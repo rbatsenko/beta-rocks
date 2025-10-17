@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Send, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 interface Message {
   role: "user" | "assistant";
@@ -58,11 +59,14 @@ const ChatInterface = () => {
   return (
     <section id="chat-section" className="py-20 px-6 bg-gradient-earth">
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4">Ask About Conditions</h2>
-          <p className="text-lg text-muted-foreground">
-            Chat naturally about any crag, sector, or route worldwide
-          </p>
+        <div className="flex items-center justify-between mb-12">
+          <div className="text-center flex-1">
+            <h2 className="text-4xl font-bold mb-4">Ask About Conditions</h2>
+            <p className="text-lg text-muted-foreground">
+              Chat naturally about any crag, sector, or route worldwide
+            </p>
+          </div>
+          <ThemeToggle />
         </div>
 
         <Card className="shadow-elevated">
