@@ -14,7 +14,245 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      confirmations: {
+        Row: {
+          created_at: string | null
+          id: string
+          report_id: string | null
+          user_key_hash: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          report_id?: string | null
+          user_key_hash: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          report_id?: string | null
+          user_key_hash?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "confirmations_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      crags: {
+        Row: {
+          aspects: number[] | null
+          country: string
+          created_at: string | null
+          id: string
+          lat: number
+          lon: number
+          name: string
+          rock_type: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          aspects?: number[] | null
+          country: string
+          created_at?: string | null
+          id?: string
+          lat: number
+          lon: number
+          name: string
+          rock_type?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          aspects?: number[] | null
+          country?: string
+          created_at?: string | null
+          id?: string
+          lat?: number
+          lon?: number
+          name?: string
+          rock_type?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      reports: {
+        Row: {
+          author_id: string | null
+          crag_id: string | null
+          created_at: string | null
+          id: string
+          photo_url: string | null
+          rating_crowds: number | null
+          rating_dry: number | null
+          rating_wind: number | null
+          route_id: string | null
+          sector_id: string | null
+          text: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          author_id?: string | null
+          crag_id?: string | null
+          created_at?: string | null
+          id?: string
+          photo_url?: string | null
+          rating_crowds?: number | null
+          rating_dry?: number | null
+          rating_wind?: number | null
+          route_id?: string | null
+          sector_id?: string | null
+          text?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          author_id?: string | null
+          crag_id?: string | null
+          created_at?: string | null
+          id?: string
+          photo_url?: string | null
+          rating_crowds?: number | null
+          rating_dry?: number | null
+          rating_wind?: number | null
+          route_id?: string | null
+          sector_id?: string | null
+          text?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reports_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "user_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reports_crag_id_fkey"
+            columns: ["crag_id"]
+            isOneToOne: false
+            referencedRelation: "crags"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reports_route_id_fkey"
+            columns: ["route_id"]
+            isOneToOne: false
+            referencedRelation: "routes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reports_sector_id_fkey"
+            columns: ["sector_id"]
+            isOneToOne: false
+            referencedRelation: "sectors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      routes: {
+        Row: {
+          created_at: string | null
+          grade: string | null
+          id: string
+          name: string
+          sector_id: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          grade?: string | null
+          id?: string
+          name: string
+          sector_id?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          grade?: string | null
+          id?: string
+          name?: string
+          sector_id?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "routes_sector_id_fkey"
+            columns: ["sector_id"]
+            isOneToOne: false
+            referencedRelation: "sectors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sectors: {
+        Row: {
+          aspect: number | null
+          crag_id: string | null
+          created_at: string | null
+          id: string
+          lat: number | null
+          lon: number | null
+          name: string
+          updated_at: string | null
+        }
+        Insert: {
+          aspect?: number | null
+          crag_id?: string | null
+          created_at?: string | null
+          id?: string
+          lat?: number | null
+          lon?: number | null
+          name: string
+          updated_at?: string | null
+        }
+        Update: {
+          aspect?: number | null
+          crag_id?: string | null
+          created_at?: string | null
+          id?: string
+          lat?: number | null
+          lon?: number | null
+          name?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sectors_crag_id_fkey"
+            columns: ["crag_id"]
+            isOneToOne: false
+            referencedRelation: "crags"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_profiles: {
+        Row: {
+          created_at: string | null
+          display_name: string | null
+          id: string
+          sync_key_hash: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          display_name?: string | null
+          id?: string
+          sync_key_hash: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          display_name?: string | null
+          id?: string
+          sync_key_hash?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
