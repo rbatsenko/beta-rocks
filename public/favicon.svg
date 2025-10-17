@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Sun circle -->
+  <circle cx="50" cy="50" r="35" fill="#F59E0B" opacity="0.9"/>
+
+  <!-- Sun rays -->
+  <g stroke="#F59E0B" stroke-width="4" stroke-linecap="round" opacity="0.7">
+    <line x1="50" y1="8" x2="50" y2="18"/>
+    <line x1="50" y1="82" x2="50" y2="92"/>
+    <line x1="8" y1="50" x2="18" y2="50"/>
+    <line x1="82" y1="50" x2="92" y2="50"/>
+    <line x1="19" y1="19" x2="27" y2="27"/>
+    <line x1="73" y1="73" x2="81" y2="81"/>
+    <line x1="81" y1="19" x2="73" y2="27"/>
+    <line x1="27" y1="73" x2="19" y2="81"/>
+  </g>
+
+  <!-- Rock/climbing element at bottom -->
+  <path d="M 35 65 Q 40 75 50 76 Q 60 75 65 65" fill="#92400E" opacity="0.8" stroke="#92400E" stroke-width="1"/>
+</svg>

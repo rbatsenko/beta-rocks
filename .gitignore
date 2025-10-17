@@ -1,3 +1,8 @@
+# Next.js
+.next/
+out/
+build/
+
 # Logs
 logs
 *.log
@@ -12,6 +17,14 @@ dist
 dist-ssr
 *.local
 
+# Environment
+.env
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,3 +35,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Misc
+.turbo/
+coverage/

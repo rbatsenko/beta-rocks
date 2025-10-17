@@ -1,73 +1,89 @@
-# Welcome to your Lovable project
+# temps.rocks
 
-## Project info
+A free, chat-first web app that helps climbers check real-time conditions at crags, sectors, and routes worldwide. Built with Next.js, React, and deployed on Vercel.
 
-**URL**: https://lovable.dev/projects/007a60ad-4a01-4f37-8c3b-dad4e97cce7e
+## Getting Started
 
-## How can I edit this code?
+### Prerequisites
 
-There are several ways of editing your application.
+- Node.js 18+ & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/007a60ad-4a01-4f37-8c3b-dad4e97cce7e) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+### Local Development
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
+# Clone the repository
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Navigate to the project directory
+cd temps-rocks
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the app.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Environment Variables
 
-**Use GitHub Codespaces**
+Create a `.env.local` file in the project root:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://vbqnfvgvxlnlfabuqlzi.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=<your-key>
+```
 
-## What technologies are used for this project?
+## What technologies are used?
 
 This project is built with:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- **Next.js 15** - React framework for production
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Utility-first CSS
+- **shadcn/ui** - High-quality React components
+- **Supabase** - PostgreSQL database & auth
+- **Vercel AI SDK** - AI-powered chat (Gemini 2.5 Flash)
 
-## How can I deploy this project?
+## Project Structure
 
-Simply open [Lovable](https://lovable.dev/projects/007a60ad-4a01-4f37-8c3b-dad4e97cce7e) and click on Share -> Publish.
+```
+app/
+├── api/              # API routes (chat, sync, conditions)
+├── components/       # Reusable React components
+├── layout.tsx        # Root layout
+└── page.tsx          # Home page
 
-## Can I connect a custom domain to my Lovable project?
+src/
+├── components/       # UI components (shadcn/ui)
+├── lib/             # Utility functions
+└── integrations/    # External service clients
+```
 
-Yes, you can!
+## Deployment
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Deploy to Vercel with one click:
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+```sh
+vercel
+```
+
+Or connect your GitHub repo to Vercel for automatic deployments on every push.
+
+See [Vercel docs](https://vercel.com/docs) for more info.
+
+## Features
+
+- **Chat interface** - Ask about climbing conditions naturally
+- **Real-time weather** - Open-Meteo integration
+- **Community reports** - Share and confirm conditions
+- **Offline support** - Local-first data storage
+- **Multi-device sync** - Sync across devices with a sync key
+- **Privacy-first** - No accounts required, anonymous by default
+
+## Learn More
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Vercel Documentation](https://vercel.com/docs)
+- [PRD](./docs/PRD.md)
