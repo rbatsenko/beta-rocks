@@ -479,7 +479,6 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                                       <Badge
                                         className={getRatingColor(window.rating)}
                                         variant="outline"
-                                        size="sm"
                                       >
                                         {window.rating}
                                       </Badge>
