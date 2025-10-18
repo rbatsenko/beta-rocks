@@ -109,7 +109,7 @@ const ChatInterface = () => {
           </p>
         </div>
 
-        <Card className="shadow-elevated h-[600px] flex flex-col">
+        <Card className="shadow-elevated h-[calc(100vh-280px)] md:h-[600px] flex flex-col">
           <Conversation className="flex-1">
             <ConversationContent className="p-6">
               {messages.length === 0 ? (
