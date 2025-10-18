@@ -121,14 +121,22 @@ export async function GET(request: NextRequest) {
       updatedAt: new Date().toISOString(),
     });
   } catch (error) {
-    console.error("Conditions API error:", {
+    const errorDetails = {
       message: error instanceof Error ? error.message : String(error),
       stack: error instanceof Error ? error.stack : undefined,
-    });
+      timestamp: new Date().toISOString(),
+    };
+
+    console.error("Conditions API error:", errorDetails);
+
+    // Also log to stdout which Vercel should capture
+    process.stdout.write(`[ERROR] Conditions API: ${JSON.stringify(errorDetails)}\n`);
+
     return NextResponse.json(
       {
         error: "Failed to compute conditions",
         details: error instanceof Error ? error.message : "Unknown error",
+        debug: process.env.NODE_ENV === 'development' ? errorDetails : undefined,
       },
       { status: 500 }
     );
