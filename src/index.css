@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Required for Response component - Streamdown styles */
+@source "../node_modules/streamdown/dist/index.js";
+
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
 All colors MUST be HSL.
 */
