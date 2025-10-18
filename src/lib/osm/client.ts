@@ -32,13 +32,20 @@ export async function searchClimbingAreas(searchText: string): Promise<ClimbingA
   console.log("[OSM] Executing query:", query.substring(0, 150) + "...");
 
   try {
+    // Add 10 second timeout to prevent hanging
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
+
     const response = await fetch(OVERPASS_ENDPOINT, {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: `data=${encodeURIComponent(query)}`,
+      signal: controller.signal,
     });
+
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       throw new Error(`OSM API error: ${response.status} ${response.statusText}`);
@@ -65,6 +72,12 @@ export async function searchClimbingAreas(searchText: string): Promise<ClimbingA
 
     return areas;
   } catch (error) {
+    // Check if it's a timeout/abort error
+    if (error instanceof Error && error.name === 'AbortError') {
+      console.warn("[OSM] Query timeout after 10s:", searchText);
+      return []; // Return empty array on timeout
+    }
+
     console.error("[OSM] Search error:", {
       searchText,
       error: error instanceof Error ? error.message : String(error),
