@@ -65,7 +65,9 @@ interface DisambiguationResult {
 
 const ChatInterface = () => {
   const [input, setInput] = useState("");
-  const { messages, sendMessage } = useChat();
+  const { messages, sendMessage } = useChat({
+    experimental_throttle: 100, // Batch updates every 100ms for smooth streaming
+  });
   const isLoading = messages.length > 0 && messages[messages.length - 1].role === "user";
   const [detailsDialogOpen, setDetailsDialogOpen] = useState(false);
   const [selectedConditions, setSelectedConditions] = useState<ConditionsData | null>(null);
