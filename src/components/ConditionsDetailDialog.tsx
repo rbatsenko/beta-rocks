@@ -390,47 +390,41 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                               : "bg-muted/50 border-border"
                           }`}
                         >
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-3">
-                              {/* Colored indicator dot */}
+                          <div className="space-y-2">
+                            {/* Day header */}
+                            <div className="flex items-center gap-2">
                               <div
                                 className={`w-2 h-2 rounded-full ${
                                   isHighlighted ? "bg-green-500" : "bg-green-400"
                                 }`}
                               />
-
-                              {/* Day name with special badge for Today */}
-                              <div className="flex items-center gap-2">
-                                <span
-                                  className={`text-sm font-medium ${
-                                    isHighlighted
-                                      ? "text-green-800 dark:text-green-200"
-                                      : "text-foreground"
-                                  }`}
-                                >
-                                  {day}
+                              <span
+                                className={`text-sm font-medium ${
+                                  isHighlighted
+                                    ? "text-green-800 dark:text-green-200"
+                                    : "text-foreground"
+                                }`}
+                              >
+                                {day}
+                              </span>
+                              {dayData.isToday && (
+                                <span className="rounded-full border border-green-400/30 bg-green-500/10 text-green-700 dark:text-green-300 px-2 py-0.5 text-[10px] font-medium leading-none">
+                                  TODAY
                                 </span>
-                                {dayData.isToday && (
-                                  <span className="rounded-full border border-green-400/30 bg-green-500/10 text-green-700 dark:text-green-300 px-2 py-0.5 text-[10px] font-medium leading-none">
-                                    TODAY
-                                  </span>
-                                )}
-                              </div>
+                              )}
                             </div>
 
-                            {/* Time windows as badges */}
-                            <div className="flex items-center gap-2">
-                              <div className="flex flex-wrap gap-1.5 justify-end">
-                                {dayData.times.map((time, idx) => (
-                                  <span
-                                    key={idx}
-                                    className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-700"
-                                  >
-                                    <Clock className="h-3 w-3" />
-                                    {time}
-                                  </span>
-                                ))}
-                              </div>
+                            {/* Time windows */}
+                            <div className="flex flex-wrap gap-1.5">
+                              {dayData.times.map((time, idx) => (
+                                <span
+                                  key={idx}
+                                  className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-700"
+                                >
+                                  <Clock className="h-3 w-3" />
+                                  {time}
+                                </span>
+                              ))}
                             </div>
                           </div>
                         </div>
