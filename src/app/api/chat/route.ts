@@ -4,7 +4,7 @@ import { z } from "zod";
 import { searchLocationMultiple } from "@/lib/external-apis/geocoding";
 import { getWeatherForecast } from "@/lib/external-apis/open-meteo";
 import { computeConditions, RockType } from "@/lib/conditions/conditions.service";
-import { searchAreas, formatAreaPath, getCountry, extractRockType, isCrag, hasPreciseCoordinates } from "@/lib/openbeta/client";
+import { searchAreas, formatAreaPath, extractRockType, isCrag, hasPreciseCoordinates } from "@/lib/openbeta/client";
 
 export const maxDuration = 30;
 
@@ -314,75 +314,6 @@ const tools = {
         reportId: report_id,
         message: `Report confirmed`,
       };
-    },
-  }),
-  search_crag: tool({
-    description: "Search for climbing crags, areas, sectors, or routes by name",
-    inputSchema: z.object({
-      query: z.string().describe("Crag/area/sector name to search for"),
-    }),
-    execute: async ({ query }) => {
-      console.log("[search_crag] Starting search for:", query);
-
-      try {
-        // Search OpenBeta API
-        const areas = await searchAreas(query);
-
-        console.log("[search_crag] Found results:", {
-          query,
-          count: areas.length,
-        });
-
-        if (areas.length === 0) {
-          return {
-            query,
-            results: [],
-            message: `No climbing areas found for "${query}". Try a different search term.`,
-          };
-        }
-
-        // Filter to only show likely crags (not countries/regions)
-        const crags = areas.filter(isCrag);
-
-        // Format results for the chat UI
-        const results = crags.map((area) => ({
-          id: area.uuid,
-          name: area.area_name,
-          path: formatAreaPath(area),
-          country: getCountry(area),
-          latitude: area.metadata.lat,
-          longitude: area.metadata.lng,
-          rockType: extractRockType(area),
-          description: area.content?.description?.slice(0, 200), // First 200 chars
-          childCount: area.children?.length || 0,
-        }));
-
-        console.log("[search_crag] Filtered to crags:", {
-          originalCount: areas.length,
-          cragCount: results.length,
-        });
-
-        return {
-          query,
-          results,
-          message:
-            results.length > 1
-              ? `Found ${results.length} climbing areas for "${query}"`
-              : `Found ${results[0].name} in ${results[0].country}`,
-        };
-      } catch (error) {
-        console.error("[search_crag] Error:", {
-          query,
-          error: error instanceof Error ? error.message : String(error),
-          stack: error instanceof Error ? error.stack : undefined,
-        });
-
-        return {
-          query,
-          results: [],
-          error: `Failed to search for "${query}". Please try again.`,
-        };
-      }
     },
   }),
 };
