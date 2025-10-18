@@ -87,6 +87,14 @@
     "thunderstormSlightHail": "Thunderstorm with slight hail",
     "thunderstormHeavyHail": "Thunderstorm with heavy hail"
   },
+  "timeframes": {
+    "now": "now",
+    "today": "today",
+    "tomorrow": "tomorrow",
+    "thisAfternoon": "this afternoon",
+    "thisEvening": "this evening",
+    "tonight": "tonight"
+  },
   "disambiguation": {
     "foundMultipleAreas": "Found {{count}} climbing areas for \"{{location}}\". Please choose one:",
     "foundMultipleLocations": "Found multiple locations for \"{{location}}\". Please choose one:",

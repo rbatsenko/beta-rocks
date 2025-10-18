@@ -87,6 +87,14 @@
     "thunderstormSlightHail": "Burza z gradem",
     "thunderstormHeavyHail": "Burza z silnym gradem"
   },
+  "timeframes": {
+    "now": "teraz",
+    "today": "dzisiaj",
+    "tomorrow": "jutro",
+    "thisAfternoon": "dziś po południu",
+    "thisEvening": "dziś wieczorem",
+    "tonight": "dzisiaj w nocy"
+  },
   "disambiguation": {
     "foundMultipleAreas": "Znaleziono {{count}} rejonów wspinaczkowych dla \"{{location}}\". Wybierz jeden:",
     "foundMultipleLocations": "Znaleziono wiele lokalizacji dla \"{{location}}\". Wybierz jedną:",

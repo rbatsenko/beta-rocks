@@ -242,6 +242,24 @@ const ChatInterface = () => {
     return warning;
   };
 
+  // Translate timeframe strings from backend
+  const translateTimeframe = (timeframe: string): string => {
+    const timeframeLower = timeframe.toLowerCase();
+
+    // Map common timeframe strings to translation keys
+    const timeframeMap: Record<string, string> = {
+      'now': 'timeframes.now',
+      'today': 'timeframes.today',
+      'tomorrow': 'timeframes.tomorrow',
+      'this afternoon': 'timeframes.thisAfternoon',
+      'this evening': 'timeframes.thisEvening',
+      'tonight': 'timeframes.tonight',
+    };
+
+    const key = timeframeMap[timeframeLower];
+    return key ? t(key) : timeframe;
+  };
+
   const exampleQueries = [
     {
       display: t('welcome.exampleQueries.query1.display'),
@@ -425,9 +443,9 @@ const ChatInterface = () => {
                             return (
                               <div
                                 key={i}
-                                className="mt-3 bg-muted/50 rounded-lg p-4 space-y-3 border border-border"
+                                className="mt-3 bg-muted/50 rounded-lg p-4 space-y-3 border border-border max-w-full overflow-hidden"
                               >
-                                <div className="flex items-start justify-between gap-3">
+                                <div className="flex items-start gap-2 sm:gap-3 min-w-0">
                                   {/* Weather emoji display */}
                                   {conditionsResult.current?.weatherCode !== undefined && (
                                     <div className="shrink-0">
@@ -440,13 +458,13 @@ const ChatInterface = () => {
                                     </div>
                                   )}
 
-                                  <div className="space-y-2 flex-1">
+                                  <div className="space-y-2 flex-1 min-w-0">
                                     <div className="space-y-1">
                                       <div className="font-semibold text-base">
                                         🧗 {conditionsResult.location}
                                         {conditionsResult.timeframe && conditionsResult.timeframe !== "now" && (
                                           <span className="ml-2 text-xs font-normal text-muted-foreground">
-                                            ({conditionsResult.timeframe})
+                                            ({translateTimeframe(conditionsResult.timeframe)})
                                           </span>
                                         )}
                                       </div>
@@ -481,7 +499,7 @@ const ChatInterface = () => {
                                     <Button
                                       variant="outline"
                                       size="sm"
-                                      className="ml-3 shrink-0"
+                                      className="shrink-0 self-start"
                                       onClick={() => {
                                         setSelectedConditions(conditionsResult);
                                         setDetailsDialogOpen(true);
