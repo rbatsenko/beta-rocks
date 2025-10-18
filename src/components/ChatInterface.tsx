@@ -83,7 +83,7 @@ const ChatInterface = () => {
   const exampleQueries = [
     "Siurana conditions tomorrow?",
     "Is El Pati dry this afternoon?",
-    "Best sectors at Fontainebleau today?",
+    "El Capitan conditions today?",
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
