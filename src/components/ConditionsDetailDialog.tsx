@@ -125,8 +125,8 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
       hour12: false,
     });
 
-    if (isToday) return `Today ${timeStr}`;
-    if (isTomorrow) return `Tomorrow ${timeStr}`;
+    if (isToday) return `${t('dialog.today')} ${timeStr}`;
+    if (isTomorrow) return `${t('dialog.tomorrow')} ${timeStr}`;
 
     return date.toLocaleDateString("en-US", {
       weekday: "short",
@@ -152,9 +152,9 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
 
       let dayKey: string;
       if (isToday) {
-        dayKey = "Today";
+        dayKey = t('dialog.today');
       } else if (isTomorrow) {
-        dayKey = "Tomorrow";
+        dayKey = t('dialog.tomorrow');
       } else {
         dayKey = date.toLocaleDateString("en-US", {
           weekday: "short",
@@ -258,10 +258,10 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
       let isTomorrow = false;
 
       if (windowDay.getTime() === today.getTime()) {
-        displayDay = "Today";
+        displayDay = t('dialog.today');
         isToday = true;
       } else if (windowDay.getTime() === tomorrow.getTime()) {
-        displayDay = "Tomorrow";
+        displayDay = t('dialog.tomorrow');
         isTomorrow = true;
       } else {
         displayDay = startDate.toLocaleDateString("en-US", {
@@ -549,11 +549,11 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
                               </span>
                               {dayData.isToday && (
                                 <span className="rounded-full border border-green-400/30 bg-green-500/10 text-green-700 dark:text-green-300 px-2 py-0.5 text-[10px] font-medium leading-none">
-                                  TODAY
+                                  {t('dialog.todayBadge')}
                                 </span>
                               )}
                               <span className="text-xs text-muted-foreground ml-auto mr-2">
-                                {dayData.windows.length} window{dayData.windows.length > 1 ? "s" : ""}
+                                {dayData.windows.length} {dayData.windows.length > 1 ? t('dialog.windows') : t('dialog.window')}
                               </span>
                             </div>
                           </AccordionTrigger>
@@ -635,7 +635,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
                   </Accordion>
                   {data.optimalTime && (
                     <p className="text-sm text-muted-foreground">
-                      🌟 Best time: <span className="font-semibold">{formatHourlyTime(data.optimalTime)}</span>
+                      {t('dialog.bestTime')}: <span className="font-semibold">{formatHourlyTime(data.optimalTime)}</span>
                     </p>
                   )}
                 </div>
@@ -670,7 +670,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
             {/* Weather Monitoring Disclaimer */}
             <div className="mt-6 p-3 bg-muted/30 rounded-lg border border-border">
               <p className="text-xs text-muted-foreground text-center">
-                ⚠️ Weather conditions can change rapidly. Always monitor forecasts before heading out and check conditions on arrival.
+                {t('dialog.weatherDisclaimer')}
               </p>
             </div>
               </div>
@@ -767,7 +767,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
                             <AccordionItem value="all-hours" className="border rounded-lg">
                               <AccordionTrigger className="px-3 py-2 hover:no-underline">
                                 <span className="text-sm text-muted-foreground">
-                                  Show complete timeline ({hours.length} hour{hours.length > 1 ? "s" : ""})
+                                  {t('dialog.showCompleteTimeline')} ({hours.length} {hours.length > 1 ? t('dialog.hours') : t('dialog.hour')})
                                 </span>
                               </AccordionTrigger>
                               <AccordionContent className="px-3 pb-3">
@@ -845,7 +845,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
                         {/* No good hours message */}
                         {goodHours.length === 0 && (
                           <p className="text-sm text-muted-foreground italic">
-                            No optimal conditions on {day}
+                            {t('dialog.noOptimalHours')} {day}
                           </p>
                         )}
                       </div>
@@ -959,7 +959,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
                               <span className="font-semibold">{dayLabel}</span>
                             {isToday && (
                               <span className="rounded-full border border-green-400/30 bg-green-500/10 text-green-700 dark:text-green-300 px-2 py-0.5 text-[10px] font-medium leading-none">
-                                TODAY
+                                {t('dialog.todayBadge')}
                               </span>
                             )}
                             {isLongTerm && (

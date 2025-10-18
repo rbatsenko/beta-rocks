@@ -103,7 +103,43 @@
   "footer": {
     "about": "O nas",
     "privacy": "Prywatność",
-    "github": "GitHub"
+    "github": "GitHub",
+    "brand": "temps.rocks",
+    "description": "Darmowe warunki wspinaczkowe dla każdego. Stworzone z ❤️ dla wspinaczkowej społeczności.",
+    "attribution": "Dane z Open-Meteo i OpenBeta. Raporty społecznościowe.",
+    "copyright": "© 2025 temps.rocks. Wszelkie prawa zastrzeżone."
+  },
+  "features": {
+    "heading": "Wszystko czego potrzebujesz",
+    "subheading": "Kompleksowe warunki wspinaczkowe w zasięgu ręki, całkowicie za darmo",
+    "realTimeWeather": {
+      "title": "Pogoda na żywo",
+      "description": "Dokładne prognozy z Open-Meteo z kalkulacją słońca/cienia dla konkretnych sektorów"
+    },
+    "chatInterface": {
+      "title": "Interfejs czatu",
+      "description": "Zapytania w języku naturalnym dzięki AI. Pytaj w dowolnym języku, otrzymuj natychmiastowe odpowiedzi"
+    },
+    "communityReports": {
+      "title": "Raporty społeczności",
+      "description": "Dziel się i potwierdzaj obecne warunki. Pomagaj innym wspinaczom z aktualizacjami na żywo"
+    },
+    "globalCoverage": {
+      "title": "Zasięg globalny",
+      "description": "Każda skałka, sektor lub droga na świecie dzięki integracji z bazą OpenBeta"
+    },
+    "worksOffline": {
+      "title": "Działa offline",
+      "description": "Projekt local-first. Zapisuj dane offline i synchronizuj między urządzeniami za pomocą klucza sync"
+    },
+    "privacyFirst": {
+      "title": "Prywatność na pierwszym miejscu",
+      "description": "Anonimowość domyślnie. Nie wymagane konta. Twoje dane pozostają Twoje"
+    }
+  },
+  "ui": {
+    "toggleTheme": "Przełącz motyw",
+    "selectLanguage": "Wybierz język"
   },
   "dialog": {
     "close": "Zamknij",
@@ -158,6 +194,7 @@
     "fairConditions": "Przeciętne warunki",
     "poorConditions": "Słabe warunki",
     "lessReliable": "Dni 8-14: Mniej pewna prognoza",
-    "lessCertain": "MNIEJ PEWNE"
+    "lessCertain": "MNIEJ PEWNE",
+    "todayBadge": "DZISIAJ"
   }
 }

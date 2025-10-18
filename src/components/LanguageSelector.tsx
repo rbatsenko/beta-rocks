@@ -18,7 +18,7 @@ const languageConfig: Record<Locale, { name: string; flag: string }> = {
 };
 
 export function LanguageSelector() {
-  const { i18n, language } = useClientTranslation();
+  const { i18n, language, t } = useClientTranslation('common');
   const currentFlag = languageConfig[language as Locale]?.flag || languageConfig.en.flag;
 
   const changeLanguage = (locale: Locale) => {
@@ -35,7 +35,7 @@ export function LanguageSelector() {
           className="rounded-full text-xl leading-none transition-colors data-[state=open]:bg-muted"
         >
           {currentFlag}
-          <span className="sr-only">Select language</span>
+          <span className="sr-only">{t('ui.selectLanguage')}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
