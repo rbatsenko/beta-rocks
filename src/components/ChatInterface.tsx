@@ -142,9 +142,29 @@ const ChatInterface = () => {
                 </div>
               ) : (
                 messages.map((message) => {
+                  // Check if any tool is currently executing
+                  const hasExecutingTool = message.role === "assistant" && message.parts.some(
+                    (part) => part.type.startsWith("tool-") && part.state !== "output-available"
+                  );
+
+                  // Check if message has any content to show
+                  const hasContent = message.parts.some(
+                    (part) => part.type === "text" || part.state === "output-available"
+                  );
+
                   return (
                     <Message key={message.id} from={message.role}>
                       <MessageContent variant={message.role === "assistant" ? "flat" : "contained"}>
+                        {hasExecutingTool && !hasContent && (
+                          <div className="flex items-center gap-3 py-1">
+                            <div className="flex gap-1.5">
+                              <div className="w-2 h-2 bg-orange-500 rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></div>
+                              <div className="w-2 h-2 bg-orange-500 rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></div>
+                              <div className="w-2 h-2 bg-orange-500 rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></div>
+                            </div>
+                            <span className="text-sm text-muted-foreground">Analyzing conditions...</span>
+                          </div>
+                        )}
                         {message.parts.map((part, i) => {
                           // Render text parts
                           if (part.type === "text") {
