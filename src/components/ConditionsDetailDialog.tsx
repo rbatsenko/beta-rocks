@@ -598,8 +598,8 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                                 : "bg-muted/30 border-border"
                             }`}
                           >
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-3">
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
                                 <span className="font-mono text-sm font-semibold min-w-[60px]">
                                   {new Date(hour.time).toLocaleTimeString("en-US", {
                                     hour: "2-digit",
@@ -607,7 +607,7 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                                     hour12: false,
                                   })}
                                 </span>
-                                <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                                <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
                                   <div className="flex items-center gap-1">
                                     <ThermometerSun className="h-3 w-3" />
                                     <span>{hour.temp_c}°C</span>
@@ -638,7 +638,7 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                               </div>
                             </div>
                             {hour.warnings.length > 0 && (
-                              <p className="text-xs text-muted-foreground mt-1 ml-[76px]">
+                              <p className="text-xs text-muted-foreground mt-1">
                                 {hour.warnings.join(", ")}
                               </p>
                             )}
