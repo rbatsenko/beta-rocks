@@ -193,6 +193,55 @@ const ChatInterface = () => {
     return key ? t(key) : description;
   };
 
+  // Translate warning strings from backend
+  const translateWarning = (warning: string): string => {
+    // "Too warm for X (Y°C)"
+    const tooWarmMatch = warning.match(/Too warm for (\w+) \((\d+)°C\)/);
+    if (tooWarmMatch) {
+      return t('warnings.tooWarm', { rockType: tooWarmMatch[1], temp: tooWarmMatch[2] });
+    }
+
+    // "Cold and suboptimal for X"
+    const coldSuboptimalMatch = warning.match(/Cold and suboptimal for (\w+)/);
+    if (coldSuboptimalMatch) {
+      return t('warnings.coldSuboptimal', { rockType: coldSuboptimalMatch[1] });
+    }
+
+    // "High humidity (X%) - rock can be slippery"
+    const highHumidityMatch = warning.match(/High humidity \((\d+)%\) - rock can be slippery/);
+    if (highHumidityMatch) {
+      return t('warnings.highHumidity', { humidity: highHumidityMatch[1] });
+    }
+
+    // "Very high winds (X km/h) - danger of blown off"
+    const veryHighWindsMatch = warning.match(/Very high winds \((\d+) km\/h\) - danger of blown off/);
+    if (veryHighWindsMatch) {
+      return t('warnings.veryHighWinds', { wind: veryHighWindsMatch[1] });
+    }
+
+    // "High wind (X km/h)"
+    const highWindMatch = warning.match(/High wind \((\d+) km\/h\)/);
+    if (highWindMatch) {
+      return t('warnings.highWind', { wind: highWindMatch[1] });
+    }
+
+    // Simple string matches
+    if (warning === "Rock is currently wet - dangerous to climb (sandstone becomes weak when wet)") {
+      return t('warnings.wetDangerousSandstone');
+    }
+    if (warning === "Rock is currently wet - slippery conditions") {
+      return t('warnings.wetSlippery');
+    }
+    if (warning === "Currently wet - dangerous") {
+      return t('warnings.currentlyWetDangerous');
+    }
+    if (warning === "Currently wet") {
+      return t('warnings.currentlyWet');
+    }
+
+    return warning;
+  };
+
   const exampleQueries = [
     {
       display: t('welcome.exampleQueries.query1.display'),
@@ -418,7 +467,7 @@ const ChatInterface = () => {
                                     </div>
                                     {conditionsResult.warnings && conditionsResult.warnings.length > 0 && (
                                       <div className="text-destructive font-semibold text-sm">
-                                        ⚠️ {conditionsResult.warnings.join(", ")}
+                                        ⚠️ {conditionsResult.warnings.map(translateWarning).join(", ")}
                                       </div>
                                     )}
                                     {conditionsResult.reasons && conditionsResult.reasons.length > 0 && (

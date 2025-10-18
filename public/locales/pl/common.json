@@ -46,6 +46,17 @@
     "readyInHours": "Gotowe do wspinania za ~{{hours}} godzin",
     "acceptable": "Warunki akceptowalne"
   },
+  "warnings": {
+    "tooWarm": "Za ciepło dla {{rockType}} ({{temp}}°C)",
+    "coldSuboptimal": "Zimno i nieoptymalnie dla {{rockType}}",
+    "highHumidity": "Wysoka wilgotność ({{humidity}}%) - skała może być śliska",
+    "wetDangerousSandstone": "Skała mokra - niebezpiecznie (piaskowiec słabnie gdy mokry)",
+    "wetSlippery": "Skała mokra - ślisko",
+    "veryHighWinds": "Bardzo silny wiatr ({{wind}} km/h) - możliwość zerwania",
+    "highWind": "Silny wiatr ({{wind}} km/h)",
+    "currentlyWetDangerous": "Obecnie mokro - niebezpiecznie",
+    "currentlyWet": "Obecnie mokro"
+  },
   "weather": {
     "clearSky": "Bezchmurnie",
     "mainlyClear": "Przeważnie bezchmurnie",
