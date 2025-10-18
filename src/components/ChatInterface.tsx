@@ -97,17 +97,18 @@ const ChatInterface = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen">
-      {/* Header */}
-      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-        <div className="container flex h-16 items-center justify-between px-4">
-          <div className="flex items-center gap-3">
-            <CloudSun className="w-6 h-6 text-orange-500" />
-            <h1 className="text-xl font-bold">temps.rocks</h1>
+    <>
+      <div className="flex flex-col h-screen">
+        {/* Header */}
+        <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+          <div className="container flex h-16 items-center justify-between px-4">
+            <div className="flex items-center gap-3">
+              <CloudSun className="w-6 h-6 text-orange-500" />
+              <h1 className="text-xl font-bold">temps.rocks</h1>
+            </div>
+            <ThemeToggle />
           </div>
-          <ThemeToggle />
-        </div>
-      </header>
+        </header>
 
       {/* Chat Area */}
       <div className="flex-1 overflow-hidden flex flex-col">
@@ -305,7 +306,7 @@ const ChatInterface = () => {
           data={selectedConditions}
         />
       )}
-    </div>
+    </>
   );
 };
 
