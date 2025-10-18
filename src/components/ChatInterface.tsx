@@ -144,12 +144,12 @@ const ChatInterface = () => {
                 messages.map((message) => {
                   // Check if any tool is currently executing
                   const hasExecutingTool = message.role === "assistant" && message.parts.some(
-                    (part) => part.type.startsWith("tool-") && part.state !== "output-available"
+                    (part) => part.type.startsWith("tool-") && "state" in part && part.state !== "output-available"
                   );
 
                   // Check if message has any content to show
                   const hasContent = message.parts.some(
-                    (part) => part.type === "text" || part.state === "output-available"
+                    (part) => part.type === "text" || ("state" in part && part.state === "output-available")
                   );
 
                   return (
