@@ -67,20 +67,91 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
     }
   };
 
-  const formatWindowTime = (timestamp: string) => {
+  const formatTimeRange = (start: string, end: string) => {
     try {
-      const date = new Date(timestamp);
-      return date.toLocaleString("en-US", {
-        month: "short",
-        day: "numeric",
+      const startDate = new Date(start);
+      const endDate = new Date(end);
+      const startTime = startDate.toLocaleTimeString("en-US", {
         hour: "2-digit",
         minute: "2-digit",
         hour12: false,
       });
+      const endTime = endDate.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      });
+      return `${startTime}-${endTime}`;
     } catch {
-      return timestamp;
+      return `${start}-${end}`;
     }
   };
+
+  const groupWindowsByDay = () => {
+    if (!data.optimalWindows || data.optimalWindows.length === 0) return null;
+
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const threeDaysFromNow = new Date(today);
+    threeDaysFromNow.setDate(threeDaysFromNow.getDate() + 3);
+
+    type GroupedWindow = {
+      times: string[];
+      isToday: boolean;
+      isTomorrow: boolean;
+      rating: string;
+    };
+
+    const grouped: Record<string, GroupedWindow> = {};
+
+    data.optimalWindows.forEach((window) => {
+      const startDate = new Date(window.startTime);
+
+      // Skip windows outside the next 3 days
+      if (startDate < today || startDate >= threeDaysFromNow) return;
+
+      const windowDay = new Date(
+        startDate.getFullYear(),
+        startDate.getMonth(),
+        startDate.getDate()
+      );
+
+      let displayDay: string;
+      let isToday = false;
+      let isTomorrow = false;
+
+      if (windowDay.getTime() === today.getTime()) {
+        displayDay = "Today";
+        isToday = true;
+      } else if (windowDay.getTime() === tomorrow.getTime()) {
+        displayDay = "Tomorrow";
+        isTomorrow = true;
+      } else {
+        displayDay = startDate.toLocaleDateString("en-US", {
+          weekday: "short",
+          month: "short",
+          day: "numeric",
+        });
+      }
+
+      if (!grouped[displayDay]) {
+        grouped[displayDay] = {
+          times: [],
+          isToday,
+          isTomorrow,
+          rating: window.rating,
+        };
+      }
+
+      grouped[displayDay].times.push(formatTimeRange(window.startTime, window.endTime));
+    });
+
+    return Object.keys(grouped).length > 0 ? grouped : null;
+  };
+
+  const windowsByDay = groupWindowsByDay();
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -181,7 +252,7 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
             )}
 
             {/* Optimal Windows */}
-            {data.optimalWindows && data.optimalWindows.length > 0 && (
+            {windowsByDay && Object.keys(windowsByDay).length > 0 ? (
               <>
                 <div className="space-y-3">
                   <h3 className="font-semibold flex items-center gap-2">
@@ -189,28 +260,64 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                     Optimal Climbing Windows
                   </h3>
                   <div className="space-y-2">
-                    {data.optimalWindows.map((window, i) => (
-                      <div
-                        key={i}
-                        className="bg-muted/50 rounded-lg p-3 flex items-center justify-between"
-                      >
-                        <div className="flex items-center gap-3">
-                          <Clock className="w-4 h-4 text-muted-foreground" />
-                          <div>
-                            <p className="font-medium">
-                              {formatWindowTime(window.startTime)} - {formatWindowTime(window.endTime)}
-                            </p>
-                            <p className="text-xs text-muted-foreground">
-                              {window.hourCount} hours
-                            </p>
+                    {Object.entries(windowsByDay).map(([day, dayData]) => {
+                      const isHighlighted = dayData.isToday || dayData.isTomorrow;
+
+                      return (
+                        <div
+                          key={day}
+                          className={`rounded-lg p-3 border transition-colors ${
+                            isHighlighted
+                              ? "bg-green-50/70 dark:bg-green-900/20 border-green-200/70 dark:border-green-700/50"
+                              : "bg-muted/50 border-border"
+                          }`}
+                        >
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                              {/* Colored indicator dot */}
+                              <div
+                                className={`w-2 h-2 rounded-full ${
+                                  isHighlighted ? "bg-green-500" : "bg-green-400"
+                                }`}
+                              />
+
+                              {/* Day name with special badge for Today */}
+                              <div className="flex items-center gap-2">
+                                <span
+                                  className={`text-sm font-medium ${
+                                    isHighlighted
+                                      ? "text-green-800 dark:text-green-200"
+                                      : "text-foreground"
+                                  }`}
+                                >
+                                  {day}
+                                </span>
+                                {dayData.isToday && (
+                                  <span className="rounded-full border border-green-400/30 bg-green-500/10 text-green-700 dark:text-green-300 px-2 py-0.5 text-[10px] font-medium leading-none">
+                                    TODAY
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+
+                            {/* Time windows as badges */}
+                            <div className="flex items-center gap-2">
+                              <div className="flex flex-wrap gap-1.5 justify-end">
+                                {dayData.times.map((time, idx) => (
+                                  <span
+                                    key={idx}
+                                    className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-700"
+                                  >
+                                    <Clock className="h-3 w-3" />
+                                    {time}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
                           </div>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Badge className={getRatingColor(window.rating)}>{window.rating}</Badge>
-                          <span className="text-sm font-semibold">{window.avgFrictionScore}/5</span>
-                        </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                   {data.optimalTime && (
                     <p className="text-sm text-muted-foreground">
@@ -220,7 +327,28 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                 </div>
                 <Separator />
               </>
-            )}
+            ) : data.optimalWindows && data.optimalWindows.length === 0 ? (
+              <>
+                <div className="space-y-3">
+                  <h3 className="font-semibold flex items-center gap-2">
+                    <TrendingUp className="w-4 h-4" />
+                    Optimal Climbing Windows
+                  </h3>
+                  <div className="flex flex-col items-center justify-center py-8 text-center">
+                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center mb-3">
+                      <Clock className="h-6 w-6 text-muted-foreground" />
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      No optimal conditions in the next 3 days
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Check hourly forecast for more details
+                    </p>
+                  </div>
+                </div>
+                <Separator />
+              </>
+            ) : null}
 
             {/* Hourly Forecast */}
             {data.hourlyConditions && data.hourlyConditions.length > 0 && (
