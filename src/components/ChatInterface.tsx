@@ -97,9 +97,12 @@ interface DisambiguationResult {
 const ChatInterface = () => {
   const { t, language } = useClientTranslation('common');
   const [input, setInput] = useState("");
-  const { messages, sendMessage, isLoading } = useChat();
+  const { messages, sendMessage, status } = useChat();
   const [detailsDialogOpen, setDetailsDialogOpen] = useState(false);
   const [selectedConditions, setSelectedConditions] = useState<ConditionsData | null>(null);
+
+  // Compute loading state from status (v5 API)
+  const isLoading = status === 'submitted' || status === 'streaming';
 
   // Helper to detect if it's night time (7pm-7am)
   const isNightTime = (dateOrHour: Date | number): boolean => {

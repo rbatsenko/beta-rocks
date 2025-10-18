@@ -507,33 +507,33 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                 <div className="space-y-3">
                   <h3 className="font-semibold flex items-center gap-2">
                     <Droplets className="w-4 h-4" />
-                    Precipitation Context
+                    {t('dialog.precipitationContext')}
                   </h3>
                   <div className="grid grid-cols-3 gap-3">
                     <div className="bg-muted/50 rounded-lg p-3">
-                      <p className="text-xs text-muted-foreground">Last 24h</p>
+                      <p className="text-xs text-muted-foreground">{t('dialog.last24h')}</p>
                       <p className="text-lg font-semibold">{data.precipitationContext.last24h}mm</p>
                     </div>
                     <div className="bg-muted/50 rounded-lg p-3">
-                      <p className="text-xs text-muted-foreground">Last 48h</p>
+                      <p className="text-xs text-muted-foreground">{t('dialog.last48h')}</p>
                       <p className="text-lg font-semibold">{data.precipitationContext.last48h}mm</p>
                     </div>
                     <div className="bg-muted/50 rounded-lg p-3">
-                      <p className="text-xs text-muted-foreground">Next 24h</p>
+                      <p className="text-xs text-muted-foreground">{t('dialog.next24h')}</p>
                       <p className="text-lg font-semibold">{data.precipitationContext.next24h}mm</p>
                     </div>
                   </div>
                   {data.dewPointSpread !== undefined && (
                     <div className="bg-muted/50 rounded-lg p-3">
                       <p className="text-xs text-muted-foreground">
-                        Dew Point Spread (condensation risk)
+                        {t('dialog.dewPointSpread')}
                       </p>
                       <p className="text-sm">
                         {data.dewPointSpread > 5
-                          ? "✅ Low risk - rock should stay dry"
+                          ? t('dialog.lowRisk')
                           : data.dewPointSpread > 2
-                            ? "⚠️ Moderate risk - watch for moisture"
-                            : "❌ High risk - condensation likely"}
+                            ? t('dialog.moderateRisk')
+                            : t('dialog.highRisk')}
                       </p>
                       <p className="text-lg font-semibold">{Math.round(data.dewPointSpread)}°C</p>
                     </div>
@@ -550,9 +550,9 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                   <div className="flex items-start justify-between gap-2">
                     <h3 className="font-semibold flex items-center gap-2">
                       <TrendingUp className="w-4 h-4" />
-                      Optimal Climbing Windows
+                      {t('dialog.optimalWindows')}
                     </h3>
-                    <span className="text-xs text-muted-foreground">Next 5 days</span>
+                    <span className="text-xs text-muted-foreground">{t('dialog.nextDays')}</span>
                   </div>
                   <Accordion type="multiple" className="space-y-2">
                     {Object.entries(windowsByDay).map(([day, dayData]) => {
@@ -684,19 +684,19 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                   <div className="flex items-start justify-between gap-2">
                     <h3 className="font-semibold flex items-center gap-2">
                       <TrendingUp className="w-4 h-4" />
-                      Optimal Climbing Windows
+                      {t('dialog.optimalWindows')}
                     </h3>
-                    <span className="text-xs text-muted-foreground">Next 5 days</span>
+                    <span className="text-xs text-muted-foreground">{t('dialog.nextDays')}</span>
                   </div>
                   <div className="flex flex-col items-center justify-center py-8 text-center">
                     <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center mb-3">
                       <Clock className="h-6 w-6 text-muted-foreground" />
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      No optimal conditions in the next 5 days
+                      {t('dialog.noOptimalConditions')}
                     </p>
                     <p className="text-xs text-muted-foreground mt-1">
-                      Check hourly forecast for more details
+                      {t('dialog.checkHourlyForecast')}
                     </p>
                   </div>
                 </div>
