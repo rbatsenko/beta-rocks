@@ -96,6 +96,43 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
     return t(key);
   };
 
+  // Translate weather description strings
+  const translateWeather = (description: string): string => {
+    const weatherMap: Record<string, string> = {
+      'Clear sky': 'weather.clearSky',
+      'Mainly clear': 'weather.mainlyClear',
+      'Partly cloudy': 'weather.partlyCloudy',
+      'Overcast': 'weather.overcast',
+      'Fog': 'weather.fog',
+      'Depositing rime fog': 'weather.depositingRimeFog',
+      'Light drizzle': 'weather.lightDrizzle',
+      'Moderate drizzle': 'weather.moderateDrizzle',
+      'Dense drizzle': 'weather.denseDrizzle',
+      'Light freezing drizzle': 'weather.lightFreezingDrizzle',
+      'Dense freezing drizzle': 'weather.denseFreezingDrizzle',
+      'Slight rain': 'weather.slightRain',
+      'Moderate rain': 'weather.moderateRain',
+      'Heavy rain': 'weather.heavyRain',
+      'Light freezing rain': 'weather.lightFreezingRain',
+      'Heavy freezing rain': 'weather.heavyFreezingRain',
+      'Slight snow fall': 'weather.slightSnowFall',
+      'Moderate snow fall': 'weather.moderateSnowFall',
+      'Heavy snow fall': 'weather.heavySnowFall',
+      'Snow grains': 'weather.snowGrains',
+      'Slight rain showers': 'weather.slightRainShowers',
+      'Moderate rain showers': 'weather.moderateRainShowers',
+      'Violent rain showers': 'weather.violentRainShowers',
+      'Slight snow showers': 'weather.slightSnowShowers',
+      'Heavy snow showers': 'weather.heavySnowShowers',
+      'Thunderstorm': 'weather.thunderstorm',
+      'Thunderstorm with slight hail': 'weather.thunderstormSlightHail',
+      'Thunderstorm with heavy hail': 'weather.thunderstormHeavyHail',
+    };
+
+    const key = weatherMap[description];
+    return key ? t(key) : description;
+  };
+
   const getRatingColor = (rating: string) => {
     switch (rating) {
       case "Great":
@@ -394,7 +431,7 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                   <div className="flex items-center gap-4 bg-muted/30 rounded-lg p-4 border border-border">
                     <div className="text-6xl">{getWeatherEmoji(data.current.weatherCode, isNightTime(new Date()))}</div>
                     <div className="flex-1">
-                      <p className="text-lg font-semibold">{getWeatherDescription(data.current.weatherCode)}</p>
+                      <p className="text-lg font-semibold">{translateWeather(getWeatherDescription(data.current.weatherCode))}</p>
                       <p className="text-sm text-muted-foreground">{t('dialog.currentWeather')}</p>
                     </div>
                   </div>
@@ -566,7 +603,7 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                                     <div className="flex items-center gap-2">
                                       {/* Weather summary for the window */}
                                       {window.hours.length > 0 && window.hours[0].weatherCode !== undefined && (
-                                        <span className="text-lg" title={getWeatherDescription(window.hours[0].weatherCode)}>
+                                        <span className="text-lg" title={translateWeather(getWeatherDescription(window.hours[0].weatherCode))}>
                                           {getWeatherEmoji(window.hours[0].weatherCode, isNightTime(new Date(window.hours[0].time)))}
                                         </span>
                                       )}
@@ -594,7 +631,7 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                                         >
                                           <div className="flex items-center gap-2 text-muted-foreground">
                                             {hour.weatherCode !== undefined && (
-                                              <span className="text-base" title={getWeatherDescription(hour.weatherCode)}>
+                                              <span className="text-base" title={translateWeather(getWeatherDescription(hour.weatherCode))}>
                                                 {getWeatherEmoji(hour.weatherCode, isNightTime(new Date(hour.time)))}
                                               </span>
                                             )}
@@ -709,7 +746,7 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                                   <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
                                     <div className="flex items-center gap-2">
                                       {hour.weatherCode !== undefined && (
-                                        <span className="text-2xl" title={getWeatherDescription(hour.weatherCode)}>
+                                        <span className="text-2xl" title={translateWeather(getWeatherDescription(hour.weatherCode))}>
                                           {getWeatherEmoji(hour.weatherCode, isNightTime(new Date(hour.time)))}
                                         </span>
                                       )}
@@ -787,7 +824,7 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                                         <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
                                           <div className="flex items-center gap-2">
                                             {hour.weatherCode !== undefined && (
-                                              <span className="text-xl" title={getWeatherDescription(hour.weatherCode)}>
+                                              <span className="text-xl" title={translateWeather(getWeatherDescription(hour.weatherCode))}>
                                                 {getWeatherEmoji(hour.weatherCode, isNightTime(new Date(hour.time)))}
                                               </span>
                                             )}
@@ -951,7 +988,7 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-3">
                             {/* Weather emoji */}
-                            <div className="text-3xl" title={getWeatherDescription(day.weatherCode)}>
+                            <div className="text-3xl" title={translateWeather(getWeatherDescription(day.weatherCode))}>
                               {getWeatherEmoji(day.weatherCode, isNightTime(12))}
                             </div>
                             <div className="flex items-center gap-2">

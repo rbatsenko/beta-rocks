@@ -156,6 +156,43 @@ const ChatInterface = () => {
     return reason;
   };
 
+  // Translate weather description strings
+  const translateWeather = (description: string): string => {
+    const weatherMap: Record<string, string> = {
+      'Clear sky': 'weather.clearSky',
+      'Mainly clear': 'weather.mainlyClear',
+      'Partly cloudy': 'weather.partlyCloudy',
+      'Overcast': 'weather.overcast',
+      'Fog': 'weather.fog',
+      'Depositing rime fog': 'weather.depositingRimeFog',
+      'Light drizzle': 'weather.lightDrizzle',
+      'Moderate drizzle': 'weather.moderateDrizzle',
+      'Dense drizzle': 'weather.denseDrizzle',
+      'Light freezing drizzle': 'weather.lightFreezingDrizzle',
+      'Dense freezing drizzle': 'weather.denseFreezingDrizzle',
+      'Slight rain': 'weather.slightRain',
+      'Moderate rain': 'weather.moderateRain',
+      'Heavy rain': 'weather.heavyRain',
+      'Light freezing rain': 'weather.lightFreezingRain',
+      'Heavy freezing rain': 'weather.heavyFreezingRain',
+      'Slight snow fall': 'weather.slightSnowFall',
+      'Moderate snow fall': 'weather.moderateSnowFall',
+      'Heavy snow fall': 'weather.heavySnowFall',
+      'Snow grains': 'weather.snowGrains',
+      'Slight rain showers': 'weather.slightRainShowers',
+      'Moderate rain showers': 'weather.moderateRainShowers',
+      'Violent rain showers': 'weather.violentRainShowers',
+      'Slight snow showers': 'weather.slightSnowShowers',
+      'Heavy snow showers': 'weather.heavySnowShowers',
+      'Thunderstorm': 'weather.thunderstorm',
+      'Thunderstorm with slight hail': 'weather.thunderstormSlightHail',
+      'Thunderstorm with heavy hail': 'weather.thunderstormHeavyHail',
+    };
+
+    const key = weatherMap[description];
+    return key ? t(key) : description;
+  };
+
   const exampleQueries = [
     {
       display: t('welcome.exampleQueries.query1.display'),
@@ -347,7 +384,7 @@ const ChatInterface = () => {
                                     <div className="shrink-0">
                                       <div
                                         className="text-4xl"
-                                        title={getWeatherDescription(conditionsResult.current.weatherCode)}
+                                        title={translateWeather(getWeatherDescription(conditionsResult.current.weatherCode))}
                                       >
                                         {getWeatherEmoji(conditionsResult.current.weatherCode, isNightTime(new Date()))}
                                       </div>
@@ -371,7 +408,7 @@ const ChatInterface = () => {
                                       )}
                                       {conditionsResult.current?.weatherCode !== undefined && (
                                         <div className="text-xs text-muted-foreground">
-                                          {getWeatherDescription(conditionsResult.current.weatherCode)}
+                                          {translateWeather(getWeatherDescription(conditionsResult.current.weatherCode))}
                                         </div>
                                       )}
                                     </div>
