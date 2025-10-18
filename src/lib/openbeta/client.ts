@@ -58,7 +58,7 @@ export async function searchAreas(searchText: string): Promise<Area[]> {
   console.log("[OpenBeta] searchAreas called with:", searchText);
 
   const query = `
-    query SearchAreas($filter: AreaFilterInput!) {
+    query SearchAreas($filter: AreaFilter!) {
       areas(filter: $filter) {
         uuid
         area_name
