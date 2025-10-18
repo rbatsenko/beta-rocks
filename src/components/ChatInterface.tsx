@@ -5,7 +5,7 @@ import { useChat } from "@ai-sdk/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { Send, Loader2, Sun, Info } from "lucide-react";
+import { Send, Loader2, Sun, Info, CloudSun } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Message, MessageContent } from "@/components/ai-elements/message";
 import { Response } from "@/components/ai-elements/response";
@@ -93,14 +93,18 @@ const ChatInterface = () => {
   return (
     <section id="chat-section" className="py-20 px-6 bg-gradient-earth">
       <div className="max-w-4xl mx-auto">
-        <div className="flex items-center justify-between mb-12">
-          <div className="text-center flex-1">
-            <h2 className="text-4xl font-bold mb-4">Ask About Conditions</h2>
-            <p className="text-lg text-muted-foreground">
-              Chat naturally about any crag, sector, or route worldwide
-            </p>
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-3">
+            <CloudSun className="w-10 h-10 text-orange-500" />
+            <h1 className="text-3xl font-bold">temps.rocks</h1>
           </div>
           <ThemeToggle />
+        </div>
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold mb-4">Ask About Conditions</h2>
+          <p className="text-lg text-muted-foreground">
+            Chat naturally about any crag, sector, or route worldwide
+          </p>
         </div>
 
         <Card className="shadow-elevated h-[600px] flex flex-col">

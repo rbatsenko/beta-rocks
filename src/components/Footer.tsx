@@ -1,4 +1,4 @@
-import { Mountain } from "lucide-react";
+import { Sun } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-2">
-            <Mountain className="w-6 h-6 text-primary" />
+            <Sun className="w-6 h-6 text-orange-500" />
             <span className="text-xl font-bold">temps.rocks</span>
           </div>
 
