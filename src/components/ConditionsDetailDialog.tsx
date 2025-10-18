@@ -20,6 +20,7 @@ interface ConditionsDetailDialogProps {
   onOpenChange: (open: boolean) => void;
   data: {
     location: string;
+    locationDetails?: string;
     rating: string;
     frictionScore: number;
     reasons?: string[];
@@ -271,9 +272,16 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-3xl max-h-[90vh]">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
-            <ThermometerSun className="w-5 h-5" />
-            Detailed Conditions: {data.location}
+          <DialogTitle className="flex flex-col gap-1">
+            <div className="flex items-center gap-2">
+              <ThermometerSun className="w-5 h-5" />
+              Detailed Conditions: {data.location}
+            </div>
+            {data.locationDetails && (
+              <span className="text-sm font-normal text-muted-foreground">
+                📍 {data.locationDetails}
+              </span>
+            )}
           </DialogTitle>
           <DialogDescription>
             Full weather analysis and climbing conditions forecast
