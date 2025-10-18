@@ -7,7 +7,6 @@ import type {
   Area,
   AreasResponse,
   AreaResponse,
-  AreasFilter,
 } from "./types";
 
 const OPENBETA_ENDPOINT = "https://api.openbeta.io/graphql";
@@ -71,7 +70,7 @@ export async function searchAreas(searchText: string): Promise<Area[]> {
     }
   `;
 
-  const variables: AreasFilter = {
+  const variables = {
     filter: {
       area_name: {
         match: searchText,
@@ -79,7 +78,7 @@ export async function searchAreas(searchText: string): Promise<Area[]> {
     },
   };
 
-  const data = await executeQuery<AreasResponse>(query, variables as Record<string, unknown>);
+  const data = await executeQuery<AreasResponse>(query, variables);
   return data.areas;
 }
 

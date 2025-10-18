@@ -60,12 +60,14 @@ interface ConditionsData {
 interface DisambiguationResult {
   disambiguate: true;
   message: string;
+  source?: string;
   options: Array<{
     id: string;
     name: string;
     location: string;
     latitude: number;
     longitude: number;
+    rockType?: string;
   }>;
 }
 
@@ -168,15 +170,23 @@ const ChatInterface = () => {
                                         variant="outline"
                                         size="sm"
                                         onClick={() => {
+                                          const rockTypePart = option.rockType ? ` ${option.rockType}` : "";
                                           sendMessage({
-                                            text: `conditions at ${option.name} (${option.latitude}, ${option.longitude})`,
+                                            text: `conditions at ${option.name}${rockTypePart} (${option.latitude}, ${option.longitude})`,
                                           });
                                         }}
                                         className="flex flex-col items-start h-auto py-2 px-3 overflow-visible animate-in fade-in slide-in-from-bottom-2 duration-500"
                                         style={{ animationDelay: `${idx * 100}ms` }}
                                       >
                                         <span className="font-semibold text-sm">{option.name}</span>
-                                        <span className="text-xs opacity-70">{option.location}</span>
+                                        <span className="text-xs opacity-70">
+                                          {option.location}
+                                          {option.rockType && (
+                                            <span className="ml-1.5 text-orange-600 dark:text-orange-400">
+                                              • {option.rockType}
+                                            </span>
+                                          )}
+                                        </span>
                                       </Button>
                                     ))}
                                   </div>
