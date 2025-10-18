@@ -2,6 +2,8 @@ import { streamText, tool, stepCountIs, convertToModelMessages, UIMessage } from
 import { google } from "@ai-sdk/google";
 import { z } from "zod";
 import { searchLocationMultiple } from "@/lib/external-apis/geocoding";
+import { getWeatherForecast } from "@/lib/external-apis/open-meteo";
+import { computeConditions, RockType } from "@/lib/conditions/conditions.service";
 
 export const maxDuration = 30;
 
@@ -94,58 +96,79 @@ const tools = {
       }
 
       try {
-        const conditionsUrl = new URL(
-          `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/api/conditions`
-        );
-        conditionsUrl.searchParams.set("lat", lat.toString());
-        conditionsUrl.searchParams.set("lon", lon.toString());
-        if (rockType) {
-          conditionsUrl.searchParams.set("rockType", rockType);
-        }
-
-        console.log("[get_conditions] Fetching conditions:", {
+        console.log("[get_conditions] Fetching weather forecast:", {
           location,
           lat,
           lon,
           rockType,
-          url: conditionsUrl.toString(),
-          baseUrl: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
         });
 
-        const response = await fetch(conditionsUrl.toString());
-        console.log("[get_conditions] Conditions API response status:", response.status);
+        // Call the weather API directly instead of making an HTTP request
+        const forecast = await getWeatherForecast(lat, lon, 7);
 
-        const data = await response.json();
+        console.log("[get_conditions] Weather forecast received:", {
+          location,
+          hasCurrent: !!forecast.current,
+          hasHourly: !!forecast.hourly,
+        });
 
-        if (!response.ok) {
-          console.error("[get_conditions] Conditions API error:", {
+        if (!forecast.current || !forecast.hourly) {
+          console.error("[get_conditions] Invalid forecast data structure");
+          return {
+            error: "Invalid forecast data structure",
             location,
-            status: response.status,
-            error: data.error,
-            data,
-          });
-          return { error: data.error || "Failed to get conditions", location };
+          };
         }
 
-        console.log("[get_conditions] Successfully fetched conditions:", {
+        // Prepare hourly data
+        const hourlyData = forecast.hourly.map((h) => ({
+          time: h.time,
+          temp_c: h.temperature,
+          humidity: h.humidity,
+          wind_kph: h.windSpeed,
+          precip_mm: h.precipitation,
+        }));
+
+        // Compute conditions
+        const conditions = computeConditions(
+          {
+            current: {
+              temp_c: forecast.current.temperature,
+              humidity: forecast.current.humidity,
+              wind_kph: forecast.current.windSpeed,
+              precip_mm: forecast.current.precipitation,
+            },
+            hourly: hourlyData,
+          },
+          (rockType as RockType) || "unknown",
+          0
+        );
+
+        console.log("[get_conditions] Successfully computed conditions:", {
           location,
-          rating: data.conditions.rating,
-          frictionScore: data.conditions.frictionRating,
+          rating: conditions.rating,
+          frictionScore: conditions.frictionRating,
         });
 
         return {
           location,
-          rating: data.conditions.rating,
-          frictionScore: data.conditions.frictionRating,
-          reasons: data.conditions.reasons,
-          warnings: data.conditions.warnings || [],
-          isDry: data.conditions.isDry,
-          dryingTimeHours: data.conditions.dryingTimeHours,
-          optimalWindows: data.conditions.optimalWindows,
-          current: data.current,
+          rating: conditions.rating,
+          frictionScore: conditions.frictionRating,
+          reasons: conditions.reasons,
+          warnings: conditions.warnings || [],
+          isDry: conditions.isDry,
+          dryingTimeHours: conditions.dryingTimeHours,
+          optimalWindows: conditions.optimalWindows,
+          current: {
+            temperature_c: forecast.current.temperature,
+            humidity: forecast.current.humidity,
+            windSpeed_kph: forecast.current.windSpeed,
+            precipitation_mm: forecast.current.precipitation,
+            weatherCode: forecast.current.weatherCode,
+          },
         };
       } catch (error) {
-        console.error("[get_conditions] Fetch error:", {
+        console.error("[get_conditions] Error:", {
           location,
           lat,
           lon,
