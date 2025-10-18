@@ -44,6 +44,8 @@ async function executeQuery<T>(query: string, variables?: Record<string, unknown
  * Returns multiple results for disambiguation
  */
 export async function searchAreas(searchText: string): Promise<Area[]> {
+  console.log("[OpenBeta] searchAreas called with:", searchText);
+
   const query = `
     query SearchAreas($filter: AreaFilterInput!) {
       areas(filter: $filter) {
@@ -78,7 +80,19 @@ export async function searchAreas(searchText: string): Promise<Area[]> {
     },
   };
 
+  console.log("[OpenBeta] Executing query with variables:", JSON.stringify(variables));
+
   const data = await executeQuery<AreasResponse>(query, variables);
+
+  console.log("[OpenBeta] Response:", {
+    count: data.areas?.length || 0,
+    areas: data.areas?.slice(0, 3).map(a => ({
+      name: a.area_name,
+      path: a.pathTokens?.join(" > "),
+      coords: `${a.metadata?.lat}, ${a.metadata?.lng}`,
+    })),
+  });
+
   return data.areas;
 }
 
