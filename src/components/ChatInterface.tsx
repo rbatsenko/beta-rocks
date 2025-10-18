@@ -164,7 +164,7 @@ const ChatInterface = () => {
                               return (
                                 <div key={i} className="mt-3 space-y-2">
                                   <p className="text-sm font-medium">{result.message}</p>
-                                  <div className="flex flex-wrap gap-2">
+                                  <div className="flex flex-wrap gap-2 overflow-visible">
                                     {result.options.map((option) => (
                                       <Button
                                         key={option.id}
@@ -175,7 +175,7 @@ const ChatInterface = () => {
                                             text: `conditions at ${option.name} (${option.latitude}, ${option.longitude})`,
                                           });
                                         }}
-                                        className="flex flex-col items-start h-auto py-2 px-3"
+                                        className="flex flex-col items-start h-auto py-2 px-3 overflow-visible"
                                       >
                                         <span className="font-semibold text-sm">{option.name}</span>
                                         <span className="text-xs opacity-70">{option.location}</span>

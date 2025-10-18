@@ -563,6 +563,19 @@ export function findOptimalWindowsEnhanced(hourlyConditions: HourlyCondition[]):
 
   hourlyConditions.forEach((hour, index) => {
     if (hour.frictionScore >= 4) {
+      // Check if we need to split window at midnight
+      if (currentWindow && currentWindow.hours.length > 0) {
+        const lastHourDate = new Date(currentWindow.hours[currentWindow.hours.length - 1].time);
+        const currentHourDate = new Date(hour.time);
+
+        // If day changed, close current window and start new one
+        if (lastHourDate.getDate() !== currentHourDate.getDate()) {
+          closeWindow(currentWindow);
+          currentWindow = { start: index, hours: [hour] };
+          return;
+        }
+      }
+
       // Good hour, add to current window or start new one
       if (!currentWindow) {
         currentWindow = { start: index, hours: [hour] };

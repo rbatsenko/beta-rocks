@@ -172,8 +172,8 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
-    const threeDaysFromNow = new Date(today);
-    threeDaysFromNow.setDate(threeDaysFromNow.getDate() + 3);
+    const fiveDaysFromNow = new Date(today);
+    fiveDaysFromNow.setDate(fiveDaysFromNow.getDate() + 5);
 
     type GroupedWindow = {
       times: string[];
@@ -187,8 +187,8 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
     data.optimalWindows.forEach((window) => {
       const startDate = new Date(window.startTime);
 
-      // Skip windows outside the next 3 days
-      if (startDate < today || startDate >= threeDaysFromNow) return;
+      // Skip windows outside the next 5 days
+      if (startDate < today || startDate >= fiveDaysFromNow) return;
 
       const windowDay = new Date(
         startDate.getFullYear(),
@@ -234,7 +234,7 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-3xl max-h-[85vh]">
+      <DialogContent className="max-w-3xl max-h-[90vh]">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <ThermometerSun className="w-5 h-5" />
@@ -245,15 +245,15 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
           </DialogDescription>
         </DialogHeader>
 
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full flex flex-col">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="hourly">Hourly Forecast</TabsTrigger>
           </TabsList>
 
           {/* Overview Tab */}
-          <TabsContent value="overview" className="mt-4">
-            <ScrollArea className="max-h-[calc(85vh-200px)] pr-4">
+          <TabsContent value="overview" className="mt-4 flex-1 overflow-hidden">
+            <ScrollArea className="h-[calc(90vh-240px)] pr-4">
               <div className="space-y-6">
             {/* Current Conditions Summary */}
             <div className="space-y-3">
@@ -306,19 +306,31 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                   </h3>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     <div className="bg-muted/50 rounded-lg p-3">
-                      <p className="text-xs text-muted-foreground">Temperature</p>
+                      <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
+                        <ThermometerSun className="h-3 w-3" />
+                        <span>Temperature</span>
+                      </div>
                       <p className="text-lg font-semibold">{data.current.temperature_c}°C</p>
                     </div>
                     <div className="bg-muted/50 rounded-lg p-3">
-                      <p className="text-xs text-muted-foreground">Humidity</p>
+                      <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
+                        <Droplets className="h-3 w-3" />
+                        <span>Humidity</span>
+                      </div>
                       <p className="text-lg font-semibold">{data.current.humidity}%</p>
                     </div>
                     <div className="bg-muted/50 rounded-lg p-3">
-                      <p className="text-xs text-muted-foreground">Wind Speed</p>
+                      <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
+                        <Wind className="h-3 w-3" />
+                        <span>Wind Speed</span>
+                      </div>
                       <p className="text-lg font-semibold">{data.current.windSpeed_kph}km/h</p>
                     </div>
                     <div className="bg-muted/50 rounded-lg p-3">
-                      <p className="text-xs text-muted-foreground">Precipitation</p>
+                      <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
+                        <Cloud className="h-3 w-3" />
+                        <span>Precipitation</span>
+                      </div>
                       <p className="text-lg font-semibold">{data.current.precipitation_mm}mm</p>
                     </div>
                   </div>
@@ -373,10 +385,13 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
             {windowsByDay && Object.keys(windowsByDay).length > 0 ? (
               <>
                 <div className="space-y-3">
-                  <h3 className="font-semibold flex items-center gap-2">
-                    <TrendingUp className="w-4 h-4" />
-                    Optimal Climbing Windows
-                  </h3>
+                  <div className="flex items-start justify-between gap-2">
+                    <h3 className="font-semibold flex items-center gap-2">
+                      <TrendingUp className="w-4 h-4" />
+                      Optimal Climbing Windows
+                    </h3>
+                    <span className="text-xs text-muted-foreground">Next 5 days</span>
+                  </div>
                   <div className="space-y-2">
                     {Object.entries(windowsByDay).map(([day, dayData]) => {
                       const isHighlighted = dayData.isToday || dayData.isTomorrow;
@@ -433,7 +448,7 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                   </div>
                   {data.optimalTime && (
                     <p className="text-sm text-muted-foreground">
-                      🌟 Best time: <span className="font-semibold">{data.optimalTime}</span>
+                      🌟 Best time: <span className="font-semibold">{formatHourlyTime(data.optimalTime)}</span>
                     </p>
                   )}
                 </div>
@@ -442,16 +457,19 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
             ) : data.optimalWindows && data.optimalWindows.length === 0 ? (
               <>
                 <div className="space-y-3">
-                  <h3 className="font-semibold flex items-center gap-2">
-                    <TrendingUp className="w-4 h-4" />
-                    Optimal Climbing Windows
-                  </h3>
+                  <div className="flex items-start justify-between gap-2">
+                    <h3 className="font-semibold flex items-center gap-2">
+                      <TrendingUp className="w-4 h-4" />
+                      Optimal Climbing Windows
+                    </h3>
+                    <span className="text-xs text-muted-foreground">Next 5 days</span>
+                  </div>
                   <div className="flex flex-col items-center justify-center py-8 text-center">
                     <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center mb-3">
                       <Clock className="h-6 w-6 text-muted-foreground" />
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      No optimal conditions in the next 3 days
+                      No optimal conditions in the next 5 days
                     </p>
                     <p className="text-xs text-muted-foreground mt-1">
                       Check hourly forecast for more details
@@ -461,13 +479,20 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                 <Separator />
               </>
             ) : null}
+
+            {/* Weather Monitoring Disclaimer */}
+            <div className="mt-6 p-3 bg-muted/30 rounded-lg border border-border">
+              <p className="text-xs text-muted-foreground text-center">
+                ⚠️ Weather conditions can change rapidly. Always monitor forecasts before heading out and check conditions on arrival.
+              </p>
+            </div>
               </div>
             </ScrollArea>
           </TabsContent>
 
           {/* Hourly Forecast Tab */}
-          <TabsContent value="hourly" className="mt-4">
-            <ScrollArea className="max-h-[calc(85vh-200px)] pr-4">
+          <TabsContent value="hourly" className="mt-4 flex-1 overflow-hidden">
+            <ScrollArea className="h-[calc(90vh-240px)] pr-4">
               {hourlyByDay && Object.keys(hourlyByDay).length > 0 ? (
                 <div className="space-y-6">
                   {Object.entries(hourlyByDay).map(([day, hours]) => (
@@ -495,17 +520,24 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                                     hour12: false,
                                   })}
                                 </span>
-                                <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                  <span>{hour.temp_c}°C</span>
-                                  <span>•</span>
-                                  <span>{hour.humidity}%</span>
-                                  <span>•</span>
-                                  <span>{hour.wind_kph}km/h</span>
+                                <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                                  <div className="flex items-center gap-1">
+                                    <ThermometerSun className="h-3 w-3" />
+                                    <span>{hour.temp_c}°C</span>
+                                  </div>
+                                  <div className="flex items-center gap-1">
+                                    <Droplets className="h-3 w-3" />
+                                    <span>{hour.humidity}%</span>
+                                  </div>
+                                  <div className="flex items-center gap-1">
+                                    <Wind className="h-3 w-3" />
+                                    <span>{hour.wind_kph}km/h</span>
+                                  </div>
                                   {hour.precip_mm > 0 && (
-                                    <>
-                                      <span>•</span>
-                                      <span className="text-blue-500">{hour.precip_mm}mm</span>
-                                    </>
+                                    <div className="flex items-center gap-1 text-blue-500">
+                                      <Cloud className="h-3 w-3" />
+                                      <span>{hour.precip_mm}mm</span>
+                                    </div>
                                   )}
                                 </div>
                               </div>
