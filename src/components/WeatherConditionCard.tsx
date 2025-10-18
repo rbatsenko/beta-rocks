@@ -52,7 +52,8 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
   detailsLabel,
 }: WeatherConditionCardProps) {
   return (
-    <div className="mt-3 bg-muted/50 rounded-lg p-3 sm:p-4 border border-border max-w-full overflow-hidden">
+    <div className="mt-3 bg-muted/50 rounded-lg p-3 sm:p-4 border border-border max-w-full overflow-hidden space-y-2">
+      {/* Top row: emoji, basic info, and button */}
       <div className="flex items-start gap-2 sm:gap-3 min-w-0">
         {/* Weather emoji display */}
         {data.current?.weatherCode !== undefined && (
@@ -66,8 +67,8 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
           </div>
         )}
 
-        <div className="space-y-1.5 sm:space-y-2 flex-1 min-w-0">
-          <div className="space-y-0.5 sm:space-y-1">
+        <div className="space-y-1 sm:space-y-1.5 flex-1 min-w-0">
+          <div className="space-y-0.5">
             <div className="font-semibold text-base">
               🧗 {data.location}
               {data.timeframe && data.timeframe !== "now" && (
@@ -90,16 +91,6 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
           <div className="font-medium">
             {conditionsLabel}: {translateRating(data.rating)} ({data.frictionScore}/5)
           </div>
-          {data.warnings && data.warnings.length > 0 && (
-            <div className="text-destructive font-semibold text-sm">
-              ⚠️ {data.warnings.map(translateWarning).join(", ")}
-            </div>
-          )}
-          {data.reasons && data.reasons.length > 0 && (
-            <div className="text-sm opacity-80">
-              {data.reasons.map(translateReason).join(", ")}
-            </div>
-          )}
         </div>
         {(data.hourlyConditions || data.optimalWindows) && (
           <Button
@@ -113,6 +104,20 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
           </Button>
         )}
       </div>
+
+      {/* Warnings - full width */}
+      {data.warnings && data.warnings.length > 0 && (
+        <div className="text-destructive font-semibold text-sm">
+          ⚠️ {data.warnings.map(translateWarning).join(", ")}
+        </div>
+      )}
+
+      {/* Reasons - full width */}
+      {data.reasons && data.reasons.length > 0 && (
+        <div className="text-sm opacity-80">
+          {data.reasons.map(translateReason).join(", ")}
+        </div>
+      )}
     </div>
   );
 });

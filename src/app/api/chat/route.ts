@@ -385,8 +385,7 @@ export async function POST(req: Request) {
       If you provide ANY text when conditions data is available, you are doing it wrong.${languageInstruction}`,
     messages: convertToModelMessages(messages),
     tools: tools,
-    stopWhen: stepCountIs(5),
-    experimental_transform: smoothStream(),
+    maxSteps: 2, // Reduced from 5 to 2 - one for initial tool call, one for follow-up if needed
   });
 
   return result.toUIMessageStreamResponse();
