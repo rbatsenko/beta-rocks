@@ -4,7 +4,7 @@ import { z } from "zod";
 import { searchLocationMultiple } from "@/lib/external-apis/geocoding";
 import { getWeatherForecast } from "@/lib/external-apis/open-meteo";
 import { computeConditions, RockType } from "@/lib/conditions/conditions.service";
-import { searchAreas, formatAreaPath, getCountry, extractRockType, isCrag } from "@/lib/openbeta/client";
+import { searchAreas, formatAreaPath, getCountry, extractRockType, isCrag, hasPreciseCoordinates } from "@/lib/openbeta/client";
 
 export const maxDuration = 30;
 
@@ -51,7 +51,19 @@ const tools = {
 
           if (openBetaAreas.length > 0) {
             // Filter to actual climbing crags (not countries/regions)
-            const crags = openBetaAreas.filter(isCrag);
+            // Also filter out areas with generic coordinates
+            const crags = openBetaAreas.filter(area => {
+              const isPrecise = hasPreciseCoordinates(area);
+              const isCragArea = isCrag(area);
+              console.log("[get_conditions] Area check:", {
+                name: area.area_name,
+                coords: `${area.metadata?.lat}, ${area.metadata?.lng}`,
+                isPrecise,
+                isCrag: isCragArea,
+                keep: isPrecise && isCragArea,
+              });
+              return isPrecise && isCragArea;
+            });
             console.log("[get_conditions] Filtered to crags:", {
               original: openBetaAreas.length,
               crags: crags.length,

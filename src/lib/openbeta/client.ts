@@ -194,3 +194,23 @@ export function isCrag(area: Area): boolean {
     !!area.content?.description
   );
 }
+
+/**
+ * Check if coordinates look precise (not generic region coordinates)
+ * Generic coordinates are often whole numbers like (46, 2) for France
+ */
+export function hasPreciseCoordinates(area: Area): boolean {
+  if (!area.metadata?.lat || !area.metadata?.lng) {
+    return false;
+  }
+
+  const lat = area.metadata.lat;
+  const lng = area.metadata.lng;
+
+  // Check if coordinates have decimal precision (not whole numbers)
+  // Whole numbers like (46, 2) are usually generic region coordinates
+  const latIsWhole = Math.abs(lat - Math.round(lat)) < 0.01;
+  const lngIsWhole = Math.abs(lng - Math.round(lng)) < 0.01;
+
+  return !(latIsWhole && lngIsWhole);
+}
