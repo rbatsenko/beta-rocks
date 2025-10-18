@@ -89,6 +89,13 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
     return hour >= 19 || hour < 7;
   };
 
+  // Translate rating strings
+  const translateRating = (rating: string): string => {
+    const ratingLower = rating.toLowerCase();
+    const key = `ratings.${ratingLower}`;
+    return t(key);
+  };
+
   const getRatingColor = (rating: string) => {
     switch (rating) {
       case "Great":
@@ -341,7 +348,7 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
               </h3>
               <div className="flex items-center gap-3">
                 <Badge className={`text-lg px-4 py-2 ${getRatingColor(data.rating)}`}>
-                  {data.rating}
+                  {translateRating(data.rating)}
                 </Badge>
                 <span className="text-2xl font-bold">{data.frictionScore}/5</span>
                 {data.isDry ? (
@@ -569,7 +576,7 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                                         className={getRatingColor(window.rating)}
                                         variant="outline"
                                       >
-                                        {window.rating}
+                                        {translateRating(window.rating)}
                                       </Badge>
                                     </div>
                                     <span className="text-xs text-muted-foreground">
@@ -737,7 +744,7 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                                   </div>
                                   <div className="flex items-center gap-2">
                                     <Badge className={getRatingColor(hour.rating)} variant="outline">
-                                      {hour.rating}
+                                      {translateRating(hour.rating)}
                                     </Badge>
                                     <span className="text-sm font-semibold w-8 text-right">
                                       {hour.frictionScore}/5
@@ -815,7 +822,7 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                                         </div>
                                         <div className="flex items-center gap-2">
                                           <Badge className={getRatingColor(hour.rating)} variant="outline">
-                                            {hour.rating}
+                                            {translateRating(hour.rating)}
                                           </Badge>
                                           <span className="text-sm font-semibold w-8 text-right">
                                             {hour.frictionScore}/5

@@ -30,6 +30,13 @@
     "details": "Szczegóły",
     "location": "Lokalizacja"
   },
+  "ratings": {
+    "great": "Super",
+    "good": "Dobrze",
+    "fair": "Średnio",
+    "poor": "Słabo",
+    "nope": "Dramat"
+  },
   "disambiguation": {
     "foundMultipleAreas": "Znaleziono {{count}} obszarów wspinaczkowych dla \"{{location}}\". Wybierz jeden:",
     "foundMultipleLocations": "Znaleziono wiele lokalizacji dla \"{{location}}\". Wybierz jedną:",

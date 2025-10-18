@@ -30,6 +30,13 @@
     "details": "Details",
     "location": "Location"
   },
+  "ratings": {
+    "great": "Great",
+    "good": "Good",
+    "fair": "Fair",
+    "poor": "Poor",
+    "nope": "Nope"
+  },
   "disambiguation": {
     "foundMultipleAreas": "Found {{count}} climbing areas for \"{{location}}\". Please choose one:",
     "foundMultipleLocations": "Found multiple locations for \"{{location}}\". Please choose one:",

@@ -7,18 +7,26 @@ import "@/index.css";
 export const metadata: Metadata = {
   title: "temps.rocks - Real-time Climbing Conditions",
   description:
-    "Chat with temps.rocks for instant climbing conditions at any crag, sector, or route worldwide. Free weather forecasts, community reports, and AI-powered insights for climbers.",
+    "Chat with temps.rocks for instant climbing conditions at any crag, sector, or route worldwide. Get real-time weather forecasts, friction analysis, optimal climbing windows, and AI-powered insights - completely free for climbers.",
   authors: [{ name: "temps.rocks" }],
+  keywords: ["climbing", "weather", "conditions", "friction", "crag", "rock climbing", "bouldering", "sport climbing", "forecast"],
   openGraph: {
     title: "temps.rocks - Real-time Climbing Conditions",
     description:
-      "Free climbing conditions via chat. Get instant weather, sun/shade, and community reports for any crag worldwide.",
+      "Chat naturally to get instant climbing conditions for any crag worldwide. Real-time weather, friction analysis, optimal climbing windows, and 14-day forecasts. Free for climbers.",
+    url: "https://temps.rocks",
+    siteName: "temps.rocks",
+    locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "temps.rocks - Climbing Conditions Chat",
-    description: "Chat naturally to get real-time climbing conditions anywhere",
+    description: "Ask about any crag and get instant weather, friction scores, and optimal climbing windows. Free AI-powered climbing conditions assistant.",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
