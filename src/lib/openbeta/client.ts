@@ -184,15 +184,31 @@ export function extractRockType(area: Area): string | undefined {
  * vs a region/country container
  */
 export function isCrag(area: Area): boolean {
-  // Crags typically have:
-  // - More than 3 levels in path (Country > Region > Crag)
-  // - Or have climbs
-  // - Or have description
-  return (
-    area.pathTokens.length >= 3 ||
-    (area.climbs && area.climbs.length > 0) ||
-    !!area.content?.description
-  );
+  // Definitely a crag if:
+  // - Has climbs
+  if (area.climbs && area.climbs.length > 0) {
+    return true;
+  }
+
+  // Likely a crag if:
+  // - More than 2 levels in path (Country > Crag is valid for major areas like Siurana)
+  // - Has children (sectors/routes)
+  // - Has description (suggests it's a specific climbing area, not just a region)
+  const hasChildren = area.children && area.children.length > 0;
+  const hasDescription = !!area.content?.description;
+  const hasDeepPath = area.pathTokens.length >= 3;
+
+  // If has 2+ levels AND (children OR description), it's likely a crag
+  if (area.pathTokens.length >= 2 && (hasChildren || hasDescription)) {
+    return true;
+  }
+
+  // If has 3+ levels, it's likely a crag (even without children/description yet)
+  if (hasDeepPath) {
+    return true;
+  }
+
+  return false;
 }
 
 /**

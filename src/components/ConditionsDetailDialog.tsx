@@ -69,10 +69,12 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
     switch (rating) {
       case "Great":
         return "bg-green-500/10 text-green-500 border-green-500/20";
-      case "OK":
+      case "Good":
         return "bg-blue-500/10 text-blue-500 border-blue-500/20";
-      case "Meh":
+      case "Fair":
         return "bg-yellow-500/10 text-yellow-500 border-yellow-500/20";
+      case "Poor":
+        return "bg-orange-500/10 text-orange-500 border-orange-500/20";
       case "Nope":
         return "bg-red-500/10 text-red-500 border-red-500/20";
       default:
@@ -589,71 +591,162 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
             <ScrollArea className="h-[calc(90vh-240px)] pr-4">
               {hourlyByDay && Object.keys(hourlyByDay).length > 0 ? (
                 <div className="space-y-6">
-                  {Object.entries(hourlyByDay).map(([day, hours]) => (
-                    <div key={day} className="space-y-3">
-                      <h3 className="font-semibold flex items-center gap-2 sticky top-0 bg-background z-10 py-2">
-                        <Calendar className="w-4 h-4" />
-                        {day}
-                      </h3>
-                      <div className="space-y-2">
-                        {hours.map((hour, i) => (
-                          <div
-                            key={i}
-                            className={`rounded-lg p-3 border ${
-                              hour.frictionScore >= 4
-                                ? "bg-green-500/5 border-green-500/20"
-                                : "bg-muted/30 border-border"
-                            }`}
-                          >
-                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-                                <span className="font-mono text-sm font-semibold min-w-[60px]">
-                                  {new Date(hour.time).toLocaleTimeString("en-US", {
-                                    hour: "2-digit",
-                                    minute: "2-digit",
-                                    hour12: false,
-                                  })}
-                                </span>
-                                <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                                  <div className="flex items-center gap-1">
-                                    <ThermometerSun className="h-3 w-3" />
-                                    <span>{hour.temp_c}°C</span>
-                                  </div>
-                                  <div className="flex items-center gap-1">
-                                    <Droplets className="h-3 w-3" />
-                                    <span>{hour.humidity}%</span>
-                                  </div>
-                                  <div className="flex items-center gap-1">
-                                    <Wind className="h-3 w-3" />
-                                    <span>{hour.wind_kph}km/h</span>
-                                  </div>
-                                  {hour.precip_mm > 0 && (
-                                    <div className="flex items-center gap-1 text-blue-500">
-                                      <Cloud className="h-3 w-3" />
-                                      <span>{hour.precip_mm}mm</span>
+                  {Object.entries(hourlyByDay).map(([day, hours]) => {
+                    // Group hours by rating
+                    const goodHours = hours.filter((h) => h.rating === "Great" || h.rating === "Good");
+                    const otherHours = hours.filter((h) => h.rating !== "Great" && h.rating !== "Good");
+
+                    return (
+                      <div key={day} className="space-y-3">
+                        <h3 className="font-semibold flex items-center gap-2 sticky top-0 bg-background z-10 py-2">
+                          <Calendar className="w-4 h-4" />
+                          {day}
+                        </h3>
+
+                        {/* Good hours - shown prominently */}
+                        {goodHours.length > 0 && (
+                          <div className="space-y-2">
+                            {goodHours.map((hour, i) => (
+                              <div
+                                key={i}
+                                className={`rounded-lg p-3 border ${
+                                  hour.rating === "Great"
+                                    ? "bg-green-500/10 border-green-500/30"
+                                    : "bg-blue-500/5 border-blue-500/20"
+                                }`}
+                              >
+                                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+                                    <span className="font-mono text-sm font-semibold min-w-[60px]">
+                                      {new Date(hour.time).toLocaleTimeString("en-US", {
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                        hour12: false,
+                                      })}
+                                    </span>
+                                    <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                                      <div className="flex items-center gap-1">
+                                        <ThermometerSun className="h-3 w-3" />
+                                        <span>{hour.temp_c}°C</span>
+                                      </div>
+                                      <div className="flex items-center gap-1">
+                                        <Droplets className="h-3 w-3" />
+                                        <span>{hour.humidity}%</span>
+                                      </div>
+                                      <div className="flex items-center gap-1">
+                                        <Wind className="h-3 w-3" />
+                                        <span>{hour.wind_kph}km/h</span>
+                                      </div>
+                                      {hour.precip_mm > 0 && (
+                                        <div className="flex items-center gap-1 text-blue-500">
+                                          <Cloud className="h-3 w-3" />
+                                          <span>{hour.precip_mm}mm</span>
+                                        </div>
+                                      )}
                                     </div>
-                                  )}
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    <Badge className={getRatingColor(hour.rating)} variant="outline">
+                                      {hour.rating}
+                                    </Badge>
+                                    <span className="text-sm font-semibold w-8 text-right">
+                                      {hour.frictionScore}/5
+                                    </span>
+                                  </div>
                                 </div>
+                                {hour.warnings.length > 0 && (
+                                  <p className="text-xs text-muted-foreground mt-1">
+                                    {hour.warnings.join(", ")}
+                                  </p>
+                                )}
                               </div>
-                              <div className="flex items-center gap-2">
-                                <Badge className={getRatingColor(hour.rating)} variant="outline">
-                                  {hour.rating}
-                                </Badge>
-                                <span className="text-sm font-semibold w-8 text-right">
-                                  {hour.frictionScore}/5
-                                </span>
-                              </div>
-                            </div>
-                            {hour.warnings.length > 0 && (
-                              <p className="text-xs text-muted-foreground mt-1">
-                                {hour.warnings.join(", ")}
-                              </p>
-                            )}
+                            ))}
                           </div>
-                        ))}
+                        )}
+
+                        {/* Complete timeline - collapsible, shows ALL hours including good ones */}
+                        {hours.length > 0 && (
+                          <Accordion type="single" collapsible>
+                            <AccordionItem value="all-hours" className="border rounded-lg">
+                              <AccordionTrigger className="px-3 py-2 hover:no-underline">
+                                <span className="text-sm text-muted-foreground">
+                                  Show complete timeline ({hours.length} hour{hours.length > 1 ? "s" : ""})
+                                </span>
+                              </AccordionTrigger>
+                              <AccordionContent className="px-3 pb-3">
+                                <div className="space-y-2">
+                                  {hours.map((hour, i) => (
+                                    <div
+                                      key={i}
+                                      className={`rounded-lg p-3 border ${
+                                        hour.rating === "Great"
+                                          ? "bg-green-500/10 border-green-500/30"
+                                          : hour.rating === "Good"
+                                            ? "bg-blue-500/5 border-blue-500/20"
+                                            : "bg-muted/30 border-border"
+                                      }`}
+                                    >
+                                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+                                          <span className="font-mono text-sm font-semibold min-w-[60px]">
+                                            {new Date(hour.time).toLocaleTimeString("en-US", {
+                                              hour: "2-digit",
+                                              minute: "2-digit",
+                                              hour12: false,
+                                            })}
+                                          </span>
+                                          <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                                            <div className="flex items-center gap-1">
+                                              <ThermometerSun className="h-3 w-3" />
+                                              <span>{hour.temp_c}°C</span>
+                                            </div>
+                                            <div className="flex items-center gap-1">
+                                              <Droplets className="h-3 w-3" />
+                                              <span>{hour.humidity}%</span>
+                                            </div>
+                                            <div className="flex items-center gap-1">
+                                              <Wind className="h-3 w-3" />
+                                              <span>{hour.wind_kph}km/h</span>
+                                            </div>
+                                            {hour.precip_mm > 0 && (
+                                              <div className="flex items-center gap-1 text-blue-500">
+                                                <Cloud className="h-3 w-3" />
+                                                <span>{hour.precip_mm}mm</span>
+                                              </div>
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                          <Badge className={getRatingColor(hour.rating)} variant="outline">
+                                            {hour.rating}
+                                          </Badge>
+                                          <span className="text-sm font-semibold w-8 text-right">
+                                            {hour.frictionScore}/5
+                                          </span>
+                                        </div>
+                                      </div>
+                                      {hour.warnings.length > 0 && (
+                                        <p className="text-xs text-muted-foreground mt-1">
+                                          {hour.warnings.join(", ")}
+                                        </p>
+                                      )}
+                                    </div>
+                                  ))}
+                                </div>
+                              </AccordionContent>
+                            </AccordionItem>
+                          </Accordion>
+                        )}
+
+                        {/* No good hours message */}
+                        {goodHours.length === 0 && (
+                          <p className="text-sm text-muted-foreground italic">
+                            No optimal conditions on {day}
+                          </p>
+                        )}
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               ) : (
                 <div className="flex flex-col items-center justify-center py-12 text-center">

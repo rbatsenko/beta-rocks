@@ -155,7 +155,10 @@ const ChatInterface = () => {
 
                   return (
                     <Message key={message.id} from={message.role}>
-                      <MessageContent variant={message.role === "assistant" ? "flat" : "contained"}>
+                      <MessageContent
+                        variant={message.role === "assistant" ? "flat" : "contained"}
+                        className={message.role === "user" ? "bg-gradient-to-br from-orange-100 to-orange-50 dark:from-orange-950/50 dark:to-orange-900/30 border-orange-200 dark:border-orange-800/50 shadow-sm" : ""}
+                      >
                         {hasExecutingTool && !hasContent && (
                           <div className="flex items-center gap-3 py-1">
                             <div className="flex gap-1.5">

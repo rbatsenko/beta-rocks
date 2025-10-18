@@ -28,7 +28,7 @@ export interface HourlyCondition {
   precip_mm: number;
   isOptimal: boolean;
   frictionScore: number;
-  rating: "Nope" | "Meh" | "OK" | "Great";
+  rating: "Nope" | "Poor" | "Fair" | "Good" | "Great";
   isDry: boolean;
   warnings: string[];
 }
@@ -37,7 +37,7 @@ export interface OptimalWindow {
   startTime: string;
   endTime: string;
   avgFrictionScore: number;
-  rating: "Nope" | "Meh" | "OK" | "Great";
+  rating: "Nope" | "Poor" | "Fair" | "Good" | "Great";
   hourCount: number;
 }
 
@@ -49,7 +49,7 @@ export interface PrecipitationContext {
 
 export interface ConditionsResult {
   frictionRating: number; // 1-5 scale
-  rating: "Nope" | "Meh" | "OK" | "Great"; // Human-readable
+  rating: "Nope" | "Poor" | "Fair" | "Good" | "Great"; // Human-readable
   reasons: string[];
   dryingTimeHours?: number;
   isDry: boolean;
@@ -326,13 +326,15 @@ export function computeConditions(
   frictionScore = Math.max(1, Math.min(5, frictionScore));
 
   // === CONVERT TO RATING ===
-  let rating: "Nope" | "Meh" | "OK" | "Great";
+  let rating: "Nope" | "Poor" | "Fair" | "Good" | "Great";
   if (frictionScore >= 4.5) {
     rating = "Great";
   } else if (frictionScore >= 3.5) {
-    rating = "OK";
-  } else if (frictionScore >= 2) {
-    rating = "Meh";
+    rating = "Good";
+  } else if (frictionScore >= 2.5) {
+    rating = "Fair";
+  } else if (frictionScore >= 1.5) {
+    rating = "Poor";
   } else {
     rating = "Nope";
   }
@@ -456,10 +458,11 @@ function computeHourlyFrictionScore(
 /**
  * Convert friction score to rating
  */
-function scoreToRating(score: number): "Nope" | "Meh" | "OK" | "Great" {
+function scoreToRating(score: number): "Nope" | "Poor" | "Fair" | "Good" | "Great" {
   if (score >= 4.5) return "Great";
-  if (score >= 3.5) return "OK";
-  if (score >= 2) return "Meh";
+  if (score >= 3.5) return "Good";
+  if (score >= 2.5) return "Fair";
+  if (score >= 1.5) return "Poor";
   return "Nope";
 }
 
