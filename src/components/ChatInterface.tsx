@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useChat } from "@ai-sdk/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card } from "@/components/ui/card";
 import { Send, Loader2, Sun, Info, CloudSun } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Message, MessageContent } from "@/components/ai-elements/message";
@@ -98,35 +97,32 @@ const ChatInterface = () => {
   };
 
   return (
-    <section id="chat-section" className="py-12 px-6 bg-gradient-earth">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
+    <div className="flex flex-col h-screen">
+      {/* Header */}
+      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+        <div className="container flex h-16 items-center justify-between px-4">
           <div className="flex items-center gap-3">
-            <CloudSun className="w-10 h-10 text-orange-500" />
-            <h1 className="text-3xl font-bold">temps.rocks</h1>
+            <CloudSun className="w-6 h-6 text-orange-500" />
+            <h1 className="text-xl font-bold">temps.rocks</h1>
           </div>
           <ThemeToggle />
         </div>
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4">Ask About Conditions</h2>
-          <p className="text-lg text-muted-foreground">
-            Chat naturally about any crag, sector, or route worldwide
-          </p>
-        </div>
+      </header>
 
-        <Card className="shadow-elevated h-[60vh] md:h-[500px] flex flex-col">
-          <Conversation className="flex-1">
-            <ConversationContent className="p-6">
+      {/* Chat Area */}
+      <div className="flex-1 overflow-hidden flex flex-col">
+        <Conversation className="flex-1">
+          <ConversationContent className="container max-w-3xl px-4 py-6">
               {messages.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center py-12">
-                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                    <Send className="w-8 h-8 text-primary" />
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-orange-500/20 to-orange-600/20 flex items-center justify-center mb-6">
+                    <CloudSun className="w-10 h-10 text-orange-500" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">Start a conversation</h3>
-                  <p className="text-muted-foreground mb-6 max-w-md">
-                    Ask about climbing conditions anywhere in the world
+                  <h2 className="text-3xl font-bold mb-3">Ask about climbing conditions</h2>
+                  <p className="text-muted-foreground mb-8 max-w-md text-base">
+                    Get real-time weather, friction analysis, and optimal climbing windows for any crag worldwide
                   </p>
-                  <div className="flex flex-wrap gap-2 justify-center">
+                  <div className="flex flex-wrap gap-2 justify-center max-w-lg">
                     {exampleQueries.map((query, idx) => (
                       <Button
                         key={idx}
@@ -257,9 +253,11 @@ const ChatInterface = () => {
             </ConversationContent>
             <ConversationScrollButton />
           </Conversation>
+        </div>
 
-          {/* Input */}
-          <div className="border-t p-4 shrink-0">
+        {/* Input */}
+        <div className="border-t bg-background">
+          <div className="container max-w-3xl px-4 py-4">
             <form onSubmit={handleSubmit} className="flex gap-2">
               <Input
                 value={input}
@@ -276,8 +274,27 @@ const ChatInterface = () => {
                 )}
               </Button>
             </form>
+            {/* Footer Links */}
+            <div className="flex items-center justify-center gap-4 mt-3 text-xs text-muted-foreground">
+              <a href="#" className="hover:text-foreground transition-colors">
+                About
+              </a>
+              <span>•</span>
+              <a href="#" className="hover:text-foreground transition-colors">
+                Privacy
+              </a>
+              <span>•</span>
+              <a
+                href="https://github.com/rbatsenko/temps-rocks"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground transition-colors"
+              >
+                GitHub
+              </a>
+            </div>
           </div>
-        </Card>
+        </div>
       </div>
 
       {/* Conditions Detail Dialog */}
@@ -288,7 +305,7 @@ const ChatInterface = () => {
           data={selectedConditions}
         />
       )}
-    </section>
+    </div>
   );
 };
 
