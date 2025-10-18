@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
  *
  * TODO: Query Supabase for user data with matching sync_key_hash
  */
-async function handleGet(_key: string) {
+async function handleGet() {
   try {
     // TODO: Implement Supabase query
     // const data = await supabase
@@ -33,7 +33,7 @@ async function handleGet(_key: string) {
  * TODO: Implement conflict resolution via updatedAt timestamps
  * TODO: Save to Supabase
  */
-async function handlePost(_key: string, _body: any) {
+async function handlePost() {
   try {
     // TODO: Validate sync key
     // TODO: Implement conflict resolution
@@ -50,12 +50,12 @@ async function handlePost(_key: string, _body: any) {
 }
 
 export async function GET(_request: NextRequest, { params }: { params: Promise<{ key: string }> }) {
-  const { key } = await params;
-  return handleGet(key);
+  await params; // key would be used in the future implementation
+  return handleGet();
 }
 
 export async function POST(request: NextRequest, { params }: { params: Promise<{ key: string }> }) {
-  const { key } = await params;
-  const body = await request.json();
-  return handlePost(key, body);
+  await params; // key would be used in the future implementation
+  await request.json(); // body would be used in the future implementation
+  return handlePost();
 }

@@ -16,14 +16,59 @@ import {
 } from "@/components/ai-elements/conversation";
 import { ConditionsDetailDialog } from "@/components/ConditionsDetailDialog";
 
+interface ConditionsData {
+  location: string;
+  rating: string;
+  frictionScore: number;
+  reasons?: string[];
+  warnings?: string[];
+  isDry: boolean;
+  dryingTimeHours?: number;
+  hourlyConditions?: Array<{
+    time: string;
+    temp_c: number;
+    humidity: number;
+    wind_kph: number;
+    precip_mm: number;
+    frictionScore: number;
+    rating: string;
+    isDry: boolean;
+    warnings: string[];
+  }>;
+  optimalWindows?: Array<{
+    startTime: string;
+    endTime: string;
+    avgFrictionScore: number;
+    rating: string;
+    hourCount: number;
+  }>;
+  precipitationContext?: {
+    last24h: number;
+    last48h: number;
+    next24h: number;
+  };
+  dewPointSpread?: number;
+  optimalTime?: string;
+}
+
+interface DisambiguationResult {
+  disambiguate: true;
+  message: string;
+  options: Array<{
+    id: string;
+    name: string;
+    location: string;
+    latitude: number;
+    longitude: number;
+  }>;
+}
+
 const ChatInterface = () => {
   const [input, setInput] = useState("");
   const { messages, sendMessage } = useChat();
   const isLoading = messages.length > 0 && messages[messages.length - 1].role === "user";
   const [detailsDialogOpen, setDetailsDialogOpen] = useState(false);
-  const [selectedConditions, setSelectedConditions] = useState<Record<string, unknown> | null>(
-    null
-  );
+  const [selectedConditions, setSelectedConditions] = useState<ConditionsData | null>(null);
 
   const exampleQueries = [
     "Siurana conditions tomorrow?",
@@ -86,125 +131,99 @@ const ChatInterface = () => {
                 </div>
               ) : (
                 messages.map((message) => {
-                  const textParts = message.parts.filter(
-                    (part: { type: string }) => part.type === "text"
-                  );
-                  const toolParts = message.parts.filter(
-                    (part: { type: string }) =>
-                      part.type !== "text" && part.type !== "error" && part.type !== "step-start"
-                  );
-
                   return (
                     <Message key={message.id} from={message.role}>
                       <MessageContent variant={message.role === "assistant" ? "flat" : "contained"}>
-                        {/* Render text parts with markdown */}
-                        {textParts.map((part: { text: string }, i: number) => (
-                          <Response key={i}>{part.text}</Response>
-                        ))}
+                        {message.parts.map((part, i) => {
+                          // Render text parts
+                          if (part.type === "text") {
+                            return <Response key={i}>{part.text}</Response>;
+                          }
 
-                        {/* Render tool results inline for assistant messages */}
-                        {message.role === "assistant" &&
-                          toolParts.map(
-                            (
-                              part: {
-                                type: string;
-                                state?: string;
-                                output?: Record<string, unknown>;
-                                result?: Record<string, unknown>;
-                              },
-                              i: number
-                            ) => {
-                              // In AI SDK v5, tool parts have type 'tool-${toolName}' and state 'output-available'
-                              if (
-                                part.type === "tool-get_conditions" &&
-                                part.state === "output-available"
-                              ) {
-                                // Handle disambiguation results
-                                if (part.output?.disambiguate || part.result?.disambiguate) {
-                                  const result = part.output || part.result;
-                                  return (
-                                    <div key={i} className="mt-3 space-y-2">
-                                      <p className="text-sm font-medium">{result.message}</p>
-                                      <div className="flex flex-wrap gap-2">
-                                        {result.options?.map(
-                                          (option: {
-                                            id: string;
-                                            name: string;
-                                            location: string;
-                                            latitude: number;
-                                            longitude: number;
-                                          }) => (
-                                            <Button
-                                              key={option.id}
-                                              variant="outline"
-                                              size="sm"
-                                              onClick={() => {
-                                                sendMessage({
-                                                  text: `conditions at ${option.name} (${option.latitude}, ${option.longitude})`,
-                                                });
-                                              }}
-                                              className="flex flex-col items-start h-auto py-2 px-3"
-                                            >
-                                              <span className="font-semibold text-sm">
-                                                {option.name}
-                                              </span>
-                                              <span className="text-xs opacity-70">
-                                                {option.location}
-                                              </span>
-                                            </Button>
-                                          )
-                                        )}
-                                      </div>
-                                    </div>
-                                  );
-                                }
-                                // Handle regular conditions results
-                                const result = part.output || part.result;
-                                return (
-                                  <div
-                                    key={i}
-                                    className="mt-3 bg-muted/50 rounded-lg p-4 space-y-3 border border-border"
-                                  >
-                                    <div className="flex items-start justify-between">
-                                      <div className="space-y-2 flex-1">
-                                        <div className="font-semibold text-base">
-                                          🧗 {result?.location}
-                                        </div>
-                                        <div className="font-medium">
-                                          Rating: {result?.rating} ({result?.frictionScore}/5)
-                                        </div>
-                                        {result?.warnings && result.warnings.length > 0 && (
-                                          <div className="text-destructive font-semibold text-sm">
-                                            ⚠️ {result.warnings.join(", ")}
-                                          </div>
-                                        )}
-                                        {result?.reasons && result.reasons.length > 0 && (
-                                          <div className="text-sm opacity-80">
-                                            {result.reasons.join(", ")}
-                                          </div>
-                                        )}
-                                      </div>
-                                      {(result?.hourlyConditions || result?.optimalWindows) && (
-                                        <Button
-                                          variant="outline"
-                                          size="sm"
-                                          className="ml-3 shrink-0"
-                                          onClick={() => {
-                                            setSelectedConditions(result);
-                                            setDetailsDialogOpen(true);
-                                          }}
-                                        >
-                                          <Info className="w-4 h-4 mr-1" />
-                                          Details
-                                        </Button>
-                                      )}
-                                    </div>
+                          // Render tool results for assistant messages
+                          if (
+                            message.role === "assistant" &&
+                            part.type === "tool-get_conditions" &&
+                            part.state === "output-available"
+                          ) {
+                            const result = part.output as ConditionsData | DisambiguationResult;
+
+                            // Handle disambiguation results
+                            if ("disambiguate" in result && result.disambiguate) {
+                              return (
+                                <div key={i} className="mt-3 space-y-2">
+                                  <p className="text-sm font-medium">{result.message}</p>
+                                  <div className="flex flex-wrap gap-2">
+                                    {result.options.map((option) => (
+                                      <Button
+                                        key={option.id}
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={() => {
+                                          sendMessage({
+                                            text: `conditions at ${option.name} (${option.latitude}, ${option.longitude})`,
+                                          });
+                                        }}
+                                        className="flex flex-col items-start h-auto py-2 px-3"
+                                      >
+                                        <span className="font-semibold text-sm">{option.name}</span>
+                                        <span className="text-xs opacity-70">{option.location}</span>
+                                      </Button>
+                                    ))}
                                   </div>
-                                );
-                              }
-                              return null;
+                                </div>
+                              );
                             }
-                          )}
+
+                            // Handle regular conditions results
+                            const conditionsResult = result as ConditionsData;
+                            return (
+                              <div
+                                key={i}
+                                className="mt-3 bg-muted/50 rounded-lg p-4 space-y-3 border border-border"
+                              >
+                                <div className="flex items-start justify-between">
+                                  <div className="space-y-2 flex-1">
+                                    <div className="font-semibold text-base">
+                                      🧗 {conditionsResult.location}
+                                    </div>
+                                    <div className="font-medium">
+                                      Rating: {conditionsResult.rating} ({conditionsResult.frictionScore}
+                                      /5)
+                                    </div>
+                                    {conditionsResult.warnings && conditionsResult.warnings.length > 0 && (
+                                      <div className="text-destructive font-semibold text-sm">
+                                        ⚠️ {conditionsResult.warnings.join(", ")}
+                                      </div>
+                                    )}
+                                    {conditionsResult.reasons && conditionsResult.reasons.length > 0 && (
+                                      <div className="text-sm opacity-80">
+                                        {conditionsResult.reasons.join(", ")}
+                                      </div>
+                                    )}
+                                  </div>
+                                  {(conditionsResult.hourlyConditions ||
+                                    conditionsResult.optimalWindows) && (
+                                    <Button
+                                      variant="outline"
+                                      size="sm"
+                                      className="ml-3 shrink-0"
+                                      onClick={() => {
+                                        setSelectedConditions(conditionsResult);
+                                        setDetailsDialogOpen(true);
+                                      }}
+                                    >
+                                      <Info className="w-4 h-4 mr-1" />
+                                      Details
+                                    </Button>
+                                  )}
+                                </div>
+                              </div>
+                            );
+                          }
+
+                          return null;
+                        })}
                       </MessageContent>
                       {message.role === "assistant" && (
                         <div className="size-8 rounded-full bg-orange-500/10 flex items-center justify-center">

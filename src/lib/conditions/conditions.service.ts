@@ -226,7 +226,6 @@ export function computeConditions(
   let hourlyConditions: HourlyCondition[] | undefined;
   let optimalWindows: OptimalWindow[] | undefined;
   let precipitationContext: PrecipitationContext | undefined;
-  let dewPointSpread: number | undefined;
   let optimalTime: string | undefined;
 
   if (hourly && hourly.length > 0) {
@@ -537,8 +536,25 @@ export function calculatePrecipitationContext(
  * Analyze hourly forecast for optimal climbing windows (enhanced version)
  */
 export function findOptimalWindowsEnhanced(hourlyConditions: HourlyCondition[]): OptimalWindow[] {
+  type WindowInProgress = { start: number; hours: HourlyCondition[] };
+
   const windows: OptimalWindow[] = [];
-  let currentWindow: { start: number; hours: HourlyCondition[] } | null = null;
+  let currentWindow: WindowInProgress | null = null;
+
+  const closeWindow = (window: WindowInProgress) => {
+    if (window.hours.length >= 2) {
+      const avgScore =
+        window.hours.reduce((sum, h) => sum + h.frictionScore, 0) /
+        window.hours.length;
+      windows.push({
+        startTime: window.hours[0].time,
+        endTime: window.hours[window.hours.length - 1].time,
+        avgFrictionScore: Math.round(avgScore * 10) / 10,
+        rating: scoreToRating(avgScore),
+        hourCount: window.hours.length,
+      });
+    }
+  };
 
   hourlyConditions.forEach((hour, index) => {
     if (hour.frictionScore >= 4) {
@@ -550,33 +566,16 @@ export function findOptimalWindowsEnhanced(hourlyConditions: HourlyCondition[]):
       }
     } else {
       // Bad hour, close current window if exists
-      if (currentWindow && currentWindow.hours.length >= 2) {
-        const avgScore =
-          currentWindow.hours.reduce((sum, h) => sum + h.frictionScore, 0) /
-          currentWindow.hours.length;
-        windows.push({
-          startTime: currentWindow.hours[0].time,
-          endTime: currentWindow.hours[currentWindow.hours.length - 1].time,
-          avgFrictionScore: Math.round(avgScore * 10) / 10,
-          rating: scoreToRating(avgScore),
-          hourCount: currentWindow.hours.length,
-        });
+      if (currentWindow) {
+        closeWindow(currentWindow);
       }
       currentWindow = null;
     }
   });
 
   // Close last window if exists
-  if (currentWindow && currentWindow.hours.length >= 2) {
-    const avgScore =
-      currentWindow.hours.reduce((sum, h) => sum + h.frictionScore, 0) / currentWindow.hours.length;
-    windows.push({
-      startTime: currentWindow.hours[0].time,
-      endTime: currentWindow.hours[currentWindow.hours.length - 1].time,
-      avgFrictionScore: Math.round(avgScore * 10) / 10,
-      rating: scoreToRating(avgScore),
-      hourCount: currentWindow.hours.length,
-    });
+  if (currentWindow) {
+    closeWindow(currentWindow);
   }
 
   return windows;

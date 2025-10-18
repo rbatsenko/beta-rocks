@@ -188,7 +188,7 @@ export async function fetchReportById(id: string) {
   return data;
 }
 
-export async function updateReport(id: string, updates: { [key: string]: any }) {
+export async function updateReport(id: string, updates: Record<string, unknown>) {
   const { data, error } = await supabase
     .from("reports")
     .update({
