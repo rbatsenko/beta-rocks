@@ -18,6 +18,7 @@ import { ConditionsDetailDialog } from "@/components/ConditionsDetailDialog";
 
 interface ConditionsData {
   location: string;
+  locationDetails?: string; // Optional region/country or path info
   rating: string;
   frictionScore: number;
   reasons?: string[];
@@ -224,8 +225,15 @@ const ChatInterface = () => {
                               >
                                 <div className="flex items-start justify-between">
                                   <div className="space-y-2 flex-1">
-                                    <div className="font-semibold text-base">
-                                      🧗 {conditionsResult.location}
+                                    <div className="space-y-1">
+                                      <div className="font-semibold text-base">
+                                        🧗 {conditionsResult.location}
+                                      </div>
+                                      {conditionsResult.locationDetails && (
+                                        <div className="text-xs text-muted-foreground">
+                                          📍 {conditionsResult.locationDetails}
+                                        </div>
+                                      )}
                                     </div>
                                     <div className="font-medium">
                                       Rating: {conditionsResult.rating} ({conditionsResult.frictionScore}

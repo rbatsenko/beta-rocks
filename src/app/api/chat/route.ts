@@ -33,6 +33,7 @@ const tools = {
       let lat = latitude;
       let lon = longitude;
       let detectedRockType = rockType;
+      let locationDetails = ""; // Will store "Region, Country" or path from OpenBeta
 
       // If no coordinates provided, search for location
       if (!lat || !lon) {
@@ -75,6 +76,7 @@ const tools = {
               lat = crag.metadata.lat;
               lon = crag.metadata.lng;
               detectedRockType = (detectedRockType || extractRockType(crag)) as RockType;
+              locationDetails = formatAreaPath(crag); // e.g., "Spain > Siurana > El Pati"
 
               console.log("[get_conditions] Using OpenBeta crag:", {
                 name: crag.area_name,
@@ -163,10 +165,18 @@ const tools = {
             const geocoded = geocodedMultiple[0];
             lat = geocoded.latitude;
             lon = geocoded.longitude;
+
+            // Build location details string
+            const locationParts = [];
+            if (geocoded.admin1) locationParts.push(geocoded.admin1);
+            if (geocoded.country) locationParts.push(geocoded.country);
+            locationDetails = locationParts.join(", ");
+
             console.log("[get_conditions] Using geocoded coordinates:", {
               lat,
               lon,
               name: geocoded.name,
+              details: locationDetails,
             });
           } catch (error) {
             console.error("[get_conditions] Geocoding error:", {
@@ -239,6 +249,7 @@ const tools = {
 
         return {
           location,
+          locationDetails, // Add region/country or OpenBeta path
           rating: conditions.rating,
           frictionScore: conditions.frictionRating,
           reasons: conditions.reasons,
