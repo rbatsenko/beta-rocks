@@ -79,7 +79,7 @@ export async function searchAreas(searchText: string): Promise<Area[]> {
     },
   };
 
-  const data = await executeQuery<AreasResponse>(query, variables);
+  const data = await executeQuery<AreasResponse>(query, variables as Record<string, unknown>);
   return data.areas;
 }
 
