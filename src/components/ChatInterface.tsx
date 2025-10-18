@@ -378,7 +378,7 @@ const ChatInterface = () => {
                         {message.parts.map((part, i) => {
                           // Check if message has successful tool results
                           const hasToolResults = message.parts.some(
-                            (p) => p.type === "tool-get_conditions" && "state" in p && p.state === "output-available"
+                            (p) => p.type.startsWith("tool-") && "state" in p && p.state === "output-available"
                           );
 
                           // Render text parts only if there are no tool results
@@ -452,14 +452,14 @@ const ChatInterface = () => {
                             return (
                               <div
                                 key={i}
-                                className="mt-3 bg-muted/50 rounded-lg p-4 space-y-3 border border-border max-w-full overflow-hidden"
+                                className="mt-3 bg-muted/50 rounded-lg p-3 sm:p-4 border border-border max-w-full overflow-hidden"
                               >
                                 <div className="flex items-start gap-2 sm:gap-3 min-w-0">
                                   {/* Weather emoji display */}
                                   {conditionsResult.current?.weatherCode !== undefined && (
                                     <div className="shrink-0">
                                       <div
-                                        className="text-4xl"
+                                        className="text-3xl sm:text-4xl"
                                         title={translateWeather(getWeatherDescription(conditionsResult.current.weatherCode))}
                                       >
                                         {getWeatherEmoji(conditionsResult.current.weatherCode, isNightTime(new Date()))}
@@ -467,8 +467,8 @@ const ChatInterface = () => {
                                     </div>
                                   )}
 
-                                  <div className="space-y-2 flex-1 min-w-0">
-                                    <div className="space-y-1">
+                                  <div className="space-y-1.5 sm:space-y-2 flex-1 min-w-0">
+                                    <div className="space-y-0.5 sm:space-y-1">
                                       <div className="font-semibold text-base">
                                         🧗 {conditionsResult.location}
                                         {conditionsResult.timeframe && conditionsResult.timeframe !== "now" && (
