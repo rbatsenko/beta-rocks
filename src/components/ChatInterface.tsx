@@ -1,14 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { useChat } from "@ai-sdk/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send, Loader2, Sun, Info, CloudSun } from "lucide-react";
+import { Send, Loader2, CloudSun } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
+import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
 import { Message, MessageContent } from "@/components/ai-elements/message";
 import { Response } from "@/components/ai-elements/response";
 import {
@@ -17,7 +18,8 @@ import {
   ConversationScrollButton,
 } from "@/components/ai-elements/conversation";
 import { ConditionsDetailDialog } from "@/components/ConditionsDetailDialog";
-import { getWeatherEmoji, getWeatherDescription } from "@/lib/utils/weather-emojis";
+import { WeatherConditionCard } from "@/components/WeatherConditionCard";
+import { DisambiguationOptions } from "@/components/DisambiguationOptions";
 
 interface ConditionsData {
   location: string;
@@ -101,168 +103,17 @@ const ChatInterface = () => {
   const [detailsDialogOpen, setDetailsDialogOpen] = useState(false);
   const [selectedConditions, setSelectedConditions] = useState<ConditionsData | null>(null);
 
+  // Get translation functions (memoized)
+  const translations = useConditionsTranslations(t);
+
   // Compute loading state from status (v5 API)
-  const isLoading = status === 'submitted' || status === 'streaming';
+  const isLoading = useMemo(() =>
+    status === 'submitted' || status === 'streaming',
+    [status]
+  );
 
-  // Helper to detect if it's night time (7pm-7am)
-  const isNightTime = (dateOrHour: Date | number): boolean => {
-    const hour = typeof dateOrHour === 'number' ? dateOrHour : dateOrHour.getHours();
-    return hour >= 19 || hour < 7;
-  };
-
-  // Translate rating strings
-  const translateRating = (rating: string): string => {
-    const ratingLower = rating.toLowerCase();
-    const key = `ratings.${ratingLower}`;
-    return t(key);
-  };
-
-  // Translate reason strings from backend
-  const translateReason = (reason: string): string => {
-    // Extract temperature from "Perfect temperature (X°C)"
-    const perfectTempMatch = reason.match(/Perfect temperature \((\d+)°C\)/);
-    if (perfectTempMatch) {
-      return t('reasons.perfectTemp', { temp: perfectTempMatch[1] });
-    }
-
-    // Extract humidity from "Ideal humidity (X%)"
-    const idealHumidityMatch = reason.match(/Ideal humidity \((\d+)%\)/);
-    if (idealHumidityMatch) {
-      return t('reasons.idealHumidity', { humidity: idealHumidityMatch[1] });
-    }
-
-    // Extract hours from "Will be ready to climb in ~X hours"
-    const readyInHoursMatch = reason.match(/Will be ready to climb in ~(\d+) hours/);
-    if (readyInHoursMatch) {
-      return t('reasons.readyInHours', { hours: readyInHoursMatch[1] });
-    }
-
-    // Extract rock type from "Cold but good for X friction"
-    const coldFrictionMatch = reason.match(/Cold but good for (\w+) friction/);
-    if (coldFrictionMatch) {
-      return t('reasons.coldGoodFriction', { rockType: coldFrictionMatch[1] });
-    }
-
-    // Simple string matches
-    if (reason === "Temperature too high - fingers may slip") {
-      return t('reasons.tempTooHigh');
-    }
-    if (reason === "Low humidity aids friction on granite") {
-      return t('reasons.lowHumidityGranite');
-    }
-    if (reason === "Conditions are acceptable") {
-      return t('reasons.acceptable');
-    }
-
-    // Return original if no match
-    return reason;
-  };
-
-  // Translate weather description strings
-  const translateWeather = (description: string): string => {
-    const weatherMap: Record<string, string> = {
-      'Clear sky': 'weather.clearSky',
-      'Mainly clear': 'weather.mainlyClear',
-      'Partly cloudy': 'weather.partlyCloudy',
-      'Overcast': 'weather.overcast',
-      'Fog': 'weather.fog',
-      'Depositing rime fog': 'weather.depositingRimeFog',
-      'Light drizzle': 'weather.lightDrizzle',
-      'Moderate drizzle': 'weather.moderateDrizzle',
-      'Dense drizzle': 'weather.denseDrizzle',
-      'Light freezing drizzle': 'weather.lightFreezingDrizzle',
-      'Dense freezing drizzle': 'weather.denseFreezingDrizzle',
-      'Slight rain': 'weather.slightRain',
-      'Moderate rain': 'weather.moderateRain',
-      'Heavy rain': 'weather.heavyRain',
-      'Light freezing rain': 'weather.lightFreezingRain',
-      'Heavy freezing rain': 'weather.heavyFreezingRain',
-      'Slight snow fall': 'weather.slightSnowFall',
-      'Moderate snow fall': 'weather.moderateSnowFall',
-      'Heavy snow fall': 'weather.heavySnowFall',
-      'Snow grains': 'weather.snowGrains',
-      'Slight rain showers': 'weather.slightRainShowers',
-      'Moderate rain showers': 'weather.moderateRainShowers',
-      'Violent rain showers': 'weather.violentRainShowers',
-      'Slight snow showers': 'weather.slightSnowShowers',
-      'Heavy snow showers': 'weather.heavySnowShowers',
-      'Thunderstorm': 'weather.thunderstorm',
-      'Thunderstorm with slight hail': 'weather.thunderstormSlightHail',
-      'Thunderstorm with heavy hail': 'weather.thunderstormHeavyHail',
-    };
-
-    const key = weatherMap[description];
-    return key ? t(key) : description;
-  };
-
-  // Translate warning strings from backend
-  const translateWarning = (warning: string): string => {
-    // "Too warm for X (Y°C)"
-    const tooWarmMatch = warning.match(/Too warm for (\w+) \((\d+)°C\)/);
-    if (tooWarmMatch) {
-      return t('warnings.tooWarm', { rockType: tooWarmMatch[1], temp: tooWarmMatch[2] });
-    }
-
-    // "Cold and suboptimal for X"
-    const coldSuboptimalMatch = warning.match(/Cold and suboptimal for (\w+)/);
-    if (coldSuboptimalMatch) {
-      return t('warnings.coldSuboptimal', { rockType: coldSuboptimalMatch[1] });
-    }
-
-    // "High humidity (X%) - rock can be slippery"
-    const highHumidityMatch = warning.match(/High humidity \((\d+)%\) - rock can be slippery/);
-    if (highHumidityMatch) {
-      return t('warnings.highHumidity', { humidity: highHumidityMatch[1] });
-    }
-
-    // "Very high winds (X km/h) - danger of blown off"
-    const veryHighWindsMatch = warning.match(/Very high winds \((\d+) km\/h\) - danger of blown off/);
-    if (veryHighWindsMatch) {
-      return t('warnings.veryHighWinds', { wind: veryHighWindsMatch[1] });
-    }
-
-    // "High wind (X km/h)"
-    const highWindMatch = warning.match(/High wind \((\d+) km\/h\)/);
-    if (highWindMatch) {
-      return t('warnings.highWind', { wind: highWindMatch[1] });
-    }
-
-    // Simple string matches
-    if (warning === "Rock is currently wet - dangerous to climb (sandstone becomes weak when wet)") {
-      return t('warnings.wetDangerousSandstone');
-    }
-    if (warning === "Rock is currently wet - slippery conditions") {
-      return t('warnings.wetSlippery');
-    }
-    if (warning === "Currently wet - dangerous") {
-      return t('warnings.currentlyWetDangerous');
-    }
-    if (warning === "Currently wet") {
-      return t('warnings.currentlyWet');
-    }
-
-    return warning;
-  };
-
-  // Translate timeframe strings from backend
-  const translateTimeframe = (timeframe: string): string => {
-    const timeframeLower = timeframe.toLowerCase();
-
-    // Map common timeframe strings to translation keys
-    const timeframeMap: Record<string, string> = {
-      'now': 'timeframes.now',
-      'today': 'timeframes.today',
-      'tomorrow': 'timeframes.tomorrow',
-      'this afternoon': 'timeframes.thisAfternoon',
-      'this evening': 'timeframes.thisEvening',
-      'tonight': 'timeframes.tonight',
-    };
-
-    const key = timeframeMap[timeframeLower];
-    return key ? t(key) : timeframe;
-  };
-
-  const exampleQueries = [
+  // Memoize example queries
+  const exampleQueries = useMemo(() => [
     {
       display: t('welcome.exampleQueries.query1.display'),
       query: t('welcome.exampleQueries.query1.query'),
@@ -275,9 +126,10 @@ const ChatInterface = () => {
       display: t('welcome.exampleQueries.query3.display'),
       query: t('welcome.exampleQueries.query3.query'),
     },
-  ];
+  ], [t]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Memoize submit handler
+  const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
 
@@ -291,9 +143,10 @@ const ChatInterface = () => {
         },
       }
     );
-  };
+  }, [input, language, sendMessage]);
 
-  const handleExampleClick = (queryText: string) => {
+  // Memoize example click handler
+  const handleExampleClick = useCallback((queryText: string) => {
     setInput("");
     sendMessage(
       { text: queryText },
@@ -303,7 +156,19 @@ const ChatInterface = () => {
         },
       }
     );
-  };
+  }, [language, sendMessage]);
+
+  // Memoize disambiguation option handler
+  const handleDisambiguationSelect = useCallback((queryText: string) => {
+    sendMessage(
+      { text: queryText },
+      {
+        body: {
+          language: language,
+        },
+      }
+    );
+  }, [language, sendMessage]);
 
   return (
     <>
@@ -407,121 +272,35 @@ const ChatInterface = () => {
                                 : result.message;
 
                               return (
-                                <div key={i} className="mt-3 space-y-2">
-                                  <p className="text-sm font-medium">{displayMessage}</p>
-                                  <div className="flex flex-wrap gap-2 overflow-visible">
-                                    {result.options.map((option, idx) => (
-                                      <Button
-                                        key={option.id}
-                                        variant="outline"
-                                        size="sm"
-                                        onClick={() => {
-                                          const queryText = t('disambiguation.queryTemplate', {
-                                            name: option.name + (option.rockType ? ` ${option.rockType}` : ""),
-                                            latitude: option.latitude,
-                                            longitude: option.longitude,
-                                          });
-                                          sendMessage(
-                                            { text: queryText },
-                                            {
-                                              body: {
-                                                language: language,
-                                              },
-                                            }
-                                          );
-                                        }}
-                                        className="flex flex-col items-start h-auto py-2 px-3 overflow-visible animate-in fade-in slide-in-from-bottom-2 duration-500"
-                                        style={{ animationDelay: `${idx * 100}ms` }}
-                                      >
-                                        <span className="font-semibold text-sm">{option.name}</span>
-                                        <span className="text-xs opacity-70">
-                                          {option.location}
-                                          {option.rockType && (
-                                            <span className="ml-1.5 text-orange-600 dark:text-orange-400">
-                                              • {option.rockType}
-                                            </span>
-                                          )}
-                                        </span>
-                                      </Button>
-                                    ))}
-                                  </div>
-                                </div>
+                                <DisambiguationOptions
+                                  key={i}
+                                  result={result}
+                                  displayMessage={displayMessage}
+                                  queryTemplate={t('disambiguation.queryTemplate')}
+                                  language={language}
+                                  onOptionSelect={handleDisambiguationSelect}
+                                />
                               );
                             }
 
                             // Handle regular conditions results
                             const conditionsResult = result as ConditionsData;
                             return (
-                              <div
+                              <WeatherConditionCard
                                 key={i}
-                                className="mt-3 bg-muted/50 rounded-lg p-3 sm:p-4 border border-border max-w-full overflow-hidden"
-                              >
-                                <div className="flex items-start gap-2 sm:gap-3 min-w-0">
-                                  {/* Weather emoji display */}
-                                  {conditionsResult.current?.weatherCode !== undefined && (
-                                    <div className="shrink-0">
-                                      <div
-                                        className="text-3xl sm:text-4xl"
-                                        title={translateWeather(getWeatherDescription(conditionsResult.current.weatherCode))}
-                                      >
-                                        {getWeatherEmoji(conditionsResult.current.weatherCode, isNightTime(new Date()))}
-                                      </div>
-                                    </div>
-                                  )}
-
-                                  <div className="space-y-1.5 sm:space-y-2 flex-1 min-w-0">
-                                    <div className="space-y-0.5 sm:space-y-1">
-                                      <div className="font-semibold text-base">
-                                        🧗 {conditionsResult.location}
-                                        {conditionsResult.timeframe && conditionsResult.timeframe !== "now" && (
-                                          <span className="ml-2 text-xs font-normal text-muted-foreground">
-                                            ({translateTimeframe(conditionsResult.timeframe)})
-                                          </span>
-                                        )}
-                                      </div>
-                                      {conditionsResult.locationDetails && (
-                                        <div className="text-xs text-muted-foreground">
-                                          📍 {conditionsResult.locationDetails}
-                                        </div>
-                                      )}
-                                      {conditionsResult.current?.weatherCode !== undefined && (
-                                        <div className="text-xs text-muted-foreground">
-                                          {translateWeather(getWeatherDescription(conditionsResult.current.weatherCode))}
-                                        </div>
-                                      )}
-                                    </div>
-                                    <div className="font-medium">
-                                      {t('conditions.rating')}: {translateRating(conditionsResult.rating)} ({conditionsResult.frictionScore}
-                                      /5)
-                                    </div>
-                                    {conditionsResult.warnings && conditionsResult.warnings.length > 0 && (
-                                      <div className="text-destructive font-semibold text-sm">
-                                        ⚠️ {conditionsResult.warnings.map(translateWarning).join(", ")}
-                                      </div>
-                                    )}
-                                    {conditionsResult.reasons && conditionsResult.reasons.length > 0 && (
-                                      <div className="text-sm opacity-80">
-                                        {conditionsResult.reasons.map(translateReason).join(", ")}
-                                      </div>
-                                    )}
-                                  </div>
-                                  {(conditionsResult.hourlyConditions ||
-                                    conditionsResult.optimalWindows) && (
-                                    <Button
-                                      variant="outline"
-                                      size="sm"
-                                      className="shrink-0 self-start"
-                                      onClick={() => {
-                                        setSelectedConditions(conditionsResult);
-                                        setDetailsDialogOpen(true);
-                                      }}
-                                    >
-                                      <Info className="w-4 h-4 mr-1" />
-                                      {t('conditions.details')}
-                                    </Button>
-                                  )}
-                                </div>
-                              </div>
+                                data={conditionsResult}
+                                translateWeather={translations.translateWeather}
+                                translateRating={translations.translateRating}
+                                translateWarning={translations.translateWarning}
+                                translateReason={translations.translateReason}
+                                translateTimeframe={translations.translateTimeframe}
+                                onDetailsClick={() => {
+                                  setSelectedConditions(conditionsResult);
+                                  setDetailsDialogOpen(true);
+                                }}
+                                conditionsLabel={t('conditions.rating')}
+                                detailsLabel={t('conditions.details')}
+                              />
                             );
                           }
 
