@@ -12,6 +12,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Cloud, Droplets, Wind, ThermometerSun, Clock, TrendingUp, Calendar } from "lucide-react";
 
 interface ConditionsDetailDialogProps {
@@ -175,11 +176,28 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
     const fiveDaysFromNow = new Date(today);
     fiveDaysFromNow.setDate(fiveDaysFromNow.getDate() + 5);
 
+    type WindowWithHours = {
+      timeRange: string;
+      startTime: string;
+      endTime: string;
+      avgFrictionScore: number;
+      rating: string;
+      hourCount: number;
+      hours: Array<{
+        time: string;
+        temp_c: number;
+        humidity: number;
+        wind_kph: number;
+        precip_mm: number;
+        frictionScore: number;
+        rating: string;
+      }>;
+    };
+
     type GroupedWindow = {
-      times: string[];
+      windows: WindowWithHours[];
       isToday: boolean;
       isTomorrow: boolean;
-      rating: string;
     };
 
     const grouped: Record<string, GroupedWindow> = {};
@@ -216,14 +234,31 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
 
       if (!grouped[displayDay]) {
         grouped[displayDay] = {
-          times: [],
+          windows: [],
           isToday,
           isTomorrow,
-          rating: window.rating,
         };
       }
 
-      grouped[displayDay].times.push(formatTimeRange(window.startTime, window.endTime));
+      // Get hourly data for this window
+      const windowHours = data.hourlyConditions
+        ? data.hourlyConditions.filter((hour) => {
+            const hourTime = new Date(hour.time);
+            const windowStart = new Date(window.startTime);
+            const windowEnd = new Date(window.endTime);
+            return hourTime >= windowStart && hourTime < windowEnd;
+          })
+        : [];
+
+      grouped[displayDay].windows.push({
+        timeRange: formatTimeRange(window.startTime, window.endTime),
+        startTime: window.startTime,
+        endTime: window.endTime,
+        avgFrictionScore: window.avgFrictionScore,
+        rating: window.rating,
+        hourCount: window.hourCount,
+        hours: windowHours,
+      });
     });
 
     return Object.keys(grouped).length > 0 ? grouped : null;
@@ -392,21 +427,21 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                     </h3>
                     <span className="text-xs text-muted-foreground">Next 5 days</span>
                   </div>
-                  <div className="space-y-2">
+                  <Accordion type="multiple" className="space-y-2">
                     {Object.entries(windowsByDay).map(([day, dayData]) => {
                       const isHighlighted = dayData.isToday || dayData.isTomorrow;
 
                       return (
-                        <div
+                        <AccordionItem
                           key={day}
-                          className={`rounded-lg p-3 border transition-colors ${
+                          value={day}
+                          className={`rounded-lg border transition-colors ${
                             isHighlighted
                               ? "bg-green-50/70 dark:bg-green-900/20 border-green-200/70 dark:border-green-700/50"
                               : "bg-muted/50 border-border"
                           }`}
                         >
-                          <div className="space-y-2">
-                            {/* Day header */}
+                          <AccordionTrigger className="px-3 py-2 hover:no-underline">
                             <div className="flex items-center gap-2">
                               <div
                                 className={`w-2 h-2 rounded-full ${
@@ -427,25 +462,77 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                                   TODAY
                                 </span>
                               )}
+                              <span className="text-xs text-muted-foreground ml-auto mr-2">
+                                {dayData.windows.length} window{dayData.windows.length > 1 ? "s" : ""}
+                              </span>
                             </div>
+                          </AccordionTrigger>
+                          <AccordionContent className="px-3 pb-3">
+                            <div className="space-y-3">
+                              {dayData.windows.map((window, idx) => (
+                                <div key={idx} className="space-y-2">
+                                  {/* Window header */}
+                                  <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-2">
+                                      <Clock className="h-3 w-3 text-green-600 dark:text-green-400" />
+                                      <span className="text-sm font-medium">{window.timeRange}</span>
+                                      <Badge
+                                        className={getRatingColor(window.rating)}
+                                        variant="outline"
+                                        size="sm"
+                                      >
+                                        {window.rating}
+                                      </Badge>
+                                    </div>
+                                    <span className="text-xs text-muted-foreground">
+                                      {window.avgFrictionScore}/5
+                                    </span>
+                                  </div>
 
-                            {/* Time windows */}
-                            <div className="flex flex-wrap gap-1.5">
-                              {dayData.times.map((time, idx) => (
-                                <span
-                                  key={idx}
-                                  className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-700"
-                                >
-                                  <Clock className="h-3 w-3" />
-                                  {time}
-                                </span>
+                                  {/* Hourly breakdown */}
+                                  {window.hours.length > 0 && (
+                                    <div className="space-y-1 pl-5">
+                                      {window.hours.map((hour, hourIdx) => (
+                                        <div
+                                          key={hourIdx}
+                                          className="flex items-center justify-between text-xs py-1"
+                                        >
+                                          <div className="flex items-center gap-2 text-muted-foreground">
+                                            <span className="font-mono min-w-[45px]">
+                                              {new Date(hour.time).toLocaleTimeString("en-US", {
+                                                hour: "2-digit",
+                                                minute: "2-digit",
+                                                hour12: false,
+                                              })}
+                                            </span>
+                                            <div className="flex items-center gap-2">
+                                              <div className="flex items-center gap-0.5">
+                                                <ThermometerSun className="h-2.5 w-2.5" />
+                                                <span>{hour.temp_c}°C</span>
+                                              </div>
+                                              <div className="flex items-center gap-0.5">
+                                                <Droplets className="h-2.5 w-2.5" />
+                                                <span>{hour.humidity}%</span>
+                                              </div>
+                                              <div className="flex items-center gap-0.5">
+                                                <Wind className="h-2.5 w-2.5" />
+                                                <span>{hour.wind_kph}km/h</span>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <span className="font-medium">{hour.frictionScore}/5</span>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  )}
+                                </div>
                               ))}
                             </div>
-                          </div>
-                        </div>
+                          </AccordionContent>
+                        </AccordionItem>
                       );
                     })}
-                  </div>
+                  </Accordion>
                   {data.optimalTime && (
                     <p className="text-sm text-muted-foreground">
                       🌟 Best time: <span className="font-semibold">{formatHourlyTime(data.optimalTime)}</span>

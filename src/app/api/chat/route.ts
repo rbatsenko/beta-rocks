@@ -4,6 +4,7 @@ import { z } from "zod";
 import { searchLocationMultiple } from "@/lib/external-apis/geocoding";
 import { getWeatherForecast } from "@/lib/external-apis/open-meteo";
 import { computeConditions, RockType } from "@/lib/conditions/conditions.service";
+import { searchAreas, formatAreaPath, getCountry, extractRockType, isCrag } from "@/lib/openbeta/client";
 
 export const maxDuration = 30;
 
@@ -31,67 +32,134 @@ const tools = {
 
       let lat = latitude;
       let lon = longitude;
+      let detectedRockType = rockType;
 
-      // If no coordinates provided, search for location using geocoding
+      // If no coordinates provided, search for location
       if (!lat || !lon) {
+        // STEP 1: Try OpenBeta first (climbing-specific database)
         try {
           console.log(
-            "[get_conditions] No coordinates provided, searching for location:",
+            "[get_conditions] No coordinates provided, trying OpenBeta search:",
             location
           );
-          // First try to get multiple results for disambiguation
-          const geocodedMultiple = await searchLocationMultiple(location, 3);
 
-          console.log("[get_conditions] Geocoding results:", {
+          const openBetaAreas = await searchAreas(location);
+          console.log("[get_conditions] OpenBeta results:", {
             location,
-            resultsCount: geocodedMultiple?.length || 0,
+            count: openBetaAreas.length,
           });
 
-          if (!geocodedMultiple || geocodedMultiple.length === 0) {
-            console.error("[get_conditions] No geocoding results found for:", location);
+          if (openBetaAreas.length > 0) {
+            // Filter to actual climbing crags (not countries/regions)
+            const crags = openBetaAreas.filter(isCrag);
+            console.log("[get_conditions] Filtered to crags:", {
+              original: openBetaAreas.length,
+              crags: crags.length,
+            });
+
+            if (crags.length === 1) {
+              // Perfect! Single crag found
+              const crag = crags[0];
+              lat = crag.metadata.lat;
+              lon = crag.metadata.lng;
+              detectedRockType = (detectedRockType || extractRockType(crag)) as RockType;
+
+              console.log("[get_conditions] Using OpenBeta crag:", {
+                name: crag.area_name,
+                path: formatAreaPath(crag),
+                lat,
+                lon,
+                rockType: detectedRockType,
+              });
+            } else if (crags.length > 1) {
+              // Multiple crags found - return disambiguation
+              console.log(
+                "[get_conditions] Multiple crags found, returning disambiguation"
+              );
+              return {
+                disambiguate: true,
+                source: "openbeta",
+                message: `Found ${crags.length} climbing areas for "${location}". Please choose one:`,
+                options: crags.map((crag) => ({
+                  id: crag.uuid,
+                  name: crag.area_name,
+                  location: formatAreaPath(crag),
+                  latitude: crag.metadata.lat,
+                  longitude: crag.metadata.lng,
+                  rockType: extractRockType(crag),
+                })),
+              };
+            }
+          }
+        } catch (error) {
+          console.log("[get_conditions] OpenBeta search failed, will try geocoding:", {
+            error: error instanceof Error ? error.message : String(error),
+          });
+          // Continue to geocoding fallback
+        }
+
+        // STEP 2: If OpenBeta didn't find a crag, fall back to geocoding
+        if (!lat || !lon) {
+          try {
+            console.log(
+              "[get_conditions] Falling back to geocoding API:",
+              location
+            );
+            // First try to get multiple results for disambiguation
+            const geocodedMultiple = await searchLocationMultiple(location, 3);
+
+            console.log("[get_conditions] Geocoding results:", {
+              location,
+              resultsCount: geocodedMultiple?.length || 0,
+            });
+
+            if (!geocodedMultiple || geocodedMultiple.length === 0) {
+              console.error("[get_conditions] No geocoding results found for:", location);
+              return {
+                error: `Could not find location: ${location}`,
+                location,
+              };
+            }
+
+            // If multiple results, return them for user to choose
+            if (geocodedMultiple.length > 1) {
+              console.log(
+                "[get_conditions] Multiple results found, returning disambiguation options"
+              );
+              return {
+                disambiguate: true,
+                source: "geocoding",
+                message: `Found multiple locations for "${location}". Please choose one:`,
+                options: geocodedMultiple.map((result) => ({
+                  id: `${result.latitude},${result.longitude}`,
+                  name: result.name,
+                  location: `${result.admin2 || result.admin1 || ""}, ${result.country}`.trim(),
+                  latitude: result.latitude,
+                  longitude: result.longitude,
+                })),
+              };
+            }
+
+            // Use the single result
+            const geocoded = geocodedMultiple[0];
+            lat = geocoded.latitude;
+            lon = geocoded.longitude;
+            console.log("[get_conditions] Using geocoded coordinates:", {
+              lat,
+              lon,
+              name: geocoded.name,
+            });
+          } catch (error) {
+            console.error("[get_conditions] Geocoding error:", {
+              location,
+              error: error instanceof Error ? error.message : String(error),
+              stack: error instanceof Error ? error.stack : undefined,
+            });
             return {
-              error: `Could not find location: ${location}`,
+              error: `Failed to search for location: ${location}`,
               location,
             };
           }
-
-          // If multiple results, return them for user to choose
-          if (geocodedMultiple.length > 1) {
-            console.log(
-              "[get_conditions] Multiple results found, returning disambiguation options"
-            );
-            return {
-              disambiguate: true,
-              message: `Found multiple locations for "${location}". Please choose one:`,
-              options: geocodedMultiple.map((result) => ({
-                id: `${result.latitude},${result.longitude}`,
-                name: result.name,
-                location: `${result.admin2 || result.admin1 || ""}, ${result.country}`.trim(),
-                latitude: result.latitude,
-                longitude: result.longitude,
-              })),
-            };
-          }
-
-          // Use the single result
-          const geocoded = geocodedMultiple[0];
-          lat = geocoded.latitude;
-          lon = geocoded.longitude;
-          console.log("[get_conditions] Using geocoded coordinates:", {
-            lat,
-            lon,
-            name: geocoded.name,
-          });
-        } catch (error) {
-          console.error("[get_conditions] Geocoding error:", {
-            location,
-            error: error instanceof Error ? error.message : String(error),
-            stack: error instanceof Error ? error.stack : undefined,
-          });
-          return {
-            error: `Failed to search for location: ${location}`,
-            location,
-          };
         }
       }
 
@@ -100,7 +168,7 @@ const tools = {
           location,
           lat,
           lon,
-          rockType,
+          rockType: detectedRockType,
         });
 
         // Call the weather API directly instead of making an HTTP request
@@ -140,7 +208,7 @@ const tools = {
             },
             hourly: hourlyData,
           },
-          (rockType as RockType) || "unknown",
+          (detectedRockType as RockType) || "unknown",
           0
         );
 
@@ -219,17 +287,72 @@ const tools = {
     },
   }),
   search_crag: tool({
-    description: "Search for a crag by name or location",
+    description: "Search for climbing crags, areas, sectors, or routes by name",
     inputSchema: z.object({
-      query: z.string().describe("Crag name or location"),
+      query: z.string().describe("Crag/area/sector name to search for"),
     }),
     execute: async ({ query }) => {
-      // TODO: Implement crag search from Supabase/OpenBeta
-      return {
-        query,
-        results: [],
-        message: `Search for "${query}" pending implementation`,
-      };
+      console.log("[search_crag] Starting search for:", query);
+
+      try {
+        // Search OpenBeta API
+        const areas = await searchAreas(query);
+
+        console.log("[search_crag] Found results:", {
+          query,
+          count: areas.length,
+        });
+
+        if (areas.length === 0) {
+          return {
+            query,
+            results: [],
+            message: `No climbing areas found for "${query}". Try a different search term.`,
+          };
+        }
+
+        // Filter to only show likely crags (not countries/regions)
+        const crags = areas.filter(isCrag);
+
+        // Format results for the chat UI
+        const results = crags.map((area) => ({
+          id: area.uuid,
+          name: area.area_name,
+          path: formatAreaPath(area),
+          country: getCountry(area),
+          latitude: area.metadata.lat,
+          longitude: area.metadata.lng,
+          rockType: extractRockType(area),
+          description: area.content?.description?.slice(0, 200), // First 200 chars
+          childCount: area.children?.length || 0,
+        }));
+
+        console.log("[search_crag] Filtered to crags:", {
+          originalCount: areas.length,
+          cragCount: results.length,
+        });
+
+        return {
+          query,
+          results,
+          message:
+            results.length > 1
+              ? `Found ${results.length} climbing areas for "${query}"`
+              : `Found ${results[0].name} in ${results[0].country}`,
+        };
+      } catch (error) {
+        console.error("[search_crag] Error:", {
+          query,
+          error: error instanceof Error ? error.message : String(error),
+          stack: error instanceof Error ? error.stack : undefined,
+        });
+
+        return {
+          query,
+          results: [],
+          error: `Failed to search for "${query}". Please try again.`,
+        };
+      }
     },
   }),
 };
