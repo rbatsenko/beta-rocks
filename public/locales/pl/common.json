@@ -38,7 +38,7 @@
     "nope": "Dramat"
   },
   "disambiguation": {
-    "foundMultipleAreas": "Znaleziono {{count}} obszarów wspinaczkowych dla \"{{location}}\". Wybierz jeden:",
+    "foundMultipleAreas": "Znaleziono {{count}} rejonów wspinaczkowych dla \"{{location}}\". Wybierz jeden:",
     "foundMultipleLocations": "Znaleziono wiele lokalizacji dla \"{{location}}\". Wybierz jedną:",
     "queryTemplate": "warunki w {{name}} ({{latitude}}, {{longitude}})"
   },
@@ -57,8 +57,8 @@
       "daily": "14-dniowa"
     },
     "currentRating": "Obecna ocena",
-    "currentConditions": "Obecne warunki",
-    "currentWeather": "Obecne warunki pogodowe",
+    "currentConditions": "Obecny warun",
+    "currentWeather": "Obecnie pogoda",
     "temperature": "Temperatura",
     "humidity": "Wilgotność",
     "windSpeed": "Prędkość wiatru",
@@ -76,15 +76,15 @@
     "last48h": "Ostatnie 48h",
     "next24h": "Następne 24h",
     "dewPointSpread": "Punkt rosy (ryzyko kondensacji)",
-    "lowRisk": "Niskie ryzyko - skała powinna pozostać sucha",
+    "lowRisk": "Niskie ryzyko - skała być sucha",
     "moderateRisk": "Umiarkowane ryzyko - obserwuj wilgoć",
     "highRisk": "Wysokie ryzyko - prawdopodobna kondensacja",
     "optimalWindows": "Optymalne okna wspinaczkowe",
     "nextDays": "Następne 5 dni",
     "bestTime": "Najlepszy czas",
     "noOptimalConditions": "Brak optymalnych warunków w ciągu najbliższych 5 dni",
-    "checkHourlyForecast": "Sprawdź prognozę godzinową dla więcej szczegółów",
-    "weatherDisclaimer": "Warunki pogodowe mogą się szybko zmieniać. Zawsze monitoruj prognozy przed wyjazdem i sprawdź warunki na miejscu.",
+    "checkHourlyForecast": "Sprawdź prognozę godzinową",
+    "weatherDisclaimer": "Pogoda może się szybko zmieniać. Monitoruj prognozy przed wyjazdem i sprawdź warunki na miejscu.",
     "window": "okno",
     "windows": "okna",
     "today": "Dzisiaj",
