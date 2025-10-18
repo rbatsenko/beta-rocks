@@ -251,14 +251,8 @@ export async function POST(req: Request) {
     messages: convertToModelMessages(messages),
     tools: tools,
     stopWhen: stepCountIs(5),
-    experimental_transform: smoothStream({
-      delayInMs: 15,
-      chunking: "word",
-    }),
-    abortSignal: req.signal,
+    experimental_transform: smoothStream(),
   });
 
-  return result.toUIMessageStreamResponse({
-    originalMessages: messages,
-  });
+  return result.toUIMessageStreamResponse();
 }
