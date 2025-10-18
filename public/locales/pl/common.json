@@ -39,11 +39,11 @@
   },
   "reasons": {
     "perfectTemp": "Idealna temperatura ({{temp}}°C)",
-    "tempTooHigh": "Za ciepło - palce mogą się ślizgać",
-    "coldGoodFriction": "Zimno ale dobre dla {{rockType}}",
+    "tempTooHigh": "Za ciepło - dla optymalnego tarcia może potrzebny wiatr",
+    "coldGoodFriction": "Zimno ale dobrze dla {{rockType}}",
     "idealHumidity": "Idealna wilgotność ({{humidity}}%)",
     "lowHumidityGranite": "Niska wilgotność pomaga na granicie",
-    "readyInHours": "Gotowe do wspinki za ~{{hours}} godzin",
+    "readyInHours": "Gotowe do wspinania za ~{{hours}} godzin",
     "acceptable": "Warunki akceptowalne"
   },
   "disambiguation": {
