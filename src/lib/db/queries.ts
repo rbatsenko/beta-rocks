@@ -22,11 +22,7 @@ export async function fetchCrags(limit = 50, offset = 0) {
 }
 
 export async function fetchCragById(id: string) {
-  const { data, error } = await supabase
-    .from("crags")
-    .select("*")
-    .eq("id", id)
-    .single();
+  const { data, error } = await supabase.from("crags").select("*").eq("id", id).single();
 
   if (error) throw error;
   return data;
@@ -36,9 +32,7 @@ export async function searchCrags(query: string) {
   const { data, error } = await supabase
     .from("crags")
     .select("*")
-    .or(
-      `name.ilike.%${query}%,country.ilike.%${query}%`
-    )
+    .or(`name.ilike.%${query}%,country.ilike.%${query}%`)
     .limit(10);
 
   if (error) throw error;
@@ -75,11 +69,7 @@ export async function fetchSectorsByCrag(cragId: string) {
 }
 
 export async function fetchSectorById(id: string) {
-  const { data, error } = await supabase
-    .from("sectors")
-    .select("*")
-    .eq("id", id)
-    .single();
+  const { data, error } = await supabase.from("sectors").select("*").eq("id", id).single();
 
   if (error) throw error;
   return data;
@@ -115,11 +105,7 @@ export async function fetchRoutesBySector(sectorId: string) {
 }
 
 export async function fetchRouteById(id: string) {
-  const { data, error } = await supabase
-    .from("routes")
-    .select("*")
-    .eq("id", id)
-    .single();
+  const { data, error } = await supabase.from("routes").select("*").eq("id", id).single();
 
   if (error) throw error;
   return data;
@@ -196,20 +182,13 @@ export async function fetchReportsByRoute(routeId: string, limit = 20) {
 }
 
 export async function fetchReportById(id: string) {
-  const { data, error } = await supabase
-    .from("reports")
-    .select("*")
-    .eq("id", id)
-    .single();
+  const { data, error } = await supabase.from("reports").select("*").eq("id", id).single();
 
   if (error) throw error;
   return data;
 }
 
-export async function updateReport(
-  id: string,
-  updates: { [key: string]: any }
-) {
+export async function updateReport(id: string, updates: { [key: string]: any }) {
   const { data, error } = await supabase
     .from("reports")
     .update({
@@ -259,20 +238,13 @@ export async function fetchOrCreateUserProfile(syncKeyHash: string) {
 }
 
 export async function fetchUserProfile(id: string) {
-  const { data, error } = await supabase
-    .from("user_profiles")
-    .select("*")
-    .eq("id", id)
-    .single();
+  const { data, error } = await supabase.from("user_profiles").select("*").eq("id", id).single();
 
   if (error) throw error;
   return data;
 }
 
-export async function updateUserProfile(
-  id: string,
-  updates: { display_name?: string }
-) {
+export async function updateUserProfile(id: string, updates: { display_name?: string }) {
   const { data, error } = await supabase
     .from("user_profiles")
     .update({
@@ -289,10 +261,7 @@ export async function updateUserProfile(
 
 // ==================== CONFIRMATIONS ====================
 
-export async function createConfirmation(
-  reportId: string,
-  userKeyHash: string
-) {
+export async function createConfirmation(reportId: string, userKeyHash: string) {
   const { data, error } = await supabase
     .from("confirmations")
     .insert({
@@ -328,10 +297,7 @@ export async function countConfirmationsForReport(reportId: string) {
   return count || 0;
 }
 
-export async function hasUserConfirmedReport(
-  reportId: string,
-  userKeyHash: string
-) {
+export async function hasUserConfirmedReport(reportId: string, userKeyHash: string) {
   const { data, error } = await supabase
     .from("confirmations")
     .select("*")
@@ -343,10 +309,7 @@ export async function hasUserConfirmedReport(
   return !!data;
 }
 
-export async function removeConfirmation(
-  reportId: string,
-  userKeyHash: string
-) {
+export async function removeConfirmation(reportId: string, userKeyHash: string) {
   const { error } = await supabase
     .from("confirmations")
     .delete()

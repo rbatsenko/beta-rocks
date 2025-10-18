@@ -1,9 +1,8 @@
 ================================================================================
-                         TEMPS-ROCKS ARCHITECTURE
+TEMPS-ROCKS ARCHITECTURE
 ================================================================================
 
-FRONTEND LAYER (Browser)
-========================
+# FRONTEND LAYER (Browser)
 
     User Interface (Next.js 15)
     ┌─────────────────────────────────────────────────────────┐
@@ -24,14 +23,14 @@ FRONTEND LAYER (Browser)
                            | HTTP Requests
                            |
                            v
-                      
-API LAYER (Next.js Edge Routes)
-===============================
+
+
+# API LAYER (Next.js Edge Routes)
 
     POST /api/chat
     ├── Input: { message, lang?, location? }
     ├── Current: Returns mock response after 1s delay
-    └── TODO: 
+    └── TODO:
         ├── Integrate Gemini 2.5 Flash (Vercel AI SDK)
         ├── Classify intent: get_conditions | add_report | confirm_report | search | help
         └── Route to external APIs based on intent
@@ -60,11 +59,10 @@ API LAYER (Next.js Edge Routes)
                            |
                            v
 
-DATABASE LAYER (Supabase PostgreSQL)
-====================================
+# DATABASE LAYER (Supabase PostgreSQL)
 
     Tables:
-    
+
     user_profiles
     ├── id (PK)
     ├── display_name (anonymous display name)
@@ -114,8 +112,7 @@ DATABASE LAYER (Supabase PostgreSQL)
                            |
                            v
 
-EXTERNAL SERVICES (TO BE INTEGRATED)
-====================================
+# EXTERNAL SERVICES (TO BE INTEGRATED)
 
     Google Gemini 2.5 Flash (via Vercel AI SDK)
     ├── Purpose: LLM for chat interface
@@ -147,8 +144,7 @@ EXTERNAL SERVICES (TO BE INTEGRATED)
                            |
                            v
 
-LOCAL STORAGE LAYER (Client-side - TO BE IMPLEMENTED)
-=====================================================
+# LOCAL STORAGE LAYER (Client-side - TO BE IMPLEMENTED)
 
     IndexedDB Database:
     ├── crags (downloaded from OpenBeta, cached)
@@ -186,18 +182,18 @@ EXAMPLE 1: User asks "Siurana conditions tomorrow?"
    d) Query OpenBeta for "Siurana" → Get crag ID + coordinates
    e) Call Open-Meteo API → Get forecast for tomorrow
    f) Calculate conditions (Great/OK/Meh/Nope) based on:
-      - Temperature (ideal 50-70°F)
-      - Humidity (lower is better for dry)
-      - Wind (lower is better)
-      - Recent rain (lowers dryness)
-   g) Get recent reports from Supabase (reports table)
-   h) Format response with forecast summary + top reports
-   i) Return to frontend
+   - Temperature (ideal 50-70°F)
+   - Humidity (lower is better for dry)
+   - Wind (lower is better)
+   - Recent rain (lowers dryness)
+     g) Get recent reports from Supabase (reports table)
+     h) Format response with forecast summary + top reports
+     i) Return to frontend
 
 4. Frontend displays response:
    "Siurana looks OK tomorrow 👍
-    High 68°F, Low 45°F, 5mph wind
-    Reports: Dry in morning, gets crowded after 2pm"
+   High 68°F, Low 45°F, 5mph wind
+   Reports: Dry in morning, gets crowded after 2pm"
 
 EXAMPLE 2: User submits a report
 ──────────────────────────────────
@@ -211,10 +207,10 @@ EXAMPLE 2: User submits a report
 3. Backend:
    a) Validate input
    b) Insert into reports table
-      - author_id: user's sync_key_hash (anonymous)
-      - created_at: now
-      - text, ratings: from user
-   c) Return report ID + confirmation
+   - author_id: user's sync_key_hash (anonymous)
+   - created_at: now
+   - text, ratings: from user
+     c) Return report ID + confirmation
 
 4. Other users see the report when they ask about Siurana
    Displayed with: "👍 3 people confirmed this is accurate"
@@ -223,15 +219,18 @@ EXAMPLE 3: User syncs to new device
 ──────────────────────────────────
 
 Device 1 (original):
+
 - Has sync_key stored locally
 - Posts to /api/sync/:sync_key with all local data
 
 Backend:
+
 - Receives data from Device 1
 - Merges with existing data using updatedAt timestamps
 - Stores merged version in Supabase
 
 Device 2 (new):
+
 - User enters sync_key (QR scan or paste)
 - Calls GET /api/sync/:sync_key
 - Backend returns all user's crags, reports, confirmations
@@ -242,80 +241,86 @@ TECHNOLOGY STACK SUMMARY
 ================================================================================
 
 Frontend:
-  - Next.js 15 (React framework)
-  - React 18 (UI library)
-  - TypeScript (type safety)
-  - Tailwind CSS (styling)
-  - shadcn/ui (50+ pre-built components)
-  - Radix UI (accessibility primitives)
-  - Lucide React (icons)
+
+- Next.js 15 (React framework)
+- React 18 (UI library)
+- TypeScript (type safety)
+- Tailwind CSS (styling)
+- shadcn/ui (50+ pre-built components)
+- Radix UI (accessibility primitives)
+- Lucide React (icons)
 
 State Management:
-  - React Hooks (useState, useEffect)
-  - TanStack Query (server state)
-  - next-themes (dark mode)
+
+- React Hooks (useState, useEffect)
+- TanStack Query (server state)
+- next-themes (dark mode)
 
 Backend:
-  - Next.js API Routes (serverless)
-  - Supabase (PostgreSQL database)
-  - Vercel AI SDK (LLM integration - pending)
+
+- Next.js API Routes (serverless)
+- Supabase (PostgreSQL database)
+- Vercel AI SDK (LLM integration - pending)
 
 Styling:
-  - Tailwind CSS (utility-first)
-  - PostCSS (CSS processing)
-  - Custom design system (earthy colors)
+
+- Tailwind CSS (utility-first)
+- PostCSS (CSS processing)
+- Custom design system (earthy colors)
 
 Tools:
-  - TypeScript (type checking)
-  - ESLint (code linting)
-  - Vercel (deployment)
+
+- TypeScript (type checking)
+- ESLint (code linting)
+- Vercel (deployment)
 
 External APIs:
-  - Google Gemini 2.5 Flash (LLM) - PENDING
-  - OpenBeta (crag data) - PENDING
-  - Open-Meteo (weather) - PENDING
-  - suncalc (sun position) - PENDING
+
+- Google Gemini 2.5 Flash (LLM) - PENDING
+- OpenBeta (crag data) - PENDING
+- Open-Meteo (weather) - PENDING
+- suncalc (sun position) - PENDING
 
 ================================================================================
 DEPLOYMENT ARCHITECTURE
 ================================================================================
 
 Development:
-  npm run dev → Next.js dev server on localhost:3000
+npm run dev → Next.js dev server on localhost:3000
 
 Production:
-  npm run build → Next.js build
-  npm start → Production server
+npm run build → Next.js build
+npm start → Production server
 
 Vercel (Current Target):
-  ┌──────────────────┐
-  │ GitHub Repo      │
-  │ (this project)   │
-  └────────┬─────────┘
-           │ Push to main
-           v
-  ┌──────────────────────────┐
-  │ Vercel CI/CD             │
-  │ - Build Next.js app      │
-  │ - Run tests (eslint)     │
-  │ - Deploy to edge network │
-  └────────┬─────────────────┘
-           │
-           v
-  ┌──────────────────────────┐
-  │ Vercel Edge Network      │
-  │ - Serves HTML/CSS/JS     │
-  │ - Runs API routes        │
-  │ - Global CDN             │
-  └────────┬─────────────────┘
-           │
-           v
-  ┌──────────────────────────┐
-  │ Supabase (Database)      │
-  │ - PostgreSQL hosted      │
-  │ - Real-time updates      │
-  │ - Authentication (RLS)   │
-  └──────────────────────────┘
+┌──────────────────┐
+│ GitHub Repo │
+│ (this project) │
+└────────┬─────────┘
+│ Push to main
+v
+┌──────────────────────────┐
+│ Vercel CI/CD │
+│ - Build Next.js app │
+│ - Run tests (eslint) │
+│ - Deploy to edge network │
+└────────┬─────────────────┘
+│
+v
+┌──────────────────────────┐
+│ Vercel Edge Network │
+│ - Serves HTML/CSS/JS │
+│ - Runs API routes │
+│ - Global CDN │
+└────────┬─────────────────┘
+│
+v
+┌──────────────────────────┐
+│ Supabase (Database) │
+│ - PostgreSQL hosted │
+│ - Real-time updates │
+│ - Authentication (RLS) │
+└──────────────────────────┘
 
 ================================================================================
 CURRENT STATE DIAGRAM
@@ -396,46 +401,46 @@ NEXT IMPLEMENTATION ROADMAP
 ================================================================================
 
 PHASE 1: LLM Integration (1-2 weeks)
-  [ ] Add GOOGLE_GENERATIVE_AI_API_KEY to .env
-  [ ] Install/configure Vercel AI SDK
-  [ ] Implement Gemini 2.5 Flash integration in /api/chat
-  [ ] Add intent classification logic
-  [ ] Add tool routing (which API to call based on intent)
+[ ] Add GOOGLE_GENERATIVE_AI_API_KEY to .env
+[ ] Install/configure Vercel AI SDK
+[ ] Implement Gemini 2.5 Flash integration in /api/chat
+[ ] Add intent classification logic
+[ ] Add tool routing (which API to call based on intent)
 
 PHASE 2: External APIs (1-2 weeks)
-  [ ] OpenBeta integration (search/fetch crags)
-  [ ] Open-Meteo integration (get weather forecasts)
-  [ ] suncalc integration (calculate sun position)
-  [ ] Cache strategy for external data
+[ ] OpenBeta integration (search/fetch crags)
+[ ] Open-Meteo integration (get weather forecasts)
+[ ] suncalc integration (calculate sun position)
+[ ] Cache strategy for external data
 
 PHASE 3: Core Business Logic (1 week)
-  [ ] Implement computeConditions() function
-  [ ] Build condition scoring algorithm
-  [ ] Build reports CRUD endpoints (/api/reports)
-  [ ] Build conditions endpoint (/api/conditions)
+[ ] Implement computeConditions() function
+[ ] Build condition scoring algorithm
+[ ] Build reports CRUD endpoints (/api/reports)
+[ ] Build conditions endpoint (/api/conditions)
 
 PHASE 4: Database Integration (1 week)
-  [ ] Implement Supabase queries in all endpoints
-  [ ] Add rate limiting
-  [ ] Add data validation
+[ ] Implement Supabase queries in all endpoints
+[ ] Add rate limiting
+[ ] Add data validation
 
 PHASE 5: Offline & Sync (1 week)
-  [ ] Implement IndexedDB local storage
-  [ ] Add sync key generation
-  [ ] Implement conflict resolution
-  [ ] Test multi-device sync
+[ ] Implement IndexedDB local storage
+[ ] Add sync key generation
+[ ] Implement conflict resolution
+[ ] Test multi-device sync
 
 PHASE 6: UI Enhancements (1 week)
-  [ ] Add report form component
-  [ ] Add settings/sync page
-  [ ] Add shareable links for crags
-  [ ] Polish animations & transitions
+[ ] Add report form component
+[ ] Add settings/sync page
+[ ] Add shareable links for crags
+[ ] Polish animations & transitions
 
 PHASE 7: Testing & Deployment (1 week)
-  [ ] Write integration tests
-  [ ] Manual testing on multiple devices
-  [ ] Deploy to Vercel
-  [ ] Monitor & debug
+[ ] Write integration tests
+[ ] Manual testing on multiple devices
+[ ] Deploy to Vercel
+[ ] Monitor & debug
 
 Total Estimated: 7-9 weeks to full MVP
 

@@ -4,13 +4,13 @@ import heroImage from "@/assets/hero-climbing.jpg";
 
 const Hero = () => {
   const scrollToChat = () => {
-    document.getElementById('chat-section')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById("chat-section")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${heroImage})` }}
       >
@@ -23,27 +23,27 @@ const Hero = () => {
           <Mountain className="w-4 h-4 text-white" />
           <span className="text-sm font-medium text-white">Real-time climbing conditions</span>
         </div>
-        
+
         <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
           Know before you go
         </h1>
-        
+
         <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto">
-          Chat with temps.rocks to get instant conditions for any climbing crag, 
-          sector, or route worldwide
+          Chat with temps.rocks to get instant conditions for any climbing crag, sector, or route
+          worldwide
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button 
-            size="lg" 
+          <Button
+            size="lg"
             onClick={scrollToChat}
             className="bg-primary hover:bg-primary-hover text-primary-foreground shadow-elevated transition-smooth text-lg px-8"
           >
             <MessageCircle className="w-5 h-5 mr-2" />
             Start Chatting
           </Button>
-          <Button 
-            size="lg" 
+          <Button
+            size="lg"
             variant="outline"
             onClick={scrollToChat}
             className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 transition-smooth text-lg px-8"

@@ -5,17 +5,21 @@ This directory contains comprehensive analysis documentation of the temps.rocks 
 ## Quick Start - Where to Begin
 
 ### For the First Time (5 minutes)
+
 Start with **[QUICK_REFERENCE.md](./QUICK_REFERENCE.md)** for a quick overview organized by purpose.
 
 ### For Team Onboarding (30 minutes)
+
 1. Read **[QUICK_REFERENCE.md](./QUICK_REFERENCE.md)** (5 min)
 2. Skim **[SUMMARY.txt](./SUMMARY.txt)** (10 min)
 3. Review **[ARCHITECTURE.md](./ARCHITECTURE.md)** diagrams (15 min)
 
 ### For Deep Dive (1 hour)
+
 Read **[CODEBASE_ANALYSIS.md](./CODEBASE_ANALYSIS.md)** for complete details.
 
 ### For Implementation
+
 1. Check **[CODEBASE_ANALYSIS.md](./CODEBASE_ANALYSIS.md)** Section 8: Missing/TODO Features
 2. Reference **[ARCHITECTURE.md](./ARCHITECTURE.md)** Implementation Roadmap
 3. Use **[QUICK_REFERENCE.md](./QUICK_REFERENCE.md)** for file locations and commands
@@ -25,7 +29,9 @@ Read **[CODEBASE_ANALYSIS.md](./CODEBASE_ANALYSIS.md)** for complete details.
 ## Analysis Files
 
 ### 1. [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) - Start Here! (7.6 KB)
+
 **Best for:** Quick lookups, finding files, common commands
+
 - File locations organized by purpose
 - Quick npm commands
 - Database tables summary
@@ -35,7 +41,9 @@ Read **[CODEBASE_ANALYSIS.md](./CODEBASE_ANALYSIS.md)** for complete details.
 - Resource links
 
 ### 2. [SUMMARY.txt](./SUMMARY.txt) - Executive Overview (13 KB)
+
 **Best for:** Understanding current state at a glance
+
 - Project structure
 - Implementation status (complete/partial/not)
 - API routes summary
@@ -47,7 +55,9 @@ Read **[CODEBASE_ANALYSIS.md](./CODEBASE_ANALYSIS.md)** for complete details.
 - Key files to review
 
 ### 3. [ARCHITECTURE.md](./ARCHITECTURE.md) - System Design (19 KB)
+
 **Best for:** Understanding how everything fits together
+
 - Frontend layer
 - API layer
 - Database layer
@@ -60,7 +70,9 @@ Read **[CODEBASE_ANALYSIS.md](./CODEBASE_ANALYSIS.md)** for complete details.
 - Implementation roadmap (7 phases)
 
 ### 4. [CODEBASE_ANALYSIS.md](./CODEBASE_ANALYSIS.md) - Detailed Reference (16 KB)
+
 **Best for:** In-depth code understanding
+
 - Complete directory structure
 - Implementation status details
 - All API routes (with line numbers)
@@ -73,7 +85,9 @@ Read **[CODEBASE_ANALYSIS.md](./CODEBASE_ANALYSIS.md)** for complete details.
 - Quick start guide
 
 ### 5. [FILES_CREATED.txt](./FILES_CREATED.txt) - This Analysis (6.5 KB)
+
 **Best for:** Understanding what was analyzed
+
 - Overview of all files generated
 - Key insights summary
 - File usage recommendations
@@ -89,6 +103,7 @@ Read **[CODEBASE_ANALYSIS.md](./CODEBASE_ANALYSIS.md)** for complete details.
 **Deployment**: Vercel
 
 ### What's Working
+
 - ✓ Modern UI with dark mode
 - ✓ 50+ pre-built components (shadcn/ui)
 - ✓ Beautiful design system
@@ -96,6 +111,7 @@ Read **[CODEBASE_ANALYSIS.md](./CODEBASE_ANALYSIS.md)** for complete details.
 - ✓ TypeScript + Tailwind fully setup
 
 ### What Needs Work
+
 - ✗ Gemini 2.5 Flash integration (API key needed)
 - ✗ External API connections (OpenBeta, Open-Meteo)
 - ✗ Business logic (condition calculations)
@@ -106,32 +122,32 @@ Read **[CODEBASE_ANALYSIS.md](./CODEBASE_ANALYSIS.md)** for complete details.
 
 ## Document Purpose & Reading Guide
 
-| If you need to... | Read this | Time |
-|------------------|-----------|------|
-| Find a specific file | QUICK_REFERENCE.md | 2 min |
-| Understand the project | SUMMARY.txt | 10 min |
-| Learn the architecture | ARCHITECTURE.md | 20 min |
-| Deep dive into code | CODEBASE_ANALYSIS.md | 30 min |
-| Set up for development | QUICK_REFERENCE.md commands | 5 min |
-| See what's missing | CODEBASE_ANALYSIS.md Section 8 | 10 min |
-| Plan next phase | ARCHITECTURE.md Roadmap | 15 min |
-| Add a new feature | All files (reference) | varies |
+| If you need to...      | Read this                      | Time   |
+| ---------------------- | ------------------------------ | ------ |
+| Find a specific file   | QUICK_REFERENCE.md             | 2 min  |
+| Understand the project | SUMMARY.txt                    | 10 min |
+| Learn the architecture | ARCHITECTURE.md                | 20 min |
+| Deep dive into code    | CODEBASE_ANALYSIS.md           | 30 min |
+| Set up for development | QUICK_REFERENCE.md commands    | 5 min  |
+| See what's missing     | CODEBASE_ANALYSIS.md Section 8 | 10 min |
+| Plan next phase        | ARCHITECTURE.md Roadmap        | 15 min |
+| Add a new feature      | All files (reference)          | varies |
 
 ---
 
 ## Key Statistics
 
-| Metric | Value |
-|--------|-------|
-| Core source files | ~20 |
-| React components | 55+ |
-| npm dependencies | 40+ |
-| Lines of code | ~2000 |
-| Supabase tables | 6 |
-| API endpoints | 3 (need work) |
-| UI components ready | 50+ |
-| Implementation complete | ~15% |
-| Estimated MVP time | 3-4 weeks |
+| Metric                  | Value         |
+| ----------------------- | ------------- |
+| Core source files       | ~20           |
+| React components        | 55+           |
+| npm dependencies        | 40+           |
+| Lines of code           | ~2000         |
+| Supabase tables         | 6             |
+| API endpoints           | 3 (need work) |
+| UI components ready     | 50+           |
+| Implementation complete | ~15%          |
+| Estimated MVP time      | 3-4 weeks     |
 
 ---
 
@@ -249,15 +265,19 @@ AI_PROVIDER                           Set to "google"
 ## Common Tasks
 
 ### Add API Endpoint
+
 See QUICK_REFERENCE.md "Common Tasks" section
 
 ### Query Database
+
 See QUICK_REFERENCE.md "Common Tasks" section
 
 ### Add UI Component
+
 See QUICK_REFERENCE.md "Common Tasks" section
 
 ### Deploy
+
 See QUICK_REFERENCE.md "Common Tasks" section
 
 ---
@@ -283,6 +303,7 @@ For common issues and solutions, see **QUICK_REFERENCE.md** "Troubleshooting" se
 ## Questions?
 
 Refer to the appropriate analysis file:
+
 - **Finding files?** → QUICK_REFERENCE.md
 - **How does it work?** → ARCHITECTURE.md
 - **What's the code doing?** → CODEBASE_ANALYSIS.md

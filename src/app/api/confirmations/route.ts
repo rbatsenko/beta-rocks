@@ -1,9 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import {
-  createConfirmation,
-  removeConfirmation,
-  hasUserConfirmedReport,
-} from "@/lib/db/queries";
+import { createConfirmation, removeConfirmation, hasUserConfirmedReport } from "@/lib/db/queries";
 
 /**
  * POST /api/confirmations
@@ -20,22 +16,13 @@ export async function POST(request: NextRequest) {
     const { reportId, userKeyHash } = await request.json();
 
     if (!reportId || !userKeyHash) {
-      return NextResponse.json(
-        { error: "reportId and userKeyHash required" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "reportId and userKeyHash required" }, { status: 400 });
     }
 
     // Check if user already confirmed
-    const alreadyConfirmed = await hasUserConfirmedReport(
-      reportId,
-      userKeyHash
-    );
+    const alreadyConfirmed = await hasUserConfirmedReport(reportId, userKeyHash);
     if (alreadyConfirmed) {
-      return NextResponse.json(
-        { error: "User already confirmed this report" },
-        { status: 409 }
-      );
+      return NextResponse.json({ error: "User already confirmed this report" }, { status: 409 });
     }
 
     const confirmation = await createConfirmation(reportId, userKeyHash);
@@ -43,10 +30,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(confirmation, { status: 201 });
   } catch (error) {
     console.error("Confirmations POST error:", error);
-    return NextResponse.json(
-      { error: "Failed to create confirmation" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to create confirmation" }, { status: 500 });
   }
 }
 
@@ -60,18 +44,12 @@ export async function DELETE(request: NextRequest) {
     const userKeyHash = request.nextUrl.searchParams.get("userKeyHash");
 
     if (!reportId || !userKeyHash) {
-      return NextResponse.json(
-        { error: "reportId and userKeyHash required" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "reportId and userKeyHash required" }, { status: 400 });
     }
 
     const confirmed = await hasUserConfirmedReport(reportId, userKeyHash);
     if (!confirmed) {
-      return NextResponse.json(
-        { error: "Confirmation not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "Confirmation not found" }, { status: 404 });
     }
 
     await removeConfirmation(reportId, userKeyHash);
@@ -79,9 +57,6 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Confirmations DELETE error:", error);
-    return NextResponse.json(
-      { error: "Failed to remove confirmation" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to remove confirmation" }, { status: 500 });
   }
 }

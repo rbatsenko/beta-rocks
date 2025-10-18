@@ -11,27 +11,16 @@ const tools = {
     description: "Get climbing conditions for a crag, sector, or route",
     inputSchema: z.object({
       location: z.string().describe("Name of the crag, sector, or route"),
-      timeframe: z
-        .string()
-        .optional()
-        .describe("When? (today, tomorrow, this week, etc)"),
+      timeframe: z.string().optional().describe("When? (today, tomorrow, this week, etc)"),
       latitude: z.number().optional().describe("Latitude of the location"),
       longitude: z.number().optional().describe("Longitude of the location"),
       rockType: z
-        .enum([
-          "granite",
-          "sandstone",
-          "limestone",
-          "basalt",
-          "gneiss",
-          "quartzite",
-          "unknown",
-        ])
+        .enum(["granite", "sandstone", "limestone", "basalt", "gneiss", "quartzite", "unknown"])
         .optional()
         .describe("Type of rock at the crag"),
     }),
     execute: async ({ location, latitude, longitude, rockType }) => {
-      console.log('[get_conditions] Starting tool execution:', {
+      console.log("[get_conditions] Starting tool execution:", {
         location,
         latitude,
         longitude,
@@ -44,17 +33,20 @@ const tools = {
       // If no coordinates provided, search for location using geocoding
       if (!lat || !lon) {
         try {
-          console.log('[get_conditions] No coordinates provided, searching for location:', location);
+          console.log(
+            "[get_conditions] No coordinates provided, searching for location:",
+            location
+          );
           // First try to get multiple results for disambiguation
           const geocodedMultiple = await searchLocationMultiple(location, 3);
 
-          console.log('[get_conditions] Geocoding results:', {
+          console.log("[get_conditions] Geocoding results:", {
             location,
             resultsCount: geocodedMultiple?.length || 0,
           });
 
           if (!geocodedMultiple || geocodedMultiple.length === 0) {
-            console.error('[get_conditions] No geocoding results found for:', location);
+            console.error("[get_conditions] No geocoding results found for:", location);
             return {
               error: `Could not find location: ${location}`,
               location,
@@ -63,7 +55,9 @@ const tools = {
 
           // If multiple results, return them for user to choose
           if (geocodedMultiple.length > 1) {
-            console.log('[get_conditions] Multiple results found, returning disambiguation options');
+            console.log(
+              "[get_conditions] Multiple results found, returning disambiguation options"
+            );
             return {
               disambiguate: true,
               message: `Found multiple locations for "${location}". Please choose one:`,
@@ -81,9 +75,13 @@ const tools = {
           const geocoded = geocodedMultiple[0];
           lat = geocoded.latitude;
           lon = geocoded.longitude;
-          console.log('[get_conditions] Using geocoded coordinates:', { lat, lon, name: geocoded.name });
+          console.log("[get_conditions] Using geocoded coordinates:", {
+            lat,
+            lon,
+            name: geocoded.name,
+          });
         } catch (error) {
-          console.error('[get_conditions] Geocoding error:', {
+          console.error("[get_conditions] Geocoding error:", {
             location,
             error: error instanceof Error ? error.message : String(error),
             stack: error instanceof Error ? error.stack : undefined,
@@ -97,9 +95,7 @@ const tools = {
 
       try {
         const conditionsUrl = new URL(
-          `${
-            process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
-          }/api/conditions`
+          `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/api/conditions`
         );
         conditionsUrl.searchParams.set("lat", lat.toString());
         conditionsUrl.searchParams.set("lon", lon.toString());
@@ -107,7 +103,7 @@ const tools = {
           conditionsUrl.searchParams.set("rockType", rockType);
         }
 
-        console.log('[get_conditions] Fetching conditions:', {
+        console.log("[get_conditions] Fetching conditions:", {
           location,
           lat,
           lon,
@@ -117,12 +113,12 @@ const tools = {
         });
 
         const response = await fetch(conditionsUrl.toString());
-        console.log('[get_conditions] Conditions API response status:', response.status);
+        console.log("[get_conditions] Conditions API response status:", response.status);
 
         const data = await response.json();
 
         if (!response.ok) {
-          console.error('[get_conditions] Conditions API error:', {
+          console.error("[get_conditions] Conditions API error:", {
             location,
             status: response.status,
             error: data.error,
@@ -131,7 +127,7 @@ const tools = {
           return { error: data.error || "Failed to get conditions", location };
         }
 
-        console.log('[get_conditions] Successfully fetched conditions:', {
+        console.log("[get_conditions] Successfully fetched conditions:", {
           location,
           rating: data.conditions.rating,
           frictionScore: data.conditions.frictionRating,
@@ -149,7 +145,7 @@ const tools = {
           current: data.current,
         };
       } catch (error) {
-        console.error('[get_conditions] Fetch error:', {
+        console.error("[get_conditions] Fetch error:", {
           location,
           lat,
           lon,
@@ -167,12 +163,7 @@ const tools = {
     description: "Add a community report about climbing conditions",
     inputSchema: z.object({
       location: z.string().describe("Crag/sector/route name"),
-      dryness: z
-        .number()
-        .min(1)
-        .max(5)
-        .optional()
-        .describe("Dryness rating 1-5"),
+      dryness: z.number().min(1).max(5).optional().describe("Dryness rating 1-5"),
       wind: z.number().min(1).max(5).optional().describe("Wind rating 1-5"),
       crowds: z.number().min(1).max(5).optional().describe("Crowds rating 1-5"),
       text: z.string().optional().describe("Optional comment"),

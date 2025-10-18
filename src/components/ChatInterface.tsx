@@ -21,7 +21,9 @@ const ChatInterface = () => {
   const { messages, sendMessage } = useChat();
   const isLoading = messages.length > 0 && messages[messages.length - 1].role === "user";
   const [detailsDialogOpen, setDetailsDialogOpen] = useState(false);
-  const [selectedConditions, setSelectedConditions] = useState<any>(null);
+  const [selectedConditions, setSelectedConditions] = useState<Record<string, unknown> | null>(
+    null
+  );
 
   const exampleQueries = [
     "Siurana conditions tomorrow?",
@@ -41,7 +43,7 @@ const ChatInterface = () => {
   const handleExampleClick = (query: string) => {
     setInput("");
     sendMessage({ text: query });
-  }
+  };
 
   return (
     <section id="chat-section" className="py-20 px-6 bg-gradient-earth">
@@ -59,128 +61,168 @@ const ChatInterface = () => {
         <Card className="shadow-elevated h-[600px] flex flex-col">
           <Conversation className="flex-1">
             <ConversationContent className="p-6">
-            {messages.length === 0 ? (
-              <div className="flex flex-col items-center justify-center h-full text-center py-12">
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                  <Send className="w-8 h-8 text-primary" />
+              {messages.length === 0 ? (
+                <div className="flex flex-col items-center justify-center h-full text-center py-12">
+                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                    <Send className="w-8 h-8 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">Start a conversation</h3>
+                  <p className="text-muted-foreground mb-6 max-w-md">
+                    Ask about climbing conditions anywhere in the world
+                  </p>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    {exampleQueries.map((query, idx) => (
+                      <Button
+                        key={idx}
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleExampleClick(query)}
+                        className="transition-smooth hover:scale-105"
+                      >
+                        {query}
+                      </Button>
+                    ))}
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Start a conversation</h3>
-                <p className="text-muted-foreground mb-6 max-w-md">
-                  Ask about climbing conditions anywhere in the world
-                </p>
-                <div className="flex flex-wrap gap-2 justify-center">
-                  {exampleQueries.map((query, idx) => (
-                    <Button
-                      key={idx}
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleExampleClick(query)}
-                      className="transition-smooth hover:scale-105"
-                    >
-                      {query}
-                    </Button>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              messages.map((message) => {
-                const textParts = message.parts.filter((part: any) => part.type === "text");
-                const toolParts = message.parts.filter((part: any) => part.type !== "text" && part.type !== "error" && part.type !== "step-start");
+              ) : (
+                messages.map((message) => {
+                  const textParts = message.parts.filter(
+                    (part: { type: string }) => part.type === "text"
+                  );
+                  const toolParts = message.parts.filter(
+                    (part: { type: string }) =>
+                      part.type !== "text" && part.type !== "error" && part.type !== "step-start"
+                  );
 
-                return (
-                  <Message key={message.id} from={message.role}>
-                    <MessageContent variant={message.role === "assistant" ? "flat" : "contained"}>
-                      {/* Render text parts with markdown */}
-                      {textParts.map((part: any, i: number) => (
-                        <Response key={i}>{part.text}</Response>
-                      ))}
+                  return (
+                    <Message key={message.id} from={message.role}>
+                      <MessageContent variant={message.role === "assistant" ? "flat" : "contained"}>
+                        {/* Render text parts with markdown */}
+                        {textParts.map((part: { text: string }, i: number) => (
+                          <Response key={i}>{part.text}</Response>
+                        ))}
 
-                      {/* Render tool results inline for assistant messages */}
-                      {message.role === "assistant" && toolParts.map((part: any, i: number) => {
-                        // In AI SDK v5, tool parts have type 'tool-${toolName}' and state 'output-available'
-                        if (part.type === "tool-get_conditions" && part.state === "output-available") {
-                          // Handle disambiguation results
-                          if (part.output?.disambiguate || part.result?.disambiguate) {
-                            const result = part.output || part.result;
-                            return (
-                              <div key={i} className="mt-3 space-y-2">
-                                <p className="text-sm font-medium">{result.message}</p>
-                                <div className="flex flex-wrap gap-2">
-                                  {result.options?.map((option: any) => (
-                                    <Button
-                                      key={option.id}
-                                      variant="outline"
-                                      size="sm"
-                                      onClick={() => {
-                                        sendMessage({
-                                          text: `conditions at ${option.name} (${option.latitude}, ${option.longitude})`,
-                                        });
-                                      }}
-                                      className="flex flex-col items-start h-auto py-2 px-3"
-                                    >
-                                      <span className="font-semibold text-sm">{option.name}</span>
-                                      <span className="text-xs opacity-70">{option.location}</span>
-                                    </Button>
-                                  ))}
-                                </div>
-                              </div>
-                            );
-                          }
-                          // Handle regular conditions results
-                          const result = part.output || part.result;
-                          return (
-                            <div key={i} className="mt-3 bg-muted/50 rounded-lg p-4 space-y-3 border border-border">
-                              <div className="flex items-start justify-between">
-                                <div className="space-y-2 flex-1">
-                                  <div className="font-semibold text-base">🧗 {result?.location}</div>
-                                  <div className="font-medium">Rating: {result?.rating} ({result?.frictionScore}/5)</div>
-                                  {result?.warnings && result.warnings.length > 0 && (
-                                    <div className="text-destructive font-semibold text-sm">
-                                      ⚠️ {result.warnings.join(", ")}
+                        {/* Render tool results inline for assistant messages */}
+                        {message.role === "assistant" &&
+                          toolParts.map(
+                            (
+                              part: {
+                                type: string;
+                                state?: string;
+                                output?: Record<string, unknown>;
+                                result?: Record<string, unknown>;
+                              },
+                              i: number
+                            ) => {
+                              // In AI SDK v5, tool parts have type 'tool-${toolName}' and state 'output-available'
+                              if (
+                                part.type === "tool-get_conditions" &&
+                                part.state === "output-available"
+                              ) {
+                                // Handle disambiguation results
+                                if (part.output?.disambiguate || part.result?.disambiguate) {
+                                  const result = part.output || part.result;
+                                  return (
+                                    <div key={i} className="mt-3 space-y-2">
+                                      <p className="text-sm font-medium">{result.message}</p>
+                                      <div className="flex flex-wrap gap-2">
+                                        {result.options?.map(
+                                          (option: {
+                                            id: string;
+                                            name: string;
+                                            location: string;
+                                            latitude: number;
+                                            longitude: number;
+                                          }) => (
+                                            <Button
+                                              key={option.id}
+                                              variant="outline"
+                                              size="sm"
+                                              onClick={() => {
+                                                sendMessage({
+                                                  text: `conditions at ${option.name} (${option.latitude}, ${option.longitude})`,
+                                                });
+                                              }}
+                                              className="flex flex-col items-start h-auto py-2 px-3"
+                                            >
+                                              <span className="font-semibold text-sm">
+                                                {option.name}
+                                              </span>
+                                              <span className="text-xs opacity-70">
+                                                {option.location}
+                                              </span>
+                                            </Button>
+                                          )
+                                        )}
+                                      </div>
                                     </div>
-                                  )}
-                                  {result?.reasons && result.reasons.length > 0 && (
-                                    <div className="text-sm opacity-80">{result.reasons.join(", ")}</div>
-                                  )}
-                                </div>
-                                {(result?.hourlyConditions || result?.optimalWindows) && (
-                                  <Button
-                                    variant="outline"
-                                    size="sm"
-                                    className="ml-3 shrink-0"
-                                    onClick={() => {
-                                      setSelectedConditions(result);
-                                      setDetailsDialogOpen(true);
-                                    }}
+                                  );
+                                }
+                                // Handle regular conditions results
+                                const result = part.output || part.result;
+                                return (
+                                  <div
+                                    key={i}
+                                    className="mt-3 bg-muted/50 rounded-lg p-4 space-y-3 border border-border"
                                   >
-                                    <Info className="w-4 h-4 mr-1" />
-                                    Details
-                                  </Button>
-                                )}
-                              </div>
-                            </div>
-                          );
-                        }
-                        return null;
-                      })}
-                    </MessageContent>
-                    {message.role === "assistant" && (
-                      <div className="size-8 rounded-full bg-orange-500/10 flex items-center justify-center">
-                        <Sun className="size-5 text-orange-500" strokeWidth={2} />
-                      </div>
-                    )}
-                  </Message>
-                );
-              })
-            )}
-            {isLoading && (
-              <div className="flex justify-start">
-                <div className="bg-muted rounded-2xl px-4 py-3 flex items-center gap-2">
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Thinking...</span>
+                                    <div className="flex items-start justify-between">
+                                      <div className="space-y-2 flex-1">
+                                        <div className="font-semibold text-base">
+                                          🧗 {result?.location}
+                                        </div>
+                                        <div className="font-medium">
+                                          Rating: {result?.rating} ({result?.frictionScore}/5)
+                                        </div>
+                                        {result?.warnings && result.warnings.length > 0 && (
+                                          <div className="text-destructive font-semibold text-sm">
+                                            ⚠️ {result.warnings.join(", ")}
+                                          </div>
+                                        )}
+                                        {result?.reasons && result.reasons.length > 0 && (
+                                          <div className="text-sm opacity-80">
+                                            {result.reasons.join(", ")}
+                                          </div>
+                                        )}
+                                      </div>
+                                      {(result?.hourlyConditions || result?.optimalWindows) && (
+                                        <Button
+                                          variant="outline"
+                                          size="sm"
+                                          className="ml-3 shrink-0"
+                                          onClick={() => {
+                                            setSelectedConditions(result);
+                                            setDetailsDialogOpen(true);
+                                          }}
+                                        >
+                                          <Info className="w-4 h-4 mr-1" />
+                                          Details
+                                        </Button>
+                                      )}
+                                    </div>
+                                  </div>
+                                );
+                              }
+                              return null;
+                            }
+                          )}
+                      </MessageContent>
+                      {message.role === "assistant" && (
+                        <div className="size-8 rounded-full bg-orange-500/10 flex items-center justify-center">
+                          <Sun className="size-5 text-orange-500" strokeWidth={2} />
+                        </div>
+                      )}
+                    </Message>
+                  );
+                })
+              )}
+              {isLoading && (
+                <div className="flex justify-start">
+                  <div className="bg-muted rounded-2xl px-4 py-3 flex items-center gap-2">
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Thinking...</span>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
             </ConversationContent>
             <ConversationScrollButton />
           </Conversation>

@@ -34,13 +34,13 @@ export async function searchLocations(
   limit: number = 10
 ): Promise<GeocodingResult[]> {
   try {
-    const url = new URL('https://geocoding-api.open-meteo.com/v1/search');
-    url.searchParams.append('name', query);
-    url.searchParams.append('count', limit.toString());
-    url.searchParams.append('language', 'en');
-    url.searchParams.append('format', 'json');
+    const url = new URL("https://geocoding-api.open-meteo.com/v1/search");
+    url.searchParams.append("name", query);
+    url.searchParams.append("count", limit.toString());
+    url.searchParams.append("language", "en");
+    url.searchParams.append("format", "json");
 
-    console.log('[Geocoding] Fetching location:', {
+    console.log("[Geocoding] Fetching location:", {
       query,
       limit,
       url: url.toString(),
@@ -48,15 +48,15 @@ export async function searchLocations(
 
     const response = await fetch(url.toString(), {
       headers: {
-        'User-Agent': 'temps.rocks',
+        "User-Agent": "temps.rocks",
       },
     });
 
-    console.log('[Geocoding] Response status:', response.status);
+    console.log("[Geocoding] Response status:", response.status);
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('[Geocoding] API error response:', {
+      console.error("[Geocoding] API error response:", {
         status: response.status,
         statusText: response.statusText,
         body: errorText,
@@ -65,14 +65,14 @@ export async function searchLocations(
     }
 
     const data: GeocodingResponse = await response.json();
-    console.log('[Geocoding] Found results:', {
+    console.log("[Geocoding] Found results:", {
       query,
       count: data.results?.length || 0,
-      results: data.results?.map(r => ({ name: r.name, country: r.country })),
+      results: data.results?.map((r) => ({ name: r.name, country: r.country })),
     });
     return data.results || [];
   } catch (error) {
-    console.error('[Geocoding] Error:', {
+    console.error("[Geocoding] Error:", {
       query,
       error: error instanceof Error ? error.message : String(error),
       stack: error instanceof Error ? error.stack : undefined,
@@ -95,6 +95,9 @@ export async function searchLocationBest(query: string): Promise<GeocodingResult
  * @param query - Location search query
  * @param limit - Maximum number of results (default 5)
  */
-export async function searchLocationMultiple(query: string, limit: number = 5): Promise<GeocodingResult[]> {
+export async function searchLocationMultiple(
+  query: string,
+  limit: number = 5
+): Promise<GeocodingResult[]> {
   return await searchLocations(query, limit);
 }

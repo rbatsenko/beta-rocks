@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/integrations/supabase/client';
+import { NextRequest, NextResponse } from "next/server";
+import { supabase } from "@/integrations/supabase/client";
 
 /**
  * GET /api/reports
@@ -14,37 +14,37 @@ import { supabase } from '@/integrations/supabase/client';
  */
 export async function GET(request: NextRequest) {
   try {
-    const cragId = request.nextUrl.searchParams.get('cragId');
-    const sectorId = request.nextUrl.searchParams.get('sectorId');
-    const routeId = request.nextUrl.searchParams.get('routeId');
-    const limit = parseInt(request.nextUrl.searchParams.get('limit') || '50');
-    const offset = parseInt(request.nextUrl.searchParams.get('offset') || '0');
+    const cragId = request.nextUrl.searchParams.get("cragId");
+    const sectorId = request.nextUrl.searchParams.get("sectorId");
+    const routeId = request.nextUrl.searchParams.get("routeId");
+    const limit = parseInt(request.nextUrl.searchParams.get("limit") || "50");
+    const offset = parseInt(request.nextUrl.searchParams.get("offset") || "0");
 
     if (!cragId && !sectorId && !routeId) {
       return NextResponse.json(
-        { error: 'Must provide at least cragId, sectorId, or routeId' },
+        { error: "Must provide at least cragId, sectorId, or routeId" },
         { status: 400 }
       );
     }
 
     let query = supabase
-      .from('reports')
-      .select('*, confirmations(count)', { count: 'exact' })
-      .order('created_at', { ascending: false })
+      .from("reports")
+      .select("*, confirmations(count)", { count: "exact" })
+      .order("created_at", { ascending: false })
       .range(offset, offset + limit - 1);
 
     if (routeId) {
-      query = query.eq('route_id', routeId);
+      query = query.eq("route_id", routeId);
     } else if (sectorId) {
-      query = query.eq('sector_id', sectorId);
+      query = query.eq("sector_id", sectorId);
     } else {
-      query = query.eq('crag_id', cragId as string);
+      query = query.eq("crag_id", cragId as string);
     }
 
     const { data, error, count } = await query;
 
     if (error) {
-      console.error('Supabase error:', error);
+      console.error("Supabase error:", error);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
@@ -55,11 +55,8 @@ export async function GET(request: NextRequest) {
       offset,
     });
   } catch (error) {
-    console.error('Reports GET error:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch reports' },
-      { status: 500 }
-    );
+    console.error("Reports GET error:", error);
+    return NextResponse.json({ error: "Failed to fetch reports" }, { status: 500 });
   }
 }
 
@@ -95,10 +92,7 @@ export async function POST(request: NextRequest) {
 
     // Validate required fields
     if (!cragId) {
-      return NextResponse.json(
-        { error: 'cragId is required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "cragId is required" }, { status: 400 });
     }
 
     // Validate ratings are 1-5
@@ -107,15 +101,12 @@ export async function POST(request: NextRequest) {
       (rating_wind && (rating_wind < 1 || rating_wind > 5)) ||
       (rating_crowds && (rating_crowds < 1 || rating_crowds > 5))
     ) {
-      return NextResponse.json(
-        { error: 'Ratings must be between 1-5' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Ratings must be between 1-5" }, { status: 400 });
     }
 
     // Insert report into Supabase
     const { data, error } = await supabase
-      .from('reports')
+      .from("reports")
       .insert({
         crag_id: cragId,
         sector_id: sectorId,
@@ -133,16 +124,13 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (error) {
-      console.error('Supabase insert error:', error);
+      console.error("Supabase insert error:", error);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
     return NextResponse.json(data, { status: 201 });
   } catch (error) {
-    console.error('Reports POST error:', error);
-    return NextResponse.json(
-      { error: 'Failed to create report' },
-      { status: 500 }
-    );
+    console.error("Reports POST error:", error);
+    return NextResponse.json({ error: "Failed to create report" }, { status: 500 });
   }
 }

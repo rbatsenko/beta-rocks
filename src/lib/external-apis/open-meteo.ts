@@ -56,7 +56,7 @@ export async function getWeatherForecast(
     url.searchParams.append("timezone", "auto");
     url.searchParams.append("forecast_days", days.toString());
 
-    console.log('[Weather] Fetching forecast:', {
+    console.log("[Weather] Fetching forecast:", {
       lat,
       lon,
       days,
@@ -69,11 +69,11 @@ export async function getWeatherForecast(
       },
     });
 
-    console.log('[Weather] Response status:', response.status);
+    console.log("[Weather] Response status:", response.status);
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('[Weather] API error response:', {
+      console.error("[Weather] API error response:", {
         status: response.status,
         statusText: response.statusText,
         body: errorText,
@@ -82,7 +82,7 @@ export async function getWeatherForecast(
     }
 
     const data = await response.json();
-    console.log('[Weather] Received forecast data:', {
+    console.log("[Weather] Received forecast data:", {
       lat,
       lon,
       currentTemp: data.current?.temperature_2m,
@@ -118,7 +118,7 @@ export async function getWeatherForecast(
       })),
     };
   } catch (error) {
-    console.error('[Weather] Error:', {
+    console.error("[Weather] Error:", {
       lat,
       lon,
       error: error instanceof Error ? error.message : String(error),
@@ -131,10 +131,7 @@ export async function getWeatherForecast(
 /**
  * Get current weather for a location
  */
-export async function getCurrentWeather(
-  lat: number,
-  lon: number
-): Promise<WeatherData> {
+export async function getCurrentWeather(lat: number, lon: number): Promise<WeatherData> {
   const forecast = await getWeatherForecast(lat, lon, 1);
   return forecast.current;
 }
@@ -142,10 +139,7 @@ export async function getCurrentWeather(
 /**
  * Get hourly forecast for next 24 hours
  */
-export async function getHourlyForecast(
-  lat: number,
-  lon: number
-): Promise<WeatherData[]> {
+export async function getHourlyForecast(lat: number, lon: number): Promise<WeatherData[]> {
   const forecast = await getWeatherForecast(lat, lon, 1);
   return forecast.hourly.slice(0, 24);
 }

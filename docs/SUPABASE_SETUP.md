@@ -11,6 +11,7 @@
 Your Supabase has 6 tables ready:
 
 ### 1. **user_profiles**
+
 ```sql
 - id (UUID, PK)
 - sync_key_hash (string) - Hash of the sync key for identity
@@ -19,6 +20,7 @@ Your Supabase has 6 tables ready:
 ```
 
 ### 2. **crags**
+
 ```sql
 - id (string, PK) - OpenBeta ID or custom
 - name (string)
@@ -30,6 +32,7 @@ Your Supabase has 6 tables ready:
 ```
 
 ### 3. **sectors**
+
 ```sql
 - id (string, PK)
 - crag_id (FK → crags)
@@ -40,6 +43,7 @@ Your Supabase has 6 tables ready:
 ```
 
 ### 4. **routes**
+
 ```sql
 - id (string, PK)
 - sector_id (FK → sectors)
@@ -49,6 +53,7 @@ Your Supabase has 6 tables ready:
 ```
 
 ### 5. **reports**
+
 ```sql
 - id (string, PK)
 - crag_id (FK → crags, nullable)
@@ -64,6 +69,7 @@ Your Supabase has 6 tables ready:
 ```
 
 ### 6. **confirmations**
+
 ```sql
 - id (string, PK)
 - report_id (FK → reports)
@@ -74,12 +80,14 @@ Your Supabase has 6 tables ready:
 ## 🚀 Next Steps
 
 ### 1. Verify Connection
+
 ```bash
 npm run dev
 # Check browser console for errors connecting to Supabase
 ```
 
 ### 2. Create Helper Functions
+
 Create `src/lib/db/queries.ts` with these functions:
 
 ```typescript
@@ -88,9 +96,7 @@ import { v4 as uuidv4 } from "uuid";
 
 // Crags
 export async function fetchCrags() {
-  const { data, error } = await supabase
-    .from("crags")
-    .select("*");
+  const { data, error } = await supabase.from("crags").select("*");
   if (error) throw error;
   return data;
 }
@@ -203,12 +209,14 @@ export async function fetchConfirmationsForReport(reportId: string) {
 ```
 
 ### 3. Install uuid
+
 ```bash
 npm install uuid
 npm install --save-dev @types/uuid
 ```
 
 ### 4. Test with API Routes
+
 Update `/src/app/api/reports/route.ts`:
 
 ```typescript
@@ -241,6 +249,7 @@ export async function POST(request: NextRequest) {
 ```
 
 ### 5. Row-Level Security (RLS)
+
 For production, enable RLS on all tables:
 
 ```sql
@@ -263,6 +272,7 @@ CREATE POLICY "reports_insert" ON reports FOR INSERT WITH CHECK (true);
 ## 🔑 Environment Variables
 
 Your `.env` should have:
+
 ```
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
@@ -280,7 +290,7 @@ For multi-device sync:
 4. QR code: `temps.rocks/sync?key=<key>`
 
 ```typescript
-import { sha256 } from 'crypto-js';
+import { sha256 } from "crypto-js";
 
 function hashSyncKey(key: string): string {
   return sha256(key).toString();
@@ -293,12 +303,12 @@ function generateSyncKey(): string {
 
 ## 🐛 Troubleshooting
 
-| Error | Solution |
-|-------|----------|
-| `NEXT_PUBLIC_SUPABASE_URL is undefined` | Check `.env` file and restart dev server |
-| `Cannot read property 'auth'` | Ensure `typeof window !== 'undefined'` check |
-| `Relation does not exist` | Verify tables exist in Supabase dashboard |
-| `Permission denied` | Check RLS policies or use anon key |
+| Error                                   | Solution                                     |
+| --------------------------------------- | -------------------------------------------- |
+| `NEXT_PUBLIC_SUPABASE_URL is undefined` | Check `.env` file and restart dev server     |
+| `Cannot read property 'auth'`           | Ensure `typeof window !== 'undefined'` check |
+| `Relation does not exist`               | Verify tables exist in Supabase dashboard    |
+| `Permission denied`                     | Check RLS policies or use anon key           |
 
 ## ✨ Files to Create
 

@@ -54,11 +54,16 @@ interface ConditionsDetailDialogProps {
 export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsDetailDialogProps) {
   const getRatingColor = (rating: string) => {
     switch (rating) {
-      case "Great": return "bg-green-500/10 text-green-500 border-green-500/20";
-      case "OK": return "bg-blue-500/10 text-blue-500 border-blue-500/20";
-      case "Meh": return "bg-yellow-500/10 text-yellow-500 border-yellow-500/20";
-      case "Nope": return "bg-red-500/10 text-red-500 border-red-500/20";
-      default: return "bg-muted text-muted-foreground";
+      case "Great":
+        return "bg-green-500/10 text-green-500 border-green-500/20";
+      case "OK":
+        return "bg-blue-500/10 text-blue-500 border-blue-500/20";
+      case "Meh":
+        return "bg-yellow-500/10 text-yellow-500 border-yellow-500/20";
+      case "Nope":
+        return "bg-red-500/10 text-red-500 border-red-500/20";
+      default:
+        return "bg-muted text-muted-foreground";
     }
   };
 
@@ -89,9 +94,13 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                 </Badge>
                 <span className="text-2xl font-bold">{data.frictionScore}/5</span>
                 {data.isDry ? (
-                  <Badge variant="outline" className="text-green-600 border-green-600">Dry</Badge>
+                  <Badge variant="outline" className="text-green-600 border-green-600">
+                    Dry
+                  </Badge>
                 ) : (
-                  <Badge variant="outline" className="text-orange-600 border-orange-600">Wet</Badge>
+                  <Badge variant="outline" className="text-orange-600 border-orange-600">
+                    Wet
+                  </Badge>
                 )}
               </div>
               {data.reasons && data.reasons.length > 0 && (
@@ -104,7 +113,9 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
               {data.warnings && data.warnings.length > 0 && (
                 <div className="space-y-1">
                   {data.warnings.map((warning, i) => (
-                    <p key={i} className="text-sm text-destructive">⚠️ {warning}</p>
+                    <p key={i} className="text-sm text-destructive">
+                      ⚠️ {warning}
+                    </p>
                   ))}
                 </div>
               )}
@@ -136,13 +147,15 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                   </div>
                   {data.dewPointSpread !== undefined && (
                     <div className="bg-muted/50 rounded-lg p-3">
-                      <p className="text-xs text-muted-foreground">Dew Point Spread (condensation risk)</p>
+                      <p className="text-xs text-muted-foreground">
+                        Dew Point Spread (condensation risk)
+                      </p>
                       <p className="text-sm">
                         {data.dewPointSpread > 5
                           ? "✅ Low risk - rock should stay dry"
                           : data.dewPointSpread > 2
-                          ? "⚠️ Moderate risk - watch for moisture"
-                          : "❌ High risk - condensation likely"}
+                            ? "⚠️ Moderate risk - watch for moisture"
+                            : "❌ High risk - condensation likely"}
                       </p>
                       <p className="text-lg font-semibold">{data.dewPointSpread}°C</p>
                     </div>
@@ -162,18 +175,23 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                   </h3>
                   <div className="space-y-2">
                     {data.optimalWindows.map((window, i) => (
-                      <div key={i} className="bg-muted/50 rounded-lg p-3 flex items-center justify-between">
+                      <div
+                        key={i}
+                        className="bg-muted/50 rounded-lg p-3 flex items-center justify-between"
+                      >
                         <div className="flex items-center gap-3">
                           <Clock className="w-4 h-4 text-muted-foreground" />
                           <div>
-                            <p className="font-medium">{window.startTime} - {window.endTime}</p>
-                            <p className="text-xs text-muted-foreground">{window.hourCount} hours</p>
+                            <p className="font-medium">
+                              {window.startTime} - {window.endTime}
+                            </p>
+                            <p className="text-xs text-muted-foreground">
+                              {window.hourCount} hours
+                            </p>
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Badge className={getRatingColor(window.rating)}>
-                            {window.rating}
-                          </Badge>
+                          <Badge className={getRatingColor(window.rating)}>{window.rating}</Badge>
                           <span className="text-sm font-semibold">{window.avgFrictionScore}/5</span>
                         </div>
                       </div>
@@ -201,7 +219,9 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                     <div
                       key={i}
                       className={`rounded-lg p-3 border ${
-                        hour.frictionScore >= 4 ? "bg-green-500/5 border-green-500/20" : "bg-muted/30 border-border"
+                        hour.frictionScore >= 4
+                          ? "bg-green-500/5 border-green-500/20"
+                          : "bg-muted/30 border-border"
                       }`}
                     >
                       <div className="flex items-center justify-between">
@@ -225,7 +245,9 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                           <Badge className={getRatingColor(hour.rating)} variant="outline">
                             {hour.rating}
                           </Badge>
-                          <span className="text-sm font-semibold w-8 text-right">{hour.frictionScore}/5</span>
+                          <span className="text-sm font-semibold w-8 text-right">
+                            {hour.frictionScore}/5
+                          </span>
                         </div>
                       </div>
                       {hour.warnings.length > 0 && (

@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { computeConditions, RockType } from '@/lib/conditions/conditions.service';
-import { getWeatherForecast } from '@/lib/external-apis/open-meteo';
+import { NextRequest, NextResponse } from "next/server";
+import { computeConditions, RockType } from "@/lib/conditions/conditions.service";
+import { getWeatherForecast } from "@/lib/external-apis/open-meteo";
 
 /**
  * GET /api/conditions
@@ -14,12 +14,12 @@ import { getWeatherForecast } from '@/lib/external-apis/open-meteo';
  */
 export async function GET(request: NextRequest) {
   try {
-    const lat = request.nextUrl.searchParams.get('lat');
-    const lon = request.nextUrl.searchParams.get('lon');
-    const rockType = (request.nextUrl.searchParams.get('rockType') || 'unknown') as RockType;
-    const recentPrecipMm = parseFloat(request.nextUrl.searchParams.get('recentPrecipMm') || '0');
+    const lat = request.nextUrl.searchParams.get("lat");
+    const lon = request.nextUrl.searchParams.get("lon");
+    const rockType = (request.nextUrl.searchParams.get("rockType") || "unknown") as RockType;
+    const recentPrecipMm = parseFloat(request.nextUrl.searchParams.get("recentPrecipMm") || "0");
 
-    console.log('[Conditions API] Received request:', {
+    console.log("[Conditions API] Received request:", {
       lat,
       lon,
       rockType,
@@ -29,30 +29,24 @@ export async function GET(request: NextRequest) {
 
     // Validate required parameters
     if (!lat || !lon) {
-      console.error('[Conditions API] Missing parameters:', { lat, lon });
-      return NextResponse.json(
-        { error: 'Missing required parameters: lat, lon' },
-        { status: 400 }
-      );
+      console.error("[Conditions API] Missing parameters:", { lat, lon });
+      return NextResponse.json({ error: "Missing required parameters: lat, lon" }, { status: 400 });
     }
 
     const latitude = parseFloat(lat);
     const longitude = parseFloat(lon);
 
     if (isNaN(latitude) || isNaN(longitude)) {
-      console.error('[Conditions API] Invalid coordinates:', { lat, lon, latitude, longitude });
-      return NextResponse.json(
-        { error: 'Invalid coordinates' },
-        { status: 400 }
-      );
+      console.error("[Conditions API] Invalid coordinates:", { lat, lon, latitude, longitude });
+      return NextResponse.json({ error: "Invalid coordinates" }, { status: 400 });
     }
 
-    console.log('[Conditions API] Fetching weather forecast for:', { latitude, longitude });
+    console.log("[Conditions API] Fetching weather forecast for:", { latitude, longitude });
 
     // Fetch weather data
     const forecast = await getWeatherForecast(latitude, longitude, 7);
 
-    console.log('[Conditions API] Weather forecast received:', {
+    console.log("[Conditions API] Weather forecast received:", {
       latitude,
       longitude,
       hasCurrent: !!forecast.current,
@@ -61,11 +55,11 @@ export async function GET(request: NextRequest) {
     });
 
     if (!forecast.current || !forecast.hourly) {
-      console.error('[Conditions API] Invalid forecast data structure:', {
+      console.error("[Conditions API] Invalid forecast data structure:", {
         hasCurrent: !!forecast.current,
         hasHourly: !!forecast.hourly,
       });
-      throw new Error('Invalid forecast data structure');
+      throw new Error("Invalid forecast data structure");
     }
 
     // Prepare hourly data with timestamps
@@ -95,14 +89,14 @@ export async function GET(request: NextRequest) {
     // Format hourly conditions for response (convert ISO timestamps to readable format)
     const formattedHourlyConditions = conditions.hourlyConditions?.map((h) => ({
       ...h,
-      time: new Date(h.time).toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
+      time: new Date(h.time).toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
         hour12: false,
       }),
     }));
 
-    console.log('[Conditions API] Successfully computed conditions:', {
+    console.log("[Conditions API] Successfully computed conditions:", {
       latitude,
       longitude,
       rockType,
@@ -127,14 +121,14 @@ export async function GET(request: NextRequest) {
       updatedAt: new Date().toISOString(),
     });
   } catch (error) {
-    console.error('Conditions API error:', {
+    console.error("Conditions API error:", {
       message: error instanceof Error ? error.message : String(error),
       stack: error instanceof Error ? error.stack : undefined,
     });
     return NextResponse.json(
       {
-        error: 'Failed to compute conditions',
-        details: error instanceof Error ? error.message : 'Unknown error'
+        error: "Failed to compute conditions",
+        details: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 }
     );

@@ -1,16 +1,18 @@
 # temps.rocks - Quick Reference Guide
 
 ## Project Overview
+
 **Project**: temps.rocks - Chat-first climbing conditions web app  
 **Status**: UI/Styling complete, core logic ~15% implemented  
 **Tech Stack**: Next.js 15, React 18, TypeScript, Tailwind CSS, Supabase  
-**Deployment**: Vercel  
+**Deployment**: Vercel
 
 ---
 
 ## File Locations - Find What You Need
 
 ### Main Application
+
 ```
 src/app/page.tsx                      HOME PAGE
 src/app/layout.tsx                    ROOT LAYOUT
@@ -21,18 +23,21 @@ src/index.css                          DESIGN SYSTEM & COLORS
 ```
 
 ### API Endpoints (Need Work)
+
 ```
 src/app/api/chat/route.ts              ← 90% TODO: Implement Gemini integration
 src/app/api/sync/[key]/route.ts        ← 80% TODO: Implement Supabase integration
 ```
 
 ### Database & Integrations
+
 ```
 src/integrations/supabase/client.ts    Supabase client (initialized)
 src/integrations/supabase/types.ts     Database types (auto-generated)
 ```
 
 ### Utilities
+
 ```
 src/hooks/use-toast.ts                 Toast notifications
 src/hooks/use-mobile.tsx               Mobile detection
@@ -40,6 +45,7 @@ src/lib/utils.ts                       Classname utilities (cn)
 ```
 
 ### Configuration
+
 ```
 next.config.ts                         Next.js config
 tsconfig.json                          TypeScript config
@@ -49,6 +55,7 @@ package.json                           Dependencies & scripts
 ```
 
 ### Documentation
+
 ```
 docs/PRD.md                            Full product requirements
 CODEBASE_ANALYSIS.md                   Detailed codebase analysis
@@ -75,20 +82,21 @@ vercel                   # Deploy to Vercel
 
 ## Database Tables (Supabase)
 
-| Table | Purpose | Key Fields |
-|-------|---------|-----------|
-| user_profiles | User identity | id, sync_key_hash, display_name |
-| crags | Climbing locations | id, name, lat, lon, country |
-| sectors | Areas within crags | id, crag_id, name, aspect |
-| routes | Individual climbs | id, sector_id, name, grade |
-| reports | User-submitted conditions | id, crag_id, rating_dry, rating_wind, rating_crowds, text |
-| confirmations | Thumbs-up on reports | id, report_id, user_key_hash |
+| Table         | Purpose                   | Key Fields                                                |
+| ------------- | ------------------------- | --------------------------------------------------------- |
+| user_profiles | User identity             | id, sync_key_hash, display_name                           |
+| crags         | Climbing locations        | id, name, lat, lon, country                               |
+| sectors       | Areas within crags        | id, crag_id, name, aspect                                 |
+| routes        | Individual climbs         | id, sector_id, name, grade                                |
+| reports       | User-submitted conditions | id, crag_id, rating_dry, rating_wind, rating_crowds, text |
+| confirmations | Thumbs-up on reports      | id, report_id, user_key_hash                              |
 
 ---
 
 ## Current API Endpoints
 
 ### POST /api/chat (MOCK)
+
 ```javascript
 // Request
 { message: string, lang?: string, location?: { lat, lon } }
@@ -100,6 +108,7 @@ vercel                   # Deploy to Vercel
 ```
 
 ### GET /api/sync/:key (STUB)
+
 ```javascript
 // Response
 { profile: null, crags: [], reports: [], confirmations: [] }
@@ -108,6 +117,7 @@ vercel                   # Deploy to Vercel
 ```
 
 ### POST /api/sync/:key (STUB)
+
 ```javascript
 // Response
 { success: true, syncedAt: ISO timestamp }
@@ -147,6 +157,7 @@ vercel                   # Deploy to Vercel
 ## Design System
 
 ### Colors (HSL format)
+
 - **Primary**: Terracotta (15° 65% 55%)
 - **Secondary**: Sage green (140° 20% 60%)
 - **Accent**: Sky blue (200° 75% 55%)
@@ -154,10 +165,12 @@ vercel                   # Deploy to Vercel
 - **Foreground**: Dark brown light / Off-white dark
 
 ### Typography
+
 - Font: System default (see Tailwind config)
 - Spacing: Tailwind defaults
 
 ### Components
+
 - 50+ shadcn/ui components available
 - All in `src/components/ui/`
 
@@ -193,12 +206,12 @@ AI_PROVIDER=google                     ✗ Set this
 
 ## External APIs to Integrate
 
-| Service | Purpose | Status | Free? |
-|---------|---------|--------|-------|
-| Gemini 2.5 Flash | LLM for chat | TODO | No |
-| OpenBeta | Crag data | TODO | Yes |
-| Open-Meteo | Weather | TODO | Yes |
-| suncalc | Sun position | TODO | Yes |
+| Service          | Purpose      | Status | Free? |
+| ---------------- | ------------ | ------ | ----- |
+| Gemini 2.5 Flash | LLM for chat | TODO   | No    |
+| OpenBeta         | Crag data    | TODO   | Yes   |
+| Open-Meteo       | Weather      | TODO   | Yes   |
+| suncalc          | Sun position | TODO   | Yes   |
 
 ---
 
@@ -236,12 +249,14 @@ AI_PROVIDER=google                     ✗ Set this
 ## Common Tasks
 
 ### Add a new API endpoint
+
 1. Create file: `src/app/api/[route]/route.ts`
 2. Export `GET`, `POST`, etc. functions
 3. Verify with TypeScript
 4. Call from frontend via `fetch("/api/[route]")`
 
 ### Add a new UI component
+
 1. Create file: `src/components/[ComponentName].tsx`
 2. Use shadcn/ui primitives if needed
 3. Style with Tailwind classes
@@ -249,12 +264,14 @@ AI_PROVIDER=google                     ✗ Set this
 5. Use path alias: `import { Button } from "@/components/ui/button"`
 
 ### Query Supabase
+
 1. Import client: `import { supabase } from "@/integrations/supabase/client"`
 2. Use TypeScript types: `Tables<"crags">`
 3. Query: `supabase.from("crags").select("*")`
 4. Handle errors & types
 
 ### Deploy to Vercel
+
 1. Push to GitHub main branch
 2. Vercel auto-deploys on push
 3. Check vercel.com for status
@@ -265,23 +282,27 @@ AI_PROVIDER=google                     ✗ Set this
 ## Troubleshooting
 
 **Port 3000 already in use?**
+
 ```bash
 lsof -i :3000          # Find process
 kill -9 <PID>          # Kill it
 ```
 
 **TypeScript errors?**
+
 ```bash
 npm run type-check     # Check all files
 ```
 
 **Need to regenerate Supabase types?**
+
 ```bash
 # Run in Supabase CLI (if installed)
 # Types auto-update from schema
 ```
 
 **Dark mode not working?**
+
 - Check next-themes provider in layout.tsx
 - Ensure Tailwind darkMode: "class" in config
 

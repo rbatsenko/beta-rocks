@@ -5,7 +5,8 @@ const features = [
   {
     icon: Cloud,
     title: "Real-time Weather",
-    description: "Accurate forecasts from Open-Meteo with sun/shade calculations for specific sectors",
+    description:
+      "Accurate forecasts from Open-Meteo with sun/shade calculations for specific sectors",
   },
   {
     icon: MessageSquare,
@@ -15,7 +16,8 @@ const features = [
   {
     icon: Users,
     title: "Community Reports",
-    description: "Share and confirm current conditions. Help fellow climbers with real-time updates",
+    description:
+      "Share and confirm current conditions. Help fellow climbers with real-time updates",
   },
   {
     icon: MapPin,
@@ -49,8 +51,8 @@ const Features = () => {
           {features.map((feature, idx) => {
             const Icon = feature.icon;
             return (
-              <Card 
-                key={idx} 
+              <Card
+                key={idx}
                 className="shadow-soft hover:shadow-medium transition-smooth hover:-translate-y-1"
               >
                 <CardHeader>

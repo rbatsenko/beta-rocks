@@ -5,13 +5,13 @@
  */
 
 export type RockType =
-  | 'granite'
-  | 'sandstone'
-  | 'limestone'
-  | 'basalt'
-  | 'gneiss'
-  | 'quartzite'
-  | 'unknown';
+  | "granite"
+  | "sandstone"
+  | "limestone"
+  | "basalt"
+  | "gneiss"
+  | "quartzite"
+  | "unknown";
 
 export interface RockTypeConditions {
   optimalTemp: { min: number; max: number };
@@ -28,7 +28,7 @@ export interface HourlyCondition {
   precip_mm: number;
   isOptimal: boolean;
   frictionScore: number;
-  rating: 'Nope' | 'Meh' | 'OK' | 'Great';
+  rating: "Nope" | "Meh" | "OK" | "Great";
   isDry: boolean;
   warnings: string[];
 }
@@ -37,7 +37,7 @@ export interface OptimalWindow {
   startTime: string;
   endTime: string;
   avgFrictionScore: number;
-  rating: 'Nope' | 'Meh' | 'OK' | 'Great';
+  rating: "Nope" | "Meh" | "OK" | "Great";
   hourCount: number;
 }
 
@@ -49,7 +49,7 @@ export interface PrecipitationContext {
 
 export interface ConditionsResult {
   frictionRating: number; // 1-5 scale
-  rating: 'Nope' | 'Meh' | 'OK' | 'Great'; // Human-readable
+  rating: "Nope" | "Meh" | "OK" | "Great"; // Human-readable
   reasons: string[];
   dryingTimeHours?: number;
   isDry: boolean;
@@ -158,9 +158,9 @@ function calculateWeatherAwareDryingPenalty(
   }
 
   // Adjust for rock type
-  if (rockType === 'sandstone') {
+  if (rockType === "sandstone") {
     penalty *= 1.25; // Stays wet longer
-  } else if (rockType === 'granite' || rockType === 'gneiss') {
+  } else if (rockType === "granite" || rockType === "gneiss") {
     penalty *= 0.9; // Dries faster
   }
 
@@ -209,7 +209,7 @@ function calculateWeatherAwareDryingPenalty(
  */
 export function computeConditions(
   weather: WeatherForecast,
-  rockType: RockType = 'unknown',
+  rockType: RockType = "unknown",
   recentPrecipitationMm: number = 0
 ): ConditionsResult {
   const { current, hourly } = weather;
@@ -235,9 +235,10 @@ export function computeConditions(
     precipitationContext = calculatePrecipitationContext(hourly);
 
     // Find optimal time (best friction score in next 48h)
-    const bestHour = hourlyConditions.reduce((best, hour) =>
-      hour.frictionScore > best.frictionScore ? hour : best
-    , hourlyConditions[0]);
+    const bestHour = hourlyConditions.reduce(
+      (best, hour) => (hour.frictionScore > best.frictionScore ? hour : best),
+      hourlyConditions[0]
+    );
     if (bestHour && bestHour.frictionScore >= 4) {
       optimalTime = bestHour.time;
     }
@@ -245,11 +246,10 @@ export function computeConditions(
 
   // Calculate dew point spread (condensation risk)
   const dewPoint = calculateDewPoint(current.temp_c, current.humidity);
-  dewPointSpread = Math.round((current.temp_c - dewPoint) * 10) / 10;
+  const dewPointSpread = Math.round((current.temp_c - dewPoint) * 10) / 10;
 
   // === TEMPERATURE ASSESSMENT ===
-  const inOptimalTemp =
-    current.temp_c >= optimalTemp.min && current.temp_c <= optimalTemp.max;
+  const inOptimalTemp = current.temp_c >= optimalTemp.min && current.temp_c <= optimalTemp.max;
   const tooHot = current.temp_c > optimalTemp.max;
   const tooCold = current.temp_c < optimalTemp.min;
 
@@ -259,9 +259,9 @@ export function computeConditions(
   } else if (tooHot) {
     frictionScore -= 1.5;
     warnings.push(`Too warm for ${rockType} (${current.temp_c}°C)`);
-    reasons.push('Temperature too high - fingers may slip');
+    reasons.push("Temperature too high - fingers may slip");
   } else if (tooCold) {
-    if (rockType === 'granite' || rockType === 'gneiss') {
+    if (rockType === "granite" || rockType === "gneiss") {
       frictionScore += 1;
       reasons.push(`Cold but good for ${rockType} friction`);
     } else {
@@ -272,8 +272,7 @@ export function computeConditions(
 
   // === HUMIDITY ASSESSMENT ===
   const inOptimalHumidity =
-    current.humidity >= optimalHumidity.min &&
-    current.humidity <= optimalHumidity.max;
+    current.humidity >= optimalHumidity.min && current.humidity <= optimalHumidity.max;
   const highHumidity = current.humidity > maxHumidity;
   const lowHumidity = current.humidity < optimalHumidity.min;
 
@@ -282,12 +281,10 @@ export function computeConditions(
     reasons.push(`Ideal humidity (${current.humidity}%)`);
   } else if (highHumidity) {
     frictionScore -= 1.5;
-    warnings.push(
-      `High humidity (${current.humidity}%) - rock will be slippery`
-    );
-  } else if (lowHumidity && (rockType === 'granite' || rockType === 'gneiss')) {
+    warnings.push(`High humidity (${current.humidity}%) - rock will be slippery`);
+  } else if (lowHumidity && (rockType === "granite" || rockType === "gneiss")) {
     frictionScore += 0.5;
-    reasons.push('Low humidity aids friction on granite');
+    reasons.push("Low humidity aids friction on granite");
   }
 
   // === WETNESS & DRYING ===
@@ -298,7 +295,7 @@ export function computeConditions(
   if (isCurrentlyWet) {
     frictionScore = Math.min(frictionScore, 1.5);
     dryingTimeHours = baseDryingHours;
-    warnings.push('Rock is currently wet - dangerous to climb');
+    warnings.push("Rock is currently wet - dangerous to climb");
   } else if (hasRecentPrecip) {
     const penalty = calculateWeatherAwareDryingPenalty(
       recentPrecipitationMm,
@@ -309,8 +306,7 @@ export function computeConditions(
     );
     frictionScore -= penalty;
 
-    const dryingFactor =
-      (current.temp_c >= 15 && current.humidity < 50) ? 0.8 : 1.2;
+    const dryingFactor = current.temp_c >= 15 && current.humidity < 50 ? 0.8 : 1.2;
     dryingTimeHours = baseDryingHours * dryingFactor;
 
     warnings.push(
@@ -331,37 +327,33 @@ export function computeConditions(
   frictionScore = Math.max(1, Math.min(5, frictionScore));
 
   // === CONVERT TO RATING ===
-  let rating: 'Nope' | 'Meh' | 'OK' | 'Great';
+  let rating: "Nope" | "Meh" | "OK" | "Great";
   if (frictionScore >= 4.5) {
-    rating = 'Great';
+    rating = "Great";
   } else if (frictionScore >= 3.5) {
-    rating = 'OK';
+    rating = "OK";
   } else if (frictionScore >= 2) {
-    rating = 'Meh';
+    rating = "Meh";
   } else {
-    rating = 'Nope';
+    rating = "Nope";
   }
 
   // === BUILD RESPONSE ===
   const isDry = !isCurrentlyWet && !hasRecentPrecip;
 
   if (!isDry && dryingTimeHours) {
-    reasons.push(
-      `Will be ready to climb in ~${Math.round(dryingTimeHours)} hours`
-    );
+    reasons.push(`Will be ready to climb in ~${Math.round(dryingTimeHours)} hours`);
   }
 
   if (reasons.length === 0) {
-    reasons.push('Conditions are acceptable');
+    reasons.push("Conditions are acceptable");
   }
 
   return {
     frictionRating: Math.round(frictionScore),
     rating,
     reasons,
-    dryingTimeHours: dryingTimeHours
-      ? Math.round(dryingTimeHours)
-      : undefined,
+    dryingTimeHours: dryingTimeHours ? Math.round(dryingTimeHours) : undefined,
     isDry,
     warnings,
     hourlyConditions,
@@ -378,7 +370,7 @@ export function computeConditions(
 function calculateDewPoint(temp_c: number, humidity: number): number {
   const a = 17.27;
   const b = 237.7;
-  const alpha = ((a * temp_c) / (b + temp_c)) + Math.log(humidity / 100);
+  const alpha = (a * temp_c) / (b + temp_c) + Math.log(humidity / 100);
   return (b * alpha) / (a - alpha);
 }
 
@@ -408,7 +400,7 @@ function computeHourlyFrictionScore(
     score -= 1.5;
     warnings.push(`Too warm (${hour.temp_c}°C)`);
   } else if (hour.temp_c < optimalTemp.min) {
-    if (rockType === 'granite' || rockType === 'gneiss') {
+    if (rockType === "granite" || rockType === "gneiss") {
       score += 1;
     } else {
       score -= 0.5;
@@ -422,7 +414,10 @@ function computeHourlyFrictionScore(
   } else if (hour.humidity > maxHumidity) {
     score -= 1.5;
     warnings.push(`High humidity (${hour.humidity}%)`);
-  } else if (hour.humidity < optimalHumidity.min && (rockType === 'granite' || rockType === 'gneiss')) {
+  } else if (
+    hour.humidity < optimalHumidity.min &&
+    (rockType === "granite" || rockType === "gneiss")
+  ) {
     score += 0.5;
   }
 
@@ -432,7 +427,7 @@ function computeHourlyFrictionScore(
 
   if (isCurrentlyWet) {
     score = Math.min(score, 1.5);
-    warnings.push('Currently wet');
+    warnings.push("Currently wet");
   } else if (hasRecentPrecip) {
     const penalty = calculateWeatherAwareDryingPenalty(
       recentPrecipMm,
@@ -462,11 +457,11 @@ function computeHourlyFrictionScore(
 /**
  * Convert friction score to rating
  */
-function scoreToRating(score: number): 'Nope' | 'Meh' | 'OK' | 'Great' {
-  if (score >= 4.5) return 'Great';
-  if (score >= 3.5) return 'OK';
-  if (score >= 2) return 'Meh';
-  return 'Nope';
+function scoreToRating(score: number): "Nope" | "Meh" | "OK" | "Great" {
+  if (score >= 4.5) return "Great";
+  if (score >= 3.5) return "OK";
+  if (score >= 2) return "Meh";
+  return "Nope";
 }
 
 /**
@@ -480,7 +475,7 @@ export function computeHourlyConditions(
     wind_kph: number;
     precip_mm: number;
   }>,
-  rockType: RockType = 'unknown',
+  rockType: RockType = "unknown",
   recentPrecipMm: number = 0
 ): HourlyCondition[] {
   return hourly.map((hour) => {
@@ -541,9 +536,7 @@ export function calculatePrecipitationContext(
 /**
  * Analyze hourly forecast for optimal climbing windows (enhanced version)
  */
-export function findOptimalWindowsEnhanced(
-  hourlyConditions: HourlyCondition[]
-): OptimalWindow[] {
+export function findOptimalWindowsEnhanced(hourlyConditions: HourlyCondition[]): OptimalWindow[] {
   const windows: OptimalWindow[] = [];
   let currentWindow: { start: number; hours: HourlyCondition[] } | null = null;
 
@@ -558,7 +551,9 @@ export function findOptimalWindowsEnhanced(
     } else {
       // Bad hour, close current window if exists
       if (currentWindow && currentWindow.hours.length >= 2) {
-        const avgScore = currentWindow.hours.reduce((sum, h) => sum + h.frictionScore, 0) / currentWindow.hours.length;
+        const avgScore =
+          currentWindow.hours.reduce((sum, h) => sum + h.frictionScore, 0) /
+          currentWindow.hours.length;
         windows.push({
           startTime: currentWindow.hours[0].time,
           endTime: currentWindow.hours[currentWindow.hours.length - 1].time,
@@ -573,7 +568,8 @@ export function findOptimalWindowsEnhanced(
 
   // Close last window if exists
   if (currentWindow && currentWindow.hours.length >= 2) {
-    const avgScore = currentWindow.hours.reduce((sum, h) => sum + h.frictionScore, 0) / currentWindow.hours.length;
+    const avgScore =
+      currentWindow.hours.reduce((sum, h) => sum + h.frictionScore, 0) / currentWindow.hours.length;
     windows.push({
       startTime: currentWindow.hours[0].time,
       endTime: currentWindow.hours[currentWindow.hours.length - 1].time,
@@ -590,14 +586,16 @@ export function findOptimalWindowsEnhanced(
  * Analyze hourly forecast for optimal climbing windows (legacy version for backward compatibility)
  */
 export function findOptimalWindows(
-  hourly: Array<{
-    time: string;
-    temp_c: number;
-    humidity: number;
-    wind_kph: number;
-    precip_mm: number;
-  }> | undefined,
-  rockType: RockType = 'unknown'
+  hourly:
+    | Array<{
+        time: string;
+        temp_c: number;
+        humidity: number;
+        wind_kph: number;
+        precip_mm: number;
+      }>
+    | undefined,
+  rockType: RockType = "unknown"
 ): string[] {
   if (!hourly || hourly.length === 0) return [];
 
@@ -607,11 +605,8 @@ export function findOptimalWindows(
   // Find hours with good conditions (score >= 4)
   const goodHours = hourly.filter((hour) => {
     let score = 3;
-    if (hour.temp_c >= optimalTemp.min && hour.temp_c <= optimalTemp.max)
-      score += 1;
-    if (hour.humidity >= optimalHumidity.min &&
-      hour.humidity <= optimalHumidity.max)
-      score += 1;
+    if (hour.temp_c >= optimalTemp.min && hour.temp_c <= optimalTemp.max) score += 1;
+    if (hour.humidity >= optimalHumidity.min && hour.humidity <= optimalHumidity.max) score += 1;
     if (hour.precip_mm === 0) score += 0.5;
     if (hour.wind_kph < 25) score += 0.5;
     return score >= 4;
@@ -645,8 +640,8 @@ export function findOptimalWindows(
       windowEnd = null;
     } else {
       const nextHour = goodHours[i + 1];
-      const currentHour = parseInt(hour.time.split(':')[0]);
-      const nextHourNum = parseInt(nextHour.time.split(':')[0]);
+      const currentHour = parseInt(hour.time.split(":")[0]);
+      const nextHourNum = parseInt(nextHour.time.split(":")[0]);
 
       // Break if not consecutive
       if (nextHourNum - currentHour !== 1 && nextHourNum !== 0) {

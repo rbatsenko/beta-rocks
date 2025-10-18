@@ -48,6 +48,7 @@ temps-rocks/
 ## 2. CURRENT IMPLEMENTATION STATUS
 
 ### IMPLEMENTED ✓
+
 - **UI Framework**: Next.js 15 with React 18
 - **Styling**: Tailwind CSS + dark mode support (next-themes)
 - **Component Library**: shadcn/ui (50+ pre-built components)
@@ -59,11 +60,13 @@ temps-rocks/
 - **Database Schema**: Supabase types for crags, sectors, routes, reports, confirmations, user_profiles
 
 ### PARTIALLY IMPLEMENTED ⚠️
+
 - **Chat API** (/api/chat/route.ts): Accepts requests but returns mock responses
 - **Sync API** (/api/sync/[key]/route.ts): Endpoints defined but no Supabase integration
 - **Supabase Client**: Configured but not actively used
 
 ### NOT IMPLEMENTED ❌
+
 - AI/LLM integration (Gemini 2.5 Flash via Vercel AI SDK)
 - Real API calls to OpenBeta (crags/sectors/routes)
 - Real API calls to Open-Meteo (weather/forecast)
@@ -81,9 +84,11 @@ temps-rocks/
 ## 3. API ROUTES
 
 ### POST /api/chat
+
 **File**: `/Users/rbatsenko/Desktop/Projects/temps-rocks/src/app/api/chat/route.ts`
 
 **Current State**: Mock implementation
+
 - Accepts: `{ message: string, lang?: string, location?: { lat: number; lon: number } }`
 - Returns: `{ reply: string, chips: [], state: { location } }`
 - **TODOs**:
@@ -92,16 +97,20 @@ temps-rocks/
   - Add external API calls based on intent
 
 ### GET /api/sync/:key
+
 **File**: `/Users/rbatsenko/Desktop/Projects/temps-rocks/src/app/api/sync/[key]/route.ts`
 
 **Current State**: Stub implementation
+
 - Returns: `{ profile: null, crags: [], reports: [], confirmations: [] }`
 - **TODOs**:
   - Query Supabase for user data matching sync_key_hash
   - Validate sync key
 
 ### POST /api/sync/:key
+
 **Current State**: Stub implementation
+
 - Returns: `{ success: true, syncedAt: ISO timestamp }`
 - **TODOs**:
   - Implement conflict resolution via updatedAt timestamps
@@ -109,6 +118,7 @@ temps-rocks/
   - Handle sync key validation
 
 **Missing Endpoints**:
+
 - /api/conditions - Get crag conditions
 - /api/reports - Create/retrieve community reports
 - /api/reports/:id/confirm - Confirm a report
@@ -116,19 +126,22 @@ temps-rocks/
 ## 4. REACT COMPONENTS
 
 ### Page Components
+
 - **src/app/page.tsx** - Main homepage (uses ChatInterface, Features, Footer)
 - **src/app/layout.tsx** - Root layout with ThemeProvider and metadata
 
 ### Feature Components
-| Component | File | Status | Purpose |
-|-----------|------|--------|---------|
-| ChatInterface | src/components/ChatInterface.tsx | Partial | Chat UI with mock responses, example queries |
-| Features | src/components/Features.tsx | Complete | 6-feature showcase grid |
-| Footer | src/components/Footer.tsx | Complete | Footer with branding and links |
-| ThemeProvider | src/components/ThemeProvider.tsx | Complete | next-themes wrapper |
-| ThemeToggle | src/components/ThemeToggle.tsx | Complete | Dark/light mode button |
+
+| Component     | File                             | Status   | Purpose                                      |
+| ------------- | -------------------------------- | -------- | -------------------------------------------- |
+| ChatInterface | src/components/ChatInterface.tsx | Partial  | Chat UI with mock responses, example queries |
+| Features      | src/components/Features.tsx      | Complete | 6-feature showcase grid                      |
+| Footer        | src/components/Footer.tsx        | Complete | Footer with branding and links               |
+| ThemeProvider | src/components/ThemeProvider.tsx | Complete | next-themes wrapper                          |
+| ThemeToggle   | src/components/ThemeToggle.tsx   | Complete | Dark/light mode button                       |
 
 ### ChatInterface Details
+
 - State: messages, input, isLoading
 - Mock message handling (1s delay)
 - Example queries: "Siurana conditions tomorrow?", "Is El Pati dry this afternoon?", "Best sectors at Fontainebleau today?"
@@ -136,7 +149,9 @@ temps-rocks/
 - Uses UI components: Button, Input, Card, icons (Send, Loader2)
 
 ### shadcn/ui Components (50+ available)
+
 Located in `src/components/ui/`:
+
 - Layout: accordion, breadcrumb, card, carousel, drawer, sidebar, tabs
 - Forms: checkbox, input, label, radio-group, select, switch, textarea, toggle
 - Dialogs: alert-dialog, dialog, popover, tooltip, hover-card
@@ -147,21 +162,25 @@ Located in `src/components/ui/`:
 ## 5. LIBRARIES & DEPENDENCIES
 
 ### Core Framework
+
 - **next**: ^15.0.0 - React framework
 - **react**: ^18.3.1 - UI library
 - **react-dom**: ^18.3.1 - React DOM
 
 ### Database & Backend
+
 - **@supabase/supabase-js**: ^2.75.1 - Supabase client
 - **@tanstack/react-query**: ^5.83.0 - Server state management
 
 ### AI & LLM
+
 - **ai**: ^5.0.0 - Vercel AI SDK (not yet integrated)
 
 ### UI & Styling
+
 - **tailwindcss**: ^3.4.17 - Utility-first CSS
 - **next-themes**: ^0.3.0 - Dark mode support
-- **@radix-ui/***: 40+ components - Headless UI primitives
+- **@radix-ui/\***: 40+ components - Headless UI primitives
 - **shadcn/ui**: Built on Radix UI (components in src/components/ui/)
 - **lucide-react**: ^0.462.0 - Icon library
 - **clsx**: ^2.1.1 - Classname utility
@@ -169,11 +188,13 @@ Located in `src/components/ui/`:
 - **tailwindcss-animate**: ^1.0.7 - Animation utilities
 
 ### Forms & Validation
+
 - **react-hook-form**: ^7.61.1 - Form state management
 - **@hookform/resolvers**: ^3.10.0 - Form validation resolvers
 - **zod**: ^3.25.76 - TypeScript-first schema validation
 
 ### Utilities
+
 - **date-fns**: ^3.6.0 - Date manipulation
 - **sonner**: ^1.7.4 - Toast notifications
 - **vaul**: ^0.9.9 - Drawer component
@@ -186,6 +207,7 @@ Located in `src/components/ui/`:
 - **class-variance-authority**: ^0.7.1 - Component variants
 
 ### Development Tools
+
 - **typescript**: ^5.8.3 - TypeScript
 - **eslint**: ^9.32.0 - Linting
 - **tailwindcss**: ^3.4.17 - CSS framework
@@ -197,6 +219,7 @@ Located in `src/components/ui/`:
 ### Supabase Schema (from `/src/integrations/supabase/types.ts`)
 
 #### user_profiles
+
 ```typescript
 {
   id: string (PK)
@@ -208,6 +231,7 @@ Located in `src/components/ui/`:
 ```
 
 #### crags
+
 ```typescript
 {
   id: string (PK)
@@ -223,6 +247,7 @@ Located in `src/components/ui/`:
 ```
 
 #### sectors
+
 ```typescript
 {
   id: string (PK)
@@ -237,6 +262,7 @@ Located in `src/components/ui/`:
 ```
 
 #### routes
+
 ```typescript
 {
   id: string (PK)
@@ -249,6 +275,7 @@ Located in `src/components/ui/`:
 ```
 
 #### reports
+
 ```typescript
 {
   id: string (PK)
@@ -267,6 +294,7 @@ Located in `src/components/ui/`:
 ```
 
 #### confirmations
+
 ```typescript
 {
   id: string (PK)
@@ -279,20 +307,23 @@ Located in `src/components/ui/`:
 ## 7. CONFIGURATION FILES
 
 ### TypeScript (tsconfig.json)
+
 - Target: ES2017
 - Lib: ES2020, DOM, DOM.Iterable
 - Module: ESNext
 - Strict mode enabled for null checks
-- Path alias: @/* → ./src/*
+- Path alias: @/_ → ./src/_
 - Supports React JSX
 
 ### Next.js (next.config.ts)
+
 ```typescript
 - React strict mode: enabled
 - TypeScript: configured with tsconfig.json
 ```
 
 ### Tailwind (tailwind.config.ts)
+
 - Dark mode: class-based
 - Content: pages, components, app, src directories
 - Custom colors: primary, secondary, accent, muted, destructive
@@ -301,7 +332,9 @@ Located in `src/components/ui/`:
 - Custom transitions: transition-smooth, transition-bounce
 
 ### Design System (src/index.css)
+
 **Light Mode (Root)**:
+
 - Background: Warm beige (35° 20% 96%)
 - Foreground: Dark brown (20° 15% 15%)
 - Primary: Terracotta (15° 65% 55%)
@@ -309,6 +342,7 @@ Located in `src/components/ui/`:
 - Accent: Sky blue (200° 75% 55%)
 
 **Dark Mode**:
+
 - Background: Very dark (20° 20% 10%)
 - Foreground: Off-white (35° 10% 95%)
 - Primary: Lighter terracotta (15° 70% 60%)
@@ -316,6 +350,7 @@ Located in `src/components/ui/`:
 - Accent: Lighter blue (200° 70% 50%)
 
 ### Environment Variables (.env.example)
+
 ```
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-anon-key
@@ -324,17 +359,18 @@ AI_PROVIDER=google
 ```
 
 ### ESLint (eslint.config.mjs)
+
 - Uses TypeScript-ESLint
 - React Hooks plugin
 
 ## 8. MISSING/TODO FEATURES FOR MVP
 
 ### High Priority - Core Functionality
+
 - [ ] **Gemini 2.5 Flash Integration** - LLM for chat interface
   - File: `/src/app/api/chat/route.ts` (line 14, 27-29)
   - Use Vercel AI SDK to process messages
   - Implement intent classification
-  
 - [ ] **Weather Integration** - Open-Meteo API
   - Missing: Get hourly forecast for lat/lon
   - Missing: Parse temperature, humidity, wind, rain, sun hours
@@ -362,6 +398,7 @@ AI_PROVIDER=google
   - Missing: Prevent duplicate confirmations
 
 ### Medium Priority - Sync & Offline
+
 - [ ] **Sync Key Generation** - Random UUID/nanoid
   - Missing: Generate unique key per user
   - Missing: Hash for secure storage
@@ -383,6 +420,7 @@ AI_PROVIDER=google
   - Missing: Report display on share page
 
 ### Low Priority - Polish & Features
+
 - [ ] **Profanity Filter** - For community reports
 - [ ] **Rate Limiting** - By sync key/IP
 - [ ] **Photo Upload** - For reports
@@ -394,25 +432,27 @@ AI_PROVIDER=google
 ## 9. FILE PATHS REFERENCE
 
 ### Core Application Files
-| File | Purpose |
-|------|---------|
-| `/src/app/page.tsx` | Main homepage |
-| `/src/app/layout.tsx` | Root layout |
-| `/src/app/api/chat/route.ts` | Chat endpoint (90% TODO) |
-| `/src/app/api/sync/[key]/route.ts` | Sync endpoints (80% TODO) |
-| `/src/components/ChatInterface.tsx` | Chat UI (mock) |
-| `/src/components/Features.tsx` | Features section |
-| `/src/components/Footer.tsx` | Footer |
-| `/src/integrations/supabase/client.ts` | Supabase client |
-| `/src/integrations/supabase/types.ts` | DB types (auto-generated) |
-| `/src/index.css` | Design system & Tailwind |
-| `/docs/PRD.md` | Product requirements |
-| `/next.config.ts` | Next.js config |
-| `/tsconfig.json` | TypeScript config |
-| `/tailwind.config.ts` | Tailwind config |
-| `/package.json` | Dependencies & scripts |
+
+| File                                   | Purpose                   |
+| -------------------------------------- | ------------------------- |
+| `/src/app/page.tsx`                    | Main homepage             |
+| `/src/app/layout.tsx`                  | Root layout               |
+| `/src/app/api/chat/route.ts`           | Chat endpoint (90% TODO)  |
+| `/src/app/api/sync/[key]/route.ts`     | Sync endpoints (80% TODO) |
+| `/src/components/ChatInterface.tsx`    | Chat UI (mock)            |
+| `/src/components/Features.tsx`         | Features section          |
+| `/src/components/Footer.tsx`           | Footer                    |
+| `/src/integrations/supabase/client.ts` | Supabase client           |
+| `/src/integrations/supabase/types.ts`  | DB types (auto-generated) |
+| `/src/index.css`                       | Design system & Tailwind  |
+| `/docs/PRD.md`                         | Product requirements      |
+| `/next.config.ts`                      | Next.js config            |
+| `/tsconfig.json`                       | TypeScript config         |
+| `/tailwind.config.ts`                  | Tailwind config           |
+| `/package.json`                        | Dependencies & scripts    |
 
 ### Key Lines with TODOs
+
 - `/src/app/api/chat/route.ts:14` - "TODO: Implement Gemini 2.5 Flash"
 - `/src/app/api/chat/route.ts:27` - "TODO: Call Gemini 2.5 Flash API"
 - `/src/app/api/chat/route.ts:28` - "TODO: Implement intent classification"
@@ -425,6 +465,7 @@ AI_PROVIDER=google
 ## 10. QUICK START GUIDE
 
 ### Development
+
 ```bash
 npm install
 npm run dev
@@ -432,6 +473,7 @@ npm run dev
 ```
 
 ### Build & Deploy
+
 ```bash
 npm run build
 npm start
@@ -439,11 +481,13 @@ npm start
 ```
 
 ### Type Checking
+
 ```bash
 npm run type-check
 ```
 
 ### Linting
+
 ```bash
 npm run lint
 ```

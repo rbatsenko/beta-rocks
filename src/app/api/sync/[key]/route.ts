@@ -22,10 +22,7 @@ async function handleGet(_key: string) {
     });
   } catch (error) {
     console.error("Sync GET error:", error);
-    return NextResponse.json(
-      { error: "Failed to retrieve data" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to retrieve data" }, { status: 500 });
   }
 }
 
@@ -48,25 +45,16 @@ async function handlePost(_key: string, _body: any) {
     });
   } catch (error) {
     console.error("Sync POST error:", error);
-    return NextResponse.json(
-      { error: "Failed to sync data" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to sync data" }, { status: 500 });
   }
 }
 
-export async function GET(
-  _request: NextRequest,
-  { params }: { params: Promise<{ key: string }> }
-) {
+export async function GET(_request: NextRequest, { params }: { params: Promise<{ key: string }> }) {
   const { key } = await params;
   return handleGet(key);
 }
 
-export async function POST(
-  request: NextRequest,
-  { params }: { params: Promise<{ key: string }> }
-) {
+export async function POST(request: NextRequest, { params }: { params: Promise<{ key: string }> }) {
   const { key } = await params;
   const body = await request.json();
   return handlePost(key, body);
