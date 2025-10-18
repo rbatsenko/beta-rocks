@@ -326,14 +326,29 @@ const ChatInterface = () => {
                   );
                 })
               )}
-              {isLoading && (
-                <div className="flex justify-start">
-                  <div className="bg-muted rounded-2xl px-4 py-3 flex items-center gap-2">
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>{t('chat.thinking')}</span>
+              {isLoading && (() => {
+                // Check if any message has an executing tool
+                const hasExecutingTool = messages.some(message =>
+                  message.role === "assistant" && message.parts.some(
+                    (part) => part.type.startsWith("tool-") && "state" in part && part.state !== "output-available"
+                  )
+                );
+
+                // Only show "Thinking..." if no tool is currently executing
+                // (when a tool is executing, we already show "Analyzing conditions...")
+                if (hasExecutingTool) {
+                  return null;
+                }
+
+                return (
+                  <div className="flex justify-start">
+                    <div className="bg-muted rounded-2xl px-4 py-3 flex items-center gap-2">
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>{t('chat.thinking')}</span>
+                    </div>
                   </div>
-                </div>
-              )}
+                );
+              })()}
             </ConversationContent>
             <ConversationScrollButton />
           </Conversation>
