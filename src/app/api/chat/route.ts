@@ -1,4 +1,4 @@
-import { streamText, tool, stepCountIs, convertToModelMessages, UIMessage } from "ai";
+import { streamText, tool, stepCountIs, convertToModelMessages, UIMessage, smoothStream } from "ai";
 import { google } from "@ai-sdk/google";
 import { z } from "zod";
 import { searchLocationMultiple } from "@/lib/external-apis/geocoding";
@@ -251,6 +251,7 @@ export async function POST(req: Request) {
     messages: convertToModelMessages(messages),
     tools: tools,
     stopWhen: stepCountIs(5),
+    experimental_transform: smoothStream(),
   });
 
   return result.toUIMessageStreamResponse();
