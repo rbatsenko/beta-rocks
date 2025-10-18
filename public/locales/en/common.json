@@ -139,7 +139,8 @@
   },
   "ui": {
     "toggleTheme": "Toggle theme",
-    "selectLanguage": "Select language"
+    "selectLanguage": "Select language",
+    "aboutApp": "About app"
   },
   "dialog": {
     "close": "Close",

@@ -139,7 +139,8 @@
   },
   "ui": {
     "toggleTheme": "Przełącz motyw",
-    "selectLanguage": "Wybierz język"
+    "selectLanguage": "Wybierz język",
+    "aboutApp": "O aplikacji"
   },
   "dialog": {
     "close": "Zamknij",

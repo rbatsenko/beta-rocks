@@ -5,7 +5,7 @@ import { useChat } from "@ai-sdk/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send, Loader2, CloudSun, Sun } from "lucide-react";
+import { Send, Loader2, CloudSun, Sun, Info } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
@@ -20,6 +20,7 @@ import {
 import { ConditionsDetailDialog } from "@/components/ConditionsDetailDialog";
 import { WeatherConditionCard } from "@/components/WeatherConditionCard";
 import { DisambiguationOptions } from "@/components/DisambiguationOptions";
+import { FeaturesDialog } from "@/components/FeaturesDialog";
 
 interface ConditionsData {
   location: string;
@@ -102,6 +103,7 @@ const ChatInterface = () => {
   const { messages, sendMessage, status } = useChat();
   const [detailsDialogOpen, setDetailsDialogOpen] = useState(false);
   const [selectedConditions, setSelectedConditions] = useState<ConditionsData | null>(null);
+  const [featuresDialogOpen, setFeaturesDialogOpen] = useState(false);
 
   // Get translation functions (memoized)
   const translations = useConditionsTranslations(t);
@@ -181,6 +183,15 @@ const ChatInterface = () => {
               <h1 className="text-xl font-bold">{t('header.title')}</h1>
             </Link>
             <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => setFeaturesDialogOpen(true)}
+                className="rounded-full"
+              >
+                <Info className="h-5 w-5" />
+                <span className="sr-only">{t('ui.aboutApp')}</span>
+              </Button>
               <LanguageSelector />
               <ThemeToggle />
             </div>
@@ -378,6 +389,12 @@ const ChatInterface = () => {
           data={selectedConditions}
         />
       )}
+
+      {/* Features / About App Dialog */}
+      <FeaturesDialog
+        open={featuresDialogOpen}
+        onOpenChange={setFeaturesDialogOpen}
+      />
     </>
   );
 };
