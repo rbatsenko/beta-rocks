@@ -546,9 +546,14 @@ export function findOptimalWindowsEnhanced(hourlyConditions: HourlyCondition[]):
       const avgScore =
         window.hours.reduce((sum, h) => sum + h.frictionScore, 0) /
         window.hours.length;
+
+      // Calculate end time by adding 1 hour to the last hour's time
+      const lastHourTime = new Date(window.hours[window.hours.length - 1].time);
+      lastHourTime.setHours(lastHourTime.getHours() + 1);
+
       windows.push({
         startTime: window.hours[0].time,
-        endTime: window.hours[window.hours.length - 1].time,
+        endTime: lastHourTime.toISOString(),
         avgFrictionScore: Math.round(avgScore * 10) / 10,
         rating: scoreToRating(avgScore),
         hourCount: window.hours.length,

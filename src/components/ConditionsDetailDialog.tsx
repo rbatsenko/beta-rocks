@@ -67,6 +67,21 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
     }
   };
 
+  const formatWindowTime = (timestamp: string) => {
+    try {
+      const date = new Date(timestamp);
+      return date.toLocaleString("en-US", {
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      });
+    } catch {
+      return timestamp;
+    }
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-3xl max-h-[85vh]">
@@ -183,7 +198,7 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                           <Clock className="w-4 h-4 text-muted-foreground" />
                           <div>
                             <p className="font-medium">
-                              {window.startTime} - {window.endTime}
+                              {formatWindowTime(window.startTime)} - {formatWindowTime(window.endTime)}
                             </p>
                             <p className="text-xs text-muted-foreground">
                               {window.hourCount} hours
