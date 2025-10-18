@@ -22,12 +22,13 @@ const tools = {
         .optional()
         .describe("Type of rock at the crag"),
     }),
-    execute: async ({ location, latitude, longitude, rockType }) => {
+    execute: async ({ location, latitude, longitude, rockType, timeframe }) => {
       console.log("[get_conditions] Starting tool execution:", {
         location,
         latitude,
         longitude,
         rockType,
+        timeframe,
       });
 
       let lat = latitude;
@@ -90,11 +91,21 @@ const tools = {
               console.log(
                 "[get_conditions] Multiple crags found, returning disambiguation"
               );
+
+              // Sort by popularity (number of climbs) - more popular crags first
+              const sortedCrags = [...crags].sort((a, b) => {
+                const aClimbCount = (a.climbs?.length || 0) + (a.children?.length || 0);
+                const bClimbCount = (b.climbs?.length || 0) + (b.children?.length || 0);
+                return bClimbCount - aClimbCount; // Descending order
+              });
+
               return {
                 disambiguate: true,
                 source: "openbeta",
                 message: `Found ${crags.length} climbing areas for "${location}". Please choose one:`,
-                options: crags.map((crag) => ({
+                translationKey: "disambiguation.foundMultipleAreas",
+                translationParams: { count: crags.length, location },
+                options: sortedCrags.map((crag) => ({
                   id: crag.uuid,
                   name: crag.area_name,
                   location: formatAreaPath(crag),
@@ -144,6 +155,8 @@ const tools = {
                 disambiguate: true,
                 source: "geocoding",
                 message: `Found multiple locations for "${location}". Please choose one:`,
+                translationKey: "disambiguation.foundMultipleLocations",
+                translationParams: { location },
                 options: geocodedMultiple.map((result) => {
                   // Build location string with region and country
                   const locationParts = [];
@@ -201,7 +214,7 @@ const tools = {
         });
 
         // Call the weather API directly instead of making an HTTP request
-        const forecast = await getWeatherForecast(lat, lon, 7);
+        const forecast = await getWeatherForecast(lat, lon, 14);
 
         console.log("[get_conditions] Weather forecast received:", {
           location,
@@ -217,13 +230,14 @@ const tools = {
           };
         }
 
-        // Prepare hourly data
+        // Prepare hourly data with weather codes
         const hourlyData = forecast.hourly.map((h) => ({
           time: h.time,
           temp_c: h.temperature,
           humidity: h.humidity,
           wind_kph: h.windSpeed,
           precip_mm: h.precipitation,
+          weatherCode: h.weatherCode,
         }));
 
         // Compute conditions
@@ -250,6 +264,7 @@ const tools = {
         return {
           location,
           locationDetails, // Add region/country or OpenBeta path
+          timeframe: timeframe || "now", // Add timeframe to response
           rating: conditions.rating,
           frictionScore: conditions.frictionRating,
           reasons: conditions.reasons,
@@ -268,6 +283,22 @@ const tools = {
             precipitation_mm: forecast.current.precipitation,
             weatherCode: forecast.current.weatherCode,
           },
+          // Include today's sunrise/sunset
+          astro: forecast.daily?.[0] ? {
+            sunrise: forecast.daily[0].sunrise,
+            sunset: forecast.daily[0].sunset,
+          } : undefined,
+          // Include full daily forecast
+          dailyForecast: forecast.daily?.map(day => ({
+            date: day.date,
+            tempMax: day.tempMax,
+            tempMin: day.tempMin,
+            precipitation: day.precipitation,
+            windSpeedMax: day.windSpeedMax,
+            sunrise: day.sunrise,
+            sunset: day.sunset,
+            weatherCode: day.weatherCode,
+          })),
         };
       } catch (error) {
         console.error("[get_conditions] Error:", {
@@ -319,7 +350,19 @@ const tools = {
 };
 
 export async function POST(req: Request) {
-  const { messages }: { messages: UIMessage[] } = await req.json();
+  const { messages, language }: { messages: UIMessage[]; language?: string } = await req.json();
+
+  // Map language codes to language names
+  const languageNames: Record<string, string> = {
+    en: 'English',
+    'en-GB': 'English',
+    pl: 'Polish',
+  };
+
+  const languageName = language && languageNames[language] ? languageNames[language] : 'English';
+  const languageInstruction = language && language !== 'en'
+    ? `\n\nIMPORTANT: Respond to the user in ${languageName}.`
+    : '';
 
   const result = streamText({
     model: google("gemini-2.5-flash"),
@@ -334,7 +377,7 @@ export async function POST(req: Request) {
 
       IMPORTANT: When a tool returns results (disambiguation options, condition data, etc.), DO NOT provide any text response.
       The UI will automatically render all tool results as interactive components.
-      Only provide text responses when the tool returns an error or when greeting/chatting with the user.`,
+      Only provide text responses when the tool returns an error or when greeting/chatting with the user.${languageInstruction}`,
     messages: convertToModelMessages(messages),
     tools: tools,
     stopWhen: stepCountIs(5),

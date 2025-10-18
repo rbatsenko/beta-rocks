@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Send, Loader2, Sun, Info, CloudSun } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { LanguageSelector } from "@/components/LanguageSelector";
+import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { Message, MessageContent } from "@/components/ai-elements/message";
 import { Response } from "@/components/ai-elements/response";
 import {
@@ -15,10 +17,12 @@ import {
   ConversationScrollButton,
 } from "@/components/ai-elements/conversation";
 import { ConditionsDetailDialog } from "@/components/ConditionsDetailDialog";
+import { getWeatherEmoji, getWeatherDescription } from "@/lib/utils/weather-emojis";
 
 interface ConditionsData {
   location: string;
   locationDetails?: string; // Optional region/country or path info
+  timeframe?: string; // Optional timeframe (e.g., "now", "tomorrow", "this afternoon")
   rating: string;
   frictionScore: number;
   reasons?: string[];
@@ -42,6 +46,7 @@ interface ConditionsData {
     rating: string;
     isDry: boolean;
     warnings: string[];
+    weatherCode?: number;
   }>;
   optimalWindows?: Array<{
     startTime: string;
@@ -57,11 +62,27 @@ interface ConditionsData {
   };
   dewPointSpread?: number;
   optimalTime?: string;
+  astro?: {
+    sunrise: string;
+    sunset: string;
+  };
+  dailyForecast?: Array<{
+    date: string;
+    tempMax: number;
+    tempMin: number;
+    precipitation: number;
+    windSpeedMax: number;
+    sunrise: string;
+    sunset: string;
+    weatherCode: number;
+  }>;
 }
 
 interface DisambiguationResult {
   disambiguate: true;
   message: string;
+  translationKey?: string;
+  translationParams?: Record<string, string | number>;
   source?: string;
   options: Array<{
     id: string;
@@ -74,16 +95,32 @@ interface DisambiguationResult {
 }
 
 const ChatInterface = () => {
+  const { t, language } = useClientTranslation('common');
   const [input, setInput] = useState("");
   const { messages, sendMessage } = useChat();
   const isLoading = messages.length > 0 && messages[messages.length - 1].role === "user";
   const [detailsDialogOpen, setDetailsDialogOpen] = useState(false);
   const [selectedConditions, setSelectedConditions] = useState<ConditionsData | null>(null);
 
+  // Helper to detect if it's night time (7pm-7am)
+  const isNightTime = (dateOrHour: Date | number): boolean => {
+    const hour = typeof dateOrHour === 'number' ? dateOrHour : dateOrHour.getHours();
+    return hour >= 19 || hour < 7;
+  };
+
   const exampleQueries = [
-    "Siurana conditions tomorrow?",
-    "Is El Pati dry this afternoon?",
-    "El Capitan conditions today?",
+    {
+      display: t('welcome.exampleQueries.query1.display'),
+      query: t('welcome.exampleQueries.query1.query'),
+    },
+    {
+      display: t('welcome.exampleQueries.query2.display'),
+      query: t('welcome.exampleQueries.query2.query'),
+    },
+    {
+      display: t('welcome.exampleQueries.query3.display'),
+      query: t('welcome.exampleQueries.query3.query'),
+    },
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -92,25 +129,42 @@ const ChatInterface = () => {
 
     const userMessage = input.trim();
     setInput("");
-    sendMessage({ text: userMessage });
+    sendMessage(
+      { text: userMessage },
+      {
+        body: {
+          language: language,
+        },
+      }
+    );
   };
 
-  const handleExampleClick = (query: string) => {
+  const handleExampleClick = (queryText: string) => {
     setInput("");
-    sendMessage({ text: query });
+    sendMessage(
+      { text: queryText },
+      {
+        body: {
+          language: language,
+        },
+      }
+    );
   };
 
   return (
     <>
-      <div className="flex flex-col h-screen">
+      <div className="flex flex-col h-dvh">
         {/* Header */}
         <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
           <div className="container flex h-16 items-center justify-between px-4">
             <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
               <CloudSun className="w-6 h-6 text-orange-500" />
-              <h1 className="text-xl font-bold">temps.rocks</h1>
+              <h1 className="text-xl font-bold">{t('header.title')}</h1>
             </Link>
-            <ThemeToggle />
+            <div className="flex items-center gap-2">
+              <LanguageSelector />
+              <ThemeToggle />
+            </div>
           </div>
         </header>
 
@@ -123,20 +177,20 @@ const ChatInterface = () => {
                   <div className="w-20 h-20 rounded-full bg-gradient-to-br from-orange-500/20 to-orange-600/20 flex items-center justify-center mb-6">
                     <CloudSun className="w-10 h-10 text-orange-500" />
                   </div>
-                  <h2 className="text-3xl font-bold mb-3">Ask about climbing conditions</h2>
+                  <h2 className="text-3xl font-bold mb-3">{t('welcome.heading')}</h2>
                   <p className="text-muted-foreground mb-8 max-w-md text-base">
-                    Get real-time weather, friction analysis, and optimal climbing windows for any crag worldwide
+                    {t('welcome.description')}
                   </p>
                   <div className="flex flex-wrap gap-2 justify-center max-w-lg">
-                    {exampleQueries.map((query, idx) => (
+                    {exampleQueries.map((example, idx) => (
                       <Button
                         key={idx}
                         variant="outline"
                         size="sm"
-                        onClick={() => handleExampleClick(query)}
+                        onClick={() => handleExampleClick(example.query)}
                         className="transition-smooth hover:scale-105"
                       >
-                        {query}
+                        {example.display}
                       </Button>
                     ))}
                   </div>
@@ -157,7 +211,7 @@ const ChatInterface = () => {
                     <Message key={message.id} from={message.role}>
                       <MessageContent
                         variant={message.role === "assistant" ? "flat" : "contained"}
-                        className={message.role === "user" ? "bg-gradient-to-br from-orange-100 to-orange-50 dark:from-orange-950/50 dark:to-orange-900/30 border-orange-200 dark:border-orange-800/50 shadow-sm" : ""}
+                        className={message.role === "user" ? "bg-gradient-to-br from-orange-500 to-orange-400 dark:from-orange-950/50 dark:to-orange-900/30 border-orange-600 dark:border-orange-800/50 shadow-md text-orange-950 dark:text-inherit" : ""}
                       >
                         {hasExecutingTool && !hasContent && (
                           <div className="flex items-center gap-3 py-1">
@@ -166,7 +220,7 @@ const ChatInterface = () => {
                               <div className="w-2 h-2 bg-orange-500 rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></div>
                               <div className="w-2 h-2 bg-orange-500 rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></div>
                             </div>
-                            <span className="text-sm text-muted-foreground">Analyzing conditions...</span>
+                            <span className="text-sm text-muted-foreground">{t('chat.analyzing')}</span>
                           </div>
                         )}
                         {message.parts.map((part, i) => {
@@ -185,9 +239,13 @@ const ChatInterface = () => {
 
                             // Handle disambiguation results
                             if ("disambiguate" in result && result.disambiguate) {
+                              const displayMessage = result.translationKey && result.translationParams
+                                ? t(result.translationKey, result.translationParams)
+                                : result.message;
+
                               return (
                                 <div key={i} className="mt-3 space-y-2">
-                                  <p className="text-sm font-medium">{result.message}</p>
+                                  <p className="text-sm font-medium">{displayMessage}</p>
                                   <div className="flex flex-wrap gap-2 overflow-visible">
                                     {result.options.map((option, idx) => (
                                       <Button
@@ -195,10 +253,19 @@ const ChatInterface = () => {
                                         variant="outline"
                                         size="sm"
                                         onClick={() => {
-                                          const rockTypePart = option.rockType ? ` ${option.rockType}` : "";
-                                          sendMessage({
-                                            text: `conditions at ${option.name}${rockTypePart} (${option.latitude}, ${option.longitude})`,
+                                          const queryText = t('disambiguation.queryTemplate', {
+                                            name: option.name + (option.rockType ? ` ${option.rockType}` : ""),
+                                            latitude: option.latitude,
+                                            longitude: option.longitude,
                                           });
+                                          sendMessage(
+                                            { text: queryText },
+                                            {
+                                              body: {
+                                                language: language,
+                                              },
+                                            }
+                                          );
                                         }}
                                         className="flex flex-col items-start h-auto py-2 px-3 overflow-visible animate-in fade-in slide-in-from-bottom-2 duration-500"
                                         style={{ animationDelay: `${idx * 100}ms` }}
@@ -226,20 +293,42 @@ const ChatInterface = () => {
                                 key={i}
                                 className="mt-3 bg-muted/50 rounded-lg p-4 space-y-3 border border-border"
                               >
-                                <div className="flex items-start justify-between">
+                                <div className="flex items-start justify-between gap-3">
+                                  {/* Weather emoji display */}
+                                  {conditionsResult.current?.weatherCode !== undefined && (
+                                    <div className="shrink-0">
+                                      <div
+                                        className="text-4xl"
+                                        title={getWeatherDescription(conditionsResult.current.weatherCode)}
+                                      >
+                                        {getWeatherEmoji(conditionsResult.current.weatherCode, isNightTime(new Date()))}
+                                      </div>
+                                    </div>
+                                  )}
+
                                   <div className="space-y-2 flex-1">
                                     <div className="space-y-1">
                                       <div className="font-semibold text-base">
                                         🧗 {conditionsResult.location}
+                                        {conditionsResult.timeframe && conditionsResult.timeframe !== "now" && (
+                                          <span className="ml-2 text-xs font-normal text-muted-foreground">
+                                            ({conditionsResult.timeframe})
+                                          </span>
+                                        )}
                                       </div>
                                       {conditionsResult.locationDetails && (
                                         <div className="text-xs text-muted-foreground">
                                           📍 {conditionsResult.locationDetails}
                                         </div>
                                       )}
+                                      {conditionsResult.current?.weatherCode !== undefined && (
+                                        <div className="text-xs text-muted-foreground">
+                                          {getWeatherDescription(conditionsResult.current.weatherCode)}
+                                        </div>
+                                      )}
                                     </div>
                                     <div className="font-medium">
-                                      Rating: {conditionsResult.rating} ({conditionsResult.frictionScore}
+                                      {t('conditions.rating')}: {conditionsResult.rating} ({conditionsResult.frictionScore}
                                       /5)
                                     </div>
                                     {conditionsResult.warnings && conditionsResult.warnings.length > 0 && (
@@ -265,7 +354,7 @@ const ChatInterface = () => {
                                       }}
                                     >
                                       <Info className="w-4 h-4 mr-1" />
-                                      Details
+                                      {t('conditions.details')}
                                     </Button>
                                   )}
                                 </div>
@@ -277,7 +366,7 @@ const ChatInterface = () => {
                         })}
                       </MessageContent>
                       {message.role === "assistant" && (
-                        <div className="size-8 rounded-full bg-orange-500/10 flex items-center justify-center">
+                        <div className="size-8 shrink-0 rounded-full bg-orange-500/10 flex items-center justify-center">
                           <Sun className="size-5 text-orange-500" strokeWidth={2} />
                         </div>
                       )}
@@ -289,7 +378,7 @@ const ChatInterface = () => {
                 <div className="flex justify-start">
                   <div className="bg-muted rounded-2xl px-4 py-3 flex items-center gap-2">
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Thinking...</span>
+                    <span>{t('chat.thinking')}</span>
                   </div>
                 </div>
               )}
@@ -305,7 +394,7 @@ const ChatInterface = () => {
               <Input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask about any crag, sector, or route..."
+                placeholder={t('chat.inputPlaceholder')}
                 className="flex-1"
                 disabled={isLoading}
               />
@@ -320,11 +409,11 @@ const ChatInterface = () => {
             {/* Footer Links */}
             <div className="flex items-center justify-center gap-4 mt-3 text-xs text-muted-foreground">
               <a href="#" className="hover:text-foreground transition-colors">
-                About
+                {t('footer.about')}
               </a>
               <span>•</span>
               <a href="#" className="hover:text-foreground transition-colors">
-                Privacy
+                {t('footer.privacy')}
               </a>
               <span>•</span>
               <a
@@ -333,7 +422,7 @@ const ChatInterface = () => {
                 rel="noopener noreferrer"
                 className="hover:text-foreground transition-colors"
               >
-                GitHub
+                {t('footer.github')}
               </a>
             </div>
           </div>

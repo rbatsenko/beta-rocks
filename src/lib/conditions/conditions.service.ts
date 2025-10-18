@@ -31,6 +31,7 @@ export interface HourlyCondition {
   rating: "Nope" | "Poor" | "Fair" | "Good" | "Great";
   isDry: boolean;
   warnings: string[];
+  weatherCode?: number;
 }
 
 export interface OptimalWindow {
@@ -74,6 +75,7 @@ export interface WeatherForecast {
     humidity: number;
     wind_kph: number;
     precip_mm: number;
+    weatherCode?: number;
   }>;
 }
 
@@ -254,10 +256,10 @@ export function computeConditions(
 
   if (inOptimalTemp) {
     frictionScore += 1.5;
-    reasons.push(`Perfect temperature (${current.temp_c}°C)`);
+    reasons.push(`Perfect temperature (${Math.round(current.temp_c)}°C)`);
   } else if (tooHot) {
     frictionScore -= 1.5;
-    warnings.push(`Too warm for ${rockType} (${current.temp_c}°C)`);
+    warnings.push(`Too warm for ${rockType} (${Math.round(current.temp_c)}°C)`);
     reasons.push("Temperature too high - fingers may slip");
   } else if (tooCold) {
     if (rockType === "granite" || rockType === "gneiss") {
@@ -280,7 +282,7 @@ export function computeConditions(
     reasons.push(`Ideal humidity (${current.humidity}%)`);
   } else if (highHumidity) {
     frictionScore -= 1.5;
-    warnings.push(`High humidity (${current.humidity}%) - rock will be slippery`);
+    warnings.push(`High humidity (${current.humidity}%) - rock can be slippery`);
   } else if (lowHumidity && (rockType === "granite" || rockType === "gneiss")) {
     frictionScore += 0.5;
     reasons.push("Low humidity aids friction on granite");
@@ -294,7 +296,11 @@ export function computeConditions(
   if (isCurrentlyWet) {
     frictionScore = Math.min(frictionScore, 1.5);
     dryingTimeHours = baseDryingHours;
-    warnings.push("Rock is currently wet - dangerous to climb");
+    if (rockType === "sandstone") {
+      warnings.push("Rock is currently wet - dangerous to climb (sandstone becomes weak when wet)");
+    } else {
+      warnings.push("Rock is currently wet - slippery conditions");
+    }
   } else if (hasRecentPrecip) {
     const penalty = calculateWeatherAwareDryingPenalty(
       recentPrecipitationMm,
@@ -399,13 +405,13 @@ function computeHourlyFrictionScore(
     score += 1.5;
   } else if (hour.temp_c > optimalTemp.max) {
     score -= 1.5;
-    warnings.push(`Too warm (${hour.temp_c}°C)`);
+    warnings.push(`Too warm (${Math.round(hour.temp_c)}°C)`);
   } else if (hour.temp_c < optimalTemp.min) {
     if (rockType === "granite" || rockType === "gneiss") {
       score += 1;
     } else {
       score -= 0.5;
-      warnings.push(`Cold (${hour.temp_c}°C)`);
+      warnings.push(`Cold (${Math.round(hour.temp_c)}°C)`);
     }
   }
 
@@ -428,7 +434,11 @@ function computeHourlyFrictionScore(
 
   if (isCurrentlyWet) {
     score = Math.min(score, 1.5);
-    warnings.push("Currently wet");
+    if (rockType === "sandstone") {
+      warnings.push("Currently wet - dangerous");
+    } else {
+      warnings.push("Currently wet");
+    }
   } else if (hasRecentPrecip) {
     const penalty = calculateWeatherAwareDryingPenalty(
       recentPrecipMm,
@@ -476,6 +486,7 @@ export function computeHourlyConditions(
     humidity: number;
     wind_kph: number;
     precip_mm: number;
+    weatherCode?: number;
   }>,
   rockType: RockType = "unknown",
   recentPrecipMm: number = 0
@@ -494,6 +505,7 @@ export function computeHourlyConditions(
       isOptimal: score >= 4,
       isDry,
       warnings,
+      weatherCode: hour.weatherCode,
     };
   });
 }
@@ -547,8 +559,7 @@ export function findOptimalWindowsEnhanced(hourlyConditions: HourlyCondition[]):
   const closeWindow = (window: WindowInProgress) => {
     if (window.hours.length >= 2) {
       const avgScore =
-        window.hours.reduce((sum, h) => sum + h.frictionScore, 0) /
-        window.hours.length;
+        window.hours.reduce((sum, h) => sum + h.frictionScore, 0) / window.hours.length;
 
       // Calculate end time by adding 1 hour to the last hour's time
       const lastHourTime = new Date(window.hours[window.hours.length - 1].time);

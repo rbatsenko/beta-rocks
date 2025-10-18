@@ -1,0 +1,98 @@
+{
+  "header": {
+    "title": "temps.rocks"
+  },
+  "welcome": {
+    "heading": "Ask about climbing conditions",
+    "description": "Get real-time weather, friction analysis, and optimal climbing windows for any crag worldwide",
+    "exampleQueries": {
+      "query1": {
+        "display": "Little Cottonwood Canyon conditions tomorrow?",
+        "query": "Little Cottonwood Canyon conditions tomorrow?"
+      },
+      "query2": {
+        "display": "Is Rifle dry this afternoon?",
+        "query": "Is Rifle dry this afternoon?"
+      },
+      "query3": {
+        "display": "El Capitan conditions today?",
+        "query": "El Capitan conditions today?"
+      }
+    }
+  },
+  "chat": {
+    "analyzing": "Analyzing conditions...",
+    "thinking": "Thinking...",
+    "inputPlaceholder": "Ask about any crag, sector, or route..."
+  },
+  "conditions": {
+    "rating": "Rating",
+    "details": "Details",
+    "location": "Location"
+  },
+  "disambiguation": {
+    "foundMultipleAreas": "Found {{count}} climbing areas for \"{{location}}\". Please choose one:",
+    "foundMultipleLocations": "Found multiple locations for \"{{location}}\". Please choose one:",
+    "queryTemplate": "conditions at {{name}} ({{latitude}}, {{longitude}})"
+  },
+  "footer": {
+    "about": "About",
+    "privacy": "Privacy",
+    "github": "GitHub"
+  },
+  "dialog": {
+    "close": "Close",
+    "detailedConditions": "Detailed Conditions",
+    "fullAnalysis": "Full weather analysis and climbing conditions forecast",
+    "tabs": {
+      "overview": "Overview",
+      "hourly": "Hourly",
+      "daily": "14-Day"
+    },
+    "currentRating": "Current Rating",
+    "currentConditions": "Current Conditions",
+    "currentWeather": "Current weather conditions",
+    "temperature": "Temperature",
+    "humidity": "Humidity",
+    "windSpeed": "Wind Speed",
+    "precipitation": "Precipitation",
+    "sunrise": "Sunrise",
+    "sunset": "Sunset",
+    "high": "High",
+    "low": "Low",
+    "rain": "Rain",
+    "wind": "Wind",
+    "dry": "Dry",
+    "wet": "Wet",
+    "precipitationContext": "Precipitation Context",
+    "last24h": "Last 24h",
+    "last48h": "Last 48h",
+    "next24h": "Next 24h",
+    "dewPointSpread": "Dew Point Spread (condensation risk)",
+    "lowRisk": "✅ Low risk - rock should stay dry",
+    "moderateRisk": "⚠️ Moderate risk - watch for moisture",
+    "highRisk": "❌ High risk - condensation likely",
+    "optimalWindows": "Optimal Climbing Windows",
+    "nextDays": "Next 5 days",
+    "bestTime": "🌟 Best time",
+    "noOptimalConditions": "No optimal conditions in the next 5 days",
+    "checkHourlyForecast": "Check hourly forecast for more details",
+    "weatherDisclaimer": "⚠️ Weather conditions can change rapidly. Always monitor forecasts before heading out and check conditions on arrival.",
+    "window": "window",
+    "windows": "windows",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "showCompleteTimeline": "Show complete timeline",
+    "hour": "hour",
+    "hours": "hours",
+    "noHourlyData": "No hourly forecast data available",
+    "noDailyData": "No daily forecast data available",
+    "noOptimalHours": "No optimal conditions on",
+    "forecastIndicators": "Forecast Indicators:",
+    "goodClimbingWindows": "Good climbing windows",
+    "fairConditions": "Fair conditions",
+    "poorConditions": "Poor conditions",
+    "lessReliable": "Days 8-14: Less reliable forecast",
+    "lessCertain": "LESS CERTAIN"
+  }
+}

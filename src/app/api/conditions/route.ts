@@ -62,13 +62,14 @@ export async function GET(request: NextRequest) {
       throw new Error("Invalid forecast data structure");
     }
 
-    // Prepare hourly data with timestamps
+    // Prepare hourly data with timestamps and weather codes
     const hourlyData = forecast.hourly.map((h) => ({
       time: h.time, // Keep ISO timestamp for precipitation context calculation
       temp_c: h.temperature,
       humidity: h.humidity,
       wind_kph: h.windSpeed,
       precip_mm: h.precipitation,
+      weatherCode: h.weatherCode,
     }));
 
     // Compute conditions with enhanced data (hourly conditions, optimal windows, etc.)
@@ -85,16 +86,6 @@ export async function GET(request: NextRequest) {
       rockType,
       recentPrecipMm
     );
-
-    // Format hourly conditions for response (convert ISO timestamps to readable format)
-    const formattedHourlyConditions = conditions.hourlyConditions?.map((h) => ({
-      ...h,
-      time: new Date(h.time).toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-      }),
-    }));
 
     console.log("[Conditions API] Successfully computed conditions:", {
       latitude,
@@ -116,8 +107,13 @@ export async function GET(request: NextRequest) {
       },
       conditions: {
         ...conditions,
-        hourlyConditions: formattedHourlyConditions,
+        // Keep ISO timestamps - formatting happens in UI
       },
+      // Include today's sunrise/sunset from daily forecast
+      astro: forecast.daily?.[0] ? {
+        sunrise: forecast.daily[0].sunrise,
+        sunset: forecast.daily[0].sunset,
+      } : undefined,
       updatedAt: new Date().toISOString(),
     });
   } catch (error) {

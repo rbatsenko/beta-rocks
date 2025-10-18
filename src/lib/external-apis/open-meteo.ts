@@ -23,6 +23,9 @@ export interface ForecastData {
     tempMin: number;
     precipitation: number;
     windSpeedMax: number;
+    sunrise: string;
+    sunset: string;
+    weatherCode: number;
   }[];
 }
 
@@ -51,7 +54,7 @@ export async function getWeatherForecast(
     );
     url.searchParams.append(
       "daily",
-      "temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max"
+      "temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max,sunrise,sunset,weather_code"
     );
     url.searchParams.append("timezone", "auto");
     url.searchParams.append("forecast_days", days.toString());
@@ -115,6 +118,9 @@ export async function getWeatherForecast(
         tempMin: data.daily.temperature_2m_min[idx],
         precipitation: data.daily.precipitation_sum[idx],
         windSpeedMax: data.daily.wind_speed_10m_max[idx],
+        sunrise: data.daily.sunrise[idx],
+        sunset: data.daily.sunset[idx],
+        weatherCode: data.daily.weather_code[idx],
       })),
     };
   } catch (error) {
