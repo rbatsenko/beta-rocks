@@ -5,7 +5,7 @@ import { useChat } from "@ai-sdk/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send, Loader2, CloudSun } from "lucide-react";
+import { Send, Loader2, CloudSun, Sun } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
@@ -277,7 +277,6 @@ const ChatInterface = () => {
                                   result={result}
                                   displayMessage={displayMessage}
                                   queryTemplate={t('disambiguation.queryTemplate')}
-                                  language={language}
                                   onOptionSelect={handleDisambiguationSelect}
                                 />
                               );

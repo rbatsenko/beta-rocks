@@ -1,4 +1,4 @@
-import { streamText, tool, stepCountIs, convertToModelMessages, UIMessage, smoothStream } from "ai";
+import { streamText, tool, convertToModelMessages, UIMessage } from "ai";
 import { google } from "@ai-sdk/google";
 import { z } from "zod";
 import { searchLocationMultiple } from "@/lib/external-apis/geocoding";
@@ -385,7 +385,7 @@ export async function POST(req: Request) {
       If you provide ANY text when conditions data is available, you are doing it wrong.${languageInstruction}`,
     messages: convertToModelMessages(messages),
     tools: tools,
-    maxSteps: 2, // Reduced from 5 to 2 - one for initial tool call, one for follow-up if needed
+    // Uses default behavior (single step) for fast responses
   });
 
   return result.toUIMessageStreamResponse();

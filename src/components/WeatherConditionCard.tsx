@@ -105,16 +105,16 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
         )}
       </div>
 
-      {/* Warnings - full width */}
+      {/* Warnings - aligned with content on desktop */}
       {data.warnings && data.warnings.length > 0 && (
-        <div className="text-destructive font-semibold text-sm">
+        <div className={`text-destructive font-semibold text-sm ${data.current?.weatherCode !== undefined ? 'sm:pl-14' : ''}`}>
           ⚠️ {data.warnings.map(translateWarning).join(", ")}
         </div>
       )}
 
-      {/* Reasons - full width */}
+      {/* Reasons - aligned with content on desktop */}
       {data.reasons && data.reasons.length > 0 && (
-        <div className="text-sm opacity-80">
+        <div className={`text-sm opacity-80 ${data.current?.weatherCode !== undefined ? 'sm:pl-14' : ''}`}>
           {data.reasons.map(translateReason).join(", ")}
         </div>
       )}

@@ -23,7 +23,6 @@ interface DisambiguationOptionsProps {
   result: DisambiguationResult;
   displayMessage: string;
   queryTemplate: string;
-  language: string;
   onOptionSelect: (queryText: string) => void;
 }
 
@@ -31,7 +30,6 @@ export const DisambiguationOptions = memo(function DisambiguationOptions({
   result,
   displayMessage,
   queryTemplate,
-  language,
   onOptionSelect,
 }: DisambiguationOptionsProps) {
   const handleOptionClick = useCallback((option: DisambiguationOption) => {
