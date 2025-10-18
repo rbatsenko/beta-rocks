@@ -39,3 +39,6 @@ dist-ssr
 # Misc
 .turbo/
 coverage/
+
+.mcp.json
+.vercel

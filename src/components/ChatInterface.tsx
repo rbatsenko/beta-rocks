@@ -1,23 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useChat } from "@ai-sdk/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { Send, Loader2 } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { Send, Loader2, Sun } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
-
-interface Message {
-  role: "user" | "assistant";
-  content: string;
-}
+import { Message, MessageContent } from "@/components/ai-elements/message";
+import { Response } from "@/components/ai-elements/response";
+import {
+  Conversation,
+  ConversationContent,
+  ConversationScrollButton,
+} from "@/components/ai-elements/conversation";
 
 const ChatInterface = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
+  const { messages, sendMessage } = useChat();
+  const isLoading = messages.length > 0 && messages[messages.length - 1].role === "user";
 
   const exampleQueries = [
     "Siurana conditions tomorrow?",
@@ -25,38 +26,19 @@ const ChatInterface = () => {
     "Best sectors at Fontainebleau today?",
   ];
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim() || isLoading) return;
+    if (!input.trim()) return;
 
     const userMessage = input.trim();
     setInput("");
-    setMessages(prev => [...prev, { role: "user", content: userMessage }]);
-    setIsLoading(true);
-
-    try {
-      // TODO: Implement actual chat endpoint
-      // For now, mock response
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      setMessages(prev => [...prev, { 
-        role: "assistant", 
-        content: "Thanks for asking! I'm still learning about climbing conditions. Check back soon for real-time weather data, community reports, and route-specific conditions." 
-      }]);
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
-    }
+    sendMessage({ text: userMessage });
   };
 
   const handleExampleClick = (query: string) => {
-    setInput(query);
-  };
+    setInput("");
+    sendMessage({ text: query });
+  }
 
   return (
     <section id="chat-section" className="py-20 px-6 bg-gradient-earth">
@@ -71,9 +53,9 @@ const ChatInterface = () => {
           <ThemeToggle />
         </div>
 
-        <Card className="shadow-elevated">
-          {/* Messages */}
-          <div className="p-6 min-h-[400px] max-h-[600px] overflow-y-auto space-y-4">
+        <Card className="shadow-elevated h-[600px] flex flex-col">
+          <Conversation className="flex-1">
+            <ConversationContent className="p-6">
             {messages.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-center py-12">
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
@@ -98,22 +80,85 @@ const ChatInterface = () => {
                 </div>
               </div>
             ) : (
-              messages.map((message, idx) => (
-                <div
-                  key={idx}
-                  className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
-                >
-                  <div
-                    className={`max-w-[80%] rounded-2xl px-4 py-3 ${
-                      message.role === "user"
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-muted"
-                    }`}
-                  >
-                    {message.content}
-                  </div>
-                </div>
-              ))
+              messages.map((message) => {
+                const textParts = message.parts.filter((part: any) => part.type === "text");
+                const toolParts = message.parts.filter((part: any) => part.type !== "text" && part.type !== "error");
+
+                // Debug: log parts to see what we're getting
+                if (message.role === "assistant") {
+                  console.log('Message parts:', message.parts);
+                  console.log('Tool parts:', toolParts);
+                }
+
+                return (
+                  <Message key={message.id} from={message.role}>
+                    <MessageContent variant={message.role === "assistant" ? "flat" : "contained"}>
+                      {/* Render text parts with markdown */}
+                      {textParts.map((part: any, i: number) => (
+                        <Response key={i}>{part.text}</Response>
+                      ))}
+
+                      {/* Render tool results inline for assistant messages */}
+                      {message.role === "assistant" && toolParts.map((part: any, i: number) => {
+                        console.log('Processing tool part:', part.type, part);
+
+                        // In AI SDK v5, tool parts have type 'tool-${toolName}'
+                        if (part.type === "tool-get_conditions" || (part.type.startsWith?.('tool-') && part.toolName === "get_conditions")) {
+                          // Handle disambiguation results
+                          if (part.output?.disambiguate || part.result?.disambiguate) {
+                            const result = part.output || part.result;
+                            return (
+                              <div key={i} className="mt-3 space-y-2">
+                                <p className="text-sm font-medium">{result.message}</p>
+                                <div className="flex flex-wrap gap-2">
+                                  {result.options?.map((option: any) => (
+                                    <Button
+                                      key={option.id}
+                                      variant="outline"
+                                      size="sm"
+                                      onClick={() => {
+                                        sendMessage({
+                                          text: `conditions at ${option.name} (${option.latitude}, ${option.longitude})`,
+                                        });
+                                      }}
+                                      className="flex flex-col items-start h-auto py-2 px-3"
+                                    >
+                                      <span className="font-semibold text-sm">{option.name}</span>
+                                      <span className="text-xs opacity-70">{option.location}</span>
+                                    </Button>
+                                  ))}
+                                </div>
+                              </div>
+                            );
+                          }
+                          // Handle regular conditions results
+                          const result = part.output || part.result;
+                          return (
+                            <div key={i} className="mt-3 bg-muted/50 rounded-lg p-4 space-y-2 border border-border">
+                              <div className="font-semibold text-base">🧗 {result?.location}</div>
+                              <div className="font-medium">Rating: {result?.rating} ({result?.frictionScore}/5)</div>
+                              {result?.warnings && result.warnings.length > 0 && (
+                                <div className="text-destructive font-semibold text-sm">
+                                  ⚠️ {result.warnings.join(", ")}
+                                </div>
+                              )}
+                              {result?.reasons && result.reasons.length > 0 && (
+                                <div className="text-sm opacity-80">{result.reasons.join(", ")}</div>
+                              )}
+                            </div>
+                          );
+                        }
+                        return null;
+                      })}
+                    </MessageContent>
+                    {message.role === "assistant" && (
+                      <div className="size-8 rounded-full bg-orange-500/10 flex items-center justify-center">
+                        <Sun className="size-5 text-orange-500" strokeWidth={2} />
+                      </div>
+                    )}
+                  </Message>
+                );
+              })
             )}
             {isLoading && (
               <div className="flex justify-start">
@@ -123,10 +168,12 @@ const ChatInterface = () => {
                 </div>
               </div>
             )}
-          </div>
+            </ConversationContent>
+            <ConversationScrollButton />
+          </Conversation>
 
           {/* Input */}
-          <div className="border-t p-4">
+          <div className="border-t p-4 shrink-0">
             <form onSubmit={handleSubmit} className="flex gap-2">
               <Input
                 value={input}
