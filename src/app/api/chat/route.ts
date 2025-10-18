@@ -142,13 +142,20 @@ const tools = {
                 disambiguate: true,
                 source: "geocoding",
                 message: `Found multiple locations for "${location}". Please choose one:`,
-                options: geocodedMultiple.map((result) => ({
-                  id: `${result.latitude},${result.longitude}`,
-                  name: result.name,
-                  location: `${result.admin2 || result.admin1 || ""}, ${result.country}`.trim(),
-                  latitude: result.latitude,
-                  longitude: result.longitude,
-                })),
+                options: geocodedMultiple.map((result) => {
+                  // Build location string with region and country
+                  const locationParts = [];
+                  if (result.admin1) locationParts.push(result.admin1); // State/Region
+                  if (result.country) locationParts.push(result.country);
+
+                  return {
+                    id: `${result.latitude},${result.longitude}`,
+                    name: result.name,
+                    location: locationParts.join(", ") || "Unknown",
+                    latitude: result.latitude,
+                    longitude: result.longitude,
+                  };
+                }),
               };
             }
 
