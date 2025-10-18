@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo, memo } from "react";
 import {
   Dialog,
   DialogContent,
@@ -16,6 +16,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Cloud, Droplets, Wind, ThermometerSun, Clock, TrendingUp, Calendar, Sunrise, Sunset } from "lucide-react";
 import { getWeatherEmoji, getWeatherDescription } from "@/lib/utils/weather-emojis";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
+import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
 
 interface ConditionsDetailDialogProps {
   open: boolean;
@@ -79,58 +80,17 @@ interface ConditionsDetailDialogProps {
   };
 }
 
-export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsDetailDialogProps) {
+export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsDetailDialogProps) {
   const { t } = useClientTranslation('common');
   const [activeTab, setActiveTab] = useState("overview");
+
+  // Get memoized translation functions
+  const { translateRating, translateWeather } = useConditionsTranslations(t);
 
   // Helper to detect if it's night time (7pm-7am)
   const isNightTime = (dateOrHour: Date | number): boolean => {
     const hour = typeof dateOrHour === 'number' ? dateOrHour : dateOrHour.getHours();
     return hour >= 19 || hour < 7;
-  };
-
-  // Translate rating strings
-  const translateRating = (rating: string): string => {
-    const ratingLower = rating.toLowerCase();
-    const key = `ratings.${ratingLower}`;
-    return t(key);
-  };
-
-  // Translate weather description strings
-  const translateWeather = (description: string): string => {
-    const weatherMap: Record<string, string> = {
-      'Clear sky': 'weather.clearSky',
-      'Mainly clear': 'weather.mainlyClear',
-      'Partly cloudy': 'weather.partlyCloudy',
-      'Overcast': 'weather.overcast',
-      'Fog': 'weather.fog',
-      'Depositing rime fog': 'weather.depositingRimeFog',
-      'Light drizzle': 'weather.lightDrizzle',
-      'Moderate drizzle': 'weather.moderateDrizzle',
-      'Dense drizzle': 'weather.denseDrizzle',
-      'Light freezing drizzle': 'weather.lightFreezingDrizzle',
-      'Dense freezing drizzle': 'weather.denseFreezingDrizzle',
-      'Slight rain': 'weather.slightRain',
-      'Moderate rain': 'weather.moderateRain',
-      'Heavy rain': 'weather.heavyRain',
-      'Light freezing rain': 'weather.lightFreezingRain',
-      'Heavy freezing rain': 'weather.heavyFreezingRain',
-      'Slight snow fall': 'weather.slightSnowFall',
-      'Moderate snow fall': 'weather.moderateSnowFall',
-      'Heavy snow fall': 'weather.heavySnowFall',
-      'Snow grains': 'weather.snowGrains',
-      'Slight rain showers': 'weather.slightRainShowers',
-      'Moderate rain showers': 'weather.moderateRainShowers',
-      'Violent rain showers': 'weather.violentRainShowers',
-      'Slight snow showers': 'weather.slightSnowShowers',
-      'Heavy snow showers': 'weather.heavySnowShowers',
-      'Thunderstorm': 'weather.thunderstorm',
-      'Thunderstorm with slight hail': 'weather.thunderstormSlightHail',
-      'Thunderstorm with heavy hail': 'weather.thunderstormHeavyHail',
-    };
-
-    const key = weatherMap[description];
-    return key ? t(key) : description;
   };
 
   const getRatingColor = (rating: string) => {
@@ -343,8 +303,11 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
     return Object.keys(grouped).length > 0 ? grouped : null;
   };
 
-  const windowsByDay = groupWindowsByDay();
-  const hourlyByDay = groupHourlyByDay();
+  // Memoize expensive grouping functions to prevent recalculation on every render
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const windowsByDay = useMemo(() => groupWindowsByDay(), [data.optimalWindows, data.hourlyConditions]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const hourlyByDay = useMemo(() => groupHourlyByDay(), [data.hourlyConditions]);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -1080,4 +1043,4 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
       </DialogContent>
     </Dialog>
   );
-}
+});
