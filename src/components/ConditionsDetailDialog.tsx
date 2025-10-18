@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -7,10 +8,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
-import { Cloud, Droplets, Wind, ThermometerSun, Clock, TrendingUp } from "lucide-react";
+import { Cloud, Droplets, Wind, ThermometerSun, Clock, TrendingUp, Calendar } from "lucide-react";
 
 interface ConditionsDetailDialogProps {
   open: boolean;
@@ -59,6 +61,8 @@ interface ConditionsDetailDialogProps {
 }
 
 export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsDetailDialogProps) {
+  const [activeTab, setActiveTab] = useState("overview");
+
   const getRatingColor = (rating: string) => {
     switch (rating) {
       case "Great":
@@ -72,6 +76,73 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
       default:
         return "bg-muted text-muted-foreground";
     }
+  };
+
+  const formatHourlyTime = (isoString: string) => {
+    const date = new Date(isoString);
+    const now = new Date();
+    const tomorrow = new Date(now);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    const isToday = date.toDateString() === now.toDateString();
+    const isTomorrow = date.toDateString() === tomorrow.toDateString();
+
+    const timeStr = date.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
+
+    if (isToday) return `Today ${timeStr}`;
+    if (isTomorrow) return `Tomorrow ${timeStr}`;
+
+    return date.toLocaleDateString("en-US", {
+      weekday: "short",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
+  };
+
+  const groupHourlyByDay = () => {
+    if (!data.hourlyConditions) return null;
+
+    const grouped: Record<string, typeof data.hourlyConditions> = {};
+    const now = new Date();
+
+    data.hourlyConditions.forEach((hour) => {
+      const date = new Date(hour.time);
+      const isToday = date.toDateString() === now.toDateString();
+
+      const tomorrow = new Date(now);
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      const isTomorrow = date.toDateString() === tomorrow.toDateString();
+
+      let dayKey: string;
+      if (isToday) {
+        dayKey = "Today";
+      } else if (isTomorrow) {
+        dayKey = "Tomorrow";
+      } else {
+        dayKey = date.toLocaleDateString("en-US", {
+          weekday: "short",
+          month: "short",
+          day: "numeric",
+        });
+      }
+
+      if (!grouped[dayKey]) {
+        grouped[dayKey] = [];
+      }
+      grouped[dayKey].push(hour);
+    });
+
+    // Filter to show every 3 hours to reduce clutter
+    Object.keys(grouped).forEach((key) => {
+      grouped[key] = grouped[key].filter((_, index) => index % 3 === 0);
+    });
+
+    return grouped;
   };
 
   const formatTimeRange = (start: string, end: string) => {
@@ -159,6 +230,7 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
   };
 
   const windowsByDay = groupWindowsByDay();
+  const hourlyByDay = groupHourlyByDay();
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -173,8 +245,16 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
           </DialogDescription>
         </DialogHeader>
 
-        <ScrollArea className="max-h-[calc(85vh-120px)] pr-4">
-          <div className="space-y-6">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="hourly">Hourly Forecast</TabsTrigger>
+          </TabsList>
+
+          {/* Overview Tab */}
+          <TabsContent value="overview" className="mt-4">
+            <ScrollArea className="max-h-[calc(85vh-200px)] pr-4">
+              <div className="space-y-6">
             {/* Current Conditions Summary */}
             <div className="space-y-3">
               <h3 className="font-semibold flex items-center gap-2">
@@ -387,62 +467,83 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
                 <Separator />
               </>
             ) : null}
+              </div>
+            </ScrollArea>
+          </TabsContent>
 
-            {/* Hourly Forecast */}
-            {data.hourlyConditions && data.hourlyConditions.length > 0 && (
-              <div className="space-y-3">
-                <h3 className="font-semibold flex items-center gap-2">
-                  <Wind className="w-4 h-4" />
-                  Hourly Forecast (Next 48h)
-                </h3>
-                <div className="space-y-2">
-                  {data.hourlyConditions.slice(0, 24).map((hour, i) => (
-                    <div
-                      key={i}
-                      className={`rounded-lg p-3 border ${
-                        hour.frictionScore >= 4
-                          ? "bg-green-500/5 border-green-500/20"
-                          : "bg-muted/30 border-border"
-                      }`}
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <span className="font-mono text-sm font-semibold w-16">{hour.time}</span>
-                          <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                            <span>{hour.temp_c}°C</span>
-                            <span>•</span>
-                            <span>{hour.humidity}%</span>
-                            <span>•</span>
-                            <span>{hour.wind_kph}km/h</span>
-                            {hour.precip_mm > 0 && (
-                              <>
-                                <span>•</span>
-                                <span className="text-blue-500">{hour.precip_mm}mm</span>
-                              </>
+          {/* Hourly Forecast Tab */}
+          <TabsContent value="hourly" className="mt-4">
+            <ScrollArea className="max-h-[calc(85vh-200px)] pr-4">
+              {hourlyByDay && Object.keys(hourlyByDay).length > 0 ? (
+                <div className="space-y-6">
+                  {Object.entries(hourlyByDay).map(([day, hours]) => (
+                    <div key={day} className="space-y-3">
+                      <h3 className="font-semibold flex items-center gap-2 sticky top-0 bg-background z-10 py-2">
+                        <Calendar className="w-4 h-4" />
+                        {day}
+                      </h3>
+                      <div className="space-y-2">
+                        {hours.map((hour, i) => (
+                          <div
+                            key={i}
+                            className={`rounded-lg p-3 border ${
+                              hour.frictionScore >= 4
+                                ? "bg-green-500/5 border-green-500/20"
+                                : "bg-muted/30 border-border"
+                            }`}
+                          >
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-3">
+                                <span className="font-mono text-sm font-semibold min-w-[60px]">
+                                  {new Date(hour.time).toLocaleTimeString("en-US", {
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                    hour12: false,
+                                  })}
+                                </span>
+                                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                  <span>{hour.temp_c}°C</span>
+                                  <span>•</span>
+                                  <span>{hour.humidity}%</span>
+                                  <span>•</span>
+                                  <span>{hour.wind_kph}km/h</span>
+                                  {hour.precip_mm > 0 && (
+                                    <>
+                                      <span>•</span>
+                                      <span className="text-blue-500">{hour.precip_mm}mm</span>
+                                    </>
+                                  )}
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <Badge className={getRatingColor(hour.rating)} variant="outline">
+                                  {hour.rating}
+                                </Badge>
+                                <span className="text-sm font-semibold w-8 text-right">
+                                  {hour.frictionScore}/5
+                                </span>
+                              </div>
+                            </div>
+                            {hour.warnings.length > 0 && (
+                              <p className="text-xs text-muted-foreground mt-1 ml-[76px]">
+                                {hour.warnings.join(", ")}
+                              </p>
                             )}
                           </div>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Badge className={getRatingColor(hour.rating)} variant="outline">
-                            {hour.rating}
-                          </Badge>
-                          <span className="text-sm font-semibold w-8 text-right">
-                            {hour.frictionScore}/5
-                          </span>
-                        </div>
+                        ))}
                       </div>
-                      {hour.warnings.length > 0 && (
-                        <p className="text-xs text-muted-foreground mt-1 ml-20">
-                          {hour.warnings.join(", ")}
-                        </p>
-                      )}
                     </div>
                   ))}
                 </div>
-              </div>
-            )}
-          </div>
-        </ScrollArea>
+              ) : (
+                <div className="flex flex-col items-center justify-center py-12 text-center">
+                  <Wind className="w-12 h-12 text-muted-foreground mb-3" />
+                  <p className="text-sm text-muted-foreground">No hourly forecast data available</p>
+                </div>
+              )}
+            </ScrollArea>
+          </TabsContent>
+        </Tabs>
       </DialogContent>
     </Dialog>
   );
