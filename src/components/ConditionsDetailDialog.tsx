@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, memo } from "react";
+import { useState, useMemo, memo, useEffect, useRef } from "react";
 import {
   Dialog,
   DialogContent,
@@ -17,6 +17,7 @@ import { Cloud, Droplets, Wind, ThermometerSun, Clock, TrendingUp, Calendar, Sun
 import { getWeatherEmoji, getWeatherDescription } from "@/lib/utils/weather-emojis";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
+import { logRender, isDebugRenders, logPhase } from "@/lib/debug/render-log";
 
 interface ConditionsDetailDialogProps {
   open: boolean;
@@ -83,6 +84,15 @@ interface ConditionsDetailDialogProps {
 export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsDetailDialogProps) {
   const { t } = useClientTranslation('common');
   const [activeTab, setActiveTab] = useState("overview");
+  const tabSwitchStartRef = useRef<number | null>(null);
+
+  logRender('ConditionsDetailDialog', {
+    open,
+    activeTab,
+    hasHourly: !!data.hourlyConditions?.length,
+    hasDaily: !!data.dailyForecast?.length,
+    hasWindows: !!data.optimalWindows?.length,
+  });
 
   // Get memoized translation functions
   const { translateRating, translateWeather } = useConditionsTranslations(t);
@@ -309,6 +319,16 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const hourlyByDay = useMemo(() => groupHourlyByDay(), [data.hourlyConditions]);
 
+  // Measure tab switch duration in debug mode
+  useEffect(() => {
+    if (!isDebugRenders) return;
+    if (tabSwitchStartRef.current != null) {
+      const elapsed = performance.now() - tabSwitchStartRef.current;
+      logPhase('ConditionsDetailDialog', 'tab-switched', { tab: activeTab, ms: Number(elapsed.toFixed(1)) });
+      tabSwitchStartRef.current = null;
+    }
+  }, [activeTab]);
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-3xl max-h-[90vh]">
@@ -329,7 +349,17 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
           </DialogDescription>
         </DialogHeader>
 
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full flex flex-col">
+        <Tabs
+          value={activeTab}
+          onValueChange={(v) => {
+            if (isDebugRenders) {
+              tabSwitchStartRef.current = performance.now();
+              logPhase('ConditionsDetailDialog', 'tab-change', { to: v });
+            }
+            setActiveTab(v);
+          }}
+          className="w-full flex flex-col"
+        >
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="overview">{t('dialog.tabs.overview')}</TabsTrigger>
             <TabsTrigger value="hourly">{t('dialog.tabs.hourly')}</TabsTrigger>

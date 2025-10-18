@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import { useChat } from "@ai-sdk/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -17,10 +17,24 @@ import {
   ConversationContent,
   ConversationScrollButton,
 } from "@/components/ai-elements/conversation";
+import { useStickToBottomContext } from "use-stick-to-bottom";
+
+// Helper component: triggers scroll within StickToBottom context when `signal` changes
+const ScrollToBottomOnSignal = ({ signal }: { signal: number }) => {
+  const { scrollToBottom } = useStickToBottomContext();
+  useEffect(() => {
+    try {
+      scrollToBottom();
+      setTimeout(() => scrollToBottom(), 0);
+    } catch {}
+  }, [signal, scrollToBottom]);
+  return null;
+};
 import { ConditionsDetailDialog } from "@/components/ConditionsDetailDialog";
 import { WeatherConditionCard } from "@/components/WeatherConditionCard";
 import { DisambiguationOptions } from "@/components/DisambiguationOptions";
 import { FeaturesDialog } from "@/components/FeaturesDialog";
+import { logRender } from "@/lib/debug/render-log";
 
 interface ConditionsData {
   location: string;
@@ -104,6 +118,7 @@ const ChatInterface = () => {
   const [detailsDialogOpen, setDetailsDialogOpen] = useState(false);
   const [selectedConditions, setSelectedConditions] = useState<ConditionsData | null>(null);
   const [featuresDialogOpen, setFeaturesDialogOpen] = useState(false);
+  const [scrollSignal, setScrollSignal] = useState(0);
 
   // Get translation functions (memoized)
   const translations = useConditionsTranslations(t);
@@ -145,6 +160,8 @@ const ChatInterface = () => {
         },
       }
     );
+    // Signal scroll to bottom within Conversation provider
+    setScrollSignal((s) => s + 1);
   }, [input, language, sendMessage]);
 
   // Memoize example click handler
@@ -158,6 +175,8 @@ const ChatInterface = () => {
         },
       }
     );
+    // Signal scroll to bottom within Conversation provider
+    setScrollSignal((s) => s + 1);
   }, [language, sendMessage]);
 
   // Memoize disambiguation option handler
@@ -171,6 +190,15 @@ const ChatInterface = () => {
       }
     );
   }, [language, sendMessage]);
+
+  // Render log for profiling
+  logRender('ChatInterface', {
+    messages: messages.length,
+    status,
+    detailsOpen: detailsDialogOpen,
+    selected: selectedConditions?.location ?? null,
+    inputLen: input.length,
+  });
 
   return (
     <>
@@ -201,6 +229,7 @@ const ChatInterface = () => {
       {/* Chat Area */}
       <div className="flex-1 overflow-hidden flex flex-col">
         <Conversation className="flex-1">
+          <ScrollToBottomOnSignal signal={scrollSignal} />
           <ConversationContent className="container max-w-3xl px-4 py-6">
               {messages.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center py-12">
