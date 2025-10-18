@@ -3,6 +3,9 @@
 out/
 build/
 
+# TypeScript
+*.tsbuildinfo
+
 # Logs
 logs
 *.log
