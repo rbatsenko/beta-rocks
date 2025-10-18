@@ -159,6 +159,10 @@ const tools = {
           isDry: conditions.isDry,
           dryingTimeHours: conditions.dryingTimeHours,
           optimalWindows: conditions.optimalWindows,
+          hourlyConditions: conditions.hourlyConditions,
+          precipitationContext: conditions.precipitationContext,
+          dewPointSpread: conditions.dewPointSpread,
+          optimalTime: conditions.optimalTime,
           current: {
             temperature_c: forecast.current.temperature,
             humidity: forecast.current.humidity,

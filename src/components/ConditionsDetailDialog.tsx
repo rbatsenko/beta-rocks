@@ -23,6 +23,13 @@ interface ConditionsDetailDialogProps {
     warnings?: string[];
     isDry: boolean;
     dryingTimeHours?: number;
+    current?: {
+      temperature_c: number;
+      humidity: number;
+      windSpeed_kph: number;
+      precipitation_mm: number;
+      weatherCode: number;
+    };
     hourlyConditions?: Array<{
       time: string;
       temp_c: number;
@@ -208,6 +215,37 @@ export function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsD
             </div>
 
             <Separator />
+
+            {/* Current Conditions */}
+            {data.current && (
+              <>
+                <div className="space-y-3">
+                  <h3 className="font-semibold flex items-center gap-2">
+                    <ThermometerSun className="w-4 h-4" />
+                    Current Conditions
+                  </h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div className="bg-muted/50 rounded-lg p-3">
+                      <p className="text-xs text-muted-foreground">Temperature</p>
+                      <p className="text-lg font-semibold">{data.current.temperature_c}°C</p>
+                    </div>
+                    <div className="bg-muted/50 rounded-lg p-3">
+                      <p className="text-xs text-muted-foreground">Humidity</p>
+                      <p className="text-lg font-semibold">{data.current.humidity}%</p>
+                    </div>
+                    <div className="bg-muted/50 rounded-lg p-3">
+                      <p className="text-xs text-muted-foreground">Wind Speed</p>
+                      <p className="text-lg font-semibold">{data.current.windSpeed_kph}km/h</p>
+                    </div>
+                    <div className="bg-muted/50 rounded-lg p-3">
+                      <p className="text-xs text-muted-foreground">Precipitation</p>
+                      <p className="text-lg font-semibold">{data.current.precipitation_mm}mm</p>
+                    </div>
+                  </div>
+                </div>
+                <Separator />
+              </>
+            )}
 
             {/* Precipitation Context */}
             {data.precipitationContext && (

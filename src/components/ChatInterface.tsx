@@ -24,6 +24,13 @@ interface ConditionsData {
   warnings?: string[];
   isDry: boolean;
   dryingTimeHours?: number;
+  current?: {
+    temperature_c: number;
+    humidity: number;
+    windSpeed_kph: number;
+    precipitation_mm: number;
+    weatherCode: number;
+  };
   hourlyConditions?: Array<{
     time: string;
     temp_c: number;
