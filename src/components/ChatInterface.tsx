@@ -93,7 +93,7 @@ const ChatInterface = () => {
   };
 
   return (
-    <section id="chat-section" className="py-20 px-6 bg-gradient-earth">
+    <section id="chat-section" className="py-12 px-6 bg-gradient-earth">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">

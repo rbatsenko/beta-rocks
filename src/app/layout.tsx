@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import "@/index.css";
 
 export const metadata: Metadata = {
-  title: "temps.rocks - Real-time Climbing Conditions Chat",
+  title: "temps.rocks - Real-time Climbing Conditions",
   description:
     "Chat with temps.rocks for instant climbing conditions at any crag, sector, or route worldwide. Free weather forecasts, community reports, and AI-powered insights for climbers.",
   authors: [{ name: "temps.rocks" }],
