@@ -58,8 +58,8 @@ export async function searchAreas(searchText: string): Promise<Area[]> {
   console.log("[OpenBeta] searchAreas called with:", searchText);
 
   const query = `
-    query SearchAreas($filter: AreaFilter!) {
-      areas(filter: $filter) {
+    query SearchAreas($searchText: String!) {
+      areas(filter: { area_name: { match: $searchText } }) {
         uuid
         area_name
         metadata {
@@ -84,11 +84,7 @@ export async function searchAreas(searchText: string): Promise<Area[]> {
   `;
 
   const variables = {
-    filter: {
-      area_name: {
-        match: searchText,
-      },
-    },
+    searchText,
   };
 
   console.log("[OpenBeta] Executing query with variables:", JSON.stringify(variables));
