@@ -15,6 +15,12 @@ const OPENBETA_ENDPOINT = "https://api.openbeta.io/graphql";
  * Execute a GraphQL query against the OpenBeta API
  */
 async function executeQuery<T>(query: string, variables?: Record<string, unknown>): Promise<T> {
+  console.log("[OpenBeta] Request:", {
+    endpoint: OPENBETA_ENDPOINT,
+    query: query.substring(0, 100) + "...",
+    variables,
+  });
+
   const response = await fetch(OPENBETA_ENDPOINT, {
     method: "POST",
     headers: {
@@ -26,11 +32,16 @@ async function executeQuery<T>(query: string, variables?: Record<string, unknown
     }),
   });
 
-  if (!response.ok) {
-    throw new Error(`OpenBeta API error: ${response.status} ${response.statusText}`);
-  }
-
   const result = await response.json();
+  console.log("[OpenBeta] Raw response:", {
+    status: response.status,
+    ok: response.ok,
+    result,
+  });
+
+  if (!response.ok) {
+    throw new Error(`OpenBeta API error: ${response.status} ${response.statusText} - ${JSON.stringify(result)}`);
+  }
 
   if (result.errors) {
     throw new Error(`GraphQL errors: ${JSON.stringify(result.errors)}`);
