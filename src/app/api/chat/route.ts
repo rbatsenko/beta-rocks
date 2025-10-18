@@ -5,7 +5,6 @@ import { searchLocationMultiple } from "@/lib/external-apis/geocoding";
 import { getWeatherForecast } from "@/lib/external-apis/open-meteo";
 import { computeConditions, RockType } from "@/lib/conditions/conditions.service";
 import { searchAreas, formatAreaPath, getCountry, extractRockType, isCrag, hasPreciseCoordinates } from "@/lib/openbeta/client";
-import { searchClimbingAreas, normalizeRockType, hasValidCoordinates } from "@/lib/osm/client";
 
 export const maxDuration = 30;
 
@@ -105,72 +104,13 @@ const tools = {
             }
           }
         } catch (error) {
-          console.log("[get_conditions] OpenBeta search failed, will try OSM:", {
+          console.log("[get_conditions] OpenBeta search failed, will try geocoding:", {
             error: error instanceof Error ? error.message : String(error),
           });
-          // Continue to OSM search
+          // Continue to geocoding fallback
         }
 
-        // STEP 2: If OpenBeta didn't find a crag, try OpenStreetMap
-        if (!lat || !lon) {
-          try {
-            console.log("[get_conditions] Trying OSM search:", location);
-            const osmAreas = await searchClimbingAreas(location);
-
-            console.log("[get_conditions] OSM results:", {
-              location,
-              count: osmAreas.length,
-            });
-
-            if (osmAreas.length > 0) {
-              // Filter to areas with valid coordinates
-              const validAreas = osmAreas.filter(hasValidCoordinates);
-
-              console.log("[get_conditions] OSM valid areas:", {
-                original: osmAreas.length,
-                valid: validAreas.length,
-              });
-
-              if (validAreas.length === 1) {
-                // Perfect! Single area found
-                const area = validAreas[0];
-                lat = area.latitude;
-                lon = area.longitude;
-                detectedRockType = (detectedRockType || normalizeRockType(area.rockType)) as RockType;
-
-                console.log("[get_conditions] Using OSM climbing area:", {
-                  name: area.name,
-                  lat,
-                  lon,
-                  rockType: detectedRockType,
-                  country: area.country,
-                });
-              } else if (validAreas.length > 1) {
-                // Multiple areas found - return disambiguation
-                console.log("[get_conditions] Multiple OSM areas found, returning disambiguation");
-                return {
-                  location,
-                  message: `Found ${validAreas.length} climbing areas for "${location}". Please choose one:`,
-                  options: validAreas.map((area) => ({
-                    id: `osm-${area.id}`,
-                    name: area.name,
-                    location: area.country || "Unknown",
-                    latitude: area.latitude,
-                    longitude: area.longitude,
-                    rockType: normalizeRockType(area.rockType),
-                  })),
-                };
-              }
-            }
-          } catch (error) {
-            console.log("[get_conditions] OSM search failed, will try geocoding:", {
-              error: error instanceof Error ? error.message : String(error),
-            });
-            // Continue to geocoding fallback
-          }
-        }
-
-        // STEP 3: If both OpenBeta and OSM didn't find a crag, fall back to geocoding
+        // STEP 2: If OpenBeta didn't find a crag, fall back to geocoding
         if (!lat || !lon) {
           try {
             console.log(
