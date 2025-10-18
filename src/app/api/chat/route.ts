@@ -31,15 +31,30 @@ const tools = {
         .describe("Type of rock at the crag"),
     }),
     execute: async ({ location, latitude, longitude, rockType }) => {
+      console.log('[get_conditions] Starting tool execution:', {
+        location,
+        latitude,
+        longitude,
+        rockType,
+      });
+
       let lat = latitude;
       let lon = longitude;
 
       // If no coordinates provided, search for location using geocoding
       if (!lat || !lon) {
         try {
+          console.log('[get_conditions] No coordinates provided, searching for location:', location);
           // First try to get multiple results for disambiguation
           const geocodedMultiple = await searchLocationMultiple(location, 3);
+
+          console.log('[get_conditions] Geocoding results:', {
+            location,
+            resultsCount: geocodedMultiple?.length || 0,
+          });
+
           if (!geocodedMultiple || geocodedMultiple.length === 0) {
+            console.error('[get_conditions] No geocoding results found for:', location);
             return {
               error: `Could not find location: ${location}`,
               location,
@@ -48,6 +63,7 @@ const tools = {
 
           // If multiple results, return them for user to choose
           if (geocodedMultiple.length > 1) {
+            console.log('[get_conditions] Multiple results found, returning disambiguation options');
             return {
               disambiguate: true,
               message: `Found multiple locations for "${location}". Please choose one:`,
@@ -65,7 +81,13 @@ const tools = {
           const geocoded = geocodedMultiple[0];
           lat = geocoded.latitude;
           lon = geocoded.longitude;
+          console.log('[get_conditions] Using geocoded coordinates:', { lat, lon, name: geocoded.name });
         } catch (error) {
+          console.error('[get_conditions] Geocoding error:', {
+            location,
+            error: error instanceof Error ? error.message : String(error),
+            stack: error instanceof Error ? error.stack : undefined,
+          });
           return {
             error: `Failed to search for location: ${location}`,
             location,
@@ -85,12 +107,35 @@ const tools = {
           conditionsUrl.searchParams.set("rockType", rockType);
         }
 
+        console.log('[get_conditions] Fetching conditions:', {
+          location,
+          lat,
+          lon,
+          rockType,
+          url: conditionsUrl.toString(),
+          baseUrl: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
+        });
+
         const response = await fetch(conditionsUrl.toString());
+        console.log('[get_conditions] Conditions API response status:', response.status);
+
         const data = await response.json();
 
         if (!response.ok) {
+          console.error('[get_conditions] Conditions API error:', {
+            location,
+            status: response.status,
+            error: data.error,
+            data,
+          });
           return { error: data.error || "Failed to get conditions", location };
         }
+
+        console.log('[get_conditions] Successfully fetched conditions:', {
+          location,
+          rating: data.conditions.rating,
+          frictionScore: data.conditions.frictionRating,
+        });
 
         return {
           location,
@@ -104,6 +149,13 @@ const tools = {
           current: data.current,
         };
       } catch (error) {
+        console.error('[get_conditions] Fetch error:', {
+          location,
+          lat,
+          lon,
+          error: error instanceof Error ? error.message : String(error),
+          stack: error instanceof Error ? error.stack : undefined,
+        });
         return {
           error: `Failed to fetch conditions for ${location}`,
           location,

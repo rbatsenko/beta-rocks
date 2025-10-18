@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { useChat } from "@ai-sdk/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { Send, Loader2, Sun } from "lucide-react";
+import { Send, Loader2, Sun, Info } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Message, MessageContent } from "@/components/ai-elements/message";
 import { Response } from "@/components/ai-elements/response";
@@ -14,11 +14,14 @@ import {
   ConversationContent,
   ConversationScrollButton,
 } from "@/components/ai-elements/conversation";
+import { ConditionsDetailDialog } from "@/components/ConditionsDetailDialog";
 
 const ChatInterface = () => {
   const [input, setInput] = useState("");
   const { messages, sendMessage } = useChat();
   const isLoading = messages.length > 0 && messages[messages.length - 1].role === "user";
+  const [detailsDialogOpen, setDetailsDialogOpen] = useState(false);
+  const [selectedConditions, setSelectedConditions] = useState<any>(null);
 
   const exampleQueries = [
     "Siurana conditions tomorrow?",
@@ -82,13 +85,7 @@ const ChatInterface = () => {
             ) : (
               messages.map((message) => {
                 const textParts = message.parts.filter((part: any) => part.type === "text");
-                const toolParts = message.parts.filter((part: any) => part.type !== "text" && part.type !== "error");
-
-                // Debug: log parts to see what we're getting
-                if (message.role === "assistant") {
-                  console.log('Message parts:', message.parts);
-                  console.log('Tool parts:', toolParts);
-                }
+                const toolParts = message.parts.filter((part: any) => part.type !== "text" && part.type !== "error" && part.type !== "step-start");
 
                 return (
                   <Message key={message.id} from={message.role}>
@@ -100,10 +97,8 @@ const ChatInterface = () => {
 
                       {/* Render tool results inline for assistant messages */}
                       {message.role === "assistant" && toolParts.map((part: any, i: number) => {
-                        console.log('Processing tool part:', part.type, part);
-
-                        // In AI SDK v5, tool parts have type 'tool-${toolName}'
-                        if (part.type === "tool-get_conditions" || (part.type.startsWith?.('tool-') && part.toolName === "get_conditions")) {
+                        // In AI SDK v5, tool parts have type 'tool-${toolName}' and state 'output-available'
+                        if (part.type === "tool-get_conditions" && part.state === "output-available") {
                           // Handle disambiguation results
                           if (part.output?.disambiguate || part.result?.disambiguate) {
                             const result = part.output || part.result;
@@ -134,17 +129,35 @@ const ChatInterface = () => {
                           // Handle regular conditions results
                           const result = part.output || part.result;
                           return (
-                            <div key={i} className="mt-3 bg-muted/50 rounded-lg p-4 space-y-2 border border-border">
-                              <div className="font-semibold text-base">🧗 {result?.location}</div>
-                              <div className="font-medium">Rating: {result?.rating} ({result?.frictionScore}/5)</div>
-                              {result?.warnings && result.warnings.length > 0 && (
-                                <div className="text-destructive font-semibold text-sm">
-                                  ⚠️ {result.warnings.join(", ")}
+                            <div key={i} className="mt-3 bg-muted/50 rounded-lg p-4 space-y-3 border border-border">
+                              <div className="flex items-start justify-between">
+                                <div className="space-y-2 flex-1">
+                                  <div className="font-semibold text-base">🧗 {result?.location}</div>
+                                  <div className="font-medium">Rating: {result?.rating} ({result?.frictionScore}/5)</div>
+                                  {result?.warnings && result.warnings.length > 0 && (
+                                    <div className="text-destructive font-semibold text-sm">
+                                      ⚠️ {result.warnings.join(", ")}
+                                    </div>
+                                  )}
+                                  {result?.reasons && result.reasons.length > 0 && (
+                                    <div className="text-sm opacity-80">{result.reasons.join(", ")}</div>
+                                  )}
                                 </div>
-                              )}
-                              {result?.reasons && result.reasons.length > 0 && (
-                                <div className="text-sm opacity-80">{result.reasons.join(", ")}</div>
-                              )}
+                                {(result?.hourlyConditions || result?.optimalWindows) && (
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="ml-3 shrink-0"
+                                    onClick={() => {
+                                      setSelectedConditions(result);
+                                      setDetailsDialogOpen(true);
+                                    }}
+                                  >
+                                    <Info className="w-4 h-4 mr-1" />
+                                    Details
+                                  </Button>
+                                )}
+                              </div>
                             </div>
                           );
                         }
@@ -193,6 +206,15 @@ const ChatInterface = () => {
           </div>
         </Card>
       </div>
+
+      {/* Conditions Detail Dialog */}
+      {selectedConditions && (
+        <ConditionsDetailDialog
+          open={detailsDialogOpen}
+          onOpenChange={setDetailsDialogOpen}
+          data={selectedConditions}
+        />
+      )}
     </section>
   );
 };

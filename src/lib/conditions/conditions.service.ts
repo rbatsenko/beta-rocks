@@ -28,6 +28,23 @@ export interface HourlyCondition {
   precip_mm: number;
   isOptimal: boolean;
   frictionScore: number;
+  rating: 'Nope' | 'Meh' | 'OK' | 'Great';
+  isDry: boolean;
+  warnings: string[];
+}
+
+export interface OptimalWindow {
+  startTime: string;
+  endTime: string;
+  avgFrictionScore: number;
+  rating: 'Nope' | 'Meh' | 'OK' | 'Great';
+  hourCount: number;
+}
+
+export interface PrecipitationContext {
+  last24h: number;
+  last48h: number;
+  next24h: number;
 }
 
 export interface ConditionsResult {
@@ -36,8 +53,12 @@ export interface ConditionsResult {
   reasons: string[];
   dryingTimeHours?: number;
   isDry: boolean;
-  optimalWindows?: string[];
+  optimalWindows?: OptimalWindow[];
   warnings: string[];
+  hourlyConditions?: HourlyCondition[];
+  precipitationContext?: PrecipitationContext;
+  dewPointSpread?: number;
+  optimalTime?: string;
 }
 
 export interface WeatherForecast {
@@ -184,14 +205,14 @@ function calculateWeatherAwareDryingPenalty(
 }
 
 /**
- * Compute climbing conditions from weather data
+ * Compute climbing conditions from weather data (enhanced version)
  */
 export function computeConditions(
   weather: WeatherForecast,
   rockType: RockType = 'unknown',
   recentPrecipitationMm: number = 0
 ): ConditionsResult {
-  const { current } = weather;
+  const { current, hourly } = weather;
   const rockConditions = getRockTypeConditions(rockType);
   const { optimalTemp, optimalHumidity, maxHumidity } = rockConditions;
 
@@ -200,6 +221,31 @@ export function computeConditions(
   const reasons: string[] = [];
   const warnings: string[] = [];
   let dryingTimeHours: number | undefined;
+
+  // Compute hourly conditions if available
+  let hourlyConditions: HourlyCondition[] | undefined;
+  let optimalWindows: OptimalWindow[] | undefined;
+  let precipitationContext: PrecipitationContext | undefined;
+  let dewPointSpread: number | undefined;
+  let optimalTime: string | undefined;
+
+  if (hourly && hourly.length > 0) {
+    hourlyConditions = computeHourlyConditions(hourly, rockType, recentPrecipitationMm);
+    optimalWindows = findOptimalWindowsEnhanced(hourlyConditions);
+    precipitationContext = calculatePrecipitationContext(hourly);
+
+    // Find optimal time (best friction score in next 48h)
+    const bestHour = hourlyConditions.reduce((best, hour) =>
+      hour.frictionScore > best.frictionScore ? hour : best
+    , hourlyConditions[0]);
+    if (bestHour && bestHour.frictionScore >= 4) {
+      optimalTime = bestHour.time;
+    }
+  }
+
+  // Calculate dew point spread (condensation risk)
+  const dewPoint = calculateDewPoint(current.temp_c, current.humidity);
+  dewPointSpread = Math.round((current.temp_c - dewPoint) * 10) / 10;
 
   // === TEMPERATURE ASSESSMENT ===
   const inOptimalTemp =
@@ -318,11 +364,230 @@ export function computeConditions(
       : undefined,
     isDry,
     warnings,
+    hourlyConditions,
+    optimalWindows,
+    precipitationContext,
+    dewPointSpread,
+    optimalTime,
   };
 }
 
 /**
- * Analyze hourly forecast for optimal climbing windows
+ * Calculate dew point from temperature and humidity
+ */
+function calculateDewPoint(temp_c: number, humidity: number): number {
+  const a = 17.27;
+  const b = 237.7;
+  const alpha = ((a * temp_c) / (b + temp_c)) + Math.log(humidity / 100);
+  return (b * alpha) / (a - alpha);
+}
+
+/**
+ * Compute friction score for a single hour
+ */
+function computeHourlyFrictionScore(
+  hour: {
+    temp_c: number;
+    humidity: number;
+    wind_kph: number;
+    precip_mm: number;
+  },
+  rockType: RockType,
+  recentPrecipMm: number = 0
+): { score: number; warnings: string[]; isDry: boolean } {
+  const rockConditions = getRockTypeConditions(rockType);
+  const { optimalTemp, optimalHumidity, maxHumidity } = rockConditions;
+
+  let score = 3;
+  const warnings: string[] = [];
+
+  // Temperature assessment
+  if (hour.temp_c >= optimalTemp.min && hour.temp_c <= optimalTemp.max) {
+    score += 1.5;
+  } else if (hour.temp_c > optimalTemp.max) {
+    score -= 1.5;
+    warnings.push(`Too warm (${hour.temp_c}°C)`);
+  } else if (hour.temp_c < optimalTemp.min) {
+    if (rockType === 'granite' || rockType === 'gneiss') {
+      score += 1;
+    } else {
+      score -= 0.5;
+      warnings.push(`Cold (${hour.temp_c}°C)`);
+    }
+  }
+
+  // Humidity assessment
+  if (hour.humidity >= optimalHumidity.min && hour.humidity <= optimalHumidity.max) {
+    score += 1;
+  } else if (hour.humidity > maxHumidity) {
+    score -= 1.5;
+    warnings.push(`High humidity (${hour.humidity}%)`);
+  } else if (hour.humidity < optimalHumidity.min && (rockType === 'granite' || rockType === 'gneiss')) {
+    score += 0.5;
+  }
+
+  // Wetness assessment
+  const isCurrentlyWet = hour.precip_mm > 0;
+  const hasRecentPrecip = recentPrecipMm >= 1;
+
+  if (isCurrentlyWet) {
+    score = Math.min(score, 1.5);
+    warnings.push('Currently wet');
+  } else if (hasRecentPrecip) {
+    const penalty = calculateWeatherAwareDryingPenalty(
+      recentPrecipMm,
+      rockType,
+      hour.temp_c,
+      hour.humidity,
+      hour.wind_kph
+    );
+    score -= penalty;
+  }
+
+  // Wind assessment
+  if (hour.wind_kph > 40) {
+    score -= 0.5;
+    warnings.push(`Very high winds (${hour.wind_kph} km/h)`);
+  } else if (hour.wind_kph > 25) {
+    score -= 0.3;
+    warnings.push(`High wind (${hour.wind_kph} km/h)`);
+  }
+
+  score = Math.max(1, Math.min(5, score));
+  const isDry = !isCurrentlyWet && !hasRecentPrecip;
+
+  return { score, warnings, isDry };
+}
+
+/**
+ * Convert friction score to rating
+ */
+function scoreToRating(score: number): 'Nope' | 'Meh' | 'OK' | 'Great' {
+  if (score >= 4.5) return 'Great';
+  if (score >= 3.5) return 'OK';
+  if (score >= 2) return 'Meh';
+  return 'Nope';
+}
+
+/**
+ * Compute hourly conditions for next 48 hours
+ */
+export function computeHourlyConditions(
+  hourly: Array<{
+    time: string;
+    temp_c: number;
+    humidity: number;
+    wind_kph: number;
+    precip_mm: number;
+  }>,
+  rockType: RockType = 'unknown',
+  recentPrecipMm: number = 0
+): HourlyCondition[] {
+  return hourly.map((hour) => {
+    const { score, warnings, isDry } = computeHourlyFrictionScore(hour, rockType, recentPrecipMm);
+
+    return {
+      time: hour.time,
+      temp_c: hour.temp_c,
+      humidity: hour.humidity,
+      wind_kph: hour.wind_kph,
+      precip_mm: hour.precip_mm,
+      frictionScore: Math.round(score),
+      rating: scoreToRating(score),
+      isOptimal: score >= 4,
+      isDry,
+      warnings,
+    };
+  });
+}
+
+/**
+ * Calculate precipitation context from hourly data
+ */
+export function calculatePrecipitationContext(
+  hourly: Array<{
+    time: string;
+    precip_mm: number;
+  }>
+): PrecipitationContext {
+  const now = new Date();
+
+  let last24h = 0;
+  let last48h = 0;
+  let next24h = 0;
+
+  hourly.forEach((hour) => {
+    const hourTime = new Date(hour.time);
+    const diffHours = (now.getTime() - hourTime.getTime()) / (1000 * 60 * 60);
+
+    if (diffHours <= 24 && diffHours >= 0) {
+      last24h += hour.precip_mm;
+    }
+    if (diffHours <= 48 && diffHours >= 0) {
+      last48h += hour.precip_mm;
+    }
+    if (diffHours >= -24 && diffHours < 0) {
+      next24h += hour.precip_mm;
+    }
+  });
+
+  return {
+    last24h: Math.round(last24h * 10) / 10,
+    last48h: Math.round(last48h * 10) / 10,
+    next24h: Math.round(next24h * 10) / 10,
+  };
+}
+
+/**
+ * Analyze hourly forecast for optimal climbing windows (enhanced version)
+ */
+export function findOptimalWindowsEnhanced(
+  hourlyConditions: HourlyCondition[]
+): OptimalWindow[] {
+  const windows: OptimalWindow[] = [];
+  let currentWindow: { start: number; hours: HourlyCondition[] } | null = null;
+
+  hourlyConditions.forEach((hour, index) => {
+    if (hour.frictionScore >= 4) {
+      // Good hour, add to current window or start new one
+      if (!currentWindow) {
+        currentWindow = { start: index, hours: [hour] };
+      } else {
+        currentWindow.hours.push(hour);
+      }
+    } else {
+      // Bad hour, close current window if exists
+      if (currentWindow && currentWindow.hours.length >= 2) {
+        const avgScore = currentWindow.hours.reduce((sum, h) => sum + h.frictionScore, 0) / currentWindow.hours.length;
+        windows.push({
+          startTime: currentWindow.hours[0].time,
+          endTime: currentWindow.hours[currentWindow.hours.length - 1].time,
+          avgFrictionScore: Math.round(avgScore * 10) / 10,
+          rating: scoreToRating(avgScore),
+          hourCount: currentWindow.hours.length,
+        });
+      }
+      currentWindow = null;
+    }
+  });
+
+  // Close last window if exists
+  if (currentWindow && currentWindow.hours.length >= 2) {
+    const avgScore = currentWindow.hours.reduce((sum, h) => sum + h.frictionScore, 0) / currentWindow.hours.length;
+    windows.push({
+      startTime: currentWindow.hours[0].time,
+      endTime: currentWindow.hours[currentWindow.hours.length - 1].time,
+      avgFrictionScore: Math.round(avgScore * 10) / 10,
+      rating: scoreToRating(avgScore),
+      hourCount: currentWindow.hours.length,
+    });
+  }
+
+  return windows;
+}
+
+/**
+ * Analyze hourly forecast for optimal climbing windows (legacy version for backward compatibility)
  */
 export function findOptimalWindows(
   hourly: Array<{

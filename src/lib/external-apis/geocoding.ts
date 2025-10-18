@@ -40,20 +40,43 @@ export async function searchLocations(
     url.searchParams.append('language', 'en');
     url.searchParams.append('format', 'json');
 
+    console.log('[Geocoding] Fetching location:', {
+      query,
+      limit,
+      url: url.toString(),
+    });
+
     const response = await fetch(url.toString(), {
       headers: {
         'User-Agent': 'temps.rocks',
       },
     });
 
+    console.log('[Geocoding] Response status:', response.status);
+
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error('[Geocoding] API error response:', {
+        status: response.status,
+        statusText: response.statusText,
+        body: errorText,
+      });
       throw new Error(`Geocoding API error: ${response.status}`);
     }
 
     const data: GeocodingResponse = await response.json();
+    console.log('[Geocoding] Found results:', {
+      query,
+      count: data.results?.length || 0,
+      results: data.results?.map(r => ({ name: r.name, country: r.country })),
+    });
     return data.results || [];
   } catch (error) {
-    console.error('Geocoding API error:', error);
+    console.error('[Geocoding] Error:', {
+      query,
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    });
     throw error;
   }
 }

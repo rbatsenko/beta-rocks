@@ -56,17 +56,39 @@ export async function getWeatherForecast(
     url.searchParams.append("timezone", "auto");
     url.searchParams.append("forecast_days", days.toString());
 
+    console.log('[Weather] Fetching forecast:', {
+      lat,
+      lon,
+      days,
+      url: url.toString(),
+    });
+
     const response = await fetch(url.toString(), {
       headers: {
         "User-Agent": "temps.rocks",
       },
     });
 
+    console.log('[Weather] Response status:', response.status);
+
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error('[Weather] API error response:', {
+        status: response.status,
+        statusText: response.statusText,
+        body: errorText,
+      });
       throw new Error(`Open-Meteo API error: ${response.status}`);
     }
 
     const data = await response.json();
+    console.log('[Weather] Received forecast data:', {
+      lat,
+      lon,
+      currentTemp: data.current?.temperature_2m,
+      hourlyDataPoints: data.hourly?.time?.length || 0,
+      dailyDataPoints: data.daily?.time?.length || 0,
+    });
 
     return {
       current: {
@@ -96,7 +118,12 @@ export async function getWeatherForecast(
       })),
     };
   } catch (error) {
-    console.error("Open-Meteo API error:", error);
+    console.error('[Weather] Error:', {
+      lat,
+      lon,
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    });
     throw error;
   }
 }
