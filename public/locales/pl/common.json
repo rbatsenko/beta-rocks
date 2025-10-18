@@ -37,6 +37,15 @@
     "poor": "Słabo",
     "nope": "Dramat"
   },
+  "reasons": {
+    "perfectTemp": "Idealna temperatura ({{temp}}°C)",
+    "tempTooHigh": "Za ciepło - palce mogą się ślizgać",
+    "coldGoodFriction": "Zimno ale dobre dla {{rockType}}",
+    "idealHumidity": "Idealna wilgotność ({{humidity}}%)",
+    "lowHumidityGranite": "Niska wilgotność pomaga na granicie",
+    "readyInHours": "Gotowe do wspinki za ~{{hours}} godzin",
+    "acceptable": "Warunki akceptowalne"
+  },
   "disambiguation": {
     "foundMultipleAreas": "Znaleziono {{count}} rejonów wspinaczkowych dla \"{{location}}\". Wybierz jeden:",
     "foundMultipleLocations": "Znaleziono wiele lokalizacji dla \"{{location}}\". Wybierz jedną:",
@@ -69,8 +78,8 @@
     "low": "Minimalna",
     "rain": "Deszcz",
     "wind": "Wiatr",
-    "dry": "Suche",
-    "wet": "Mokre",
+    "dry": "Sucho",
+    "wet": "Mokro",
     "precipitationContext": "Kontekst opadów",
     "last24h": "Ostatnie 24h",
     "last48h": "Ostatnie 48h",

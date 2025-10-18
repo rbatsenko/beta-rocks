@@ -37,6 +37,15 @@
     "poor": "Poor",
     "nope": "Nope"
   },
+  "reasons": {
+    "perfectTemp": "Perfect temperature ({{temp}}°C)",
+    "tempTooHigh": "Temperature too high - fingers may slip",
+    "coldGoodFriction": "Cold but good for {{rockType}} friction",
+    "idealHumidity": "Ideal humidity ({{humidity}}%)",
+    "lowHumidityGranite": "Low humidity aids friction on granite",
+    "readyInHours": "Will be ready to climb in ~{{hours}} hours",
+    "acceptable": "Conditions are acceptable"
+  },
   "disambiguation": {
     "foundMultipleAreas": "Found {{count}} climbing areas for \"{{location}}\". Please choose one:",
     "foundMultipleLocations": "Found multiple locations for \"{{location}}\". Please choose one:",

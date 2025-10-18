@@ -108,6 +108,54 @@ const ChatInterface = () => {
     return hour >= 19 || hour < 7;
   };
 
+  // Translate rating strings
+  const translateRating = (rating: string): string => {
+    const ratingLower = rating.toLowerCase();
+    const key = `ratings.${ratingLower}`;
+    return t(key);
+  };
+
+  // Translate reason strings from backend
+  const translateReason = (reason: string): string => {
+    // Extract temperature from "Perfect temperature (X°C)"
+    const perfectTempMatch = reason.match(/Perfect temperature \((\d+)°C\)/);
+    if (perfectTempMatch) {
+      return t('reasons.perfectTemp', { temp: perfectTempMatch[1] });
+    }
+
+    // Extract humidity from "Ideal humidity (X%)"
+    const idealHumidityMatch = reason.match(/Ideal humidity \((\d+)%\)/);
+    if (idealHumidityMatch) {
+      return t('reasons.idealHumidity', { humidity: idealHumidityMatch[1] });
+    }
+
+    // Extract hours from "Will be ready to climb in ~X hours"
+    const readyInHoursMatch = reason.match(/Will be ready to climb in ~(\d+) hours/);
+    if (readyInHoursMatch) {
+      return t('reasons.readyInHours', { hours: readyInHoursMatch[1] });
+    }
+
+    // Extract rock type from "Cold but good for X friction"
+    const coldFrictionMatch = reason.match(/Cold but good for (\w+) friction/);
+    if (coldFrictionMatch) {
+      return t('reasons.coldGoodFriction', { rockType: coldFrictionMatch[1] });
+    }
+
+    // Simple string matches
+    if (reason === "Temperature too high - fingers may slip") {
+      return t('reasons.tempTooHigh');
+    }
+    if (reason === "Low humidity aids friction on granite") {
+      return t('reasons.lowHumidityGranite');
+    }
+    if (reason === "Conditions are acceptable") {
+      return t('reasons.acceptable');
+    }
+
+    // Return original if no match
+    return reason;
+  };
+
   const exampleQueries = [
     {
       display: t('welcome.exampleQueries.query1.display'),
@@ -328,7 +376,7 @@ const ChatInterface = () => {
                                       )}
                                     </div>
                                     <div className="font-medium">
-                                      {t('conditions.rating')}: {conditionsResult.rating} ({conditionsResult.frictionScore}
+                                      {t('conditions.rating')}: {translateRating(conditionsResult.rating)} ({conditionsResult.frictionScore}
                                       /5)
                                     </div>
                                     {conditionsResult.warnings && conditionsResult.warnings.length > 0 && (
@@ -338,7 +386,7 @@ const ChatInterface = () => {
                                     )}
                                     {conditionsResult.reasons && conditionsResult.reasons.length > 0 && (
                                       <div className="text-sm opacity-80">
-                                        {conditionsResult.reasons.join(", ")}
+                                        {conditionsResult.reasons.map(translateReason).join(", ")}
                                       </div>
                                     )}
                                   </div>
