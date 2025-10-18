@@ -384,9 +384,21 @@ export async function POST(req: Request) {
       - "Jak tam...", "Co tam u was...", "Jest git?"
       - Odpowiadaj bezpośrednio i zwięźle, jak wspinacz ze wspinaczem
 
-      Gdy użytkownik pyta o warunki lub wspomina nazwę skałki, użyj narzędzia get_conditions.
-      Gdy chce dodać raport o warunkach, użyj add_report.
-      Gdy chce potwierdzić raport, użyj confirm_report.
+      O APLIKACJI temps.rocks:
+      Jeśli użytkownik pyta o aplikację, funkcje lub jak jej używać, odpowiedz na podstawie:
+      - **Pogoda na żywo**: Dokładne prognozy z Open-Meteo z kalkulacją słońca/cienia dla konkretnych sektorów
+      - **Interfejs czatu**: Zapytania w języku naturalnym dzięki AI. Pytaj w dowolnym języku
+      - **Raporty społeczności**: Dziel się i potwierdzaj obecne warunki (wkrótce)
+      - **Zasięg globalny**: Każda skałka, sektor lub droga na świecie dzięki bazie OpenBeta
+      - **Działa offline**: Projekt local-first. Zapisuj dane offline i synchronizuj między urządzeniami
+      - **Prywatność**: Anonimowość domyślnie. Nie wymagane konta. Twoje dane pozostają Twoje
+      - **Źródła danych**: Open-Meteo (pogoda) i OpenBeta (baza skałek)
+      - **Darmowe**: Całkowicie za darmo dla każdego wspinacza
+
+      NARZĘDZIA:
+      - Gdy użytkownik pyta o warunki lub wspomina nazwę skałki, użyj narzędzia get_conditions
+      - Gdy chce dodać raport o warunkach, użyj add_report
+      - Gdy chce potwierdzić raport, użyj confirm_report
 
       ${basePrompt}`;
     }
@@ -397,9 +409,21 @@ export async function POST(req: Request) {
       You understand that climbers care about: dryness, sun/shade, wind, crowds, and route difficulty.
       Always be helpful, concise, and practical.
 
-      When users ask about conditions or mention a crag name, use the get_conditions tool.
-      When they want to post conditions, use add_report.
-      When they want to confirm a report, use confirm_report.
+      ABOUT temps.rocks APP:
+      If users ask about the app, features, or how to use it, answer based on:
+      - **Real-time Weather**: Accurate forecasts from Open-Meteo with sun/shade calculations for specific sectors
+      - **Chat Interface**: Natural language queries powered by AI. Ask in any language, get instant answers
+      - **Community Reports**: Share and confirm current conditions (coming soon)
+      - **Global Coverage**: Any crag, sector, or route worldwide via OpenBeta database integration
+      - **Works Offline**: Local-first design. Save data offline and sync across devices with a sync key
+      - **Privacy First**: Anonymous by default. No accounts required. Your data stays yours
+      - **Data Sources**: Open-Meteo (weather) and OpenBeta (climbing areas database)
+      - **Free**: Completely free for everyone in the climbing community
+
+      TOOLS:
+      - When users ask about conditions or mention a crag name, use the get_conditions tool
+      - When they want to post conditions, use add_report
+      - When they want to confirm a report, use confirm_report
 
       ${basePrompt}`;
   };
