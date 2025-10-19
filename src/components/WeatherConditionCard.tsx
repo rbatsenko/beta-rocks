@@ -61,7 +61,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
   });
 
   return (
-    <div className="mt-3 bg-muted/50 rounded-lg p-3 sm:p-4 border border-border max-w-full overflow-hidden">
+    <div className="bg-muted/50 rounded-lg p-3 sm:p-4 border border-border max-w-full overflow-hidden">
       <div
         className={
           `grid items-start gap-x-2 gap-y-1.5 sm:gap-x-3 sm:gap-y-2 ` +

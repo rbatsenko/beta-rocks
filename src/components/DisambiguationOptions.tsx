@@ -58,7 +58,7 @@ export const DisambiguationOptions = memo(function DisambiguationOptions({
   }, [queryTemplate, onOptionSelect, scrollToBottom]);
 
   return (
-    <div className="mt-3 space-y-2">
+    <div className="space-y-2">
       <p className="text-sm font-medium">{displayMessage}</p>
       <div className="flex flex-wrap gap-2 overflow-visible">
         {result.options.map((option, idx) => (

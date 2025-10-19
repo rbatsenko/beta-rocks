@@ -294,7 +294,11 @@ const ChatInterface = () => {
                             if (hasToolResults) {
                               return null;
                             }
-                            return <Response key={i}>{part.text}</Response>;
+                            return (
+                              <div key={i} className="pt-1">
+                                <Response>{part.text}</Response>
+                              </div>
+                            );
                           }
 
                           // Render tool results for assistant messages

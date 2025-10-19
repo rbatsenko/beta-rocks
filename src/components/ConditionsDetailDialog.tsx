@@ -152,7 +152,10 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
     const grouped: Record<string, typeof data.hourlyConditions> = {};
     const now = new Date();
 
-    data.hourlyConditions.forEach((hour) => {
+    // Filter to only show current hour and future hours
+    const futureHours = data.hourlyConditions.filter((hour) => new Date(hour.time) >= now);
+
+    futureHours.forEach((hour) => {
       const date = new Date(hour.time);
       const isToday = date.toDateString() === now.toDateString();
 
@@ -253,9 +256,15 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
 
     data.optimalWindows.forEach((window) => {
       const startDate = new Date(window.startTime);
+      const endDate = new Date(window.endTime);
 
-      // Skip windows outside the next 5 days
-      if (startDate < today || startDate >= fiveDaysFromNow) return;
+      // Skip windows that have already ended or are more than 5 days away
+      if (endDate < now || startDate >= fiveDaysFromNow) return;
+
+      // Skip windows with zero or very short duration (less than 30 minutes)
+      const durationMs = endDate.getTime() - startDate.getTime();
+      const durationMinutes = durationMs / (1000 * 60);
+      if (durationMinutes < 30) return;
 
       const windowDay = new Date(
         startDate.getFullYear(),
@@ -918,13 +927,21 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
                       </div>
                     </div>
                   </div>
-                  {data.dailyForecast.map((day, idx) => {
-                    const dayDate = new Date(day.date);
-                    const now = new Date();
-                    const isToday = dayDate.toDateString() === now.toDateString();
-                    const tomorrow = new Date(now);
-                    tomorrow.setDate(tomorrow.getDate() + 1);
-                    const isTomorrow = dayDate.toDateString() === tomorrow.toDateString();
+                  {data.dailyForecast
+                    .filter((day) => {
+                      // Filter out any days in the past
+                      const dayDate = new Date(day.date);
+                      const now = new Date();
+                      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                      return dayDate >= today;
+                    })
+                    .map((day, idx) => {
+                      const dayDate = new Date(day.date);
+                      const now = new Date();
+                      const isToday = dayDate.toDateString() === now.toDateString();
+                      const tomorrow = new Date(now);
+                      tomorrow.setDate(tomorrow.getDate() + 1);
+                      const isTomorrow = dayDate.toDateString() === tomorrow.toDateString();
 
                     // Check if this is in the less reliable forecast period (days 8-14)
                     const isLongTerm = idx >= 7;

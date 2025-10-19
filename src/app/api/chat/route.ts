@@ -231,14 +231,18 @@ const tools = {
         }
 
         // Prepare hourly data with weather codes
-        const hourlyData = forecast.hourly.map((h) => ({
-          time: h.time,
-          temp_c: h.temperature,
-          humidity: h.humidity,
-          wind_kph: h.windSpeed,
-          precip_mm: h.precipitation,
-          weatherCode: h.weatherCode,
-        }));
+        // Filter to only include current hour and future hours
+        const now = new Date();
+        const hourlyData = forecast.hourly
+          .filter((h) => new Date(h.time) >= now)
+          .map((h) => ({
+            time: h.time,
+            temp_c: h.temperature,
+            humidity: h.humidity,
+            wind_kph: h.windSpeed,
+            precip_mm: h.precipitation,
+            weatherCode: h.weatherCode,
+          }));
 
         // Compute conditions
         const conditions = computeConditions(
