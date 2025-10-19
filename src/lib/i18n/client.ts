@@ -75,31 +75,33 @@ let initPromise: Promise<I18nInstance> | null = null;
 
 export const initI18n = (): Promise<I18nInstance> => {
   if (!initPromise) {
-    const initialLanguage = getInitialLanguage();
-    initPromise = i18n
-      .use(initReactI18next)
-      .init({
-        lng: initialLanguage,
-        fallbackLng: i18nConfig.defaultLocale,
-        supportedLngs: i18nConfig.locales,
-        ns: ['common'],
-        defaultNS: 'common',
-        resources,
-        interpolation: {
-          escapeValue: false,
-        },
-        react: {
-          useSuspense: false,
-        },
-      })
-      .then(() => {
-        const resolvedLanguage = resolveLocale(i18n.language);
-        if (resolvedLanguage !== initialLanguage) {
-          return i18n.changeLanguage(resolvedLanguage);
-        }
-        return i18n;
-      })
-      .then(() => i18n);
+    initPromise = (async () => {
+      const initialLanguage = getInitialLanguage();
+
+      await i18n
+        .use(initReactI18next)
+        .init({
+          lng: initialLanguage,
+          fallbackLng: i18nConfig.defaultLocale,
+          supportedLngs: i18nConfig.locales,
+          ns: ['common'],
+          defaultNS: 'common',
+          resources,
+          interpolation: {
+            escapeValue: false,
+          },
+          react: {
+            useSuspense: false,
+          },
+        });
+
+      const resolvedLanguage = resolveLocale(i18n.language);
+      if (resolvedLanguage !== initialLanguage) {
+        await i18n.changeLanguage(resolvedLanguage);
+      }
+
+      return i18n;
+    })();
   }
 
   return initPromise;

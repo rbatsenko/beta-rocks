@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/integrations/supabase/client";
+import {
+  getSupabaseClient,
+  isSupabaseConfigured,
+} from "@/integrations/supabase/client";
 
 /**
  * GET /api/reports
@@ -14,6 +17,15 @@ import { supabase } from "@/integrations/supabase/client";
  */
 export async function GET(request: NextRequest) {
   try {
+    if (!isSupabaseConfigured) {
+      console.error("Supabase environment variables are not configured.");
+      return NextResponse.json(
+        { error: "Supabase client is not configured" },
+        { status: 500 },
+      );
+    }
+
+    const supabase = getSupabaseClient();
     const cragId = request.nextUrl.searchParams.get("cragId");
     const sectorId = request.nextUrl.searchParams.get("sectorId");
     const routeId = request.nextUrl.searchParams.get("routeId");
@@ -77,6 +89,15 @@ export async function GET(request: NextRequest) {
  */
 export async function POST(request: NextRequest) {
   try {
+    if (!isSupabaseConfigured) {
+      console.error("Supabase environment variables are not configured.");
+      return NextResponse.json(
+        { error: "Supabase client is not configured" },
+        { status: 500 },
+      );
+    }
+
+    const supabase = getSupabaseClient();
     const body = await request.json();
     const {
       cragId,
