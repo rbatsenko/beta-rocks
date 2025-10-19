@@ -39,7 +39,7 @@
   },
   "reasons": {
     "perfectTemp": "Idealna temperatura ({{temp}}°C)",
-    "tempTooHigh": "Za ciepło - dla optymalnego tarcia może potrzebny wiatr",
+    "tempTooHigh": "Za ciepło - dla optymalnego tarcia może być potrzebny wiatr",
     "coldGoodFriction": "Zimno ale dobrze dla {{rockType}}",
     "idealHumidity": "Idealna wilgotność ({{humidity}}%)",
     "lowHumidityGranite": "Niska wilgotność pomaga na granicie",
@@ -49,12 +49,12 @@
   "warnings": {
     "tooWarm": "Za ciepło dla {{rockType}} ({{temp}}°C)",
     "coldSuboptimal": "Zimno i nieoptymalnie dla {{rockType}}",
-    "highHumidity": "Wysoka wilgotność ({{humidity}}%) - skała może być śliska",
-    "wetDangerousSandstone": "Skała mokra - niebezpiecznie (piaskowiec słabnie gdy mokry)",
+    "highHumidity": "Wysoka wilgotność ({{humidity}}%) - może być problem z tarciem",
+    "wetDangerousSandstone": "Piaskowiec mokry - nie wspinaj się póki całkiem nie wyschnie!",
     "wetSlippery": "Skała mokra - ślisko",
-    "veryHighWinds": "Bardzo silny wiatr ({{wind}} km/h) - możliwość zerwania",
+    "veryHighWinds": "Bardzo mocny wiatr ({{wind}} km/h) - może być problem ze wspinaniem",
     "highWind": "Silny wiatr ({{wind}} km/h)",
-    "currentlyWetDangerous": "Obecnie mokro - niebezpiecznie",
+    "currentlyWetDangerous": "Obecnie mokro - może być problem ze wspinaniem",
     "currentlyWet": "Obecnie mokro"
   },
   "weather": {
