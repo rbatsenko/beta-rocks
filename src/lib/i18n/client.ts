@@ -7,6 +7,11 @@ import enCommon from '../../../public/locales/en/common.json';
 import enGBCommon from '../../../public/locales/en-GB/common.json';
 import plCommon from '../../../public/locales/pl/common.json';
 import ukCommon from '../../../public/locales/uk/common.json';
+import esESCommon from '../../../public/locales/es-ES/common.json';
+import frFRCommon from '../../../public/locales/fr-FR/common.json';
+import itITCommon from '../../../public/locales/it-IT/common.json';
+import deDECommon from '../../../public/locales/de-DE/common.json';
+import deATCommon from '../../../public/locales/de-AT/common.json';
 
 const resources = {
   en: {
@@ -20,6 +25,21 @@ const resources = {
   },
   uk: {
     common: ukCommon,
+  },
+  'es-ES': {
+    common: esESCommon,
+  },
+  'fr-FR': {
+    common: frFRCommon,
+  },
+  'it-IT': {
+    common: itITCommon,
+  },
+  'de-DE': {
+    common: deDECommon,
+  },
+  'de-AT': {
+    common: deATCommon,
   },
 };
 
@@ -52,6 +72,21 @@ const getPreferredLanguage = (): Locale | null => {
   }
   if (detectedCountry === 'UA') {
     return 'uk';
+  }
+  if (detectedCountry === 'ES') {
+    return 'es-ES';
+  }
+  if (detectedCountry === 'FR') {
+    return 'fr-FR';
+  }
+  if (detectedCountry === 'IT') {
+    return 'it-IT';
+  }
+  if (detectedCountry === 'DE') {
+    return 'de-DE';
+  }
+  if (detectedCountry === 'AT') {
+    return 'de-AT';
   }
 
   const browserLanguages: string[] = Array.isArray(navigator.languages) && navigator.languages.length
