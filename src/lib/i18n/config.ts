@@ -35,13 +35,20 @@ export const matchLocale = (language?: string | null): Locale | null => {
 
   const normalizedLanguage = language.toLowerCase();
 
-  for (const { value, lowerValue } of localeDescriptors) {
-    if (
-      normalizedLanguage === lowerValue ||
-      normalizedLanguage.startsWith(`${lowerValue}-`)
-    ) {
-      return value;
-    }
+  const exactMatch = localeDescriptors.find(
+    ({ lowerValue }) => lowerValue === normalizedLanguage,
+  );
+  if (exactMatch) {
+    return exactMatch.value;
+  }
+
+  const partialMatch = localeDescriptors
+    .slice()
+    .sort((a, b) => b.lowerValue.length - a.lowerValue.length)
+    .find(({ lowerValue }) => normalizedLanguage.startsWith(`${lowerValue}-`));
+
+  if (partialMatch) {
+    return partialMatch.value;
   }
 
   return null;
