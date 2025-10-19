@@ -12,6 +12,9 @@ import frFRCommon from '../../../public/locales/fr-FR/common.json';
 import itITCommon from '../../../public/locales/it-IT/common.json';
 import deDECommon from '../../../public/locales/de-DE/common.json';
 import deATCommon from '../../../public/locales/de-AT/common.json';
+import slSICommon from '../../../public/locales/sl-SI/common.json';
+import svSECommon from '../../../public/locales/sv-SE/common.json';
+import nbNOCommon from '../../../public/locales/nb-NO/common.json';
 
 const resources = {
   en: {
@@ -40,6 +43,15 @@ const resources = {
   },
   'de-AT': {
     common: deATCommon,
+  },
+  'sl-SI': {
+    common: slSICommon,
+  },
+  'sv-SE': {
+    common: svSECommon,
+  },
+  'nb-NO': {
+    common: nbNOCommon,
   },
 };
 
@@ -87,6 +99,15 @@ const getPreferredLanguage = (): Locale | null => {
   }
   if (detectedCountry === 'AT') {
     return 'de-AT';
+  }
+  if (detectedCountry === 'SI') {
+    return 'sl-SI';
+  }
+  if (detectedCountry === 'SE') {
+    return 'sv-SE';
+  }
+  if (detectedCountry === 'NO') {
+    return 'nb-NO';
   }
 
   const browserLanguages: string[] = Array.isArray(navigator.languages) && navigator.languages.length

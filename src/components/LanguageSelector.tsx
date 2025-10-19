@@ -21,6 +21,9 @@ const languageConfig: Record<Locale, { name: string; flag: string }> = {
   'it-IT': { name: 'Italiano', flag: '🇮🇹' },
   'de-DE': { name: 'Deutsch (Deutschland)', flag: '🇩🇪' },
   'de-AT': { name: 'Deutsch (Österreich)', flag: '🇦🇹' },
+  'sl-SI': { name: 'Slovenščina', flag: '🇸🇮' },
+  'sv-SE': { name: 'Svenska', flag: '🇸🇪' },
+  'nb-NO': { name: 'Norsk (Bokmål)', flag: '🇳🇴' },
 };
 
 export function LanguageSelector() {
