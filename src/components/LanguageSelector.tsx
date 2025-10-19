@@ -15,6 +15,7 @@ const languageConfig: Record<Locale, { name: string; flag: string }> = {
   en: { name: 'English (US)', flag: '🇺🇸' },
   'en-GB': { name: 'English (UK)', flag: '🇬🇧' },
   pl: { name: 'Polski', flag: '🇵🇱' },
+  uk: { name: 'Українська', flag: '🇺🇦' },
 };
 
 export function LanguageSelector() {

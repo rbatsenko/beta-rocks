@@ -86,15 +86,9 @@ export function FeaturesDialog({ open, onOpenChange }: FeaturesDialogProps) {
             })}
           </div>
           <div className="mt-2 pt-4 border-t border-border text-sm text-muted-foreground space-y-1">
-            <p>
-              Free climbing conditions for everyone. Built with ❤️ for the climbing community.
-            </p>
-            <p>
-              Data from Open-Meteo and OpenBeta. Community-powered reports.
-            </p>
-            <p>
-              © 2025 temps.rocks. All rights reserved.
-            </p>
+            <p>{t('footer.description')}</p>
+            <p>{t('footer.attribution')}</p>
+            <p>{t('footer.copyright')}</p>
           </div>
         </ScrollArea>
       </DialogContent>

@@ -87,6 +87,14 @@
     "thunderstormSlightHail": "Thunderstorm with slight hail",
     "thunderstormHeavyHail": "Thunderstorm with heavy hail"
   },
+  "timeframes": {
+    "now": "now",
+    "today": "today",
+    "tomorrow": "tomorrow",
+    "thisAfternoon": "this afternoon",
+    "thisEvening": "this evening",
+    "tonight": "tonight"
+  },
   "disambiguation": {
     "foundMultipleAreas": "Found {{count}} climbing areas for \"{{location}}\". Please choose one:",
     "foundMultipleLocations": "Found multiple locations for \"{{location}}\". Please choose one:",
@@ -95,7 +103,44 @@
   "footer": {
     "about": "About",
     "privacy": "Privacy",
-    "github": "GitHub"
+    "github": "GitHub",
+    "brand": "temps.rocks",
+    "description": "Free climbing conditions for everyone. Built with ❤️ for the climbing community.",
+    "attribution": "Data from Open-Meteo and OpenBeta. Community-powered reports.",
+    "copyright": "© 2025 temps.rocks. All rights reserved."
+  },
+  "features": {
+    "heading": "Everything You Need",
+    "subheading": "Comprehensive climbing conditions at your fingertips, completely free",
+    "realTimeWeather": {
+      "title": "Real-time Weather",
+      "description": "Accurate forecasts from Open-Meteo with sun/shade calculations for specific sectors"
+    },
+    "chatInterface": {
+      "title": "Chat Interface",
+      "description": "Natural language queries powered by AI. Ask in any language, get instant answers"
+    },
+    "communityReports": {
+      "title": "Community Reports",
+      "description": "Share and confirm current conditions. Help fellow climbers with real-time updates"
+    },
+    "globalCoverage": {
+      "title": "Global Coverage",
+      "description": "Any crag, sector, or route worldwide via OpenBeta database integration"
+    },
+    "worksOffline": {
+      "title": "Works Offline",
+      "description": "Local-first design. Save data offline and sync across devices with a sync key"
+    },
+    "privacyFirst": {
+      "title": "Privacy First",
+      "description": "Anonymous by default. No accounts required. Your data stays yours"
+    }
+  },
+  "ui": {
+    "toggleTheme": "Toggle theme",
+    "selectLanguage": "Select language",
+    "aboutApp": "About app"
   },
   "dialog": {
     "close": "Close",
@@ -150,6 +195,7 @@
     "fairConditions": "Fair conditions",
     "poorConditions": "Poor conditions",
     "lessReliable": "Days 8-14: Less reliable forecast",
-    "lessCertain": "LESS CERTAIN"
+    "lessCertain": "LESS CERTAIN",
+    "todayBadge": "TODAY"
   }
 }
