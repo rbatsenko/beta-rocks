@@ -1,48 +1,12 @@
 'use client';
 
-import i18next from 'i18next';
+import i18next, { type i18n as I18nInstance } from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import { i18nConfig } from './config';
+import { i18nConfig, matchLocale, resolveLocale, type Locale } from './config';
 import enCommon from '../../../public/locales/en/common.json';
 import enGBCommon from '../../../public/locales/en-GB/common.json';
 import plCommon from '../../../public/locales/pl/common.json';
 import ukCommon from '../../../public/locales/uk/common.json';
-
-const getInitialLanguage = (): string => {
-  if (typeof window !== 'undefined') {
-    // First check if user has previously selected a language
-    const savedLanguage = localStorage.getItem('preferredLanguage');
-    if (savedLanguage && (i18nConfig.locales as readonly string[]).includes(savedLanguage)) {
-      return savedLanguage;
-    }
-
-    // Check geo-IP detected country from cookie
-    const detectedCountry = document.cookie
-      .split('; ')
-      .find(row => row.startsWith('detected-country='))
-      ?.split('=')[1];
-
-    if (detectedCountry === 'GB') {
-      return 'en-GB';
-    } else if (detectedCountry === 'PL') {
-      return 'pl';
-    } else if (detectedCountry === 'UA') {
-      return 'uk';
-    }
-
-    // Auto-detect from browser language
-    const browserLang = navigator.language.toLowerCase();
-
-    // Check for exact match (e.g., 'pl' or 'en')
-    for (const locale of i18nConfig.locales) {
-      if (browserLang === locale || browserLang.startsWith(`${locale}-`)) {
-        return locale;
-      }
-    }
-  }
-
-  return i18nConfig.defaultLocale;
-};
 
 const resources = {
   en: {
@@ -59,25 +23,84 @@ const resources = {
   },
 };
 
-const initI18next = () => {
-  i18next
-    .use(initReactI18next)
-    .init({
-      lng: getInitialLanguage(),
-      fallbackLng: i18nConfig.defaultLocale,
-      supportedLngs: i18nConfig.locales,
-      ns: ['common'],
-      defaultNS: 'common',
-      resources,
-      interpolation: {
-        escapeValue: false, // React already escapes values
-      },
-      react: {
-        useSuspense: false, // Important for App Router
-      },
-    });
+export const i18n = i18next.createInstance();
 
-  return i18next;
+const getPreferredLanguage = (): Locale | null => {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
+  const savedLanguage = localStorage.getItem('preferredLanguage');
+  const matchedSavedLanguage = matchLocale(savedLanguage);
+  if (matchedSavedLanguage) {
+    if (savedLanguage !== matchedSavedLanguage) {
+      localStorage.setItem('preferredLanguage', matchedSavedLanguage);
+    }
+    return matchedSavedLanguage;
+  }
+
+  const detectedCountry = document.cookie
+    .split('; ')
+    .find((row) => row.startsWith('detected-country='))
+    ?.split('=')[1];
+
+  if (detectedCountry === 'GB') {
+    return 'en-GB';
+  }
+  if (detectedCountry === 'PL') {
+    return 'pl';
+  }
+  if (detectedCountry === 'UA') {
+    return 'uk';
+  }
+
+  const browserLanguages: string[] = Array.isArray(navigator.languages) && navigator.languages.length
+    ? [...navigator.languages]
+    : [navigator.language];
+
+  for (const browserLanguage of browserLanguages) {
+    const matchedBrowserLanguage = matchLocale(browserLanguage);
+    if (matchedBrowserLanguage) {
+      return matchedBrowserLanguage;
+    }
+  }
+
+  return null;
 };
 
-export const i18n = initI18next();
+export const getInitialLanguage = (): Locale =>
+  getPreferredLanguage() ?? i18nConfig.defaultLocale;
+
+let initPromise: Promise<I18nInstance> | null = null;
+
+export const initI18n = (): Promise<I18nInstance> => {
+  if (!initPromise) {
+    const initialLanguage = getInitialLanguage();
+    initPromise = i18n
+      .use(initReactI18next)
+      .init({
+        lng: initialLanguage,
+        fallbackLng: i18nConfig.defaultLocale,
+        supportedLngs: i18nConfig.locales,
+        ns: ['common'],
+        defaultNS: 'common',
+        resources,
+        interpolation: {
+          escapeValue: false,
+        },
+        react: {
+          useSuspense: false,
+        },
+      })
+      .then(() => {
+        const resolvedLanguage = resolveLocale(i18n.language);
+        if (resolvedLanguage !== initialLanguage) {
+          return i18n.changeLanguage(resolvedLanguage);
+        }
+        return i18n;
+      })
+      .then(() => i18n);
+  }
+
+  return initPromise;
+};

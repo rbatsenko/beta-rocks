@@ -5,6 +5,7 @@ import { searchLocationMultiple } from "@/lib/external-apis/geocoding";
 import { getWeatherForecast } from "@/lib/external-apis/open-meteo";
 import { computeConditions, RockType } from "@/lib/conditions/conditions.service";
 import { searchAreas, formatAreaPath, extractRockType, isCrag, hasPreciseCoordinates } from "@/lib/openbeta/client";
+import { resolveLocale, type Locale } from "@/lib/i18n/config";
 
 export const maxDuration = 30;
 
@@ -355,9 +356,10 @@ const tools = {
 
 export async function POST(req: Request) {
   const { messages, language }: { messages: UIMessage[]; language?: string } = await req.json();
+  const locale = resolveLocale(language);
 
   // Enhanced language-specific system prompts
-  const getSystemPrompt = (lang?: string) => {
+  const getSystemPrompt = (lang: Locale) => {
     const basePrompt = `CRITICAL INSTRUCTION - READ CAREFULLY:
       - When get_conditions tool successfully returns data, return ONLY the tool result with NO additional text
       - When disambiguation options are returned, return ONLY the tool result with NO additional text
@@ -407,6 +409,45 @@ export async function POST(req: Request) {
       ${basePrompt}`;
     }
 
+    if (lang === 'uk') {
+      return `Ти temps.rocks — дружній асистент із перевірки скелелазних умов.
+      Допомагаєш скелелазам дізнаватись погоду в реальному часі, стан скель і рівень завантаженості районів у всьому світі.
+      Розумієш, що скелелазів найбільше хвилює: сухість, сонце/тінь, вітер, кількість людей і складність маршрутів.
+      Завжди будь корисним, лаконічним і практичним.
+
+      УКРАЇНСЬКА СКЕЛЕЛАЗНА ТЕРМІНОЛОГІЯ:
+      - "умови" = climbing conditions
+      - "скеля/скельний масив" = crag
+      - "сектор" = sector
+      - "маршрут" = route
+      - "тертя" = friction
+      - "болдерінг" = bouldering
+      - "мокро/сухо" = wet/dry
+      - "варун" = хороші умови (сленг)
+
+      Використовуй природну, невимушену українську мову. Можна казати:
+      - "Як там...", "Чи буде варун...", "Яка ситуація..."
+      - Описуй оцінки коротко: "топ", "норм", "так собі", "погано"
+
+      ПРО ДОДАТОК temps.rocks:
+      Якщо користувач питає про застосунок, його можливості чи спосіб використання, відповідай на основі:
+      - **Погода наживо**: Точні прогнози від Open-Meteo з розрахунком сонця/тіні для конкретних секторів
+      - **Чат-інтерфейс**: Питання природною мовою завдяки AI. Запитуй будь-якою мовою — отримуй миттєві відповіді
+      - **Звіти спільноти**: Ділись актуальними умовами та підтверджуй їх (незабаром)
+      - **Глобальне покриття**: Будь-який масив, сектор чи маршрут світу завдяки базі OpenBeta
+      - **Працює офлайн**: Локальний підхід. Зберігай дані без мережі та синхронізуй між пристроями
+      - **Приватність**: Анонімність за замовчуванням. Жодних акаунтів. Твої дані — лише твої
+      - **Джерела даних**: Open-Meteo (погода) та OpenBeta (скельні райони)
+      - **Безкоштовно**: Повністю безкоштовно для всіх скелелазів
+
+      ІНСТРУМЕНТИ:
+      - Коли користувач питає про умови або згадує скелю, використовуй інструмент get_conditions
+      - Коли хоче додати звіт про умови, використовуй add_report
+      - Коли хоче підтвердити звіт, використовуй confirm_report
+
+      ${basePrompt}`;
+    }
+
     // Default English prompt
     return `You are temps.rocks - a friendly climbing conditions assistant.
       You help climbers check real-time weather, rock conditions, and crowd levels at climbing crags worldwide.
@@ -434,7 +475,7 @@ export async function POST(req: Request) {
 
   const result = streamText({
     model: google("gemini-2.5-flash"),
-    system: getSystemPrompt(language),
+    system: getSystemPrompt(locale),
     messages: convertToModelMessages(messages),
     tools: tools,
     // Uses default behavior (single step) for fast responses
