@@ -6,6 +6,7 @@ import { i18nConfig } from './config';
 import enCommon from '../../../public/locales/en/common.json';
 import enGBCommon from '../../../public/locales/en-GB/common.json';
 import plCommon from '../../../public/locales/pl/common.json';
+import ukCommon from '../../../public/locales/uk/common.json';
 
 const getInitialLanguage = (): string => {
   if (typeof window !== 'undefined') {
@@ -25,6 +26,8 @@ const getInitialLanguage = (): string => {
       return 'en-GB';
     } else if (detectedCountry === 'PL') {
       return 'pl';
+    } else if (detectedCountry === 'UA') {
+      return 'uk';
     }
 
     // Auto-detect from browser language
@@ -50,6 +53,9 @@ const resources = {
   },
   pl: {
     common: plCommon,
+  },
+  uk: {
+    common: ukCommon,
   },
 };
 
