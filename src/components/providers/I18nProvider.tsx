@@ -2,18 +2,39 @@
 
 import { useEffect, useState } from 'react';
 import { I18nextProvider } from 'react-i18next';
-import { i18n } from '@/lib/i18n/client';
+import { getInitialLanguage, i18n, initI18n } from '@/lib/i18n/client';
+import { resolveLocale } from '@/lib/i18n/config';
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(i18n.isInitialized);
 
   useEffect(() => {
-    // Ensure i18n is initialized on the client
-    if (!i18n.isInitialized) {
-      i18n.init().then(() => setIsInitialized(true));
-    } else {
-      setIsInitialized(true);
-    }
+    let isMounted = true;
+
+    const initialize = async () => {
+      const instance = await initI18n();
+
+      if (!isMounted) {
+        return;
+      }
+
+      const desiredLanguage = getInitialLanguage();
+      const currentLanguage = resolveLocale(instance.language);
+
+      if (currentLanguage !== desiredLanguage) {
+        await instance.changeLanguage(desiredLanguage);
+      }
+
+      if (isMounted) {
+        setIsInitialized(true);
+      }
+    };
+
+    initialize();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   if (!isInitialized) {

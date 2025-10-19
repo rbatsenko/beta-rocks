@@ -1,0 +1,201 @@
+{
+  "header": {
+    "title": "temps.rocks"
+  },
+  "welcome": {
+    "heading": "Frag nach den Kletterbedingungen",
+    "description": "Hol dir Wetter in Echtzeit, Reibungsanalyse und die besten Kletterfenster für jedes Gebiet in den Alpen und darüber hinaus",
+    "exampleQueries": {
+      "query1": {
+        "display": "Wie schaut's morgen im Zillertal aus?",
+        "query": "Wie sind die Bedingungen im Zillertal (47.184, 11.871) morgen?"
+      },
+      "query2": {
+        "display": "Ist die Hohe Wand heute Nachmittag trocken?",
+        "query": "Ist die Hohe Wand (47.823, 16.037) heute Nachmittag trocken?"
+      },
+      "query3": {
+        "display": "Kommt gutes Wetter am Kanzianiberg fürs Wochenende?",
+        "query": "Wie sind die Bedingungen am Kanzianiberg (46.572, 13.908) am Wochenende?"
+      }
+    }
+  },
+  "chat": {
+    "analyzing": "Analysiere die Bedingungen...",
+    "thinking": "Am Überlegen...",
+    "inputPlaceholder": "Frag nach einem Klettergebiet, Sektor oder einer Tour..."
+  },
+  "conditions": {
+    "rating": "Bewertung",
+    "details": "Details",
+    "location": "Ort"
+  },
+  "ratings": {
+    "great": "Top",
+    "good": "Gut",
+    "fair": "Passt",
+    "poor": "Schwach",
+    "nope": "Lass es"
+  },
+  "reasons": {
+    "perfectTemp": "Perfekte Temperatur ({{temp}}°C)",
+    "tempTooHigh": "Zu warm - die Finger rutschen sonst",
+    "coldGoodFriction": "Frisch, aber super Reibung für {{rockType}}",
+    "idealHumidity": "Ideale Luftfeuchtigkeit ({{humidity}}%)",
+    "lowHumidityGranite": "Wenig Feuchte bringt mehr Grip auf Granit",
+    "readyInHours": "In ~{{hours}} Stunden kletterfit",
+    "acceptable": "Eh in Ordnung"
+  },
+  "warnings": {
+    "tooWarm": "Zu warm für {{rockType}} ({{temp}}°C)",
+    "coldSuboptimal": "Kalt und nicht ideal für {{rockType}}",
+    "highHumidity": "Hohe Luftfeuchte ({{humidity}}%) - der Fels kann schmierig sein",
+    "wetDangerousSandstone": "Fels ist nass - nicht klettern, vor allem Sandstein leidet",
+    "wetSlippery": "Fels ist nass - rutschige Bedingungen",
+    "veryHighWinds": "Sehr starker Wind ({{wind}} km/h) - Gefahr verblasen zu werden",
+    "highWind": "Starker Wind ({{wind}} km/h)",
+    "currentlyWetDangerous": "Gerade nass - gefährlich",
+    "currentlyWet": "Derzeit nass"
+  },
+  "weather": {
+    "clearSky": "Wolkenlos",
+    "mainlyClear": "Meistens klar",
+    "partlyCloudy": "Teilweise bewölkt",
+    "overcast": "Bedeckt",
+    "fog": "Nebel",
+    "depositingRimeFog": "Raureifnebel",
+    "lightDrizzle": "Leichter Niesel",
+    "moderateDrizzle": "Mäßiger Niesel",
+    "denseDrizzle": "Starker Niesel",
+    "lightFreezingDrizzle": "Leichter gefrierender Niesel",
+    "denseFreezingDrizzle": "Starker gefrierender Niesel",
+    "slightRain": "Leichter Regen",
+    "moderateRain": "Mittelstarker Regen",
+    "heavyRain": "Starker Regen",
+    "lightFreezingRain": "Leichter gefrierender Regen",
+    "heavyFreezingRain": "Starker gefrierender Regen",
+    "slightSnowFall": "Leichter Schneefall",
+    "moderateSnowFall": "Mittelstarker Schneefall",
+    "heavySnowFall": "Starker Schneefall",
+    "snowGrains": "Schneegriesel",
+    "slightRainShowers": "Leichte Schauer",
+    "moderateRainShowers": "Mittelstarke Schauer",
+    "violentRainShowers": "Heftige Schauer",
+    "slightSnowShowers": "Leichte Schneeschauer",
+    "heavySnowShowers": "Starke Schneeschauer",
+    "thunderstorm": "Gewitter",
+    "thunderstormSlightHail": "Gewitter mit kleinem Hagel",
+    "thunderstormHeavyHail": "Gewitter mit starkem Hagel"
+  },
+  "timeframes": {
+    "now": "jetzt",
+    "today": "heute",
+    "tomorrow": "morgen",
+    "thisAfternoon": "heute Nachmittag",
+    "thisEvening": "heute Abend",
+    "tonight": "heute Nacht"
+  },
+  "disambiguation": {
+    "foundMultipleAreas": "Es gibt {{count}} Kletterspots für \"{{location}}\". Such dir einen aus:",
+    "foundMultipleLocations": "Mehrere Orte für \"{{location}}\" gefunden. Bitte auswählen:",
+    "queryTemplate": "Bedingungen in {{name}} ({{latitude}}, {{longitude}})"
+  },
+  "footer": {
+    "about": "Über uns",
+    "privacy": "Datenschutz",
+    "github": "GitHub",
+    "brand": "temps.rocks",
+    "description": "Kostenlose Kletterinfos für alle. Mit ❤️ für die alpine Community gebaut.",
+    "attribution": "Daten von Open-Meteo und OpenBeta. Community-Reports.",
+    "copyright": "© 2025 temps.rocks. Alle Rechte vorbehalten."
+  },
+  "features": {
+    "heading": "Alles was du brauchst",
+    "subheading": "Alle Kletterbedingungen griffbereit, komplett gratis",
+    "realTimeWeather": {
+      "title": "Live-Wetter",
+      "description": "Exakte Open-Meteo-Prognosen mit Sonnen-/Schattenberechnung für einzelne Sektoren"
+    },
+    "chatInterface": {
+      "title": "Chat-Interface",
+      "description": "Natürlichsprachliche Fragen dank KI. Frag in jeder Sprache und bekomm sofort Antworten"
+    },
+    "communityReports": {
+      "title": "Community-Reports",
+      "description": "Teile und bestätige aktuelle Bedingungen. Hilf anderen Bergsportler:innen mit Live-Updates"
+    },
+    "globalCoverage": {
+      "title": "Globale Abdeckung",
+      "description": "Jeder Spot weltweit durch die OpenBeta-Integration"
+    },
+    "worksOffline": {
+      "title": "Offline nutzbar",
+      "description": "Local-first-Design. Speichere Daten offline und synchronisiere sie mit einem Schlüssel"
+    },
+    "privacyFirst": {
+      "title": "Datenschutz voran",
+      "description": "Standardmäßig anonym. Kein Account nötig. Deine Daten bleiben deine"
+    }
+  },
+  "ui": {
+    "toggleTheme": "Theme wechseln",
+    "selectLanguage": "Sprache wählen",
+    "aboutApp": "Über die App"
+  },
+  "dialog": {
+    "close": "Schließen",
+    "detailedConditions": "Detailbedingungen",
+    "fullAnalysis": "Komplette Wetter- und Bedingungsanalyse",
+    "tabs": {
+      "overview": "Überblick",
+      "hourly": "Stündlich",
+      "daily": "14 Tage"
+    },
+    "currentRating": "Aktuelle Bewertung",
+    "currentConditions": "Aktuelle Bedingungen",
+    "currentWeather": "Aktuelles Wetter",
+    "temperature": "Temperatur",
+    "humidity": "Luftfeuchtigkeit",
+    "windSpeed": "Windgeschwindigkeit",
+    "precipitation": "Niederschlag",
+    "sunrise": "Sonnenaufgang",
+    "sunset": "Sonnenuntergang",
+    "high": "Hoch",
+    "low": "Tief",
+    "rain": "Regen",
+    "wind": "Wind",
+    "dry": "Trocken",
+    "wet": "Nass",
+    "precipitationContext": "Niederschlagskontext",
+    "last24h": "Letzte 24 h",
+    "last48h": "Letzte 48 h",
+    "next24h": "Nächste 24 h",
+    "dewPointSpread": "Abstand zum Taupunkt (Kondensationsrisiko)",
+    "lowRisk": "✅ Geringes Risiko - der Fels bleibt trocken",
+    "moderateRisk": "⚠️ Mittleres Risiko - beobachte die Feuchte",
+    "highRisk": "❌ Hohes Risiko - Kondensation wahrscheinlich",
+    "optimalWindows": "Beste Kletterfenster",
+    "nextDays": "Nächste 5 Tage",
+    "bestTime": "🌟 Bester Zeitpunkt",
+    "noOptimalConditions": "Keine optimalen Bedingungen in den nächsten 5 Tagen",
+    "checkHourlyForecast": "Schau in die stündliche Prognose für Details",
+    "weatherDisclaimer": "⚠️ Wetter dreht schnell. Check die Prognose vorm Losfahren und schau dir die Bedingungen vor Ort an.",
+    "window": "Fenster",
+    "windows": "Fenster",
+    "today": "Heute",
+    "tomorrow": "Morgen",
+    "showCompleteTimeline": "Gesamten Verlauf anzeigen",
+    "hour": "Stunde",
+    "hours": "Stunden",
+    "noHourlyData": "Keine stündlichen Daten verfügbar",
+    "noDailyData": "Keine täglichen Daten verfügbar",
+    "noOptimalHours": "Keine optimalen Bedingungen am",
+    "forecastIndicators": "Vorhersage-Indikatoren:",
+    "goodClimbingWindows": "Gute Fenster",
+    "fairConditions": "Passt schon",
+    "poorConditions": "Schlechte Bedingungen",
+    "lessReliable": "Tage 8-14: weniger verlässliche Prognose",
+    "lessCertain": "UNSICHER",
+    "todayBadge": "HEUTE"
+  }
+}

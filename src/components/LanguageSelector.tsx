@@ -1,7 +1,7 @@
 'use client';
 
 import { useClientTranslation } from "@/hooks/useClientTranslation";
-import { i18nConfig, type Locale } from "@/lib/i18n/config";
+import { i18nConfig, resolveLocale, type Locale } from "@/lib/i18n/config";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -15,14 +15,29 @@ const languageConfig: Record<Locale, { name: string; flag: string }> = {
   en: { name: 'English (US)', flag: '🇺🇸' },
   'en-GB': { name: 'English (UK)', flag: '🇬🇧' },
   pl: { name: 'Polski', flag: '🇵🇱' },
+  uk: { name: 'Українська', flag: '🇺🇦' },
+  'es-ES': { name: 'Español (España)', flag: '🇪🇸' },
+  'fr-FR': { name: 'Français', flag: '🇫🇷' },
+  'it-IT': { name: 'Italiano', flag: '🇮🇹' },
+  'de-DE': { name: 'Deutsch (Deutschland)', flag: '🇩🇪' },
+  'de-AT': { name: 'Deutsch (Österreich)', flag: '🇦🇹' },
+  'sl-SI': { name: 'Slovenščina', flag: '🇸🇮' },
+  'sv-SE': { name: 'Svenska', flag: '🇸🇪' },
+  'nb-NO': { name: 'Norsk (Bokmål)', flag: '🇳🇴' },
 };
 
 export function LanguageSelector() {
-  const { i18n, language, t } = useClientTranslation('common');
-  const currentFlag = languageConfig[language as Locale]?.flag || languageConfig.en.flag;
+  const { i18n, language, rawLanguage, t } = useClientTranslation('common');
+  const currentLocale: Locale = resolveLocale(rawLanguage ?? language);
+  const currentFlag = languageConfig[currentLocale]?.flag || languageConfig.en.flag;
+  const sortedLocales = [...i18nConfig.locales].sort((a, b) =>
+    languageConfig[a].name.localeCompare(languageConfig[b].name, undefined, {
+      sensitivity: 'base',
+    })
+  ) as Locale[];
 
   const changeLanguage = (locale: Locale) => {
-    i18n.changeLanguage(locale);
+    void i18n.changeLanguage(locale);
     localStorage.setItem('preferredLanguage', locale);
   };
 
@@ -43,9 +58,9 @@ export function LanguageSelector() {
         className="min-w-[200px] p-1 shadow-lg"
       >
         <div className="grid gap-1">
-          {i18nConfig.locales.map((locale) => {
+          {sortedLocales.map((locale) => {
             const { name, flag } = languageConfig[locale];
-            const isSelected = language === locale;
+            const isSelected = currentLocale === locale;
             return (
               <DropdownMenuItem
                 key={locale}
