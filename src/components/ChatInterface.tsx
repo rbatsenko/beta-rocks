@@ -247,7 +247,7 @@ const ChatInterface = () => {
                         variant="outline"
                         size="sm"
                         onClick={() => handleExampleClick(example.query)}
-                        className="transition-smooth hover:scale-105"
+                        className="transition-smooth hover:scale-105 !whitespace-normal break-words text-left leading-snug !h-auto min-h-9 !items-start !justify-start w-full sm:max-w-xs"
                       >
                         {example.display}
                       </Button>

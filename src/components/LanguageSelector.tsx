@@ -27,6 +27,11 @@ export function LanguageSelector() {
   const { i18n, language, rawLanguage, t } = useClientTranslation('common');
   const currentLocale: Locale = resolveLocale(rawLanguage ?? language);
   const currentFlag = languageConfig[currentLocale]?.flag || languageConfig.en.flag;
+  const sortedLocales = [...i18nConfig.locales].sort((a, b) =>
+    languageConfig[a].name.localeCompare(languageConfig[b].name, undefined, {
+      sensitivity: 'base',
+    })
+  ) as Locale[];
 
   const changeLanguage = (locale: Locale) => {
     void i18n.changeLanguage(locale);
@@ -50,7 +55,7 @@ export function LanguageSelector() {
         className="min-w-[200px] p-1 shadow-lg"
       >
         <div className="grid gap-1">
-          {i18nConfig.locales.map((locale) => {
+          {sortedLocales.map((locale) => {
             const { name, flag } = languageConfig[locale];
             const isSelected = currentLocale === locale;
             return (
