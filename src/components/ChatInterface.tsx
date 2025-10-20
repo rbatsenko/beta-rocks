@@ -161,6 +161,8 @@ const ChatInterface = () => {
         {
           body: {
             language: language,
+            userDateTime: new Date().toISOString(),
+            userTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
           },
         }
       );
@@ -179,6 +181,8 @@ const ChatInterface = () => {
         {
           body: {
             language: language,
+            userDateTime: new Date().toISOString(),
+            userTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
           },
         }
       );
@@ -196,6 +200,8 @@ const ChatInterface = () => {
         {
           body: {
             language: language,
+            userDateTime: new Date().toISOString(),
+            userTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
           },
         }
       );

@@ -250,7 +250,7 @@ const tools = {
         // Find max temperature from forecast for context detection
         const maxDailyTemp = Math.max(...hourlyData.slice(0, 24).map(h => h.temp_c));
 
-        // Compute conditions
+        // Compute conditions - include ALL hours (including night) for UI to filter
         const conditions = computeConditions(
           {
             current: {
@@ -265,7 +265,8 @@ const tools = {
             maxDailyTemp,
           },
           (detectedRockType as RockType) || "unknown",
-          0
+          0,
+          { includeNightHours: true }  // Send all hours to frontend
         );
 
         console.log("[get_conditions] Successfully computed conditions:", {
@@ -366,12 +367,37 @@ const tools = {
 };
 
 export async function POST(req: Request) {
-  const { messages, language }: { messages: UIMessage[]; language?: string } = await req.json();
+  const { messages, language, userDateTime, userTimezone }: {
+    messages: UIMessage[];
+    language?: string;
+    userDateTime?: string;
+    userTimezone?: string;
+  } = await req.json();
   const locale = resolveLocale(language);
+
+  // Format user's current time for the AI
+  const userTime = userDateTime ? new Date(userDateTime).toLocaleString('en-US', {
+    timeZone: userTimezone || 'UTC',
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZoneName: 'short'
+  }) : 'Unknown time';
+
+  const systemPrompt = `${getSystemPrompt(locale)}
+
+CRITICAL TIME CONTEXT:
+Current user time: ${userTime}
+User timezone: ${userTimezone || 'UTC'}
+When the user says "now" or "today", they mean relative to this time.
+When the user says "tomorrow", they mean the day after ${userTime}.`;
 
   const result = streamText({
     model: google("gemini-2.5-flash"),
-    system: getSystemPrompt(locale),
+    system: systemPrompt,
     messages: convertToModelMessages(messages),
     tools: tools,
     // Encourage: assistant -> tool -> assistant(summary using tool result)

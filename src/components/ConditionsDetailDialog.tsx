@@ -121,6 +121,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
   const { t, language } = useClientTranslation("common");
   const locale = getLocaleFromLanguage(language);
   const [activeTab, setActiveTab] = useState("overview");
+  const [showAllHours, setShowAllHours] = useState(false); // Start with filtered hours by default // Show all hours by default
   const tabSwitchStartRef = useRef<number | null>(null);
 
   logRender("ConditionsDetailDialog", {
@@ -661,14 +662,36 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
 
           {/* Hourly Forecast Tab */}
           <TabsContent value="hourly" className="mt-4 flex-1 overflow-hidden">
-            <ScrollArea className="h-[calc(90vh-240px)] pr-4">
+            {/* Toggle for filtering hours */}
+            <div className="flex items-center justify-between mb-4 px-4">
+              <span className="text-sm font-medium">{t("timeContext.showAllHours")}</span>
+              <button
+                onClick={() => setShowAllHours(!showAllHours)}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                  showAllHours ? 'bg-primary' : 'bg-muted'
+                }`}
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    showAllHours ? 'translate-x-6' : 'translate-x-1'
+                  }`}
+                />
+              </button>
+            </div>
+            <ScrollArea className="h-[calc(90vh-280px)] pr-4">
               {hourlyByDay && Object.keys(hourlyByDay).length > 0 ? (
                 <div className="space-y-6">
                   {Object.entries(hourlyByDay).map(([day, hours]) => {
-                    // Group hours by rating
-                    const goodHours = hours.filter(
-                      (h) => h.rating === "Great" || h.rating === "Good"
-                    );
+                    // Filter hours based on toggle - show ALL or just climbing hours
+                    const displayHours = showAllHours
+                      ? hours  // Show ALL hours
+                      : hours.filter((h) => {
+                          const hour = new Date(h.time).getHours();
+                          // Show only daylight/climbing hours (6am-8pm)
+                          return hour >= 6 && hour <= 20;
+                        });
+
+                    if (displayHours.length === 0) return null;
 
                     // Check if hours are distant (>48h from now)
                     const now = new Date();
@@ -685,16 +708,15 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
                           {day}
                         </h3>
 
-                        {/* Good hours - shown prominently */}
-                        {goodHours.length > 0 && (
-                          <div className="space-y-2">
-                            {goodHours.map((hour, i) => {
+                        {/* Display all hours based on toggle */}
+                        <div className="space-y-2">
+                          {displayHours.map((hour, i) => {
                               const isDistant = isDistantHour(hour.time);
-                              const prevHour = i > 0 ? goodHours[i - 1] : null;
+                              const prevHour = i > 0 ? displayHours[i - 1] : null;
                               const showHint = isDistant && (!prevHour || !isDistantHour(prevHour.time));
 
                               return (
-                                <React.Fragment key={`good-hour-${i}`}>
+                                <React.Fragment key={`hour-${i}`}>
                                   {showHint && (
                                     <div className="flex items-center gap-2 py-2 text-xs text-muted-foreground">
                                       <div className="flex-1 h-px bg-border"></div>
@@ -709,7 +731,9 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
                                     className={`rounded-lg p-3 border ${
                                       hour.rating === "Great"
                                         ? "bg-green-500/10 border-green-500/30"
-                                        : "bg-blue-500/5 border-blue-500/20"
+                                        : hour.rating === "Good"
+                                        ? "bg-blue-500/5 border-blue-500/20"
+                                        : "bg-muted/30 border-border"
                                     } ${isDistant ? "opacity-60" : ""}`}
                                   >
                                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
@@ -779,124 +803,6 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
                             );
                             })}
                           </div>
-                        )}
-
-                        {/* Complete timeline - collapsible, shows ALL hours including good ones */}
-                        {hours.length > 0 && (
-                          <Accordion type="single" collapsible>
-                            <AccordionItem value="all-hours" className="border rounded-lg">
-                              <AccordionTrigger className="px-3 py-2 hover:no-underline">
-                                <span className="text-sm text-muted-foreground">
-                                  {t("dialog.showCompleteTimeline")} ({hours.length}{" "}
-                                  {hours.length > 1 ? t("dialog.periods") : t("dialog.period")})
-                                </span>
-                              </AccordionTrigger>
-                              <AccordionContent className="px-3 pb-3">
-                                <div className="space-y-2">
-                                  {hours.map((hour, i) => {
-                                    const isDistant = isDistantHour(hour.time);
-                                    const prevHour = i > 0 ? hours[i - 1] : null;
-                                    const showHint = isDistant && (!prevHour || !isDistantHour(prevHour.time));
-
-                                    return (
-                                      <React.Fragment key={`all-hour-${i}`}>
-                                        {showHint && (
-                                          <div className="flex items-center gap-2 py-2 text-xs text-muted-foreground">
-                                            <div className="flex-1 h-px bg-border"></div>
-                                            <span className="flex items-center gap-1.5">
-                                              <span className="text-orange-600">•</span>
-                                              {t("dialog.lessReliableHourly")}
-                                            </span>
-                                            <div className="flex-1 h-px bg-border"></div>
-                                          </div>
-                                        )}
-                                        <div
-                                          className={`rounded-lg p-3 border ${
-                                            hour.rating === "Great"
-                                              ? "bg-green-500/10 border-green-500/30"
-                                              : hour.rating === "Good"
-                                                ? "bg-blue-500/5 border-blue-500/20"
-                                                : "bg-muted/30 border-border"
-                                          } ${isDistant ? "opacity-60" : ""}`}
-                                        >
-                                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-                                          <div className="flex items-center gap-2">
-                                            {hour.weatherCode !== undefined && (
-                                              <span
-                                                className="text-xl"
-                                                title={translateWeather(
-                                                  getWeatherDescription(hour.weatherCode)
-                                                )}
-                                              >
-                                                {getWeatherEmoji(
-                                                  hour.weatherCode,
-                                                  isNightTime(new Date(hour.time))
-                                                )}
-                                              </span>
-                                            )}
-                                            <span className="font-mono text-sm font-semibold min-w-[60px]">
-                                              {new Date(hour.time).toLocaleTimeString(locale, {
-                                                hour: "2-digit",
-                                                minute: "2-digit",
-                                                hour12: false,
-                                              })}
-                                            </span>
-                                          </div>
-                                          <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                                            <div className="flex items-center gap-1">
-                                              <ThermometerSun className="h-3 w-3" />
-                                              <span>{Math.round(hour.temp_c)}°C</span>
-                                            </div>
-                                            <div className="flex items-center gap-1">
-                                              <Droplets className="h-3 w-3" />
-                                              <span>{hour.humidity}%</span>
-                                            </div>
-                                            <div className="flex items-center gap-1">
-                                              <Wind className="h-3 w-3" />
-                                              <span>{hour.wind_kph}km/h</span>
-                                            </div>
-                                            {hour.precip_mm > 0 && (
-                                              <div className="flex items-center gap-1 text-blue-500">
-                                                <CloudRain className="h-3 w-3" />
-                                                <span>{hour.precip_mm}mm</span>
-                                              </div>
-                                            )}
-                                          </div>
-                                        </div>
-                                        <div className="flex items-center gap-2">
-                                          <Badge
-                                            className={getRatingColor(hour.rating)}
-                                            variant="outline"
-                                          >
-                                            {translateRating(hour.rating)}
-                                          </Badge>
-                                          <span className="text-sm font-semibold w-8 text-right">
-                                            {hour.frictionScore}/5
-                                          </span>
-                                        </div>
-                                      </div>
-                                      {hour.warnings.length > 0 && (
-                                        <p className="text-xs text-muted-foreground mt-1">
-                                          {hour.warnings.map(w => translateWarning(w)).join(", ")}
-                                        </p>
-                                      )}
-                                    </div>
-                                      </React.Fragment>
-                                  );
-                                  })}
-                                </div>
-                              </AccordionContent>
-                            </AccordionItem>
-                          </Accordion>
-                        )}
-
-                        {/* No good hours message */}
-                        {goodHours.length === 0 && (
-                          <p className="text-sm text-muted-foreground italic">
-                            {t("dialog.noOptimalHours")} {day}
-                          </p>
-                        )}
                       </div>
                     );
                   })}
