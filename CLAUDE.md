@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-temps.rocks is a free, chat-first web app that helps climbers check real-time conditions at crags, sectors, and routes worldwide. It uses AI (Gemini 2.5 Flash via Vercel AI SDK) to provide intelligent climbing condition analysis based on weather data, rock type, and climbing-specific factors.
+temps.rocks is a free, chat-first web app that helps climbers check real-time conditions at crags, sectors, and routes worldwide. It uses AI (Google Gemini 2.5 Flash via Vercel AI SDK) to provide intelligent climbing condition analysis based on weather data, rock type, and climbing-specific factors.
 
 **Key Technologies:**
 
@@ -60,7 +60,7 @@ Copy `.env.example` to `.env.local` and add:
 
 - `NEXT_PUBLIC_SUPABASE_URL` - Supabase project URL
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` - Supabase anon key
-- `GOOGLE_GENERATIVE_AI_API_KEY` - Google Gemini API key (server-side only)
+- `GOOGLE_GENERATIVE_AI_API_KEY` - Google AI API key (server-side only)
 
 ## Code Architecture
 

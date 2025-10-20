@@ -4,7 +4,7 @@ Guidance for AI coding agents working in this repository. Adapted from CLAUDE.md
 
 ## Project Overview
 
-temps.rocks is a free, chat-first web app that helps climbers check real-time conditions at crags, sectors, and routes worldwide. It uses AI (Gemini 2.5 Flash via Vercel AI SDK) to analyze conditions based on weather, rock type, and climbing-specific factors.
+temps.rocks is a free, chat-first web app that helps climbers check real-time conditions at crags, sectors, and routes worldwide. It uses AI (Google Gemini 2.5 Flash via Vercel AI SDK) to analyze conditions based on weather, rock type, and climbing-specific factors.
 
 Key technologies:
 

@@ -363,7 +363,7 @@ export async function POST(req: Request) {
   const locale = resolveLocale(language);
 
   const result = streamText({
-    model: google("gemini-2.5-flash-lite-preview-09-2025"),
+    model: google("gemini-2.5-flash"),
     system: getSystemPrompt(locale),
     messages: convertToModelMessages(messages),
     tools: tools,

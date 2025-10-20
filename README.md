@@ -33,6 +33,7 @@ Create a `.env.local` file in the project root:
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://vbqnfvgvxlnlfabuqlzi.supabase.co
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=<your-key>
+GOOGLE_GENERATIVE_AI_API_KEY=<your-google-api-key>
 ```
 
 ## What technologies are used?
@@ -44,7 +45,7 @@ This project is built with:
 - **Tailwind CSS** - Utility-first CSS
 - **shadcn/ui** - High-quality React components
 - **Supabase** - PostgreSQL database & auth
-- **Vercel AI SDK** - AI-powered chat (Gemini 2.5 Flash)
+- **Vercel AI SDK** - AI-powered chat (Google Gemini 2.5 Flash)
 
 ## Project Structure
 
