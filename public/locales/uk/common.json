@@ -188,6 +188,8 @@
     "showCompleteTimeline": "Показати повну шкалу часу",
     "hour": "година",
     "hours": "години",
+    "period": "період",
+    "periods": "періоди",
     "noHourlyData": "Немає погодинного прогнозу",
     "noDailyData": "Немає денного прогнозу",
     "noOptimalHours": "Немає оптимальних умов у день",
@@ -199,5 +201,19 @@
     "lessReliableHourly": "Наступні години менш передбачувані",
     "lessCertain": "МЕНШ ВПЕВНЕНО",
     "todayBadge": "СЬОГОДНІ"
+  },
+  "timeContext": {
+    "sunrise": "Схід сонця",
+    "sunset": "Захід сонця",
+    "recommendedHours": "Рекомендовані години для скелелазіння",
+    "totalDaylight": "Загальне денне світло",
+    "hoursOfDaylight": "{{hours}} годин денного світла",
+    "earlyStartRecommended": "Рекомендується ранній старт, щоб уникнути спеки",
+    "limitedDaylight": "Обмежене денне світло - плануйте відповідно",
+    "morningConditionsBest": "Найкращі умови вранці",
+    "eveningSession": "Умови вечірньої сесії",
+    "showAllHours": "Показати всі 24 години",
+    "showClimbingHoursOnly": "Показати лише години скелелазіння",
+    "expandHours": "Розгорнути, щоб побачити всі години"
   }
 }

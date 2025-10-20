@@ -48,6 +48,15 @@ export interface PrecipitationContext {
   next24h: number;
 }
 
+export interface TimeContext {
+  sunriseISO: string;
+  sunsetISO: string;
+  climbingStartHour: number;
+  climbingEndHour: number;
+  totalDaylightHours: number;
+  contextNote?: string;
+}
+
 export interface ConditionsResult {
   frictionRating: number; // 1-5 scale
   rating: "Nope" | "Poor" | "Fair" | "Good" | "Great"; // Human-readable
@@ -60,6 +69,7 @@ export interface ConditionsResult {
   precipitationContext?: PrecipitationContext;
   dewPointSpread?: number;
   optimalTime?: string;
+  timeContext?: TimeContext;
 }
 
 export interface WeatherForecast {
@@ -210,9 +220,12 @@ function calculateWeatherAwareDryingPenalty(
  * Compute climbing conditions from weather data (enhanced version)
  */
 export function computeConditions(
-  weather: WeatherForecast,
+  weather: WeatherForecast & { latitude?: number; longitude?: number; maxDailyTemp?: number },
   rockType: RockType = "unknown",
-  recentPrecipitationMm: number = 0
+  recentPrecipitationMm: number = 0,
+  options?: {
+    includeNightHours?: boolean;
+  }
 ): ConditionsResult {
   const { current, hourly } = weather;
   const rockConditions = getRockTypeConditions(rockType);
@@ -231,7 +244,17 @@ export function computeConditions(
   let optimalTime: string | undefined;
 
   if (hourly && hourly.length > 0) {
-    hourlyConditions = computeHourlyConditions(hourly, rockType, recentPrecipitationMm);
+    hourlyConditions = computeHourlyConditions(
+      hourly,
+      rockType,
+      recentPrecipitationMm,
+      {
+        includeNightHours: options?.includeNightHours,
+        latitude: weather.latitude,
+        longitude: weather.longitude,
+        maxDailyTemp: weather.maxDailyTemp
+      }
+    );
     optimalWindows = findOptimalWindowsEnhanced(hourlyConditions);
     precipitationContext = calculatePrecipitationContext(hourly);
 
@@ -355,6 +378,22 @@ export function computeConditions(
   // Don't add a generic fallback - let warnings speak for themselves
   // The UI will show the rating and friction score
 
+  // Calculate time context if location is provided
+  let timeContext: TimeContext | undefined;
+  if (weather.latitude && weather.longitude) {
+    const { calculateDaylightHours, detectTimeContext, getTimeContextData } = require('./daylight.utils');
+
+    const now = new Date();
+    const daylight = calculateDaylightHours(weather.latitude, weather.longitude, now);
+    const context = detectTimeContext(
+      weather.maxDailyTemp || current.temp_c,
+      weather.latitude,
+      now.getMonth()
+    );
+
+    timeContext = getTimeContextData(daylight, context);
+  }
+
   return {
     frictionRating: Math.round(frictionScore),
     rating,
@@ -367,6 +406,7 @@ export function computeConditions(
     precipitationContext,
     dewPointSpread,
     optimalTime,
+    timeContext,
   };
 }
 
@@ -488,9 +528,15 @@ export function computeHourlyConditions(
     weatherCode?: number;
   }>,
   rockType: RockType = "unknown",
-  recentPrecipMm: number = 0
+  recentPrecipMm: number = 0,
+  options?: {
+    includeNightHours?: boolean;        // Default false - filter to climbing hours
+    latitude?: number;                   // For daylight calculation
+    longitude?: number;                  // For daylight calculation
+    maxDailyTemp?: number;              // For context detection (alpine starts, etc)
+  }
 ): HourlyCondition[] {
-  return hourly.map((hour) => {
+  const allConditions = hourly.map((hour) => {
     const { score, warnings, isDry } = computeHourlyFrictionScore(hour, rockType, recentPrecipMm);
 
     return {
@@ -507,6 +553,50 @@ export function computeHourlyConditions(
       weatherCode: hour.weatherCode,
     };
   });
+
+  // If requested to include all hours or no location data, return everything
+  if (options?.includeNightHours || !options?.latitude || !options?.longitude) {
+    return allConditions;
+  }
+
+  // Import daylight utilities
+  const { calculateDaylightHours, detectTimeContext, getClimbingHours } = require('./daylight.utils');
+
+  // Get daylight hours for the location
+  const now = new Date();
+  const daylight = calculateDaylightHours(options.latitude, options.longitude, now);
+
+  // Detect context (alpine start, winter, etc)
+  const context = detectTimeContext(
+    options.maxDailyTemp || 20,
+    options.latitude,
+    now.getMonth(),
+    undefined  // No query string here, but could be passed in future
+  );
+
+  const climbingHours = getClimbingHours(daylight, context, options.maxDailyTemp);
+
+  // Filter to climbing hours only
+  const filtered = allConditions.filter((hour) => {
+    const hourTime = new Date(hour.time);
+    const hourOfDay = hourTime.getHours();
+
+    // Always include the next 3 hours (even if night) for "current conditions"
+    const hoursFromNow = (hourTime.getTime() - now.getTime()) / (1000 * 60 * 60);
+    if (hoursFromNow >= 0 && hoursFromNow <= 3) {
+      return true;
+    }
+
+    // Check if hour is within climbing hours
+    return hourOfDay >= climbingHours.start && hourOfDay <= climbingHours.end;
+  });
+
+  // If filtering removed all hours (shouldn't happen), return at least next 12 hours
+  if (filtered.length === 0 && allConditions.length > 0) {
+    return allConditions.slice(0, Math.min(12, allConditions.length));
+  }
+
+  return filtered;
 }
 
 /**

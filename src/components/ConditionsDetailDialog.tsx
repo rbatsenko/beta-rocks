@@ -92,6 +92,14 @@ interface ConditionsDetailDialogProps {
       sunrise: string;
       sunset: string;
     };
+    timeContext?: {
+      sunriseISO: string;
+      sunsetISO: string;
+      climbingStartHour: number;
+      climbingEndHour: number;
+      totalDaylightHours: number;
+      contextNote?: string;
+    };
     dailyForecast?: Array<{
       date: string;
       tempMax: number;
@@ -307,32 +315,44 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
                           </div>
                           <p className="text-lg font-semibold">{data.current.precipitation_mm}mm</p>
                         </div>
-                        {data.astro && (
+                        {(data.timeContext || data.astro) && (
                           <>
                             <div className="bg-muted/50 rounded-lg p-3">
                               <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
                                 <Sunrise className="h-3 w-3 text-orange-500" />
-                                <span>{t("dialog.sunrise")}</span>
+                                <span>{t("timeContext.sunrise")}</span>
                               </div>
                               <p className="text-lg font-semibold">
-                                {new Date(data.astro.sunrise).toLocaleTimeString(locale, {
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                  hour12: false,
-                                })}
+                                {data.timeContext?.sunriseISO
+                                  ? new Date(data.timeContext.sunriseISO).toLocaleTimeString(locale, {
+                                      hour: "2-digit",
+                                      minute: "2-digit",
+                                      hour12: false,
+                                    })
+                                  : (data.astro && new Date(data.astro.sunrise).toLocaleTimeString(locale, {
+                                      hour: "2-digit",
+                                      minute: "2-digit",
+                                      hour12: false,
+                                    }))}
                               </p>
                             </div>
                             <div className="bg-muted/50 rounded-lg p-3">
                               <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
                                 <Sunset className="h-3 w-3 text-orange-600" />
-                                <span>{t("dialog.sunset")}</span>
+                                <span>{t("timeContext.sunset")}</span>
                               </div>
                               <p className="text-lg font-semibold">
-                                {new Date(data.astro.sunset).toLocaleTimeString(locale, {
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                  hour12: false,
-                                })}
+                                {data.timeContext?.sunsetISO
+                                  ? new Date(data.timeContext.sunsetISO).toLocaleTimeString(locale, {
+                                      hour: "2-digit",
+                                      minute: "2-digit",
+                                      hour12: false,
+                                    })
+                                  : (data.astro && new Date(data.astro.sunset).toLocaleTimeString(locale, {
+                                      hour: "2-digit",
+                                      minute: "2-digit",
+                                      hour12: false,
+                                    }))}
                               </p>
                             </div>
                           </>
@@ -388,6 +408,50 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
                           </p>
                         </div>
                       )}
+                    </div>
+                    <Separator />
+                  </>
+                )}
+
+                {/* Time Context */}
+                {data.timeContext && (
+                  <>
+                    <div className="space-y-3">
+                      <h3 className="font-semibold flex items-center gap-2">
+                        <Clock className="w-4 h-4" />
+                        {t("timeContext.recommendedHours")}
+                      </h3>
+                      <div className="space-y-2">
+                        <div className="bg-accent/50 rounded-lg p-3 border border-accent">
+                          <p className="text-lg font-medium">
+                            {(() => {
+                              const formatHour = (hour: number) => {
+                                if (['en', 'en-US', 'en-GB'].includes(locale)) {
+                                  // 12-hour format for English locales
+                                  if (hour === 0) return "12am";
+                                  if (hour < 12) return `${hour}am`;
+                                  if (hour === 12) return "12pm";
+                                  return `${hour - 12}pm`;
+                                } else {
+                                  // 24-hour format for other locales
+                                  return `${hour.toString().padStart(2, '0')}:00`;
+                                }
+                              };
+                              return `${formatHour(data.timeContext.climbingStartHour)}–${formatHour(data.timeContext.climbingEndHour)}`;
+                            })()}
+                          </p>
+                          {data.timeContext.contextNote && (
+                            <p className="text-sm text-muted-foreground mt-1">
+                              {t(`timeContext.${data.timeContext.contextNote}`)}
+                            </p>
+                          )}
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          {t("timeContext.hoursOfDaylight", {
+                            hours: data.timeContext.totalDaylightHours
+                          })}
+                        </div>
+                      </div>
                     </div>
                     <Separator />
                   </>
@@ -724,7 +788,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
                               <AccordionTrigger className="px-3 py-2 hover:no-underline">
                                 <span className="text-sm text-muted-foreground">
                                   {t("dialog.showCompleteTimeline")} ({hours.length}{" "}
-                                  {hours.length > 1 ? t("dialog.hours") : t("dialog.hour")})
+                                  {hours.length > 1 ? t("dialog.periods") : t("dialog.period")})
                                 </span>
                               </AccordionTrigger>
                               <AccordionContent className="px-3 pb-3">

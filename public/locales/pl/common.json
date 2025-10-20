@@ -188,6 +188,8 @@
     "showCompleteTimeline": "Pokaż pełną oś czasu",
     "hour": "godzina",
     "hours": "godziny",
+    "period": "okres",
+    "periods": "okresy",
     "noHourlyData": "Brak danych prognozy godzinowej",
     "noDailyData": "Brak danych prognozy dziennej",
     "noOptimalHours": "Brak optymalnych warunków w dniu",
@@ -199,5 +201,19 @@
     "lessReliableHourly": "Następne godziny mniej przewidywalne",
     "lessCertain": "MNIEJ PEWNE",
     "todayBadge": "DZISIAJ"
+  },
+  "timeContext": {
+    "sunrise": "Wschód słońca",
+    "sunset": "Zachód słońca",
+    "recommendedHours": "Zalecane godziny wspinaczki",
+    "totalDaylight": "Całkowite światło dzienne",
+    "hoursOfDaylight": "{{hours}} godzin światła dziennego",
+    "earlyStartRecommended": "Zalecany wczesny start, aby uniknąć upału",
+    "limitedDaylight": "Ograniczone światło dzienne - zaplanuj odpowiednio",
+    "morningConditionsBest": "Najlepsze warunki rano",
+    "eveningSession": "Warunki wieczornej sesji",
+    "showAllHours": "Pokaż wszystkie 24 godziny",
+    "showClimbingHoursOnly": "Pokaż tylko godziny wspinaczki",
+    "expandHours": "Rozwiń, aby zobaczyć wszystkie godziny"
   }
 }

@@ -189,6 +189,8 @@
     "showCompleteTimeline": "Prikaži celoten časovni potek",
     "hour": "ura",
     "hours": "ure",
+    "period": "obdobje",
+    "periods": "obdobja",
     "noHourlyData": "Urni podatki niso na voljo",
     "noDailyData": "Dnevni podatki niso na voljo",
     "noOptimalHours": "Ni optimalnih razmer za",
@@ -200,5 +202,19 @@
     "lessReliableHourly": "Naslednje ure manj predvidljive",
     "lessCertain": "MANJ ZANESLJIVO",
     "todayBadge": "DANES"
+  },
+  "timeContext": {
+    "sunrise": "Sončni vzhod",
+    "sunset": "Sončni zahod",
+    "recommendedHours": "Priporočene ure za plezanje",
+    "totalDaylight": "Skupna dnevna svetloba",
+    "hoursOfDaylight": "{{hours}} ur dnevne svetlobe",
+    "earlyStartRecommended": "Priporočen zgodnji začetek za izogib vročini",
+    "limitedDaylight": "Omejena dnevna svetloba - načrtujte ustrezno",
+    "morningConditionsBest": "Najboljše razmere zjutraj",
+    "eveningSession": "Večerne razmere",
+    "showAllHours": "Prikaži vseh 24 ur",
+    "showClimbingHoursOnly": "Prikaži samo plezalne ure",
+    "expandHours": "Razširi za prikaz vseh ur"
   }
 }

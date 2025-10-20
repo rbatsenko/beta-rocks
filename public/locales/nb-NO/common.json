@@ -189,6 +189,8 @@
     "showCompleteTimeline": "Vis hele tidslinjen",
     "hour": "time",
     "hours": "timer",
+    "period": "periode",
+    "periods": "perioder",
     "noHourlyData": "Ingen timeprognose tilgjengelig",
     "noDailyData": "Ingen dagsprognose tilgjengelig",
     "noOptimalHours": "Ingen optimale forhold for",
@@ -200,5 +202,19 @@
     "lessReliableHourly": "Neste timer mindre forutsigbare",
     "lessCertain": "MER USIKKERT",
     "todayBadge": "I DAG"
+  },
+  "timeContext": {
+    "sunrise": "Soloppgang",
+    "sunset": "Solnedgang",
+    "recommendedHours": "Anbefalte klatretider",
+    "totalDaylight": "Totalt dagslys",
+    "hoursOfDaylight": "{{hours}} timer dagslys",
+    "earlyStartRecommended": "Tidlig start anbefales for å unngå varmen",
+    "limitedDaylight": "Begrenset dagslys - planlegg deretter",
+    "morningConditionsBest": "Beste forhold om morgenen",
+    "eveningSession": "Kveldsøktforhold",
+    "showAllHours": "Vis alle 24 timer",
+    "showClimbingHoursOnly": "Vis kun klatretimer",
+    "expandHours": "Utvid for å se alle timer"
   }
 }

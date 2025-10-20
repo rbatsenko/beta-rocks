@@ -247,6 +247,9 @@ const tools = {
             weatherCode: h.weatherCode,
           }));
 
+        // Find max temperature from forecast for context detection
+        const maxDailyTemp = Math.max(...hourlyData.slice(0, 24).map(h => h.temp_c));
+
         // Compute conditions
         const conditions = computeConditions(
           {
@@ -257,6 +260,9 @@ const tools = {
               precip_mm: forecast.current.precipitation,
             },
             hourly: hourlyData,
+            latitude: lat,
+            longitude: lon,
+            maxDailyTemp,
           },
           (detectedRockType as RockType) || "unknown",
           0
@@ -283,6 +289,7 @@ const tools = {
           precipitationContext: conditions.precipitationContext,
           dewPointSpread: conditions.dewPointSpread,
           optimalTime: conditions.optimalTime,
+          timeContext: conditions.timeContext,
           current: {
             temperature_c: forecast.current.temperature,
             humidity: forecast.current.humidity,
@@ -290,7 +297,7 @@ const tools = {
             precipitation_mm: forecast.current.precipitation,
             weatherCode: forecast.current.weatherCode,
           },
-          // Include today's sunrise/sunset
+          // Include today's sunrise/sunset from forecast as fallback
           astro: forecast.daily?.[0]
             ? {
                 sunrise: forecast.daily[0].sunrise,

@@ -188,6 +188,8 @@
     "showCompleteTimeline": "Kompletten Verlauf anzeigen",
     "hour": "Stunde",
     "hours": "Stunden",
+    "period": "Zeitraum",
+    "periods": "Zeiträume",
     "noHourlyData": "Keine stündlichen Vorhersagedaten verfügbar",
     "noDailyData": "Keine täglichen Vorhersagedaten verfügbar",
     "noOptimalHours": "Keine optimalen Bedingungen am",
@@ -199,5 +201,19 @@
     "lessReliableHourly": "Nächste Stunden weniger vorhersehbar",
     "lessCertain": "UNSICHERER",
     "todayBadge": "HEUTE"
+  },
+  "timeContext": {
+    "sunrise": "Sonnenaufgang",
+    "sunset": "Sonnenuntergang",
+    "recommendedHours": "Empfohlene Kletterzeiten",
+    "totalDaylight": "Gesamte Tageslichtstunden",
+    "hoursOfDaylight": "{{hours}} Stunden Tageslicht",
+    "earlyStartRecommended": "Früher Start empfohlen, um die Hitze zu vermeiden",
+    "limitedDaylight": "Begrenztes Tageslicht - entsprechend planen",
+    "morningConditionsBest": "Beste Bedingungen am Morgen",
+    "eveningSession": "Abendsession-Bedingungen",
+    "showAllHours": "Alle 24 Stunden anzeigen",
+    "showClimbingHoursOnly": "Nur Kletterstunden anzeigen",
+    "expandHours": "Erweitern, um alle Stunden zu sehen"
   }
 }

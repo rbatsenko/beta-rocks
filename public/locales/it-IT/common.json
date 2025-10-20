@@ -188,6 +188,8 @@
     "showCompleteTimeline": "Mostra la cronologia completa",
     "hour": "ora",
     "hours": "ore",
+    "period": "periodo",
+    "periods": "periodi",
     "noHourlyData": "Nessun dato di previsione oraria disponibile",
     "noDailyData": "Nessun dato di previsione giornaliera disponibile",
     "noOptimalHours": "Nessuna finestra ottimale il",
@@ -199,5 +201,19 @@
     "lessReliableHourly": "Prossime ore meno prevedibili",
     "lessCertain": "MENO CERTO",
     "todayBadge": "OGGI"
+  },
+  "timeContext": {
+    "sunrise": "Alba",
+    "sunset": "Tramonto",
+    "recommendedHours": "Ore consigliate per arrampicare",
+    "totalDaylight": "Luce diurna totale",
+    "hoursOfDaylight": "{{hours}} ore di luce",
+    "earlyStartRecommended": "Si consiglia di partire presto per evitare il caldo",
+    "limitedDaylight": "Luce limitata - pianifica di conseguenza",
+    "morningConditionsBest": "Condizioni migliori al mattino",
+    "eveningSession": "Condizioni per sessione serale",
+    "showAllHours": "Mostra tutte le 24 ore",
+    "showClimbingHoursOnly": "Mostra solo ore di arrampicata",
+    "expandHours": "Espandi per vedere tutte le ore"
   }
 }

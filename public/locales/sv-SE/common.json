@@ -189,6 +189,8 @@
     "showCompleteTimeline": "Visa hela tidslinjen",
     "hour": "timme",
     "hours": "timmar",
+    "period": "period",
+    "periods": "perioder",
     "noHourlyData": "Ingen timprognos tillgänglig",
     "noDailyData": "Ingen dagsprognos tillgänglig",
     "noOptimalHours": "Inga optimala förhållanden för",
@@ -200,5 +202,19 @@
     "lessReliableHourly": "Nästa timmar mindre förutsägbara",
     "lessCertain": "OSÄKRARE",
     "todayBadge": "I DAG"
+  },
+  "timeContext": {
+    "sunrise": "Soluppgång",
+    "sunset": "Solnedgång",
+    "recommendedHours": "Rekommenderade klättertider",
+    "totalDaylight": "Total dagsljus",
+    "hoursOfDaylight": "{{hours}} timmar dagsljus",
+    "earlyStartRecommended": "Tidig start rekommenderas för att undvika värmen",
+    "limitedDaylight": "Begränsat dagsljus - planera därefter",
+    "morningConditionsBest": "Bästa förhållandena på morgonen",
+    "eveningSession": "Kvällspassförhållanden",
+    "showAllHours": "Visa alla 24 timmar",
+    "showClimbingHoursOnly": "Visa endast klättertimmar",
+    "expandHours": "Expandera för att se alla timmar"
   }
 }

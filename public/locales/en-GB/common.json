@@ -188,6 +188,8 @@
     "showCompleteTimeline": "Show complete timeline",
     "hour": "hour",
     "hours": "hours",
+    "period": "period",
+    "periods": "periods",
     "noHourlyData": "No hourly forecast data available",
     "noDailyData": "No daily forecast data available",
     "noOptimalHours": "No optimal conditions on",
@@ -199,5 +201,19 @@
     "lessReliableHourly": "Next hours less predictable",
     "lessCertain": "LESS CERTAIN",
     "todayBadge": "TODAY"
+  },
+  "timeContext": {
+    "sunrise": "Sunrise",
+    "sunset": "Sunset",
+    "recommendedHours": "Recommended climbing hours",
+    "totalDaylight": "Total daylight",
+    "hoursOfDaylight": "{{hours}} hours of daylight",
+    "earlyStartRecommended": "Early start recommended to beat the heat",
+    "limitedDaylight": "Limited daylight - plan accordingly",
+    "morningConditionsBest": "Best conditions in the morning",
+    "eveningSession": "Evening session conditions",
+    "showAllHours": "Show all 24 hours",
+    "showClimbingHoursOnly": "Show climbing hours only",
+    "expandHours": "Expand to see all hours"
   }
 }
