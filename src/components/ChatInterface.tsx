@@ -307,7 +307,18 @@ const ChatInterface = () => {
                             part.type === "tool-get_conditions" &&
                             part.state === "output-available"
                           ) {
-                            const result = part.output as ConditionsData | DisambiguationResult;
+                            const result = part.output as ConditionsData | DisambiguationResult | { error: string; location: string };
+
+                            // Handle error results
+                            if ("error" in result && result.error) {
+                              return (
+                                <div key={i} className="bg-destructive/10 border border-destructive/20 rounded-lg p-4">
+                                  <p className="text-destructive font-medium">
+                                    {result.error}
+                                  </p>
+                                </div>
+                              );
+                            }
 
                             // Handle disambiguation results
                             if ("disambiguate" in result && result.disambiguate) {

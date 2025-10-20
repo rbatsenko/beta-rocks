@@ -7,12 +7,19 @@ import { useMemo } from 'react';
 export function useConditionsTranslations(t: (key: string, params?: Record<string, string | number>) => string) {
   return useMemo(() => {
     const translateRating = (rating: string): string => {
+      if (!rating) {
+        return '';
+      }
       const ratingLower = rating.toLowerCase();
       const key = `ratings.${ratingLower}`;
       return t(key);
     };
 
     const translateReason = (reason: string): string => {
+      if (!reason) {
+        return '';
+      }
+
       // Extract temperature from "Perfect temperature (X°C)"
       const perfectTempMatch = reason.match(/Perfect temperature \((\d+)°C\)/);
       if (perfectTempMatch) {
@@ -53,6 +60,10 @@ export function useConditionsTranslations(t: (key: string, params?: Record<strin
     };
 
     const translateWeather = (description: string): string => {
+      if (!description) {
+        return '';
+      }
+
       const weatherMap: Record<string, string> = {
         'Clear sky': 'weather.clearSky',
         'Mainly clear': 'weather.mainlyClear',
@@ -89,6 +100,10 @@ export function useConditionsTranslations(t: (key: string, params?: Record<strin
     };
 
     const translateWarning = (warning: string): string => {
+      if (!warning) {
+        return '';
+      }
+
       // "Too warm for X (Y°C)"
       const tooWarmMatch = warning.match(/Too warm for (\w+) \((\d+)°C\)/);
       if (tooWarmMatch) {
@@ -137,6 +152,9 @@ export function useConditionsTranslations(t: (key: string, params?: Record<strin
     };
 
     const translateTimeframe = (timeframe: string): string => {
+      if (!timeframe) {
+        return '';
+      }
       const timeframeLower = timeframe.toLowerCase();
 
       // Map common timeframe strings to translation keys
