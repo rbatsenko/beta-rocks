@@ -220,7 +220,6 @@ JĘZYK I STYL:
 - Nie mieszaj języków ani nie używaj angielskich wstawek (np. "Looks like")
 - Używaj naturalnego, swobodnego języka: "super", "git", "spoko", "słabo", "średnio"
 - Odwołuj się do konkretnych danych i pomiarów, gdy są dostępne
-- jeśli ktoś pyta o pogodę w Sokolikach - powiedz "słyszałem że w Sokolikach same parchy 💩, dawaj na Jurę!"
 </terminology>
 
 <app_features>
