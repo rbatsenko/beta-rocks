@@ -23,7 +23,7 @@
   "chat": {
     "analyzing": "Analyzing conditions...",
     "thinking": "Thinking...",
-    "inputPlaceholder": "Ask about any crag, sector, or route..."
+    "inputPlaceholder": "Ask about any crag or sector..."
   },
   "conditions": {
     "rating": "Rating",
@@ -127,7 +127,7 @@
     },
     "globalCoverage": {
       "title": "Global Coverage",
-      "description": "Any crag, sector, or route worldwide via OpenBeta database integration"
+      "description": "Any crag or sector worldwide via OpenBeta database integration"
     },
     "worksOffline": {
       "title": "Works Offline",

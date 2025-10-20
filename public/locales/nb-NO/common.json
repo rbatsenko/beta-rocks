@@ -23,7 +23,7 @@
   "chat": {
     "analyzing": "Analyserer forhold...",
     "thinking": "Tenker...",
-    "inputPlaceholder": "Spør om et hvilket som helst crag, sektor eller rute..."
+    "inputPlaceholder": "Spør om et hvilket som helst crag eller sektor..."
   },
   "conditions": {
     "rating": "Vurdering",
@@ -128,7 +128,7 @@
     },
     "globalCoverage": {
       "title": "Global dekning",
-      "description": "Alle crag, sektorer eller ruter i verden gjennom OpenBeta-integrasjonen"
+      "description": "Alle crag eller sektorer i verden gjennom OpenBeta-integrasjonen"
     },
     "worksOffline": {
       "title": "Fungerer offline",

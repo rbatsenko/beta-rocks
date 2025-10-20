@@ -23,7 +23,7 @@
   "chat": {
     "analyzing": "Analizuję warunki...",
     "thinking": "Myślę...",
-    "inputPlaceholder": "Zapytaj o dowolną skałkę, sektor lub drogę..."
+    "inputPlaceholder": "Zapytaj o dowolną skałkę lub sektor..."
   },
   "conditions": {
     "rating": "Ocena",
@@ -127,7 +127,7 @@
     },
     "globalCoverage": {
       "title": "Zasięg globalny",
-      "description": "Każda skałka, sektor lub droga na świecie dzięki integracji z bazą OpenBeta"
+      "description": "Każda skałka lub sektor na świecie dzięki integracji z bazą OpenBeta"
     },
     "worksOffline": {
       "title": "Działa offline",

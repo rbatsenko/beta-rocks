@@ -23,7 +23,7 @@
   "chat": {
     "analyzing": "Analyse des conditions...",
     "thinking": "Réflexion...",
-    "inputPlaceholder": "Demandez pour une falaise, un secteur ou une voie..."
+    "inputPlaceholder": "Demandez pour une falaise ou un secteur..."
   },
   "conditions": {
     "rating": "Note",
@@ -127,7 +127,7 @@
     },
     "globalCoverage": {
       "title": "Couverture mondiale",
-      "description": "Toute falaise, secteur ou voie grâce à l'intégration de la base de données OpenBeta"
+      "description": "Toute falaise ou secteur grâce à l'intégration de la base de données OpenBeta"
     },
     "worksOffline": {
       "title": "Fonctionne hors ligne",

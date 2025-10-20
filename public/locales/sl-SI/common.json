@@ -23,7 +23,7 @@
   "chat": {
     "analyzing": "Analiziram razmere...",
     "thinking": "Razmišljam...",
-    "inputPlaceholder": "Vprašaj po kateremkoli plezališču, sektorju ali smeri..."
+    "inputPlaceholder": "Vprašaj po kateremkoli plezališču ali sektorju..."
   },
   "conditions": {
     "rating": "Ocena",
@@ -128,7 +128,7 @@
     },
     "globalCoverage": {
       "title": "Globalna pokritost",
-      "description": "Vsako plezališče, sektor ali smer kjerkoli na svetu z integracijo baze OpenBeta"
+      "description": "Vsako plezališče ali sektor kjerkoli na svetu z integracijo baze OpenBeta"
     },
     "worksOffline": {
       "title": "Deluje brez povezave",

@@ -23,7 +23,7 @@
   "chat": {
     "analyzing": "Analisi delle condizioni...",
     "thinking": "Sto pensando...",
-    "inputPlaceholder": "Chiedi di una falesia, settore o via..."
+    "inputPlaceholder": "Chiedi di una falesia o settore..."
   },
   "conditions": {
     "rating": "Valutazione",
@@ -127,7 +127,7 @@
     },
     "globalCoverage": {
       "title": "Copertura globale",
-      "description": "Qualsiasi falesia, settore o via nel mondo grazie all'integrazione con OpenBeta"
+      "description": "Qualsiasi falesia o settore nel mondo grazie all'integrazione con OpenBeta"
     },
     "worksOffline": {
       "title": "Funziona offline",

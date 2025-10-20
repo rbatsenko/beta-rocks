@@ -23,7 +23,7 @@
   "chat": {
     "analyzing": "Analizando condiciones...",
     "thinking": "Pensando...",
-    "inputPlaceholder": "Pregunta por cualquier escuela, sector o vía..."
+    "inputPlaceholder": "Pregunta por cualquier escuela o sector..."
   },
   "conditions": {
     "rating": "Valoración",
@@ -127,7 +127,7 @@
     },
     "globalCoverage": {
       "title": "Cobertura global",
-      "description": "Cualquier escuela, sector o vía del mundo gracias a la integración con la base de datos de OpenBeta"
+      "description": "Cualquier escuela o sector del mundo gracias a la integración con la base de datos de OpenBeta"
     },
     "worksOffline": {
       "title": "Funciona sin conexión",

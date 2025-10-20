@@ -23,7 +23,7 @@
   "chat": {
     "analyzing": "Analysiere Bedingungen...",
     "thinking": "Denke nach...",
-    "inputPlaceholder": "Frag nach einem Fels, Sektor oder einer Route..."
+    "inputPlaceholder": "Frag nach einem Fels oder Sektor..."
   },
   "conditions": {
     "rating": "Bewertung",
@@ -127,7 +127,7 @@
     },
     "globalCoverage": {
       "title": "Globale Abdeckung",
-      "description": "Jeder Fels, Sektor oder jede Route weltweit durch die OpenBeta-Integration"
+      "description": "Jeder Fels oder Sektor weltweit durch die OpenBeta-Integration"
     },
     "worksOffline": {
       "title": "Funktioniert offline",

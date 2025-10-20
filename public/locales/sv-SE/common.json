@@ -23,7 +23,7 @@
   "chat": {
     "analyzing": "Analyserar förhållanden...",
     "thinking": "Tänker...",
-    "inputPlaceholder": "Fråga om valfri klippa, sektor eller led..."
+    "inputPlaceholder": "Fråga om valfri klippa eller sektor..."
   },
   "conditions": {
     "rating": "Betyg",
@@ -128,7 +128,7 @@
     },
     "globalCoverage": {
       "title": "Global täckning",
-      "description": "Varje klippa, sektor eller led i världen via OpenBeta-integrationen"
+      "description": "Varje klippa eller sektor i världen via OpenBeta-integrationen"
     },
     "worksOffline": {
       "title": "Fungerar offline",

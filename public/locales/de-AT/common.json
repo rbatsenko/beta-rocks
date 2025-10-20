@@ -23,7 +23,7 @@
   "chat": {
     "analyzing": "Analysiere die Bedingungen...",
     "thinking": "Am Überlegen...",
-    "inputPlaceholder": "Frag nach einem Klettergebiet, Sektor oder einer Tour..."
+    "inputPlaceholder": "Frag nach einem Klettergebiet oder Sektor..."
   },
   "conditions": {
     "rating": "Bewertung",
