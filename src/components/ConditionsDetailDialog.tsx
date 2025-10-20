@@ -15,6 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Cloud, Droplets, Wind, ThermometerSun, Clock, TrendingUp, Calendar, Sunrise, Sunset } from "lucide-react";
 import { getWeatherEmoji, getWeatherDescription } from "@/lib/utils/weather-emojis";
+import { getLocaleFromLanguage } from "@/lib/utils/locale";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
 import { logRender, isDebugRenders, logPhase } from "@/lib/debug/render-log";
@@ -82,7 +83,8 @@ interface ConditionsDetailDialogProps {
 }
 
 export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ open, onOpenChange, data }: ConditionsDetailDialogProps) {
-  const { t } = useClientTranslation('common');
+  const { t, language } = useClientTranslation('common');
+  const locale = getLocaleFromLanguage(language);
   const [activeTab, setActiveTab] = useState("overview");
   const tabSwitchStartRef = useRef<number | null>(null);
 
@@ -129,7 +131,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
     const isToday = date.toDateString() === now.toDateString();
     const isTomorrow = date.toDateString() === tomorrow.toDateString();
 
-    const timeStr = date.toLocaleTimeString("en-US", {
+    const timeStr = date.toLocaleTimeString(locale, {
       hour: "2-digit",
       minute: "2-digit",
       hour12: false,
@@ -138,7 +140,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
     if (isToday) return `${t('dialog.today')} ${timeStr}`;
     if (isTomorrow) return `${t('dialog.tomorrow')} ${timeStr}`;
 
-    return date.toLocaleDateString("en-US", {
+    return date.toLocaleDateString(locale, {
       weekday: "short",
       hour: "2-digit",
       minute: "2-digit",
@@ -169,7 +171,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
       } else if (isTomorrow) {
         dayKey = t('dialog.tomorrow');
       } else {
-        dayKey = date.toLocaleDateString("en-US", {
+        dayKey = date.toLocaleDateString(locale, {
           weekday: "short",
           month: "short",
           day: "numeric",
@@ -207,7 +209,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
 
       if (!isSameDay) {
         // Show date for end time if it's a different day
-        const endDay = endDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        const endDay = endDate.toLocaleDateString(locale, { month: 'short', day: 'numeric' });
         return `${formatTime(startDate)}-${formatTime(endDate)} (${endDay})`;
       }
 
@@ -283,7 +285,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
         displayDay = t('dialog.tomorrow');
         isTomorrow = true;
       } else {
-        displayDay = startDate.toLocaleDateString("en-US", {
+        displayDay = startDate.toLocaleDateString(locale, {
           weekday: "short",
           month: "short",
           day: "numeric",
@@ -475,7 +477,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
                             <span>{t('dialog.sunrise')}</span>
                           </div>
                           <p className="text-lg font-semibold">
-                            {new Date(data.astro.sunrise).toLocaleTimeString('en-US', {
+                            {new Date(data.astro.sunrise).toLocaleTimeString(locale, {
                               hour: '2-digit',
                               minute: '2-digit',
                               hour12: false
@@ -488,7 +490,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
                             <span>{t('dialog.sunset')}</span>
                           </div>
                           <p className="text-lg font-semibold">
-                            {new Date(data.astro.sunset).toLocaleTimeString('en-US', {
+                            {new Date(data.astro.sunset).toLocaleTimeString(locale, {
                               hour: '2-digit',
                               minute: '2-digit',
                               hour12: false
@@ -638,7 +640,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
                                               </span>
                                             )}
                                             <span className="font-mono min-w-[45px]">
-                                              {new Date(hour.time).toLocaleTimeString("en-US", {
+                                              {new Date(hour.time).toLocaleTimeString(locale, {
                                                 hour: "2-digit",
                                                 minute: "2-digit",
                                                 hour12: false,
@@ -753,7 +755,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
                                         </span>
                                       )}
                                       <span className="font-mono text-sm font-semibold min-w-[60px]">
-                                        {new Date(hour.time).toLocaleTimeString("en-US", {
+                                        {new Date(hour.time).toLocaleTimeString(locale, {
                                           hour: "2-digit",
                                           minute: "2-digit",
                                           hour12: false,
@@ -831,7 +833,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
                                               </span>
                                             )}
                                             <span className="font-mono text-sm font-semibold min-w-[60px]">
-                                              {new Date(hour.time).toLocaleTimeString("en-US", {
+                                              {new Date(hour.time).toLocaleTimeString(locale, {
                                                 hour: "2-digit",
                                                 minute: "2-digit",
                                                 hour12: false,
@@ -971,7 +973,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
                     } else if (isTomorrow) {
                       dayLabel = t('dialog.tomorrow');
                     } else {
-                      dayLabel = dayDate.toLocaleDateString("en-US", {
+                      dayLabel = dayDate.toLocaleDateString(locale, {
                         weekday: "short",
                         month: "short",
                         day: "numeric",
@@ -1017,7 +1019,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
                             </div>
                           </div>
                           <span className="text-xs text-muted-foreground">
-                            {dayDate.toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                            {dayDate.toLocaleDateString(locale, { month: "short", day: "numeric" })}
                           </span>
                         </div>
 
@@ -1056,7 +1058,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
                           <div className="flex items-center gap-1">
                             <Sunrise className="h-3 w-3 text-orange-500" />
                             <span>
-                              {new Date(day.sunrise).toLocaleTimeString("en-US", {
+                              {new Date(day.sunrise).toLocaleTimeString(locale, {
                                 hour: "2-digit",
                                 minute: "2-digit",
                                 hour12: false,
@@ -1066,7 +1068,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({ ope
                           <div className="flex items-center gap-1">
                             <Sunset className="h-3 w-3 text-orange-600" />
                             <span>
-                              {new Date(day.sunset).toLocaleTimeString("en-US", {
+                              {new Date(day.sunset).toLocaleTimeString(locale, {
                                 hour: "2-digit",
                                 minute: "2-digit",
                                 hour12: false,
