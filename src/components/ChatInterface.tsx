@@ -420,9 +420,10 @@ const ChatInterface = () => {
                         })}
 
                         {/* If we have a tool result and a text part, show only the last text once below the card */}
-                        {shouldPreferLastText ? (
+                        {shouldPreferLastText &&
+                        message.parts[lastTextIdx]?.type === "text" ? (
                           <div className="mt-3">
-                            <Response>{(message.parts[lastTextIdx] as any).text}</Response>
+                            <Response>{message.parts[lastTextIdx].text}</Response>
                           </div>
                         ) : null}
                       </MessageContent>

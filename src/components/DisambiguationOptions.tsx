@@ -53,7 +53,7 @@ export const DisambiguationOptions = memo(function DisambiguationOptions({
         scrollToBottom();
         // Also schedule after the message enqueues to cover async updates
         setTimeout(() => scrollToBottom(), 0);
-      } catch (_) {
+      } catch {
         // no-op
       }
     },

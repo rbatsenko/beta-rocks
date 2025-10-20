@@ -21,10 +21,8 @@ export function logRender(name: string, details?: Details): void {
           clean[k] = v as unknown;
         }
       }
-      // eslint-disable-next-line no-console
       console.log(`[render] ${name} @ ${t}ms`, clean);
     } else {
-      // eslint-disable-next-line no-console
       console.log(`[render] ${name} @ ${t}ms`);
     }
   } catch {
@@ -37,10 +35,8 @@ export function logPhase(name: string, phase: string, details?: Details): void {
   try {
     const t = typeof performance !== "undefined" ? performance.now().toFixed(1) : "n/a";
     if (details) {
-      // eslint-disable-next-line no-console
       console.log(`[phase] ${name}:${phase} @ ${t}ms`, details);
     } else {
-      // eslint-disable-next-line no-console
       console.log(`[phase] ${name}:${phase} @ ${t}ms`);
     }
   } catch {

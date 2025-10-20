@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, memo, useEffect, useRef } from "react";
+import { useState, useMemo, memo, useEffect, useRef, useCallback } from "react";
 import {
   Dialog,
   DialogContent,
@@ -167,7 +167,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
     });
   };
 
-  const groupHourlyByDay = () => {
+  const groupHourlyByDay = useCallback(() => {
     if (!data.hourlyConditions) return null;
 
     const grouped: Record<string, typeof data.hourlyConditions> = {};
@@ -209,9 +209,9 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
     });
 
     return grouped;
-  };
+  }, [data, t, locale]);
 
-  const formatTimeRange = (start: string, end: string) => {
+  const formatTimeRange = useCallback((start: string, end: string) => {
     try {
       const startDate = new Date(start);
       const endDate = new Date(end);
@@ -236,9 +236,9 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
     } catch {
       return `${start}-${end}`;
     }
-  };
+  }, [locale]);
 
-  const groupWindowsByDay = () => {
+  const groupWindowsByDay = useCallback(() => {
     if (!data.optimalWindows || data.optimalWindows.length === 0) return null;
 
     const now = new Date();
@@ -341,16 +341,14 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
     });
 
     return Object.keys(grouped).length > 0 ? grouped : null;
-  };
+  }, [data, t, locale, formatTimeRange]);
 
   // Memoize expensive grouping functions to prevent recalculation on every render
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const windowsByDay = useMemo(
     () => groupWindowsByDay(),
-    [data.optimalWindows, data.hourlyConditions]
+    [groupWindowsByDay]
   );
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const hourlyByDay = useMemo(() => groupHourlyByDay(), [data.hourlyConditions]);
+  const hourlyByDay = useMemo(() => groupHourlyByDay(), [groupHourlyByDay]);
 
   // Measure tab switch duration in debug mode
   useEffect(() => {
