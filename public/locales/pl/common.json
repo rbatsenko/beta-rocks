@@ -54,6 +54,7 @@
     "wetSlippery": "Skała mokra - ślisko",
     "veryHighWinds": "Bardzo mocny wiatr ({{wind}} km/h) - może być problem ze wspinaniem",
     "highWind": "Silny wiatr ({{wind}} km/h)",
+    "recentPrecip": "Niedawne opady ({{precip}}mm) - wyschnie za ~{{hours}}h",
     "currentlyWetDangerous": "Obecnie mokro - może być problem ze wspinaniem",
     "currentlyWet": "Obecnie mokro"
   },

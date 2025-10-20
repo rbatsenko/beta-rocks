@@ -352,9 +352,8 @@ export function computeConditions(
     reasons.push(`Will be ready to climb in ~${Math.round(dryingTimeHours)} hours`);
   }
 
-  if (reasons.length === 0) {
-    reasons.push("Conditions are acceptable");
-  }
+  // Don't add a generic fallback - let warnings speak for themselves
+  // The UI will show the rating and friction score
 
   return {
     frictionRating: Math.round(frictionScore),

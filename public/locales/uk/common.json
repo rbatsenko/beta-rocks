@@ -54,6 +54,7 @@
     "wetSlippery": "Скала зараз мокра — слизькі умови",
     "veryHighWinds": "Дуже сильний вітер ({{wind}} км/год) — є ризик здуву",
     "highWind": "Сильний вітер ({{wind}} км/год)",
+    "recentPrecip": "Недавні опади ({{precip}}мм) - висохне за ~{{hours}}год",
     "currentlyWetDangerous": "Зараз мокро — небезпечно",
     "currentlyWet": "Зараз мокро"
   },

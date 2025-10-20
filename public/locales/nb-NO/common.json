@@ -54,6 +54,7 @@
     "wetSlippery": "Fjellet er vått – glatte forhold",
     "veryHighWinds": "Svært kraftig vind ({{wind}} km/t) – fare for å blåse av",
     "highWind": "Kraftig vind ({{wind}} km/t)",
+    "recentPrecip": "Nylig nedbør ({{precip}}mm) - tørker om ~{{hours}}t",
     "currentlyWetDangerous": "Akkurat nå vått – risikabelt",
     "currentlyWet": "Akkurat nå vått"
   },

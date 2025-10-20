@@ -54,6 +54,7 @@
     "wetSlippery": "La roccia è bagnata - condizioni scivolose",
     "veryHighWinds": "Vento molto forte ({{wind}} km/h) - rischio di sbilanciamento",
     "highWind": "Vento forte ({{wind}} km/h)",
+    "recentPrecip": "Precipitazioni recenti ({{precip}}mm) - si asciugherà in ~{{hours}}h",
     "currentlyWetDangerous": "Attualmente bagnato - pericoloso",
     "currentlyWet": "Attualmente bagnato"
   },

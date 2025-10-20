@@ -54,6 +54,7 @@
     "wetSlippery": "Stenen är blöt - hala förhållanden",
     "veryHighWinds": "Mycket hård vind ({{wind}} km/h) - risk för att blåsa av",
     "highWind": "Hård vind ({{wind}} km/h)",
+    "recentPrecip": "Senaste nederbörd ({{precip}}mm) - torkar på ~{{hours}}h",
     "currentlyWetDangerous": "För närvarande blött - riskabelt",
     "currentlyWet": "För närvarande blött"
   },

@@ -54,6 +54,7 @@
     "wetSlippery": "Roche mouillée - conditions glissantes",
     "veryHighWinds": "Vent très fort ({{wind}} km/h) - risque de déséquilibre",
     "highWind": "Vent fort ({{wind}} km/h)",
+    "recentPrecip": "Précipitations récentes ({{precip}}mm) - séchera dans ~{{hours}}h",
     "currentlyWetDangerous": "Actuellement mouillé - dangereux",
     "currentlyWet": "Actuellement mouillé"
   },

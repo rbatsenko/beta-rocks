@@ -54,6 +54,7 @@
     "wetSlippery": "Fels ist nass - rutschige Bedingungen",
     "veryHighWinds": "Sehr starker Wind ({{wind}} km/h) - Gefahr vom Fels geweht zu werden",
     "highWind": "Starker Wind ({{wind}} km/h)",
+    "recentPrecip": "Kürzliche Niederschläge ({{precip}}mm) - trocknet in ~{{hours}}h",
     "currentlyWetDangerous": "Derzeit nass - gefährlich",
     "currentlyWet": "Derzeit nass"
   },

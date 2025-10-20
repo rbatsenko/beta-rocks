@@ -54,6 +54,7 @@
     "wetSlippery": "Skala je mokra - spolzke razmere",
     "veryHighWinds": "Zelo močan veter ({{wind}} km/h) - nevarnost sunkov",
     "highWind": "Močan veter ({{wind}} km/h)",
+    "recentPrecip": "Nedavne padavine ({{precip}}mm) - bo suho čez ~{{hours}}h",
     "currentlyWetDangerous": "Trenutno mokro - nevarno",
     "currentlyWet": "Trenutno mokro"
   },

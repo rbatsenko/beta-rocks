@@ -54,6 +54,7 @@
     "wetSlippery": "Rock is currently wet - slippery conditions",
     "veryHighWinds": "Very high winds ({{wind}} km/h) - danger of blown off",
     "highWind": "High wind ({{wind}} km/h)",
+    "recentPrecip": "Recent precipitation ({{precip}}mm) - will dry in ~{{hours}}h",
     "currentlyWetDangerous": "Currently wet - dangerous",
     "currentlyWet": "Currently wet"
   },

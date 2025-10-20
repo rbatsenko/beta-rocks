@@ -209,6 +209,8 @@ const ChatInterface = () => {
     inputLen: input.length,
   });
 
+  // (debug logging removed)
+
   return (
     <>
       <div className="flex flex-col h-dvh">
@@ -281,6 +283,29 @@ const ChatInterface = () => {
                       part.type === "text" || ("state" in part && part.state === "output-available")
                   );
 
+                  // Prefer showing a single, most-recent assistant text summary above the card
+                  // when a tool result is present. This ensures the summary likely reflects
+                  // the latest tool output, even if the model emitted early generic text.
+                  const isAssistant = message.role === "assistant";
+                  const toolOutIdx = isAssistant
+                    ? message.parts.findIndex(
+                        (p) =>
+                          p.type === "tool-get_conditions" &&
+                          "state" in p &&
+                          p.state === "output-available"
+                      )
+                    : -1;
+                  const lastTextIdx = isAssistant
+                    ? (() => {
+                        for (let i = message.parts.length - 1; i >= 0; i--) {
+                          if (message.parts[i].type === "text") return i;
+                        }
+                        return -1;
+                      })()
+                    : -1;
+                  const shouldPreferLastText =
+                    isAssistant && toolOutIdx !== -1 && lastTextIdx !== -1;
+
                   return (
                     <Message key={message.id} from={message.role}>
                       <MessageContent
@@ -315,8 +340,15 @@ const ChatInterface = () => {
                         {message.parts.map((part, i) => {
                           // Render text parts
                           if (part.type === "text") {
+                            if (shouldPreferLastText) {
+                              // Already rendered the preferred text above; skip all text parts
+                              return null;
+                            }
                             return (
-                              <div key={i} className="pb-3">
+                              <div
+                                key={i}
+                                className={message.role === "assistant" ? "pb-3" : undefined}
+                              >
                                 <Response>{part.text}</Response>
                               </div>
                             );
@@ -386,6 +418,13 @@ const ChatInterface = () => {
 
                           return null;
                         })}
+
+                        {/* If we have a tool result and a text part, show only the last text once below the card */}
+                        {shouldPreferLastText ? (
+                          <div className="mt-3">
+                            <Response>{(message.parts[lastTextIdx] as any).text}</Response>
+                          </div>
+                        ) : null}
                       </MessageContent>
                       {message.role === "assistant" && (
                         <div className="size-8 shrink-0 rounded-full bg-orange-500/10 flex items-center justify-center">

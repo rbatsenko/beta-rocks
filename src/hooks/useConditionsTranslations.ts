@@ -138,6 +138,17 @@ export function useConditionsTranslations(
         return t("warnings.highWind", { wind: highWindMatch[1] });
       }
 
+      // "Recent precipitation (X.Xmm) - will dry in ~Yh"
+      const recentPrecipMatch = warning.match(
+        /Recent precipitation \(([0-9.]+)mm\) - will dry in ~(\d+)h/
+      );
+      if (recentPrecipMatch) {
+        return t("warnings.recentPrecip", {
+          precip: recentPrecipMatch[1],
+          hours: recentPrecipMatch[2],
+        });
+      }
+
       // Simple string matches
       if (
         warning === "Rock is currently wet - dangerous to climb (sandstone becomes weak when wet)"

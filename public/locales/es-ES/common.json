@@ -54,6 +54,7 @@
     "wetSlippery": "La roca está mojada - condiciones resbaladizas",
     "veryHighWinds": "Viento muy fuerte ({{wind}} km/h) - riesgo de ser desplazado",
     "highWind": "Viento fuerte ({{wind}} km/h)",
+    "recentPrecip": "Precipitación reciente ({{precip}}mm) - se secará en ~{{hours}}h",
     "currentlyWetDangerous": "Actualmente mojado - peligroso",
     "currentlyWet": "Actualmente mojado"
   },

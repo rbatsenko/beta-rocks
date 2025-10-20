@@ -1,4 +1,4 @@
-import { streamText, tool, convertToModelMessages, UIMessage } from "ai";
+import { streamText, tool, convertToModelMessages, UIMessage, stepCountIs } from "ai";
 import { google } from "@ai-sdk/google";
 import { z } from "zod";
 import { searchLocationMultiple } from "@/lib/external-apis/geocoding";
@@ -363,12 +363,14 @@ export async function POST(req: Request) {
   const locale = resolveLocale(language);
 
   const result = streamText({
-    model: google("gemini-2.5-flash"),
+    model: google("gemini-2.5-flash-lite-preview-09-2025"),
     system: getSystemPrompt(locale),
     messages: convertToModelMessages(messages),
     tools: tools,
-    // Uses default behavior (single step) for fast responses
+    // Encourage: assistant -> tool -> assistant(summary using tool result)
+    // Steps ~= roundtrips + 1. Allow headroom to ensure a post-tool text step.
+    stopWhen: stepCountIs(3),
   });
 
-  return result.toUIMessageStreamResponse();
+  return result.toUIMessageStreamResponse({ originalMessages: messages });
 }
