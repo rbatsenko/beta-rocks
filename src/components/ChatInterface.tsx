@@ -112,7 +112,7 @@ interface DisambiguationResult {
 }
 
 const ChatInterface = () => {
-  const { t, language } = useClientTranslation('common');
+  const { t, language } = useClientTranslation("common");
   const [input, setInput] = useState("");
   const { messages, sendMessage, status } = useChat();
   const [detailsDialogOpen, setDetailsDialogOpen] = useState(false);
@@ -124,75 +124,84 @@ const ChatInterface = () => {
   const translations = useConditionsTranslations(t);
 
   // Compute loading state from status (v5 API)
-  const isLoading = useMemo(() =>
-    status === 'submitted' || status === 'streaming',
-    [status]
-  );
+  const isLoading = useMemo(() => status === "submitted" || status === "streaming", [status]);
 
   // Memoize example queries
-  const exampleQueries = useMemo(() => [
-    {
-      display: t('welcome.exampleQueries.query1.display'),
-      query: t('welcome.exampleQueries.query1.query'),
-    },
-    {
-      display: t('welcome.exampleQueries.query2.display'),
-      query: t('welcome.exampleQueries.query2.query'),
-    },
-    {
-      display: t('welcome.exampleQueries.query3.display'),
-      query: t('welcome.exampleQueries.query3.query'),
-    },
-  ], [t]);
+  const exampleQueries = useMemo(
+    () => [
+      {
+        display: t("welcome.exampleQueries.query1.display"),
+        query: t("welcome.exampleQueries.query1.query"),
+      },
+      {
+        display: t("welcome.exampleQueries.query2.display"),
+        query: t("welcome.exampleQueries.query2.query"),
+      },
+      {
+        display: t("welcome.exampleQueries.query3.display"),
+        query: t("welcome.exampleQueries.query3.query"),
+      },
+    ],
+    [t]
+  );
 
   // Memoize submit handler
-  const handleSubmit = useCallback((e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim()) return;
+  const handleSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      if (!input.trim()) return;
 
-    const userMessage = input.trim();
-    setInput("");
-    sendMessage(
-      { text: userMessage },
-      {
-        body: {
-          language: language,
-        },
-      }
-    );
-    // Signal scroll to bottom within Conversation provider
-    setScrollSignal((s) => s + 1);
-  }, [input, language, sendMessage]);
+      const userMessage = input.trim();
+      setInput("");
+      sendMessage(
+        { text: userMessage },
+        {
+          body: {
+            language: language,
+          },
+        }
+      );
+      // Signal scroll to bottom within Conversation provider
+      setScrollSignal((s) => s + 1);
+    },
+    [input, language, sendMessage]
+  );
 
   // Memoize example click handler
-  const handleExampleClick = useCallback((queryText: string) => {
-    setInput("");
-    sendMessage(
-      { text: queryText },
-      {
-        body: {
-          language: language,
-        },
-      }
-    );
-    // Signal scroll to bottom within Conversation provider
-    setScrollSignal((s) => s + 1);
-  }, [language, sendMessage]);
+  const handleExampleClick = useCallback(
+    (queryText: string) => {
+      setInput("");
+      sendMessage(
+        { text: queryText },
+        {
+          body: {
+            language: language,
+          },
+        }
+      );
+      // Signal scroll to bottom within Conversation provider
+      setScrollSignal((s) => s + 1);
+    },
+    [language, sendMessage]
+  );
 
   // Memoize disambiguation option handler
-  const handleDisambiguationSelect = useCallback((queryText: string) => {
-    sendMessage(
-      { text: queryText },
-      {
-        body: {
-          language: language,
-        },
-      }
-    );
-  }, [language, sendMessage]);
+  const handleDisambiguationSelect = useCallback(
+    (queryText: string) => {
+      sendMessage(
+        { text: queryText },
+        {
+          body: {
+            language: language,
+          },
+        }
+      );
+    },
+    [language, sendMessage]
+  );
 
   // Render log for profiling
-  logRender('ChatInterface', {
+  logRender("ChatInterface", {
     messages: messages.length,
     status,
     detailsOpen: detailsDialogOpen,
@@ -208,7 +217,7 @@ const ChatInterface = () => {
           <div className="container flex h-16 items-center justify-between px-4">
             <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
               <CloudSun className="w-6 h-6 text-orange-500" />
-              <h1 className="text-xl font-bold">{t('header.title')}</h1>
+              <h1 className="text-xl font-bold">{t("header.title")}</h1>
             </Link>
             <div className="flex items-center gap-2">
               <Button
@@ -218,7 +227,7 @@ const ChatInterface = () => {
                 className="rounded-full"
               >
                 <Info className="h-5 w-5" />
-                <span className="sr-only">{t('ui.aboutApp')}</span>
+                <span className="sr-only">{t("ui.aboutApp")}</span>
               </Button>
               <LanguageSelector />
               <ThemeToggle />
@@ -226,19 +235,19 @@ const ChatInterface = () => {
           </div>
         </header>
 
-      {/* Chat Area */}
-      <div className="flex-1 overflow-hidden flex flex-col">
-        <Conversation className="flex-1">
-          <ScrollToBottomOnSignal signal={scrollSignal} />
-          <ConversationContent className="container max-w-3xl px-4 py-6">
+        {/* Chat Area */}
+        <div className="flex-1 overflow-hidden flex flex-col">
+          <Conversation className="flex-1">
+            <ScrollToBottomOnSignal signal={scrollSignal} />
+            <ConversationContent className="container max-w-3xl px-4 py-6">
               {messages.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center py-12">
                   <div className="w-20 h-20 rounded-full bg-gradient-to-br from-orange-500/20 to-orange-600/20 flex items-center justify-center mb-6">
                     <CloudSun className="w-10 h-10 text-orange-500" />
                   </div>
-                  <h2 className="text-3xl font-bold mb-3">{t('welcome.heading')}</h2>
+                  <h2 className="text-3xl font-bold mb-3">{t("welcome.heading")}</h2>
                   <p className="text-muted-foreground mb-8 max-w-md text-base">
-                    {t('welcome.description')}
+                    {t("welcome.description")}
                   </p>
                   <div className="flex flex-wrap gap-2 justify-center max-w-lg">
                     {exampleQueries.map((example, idx) => (
@@ -257,35 +266,59 @@ const ChatInterface = () => {
               ) : (
                 messages.map((message) => {
                   // Check if any tool is currently executing
-                  const hasExecutingTool = message.role === "assistant" && message.parts.some(
-                    (part) => part.type.startsWith("tool-") && "state" in part && part.state !== "output-available"
-                  );
+                  const hasExecutingTool =
+                    message.role === "assistant" &&
+                    message.parts.some(
+                      (part) =>
+                        part.type.startsWith("tool-") &&
+                        "state" in part &&
+                        part.state !== "output-available"
+                    );
 
                   // Check if message has any content to show
                   const hasContent = message.parts.some(
-                    (part) => part.type === "text" || ("state" in part && part.state === "output-available")
+                    (part) =>
+                      part.type === "text" || ("state" in part && part.state === "output-available")
                   );
 
                   return (
                     <Message key={message.id} from={message.role}>
                       <MessageContent
                         variant={message.role === "assistant" ? "flat" : "contained"}
-                        className={message.role === "user" ? "bg-gradient-to-br from-orange-500 to-orange-400 dark:from-orange-950/50 dark:to-orange-900/30 border-orange-600 dark:border-orange-800/50 shadow-md text-orange-950 dark:text-inherit" : ""}
+                        className={
+                          message.role === "user"
+                            ? "bg-gradient-to-br from-orange-500 to-orange-400 dark:from-orange-950/50 dark:to-orange-900/30 border-orange-600 dark:border-orange-800/50 shadow-md text-orange-950 dark:text-inherit"
+                            : ""
+                        }
                       >
                         {hasExecutingTool && !hasContent && (
                           <div className="flex items-center gap-3 py-1">
                             <div className="flex gap-1.5">
-                              <div className="w-2 h-2 bg-orange-500 rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></div>
-                              <div className="w-2 h-2 bg-orange-500 rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></div>
-                              <div className="w-2 h-2 bg-orange-500 rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></div>
+                              <div
+                                className="w-2 h-2 bg-orange-500 rounded-full animate-bounce"
+                                style={{ animationDelay: "0ms" }}
+                              ></div>
+                              <div
+                                className="w-2 h-2 bg-orange-500 rounded-full animate-bounce"
+                                style={{ animationDelay: "150ms" }}
+                              ></div>
+                              <div
+                                className="w-2 h-2 bg-orange-500 rounded-full animate-bounce"
+                                style={{ animationDelay: "300ms" }}
+                              ></div>
                             </div>
-                            <span className="text-sm text-muted-foreground">{t('chat.analyzing')}</span>
+                            <span className="text-sm text-muted-foreground">
+                              {t("chat.analyzing")}
+                            </span>
                           </div>
                         )}
                         {message.parts.map((part, i) => {
                           // Check if message has successful tool results
                           const hasToolResults = message.parts.some(
-                            (p) => p.type.startsWith("tool-") && "state" in p && p.state === "output-available"
+                            (p) =>
+                              p.type.startsWith("tool-") &&
+                              "state" in p &&
+                              p.state === "output-available"
                           );
 
                           // Render text parts only if there are no tool results
@@ -307,31 +340,36 @@ const ChatInterface = () => {
                             part.type === "tool-get_conditions" &&
                             part.state === "output-available"
                           ) {
-                            const result = part.output as ConditionsData | DisambiguationResult | { error: string; location: string };
+                            const result = part.output as
+                              | ConditionsData
+                              | DisambiguationResult
+                              | { error: string; location: string };
 
                             // Handle error results
                             if ("error" in result && result.error) {
                               return (
-                                <div key={i} className="bg-destructive/10 border border-destructive/20 rounded-lg p-4">
-                                  <p className="text-destructive font-medium">
-                                    {result.error}
-                                  </p>
+                                <div
+                                  key={i}
+                                  className="bg-destructive/10 border border-destructive/20 rounded-lg p-4"
+                                >
+                                  <p className="text-destructive font-medium">{result.error}</p>
                                 </div>
                               );
                             }
 
                             // Handle disambiguation results
                             if ("disambiguate" in result && result.disambiguate) {
-                              const displayMessage = result.translationKey && result.translationParams
-                                ? t(result.translationKey, result.translationParams)
-                                : result.message;
+                              const displayMessage =
+                                result.translationKey && result.translationParams
+                                  ? t(result.translationKey, result.translationParams)
+                                  : result.message;
 
                               return (
                                 <DisambiguationOptions
                                   key={i}
                                   result={result}
                                   displayMessage={displayMessage}
-                                  queryTemplate={t('disambiguation.queryTemplate')}
+                                  queryTemplate={t("disambiguation.queryTemplate")}
                                   onOptionSelect={handleDisambiguationSelect}
                                 />
                               );
@@ -352,8 +390,8 @@ const ChatInterface = () => {
                                   setSelectedConditions(conditionsResult);
                                   setDetailsDialogOpen(true);
                                 }}
-                                conditionsLabel={t('conditions.rating')}
-                                detailsLabel={t('conditions.details')}
+                                conditionsLabel={t("conditions.rating")}
+                                detailsLabel={t("conditions.details")}
                               />
                             );
                           }
@@ -370,29 +408,35 @@ const ChatInterface = () => {
                   );
                 })
               )}
-              {isLoading && (() => {
-                // Check if any message has an executing tool
-                const hasExecutingTool = messages.some(message =>
-                  message.role === "assistant" && message.parts.some(
-                    (part) => part.type.startsWith("tool-") && "state" in part && part.state !== "output-available"
-                  )
-                );
+              {isLoading &&
+                (() => {
+                  // Check if any message has an executing tool
+                  const hasExecutingTool = messages.some(
+                    (message) =>
+                      message.role === "assistant" &&
+                      message.parts.some(
+                        (part) =>
+                          part.type.startsWith("tool-") &&
+                          "state" in part &&
+                          part.state !== "output-available"
+                      )
+                  );
 
-                // Only show "Thinking..." if no tool is currently executing
-                // (when a tool is executing, we already show "Analyzing conditions...")
-                if (hasExecutingTool) {
-                  return null;
-                }
+                  // Only show "Thinking..." if no tool is currently executing
+                  // (when a tool is executing, we already show "Analyzing conditions...")
+                  if (hasExecutingTool) {
+                    return null;
+                  }
 
-                return (
-                  <div className="flex justify-start">
-                    <div className="bg-muted rounded-2xl px-4 py-3 flex items-center gap-2">
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>{t('chat.thinking')}</span>
+                  return (
+                    <div className="flex justify-start">
+                      <div className="bg-muted rounded-2xl px-4 py-3 flex items-center gap-2">
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>{t("chat.thinking")}</span>
+                      </div>
                     </div>
-                  </div>
-                );
-              })()}
+                  );
+                })()}
             </ConversationContent>
             <ConversationScrollButton />
           </Conversation>
@@ -405,7 +449,7 @@ const ChatInterface = () => {
               <Input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder={t('chat.inputPlaceholder')}
+                placeholder={t("chat.inputPlaceholder")}
                 className="flex-1"
                 disabled={isLoading}
               />
@@ -420,11 +464,11 @@ const ChatInterface = () => {
             {/* Footer Links */}
             <div className="flex items-center justify-center gap-4 mt-3 text-xs text-muted-foreground">
               <a href="#" className="hover:text-foreground transition-colors">
-                {t('footer.about')}
+                {t("footer.about")}
               </a>
               <span>•</span>
               <a href="#" className="hover:text-foreground transition-colors">
-                {t('footer.privacy')}
+                {t("footer.privacy")}
               </a>
               <span>•</span>
               <a
@@ -433,7 +477,7 @@ const ChatInterface = () => {
                 rel="noopener noreferrer"
                 className="hover:text-foreground transition-colors"
               >
-                {t('footer.github')}
+                {t("footer.github")}
               </a>
             </div>
           </div>
@@ -450,10 +494,7 @@ const ChatInterface = () => {
       )}
 
       {/* Features / About App Dialog */}
-      <FeaturesDialog
-        open={featuresDialogOpen}
-        onOpenChange={setFeaturesDialogOpen}
-      />
+      <FeaturesDialog open={featuresDialogOpen} onOpenChange={setFeaturesDialogOpen} />
     </>
   );
 };

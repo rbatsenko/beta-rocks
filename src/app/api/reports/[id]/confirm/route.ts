@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import {
-  getSupabaseClient,
-  isSupabaseConfigured,
-} from "@/integrations/supabase/client";
+import { getSupabaseClient, isSupabaseConfigured } from "@/integrations/supabase/client";
 
 /**
  * POST /api/reports/[id]/confirm
@@ -18,10 +15,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
   try {
     if (!isSupabaseConfigured) {
       console.error("Supabase environment variables are not configured.");
-      return NextResponse.json(
-        { error: "Supabase client is not configured" },
-        { status: 500 },
-      );
+      return NextResponse.json({ error: "Supabase client is not configured" }, { status: 500 });
     }
 
     const supabase = getSupabaseClient();

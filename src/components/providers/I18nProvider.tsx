@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { I18nextProvider } from 'react-i18next';
-import { getInitialLanguage, i18n, initI18n } from '@/lib/i18n/client';
-import { resolveLocale } from '@/lib/i18n/config';
+import { useEffect, useState } from "react";
+import { I18nextProvider } from "react-i18next";
+import { getInitialLanguage, i18n, initI18n } from "@/lib/i18n/client";
+import { resolveLocale } from "@/lib/i18n/config";
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
   const [isInitialized, setIsInitialized] = useState(i18n.isInitialized);

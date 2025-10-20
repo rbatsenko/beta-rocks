@@ -380,5 +380,4 @@ const prompts: Record<Locale, string> = {
   Hvis du legger til NOE tekst når verktøysdata er tilgjengelig, gjør du en feil.`,
 };
 
-export const getSystemPrompt = (locale: Locale): string =>
-  prompts[locale] ?? prompts.en;
+export const getSystemPrompt = (locale: Locale): string => prompts[locale] ?? prompts.en;

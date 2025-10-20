@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import {
-  getSupabaseClient,
-  isSupabaseConfigured,
-} from "@/integrations/supabase/client";
+import { getSupabaseClient, isSupabaseConfigured } from "@/integrations/supabase/client";
 
 /**
  * GET /api/reports
@@ -19,10 +16,7 @@ export async function GET(request: NextRequest) {
   try {
     if (!isSupabaseConfigured) {
       console.error("Supabase environment variables are not configured.");
-      return NextResponse.json(
-        { error: "Supabase client is not configured" },
-        { status: 500 },
-      );
+      return NextResponse.json({ error: "Supabase client is not configured" }, { status: 500 });
     }
 
     const supabase = getSupabaseClient();
@@ -91,10 +85,7 @@ export async function POST(request: NextRequest) {
   try {
     if (!isSupabaseConfigured) {
       console.error("Supabase environment variables are not configured.");
-      return NextResponse.json(
-        { error: "Supabase client is not configured" },
-        { status: 500 },
-      );
+      return NextResponse.json({ error: "Supabase client is not configured" }, { status: 500 });
     }
 
     const supabase = getSupabaseClient();

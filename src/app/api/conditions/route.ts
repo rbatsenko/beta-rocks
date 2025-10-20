@@ -110,10 +110,12 @@ export async function GET(request: NextRequest) {
         // Keep ISO timestamps - formatting happens in UI
       },
       // Include today's sunrise/sunset from daily forecast
-      astro: forecast.daily?.[0] ? {
-        sunrise: forecast.daily[0].sunrise,
-        sunset: forecast.daily[0].sunset,
-      } : undefined,
+      astro: forecast.daily?.[0]
+        ? {
+            sunrise: forecast.daily[0].sunrise,
+            sunset: forecast.daily[0].sunset,
+          }
+        : undefined,
       updatedAt: new Date().toISOString(),
     });
   } catch (error) {
@@ -132,7 +134,7 @@ export async function GET(request: NextRequest) {
       {
         error: "Failed to compute conditions",
         details: error instanceof Error ? error.message : "Unknown error",
-        debug: process.env.NODE_ENV === 'development' ? errorDetails : undefined,
+        debug: process.env.NODE_ENV === "development" ? errorDetails : undefined,
       },
       { status: 500 }
     );

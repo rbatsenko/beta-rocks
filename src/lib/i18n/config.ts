@@ -1,19 +1,19 @@
 export const i18nConfig = {
   locales: [
-    'en',
-    'en-GB',
-    'pl',
-    'uk',
-    'es-ES',
-    'fr-FR',
-    'it-IT',
-    'de-DE',
-    'de-AT',
-    'sl-SI',
-    'sv-SE',
-    'nb-NO',
+    "en",
+    "en-GB",
+    "pl",
+    "uk",
+    "es-ES",
+    "fr-FR",
+    "it-IT",
+    "de-DE",
+    "de-AT",
+    "sl-SI",
+    "sv-SE",
+    "nb-NO",
   ],
-  defaultLocale: 'en',
+  defaultLocale: "en",
 } as const;
 
 export type Locale = (typeof i18nConfig.locales)[number];
@@ -35,9 +35,7 @@ export const matchLocale = (language?: string | null): Locale | null => {
 
   const normalizedLanguage = language.toLowerCase();
 
-  const exactMatch = localeDescriptors.find(
-    ({ lowerValue }) => lowerValue === normalizedLanguage,
-  );
+  const exactMatch = localeDescriptors.find(({ lowerValue }) => lowerValue === normalizedLanguage);
   if (exactMatch) {
     return exactMatch.value;
   }

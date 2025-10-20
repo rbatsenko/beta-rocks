@@ -18,7 +18,7 @@ interface FeaturesDialogProps {
 }
 
 export function FeaturesDialog({ open, onOpenChange }: FeaturesDialogProps) {
-  const { t } = useClientTranslation('common');
+  const { t } = useClientTranslation("common");
 
   const features = [
     {
@@ -57,10 +57,8 @@ export function FeaturesDialog({ open, onOpenChange }: FeaturesDialogProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-4xl max-h-[90vh]">
         <DialogHeader>
-          <DialogTitle className="text-2xl">{t('features.heading')}</DialogTitle>
-          <DialogDescription>
-            {t('features.subheading')}
-          </DialogDescription>
+          <DialogTitle className="text-2xl">{t("features.heading")}</DialogTitle>
+          <DialogDescription>{t("features.subheading")}</DialogDescription>
         </DialogHeader>
 
         <ScrollArea className="h-[calc(90vh-180px)] pr-4">
@@ -68,10 +66,7 @@ export function FeaturesDialog({ open, onOpenChange }: FeaturesDialogProps) {
             {features.map((feature, idx) => {
               const Icon = feature.icon;
               return (
-                <Card
-                  key={idx}
-                  className="shadow-sm hover:shadow-md transition-all"
-                >
+                <Card key={idx} className="shadow-sm hover:shadow-md transition-all">
                   <CardHeader>
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-3">
                       <Icon className="w-5 h-5 text-primary" />
@@ -79,16 +74,18 @@ export function FeaturesDialog({ open, onOpenChange }: FeaturesDialogProps) {
                     <CardTitle className="text-base">{t(feature.titleKey)}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <CardDescription className="text-sm">{t(feature.descriptionKey)}</CardDescription>
+                    <CardDescription className="text-sm">
+                      {t(feature.descriptionKey)}
+                    </CardDescription>
                   </CardContent>
                 </Card>
               );
             })}
           </div>
           <div className="mt-2 pt-4 border-t border-border text-sm text-muted-foreground space-y-1">
-            <p>{t('footer.description')}</p>
-            <p>{t('footer.attribution')}</p>
-            <p>{t('footer.copyright')}</p>
+            <p>{t("footer.description")}</p>
+            <p>{t("footer.attribution")}</p>
+            <p>{t("footer.copyright")}</p>
           </div>
         </ScrollArea>
       </DialogContent>

@@ -2,8 +2,7 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "./types";
 
-const SUPABASE_URL =
-  process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || "";
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || "";
 const SUPABASE_PUBLISHABLE_KEY =
   process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
   process.env.SUPABASE_ANON_KEY ||
@@ -12,14 +11,12 @@ const SUPABASE_PUBLISHABLE_KEY =
 
 let cachedClient: SupabaseClient<Database> | null = null;
 
-export const isSupabaseConfigured = Boolean(
-  SUPABASE_URL && SUPABASE_PUBLISHABLE_KEY,
-);
+export const isSupabaseConfigured = Boolean(SUPABASE_URL && SUPABASE_PUBLISHABLE_KEY);
 
 const createSupabaseClient = (): SupabaseClient<Database> => {
   if (!isSupabaseConfigured) {
     throw new Error(
-      "Supabase environment variables are not configured. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY (or server-side equivalents).",
+      "Supabase environment variables are not configured. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY (or server-side equivalents)."
     );
   }
 

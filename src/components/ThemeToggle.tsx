@@ -7,7 +7,7 @@ import { useClientTranslation } from "@/hooks/useClientTranslation";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
-  const { t } = useClientTranslation('common');
+  const { t } = useClientTranslation("common");
 
   return (
     <Button
@@ -18,7 +18,7 @@ export function ThemeToggle() {
     >
       <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
       <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-      <span className="sr-only">{t('ui.toggleTheme')}</span>
+      <span className="sr-only">{t("ui.toggleTheme")}</span>
     </Button>
   );
 }

@@ -4,7 +4,13 @@ import { z } from "zod";
 import { searchLocationMultiple } from "@/lib/external-apis/geocoding";
 import { getWeatherForecast } from "@/lib/external-apis/open-meteo";
 import { computeConditions, RockType } from "@/lib/conditions/conditions.service";
-import { searchAreas, formatAreaPath, extractRockType, isCrag, hasPreciseCoordinates } from "@/lib/openbeta/client";
+import {
+  searchAreas,
+  formatAreaPath,
+  extractRockType,
+  isCrag,
+  hasPreciseCoordinates,
+} from "@/lib/openbeta/client";
 import { resolveLocale } from "@/lib/i18n/config";
 import { getSystemPrompt } from "./prompts";
 
@@ -56,7 +62,7 @@ const tools = {
           if (openBetaAreas.length > 0) {
             // Filter to actual climbing crags (not countries/regions)
             // Also filter out areas with generic coordinates
-            const crags = openBetaAreas.filter(area => {
+            const crags = openBetaAreas.filter((area) => {
               const isPrecise = hasPreciseCoordinates(area);
               const isCragArea = isCrag(area);
               console.log("[get_conditions] Area check:", {
@@ -90,9 +96,7 @@ const tools = {
               });
             } else if (crags.length > 1) {
               // Multiple crags found - return disambiguation
-              console.log(
-                "[get_conditions] Multiple crags found, returning disambiguation"
-              );
+              console.log("[get_conditions] Multiple crags found, returning disambiguation");
 
               // Sort by popularity (number of climbs) - more popular crags first
               const sortedCrags = [...crags].sort((a, b) => {
@@ -128,10 +132,7 @@ const tools = {
         // STEP 2: If OpenBeta didn't find a crag, fall back to geocoding
         if (!lat || !lon) {
           try {
-            console.log(
-              "[get_conditions] Falling back to geocoding API:",
-              location
-            );
+            console.log("[get_conditions] Falling back to geocoding API:", location);
             // First try to get multiple results for disambiguation
             const geocodedMultiple = await searchLocationMultiple(location, 3);
 
@@ -290,12 +291,14 @@ const tools = {
             weatherCode: forecast.current.weatherCode,
           },
           // Include today's sunrise/sunset
-          astro: forecast.daily?.[0] ? {
-            sunrise: forecast.daily[0].sunrise,
-            sunset: forecast.daily[0].sunset,
-          } : undefined,
+          astro: forecast.daily?.[0]
+            ? {
+                sunrise: forecast.daily[0].sunrise,
+                sunset: forecast.daily[0].sunset,
+              }
+            : undefined,
           // Include full daily forecast
-          dailyForecast: forecast.daily?.map(day => ({
+          dailyForecast: forecast.daily?.map((day) => ({
             date: day.date,
             tempMax: day.tempMax,
             tempMin: day.tempMin,

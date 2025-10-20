@@ -7,6 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 temps.rocks is a free, chat-first web app that helps climbers check real-time conditions at crags, sectors, and routes worldwide. It uses AI (Gemini 2.5 Flash via Vercel AI SDK) to provide intelligent climbing condition analysis based on weather data, rock type, and climbing-specific factors.
 
 **Key Technologies:**
+
 - Next.js 15 (App Router with Turbopack)
 - TypeScript with strict mode
 - Tailwind CSS + shadcn/ui components
@@ -19,6 +20,7 @@ temps.rocks is a free, chat-first web app that helps climbers check real-time co
 ## Development Commands
 
 ### Running the App
+
 ```bash
 # Start dev server (uses Turbopack by default)
 npm run dev
@@ -34,6 +36,7 @@ npm start
 ```
 
 ### Code Quality
+
 ```bash
 # Run ESLint
 npm run lint
@@ -52,7 +55,9 @@ npm run type-check
 ```
 
 ### Environment Setup
+
 Copy `.env.example` to `.env.local` and add:
+
 - `NEXT_PUBLIC_SUPABASE_URL` - Supabase project URL
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` - Supabase anon key
 - `GOOGLE_GENERATIVE_AI_API_KEY` - Google Gemini API key (server-side only)
@@ -91,6 +96,7 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
 ### Climbing Conditions Service (src/lib/conditions/conditions.service.ts)
 
 **Core Algorithm**: Calculates friction scores (1-5 scale) based on:
+
 - **Rock type** (granite, sandstone, limestone, etc.) - each has different optimal temp/humidity ranges
 - **Temperature** - compared to rock-specific optimal ranges
 - **Humidity** - critical for friction; sandstone is very sensitive
@@ -99,12 +105,14 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
 - **Dew point spread** - risk of condensation
 
 **Key Functions**:
+
 - `computeConditions()`: Main entry point, returns current conditions + hourly forecast
 - `computeHourlyConditions()`: Analyzes next 48 hours for friction scores
 - `findOptimalWindowsEnhanced()`: Groups consecutive good hours into climbing windows
 - `calculateWeatherAwareDryingPenalty()`: Smart wetness penalty that considers current weather (temp, humidity, wind affect drying speed)
 
 **Important**: Rock types have vastly different characteristics:
+
 - **Sandstone**: Requires long drying time (36h), becomes structurally weak when wet (dangerous to climb)
 - **Granite/Gneiss**: Fast drying (2h), performs well in cold temps, low humidity preferred
 - **Limestone**: More humidity-tolerant, moderate drying time
@@ -112,6 +120,7 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
 ### Component Structure
 
 **Main Components** (src/components/):
+
 - `ChatInterface.tsx`: Primary chat UI with Vercel AI SDK's `useChat` hook
 - `ConditionsDetailDialog.tsx`: Large modal showing detailed weather analysis, charts (recharts), hourly forecasts
 - `DisambiguationOptions.tsx`: Renders location options when multiple matches found
@@ -123,15 +132,18 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
 ### Data Layer
 
 **OpenBeta Client** (src/lib/openbeta/client.ts):
+
 - GraphQL client for OpenBeta climbing database
 - Provides `searchAreas()`, `getAreaByUuid()`, `formatAreaPath()`
 - Helper functions: `isCrag()` checks if area has climbs/sectors vs being a region, `hasPreciseCoordinates()` filters out generic country-level coords, `extractRockType()` parses description for rock type
 
 **External APIs** (src/lib/external-apis/):
+
 - `open-meteo.ts`: Fetches 14-day weather forecast with hourly data
 - `geocoding.ts`: Fallback location search when OpenBeta doesn't find a crag
 
 **Database** (src/lib/db/queries.ts):
+
 - Supabase queries for user reports, confirmations (TODO: not fully implemented)
 - See `docs/SUPABASE_SETUP.md` for schema
 
@@ -144,6 +156,7 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
 - Locale detection via browser headers, stored in cookies via middleware
 
 **Adding Translations**:
+
 1. Add key to `public/locales/en/common.json` (source of truth)
 2. Add to all other locale files
 3. Use `matchLocale()` for region-specific fallback (e.g., `en-US` → `en`)
@@ -159,24 +172,30 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
 ## Important Patterns
 
 ### Tool Calling with Vercel AI SDK
+
 The chat uses the single-step tool pattern (default behavior for fast responses). Tools return structured data, then the LLM generates natural language response. The UI components (via ai-elements) automatically render tool results with proper formatting.
 
 ### Type Safety
+
 - Strict TypeScript mode enabled
 - `noUnusedLocals` and `noUnusedParameters` enforced
 - Zod schemas for API validation (see tool definitions in chat/route.ts)
 - OpenBeta types defined in `src/lib/openbeta/types.ts`
 
 ### Path Aliases
+
 Use `@/*` to import from `src/`:
+
 ```typescript
 import { computeConditions } from "@/lib/conditions/conditions.service";
 ```
 
 ### Middleware (src/middleware.ts)
+
 Detects user's country via Vercel geo headers, sets cookie for i18n auto-detection.
 
 ### Git Conventions
+
 Follow conventional commits: `feat:`, `fix:`, `refactor:`, `docs:`, etc.
 First letter after type is lowercase: `fix: correct friction calculation` (not `fix: Correct...`)
 
@@ -199,6 +218,7 @@ First letter after type is lowercase: `fix: correct friction calculation` (not `
 ## Deployment
 
 Deployed on Vercel. On push to main:
+
 1. Vercel auto-builds with Turbopack
 2. Environment variables set in Vercel dashboard
 3. Edge functions for API routes

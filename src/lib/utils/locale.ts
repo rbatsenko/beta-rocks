@@ -5,19 +5,19 @@
  */
 export function getLocaleFromLanguage(language: string): string {
   const localeMap: Record<string, string> = {
-    'en': 'en-US',
-    'en-GB': 'en-GB',
-    'uk': 'uk-UA',
-    'de-DE': 'de-DE',
-    'de-AT': 'de-AT',
-    'es-ES': 'es-ES',
-    'fr-FR': 'fr-FR',
-    'it-IT': 'it-IT',
-    'nb-NO': 'nb-NO',
-    'pl': 'pl-PL',
-    'sl-SI': 'sl-SI',
-    'sv-SE': 'sv-SE',
+    en: "en-US",
+    "en-GB": "en-GB",
+    uk: "uk-UA",
+    "de-DE": "de-DE",
+    "de-AT": "de-AT",
+    "es-ES": "es-ES",
+    "fr-FR": "fr-FR",
+    "it-IT": "it-IT",
+    "nb-NO": "nb-NO",
+    pl: "pl-PL",
+    "sl-SI": "sl-SI",
+    "sv-SE": "sv-SE",
   };
 
-  return localeMap[language] || 'en-US';
+  return localeMap[language] || "en-US";
 }

@@ -9,7 +9,17 @@ export const metadata: Metadata = {
   description:
     "Chat with temps.rocks for instant climbing conditions at any crag, sector, or route worldwide. Get real-time weather forecasts, friction analysis, optimal climbing windows, and AI-powered insights - completely free for climbers.",
   authors: [{ name: "temps.rocks" }],
-  keywords: ["climbing", "weather", "conditions", "friction", "crag", "rock climbing", "bouldering", "sport climbing", "forecast"],
+  keywords: [
+    "climbing",
+    "weather",
+    "conditions",
+    "friction",
+    "crag",
+    "rock climbing",
+    "bouldering",
+    "sport climbing",
+    "forecast",
+  ],
   openGraph: {
     title: "temps.rocks - Real-time Climbing Conditions",
     description:
@@ -22,7 +32,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "temps.rocks - Climbing Conditions Chat",
-    description: "Ask about any crag and get instant weather, friction scores, and optimal climbing windows. Free AI-powered climbing conditions assistant.",
+    description:
+      "Ask about any crag and get instant weather, friction scores, and optimal climbing windows. Free AI-powered climbing conditions assistant.",
   },
   robots: {
     index: true,

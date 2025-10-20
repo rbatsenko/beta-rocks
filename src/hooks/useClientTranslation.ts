@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useTranslation as useTranslationOrg } from 'react-i18next';
-import { resolveLocale, type Locale } from '@/lib/i18n/config';
+import { useTranslation as useTranslationOrg } from "react-i18next";
+import { resolveLocale, type Locale } from "@/lib/i18n/config";
 
 export function useClientTranslation(ns?: string | string[]) {
   const { t, i18n } = useTranslationOrg(ns);

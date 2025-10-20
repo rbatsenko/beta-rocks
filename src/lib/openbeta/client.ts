@@ -3,11 +3,7 @@
  * Provides type-safe access to the OpenBeta climbing database
  */
 
-import type {
-  Area,
-  AreasResponse,
-  AreaResponse,
-} from "./types";
+import type { Area, AreasResponse, AreaResponse } from "./types";
 
 const OPENBETA_ENDPOINT = "https://api.openbeta.io/graphql";
 
@@ -40,7 +36,9 @@ async function executeQuery<T>(query: string, variables?: Record<string, unknown
   });
 
   if (!response.ok) {
-    throw new Error(`OpenBeta API error: ${response.status} ${response.statusText} - ${JSON.stringify(result)}`);
+    throw new Error(
+      `OpenBeta API error: ${response.status} ${response.statusText} - ${JSON.stringify(result)}`
+    );
   }
 
   if (result.errors) {
@@ -93,7 +91,7 @@ export async function searchAreas(searchText: string): Promise<Area[]> {
 
   console.log("[OpenBeta] Response:", {
     count: data.areas?.length || 0,
-    areas: data.areas?.slice(0, 3).map(a => ({
+    areas: data.areas?.slice(0, 3).map((a) => ({
       name: a.area_name,
       path: a.pathTokens?.join(" > "),
       coords: `${a.metadata?.lat}, ${a.metadata?.lng}`,

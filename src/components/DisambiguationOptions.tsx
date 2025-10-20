@@ -1,7 +1,7 @@
-import { memo, useCallback } from 'react';
-import { Button } from '@/components/ui/button';
-import { useStickToBottomContext } from 'use-stick-to-bottom';
-import { logRender } from '@/lib/debug/render-log';
+import { memo, useCallback } from "react";
+import { Button } from "@/components/ui/button";
+import { useStickToBottomContext } from "use-stick-to-bottom";
+import { logRender } from "@/lib/debug/render-log";
 
 interface DisambiguationOption {
   id: string;
@@ -35,27 +35,30 @@ export const DisambiguationOptions = memo(function DisambiguationOptions({
   onOptionSelect,
 }: DisambiguationOptionsProps) {
   const { scrollToBottom } = useStickToBottomContext();
-  logRender('DisambiguationOptions', {
+  logRender("DisambiguationOptions", {
     options: result.options.length,
     hasSource: !!result.source,
   });
 
-  const handleOptionClick = useCallback((option: DisambiguationOption) => {
-    const queryText = queryTemplate
-      .replace('{{name}}', option.name + (option.rockType ? ` ${option.rockType}` : ""))
-      .replace('{{latitude}}', option.latitude.toString())
-      .replace('{{longitude}}', option.longitude.toString());
+  const handleOptionClick = useCallback(
+    (option: DisambiguationOption) => {
+      const queryText = queryTemplate
+        .replace("{{name}}", option.name + (option.rockType ? ` ${option.rockType}` : ""))
+        .replace("{{latitude}}", option.latitude.toString())
+        .replace("{{longitude}}", option.longitude.toString());
 
-    onOptionSelect(queryText);
-    // Ensure the chat view jumps to the latest message
-    try {
-      scrollToBottom();
-      // Also schedule after the message enqueues to cover async updates
-      setTimeout(() => scrollToBottom(), 0);
-    } catch (_) {
-      // no-op
-    }
-  }, [queryTemplate, onOptionSelect, scrollToBottom]);
+      onOptionSelect(queryText);
+      // Ensure the chat view jumps to the latest message
+      try {
+        scrollToBottom();
+        // Also schedule after the message enqueues to cover async updates
+        setTimeout(() => scrollToBottom(), 0);
+      } catch (_) {
+        // no-op
+      }
+    },
+    [queryTemplate, onOptionSelect, scrollToBottom]
+  );
 
   return (
     <div className="space-y-2">
