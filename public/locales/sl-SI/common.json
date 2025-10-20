@@ -197,6 +197,7 @@
     "fairConditions": "Solidne razmere",
     "poorConditions": "Slabe razmere",
     "lessReliable": "Dnevi 8-14: manj zanesljiva napoved",
+    "lessReliableHourly": "Naslednje ure manj predvidljive",
     "lessCertain": "MANJ ZANESLJIVO",
     "todayBadge": "DANES"
   }

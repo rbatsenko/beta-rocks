@@ -196,6 +196,7 @@
     "fairConditions": "Passt schon",
     "poorConditions": "Schlechte Bedingungen",
     "lessReliable": "Tage 8-14: weniger verlässliche Prognose",
+    "lessReliableHourly": "Nächste Stunden weniger verlässlich",
     "lessCertain": "UNSICHER",
     "todayBadge": "HEUTE"
   }

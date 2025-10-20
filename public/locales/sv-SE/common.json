@@ -197,6 +197,7 @@
     "fairConditions": "Okej förhållanden",
     "poorConditions": "Dåliga förhållanden",
     "lessReliable": "Dag 8-14: mindre tillförlitlig prognos",
+    "lessReliableHourly": "Nästa timmar mindre förutsägbara",
     "lessCertain": "OSÄKRARE",
     "todayBadge": "I DAG"
   }

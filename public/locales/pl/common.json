@@ -35,7 +35,7 @@
     "good": "Dobrze",
     "fair": "Średnio",
     "poor": "Słabo",
-    "nope": "Dramat"
+    "nope": "Bardzo słabo"
   },
   "reasons": {
     "perfectTemp": "Idealna temperatura ({{temp}}°C)",
@@ -112,7 +112,7 @@
   },
   "features": {
     "heading": "Wszystko czego potrzebujesz",
-    "subheading": "Kompleksowe warunki wspinaczkowe w zasięgu ręki, całkowicie za darmo",
+    "subheading": "Warunki pogodowe do wspinania w zasięgu ręki, całkowicie za darmo",
     "realTimeWeather": {
       "title": "Pogoda na żywo",
       "description": "Dokładne prognozy z Open-Meteo z kalkulacją słońca/cienia dla konkretnych sektorów"
@@ -123,7 +123,7 @@
     },
     "communityReports": {
       "title": "Raporty społeczności",
-      "description": "Dziel się i potwierdzaj obecne warunki. Pomagaj innym wspinaczom z aktualizacjami na żywo"
+      "description": "Dziel się i potwierdzaj obecne warunki. Pomagaj innym z aktualizacjami na żywo"
     },
     "globalCoverage": {
       "title": "Zasięg globalny",
@@ -196,6 +196,7 @@
     "fairConditions": "Przeciętne warunki",
     "poorConditions": "Słabe warunki",
     "lessReliable": "Dni 8-14: Mniej pewna prognoza",
+    "lessReliableHourly": "Następne godziny mniej przewidywalne",
     "lessCertain": "MNIEJ PEWNE",
     "todayBadge": "DZISIAJ"
   }

@@ -23,38 +23,58 @@ export function useConditionsTranslations(
       }
 
       // Extract temperature from "Perfect temperature (X°C)"
-      const perfectTempMatch = reason.match(/Perfect temperature \((\d+)°C\)/);
+      const perfectTempMatch = reason.match(/Perfect temperature \((-?\d+)°C\)/);
       if (perfectTempMatch) {
-        return t("reasons.perfectTemp", { temp: perfectTempMatch[1] });
+        const translated = t("reasons.perfectTemp", { temp: perfectTempMatch[1] });
+        // Check if translation was found (not the key itself and not empty)
+        if (translated && !translated.startsWith("reasons.")) {
+          return translated;
+        }
+        return reason; // Fallback to original
       }
 
       // Extract humidity from "Ideal humidity (X%)"
-      const idealHumidityMatch = reason.match(/Ideal humidity \((\d+)%\)/);
+      const idealHumidityMatch = reason.match(/Ideal humidity \((-?\d+)%\)/);
       if (idealHumidityMatch) {
-        return t("reasons.idealHumidity", { humidity: idealHumidityMatch[1] });
+        const translated = t("reasons.idealHumidity", { humidity: idealHumidityMatch[1] });
+        if (translated && !translated.startsWith("reasons.")) {
+          return translated;
+        }
+        return reason;
       }
 
       // Extract hours from "Will be ready to climb in ~X hours"
       const readyInHoursMatch = reason.match(/Will be ready to climb in ~(\d+) hours/);
       if (readyInHoursMatch) {
-        return t("reasons.readyInHours", { hours: readyInHoursMatch[1] });
+        const translated = t("reasons.readyInHours", { hours: readyInHoursMatch[1] });
+        if (translated && !translated.startsWith("reasons.")) {
+          return translated;
+        }
+        return reason;
       }
 
       // Extract rock type from "Cold but good for X friction"
       const coldFrictionMatch = reason.match(/Cold but good for (\w+) friction/);
       if (coldFrictionMatch) {
-        return t("reasons.coldGoodFriction", { rockType: coldFrictionMatch[1] });
+        const translated = t("reasons.coldGoodFriction", { rockType: coldFrictionMatch[1] });
+        if (translated && !translated.startsWith("reasons.")) {
+          return translated;
+        }
+        return reason;
       }
 
       // Simple string matches
       if (reason === "Temperature too high - fingers may slip") {
-        return t("reasons.tempTooHigh");
+        const translated = t("reasons.tempTooHigh");
+        return translated && !translated.startsWith("reasons.") ? translated : reason;
       }
       if (reason === "Low humidity aids friction on granite") {
-        return t("reasons.lowHumidityGranite");
+        const translated = t("reasons.lowHumidityGranite");
+        return translated && !translated.startsWith("reasons.") ? translated : reason;
       }
       if (reason === "Conditions are acceptable") {
-        return t("reasons.acceptable");
+        const translated = t("reasons.acceptable");
+        return translated && !translated.startsWith("reasons.") ? translated : reason;
       }
 
       // Return original if no match
@@ -107,7 +127,7 @@ export function useConditionsTranslations(
       }
 
       // "Too warm for X (Y°C)"
-      const tooWarmMatch = warning.match(/Too warm for (\w+) \((\d+)°C\)/);
+      const tooWarmMatch = warning.match(/Too warm for (\w+) \((-?\d+)°C\)/);
       if (tooWarmMatch) {
         return t("warnings.tooWarm", { rockType: tooWarmMatch[1], temp: tooWarmMatch[2] });
       }
@@ -119,21 +139,21 @@ export function useConditionsTranslations(
       }
 
       // "High humidity (X%) - rock can be slippery"
-      const highHumidityMatch = warning.match(/High humidity \((\d+)%\) - rock can be slippery/);
+      const highHumidityMatch = warning.match(/High humidity \((-?\d+)%\) - rock can be slippery/);
       if (highHumidityMatch) {
         return t("warnings.highHumidity", { humidity: highHumidityMatch[1] });
       }
 
       // "Very high winds (X km/h) - danger of blown off"
       const veryHighWindsMatch = warning.match(
-        /Very high winds \((\d+) km\/h\) - danger of blown off/
+        /Very high winds \((-?\d+) km\/h\) - danger of blown off/
       );
       if (veryHighWindsMatch) {
         return t("warnings.veryHighWinds", { wind: veryHighWindsMatch[1] });
       }
 
       // "High wind (X km/h)"
-      const highWindMatch = warning.match(/High wind \((\d+) km\/h\)/);
+      const highWindMatch = warning.match(/High wind \((-?\d+) km\/h\)/);
       if (highWindMatch) {
         return t("warnings.highWind", { wind: highWindMatch[1] });
       }

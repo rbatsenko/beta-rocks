@@ -279,10 +279,10 @@ export function computeConditions(
 
   if (inOptimalHumidity) {
     frictionScore += 1;
-    reasons.push(`Ideal humidity (${current.humidity}%)`);
+    reasons.push(`Ideal humidity (${Math.round(current.humidity)}%)`);
   } else if (highHumidity) {
     frictionScore -= 1.5;
-    warnings.push(`High humidity (${current.humidity}%) - rock can be slippery`);
+    warnings.push(`High humidity (${Math.round(current.humidity)}%) - rock can be slippery`);
   } else if (lowHumidity && (rockType === "granite" || rockType === "gneiss")) {
     frictionScore += 0.5;
     reasons.push("Low humidity aids friction on granite");
@@ -322,10 +322,10 @@ export function computeConditions(
   // === WIND ASSESSMENT ===
   if (current.wind_kph > 40) {
     frictionScore -= 0.5;
-    warnings.push(`Very high winds (${current.wind_kph} km/h) - danger of blown off`);
+    warnings.push(`Very high winds (${Math.round(current.wind_kph)} km/h) - danger of blown off`);
   } else if (current.wind_kph > 25) {
     frictionScore -= 0.3;
-    warnings.push(`High wind (${current.wind_kph} km/h)`);
+    warnings.push(`High wind (${Math.round(current.wind_kph)} km/h)`);
   }
 
   // === CLAMP SCORE ===
@@ -419,7 +419,7 @@ function computeHourlyFrictionScore(
     score += 1;
   } else if (hour.humidity > maxHumidity) {
     score -= 1.5;
-    warnings.push(`High humidity (${hour.humidity}%)`);
+    warnings.push(`High humidity (${Math.round(hour.humidity)}%)`);
   } else if (
     hour.humidity < optimalHumidity.min &&
     (rockType === "granite" || rockType === "gneiss")
@@ -452,10 +452,10 @@ function computeHourlyFrictionScore(
   // Wind assessment
   if (hour.wind_kph > 40) {
     score -= 0.5;
-    warnings.push(`Very high winds (${hour.wind_kph} km/h)`);
+    warnings.push(`Very high winds (${Math.round(hour.wind_kph)} km/h)`);
   } else if (hour.wind_kph > 25) {
     score -= 0.3;
-    warnings.push(`High wind (${hour.wind_kph} km/h)`);
+    warnings.push(`High wind (${Math.round(hour.wind_kph)} km/h)`);
   }
 
   score = Math.max(1, Math.min(5, score));

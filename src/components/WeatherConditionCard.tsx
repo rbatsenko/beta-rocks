@@ -61,10 +61,10 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
   });
 
   return (
-    <div className="bg-muted/50 rounded-lg p-3 sm:p-4 border border-border max-w-full overflow-hidden">
+    <div className="bg-muted/50 rounded-lg p-3 sm:p-4 border border-border w-full max-w-2xl transition-all duration-500 ease-out will-change-[max-width,transform]">
       <div
         className={
-          `grid items-start gap-x-2 gap-y-1.5 sm:gap-x-3 sm:gap-y-2 ` +
+          `grid items-start gap-x-2 gap-y-1.5 sm:gap-x-3 sm:gap-y-2 transition-all duration-500 ease-out ` +
           (hasEmoji
             ? "grid-cols-[auto_1fr] sm:grid-cols-[auto_1fr_auto]"
             : "grid-cols-[1fr] sm:grid-cols-[1fr_auto]")
@@ -136,7 +136,8 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
           <div
             className={
               `text-destructive font-semibold text-sm ${hasEmoji ? "col-start-2" : "col-start-1"} ` +
-              `${hasEmoji ? "sm:col-start-2" : "sm:col-start-1"}`
+              `${hasEmoji ? "sm:col-start-2" : "sm:col-start-1"} ` +
+              `animate-in fade-in-0 slide-in-from-bottom-2 duration-500`
             }
           >
             ⚠️ {data.warnings.map(translateWarning).join(", ")}
@@ -148,7 +149,8 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
           <div
             className={
               `text-sm opacity-80 ${hasEmoji ? "col-start-2" : "col-start-1"} ` +
-              `${hasEmoji ? "sm:col-start-2" : "sm:col-start-1"}`
+              `${hasEmoji ? "sm:col-start-2" : "sm:col-start-1"} ` +
+              `animate-in fade-in-0 slide-in-from-bottom-2 duration-500 delay-100`
             }
           >
             {data.reasons.map(translateReason).join(", ")}

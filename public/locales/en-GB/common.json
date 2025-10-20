@@ -196,6 +196,7 @@
     "fairConditions": "Fair conditions",
     "poorConditions": "Poor conditions",
     "lessReliable": "Days 8-14: Less reliable forecast",
+    "lessReliableHourly": "Next hours less predictable",
     "lessCertain": "LESS CERTAIN",
     "todayBadge": "TODAY"
   }

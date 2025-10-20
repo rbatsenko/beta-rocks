@@ -114,7 +114,10 @@ interface DisambiguationResult {
 const ChatInterface = () => {
   const { t, language } = useClientTranslation("common");
   const [input, setInput] = useState("");
-  const { messages, sendMessage, status } = useChat();
+  const { messages, sendMessage, status } = useChat({
+    // Throttle updates to 30ms for smoother text streaming
+    experimental_throttle: 30,
+  });
   const [detailsDialogOpen, setDetailsDialogOpen] = useState(false);
   const [selectedConditions, setSelectedConditions] = useState<ConditionsData | null>(null);
   const [featuresDialogOpen, setFeaturesDialogOpen] = useState(false);
@@ -347,7 +350,11 @@ const ChatInterface = () => {
                             return (
                               <div
                                 key={i}
-                                className={message.role === "assistant" ? "pb-3" : undefined}
+                                className={
+                                  message.role === "assistant"
+                                    ? "pb-3 animate-in fade-in-0 duration-500"
+                                    : undefined
+                                }
                               >
                                 <Response>{part.text}</Response>
                               </div>
@@ -422,7 +429,7 @@ const ChatInterface = () => {
                         {/* If we have a tool result and a text part, show only the last text once below the card */}
                         {shouldPreferLastText &&
                         message.parts[lastTextIdx]?.type === "text" ? (
-                          <div className="mt-3">
+                          <div className="mt-3 animate-in fade-in-0 slide-in-from-bottom-2 duration-500">
                             <Response>{message.parts[lastTextIdx].text}</Response>
                           </div>
                         ) : null}

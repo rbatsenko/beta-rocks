@@ -11,7 +11,7 @@ export type MessageProps = HTMLAttributes<HTMLDivElement> & {
 export const Message = ({ className, from, ...props }: MessageProps) => (
   <div
     className={cn(
-      "group flex w-full justify-end gap-2 py-4 animate-in fade-in slide-in-from-bottom-2 duration-500",
+      "group flex w-full justify-end gap-2 py-4 animate-in fade-in slide-in-from-bottom-2 duration-500 transition-[width,height,max-width,min-width] duration-300",
       from === "user"
         ? "is-user items-end"
         : "is-assistant flex-row-reverse justify-end items-start",
@@ -21,7 +21,7 @@ export const Message = ({ className, from, ...props }: MessageProps) => (
   />
 );
 
-const messageContentVariants = cva("is-user:dark flex flex-col rounded-lg text-sm", {
+const messageContentVariants = cva("is-user:dark flex flex-col rounded-lg text-sm transition-[width,height,max-width,min-width] duration-300 ease-out", {
   variants: {
     variant: {
       contained: [

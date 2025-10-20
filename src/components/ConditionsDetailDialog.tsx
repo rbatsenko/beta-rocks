@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, memo, useEffect, useRef, useCallback } from "react";
+import React, { useState, useMemo, memo, useEffect, useRef, useCallback } from "react";
 import {
   Dialog,
   DialogContent,
@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/accordion";
 import {
   Cloud,
+  CloudRain,
   Droplets,
   Wind,
   ThermometerSun,
@@ -34,6 +35,13 @@ import { getLocaleFromLanguage } from "@/lib/utils/locale";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
 import { logRender, isDebugRenders, logPhase } from "@/lib/debug/render-log";
+import {
+  getRatingColor,
+  formatHourlyTime,
+  formatTimeRange,
+  groupHourlyByDay,
+  groupWindowsByDay,
+} from "./ConditionsDetailDialog.utils";
 
 interface ConditionsDetailDialogProps {
   open: boolean;
@@ -116,7 +124,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
   });
 
   // Get memoized translation functions
-  const { translateRating, translateWeather } = useConditionsTranslations(t);
+  const { translateRating, translateWeather, translateReason, translateWarning } = useConditionsTranslations(t);
 
   // Helper to detect if it's night time (7pm-7am)
   const isNightTime = (dateOrHour: Date | number): boolean => {
@@ -124,231 +132,32 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
     return hour >= 19 || hour < 7;
   };
 
-  const getRatingColor = (rating: string) => {
-    switch (rating) {
-      case "Great":
-        return "bg-green-500/10 text-green-500 border-green-500/20";
-      case "Good":
-        return "bg-blue-500/10 text-blue-500 border-blue-500/20";
-      case "Fair":
-        return "bg-yellow-500/10 text-yellow-500 border-yellow-500/20";
-      case "Poor":
-        return "bg-orange-500/10 text-orange-500 border-orange-500/20";
-      case "Nope":
-        return "bg-red-500/10 text-red-500 border-red-500/20";
-      default:
-        return "bg-muted text-muted-foreground";
-    }
-  };
+  // getRatingColor is now imported from utils
 
-  const formatHourlyTime = (isoString: string) => {
-    const date = new Date(isoString);
-    const now = new Date();
-    const tomorrow = new Date(now);
-    tomorrow.setDate(tomorrow.getDate() + 1);
+  // formatHourlyTime is now imported from utils
+  // Note: need to pass locale and t as parameters when calling it
 
-    const isToday = date.toDateString() === now.toDateString();
-    const isTomorrow = date.toDateString() === tomorrow.toDateString();
+  // groupHourlyByDay wrapper to pass required parameters
+  const groupedHourlyData = useCallback(() => {
+    return groupHourlyByDay(data.hourlyConditions, t, locale);
+  }, [data.hourlyConditions, t, locale]);
 
-    const timeStr = date.toLocaleTimeString(locale, {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-    });
-
-    if (isToday) return `${t("dialog.today")} ${timeStr}`;
-    if (isTomorrow) return `${t("dialog.tomorrow")} ${timeStr}`;
-
-    return date.toLocaleDateString(locale, {
-      weekday: "short",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-    });
-  };
-
-  const groupHourlyByDay = useCallback(() => {
-    if (!data.hourlyConditions) return null;
-
-    const grouped: Record<string, typeof data.hourlyConditions> = {};
-    const now = new Date();
-
-    // Filter to only show current hour and future hours
-    const futureHours = data.hourlyConditions.filter((hour) => new Date(hour.time) >= now);
-
-    futureHours.forEach((hour) => {
-      const date = new Date(hour.time);
-      const isToday = date.toDateString() === now.toDateString();
-
-      const tomorrow = new Date(now);
-      tomorrow.setDate(tomorrow.getDate() + 1);
-      const isTomorrow = date.toDateString() === tomorrow.toDateString();
-
-      let dayKey: string;
-      if (isToday) {
-        dayKey = t("dialog.today");
-      } else if (isTomorrow) {
-        dayKey = t("dialog.tomorrow");
-      } else {
-        dayKey = date.toLocaleDateString(locale, {
-          weekday: "short",
-          month: "short",
-          day: "numeric",
-        });
-      }
-
-      if (!grouped[dayKey]) {
-        grouped[dayKey] = [];
-      }
-      grouped[dayKey].push(hour);
-    });
-
-    // Filter to show every 3 hours to reduce clutter
-    Object.keys(grouped).forEach((key) => {
-      grouped[key] = grouped[key].filter((_, index) => index % 3 === 0);
-    });
-
-    return grouped;
-  }, [data, t, locale]);
-
-  const formatTimeRange = useCallback((start: string, end: string) => {
-    try {
-      const startDate = new Date(start);
-      const endDate = new Date(end);
-
-      // Format hours and minutes separately to avoid locale issues
-      const formatTime = (date: Date) => {
-        const hours = date.getHours().toString().padStart(2, "0");
-        const minutes = date.getMinutes().toString().padStart(2, "0");
-        return `${hours}:${minutes}`;
-      };
-
-      // Check if the window spans across days
-      const isSameDay = startDate.toDateString() === endDate.toDateString();
-
-      if (!isSameDay) {
-        // Show date for end time if it's a different day
-        const endDay = endDate.toLocaleDateString(locale, { month: "short", day: "numeric" });
-        return `${formatTime(startDate)}-${formatTime(endDate)} (${endDay})`;
-      }
-
-      return `${formatTime(startDate)}-${formatTime(endDate)}`;
-    } catch {
-      return `${start}-${end}`;
-    }
-  }, [locale]);
-
-  const groupWindowsByDay = useCallback(() => {
-    if (!data.optimalWindows || data.optimalWindows.length === 0) return null;
-
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    const fiveDaysFromNow = new Date(today);
-    fiveDaysFromNow.setDate(fiveDaysFromNow.getDate() + 5);
-
-    type WindowWithHours = {
-      timeRange: string;
-      startTime: string;
-      endTime: string;
-      avgFrictionScore: number;
-      rating: string;
-      hourCount: number;
-      hours: Array<{
-        time: string;
-        temp_c: number;
-        humidity: number;
-        wind_kph: number;
-        precip_mm: number;
-        frictionScore: number;
-        rating: string;
-        weatherCode?: number;
-      }>;
-    };
-
-    type GroupedWindow = {
-      windows: WindowWithHours[];
-      isToday: boolean;
-      isTomorrow: boolean;
-    };
-
-    const grouped: Record<string, GroupedWindow> = {};
-
-    data.optimalWindows.forEach((window) => {
-      const startDate = new Date(window.startTime);
-      const endDate = new Date(window.endTime);
-
-      // Skip windows that have already ended or are more than 5 days away
-      if (endDate < now || startDate >= fiveDaysFromNow) return;
-
-      // Skip windows with zero or very short duration (less than 30 minutes)
-      const durationMs = endDate.getTime() - startDate.getTime();
-      const durationMinutes = durationMs / (1000 * 60);
-      if (durationMinutes < 30) return;
-
-      const windowDay = new Date(
-        startDate.getFullYear(),
-        startDate.getMonth(),
-        startDate.getDate()
-      );
-
-      let displayDay: string;
-      let isToday = false;
-      let isTomorrow = false;
-
-      if (windowDay.getTime() === today.getTime()) {
-        displayDay = t("dialog.today");
-        isToday = true;
-      } else if (windowDay.getTime() === tomorrow.getTime()) {
-        displayDay = t("dialog.tomorrow");
-        isTomorrow = true;
-      } else {
-        displayDay = startDate.toLocaleDateString(locale, {
-          weekday: "short",
-          month: "short",
-          day: "numeric",
-        });
-      }
-
-      if (!grouped[displayDay]) {
-        grouped[displayDay] = {
-          windows: [],
-          isToday,
-          isTomorrow,
-        };
-      }
-
-      // Get hourly data for this window
-      const windowHours = data.hourlyConditions
-        ? data.hourlyConditions.filter((hour) => {
-            const hourTime = new Date(hour.time);
-            const windowStart = new Date(window.startTime);
-            const windowEnd = new Date(window.endTime);
-            return hourTime >= windowStart && hourTime < windowEnd;
-          })
-        : [];
-
-      grouped[displayDay].windows.push({
-        timeRange: formatTimeRange(window.startTime, window.endTime),
-        startTime: window.startTime,
-        endTime: window.endTime,
-        avgFrictionScore: window.avgFrictionScore,
-        rating: window.rating,
-        hourCount: window.hourCount,
-        hours: windowHours,
-      });
-    });
-
-    return Object.keys(grouped).length > 0 ? grouped : null;
-  }, [data, t, locale, formatTimeRange]);
+  // groupWindowsByDay wrapper to pass required parameters
+  const groupWindowsByDayWithParams = useCallback(() => {
+    // Need to transform windows to include formatted timeRange
+    const windowsWithTimeRange = data.optimalWindows?.map(window => ({
+      ...window,
+      timeRange: formatTimeRange(window.startTime, window.endTime, locale)
+    }));
+    return groupWindowsByDay(windowsWithTimeRange, data.hourlyConditions, t, locale);
+  }, [data.optimalWindows, data.hourlyConditions, t, locale]);
 
   // Memoize expensive grouping functions to prevent recalculation on every render
   const windowsByDay = useMemo(
-    () => groupWindowsByDay(),
-    [groupWindowsByDay]
+    () => groupWindowsByDayWithParams(),
+    [groupWindowsByDayWithParams]
   );
-  const hourlyByDay = useMemo(() => groupHourlyByDay(), [groupHourlyByDay]);
+  const hourlyByDay = useMemo(() => groupedHourlyData(), [groupedHourlyData]);
 
   // Measure tab switch duration in debug mode
   useEffect(() => {
@@ -426,7 +235,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
                   {data.reasons && data.reasons.length > 0 && (
                     <ul className="text-sm space-y-1 text-muted-foreground">
                       {data.reasons.map((reason, i) => (
-                        <li key={i}>• {reason}</li>
+                        <li key={i}>• {translateReason(reason)}</li>
                       ))}
                     </ul>
                   )}
@@ -434,7 +243,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
                     <div className="space-y-1">
                       {data.warnings.map((warning, i) => (
                         <p key={i} className="text-sm text-destructive">
-                          ⚠️ {warning}
+                          ⚠️ {translateWarning(warning)}
                         </p>
                       ))}
                     </div>
@@ -493,7 +302,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
                         </div>
                         <div className="bg-muted/50 rounded-lg p-3">
                           <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
-                            <Cloud className="h-3 w-3" />
+                            <CloudRain className="h-3 w-3" />
                             <span>{t("dialog.precipitation")}</span>
                           </div>
                           <p className="text-lg font-semibold">{data.current.precipitation_mm}mm</p>
@@ -648,7 +457,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
                                       <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-2">
                                           {/* Weather summary for the window */}
-                                          {window.hours.length > 0 &&
+                                          {window.hours && window.hours.length > 0 &&
                                             window.hours[0].weatherCode !== undefined && (
                                               <span
                                                 className="text-lg"
@@ -679,9 +488,9 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
                                       </div>
 
                                       {/* Hourly breakdown */}
-                                      {window.hours.length > 0 && (
+                                      {window.hours && window.hours.length > 0 && (
                                         <div className="space-y-1 pl-5">
-                                          {window.hours.map((hour, hourIdx) => (
+                                          {window.hours?.map((hour, hourIdx) => (
                                             <div
                                               key={hourIdx}
                                               className="flex items-center justify-between text-xs py-1"
@@ -741,7 +550,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
                         <p className="text-sm text-muted-foreground">
                           {t("dialog.bestTime")}:{" "}
                           <span className="font-semibold">
-                            {formatHourlyTime(data.optimalTime)}
+                            {formatHourlyTime(data.optimalTime, locale, t)}
                           </span>
                         </p>
                       )}
@@ -797,6 +606,14 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
                       (h) => h.rating === "Great" || h.rating === "Good"
                     );
 
+                    // Check if hours are distant (>48h from now)
+                    const now = new Date();
+                    const isDistantHour = (hourTime: string) => {
+                      const hourDate = new Date(hourTime);
+                      const hoursFromNow = (hourDate.getTime() - now.getTime()) / (1000 * 60 * 60);
+                      return hoursFromNow > 48;
+                    };
+
                     return (
                       <div key={day} className="space-y-3">
                         <h3 className="font-semibold flex items-center gap-2 sticky top-0 bg-background z-10 py-2">
@@ -807,15 +624,30 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
                         {/* Good hours - shown prominently */}
                         {goodHours.length > 0 && (
                           <div className="space-y-2">
-                            {goodHours.map((hour, i) => (
-                              <div
-                                key={i}
-                                className={`rounded-lg p-3 border ${
-                                  hour.rating === "Great"
-                                    ? "bg-green-500/10 border-green-500/30"
-                                    : "bg-blue-500/5 border-blue-500/20"
-                                }`}
-                              >
+                            {goodHours.map((hour, i) => {
+                              const isDistant = isDistantHour(hour.time);
+                              const prevHour = i > 0 ? goodHours[i - 1] : null;
+                              const showHint = isDistant && (!prevHour || !isDistantHour(prevHour.time));
+
+                              return (
+                                <React.Fragment key={`good-hour-${i}`}>
+                                  {showHint && (
+                                    <div className="flex items-center gap-2 py-2 text-xs text-muted-foreground">
+                                      <div className="flex-1 h-px bg-border"></div>
+                                      <span className="flex items-center gap-1.5">
+                                        <span className="text-orange-600">•</span>
+                                        {t("dialog.lessReliableHourly")}
+                                      </span>
+                                      <div className="flex-1 h-px bg-border"></div>
+                                    </div>
+                                  )}
+                                  <div
+                                    className={`rounded-lg p-3 border ${
+                                      hour.rating === "Great"
+                                        ? "bg-green-500/10 border-green-500/30"
+                                        : "bg-blue-500/5 border-blue-500/20"
+                                    } ${isDistant ? "opacity-60" : ""}`}
+                                  >
                                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                                   <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
                                     <div className="flex items-center gap-2">
@@ -855,7 +687,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
                                       </div>
                                       {hour.precip_mm > 0 && (
                                         <div className="flex items-center gap-1 text-blue-500">
-                                          <Cloud className="h-3 w-3" />
+                                          <CloudRain className="h-3 w-3" />
                                           <span>{hour.precip_mm}mm</span>
                                         </div>
                                       )}
@@ -875,11 +707,13 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
                                 </div>
                                 {hour.warnings.length > 0 && (
                                   <p className="text-xs text-muted-foreground mt-1">
-                                    {hour.warnings.join(", ")}
+                                    {hour.warnings.map(w => translateWarning(w)).join(", ")}
                                   </p>
                                 )}
                               </div>
-                            ))}
+                                </React.Fragment>
+                            );
+                            })}
                           </div>
                         )}
 
@@ -895,17 +729,32 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
                               </AccordionTrigger>
                               <AccordionContent className="px-3 pb-3">
                                 <div className="space-y-2">
-                                  {hours.map((hour, i) => (
-                                    <div
-                                      key={i}
-                                      className={`rounded-lg p-3 border ${
-                                        hour.rating === "Great"
-                                          ? "bg-green-500/10 border-green-500/30"
-                                          : hour.rating === "Good"
-                                            ? "bg-blue-500/5 border-blue-500/20"
-                                            : "bg-muted/30 border-border"
-                                      }`}
-                                    >
+                                  {hours.map((hour, i) => {
+                                    const isDistant = isDistantHour(hour.time);
+                                    const prevHour = i > 0 ? hours[i - 1] : null;
+                                    const showHint = isDistant && (!prevHour || !isDistantHour(prevHour.time));
+
+                                    return (
+                                      <React.Fragment key={`all-hour-${i}`}>
+                                        {showHint && (
+                                          <div className="flex items-center gap-2 py-2 text-xs text-muted-foreground">
+                                            <div className="flex-1 h-px bg-border"></div>
+                                            <span className="flex items-center gap-1.5">
+                                              <span className="text-orange-600">•</span>
+                                              {t("dialog.lessReliableHourly")}
+                                            </span>
+                                            <div className="flex-1 h-px bg-border"></div>
+                                          </div>
+                                        )}
+                                        <div
+                                          className={`rounded-lg p-3 border ${
+                                            hour.rating === "Great"
+                                              ? "bg-green-500/10 border-green-500/30"
+                                              : hour.rating === "Good"
+                                                ? "bg-blue-500/5 border-blue-500/20"
+                                                : "bg-muted/30 border-border"
+                                          } ${isDistant ? "opacity-60" : ""}`}
+                                        >
                                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                                         <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
                                           <div className="flex items-center gap-2">
@@ -945,7 +794,7 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
                                             </div>
                                             {hour.precip_mm > 0 && (
                                               <div className="flex items-center gap-1 text-blue-500">
-                                                <Cloud className="h-3 w-3" />
+                                                <CloudRain className="h-3 w-3" />
                                                 <span>{hour.precip_mm}mm</span>
                                               </div>
                                             )}
@@ -965,11 +814,13 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
                                       </div>
                                       {hour.warnings.length > 0 && (
                                         <p className="text-xs text-muted-foreground mt-1">
-                                          {hour.warnings.join(", ")}
+                                          {hour.warnings.map(w => translateWarning(w)).join(", ")}
                                         </p>
                                       )}
                                     </div>
-                                  ))}
+                                      </React.Fragment>
+                                  );
+                                  })}
                                 </div>
                               </AccordionContent>
                             </AccordionItem>

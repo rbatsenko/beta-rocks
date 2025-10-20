@@ -196,6 +196,7 @@
     "fairConditions": "Посередні умови",
     "poorConditions": "Погані умови",
     "lessReliable": "Дні 8-14: прогноз менш надійний",
+    "lessReliableHourly": "Наступні години менш передбачувані",
     "lessCertain": "МЕНШ ВПЕВНЕНО",
     "todayBadge": "СЬОГОДНІ"
   }

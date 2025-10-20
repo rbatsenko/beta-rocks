@@ -1,4 +1,4 @@
-import { streamText, tool, convertToModelMessages, UIMessage, stepCountIs } from "ai";
+import { streamText, tool, convertToModelMessages, UIMessage, stepCountIs, smoothStream } from "ai";
 import { google } from "@ai-sdk/google";
 import { z } from "zod";
 import { searchLocationMultiple } from "@/lib/external-apis/geocoding";
@@ -370,6 +370,8 @@ export async function POST(req: Request) {
     // Encourage: assistant -> tool -> assistant(summary using tool result)
     // Steps ~= roundtrips + 1. Allow headroom to ensure a post-tool text step.
     stopWhen: stepCountIs(3),
+    // Add smooth streaming for better UX - streams each word individually
+    experimental_transform: smoothStream(),
   });
 
   return result.toUIMessageStreamResponse({ originalMessages: messages });
