@@ -30,7 +30,6 @@ interface WeatherConditionCardProps {
   translateRating: (rating: string) => string;
   translateWarning: (warning: string) => string;
   translateReason: (reason: string) => string;
-  translateTimeframe: (timeframe: string) => string;
   onDetailsClick: () => void;
   conditionsLabel: string;
   detailsLabel: string;
@@ -47,7 +46,6 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
   translateRating,
   translateWarning,
   translateReason,
-  translateTimeframe,
   onDetailsClick,
   conditionsLabel,
   detailsLabel,
@@ -94,11 +92,6 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
           <div className="space-y-0.5">
             <div className="font-semibold text-base">
               🧗 {data.location}
-              {data.timeframe && data.timeframe !== "now" && (
-                <span className="ml-2 text-xs font-normal text-muted-foreground">
-                  ({translateTimeframe(data.timeframe)})
-                </span>
-              )}
             </div>
             {data.locationDetails && (
               <div className="text-xs text-muted-foreground">📍 {data.locationDetails}</div>

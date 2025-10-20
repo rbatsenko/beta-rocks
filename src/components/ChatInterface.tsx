@@ -418,7 +418,6 @@ const ChatInterface = () => {
                                 translateRating={translations.translateRating}
                                 translateWarning={translations.translateWarning}
                                 translateReason={translations.translateReason}
-                                translateTimeframe={translations.translateTimeframe}
                                 onDetailsClick={() => {
                                   setSelectedConditions(conditionsResult);
                                   setDetailsDialogOpen(true);
