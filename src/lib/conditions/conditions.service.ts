@@ -4,6 +4,8 @@
  * Calculates friction ratings based on weather data
  */
 
+import { calculateDaylightHours, detectTimeContext, getTimeContextData, getClimbingHours } from './daylight.utils';
+
 export type RockType =
   | "granite"
   | "sandstone"
@@ -381,8 +383,6 @@ export function computeConditions(
   // Calculate time context if location is provided
   let timeContext: TimeContext | undefined;
   if (weather.latitude && weather.longitude) {
-    const { calculateDaylightHours, detectTimeContext, getTimeContextData } = require('./daylight.utils');
-
     const now = new Date();
     const daylight = calculateDaylightHours(weather.latitude, weather.longitude, now);
     const context = detectTimeContext(
@@ -558,9 +558,6 @@ export function computeHourlyConditions(
   if (options?.includeNightHours || !options?.latitude || !options?.longitude) {
     return allConditions;
   }
-
-  // Import daylight utilities
-  const { calculateDaylightHours, detectTimeContext, getClimbingHours } = require('./daylight.utils');
 
   // Get daylight hours for the location
   const now = new Date();
