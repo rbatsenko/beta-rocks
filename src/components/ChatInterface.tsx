@@ -313,22 +313,10 @@ const ChatInterface = () => {
                           </div>
                         )}
                         {message.parts.map((part, i) => {
-                          // Check if message has successful tool results
-                          const hasToolResults = message.parts.some(
-                            (p) =>
-                              p.type.startsWith("tool-") &&
-                              "state" in p &&
-                              p.state === "output-available"
-                          );
-
-                          // Render text parts only if there are no tool results
+                          // Render text parts
                           if (part.type === "text") {
-                            // Skip text if we have tool results (conditions data or disambiguation)
-                            if (hasToolResults) {
-                              return null;
-                            }
                             return (
-                              <div key={i} className="pt-1">
+                              <div key={i} className="pb-3">
                                 <Response>{part.text}</Response>
                               </div>
                             );
