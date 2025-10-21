@@ -19,14 +19,16 @@ import {
 // Parse CLI arguments
 const args = process.argv.slice(2);
 const countryArg = args.find((arg) => arg.startsWith("--country="));
-const countryCode = countryArg?.split("=")[1];
+const countryCodeMaybe = countryArg?.split("=")[1];
 const dryRun = args.includes("--dry-run");
 
-if (!countryCode) {
+if (!countryCodeMaybe) {
   console.error("ERROR: --country=XX required");
   console.error("Example: npx tsx scripts/import-large-countries.ts --country=ES");
   process.exit(1);
 }
+
+const countryCode: string = countryCodeMaybe;
 
 // Country bounding boxes split into manageable grids (2-3 degrees per chunk to avoid 504 timeouts)
 const COUNTRY_GRIDS: Record<string, { minLat: number; maxLat: number; minLon: number; maxLon: number; gridSize: number }> = {
