@@ -1,6 +1,6 @@
 import { memo, useMemo } from "react";
 import { Button } from "@/components/ui/button";
-import { Info, PanelRightOpen } from "lucide-react";
+import { Info } from "lucide-react";
 import { getWeatherEmoji, getWeatherDescription } from "@/lib/utils/weather-emojis";
 import { logRender } from "@/lib/debug/render-log";
 import { MapPopover } from "@/components/MapPopover";
@@ -149,13 +149,18 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
                 locationName={data.location}
               />
             )}
-            {onSheetClick && (
+            {/* {onSheetClick && (
               <Button variant="outline" size="sm" onClick={onSheetClick} title="Open in side panel">
                 <PanelRightOpen className="w-4 h-4 mr-1" />
                 Panel
               </Button>
-            )}
-            <Button variant="outline" size="sm" onClick={onDetailsClick} title="Open in dialog">
+            )} */}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={onSheetClick || onDetailsClick}
+              title="View details"
+            >
               <Info className="w-4 h-4 mr-1" />
               {detailsLabel}
             </Button>

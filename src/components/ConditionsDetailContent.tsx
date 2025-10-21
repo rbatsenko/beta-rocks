@@ -740,29 +740,31 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                           : "bg-muted/30 border-border"
                                     } ${isDistant ? "opacity-60" : ""}`}
                                   >
-                                    <div className="flex items-center justify-between">
-                                      <div className="flex items-center gap-2">
-                                        {hour.weatherCode !== undefined && (
-                                          <span
-                                            className="text-base"
-                                            title={translateWeather(
-                                              getWeatherDescription(hour.weatherCode)
-                                            )}
-                                          >
-                                            {getWeatherEmoji(
-                                              hour.weatherCode,
-                                              isNightTime(new Date(hour.time))
-                                            )}
+                                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                                      <div className="flex flex-col xs:flex-row xs:items-center gap-2">
+                                        <div className="flex items-center gap-2">
+                                          {hour.weatherCode !== undefined && (
+                                            <span
+                                              className="text-base"
+                                              title={translateWeather(
+                                                getWeatherDescription(hour.weatherCode)
+                                              )}
+                                            >
+                                              {getWeatherEmoji(
+                                                hour.weatherCode,
+                                                isNightTime(new Date(hour.time))
+                                              )}
+                                            </span>
+                                          )}
+                                          <span className="font-mono">
+                                            {new Date(hour.time).toLocaleTimeString(locale, {
+                                              hour: "2-digit",
+                                              minute: "2-digit",
+                                              hour12: false,
+                                            })}
                                           </span>
-                                        )}
-                                        <span className="font-mono">
-                                          {new Date(hour.time).toLocaleTimeString(locale, {
-                                            hour: "2-digit",
-                                            minute: "2-digit",
-                                            hour12: false,
-                                          })}
-                                        </span>
-                                        <div className="flex items-center gap-2 text-muted-foreground">
+                                        </div>
+                                        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-muted-foreground">
                                           <div className="flex items-center gap-0.5">
                                             <ThermometerSun className="h-2.5 w-2.5" />
                                             <span>{Math.round(hour.temp_c)}°C</span>
