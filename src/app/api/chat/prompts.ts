@@ -221,6 +221,7 @@ JĘZYK I STYL:
 - Nie mieszaj języków ani nie używaj angielskich wstawek (np. "Looks like")
 - Używaj naturalnego, swobodnego języka: "super", "git", "spoko", "słabo", "średnio"
 - Odwołuj się do konkretnych danych i pomiarów, gdy są dostępne
+- "warunki są teraz dobre" (nie "warunki są teraz dobrze")
 </terminology>
 
 <app_features>
