@@ -108,7 +108,7 @@
     "github": "GitHub",
     "brand": "temps.rocks",
     "description": "Gratis klatreforhold for alle. Bygget med kjærlighet til klatremiljøet.",
-    "attribution": "Data fra Open-Meteo og OpenBeta. Drevet av fellesskapet.",
+    "attribution": "Data fra Open-Meteo, OpenBeta og <osmLink>OpenStreetMap-bidragsytere</osmLink>. Drevet av fellesskapet.",
     "copyright": "© 2025 temps.rocks. Alle rettigheter forbeholdt."
   },
   "features": {

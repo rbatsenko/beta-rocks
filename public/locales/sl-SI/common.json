@@ -108,7 +108,7 @@
     "github": "GitHub",
     "brand": "temps.rocks",
     "description": "Brezplačne plezalne razmere za vse. Z ljubeznijo do plezalne skupnosti.",
-    "attribution": "Podatki Open-Meteo in OpenBeta. Pognano s skupnostjo.",
+    "attribution": "Podatki Open-Meteo, OpenBeta in <osmLink>sodelavcev OpenStreetMap</osmLink>. Pognano s skupnostjo.",
     "copyright": "© 2025 temps.rocks. Vse pravice pridržane."
   },
   "features": {

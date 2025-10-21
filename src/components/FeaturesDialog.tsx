@@ -11,6 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Cloud, MessageSquare, Users, MapPin, Zap, Lock } from "lucide-react";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Trans } from "react-i18next";
 
 interface FeaturesDialogProps {
   open: boolean;
@@ -84,7 +85,21 @@ export function FeaturesDialog({ open, onOpenChange }: FeaturesDialogProps) {
           </div>
           <div className="mt-2 pt-4 border-t border-border text-sm text-muted-foreground space-y-1">
             <p>{t("footer.description")}</p>
-            <p>{t("footer.attribution")}</p>
+            <p>
+              <Trans
+                i18nKey="footer.attribution"
+                components={{
+                  osmLink: (
+                    <a
+                      href="https://www.openstreetmap.org/copyright"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline hover:text-foreground transition-colors"
+                    />
+                  ),
+                }}
+              />
+            </p>
             <p>{t("footer.copyright")}</p>
           </div>
         </ScrollArea>

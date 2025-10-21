@@ -107,7 +107,7 @@
     "github": "GitHub",
     "brand": "temps.rocks",
     "description": "Безкоштовні умови для скелелазіння для всіх. Створено з ❤️ для спільноти скелелазів.",
-    "attribution": "Дані від Open-Meteo та OpenBeta. Звітність від спільноти.",
+    "attribution": "Дані від Open-Meteo, OpenBeta та <osmLink>учасників OpenStreetMap</osmLink>. Звітність від спільноти.",
     "copyright": "© 2025 temps.rocks. Усі права захищено."
   },
   "features": {

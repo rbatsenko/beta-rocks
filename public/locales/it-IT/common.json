@@ -107,7 +107,7 @@
     "github": "GitHub",
     "brand": "temps.rocks",
     "description": "Condizioni di arrampicata gratuite per tutti. Creato con ❤️ per la comunità dei climber.",
-    "attribution": "Dati da Open-Meteo e OpenBeta. Report della community.",
+    "attribution": "Dati da Open-Meteo, OpenBeta e <osmLink>contributori di OpenStreetMap</osmLink>. Report della community.",
     "copyright": "© 2025 temps.rocks. Tutti i diritti riservati."
   },
   "features": {

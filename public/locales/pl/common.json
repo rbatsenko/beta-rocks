@@ -107,7 +107,7 @@
     "github": "GitHub",
     "brand": "temps.rocks",
     "description": "Darmowe warunki wspinaczkowe dla każdego. Stworzone z ❤️ dla wspinaczkowej społeczności.",
-    "attribution": "Dane z Open-Meteo i OpenBeta. Raporty społecznościowe.",
+    "attribution": "Dane z Open-Meteo, OpenBeta i <osmLink>współtwórców OpenStreetMap</osmLink>. Raporty społecznościowe.",
     "copyright": "© 2025 temps.rocks. Wszelkie prawa zastrzeżone."
   },
   "features": {

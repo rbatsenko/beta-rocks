@@ -107,7 +107,7 @@
     "github": "GitHub",
     "brand": "temps.rocks",
     "description": "Bezplatné podmienky na lezenie pre všetkých. Vytvorené s ❤️ pre lezeckú komunitu.",
-    "attribution": "Dáta z Open-Meteo a OpenBeta. Podporované komunitou.",
+    "attribution": "Dáta z Open-Meteo, OpenBeta a <osmLink>prispievateľov OpenStreetMap</osmLink>. Podporované komunitou.",
     "copyright": "© 2025 temps.rocks. Všetky práva vyhradené."
   },
   "features": {

@@ -107,7 +107,7 @@
     "github": "GitHub",
     "brand": "temps.rocks",
     "description": "Conditions d'escalade gratuites pour tous. Créé avec ❤️ pour la communauté des grimpeurs.",
-    "attribution": "Données d'Open-Meteo et d'OpenBeta. Rapports communautaires.",
+    "attribution": "Données d'Open-Meteo, d'OpenBeta et des <osmLink>contributeurs d'OpenStreetMap</osmLink>. Rapports communautaires.",
     "copyright": "© 2025 temps.rocks. Tous droits réservés."
   },
   "features": {

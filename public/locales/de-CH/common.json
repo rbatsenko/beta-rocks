@@ -107,7 +107,7 @@
     "github": "GitHub",
     "brand": "temps.rocks",
     "description": "Kostenlose Kletterbedingungen für alle. Mit ❤️ für die Kletterszene gebaut.",
-    "attribution": "Daten von Open-Meteo und OpenBeta. Community-getriebene Berichte.",
+    "attribution": "Daten von Open-Meteo, OpenBeta und <osmLink>OpenStreetMap-Mitwirkenden</osmLink>. Community-getriebene Berichte.",
     "copyright": "© 2025 temps.rocks. Alle Rechte vorbehalten."
   },
   "features": {
