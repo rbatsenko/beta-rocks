@@ -38,6 +38,14 @@ const COUNTRY_GRIDS: Record<string, { minLat: number; maxLat: number; minLon: nu
   GB: { minLat: 49, maxLat: 61, minLon: -9, maxLon: 2, gridSize: 2 },
   // US - split into ~3-degree chunks (very large country, more cells needed)
   US: { minLat: 24, maxLat: 50, minLon: -125, maxLon: -66, gridSize: 3 },
+  // Greece - split into ~2-degree chunks
+  GR: { minLat: 35, maxLat: 42, minLon: 19, maxLon: 28, gridSize: 2 },
+  // Portugal - split into ~2-degree chunks
+  PT: { minLat: 37, maxLat: 42, minLon: -10, maxLon: -6, gridSize: 2 },
+  // Sweden - split into ~3-degree chunks (very large north-south)
+  SE: { minLat: 55, maxLat: 69, minLon: 11, maxLon: 24, gridSize: 3 },
+  // Bosnia and Herzegovina - split into ~2-degree chunks
+  BA: { minLat: 43, maxLat: 46, minLon: 15, maxLon: 20, gridSize: 2 },
 };
 
 // Initialize Supabase client
