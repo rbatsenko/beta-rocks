@@ -52,6 +52,8 @@ export async function GET(request: NextRequest) {
       hasCurrent: !!forecast.current,
       hasHourly: !!forecast.hourly,
       hourlyCount: forecast.hourly?.length || 0,
+      hasDaily: !!forecast.daily,
+      dailyCount: forecast.daily?.length || 0,
     });
 
     if (!forecast.current || !forecast.hourly) {
@@ -108,6 +110,17 @@ export async function GET(request: NextRequest) {
       conditions: {
         ...conditions,
         // Keep ISO timestamps - formatting happens in UI
+        // Add daily forecast data (full 14 days)
+        dailyForecast: forecast.daily?.map((day) => ({
+          date: day.date,
+          tempMax: day.tempMax,
+          tempMin: day.tempMin,
+          precipitation: day.precipitation,
+          windSpeedMax: day.windSpeedMax,
+          sunrise: day.sunrise,
+          sunset: day.sunset,
+          weatherCode: day.weatherCode,
+        })),
       },
       // Include today's sunrise/sunset from daily forecast
       astro: forecast.daily?.[0]
