@@ -7,16 +7,16 @@
     "description": "Získajte aktuálne počasie, analýzu trenia a optimálne okná na lezenie na ktorejkoľvek skale po celom svete",
     "exampleQueries": {
       "query1": {
-        "display": "Aké sú podmienky v Súľovských skalách zajtra?",
-        "query": "Aké sú podmienky v Súľovských skalách zajtra?"
+        "display": "Aké sú podmienky v Demänovskej doline zajtra?",
+        "query": "Aké sú podmienky v Demänovskej doline zajtra?"
       },
       "query2": {
-        "display": "Je Strečno dnes popoludní suché?",
-        "query": "Je Strečno dnes popoludní suché?"
+        "display": "Je Harmanec dnes popoludní suchý?",
+        "query": "Je Harmanec dnes popoludní suchý?"
       },
       "query3": {
-        "display": "Ako je na tom Slovenský raj?",
-        "query": "Ako je na tom Slovenský raj?"
+        "display": "Ako je na tom Višňové?",
+        "query": "Ako je na tom Višňové?"
       }
     }
   },
