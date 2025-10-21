@@ -54,6 +54,9 @@ const tools = {
       let state: string | undefined = undefined;
       let municipality: string | undefined = undefined;
       let village: string | undefined = undefined;
+      let description: string | undefined = undefined;
+      let aspects: number[] | undefined = undefined;
+      let climbingTypes: string[] | undefined = undefined;
 
       // If no coordinates provided, search for location
       if (!lat || !lon) {
@@ -84,6 +87,11 @@ const tools = {
               municipality = crag.municipality || undefined;
               village = crag.village || undefined;
 
+              // Capture crag-specific metadata for AI context
+              description = crag.description || undefined;
+              aspects = crag.aspects || undefined;
+              climbingTypes = crag.climbing_types || undefined;
+
               // Build locationDetails from available fields
               const locationParts = [];
               if (village) locationParts.push(village);
@@ -101,6 +109,9 @@ const tools = {
                 municipality,
                 village,
                 rockType: detectedRockType,
+                description,
+                aspects,
+                climbingTypes,
               });
             } else if (localCrags.length > 1) {
               // Multiple crags found locally - return disambiguation
@@ -352,6 +363,9 @@ const tools = {
             municipality?: string | null;
             village?: string | null;
             rock_type?: string | null;
+            description?: string | null;
+            aspects?: number[] | null;
+            climbing_types?: string[] | null;
           }) {
             // Only update if we don't have these values yet
             if (!country && crag.country) country = crag.country;
@@ -362,6 +376,12 @@ const tools = {
             if ((!detectedRockType || detectedRockType === "unknown") && crag.rock_type) {
               detectedRockType = crag.rock_type as RockType;
             }
+
+            // Capture crag-specific metadata for AI context
+            if (crag.description) description = crag.description;
+            if (crag.aspects && crag.aspects.length > 0) aspects = crag.aspects;
+            if (crag.climbing_types && crag.climbing_types.length > 0)
+              climbingTypes = crag.climbing_types;
 
             // Build locationDetails if we don't have it yet
             if (!locationDetails) {
@@ -379,6 +399,9 @@ const tools = {
               municipality,
               village,
               rockType: detectedRockType,
+              description,
+              aspects,
+              climbingTypes,
               locationDetails,
             });
           }
@@ -466,6 +489,10 @@ const tools = {
           state,
           municipality,
           village,
+          rockType: detectedRockType, // Include rock type for AI context
+          description, // Crag description for AI context
+          aspects, // Wall orientation (N, S, E, W, etc.)
+          climbingTypes, // Types of climbing available
           timeframe: timeframe || "now", // Add timeframe to response
           rating: conditions.rating,
           frictionScore: conditions.frictionRating,
