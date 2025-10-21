@@ -36,7 +36,7 @@ export function MapPopover({ latitude, longitude, locationName }: MapPopoverProp
           {t("dialog.showMap")}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[400px] p-0" side="bottom" align="end">
+      <PopoverContent className="w-[calc(100vw-2rem)] sm:w-[400px] p-0" side="bottom" align="end">
         <div className="rounded-md overflow-hidden">
           {isOpen && (
             <DynamicMap latitude={latitude} longitude={longitude} locationName={locationName} />
