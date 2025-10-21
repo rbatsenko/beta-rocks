@@ -145,7 +145,7 @@ const ChatInterface = () => {
       {
         display: t("welcome.exampleQueries.query3.display"),
         query: t("welcome.exampleQueries.query3.query"),
-      },
+      }
     ],
     [t]
   );

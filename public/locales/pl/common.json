@@ -7,16 +7,16 @@
     "description": "Sprawdź pogodę w czasie rzeczywistym, analizę tarcia i optymalne okna wspinaczkowe dla dowolnej skałki na świecie",
     "exampleQueries": {
       "query1": {
-        "display": "Jak tam warun w Sokolikach jutro?",
-        "query": "Sokoliki warunki jutro?"
+        "display": "Jaki warun w Sokolikach jutro?",
+        "query": "Jaki warun w Sokolikach jutro?"
       },
       "query2": {
         "display": "Czy Podlesice są suche dzisiaj po południu?",
         "query": "Czy Podlesice są suche dzisiaj po południu?"
       },
       "query3": {
-        "display": "Cięcinatti git? Jak tam Megatronik",
-        "query": "Cięcina warunki dzisiaj?"
+        "display": "Jak tam Dupa Słonia?",
+        "query": "Jak tam Dupa Słonia?"
       }
     }
   },
