@@ -24,11 +24,11 @@ const dryRun = args.includes("--dry-run");
 
 // Initialize Supabase client
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+const supabaseKey = process.env.SUPABASE_SECRET_KEY;
 
 if (!supabaseUrl || !supabaseKey) {
   console.error("ERROR: Missing Supabase environment variables");
-  console.error("Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY");
+  console.error("Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SECRET_KEY");
   process.exit(1);
 }
 
@@ -80,14 +80,21 @@ function osmToCrag(element: OsmElement): CragRecord | null {
     return null;
   }
 
-  // Skip if it's just a route (not a crag/area)
-  if (tags.climbing === "route" || tags.climbing === "route_bottom") {
-    console.warn(`[Skip] Individual route (not crag): ${tags.name}`);
+  // Skip if it's just a route/anchor (not a crag/area)
+  if (
+    tags.climbing === "route" ||
+    tags.climbing === "route_bottom" ||
+    tags.climbing === "route_top"
+  ) {
+    console.warn(`[Skip] Individual route/anchor (not crag): ${tags.name || "unnamed"}`);
     return null;
   }
 
   const climbingTypes = extractClimbingTypes(tags);
-  const rockType = normalizeRockType(tags["climbing:rock"] || tags["rock"]);
+  // Check multiple possible rock type tags (OSMApp uses rock_type directly)
+  const rockType = normalizeRockType(
+    tags["rock_type"] || tags["climbing:rock"] || tags["rock"]
+  );
 
   // Generate unique ID from OSM data
   const id = `osm_${element.type}_${element.id}`;
