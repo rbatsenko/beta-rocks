@@ -216,5 +216,22 @@
     "showAllHours": "Показати всі 24 години",
     "showClimbingHoursOnly": "Показати лише години скелелазіння",
     "expandHours": "Розгорнути, щоб побачити всі години"
+  },
+  "rockTypes": {
+    "limestone": "вапняк",
+    "granite": "граніт",
+    "sandstone": "пісковик",
+    "basalt": "базальт",
+    "gneiss": "гнейс",
+    "quartzite": "кварцит",
+    "conglomerate": "конгломерат",
+    "rhyolite": "ріоліт",
+    "porphyry": "порфір",
+    "andesite": "андезит",
+    "slate": "сланець",
+    "schist": "кристалічний сланець",
+    "dolomite": "доломіт",
+    "volcanic": "вулканічний",
+    "phyllite": "філіт"
   }
 }

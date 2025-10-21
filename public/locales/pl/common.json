@@ -216,5 +216,22 @@
     "showAllHours": "Pokaż wszystkie 24 godziny",
     "showClimbingHoursOnly": "Pokaż tylko godziny wspinaczki",
     "expandHours": "Rozwiń, aby zobaczyć wszystkie godziny"
+  },
+  "rockTypes": {
+    "limestone": "wapień",
+    "granite": "granit",
+    "sandstone": "piaskowiec",
+    "basalt": "bazalt",
+    "gneiss": "gnejs",
+    "quartzite": "kwarcyt",
+    "conglomerate": "konglomerat",
+    "rhyolite": "riolit",
+    "porphyry": "porfir",
+    "andesite": "andezyt",
+    "slate": "łupek",
+    "schist": "łupek łyszczykowy",
+    "dolomite": "dolomit",
+    "volcanic": "wulkaniczny",
+    "phyllite": "fylit"
   }
 }

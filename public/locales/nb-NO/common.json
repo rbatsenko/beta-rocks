@@ -217,5 +217,22 @@
     "showAllHours": "Vis alle 24 timer",
     "showClimbingHoursOnly": "Vis kun klatretimer",
     "expandHours": "Utvid for å se alle timer"
+  },
+  "rockTypes": {
+    "limestone": "kalkstein",
+    "granite": "granitt",
+    "sandstone": "sandstein",
+    "basalt": "basalt",
+    "gneiss": "gneis",
+    "quartzite": "kvartsitt",
+    "conglomerate": "konglomerat",
+    "rhyolite": "ryolitt",
+    "porphyry": "porfyr",
+    "andesite": "andesitt",
+    "slate": "skifer",
+    "schist": "glimmerskifer",
+    "dolomite": "dolomitt",
+    "volcanic": "vulkansk",
+    "phyllite": "fyllitt"
   }
 }

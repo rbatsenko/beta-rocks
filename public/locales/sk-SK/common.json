@@ -216,5 +216,22 @@
     "showAllHours": "Zobraziť všetkých 24 hodín",
     "showClimbingHoursOnly": "Zobraziť iba hodiny na lezenie",
     "expandHours": "Rozbaliť pre zobrazenie všetkých hodín"
+  },
+  "rockTypes": {
+    "limestone": "vápenec",
+    "granite": "žula",
+    "sandstone": "pieskoviec",
+    "basalt": "čadič",
+    "gneiss": "rula",
+    "quartzite": "kremenec",
+    "conglomerate": "zlepienec",
+    "rhyolite": "ryolit",
+    "porphyry": "porfýr",
+    "andesite": "andezit",
+    "slate": "bridlica",
+    "schist": "svор",
+    "dolomite": "dolomit",
+    "volcanic": "sopečný",
+    "phyllite": "fylit"
   }
 }

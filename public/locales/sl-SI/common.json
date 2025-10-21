@@ -217,5 +217,22 @@
     "showAllHours": "Prikaži vseh 24 ur",
     "showClimbingHoursOnly": "Prikaži samo plezalne ure",
     "expandHours": "Razširi za prikaz vseh ur"
+  },
+  "rockTypes": {
+    "limestone": "apnenec",
+    "granite": "granit",
+    "sandstone": "peščenjak",
+    "basalt": "bazalt",
+    "gneiss": "gnejs",
+    "quartzite": "kremenčev peščenjak",
+    "conglomerate": "konglomerat",
+    "rhyolite": "riolit",
+    "porphyry": "porfir",
+    "andesite": "andezit",
+    "slate": "skriljavec",
+    "schist": "skrilavec",
+    "dolomite": "dolomit",
+    "volcanic": "vulkanski",
+    "phyllite": "filit"
   }
 }

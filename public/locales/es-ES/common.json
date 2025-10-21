@@ -216,5 +216,22 @@
     "showAllHours": "Mostrar las 24 horas",
     "showClimbingHoursOnly": "Mostrar solo horas de escalada",
     "expandHours": "Expandir para ver todas las horas"
+  },
+  "rockTypes": {
+    "limestone": "caliza",
+    "granite": "granito",
+    "sandstone": "arenisca",
+    "basalt": "basalto",
+    "gneiss": "gneis",
+    "quartzite": "cuarcita",
+    "conglomerate": "conglomerado",
+    "rhyolite": "riolita",
+    "porphyry": "pórfido",
+    "andesite": "andesita",
+    "slate": "pizarra",
+    "schist": "esquisto",
+    "dolomite": "dolomita",
+    "volcanic": "volcánico",
+    "phyllite": "filita"
   }
 }
