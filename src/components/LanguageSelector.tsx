@@ -58,7 +58,7 @@ export function LanguageSelector() {
           <span className="sr-only">{t("ui.selectLanguage")}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="min-w-[200px] p-1 shadow-lg">
+      <DropdownMenuContent align="end" className="min-w-[200px] p-1 shadow-lg max-h-[70vh] overflow-y-auto">
         <div className="grid gap-1">
           {sortedLocales.map((locale) => {
             const { name, flag } = languageConfig[locale];
