@@ -516,7 +516,10 @@ When the user says "tomorrow", they mean the day after ${userTime}.`;
 
       // Extract AI response text and tool data from responseMessage
       // responseMessage is a UIMessage which may have content as string or array
-      const responseData = responseMessage as any;
+      // Type assertion needed as UIMessage generic doesn't expose content property
+      const responseData = responseMessage as unknown as {
+        content: string | Array<{ type: string; toolName?: string; input?: unknown; output?: unknown }>;
+      };
       const aiResponse =
         typeof responseData.content === "string"
           ? responseData.content
@@ -529,12 +532,12 @@ When the user says "tomorrow", they mean the day after ${userTime}.`;
       if (Array.isArray(responseData.content)) {
         for (const part of responseData.content) {
           if (typeof part === "object" && part !== null) {
-            if (part.type === "tool-call") {
+            if (part.type === "tool-call" && part.toolName) {
               toolCalls.push({
                 name: part.toolName,
                 arguments: part.input,
               });
-            } else if (part.type === "tool-result") {
+            } else if (part.type === "tool-result" && part.toolName) {
               toolResults.push({
                 toolName: part.toolName,
                 result: part.output,

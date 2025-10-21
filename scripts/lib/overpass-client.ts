@@ -199,25 +199,18 @@ export function normalizeRockType(rockType: string | undefined): string | null {
     // German (Saxony, Bavaria, Austria)
     sandstein: "sandstone",
     kalkstein: "limestone",
-    granit: "granite",
     gneis: "gneiss",
-    basalt: "basalt",
     schiefer: "slate",
 
     // French (Fontainebleau, Verdon, etc.)
     calcaire: "limestone",
     "grès": "sandstone", // grès
-    granit: "granite",
-    gneiss: "gneiss",
     basalte: "basalt",
-    quartzite: "quartzite",
     conglomérat: "conglomerate",
 
     // Spanish (Spain, Latin America)
     caliza: "limestone",
     arenisca: "sandstone",
-    granito: "granite",
-    basalto: "basalt",
     cuarcita: "quartzite",
     pizarra: "slate",
     conglomerado: "conglomerate",
@@ -225,26 +218,25 @@ export function normalizeRockType(rockType: string | undefined): string | null {
     // Italian (Dolomites, etc.)
     calcare: "limestone",
     arenaria: "sandstone",
-    granito: "granite",
-    basalto: "basalt",
-    gneiss: "gneiss",
     ardesia: "slate",
     dolomia: "dolomite",
 
     // Polish
     wapień: "limestone",
     piaskowiec: "sandstone",
-    granit: "granite",
     bazalt: "basalt",
     gnejs: "gneiss",
 
     // Portuguese (Brazil, Portugal)
     calcário: "limestone",
     arenito: "sandstone",
-    granito: "granite",
-    basalto: "basalt",
     gnaisse: "gneiss",
     quartzito: "quartzite",
+
+    // Common across multiple languages (last to avoid conflicts)
+    granit: "granite", // German, French, Polish
+    granito: "granite", // Spanish, Italian, Portuguese
+    basalto: "basalt", // Spanish, Italian, Portuguese
   };
 
   return mapping[normalized] || normalized;
