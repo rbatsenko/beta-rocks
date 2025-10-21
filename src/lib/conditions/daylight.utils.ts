@@ -4,21 +4,21 @@
  */
 
 export interface DaylightHours {
-  sunrise: string;           // ISO string
-  sunset: string;            // ISO string
-  civilDawn: string;         // Sun 6° below horizon - can see without artificial light
-  civilDusk: string;         // Sun 6° below horizon - last usable light
-  climbingStart: number;     // Hour of day (0-23) for practical climbing start
-  climbingEnd: number;       // Hour of day (0-23) for practical climbing end
+  sunrise: string; // ISO string
+  sunset: string; // ISO string
+  civilDawn: string; // Sun 6° below horizon - can see without artificial light
+  civilDusk: string; // Sun 6° below horizon - last usable light
+  climbingStart: number; // Hour of day (0-23) for practical climbing start
+  climbingEnd: number; // Hour of day (0-23) for practical climbing end
   totalDaylightHours: number;
 }
 
 export enum ClimbingTimeContext {
-  NORMAL = "normal",           // Show 6am-8pm (adjust by season)
-  ALPINE_START = "alpine",     // Show from 4am when hot
-  DAWN_PATROL = "dawn",        // Emphasis on early morning
+  NORMAL = "normal", // Show 6am-8pm (adjust by season)
+  ALPINE_START = "alpine", // Show from 4am when hot
+  DAWN_PATROL = "dawn", // Emphasis on early morning
   EVENING_SESSION = "evening", // Extend to 9pm in summer
-  WINTER_SHORT = "winter"      // Only 9am-4pm
+  WINTER_SHORT = "winter", // Only 9am-4pm
 }
 
 /**
@@ -36,14 +36,14 @@ export function calculateDaylightHours(
   // Calculate equation of time and solar declination
   const n = julianDay - 2451545.0;
   const L = (280.46 + 0.9856474 * n) % 360;
-  const g = ((357.528 + 0.9856003 * n) % 360) * Math.PI / 180;
-  const lambda = (L + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g)) * Math.PI / 180;
+  const g = (((357.528 + 0.9856003 * n) % 360) * Math.PI) / 180;
+  const lambda = ((L + 1.915 * Math.sin(g) + 0.02 * Math.sin(2 * g)) * Math.PI) / 180;
 
   // Solar declination
-  const declination = Math.asin(Math.sin(23.45 * Math.PI / 180) * Math.sin(lambda));
+  const declination = Math.asin(Math.sin((23.45 * Math.PI) / 180) * Math.sin(lambda));
 
   // Hour angle for sunrise/sunset
-  const latRad = latitude * Math.PI / 180;
+  const latRad = (latitude * Math.PI) / 180;
   const cosH = -Math.tan(latRad) * Math.tan(declination);
 
   // Check for polar day/night
@@ -66,14 +66,15 @@ export function calculateDaylightHours(
     civilDusk = sunset;
   } else {
     // Normal day
-    const H = Math.acos(cosH) * 180 / Math.PI;
+    const H = (Math.acos(cosH) * 180) / Math.PI;
     const sunriseTime = 12 - H / 15 - longitude / 15;
     const sunsetTime = 12 + H / 15 - longitude / 15;
 
     // Civil twilight (sun 6° below horizon)
-    const cosHCivil = -Math.tan(latRad) * Math.tan(declination) -
-                      Math.sin(-6 * Math.PI / 180) / (Math.cos(latRad) * Math.cos(declination));
-    const HCivil = Math.acos(Math.max(-1, Math.min(1, cosHCivil))) * 180 / Math.PI;
+    const cosHCivil =
+      -Math.tan(latRad) * Math.tan(declination) -
+      Math.sin((-6 * Math.PI) / 180) / (Math.cos(latRad) * Math.cos(declination));
+    const HCivil = (Math.acos(Math.max(-1, Math.min(1, cosHCivil))) * 180) / Math.PI;
     const civilDawnTime = 12 - HCivil / 15 - longitude / 15;
     const civilDuskTime = 12 + HCivil / 15 - longitude / 15;
 
@@ -92,7 +93,7 @@ export function calculateDaylightHours(
 
   // Calculate practical climbing hours (typically 30min after dawn, 30min before dusk)
   const climbingStart = Math.max(5, civilDawn.getHours() + 1); // Not before 5am
-  const climbingEnd = Math.min(21, civilDusk.getHours());      // Not after 9pm
+  const climbingEnd = Math.min(21, civilDusk.getHours()); // Not after 9pm
 
   const totalDaylightHours = (sunset.getTime() - sunrise.getTime()) / (1000 * 60 * 60);
 
@@ -103,7 +104,7 @@ export function calculateDaylightHours(
     civilDusk: civilDusk.toISOString(),
     climbingStart,
     climbingEnd,
-    totalDaylightHours: Math.round(totalDaylightHours * 10) / 10
+    totalDaylightHours: Math.round(totalDaylightHours * 10) / 10,
   };
 }
 
@@ -152,28 +153,28 @@ export function getClimbingHours(
       // Start very early to beat heat
       return {
         start: Math.max(4, daylight.climbingStart - 2),
-        end: Math.min(18, daylight.climbingEnd - 2)  // End earlier when hot
+        end: Math.min(18, daylight.climbingEnd - 2), // End earlier when hot
       };
 
     case ClimbingTimeContext.WINTER_SHORT:
       // Narrow window when cold
       return {
         start: Math.max(9, daylight.climbingStart),
-        end: Math.min(16, daylight.climbingEnd)
+        end: Math.min(16, daylight.climbingEnd),
       };
 
     case ClimbingTimeContext.DAWN_PATROL:
       // Emphasize morning hours
       return {
         start: Math.max(5, daylight.climbingStart - 1),
-        end: Math.min(14, daylight.climbingEnd)
+        end: Math.min(14, daylight.climbingEnd),
       };
 
     case ClimbingTimeContext.EVENING_SESSION:
       // Extend into evening
       return {
         start: Math.max(14, daylight.climbingStart),
-        end: Math.min(21, daylight.climbingEnd + 1)
+        end: Math.min(21, daylight.climbingEnd + 1),
       };
 
     case ClimbingTimeContext.NORMAL:
@@ -230,7 +231,7 @@ export function getTimeContextData(
     [ClimbingTimeContext.WINTER_SHORT]: "limitedDaylight",
     [ClimbingTimeContext.DAWN_PATROL]: "morningConditionsBest",
     [ClimbingTimeContext.EVENING_SESSION]: "eveningSession",
-    [ClimbingTimeContext.NORMAL]: undefined
+    [ClimbingTimeContext.NORMAL]: undefined,
   };
 
   return {
@@ -239,6 +240,6 @@ export function getTimeContextData(
     climbingStartHour: hours.start,
     climbingEndHour: hours.end,
     totalDaylightHours: daylight.totalDaylightHours,
-    contextNote: contextNotes[context]
+    contextNote: contextNotes[context],
   };
 }

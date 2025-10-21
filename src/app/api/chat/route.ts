@@ -11,6 +11,7 @@ import {
   isCrag,
   hasPreciseCoordinates,
 } from "@/lib/openbeta/client";
+import { searchCrags } from "@/lib/db/queries";
 import { resolveLocale } from "@/lib/i18n/config";
 import { getSystemPrompt } from "./prompts";
 
@@ -43,93 +44,171 @@ const tools = {
       let lon = longitude;
       let detectedRockType = rockType;
       let locationDetails = ""; // Will store "Region, Country" or path from OpenBeta
+      let country: string | undefined = undefined;
+      let state: string | undefined = undefined;
+      let municipality: string | undefined = undefined;
+      let village: string | undefined = undefined;
 
       // If no coordinates provided, search for location
       if (!lat || !lon) {
-        // STEP 1: Try OpenBeta first (climbing-specific database)
+        // STEP 1: Try local database first (fastest, most customized)
         try {
           console.log(
-            "[get_conditions] No coordinates provided, trying OpenBeta search:",
+            "[get_conditions] No coordinates provided, trying local database search:",
             location
           );
 
-          const openBetaAreas = await searchAreas(location);
-          console.log("[get_conditions] OpenBeta results:", {
+          const localCrags = await searchCrags(location);
+          console.log("[get_conditions] Local database results:", {
             location,
-            count: openBetaAreas.length,
+            count: localCrags?.length || 0,
           });
 
-          if (openBetaAreas.length > 0) {
-            // Filter to actual climbing crags (not countries/regions)
-            // Also filter out areas with generic coordinates
-            const crags = openBetaAreas.filter((area) => {
-              const isPrecise = hasPreciseCoordinates(area);
-              const isCragArea = isCrag(area);
-              console.log("[get_conditions] Area check:", {
-                name: area.area_name,
-                coords: `${area.metadata?.lat}, ${area.metadata?.lng}`,
-                isPrecise,
-                isCrag: isCragArea,
-                keep: isPrecise && isCragArea,
-              });
-              return isPrecise && isCragArea;
-            });
-            console.log("[get_conditions] Filtered to crags:", {
-              original: openBetaAreas.length,
-              crags: crags.length,
-            });
+          if (localCrags && localCrags.length > 0) {
+            if (localCrags.length === 1) {
+              // Perfect! Single crag found locally
+              const crag = localCrags[0];
+              lat = crag.lat;
+              lon = crag.lon;
+              detectedRockType = (detectedRockType || (crag.rock_type as RockType)) as RockType;
 
-            if (crags.length === 1) {
-              // Perfect! Single crag found
-              const crag = crags[0];
-              lat = crag.metadata.lat;
-              lon = crag.metadata.lng;
-              detectedRockType = (detectedRockType || extractRockType(crag)) as RockType;
-              locationDetails = formatAreaPath(crag); // e.g., "Spain > Siurana > El Pati"
+              // Capture detailed location data
+              country = crag.country || undefined;
+              state = crag.state || undefined;
+              municipality = crag.municipality || undefined;
+              village = crag.village || undefined;
 
-              console.log("[get_conditions] Using OpenBeta crag:", {
-                name: crag.area_name,
-                path: formatAreaPath(crag),
+              // Build locationDetails from available fields
+              const locationParts = [];
+              if (village) locationParts.push(village);
+              if (municipality && municipality !== village) locationParts.push(municipality);
+              if (state) locationParts.push(state);
+              if (country) locationParts.push(country);
+              locationDetails = locationParts.join(", ");
+
+              console.log("[get_conditions] Using local database crag:", {
+                name: crag.name,
                 lat,
                 lon,
+                country,
+                state,
+                municipality,
+                village,
                 rockType: detectedRockType,
               });
-            } else if (crags.length > 1) {
-              // Multiple crags found - return disambiguation
-              console.log("[get_conditions] Multiple crags found, returning disambiguation");
-
-              // Sort by popularity (number of climbs) - more popular crags first
-              const sortedCrags = [...crags].sort((a, b) => {
-                const aClimbCount = (a.climbs?.length || 0) + (a.children?.length || 0);
-                const bClimbCount = (b.climbs?.length || 0) + (b.children?.length || 0);
-                return bClimbCount - aClimbCount; // Descending order
-              });
+            } else if (localCrags.length > 1) {
+              // Multiple crags found locally - return disambiguation
+              console.log(
+                "[get_conditions] Multiple crags found in local DB, returning disambiguation"
+              );
 
               return {
                 disambiguate: true,
-                source: "openbeta",
-                message: `Found ${crags.length} climbing areas for "${location}". Please choose one:`,
+                source: "local",
+                message: `Found ${localCrags.length} climbing areas for "${location}" in our database. Please choose one:`,
                 translationKey: "disambiguation.foundMultipleAreas",
-                translationParams: { count: crags.length, location },
-                options: sortedCrags.map((crag) => ({
-                  id: crag.uuid,
-                  name: crag.area_name,
-                  location: formatAreaPath(crag),
-                  latitude: crag.metadata.lat,
-                  longitude: crag.metadata.lng,
-                  rockType: extractRockType(crag),
+                translationParams: { count: localCrags.length, location },
+                options: localCrags.map((crag) => ({
+                  id: crag.id,
+                  name: crag.name,
+                  location: crag.country,
+                  latitude: crag.lat,
+                  longitude: crag.lon,
+                  rockType: crag.rock_type || "unknown",
                 })),
               };
             }
           }
         } catch (error) {
-          console.log("[get_conditions] OpenBeta search failed, will try geocoding:", {
+          console.log("[get_conditions] Local database search failed, will try OpenBeta:", {
             error: error instanceof Error ? error.message : String(error),
           });
-          // Continue to geocoding fallback
+          // Continue to OpenBeta fallback
         }
 
-        // STEP 2: If OpenBeta didn't find a crag, fall back to geocoding
+        // STEP 2: Try OpenBeta (climbing-specific database)
+        if (!lat || !lon) {
+          try {
+            console.log("[get_conditions] No local match found, trying OpenBeta search:", location);
+
+            const openBetaAreas = await searchAreas(location);
+            console.log("[get_conditions] OpenBeta results:", {
+              location,
+              count: openBetaAreas.length,
+            });
+
+            if (openBetaAreas.length > 0) {
+              // Filter to actual climbing crags (not countries/regions)
+              // Also filter out areas with generic coordinates
+              const crags = openBetaAreas.filter((area) => {
+                const isPrecise = hasPreciseCoordinates(area);
+                const isCragArea = isCrag(area);
+                console.log("[get_conditions] Area check:", {
+                  name: area.area_name,
+                  coords: `${area.metadata?.lat}, ${area.metadata?.lng}`,
+                  isPrecise,
+                  isCrag: isCragArea,
+                  keep: isPrecise && isCragArea,
+                });
+                return isPrecise && isCragArea;
+              });
+              console.log("[get_conditions] Filtered to crags:", {
+                original: openBetaAreas.length,
+                crags: crags.length,
+              });
+
+              if (crags.length === 1) {
+                // Perfect! Single crag found
+                const crag = crags[0];
+                lat = crag.metadata.lat;
+                lon = crag.metadata.lng;
+                detectedRockType = (detectedRockType || extractRockType(crag)) as RockType;
+                locationDetails = formatAreaPath(crag); // e.g., "Spain > Siurana > El Pati"
+
+                console.log("[get_conditions] Using OpenBeta crag:", {
+                  name: crag.area_name,
+                  path: formatAreaPath(crag),
+                  lat,
+                  lon,
+                  rockType: detectedRockType,
+                });
+              } else if (crags.length > 1) {
+                // Multiple crags found - return disambiguation
+                console.log("[get_conditions] Multiple crags found, returning disambiguation");
+
+                // Sort by popularity (number of climbs) - more popular crags first
+                const sortedCrags = [...crags].sort((a, b) => {
+                  const aClimbCount = (a.climbs?.length || 0) + (a.children?.length || 0);
+                  const bClimbCount = (b.climbs?.length || 0) + (b.children?.length || 0);
+                  return bClimbCount - aClimbCount; // Descending order
+                });
+
+                return {
+                  disambiguate: true,
+                  source: "openbeta",
+                  message: `Found ${crags.length} climbing areas for "${location}". Please choose one:`,
+                  translationKey: "disambiguation.foundMultipleAreas",
+                  translationParams: { count: crags.length, location },
+                  options: sortedCrags.map((crag) => ({
+                    id: crag.uuid,
+                    name: crag.area_name,
+                    location: formatAreaPath(crag),
+                    latitude: crag.metadata.lat,
+                    longitude: crag.metadata.lng,
+                    rockType: extractRockType(crag),
+                  })),
+                };
+              }
+            }
+          } catch (error) {
+            console.log("[get_conditions] OpenBeta search failed, will try geocoding:", {
+              error: error instanceof Error ? error.message : String(error),
+            });
+            // Continue to geocoding fallback
+          }
+        }
+
+        // STEP 3: If OpenBeta didn't find a crag, fall back to geocoding
         if (!lat || !lon) {
           try {
             console.log("[get_conditions] Falling back to geocoding API:", location);
@@ -248,7 +327,7 @@ const tools = {
           }));
 
         // Find max temperature from forecast for context detection
-        const maxDailyTemp = Math.max(...hourlyData.slice(0, 24).map(h => h.temp_c));
+        const maxDailyTemp = Math.max(...hourlyData.slice(0, 24).map((h) => h.temp_c));
 
         // Compute conditions - include ALL hours (including night) for UI to filter
         const conditions = computeConditions(
@@ -266,7 +345,7 @@ const tools = {
           },
           (detectedRockType as RockType) || "unknown",
           0,
-          { includeNightHours: true }  // Send all hours to frontend
+          { includeNightHours: true } // Send all hours to frontend
         );
 
         console.log("[get_conditions] Successfully computed conditions:", {
@@ -278,6 +357,12 @@ const tools = {
         return {
           location,
           locationDetails, // Add region/country or OpenBeta path
+          latitude: lat,
+          longitude: lon,
+          country,
+          state,
+          municipality,
+          village,
           timeframe: timeframe || "now", // Add timeframe to response
           rating: conditions.rating,
           frictionScore: conditions.frictionRating,
@@ -367,7 +452,12 @@ const tools = {
 };
 
 export async function POST(req: Request) {
-  const { messages, language, userDateTime, userTimezone }: {
+  const {
+    messages,
+    language,
+    userDateTime,
+    userTimezone,
+  }: {
     messages: UIMessage[];
     language?: string;
     userDateTime?: string;
@@ -376,22 +466,24 @@ export async function POST(req: Request) {
   const locale = resolveLocale(language);
 
   // Format user's current time for the AI
-  const userTime = userDateTime ? new Date(userDateTime).toLocaleString('en-US', {
-    timeZone: userTimezone || 'UTC',
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    timeZoneName: 'short'
-  }) : 'Unknown time';
+  const userTime = userDateTime
+    ? new Date(userDateTime).toLocaleString("en-US", {
+        timeZone: userTimezone || "UTC",
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        timeZoneName: "short",
+      })
+    : "Unknown time";
 
   const systemPrompt = `${getSystemPrompt(locale)}
 
 CRITICAL TIME CONTEXT:
 Current user time: ${userTime}
-User timezone: ${userTimezone || 'UTC'}
+User timezone: ${userTimezone || "UTC"}
 When the user says "now" or "today", they mean relative to this time.
 When the user says "tomorrow", they mean the day after ${userTime}.`;
 

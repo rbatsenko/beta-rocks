@@ -8,15 +8,15 @@
     "exampleQueries": {
       "query1": {
         "display": "Quel sera l'état de Fontainebleau demain ?",
-        "query": "Quelles seront les conditions à Fontainebleau (48.404, 2.637) demain ?"
+        "query": "Quelles seront les conditions à Fontainebleau demain ?"
       },
       "query2": {
         "display": "Ceüse sera-t-elle sèche cet après-midi ?",
-        "query": "Ceüse (44.336, 5.985) sera-t-elle sèche cet après-midi ?"
+        "query": "Ceüse sera-t-elle sèche cet après-midi ?"
       },
       "query3": {
         "display": "Quel temps est prévu dans les Gorges du Verdon ce week-end ?",
-        "query": "Quelles conditions dans les Gorges du Verdon (43.737, 6.366) ce week-end ?"
+        "query": "Quelles conditions dans les Gorges du Verdon ce week-end ?"
       }
     }
   },
@@ -147,6 +147,7 @@
     "close": "Fermer",
     "detailedConditions": "Conditions détaillées",
     "fullAnalysis": "Analyse complète de la météo et des conditions d'escalade",
+    "showMap": "Carte",
     "tabs": {
       "overview": "Vue d'ensemble",
       "hourly": "Horaire",

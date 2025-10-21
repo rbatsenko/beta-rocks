@@ -31,6 +31,7 @@ const ScrollToBottomOnSignal = ({ signal }: { signal: number }) => {
   return null;
 };
 import { ConditionsDetailDialog } from "@/components/ConditionsDetailDialog";
+import { ConditionsDetailSheet } from "@/components/ConditionsDetailSheet";
 import { WeatherConditionCard } from "@/components/WeatherConditionCard";
 import { DisambiguationOptions } from "@/components/DisambiguationOptions";
 import { FeaturesDialog } from "@/components/FeaturesDialog";
@@ -119,6 +120,7 @@ const ChatInterface = () => {
     experimental_throttle: 30,
   });
   const [detailsDialogOpen, setDetailsDialogOpen] = useState(false);
+  const [detailsSheetOpen, setDetailsSheetOpen] = useState(false);
   const [selectedConditions, setSelectedConditions] = useState<ConditionsData | null>(null);
   const [featuresDialogOpen, setFeaturesDialogOpen] = useState(false);
   const [scrollSignal, setScrollSignal] = useState(0);
@@ -422,6 +424,10 @@ const ChatInterface = () => {
                                   setSelectedConditions(conditionsResult);
                                   setDetailsDialogOpen(true);
                                 }}
+                                onSheetClick={() => {
+                                  setSelectedConditions(conditionsResult);
+                                  setDetailsSheetOpen(true);
+                                }}
                                 conditionsLabel={t("conditions.rating")}
                                 detailsLabel={t("conditions.details")}
                               />
@@ -432,8 +438,7 @@ const ChatInterface = () => {
                         })}
 
                         {/* If we have a tool result and a text part, show only the last text once below the card */}
-                        {shouldPreferLastText &&
-                        message.parts[lastTextIdx]?.type === "text" ? (
+                        {shouldPreferLastText && message.parts[lastTextIdx]?.type === "text" ? (
                           <div className="mt-3 animate-in fade-in-0 slide-in-from-bottom-2 duration-500">
                             <Response>{message.parts[lastTextIdx].text}</Response>
                           </div>
@@ -529,6 +534,15 @@ const ChatInterface = () => {
         <ConditionsDetailDialog
           open={detailsDialogOpen}
           onOpenChange={setDetailsDialogOpen}
+          data={selectedConditions}
+        />
+      )}
+
+      {/* Conditions Detail Sheet */}
+      {selectedConditions && (
+        <ConditionsDetailSheet
+          open={detailsSheetOpen}
+          onOpenChange={setDetailsSheetOpen}
           data={selectedConditions}
         />
       )}

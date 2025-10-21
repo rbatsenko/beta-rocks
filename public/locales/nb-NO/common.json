@@ -8,15 +8,15 @@
     "exampleQueries": {
       "query1": {
         "display": "Hvordan er forholdene i Flatanger i morgen?",
-        "query": "Hvordan er klatreforholdene i Flatanger (63.455, 9.050) i morgen?"
+        "query": "Hvordan er klatreforholdene i Flatanger i morgen?"
       },
       "query2": {
         "display": "Blir Hauktjern tørt til helga?",
-        "query": "Blir Hauktjern (59.907, 10.844) tørt til helga?"
+        "query": "Blir Hauktjern tørt til helga?"
       },
       "query3": {
         "display": "Hvordan ser været ut for Uskedalen på lørdag?",
-        "query": "Hvordan er forholdene i Uskedalen (60.019, 5.986) på lørdag?"
+        "query": "Hvordan er forholdene i Uskedalen på lørdag?"
       }
     }
   },
@@ -148,6 +148,7 @@
     "close": "Lukk",
     "detailedConditions": "Detaljerte forhold",
     "fullAnalysis": "Full væranalyse og klatreprognose",
+    "showMap": "Kart",
     "tabs": {
       "overview": "Oversikt",
       "hourly": "Hver time",

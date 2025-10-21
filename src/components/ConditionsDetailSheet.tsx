@@ -2,20 +2,19 @@
 
 import React, { memo, useMemo } from "react";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { ThermometerSun } from "lucide-react";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
-import { logRender } from "@/lib/debug/render-log";
 import { ConditionsDetailContent } from "./ConditionsDetailContent";
 import { MapPopover } from "./MapPopover";
 import { getCountryFlag } from "@/lib/utils/country-flag";
 
-interface ConditionsDetailDialogProps {
+interface ConditionsDetailSheetProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   data: {
@@ -91,21 +90,14 @@ interface ConditionsDetailDialogProps {
   };
 }
 
-export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
+export const ConditionsDetailSheet = memo(function ConditionsDetailSheet({
   open,
   onOpenChange,
   data,
-}: ConditionsDetailDialogProps) {
+}: ConditionsDetailSheetProps) {
   const { t } = useClientTranslation("common");
 
-  logRender("ConditionsDetailDialog", {
-    open,
-    hasHourly: !!data.hourlyConditions?.length,
-    hasDaily: !!data.dailyForecast?.length,
-    hasWindows: !!data.optimalWindows?.length,
-  });
-
-  // Build detailed location string with flag
+  // Build detailed location string with flag (same logic as Dialog)
   const { locationText, countryFlag } = useMemo(() => {
     const parts = [
       data.village,
@@ -120,16 +112,16 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
   }, [data.village, data.municipality, data.state, data.country]);
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-3xl max-h-[90vh] flex flex-col">
-        <DialogHeader>
-          <DialogTitle>
+    <Sheet open={open} onOpenChange={onOpenChange}>
+      <SheetContent side="right" className="w-full sm:max-w-3xl overflow-hidden p-0 flex flex-col">
+        <SheetHeader className="px-6 pt-6 pb-4 border-b shrink-0">
+          <SheetTitle className="text-xl font-semibold">
             <div className="flex items-center gap-2">
               <ThermometerSun className="w-5 h-5" />
               {t("dialog.detailedConditions")}: {data.location}
             </div>
-          </DialogTitle>
-          <DialogDescription className="flex flex-col gap-2">
+          </SheetTitle>
+          <SheetDescription className="flex flex-col gap-2">
             <span>{t("dialog.fullAnalysis")}</span>
             <span className="flex items-center gap-2">
               {(locationText || countryFlag) && (
@@ -147,13 +139,12 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
                 />
               )}
             </span>
-          </DialogDescription>
-        </DialogHeader>
-
-        <div className="flex-1 min-h-0">
-          <ConditionsDetailContent data={data} />
+          </SheetDescription>
+        </SheetHeader>
+        <div className="flex-1 overflow-hidden px-6 py-4">
+          <ConditionsDetailContent variant="sheet" data={data} />
         </div>
-      </DialogContent>
-    </Dialog>
+      </SheetContent>
+    </Sheet>
   );
 });

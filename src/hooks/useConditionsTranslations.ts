@@ -129,13 +129,13 @@ export function useConditionsTranslations(
       // "Too warm for X (Y°C)" or just "Too warm (Y°C)"
       const tooWarmMatch = warning.match(/Too warm(?: for (\w+))? \((-?\d+)°C\)/);
       if (tooWarmMatch) {
-        const rockType = tooWarmMatch[1] || '';
+        const rockType = tooWarmMatch[1] || "";
         const temp = tooWarmMatch[2];
         if (rockType) {
           return t("warnings.tooWarm", { rockType, temp });
         } else {
           // Simplified version without rock type
-          return t("warnings.tooWarm", { rockType: '', temp }).replace(' for ', '');
+          return t("warnings.tooWarm", { rockType: "", temp }).replace(" for ", "");
         }
       }
 
@@ -147,13 +147,17 @@ export function useConditionsTranslations(
           return t("warnings.coldSuboptimal", { rockType: coldMatch[1] });
         } else if (coldMatch[2]) {
           // Simplified version with temperature
-          return t("warnings.cold", { temp: coldMatch[2] }) ||
-                 t("warnings.coldSuboptimal", { rockType: '' }).replace(' for ', '');
+          return (
+            t("warnings.cold", { temp: coldMatch[2] }) ||
+            t("warnings.coldSuboptimal", { rockType: "" }).replace(" for ", "")
+          );
         }
       }
 
       // "High humidity (X%) - rock can be slippery" or just "High humidity (X%)"
-      const highHumidityMatch = warning.match(/High humidity \((-?\d+)%\)(?:\s*-\s*rock can be slippery)?/);
+      const highHumidityMatch = warning.match(
+        /High humidity \((-?\d+)%\)(?:\s*-\s*rock can be slippery)?/
+      );
       if (highHumidityMatch) {
         return t("warnings.highHumidity", { humidity: highHumidityMatch[1] });
       }

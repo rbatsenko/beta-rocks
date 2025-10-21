@@ -8,15 +8,15 @@
     "exampleQueries": {
       "query1": {
         "display": "Hur blir det i Bohuslän i helgen?",
-        "query": "Hur är klätterförhållandena i Bohuslän (58.437, 11.292) i helgen?"
+        "query": "Hur är klätterförhållandena i Bohuslän i helgen?"
       },
       "query2": {
         "display": "Är Ågelsjön torr i morgon kväll?",
-        "query": "Är Ågelsjön (58.616, 16.083) torr i morgon kväll?"
+        "query": "Är Ågelsjön torr i morgon kväll?"
       },
       "query3": {
         "display": "Vilket väder väntar i Häggsta på fredag?",
-        "query": "Vilka förhållanden får vi i Häggsta (59.192, 17.963) på fredag?"
+        "query": "Vilka förhållanden får vi i Häggsta på fredag?"
       }
     }
   },
@@ -148,6 +148,7 @@
     "close": "Stäng",
     "detailedConditions": "Detaljerade förhållanden",
     "fullAnalysis": "Fullständig väderanalys och prognos för klättring",
+    "showMap": "Karta",
     "tabs": {
       "overview": "Översikt",
       "hourly": "Timvis",

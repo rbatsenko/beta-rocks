@@ -8,7 +8,7 @@
     "exampleQueries": {
       "query1": {
         "display": "¿Habrá buen tacto en Siurana mañana?",
-        "query": "¿Cómo estarán las condiciones en Siurana (41.257, 0.977) mañana?"
+        "query": "¿Cómo estarán las condiciones en Siurana mañana?"
       },
       "query2": {
         "display": "¿Estará Rodellar seco esta tarde?",
@@ -147,6 +147,7 @@
     "close": "Cerrar",
     "detailedConditions": "Condiciones detalladas",
     "fullAnalysis": "Análisis completo del tiempo y previsión de condiciones de escalada",
+    "showMap": "Mapa",
     "tabs": {
       "overview": "Resumen",
       "hourly": "Por horas",

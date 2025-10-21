@@ -214,6 +214,7 @@ POLSKA TERMINOLOGIA WSPINACZKOWA:
 - "mokro/sucho" = wet/dry
 - "dobry warun" = good conditions (slang)
 - "w Sokolikach" (nie "na Sokolikach")
+- "Na Dupie Słonia warunki są dobre (tarcie 4/5) w tym momencie"
 
 JĘZYK I STYL:
 - Zawsze odpowiadaj po polsku

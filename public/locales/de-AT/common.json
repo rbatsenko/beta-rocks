@@ -8,15 +8,15 @@
     "exampleQueries": {
       "query1": {
         "display": "Wie schaut's morgen im Zillertal aus?",
-        "query": "Wie sind die Bedingungen im Zillertal (47.184, 11.871) morgen?"
+        "query": "Wie sind die Bedingungen im Zillertal morgen?"
       },
       "query2": {
         "display": "Ist die Hohe Wand heute Nachmittag trocken?",
-        "query": "Ist die Hohe Wand (47.823, 16.037) heute Nachmittag trocken?"
+        "query": "Ist die Hohe Wand heute Nachmittag trocken?"
       },
       "query3": {
         "display": "Kommt gutes Wetter am Kanzianiberg fürs Wochenende?",
-        "query": "Wie sind die Bedingungen am Kanzianiberg (46.572, 13.908) am Wochenende?"
+        "query": "Wie sind die Bedingungen am Kanzianiberg am Wochenende?"
       }
     }
   },
@@ -147,6 +147,7 @@
     "close": "Schließen",
     "detailedConditions": "Detailbedingungen",
     "fullAnalysis": "Komplette Wetter- und Bedingungsanalyse",
+    "showMap": "Karte",
     "tabs": {
       "overview": "Überblick",
       "hourly": "Stündlich",

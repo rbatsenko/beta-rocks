@@ -181,11 +181,7 @@ export const groupWindowsByDay = (
     const durationMinutes = durationMs / (1000 * 60);
     if (durationMinutes < 30) return;
 
-    const windowDay = new Date(
-      startDate.getFullYear(),
-      startDate.getMonth(),
-      startDate.getDate()
-    );
+    const windowDay = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
 
     let displayDay: string;
     let isToday = false;

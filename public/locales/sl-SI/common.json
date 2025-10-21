@@ -8,15 +8,15 @@
     "exampleQueries": {
       "query1": {
         "display": "Kakšne bodo razmere v Ospu jutri?",
-        "query": "Kakšne bodo razmere v Ospu (45.549, 13.880) jutri?"
+        "query": "Kakšne bodo razmere v Ospu jutri?"
       },
       "query2": {
         "display": "Ali bo Mišja Peč suha danes popoldne?",
-        "query": "Ali bo Mišja Peč (45.548, 13.881) suha danes popoldne?"
+        "query": "Ali bo Mišja Peč suha danes popoldne?"
       },
       "query3": {
         "display": "Kako bo v Kotečniku ta konec tedna?",
-        "query": "Kako bodo razmere v Kotečniku (46.140, 15.236) ta konec tedna?"
+        "query": "Kako bodo razmere v Kotečniku ta konec tedna?"
       }
     }
   },
@@ -148,6 +148,7 @@
     "close": "Zapri",
     "detailedConditions": "Podrobne razmere",
     "fullAnalysis": "Celotna vremenska analiza in napoved razmer za plezanje",
+    "showMap": "Zemljevid",
     "tabs": {
       "overview": "Pregled",
       "hourly": "Urno",

@@ -8,15 +8,15 @@
     "exampleQueries": {
       "query1": {
         "display": "Jak tam warun w Sokolikach jutro?",
-        "query": "Sokoliki (50.869, 15.868) warunki jutro?"
+        "query": "Sokoliki warunki jutro?"
       },
       "query2": {
         "display": "Czy Podlesice są suche dzisiaj po południu?",
-        "query": "Czy Podlesice (50.565, 19.529) są suche dzisiaj po południu?"
+        "query": "Czy Podlesice są suche dzisiaj po południu?"
       },
       "query3": {
         "display": "Cięcinatti git? Jak tam Megatronik",
-        "query": "Cięcina (49.625, 19.145) warunki dzisiaj?"
+        "query": "Cięcina warunki dzisiaj?"
       }
     }
   },
@@ -40,7 +40,7 @@
   "reasons": {
     "perfectTemp": "Idealna temperatura ({{temp}}°C)",
     "tempTooHigh": "Za ciepło - dla optymalnego tarcia może być potrzebny wiatr",
-    "coldGoodFriction": "Zimno ale dobrze dla {{rockType}}",
+    "coldGoodFriction": "Zimno ale dobre tarcie",
     "idealHumidity": "Idealna wilgotność ({{humidity}}%)",
     "lowHumidityGranite": "Niska wilgotność pomaga na granicie",
     "readyInHours": "Gotowe do wspinania za ~{{hours}} godzin",
@@ -48,14 +48,14 @@
   },
   "warnings": {
     "tooWarm": "Za ciepło dla {{rockType}} ({{temp}}°C)",
-    "coldSuboptimal": "Zimno i nieoptymalnie dla {{rockType}}",
-    "highHumidity": "Wysoka wilgotność ({{humidity}}%) - może być problem z tarciem",
+    "coldSuboptimal": "Zimno - zabierz ciepłe ubrania i rozgrzej się porządnie",
+    "highHumidity": "Wysoka wilgotność ({{humidity}}%) - może być gorsze tarcie",
     "wetDangerousSandstone": "Piaskowiec mokry - nie wspinaj się póki całkiem nie wyschnie!",
     "wetSlippery": "Skała mokra - ślisko",
-    "veryHighWinds": "Bardzo mocny wiatr ({{wind}} km/h) - może być problem ze wspinaniem",
+    "veryHighWinds": "Bardzo mocny wiatr ({{wind}} km/h) - może być nieprzyjemnie 😅",
     "highWind": "Silny wiatr ({{wind}} km/h)",
     "recentPrecip": "Niedawne opady ({{precip}}mm) - wyschnie za ~{{hours}}h",
-    "currentlyWetDangerous": "Obecnie mokro - może być problem ze wspinaniem",
+    "currentlyWetDangerous": "Obecnie mokro - poczekaj aż wyschnie",
     "currentlyWet": "Mokro"
   },
   "weather": {
@@ -147,14 +147,15 @@
     "close": "Zamknij",
     "detailedConditions": "Szczegółowe warunki",
     "fullAnalysis": "Pełna analiza pogody i prognoza warunków wspinaczkowych",
+    "showMap": "Mapa",
     "tabs": {
       "overview": "Przegląd",
       "hourly": "Co godzinę",
       "daily": "14-dniowa"
     },
-    "currentRating": "Obecna ocena",
+    "currentRating": "Aktualna ocena",
     "currentConditions": "Obecny warun",
-    "currentWeather": "Obecna pogoda",
+    "currentWeather": "Aktualna pogoda",
     "temperature": "Temperatura",
     "humidity": "Wilgotność",
     "windSpeed": "Prędkość wiatru",

@@ -21,24 +21,27 @@ export const Message = ({ className, from, ...props }: MessageProps) => (
   />
 );
 
-const messageContentVariants = cva("is-user:dark flex flex-col rounded-lg text-sm transition-[width,height,max-width,min-width] duration-300 ease-out", {
-  variants: {
-    variant: {
-      contained: [
-        "max-w-[80%] px-4 py-3 gap-2",
-        "group-[.is-user]:bg-gradient-to-br group-[.is-user]:from-orange-50 group-[.is-user]:to-orange-100/50 group-[.is-user]:dark:from-orange-950/50 group-[.is-user]:dark:to-orange-900/30 group-[.is-user]:border group-[.is-user]:border-orange-200 group-[.is-user]:dark:border-orange-800/50 group-[.is-user]:shadow-sm group-[.is-user]:dark:shadow-md group-[.is-user]:text-foreground group-[.is-user]:dark:text-inherit",
-        "group-[.is-assistant]:bg-secondary group-[.is-assistant]:text-foreground",
-      ],
-      flat: [
-        "group-[.is-user]:max-w-[80%] group-[.is-user]:bg-secondary group-[.is-user]:px-4 group-[.is-user]:py-3 group-[.is-user]:text-foreground group-[.is-user]:gap-2",
-        "group-[.is-assistant]:max-w-full group-[.is-assistant]:text-foreground",
-      ],
+const messageContentVariants = cva(
+  "is-user:dark flex flex-col rounded-lg text-sm transition-[width,height,max-width,min-width] duration-300 ease-out",
+  {
+    variants: {
+      variant: {
+        contained: [
+          "max-w-[80%] px-4 py-3 gap-2",
+          "group-[.is-user]:bg-gradient-to-br group-[.is-user]:from-orange-50 group-[.is-user]:to-orange-100/50 group-[.is-user]:dark:from-orange-950/50 group-[.is-user]:dark:to-orange-900/30 group-[.is-user]:border group-[.is-user]:border-orange-200 group-[.is-user]:dark:border-orange-800/50 group-[.is-user]:shadow-sm group-[.is-user]:dark:shadow-md group-[.is-user]:text-foreground group-[.is-user]:dark:text-inherit",
+          "group-[.is-assistant]:bg-secondary group-[.is-assistant]:text-foreground",
+        ],
+        flat: [
+          "group-[.is-user]:max-w-[80%] group-[.is-user]:bg-secondary group-[.is-user]:px-4 group-[.is-user]:py-3 group-[.is-user]:text-foreground group-[.is-user]:gap-2",
+          "group-[.is-assistant]:max-w-full group-[.is-assistant]:text-foreground",
+        ],
+      },
     },
-  },
-  defaultVariants: {
-    variant: "contained",
-  },
-});
+    defaultVariants: {
+      variant: "contained",
+    },
+  }
+);
 
 export type MessageContentProps = HTMLAttributes<HTMLDivElement> &
   VariantProps<typeof messageContentVariants>;

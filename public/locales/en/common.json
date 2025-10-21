@@ -147,6 +147,7 @@
     "close": "Close",
     "detailedConditions": "Detailed Conditions",
     "fullAnalysis": "Full weather analysis and climbing conditions forecast",
+    "showMap": "Map",
     "tabs": {
       "overview": "Overview",
       "hourly": "Hourly",

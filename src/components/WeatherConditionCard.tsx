@@ -1,8 +1,10 @@
-import { memo } from "react";
+import { memo, useMemo } from "react";
 import { Button } from "@/components/ui/button";
-import { Info } from "lucide-react";
+import { Info, PanelRightOpen } from "lucide-react";
 import { getWeatherEmoji, getWeatherDescription } from "@/lib/utils/weather-emojis";
 import { logRender } from "@/lib/debug/render-log";
+import { MapPopover } from "@/components/MapPopover";
+import { getCountryFlag } from "@/lib/utils/country-flag";
 
 interface ConditionsData {
   location: string;
@@ -13,6 +15,12 @@ interface ConditionsData {
   reasons?: string[];
   warnings?: string[];
   isDry: boolean;
+  latitude?: number;
+  longitude?: number;
+  country?: string;
+  state?: string;
+  municipality?: string;
+  village?: string;
   current?: {
     temperature_c: number;
     humidity: number;
@@ -31,6 +39,7 @@ interface WeatherConditionCardProps {
   translateWarning: (warning: string) => string;
   translateReason: (reason: string) => string;
   onDetailsClick: () => void;
+  onSheetClick?: () => void;
   conditionsLabel: string;
   detailsLabel: string;
 }
@@ -47,6 +56,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
   translateWarning,
   translateReason,
   onDetailsClick,
+  onSheetClick,
   conditionsLabel,
   detailsLabel,
 }: WeatherConditionCardProps) {
@@ -57,6 +67,20 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
     warnings: data.warnings?.length ?? 0,
     reasons: data.reasons?.length ?? 0,
   });
+
+  // Build location details with flag
+  const { locationText, countryFlag } = useMemo(() => {
+    const parts = [
+      data.village,
+      data.municipality && data.municipality !== data.village ? data.municipality : null,
+      data.state,
+    ].filter(Boolean);
+
+    return {
+      locationText: parts.join(", "),
+      countryFlag: getCountryFlag(data.country),
+    };
+  }, [data.village, data.municipality, data.state, data.country]);
 
   return (
     <div className="bg-muted/50 rounded-lg p-3 sm:p-4 border border-border w-full max-w-2xl transition-all duration-500 ease-out will-change-[max-width,transform]">
@@ -90,11 +114,13 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
           className={`${hasEmoji ? "col-start-2" : "col-start-1"} min-w-0 space-y-1 sm:space-y-1.5`}
         >
           <div className="space-y-0.5">
-            <div className="font-semibold text-base">
-              🧗 {data.location}
-            </div>
-            {data.locationDetails && (
-              <div className="text-xs text-muted-foreground">📍 {data.locationDetails}</div>
+            <div className="font-semibold text-base">🧗 {data.location}</div>
+            {(locationText || countryFlag) && (
+              <div className="text-xs text-muted-foreground">
+                📍 {locationText}
+                {locationText && countryFlag && ", "}
+                {countryFlag} {data.country}
+              </div>
             )}
             {hasEmoji && (
               <div className="text-xs text-muted-foreground">
@@ -107,21 +133,33 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
           </div>
         </div>
 
-        {/* Details button */}
+        {/* Details buttons */}
         {(data.hourlyConditions || data.optimalWindows) && (
-          <Button
-            variant="outline"
-            size="sm"
+          <div
             className={
               `${hasEmoji ? "col-start-2" : "col-start-1"} row-start-2 ` +
               `${hasEmoji ? "sm:col-start-3" : "sm:col-start-2"} sm:row-start-1 ` +
-              "shrink-0 justify-self-start sm:justify-self-end"
+              "flex gap-2 shrink-0 justify-self-start sm:justify-self-end"
             }
-            onClick={onDetailsClick}
           >
-            <Info className="w-4 h-4 mr-1" />
-            {detailsLabel}
-          </Button>
+            {data.latitude && data.longitude && (
+              <MapPopover
+                latitude={data.latitude}
+                longitude={data.longitude}
+                locationName={data.location}
+              />
+            )}
+            {onSheetClick && (
+              <Button variant="outline" size="sm" onClick={onSheetClick} title="Open in side panel">
+                <PanelRightOpen className="w-4 h-4 mr-1" />
+                Panel
+              </Button>
+            )}
+            <Button variant="outline" size="sm" onClick={onDetailsClick} title="Open in dialog">
+              <Info className="w-4 h-4 mr-1" />
+              {detailsLabel}
+            </Button>
+          </div>
         )}
 
         {/* Warnings */}

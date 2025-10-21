@@ -4,7 +4,12 @@
  * Calculates friction ratings based on weather data
  */
 
-import { calculateDaylightHours, detectTimeContext, getTimeContextData, getClimbingHours } from './daylight.utils';
+import {
+  calculateDaylightHours,
+  detectTimeContext,
+  getTimeContextData,
+  getClimbingHours,
+} from "./daylight.utils";
 
 export type RockType =
   | "granite"
@@ -246,17 +251,12 @@ export function computeConditions(
   let optimalTime: string | undefined;
 
   if (hourly && hourly.length > 0) {
-    hourlyConditions = computeHourlyConditions(
-      hourly,
-      rockType,
-      recentPrecipitationMm,
-      {
-        includeNightHours: options?.includeNightHours,
-        latitude: weather.latitude,
-        longitude: weather.longitude,
-        maxDailyTemp: weather.maxDailyTemp
-      }
-    );
+    hourlyConditions = computeHourlyConditions(hourly, rockType, recentPrecipitationMm, {
+      includeNightHours: options?.includeNightHours,
+      latitude: weather.latitude,
+      longitude: weather.longitude,
+      maxDailyTemp: weather.maxDailyTemp,
+    });
     optimalWindows = findOptimalWindowsEnhanced(hourlyConditions);
     precipitationContext = calculatePrecipitationContext(hourly);
 
@@ -287,13 +287,9 @@ export function computeConditions(
     warnings.push(`Too warm for ${rockType} (${Math.round(current.temp_c)}°C)`);
     reasons.push("Temperature too high - fingers may slip");
   } else if (tooCold) {
-    if (rockType === "granite" || rockType === "gneiss") {
-      frictionScore += 1;
-      reasons.push(`Cold but good for ${rockType} friction`);
-    } else {
-      frictionScore -= 0.5;
-      warnings.push(`Cold and suboptimal for ${rockType}`);
-    }
+    // Cold is generally good for friction on all rock types
+    frictionScore += 1;
+    reasons.push(`Cold but good for ${rockType} friction`);
   }
 
   // === HUMIDITY ASSESSMENT ===
@@ -446,12 +442,8 @@ function computeHourlyFrictionScore(
     score -= 1.5;
     warnings.push(`Too warm (${Math.round(hour.temp_c)}°C)`);
   } else if (hour.temp_c < optimalTemp.min) {
-    if (rockType === "granite" || rockType === "gneiss") {
-      score += 1;
-    } else {
-      score -= 0.5;
-      warnings.push(`Cold (${Math.round(hour.temp_c)}°C)`);
-    }
+    // Cold is generally good for friction on all rock types
+    score += 1;
   }
 
   // Humidity assessment
@@ -530,10 +522,10 @@ export function computeHourlyConditions(
   rockType: RockType = "unknown",
   recentPrecipMm: number = 0,
   options?: {
-    includeNightHours?: boolean;        // Default false - filter to climbing hours
-    latitude?: number;                   // For daylight calculation
-    longitude?: number;                  // For daylight calculation
-    maxDailyTemp?: number;              // For context detection (alpine starts, etc)
+    includeNightHours?: boolean; // Default false - filter to climbing hours
+    latitude?: number; // For daylight calculation
+    longitude?: number; // For daylight calculation
+    maxDailyTemp?: number; // For context detection (alpine starts, etc)
   }
 ): HourlyCondition[] {
   const allConditions = hourly.map((hour) => {
@@ -568,7 +560,7 @@ export function computeHourlyConditions(
     options.maxDailyTemp || 20,
     options.latitude,
     now.getMonth(),
-    undefined  // No query string here, but could be passed in future
+    undefined // No query string here, but could be passed in future
   );
 
   const climbingHours = getClimbingHours(daylight, context, options.maxDailyTemp);

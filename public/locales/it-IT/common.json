@@ -8,15 +8,15 @@
     "exampleQueries": {
       "query1": {
         "display": "Com'è il grip ad Arco domani?",
-        "query": "Quali condizioni ci saranno ad Arco (45.921, 10.886) domani?"
+        "query": "Quali condizioni ci saranno ad Arco domani?"
       },
       "query2": {
         "display": "Finale Ligure sarà asciutta questo pomeriggio?",
-        "query": "Finale Ligure (44.170, 8.352) sarà asciutta questo pomeriggio?"
+        "query": "Finale Ligure sarà asciutta questo pomeriggio?"
       },
       "query3": {
         "display": "Che meteo è previsto a Sperlonga nel weekend?",
-        "query": "Quali condizioni sono previste a Sperlonga (41.267, 13.433) questo weekend?"
+        "query": "Quali condizioni sono previste a Sperlonga questo weekend?"
       }
     }
   },
@@ -147,6 +147,7 @@
     "close": "Chiudi",
     "detailedConditions": "Condizioni dettagliate",
     "fullAnalysis": "Analisi completa del meteo e delle condizioni di arrampicata",
+    "showMap": "Mappa",
     "tabs": {
       "overview": "Panoramica",
       "hourly": "Ogni ora",

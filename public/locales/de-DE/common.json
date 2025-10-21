@@ -8,15 +8,15 @@
     "exampleQueries": {
       "query1": {
         "display": "Wie wird der Grip im Frankenjura morgen?",
-        "query": "Wie sind die Bedingungen im Frankenjura (49.741, 11.359) morgen?"
+        "query": "Wie sind die Bedingungen im Frankenjura morgen?"
       },
       "query2": {
         "display": "Ist die Sächsische Schweiz heute Nachmittag trocken?",
-        "query": "Ist die Sächsische Schweiz (50.944, 14.236) heute Nachmittag trocken?"
+        "query": "Ist die Sächsische Schweiz heute Nachmittag trocken?"
       },
       "query3": {
         "display": "Wie wird das Wetter in Kochel am Wochenende?",
-        "query": "Wie sind die Bedingungen in Kochel (47.656, 11.368) dieses Wochenende?"
+        "query": "Wie sind die Bedingungen in Kochel dieses Wochenende?"
       }
     }
   },
@@ -147,6 +147,7 @@
     "close": "Schließen",
     "detailedConditions": "Detaillierte Bedingungen",
     "fullAnalysis": "Umfassende Wetter- und Kletteranalyse",
+    "showMap": "Karte",
     "tabs": {
       "overview": "Überblick",
       "hourly": "Stündlich",

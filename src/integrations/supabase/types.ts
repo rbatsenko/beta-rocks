@@ -12,19 +12,19 @@ export type Database = {
         Row: {
           created_at: string | null;
           id: string;
-          report_id: string | null;
+          report_id: string;
           user_key_hash: string;
         };
         Insert: {
           created_at?: string | null;
           id?: string;
-          report_id?: string | null;
+          report_id: string;
           user_key_hash: string;
         };
         Update: {
           created_at?: string | null;
           id?: string;
-          report_id?: string | null;
+          report_id?: string;
           user_key_hash?: string;
         };
         Relationships: [
@@ -40,36 +40,63 @@ export type Database = {
       crags: {
         Row: {
           aspects: number[] | null;
-          country: string;
+          climbing_types: string[] | null;
+          country: string | null;
           created_at: string | null;
+          description: string | null;
           id: string;
+          last_synced_at: string | null;
           lat: number;
           lon: number;
+          municipality: string | null;
           name: string;
+          osm_id: string | null;
+          osm_type: string | null;
           rock_type: string | null;
+          source: string | null;
+          state: string | null;
           updated_at: string | null;
+          village: string | null;
         };
         Insert: {
           aspects?: number[] | null;
-          country: string;
+          climbing_types?: string[] | null;
+          country?: string | null;
           created_at?: string | null;
+          description?: string | null;
           id?: string;
+          last_synced_at?: string | null;
           lat: number;
           lon: number;
+          municipality?: string | null;
           name: string;
+          osm_id?: string | null;
+          osm_type?: string | null;
           rock_type?: string | null;
+          source?: string | null;
+          state?: string | null;
           updated_at?: string | null;
+          village?: string | null;
         };
         Update: {
           aspects?: number[] | null;
-          country?: string;
+          climbing_types?: string[] | null;
+          country?: string | null;
           created_at?: string | null;
+          description?: string | null;
           id?: string;
+          last_synced_at?: string | null;
           lat?: number;
           lon?: number;
+          municipality?: string | null;
           name?: string;
+          osm_id?: string | null;
+          osm_type?: string | null;
           rock_type?: string | null;
+          source?: string | null;
+          state?: string | null;
           updated_at?: string | null;
+          village?: string | null;
         };
         Relationships: [];
       };
@@ -149,27 +176,48 @@ export type Database = {
       };
       routes: {
         Row: {
+          climbing_type: string | null;
           created_at: string | null;
+          description: string | null;
           grade: string | null;
           id: string;
+          last_synced_at: string | null;
           name: string;
-          sector_id: string | null;
+          osm_id: string | null;
+          osm_type: string | null;
+          pitches: number | null;
+          sector_id: string;
+          source: string | null;
           updated_at: string | null;
         };
         Insert: {
+          climbing_type?: string | null;
           created_at?: string | null;
+          description?: string | null;
           grade?: string | null;
           id?: string;
+          last_synced_at?: string | null;
           name: string;
-          sector_id?: string | null;
+          osm_id?: string | null;
+          osm_type?: string | null;
+          pitches?: number | null;
+          sector_id: string;
+          source?: string | null;
           updated_at?: string | null;
         };
         Update: {
+          climbing_type?: string | null;
           created_at?: string | null;
+          description?: string | null;
           grade?: string | null;
           id?: string;
+          last_synced_at?: string | null;
           name?: string;
-          sector_id?: string | null;
+          osm_id?: string | null;
+          osm_type?: string | null;
+          pitches?: number | null;
+          sector_id?: string;
+          source?: string | null;
           updated_at?: string | null;
         };
         Relationships: [
@@ -185,32 +233,47 @@ export type Database = {
       sectors: {
         Row: {
           aspect: number | null;
-          crag_id: string | null;
+          crag_id: string;
           created_at: string | null;
+          description: string | null;
           id: string;
+          last_synced_at: string | null;
           lat: number | null;
           lon: number | null;
           name: string;
+          osm_id: string | null;
+          osm_type: string | null;
+          source: string | null;
           updated_at: string | null;
         };
         Insert: {
           aspect?: number | null;
-          crag_id?: string | null;
+          crag_id: string;
           created_at?: string | null;
+          description?: string | null;
           id?: string;
+          last_synced_at?: string | null;
           lat?: number | null;
           lon?: number | null;
           name: string;
+          osm_id?: string | null;
+          osm_type?: string | null;
+          source?: string | null;
           updated_at?: string | null;
         };
         Update: {
           aspect?: number | null;
-          crag_id?: string | null;
+          crag_id?: string;
           created_at?: string | null;
+          description?: string | null;
           id?: string;
+          last_synced_at?: string | null;
           lat?: number | null;
           lon?: number | null;
           name?: string;
+          osm_id?: string | null;
+          osm_type?: string | null;
+          source?: string | null;
           updated_at?: string | null;
         };
         Relationships: [
@@ -252,7 +315,38 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      gtrgm_compress: {
+        Args: { "": unknown };
+        Returns: unknown;
+      };
+      gtrgm_decompress: {
+        Args: { "": unknown };
+        Returns: unknown;
+      };
+      gtrgm_in: {
+        Args: { "": unknown };
+        Returns: unknown;
+      };
+      gtrgm_options: {
+        Args: { "": unknown };
+        Returns: undefined;
+      };
+      gtrgm_out: {
+        Args: { "": unknown };
+        Returns: unknown;
+      };
+      set_limit: {
+        Args: { "": number };
+        Returns: number;
+      };
+      show_limit: {
+        Args: Record<PropertyKey, never>;
+        Returns: number;
+      };
+      show_trgm: {
+        Args: { "": string };
+        Returns: string[];
+      };
     };
     Enums: {
       [_ in never]: never;
