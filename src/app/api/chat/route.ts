@@ -14,7 +14,11 @@ import {
 import { searchCrags } from "@/lib/db/queries";
 import { resolveLocale } from "@/lib/i18n/config";
 import { getSystemPrompt } from "./prompts";
-import { logChatInteraction, extractMetadataFromToolResults } from "@/lib/observability/chat-logger";
+import {
+  logChatInteraction,
+  extractMetadataFromToolResults,
+  calculateGeminiCost,
+} from "@/lib/observability/chat-logger";
 
 export const maxDuration = 30;
 
@@ -500,8 +504,30 @@ When the user says "tomorrow", they mean the day after ${userTime}.`;
     experimental_transform: smoothStream(),
   });
 
+  // Track token usage across the stream
+  let tokenUsage: {
+    inputTokens?: number;
+    outputTokens?: number;
+    totalTokens?: number;
+    reasoningTokens?: number;
+    cachedInputTokens?: number;
+  } | null = null;
+
   return result.toUIMessageStreamResponse({
     originalMessages: messages,
+    // Capture token usage from finish parts
+    messageMetadata: ({ part }) => {
+      if (part.type === "finish" && part.totalUsage) {
+        tokenUsage = {
+          inputTokens: part.totalUsage.inputTokens,
+          outputTokens: part.totalUsage.outputTokens,
+          totalTokens: part.totalUsage.totalTokens,
+          reasoningTokens: part.totalUsage.reasoningTokens,
+          cachedInputTokens: part.totalUsage.cachedInputTokens,
+        };
+        return { totalUsage: part.totalUsage };
+      }
+    },
     onFinish: async ({ responseMessage }) => {
       console.log("[ChatLogger] onFinish callback triggered");
 
@@ -515,47 +541,59 @@ When the user says "tomorrow", they mean the day after ${userTime}.`;
             : JSON.stringify(lastMessage);
 
       // Extract AI response text and tool data from responseMessage
-      // responseMessage is a UIMessage which may have content as string or array
-      // Type assertion needed as UIMessage generic doesn't expose content property
+      // responseMessage has a 'parts' array with different part types
       const responseData = responseMessage as unknown as {
-        content: string | Array<{ type: string; toolName?: string; input?: unknown; output?: unknown }>;
+        parts?: Array<{
+          type: string;
+          text?: string;
+          toolCallId?: string;
+          input?: unknown;
+          output?: unknown;
+        }>;
       };
-      const aiResponse =
-        typeof responseData.content === "string"
-          ? responseData.content
-          : JSON.stringify(responseData.content);
 
-      // Extract tool calls and results from response message content
+      // Extract tool calls, results, and AI text from parts
       const toolCalls: Array<{ name: string; arguments: unknown }> = [];
       const toolResults: Array<{ toolName: string; result: unknown }> = [];
+      const textParts: string[] = [];
 
-      if (Array.isArray(responseData.content)) {
-        for (const part of responseData.content) {
+      if (Array.isArray(responseData.parts)) {
+        for (const part of responseData.parts) {
           if (typeof part === "object" && part !== null) {
-            if (part.type === "tool-call" && part.toolName) {
+            // Extract tool calls (type starts with "tool-")
+            if (part.type?.startsWith("tool-") && part.type !== "tool-result") {
+              const toolName = part.type.replace("tool-", "");
               toolCalls.push({
-                name: part.toolName,
+                name: toolName,
                 arguments: part.input,
               });
-            } else if (part.type === "tool-result" && part.toolName) {
-              toolResults.push({
-                toolName: part.toolName,
-                result: part.output,
-              });
+
+              // If the tool part has output, it's also a tool result
+              if (part.output !== undefined) {
+                toolResults.push({
+                  toolName: toolName,
+                  result: part.output,
+                });
+              }
+            }
+            // Extract text responses
+            else if (part.type === "text" && part.text) {
+              textParts.push(part.text);
             }
           }
         }
       }
 
-      console.log("[ChatLogger] Extracted data:", {
-        userMessage: userMessage.substring(0, 50),
-        toolCallsCount: toolCalls.length,
-        toolResultsCount: toolResults.length,
-        aiResponseLength: aiResponse.length,
-      });
+      // Combine all text parts into AI response
+      const aiResponse = textParts.length > 0 ? textParts.join("\n") : "";
 
       // Extract metadata from tool results (location, country, etc.)
       const metadata = extractMetadataFromToolResults(toolResults);
+
+      // Calculate cost if we have token usage
+      const estimatedCostUsd = tokenUsage
+        ? calculateGeminiCost(tokenUsage)
+        : undefined;
 
       // Log the interaction (non-blocking)
       await logChatInteraction({
@@ -570,6 +608,13 @@ When the user says "tomorrow", they mean the day after ${userTime}.`;
         locale,
         userAgent: req.headers.get("user-agent") || undefined,
         ...metadata,
+        // Token usage and cost
+        inputTokens: tokenUsage?.inputTokens,
+        outputTokens: tokenUsage?.outputTokens,
+        totalTokens: tokenUsage?.totalTokens,
+        reasoningTokens: tokenUsage?.reasoningTokens,
+        cachedInputTokens: tokenUsage?.cachedInputTokens,
+        estimatedCostUsd,
       }).catch((err) => {
         // Logging errors should not break the response
         console.error("[POST /api/chat] Failed to log interaction:", err);

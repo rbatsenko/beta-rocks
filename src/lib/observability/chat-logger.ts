@@ -37,6 +37,38 @@ interface ChatLogData {
   durationMs?: number;
   userAgent?: string;
   locale?: string;
+  // Token usage
+  inputTokens?: number;
+  outputTokens?: number;
+  totalTokens?: number;
+  reasoningTokens?: number;
+  cachedInputTokens?: number;
+  estimatedCostUsd?: number;
+}
+
+/**
+ * Calculate estimated cost in USD for Gemini 2.5 Flash
+ * Pricing as of Jan 2025:
+ * - Input: $0.075 per 1M tokens ($0.01875 per 1M for prompts under 128K)
+ * - Output: $0.30 per 1M tokens
+ * - Cached input: 50% discount
+ * @see https://ai.google.dev/pricing
+ */
+export function calculateGeminiCost(usage: {
+  inputTokens?: number;
+  outputTokens?: number;
+  cachedInputTokens?: number;
+}): number {
+  const INPUT_PRICE_PER_MILLION = 0.075; // $0.075 per 1M tokens
+  const OUTPUT_PRICE_PER_MILLION = 0.3; // $0.30 per 1M tokens
+  const CACHE_DISCOUNT = 0.5; // 50% discount for cached tokens
+
+  const inputCost = ((usage.inputTokens || 0) / 1_000_000) * INPUT_PRICE_PER_MILLION;
+  const outputCost = ((usage.outputTokens || 0) / 1_000_000) * OUTPUT_PRICE_PER_MILLION;
+  const cachedCost =
+    ((usage.cachedInputTokens || 0) / 1_000_000) * INPUT_PRICE_PER_MILLION * CACHE_DISCOUNT;
+
+  return inputCost + outputCost + cachedCost;
 }
 
 /**
@@ -67,6 +99,13 @@ export async function logChatInteraction(data: ChatLogData): Promise<void> {
       duration_ms: data.durationMs,
       user_agent: data.userAgent,
       locale: data.locale,
+      // Token usage
+      input_tokens: data.inputTokens,
+      output_tokens: data.outputTokens,
+      total_tokens: data.totalTokens,
+      reasoning_tokens: data.reasoningTokens,
+      cached_input_tokens: data.cachedInputTokens,
+      estimated_cost_usd: data.estimatedCostUsd,
     });
 
     if (error) {
