@@ -498,8 +498,14 @@ When the user says "tomorrow", they mean the day after ${userTime}.`;
     stopWhen: stepCountIs(3),
     // Add smooth streaming for better UX - streams each word individually
     experimental_transform: smoothStream(),
-    onFinish: async ({ text, response }) => {
-      // Extract user message from the last message
+  });
+
+  return result.toUIMessageStreamResponse({
+    originalMessages: messages,
+    onFinish: async ({ responseMessage }) => {
+      console.log("[ChatLogger] onFinish callback triggered");
+
+      // Extract user message from the last original message
       const lastMessage = messages[messages.length - 1];
       const userMessage =
         typeof lastMessage === "string"
@@ -508,15 +514,21 @@ When the user says "tomorrow", they mean the day after ${userTime}.`;
             ? String(lastMessage.content)
             : JSON.stringify(lastMessage);
 
-      // Extract tool calls and results from response messages
-      const assistantMessages = response.messages.filter((m) => m.role === "assistant");
+      // Extract AI response text and tool data from responseMessage
+      // responseMessage is a UIMessage which may have content as string or array
+      const responseData = responseMessage as any;
+      const aiResponse =
+        typeof responseData.content === "string"
+          ? responseData.content
+          : JSON.stringify(responseData.content);
+
+      // Extract tool calls and results from response message content
       const toolCalls: Array<{ name: string; arguments: unknown }> = [];
       const toolResults: Array<{ toolName: string; result: unknown }> = [];
 
-      // Parse tool calls from assistant messages
-      for (const msg of assistantMessages) {
-        if (msg.content && Array.isArray(msg.content)) {
-          for (const part of msg.content) {
+      if (Array.isArray(responseData.content)) {
+        for (const part of responseData.content) {
+          if (typeof part === "object" && part !== null) {
             if (part.type === "tool-call") {
               toolCalls.push({
                 name: part.toolName,
@@ -532,6 +544,13 @@ When the user says "tomorrow", they mean the day after ${userTime}.`;
         }
       }
 
+      console.log("[ChatLogger] Extracted data:", {
+        userMessage: userMessage.substring(0, 50),
+        toolCallsCount: toolCalls.length,
+        toolResultsCount: toolResults.length,
+        aiResponseLength: aiResponse.length,
+      });
+
       // Extract metadata from tool results (location, country, etc.)
       const metadata = extractMetadataFromToolResults(toolResults);
 
@@ -544,7 +563,7 @@ When the user says "tomorrow", they mean the day after ${userTime}.`;
           toolResults.length > 0
             ? toolResults.map((r) => ({ name: r.toolName, result: r.result }))
             : undefined,
-        aiResponse: text,
+        aiResponse,
         locale,
         userAgent: req.headers.get("user-agent") || undefined,
         ...metadata,
@@ -552,8 +571,8 @@ When the user says "tomorrow", they mean the day after ${userTime}.`;
         // Logging errors should not break the response
         console.error("[POST /api/chat] Failed to log interaction:", err);
       });
+
+      console.log("[ChatLogger] Logging complete");
     },
   });
-
-  return result.toUIMessageStreamResponse({ originalMessages: messages });
 }
