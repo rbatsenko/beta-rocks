@@ -7,16 +7,16 @@
     "description": "Získajte aktuálne počasie, analýzu trenia a optimálne okná na lezenie na ktorejkoľvek skale po celom svete",
     "exampleQueries": {
       "query1": {
-        "display": "Aké sú podmienky v Little Cottonwood Canyon zajtra?",
-        "query": "Little Cottonwood Canyon conditions tomorrow?"
+        "display": "Aké sú podmienky v Súľovských skalách zajtra?",
+        "query": "Aké sú podmienky v Súľovských skalách zajtra?"
       },
       "query2": {
-        "display": "Je Rifle dnes popoludní suché?",
-        "query": "Is Rifle dry this afternoon?"
+        "display": "Je Strečno dnes popoludní suché?",
+        "query": "Je Strečno dnes popoludní suché?"
       },
       "query3": {
-        "display": "Aké sú podmienky na El Capitan dnes?",
-        "query": "El Capitan conditions today?"
+        "display": "Ako je na tom Slovenský raj?",
+        "query": "Ako je na tom Slovenský raj?"
       }
     }
   },
