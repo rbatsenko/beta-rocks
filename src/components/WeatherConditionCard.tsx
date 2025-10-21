@@ -49,15 +49,41 @@ interface PrefetchedFullData {
     isDry: boolean;
     reasons?: string[];
     warnings?: string[];
-    hourlyConditions?: unknown[];
-    optimalWindows?: unknown[];
+    hourlyConditions?: Array<{
+      time: string;
+      temp_c: number;
+      humidity: number;
+      wind_kph: number;
+      precip_mm: number;
+      frictionScore: number;
+      rating: string;
+      isDry: boolean;
+      warnings: string[];
+      weatherCode?: number;
+    }>;
+    optimalWindows?: Array<{
+      startTime: string;
+      endTime: string;
+      avgFrictionScore: number;
+      rating: string;
+      hourCount: number;
+    }>;
     precipitationContext?: {
       last24h: number;
       last48h: number;
       next24h: number;
     };
     dewPointSpread?: number;
-    dailyForecast?: unknown[];
+    dailyForecast?: Array<{
+      date: string;
+      tempMax: number;
+      tempMin: number;
+      precipitation: number;
+      windSpeedMax: number;
+      sunrise: string;
+      sunset: string;
+      weatherCode: number;
+    }>;
   };
   astro?: {
     sunrise: string;
