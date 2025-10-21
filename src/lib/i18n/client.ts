@@ -7,6 +7,8 @@ import enCommon from "../../../public/locales/en/common.json";
 import enGBCommon from "../../../public/locales/en-GB/common.json";
 import plCommon from "../../../public/locales/pl/common.json";
 import ukCommon from "../../../public/locales/uk/common.json";
+import csCZCommon from "../../../public/locales/cs-CZ/common.json";
+import skSKCommon from "../../../public/locales/sk-SK/common.json";
 import esESCommon from "../../../public/locales/es-ES/common.json";
 import frFRCommon from "../../../public/locales/fr-FR/common.json";
 import itITCommon from "../../../public/locales/it-IT/common.json";
@@ -28,6 +30,12 @@ const resources = {
   },
   uk: {
     common: ukCommon,
+  },
+  "cs-CZ": {
+    common: csCZCommon,
+  },
+  "sk-SK": {
+    common: skSKCommon,
   },
   "es-ES": {
     common: esESCommon,
@@ -84,6 +92,12 @@ const getPreferredLanguage = (): Locale | null => {
   }
   if (detectedCountry === "UA") {
     return "uk";
+  }
+  if (detectedCountry === "CZ") {
+    return "cs-CZ";
+  }
+  if (detectedCountry === "SK") {
+    return "sk-SK";
   }
   if (detectedCountry === "ES") {
     return "es-ES";
