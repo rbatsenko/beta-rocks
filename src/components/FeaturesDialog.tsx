@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import {
   Dialog,
   DialogContent,
@@ -20,6 +21,7 @@ interface FeaturesDialogProps {
 
 export function FeaturesDialog({ open, onOpenChange }: FeaturesDialogProps) {
   const { t } = useClientTranslation("common");
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   const features = [
     {
@@ -56,13 +58,19 @@ export function FeaturesDialog({ open, onOpenChange }: FeaturesDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-4xl max-h-[90vh]">
+      <DialogContent
+        className="max-w-4xl max-h-[90vh]"
+        onOpenAutoFocus={(e) => {
+          e.preventDefault();
+          scrollAreaRef.current?.focus();
+        }}
+      >
         <DialogHeader>
           <DialogTitle className="text-2xl">{t("features.heading")}</DialogTitle>
           <DialogDescription>{t("features.subheading")}</DialogDescription>
         </DialogHeader>
 
-        <ScrollArea className="h-[calc(90vh-180px)] pr-4">
+        <ScrollArea ref={scrollAreaRef} className="h-[calc(90vh-180px)] pr-4" tabIndex={-1}>
           <div className="grid md:grid-cols-2 gap-4 pb-4">
             {features.map((feature, idx) => {
               const Icon = feature.icon;
