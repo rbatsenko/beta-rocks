@@ -2,6 +2,10 @@
  * Country Enrichment Script
  * Reverse geocode all crags to populate country, state, and municipality
  *
+ * Prerequisites:
+ *   - SUPABASE_SECRET_KEY must be set in .env.local (secret key from dashboard)
+ *   - NEXT_PUBLIC_SUPABASE_URL must be set in .env.local
+ *
  * Usage:
  *   npx tsx scripts/enrich-countries.ts [--limit=100] [--dry-run]
  */
@@ -15,17 +19,24 @@ const limitArg = args.find((arg) => arg.startsWith("--limit="));
 const limit = limitArg ? parseInt(limitArg.split("=")[1]) : undefined;
 const dryRun = args.includes("--dry-run");
 
-// Initialize Supabase client
+// Initialize Supabase client with service role secret for admin operations
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+const supabaseKey = process.env.SUPABASE_SECRET_KEY;
 
 if (!supabaseUrl || !supabaseKey) {
   console.error("ERROR: Missing Supabase environment variables");
-  console.error("Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY");
+  console.error("Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SECRET_KEY");
+  console.error("The service_role secret is required for admin operations (bypasses RLS)");
   process.exit(1);
 }
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabase = createClient(supabaseUrl, supabaseKey, {
+  auth: {
+    persistSession: false,
+    autoRefreshToken: false,
+    detectSessionInUrl: false,
+  },
+});
 
 type Crag = {
   id: string;
@@ -111,13 +122,21 @@ async function updateCrag(
     return true;
   }
 
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("crags")
     .update({ country, state, municipality, village })
-    .eq("id", id);
+    .eq("id", id)
+    .select();
 
   if (error) {
     console.error(`[DB Error] Failed to update ${id}:`, error);
+    console.error(`  Error details:`, JSON.stringify(error, null, 2));
+    return false;
+  }
+
+  // Verify the update actually worked
+  if (!data || data.length === 0) {
+    console.error(`[DB Error] Update returned no data for ${id}`);
     return false;
   }
 
@@ -134,6 +153,21 @@ async function main() {
   console.log(`  Dry run: ${dryRun ? "Yes" : "No"}`);
   console.log(`  Rate limit: 1 request/second (Nominatim policy)`);
   console.log();
+
+  // Verify database connection and permissions
+  console.log("[0/3] Verifying database permissions...");
+  const { error: testError } = await supabase
+    .from("crags")
+    .select("id, country")
+    .limit(1);
+
+  if (testError) {
+    console.error("[Error] Failed to connect to database:", testError);
+    console.error("Make sure SUPABASE_SECRET_KEY is set correctly in .env.local");
+    process.exit(1);
+  }
+
+  console.log("[✓] Database connection successful\n");
 
   // Fetch crags without country
   console.log("[1/3] Fetching crags without country data...");

@@ -34,6 +34,9 @@ Create a `.env.local` file in the project root:
 NEXT_PUBLIC_SUPABASE_URL=https://vbqnfvgvxlnlfabuqlzi.supabase.co
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=<your-key>
 GOOGLE_GENERATIVE_AI_API_KEY=<your-google-api-key>
+
+# Optional: Only required for admin scripts (e.g., enrich-countries.ts)
+# SUPABASE_SECRET_KEY=<your-service-role-secret>
 ```
 
 ## What technologies are used?

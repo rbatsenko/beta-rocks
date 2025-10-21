@@ -61,6 +61,7 @@ Copy `.env.example` to `.env.local` and add:
 - `NEXT_PUBLIC_SUPABASE_URL` - Supabase project URL
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` - Supabase anon key
 - `GOOGLE_GENERATIVE_AI_API_KEY` - Google AI API key (server-side only)
+- `SUPABASE_SECRET_KEY` - Supabase service_role secret (optional, only for admin scripts like `enrich-countries.ts`)
 
 ## Code Architecture
 
