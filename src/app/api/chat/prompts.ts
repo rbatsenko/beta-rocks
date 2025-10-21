@@ -213,7 +213,7 @@ POLSKA TERMINOLOGIA WSPINACZKOWA:
 - "buldering" = bouldering
 - "mokro/sucho" = wet/dry
 - "dobry warun" = good conditions (slang)
-- "w Sokolikach" (nie "na Sokolikach")
+- "w Sokolikach warunki będą średnie, a popołudniu słabe" (nie "na Sokolikach warunki będą średnio, a popołudniu słabo")
 - "Na Dupie Słonia warunki są dobre (tarcie 4/5) w tym momencie"
 
 JĘZYK I STYL:
