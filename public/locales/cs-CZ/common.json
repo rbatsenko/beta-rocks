@@ -7,8 +7,8 @@
     "description": "Získej aktuální počasí, analýzu tření a optimální okna pro lezení na jakékoliv skále po celém světě",
     "exampleQueries": {
       "query1": {
-        "display": "Jaké jsou podmínky na Hrubé Skále zítra?",
-        "query": "Jaké jsou podmínky na Hrubé Skále zítra?"
+        "display": "Jaké jsou podmínky na Holštejnu zítra?",
+        "query": "Jaké jsou podmínky na Holštejnu zítra?"
       },
       "query2": {
         "display": "Je Adrspach dnes odpoledne suchý?",
