@@ -114,18 +114,18 @@ export const ConditionsDetailSheet = memo(function ConditionsDetailSheet({
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="right" className="w-full sm:max-w-3xl overflow-hidden p-0 flex flex-col">
-        <SheetHeader className="px-6 pt-6 pb-4 border-b shrink-0">
-          <SheetTitle className="text-xl font-semibold">
-            <div className="flex items-center gap-2">
-              <ThermometerSun className="w-5 h-5" />
-              {t("dialog.detailedConditions")}: {data.location}
+        <SheetHeader className="px-4 sm:px-6 pt-3 sm:pt-6 pb-2 sm:pb-4 pr-12 border-b shrink-0">
+          <SheetTitle className="text-lg sm:text-xl font-semibold">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <ThermometerSun className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+              <span className="truncate">{t("dialog.detailedConditions")}: {data.location}</span>
             </div>
           </SheetTitle>
-          <SheetDescription className="flex flex-col gap-2">
-            <span>{t("dialog.fullAnalysis")}</span>
-            <span className="flex items-center gap-2">
+          <SheetDescription className="flex flex-col gap-1 sm:gap-2">
+            <span className="hidden sm:inline">{t("dialog.fullAnalysis")}</span>
+            <span className="flex items-center gap-1.5 sm:gap-2">
               {(locationText || countryFlag) && (
-                <span className="text-sm text-muted-foreground flex-1">
+                <span className="text-xs sm:text-sm text-muted-foreground flex-1 truncate">
                   📍 {locationText}
                   {locationText && countryFlag && ", "}
                   {countryFlag} {data.country}
@@ -141,7 +141,7 @@ export const ConditionsDetailSheet = memo(function ConditionsDetailSheet({
             </span>
           </SheetDescription>
         </SheetHeader>
-        <div className="flex-1 overflow-hidden px-6 py-4">
+        <div className="flex-1 overflow-hidden px-4 sm:px-6 py-3 sm:py-4">
           <ConditionsDetailContent variant="sheet" data={data} />
         </div>
       </SheetContent>
