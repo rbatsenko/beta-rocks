@@ -19,6 +19,7 @@ import {
   extractMetadataFromToolResults,
   calculateGeminiCost,
 } from "@/lib/observability/chat-logger";
+import { createClient } from "@supabase/supabase-js";
 
 export const maxDuration = 30;
 
@@ -289,6 +290,103 @@ const tools = {
               location,
             };
           }
+        }
+      }
+
+      // STEP 4: If we have coordinates but missing metadata, try reverse lookup in local DB
+      if (lat && lon && (!country || !detectedRockType || detectedRockType === "unknown")) {
+        try {
+          console.log("[get_conditions] Enriching location data via reverse lookup:", {
+            lat,
+            lon,
+          });
+
+          // Create server-side Supabase client for coordinate-based search
+          const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+          const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+
+          if (supabaseUrl && supabaseKey) {
+            const supabase = createClient(supabaseUrl, supabaseKey);
+
+            // Use PostGIS to find crags within 1km radius (0.01 degrees ≈ 1.1km)
+            const { data: nearbyCreags, error: geoError } = await supabase.rpc(
+              "find_nearby_crags",
+              {
+                search_lat: lat,
+                search_lon: lon,
+                radius_degrees: 0.01,
+              }
+            );
+
+            if (geoError) {
+              console.log("[get_conditions] PostGIS function not available, using simple query");
+              // Fallback to simple bounding box query
+              const latRange = 0.01; // ~1km
+              const lonRange = 0.01;
+              const { data: fallbackCreags } = await supabase
+                .from("crags")
+                .select("*")
+                .gte("lat", (lat - latRange).toString())
+                .lte("lat", (lat + latRange).toString())
+                .gte("lon", (lon - lonRange).toString())
+                .lte("lon", (lon + lonRange).toString())
+                .limit(5);
+
+              if (fallbackCreags && fallbackCreags.length > 0) {
+                const closestCrag = fallbackCreags[0];
+                enrichMetadata(closestCrag);
+              }
+            } else if (nearbyCreags && nearbyCreags.length > 0) {
+              console.log("[get_conditions] Reverse lookup results:", {
+                count: nearbyCreags.length,
+              });
+              const closestCrag = nearbyCreags[0];
+              enrichMetadata(closestCrag);
+            }
+          }
+
+          // Helper function to enrich metadata from a crag record
+          function enrichMetadata(crag: {
+            country?: string | null;
+            state?: string | null;
+            municipality?: string | null;
+            village?: string | null;
+            rock_type?: string | null;
+          }) {
+            // Only update if we don't have these values yet
+            if (!country && crag.country) country = crag.country;
+            if (!state && crag.state) state = crag.state;
+            if (!municipality && crag.municipality) municipality = crag.municipality;
+            if (!village && crag.village) village = crag.village;
+
+            if ((!detectedRockType || detectedRockType === "unknown") && crag.rock_type) {
+              detectedRockType = crag.rock_type as RockType;
+            }
+
+            // Build locationDetails if we don't have it yet
+            if (!locationDetails) {
+              const locationParts = [];
+              if (village) locationParts.push(village);
+              if (municipality && municipality !== village) locationParts.push(municipality);
+              if (state) locationParts.push(state);
+              if (country) locationParts.push(country);
+              locationDetails = locationParts.join(", ");
+            }
+
+            console.log("[get_conditions] Enriched with reverse lookup:", {
+              country,
+              state,
+              municipality,
+              village,
+              rockType: detectedRockType,
+              locationDetails,
+            });
+          }
+        } catch (error) {
+          console.log("[get_conditions] Reverse lookup failed (non-critical):", {
+            error: error instanceof Error ? error.message : String(error),
+          });
+          // Non-critical - continue without enrichment
         }
       }
 
