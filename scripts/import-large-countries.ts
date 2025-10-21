@@ -46,6 +46,10 @@ const COUNTRY_GRIDS: Record<string, { minLat: number; maxLat: number; minLon: nu
   SE: { minLat: 55, maxLat: 69, minLon: 11, maxLon: 24, gridSize: 3 },
   // Bosnia and Herzegovina - split into ~2-degree chunks
   BA: { minLat: 43, maxLat: 46, minLon: 15, maxLon: 20, gridSize: 2 },
+  // Australia - split into ~3-degree chunks (very large country)
+  AU: { minLat: -44, maxLat: -10, minLon: 113, maxLon: 154, gridSize: 3 },
+  // Canada - split into ~3-degree chunks (very large country)
+  CA: { minLat: 42, maxLat: 70, minLon: -141, maxLon: -52, gridSize: 3 },
 };
 
 // Initialize Supabase client
