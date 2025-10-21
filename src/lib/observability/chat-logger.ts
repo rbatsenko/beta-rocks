@@ -48,10 +48,10 @@ interface ChatLogData {
 
 /**
  * Calculate estimated cost in USD for Gemini 2.5 Flash
- * Pricing as of Jan 2025:
- * - Input: $0.075 per 1M tokens ($0.01875 per 1M for prompts under 128K)
- * - Output: $0.30 per 1M tokens
- * - Cached input: 50% discount
+ * Pricing as of Jan 2025 (Paid Tier):
+ * - Input: $0.30 per 1M tokens
+ * - Output: $2.50 per 1M tokens
+ * - Context caching: $0.03 per 1M tokens
  * @see https://ai.google.dev/pricing
  */
 export function calculateGeminiCost(usage: {
@@ -59,14 +59,13 @@ export function calculateGeminiCost(usage: {
   outputTokens?: number;
   cachedInputTokens?: number;
 }): number {
-  const INPUT_PRICE_PER_MILLION = 0.075; // $0.075 per 1M tokens
-  const OUTPUT_PRICE_PER_MILLION = 0.3; // $0.30 per 1M tokens
-  const CACHE_DISCOUNT = 0.5; // 50% discount for cached tokens
+  const INPUT_PRICE_PER_MILLION = 0.3; // $0.30 per 1M tokens
+  const OUTPUT_PRICE_PER_MILLION = 2.5; // $2.50 per 1M tokens
+  const CACHE_PRICE_PER_MILLION = 0.03; // $0.03 per 1M tokens
 
   const inputCost = ((usage.inputTokens || 0) / 1_000_000) * INPUT_PRICE_PER_MILLION;
   const outputCost = ((usage.outputTokens || 0) / 1_000_000) * OUTPUT_PRICE_PER_MILLION;
-  const cachedCost =
-    ((usage.cachedInputTokens || 0) / 1_000_000) * INPUT_PRICE_PER_MILLION * CACHE_DISCOUNT;
+  const cachedCost = ((usage.cachedInputTokens || 0) / 1_000_000) * CACHE_PRICE_PER_MILLION;
 
   return inputCost + outputCost + cachedCost;
 }
