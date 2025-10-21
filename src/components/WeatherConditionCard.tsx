@@ -33,6 +33,39 @@ interface ConditionsData {
   optimalWindows?: unknown[];
 }
 
+interface PrefetchedFullData {
+  location: { lat: number; lon: number };
+  rockType: string;
+  current: {
+    temperature_c: number;
+    humidity: number;
+    windSpeed_kph: number;
+    precipitation_mm: number;
+    weatherCode: number;
+  };
+  conditions: {
+    rating: string;
+    frictionRating: number;
+    isDry: boolean;
+    reasons?: string[];
+    warnings?: string[];
+    hourlyConditions?: unknown[];
+    optimalWindows?: unknown[];
+    precipitationContext?: {
+      last24h: number;
+      last48h: number;
+      next24h: number;
+    };
+    dewPointSpread?: number;
+    dailyForecast?: unknown[];
+  };
+  astro?: {
+    sunrise: string;
+    sunset: string;
+  };
+  updatedAt: string;
+}
+
 interface WeatherConditionCardProps {
   data: ConditionsData;
   translateWeather: (description: string) => string;
@@ -41,7 +74,7 @@ interface WeatherConditionCardProps {
   translateReason: (reason: string) => string;
   onDetailsClick: () => void;
   onSheetClick?: () => void;
-  onFullDataFetched?: (fullData: any) => void; // Callback when full 14-day data is prefetched
+  onFullDataFetched?: (fullData: PrefetchedFullData) => void; // Callback when full 14-day data is prefetched
   conditionsLabel: string;
   detailsLabel: string;
 }

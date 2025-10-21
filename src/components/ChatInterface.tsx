@@ -103,6 +103,39 @@ interface ConditionsData {
   }>;
 }
 
+interface PrefetchedFullData {
+  location: { lat: number; lon: number };
+  rockType: string;
+  current: {
+    temperature_c: number;
+    humidity: number;
+    windSpeed_kph: number;
+    precipitation_mm: number;
+    weatherCode: number;
+  };
+  conditions: {
+    rating: string;
+    frictionRating: number;
+    isDry: boolean;
+    reasons?: string[];
+    warnings?: string[];
+    hourlyConditions?: unknown[];
+    optimalWindows?: unknown[];
+    precipitationContext?: {
+      last24h: number;
+      last48h: number;
+      next24h: number;
+    };
+    dewPointSpread?: number;
+    dailyForecast?: unknown[];
+  };
+  astro?: {
+    sunrise: string;
+    sunset: string;
+  };
+  updatedAt: string;
+}
+
 interface DisambiguationResult {
   disambiguate: true;
   message: string;
@@ -132,7 +165,9 @@ const ChatInterface = () => {
   const [featuresDialogOpen, setFeaturesDialogOpen] = useState(false);
   const [scrollSignal, setScrollSignal] = useState(0);
   // Store prefetched full 14-day data keyed by location coordinates
-  const [prefetchedDataMap, setPrefetchedDataMap] = useState<Map<string, any>>(new Map());
+  const [prefetchedDataMap, setPrefetchedDataMap] = useState<Map<string, PrefetchedFullData>>(
+    new Map()
+  );
 
   // Get translation functions (memoized)
   const translations = useConditionsTranslations(t);
@@ -221,7 +256,7 @@ const ChatInterface = () => {
   );
 
   // Handle prefetched full data from WeatherConditionCard
-  const handleFullDataFetched = useCallback((fullData: any) => {
+  const handleFullDataFetched = useCallback((fullData: PrefetchedFullData) => {
     if (fullData?.location?.lat && fullData?.location?.lon) {
       const key = `${fullData.location.lat},${fullData.location.lon}`;
       setPrefetchedDataMap((prev) => new Map(prev).set(key, fullData));
