@@ -7,16 +7,16 @@
     "description": "Získej aktuální počasí, analýzu tření a optimální okna pro lezení na jakékoliv skále po celém světě",
     "exampleQueries": {
       "query1": {
-        "display": "Jaké jsou podmínky v Little Cottonwood Canyon zítra?",
-        "query": "Little Cottonwood Canyon conditions tomorrow?"
+        "display": "Jaké jsou podmínky na Holštejnu zítra?",
+        "query": "Jaké jsou podmínky na Holštejnu zítra?"
       },
       "query2": {
-        "display": "Je Rifle dnes odpoledne suché?",
-        "query": "Is Rifle dry this afternoon?"
+        "display": "Je Adrspach dnes odpoledne suchý?",
+        "query": "Je Adrspach dnes odpoledne suchý?"
       },
       "query3": {
-        "display": "Jaké jsou podmínky na El Capitan dnes?",
-        "query": "El Capitan conditions today?"
+        "display": "Jak to vypadá v Labských pískovcích?",
+        "query": "Jak to vypadá v Labských pískovcích?"
       }
     }
   },

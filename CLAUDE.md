@@ -13,7 +13,7 @@ temps.rocks is a free, chat-first web app that helps climbers check real-time co
 - Tailwind CSS + shadcn/ui components
 - Supabase (PostgreSQL database)
 - Vercel AI SDK (streaming chat with tools)
-- i18next for internationalization (12 locales)
+- i18next for internationalization (17 locales)
 - OpenBeta GraphQL API (climbing database)
 - Open-Meteo API (weather data)
 
@@ -150,11 +150,12 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
 
 ### Internationalization (i18n)
 
-- 12 supported locales defined in `src/lib/i18n/config.ts`
+- 17 supported locales defined in `src/lib/i18n/config.ts`
 - Translation files in `public/locales/{locale}/common.json`
 - Client-side: `useClientTranslation` hook for React components
 - Server-side: `resolveLocale()` for API routes
 - Locale detection via browser headers, stored in cookies via middleware
+- Special multilingual handling for Switzerland (de-CH, fr-CH, it-CH) based on browser language preference
 
 **Adding Translations**:
 
