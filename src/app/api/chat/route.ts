@@ -14,6 +14,7 @@ import {
 import { searchCrags } from "@/lib/db/queries";
 import { resolveLocale } from "@/lib/i18n/config";
 import { getSystemPrompt } from "./prompts";
+import { logChatInteraction, extractMetadataFromToolResults } from "@/lib/observability/chat-logger";
 
 export const maxDuration = 30;
 
@@ -497,6 +498,61 @@ When the user says "tomorrow", they mean the day after ${userTime}.`;
     stopWhen: stepCountIs(3),
     // Add smooth streaming for better UX - streams each word individually
     experimental_transform: smoothStream(),
+    onFinish: async ({ text, response }) => {
+      // Extract user message from the last message
+      const lastMessage = messages[messages.length - 1];
+      const userMessage =
+        typeof lastMessage === "string"
+          ? lastMessage
+          : typeof lastMessage === "object" && "content" in lastMessage
+            ? String(lastMessage.content)
+            : JSON.stringify(lastMessage);
+
+      // Extract tool calls and results from response messages
+      const assistantMessages = response.messages.filter((m) => m.role === "assistant");
+      const toolCalls: Array<{ name: string; arguments: unknown }> = [];
+      const toolResults: Array<{ toolName: string; result: unknown }> = [];
+
+      // Parse tool calls from assistant messages
+      for (const msg of assistantMessages) {
+        if (msg.content && Array.isArray(msg.content)) {
+          for (const part of msg.content) {
+            if (part.type === "tool-call") {
+              toolCalls.push({
+                name: part.toolName,
+                arguments: part.input,
+              });
+            } else if (part.type === "tool-result") {
+              toolResults.push({
+                toolName: part.toolName,
+                result: part.output,
+              });
+            }
+          }
+        }
+      }
+
+      // Extract metadata from tool results (location, country, etc.)
+      const metadata = extractMetadataFromToolResults(toolResults);
+
+      // Log the interaction (non-blocking)
+      await logChatInteraction({
+        sessionId: req.headers.get("x-session-id") || `anonymous-${Date.now()}`,
+        userMessage,
+        toolCalls: toolCalls.length > 0 ? toolCalls : undefined,
+        toolResults:
+          toolResults.length > 0
+            ? toolResults.map((r) => ({ name: r.toolName, result: r.result }))
+            : undefined,
+        aiResponse: text,
+        locale,
+        userAgent: req.headers.get("user-agent") || undefined,
+        ...metadata,
+      }).catch((err) => {
+        // Logging errors should not break the response
+        console.error("[POST /api/chat] Failed to log interaction:", err);
+      });
+    },
   });
 
   return result.toUIMessageStreamResponse({ originalMessages: messages });
