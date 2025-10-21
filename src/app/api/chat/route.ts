@@ -501,9 +501,9 @@ const tools = {
           isDry: conditions.isDry,
           dryingTimeHours: conditions.dryingTimeHours,
           optimalWindows: conditions.optimalWindows,
-          // IMPORTANT: Only send 48h of hourly data to AI to reduce token costs (~87% reduction)
-          // Users typically check short-term weather, full 14-day is available in dailyForecast
-          hourlyConditions: conditions.hourlyConditions?.slice(0, 48),
+          // Return full hourly conditions (UI needs this for details view)
+          // TODO: Optimize by having UI fetch full data from /api/conditions to reduce AI tokens
+          hourlyConditions: conditions.hourlyConditions,
           precipitationContext: conditions.precipitationContext,
           dewPointSpread: conditions.dewPointSpread,
           optimalTime: conditions.optimalTime,

@@ -43,8 +43,8 @@ export async function GET(request: NextRequest) {
 
     console.log("[Conditions API] Fetching weather forecast for:", { latitude, longitude });
 
-    // Fetch weather data
-    const forecast = await getWeatherForecast(latitude, longitude, 7);
+    // Fetch weather data (14 days for full forecast)
+    const forecast = await getWeatherForecast(latitude, longitude, 14);
 
     console.log("[Conditions API] Weather forecast received:", {
       latitude,
