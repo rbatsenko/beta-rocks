@@ -5,6 +5,7 @@ export const i18nConfig = {
     "pl",
     "uk",
     "cs-CZ",
+    "sk-SK",
     "es-ES",
     "fr-FR",
     "it-IT",

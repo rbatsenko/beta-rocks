@@ -17,6 +17,7 @@ const languageConfig: Record<Locale, { name: string; flag: string }> = {
   pl: { name: "Polski", flag: "🇵🇱" },
   uk: { name: "Українська", flag: "🇺🇦" },
   "cs-CZ": { name: "Čeština", flag: "🇨🇿" },
+  "sk-SK": { name: "Slovenčina", flag: "🇸🇰" },
   "es-ES": { name: "Español (España)", flag: "🇪🇸" },
   "fr-FR": { name: "Français", flag: "🇫🇷" },
   "it-IT": { name: "Italiano", flag: "🇮🇹" },
