@@ -47,6 +47,13 @@ interface ConditionsData {
   warnings?: string[];
   isDry: boolean;
   dryingTimeHours?: number;
+  latitude?: number;
+  longitude?: number;
+  country?: string;
+  state?: string;
+  municipality?: string;
+  village?: string;
+  rockType?: string;
   current?: {
     temperature_c: number;
     humidity: number;
@@ -124,6 +131,8 @@ const ChatInterface = () => {
   const [selectedConditions, setSelectedConditions] = useState<ConditionsData | null>(null);
   const [featuresDialogOpen, setFeaturesDialogOpen] = useState(false);
   const [scrollSignal, setScrollSignal] = useState(0);
+  // Store prefetched full 14-day data keyed by location coordinates
+  const [prefetchedDataMap, setPrefetchedDataMap] = useState<Map<string, any>>(new Map());
 
   // Get translation functions (memoized)
   const translations = useConditionsTranslations(t);
@@ -210,6 +219,15 @@ const ChatInterface = () => {
     },
     [language, sendMessage]
   );
+
+  // Handle prefetched full data from WeatherConditionCard
+  const handleFullDataFetched = useCallback((fullData: any) => {
+    if (fullData?.location?.lat && fullData?.location?.lon) {
+      const key = `${fullData.location.lat},${fullData.location.lon}`;
+      setPrefetchedDataMap((prev) => new Map(prev).set(key, fullData));
+      console.log("[ChatInterface] Stored prefetched data for", key);
+    }
+  }, []);
 
   // Render log for profiling
   logRender("ChatInterface", {
@@ -412,6 +430,27 @@ const ChatInterface = () => {
 
                             // Handle regular conditions results
                             const conditionsResult = result as ConditionsData;
+
+                            // Helper to merge prefetched full data with minimal chat data
+                            const getMergedConditions = () => {
+                              if (conditionsResult.latitude && conditionsResult.longitude) {
+                                const key = `${conditionsResult.latitude},${conditionsResult.longitude}`;
+                                const prefetchedData = prefetchedDataMap.get(key);
+
+                                if (prefetchedData?.conditions) {
+                                  console.log("[ChatInterface] Using prefetched full data for", key);
+                                  // Merge prefetched full conditions with the base result
+                                  return {
+                                    ...conditionsResult,
+                                    hourlyConditions: prefetchedData.conditions.hourlyConditions,
+                                    optimalWindows: prefetchedData.conditions.optimalWindows,
+                                    dailyForecast: prefetchedData.conditions.dailyForecast,
+                                  };
+                                }
+                              }
+                              return conditionsResult;
+                            };
+
                             return (
                               <WeatherConditionCard
                                 key={i}
@@ -421,13 +460,14 @@ const ChatInterface = () => {
                                 translateWarning={translations.translateWarning}
                                 translateReason={translations.translateReason}
                                 onDetailsClick={() => {
-                                  setSelectedConditions(conditionsResult);
+                                  setSelectedConditions(getMergedConditions());
                                   setDetailsDialogOpen(true);
                                 }}
                                 onSheetClick={() => {
-                                  setSelectedConditions(conditionsResult);
+                                  setSelectedConditions(getMergedConditions());
                                   setDetailsSheetOpen(true);
                                 }}
+                                onFullDataFetched={handleFullDataFetched}
                                 conditionsLabel={t("conditions.rating")}
                                 detailsLabel={t("conditions.details")}
                               />

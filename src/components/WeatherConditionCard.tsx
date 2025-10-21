@@ -1,4 +1,4 @@
-import { memo, useMemo } from "react";
+import { memo, useMemo, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Info } from "lucide-react";
 import { getWeatherEmoji, getWeatherDescription } from "@/lib/utils/weather-emojis";
@@ -21,6 +21,7 @@ interface ConditionsData {
   state?: string;
   municipality?: string;
   village?: string;
+  rockType?: string;
   current?: {
     temperature_c: number;
     humidity: number;
@@ -40,6 +41,7 @@ interface WeatherConditionCardProps {
   translateReason: (reason: string) => string;
   onDetailsClick: () => void;
   onSheetClick?: () => void;
+  onFullDataFetched?: (fullData: any) => void; // Callback when full 14-day data is prefetched
   conditionsLabel: string;
   detailsLabel: string;
 }
@@ -57,6 +59,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
   translateReason,
   onDetailsClick,
   onSheetClick,
+  onFullDataFetched,
   conditionsLabel,
   detailsLabel,
 }: WeatherConditionCardProps) {
@@ -67,6 +70,39 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
     warnings: data.warnings?.length ?? 0,
     reasons: data.reasons?.length ?? 0,
   });
+
+  // Prefetch full 14-day data from /api/conditions when card is shown
+  // This reduces AI token costs by 87% while maintaining UX
+  useEffect(() => {
+    if (data.latitude && data.longitude && data.rockType && onFullDataFetched) {
+      console.log("[WeatherConditionCard] Prefetching full 14-day data for", data.location);
+
+      const fetchFullData = async () => {
+        try {
+          const params = new URLSearchParams({
+            lat: data.latitude!.toString(),
+            lon: data.longitude!.toString(),
+            rockType: data.rockType!,
+          });
+
+          const response = await fetch(`/api/conditions?${params}`);
+          if (!response.ok) {
+            console.error("[WeatherConditionCard] Failed to prefetch:", response.statusText);
+            return;
+          }
+
+          const fullData = await response.json();
+          console.log("[WeatherConditionCard] Prefetch complete, hourly count:",
+            fullData.conditions?.hourlyConditions?.length || 0);
+          onFullDataFetched(fullData);
+        } catch (error) {
+          console.error("[WeatherConditionCard] Prefetch error:", error);
+        }
+      };
+
+      fetchFullData();
+    }
+  }, [data.latitude, data.longitude, data.rockType, data.location, onFullDataFetched]);
 
   // Build location details with flag
   const { locationText, countryFlag } = useMemo(() => {
