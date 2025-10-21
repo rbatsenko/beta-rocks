@@ -5,9 +5,9 @@ import { Toaster } from "@/components/ui/toaster";
 import "@/index.css";
 
 export const metadata: Metadata = {
-  title: "temps.rocks - Real-time Climbing Conditions",
+  title: "temps.rocks - Climbing Conditions",
   description:
-    "Chat with temps.rocks for instant climbing conditions at any crag, sector, or route worldwide. Get real-time weather forecasts, friction analysis, optimal climbing windows, and AI-powered insights - completely free for climbers.",
+    "Ask about any crag and get climbing conditions. Weather forecasts, friction scores based on rock type, and optimal climbing windows.",
   authors: [{ name: "temps.rocks" }],
   keywords: [
     "climbing",
@@ -21,9 +21,9 @@ export const metadata: Metadata = {
     "forecast",
   ],
   openGraph: {
-    title: "temps.rocks - Real-time Climbing Conditions",
+    title: "temps.rocks - Climbing Conditions",
     description:
-      "Chat naturally to get instant climbing conditions for any crag worldwide. Real-time weather, friction analysis, optimal climbing windows, and 14-day forecasts. Free for climbers.",
+      "Ask about any crag and get climbing conditions. Weather forecasts, friction scores based on rock type, and optimal climbing windows.",
     url: "https://temps.rocks",
     siteName: "temps.rocks",
     locale: "en_US",
@@ -31,9 +31,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "temps.rocks - Climbing Conditions Chat",
+    title: "temps.rocks",
     description:
-      "Ask about any crag and get instant weather, friction scores, and optimal climbing windows. Free AI-powered climbing conditions assistant.",
+      "Ask about any crag and get climbing conditions. Weather forecasts, friction scores, and optimal climbing windows.",
   },
   robots: {
     index: true,
