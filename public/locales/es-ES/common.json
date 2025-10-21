@@ -1,19 +1,220 @@
+{
+  "header": {
+    "title": "temps.rocks"
   },
-  "rockTypes": {
-    "limestone": "caliza",
-    "granite": "granito",
-    "sandstone": "arenisca",
-    "basalt": "basalto",
-    "gneiss": "gneis",
-    "quartzite": "cuarcita",
-    "conglomerate": "conglomerado",
-    "rhyolite": "riolita",
-    "porphyry": "pórfido",
-    "andesite": "andesita",
-    "slate": "pizarra",
-    "schist": "esquisto",
-    "dolomite": "dolomita",
-    "volcanic": "volcánico",
-    "phyllite": "filita"
+  "welcome": {
+    "heading": "Pregunta por las condiciones de escalada",
+    "description": "Obtén meteorología en tiempo real, análisis de fricción y las mejores ventanas de escalada para cualquier escuela del mundo",
+    "exampleQueries": {
+      "query1": {
+        "display": "¿Habrá buen tacto en Siurana mañana?",
+        "query": "¿Cómo estarán las condiciones en Siurana mañana?"
+      },
+      "query2": {
+        "display": "¿Estará Rodellar seco esta tarde?",
+        "query": "¿Estará Rodellar (42.287, -0.005) seco esta tarde?"
+      },
+      "query3": {
+        "display": "¿Qué tiempo hará en El Chorro este fin de semana?",
+        "query": "¿Qué condiciones habrá en El Chorro (36.901, -4.764) este fin de semana?"
+      }
+    }
+  },
+  "chat": {
+    "analyzing": "Analizando condiciones...",
+    "thinking": "Pensando...",
+    "inputPlaceholder": "Pregunta por cualquier escuela o sector..."
+  },
+  "conditions": {
+    "rating": "Valoración",
+    "details": "Detalles",
+    "location": "Ubicación"
+  },
+  "ratings": {
+    "great": "Excelente",
+    "good": "Buena",
+    "fair": "Aceptable",
+    "poor": "Mala",
+    "nope": "Ni pensarlo"
+  },
+  "reasons": {
+    "perfectTemp": "Temperatura perfecta ({{temp}}°C)",
+    "tempTooHigh": "Temperatura demasiado alta: los dedos pueden resbalar",
+    "coldGoodFriction": "Frío pero con buena fricción para {{rockType}}",
+    "idealHumidity": "Humedad ideal ({{humidity}}%)",
+    "lowHumidityGranite": "La humedad baja mejora la fricción en granito",
+    "readyInHours": "Listo para escalar en ~{{hours}} horas",
+    "acceptable": "Condiciones aceptables"
+  },
+  "warnings": {
+    "tooWarm": "Demasiado calor para {{rockType}} ({{temp}}°C)",
+    "coldSuboptimal": "Frío y poco óptimo para {{rockType}}",
+    "highHumidity": "Humedad alta ({{humidity}}%) - la roca puede estar resbaladiza",
+    "wetDangerousSandstone": "La roca está mojada - peligroso escalar (la arenisca se debilita cuando está mojada)",
+    "wetSlippery": "La roca está mojada - condiciones resbaladizas",
+    "veryHighWinds": "Viento muy fuerte ({{wind}} km/h) - riesgo de ser desplazado",
+    "highWind": "Viento fuerte ({{wind}} km/h)",
+    "recentPrecip": "Precipitación reciente ({{precip}}mm) - se secará en ~{{hours}}h",
+    "currentlyWetDangerous": "Actualmente mojado - peligroso",
+    "currentlyWet": "Actualmente mojado"
+  },
+  "weather": {
+    "clearSky": "Despejado",
+    "mainlyClear": "Mayormente despejado",
+    "partlyCloudy": "Parcialmente nublado",
+    "overcast": "Cubierto",
+    "fog": "Niebla",
+    "depositingRimeFog": "Niebla con cencellada",
+    "lightDrizzle": "Llovizna ligera",
+    "moderateDrizzle": "Llovizna moderada",
+    "denseDrizzle": "Llovizna densa",
+    "lightFreezingDrizzle": "Llovizna helada ligera",
+    "denseFreezingDrizzle": "Llovizna helada intensa",
+    "slightRain": "Lluvia débil",
+    "moderateRain": "Lluvia moderada",
+    "heavyRain": "Lluvia intensa",
+    "lightFreezingRain": "Lluvia helada ligera",
+    "heavyFreezingRain": "Lluvia helada intensa",
+    "slightSnowFall": "Nieve débil",
+    "moderateSnowFall": "Nieve moderada",
+    "heavySnowFall": "Nieve intensa",
+    "snowGrains": "Granizo blando",
+    "slightRainShowers": "Chubascos débiles",
+    "moderateRainShowers": "Chubascos moderados",
+    "violentRainShowers": "Chubascos fuertes",
+    "slightSnowShowers": "Nevadas débiles",
+    "heavySnowShowers": "Nevadas intensas",
+    "thunderstorm": "Tormenta",
+    "thunderstormSlightHail": "Tormenta con granizo débil",
+    "thunderstormHeavyHail": "Tormenta con granizo fuerte"
+  },
+  "timeframes": {
+    "now": "ahora",
+    "today": "hoy",
+    "tomorrow": "mañana",
+    "thisAfternoon": "esta tarde",
+    "thisEvening": "esta tarde-noche",
+    "tonight": "esta noche"
+  },
+  "disambiguation": {
+    "foundMultipleAreas": "Se han encontrado {{count}} zonas de escalada para \"{{location}}\". Elige una:",
+    "foundMultipleLocations": "Se han encontrado varias ubicaciones para \"{{location}}\". Elige una:",
+    "queryTemplate": "condiciones en {{name}} ({{latitude}}, {{longitude}})"
+  },
+  "footer": {
+    "about": "Acerca de",
+    "privacy": "Privacidad",
+    "github": "GitHub",
+    "brand": "temps.rocks",
+    "description": "Condiciones de escalada gratis para todo el mundo. Construido con ❤️ para la comunidad escaladora.",
+    "attribution": "Datos de Open-Meteo, OpenBeta y <osmLink>colaboradores de OpenStreetMap</osmLink>. Informes colaborativos.",
+    "copyright": "© 2025 temps.rocks. Todos los derechos reservados."
+  },
+  "features": {
+    "heading": "Todo lo que necesitas",
+    "subheading": "Condiciones de escalada completas al alcance de tu mano, totalmente gratis",
+    "realTimeWeather": {
+      "title": "Meteorología en tiempo real",
+      "description": "Pronósticos precisos de Open-Meteo con cálculo de sol y sombra para sectores específicos"
+    },
+    "chatInterface": {
+      "title": "Interfaz de chat",
+      "description": "Consultas en lenguaje natural impulsadas por IA. Pregunta en cualquier idioma y recibe respuestas al instante"
+    },
+    "communityReports": {
+      "title": "Informes de la comunidad",
+      "description": "Comparte y confirma las condiciones actuales. Ayuda a otros escaladores con actualizaciones en vivo"
+    },
+    "globalCoverage": {
+      "title": "Cobertura global",
+      "description": "Cualquier escuela o sector del mundo gracias a la integración con la base de datos de OpenBeta"
+    },
+    "worksOffline": {
+      "title": "Funciona sin conexión",
+      "description": "Diseño local-first. Guarda datos offline y sincronízalos entre dispositivos con una clave de sincronización"
+    },
+    "privacyFirst": {
+      "title": "Privacidad ante todo",
+      "description": "Anonimato por defecto. No necesitas cuentas. Tus datos siguen siendo tuyos"
+    }
+  },
+  "ui": {
+    "toggleTheme": "Cambiar tema",
+    "selectLanguage": "Seleccionar idioma",
+    "aboutApp": "Acerca de la app"
+  },
+  "dialog": {
+    "close": "Cerrar",
+    "detailedConditions": "Condiciones detalladas",
+    "fullAnalysis": "Análisis completo del tiempo y previsión de condiciones de escalada",
+    "showMap": "Mapa",
+    "tabs": {
+      "overview": "Resumen",
+      "hourly": "Por horas",
+      "daily": "14 días"
+    },
+    "currentRating": "Valoración actual",
+    "currentConditions": "Condiciones actuales",
+    "currentWeather": "Meteorología actual",
+    "temperature": "Temperatura",
+    "humidity": "Humedad",
+    "windSpeed": "Velocidad del viento",
+    "precipitation": "Precipitación",
+    "sunrise": "Amanecer",
+    "sunset": "Atardecer",
+    "high": "Máxima",
+    "low": "Mínima",
+    "rain": "Lluvia",
+    "wind": "Viento",
+    "dry": "Seco",
+    "wet": "Mojado",
+    "precipitationContext": "Contexto de precipitación",
+    "last24h": "Últimas 24 h",
+    "last48h": "Últimas 48 h",
+    "next24h": "Próximas 24 h",
+    "dewPointSpread": "Diferencia con el punto de rocío (riesgo de condensación)",
+    "lowRisk": "✅ Riesgo bajo: la roca debería mantenerse seca",
+    "moderateRisk": "⚠️ Riesgo moderado: vigila la humedad",
+    "highRisk": "❌ Riesgo alto: probabilidad de condensación",
+    "optimalWindows": "Mejores ventanas de escalada",
+    "nextDays": "Próximos 5 días",
+    "bestTime": "🌟 Mejor momento",
+    "noOptimalConditions": "No hay condiciones óptimas en los próximos 5 días",
+    "checkHourlyForecast": "Consulta la previsión por horas para más detalles",
+    "weatherDisclaimer": "⚠️ El tiempo puede cambiar rápidamente. Revisa la previsión antes de salir y comprueba las condiciones al llegar.",
+    "window": "ventana",
+    "windows": "ventanas",
+    "today": "Hoy",
+    "tomorrow": "Mañana",
+    "showCompleteTimeline": "Mostrar toda la línea temporal",
+    "hour": "hora",
+    "hours": "horas",
+    "period": "período",
+    "periods": "períodos",
+    "noHourlyData": "No hay datos de previsión por horas disponibles",
+    "noDailyData": "No hay datos de previsión diaria disponibles",
+    "noOptimalHours": "No hay condiciones óptimas el",
+    "forecastIndicators": "Indicadores de la previsión:",
+    "goodClimbingWindows": "Buenas ventanas para escalar",
+    "fairConditions": "Condiciones aceptables",
+    "poorConditions": "Malas condiciones",
+    "lessReliable": "Días 8-14: previsión menos fiable",
+    "lessReliableHourly": "Próximas horas menos predecibles",
+    "lessCertain": "MENOS SEGURO",
+    "todayBadge": "HOY"
+  },
+  "timeContext": {
+    "sunrise": "Amanecer",
+    "sunset": "Atardecer",
+    "recommendedHours": "Horas recomendadas para escalar",
+    "totalDaylight": "Luz del día total",
+    "hoursOfDaylight": "{{hours}} horas de luz",
+    "earlyStartRecommended": "Se recomienda empezar temprano para evitar el calor",
+    "limitedDaylight": "Luz limitada - planifica en consecuencia",
+    "morningConditionsBest": "Mejores condiciones por la mañana",
+    "eveningSession": "Condiciones de sesión vespertina",
+    "showAllHours": "Mostrar las 24 horas",
+    "showClimbingHoursOnly": "Mostrar solo horas de escalada",
+    "expandHours": "Expandir para ver todas las horas"
   }
 }

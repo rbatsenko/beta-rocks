@@ -1,19 +1,220 @@
+{
+  "header": {
+    "title": "temps.rocks"
   },
-  "rockTypes": {
-    "limestone": "Kalkstein",
-    "granite": "Granit",
-    "sandstone": "Sandstein",
-    "basalt": "Basalt",
-    "gneiss": "Gneis",
-    "quartzite": "Quarzit",
-    "conglomerate": "Konglomerat",
-    "rhyolite": "Rhyolith",
-    "porphyry": "Porphyr",
-    "andesite": "Andesit",
-    "slate": "Schiefer",
-    "schist": "Schist",
-    "dolomite": "Dolomit",
-    "volcanic": "Vulkanisch",
-    "phyllite": "Phyllit"
+  "welcome": {
+    "heading": "Frag nach Kletterbedingungen",
+    "description": "Erhalte Wetterdaten in Echtzeit, Reibungsanalysen und die besten Kletterfenster für jeden Fels weltweit",
+    "exampleQueries": {
+      "query1": {
+        "display": "Wie wird der Grip im Frankenjura morgen?",
+        "query": "Wie sind die Bedingungen im Frankenjura morgen?"
+      },
+      "query2": {
+        "display": "Ist die Sächsische Schweiz heute Nachmittag trocken?",
+        "query": "Ist die Sächsische Schweiz heute Nachmittag trocken?"
+      },
+      "query3": {
+        "display": "Wie wird das Wetter in Kochel am Wochenende?",
+        "query": "Wie sind die Bedingungen in Kochel dieses Wochenende?"
+      }
+    }
+  },
+  "chat": {
+    "analyzing": "Analysiere Bedingungen...",
+    "thinking": "Denke nach...",
+    "inputPlaceholder": "Frag nach einem Fels oder Sektor..."
+  },
+  "conditions": {
+    "rating": "Bewertung",
+    "details": "Details",
+    "location": "Ort"
+  },
+  "ratings": {
+    "great": "Top",
+    "good": "Gut",
+    "fair": "Okay",
+    "poor": "Schlecht",
+    "nope": "Keine Chance"
+  },
+  "reasons": {
+    "perfectTemp": "Perfekte Temperatur ({{temp}}°C)",
+    "tempTooHigh": "Temperatur zu hoch - Finger könnten rutschen",
+    "coldGoodFriction": "Kühl, aber gute Reibung für {{rockType}}",
+    "idealHumidity": "Ideale Luftfeuchtigkeit ({{humidity}}%)",
+    "lowHumidityGranite": "Niedrige Luftfeuchtigkeit verbessert die Reibung auf Granit",
+    "readyInHours": "In ~{{hours}} Stunden kletterbar",
+    "acceptable": "Akzeptable Bedingungen"
+  },
+  "warnings": {
+    "tooWarm": "Zu warm für {{rockType}} ({{temp}}°C)",
+    "coldSuboptimal": "Kalt und suboptimal für {{rockType}}",
+    "highHumidity": "Hohe Luftfeuchtigkeit ({{humidity}}%) - Fels kann rutschig sein",
+    "wetDangerousSandstone": "Fels ist nass - gefährlich zu klettern (Sandstein wird weich, wenn er nass ist)",
+    "wetSlippery": "Fels ist nass - rutschige Bedingungen",
+    "veryHighWinds": "Sehr starker Wind ({{wind}} km/h) - Gefahr vom Fels geweht zu werden",
+    "highWind": "Starker Wind ({{wind}} km/h)",
+    "recentPrecip": "Kürzliche Niederschläge ({{precip}}mm) - trocknet in ~{{hours}}h",
+    "currentlyWetDangerous": "Derzeit nass - gefährlich",
+    "currentlyWet": "Derzeit nass"
+  },
+  "weather": {
+    "clearSky": "Klarer Himmel",
+    "mainlyClear": "Überwiegend klar",
+    "partlyCloudy": "Teilweise bewölkt",
+    "overcast": "Bedeckt",
+    "fog": "Nebel",
+    "depositingRimeFog": "Raureif-Nebel",
+    "lightDrizzle": "Leichter Nieselregen",
+    "moderateDrizzle": "Mäßiger Nieselregen",
+    "denseDrizzle": "Starker Nieselregen",
+    "lightFreezingDrizzle": "Leichter gefrierender Niesel",
+    "denseFreezingDrizzle": "Starker gefrierender Niesel",
+    "slightRain": "Leichter Regen",
+    "moderateRain": "Mäßiger Regen",
+    "heavyRain": "Starker Regen",
+    "lightFreezingRain": "Leichter gefrierender Regen",
+    "heavyFreezingRain": "Starker gefrierender Regen",
+    "slightSnowFall": "Leichter Schneefall",
+    "moderateSnowFall": "Mäßiger Schneefall",
+    "heavySnowFall": "Starker Schneefall",
+    "snowGrains": "Schneegriesel",
+    "slightRainShowers": "Leichte Schauer",
+    "moderateRainShowers": "Mäßige Schauer",
+    "violentRainShowers": "Heftige Schauer",
+    "slightSnowShowers": "Leichte Schneeschauer",
+    "heavySnowShowers": "Starke Schneeschauer",
+    "thunderstorm": "Gewitter",
+    "thunderstormSlightHail": "Gewitter mit kleinem Hagel",
+    "thunderstormHeavyHail": "Gewitter mit starkem Hagel"
+  },
+  "timeframes": {
+    "now": "jetzt",
+    "today": "heute",
+    "tomorrow": "morgen",
+    "thisAfternoon": "heute Nachmittag",
+    "thisEvening": "heute Abend",
+    "tonight": "heute Nacht"
+  },
+  "disambiguation": {
+    "foundMultipleAreas": "Es wurden {{count}} Klettergebiete für \"{{location}}\" gefunden. Bitte wähle eines:",
+    "foundMultipleLocations": "Es wurden mehrere Orte für \"{{location}}\" gefunden. Bitte wähle einen:",
+    "queryTemplate": "Bedingungen in {{name}} ({{latitude}}, {{longitude}})"
+  },
+  "footer": {
+    "about": "Über uns",
+    "privacy": "Datenschutz",
+    "github": "GitHub",
+    "brand": "temps.rocks",
+    "description": "Kostenlose Kletterbedingungen für alle. Mit ❤️ für die Kletterszene gebaut.",
+    "attribution": "Daten von Open-Meteo, OpenBeta und <osmLink>OpenStreetMap-Mitwirkenden</osmLink>. Community-getriebene Berichte.",
+    "copyright": "© 2025 temps.rocks. Alle Rechte vorbehalten."
+  },
+  "features": {
+    "heading": "Alles, was du brauchst",
+    "subheading": "Umfassende Kletterbedingungen direkt zur Hand, komplett kostenlos",
+    "realTimeWeather": {
+      "title": "Wetter in Echtzeit",
+      "description": "Präzise Open-Meteo-Vorhersagen mit Sonnen-/Schattenberechnung für einzelne Sektoren"
+    },
+    "chatInterface": {
+      "title": "Chat-Oberfläche",
+      "description": "Natürlichsprachliche Anfragen mit KI-Unterstützung. Frag in jeder Sprache und erhalte sofort Antworten"
+    },
+    "communityReports": {
+      "title": "Community-Berichte",
+      "description": "Teile und bestätige aktuelle Bedingungen. Hilf anderen Kletternden mit Live-Updates"
+    },
+    "globalCoverage": {
+      "title": "Globale Abdeckung",
+      "description": "Jeder Fels oder Sektor weltweit durch die OpenBeta-Integration"
+    },
+    "worksOffline": {
+      "title": "Funktioniert offline",
+      "description": "Local-first-Design. Speichere Daten offline und synchronisiere sie per Schlüssel zwischen Geräten"
+    },
+    "privacyFirst": {
+      "title": "Datenschutz zuerst",
+      "description": "Standardmäßig anonym. Keine Accounts nötig. Deine Daten gehören dir"
+    }
+  },
+  "ui": {
+    "toggleTheme": "Theme wechseln",
+    "selectLanguage": "Sprache wählen",
+    "aboutApp": "Über die App"
+  },
+  "dialog": {
+    "close": "Schließen",
+    "detailedConditions": "Detaillierte Bedingungen",
+    "fullAnalysis": "Umfassende Wetter- und Kletteranalyse",
+    "showMap": "Karte",
+    "tabs": {
+      "overview": "Überblick",
+      "hourly": "Stündlich",
+      "daily": "14 Tage"
+    },
+    "currentRating": "Aktuelle Bewertung",
+    "currentConditions": "Aktuelle Bedingungen",
+    "currentWeather": "Aktuelles Wetter",
+    "temperature": "Temperatur",
+    "humidity": "Luftfeuchtigkeit",
+    "windSpeed": "Windgeschwindigkeit",
+    "precipitation": "Niederschlag",
+    "sunrise": "Sonnenaufgang",
+    "sunset": "Sonnenuntergang",
+    "high": "Hoch",
+    "low": "Tief",
+    "rain": "Regen",
+    "wind": "Wind",
+    "dry": "Trocken",
+    "wet": "Nass",
+    "precipitationContext": "Niederschlagskontext",
+    "last24h": "Letzte 24 h",
+    "last48h": "Letzte 48 h",
+    "next24h": "Nächste 24 h",
+    "dewPointSpread": "Differenz zum Taupunkt (Kondensationsrisiko)",
+    "lowRisk": "✅ Geringes Risiko - Fels sollte trocken bleiben",
+    "moderateRisk": "⚠️ Mittleres Risiko - Feuchte im Blick behalten",
+    "highRisk": "❌ Hohes Risiko - Kondensation wahrscheinlich",
+    "optimalWindows": "Optimale Kletterfenster",
+    "nextDays": "Nächste 5 Tage",
+    "bestTime": "🌟 Beste Zeit",
+    "noOptimalConditions": "Keine optimalen Bedingungen in den nächsten 5 Tagen",
+    "checkHourlyForecast": "Sieh dir die stündliche Vorhersage für Details an",
+    "weatherDisclaimer": "⚠️ Wetter kann sich schnell ändern. Prüfe die Vorhersage vor der Abfahrt und kontrolliere die Bedingungen vor Ort.",
+    "window": "Fenster",
+    "windows": "Fenster",
+    "today": "Heute",
+    "tomorrow": "Morgen",
+    "showCompleteTimeline": "Kompletten Verlauf anzeigen",
+    "hour": "Stunde",
+    "hours": "Stunden",
+    "period": "Zeitraum",
+    "periods": "Zeiträume",
+    "noHourlyData": "Keine stündlichen Vorhersagedaten verfügbar",
+    "noDailyData": "Keine täglichen Vorhersagedaten verfügbar",
+    "noOptimalHours": "Keine optimalen Bedingungen am",
+    "forecastIndicators": "Vorhersageindikatoren:",
+    "goodClimbingWindows": "Gute Kletterfenster",
+    "fairConditions": "Ordentliche Bedingungen",
+    "poorConditions": "Schlechte Bedingungen",
+    "lessReliable": "Tage 8-14: Weniger verlässliche Vorhersage",
+    "lessReliableHourly": "Nächste Stunden weniger vorhersehbar",
+    "lessCertain": "UNSICHERER",
+    "todayBadge": "HEUTE"
+  },
+  "timeContext": {
+    "sunrise": "Sonnenaufgang",
+    "sunset": "Sonnenuntergang",
+    "recommendedHours": "Empfohlene Kletterzeiten",
+    "totalDaylight": "Gesamte Tageslichtstunden",
+    "hoursOfDaylight": "{{hours}} Stunden Tageslicht",
+    "earlyStartRecommended": "Früher Start empfohlen, um die Hitze zu vermeiden",
+    "limitedDaylight": "Begrenztes Tageslicht - entsprechend planen",
+    "morningConditionsBest": "Beste Bedingungen am Morgen",
+    "eveningSession": "Abendsession-Bedingungen",
+    "showAllHours": "Alle 24 Stunden anzeigen",
+    "showClimbingHoursOnly": "Nur Kletterstunden anzeigen",
+    "expandHours": "Erweitern, um alle Stunden zu sehen"
   }
 }

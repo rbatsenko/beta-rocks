@@ -1,19 +1,220 @@
+{
+  "header": {
+    "title": "temps.rocks"
   },
-  "rockTypes": {
-    "limestone": "wapień",
-    "granite": "granit",
-    "sandstone": "piaskowiec",
-    "basalt": "bazalt",
-    "gneiss": "gnejs",
-    "quartzite": "kwarcyt",
-    "conglomerate": "konglomerat",
-    "rhyolite": "riolit",
-    "porphyry": "porfir",
-    "andesite": "andezyt",
-    "slate": "łupek",
-    "schist": "łupek łyszczykowy",
-    "dolomite": "dolomit",
-    "volcanic": "wulkaniczny",
-    "phyllite": "fylit"
+  "welcome": {
+    "heading": "Zapytaj o warunki wspinaczkowe",
+    "description": "Sprawdź pogodę w czasie rzeczywistym, analizę tarcia i optymalne okna wspinaczkowe dla dowolnej skałki na świecie",
+    "exampleQueries": {
+      "query1": {
+        "display": "Jaki warun w Sokolikach jutro?",
+        "query": "Jaki warun w Sokolikach jutro?"
+      },
+      "query2": {
+        "display": "Czy Podlesice są suche dzisiaj po południu?",
+        "query": "Czy Podlesice są suche dzisiaj po południu?"
+      },
+      "query3": {
+        "display": "Jak tam Dupa Słonia?",
+        "query": "Jak tam Dupa Słonia?"
+      }
+    }
+  },
+  "chat": {
+    "analyzing": "Analizuję warunki...",
+    "thinking": "Myślę...",
+    "inputPlaceholder": "Zapytaj o dowolną skałkę lub sektor..."
+  },
+  "conditions": {
+    "rating": "Ocena",
+    "details": "Szczegóły",
+    "location": "Lokalizacja"
+  },
+  "ratings": {
+    "great": "Super",
+    "good": "Dobrze",
+    "fair": "Średnio",
+    "poor": "Słabo",
+    "nope": "Bardzo słabo"
+  },
+  "reasons": {
+    "perfectTemp": "Idealna temperatura ({{temp}}°C)",
+    "tempTooHigh": "Za ciepło - dla optymalnego tarcia może być potrzebny wiatr",
+    "coldGoodFriction": "Zimno ale dobre tarcie",
+    "idealHumidity": "Idealna wilgotność ({{humidity}}%)",
+    "lowHumidityGranite": "Niska wilgotność pomaga na granicie",
+    "readyInHours": "Gotowe do wspinania za ~{{hours}} godzin",
+    "acceptable": "Warunki akceptowalne"
+  },
+  "warnings": {
+    "tooWarm": "Za ciepło dla {{rockType}} ({{temp}}°C)",
+    "coldSuboptimal": "Zimno - zabierz ciepłe ubrania i rozgrzej się porządnie",
+    "highHumidity": "Wysoka wilgotność ({{humidity}}%) - może być gorsze tarcie",
+    "wetDangerousSandstone": "Piaskowiec mokry - nie wspinaj się póki całkiem nie wyschnie!",
+    "wetSlippery": "Skała mokra - ślisko",
+    "veryHighWinds": "Bardzo mocny wiatr ({{wind}} km/h) - może być nieprzyjemnie 😅",
+    "highWind": "Silny wiatr ({{wind}} km/h)",
+    "recentPrecip": "Niedawne opady ({{precip}}mm) - wyschnie za ~{{hours}}h",
+    "currentlyWetDangerous": "Obecnie mokro - poczekaj aż wyschnie",
+    "currentlyWet": "Mokro"
+  },
+  "weather": {
+    "clearSky": "Bezchmurnie",
+    "mainlyClear": "Przeważnie bezchmurnie",
+    "partlyCloudy": "Częściowe zachmurzenie",
+    "overcast": "Pochmurno",
+    "fog": "Mgła",
+    "depositingRimeFog": "Mgła z szronem",
+    "lightDrizzle": "Lekka mżawka",
+    "moderateDrizzle": "Umiarkowana mżawka",
+    "denseDrizzle": "Gęsta mżawka",
+    "lightFreezingDrizzle": "Lekka marznąca mżawka",
+    "denseFreezingDrizzle": "Gęsta marznąca mżawka",
+    "slightRain": "Słaby deszcz",
+    "moderateRain": "Umiarkowany deszcz",
+    "heavyRain": "Silny deszcz",
+    "lightFreezingRain": "Słaba marznąca mżawka",
+    "heavyFreezingRain": "Silna marznąca mżawka",
+    "slightSnowFall": "Słaby śnieg",
+    "moderateSnowFall": "Umiarkowany śnieg",
+    "heavySnowFall": "Silny śnieg",
+    "snowGrains": "Krupy śnieżne",
+    "slightRainShowers": "Słabe przelotne opady",
+    "moderateRainShowers": "Umiarkowane przelotne opady",
+    "violentRainShowers": "Silne przelotne opady",
+    "slightSnowShowers": "Słabe opady śniegu",
+    "heavySnowShowers": "Silne opady śniegu",
+    "thunderstorm": "Burza",
+    "thunderstormSlightHail": "Burza z gradem",
+    "thunderstormHeavyHail": "Burza z silnym gradem"
+  },
+  "timeframes": {
+    "now": "teraz",
+    "today": "dzisiaj",
+    "tomorrow": "jutro",
+    "thisAfternoon": "dziś po południu",
+    "thisEvening": "dziś wieczorem",
+    "tonight": "dzisiaj w nocy"
+  },
+  "disambiguation": {
+    "foundMultipleAreas": "Znaleziono {{count}} rejonów wspinaczkowych dla \"{{location}}\". Wybierz jeden:",
+    "foundMultipleLocations": "Znaleziono wiele lokalizacji dla \"{{location}}\". Wybierz jedną:",
+    "queryTemplate": "warunki w {{name}} ({{latitude}}, {{longitude}})"
+  },
+  "footer": {
+    "about": "O nas",
+    "privacy": "Prywatność",
+    "github": "GitHub",
+    "brand": "temps.rocks",
+    "description": "Darmowe warunki wspinaczkowe dla każdego. Stworzone z ❤️ dla wspinaczkowej społeczności.",
+    "attribution": "Dane z Open-Meteo, OpenBeta i <osmLink>współtwórców OpenStreetMap</osmLink>. Raporty społecznościowe.",
+    "copyright": "© 2025 temps.rocks. Wszelkie prawa zastrzeżone."
+  },
+  "features": {
+    "heading": "Wszystko czego potrzebujesz",
+    "subheading": "Warunki pogodowe do wspinania w zasięgu ręki, całkowicie za darmo",
+    "realTimeWeather": {
+      "title": "Pogoda na żywo",
+      "description": "Dokładne prognozy z Open-Meteo z kalkulacją słońca/cienia dla konkretnych sektorów"
+    },
+    "chatInterface": {
+      "title": "Interfejs czatu",
+      "description": "Zapytania w języku naturalnym dzięki AI. Pytaj w dowolnym języku, otrzymuj natychmiastowe odpowiedzi"
+    },
+    "communityReports": {
+      "title": "Raporty społeczności",
+      "description": "Dziel się i potwierdzaj obecne warunki. Pomagaj innym z aktualizacjami na żywo"
+    },
+    "globalCoverage": {
+      "title": "Zasięg globalny",
+      "description": "Każda skałka lub sektor na świecie dzięki integracji z bazą OpenBeta"
+    },
+    "worksOffline": {
+      "title": "Działa offline",
+      "description": "Projekt local-first. Zapisuj dane offline i synchronizuj między urządzeniami za pomocą klucza sync"
+    },
+    "privacyFirst": {
+      "title": "Prywatność na pierwszym miejscu",
+      "description": "Anonimowość domyślnie. Nie wymagane konta. Twoje dane pozostają Twoje"
+    }
+  },
+  "ui": {
+    "toggleTheme": "Przełącz motyw",
+    "selectLanguage": "Wybierz język",
+    "aboutApp": "O aplikacji"
+  },
+  "dialog": {
+    "close": "Zamknij",
+    "detailedConditions": "Szczegółowe warunki",
+    "fullAnalysis": "Pełna analiza pogody i prognoza warunków wspinaczkowych",
+    "showMap": "Mapa",
+    "tabs": {
+      "overview": "Przegląd",
+      "hourly": "Co godzinę",
+      "daily": "14-dniowa"
+    },
+    "currentRating": "Aktualna ocena",
+    "currentConditions": "Obecny warun",
+    "currentWeather": "Aktualna pogoda",
+    "temperature": "Temperatura",
+    "humidity": "Wilgotność",
+    "windSpeed": "Prędkość wiatru",
+    "precipitation": "Opady",
+    "sunrise": "Wschód słońca",
+    "sunset": "Zachód słońca",
+    "high": "Maksymalna",
+    "low": "Minimalna",
+    "rain": "Deszcz",
+    "wind": "Wiatr",
+    "dry": "Sucho",
+    "wet": "Mokro",
+    "precipitationContext": "Kontekst opadów",
+    "last24h": "Ostatnie 24h",
+    "last48h": "Ostatnie 48h",
+    "next24h": "Następne 24h",
+    "dewPointSpread": "Punkt rosy (ryzyko kondensacji)",
+    "lowRisk": "Niskie ryzyko - skała powinna być sucha",
+    "moderateRisk": "Umiarkowane ryzyko - obserwuj wilgoć",
+    "highRisk": "Wysokie ryzyko - prawdopodobna kondensacja",
+    "optimalWindows": "Optymalne okna wspinaczkowe",
+    "nextDays": "Następne 5 dni",
+    "bestTime": "Najlepszy czas",
+    "noOptimalConditions": "Brak optymalnych warunków w ciągu najbliższych 5 dni",
+    "checkHourlyForecast": "Sprawdź prognozę godzinową",
+    "weatherDisclaimer": "⚠️ Pogoda może się szybko zmieniać. Monitoruj prognozy przed wyjazdem i sprawdź warunki na miejscu.",
+    "window": "okno",
+    "windows": "okna",
+    "today": "Dzisiaj",
+    "tomorrow": "Jutro",
+    "showCompleteTimeline": "Pokaż pełną oś czasu",
+    "hour": "godzina",
+    "hours": "godziny",
+    "period": "okres",
+    "periods": "okresy",
+    "noHourlyData": "Brak danych prognozy godzinowej",
+    "noDailyData": "Brak danych prognozy dziennej",
+    "noOptimalHours": "Brak optymalnych warunków w dniu",
+    "forecastIndicators": "Wskaźniki prognozy:",
+    "goodClimbingWindows": "Dobre okna wspinaczkowe",
+    "fairConditions": "Przeciętne warunki",
+    "poorConditions": "Słabe warunki",
+    "lessReliable": "Dni 8-14: Mniej pewna prognoza",
+    "lessReliableHourly": "Następne godziny mniej przewidywalne",
+    "lessCertain": "MNIEJ PEWNE",
+    "todayBadge": "DZISIAJ"
+  },
+  "timeContext": {
+    "sunrise": "Wschód słońca",
+    "sunset": "Zachód słońca",
+    "recommendedHours": "Zalecane godziny wspinaczki",
+    "totalDaylight": "Całkowite światło dzienne",
+    "hoursOfDaylight": "{{hours}} godzin światła dziennego",
+    "earlyStartRecommended": "Zalecany wczesny start, aby uniknąć upału",
+    "limitedDaylight": "Ograniczone światło dzienne - zaplanuj odpowiednio",
+    "morningConditionsBest": "Najlepsze warunki rano",
+    "eveningSession": "Warunki wieczornej sesji",
+    "showAllHours": "Pokaż wszystkie 24 godziny",
+    "showClimbingHoursOnly": "Pokaż tylko godziny wspinaczki",
+    "expandHours": "Rozwiń, aby zobaczyć wszystkie godziny"
   }
 }

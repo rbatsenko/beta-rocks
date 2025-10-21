@@ -216,22 +216,5 @@
     "showAllHours": "Show all 24 hours",
     "showClimbingHoursOnly": "Show climbing hours only",
     "expandHours": "Expand to see all hours"
-  },
-  "rockTypes": {
-    "limestone": "limestone",
-    "granite": "granite",
-    "sandstone": "sandstone",
-    "basalt": "basalt",
-    "gneiss": "gneiss",
-    "quartzite": "quartzite",
-    "conglomerate": "conglomerate",
-    "rhyolite": "rhyolite",
-    "porphyry": "porphyry",
-    "andesite": "andesite",
-    "slate": "slate",
-    "schist": "schist",
-    "dolomite": "dolomite",
-    "volcanic": "volcanic",
-    "phyllite": "phyllite"
   }
 }

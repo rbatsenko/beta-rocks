@@ -1,19 +1,220 @@
+{
+  "header": {
+    "title": "temps.rocks"
   },
-  "rockTypes": {
-    "limestone": "calcare",
-    "granite": "granito",
-    "sandstone": "arenaria",
-    "basalt": "basalto",
-    "gneiss": "gneiss",
-    "quartzite": "quarzite",
-    "conglomerate": "conglomerato",
-    "rhyolite": "riolite",
-    "porphyry": "porfido",
-    "andesite": "andesite",
-    "slate": "ardesia",
-    "schist": "scisto",
-    "dolomite": "dolomia",
-    "volcanic": "vulcanico",
-    "phyllite": "fillite"
+  "welcome": {
+    "heading": "Chiedi le condizioni di arrampicata",
+    "description": "Ottieni meteo in tempo reale, analisi dell'aderenza e le migliori finestre di scalata per qualsiasi falesia nel mondo",
+    "exampleQueries": {
+      "query1": {
+        "display": "Com'è il grip ad Arco domani?",
+        "query": "Quali condizioni ci saranno ad Arco domani?"
+      },
+      "query2": {
+        "display": "Finale Ligure sarà asciutta questo pomeriggio?",
+        "query": "Finale Ligure sarà asciutta questo pomeriggio?"
+      },
+      "query3": {
+        "display": "Che meteo è previsto a Sperlonga nel weekend?",
+        "query": "Quali condizioni sono previste a Sperlonga questo weekend?"
+      }
+    }
+  },
+  "chat": {
+    "analyzing": "Analisi delle condizioni...",
+    "thinking": "Sto pensando...",
+    "inputPlaceholder": "Chiedi di una falesia o settore..."
+  },
+  "conditions": {
+    "rating": "Valutazione",
+    "details": "Dettagli",
+    "location": "Località"
+  },
+  "ratings": {
+    "great": "Ottime",
+    "good": "Buone",
+    "fair": "Discrete",
+    "poor": "Scarse",
+    "nope": "Da evitare"
+  },
+  "reasons": {
+    "perfectTemp": "Temperatura perfetta ({{temp}}°C)",
+    "tempTooHigh": "Temperatura troppo alta - potresti scivolare",
+    "coldGoodFriction": "Freddo ma con buona aderenza per {{rockType}}",
+    "idealHumidity": "Umidità ideale ({{humidity}}%)",
+    "lowHumidityGranite": "Umidità bassa che favorisce l'aderenza sul granito",
+    "readyInHours": "Pronto per scalare tra ~{{hours}} ore",
+    "acceptable": "Condizioni accettabili"
+  },
+  "warnings": {
+    "tooWarm": "Troppo caldo per {{rockType}} ({{temp}}°C)",
+    "coldSuboptimal": "Freddo e poco ottimale per {{rockType}}",
+    "highHumidity": "Umidità elevata ({{humidity}}%) - la roccia può essere scivolosa",
+    "wetDangerousSandstone": "La roccia è bagnata - arrampicare sull'arenaria bagnata è pericoloso",
+    "wetSlippery": "La roccia è bagnata - condizioni scivolose",
+    "veryHighWinds": "Vento molto forte ({{wind}} km/h) - rischio di sbilanciamento",
+    "highWind": "Vento forte ({{wind}} km/h)",
+    "recentPrecip": "Precipitazioni recenti ({{precip}}mm) - si asciugherà in ~{{hours}}h",
+    "currentlyWetDangerous": "Attualmente bagnato - pericoloso",
+    "currentlyWet": "Attualmente bagnato"
+  },
+  "weather": {
+    "clearSky": "Cielo sereno",
+    "mainlyClear": "Prevalentemente sereno",
+    "partlyCloudy": "Parzialmente nuvoloso",
+    "overcast": "Coperto",
+    "fog": "Nebbia",
+    "depositingRimeFog": "Nebbia brinosa",
+    "lightDrizzle": "Pioviggine leggera",
+    "moderateDrizzle": "Pioviggine moderata",
+    "denseDrizzle": "Pioviggine intensa",
+    "lightFreezingDrizzle": "Pioviggine gelata debole",
+    "denseFreezingDrizzle": "Pioviggine gelata forte",
+    "slightRain": "Pioggia debole",
+    "moderateRain": "Pioggia moderata",
+    "heavyRain": "Pioggia intensa",
+    "lightFreezingRain": "Pioggia gelata debole",
+    "heavyFreezingRain": "Pioggia gelata intensa",
+    "slightSnowFall": "Neve debole",
+    "moderateSnowFall": "Neve moderata",
+    "heavySnowFall": "Neve intensa",
+    "snowGrains": "Neve granulosa",
+    "slightRainShowers": "Rovesci deboli",
+    "moderateRainShowers": "Rovesci moderati",
+    "violentRainShowers": "Rovesci forti",
+    "slightSnowShowers": "Rovesci di neve deboli",
+    "heavySnowShowers": "Rovesci di neve forti",
+    "thunderstorm": "Temporale",
+    "thunderstormSlightHail": "Temporale con grandine debole",
+    "thunderstormHeavyHail": "Temporale con forte grandine"
+  },
+  "timeframes": {
+    "now": "ora",
+    "today": "oggi",
+    "tomorrow": "domani",
+    "thisAfternoon": "questo pomeriggio",
+    "thisEvening": "questa sera",
+    "tonight": "stanotte"
+  },
+  "disambiguation": {
+    "foundMultipleAreas": "Sono state trovate {{count}} aree di arrampicata per \"{{location}}\". Scegline una:",
+    "foundMultipleLocations": "Sono state trovate più località per \"{{location}}\". Scegline una:",
+    "queryTemplate": "condizioni a {{name}} ({{latitude}}, {{longitude}})"
+  },
+  "footer": {
+    "about": "Informazioni",
+    "privacy": "Privacy",
+    "github": "GitHub",
+    "brand": "temps.rocks",
+    "description": "Condizioni di arrampicata gratuite per tutti. Creato con ❤️ per la comunità dei climber.",
+    "attribution": "Dati da Open-Meteo, OpenBeta e <osmLink>contributori di OpenStreetMap</osmLink>. Report della community.",
+    "copyright": "© 2025 temps.rocks. Tutti i diritti riservati."
+  },
+  "features": {
+    "heading": "Tutto ciò che ti serve",
+    "subheading": "Condizioni di arrampicata complete sempre a portata di mano, gratis",
+    "realTimeWeather": {
+      "title": "Meteo in tempo reale",
+      "description": "Previsioni accurate di Open-Meteo con calcolo sole/ombra per ogni settore"
+    },
+    "chatInterface": {
+      "title": "Interfaccia chat",
+      "description": "Richieste in linguaggio naturale grazie all'IA. Chiedi in qualsiasi lingua e ricevi risposte istantanee"
+    },
+    "communityReports": {
+      "title": "Report della community",
+      "description": "Condividi e conferma le condizioni attuali. Aiuta altri climber con aggiornamenti in tempo reale"
+    },
+    "globalCoverage": {
+      "title": "Copertura globale",
+      "description": "Qualsiasi falesia o settore nel mondo grazie all'integrazione con OpenBeta"
+    },
+    "worksOffline": {
+      "title": "Funziona offline",
+      "description": "Design local-first. Salva dati offline e sincronizzali tra dispositivi con una chiave di sync"
+    },
+    "privacyFirst": {
+      "title": "Privacy prima di tutto",
+      "description": "Anonimato di default. Nessun account richiesto. I tuoi dati restano tuoi"
+    }
+  },
+  "ui": {
+    "toggleTheme": "Cambia tema",
+    "selectLanguage": "Seleziona lingua",
+    "aboutApp": "Info sull'app"
+  },
+  "dialog": {
+    "close": "Chiudi",
+    "detailedConditions": "Condizioni dettagliate",
+    "fullAnalysis": "Analisi completa del meteo e delle condizioni di arrampicata",
+    "showMap": "Mappa",
+    "tabs": {
+      "overview": "Panoramica",
+      "hourly": "Ogni ora",
+      "daily": "14 giorni"
+    },
+    "currentRating": "Valutazione attuale",
+    "currentConditions": "Condizioni attuali",
+    "currentWeather": "Meteo attuale",
+    "temperature": "Temperatura",
+    "humidity": "Umidità",
+    "windSpeed": "Velocità del vento",
+    "precipitation": "Precipitazioni",
+    "sunrise": "Alba",
+    "sunset": "Tramonto",
+    "high": "Massima",
+    "low": "Minima",
+    "rain": "Pioggia",
+    "wind": "Vento",
+    "dry": "Asciutto",
+    "wet": "Bagnato",
+    "precipitationContext": "Contesto delle precipitazioni",
+    "last24h": "Ultime 24 h",
+    "last48h": "Ultime 48 h",
+    "next24h": "Prossime 24 h",
+    "dewPointSpread": "Differenza dal punto di rugiada (rischio condensa)",
+    "lowRisk": "✅ Rischio basso - la roccia dovrebbe restare asciutta",
+    "moderateRisk": "⚠️ Rischio moderato - tieni d'occhio l'umidità",
+    "highRisk": "❌ Rischio alto - probabile condensa",
+    "optimalWindows": "Finestre di arrampicata ottimali",
+    "nextDays": "Prossimi 5 giorni",
+    "bestTime": "🌟 Momento migliore",
+    "noOptimalConditions": "Nessuna condizione ottimale nei prossimi 5 giorni",
+    "checkHourlyForecast": "Controlla le previsioni orarie per maggiori dettagli",
+    "weatherDisclaimer": "⚠️ Il meteo può cambiare rapidamente. Controlla le previsioni prima di partire e verifica le condizioni sul posto.",
+    "window": "finestra",
+    "windows": "finestre",
+    "today": "Oggi",
+    "tomorrow": "Domani",
+    "showCompleteTimeline": "Mostra la cronologia completa",
+    "hour": "ora",
+    "hours": "ore",
+    "period": "periodo",
+    "periods": "periodi",
+    "noHourlyData": "Nessun dato di previsione oraria disponibile",
+    "noDailyData": "Nessun dato di previsione giornaliera disponibile",
+    "noOptimalHours": "Nessuna finestra ottimale il",
+    "forecastIndicators": "Indicatori della previsione:",
+    "goodClimbingWindows": "Buone finestre di scalata",
+    "fairConditions": "Condizioni discrete",
+    "poorConditions": "Condizioni scarse",
+    "lessReliable": "Giorni 8-14: previsione meno affidabile",
+    "lessReliableHourly": "Prossime ore meno prevedibili",
+    "lessCertain": "MENO CERTO",
+    "todayBadge": "OGGI"
+  },
+  "timeContext": {
+    "sunrise": "Alba",
+    "sunset": "Tramonto",
+    "recommendedHours": "Ore consigliate per arrampicare",
+    "totalDaylight": "Luce diurna totale",
+    "hoursOfDaylight": "{{hours}} ore di luce",
+    "earlyStartRecommended": "Si consiglia di partire presto per evitare il caldo",
+    "limitedDaylight": "Luce limitata - pianifica di conseguenza",
+    "morningConditionsBest": "Condizioni migliori al mattino",
+    "eveningSession": "Condizioni per sessione serale",
+    "showAllHours": "Mostra tutte le 24 ore",
+    "showClimbingHoursOnly": "Mostra solo ore di arrampicata",
+    "expandHours": "Espandi per vedere tutte le ore"
   }
 }

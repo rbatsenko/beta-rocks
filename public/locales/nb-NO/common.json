@@ -1,19 +1,221 @@
+{
+  "header": {
+    "title": "temps.rocks"
   },
-  "rockTypes": {
-    "limestone": "kalkstein",
-    "granite": "granitt",
-    "sandstone": "sandstein",
-    "basalt": "basalt",
-    "gneiss": "gneis",
-    "quartzite": "kvartsitt",
-    "conglomerate": "konglomerat",
-    "rhyolite": "ryolitt",
-    "porphyry": "porfyr",
-    "andesite": "andesitt",
-    "slate": "skifer",
-    "schist": "glimmerskifer",
-    "dolomite": "dolomitt",
-    "volcanic": "vulkansk",
-    "phyllite": "fyllitt"
+  "welcome": {
+    "heading": "Spør om klatreforhold",
+    "description": "Få sanntidsvær, friksjonsanalyse og de beste klatretidene for alle crag i verden",
+    "exampleQueries": {
+      "query1": {
+        "display": "Hvordan er forholdene i Flatanger i morgen?",
+        "query": "Hvordan er klatreforholdene i Flatanger i morgen?"
+      },
+      "query2": {
+        "display": "Blir Hauktjern tørt til helga?",
+        "query": "Blir Hauktjern tørt til helga?"
+      },
+      "query3": {
+        "display": "Hvordan ser været ut for Uskedalen på lørdag?",
+        "query": "Hvordan er forholdene i Uskedalen på lørdag?"
+      }
+    }
+  },
+  "chat": {
+    "analyzing": "Analyserer forhold...",
+    "thinking": "Tenker...",
+    "inputPlaceholder": "Spør om et hvilket som helst crag eller sektor..."
+  },
+  "conditions": {
+    "rating": "Vurdering",
+    "details": "Detaljer",
+    "location": "Sted"
+  },
+  "ratings": {
+    "great": "Knall",
+    "good": "Bra",
+    "fair": "Helt greit",
+    "poor": "Dårlig",
+    "nope": "Nei"
+  },
+  "reasons": {
+    "perfectTemp": "Perfekt temperatur ({{temp}}°C)",
+    "tempTooHigh": "For høy temperatur – fingrene kan gli",
+    "coldGoodFriction": "Kaldt, men god friksjon for {{rockType}}",
+    "idealHumidity": "Ideell luftfuktighet ({{humidity}}%)",
+    "lowHumidityGranite": "Lav luftfuktighet gir bedre friksjon på granitt",
+    "readyInHours": "Klar for klatring om ~{{hours}} timer",
+    "acceptable": "Forholdene er akseptable"
+  },
+  "warnings": {
+    "tooWarm": "For varmt for {{rockType}} ({{temp}}°C)",
+    "coldSuboptimal": "Kaldt og mindre optimalt for {{rockType}}",
+    "highHumidity": "Høy luftfuktighet ({{humidity}}%) – fjellet kan bli glatt",
+    "wetDangerousSandstone": "Fjellet er vått – farlig å klatre (sandstein svekkes når den er våt)",
+    "wetSlippery": "Fjellet er vått – glatte forhold",
+    "veryHighWinds": "Svært kraftig vind ({{wind}} km/t) – fare for å blåse av",
+    "highWind": "Kraftig vind ({{wind}} km/t)",
+    "recentPrecip": "Nylig nedbør ({{precip}}mm) - tørker om ~{{hours}}t",
+    "currentlyWetDangerous": "Akkurat nå vått – risikabelt",
+    "currentlyWet": "Akkurat nå vått"
+  },
+  "weather": {
+    "clearSky": "Klarvær",
+    "mainlyClear": "For det meste klart",
+    "partlyCloudy": "Delvis skyet",
+    "overcast": "Overskyet",
+    "fog": "Tåke",
+    "depositingRimeFog": "Islagt tåke",
+    "lightDrizzle": "Lett yr",
+    "moderateDrizzle": "Moderat yr",
+    "denseDrizzle": "Tett yr",
+    "lightFreezingDrizzle": "Lett underkjølt yr",
+    "denseFreezingDrizzle": "Tett underkjølt yr",
+    "slightRain": "Lett regn",
+    "moderateRain": "Moderat regn",
+    "heavyRain": "Kraftig regn",
+    "lightFreezingRain": "Lett underkjølt regn",
+    "heavyFreezingRain": "Kraftig underkjølt regn",
+    "slightSnowFall": "Lett snø",
+    "moderateSnowFall": "Moderat snøfall",
+    "heavySnowFall": "Kraftig snøfall",
+    "snowGrains": "Snøkorn",
+    "slightRainShowers": "Lette regnbyger",
+    "moderateRainShowers": "Moderate regnbyger",
+    "violentRainShowers": "Kraftige regnbyger",
+    "slightSnowShowers": "Lette snøbyger",
+    "moderateSnowShowers": "Moderate snøbyger",
+    "heavySnowShowers": "Kraftige snøbyger",
+    "thunderstorm": "Tordenvær",
+    "thunderstormSlightHail": "Tordenvær med små hagl",
+    "thunderstormHeavyHail": "Tordenvær med kraftig hagl"
+  },
+  "timeframes": {
+    "now": "nå",
+    "today": "i dag",
+    "tomorrow": "i morgen",
+    "thisAfternoon": "i ettermiddag",
+    "thisEvening": "i kveld",
+    "tonight": "i natt"
+  },
+  "disambiguation": {
+    "foundMultipleAreas": "Fant {{count}} klatreområder for \"{{location}}\". Velg ett:",
+    "foundMultipleLocations": "Fant flere steder for \"{{location}}\". Velg ett:",
+    "queryTemplate": "forhold ved {{name}} ({{latitude}}, {{longitude}})"
+  },
+  "footer": {
+    "about": "Om",
+    "privacy": "Personvern",
+    "github": "GitHub",
+    "brand": "temps.rocks",
+    "description": "Gratis klatreforhold for alle. Bygget med kjærlighet til klatremiljøet.",
+    "attribution": "Data fra Open-Meteo, OpenBeta og <osmLink>OpenStreetMap-bidragsytere</osmLink>. Drevet av fellesskapet.",
+    "copyright": "© 2025 temps.rocks. Alle rettigheter forbeholdt."
+  },
+  "features": {
+    "heading": "Alt du trenger",
+    "subheading": "Komplette klatreforhold rett i lomma, helt gratis",
+    "realTimeWeather": {
+      "title": "Vær i sanntid",
+      "description": "Presise prognoser fra Open-Meteo med sol/skygge-beregning for hver sektor"
+    },
+    "chatInterface": {
+      "title": "Chat-grensesnitt",
+      "description": "Spørsmål i naturlig språk drevet av KI. Still dem på hvilket språk du vil"
+    },
+    "communityReports": {
+      "title": "Rapporter fra miljøet",
+      "description": "Del og bekreft gjeldende forhold. Hjelp andre klatrere med ferske oppdateringer"
+    },
+    "globalCoverage": {
+      "title": "Global dekning",
+      "description": "Alle crag eller sektorer i verden gjennom OpenBeta-integrasjonen"
+    },
+    "worksOffline": {
+      "title": "Fungerer offline",
+      "description": "Local-first-design. Lagre data uten nett og synkroniser mellom enheter med en nøkkel"
+    },
+    "privacyFirst": {
+      "title": "Personvern først",
+      "description": "Anonymt som standard. Ingen kontoer kreves. Dataene dine forblir dine"
+    }
+  },
+  "ui": {
+    "toggleTheme": "Bytt tema",
+    "selectLanguage": "Velg språk",
+    "aboutApp": "Om appen"
+  },
+  "dialog": {
+    "close": "Lukk",
+    "detailedConditions": "Detaljerte forhold",
+    "fullAnalysis": "Full væranalyse og klatreprognose",
+    "showMap": "Kart",
+    "tabs": {
+      "overview": "Oversikt",
+      "hourly": "Hver time",
+      "daily": "14 dager"
+    },
+    "currentRating": "Aktuell vurdering",
+    "currentConditions": "Aktuelle forhold",
+    "currentWeather": "Aktuelt vær",
+    "temperature": "Temperatur",
+    "humidity": "Luftfuktighet",
+    "windSpeed": "Vindhastighet",
+    "precipitation": "Nedbør",
+    "sunrise": "Soloppgang",
+    "sunset": "Solnedgang",
+    "high": "Maks",
+    "low": "Min",
+    "rain": "Regn",
+    "wind": "Vind",
+    "dry": "Tørt",
+    "wet": "Vått",
+    "precipitationContext": "Nedbørskontekst",
+    "last24h": "Siste 24 t",
+    "last48h": "Siste 48 t",
+    "next24h": "Neste 24 t",
+    "dewPointSpread": "Duggpunktsdifferanse (kondenserisiko)",
+    "lowRisk": "✅ Lav risiko – fjellet bør holde seg tørt",
+    "moderateRisk": "⚠️ Moderat risiko – følg med på fukten",
+    "highRisk": "❌ Høy risiko – kondens er sannsynlig",
+    "optimalWindows": "Optimale klatrevinduer",
+    "nextDays": "Neste 5 dager",
+    "bestTime": "🌟 Beste tid",
+    "noOptimalConditions": "Ingen optimale forhold de neste 5 dagene",
+    "checkHourlyForecast": "Sjekk timevarselet for flere detaljer",
+    "weatherDisclaimer": "⚠️ Været kan endre seg raskt. Følg prognosene før avreise og sjekk forholdene på stedet.",
+    "window": "vindu",
+    "windows": "vinduer",
+    "today": "I dag",
+    "tomorrow": "I morgen",
+    "showCompleteTimeline": "Vis hele tidslinjen",
+    "hour": "time",
+    "hours": "timer",
+    "period": "periode",
+    "periods": "perioder",
+    "noHourlyData": "Ingen timeprognose tilgjengelig",
+    "noDailyData": "Ingen dagsprognose tilgjengelig",
+    "noOptimalHours": "Ingen optimale forhold for",
+    "forecastIndicators": "Prognoseindikatorer:",
+    "goodClimbingWindows": "Gode klatretidspunkt",
+    "fairConditions": "Helt greie forhold",
+    "poorConditions": "Dårlige forhold",
+    "lessReliable": "Dag 8-14: mindre pålitelig prognose",
+    "lessReliableHourly": "Neste timer mindre forutsigbare",
+    "lessCertain": "MER USIKKERT",
+    "todayBadge": "I DAG"
+  },
+  "timeContext": {
+    "sunrise": "Soloppgang",
+    "sunset": "Solnedgang",
+    "recommendedHours": "Anbefalte klatretider",
+    "totalDaylight": "Totalt dagslys",
+    "hoursOfDaylight": "{{hours}} timer dagslys",
+    "earlyStartRecommended": "Tidlig start anbefales for å unngå varmen",
+    "limitedDaylight": "Begrenset dagslys - planlegg deretter",
+    "morningConditionsBest": "Beste forhold om morgenen",
+    "eveningSession": "Kveldsøktforhold",
+    "showAllHours": "Vis alle 24 timer",
+    "showClimbingHoursOnly": "Vis kun klatretimer",
+    "expandHours": "Utvid for å se alle timer"
   }
 }

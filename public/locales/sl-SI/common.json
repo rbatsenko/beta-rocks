@@ -1,19 +1,221 @@
+{
+  "header": {
+    "title": "temps.rocks"
   },
-  "rockTypes": {
-    "limestone": "apnenec",
-    "granite": "granit",
-    "sandstone": "peščenjak",
-    "basalt": "bazalt",
-    "gneiss": "gnejs",
-    "quartzite": "kremenčev peščenjak",
-    "conglomerate": "konglomerat",
-    "rhyolite": "riolit",
-    "porphyry": "porfir",
-    "andesite": "andezit",
-    "slate": "skriljavec",
-    "schist": "skrilavec",
-    "dolomite": "dolomit",
-    "volcanic": "vulkanski",
-    "phyllite": "filit"
+  "welcome": {
+    "heading": "Vprašaj po plezalnih razmerah",
+    "description": "Pridobi vreme v živo, analizo trenja in najboljše termine za plezanje na kateremkoli plezališču na svetu",
+    "exampleQueries": {
+      "query1": {
+        "display": "Kakšne bodo razmere v Ospu jutri?",
+        "query": "Kakšne bodo razmere v Ospu jutri?"
+      },
+      "query2": {
+        "display": "Ali bo Mišja Peč suha danes popoldne?",
+        "query": "Ali bo Mišja Peč suha danes popoldne?"
+      },
+      "query3": {
+        "display": "Kako bo v Kotečniku ta konec tedna?",
+        "query": "Kako bodo razmere v Kotečniku ta konec tedna?"
+      }
+    }
+  },
+  "chat": {
+    "analyzing": "Analiziram razmere...",
+    "thinking": "Razmišljam...",
+    "inputPlaceholder": "Vprašaj po kateremkoli plezališču ali sektorju..."
+  },
+  "conditions": {
+    "rating": "Ocena",
+    "details": "Podrobnosti",
+    "location": "Lokacija"
+  },
+  "ratings": {
+    "great": "Odlično",
+    "good": "Dobro",
+    "fair": "Solidno",
+    "poor": "Slabo",
+    "nope": "Nikakor"
+  },
+  "reasons": {
+    "perfectTemp": "Popolna temperatura ({{temp}}°C)",
+    "tempTooHigh": "Temperatura previsoka - prsti lahko zdrsnejo",
+    "coldGoodFriction": "Mrzlo, a dobro za trenje na {{rockType}}",
+    "idealHumidity": "Idealna vlaga ({{humidity}}%)",
+    "lowHumidityGranite": "Nizka vlaga izboljša trenje na granitu",
+    "readyInHours": "Za plezanje pripravljeno v ~{{hours}} urah",
+    "acceptable": "Razmere so sprejemljive"
+  },
+  "warnings": {
+    "tooWarm": "Prevroče za {{rockType}} ({{temp}}°C)",
+    "coldSuboptimal": "Mrzlo in manj primerno za {{rockType}}",
+    "highHumidity": "Visoka vlaga ({{humidity}}%) - skala je lahko spolzka",
+    "wetDangerousSandstone": "Skala je mokra - nevarno za plezanje (peščenjak je občutljiv, ko je moker)",
+    "wetSlippery": "Skala je mokra - spolzke razmere",
+    "veryHighWinds": "Zelo močan veter ({{wind}} km/h) - nevarnost sunkov",
+    "highWind": "Močan veter ({{wind}} km/h)",
+    "recentPrecip": "Nedavne padavine ({{precip}}mm) - bo suho čez ~{{hours}}h",
+    "currentlyWetDangerous": "Trenutno mokro - nevarno",
+    "currentlyWet": "Trenutno mokro"
+  },
+  "weather": {
+    "clearSky": "Jasno nebo",
+    "mainlyClear": "Pretežno jasno",
+    "partlyCloudy": "Delno oblačno",
+    "overcast": "Oblačno",
+    "fog": "Megla",
+    "depositingRimeFog": "Megla s srežem",
+    "lightDrizzle": "Rahlo rosenje",
+    "moderateDrizzle": "Zmerno rosenje",
+    "denseDrizzle": "Močno rosenje",
+    "lightFreezingDrizzle": "Rahlo zmrzujoče rosenje",
+    "denseFreezingDrizzle": "Močno zmrzujoče rosenje",
+    "slightRain": "Rahlo deževje",
+    "moderateRain": "Zmerno deževje",
+    "heavyRain": "Močno deževje",
+    "lightFreezingRain": "Rahlo zmrznjeno deževje",
+    "heavyFreezingRain": "Močno zmrznjeno deževje",
+    "slightSnowFall": "Rahlo sneženje",
+    "moderateSnowFall": "Zmerno sneženje",
+    "heavySnowFall": "Močno sneženje",
+    "snowGrains": "Snežna zrnca",
+    "slightRainShowers": "Kratke plohe",
+    "moderateRainShowers": "Zmerne plohe",
+    "violentRainShowers": "Močne plohe",
+    "slightSnowShowers": "Kratke snežne plohe",
+    "moderateSnowShowers": "Zmerne snežne plohe",
+    "heavySnowShowers": "Močne snežne plohe",
+    "thunderstorm": "Nevihte",
+    "thunderstormSlightHail": "Nevihte z rahlo točo",
+    "thunderstormHeavyHail": "Nevihte z močno točo"
+  },
+  "timeframes": {
+    "now": "zdaj",
+    "today": "danes",
+    "tomorrow": "jutri",
+    "thisAfternoon": "danes popoldne",
+    "thisEvening": "danes zvečer",
+    "tonight": "nocoj"
+  },
+  "disambiguation": {
+    "foundMultipleAreas": "Našli smo {{count}} plezališč za \"{{location}}\". Izberi eno:",
+    "foundMultipleLocations": "Našli smo več lokacij za \"{{location}}\". Izberi eno:",
+    "queryTemplate": "razmere na {{name}} ({{latitude}}, {{longitude}})"
+  },
+  "footer": {
+    "about": "O nas",
+    "privacy": "Zasebnost",
+    "github": "GitHub",
+    "brand": "temps.rocks",
+    "description": "Brezplačne plezalne razmere za vse. Z ljubeznijo do plezalne skupnosti.",
+    "attribution": "Podatki Open-Meteo, OpenBeta in <osmLink>sodelavcev OpenStreetMap</osmLink>. Pognano s skupnostjo.",
+    "copyright": "© 2025 temps.rocks. Vse pravice pridržane."
+  },
+  "features": {
+    "heading": "Vse, kar potrebuješ",
+    "subheading": "Celovite plezalne razmere na dosegu roke, popolnoma brezplačno",
+    "realTimeWeather": {
+      "title": "Vreme v realnem času",
+      "description": "Natančne napovedi Open-Meteo z izračunom sonca/sence za posamezne sektorje"
+    },
+    "chatInterface": {
+      "title": "Pogovorni vmesnik",
+      "description": "Vprašanja v naravnem jeziku, ki jih poganja AI. Sprašuj v kateremkoli jeziku"
+    },
+    "communityReports": {
+      "title": "Poročila skupnosti",
+      "description": "Deli in potrjuj trenutne razmere. Pomagaj drugim plezalcem s svežimi informacijami"
+    },
+    "globalCoverage": {
+      "title": "Globalna pokritost",
+      "description": "Vsako plezališče ali sektor kjerkoli na svetu z integracijo baze OpenBeta"
+    },
+    "worksOffline": {
+      "title": "Deluje brez povezave",
+      "description": "Local-first zasnova. Shranjuj podatke brez povezave in jih sinhroniziraj med napravami s ključem"
+    },
+    "privacyFirst": {
+      "title": "Zasebnost na prvem mestu",
+      "description": "Privzeto anonimno. Brez uporabniških računov. Tvoji podatki ostanejo tvoji"
+    }
+  },
+  "ui": {
+    "toggleTheme": "Zamenjaj temo",
+    "selectLanguage": "Izberi jezik",
+    "aboutApp": "O aplikaciji"
+  },
+  "dialog": {
+    "close": "Zapri",
+    "detailedConditions": "Podrobne razmere",
+    "fullAnalysis": "Celotna vremenska analiza in napoved razmer za plezanje",
+    "showMap": "Zemljevid",
+    "tabs": {
+      "overview": "Pregled",
+      "hourly": "Urno",
+      "daily": "14 dni"
+    },
+    "currentRating": "Trenutna ocena",
+    "currentConditions": "Trenutne razmere",
+    "currentWeather": "Trenutno vreme",
+    "temperature": "Temperatura",
+    "humidity": "Vlaga",
+    "windSpeed": "Hitrost vetra",
+    "precipitation": "Padavine",
+    "sunrise": "Sončni vzhod",
+    "sunset": "Sončni zahod",
+    "high": "Najvišja",
+    "low": "Najnižja",
+    "rain": "Dež",
+    "wind": "Veter",
+    "dry": "Suho",
+    "wet": "Mokro",
+    "precipitationContext": "Kontekst padavin",
+    "last24h": "Zadnjih 24 h",
+    "last48h": "Zadnjih 48 h",
+    "next24h": "Naslednjih 24 h",
+    "dewPointSpread": "Razlika rosišča (tveganje kondenzacije)",
+    "lowRisk": "✅ Nizko tveganje - skala bi morala ostati suha",
+    "moderateRisk": "⚠️ Zmerno tveganje - spremljaj vlago",
+    "highRisk": "❌ Visoko tveganje - verjetna kondenzacija",
+    "optimalWindows": "Optimalna okna za plezanje",
+    "nextDays": "Naslednjih 5 dni",
+    "bestTime": "🌟 Najboljši čas",
+    "noOptimalConditions": "V naslednjih 5 dneh ni optimalnih razmer",
+    "checkHourlyForecast": "Preveri urno napoved za več podrobnosti",
+    "weatherDisclaimer": "⚠️ Vreme se lahko hitro spremeni. Pred odhodom spremljaj napovedi in preveri razmere na terenu.",
+    "window": "okno",
+    "windows": "okna",
+    "today": "Danes",
+    "tomorrow": "Jutri",
+    "showCompleteTimeline": "Prikaži celoten časovni potek",
+    "hour": "ura",
+    "hours": "ure",
+    "period": "obdobje",
+    "periods": "obdobja",
+    "noHourlyData": "Urni podatki niso na voljo",
+    "noDailyData": "Dnevni podatki niso na voljo",
+    "noOptimalHours": "Ni optimalnih razmer za",
+    "forecastIndicators": "Kazalniki napovedi:",
+    "goodClimbingWindows": "Dobra plezalna okna",
+    "fairConditions": "Solidne razmere",
+    "poorConditions": "Slabe razmere",
+    "lessReliable": "Dnevi 8-14: manj zanesljiva napoved",
+    "lessReliableHourly": "Naslednje ure manj predvidljive",
+    "lessCertain": "MANJ ZANESLJIVO",
+    "todayBadge": "DANES"
+  },
+  "timeContext": {
+    "sunrise": "Sončni vzhod",
+    "sunset": "Sončni zahod",
+    "recommendedHours": "Priporočene ure za plezanje",
+    "totalDaylight": "Skupna dnevna svetloba",
+    "hoursOfDaylight": "{{hours}} ur dnevne svetlobe",
+    "earlyStartRecommended": "Priporočen zgodnji začetek za izogib vročini",
+    "limitedDaylight": "Omejena dnevna svetloba - načrtujte ustrezno",
+    "morningConditionsBest": "Najboljše razmere zjutraj",
+    "eveningSession": "Večerne razmere",
+    "showAllHours": "Prikaži vseh 24 ur",
+    "showClimbingHoursOnly": "Prikaži samo plezalne ure",
+    "expandHours": "Razširi za prikaz vseh ur"
   }
 }
