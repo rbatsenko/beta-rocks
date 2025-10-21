@@ -2,6 +2,7 @@ import { memo, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { useStickToBottomContext } from "use-stick-to-bottom";
 import { logRender } from "@/lib/debug/render-log";
+import { useClientTranslation } from "@/hooks/useClientTranslation";
 
 interface DisambiguationOption {
   id: string;
@@ -35,10 +36,21 @@ export const DisambiguationOptions = memo(function DisambiguationOptions({
   onOptionSelect,
 }: DisambiguationOptionsProps) {
   const { scrollToBottom } = useStickToBottomContext();
+  const { t } = useClientTranslation("common");
+
   logRender("DisambiguationOptions", {
     options: result.options.length,
     hasSource: !!result.source,
   });
+
+  // Translate rock type if available
+  const translateRockType = useCallback((rockType: string | undefined): string | undefined => {
+    if (!rockType) return undefined;
+    const key = `rockTypes.${rockType}`;
+    const translated = t(key);
+    // If translation key doesn't exist, t() returns the key itself, so fallback to original
+    return translated !== key ? translated : rockType;
+  }, [t]);
 
   const handleOptionClick = useCallback(
     (option: DisambiguationOption) => {
@@ -77,7 +89,7 @@ export const DisambiguationOptions = memo(function DisambiguationOptions({
               {option.name}
               {option.rockType && (
                 <span className="ml-1.5 text-orange-600 dark:text-orange-400">
-                  ({option.rockType})
+                  ({translateRockType(option.rockType)})
                 </span>
               )}
             </span>
@@ -85,7 +97,7 @@ export const DisambiguationOptions = memo(function DisambiguationOptions({
               {option.location}
               {option.rockType && (
                 <span className="ml-1.5 text-orange-600 dark:text-orange-400">
-                  • {option.rockType}
+                  • {translateRockType(option.rockType)}
                 </span>
               )}
             </span>
