@@ -1,0 +1,220 @@
+{
+  "header": {
+    "title": "temps.rocks"
+  },
+  "welcome": {
+    "heading": "Zeptej se na podmínky pro lezení",
+    "description": "Získej aktuální počasí, analýzu tření a optimální okna pro lezení na jakékoliv skále po celém světě",
+    "exampleQueries": {
+      "query1": {
+        "display": "Jaké jsou podmínky v Little Cottonwood Canyon zítra?",
+        "query": "Little Cottonwood Canyon conditions tomorrow?"
+      },
+      "query2": {
+        "display": "Je Rifle dnes odpoledne suché?",
+        "query": "Is Rifle dry this afternoon?"
+      },
+      "query3": {
+        "display": "Jaké jsou podmínky na El Capitan dnes?",
+        "query": "El Capitan conditions today?"
+      }
+    }
+  },
+  "chat": {
+    "analyzing": "Analyzuji podmínky...",
+    "thinking": "Přemýšlím...",
+    "inputPlaceholder": "Zeptej se na jakoukoli skálu nebo sektor..."
+  },
+  "conditions": {
+    "rating": "Hodnocení",
+    "details": "Detaily",
+    "location": "Místo"
+  },
+  "ratings": {
+    "great": "Skvělé",
+    "good": "Dobré",
+    "fair": "Ujde",
+    "poor": "Špatné",
+    "nope": "Vůbec"
+  },
+  "reasons": {
+    "perfectTemp": "Perfektní teplota ({{temp}}°C)",
+    "tempTooHigh": "Teplota příliš vysoká - prsty mohou klouzat",
+    "coldGoodFriction": "Chladno, ale dobré pro tření na {{rockType}}",
+    "idealHumidity": "Ideální vlhkost ({{humidity}}%)",
+    "lowHumidityGranite": "Nízká vlhkost pomáhá tření na žule",
+    "readyInHours": "Bude připraveno k lezení za ~{{hours}} hodin",
+    "acceptable": "Podmínky jsou přijatelné"
+  },
+  "warnings": {
+    "tooWarm": "Příliš teplo pro {{rockType}} ({{temp}}°C)",
+    "coldSuboptimal": "Chladno a neoptimální pro {{rockType}}",
+    "highHumidity": "Vysoká vlhkost ({{humidity}}%) - skála může být kluzká",
+    "wetDangerousSandstone": "Skála je momentálně mokrá - nebezpečné pro lezení (pískovec je slabý když je mokrý)",
+    "wetSlippery": "Skála je momentálně mokrá - kluzké podmínky",
+    "veryHighWinds": "Velmi silný vítr ({{wind}} km/h) - nebezpečí sfouknutí",
+    "highWind": "Silný vítr ({{wind}} km/h)",
+    "recentPrecip": "Nedávné srážky ({{precip}}mm) - uschne za ~{{hours}}h",
+    "currentlyWetDangerous": "Momentálně mokro - nebezpečné",
+    "currentlyWet": "Momentálně mokro"
+  },
+  "weather": {
+    "clearSky": "Jasná obloha",
+    "mainlyClear": "Převážně jasno",
+    "partlyCloudy": "Polojasno",
+    "overcast": "Zataženo",
+    "fog": "Mlha",
+    "depositingRimeFog": "Námrazová mlha",
+    "lightDrizzle": "Lehké mrholení",
+    "moderateDrizzle": "Mírné mrholení",
+    "denseDrizzle": "Husté mrholení",
+    "lightFreezingDrizzle": "Lehké mrznoucí mrholení",
+    "denseFreezingDrizzle": "Husté mrznoucí mrholení",
+    "slightRain": "Slabý déšť",
+    "moderateRain": "Mírný déšť",
+    "heavyRain": "Silný déšť",
+    "lightFreezingRain": "Lehký mrznoucí déšť",
+    "heavyFreezingRain": "Silný mrznoucí déšť",
+    "slightSnowFall": "Slabé sněžení",
+    "moderateSnowFall": "Mírné sněžení",
+    "heavySnowFall": "Silné sněžení",
+    "snowGrains": "Sněhové zrno",
+    "slightRainShowers": "Slabé přeháňky",
+    "moderateRainShowers": "Mírné přeháňky",
+    "violentRainShowers": "Silné přeháňky",
+    "slightSnowShowers": "Slabé sněhové přeháňky",
+    "heavySnowShowers": "Silné sněhové přeháňky",
+    "thunderstorm": "Bouřka",
+    "thunderstormSlightHail": "Bouřka s lehkým kroupami",
+    "thunderstormHeavyHail": "Bouřka se silnými kroupami"
+  },
+  "timeframes": {
+    "now": "nyní",
+    "today": "dnes",
+    "tomorrow": "zítra",
+    "thisAfternoon": "dnes odpoledne",
+    "thisEvening": "dnes večer",
+    "tonight": "dnes v noci"
+  },
+  "disambiguation": {
+    "foundMultipleAreas": "Našel jsem {{count}} lezeckých oblastí pro \"{{location}}\". Prosím vyber jednu:",
+    "foundMultipleLocations": "Našel jsem více míst pro \"{{location}}\". Prosím vyber jedno:",
+    "queryTemplate": "podmínky na {{name}} ({{latitude}}, {{longitude}})"
+  },
+  "footer": {
+    "about": "O aplikaci",
+    "privacy": "Soukromí",
+    "github": "GitHub",
+    "brand": "temps.rocks",
+    "description": "Bezplatné podmínky pro lezení pro všechny. Vytvořeno s ❤️ pro lezeckou komunitu.",
+    "attribution": "Data z Open-Meteo a OpenBeta. Podpořeno komunitou.",
+    "copyright": "© 2025 temps.rocks. Všechna práva vyhrazena."
+  },
+  "features": {
+    "heading": "Vše, co potřebuješ",
+    "subheading": "Kompletní podmínky pro lezení na dosah ruky, zcela zdarma",
+    "realTimeWeather": {
+      "title": "Počasí v reálném čase",
+      "description": "Přesné předpovědi z Open-Meteo s výpočty slunce/stínu pro konkrétní sektory"
+    },
+    "chatInterface": {
+      "title": "Chatové rozhraní",
+      "description": "Dotazy v přirozeném jazyce poháněné AI. Ptej se v jakémkoli jazyce, dostaneš okamžité odpovědi"
+    },
+    "communityReports": {
+      "title": "Komunitní reporty",
+      "description": "Sdílej a potvrzuj aktuální podmínky. Pomoz ostatním lezců s aktuálními informacemi"
+    },
+    "globalCoverage": {
+      "title": "Globální pokrytí",
+      "description": "Jakákoli skála nebo sektor po celém světě prostřednictvím integrace databáze OpenBeta"
+    },
+    "worksOffline": {
+      "title": "Funguje offline",
+      "description": "Design zaměřený na lokální data. Ulož data offline a synchronizuj napříč zařízeními s sync klíčem"
+    },
+    "privacyFirst": {
+      "title": "Soukromí na prvním místě",
+      "description": "Anonymní ve výchozím nastavení. Není potřeba účet. Tvá data zůstávají tvá"
+    }
+  },
+  "ui": {
+    "toggleTheme": "Přepnout motiv",
+    "selectLanguage": "Vybrat jazyk",
+    "aboutApp": "O aplikaci"
+  },
+  "dialog": {
+    "close": "Zavřít",
+    "detailedConditions": "Podrobné podmínky",
+    "fullAnalysis": "Úplná analýza počasí a předpověď podmínek pro lezení",
+    "showMap": "Mapa",
+    "tabs": {
+      "overview": "Přehled",
+      "hourly": "Hodinově",
+      "daily": "14denní"
+    },
+    "currentRating": "Aktuální hodnocení",
+    "currentConditions": "Aktuální podmínky",
+    "currentWeather": "Aktuální počasí",
+    "temperature": "Teplota",
+    "humidity": "Vlhkost",
+    "windSpeed": "Rychlost větru",
+    "precipitation": "Srážky",
+    "sunrise": "Východ slunce",
+    "sunset": "Západ slunce",
+    "high": "Max",
+    "low": "Min",
+    "rain": "Déšť",
+    "wind": "Vítr",
+    "dry": "Sucho",
+    "wet": "Mokro",
+    "precipitationContext": "Kontext srážek",
+    "last24h": "Posledních 24h",
+    "last48h": "Posledních 48h",
+    "next24h": "Příštích 24h",
+    "dewPointSpread": "Rozpětí rosného bodu (riziko kondenzace)",
+    "lowRisk": "✅ Nízké riziko - skála by měla zůstat suchá",
+    "moderateRisk": "⚠️ Mírné riziko - sleduj vlhkost",
+    "highRisk": "❌ Vysoké riziko - pravděpodobná kondenzace",
+    "optimalWindows": "Optimální okna pro lezení",
+    "nextDays": "Příštích 5 dní",
+    "bestTime": "🌟 Nejlepší čas",
+    "noOptimalConditions": "Žádné optimální podmínky v příštích 5 dnech",
+    "checkHourlyForecast": "Zkontroluj hodinovou předpověď pro více detailů",
+    "weatherDisclaimer": "⚠️ Počasí se může rychle měnit. Vždy sleduj předpovědi před vyrazením a zkontroluj podmínky po příjezdu.",
+    "window": "okno",
+    "windows": "okna",
+    "today": "Dnes",
+    "tomorrow": "Zítra",
+    "showCompleteTimeline": "Zobrazit kompletní časovou osu",
+    "hour": "hodina",
+    "hours": "hodiny",
+    "period": "období",
+    "periods": "období",
+    "noHourlyData": "Nejsou dostupná data hodinové předpovědi",
+    "noDailyData": "Nejsou dostupná data denní předpovědi",
+    "noOptimalHours": "Žádné optimální podmínky dne",
+    "forecastIndicators": "Indikátory předpovědi:",
+    "goodClimbingWindows": "Dobrá okna pro lezení",
+    "fairConditions": "Přijatelné podmínky",
+    "poorConditions": "Špatné podmínky",
+    "lessReliable": "Dny 8-14: Méně spolehlivá předpověď",
+    "lessReliableHourly": "Další hodiny méně předvídatelné",
+    "lessCertain": "MÉNĚ JISTÉ",
+    "todayBadge": "DNES"
+  },
+  "timeContext": {
+    "sunrise": "Východ slunce",
+    "sunset": "Západ slunce",
+    "recommendedHours": "Doporučené hodiny pro lezení",
+    "totalDaylight": "Celková denní doba",
+    "hoursOfDaylight": "{{hours}} hodin denního světla",
+    "earlyStartRecommended": "Doporučen včasný start kvůli horku",
+    "limitedDaylight": "Omezené denní světlo - plánuj podle toho",
+    "morningConditionsBest": "Nejlepší podmínky ráno",
+    "eveningSession": "Podmínky pro večerní session",
+    "showAllHours": "Zobrazit všech 24 hodin",
+    "showClimbingHoursOnly": "Zobrazit pouze hodiny pro lezení",
+    "expandHours": "Rozbalit pro zobrazení všech hodin"
+  }
+}
