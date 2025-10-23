@@ -325,6 +325,112 @@ const tools = {
         }
       }
 
+      // STEP 3.5: If we have coordinates (e.g., from disambiguation), try exact match in DB
+      // This is critical for sectors to get parent crag descriptions
+      if (lat && lon && !description) {
+        try {
+          console.log("[get_conditions] Coordinates provided, checking for exact match in DB:", {
+            lat,
+            lon,
+          });
+
+          const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+          const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+
+          if (supabaseUrl && supabaseKey) {
+            const supabase = createClient(supabaseUrl, supabaseKey);
+
+            // Check sectors first (more specific than crags)
+            const { data: sectors } = await supabase
+              .from("sectors")
+              .select(`
+                *,
+                parent_crag:crags!sectors_crag_id_fkey(
+                  name,
+                  description,
+                  rock_type,
+                  climbing_types,
+                  aspects
+                )
+              `)
+              .eq("lat", lat)
+              .eq("lon", lon)
+              .limit(1);
+
+            if (sectors && sectors.length > 0) {
+              const sector = sectors[0];
+              console.log("[get_conditions] Found exact sector match:", {
+                name: sector.name,
+                hasParent: !!sector.parent_crag,
+              });
+
+              // Enrich with parent crag data
+              if (sector.parent_crag) {
+                const parent = Array.isArray(sector.parent_crag) ? sector.parent_crag[0] : sector.parent_crag;
+
+                // Combine sector + parent descriptions (parent has safety warnings)
+                const sectorDesc = sector.description || '';
+                const parentDesc = parent.description || '';
+                description = sectorDesc && parentDesc
+                  ? `${sectorDesc}\n\n${parentDesc}`
+                  : (parentDesc || sectorDesc || undefined);
+
+                // Use parent's rock type if we don't have one
+                if ((!detectedRockType || detectedRockType === "unknown") && parent.rock_type) {
+                  detectedRockType = parent.rock_type as RockType;
+                }
+
+                // Use parent's climbing types and aspects
+                if (parent.climbing_types && parent.climbing_types.length > 0) {
+                  climbingTypes = parent.climbing_types;
+                }
+                if (parent.aspects && parent.aspects.length > 0) {
+                  aspects = parent.aspects;
+                }
+
+                console.log("[get_conditions] Enriched with parent crag data:", {
+                  parentName: parent.name,
+                  rockType: detectedRockType,
+                  hasDescription: !!description,
+                  hasAspects: !!aspects,
+                });
+              }
+            } else {
+              // Try crags table if no sector match
+              const { data: crags } = await supabase
+                .from("crags")
+                .select("*")
+                .eq("lat", lat)
+                .eq("lon", lon)
+                .limit(1);
+
+              if (crags && crags.length > 0) {
+                const crag = crags[0];
+                console.log("[get_conditions] Found exact crag match:", {
+                  name: crag.name,
+                });
+
+                description = crag.description || undefined;
+                if ((!detectedRockType || detectedRockType === "unknown") && crag.rock_type) {
+                  detectedRockType = crag.rock_type as RockType;
+                }
+                if (crag.climbing_types && crag.climbing_types.length > 0) {
+                  climbingTypes = crag.climbing_types;
+                }
+                if (crag.aspects && crag.aspects.length > 0) {
+                  aspects = crag.aspects;
+                }
+              }
+            }
+          }
+        } catch (error) {
+          console.log("[get_conditions] Exact match lookup failed (non-critical):", {
+            error: error instanceof Error ? error.message : String(error),
+          });
+          // Non-critical - continue without enrichment
+        }
+      }
+
       // STEP 4: If we have coordinates but missing metadata, try reverse lookup in local DB
       if (lat && lon && (!country || !detectedRockType || detectedRockType === "unknown")) {
         try {
