@@ -75,22 +75,23 @@ const tools = {
 
           if (localCrags && localCrags.length > 0) {
             if (localCrags.length === 1) {
-              // Perfect! Single crag found locally
-              const crag = localCrags[0];
-              lat = crag.lat;
-              lon = crag.lon;
-              detectedRockType = (detectedRockType || (crag.rock_type as RockType)) as RockType;
+              // Perfect! Single crag/sector found locally
+              const result = localCrags[0];
+              lat = result.lat;
+              lon = result.lon;
+              detectedRockType = (detectedRockType || (result.rock_type as RockType)) as RockType;
 
               // Capture detailed location data
-              country = crag.country || undefined;
-              state = crag.state || undefined;
-              municipality = crag.municipality || undefined;
-              village = crag.village || undefined;
+              country = result.country || undefined;
+              state = result.state || undefined;
+              municipality = result.municipality || undefined;
+              village = result.village || undefined;
 
-              // Capture crag-specific metadata for AI context
-              description = crag.description || undefined;
-              aspects = crag.aspects || undefined;
-              climbingTypes = crag.climbing_types || undefined;
+              // Capture metadata for AI context
+              description = result.description || undefined;
+              // aspects is only available on crags, not sectors (search_locations_unaccent doesn't include it)
+              aspects = 'aspects' in result ? (result.aspects as number[] | undefined) : undefined;
+              climbingTypes = result.climbing_types || undefined;
 
               // Build locationDetails from available fields
               const locationParts = [];
@@ -100,8 +101,9 @@ const tools = {
               if (country) locationParts.push(country);
               locationDetails = locationParts.join(", ");
 
-              console.log("[get_conditions] Using local database crag:", {
-                name: crag.name,
+              console.log("[get_conditions] Using local database result:", {
+                name: result.name,
+                resultType: 'result_type' in result ? result.result_type : 'crag',
                 lat,
                 lon,
                 country,
