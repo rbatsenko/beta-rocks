@@ -114,9 +114,9 @@ const tools = {
                 climbingTypes,
               });
             } else if (localCrags.length > 1) {
-              // Multiple crags found locally - return disambiguation
+              // Multiple crags/sectors found locally - return disambiguation
               console.log(
-                "[get_conditions] Multiple crags found in local DB, returning disambiguation"
+                "[get_conditions] Multiple crags/sectors found in local DB, returning disambiguation"
               );
 
               return {
@@ -125,14 +125,22 @@ const tools = {
                 message: `Found ${localCrags.length} climbing areas for "${location}" in our database. Please choose one:`,
                 translationKey: "disambiguation.foundMultipleAreas",
                 translationParams: { count: localCrags.length, location },
-                options: localCrags.map((crag) => ({
-                  id: crag.id,
-                  name: crag.name,
-                  location: crag.country,
-                  latitude: crag.lat,
-                  longitude: crag.lon,
-                  rockType: crag.rock_type || "unknown",
-                })),
+                options: localCrags.map((item) => {
+                  // Check if this is a sector (has result_type field from search_locations_unaccent)
+                  const isSector = 'result_type' in item && item.result_type === 'sector';
+                  const locationLabel = isSector && 'parent_crag_name' in item
+                    ? item.parent_crag_name // Show parent crag for sectors
+                    : item.country; // Show country for crags
+
+                  return {
+                    id: item.id,
+                    name: item.name,
+                    location: locationLabel,
+                    latitude: item.lat,
+                    longitude: item.lon,
+                    rockType: item.rock_type || "unknown",
+                  };
+                }),
               };
             }
           }
