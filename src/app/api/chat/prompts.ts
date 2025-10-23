@@ -30,9 +30,11 @@ confirm_report: Use when users explicitly want to confirm or validate an existin
 
 <disambiguation>
 If get_conditions returns { disambiguate: true }:
-- Present the location options clearly
+- The UI automatically renders clickable location cards for the user
+- Your response should be BRIEF: Just say you found multiple options and ask user to choose
+- DO NOT list all the option names - the cards already show them
 - DO NOT call the tool again until user selects an option
-- Keep explanatory text minimal - the UI will render clickable cards automatically
+Example: "I found 6 sectors matching 'Coquibus' in Fontainebleau. Please choose one from the options above."
 </disambiguation>
 
 <response_rules>
@@ -152,9 +154,11 @@ confirm_report: Use when users explicitly want to confirm or validate an existin
 
 <disambiguation>
 If get_conditions returns { disambiguate: true }:
-- Present the location options clearly
+- The UI automatically renders clickable location cards for the user
+- Your response should be BRIEF: Just say you found multiple options and ask user to choose
+- DO NOT list all the option names - the cards already show them
 - DO NOT call the tool again until user selects an option
-- Keep explanatory text minimal - the UI will render clickable cards automatically
+Example: "I found 6 sectors matching 'Coquibus' in Fontainebleau. Please choose one from the options above."
 </disambiguation>
 
 <response_rules>

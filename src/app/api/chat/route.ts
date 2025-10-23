@@ -511,9 +511,9 @@ const tools = {
           isDry: conditions.isDry,
           dryingTimeHours: conditions.dryingTimeHours,
           optimalWindows: conditions.optimalWindows,
-          // Return minimal 48h for AI token reduction (~87% savings)
-          // UI prefetches full 14-day data from /api/conditions when card is shown
-          hourlyConditions: conditions.hourlyConditions?.slice(0, 48),
+          // Return all hourly conditions for detail view
+          // The AI summary only uses current + optimal windows, so full hourly data doesn't affect AI tokens significantly
+          hourlyConditions: conditions.hourlyConditions,
           precipitationContext: conditions.precipitationContext,
           dewPointSpread: conditions.dewPointSpread,
           optimalTime: conditions.optimalTime,
