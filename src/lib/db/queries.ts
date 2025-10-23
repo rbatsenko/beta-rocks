@@ -29,13 +29,23 @@ export async function fetchCragById(id: string) {
 }
 
 export async function searchCrags(query: string) {
-  const { data, error } = await supabase
-    .from("crags")
-    .select("*")
-    .or(`name.ilike.%${query}%,country.ilike.%${query}%`)
-    .limit(10);
+  // Use RPC call with accent-insensitive search for better international support
+  // This handles cases like "Apremont Desert" matching "Apremont Désert"
+  const { data, error } = await supabase.rpc("search_crags_unaccent", {
+    search_query: query,
+  });
 
-  if (error) throw error;
+  if (error) {
+    // Fallback to old search if RPC fails (e.g., function not yet created)
+    console.warn("[searchCrags] RPC failed, falling back to ILIKE:", error);
+    const fallback = await supabase
+      .from("crags")
+      .select("*")
+      .or(`name.ilike.%${query}%,country.ilike.%${query}%`)
+      .limit(10);
+    return fallback.data;
+  }
+
   return data;
 }
 

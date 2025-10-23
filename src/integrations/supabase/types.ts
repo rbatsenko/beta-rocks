@@ -8,6 +8,84 @@ export type Database = {
   };
   public: {
     Tables: {
+      chat_logs: {
+        Row: {
+          ai_response: string | null;
+          cached_input_tokens: number | null;
+          country_code: string | null;
+          created_at: string;
+          duration_ms: number | null;
+          error: string | null;
+          estimated_cost_usd: number | null;
+          friction_score: number | null;
+          id: string;
+          input_tokens: number | null;
+          locale: string | null;
+          location_name: string | null;
+          message_id: string | null;
+          metadata: Json | null;
+          output_tokens: number | null;
+          reasoning_tokens: number | null;
+          rock_type: string | null;
+          session_id: string;
+          tool_calls: Json | null;
+          tool_results: Json | null;
+          total_tokens: number | null;
+          user_agent: string | null;
+          user_message: string;
+        };
+        Insert: {
+          ai_response?: string | null;
+          cached_input_tokens?: number | null;
+          country_code?: string | null;
+          created_at?: string;
+          duration_ms?: number | null;
+          error?: string | null;
+          estimated_cost_usd?: number | null;
+          friction_score?: number | null;
+          id?: string;
+          input_tokens?: number | null;
+          locale?: string | null;
+          location_name?: string | null;
+          message_id?: string | null;
+          metadata?: Json | null;
+          output_tokens?: number | null;
+          reasoning_tokens?: number | null;
+          rock_type?: string | null;
+          session_id: string;
+          tool_calls?: Json | null;
+          tool_results?: Json | null;
+          total_tokens?: number | null;
+          user_agent?: string | null;
+          user_message: string;
+        };
+        Update: {
+          ai_response?: string | null;
+          cached_input_tokens?: number | null;
+          country_code?: string | null;
+          created_at?: string;
+          duration_ms?: number | null;
+          error?: string | null;
+          estimated_cost_usd?: number | null;
+          friction_score?: number | null;
+          id?: string;
+          input_tokens?: number | null;
+          locale?: string | null;
+          location_name?: string | null;
+          message_id?: string | null;
+          metadata?: Json | null;
+          output_tokens?: number | null;
+          reasoning_tokens?: number | null;
+          rock_type?: string | null;
+          session_id?: string;
+          tool_calls?: Json | null;
+          tool_results?: Json | null;
+          total_tokens?: number | null;
+          user_agent?: string | null;
+          user_message?: string;
+        };
+        Relationships: [];
+      };
       confirmations: {
         Row: {
           created_at: string | null;
@@ -315,38 +393,33 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
-      gtrgm_compress: {
-        Args: { "": unknown };
-        Returns: unknown;
+      immutable_unaccent: { Args: { "": string }; Returns: string };
+      search_crags_unaccent: {
+        Args: { search_query: string };
+        Returns: {
+          aspects: number[];
+          climbing_types: string[];
+          country: string;
+          created_at: string;
+          description: string;
+          id: string;
+          last_synced_at: string;
+          lat: number;
+          lon: number;
+          municipality: string;
+          name: string;
+          osm_id: string;
+          osm_type: string;
+          rock_type: string;
+          source: string;
+          state: string;
+          updated_at: string;
+          village: string;
+        }[];
       };
-      gtrgm_decompress: {
-        Args: { "": unknown };
-        Returns: unknown;
-      };
-      gtrgm_in: {
-        Args: { "": unknown };
-        Returns: unknown;
-      };
-      gtrgm_options: {
-        Args: { "": unknown };
-        Returns: undefined;
-      };
-      gtrgm_out: {
-        Args: { "": unknown };
-        Returns: unknown;
-      };
-      set_limit: {
-        Args: { "": number };
-        Returns: number;
-      };
-      show_limit: {
-        Args: Record<PropertyKey, never>;
-        Returns: number;
-      };
-      show_trgm: {
-        Args: { "": string };
-        Returns: string[];
-      };
+      show_limit: { Args: never; Returns: number };
+      show_trgm: { Args: { "": string }; Returns: string[] };
+      unaccent: { Args: { "": string }; Returns: string };
     };
     Enums: {
       [_ in never]: never;
