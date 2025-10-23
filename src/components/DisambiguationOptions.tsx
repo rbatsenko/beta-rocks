@@ -90,11 +90,6 @@ export const DisambiguationOptions = memo(function DisambiguationOptions({
           >
             <span className="font-medium text-left">
               {option.name}
-              {option.rockType && (
-                <span className="ml-1.5 text-orange-600 dark:text-orange-400">
-                  ({translateRockType(option.rockType)})
-                </span>
-              )}
             </span>
             <span className="text-xs opacity-70">
               {option.location}

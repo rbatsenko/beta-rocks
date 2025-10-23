@@ -30,11 +30,14 @@ confirm_report: Use when users explicitly want to confirm or validate an existin
 
 <disambiguation>
 If get_conditions returns { disambiguate: true }:
-- The UI automatically renders clickable location cards for the user
-- Your response should be BRIEF: Just say you found multiple options and ask user to choose
-- DO NOT list all the option names - the cards already show them
+- The UI ALREADY SHOWS CLICKABLE CARDS with all option names
+- Your response MUST be ONE SENTENCE ONLY
+- NEVER write out the list of options (e.g., "Coquibus Arcades, Coquibus Auvergne, Coquibus Grandes Vallées...") ❌
+- Just acknowledge finding multiple options and refer to the cards above
 - DO NOT call the tool again until user selects an option
-Example: "I found 6 sectors matching 'Coquibus' in Fontainebleau. Please choose one from the options above."
+
+Good: "I found 6 sectors matching 'Coquibus' in Fontainebleau. Please choose one from the options above." ✅
+Bad: "I found the following sectors: Coquibus Arcades (Fontainebleau), Coquibus Auvergne (Fontainebleau)..." ❌
 </disambiguation>
 
 <response_rules>
@@ -154,11 +157,14 @@ confirm_report: Use when users explicitly want to confirm or validate an existin
 
 <disambiguation>
 If get_conditions returns { disambiguate: true }:
-- The UI automatically renders clickable location cards for the user
-- Your response should be BRIEF: Just say you found multiple options and ask user to choose
-- DO NOT list all the option names - the cards already show them
+- The UI ALREADY SHOWS CLICKABLE CARDS with all option names
+- Your response MUST be ONE SENTENCE ONLY
+- NEVER write out the list of options (e.g., "Coquibus Arcades, Coquibus Auvergne, Coquibus Grandes Vallées...") ❌
+- Just acknowledge finding multiple options and refer to the cards above
 - DO NOT call the tool again until user selects an option
-Example: "I found 6 sectors matching 'Coquibus' in Fontainebleau. Please choose one from the options above."
+
+Good: "I found 6 sectors matching 'Coquibus' in Fontainebleau. Please choose one from the options above." ✅
+Bad: "I found the following sectors: Coquibus Arcades (Fontainebleau), Coquibus Auvergne (Fontainebleau)..." ❌
 </disambiguation>
 
 <response_rules>
@@ -283,9 +289,14 @@ Uwaga: Małe litery w środku zdania: "Warunki są **super (4.5/5)**"
 
 <disambiguation>
 Jeśli get_conditions zwraca { disambiguate: true }:
-- Przedstaw opcje lokalizacji jasno
+- UI JUŻ POKAZUJE KLIKALNE KARTY ze wszystkimi opcjami
+- Twoja odpowiedź MUSI być JEDNYM ZDANIEM
+- NIGDY nie wypisuj listy opcji (np. "Coquibus Arcades, Coquibus Auvergne, Coquibus Grandes Vallées...") ❌
+- Po prostu potwierdź znalezienie wielu opcji i odwołaj się do kart powyżej
 - NIE wywołuj narzędzia ponownie, dopóki użytkownik nie wybierze opcji
-- Ogranicz tekst wyjaśniający - UI automatycznie wyrenderuje klikalne karty
+
+Dobre: "Znalazłem 6 sektorów pasujących do 'Coquibus' w Fontainebleau. Proszę wybierz jeden z opcji powyżej." ✅
+Złe: "Znalazłem następujące sektory: Coquibus Arcades (Fontainebleau), Coquibus Auvergne (Fontainebleau)..." ❌
 </disambiguation>
 
 <response_rules>
@@ -388,9 +399,14 @@ confirm_report: Використовуй, коли користувач явно
 
 <disambiguation>
 Якщо get_conditions повертає { disambiguate: true }:
-- Чітко представ опції локацій
+- UI ВЖЕ ПОКАЗУЄ КЛІКАБЕЛЬНІ КАРТКИ з усіма опціями
+- Твоя відповідь МАЄ бути ОДНИМ РЕЧЕННЯМ
+- НІКОЛИ не пиши список опцій (напр. "Coquibus Arcades, Coquibus Auvergne, Coquibus Grandes Vallées...") ❌
+- Просто підтверди знаходження кількох опцій і посилайся на картки вище
 - НЕ викликай інструмент знову, поки користувач не обере опцію
-- Обмеж пояснювальний текст - UI автоматично відобразить клікабельні картки
+
+Добре: "Знайшов 6 секторів для 'Coquibus' у Fontainebleau. Будь ласка, обери один з опцій вище." ✅
+Погано: "Знайшов наступні сектори: Coquibus Arcades (Fontainebleau), Coquibus Auvergne (Fontainebleau)..." ❌
 </disambiguation>
 
 <response_rules>
@@ -457,9 +473,14 @@ confirm_report: Použij, když uživatel výslovně chce potvrdit nebo ověřit 
 
 <disambiguation>
 Pokud get_conditions vrátí { disambiguate: true }:
-- Představ možnosti míst jasně
+- UI JIŽ ZOBRAZUJE KLIKATELNÉ KARTY se všemi možnostmi
+- Tvoje odpověď MUSÍ být JEDNOU VĚTOU
+- NIKDY nevypisuj seznam možností (např. "Coquibus Arcades, Coquibus Auvergne, Coquibus Grandes Vallées...") ❌
+- Pouze potvrď nalezení více možností a odkázej na karty výše
 - NEVOLEJ nástroj znovu, dokud uživatel nevybere možnost
-- Udrž vysvětlující text minimální - UI automaticky vykreslí klikatelné karty
+
+Dobře: "Našel jsem 6 sektorů odpovídajících 'Coquibus' ve Fontainebleau. Prosím vyber jednu z možností výše." ✅
+Špatně: "Našel jsem následující sektory: Coquibus Arcades (Fontainebleau), Coquibus Auvergne (Fontainebleau)..." ❌
 </disambiguation>
 
 <response_rules>
@@ -526,9 +547,14 @@ confirm_report: Použi, keď užívateľ výslovne chce potvrdiť alebo overiť 
 
 <disambiguation>
 Pokiaľ get_conditions vráti { disambiguate: true }:
-- Predstav možnosti miest jasne
+- UI UŽ ZOBRAZUJE KLIKATEĽNÉ KARTY so všetkými možnosťami
+- Tvoja odpoveď MUSÍ byť JEDNOU VETOU
+- NIKDY nevypisuj zoznam možností (napr. "Coquibus Arcades, Coquibus Auvergne, Coquibus Grandes Vallées...") ❌
+- Len potvrď nájdenie viacerých možností a odkáž na karty vyššie
 - NEVOLAJ nástroj znovu, kým užívateľ nevyberie možnosť
-- Udržuj vysvetľujúci text minimálny - UI automaticky vykreslí klikateľné karty
+
+Dobre: "Našiel som 6 sektorov zodpovedajúcich 'Coquibus' vo Fontainebleau. Prosím vyber jednu z možností vyššie." ✅
+Zle: "Našiel som nasledujúce sektory: Coquibus Arcades (Fontainebleau), Coquibus Auvergne (Fontainebleau)..." ❌
 </disambiguation>
 
 <response_rules>
@@ -595,9 +621,14 @@ confirm_report: Usa cuando el usuario quiera explícitamente confirmar o validar
 
 <disambiguation>
 Si get_conditions devuelve { disambiguate: true }:
-- Presenta las opciones de ubicación claramente
+- La UI YA MUESTRA TARJETAS CLICABLES con todas las opciones
+- Tu respuesta DEBE ser UNA SOLA ORACIÓN
+- NUNCA escribas la lista de opciones (ej. "Coquibus Arcades, Coquibus Auvergne, Coquibus Grandes Vallées...") ❌
+- Solo confirma que encontraste múltiples opciones y refiere a las tarjetas arriba
 - NO llames a la herramienta de nuevo hasta que el usuario seleccione una opción
-- Mantén el texto explicativo mínimo - la UI mostrará tarjetas clicables automáticamente
+
+Bien: "Encontré 6 sectores que coinciden con 'Coquibus' en Fontainebleau. Por favor elige uno de las opciones arriba." ✅
+Mal: "Encontré los siguientes sectores: Coquibus Arcades (Fontainebleau), Coquibus Auvergne (Fontainebleau)..." ❌
 </disambiguation>
 
 <response_rules>
@@ -664,9 +695,14 @@ confirm_report: Utilise quand l'utilisateur veut explicitement confirmer ou vali
 
 <disambiguation>
 Si get_conditions renvoie { disambiguate: true }:
-- Présente les options de localisation clairement
+- L'UI AFFICHE DÉJÀ DES CARTES CLIQUABLES avec toutes les options
+- Ta réponse DOIT être UNE SEULE PHRASE
+- N'écris JAMAIS la liste des options (ex. "Coquibus Arcades, Coquibus Auvergne, Coquibus Grandes Vallées...") ❌
+- Confirme simplement avoir trouvé plusieurs options et réfère aux cartes ci-dessus
 - NE rappelle PAS l'outil tant que l'utilisateur n'a pas sélectionné une option
-- Limite le texte explicatif - l'UI affichera des cartes cliquables automatiquement
+
+Bien : "J'ai trouvé 6 secteurs correspondant à 'Coquibus' à Fontainebleau. Veuillez choisir une option ci-dessus." ✅
+Mal : "J'ai trouvé les secteurs suivants : Coquibus Arcades (Fontainebleau), Coquibus Auvergne (Fontainebleau)..." ❌
 </disambiguation>
 
 <response_rules>
@@ -733,9 +769,14 @@ confirm_report: Usa quando l'utente vuole esplicitamente confermare o validare u
 
 <disambiguation>
 Se get_conditions restituisce { disambiguate: true }:
-- Presenta le opzioni di località chiaramente
+- L'UI MOSTRA GIÀ CARD CLICCABILI con tutte le opzioni
+- La tua risposta DEVE essere UNA SOLA FRASE
+- NON scrivere MAI l'elenco delle opzioni (es. "Coquibus Arcades, Coquibus Auvergne, Coquibus Grandes Vallées...") ❌
+- Conferma semplicemente di aver trovato più opzioni e fai riferimento alle card sopra
 - NON richiamare lo strumento fino a quando l'utente non seleziona un'opzione
-- Mantieni il testo esplicativo minimo - l'UI mostrerà card cliccabili automaticamente
+
+Bene: "Ho trovato 6 settori corrispondenti a 'Coquibus' a Fontainebleau. Scegli una delle opzioni sopra." ✅
+Male: "Ho trovato i seguenti settori: Coquibus Arcades (Fontainebleau), Coquibus Auvergne (Fontainebleau)..." ❌
 </disambiguation>
 
 <response_rules>
@@ -802,9 +843,14 @@ confirm_report: Nutze wenn der Nutzer explizit einen bestehenden Report bestäti
 
 <disambiguation>
 Wenn get_conditions { disambiguate: true } zurückgibt:
-- Präsentiere die Standortoptionen klar
+- Die UI ZEIGT BEREITS KLICKBARE KARTEN mit allen Optionen
+- Deine Antwort MUSS EIN EINZELNER SATZ sein
+- Schreibe NIEMALS die Liste der Optionen aus (z.B. "Coquibus Arcades, Coquibus Auvergne, Coquibus Grandes Vallées...") ❌
+- Bestätige einfach, dass mehrere Optionen gefunden wurden und verweise auf die Karten oben
 - Rufe das Tool NICHT erneut auf, bis der Nutzer eine Option wählt
-- Halte den erklärenden Text minimal - die UI zeigt automatisch klickbare Karten
+
+Gut: "Ich habe 6 Sektoren gefunden, die zu 'Coquibus' in Fontainebleau passen. Bitte wähle eine der Optionen oben aus." ✅
+Schlecht: "Ich habe folgende Sektoren gefunden: Coquibus Arcades (Fontainebleau), Coquibus Auvergne (Fontainebleau)..." ❌
 </disambiguation>
 
 <response_rules>
@@ -871,9 +917,14 @@ confirm_report: Nutze wenn der Nutzer explizit einen bestehenden Report bestäti
 
 <disambiguation>
 Wenn get_conditions { disambiguate: true } zurückgibt:
-- Präsentiere die Standortoptionen klar
+- Die UI ZEIGT BEREITS KLICKBARE KARTEN mit allen Optionen
+- Deine Antwort MUSS EIN EINZELNER SATZ sein
+- Schreibe NIEMALS die Liste der Optionen aus (z.B. "Coquibus Arcades, Coquibus Auvergne, Coquibus Grandes Vallées...") ❌
+- Bestätige einfach, dass mehrere Optionen gefunden wurden und verweise auf die Karten oben
 - Rufe das Tool NICHT erneut auf, bis der Nutzer eine Option wählt
-- Halte den erklärenden Text minimal - die UI zeigt automatisch klickbare Karten
+
+Gut: "Ich habe 6 Sektoren gefunden, die zu 'Coquibus' in Fontainebleau passen. Bitte wähle eine der Optionen oben aus." ✅
+Schlecht: "Ich habe folgende Sektoren gefunden: Coquibus Arcades (Fontainebleau), Coquibus Auvergne (Fontainebleau)..." ❌
 </disambiguation>
 
 <response_rules>
@@ -940,9 +991,14 @@ confirm_report: Verwende, wenn der Benutzer ausdrücklich einen bestehenden Beri
 
 <disambiguation>
 Wenn get_conditions { disambiguate: true } zurückgibt:
-- Präsentiere die Ortsoptionen klar
+- Die UI ZEIGT BEREITS KLICKBARE KARTEN mit allen Optionen
+- Deine Antwort MUSS EIN EINZELNER SATZ sein
+- Schreibe NIEMALS die Liste der Optionen aus (z.B. "Coquibus Arcades, Coquibus Auvergne, Coquibus Grandes Vallées...") ❌
+- Bestätige einfach, dass mehrere Optionen gefunden wurden und verweise auf die Karten oben
 - Rufe das Tool NICHT erneut auf, bis der Benutzer eine Option auswählt
-- Halte den erklärenden Text minimal - die UI zeigt automatisch klickbare Karten an
+
+Gut: "Ich habe 6 Sektoren gefunden, die zu 'Coquibus' in Fontainebleau passen. Bitte wähle eine der Optionen oben aus." ✅
+Schlecht: "Ich habe folgende Sektoren gefunden: Coquibus Arcades (Fontainebleau), Coquibus Auvergne (Fontainebleau)..." ❌
 </disambiguation>
 
 <response_rules>
@@ -1009,9 +1065,14 @@ confirm_report: Utilise quand l'utilisateur veut explicitement confirmer ou vali
 
 <disambiguation>
 Si get_conditions retourne { disambiguate: true }:
-- Présente les options de lieux clairement
+- L'UI AFFICHE DÉJÀ DES CARTES CLIQUABLES avec toutes les options
+- Ta réponse DOIT être UNE SEULE PHRASE
+- N'écris JAMAIS la liste des options (ex. "Coquibus Arcades, Coquibus Auvergne, Coquibus Grandes Vallées...") ❌
+- Confirme simplement avoir trouvé plusieurs options et réfère aux cartes ci-dessus
 - N'appelle PAS l'outil à nouveau jusqu'à ce que l'utilisateur sélectionne une option
-- Garde le texte explicatif minimal - l'UI affichera automatiquement des cartes cliquables
+
+Bien : "J'ai trouvé 6 secteurs correspondant à 'Coquibus' à Fontainebleau. Veuillez choisir une option ci-dessus." ✅
+Mal : "J'ai trouvé les secteurs suivants : Coquibus Arcades (Fontainebleau), Coquibus Auvergne (Fontainebleau)..." ❌
 </disambiguation>
 
 <response_rules>
@@ -1078,9 +1139,14 @@ confirm_report: Usa quando l'utente vuole esplicitamente confermare o validare u
 
 <disambiguation>
 Se get_conditions restituisce { disambiguate: true }:
-- Presenta le opzioni di località chiaramente
+- L'UI MOSTRA GIÀ CARD CLICCABILI con tutte le opzioni
+- La tua risposta DEVE essere UNA SOLA FRASE
+- NON scrivere MAI l'elenco delle opzioni (es. "Coquibus Arcades, Coquibus Auvergne, Coquibus Grandes Vallées...") ❌
+- Conferma semplicemente di aver trovato più opzioni e fai riferimento alle card sopra
 - NON richiamare lo strumento fino a quando l'utente non seleziona un'opzione
-- Mantieni il testo esplicativo minimo - l'UI mostrerà card cliccabili automaticamente
+
+Bene: "Ho trovato 6 settori corrispondenti a 'Coquibus' a Fontainebleau. Scegli una delle opzioni sopra." ✅
+Male: "Ho trovato i seguenti settori: Coquibus Arcades (Fontainebleau), Coquibus Auvergne (Fontainebleau)..." ❌
 </disambiguation>
 
 <response_rules>
@@ -1147,9 +1213,14 @@ confirm_report: Uporabi ko uporabnik izrecno želi potrditi ali preveriti obstoj
 
 <disambiguation>
 Če get_conditions vrne { disambiguate: true }:
-- Predstavi možnosti lokacije jasno
+- UI ŽE PRIKAZUJE KARTICE ZA KLIKANJE z vsemi možnostmi
+- Tvoj odgovor MORA biti EN SAM STAVEK
+- NIKOLI ne izpiši seznama možnosti (npr. "Coquibus Arcades, Coquibus Auvergne, Coquibus Grandes Vallées...") ❌
+- Samo potrdi, da si našel več možnosti in se sklicuj na kartice zgoraj
 - NE kliči orodja ponovno, dokler uporabnik ne izbere možnosti
-- Ohrani razložilno besedilo minimalno - UI bo samodejno prikazal kartice za klikanje
+
+Dobro: "Našel sem 6 sektorjev, ki ustrezajo 'Coquibus' v Fontainebleau. Prosim izberi eno od možnosti zgoraj." ✅
+Slabo: "Našel sem naslednje sektorje: Coquibus Arcades (Fontainebleau), Coquibus Auvergne (Fontainebleau)..." ❌
 </disambiguation>
 
 <response_rules>
@@ -1216,9 +1287,14 @@ confirm_report: Använd när användaren uttryckligen vill bekräfta eller valid
 
 <disambiguation>
 Om get_conditions returnerar { disambiguate: true }:
-- Presentera platsmöjligheterna tydligt
+- UI:t VISAR REDAN KLICKBARA KORT med alla alternativ
+- Ditt svar MÅSTE vara EN ENDA MENING
+- Skriv ALDRIG ut listan med alternativ (t.ex. "Coquibus Arcades, Coquibus Auvergne, Coquibus Grandes Vallées...") ❌
+- Bekräfta bara att du hittade flera alternativ och hänvisa till korten ovan
 - Anropa INTE verktyget igen förrän användaren väljer ett alternativ
-- Håll förklarande text minimal - UI:t visar automatiskt klickbara kort
+
+Bra: "Jag hittade 6 sektorer som matchar 'Coquibus' i Fontainebleau. Välj ett av alternativen ovan." ✅
+Dåligt: "Jag hittade följande sektorer: Coquibus Arcades (Fontainebleau), Coquibus Auvergne (Fontainebleau)..." ❌
 </disambiguation>
 
 <response_rules>
@@ -1285,9 +1361,14 @@ confirm_report: Bruk når brukeren eksplisitt vil bekrefte eller validere en eks
 
 <disambiguation>
 Om get_conditions returnerer { disambiguate: true }:
-- Presenter stedsalternativene tydelig
+- UI-et VISER ALLEREDE KLIKKBARE KORT med alle alternativene
+- Svaret ditt MÅ være ÉN ENKELT SETNING
+- Skriv ALDRI ut listen over alternativer (f.eks. "Coquibus Arcades, Coquibus Auvergne, Coquibus Grandes Vallées...") ❌
+- Bare bekreft at du fant flere alternativer og referer til kortene ovenfor
 - IKKE kall verktøyet på nytt før brukeren velger et alternativ
-- Hold forklarende tekst minimal - UI-et viser automatisk klikkbare kort
+
+Bra: "Jeg fant 6 sektorer som matcher 'Coquibus' i Fontainebleau. Vennligst velg ett av alternativene ovenfor." ✅
+Dårlig: "Jeg fant følgende sektorer: Coquibus Arcades (Fontainebleau), Coquibus Auvergne (Fontainebleau)..." ❌
 </disambiguation>
 
 <response_rules>
