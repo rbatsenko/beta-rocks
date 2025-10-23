@@ -29,14 +29,16 @@ export async function fetchCragById(id: string) {
 }
 
 export async function searchCrags(query: string) {
-  // Use RPC call with accent-insensitive search for better international support
-  // This handles cases like "Apremont Desert" matching "Apremont Désert"
-  const { data, error } = await supabase.rpc("search_crags_unaccent", {
+  // Use RPC call with accent-insensitive search that includes both crags AND sectors
+  // This handles cases like:
+  // - "Apremont Desert" matching "Apremont Désert" (sector in Fontainebleau)
+  // - "Fontainebleau" matching the parent crag AND all its sectors
+  const { data, error } = await supabase.rpc("search_locations_unaccent", {
     search_query: query,
   });
 
   if (error) {
-    // Fallback to old search if RPC fails (e.g., function not yet created)
+    // Fallback to old crag-only search if RPC fails
     console.warn("[searchCrags] RPC failed, falling back to ILIKE:", error);
     const fallback = await supabase
       .from("crags")
