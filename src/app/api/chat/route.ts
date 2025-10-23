@@ -88,7 +88,18 @@ const tools = {
               village = result.village || undefined;
 
               // Capture metadata for AI context
-              description = result.description || undefined;
+              // For sectors, include parent crag description (e.g., Fontainebleau sandstone warning)
+              const isSector = 'result_type' in result && result.result_type === 'sector';
+              const parentDesc = isSector && 'parent_crag_description' in result ? result.parent_crag_description : null;
+
+              if (isSector && parentDesc) {
+                // Combine sector description + parent crag description (parent desc has critical safety info)
+                const sectorDesc = result.description || '';
+                description = sectorDesc ? `${sectorDesc}\n\n${parentDesc}` : parentDesc;
+              } else {
+                description = result.description || undefined;
+              }
+
               // aspects is only available on crags, not sectors (search_locations_unaccent doesn't include it)
               aspects = 'aspects' in result ? (result.aspects as number[] | undefined) : undefined;
               climbingTypes = result.climbing_types || undefined;
@@ -511,9 +522,9 @@ const tools = {
           isDry: conditions.isDry,
           dryingTimeHours: conditions.dryingTimeHours,
           optimalWindows: conditions.optimalWindows,
-          // Return all hourly conditions for detail view
-          // The AI summary only uses current + optimal windows, so full hourly data doesn't affect AI tokens significantly
-          hourlyConditions: conditions.hourlyConditions,
+          // Return 48h to AI for reasonable token usage (~2 days context)
+          // UI can fetch full 14-day data via /api/conditions when detail view opens
+          hourlyConditions: conditions.hourlyConditions?.slice(0, 48),
           precipitationContext: conditions.precipitationContext,
           dewPointSpread: conditions.dewPointSpread,
           optimalTime: conditions.optimalTime,

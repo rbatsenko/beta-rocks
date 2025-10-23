@@ -434,6 +434,7 @@ export type Database = {
           lon: number
           municipality: string
           name: string
+          parent_crag_description: string
           parent_crag_id: string
           parent_crag_name: string
           result_type: string
