@@ -88,9 +88,7 @@ export const DisambiguationOptions = memo(function DisambiguationOptions({
             className="flex flex-col items-start h-auto py-2 px-3 overflow-visible animate-in fade-in slide-in-from-bottom-2 duration-500"
             style={{ animationDelay: `${idx * 100}ms` }}
           >
-            <span className="font-medium text-left">
-              {option.name}
-            </span>
+            <span className="font-medium text-left">{option.name}</span>
             <span className="text-xs opacity-70">
               {option.location}
               {option.rockType && (

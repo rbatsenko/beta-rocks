@@ -151,8 +151,10 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
           }
 
           const fullData = await response.json();
-          console.log("[WeatherConditionCard] Prefetch complete, hourly count:",
-            fullData.conditions?.hourlyConditions?.length || 0);
+          console.log(
+            "[WeatherConditionCard] Prefetch complete, hourly count:",
+            fullData.conditions?.hourlyConditions?.length || 0
+          );
           onFullDataFetched(fullData);
         } catch (error) {
           console.error("[WeatherConditionCard] Prefetch error:", error);

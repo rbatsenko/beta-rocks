@@ -92,9 +92,7 @@ function osmToCrag(element: OsmElement): CragRecord | null {
 
   const climbingTypes = extractClimbingTypes(tags);
   // Check multiple possible rock type tags (OSMApp uses rock_type directly)
-  const rockType = normalizeRockType(
-    tags["rock_type"] || tags["climbing:rock"] || tags["rock"]
-  );
+  const rockType = normalizeRockType(tags["rock_type"] || tags["climbing:rock"] || tags["rock"]);
 
   // Generate unique ID from OSM data
   const id = `osm_${element.type}_${element.id}`;

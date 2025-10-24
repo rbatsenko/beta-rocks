@@ -89,19 +89,22 @@ const tools = {
 
               // Capture metadata for AI context
               // For sectors, include parent crag description (e.g., Fontainebleau sandstone warning)
-              const isSector = 'result_type' in result && result.result_type === 'sector';
-              const parentDesc = isSector && 'parent_crag_description' in result ? result.parent_crag_description : null;
+              const isSector = "result_type" in result && result.result_type === "sector";
+              const parentDesc =
+                isSector && "parent_crag_description" in result
+                  ? result.parent_crag_description
+                  : null;
 
               if (isSector && parentDesc) {
                 // Combine sector description + parent crag description (parent desc has critical safety info)
-                const sectorDesc = result.description || '';
+                const sectorDesc = result.description || "";
                 description = sectorDesc ? `${sectorDesc}\n\n${parentDesc}` : parentDesc;
               } else {
                 description = result.description || undefined;
               }
 
               // aspects is only available on crags, not sectors (search_locations_unaccent doesn't include it)
-              aspects = 'aspects' in result ? (result.aspects as number[] | undefined) : undefined;
+              aspects = "aspects" in result ? (result.aspects as number[] | undefined) : undefined;
               climbingTypes = result.climbing_types || undefined;
 
               // Build locationDetails from available fields
@@ -114,7 +117,7 @@ const tools = {
 
               console.log("[get_conditions] Using local database result:", {
                 name: result.name,
-                resultType: 'result_type' in result ? result.result_type : 'crag',
+                resultType: "result_type" in result ? result.result_type : "crag",
                 lat,
                 lon,
                 country,
@@ -140,10 +143,11 @@ const tools = {
                 translationParams: { count: localCrags.length, location },
                 options: localCrags.map((item) => {
                   // Check if this is a sector (has result_type field from search_locations_unaccent)
-                  const isSector = 'result_type' in item && item.result_type === 'sector';
-                  const locationLabel = isSector && 'parent_crag_name' in item
-                    ? item.parent_crag_name // Show parent crag for sectors
-                    : item.country; // Show country for crags
+                  const isSector = "result_type" in item && item.result_type === "sector";
+                  const locationLabel =
+                    isSector && "parent_crag_name" in item
+                      ? item.parent_crag_name // Show parent crag for sectors
+                      : item.country; // Show country for crags
 
                   return {
                     id: item.id,
@@ -343,7 +347,8 @@ const tools = {
             // Check sectors first (more specific than crags)
             const { data: sectors } = await supabase
               .from("sectors")
-              .select(`
+              .select(
+                `
                 *,
                 parent_crag:crags!sectors_crag_id_fkey(
                   name,
@@ -352,7 +357,8 @@ const tools = {
                   climbing_types,
                   aspects
                 )
-              `)
+              `
+              )
               .eq("lat", lat)
               .eq("lon", lon)
               .limit(1);
@@ -366,14 +372,17 @@ const tools = {
 
               // Enrich with parent crag data
               if (sector.parent_crag) {
-                const parent = Array.isArray(sector.parent_crag) ? sector.parent_crag[0] : sector.parent_crag;
+                const parent = Array.isArray(sector.parent_crag)
+                  ? sector.parent_crag[0]
+                  : sector.parent_crag;
 
                 // Combine sector + parent descriptions (parent has safety warnings)
-                const sectorDesc = sector.description || '';
-                const parentDesc = parent.description || '';
-                description = sectorDesc && parentDesc
-                  ? `${sectorDesc}\n\n${parentDesc}`
-                  : (parentDesc || sectorDesc || undefined);
+                const sectorDesc = sector.description || "";
+                const parentDesc = parent.description || "";
+                description =
+                  sectorDesc && parentDesc
+                    ? `${sectorDesc}\n\n${parentDesc}`
+                    : parentDesc || sectorDesc || undefined;
 
                 // Use parent's rock type if we don't have one
                 if ((!detectedRockType || detectedRockType === "unknown") && parent.rock_type) {
@@ -845,9 +854,7 @@ When the user says "tomorrow", they mean the day after ${userTime}.`;
       const metadata = extractMetadataFromToolResults(toolResults);
 
       // Calculate cost if we have token usage
-      const estimatedCostUsd = tokenUsage
-        ? calculateGeminiCost(tokenUsage)
-        : undefined;
+      const estimatedCostUsd = tokenUsage ? calculateGeminiCost(tokenUsage) : undefined;
 
       // Log the interaction (non-blocking)
       await logChatInteraction({

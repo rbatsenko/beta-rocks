@@ -204,7 +204,7 @@ export function normalizeRockType(rockType: string | undefined): string | null {
 
     // French (Fontainebleau, Verdon, etc.)
     calcaire: "limestone",
-    "grès": "sandstone", // grès
+    grès: "sandstone", // grès
     basalte: "basalt",
     conglomérat: "conglomerate",
 

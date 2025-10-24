@@ -156,10 +156,7 @@ async function main() {
 
   // Verify database connection and permissions
   console.log("[0/3] Verifying database permissions...");
-  const { error: testError } = await supabase
-    .from("crags")
-    .select("id, country")
-    .limit(1);
+  const { error: testError } = await supabase.from("crags").select("id, country").limit(1);
 
   if (testError) {
     console.error("[Error] Failed to connect to database:", testError);

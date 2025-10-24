@@ -215,7 +215,7 @@ const ChatInterface = () => {
       {
         display: t("welcome.exampleQueries.query3.display"),
         query: t("welcome.exampleQueries.query3.query"),
-      }
+      },
     ],
     [t]
   );
@@ -499,7 +499,10 @@ const ChatInterface = () => {
                                 const prefetchedData = prefetchedDataMap.get(key);
 
                                 if (prefetchedData?.conditions) {
-                                  console.log("[ChatInterface] Using prefetched full data for", key);
+                                  console.log(
+                                    "[ChatInterface] Using prefetched full data for",
+                                    key
+                                  );
                                   // Merge prefetched full conditions with the base result
                                   return {
                                     ...conditionsResult,

@@ -118,7 +118,9 @@ export const ConditionsDetailSheet = memo(function ConditionsDetailSheet({
           <SheetTitle className="text-lg sm:text-xl font-semibold">
             <div className="flex items-center gap-1.5 sm:gap-2">
               <ThermometerSun className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
-              <span className="truncate">{t("dialog.detailedConditions")}: {data.location}</span>
+              <span className="truncate">
+                {t("dialog.detailedConditions")}: {data.location}
+              </span>
             </div>
           </SheetTitle>
           <SheetDescription className="flex flex-col gap-1 sm:gap-2">
