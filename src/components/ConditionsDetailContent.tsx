@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, memo, useEffect, useRef, useCallback } from "react";
+import { useState, useMemo, memo, useEffect, useRef, useCallback, Fragment } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
@@ -613,7 +613,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                             isDistant && (!prevHour || !isDistantHour(prevHour.time));
 
                           return (
-                            <React.Fragment key={`hour-${i}`}>
+                            <Fragment key={`hour-${i}`}>
                               {showHint && (
                                 <div className="flex items-center gap-2 py-2 text-xs text-muted-foreground">
                                   <div className="flex-1 h-px bg-border"></div>
@@ -696,7 +696,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                   </p>
                                 )}
                               </div>
-                            </React.Fragment>
+                            </Fragment>
                           );
                         })}
                       </div>
@@ -720,7 +720,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                 isDistant && (!prevHour || !isDistantHour(prevHour.time));
 
                               return (
-                                <React.Fragment key={`all-hour-${i}`}>
+                                <Fragment key={`all-hour-${i}`}>
                                   {showHint && (
                                     <div className="flex items-center gap-2 py-2 text-xs text-muted-foreground">
                                       <div className="flex-1 h-px bg-border"></div>
@@ -803,7 +803,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                       </p>
                                     )}
                                   </div>
-                                </React.Fragment>
+                                </Fragment>
                               );
                             })}
                           </div>
