@@ -70,7 +70,7 @@ export function LanguageSelector() {
                 className={`flex items-center justify-between gap-3 cursor-pointer
                   py-2 px-3 rounded-md text-sm
                   transition-colors
-                  hover:bg-muted focus:!bg-muted focus:!text-foreground
+                  hover:bg-muted focus:bg-muted! focus:text-foreground!
                   ${isSelected ? "bg-muted font-medium" : ""}
                 `}
               >

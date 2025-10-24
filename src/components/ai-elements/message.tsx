@@ -28,7 +28,7 @@ const messageContentVariants = cva(
       variant: {
         contained: [
           "max-w-[80%] px-4 py-3 gap-2",
-          "group-[.is-user]:bg-gradient-to-br group-[.is-user]:from-orange-50 group-[.is-user]:to-orange-100/50 group-[.is-user]:dark:from-orange-950/50 group-[.is-user]:dark:to-orange-900/30 group-[.is-user]:border group-[.is-user]:border-orange-200 group-[.is-user]:dark:border-orange-800/50 group-[.is-user]:shadow-sm group-[.is-user]:dark:shadow-md group-[.is-user]:text-foreground group-[.is-user]:dark:text-inherit",
+          "group-[.is-user]:bg-linear-to-br group-[.is-user]:from-orange-50 group-[.is-user]:to-orange-100/50 dark:group-[.is-user]:from-orange-950/50 dark:group-[.is-user]:to-orange-900/30 group-[.is-user]:border group-[.is-user]:border-orange-200 dark:group-[.is-user]:border-orange-800/50 group-[.is-user]:shadow-xs dark:group-[.is-user]:shadow-md group-[.is-user]:text-foreground dark:group-[.is-user]:text-inherit",
           "group-[.is-assistant]:bg-secondary group-[.is-assistant]:text-foreground",
         ],
         flat: [

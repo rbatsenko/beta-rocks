@@ -128,52 +128,52 @@ export function getWeatherDescription(weatherCode: number): string {
  */
 export function getWeatherGradient(weatherCode: number, isNight?: boolean): string {
   if (weatherCode === undefined || weatherCode === null) {
-    return "bg-gradient-to-br from-gray-500 to-gray-600";
+    return "bg-linear-to-br from-gray-500 to-gray-600";
   }
 
   // Clear sky
   if (weatherCode === 0) {
     return isNight
-      ? "bg-gradient-to-br from-indigo-800 via-purple-800 to-pink-800"
-      : "bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600";
+      ? "bg-linear-to-br from-indigo-800 via-purple-800 to-pink-800"
+      : "bg-linear-to-br from-blue-400 via-blue-500 to-blue-600";
   }
 
   // Partly cloudy / mainly clear
   if (weatherCode >= 1 && weatherCode <= 2) {
-    return "bg-gradient-to-br from-blue-300 via-blue-400 to-gray-400";
+    return "bg-linear-to-br from-blue-300 via-blue-400 to-gray-400";
   }
 
   // Overcast
   if (weatherCode === 3) {
-    return "bg-gradient-to-br from-gray-400 via-gray-500 to-gray-600";
+    return "bg-linear-to-br from-gray-400 via-gray-500 to-gray-600";
   }
 
   // Fog
   if (weatherCode === 45 || weatherCode === 48) {
-    return "bg-gradient-to-br from-gray-300 via-gray-400 to-gray-500";
+    return "bg-linear-to-br from-gray-300 via-gray-400 to-gray-500";
   }
 
   // Drizzle and light rain
   if ((weatherCode >= 51 && weatherCode <= 57) || weatherCode === 61 || weatherCode === 80) {
-    return "bg-gradient-to-br from-slate-400 via-slate-500 to-slate-600";
+    return "bg-linear-to-br from-slate-400 via-slate-500 to-slate-600";
   }
 
   // Moderate to heavy rain
   if ((weatherCode >= 63 && weatherCode <= 67) || weatherCode === 81 || weatherCode === 82) {
-    return "bg-gradient-to-br from-slate-500 via-slate-600 to-slate-700";
+    return "bg-linear-to-br from-slate-500 via-slate-600 to-slate-700";
   }
 
   // Snow
   if ((weatherCode >= 71 && weatherCode <= 77) || weatherCode === 85 || weatherCode === 86) {
-    return "bg-gradient-to-br from-blue-100 via-blue-200 to-gray-300";
+    return "bg-linear-to-br from-blue-100 via-blue-200 to-gray-300";
   }
 
   // Thunderstorm
   if (weatherCode >= 95 && weatherCode <= 99) {
-    return "bg-gradient-to-br from-purple-700 via-purple-800 to-gray-900";
+    return "bg-linear-to-br from-purple-700 via-purple-800 to-gray-900";
   }
 
-  return "bg-gradient-to-br from-gray-500 to-gray-600";
+  return "bg-linear-to-br from-gray-500 to-gray-600";
 }
 
 /**

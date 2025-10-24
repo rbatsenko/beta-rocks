@@ -305,7 +305,7 @@ const ChatInterface = () => {
     <>
       <div className="flex flex-col h-dvh">
         {/* Header */}
-        <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+        <header className="border-b bg-background/95 backdrop-blur-sm supports-backdrop-filter:bg-background/60 sticky top-0 z-50">
           <div className="container flex h-16 items-center justify-between px-4">
             <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
               <CloudSun className="w-6 h-6 text-orange-500" />
@@ -334,7 +334,7 @@ const ChatInterface = () => {
             <ConversationContent className="container max-w-3xl px-4 py-6">
               {messages.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center py-12">
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-orange-500/20 to-orange-600/20 flex items-center justify-center mb-6">
+                  <div className="w-20 h-20 rounded-full bg-linear-to-br from-orange-500/20 to-orange-600/20 flex items-center justify-center mb-6">
                     <CloudSun className="w-10 h-10 text-orange-500" />
                   </div>
                   <h2 className="text-3xl font-bold mb-3">{t("welcome.heading")}</h2>
@@ -348,7 +348,7 @@ const ChatInterface = () => {
                         variant="outline"
                         size="sm"
                         onClick={() => handleExampleClick(example.query)}
-                        className="transition-smooth hover:scale-105 whitespace-normal break-words text-left sm:text-center leading-snug h-auto min-h-9 px-4"
+                        className="transition-smooth hover:scale-105 whitespace-normal wrap-break-word text-left sm:text-center leading-snug h-auto min-h-9 px-4"
                       >
                         {example.display}
                       </Button>
@@ -402,7 +402,7 @@ const ChatInterface = () => {
                         variant={message.role === "assistant" ? "flat" : "contained"}
                         className={
                           message.role === "user"
-                            ? "bg-gradient-to-br from-orange-500 to-orange-400 dark:from-orange-950/50 dark:to-orange-900/30 border-orange-600 dark:border-orange-800/50 shadow-md text-orange-950 dark:text-inherit"
+                            ? "bg-linear-to-br from-orange-500 to-orange-400 dark:from-orange-950/50 dark:to-orange-900/30 border-orange-600 dark:border-orange-800/50 shadow-md text-orange-950 dark:text-inherit"
                             : ""
                         }
                       >

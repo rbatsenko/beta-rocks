@@ -75,7 +75,7 @@ export function FeaturesDialog({ open, onOpenChange }: FeaturesDialogProps) {
             {features.map((feature, idx) => {
               const Icon = feature.icon;
               return (
-                <Card key={idx} className="shadow-sm hover:shadow-md transition-all">
+                <Card key={idx} className="shadow-xs hover:shadow-md transition-all">
                   <CardHeader>
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-3">
                       <Icon className="w-5 h-5 text-primary" />
