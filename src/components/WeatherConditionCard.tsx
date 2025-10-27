@@ -1,6 +1,6 @@
 import { memo, useMemo, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Info, Star } from "lucide-react";
+import { Info, Star, MessageSquare } from "lucide-react";
 import { getWeatherEmoji, getWeatherDescription } from "@/lib/utils/weather-emojis";
 import { logRender } from "@/lib/debug/render-log";
 import { MapPopover } from "@/components/MapPopover";
@@ -10,6 +10,7 @@ import {
   removeFavoriteFromStorage,
   isFavorited,
 } from "@/lib/storage/favorites";
+import { ReportDialog } from "@/components/ReportDialog";
 
 interface ConditionsData {
   location: string;
@@ -22,6 +23,7 @@ interface ConditionsData {
   isDry: boolean;
   latitude?: number;
   longitude?: number;
+  cragId?: string;
   country?: string;
   state?: string;
   municipality?: string;
@@ -130,6 +132,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
   const hasEmoji = data.current?.weatherCode !== undefined;
   const [isFavorite, setIsFavorite] = useState(false);
   const [favoriteId, setFavoriteId] = useState<string | null>(null);
+  const [reportDialogOpen, setReportDialogOpen] = useState(false);
 
   // Check if this location is already favorited
   useEffect(() => {
@@ -296,6 +299,16 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
               <Star className={`w-4 h-4 mr-1 ${isFavorite ? "fill-current" : ""}`} />
               {isFavorite ? "Favorited" : "Favorite"}
             </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setReportDialogOpen(true)}
+              disabled={!data.cragId}
+              title="Add condition report"
+            >
+              <MessageSquare className="w-4 h-4 mr-1" />
+              Add Report
+            </Button>
             {/* {onSheetClick && (
               <Button variant="outline" size="sm" onClick={onSheetClick} title="Open in side panel">
                 <PanelRightOpen className="w-4 h-4 mr-1" />
@@ -340,6 +353,20 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
           </div>
         )}
       </div>
+
+      {/* Report Dialog */}
+      {data.cragId && (
+        <ReportDialog
+          open={reportDialogOpen}
+          onOpenChange={setReportDialogOpen}
+          cragId={data.cragId}
+          cragName={data.location}
+          onReportCreated={() => {
+            console.log("Report created for", data.location);
+            // TODO: Optionally reload reports in detail dialog
+          }}
+        />
+      )}
     </div>
   );
 });

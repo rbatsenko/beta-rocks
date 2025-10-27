@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useMemo } from "react";
+import { memo, useMemo, useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -14,6 +14,9 @@ import { logRender } from "@/lib/debug/render-log";
 import { ConditionsDetailContent } from "./ConditionsDetailContent";
 import { MapPopover } from "./MapPopover";
 import { getCountryFlag } from "@/lib/utils/country-flag";
+import { ReportCard } from "@/components/ReportCard";
+import { fetchReportsByCrag } from "@/lib/db/queries";
+import { Loader2 } from "lucide-react";
 
 interface ConditionsDetailDialogProps {
   open: boolean;
@@ -23,6 +26,7 @@ interface ConditionsDetailDialogProps {
     locationDetails?: string;
     latitude?: number;
     longitude?: number;
+    cragId?: string;
     country?: string;
     state?: string;
     municipality?: string;
@@ -97,6 +101,30 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
   data,
 }: ConditionsDetailDialogProps) {
   const { t } = useClientTranslation("common");
+  const [reports, setReports] = useState<any[]>([]);
+  const [isLoadingReports, setIsLoadingReports] = useState(false);
+
+  // Load reports when dialog opens
+  useEffect(() => {
+    if (open && data.cragId) {
+      loadReports();
+    }
+  }, [open, data.cragId]);
+
+  const loadReports = async () => {
+    if (!data.cragId) return;
+
+    setIsLoadingReports(true);
+    try {
+      const fetchedReports = await fetchReportsByCrag(data.cragId);
+      setReports(fetchedReports || []);
+    } catch (error) {
+      console.error("Failed to load reports:", error);
+      setReports([]);
+    } finally {
+      setIsLoadingReports(false);
+    }
+  };
 
   logRender("ConditionsDetailDialog", {
     open,
@@ -150,8 +178,39 @@ export const ConditionsDetailDialog = memo(function ConditionsDetailDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <div className="flex-1 min-h-0">
+        <div className="flex-1 min-h-0 overflow-y-auto">
           <ConditionsDetailContent data={data} />
+
+          {/* Community Reports Section */}
+          {data.cragId && (
+            <div className="mt-8 px-6 pb-6">
+              <h3 className="text-lg font-semibold mb-4">{t("reports.recentReports")}</h3>
+
+              {isLoadingReports && (
+                <div className="flex items-center justify-center py-8">
+                  <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+                </div>
+              )}
+
+              {!isLoadingReports && reports.length === 0 && (
+                <div className="text-center py-8 text-muted-foreground">
+                  <p>{t("reports.noReportsMessage")}</p>
+                </div>
+              )}
+
+              {!isLoadingReports && reports.length > 0 && (
+                <div className="space-y-3">
+                  {reports.map((report) => (
+                    <ReportCard
+                      key={report.id}
+                      report={report}
+                      onConfirmationChange={loadReports}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </DialogContent>
     </Dialog>

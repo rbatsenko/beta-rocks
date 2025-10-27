@@ -11,7 +11,7 @@ import {
   isCrag,
   hasPreciseCoordinates,
 } from "@/lib/openbeta/client";
-import { searchCrags } from "@/lib/db/queries";
+import { searchCrags, findOrCreateCrag } from "@/lib/db/queries";
 import { resolveLocale } from "@/lib/i18n/config";
 import { getSystemPrompt } from "./prompts";
 import {
@@ -616,11 +616,33 @@ const tools = {
           frictionScore: conditions.frictionRating,
         });
 
+        // Find or create crag in database to enable reports
+        let cragId: string | undefined;
+        try {
+          const crag = await findOrCreateCrag({
+            name: location,
+            lat,
+            lon,
+            country,
+            state,
+            municipality,
+            village,
+            rockType: detectedRockType,
+            source: "ai_chat",
+          });
+          cragId = crag.id;
+          console.log("[get_conditions] Crag found/created:", { cragId, name: crag.name });
+        } catch (error) {
+          console.error("[get_conditions] Failed to find/create crag:", error);
+          // Continue without cragId - reports won't work but conditions will
+        }
+
         return {
           location,
           locationDetails, // Add region/country or OpenBeta path
           latitude: lat,
           longitude: lon,
+          cragId, // Include crag ID for reports
           country,
           state,
           municipality,

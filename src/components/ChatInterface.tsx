@@ -52,6 +52,7 @@ interface ConditionsData {
   dryingTimeHours?: number;
   latitude?: number;
   longitude?: number;
+  cragId?: string; // Crag ID for reports
   country?: string;
   state?: string;
   municipality?: string;
