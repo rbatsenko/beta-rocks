@@ -255,7 +255,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
             className={
               `${hasEmoji ? "col-start-2" : "col-start-1"} row-start-2 ` +
               `${hasEmoji ? "sm:col-start-3" : "sm:col-start-2"} sm:row-start-1 ` +
-              "flex gap-2 shrink-0 justify-self-start sm:justify-self-end"
+              "flex flex-wrap gap-2 justify-self-start sm:justify-self-end"
             }
           >
             {data.latitude && data.longitude && (
