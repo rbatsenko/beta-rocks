@@ -145,6 +145,7 @@
   },
   "dialog": {
     "close": "Schließen",
+    "cancel": "Abbrechen",
     "detailedConditions": "Detailbedingungen",
     "fullAnalysis": "Komplette Wetter- und Bedingungsanalyse",
     "showMap": "Karte",
@@ -233,5 +234,83 @@
     "dolomite": "Dolomit",
     "volcanic": "Vulkanisch",
     "phyllite": "Phyllit"
+  },
+  "profile": {
+    "anonymous": "Anonym",
+    "member": "Mitglied",
+    "anonymousMember": "Anonymes Mitglied",
+    "favorites": "Favoriten",
+    "recent": "Letzte Suchen",
+    "stats": "Deine Statistiken",
+    "settings": "Einstellungen",
+    "clearData": "Alle Daten löschen"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "description": "Verwalte dein Profil, deinen Sync-Schlüssel und deine Einstellungen",
+    "save": "Speichern",
+    "saving": "Speichere...",
+    "displayName": {
+      "label": "Anzeigename",
+      "description": "Dein Name, der bei Berichten und Bestätigungen angezeigt wird (optional)",
+      "placeholder": "Gib deinen Namen ein..."
+    },
+    "syncKey": {
+      "title": "Sync-Schlüssel",
+      "description": "Verwende diesen Schlüssel, um deine Favoriten und Einstellungen über Geräte hinweg zu synchronisieren",
+      "label": "Dein Sync-Schlüssel",
+      "copy": "Sync-Schlüssel kopieren",
+      "showFullKey": "Vollständigen Schlüssel anzeigen",
+      "hideKey": "Schlüssel verbergen",
+      "qrCode": "QR-Code",
+      "qrDescription": "Scanne diesen QR-Code auf einem anderen Gerät, um deine Daten zu synchronisieren",
+      "warning": {
+        "title": "Halte deinen Sync-Schlüssel geheim",
+        "description": "Jeder mit deinem Sync-Schlüssel kann auf deine Favoriten und Einstellungen zugreifen. Teile ihn nicht öffentlich."
+      }
+    },
+    "dangerZone": {
+      "title": "Gefahrenzone",
+      "description": "Diese Aktionen sind dauerhaft und können nicht rückgängig gemacht werden",
+      "clearData": "Alle lokalen Daten löschen"
+    }
+  },
+  "favorites": {
+    "title": "Deine Lieblingsfelsen",
+    "description": "Du hast {{count}} Lieblingsorte",
+    "empty": "Noch keine Favoriten",
+    "emptyMessage": "Du hast noch keine Lieblingsfelsen hinzugefügt",
+    "emptyHint": "Klicke auf den Stern auf einer Bedingungskarte, um sie zu deinen Favoriten hinzuzufügen",
+    "lastChecked": "Zuletzt überprüft",
+    "frictionScore": "Reibungswert",
+    "viewConditions": "Bedingungen ansehen",
+    "remove": "Entfernen"
+  },
+  "reports": {
+    "addReport": "Bedingungsbericht hinzufügen",
+    "addReportDescription": "Aktuelle Bedingungen bei {{cragName}} teilen",
+    "postingAs": "Posten als",
+    "dryness": "Trockenheit",
+    "wind": "Wind",
+    "crowds": "Andrang",
+    "additionalComments": "Zusätzliche Kommentare",
+    "commentsPlaceholder": "Beschreibe die aktuellen Bedingungen, Felsqualität, Zugang usw.",
+    "submit": "Bericht absenden",
+    "submitting": "Sende...",
+    "helpful": "Hilfreich",
+    "loginToConfirm": "Bitte richte dein Profil ein, um Berichte zu bestätigen",
+    "confirmFailed": "Bestätigung fehlgeschlagen. Bitte versuche es erneut.",
+    "ratings": {
+      "veryPoor": "Sehr schlecht",
+      "poor": "Schlecht",
+      "okay": "Okay",
+      "good": "Gut",
+      "excellent": "Ausgezeichnet"
+    },
+    "recentReports": "Aktuelle Berichte",
+    "noReports": "Noch keine Berichte",
+    "noReportsMessage": "Sei der Erste, der die Bedingungen an diesem Fels teilt",
+    "reportCount": "{{count}} Berichte",
+    "viewAllReports": "Alle Berichte ansehen"
   }
 }

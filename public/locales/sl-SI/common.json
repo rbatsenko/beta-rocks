@@ -146,6 +146,7 @@
   },
   "dialog": {
     "close": "Zapri",
+    "cancel": "Prekliči",
     "detailedConditions": "Podrobne razmere",
     "fullAnalysis": "Celotna vremenska analiza in napoved razmer za plezanje",
     "showMap": "Zemljevid",
@@ -234,5 +235,83 @@
     "dolomite": "dolomit",
     "volcanic": "vulkanski",
     "phyllite": "filit"
+  },
+  "profile": {
+    "anonymous": "Anonimen",
+    "member": "Član",
+    "anonymousMember": "Anonimen član",
+    "favorites": "Priljubljene",
+    "recent": "Nedavna iskanja",
+    "stats": "Tvoja statistika",
+    "settings": "Nastavitve",
+    "clearData": "Izbriši vse podatke"
+  },
+  "settings": {
+    "title": "Nastavitve",
+    "description": "Upravljaj svoj profil, ključ za sinhronizacijo in nastavitve",
+    "save": "Shrani",
+    "saving": "Shranjujem...",
+    "displayName": {
+      "label": "Prikazno ime",
+      "description": "Tvoje ime, prikazano v poročilih in potrditvah (neobvezno)",
+      "placeholder": "Vnesi svoje ime..."
+    },
+    "syncKey": {
+      "title": "Ključ za sinhronizacijo",
+      "description": "Uporabi ta ključ za sinhronizacijo priljubljenih in nastavitev med napravami",
+      "label": "Tvoj ključ za sinhronizacijo",
+      "copy": "Kopiraj ključ za sinhronizacijo",
+      "showFullKey": "Prikaži celoten ključ",
+      "hideKey": "Skrij ključ",
+      "qrCode": "QR koda",
+      "qrDescription": "Skeniraj to QR kodo na drugi napravi za sinhronizacijo podatkov",
+      "warning": {
+        "title": "Ohrani ključ za sinhronizacijo zaseben",
+        "description": "Kdorkoli z tvojim ključem za sinhronizacijo lahko dostopa do tvojih priljubljenih in nastavitev. Ne deli ga javno."
+      }
+    },
+    "dangerZone": {
+      "title": "Nevarna cona",
+      "description": "Ta dejanja so trajna in jih ni mogoče razveljaviti",
+      "clearData": "Izbriši vse lokalne podatke"
+    }
+  },
+  "favorites": {
+    "title": "Tvoja priljubljena plezališča",
+    "description": "Imaš {{count}} priljubljenih lokacij",
+    "empty": "Še ni priljubljenih",
+    "emptyMessage": "Še nisi dodal nobenih priljubljenih plezališč",
+    "emptyHint": "Klikni na ikono zvezde na katerikoli kartici razmer, da jo dodaš med priljubljene",
+    "lastChecked": "Zadnjič preverjeno",
+    "frictionScore": "Ocena trenja",
+    "viewConditions": "Poglej razmere",
+    "remove": "Odstrani"
+  },
+  "reports": {
+    "addReport": "Dodaj poročilo o razmerah",
+    "addReportDescription": "Deli trenutne razmere na {{cragName}}",
+    "postingAs": "Objavljaš kot",
+    "dryness": "Suhota",
+    "wind": "Veter",
+    "crowds": "Gneča",
+    "additionalComments": "Dodatni komentarji",
+    "commentsPlaceholder": "Opiši trenutne razmere, kvaliteto skale, dostop, itd.",
+    "submit": "Oddaj poročilo",
+    "submitting": "Oddajam...",
+    "helpful": "Koristno",
+    "loginToConfirm": "Prosim nastavi svoj profil za potrditev poročil",
+    "confirmFailed": "Potrditev poročila ni uspela. Poskusi ponovno.",
+    "ratings": {
+      "veryPoor": "Zelo slabo",
+      "poor": "Slabo",
+      "okay": "V redu",
+      "good": "Dobro",
+      "excellent": "Odlično"
+    },
+    "recentReports": "Nedavna poročila",
+    "noReports": "Še ni poročil",
+    "noReportsMessage": "Bodi prvi, ki deli razmere na tem plezališču",
+    "reportCount": "{{count}} poročil",
+    "viewAllReports": "Poglej vsa poročila"
   }
 }

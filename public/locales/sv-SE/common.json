@@ -146,6 +146,7 @@
   },
   "dialog": {
     "close": "Stäng",
+    "cancel": "Avbryt",
     "detailedConditions": "Detaljerade förhållanden",
     "fullAnalysis": "Fullständig väderanalys och prognos för klättring",
     "showMap": "Karta",
@@ -234,5 +235,83 @@
     "dolomite": "dolomit",
     "volcanic": "vulkanisk",
     "phyllite": "fyllit"
+  },
+  "profile": {
+    "anonymous": "Anonym",
+    "member": "Medlem",
+    "anonymousMember": "Anonym medlem",
+    "favorites": "Favoriter",
+    "recent": "Senaste sökningar",
+    "stats": "Din statistik",
+    "settings": "Inställningar",
+    "clearData": "Rensa all data"
+  },
+  "settings": {
+    "title": "Inställningar",
+    "description": "Hantera din profil, synkroniseringsnyckel och preferenser",
+    "save": "Spara",
+    "saving": "Sparar...",
+    "displayName": {
+      "label": "Visningsnamn",
+      "description": "Ditt namn visas på rapporter och bekräftelser (valfritt)",
+      "placeholder": "Ange ditt namn..."
+    },
+    "syncKey": {
+      "title": "Synkroniseringsnyckel",
+      "description": "Använd denna nyckel för att synka dina favoriter och inställningar mellan enheter",
+      "label": "Din synkroniseringsnyckel",
+      "copy": "Kopiera synkroniseringsnyckel",
+      "showFullKey": "Visa hela nyckeln",
+      "hideKey": "Dölj nyckel",
+      "qrCode": "QR-kod",
+      "qrDescription": "Skanna denna QR-kod på en annan enhet för att synka dina data",
+      "warning": {
+        "title": "Håll din synkroniseringsnyckel privat",
+        "description": "Alla med din synkroniseringsnyckel kan komma åt dina favoriter och inställningar. Dela den inte offentligt."
+      }
+    },
+    "dangerZone": {
+      "title": "Farozon",
+      "description": "Dessa åtgärder är permanenta och kan inte ångras",
+      "clearData": "Rensa all lokal data"
+    }
+  },
+  "favorites": {
+    "title": "Dina favoritklippor",
+    "description": "Du har {{count}} favoritplatser",
+    "empty": "Inga favoriter än",
+    "emptyMessage": "Du har inte lagt till några favoritklippor än",
+    "emptyHint": "Klicka på stjärnikonen på valfritt konditionskort för att lägga till den i dina favoriter",
+    "lastChecked": "Senast kontrollerad",
+    "frictionScore": "Friktionspoäng",
+    "viewConditions": "Visa förhållanden",
+    "remove": "Ta bort"
+  },
+  "reports": {
+    "addReport": "Lägg till förhållanderapport",
+    "addReportDescription": "Dela aktuella förhållanden vid {{cragName}}",
+    "postingAs": "Publicerar som",
+    "dryness": "Torrhet",
+    "wind": "Vind",
+    "crowds": "Folksamling",
+    "additionalComments": "Ytterligare kommentarer",
+    "commentsPlaceholder": "Beskriv aktuella förhållanden, bergets kvalitet, tillträde, etc.",
+    "submit": "Skicka rapport",
+    "submitting": "Skickar...",
+    "helpful": "Hjälpsam",
+    "loginToConfirm": "Vänligen ställ in din profil för att bekräfta rapporter",
+    "confirmFailed": "Misslyckades med att bekräfta rapport. Försök igen.",
+    "ratings": {
+      "veryPoor": "Mycket dåligt",
+      "poor": "Dåligt",
+      "okay": "Okej",
+      "good": "Bra",
+      "excellent": "Utmärkt"
+    },
+    "recentReports": "Senaste rapporter",
+    "noReports": "Inga rapporter än",
+    "noReportsMessage": "Bli den första att dela förhållanden vid denna klippa",
+    "reportCount": "{{count}} rapporter",
+    "viewAllReports": "Visa alla rapporter"
   }
 }

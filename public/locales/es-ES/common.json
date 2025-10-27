@@ -145,6 +145,7 @@
   },
   "dialog": {
     "close": "Cerrar",
+    "cancel": "Cancelar",
     "detailedConditions": "Condiciones detalladas",
     "fullAnalysis": "Análisis completo del tiempo y previsión de condiciones de escalada",
     "showMap": "Mapa",
@@ -233,5 +234,83 @@
     "dolomite": "dolomita",
     "volcanic": "volcánico",
     "phyllite": "filita"
+  },
+  "profile": {
+    "anonymous": "Anónimo",
+    "member": "Miembro",
+    "anonymousMember": "Miembro anónimo",
+    "favorites": "Favoritos",
+    "recent": "Búsquedas recientes",
+    "stats": "Tus estadísticas",
+    "settings": "Ajustes",
+    "clearData": "Borrar todos los datos"
+  },
+  "settings": {
+    "title": "Ajustes",
+    "description": "Gestiona tu perfil, clave de sincronización y preferencias",
+    "save": "Guardar",
+    "saving": "Guardando...",
+    "displayName": {
+      "label": "Nombre para mostrar",
+      "description": "Su nombre se mostrará en informes y confirmaciones (opcional)",
+      "placeholder": "Introduzca su nombre..."
+    },
+    "syncKey": {
+      "title": "Clave de sincronización",
+      "description": "Use esta clave para sincronizar sus favoritos y ajustes entre dispositivos",
+      "label": "Su clave de sincronización",
+      "copy": "Copiar clave de sincronización",
+      "showFullKey": "Mostrar clave completa",
+      "hideKey": "Ocultar clave",
+      "qrCode": "Código QR",
+      "qrDescription": "Escanee este código QR en otro dispositivo para sincronizar sus datos",
+      "warning": {
+        "title": "Mantenga su clave de sincronización privada",
+        "description": "Cualquier persona con su clave de sincronización puede acceder a sus favoritos y ajustes. No la comparta públicamente."
+      }
+    },
+    "dangerZone": {
+      "title": "Zona de peligro",
+      "description": "Estas acciones son permanentes y no se pueden deshacer",
+      "clearData": "Borrar todos los datos locales"
+    }
+  },
+  "favorites": {
+    "title": "Sus escuelas favoritas",
+    "description": "Tiene {{count}} ubicaciones favoritas",
+    "empty": "Aún no hay favoritos",
+    "emptyMessage": "Todavía no ha añadido ninguna escuela favorita",
+    "emptyHint": "Haga clic en el botón de estrella en cualquier tarjeta de condiciones para añadirla a sus favoritos",
+    "lastChecked": "Última comprobación",
+    "frictionScore": "Puntuación de fricción",
+    "viewConditions": "Ver condiciones",
+    "remove": "Eliminar"
+  },
+  "reports": {
+    "addReport": "Añadir informe de condiciones",
+    "addReportDescription": "Comparta las condiciones actuales en {{cragName}}",
+    "postingAs": "Publicando como",
+    "dryness": "Sequedad",
+    "wind": "Viento",
+    "crowds": "Afluencia",
+    "additionalComments": "Comentarios adicionales",
+    "commentsPlaceholder": "Describa las condiciones actuales, calidad de la roca, aproximación, etc.",
+    "submit": "Enviar informe",
+    "submitting": "Enviando...",
+    "helpful": "Útil",
+    "loginToConfirm": "Por favor, configure su perfil para confirmar informes",
+    "confirmFailed": "Error al confirmar el informe. Por favor, inténtelo de nuevo.",
+    "ratings": {
+      "veryPoor": "Muy malo",
+      "poor": "Malo",
+      "okay": "Aceptable",
+      "good": "Bueno",
+      "excellent": "Excelente"
+    },
+    "recentReports": "Informes recientes",
+    "noReports": "Aún no hay informes",
+    "noReportsMessage": "Sea el primero en compartir las condiciones en esta escuela",
+    "reportCount": "{{count}} informes",
+    "viewAllReports": "Ver todos los informes"
   }
 }

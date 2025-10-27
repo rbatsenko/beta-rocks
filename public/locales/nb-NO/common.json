@@ -146,6 +146,7 @@
   },
   "dialog": {
     "close": "Lukk",
+    "cancel": "Avbryt",
     "detailedConditions": "Detaljerte forhold",
     "fullAnalysis": "Full væranalyse og klatreprognose",
     "showMap": "Kart",
@@ -234,5 +235,83 @@
     "dolomite": "dolomitt",
     "volcanic": "vulkansk",
     "phyllite": "fyllitt"
+  },
+  "profile": {
+    "anonymous": "Anonym",
+    "member": "Medlem",
+    "anonymousMember": "Anonymt medlem",
+    "favorites": "Favoritter",
+    "recent": "Nylige søk",
+    "stats": "Din statistikk",
+    "settings": "Innstillinger",
+    "clearData": "Slett alle data"
+  },
+  "settings": {
+    "title": "Innstillinger",
+    "description": "Administrer profilen din, synkroniseringsnøkkel og preferanser",
+    "save": "Lagre",
+    "saving": "Lagrer...",
+    "displayName": {
+      "label": "Visningsnavn",
+      "description": "Navnet ditt vises på rapporter og bekreftelser (valgfritt)",
+      "placeholder": "Skriv inn navnet ditt..."
+    },
+    "syncKey": {
+      "title": "Synkroniseringsnøkkel",
+      "description": "Bruk denne nøkkelen for å synkronisere favorittene og innstillingene dine mellom enheter",
+      "label": "Din synkroniseringsnøkkel",
+      "copy": "Kopier synkroniseringsnøkkel",
+      "showFullKey": "Vis full nøkkel",
+      "hideKey": "Skjul nøkkel",
+      "qrCode": "QR-kode",
+      "qrDescription": "Skann denne QR-koden på en annen enhet for å synkronisere dataene dine",
+      "warning": {
+        "title": "Hold synkroniseringsnøkkelen din privat",
+        "description": "Alle med synkroniseringsnøkkelen din kan få tilgang til favorittene og innstillingene dine. Ikke del den offentlig."
+      }
+    },
+    "dangerZone": {
+      "title": "Faresone",
+      "description": "Disse handlingene er permanente og kan ikke angres",
+      "clearData": "Slett all lokal data"
+    }
+  },
+  "favorites": {
+    "title": "Dine favoritt-crag",
+    "description": "Du har {{count}} favorittplasser",
+    "empty": "Ingen favoritter ennå",
+    "emptyMessage": "Du har ikke lagt til noen favoritt-crag ennå",
+    "emptyHint": "Klikk på stjerneikonet på et hvilket som helst tilstandskort for å legge det til i favorittene dine",
+    "lastChecked": "Sist sjekket",
+    "frictionScore": "Friksjonspoeng",
+    "viewConditions": "Vis forhold",
+    "remove": "Fjern"
+  },
+  "reports": {
+    "addReport": "Legg til forholdrapport",
+    "addReportDescription": "Del gjeldende forhold ved {{cragName}}",
+    "postingAs": "Publiserer som",
+    "dryness": "Tørrhet",
+    "wind": "Vind",
+    "crowds": "Folkemengde",
+    "additionalComments": "Tilleggskommentarer",
+    "commentsPlaceholder": "Beskriv gjeldende forhold, fjellkvalitet, tilkomst, etc.",
+    "submit": "Send rapport",
+    "submitting": "Sender...",
+    "helpful": "Nyttig",
+    "loginToConfirm": "Vennligst sett opp profilen din for å bekrefte rapporter",
+    "confirmFailed": "Kunne ikke bekrefte rapport. Prøv igjen.",
+    "ratings": {
+      "veryPoor": "Veldig dårlig",
+      "poor": "Dårlig",
+      "okay": "Helt greit",
+      "good": "Bra",
+      "excellent": "Utmerket"
+    },
+    "recentReports": "Nylige rapporter",
+    "noReports": "Ingen rapporter ennå",
+    "noReportsMessage": "Bli den første til å dele forhold ved dette crag",
+    "reportCount": "{{count}} rapporter",
+    "viewAllReports": "Vis alle rapporter"
   }
 }

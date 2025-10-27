@@ -145,6 +145,7 @@
   },
   "dialog": {
     "close": "Close",
+    "cancel": "Cancel",
     "detailedConditions": "Detailed Conditions",
     "fullAnalysis": "Full weather analysis and climbing conditions forecast",
     "showMap": "Map",
@@ -233,5 +234,83 @@
     "dolomite": "dolomite",
     "volcanic": "volcanic",
     "phyllite": "phyllite"
+  },
+  "profile": {
+    "anonymous": "Anonymous",
+    "member": "Member",
+    "anonymousMember": "Anonymous member",
+    "favorites": "Favourites",
+    "recent": "Recent Searches",
+    "stats": "Your Stats",
+    "settings": "Settings",
+    "clearData": "Clear All Data"
+  },
+  "settings": {
+    "title": "Settings",
+    "description": "Manage your profile, sync key, and preferences",
+    "save": "Save",
+    "saving": "Saving...",
+    "displayName": {
+      "label": "Display Name",
+      "description": "Your name shown on reports and confirmations (optional)",
+      "placeholder": "Enter your name..."
+    },
+    "syncKey": {
+      "title": "Sync Key",
+      "description": "Use this key to sync your favourites and settings across devices",
+      "label": "Your Sync Key",
+      "copy": "Copy sync key",
+      "showFullKey": "Show full key",
+      "hideKey": "Hide key",
+      "qrCode": "QR Code",
+      "qrDescription": "Scan this QR code on another device to sync your data",
+      "warning": {
+        "title": "Keep your sync key private",
+        "description": "Anyone with your sync key can access your favourites and settings. Don't share it publicly."
+      }
+    },
+    "dangerZone": {
+      "title": "Danger Zone",
+      "description": "These actions are permanent and cannot be undone",
+      "clearData": "Clear All Local Data"
+    }
+  },
+  "favorites": {
+    "title": "Your Favourite Crags",
+    "description": "You have {{count}} favourite locations",
+    "empty": "No favourites yet",
+    "emptyMessage": "You haven't added any favourite crags yet",
+    "emptyHint": "Click the star button on any conditions card to add it to your favourites",
+    "lastChecked": "Last checked",
+    "frictionScore": "Friction score",
+    "viewConditions": "View Conditions",
+    "remove": "Remove"
+  },
+  "reports": {
+    "addReport": "Add Condition Report",
+    "addReportDescription": "Share current conditions at {{cragName}}",
+    "postingAs": "Posting as",
+    "dryness": "Dryness",
+    "wind": "Wind",
+    "crowds": "Crowds",
+    "additionalComments": "Additional Comments",
+    "commentsPlaceholder": "Describe current conditions, rock quality, approach, etc.",
+    "submit": "Submit Report",
+    "submitting": "Submitting...",
+    "helpful": "Helpful",
+    "loginToConfirm": "Please set up your profile to confirm reports",
+    "confirmFailed": "Failed to confirm report. Please try again.",
+    "ratings": {
+      "veryPoor": "Very Poor",
+      "poor": "Poor",
+      "okay": "Okay",
+      "good": "Good",
+      "excellent": "Excellent"
+    },
+    "recentReports": "Recent Reports",
+    "noReports": "No reports yet",
+    "noReportsMessage": "Be the first to share conditions at this crag",
+    "reportCount": "{{count}} reports",
+    "viewAllReports": "View All Reports"
   }
 }

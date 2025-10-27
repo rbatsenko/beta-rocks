@@ -145,6 +145,7 @@
   },
   "dialog": {
     "close": "Zamknij",
+    "cancel": "Anuluj",
     "detailedConditions": "Szczegółowe warunki",
     "fullAnalysis": "Pełna analiza pogody i prognoza warunków wspinaczkowych",
     "showMap": "Mapa",
@@ -233,5 +234,83 @@
     "dolomite": "dolomit",
     "volcanic": "wulkaniczny",
     "phyllite": "fylit"
+  },
+  "profile": {
+    "anonymous": "Anonimowy",
+    "member": "Członek",
+    "anonymousMember": "Anonimowy członek",
+    "favorites": "Ulubione",
+    "recent": "Ostatnie wyszukiwania",
+    "stats": "Twoje statystyki",
+    "settings": "Ustawienia",
+    "clearData": "Wyczyść wszystkie dane"
+  },
+  "settings": {
+    "title": "Ustawienia",
+    "description": "Zarządzaj swoim profilem, kluczem synchronizacji i preferencjami",
+    "save": "Zapisz",
+    "saving": "Zapisywanie...",
+    "displayName": {
+      "label": "Nazwa wyświetlana",
+      "description": "Twoje imię wyświetlane w raportach i potwierdzeniach (opcjonalnie)",
+      "placeholder": "Wprowadź swoje imię..."
+    },
+    "syncKey": {
+      "title": "Klucz synchronizacji",
+      "description": "Użyj tego klucza do synchronizacji ulubionych i ustawień między urządzeniami",
+      "label": "Twój klucz synchronizacji",
+      "copy": "Kopiuj klucz synchronizacji",
+      "showFullKey": "Pokaż pełny klucz",
+      "hideKey": "Ukryj klucz",
+      "qrCode": "Kod QR",
+      "qrDescription": "Zeskanuj ten kod QR na innym urządzeniu, aby zsynchronizować dane",
+      "warning": {
+        "title": "Zachowaj swój klucz synchronizacji w tajemnicy",
+        "description": "Każdy, kto ma Twój klucz synchronizacji, może uzyskać dostęp do Twoich ulubionych i ustawień. Nie udostępniaj go publicznie."
+      }
+    },
+    "dangerZone": {
+      "title": "Strefa niebezpieczna",
+      "description": "Te działania są trwałe i nie można ich cofnąć",
+      "clearData": "Wyczyść wszystkie dane lokalne"
+    }
+  },
+  "favorites": {
+    "title": "Twoje ulubione skałki",
+    "description": "Masz {{count}} ulubionych lokalizacji",
+    "empty": "Brak ulubionych",
+    "emptyMessage": "Nie dodałeś jeszcze żadnych ulubionych skałek",
+    "emptyHint": "Kliknij gwiazdkę na karcie warunków, aby dodać ją do ulubionych",
+    "lastChecked": "Ostatnio sprawdzono",
+    "frictionScore": "Ocena tarcia",
+    "viewConditions": "Zobacz warunki",
+    "remove": "Usuń"
+  },
+  "reports": {
+    "addReport": "Dodaj raport warunków",
+    "addReportDescription": "Podziel się aktualnymi warunkami w {{cragName}}",
+    "postingAs": "Publikujesz jako",
+    "dryness": "Suchość",
+    "wind": "Wiatr",
+    "crowds": "Tłumy",
+    "additionalComments": "Dodatkowe komentarze",
+    "commentsPlaceholder": "Opisz aktualne warunki, jakość skały, podejście itp.",
+    "submit": "Wyślij raport",
+    "submitting": "Wysyłanie...",
+    "helpful": "Pomocne",
+    "loginToConfirm": "Skonfiguruj swój profil, aby potwierdzać raporty",
+    "confirmFailed": "Nie udało się potwierdzić raportu. Spróbuj ponownie.",
+    "ratings": {
+      "veryPoor": "Bardzo słabo",
+      "poor": "Słabo",
+      "okay": "W porządku",
+      "good": "Dobrze",
+      "excellent": "Doskonale"
+    },
+    "recentReports": "Ostatnie raporty",
+    "noReports": "Brak raportów",
+    "noReportsMessage": "Bądź pierwszy, który podzieli się warunkami na tej skałce",
+    "reportCount": "{{count}} raportów",
+    "viewAllReports": "Zobacz wszystkie raporty"
   }
 }

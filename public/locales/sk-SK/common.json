@@ -145,6 +145,7 @@
   },
   "dialog": {
     "close": "Zavrieť",
+    "cancel": "Zrušiť",
     "detailedConditions": "Podrobné podmienky",
     "fullAnalysis": "Úplná analýza počasia a predpoveď podmienok na lezenie",
     "showMap": "Mapa",
@@ -233,5 +234,83 @@
     "dolomite": "dolomit",
     "volcanic": "sopečný",
     "phyllite": "fylit"
+  },
+  "profile": {
+    "anonymous": "Anonymný",
+    "member": "Člen",
+    "anonymousMember": "Anonymný člen",
+    "favorites": "Obľúbené",
+    "recent": "Nedávne vyhľadávania",
+    "stats": "Vaše štatistiky",
+    "settings": "Nastavenia",
+    "clearData": "Vymazať všetky dáta"
+  },
+  "settings": {
+    "title": "Nastavenia",
+    "description": "Spravujte svoj profil, synchronizačný kľúč a predvoľby",
+    "save": "Uložiť",
+    "saving": "Ukladanie...",
+    "displayName": {
+      "label": "Zobrazované meno",
+      "description": "Vaše meno zobrazené pri reportoch a potvrdeniach (voliteľné)",
+      "placeholder": "Zadajte svoje meno..."
+    },
+    "syncKey": {
+      "title": "Synchronizačný kľúč",
+      "description": "Použite tento kľúč na synchronizáciu obľúbených a nastavení naprieč zariadeniami",
+      "label": "Váš synchronizačný kľúč",
+      "copy": "Skopírovať synchronizačný kľúč",
+      "showFullKey": "Zobraziť celý kľúč",
+      "hideKey": "Skryť kľúč",
+      "qrCode": "QR kód",
+      "qrDescription": "Naskenujte tento QR kód na inom zariadení pre synchronizáciu dát",
+      "warning": {
+        "title": "Uchovávajte svoj synchronizačný kľúč v súkromí",
+        "description": "Ktokoľvek s vaším synchronizačným kľúčom môže pristupovať k vašim obľúbeným a nastaveniam. Nezdieľajte ho verejne."
+      }
+    },
+    "dangerZone": {
+      "title": "Nebezpečná zóna",
+      "description": "Tieto akcie sú trvalé a nemožno ich vrátiť späť",
+      "clearData": "Vymazať všetky lokálne dáta"
+    }
+  },
+  "favorites": {
+    "title": "Vaše obľúbené skaly",
+    "description": "Máte {{count}} obľúbených miest",
+    "empty": "Zatiaľ žiadne obľúbené",
+    "emptyMessage": "Zatiaľ ste nepridali žiadne obľúbené skaly",
+    "emptyHint": "Kliknite na tlačidlo hviezdičky na ktorejkoľvek karte podmienok pre pridanie do obľúbených",
+    "lastChecked": "Naposledy skontrolované",
+    "frictionScore": "Skóre trenia",
+    "viewConditions": "Zobraziť podmienky",
+    "remove": "Odstrániť"
+  },
+  "reports": {
+    "addReport": "Pridať report o podmienkach",
+    "addReportDescription": "Zdieľajte aktuálne podmienky na {{cragName}}",
+    "postingAs": "Pridávate ako",
+    "dryness": "Sucho",
+    "wind": "Vietor",
+    "crowds": "Návštevnosť",
+    "additionalComments": "Ďalšie komentáre",
+    "commentsPlaceholder": "Popíšte aktuálne podmienky, kvalitu skaly, prístup atď.",
+    "submit": "Odoslať report",
+    "submitting": "Odosielanie...",
+    "helpful": "Užitočné",
+    "loginToConfirm": "Pre potvrdenie reportov si prosím nastavte profil",
+    "confirmFailed": "Nepodarilo sa potvrdiť report. Skúste to prosím znova.",
+    "ratings": {
+      "veryPoor": "Veľmi zlé",
+      "poor": "Zlé",
+      "okay": "Ujde",
+      "good": "Dobré",
+      "excellent": "Vynikajúce"
+    },
+    "recentReports": "Nedávne reporty",
+    "noReports": "Zatiaľ žiadne reporty",
+    "noReportsMessage": "Buďte prvý, kto zdieľa podmienky na tejto skale",
+    "reportCount": "{{count}} reportov",
+    "viewAllReports": "Zobraziť všetky reporty"
   }
 }

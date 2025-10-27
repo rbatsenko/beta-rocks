@@ -145,6 +145,7 @@
   },
   "dialog": {
     "close": "Fermer",
+    "cancel": "Annuler",
     "detailedConditions": "Conditions détaillées",
     "fullAnalysis": "Analyse complète de la météo et des conditions d'escalade",
     "showMap": "Carte",
@@ -233,5 +234,83 @@
     "dolomite": "dolomite",
     "volcanic": "volcanique",
     "phyllite": "phyllite"
+  },
+  "profile": {
+    "anonymous": "Anonyme",
+    "member": "Membre",
+    "anonymousMember": "Membre anonyme",
+    "favorites": "Favoris",
+    "recent": "Recherches récentes",
+    "stats": "Vos statistiques",
+    "settings": "Paramètres",
+    "clearData": "Effacer toutes les données"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "description": "Gérez votre profil, clé de synchronisation et préférences",
+    "save": "Enregistrer",
+    "saving": "Enregistrement...",
+    "displayName": {
+      "label": "Nom d'affichage",
+      "description": "Votre nom affiché sur les rapports et confirmations (optionnel)",
+      "placeholder": "Entrez votre nom..."
+    },
+    "syncKey": {
+      "title": "Clé de synchronisation",
+      "description": "Utilisez cette clé pour synchroniser vos favoris et paramètres entre vos appareils",
+      "label": "Votre clé de synchronisation",
+      "copy": "Copier la clé de synchronisation",
+      "showFullKey": "Afficher la clé complète",
+      "hideKey": "Masquer la clé",
+      "qrCode": "Code QR",
+      "qrDescription": "Scannez ce code QR sur un autre appareil pour synchroniser vos données",
+      "warning": {
+        "title": "Gardez votre clé de synchronisation privée",
+        "description": "Toute personne disposant de votre clé de synchronisation peut accéder à vos favoris et paramètres. Ne la partagez pas publiquement."
+      }
+    },
+    "dangerZone": {
+      "title": "Zone dangereuse",
+      "description": "Ces actions sont permanentes et ne peuvent pas être annulées",
+      "clearData": "Effacer toutes les données locales"
+    }
+  },
+  "favorites": {
+    "title": "Vos falaises favorites",
+    "description": "Vous avez {{count}} emplacements favoris",
+    "empty": "Aucun favori",
+    "emptyMessage": "Vous n'avez pas encore ajouté de falaises favorites",
+    "emptyHint": "Cliquez sur le bouton étoile sur n'importe quelle carte de conditions pour l'ajouter à vos favoris",
+    "lastChecked": "Dernière vérification",
+    "frictionScore": "Score de friction",
+    "viewConditions": "Voir les conditions",
+    "remove": "Retirer"
+  },
+  "reports": {
+    "addReport": "Ajouter un rapport de conditions",
+    "addReportDescription": "Partagez les conditions actuelles à {{cragName}}",
+    "postingAs": "Publier en tant que",
+    "dryness": "Sécheresse",
+    "wind": "Vent",
+    "crowds": "Affluence",
+    "additionalComments": "Commentaires supplémentaires",
+    "commentsPlaceholder": "Décrivez les conditions actuelles, qualité de la roche, approche, etc.",
+    "submit": "Soumettre le rapport",
+    "submitting": "Envoi en cours...",
+    "helpful": "Utile",
+    "loginToConfirm": "Veuillez configurer votre profil pour confirmer les rapports",
+    "confirmFailed": "Échec de la confirmation du rapport. Veuillez réessayer.",
+    "ratings": {
+      "veryPoor": "Très mauvais",
+      "poor": "Mauvais",
+      "okay": "Acceptable",
+      "good": "Bon",
+      "excellent": "Excellent"
+    },
+    "recentReports": "Rapports récents",
+    "noReports": "Aucun rapport",
+    "noReportsMessage": "Soyez le premier à partager les conditions de cette falaise",
+    "reportCount": "{{count}} rapports",
+    "viewAllReports": "Voir tous les rapports"
   }
 }
