@@ -28,7 +28,10 @@
   "conditions": {
     "rating": "Bewertung",
     "details": "Details",
-    "location": "Ort"
+    "location": "Ort",
+    "favorite": "Favorit",
+    "favorited": "In Favoriten",
+    "addReport": "Bericht hinzufügen"
   },
   "ratings": {
     "great": "Top",

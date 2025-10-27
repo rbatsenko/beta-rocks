@@ -28,7 +28,10 @@
   "conditions": {
     "rating": "Rating",
     "details": "Details",
-    "location": "Location"
+    "location": "Location",
+    "favorite": "Favorite",
+    "favorited": "Favorited",
+    "addReport": "Add Report"
   },
   "ratings": {
     "great": "Great",

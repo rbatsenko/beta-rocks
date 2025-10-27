@@ -28,7 +28,10 @@
   "conditions": {
     "rating": "Betyg",
     "details": "Detaljer",
-    "location": "Plats"
+    "location": "Plats",
+    "favorite": "Favorit",
+    "favorited": "I favoriter",
+    "addReport": "Lägg till rapport"
   },
   "ratings": {
     "great": "Toppen",

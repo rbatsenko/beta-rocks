@@ -28,7 +28,10 @@
   "conditions": {
     "rating": "Ocena",
     "details": "Podrobnosti",
-    "location": "Lokacija"
+    "location": "Lokacija",
+    "favorite": "Priljubljeno",
+    "favorited": "V priljubljenih",
+    "addReport": "Dodaj poročilo"
   },
   "ratings": {
     "great": "Odlično",

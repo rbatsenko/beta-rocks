@@ -544,6 +544,9 @@ const ChatInterface = () => {
                                 onFullDataFetched={handleFullDataFetched}
                                 conditionsLabel={t("conditions.rating")}
                                 detailsLabel={t("conditions.details")}
+                                favoriteLabel={t("conditions.favorite")}
+                                favoritedLabel={t("conditions.favorited")}
+                                addReportLabel={t("conditions.addReport")}
                               />
                             );
                           }

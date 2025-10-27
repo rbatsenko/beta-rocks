@@ -110,6 +110,9 @@ interface WeatherConditionCardProps {
   onFullDataFetched?: (fullData: PrefetchedFullData) => void; // Callback when full 14-day data is prefetched
   conditionsLabel: string;
   detailsLabel: string;
+  favoriteLabel: string;
+  favoritedLabel: string;
+  addReportLabel: string;
 }
 
 function isNightTime(date: Date): boolean {
@@ -128,6 +131,9 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
   onFullDataFetched,
   conditionsLabel,
   detailsLabel,
+  favoriteLabel,
+  favoritedLabel,
+  addReportLabel,
 }: WeatherConditionCardProps) {
   const hasEmoji = data.current?.weatherCode !== undefined;
   const [isFavorite, setIsFavorite] = useState(false);
@@ -297,7 +303,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
               className={isFavorite ? "bg-orange-500 hover:bg-orange-600" : ""}
             >
               <Star className={`w-4 h-4 mr-1 ${isFavorite ? "fill-current" : ""}`} />
-              {isFavorite ? "Favorited" : "Favorite"}
+              {isFavorite ? favoritedLabel : favoriteLabel}
             </Button>
             <Button
               variant="outline"
@@ -307,7 +313,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
               title="Add condition report"
             >
               <MessageSquare className="w-4 h-4 mr-1" />
-              Add Report
+              {addReportLabel}
             </Button>
             {/* {onSheetClick && (
               <Button variant="outline" size="sm" onClick={onSheetClick} title="Open in side panel">

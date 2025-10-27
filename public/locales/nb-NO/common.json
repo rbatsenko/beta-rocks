@@ -28,7 +28,10 @@
   "conditions": {
     "rating": "Vurdering",
     "details": "Detaljer",
-    "location": "Sted"
+    "location": "Sted",
+    "favorite": "Favoritt",
+    "favorited": "I favoritter",
+    "addReport": "Legg til rapport"
   },
   "ratings": {
     "great": "Knall",

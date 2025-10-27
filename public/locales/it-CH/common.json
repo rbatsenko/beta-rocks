@@ -28,7 +28,10 @@
   "conditions": {
     "rating": "Valutazione",
     "details": "Dettagli",
-    "location": "Località"
+    "location": "Località",
+    "favorite": "Preferito",
+    "favorited": "Nei preferiti",
+    "addReport": "Aggiungi rapporto"
   },
   "ratings": {
     "great": "Ottime",

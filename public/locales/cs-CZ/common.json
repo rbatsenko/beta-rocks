@@ -28,7 +28,10 @@
   "conditions": {
     "rating": "Hodnocení",
     "details": "Detaily",
-    "location": "Místo"
+    "location": "Místo",
+    "favorite": "Oblíbené",
+    "favorited": "V oblíbených",
+    "addReport": "Přidat hlášení"
   },
   "ratings": {
     "great": "Skvělé",

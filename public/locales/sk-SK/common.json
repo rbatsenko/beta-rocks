@@ -28,7 +28,10 @@
   "conditions": {
     "rating": "Hodnotenie",
     "details": "Detaily",
-    "location": "Miesto"
+    "location": "Miesto",
+    "favorite": "Obľúbené",
+    "favorited": "V obľúbených",
+    "addReport": "Pridať hlásenie"
   },
   "ratings": {
     "great": "Skvelé",

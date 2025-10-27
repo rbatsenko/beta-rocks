@@ -28,7 +28,10 @@
   "conditions": {
     "rating": "Оцінка",
     "details": "Деталі",
-    "location": "Локація"
+    "location": "Локація",
+    "favorite": "Обране",
+    "favorited": "В обраному",
+    "addReport": "Додати звіт"
   },
   "ratings": {
     "great": "Чудово",
