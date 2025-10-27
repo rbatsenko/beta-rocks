@@ -1,10 +1,15 @@
-import { memo, useMemo, useEffect } from "react";
+import { memo, useMemo, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Info } from "lucide-react";
+import { Info, Star } from "lucide-react";
 import { getWeatherEmoji, getWeatherDescription } from "@/lib/utils/weather-emojis";
 import { logRender } from "@/lib/debug/render-log";
 import { MapPopover } from "@/components/MapPopover";
 import { getCountryFlag } from "@/lib/utils/country-flag";
+import {
+  addFavoriteToStorage,
+  removeFavoriteFromStorage,
+  isFavorited,
+} from "@/lib/storage/favorites";
 
 interface ConditionsData {
   location: string;
@@ -123,6 +128,17 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
   detailsLabel,
 }: WeatherConditionCardProps) {
   const hasEmoji = data.current?.weatherCode !== undefined;
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [favoriteId, setFavoriteId] = useState<string | null>(null);
+
+  // Check if this location is already favorited
+  useEffect(() => {
+    if (data.latitude && data.longitude) {
+      const favorited = isFavorited(undefined, undefined);
+      setIsFavorite(favorited);
+    }
+  }, [data.latitude, data.longitude]);
+
   logRender("WeatherConditionCard", {
     location: data.location,
     hasEmoji,
@@ -246,6 +262,40 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
                 locationName={data.location}
               />
             )}
+            <Button
+              variant={isFavorite ? "default" : "outline"}
+              size="sm"
+              onClick={() => {
+                if (isFavorite && favoriteId) {
+                  removeFavoriteFromStorage(favoriteId);
+                  setIsFavorite(false);
+                  setFavoriteId(null);
+                } else if (data.latitude && data.longitude) {
+                  try {
+                    const favorite = addFavoriteToStorage({
+                      areaName: data.location,
+                      location: `${data.country || ""}${data.state ? ", " + data.state : ""}`,
+                      latitude: data.latitude,
+                      longitude: data.longitude,
+                      rockType: data.rockType,
+                      lastRating: data.rating,
+                      lastFrictionScore: data.frictionScore,
+                      lastCheckedAt: new Date().toISOString(),
+                      displayOrder: 0,
+                    });
+                    setIsFavorite(true);
+                    setFavoriteId(favorite.id);
+                  } catch (error) {
+                    console.error("Failed to add favorite:", error);
+                  }
+                }
+              }}
+              title={isFavorite ? "Remove from favorites" : "Add to favorites"}
+              className={isFavorite ? "bg-orange-500 hover:bg-orange-600" : ""}
+            >
+              <Star className={`w-4 h-4 mr-1 ${isFavorite ? "fill-current" : ""}`} />
+              {isFavorite ? "Favorited" : "Favorite"}
+            </Button>
             {/* {onSheetClick && (
               <Button variant="outline" size="sm" onClick={onSheetClick} title="Open in side panel">
                 <PanelRightOpen className="w-4 h-4 mr-1" />

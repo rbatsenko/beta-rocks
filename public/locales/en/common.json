@@ -233,5 +233,56 @@
     "dolomite": "dolomite",
     "volcanic": "volcanic",
     "phyllite": "phyllite"
+  },
+  "profile": {
+    "anonymous": "Anonymous",
+    "member": "Member",
+    "anonymousMember": "Anonymous member",
+    "favorites": "Favorites",
+    "recent": "Recent Searches",
+    "stats": "Your Stats",
+    "settings": "Settings",
+    "clearData": "Clear All Data"
+  },
+  "settings": {
+    "title": "Settings",
+    "description": "Manage your profile, sync key, and preferences",
+    "save": "Save",
+    "saving": "Saving...",
+    "displayName": {
+      "label": "Display Name",
+      "description": "Your name shown on reports and confirmations (optional)",
+      "placeholder": "Enter your name..."
+    },
+    "syncKey": {
+      "title": "Sync Key",
+      "description": "Use this key to sync your favorites and settings across devices",
+      "label": "Your Sync Key",
+      "copy": "Copy sync key",
+      "showFullKey": "Show full key",
+      "hideKey": "Hide key",
+      "qrCode": "QR Code",
+      "qrDescription": "Scan this QR code on another device to sync your data",
+      "warning": {
+        "title": "Keep your sync key private",
+        "description": "Anyone with your sync key can access your favorites and settings. Don't share it publicly."
+      }
+    },
+    "dangerZone": {
+      "title": "Danger Zone",
+      "description": "These actions are permanent and cannot be undone",
+      "clearData": "Clear All Local Data"
+    }
+  },
+  "favorites": {
+    "title": "Your Favorite Crags",
+    "description": "You have {{count}} favorite locations",
+    "empty": "No favorites yet",
+    "emptyMessage": "You haven't added any favorite crags yet",
+    "emptyHint": "Click the star button on any conditions card to add it to your favorites",
+    "lastChecked": "Last checked",
+    "frictionScore": "Friction score",
+    "viewConditions": "View Conditions",
+    "remove": "Remove"
   }
 }

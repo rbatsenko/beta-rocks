@@ -35,6 +35,9 @@ import { ConditionsDetailSheet } from "@/components/ConditionsDetailSheet";
 import { WeatherConditionCard } from "@/components/WeatherConditionCard";
 import { DisambiguationOptions } from "@/components/DisambiguationOptions";
 import { FeaturesDialog } from "@/components/FeaturesDialog";
+import { UserMenu } from "@/components/UserMenu";
+import { SettingsDialog } from "@/components/SettingsDialog";
+import { FavoritesDialog } from "@/components/FavoritesDialog";
 import { logRender } from "@/lib/debug/render-log";
 
 interface ConditionsData {
@@ -189,6 +192,8 @@ const ChatInterface = () => {
   const [detailsSheetOpen, setDetailsSheetOpen] = useState(false);
   const [selectedConditions, setSelectedConditions] = useState<ConditionsData | null>(null);
   const [featuresDialogOpen, setFeaturesDialogOpen] = useState(false);
+  const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
+  const [favoritesDialogOpen, setFavoritesDialogOpen] = useState(false);
   const [scrollSignal, setScrollSignal] = useState(0);
   // Store prefetched full 14-day data keyed by location coordinates
   const [prefetchedDataMap, setPrefetchedDataMap] = useState<Map<string, PrefetchedFullData>>(
@@ -323,6 +328,10 @@ const ChatInterface = () => {
               </Button>
               <LanguageSelector />
               <ThemeToggle />
+              <UserMenu
+                onSettingsClick={() => setSettingsDialogOpen(true)}
+                onFavoritesClick={() => setFavoritesDialogOpen(true)}
+              />
             </div>
           </div>
         </header>
@@ -653,6 +662,19 @@ const ChatInterface = () => {
 
       {/* Features / About App Dialog */}
       <FeaturesDialog open={featuresDialogOpen} onOpenChange={setFeaturesDialogOpen} />
+
+      {/* Settings Dialog */}
+      <SettingsDialog open={settingsDialogOpen} onOpenChange={setSettingsDialogOpen} />
+
+      {/* Favorites Dialog */}
+      <FavoritesDialog
+        open={favoritesDialogOpen}
+        onOpenChange={setFavoritesDialogOpen}
+        onViewConditions={(favorite) => {
+          // TODO: Send message to chat to get conditions for this favorite location
+          console.log("View conditions for favorite:", favorite);
+        }}
+      />
     </>
   );
 };
