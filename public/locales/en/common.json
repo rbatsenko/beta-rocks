@@ -145,6 +145,7 @@
   },
   "dialog": {
     "close": "Close",
+    "cancel": "Cancel",
     "detailedConditions": "Detailed Conditions",
     "fullAnalysis": "Full weather analysis and climbing conditions forecast",
     "showMap": "Map",
@@ -284,5 +285,32 @@
     "frictionScore": "Friction score",
     "viewConditions": "View Conditions",
     "remove": "Remove"
+  },
+  "reports": {
+    "addReport": "Add Condition Report",
+    "addReportDescription": "Share current conditions at {{cragName}}",
+    "postingAs": "Posting as",
+    "dryness": "Dryness",
+    "wind": "Wind",
+    "crowds": "Crowds",
+    "additionalComments": "Additional Comments",
+    "commentsPlaceholder": "Describe current conditions, rock quality, approach, etc.",
+    "submit": "Submit Report",
+    "submitting": "Submitting...",
+    "helpful": "Helpful",
+    "loginToConfirm": "Please set up your profile to confirm reports",
+    "confirmFailed": "Failed to confirm report. Please try again.",
+    "ratings": {
+      "veryPoor": "Very Poor",
+      "poor": "Poor",
+      "okay": "Okay",
+      "good": "Good",
+      "excellent": "Excellent"
+    },
+    "recentReports": "Recent Reports",
+    "noReports": "No reports yet",
+    "noReportsMessage": "Be the first to share conditions at this crag",
+    "reportCount": "{{count}} reports",
+    "viewAllReports": "View All Reports"
   }
 }

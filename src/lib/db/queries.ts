@@ -67,6 +67,83 @@ export async function createCrag(crag: TablesInsert<"crags">) {
   return data;
 }
 
+/**
+ * Find a crag by coordinates within a tolerance (default ~100m = 0.001 degrees)
+ * Returns the closest crag if multiple exist within tolerance
+ */
+export async function findCragByCoordinates(
+  lat: number,
+  lon: number,
+  tolerance: number = 0.001
+) {
+  // Query crags within bounding box
+  const { data, error } = await supabase
+    .from("crags")
+    .select("*")
+    .gte("lat", lat - tolerance)
+    .lte("lat", lat + tolerance)
+    .gte("lon", lon - tolerance)
+    .lte("lon", lon + tolerance);
+
+  if (error) throw error;
+  if (!data || data.length === 0) return null;
+
+  // Find closest crag if multiple exist
+  let closest = data[0];
+  let minDistance = Math.sqrt(
+    Math.pow((closest.lat as number) - lat, 2) + Math.pow((closest.lon as number) - lon, 2)
+  );
+
+  for (const crag of data.slice(1)) {
+    const distance = Math.sqrt(
+      Math.pow((crag.lat as number) - lat, 2) + Math.pow((crag.lon as number) - lon, 2)
+    );
+    if (distance < minDistance) {
+      minDistance = distance;
+      closest = crag;
+    }
+  }
+
+  return closest;
+}
+
+/**
+ * Find or create a crag at given coordinates
+ * Useful for ensuring all users see the same reports for a location
+ */
+export async function findOrCreateCrag(params: {
+  name: string;
+  lat: number;
+  lon: number;
+  country?: string;
+  state?: string;
+  municipality?: string;
+  village?: string;
+  rockType?: string;
+  source?: string;
+}) {
+  // First, try to find existing crag
+  const existing = await findCragByCoordinates(params.lat, params.lon);
+  if (existing) {
+    return existing;
+  }
+
+  // Create new crag
+  const newCrag = await createCrag({
+    name: params.name,
+    lat: params.lat,
+    lon: params.lon,
+    country: params.country || null,
+    state: params.state || null,
+    municipality: params.municipality || null,
+    village: params.village || null,
+    rock_type: params.rockType || null,
+    source: params.source || "user_report",
+  });
+
+  return newCrag;
+}
+
 // ==================== SECTORS ====================
 
 export async function fetchSectorsByCrag(cragId: string) {
@@ -160,7 +237,13 @@ export async function createReport(report: TablesInsert<"reports">) {
 export async function fetchReportsByCrag(cragId: string, limit = 20) {
   const { data, error } = await supabase
     .from("reports")
-    .select("*")
+    .select(
+      `
+      *,
+      author:user_profiles(id, display_name),
+      confirmations:confirmations(count)
+    `
+    )
     .eq("crag_id", cragId)
     .order("created_at", { ascending: false })
     .limit(limit);
