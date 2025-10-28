@@ -249,6 +249,48 @@ export async function initializeUserProfile(): Promise<UserProfile> {
         // Non-critical, continue
       }
 
+      // Also restore most recent chat session from database
+      try {
+        const { supabase } = await import("@/integrations/supabase/client");
+
+        // Fetch most recent session for this user
+        const { data: sessions } = await supabase
+          .from("chat_sessions")
+          .select("*")
+          .eq("user_profile_id", dbProfile.id)
+          .order("updated_at", { ascending: false })
+          .limit(1);
+
+        if (sessions && sessions.length > 0) {
+          const mostRecentSession = sessions[0];
+
+          // Fetch messages for this session
+          const { data: messages } = await supabase
+            .from("chat_messages")
+            .select("*")
+            .eq("session_id", mostRecentSession.id)
+            .order("created_at", { ascending: true });
+
+          if (messages && messages.length > 0) {
+            // Store session ID and messages in localStorage
+            localStorage.setItem("temps_current_session_id", mostRecentSession.id);
+            localStorage.setItem("temps_chat_messages", JSON.stringify(messages));
+            console.log(
+              `[initializeUserProfile] Restored chat session ${mostRecentSession.id} with ${messages.length} messages`
+            );
+          } else {
+            // Session exists but no messages, just set the session ID
+            localStorage.setItem("temps_current_session_id", mostRecentSession.id);
+            console.log(
+              `[initializeUserProfile] Restored empty chat session ${mostRecentSession.id}`
+            );
+          }
+        }
+      } catch (chatError) {
+        console.warn("[initializeUserProfile] Failed to restore chat history:", chatError);
+        // Non-critical, continue
+      }
+
       return profileWithDbData;
     }
   } catch (error) {
