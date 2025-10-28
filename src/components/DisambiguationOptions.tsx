@@ -1,9 +1,7 @@
 import { memo, useCallback } from "react";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { logRender } from "@/lib/debug/render-log";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
-import { generateUniqueSlug } from "@/lib/utils/slug";
 
 interface DisambiguationOption {
   id: string;
@@ -33,11 +31,10 @@ interface DisambiguationOptionsProps {
 export const DisambiguationOptions = memo(function DisambiguationOptions({
   result,
   displayMessage,
-  queryTemplate: _queryTemplate,
-  onOptionSelect: _onOptionSelect,
+  queryTemplate,
+  onOptionSelect,
 }: DisambiguationOptionsProps) {
   const { t } = useClientTranslation("common");
-  const router = useRouter();
 
   logRender("DisambiguationOptions", {
     options: result.options.length,
@@ -58,11 +55,15 @@ export const DisambiguationOptions = memo(function DisambiguationOptions({
 
   const handleOptionClick = useCallback(
     (option: DisambiguationOption) => {
-      // Navigate directly to the crag page instead of querying AI
-      const slug = generateUniqueSlug(option.name, option.latitude, option.longitude);
-      router.push(`/location/${slug}`);
+      // Send a chat message with the selected location
+      // Include coordinates for precise location resolution
+      const query = queryTemplate
+        .replace("{location}", option.name)
+        .replace("{latitude}", option.latitude.toString())
+        .replace("{longitude}", option.longitude.toString());
+      onOptionSelect(query);
     },
-    [router]
+    [queryTemplate, onOptionSelect]
   );
 
   return (
