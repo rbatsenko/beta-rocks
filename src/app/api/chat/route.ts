@@ -652,14 +652,22 @@ const tools = {
             console.log("[get_conditions] Fetched recent reports:", {
               cragId,
               reportCount: recentReports.length,
+              reports: recentReports.map(r => ({
+                category: r.category,
+                text: r.text?.substring(0, 50) + '...',
+                observedAt: r.observed_at,
+                author: r.author?.display_name || 'Anonymous'
+              }))
             });
           } catch (error) {
             console.error("[get_conditions] Failed to fetch reports:", error);
             // Continue without reports - not critical for conditions
           }
+        } else {
+          console.log("[get_conditions] No cragId available, skipping reports fetch");
         }
 
-        return {
+        const result = {
           location,
           locationDetails, // Add region/country or OpenBeta path
           latitude: lat,
@@ -725,6 +733,24 @@ const tools = {
             confirmationCount: report.confirmationCount || 0,
           })),
         };
+
+        // Log final data being returned to AI (for debugging report integration)
+        console.log("[get_conditions] Returning to AI:", {
+          location,
+          cragId,
+          reportCount: recentReports.length,
+          hasReports: recentReports.length > 0,
+          reportPreview: recentReports.length > 0 ? {
+            firstReport: {
+              category: recentReports[0].category,
+              text: recentReports[0].text?.substring(0, 80) + '...',
+              author: recentReports[0].author?.display_name || 'Anonymous',
+              observedAt: recentReports[0].observed_at
+            }
+          } : 'No reports'
+        });
+
+        return result;
       } catch (error) {
         console.error("[get_conditions] Error:", {
           location,
