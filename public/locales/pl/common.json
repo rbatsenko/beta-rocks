@@ -468,7 +468,9 @@
     "noReportsInCategory": "Brak raportów w tej kategorii",
     "filters": {
       "all": "Wszystkie"
-    }
+    },
+    "observationDate": "When did you observe this?",
+    "observationDateHelp": "You can report conditions up to 7 days back"
   },
   "cragPage": {
     "askAI": "Zapytaj AI",

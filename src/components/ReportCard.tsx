@@ -33,6 +33,7 @@ interface Report {
   rating_wind: number | null;
   rating_crowds: number | null;
   created_at: string;
+  observed_at: string;
   author?: {
     id: string;
     display_name: string | null;
@@ -163,7 +164,7 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
             </Badge>
           </div>
           <span className="text-xs text-muted-foreground">
-            {formatDistanceToNow(new Date(report.created_at), { addSuffix: true })}
+            {formatDistanceToNow(new Date(report.observed_at), { addSuffix: true })}
           </span>
         </div>
 

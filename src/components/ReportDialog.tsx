@@ -9,6 +9,7 @@ import {
   Lock,
   Mountain,
   Home,
+  Calendar as CalendarIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,10 +22,14 @@ import {
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Slider } from "@/components/ui/slider";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { getUserProfile, initializeUserProfile, hashSyncKeyAsync } from "@/lib/auth/sync-key";
 import { createReport } from "@/lib/db/queries";
 import { fetchOrCreateUserProfile } from "@/lib/db/queries";
+import { format } from "date-fns";
+import { cn } from "@/lib/utils";
 
 type ReportCategory = "conditions" | "safety" | "access" | "beta" | "facilities" | "other";
 
@@ -51,6 +56,7 @@ export function ReportDialog({
   const [text, setText] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [displayName, setDisplayName] = useState<string | null>(null);
+  const [observedAt, setObservedAt] = useState<Date>(new Date());
 
   useEffect(() => {
     if (open) {
@@ -63,6 +69,7 @@ export function ReportDialog({
       setWindRating([3]);
       setCrowdsRating([3]);
       setText("");
+      setObservedAt(new Date());
     }
   }, [open]);
 
@@ -110,6 +117,7 @@ export function ReportDialog({
         rating_wind: category === "conditions" ? windRating[0] : null,
         rating_crowds: category === "conditions" ? crowdsRating[0] : null,
         text: text.trim() || null,
+        observed_at: observedAt.toISOString(),
       });
 
       // Success!
@@ -145,6 +153,41 @@ export function ReportDialog({
                 {displayName || t("profile.anonymous")}
               </span>
             </p>
+          </div>
+
+          {/* Observation Date */}
+          <div className="space-y-2">
+            <Label>{t("reports.observationDate")}</Label>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className={cn(
+                    "w-full justify-start text-left font-normal",
+                    !observedAt && "text-muted-foreground"
+                  )}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {observedAt ? format(observedAt, "PPP") : <span>Pick a date</span>}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={observedAt}
+                  onSelect={(date) => date && setObservedAt(date)}
+                  disabled={(date) => {
+                    const sevenDaysAgo = new Date();
+                    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+                    const tomorrow = new Date();
+                    tomorrow.setDate(tomorrow.getDate() + 1);
+                    return date < sevenDaysAgo || date > tomorrow;
+                  }}
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
+            <p className="text-xs text-muted-foreground">{t("reports.observationDateHelp")}</p>
           </div>
 
           {/* Category Selection */}

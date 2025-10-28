@@ -252,6 +252,7 @@ export type Database = {
           crag_id: string | null;
           created_at: string | null;
           id: string;
+          observed_at: string;
           photo_url: string | null;
           rating_crowds: number | null;
           rating_dry: number | null;
@@ -267,6 +268,7 @@ export type Database = {
           crag_id?: string | null;
           created_at?: string | null;
           id?: string;
+          observed_at?: string;
           photo_url?: string | null;
           rating_crowds?: number | null;
           rating_dry?: number | null;
@@ -282,6 +284,7 @@ export type Database = {
           crag_id?: string | null;
           created_at?: string | null;
           id?: string;
+          observed_at?: string;
           photo_url?: string | null;
           rating_crowds?: number | null;
           rating_dry?: number | null;

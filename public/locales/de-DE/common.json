@@ -475,6 +475,8 @@
     "noReportsInCategory": "No reports in this category",
     "filters": {
       "all": "All"
-    }
+    },
+    "observationDate": "When did you observe this?",
+    "observationDateHelp": "You can report conditions up to 7 days back"
   }
 }

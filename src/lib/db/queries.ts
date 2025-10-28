@@ -260,6 +260,7 @@ export async function createReport(report: TablesInsert<"reports">) {
     .insert({
       id: uuidv4(),
       ...report,
+      // observed_at should be provided by caller, defaults to now() in DB
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     })
@@ -281,7 +282,7 @@ export async function fetchReportsByCrag(cragId: string, limit = 20) {
     `
     )
     .eq("crag_id", cragId)
-    .order("created_at", { ascending: false })
+    .order("observed_at", { ascending: false })
     .limit(limit);
 
   if (error) {
@@ -304,7 +305,7 @@ export async function fetchReportsBySector(sectorId: string, limit = 20) {
     .from("reports")
     .select("*")
     .eq("sector_id", sectorId)
-    .order("created_at", { ascending: false })
+    .order("observed_at", { ascending: false })
     .limit(limit);
 
   if (error) throw error;
@@ -316,7 +317,7 @@ export async function fetchReportsByRoute(routeId: string, limit = 20) {
     .from("reports")
     .select("*")
     .eq("route_id", routeId)
-    .order("created_at", { ascending: false })
+    .order("observed_at", { ascending: false })
     .limit(limit);
 
   if (error) throw error;
