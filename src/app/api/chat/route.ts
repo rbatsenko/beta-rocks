@@ -59,6 +59,7 @@ const tools = {
       let description: string | undefined = undefined;
       let aspects: number[] | undefined = undefined;
       let climbingTypes: string[] | undefined = undefined;
+      let cragId: string | undefined = undefined;
 
       // If no coordinates provided, search for location
       if (!lat || !lon) {
@@ -81,6 +82,7 @@ const tools = {
               const result = localCrags[0];
               lat = result.lat;
               lon = result.lon;
+              cragId = result.id; // Capture crag ID for fetching reports
               detectedRockType = (detectedRockType || (result.rock_type as RockType)) as RockType;
 
               // Capture detailed location data
@@ -618,25 +620,28 @@ const tools = {
           frictionScore: conditions.frictionRating,
         });
 
-        // Find or create crag in database to enable reports
-        let cragId: string | undefined;
-        try {
-          const crag = await findOrCreateCrag({
-            name: location,
-            lat,
-            lon,
-            country,
-            state,
-            municipality,
-            village,
-            rockType: detectedRockType,
-            source: "ai_chat",
-          });
-          cragId = crag.id;
-          console.log("[get_conditions] Crag found/created:", { cragId, name: crag.name });
-        } catch (error) {
-          console.error("[get_conditions] Failed to find/create crag:", error);
-          // Continue without cragId - reports won't work but conditions will
+        // Find or create crag in database to enable reports (if not already found via local search)
+        if (!cragId) {
+          try {
+            const crag = await findOrCreateCrag({
+              name: location,
+              lat,
+              lon,
+              country,
+              state,
+              municipality,
+              village,
+              rockType: detectedRockType,
+              source: "ai_chat",
+            });
+            cragId = crag.id;
+            console.log("[get_conditions] Crag found/created:", { cragId, name: crag.name });
+          } catch (error) {
+            console.error("[get_conditions] Failed to find/create crag:", error);
+            // Continue without cragId - reports won't work but conditions will
+          }
+        } else {
+          console.log("[get_conditions] Using cragId from local search:", cragId);
         }
 
         // Fetch recent community reports for this crag
