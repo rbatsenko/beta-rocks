@@ -11,7 +11,7 @@ import {
   isCrag,
   hasPreciseCoordinates,
 } from "@/lib/openbeta/client";
-import { searchCrags, findOrCreateCrag } from "@/lib/db/queries";
+import { searchCrags, findOrCreateCrag, fetchReportsByCrag } from "@/lib/db/queries";
 import { resolveLocale } from "@/lib/i18n/config";
 import { getSystemPrompt } from "./prompts";
 import {
@@ -639,6 +639,21 @@ const tools = {
           // Continue without cragId - reports won't work but conditions will
         }
 
+        // Fetch recent community reports for this crag
+        let recentReports: any[] = [];
+        if (cragId) {
+          try {
+            recentReports = await fetchReportsByCrag(cragId, 10);
+            console.log("[get_conditions] Fetched recent reports:", {
+              cragId,
+              reportCount: recentReports.length,
+            });
+          } catch (error) {
+            console.error("[get_conditions] Failed to fetch reports:", error);
+            // Continue without reports - not critical for conditions
+          }
+        }
+
         return {
           location,
           locationDetails, // Add region/country or OpenBeta path
@@ -692,6 +707,17 @@ const tools = {
             sunrise: day.sunrise,
             sunset: day.sunset,
             weatherCode: day.weatherCode,
+          })),
+          // Include recent community reports for AI context
+          recentReports: recentReports.map((report) => ({
+            category: report.category,
+            text: report.text,
+            observedAt: report.observed_at,
+            ratingDry: report.rating_dry,
+            ratingWind: report.rating_wind,
+            ratingCrowds: report.rating_crowds,
+            author: report.author?.display_name || "Anonymous",
+            confirmationCount: report.confirmationCount || 0,
           })),
         };
       } catch (error) {

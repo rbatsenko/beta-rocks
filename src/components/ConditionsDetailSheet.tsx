@@ -152,11 +152,13 @@ export const ConditionsDetailSheet = memo(function ConditionsDetailSheet({
           </SheetDescription>
           <div className="flex flex-wrap gap-2 pt-1">
             {data.latitude && data.longitude && (
-              <MapPopover
-                latitude={data.latitude}
-                longitude={data.longitude}
-                locationName={data.location}
-              />
+              <div>
+                <MapPopover
+                  latitude={data.latitude}
+                  longitude={data.longitude}
+                  locationName={data.location}
+                />
+              </div>
             )}
             {data.latitude && data.longitude && (
               <Button

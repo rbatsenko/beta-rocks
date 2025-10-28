@@ -268,6 +268,17 @@ export async function createReport(report: TablesInsert<"reports">) {
     .single();
 
   if (error) throw error;
+
+  // Increment user stats
+  if (data && report.author_id) {
+    try {
+      await incrementUserStat(report.author_id, "reports_posted");
+    } catch (statsError) {
+      console.error("[createReport] Failed to increment user stats:", statsError);
+      // Don't fail the report creation if stats update fails
+    }
+  }
+
   return data;
 }
 

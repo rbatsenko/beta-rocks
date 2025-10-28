@@ -15,6 +15,11 @@ import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { fetchOrCreateUserStats, fetchOrCreateUserProfile } from "@/lib/db/queries";
 import { getUserProfile, hashSyncKeyAsync } from "@/lib/auth/sync-key";
 import { formatDistanceToNow } from "date-fns";
+import {
+  getUserStatsFromStorage,
+  saveUserStatsToStorage,
+  type CachedUserStats,
+} from "@/lib/storage/user-stats";
 
 interface StatsDialogProps {
   open: boolean;
@@ -42,10 +47,21 @@ export function StatsDialog({ open, onOpenChange }: StatsDialogProps) {
 
   const loadStats = async () => {
     try {
-      setIsLoading(true);
+      // Load from localStorage immediately (instant, no delay)
+      const cachedStats = getUserStatsFromStorage();
+      if (cachedStats) {
+        setStats(cachedStats as UserStats);
+        setIsLoading(false);
+        console.log("[StatsDialog] Loaded stats from localStorage");
+      } else {
+        setIsLoading(true);
+      }
+
+      // Then sync from database in the background
       const profile = getUserProfile();
       if (!profile?.syncKey) {
-        console.warn("No user profile found");
+        console.warn("[StatsDialog] No user profile found");
+        if (!cachedStats) setIsLoading(false);
         return;
       }
 
@@ -54,14 +70,20 @@ export function StatsDialog({ open, onOpenChange }: StatsDialogProps) {
       const dbProfile = await fetchOrCreateUserProfile(syncKeyHash);
 
       if (!dbProfile?.id) {
-        console.warn("Failed to get database profile");
+        console.warn("[StatsDialog] Failed to get database profile");
+        if (!cachedStats) setIsLoading(false);
         return;
       }
 
       const userStats = await fetchOrCreateUserStats(dbProfile.id);
       setStats(userStats as UserStats);
+
+      // Update localStorage cache
+      saveUserStatsToStorage(userStats as CachedUserStats);
+
+      console.log("[StatsDialog] Updated stats from DB");
     } catch (error) {
-      console.error("Failed to load user stats:", error);
+      console.error("[StatsDialog] Failed to load user stats:", error);
     } finally {
       setIsLoading(false);
     }

@@ -76,6 +76,15 @@ USE CRAG-SPECIFIC CONTEXT when available:
 When crag metadata is available, integrate it naturally into your response. Don't mention every field - only what's relevant to current conditions.
 </crag_metadata>
 
+<community_reports>
+COMMUNITY REPORTS: When get_conditions returns recentReports, these are REAL observations from climbers. ALWAYS consider them:
+- Reports within last 48 hours trump weather data - if report says "dry" but weather shows rain 2 days ago, trust the report
+- Integrate naturally: "A climber reported yesterday that conditions were excellent with dry rock (5/5 dryness)"
+- Safety reports: START response with ⚠️ warning
+- Access reports: Mention prominently (closures, parking changes, etc.)
+Reports provide ground truth that complements weather predictions.
+</community_reports>
+
 <rating_levels>
 RATING LEVELS (use these exact terms):
 - Great (5/5 friction) - Perfect climbing conditions
@@ -205,6 +214,15 @@ USE CRAG-SPECIFIC CONTEXT when available:
 
 When crag metadata is available, integrate it naturally into your response. Don't mention every field - only what's relevant to current conditions.
 </crag_metadata>
+
+<community_reports>
+COMMUNITY REPORTS: When get_conditions returns recentReports, these are REAL observations from climbers. ALWAYS consider them:
+- Reports within last 48 hours trump weather data - if report says "dry" but weather shows rain 2 days ago, trust the report
+- Integrate naturally: "A climber reported yesterday that conditions were excellent with dry rock (5/5 dryness)"
+- Safety reports: START response with ⚠️ warning
+- Access reports: Mention prominently (closures, parking changes, etc.)
+Reports provide ground truth that complements weather predictions.
+</community_reports>
 
 <rating_levels>
 RATING LEVELS (use these exact terms):
