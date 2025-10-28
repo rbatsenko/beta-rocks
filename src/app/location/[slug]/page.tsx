@@ -9,7 +9,7 @@ import {
 } from "@/lib/db/queries";
 import { getWeatherForecast } from "@/lib/external-apis/open-meteo";
 import { computeConditions } from "@/lib/conditions/conditions.service";
-import { generateSlug, parseCoordinatesFromSlug, getBaseSlug, slugToTitle } from "@/lib/utils/slug";
+import { generateSlug, parseCoordinatesFromSlug, getBaseSlug } from "@/lib/utils/slug";
 import { CragPageContent } from "@/components/CragPageContent";
 import type { RockType } from "@/lib/conditions/conditions.service";
 
