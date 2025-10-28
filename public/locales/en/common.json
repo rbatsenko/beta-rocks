@@ -108,6 +108,10 @@
     "thisEvening": "this evening",
     "tonight": "tonight"
   },
+  "time": {
+    "today": "Today",
+    "yesterday": "Yesterday"
+  },
   "disambiguation": {
     "foundMultipleAreas": "Found {{count}} climbing areas for \"{{location}}\". Please choose one:",
     "foundMultipleLocations": "Found multiple locations for \"{{location}}\". Please choose one:",

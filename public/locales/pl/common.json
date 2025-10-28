@@ -480,5 +480,9 @@
     "askAIAboutCrag": "Zapytaj AI o tę skałkę",
     "viewOnSunCalc": "Zobacz czasy słońca/księżyca",
     "viewOnMap": "Zobacz na mapie"
+  },
+  "time": {
+    "today": "Today",
+    "yesterday": "Yesterday"
   }
 }

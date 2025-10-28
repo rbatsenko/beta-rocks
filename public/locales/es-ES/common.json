@@ -478,5 +478,9 @@
     },
     "observationDate": "When did you observe this?",
     "observationDateHelp": "You can report conditions up to 7 days back"
+  },
+  "time": {
+    "today": "Today",
+    "yesterday": "Yesterday"
   }
 }

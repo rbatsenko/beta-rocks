@@ -159,21 +159,71 @@ export function ReportDialog({
 
           {/* Observation Date */}
           <div className="space-y-2">
-            <Label>{t("reports.observationDate")}</Label>
+            <Label className="text-sm font-medium">{t("reports.observationDate")}</Label>
             <Popover>
               <PopoverTrigger asChild>
                 <Button
                   variant="outline"
                   className={cn(
-                    "w-full justify-start text-left font-normal",
+                    "w-full justify-start text-left font-normal h-11 px-4 bg-background hover:bg-accent hover:text-accent-foreground border-2 transition-colors",
                     !observedAt && "text-muted-foreground"
                   )}
                 >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {observedAt ? format(observedAt, "PPP") : <span>Pick a date</span>}
+                  <CalendarIcon className="mr-3 h-4 w-4 text-orange-500" />
+                  <div className="flex flex-col items-start">
+                    {observedAt ? (
+                      <>
+                        <span className="text-sm font-medium">
+                          {format(observedAt, "EEEE, MMMM d, yyyy")}
+                        </span>
+                        <span className="text-xs text-muted-foreground">
+                          {(() => {
+                            const today = new Date();
+                            const yesterday = new Date(today);
+                            yesterday.setDate(yesterday.getDate() - 1);
+
+                            if (format(observedAt, "yyyy-MM-dd") === format(today, "yyyy-MM-dd")) {
+                              return t("time.today");
+                            } else if (format(observedAt, "yyyy-MM-dd") === format(yesterday, "yyyy-MM-dd")) {
+                              return t("time.yesterday");
+                            } else {
+                              const daysAgo = Math.floor((today.getTime() - observedAt.getTime()) / (1000 * 60 * 60 * 24));
+                              return `${daysAgo} days ago`;
+                            }
+                          })()}
+                        </span>
+                      </>
+                    ) : (
+                      <span>Pick a date</span>
+                    )}
+                  </div>
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
+              <PopoverContent className="w-auto p-0" align="center">
+                <div className="p-3 border-b">
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex-1"
+                      onClick={() => setObservedAt(new Date())}
+                    >
+                      {t("time.today")}
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex-1"
+                      onClick={() => {
+                        const yesterday = new Date();
+                        yesterday.setDate(yesterday.getDate() - 1);
+                        setObservedAt(yesterday);
+                      }}
+                    >
+                      {t("time.yesterday")}
+                    </Button>
+                  </div>
+                </div>
                 <Calendar
                   mode="single"
                   selected={observedAt}
@@ -186,10 +236,14 @@ export function ReportDialog({
                     return date < sevenDaysAgo || date > tomorrow;
                   }}
                   initialFocus
+                  className="rounded-md"
                 />
               </PopoverContent>
             </Popover>
-            <p className="text-xs text-muted-foreground">{t("reports.observationDateHelp")}</p>
+            <p className="text-xs text-muted-foreground flex items-center gap-1">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-orange-500" />
+              {t("reports.observationDateHelp")}
+            </p>
           </div>
 
           {/* Category Selection */}
