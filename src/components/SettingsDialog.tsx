@@ -21,7 +21,10 @@ import {
   hashSyncKeyAsync,
   type UserProfile,
 } from "@/lib/auth/sync-key";
-import { fetchOrCreateUserProfile, updateUserProfile as updateDbUserProfile } from "@/lib/db/queries";
+import {
+  fetchOrCreateUserProfile,
+  updateUserProfile as updateDbUserProfile,
+} from "@/lib/db/queries";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { QRCodeSVG } from "qrcode.react";
 

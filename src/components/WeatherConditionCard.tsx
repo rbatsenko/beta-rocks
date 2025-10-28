@@ -210,8 +210,8 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
         className={
           `grid items-start gap-x-2 gap-y-1.5 sm:gap-x-3 sm:gap-y-2 transition-all duration-500 ease-out ` +
           (hasEmoji
-            ? "grid-cols-[auto_1fr] sm:grid-cols-[auto_1fr_auto]"
-            : "grid-cols-[1fr] sm:grid-cols-[1fr_auto]")
+            ? "grid-cols-[auto_1fr] sm:grid-cols-[auto_1fr_min-content]"
+            : "grid-cols-[1fr] sm:grid-cols-[1fr_min-content]")
         }
       >
         {/* Weather emoji */}
@@ -261,7 +261,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
             className={
               `${hasEmoji ? "col-start-2" : "col-start-1"} row-start-2 ` +
               `${hasEmoji ? "sm:col-start-3" : "sm:col-start-2"} sm:row-start-1 ` +
-              "flex flex-wrap gap-2 justify-self-start sm:justify-self-end"
+              "flex flex-wrap gap-2 justify-self-start sm:justify-self-end sm:max-w-fit"
             }
           >
             {data.latitude && data.longitude && (

@@ -92,25 +92,25 @@ export function UserMenu({ onSettingsClick, onFavoritesClick }: UserMenuProps) {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={onFavoritesClick}>
+        <DropdownMenuItem onClick={onFavoritesClick} className="cursor-pointer">
           <Star className="mr-2 h-4 w-4" />
           <span>{t("profile.favorites")}</span>
         </DropdownMenuItem>
-        <DropdownMenuItem disabled>
+        <DropdownMenuItem disabled className="cursor-not-allowed">
           <Clock className="mr-2 h-4 w-4" />
           <span>{t("profile.recent")}</span>
         </DropdownMenuItem>
-        <DropdownMenuItem disabled>
+        <DropdownMenuItem disabled className="cursor-not-allowed">
           <BarChart3 className="mr-2 h-4 w-4" />
           <span>{t("profile.stats")}</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={onSettingsClick}>
+        <DropdownMenuItem onClick={onSettingsClick} className="cursor-pointer">
           <Settings className="mr-2 h-4 w-4" />
           <span>{t("profile.settings")}</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem disabled className="text-muted-foreground">
+        <DropdownMenuItem disabled className="text-muted-foreground cursor-not-allowed">
           <LogOut className="mr-2 h-4 w-4" />
           <span>{t("profile.clearData")}</span>
         </DropdownMenuItem>
