@@ -178,14 +178,14 @@ export function CragPageContent({
     ...conditions,
   };
 
-  const handleToggleFavorite = () => {
+  const handleToggleFavorite = async () => {
     try {
       if (isFavorite && favoriteId) {
         removeFavoriteFromStorage(favoriteId);
         setIsFavorite(false);
         setFavoriteId(null);
       } else {
-        const favorite = addFavoriteToStorage({
+        const favorite = await addFavoriteToStorage({
           areaName: crag.name,
           location: locationString,
           latitude: crag.lat,

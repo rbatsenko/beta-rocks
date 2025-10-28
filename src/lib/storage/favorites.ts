@@ -69,9 +69,11 @@ export function saveFavoritesToStorage(favorites: Favorite[]): void {
 }
 
 /**
- * Add a favorite to localStorage
+ * Add a favorite to localStorage AND sync to database
  */
-export function addFavoriteToStorage(favorite: Omit<Favorite, "id" | "addedAt">): Favorite {
+export async function addFavoriteToStorage(
+  favorite: Omit<Favorite, "id" | "addedAt">
+): Promise<Favorite> {
   const favorites = getFavoritesFromStorage();
 
   // Check if already exists
@@ -94,6 +96,41 @@ export function addFavoriteToStorage(favorite: Omit<Favorite, "id" | "addedAt">)
 
   favorites.push(newFavorite);
   saveFavoritesToStorage(favorites);
+
+  // Also sync to database
+  try {
+    const { getUserProfile, hashSyncKeyAsync } = await import("@/lib/auth/sync-key");
+    const { fetchOrCreateUserProfile, createFavorite } = await import("@/lib/db/queries");
+
+    const profile = getUserProfile();
+    if (profile) {
+      const syncKeyHash = await hashSyncKeyAsync(profile.syncKey);
+      const dbProfile = await fetchOrCreateUserProfile(syncKeyHash);
+
+      await createFavorite({
+        id: newFavorite.id,
+        user_profile_id: dbProfile.id,
+        area_id: newFavorite.areaId,
+        crag_id: newFavorite.cragId,
+        area_name: newFavorite.areaName,
+        area_slug: newFavorite.areaSlug,
+        location: newFavorite.location,
+        latitude: newFavorite.latitude,
+        longitude: newFavorite.longitude,
+        rock_type: newFavorite.rockType,
+        last_rating: newFavorite.lastRating,
+        last_friction_score: newFavorite.lastFrictionScore,
+        last_checked_at: newFavorite.lastCheckedAt,
+        display_order: newFavorite.displayOrder,
+        added_at: newFavorite.addedAt,
+      });
+
+      console.log(`[addFavoriteToStorage] Synced favorite to database: ${newFavorite.areaName}`);
+    }
+  } catch (error) {
+    console.warn("[addFavoriteToStorage] Failed to sync to database:", error);
+    // Non-critical, favorite is still saved locally
+  }
 
   return newFavorite;
 }

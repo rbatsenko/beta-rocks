@@ -294,14 +294,14 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => {
+                onClick={async () => {
                   if (isFavorite && favoriteId) {
                     removeFavoriteFromStorage(favoriteId);
                     setIsFavorite(false);
                     setFavoriteId(null);
                   } else if (data.latitude && data.longitude) {
                     try {
-                      const favorite = addFavoriteToStorage({
+                      const favorite = await addFavoriteToStorage({
                         areaName: data.location,
                         location: `${data.country || ""}${data.state ? ", " + data.state : ""}`,
                         latitude: data.latitude,

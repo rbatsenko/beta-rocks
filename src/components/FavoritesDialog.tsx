@@ -16,12 +16,15 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   getFavoritesFromStorage,
   removeFavoriteFromStorage,
+  saveFavoritesToStorage,
   type Favorite,
 } from "@/lib/storage/favorites";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { formatDistanceToNow } from "date-fns";
 import { useRouter } from "next/navigation";
 import { generateUniqueSlug } from "@/lib/utils/slug";
+import { getUserProfile, hashSyncKeyAsync } from "@/lib/auth/sync-key";
+import { fetchOrCreateUserProfile, fetchFavoritesByUserProfile } from "@/lib/db/queries";
 
 interface FavoritesDialogProps {
   open: boolean;
@@ -39,9 +42,57 @@ export function FavoritesDialog({ open, onOpenChange }: FavoritesDialogProps) {
     }
   }, [open]);
 
-  const loadFavorites = () => {
-    const stored = getFavoritesFromStorage();
-    setFavorites(stored);
+  const loadFavorites = async () => {
+    try {
+      // Get user profile
+      const profile = getUserProfile();
+      if (!profile) {
+        setFavorites([]);
+        return;
+      }
+
+      // Fetch from database
+      const syncKeyHash = await hashSyncKeyAsync(profile.syncKey);
+      const dbProfile = await fetchOrCreateUserProfile(syncKeyHash);
+
+      if (dbProfile) {
+        const dbFavorites = await fetchFavoritesByUserProfile(dbProfile.id);
+        if (dbFavorites && dbFavorites.length > 0) {
+          const favoritesForStorage = dbFavorites.map((dbFav) => ({
+            id: dbFav.id,
+            userProfileId: dbFav.user_profile_id,
+            areaId: dbFav.area_id || undefined,
+            cragId: dbFav.crag_id || undefined,
+            areaName: dbFav.area_name,
+            areaSlug: dbFav.area_slug || undefined,
+            location: dbFav.location || "",
+            latitude: dbFav.latitude,
+            longitude: dbFav.longitude,
+            rockType: dbFav.rock_type || undefined,
+            lastRating: dbFav.last_rating || undefined,
+            lastFrictionScore: dbFav.last_friction_score || undefined,
+            lastCheckedAt: dbFav.last_checked_at || undefined,
+            displayOrder: dbFav.display_order ?? 0,
+            addedAt: dbFav.added_at || new Date().toISOString(),
+          }));
+
+          // Update localStorage to keep it in sync
+          saveFavoritesToStorage(favoritesForStorage);
+          setFavorites(favoritesForStorage);
+          console.log(`[FavoritesDialog] Loaded ${favoritesForStorage.length} favorites from DB`);
+          return;
+        }
+      }
+
+      // Fallback to localStorage if DB fetch fails or is empty
+      const stored = getFavoritesFromStorage();
+      setFavorites(stored);
+    } catch (error) {
+      console.error("[FavoritesDialog] Failed to load favorites from DB:", error);
+      // Fallback to localStorage
+      const stored = getFavoritesFromStorage();
+      setFavorites(stored);
+    }
   };
 
   const handleRemove = (id: string) => {

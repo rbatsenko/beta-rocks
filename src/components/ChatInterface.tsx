@@ -11,7 +11,9 @@ import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
 import { useChatHistory } from "@/hooks/useChatHistory";
 import { useUnits } from "@/hooks/useUnits";
-import { getFavoritesFromStorage } from "@/lib/storage/favorites";
+import { getFavoritesFromStorage, type Favorite } from "@/lib/storage/favorites";
+import { getUserProfile, hashSyncKeyAsync } from "@/lib/auth/sync-key";
+import { fetchOrCreateUserProfile, fetchFavoritesByUserProfile } from "@/lib/db/queries";
 import { generateUniqueSlug } from "@/lib/utils/slug";
 import { Message, MessageContent } from "@/components/ai-elements/message";
 import { Response } from "@/components/ai-elements/response";
@@ -244,8 +246,50 @@ const ChatUI = ({
     new Map()
   );
 
-  // Load favorites for quick actions
-  const favorites = useMemo(() => getFavoritesFromStorage(), [messages.length]);
+  // Load favorites for quick actions (from database)
+  const [favorites, setFavorites] = useState<Favorite[]>([]);
+
+  useEffect(() => {
+    const loadFavorites = async () => {
+      try {
+        const profile = getUserProfile();
+        if (!profile) return;
+
+        const syncKeyHash = await hashSyncKeyAsync(profile.syncKey);
+        const dbProfile = await fetchOrCreateUserProfile(syncKeyHash);
+
+        if (dbProfile) {
+          const dbFavorites = await fetchFavoritesByUserProfile(dbProfile.id);
+          if (dbFavorites) {
+            const favoritesForStorage = dbFavorites.map((dbFav) => ({
+              id: dbFav.id,
+              userProfileId: dbFav.user_profile_id,
+              areaId: dbFav.area_id || undefined,
+              cragId: dbFav.crag_id || undefined,
+              areaName: dbFav.area_name,
+              areaSlug: dbFav.area_slug || undefined,
+              location: dbFav.location || "",
+              latitude: dbFav.latitude,
+              longitude: dbFav.longitude,
+              rockType: dbFav.rock_type || undefined,
+              lastRating: dbFav.last_rating || undefined,
+              lastFrictionScore: dbFav.last_friction_score || undefined,
+              lastCheckedAt: dbFav.last_checked_at || undefined,
+              displayOrder: dbFav.display_order ?? 0,
+              addedAt: dbFav.added_at || new Date().toISOString(),
+            }));
+            setFavorites(favoritesForStorage);
+          }
+        }
+      } catch (error) {
+        console.warn("[ChatInterface] Failed to load favorites:", error);
+        // Fallback to localStorage
+        setFavorites(getFavoritesFromStorage());
+      }
+    };
+
+    loadFavorites();
+  }, [messages.length]);
 
   // Get translation functions (memoized)
   const translations = useConditionsTranslations(t);
