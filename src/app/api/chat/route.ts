@@ -652,14 +652,14 @@ const tools = {
             console.log("[get_conditions] Fetched recent reports:", {
               cragId,
               reportCount: recentReports.length,
-              reports: recentReports.map(r => ({
+              reports: recentReports.map((r) => ({
                 category: r.category,
-                text: r.text?.substring(0, 50) + '...',
+                text: r.text?.substring(0, 50) + "...",
                 observedAt: r.observed_at,
-                author: r.author?.display_name || 'Anonymous',
+                author: r.author?.display_name || "Anonymous",
                 authorObject: r.author, // Raw author object for debugging
-                authorId: r.author_id
-              }))
+                authorId: r.author_id,
+              })),
             });
           } catch (error) {
             console.error("[get_conditions] Failed to fetch reports:", error);
@@ -742,14 +742,17 @@ const tools = {
           cragId,
           reportCount: recentReports.length,
           hasReports: recentReports.length > 0,
-          reportPreview: recentReports.length > 0 ? {
-            firstReport: {
-              category: recentReports[0].category,
-              text: recentReports[0].text?.substring(0, 80) + '...',
-              author: recentReports[0].author?.display_name || 'Anonymous',
-              observedAt: recentReports[0].observed_at
-            }
-          } : 'No reports'
+          reportPreview:
+            recentReports.length > 0
+              ? {
+                  firstReport: {
+                    category: recentReports[0].category,
+                    text: recentReports[0].text?.substring(0, 80) + "...",
+                    author: recentReports[0].author?.display_name || "Anonymous",
+                    observedAt: recentReports[0].observed_at,
+                  },
+                }
+              : "No reports",
         });
 
         return result;

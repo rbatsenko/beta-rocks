@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { I18nProvider } from "@/components/providers/I18nProvider";
+import { QueryProvider } from "@/components/providers/QueryProvider";
 import { Toaster } from "@/components/ui/toaster";
 import "@/index.css";
 
@@ -49,10 +50,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <I18nProvider>
-            {children}
-            <Toaster />
-          </I18nProvider>
+          <QueryProvider>
+            <I18nProvider>
+              {children}
+              <Toaster />
+            </I18nProvider>
+          </QueryProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -32,11 +32,10 @@ import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
 import { useRouter } from "next/navigation";
 import {
-  addFavoriteToStorage,
-  removeFavoriteFromStorage,
-  isFavorited,
-  getFavorite,
-} from "@/lib/storage/favorites";
+  useIsFavorited,
+  useAddFavorite,
+  useRemoveFavorite,
+} from "@/hooks/queries/useFavoritesQueries";
 import { getSunCalcUrl, getGoogleMapsUrl, getOpenStreetMapEmbedUrl } from "@/lib/utils/urls";
 import { getCountryFlag } from "@/lib/utils/country-flag";
 import { fetchReportsByCrag } from "@/lib/db/queries";
@@ -131,8 +130,6 @@ export function CragPageContent({
   const { t } = useClientTranslation("common");
   const { translateReason, translateWarning } = useConditionsTranslations(t);
   const router = useRouter();
-  const [isFavorite, setIsFavorite] = useState(false);
-  const [favoriteId, setFavoriteId] = useState<string | null>(null);
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
   const [reports, setReports] = useState(initialReports);
   const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
@@ -141,25 +138,19 @@ export function CragPageContent({
   const [syncExplainerDialogOpen, setSyncExplainerDialogOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<"all" | ReportCategory>("all");
 
+  // React Query hooks for favorites
+  const { isFavorited, favorite } = useIsFavorited(crag.id, undefined, {
+    lat: crag.lat,
+    lon: crag.lon,
+  });
+  const addFavorite = useAddFavorite();
+  const removeFavorite = useRemoveFavorite();
+
   // Filter reports by selected category
   const filteredReports = useMemo(() => {
     if (selectedCategory === "all") return reports;
     return reports.filter((report) => report.category === selectedCategory);
   }, [reports, selectedCategory]);
-
-  // Check if this location is already favorited (from localStorage)
-  useEffect(() => {
-    const coords = { lat: crag.lat, lon: crag.lon };
-    const favorited = isFavorited(undefined, crag.id, coords);
-    setIsFavorite(favorited);
-
-    if (favorited) {
-      const existing = getFavorite(undefined, crag.id, coords);
-      if (existing) {
-        setFavoriteId(existing.id);
-      }
-    }
-  }, [crag.id, crag.lat, crag.lon]);
 
   // Fetch fresh reports on mount (bypasses ISR cache for user-generated content)
   useEffect(() => {
@@ -195,31 +186,21 @@ export function CragPageContent({
     ...conditions,
   };
 
-  const handleToggleFavorite = async () => {
-    try {
-      if (isFavorite && favoriteId) {
-        removeFavoriteFromStorage(favoriteId);
-        setIsFavorite(false);
-        setFavoriteId(null);
-      } else {
-        const favorite = await addFavoriteToStorage({
-          areaName: crag.name,
-          location: locationString,
-          latitude: crag.lat,
-          longitude: crag.lon,
-          cragId: crag.id,
-          rockType: crag.rock_type || undefined,
-          lastRating: conditions.rating,
-          lastFrictionScore: conditions.frictionScore,
-          lastCheckedAt: new Date().toISOString(),
-          displayOrder: 0,
-        });
-        setIsFavorite(true);
-        setFavoriteId(favorite.id);
-      }
-    } catch (error) {
-      console.error("Failed to toggle favorite:", error);
-      alert(t("favorites.errorToggling"));
+  const handleToggleFavorite = () => {
+    if (isFavorited && favorite) {
+      removeFavorite.mutate(favorite.id);
+    } else {
+      addFavorite.mutate({
+        areaName: crag.name,
+        location: locationString,
+        latitude: crag.lat,
+        longitude: crag.lon,
+        cragId: crag.id,
+        rockType: crag.rock_type || undefined,
+        lastRating: conditions.rating,
+        lastFrictionScore: conditions.frictionScore,
+        lastCheckedAt: new Date().toISOString(),
+      });
     }
   };
 
@@ -299,13 +280,13 @@ export function CragPageContent({
                   <span className="hidden sm:inline">{t("cragPage.askAI")}</span>
                 </Button>
                 <Button
-                  variant={isFavorite ? "default" : "outline"}
+                  variant={isFavorited ? "default" : "outline"}
                   size="sm"
                   onClick={handleToggleFavorite}
-                  title={isFavorite ? "Remove from favorites" : "Add to favorites"}
-                  className={isFavorite ? "bg-orange-500 hover:bg-orange-600" : ""}
+                  title={isFavorited ? "Remove from favorites" : "Add to favorites"}
+                  className={isFavorited ? "bg-orange-500 hover:bg-orange-600" : ""}
                 >
-                  <Heart className={`h-4 w-4 ${isFavorite ? "fill-current" : ""}`} />
+                  <Heart className={`h-4 w-4 ${isFavorited ? "fill-current" : ""}`} />
                 </Button>
               </div>
             </div>

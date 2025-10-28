@@ -35,7 +35,7 @@ import {
   fetchOrCreateUserProfile,
   updateUserProfile as updateDbUserProfile,
 } from "@/lib/db/queries";
-import { deleteUserProfile } from "@/lib/chat/history.service";
+import { useDeleteProfile } from "@/hooks/queries/useProfileQueries";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { QRCodeSVG } from "qrcode.react";
 import { useUnits } from "@/hooks/useUnits";
@@ -59,6 +59,7 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
   const { t } = useClientTranslation("common");
   const { units, updateUnits } = useUnits();
   const { toast } = useToast();
+  const deleteProfile = useDeleteProfile();
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [displayName, setDisplayName] = useState("");
   const [isSaving, setIsSaving] = useState(false);
@@ -613,7 +614,7 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
         onOpenChange={setDeleteProfileConfirmOpen}
         onConfirm={async () => {
           try {
-            await deleteUserProfile();
+            await deleteProfile.mutateAsync();
             setDeleteProfileConfirmOpen(false);
             onOpenChange(false);
             // Reload the page to reset everything

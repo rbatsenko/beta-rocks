@@ -22,10 +22,7 @@ function Calendar({
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
-      className={cn(
-        "group/calendar p-3 [--cell-size:2.25rem]",
-        className
-      )}
+      className={cn("group/calendar p-3 [--cell-size:2.25rem]", className)}
       captionLayout={captionLayout}
       formatters={{
         formatMonthDropdown: (date) => date.toLocaleString("default", { month: "short" }),
@@ -92,10 +89,7 @@ function Calendar({
           "bg-orange-100 text-orange-900 font-bold dark:bg-orange-900 dark:text-orange-100",
           defaultClassNames.today
         ),
-        outside: cn(
-          "text-muted-foreground opacity-50",
-          defaultClassNames.outside
-        ),
+        outside: cn("text-muted-foreground opacity-50", defaultClassNames.outside),
         disabled: cn("text-muted-foreground opacity-30 line-through", defaultClassNames.disabled),
         hidden: cn("invisible", defaultClassNames.hidden),
         ...classNames,

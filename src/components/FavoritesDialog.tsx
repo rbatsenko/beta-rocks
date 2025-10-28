@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { Star, Trash2, MapPin, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,17 +13,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
-  getFavoritesFromStorage,
-  removeFavoriteFromStorage,
-  saveFavoritesToStorage,
+  useFavorites,
+  useRemoveFavorite,
   type Favorite,
-} from "@/lib/storage/favorites";
+} from "@/hooks/queries/useFavoritesQueries";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { formatDistanceToNow } from "date-fns";
 import { useRouter } from "next/navigation";
 import { generateUniqueSlug } from "@/lib/utils/slug";
-import { getUserProfile, hashSyncKeyAsync } from "@/lib/auth/sync-key";
-import { fetchOrCreateUserProfile, fetchFavoritesByUserProfile } from "@/lib/db/queries";
 
 interface FavoritesDialogProps {
   open: boolean;
@@ -34,75 +30,13 @@ interface FavoritesDialogProps {
 export function FavoritesDialog({ open, onOpenChange }: FavoritesDialogProps) {
   const { t } = useClientTranslation("common");
   const router = useRouter();
-  const [favorites, setFavorites] = useState<Favorite[]>([]);
 
-  useEffect(() => {
-    if (open) {
-      loadFavorites();
-    }
-  }, [open]);
-
-  const loadFavorites = async () => {
-    // Load from localStorage immediately (instant, no delay)
-    const storedFavorites = getFavoritesFromStorage();
-    setFavorites(storedFavorites);
-    console.log(`[FavoritesDialog] Loaded ${storedFavorites.length} favorites from localStorage`);
-
-    // Then sync from database in the background
-    try {
-      const profile = getUserProfile();
-      if (!profile) {
-        return;
-      }
-
-      // Fetch from database
-      const syncKeyHash = await hashSyncKeyAsync(profile.syncKey);
-      const dbProfile = await fetchOrCreateUserProfile(syncKeyHash);
-
-      if (dbProfile) {
-        const dbFavorites = await fetchFavoritesByUserProfile(dbProfile.id);
-        if (dbFavorites && dbFavorites.length > 0) {
-          const favoritesForStorage = dbFavorites.map((dbFav) => ({
-            id: dbFav.id,
-            userProfileId: dbFav.user_profile_id,
-            areaId: dbFav.area_id || undefined,
-            cragId: dbFav.crag_id || undefined,
-            areaName: dbFav.area_name,
-            areaSlug: dbFav.area_slug || undefined,
-            location: dbFav.location || "",
-            latitude: dbFav.latitude,
-            longitude: dbFav.longitude,
-            rockType: dbFav.rock_type || undefined,
-            lastRating: dbFav.last_rating || undefined,
-            lastFrictionScore: dbFav.last_friction_score || undefined,
-            lastCheckedAt: dbFav.last_checked_at || undefined,
-            displayOrder: dbFav.display_order ?? 0,
-            addedAt: dbFav.added_at || new Date().toISOString(),
-          }));
-
-          // Update localStorage to keep it in sync
-          saveFavoritesToStorage(favoritesForStorage);
-
-          // Only update state if different from what we already have
-          if (JSON.stringify(favoritesForStorage) !== JSON.stringify(storedFavorites)) {
-            setFavorites(favoritesForStorage);
-            console.log(`[FavoritesDialog] Updated ${favoritesForStorage.length} favorites from DB`);
-          }
-        }
-      }
-    } catch (error) {
-      console.error("[FavoritesDialog] Failed to sync favorites from DB:", error);
-      // Already showing localStorage data, no need to fallback
-    }
-  };
+  // React Query hooks for favorites
+  const { data: favorites = [], isLoading } = useFavorites();
+  const removeFavorite = useRemoveFavorite();
 
   const handleRemove = (id: string) => {
-    try {
-      removeFavoriteFromStorage(id);
-      loadFavorites();
-    } catch (error) {
-      console.error("Failed to remove favorite:", error);
-    }
+    removeFavorite.mutate(id);
   };
 
   const handleViewConditions = (favorite: Favorite) => {
@@ -141,7 +75,14 @@ export function FavoritesDialog({ open, onOpenChange }: FavoritesDialogProps) {
         </DialogHeader>
 
         <ScrollArea className="h-[60vh] pr-4">
-          {favorites.length === 0 ? (
+          {isLoading ? (
+            <div className="flex flex-col items-center justify-center py-12 text-center">
+              <Star className="h-16 w-16 text-muted-foreground/50 mb-4 animate-pulse" />
+              <p className="text-muted-foreground">
+                {t("favorites.loading") || "Loading favorites..."}
+              </p>
+            </div>
+          ) : favorites.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-12 text-center">
               <Star className="h-16 w-16 text-muted-foreground/50 mb-4" />
               <p className="text-muted-foreground">{t("favorites.emptyMessage")}</p>

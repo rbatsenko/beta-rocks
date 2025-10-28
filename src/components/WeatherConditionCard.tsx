@@ -1,4 +1,4 @@
-import { memo, useMemo, useEffect, useState } from "react";
+import { memo, useMemo, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Info, Star, MessageSquare, ArrowRight } from "lucide-react";
@@ -7,15 +7,15 @@ import { logRender } from "@/lib/debug/render-log";
 import { MapPopover } from "@/components/MapPopover";
 import { getCountryFlag } from "@/lib/utils/country-flag";
 import {
-  addFavoriteToStorage,
-  removeFavoriteFromStorage,
-  isFavorited,
-  getFavorite,
-} from "@/lib/storage/favorites";
+  useIsFavorited,
+  useAddFavorite,
+  useRemoveFavorite,
+} from "@/hooks/queries/useFavoritesQueries";
 import { ReportDialog } from "@/components/ReportDialog";
 import { generateUniqueSlug } from "@/lib/utils/slug";
 import { useUnits } from "@/hooks/useUnits";
 import { convertTemperature } from "@/lib/units/conversions";
+import { useState } from "react";
 
 interface ConditionsData {
   location: string;
@@ -142,27 +142,17 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
 }: WeatherConditionCardProps) {
   const hasEmoji = data.current?.weatherCode !== undefined;
   const router = useRouter();
-  const [isFavorite, setIsFavorite] = useState(false);
-  const [favoriteId, setFavoriteId] = useState<string | null>(null);
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
   const { units } = useUnits();
 
-  // Check if this location is already favorited
-  useEffect(() => {
-    if (data.latitude && data.longitude) {
-      const coords = { lat: data.latitude, lon: data.longitude };
-      const favorited = isFavorited(undefined, data.cragId, coords);
-      setIsFavorite(favorited);
-
-      // Get the favorite ID if it exists
-      if (favorited) {
-        const existing = getFavorite(undefined, data.cragId, coords);
-        if (existing) {
-          setFavoriteId(existing.id);
-        }
-      }
-    }
-  }, [data.latitude, data.longitude, data.cragId]);
+  // React Query hooks for favorites
+  const { isFavorited, favorite } = useIsFavorited(
+    data.cragId,
+    undefined,
+    data.latitude && data.longitude ? { lat: data.latitude, lon: data.longitude } : undefined
+  );
+  const addFavorite = useAddFavorite();
+  const removeFavorite = useRemoveFavorite();
 
   logRender("WeatherConditionCard", {
     location: data.location,
@@ -294,36 +284,27 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
               <Button
                 variant="outline"
                 size="sm"
-                onClick={async () => {
-                  if (isFavorite && favoriteId) {
-                    removeFavoriteFromStorage(favoriteId);
-                    setIsFavorite(false);
-                    setFavoriteId(null);
+                onClick={() => {
+                  if (isFavorited && favorite) {
+                    removeFavorite.mutate(favorite.id);
                   } else if (data.latitude && data.longitude) {
-                    try {
-                      const favorite = await addFavoriteToStorage({
-                        areaName: data.location,
-                        location: `${data.country || ""}${data.state ? ", " + data.state : ""}`,
-                        latitude: data.latitude,
-                        longitude: data.longitude,
-                        cragId: data.cragId,
-                        rockType: data.rockType,
-                        lastRating: data.rating,
-                        lastFrictionScore: data.frictionScore,
-                        lastCheckedAt: new Date().toISOString(),
-                        displayOrder: 0,
-                      });
-                      setIsFavorite(true);
-                      setFavoriteId(favorite.id);
-                    } catch (error) {
-                      console.error("Failed to add favorite:", error);
-                    }
+                    addFavorite.mutate({
+                      areaName: data.location,
+                      location: `${data.country || ""}${data.state ? ", " + data.state : ""}`,
+                      latitude: data.latitude,
+                      longitude: data.longitude,
+                      cragId: data.cragId,
+                      rockType: data.rockType,
+                      lastRating: data.rating,
+                      lastFrictionScore: data.frictionScore,
+                      lastCheckedAt: new Date().toISOString(),
+                    });
                   }
                 }}
-                title={isFavorite ? "Remove from favorites" : "Add to favorites"}
-                className={isFavorite ? "bg-orange-500 hover:bg-orange-600 text-white" : ""}
+                title={isFavorited ? "Remove from favorites" : "Add to favorites"}
+                className={isFavorited ? "bg-orange-500 hover:bg-orange-600 text-white" : ""}
               >
-                <Star className={`w-4 h-4 ${isFavorite ? "fill-current" : ""}`} />
+                <Star className={`w-4 h-4 ${isFavorited ? "fill-current" : ""}`} />
                 {favoriteLabel}
               </Button>
               <Button

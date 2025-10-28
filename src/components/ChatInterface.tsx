@@ -9,12 +9,17 @@ import { Input } from "@/components/ui/input";
 import { Send, Loader2, CloudSun, Sun, Info, RotateCcw, Star } from "lucide-react";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
-import { useChatHistory } from "@/hooks/useChatHistory";
 import { useUnits } from "@/hooks/useUnits";
-import { getFavoritesFromStorage, type Favorite } from "@/lib/storage/favorites";
-import { getUserProfile, hashSyncKeyAsync } from "@/lib/auth/sync-key";
-import { fetchOrCreateUserProfile, fetchFavoritesByUserProfile } from "@/lib/db/queries";
+import { useFavorites } from "@/hooks/queries/useFavoritesQueries";
 import { generateUniqueSlug } from "@/lib/utils/slug";
+import {
+  useCurrentSession,
+  useChatMessages,
+  useSendMessage,
+  useClearSession,
+  chatMessageToUIMessage,
+  uiMessageToChatMessage,
+} from "@/hooks/queries/useChatQueries";
 import { Message, MessageContent } from "@/components/ai-elements/message";
 import { Response } from "@/components/ai-elements/response";
 import {
@@ -194,21 +199,23 @@ interface DisambiguationResult {
 // Separate component that only mounts after history is loaded
 // This ensures useChat initializes with the correct messages
 const ChatUI = ({
+  sessionId,
   initialMessages,
-  saveMessage,
-  handleNewChat,
   t,
   language,
 }: {
+  sessionId: string;
   initialMessages: UIMessage[];
-  saveMessage: (message: UIMessage) => Promise<void>;
-  handleNewChat: () => Promise<void>;
   t: TFunction;
   language: string;
 }) => {
   const router = useRouter();
   const [input, setInput] = useState("");
   const { units } = useUnits();
+
+  // React Query mutations for message persistence
+  const sendMessageMutation = useSendMessage();
+  const clearSessionMutation = useClearSession();
 
   const { messages, sendMessage, status } = useChat({
     // Load initial messages from history
@@ -224,11 +231,19 @@ const ChatUI = ({
         .find((m) => m.role === "user" && m.id !== message.id);
 
       if (lastUserMessage) {
-        await saveMessage(lastUserMessage);
+        const chatMessage = uiMessageToChatMessage(lastUserMessage, sessionId);
+        await sendMessageMutation.mutateAsync({
+          sessionId,
+          message: chatMessage,
+        });
       }
 
       // Then save the assistant message
-      await saveMessage(message);
+      const chatMessage = uiMessageToChatMessage(message, sessionId);
+      await sendMessageMutation.mutateAsync({
+        sessionId,
+        message: chatMessage,
+      });
     },
   });
 
@@ -246,60 +261,19 @@ const ChatUI = ({
     new Map()
   );
 
-  // Load favorites for quick actions (localStorage first, then sync from DB)
-  const [favorites, setFavorites] = useState<Favorite[]>([]);
+  // Handler for clearing current session
+  const handleNewChat = useCallback(async () => {
+    try {
+      await clearSessionMutation.mutateAsync(sessionId);
+      // Navigate to home to reset the chat interface
+      window.location.href = "/";
+    } catch (error) {
+      console.error("Failed to clear session:", error);
+    }
+  }, [clearSessionMutation, sessionId]);
 
-  useEffect(() => {
-    const loadFavorites = async () => {
-      // Load from localStorage immediately (instant, no delay)
-      const storedFavorites = getFavoritesFromStorage();
-      setFavorites(storedFavorites);
-      console.log(`[ChatInterface] Loaded ${storedFavorites.length} favorites from localStorage`);
-
-      // Then sync from database in the background
-      try {
-        const profile = getUserProfile();
-        if (!profile) return;
-
-        const syncKeyHash = await hashSyncKeyAsync(profile.syncKey);
-        const dbProfile = await fetchOrCreateUserProfile(syncKeyHash);
-
-        if (dbProfile) {
-          const dbFavorites = await fetchFavoritesByUserProfile(dbProfile.id);
-          if (dbFavorites) {
-            const favoritesForStorage = dbFavorites.map((dbFav) => ({
-              id: dbFav.id,
-              userProfileId: dbFav.user_profile_id,
-              areaId: dbFav.area_id || undefined,
-              cragId: dbFav.crag_id || undefined,
-              areaName: dbFav.area_name,
-              areaSlug: dbFav.area_slug || undefined,
-              location: dbFav.location || "",
-              latitude: dbFav.latitude,
-              longitude: dbFav.longitude,
-              rockType: dbFav.rock_type || undefined,
-              lastRating: dbFav.last_rating || undefined,
-              lastFrictionScore: dbFav.last_friction_score || undefined,
-              lastCheckedAt: dbFav.last_checked_at || undefined,
-              displayOrder: dbFav.display_order ?? 0,
-              addedAt: dbFav.added_at || new Date().toISOString(),
-            }));
-
-            // Only update state if different from what we already have
-            if (JSON.stringify(favoritesForStorage) !== JSON.stringify(storedFavorites)) {
-              setFavorites(favoritesForStorage);
-              console.log(`[ChatInterface] Updated ${favoritesForStorage.length} favorites from DB`);
-            }
-          }
-        }
-      } catch (error) {
-        console.warn("[ChatInterface] Failed to sync favorites from DB:", error);
-        // Already showing localStorage data, no need to fallback
-      }
-    };
-
-    loadFavorites();
-  }, [messages.length]);
+  // React Query hook for favorites
+  const { data: favorites = [] } = useFavorites();
 
   // Get translation functions (memoized)
   const translations = useConditionsTranslations(t);
@@ -855,11 +829,11 @@ interface ChatInterfaceProps {
   initialSessionId?: string;
 }
 
-// Main ChatInterface component that handles history loading
+// Main ChatInterface component that handles history loading with React Query
 const ChatInterface = ({
   initialSyncKey: _initialSyncKey,
   initialDisplayName: _initialDisplayName,
-  initialSessionId,
+  initialSessionId: _initialSessionId,
 }: ChatInterfaceProps = {}) => {
   const { t, language } = useClientTranslation("common");
   const [featuresDialogOpen, setFeaturesDialogOpen] = useState(false);
@@ -868,12 +842,20 @@ const ChatInterface = ({
   const [statsDialogOpen, setStatsDialogOpen] = useState(false);
   const [syncExplainerDialogOpen, setSyncExplainerDialogOpen] = useState(false);
 
-  // Chat history integration - pass server props to skip loading
-  const { initialMessages, isLoadingHistory, saveMessage, handleNewChat } =
-    useChatHistory(initialSessionId);
+  // React Query hooks for session and messages
+  const { data: session, isLoading: isLoadingSession } = useCurrentSession();
+  const { data: messages = [], isLoading: isLoadingMessages } = useChatMessages(session?.id);
+
+  // Convert database messages to UIMessage format
+  const initialMessages = useMemo(() => {
+    return messages.map(chatMessageToUIMessage);
+  }, [messages]);
+
+  // Combined loading state
+  const isLoadingHistory = isLoadingSession || isLoadingMessages;
 
   // Only mount ChatUI after history loads to ensure useChat initializes with correct messages
-  if (isLoadingHistory) {
+  if (isLoadingHistory || !session) {
     // Render the layout with a loader in the messages area (not full page)
     // Keep header and input visible during loading
     return (
@@ -963,13 +945,7 @@ const ChatInterface = ({
 
   // Once loaded, render the full chat UI
   return (
-    <ChatUI
-      initialMessages={initialMessages}
-      saveMessage={saveMessage}
-      handleNewChat={handleNewChat}
-      t={t}
-      language={language}
-    />
+    <ChatUI sessionId={session.id} initialMessages={initialMessages} t={t} language={language} />
   );
 };
 

@@ -173,7 +173,8 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
                 <Badge variant="outline" className="gap-1.5">
                   <Droplets className="h-3 w-3" />
                   <span className="text-xs">
-                    {t("reports.dryness")}: <span className="font-semibold">{report.rating_dry}/5</span>
+                    {t("reports.dryness")}:{" "}
+                    <span className="font-semibold">{report.rating_dry}/5</span>
                   </span>
                   <div className={`h-2 w-2 rounded-full ${getRatingColor(report.rating_dry)}`} />
                 </Badge>
@@ -182,7 +183,8 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
                 <Badge variant="outline" className="gap-1.5">
                   <Wind className="h-3 w-3" />
                   <span className="text-xs">
-                    {t("reports.wind")}: <span className="font-semibold">{report.rating_wind}/5</span>
+                    {t("reports.wind")}:{" "}
+                    <span className="font-semibold">{report.rating_wind}/5</span>
                   </span>
                   <div className={`h-2 w-2 rounded-full ${getRatingColor(report.rating_wind)}`} />
                 </Badge>
@@ -191,7 +193,8 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
                 <Badge variant="outline" className="gap-1.5">
                   <Users className="h-3 w-3" />
                   <span className="text-xs">
-                    {t("reports.crowds")}: <span className="font-semibold">{report.rating_crowds}/5</span>
+                    {t("reports.crowds")}:{" "}
+                    <span className="font-semibold">{report.rating_crowds}/5</span>
                   </span>
                   <div className={`h-2 w-2 rounded-full ${getRatingColor(report.rating_crowds)}`} />
                 </Badge>

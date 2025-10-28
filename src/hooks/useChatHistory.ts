@@ -1,6 +1,19 @@
 /**
  * useChatHistory Hook
  *
+ * @deprecated This hook is deprecated and no longer used. Use React Query hooks from
+ * @/hooks/queries/useChatQueries instead:
+ * - useCurrentSession() - Get or create current session
+ * - useChatMessages(sessionId) - Load messages for a session
+ * - useSendMessage() - Send messages with optimistic updates
+ * - useClearSession() - Clear current session
+ * - useClearAllHistory() - Delete all history
+ *
+ * This file is kept for reference only and should not be used in new code.
+ *
+ * ---
+ *
+ * OLD DESCRIPTION:
  * Integrates chat history persistence with Vercel AI SDK's useChat hook.
  * Handles loading history on mount and saving messages as they arrive.
  * If initialSessionId is provided (from SSR), skips the loading state.
@@ -103,9 +116,7 @@ export function useChatHistory(initialSessionId?: string) {
       console.log("[useChatHistory] Window focused, syncing from DB...");
       // Sync both chat messages and favorites
       await Promise.all([
-        syncFromSupabase().catch((err) =>
-          console.error("[useChatHistory] Chat sync failed:", err)
-        ),
+        syncFromSupabase().catch((err) => console.error("[useChatHistory] Chat sync failed:", err)),
         import("@/lib/storage/favorites")
           .then((mod) => mod.syncFavoritesFromSupabase())
           .catch((err) => console.error("[useChatHistory] Favorites sync failed:", err)),

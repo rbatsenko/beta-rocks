@@ -131,51 +131,51 @@ export function StatsDialog({ open, onOpenChange }: StatsDialogProps) {
         ) : (
           <ScrollArea className="max-h-[60vh] pr-4">
             <div className="space-y-6">
-            {/* Main Stats Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {statCards.map((stat) => (
-                <Card key={stat.label} className="border-2">
-                  <CardContent className="p-6">
-                    <div className="flex flex-col items-center text-center space-y-2">
-                      <div className={`rounded-full p-3 ${stat.bgColor}`}>
-                        <stat.icon className={`h-6 w-6 ${stat.color}`} />
+              {/* Main Stats Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {statCards.map((stat) => (
+                  <Card key={stat.label} className="border-2">
+                    <CardContent className="p-6">
+                      <div className="flex flex-col items-center text-center space-y-2">
+                        <div className={`rounded-full p-3 ${stat.bgColor}`}>
+                          <stat.icon className={`h-6 w-6 ${stat.color}`} />
+                        </div>
+                        <div className="text-3xl font-bold">{stat.value}</div>
+                        <div className="text-sm text-muted-foreground">{stat.label}</div>
                       </div>
-                      <div className="text-3xl font-bold">{stat.value}</div>
-                      <div className="text-sm text-muted-foreground">{stat.label}</div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            {/* Activity Info */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Calendar className="h-4 w-4" />
-                <span>
-                  {t("stats.memberSince")}:{" "}
-                  {stats?.created_at
-                    ? new Date(stats.created_at).toLocaleDateString()
-                    : t("stats.unknown")}
-                </span>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
-              {stats?.last_active && (
+
+              {/* Activity Info */}
+              <div className="space-y-3">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <TrendingUp className="h-4 w-4" />
+                  <Calendar className="h-4 w-4" />
                   <span>
-                    {t("stats.lastActive")}:{" "}
-                    {formatDistanceToNow(new Date(stats.last_active), { addSuffix: true })}
+                    {t("stats.memberSince")}:{" "}
+                    {stats?.created_at
+                      ? new Date(stats.created_at).toLocaleDateString()
+                      : t("stats.unknown")}
                   </span>
                 </div>
-              )}
-            </div>
+                {stats?.last_active && (
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <TrendingUp className="h-4 w-4" />
+                    <span>
+                      {t("stats.lastActive")}:{" "}
+                      {formatDistanceToNow(new Date(stats.last_active), { addSuffix: true })}
+                    </span>
+                  </div>
+                )}
+              </div>
 
-            {/* Encouragement Message */}
-            <div className="bg-muted/30 rounded-lg p-4 border border-border">
-              <p className="text-sm text-center text-muted-foreground">
-                {stats?.reports_posted === 0 ? t("stats.encourageReports") : t("stats.thankYou")}
-              </p>
-            </div>
+              {/* Encouragement Message */}
+              <div className="bg-muted/30 rounded-lg p-4 border border-border">
+                <p className="text-sm text-center text-muted-foreground">
+                  {stats?.reports_posted === 0 ? t("stats.encourageReports") : t("stats.thankYou")}
+                </p>
+              </div>
             </div>
           </ScrollArea>
         )}
