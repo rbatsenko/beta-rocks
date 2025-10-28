@@ -192,7 +192,9 @@ export async function initializeUserProfile(): Promise<UserProfile> {
   // Check if this sync key has a profile in the database
   // This happens after sync key restoration
   try {
-    const { fetchOrCreateUserProfile } = await import("@/lib/db/queries");
+    const { fetchOrCreateUserProfile, fetchFavoritesByUserProfile } = await import(
+      "@/lib/db/queries"
+    );
     const dbProfile = await fetchOrCreateUserProfile(syncKeyHash);
 
     // If database profile exists with data, use it
@@ -216,6 +218,37 @@ export async function initializeUserProfile(): Promise<UserProfile> {
       };
 
       await saveUserProfile(profileWithDbData);
+
+      // Also restore favorites from database
+      try {
+        const dbFavorites = await fetchFavoritesByUserProfile(dbProfile.id);
+        if (dbFavorites && dbFavorites.length > 0) {
+          const { saveFavoritesToStorage } = await import("@/lib/storage/favorites");
+          const favoritesForStorage = dbFavorites.map((dbFav) => ({
+            id: dbFav.id,
+            userProfileId: dbFav.user_profile_id,
+            areaId: dbFav.area_id || undefined,
+            cragId: dbFav.crag_id || undefined,
+            areaName: dbFav.area_name,
+            areaSlug: dbFav.area_slug || undefined,
+            location: dbFav.location,
+            latitude: dbFav.latitude,
+            longitude: dbFav.longitude,
+            rockType: dbFav.rock_type || undefined,
+            lastRating: dbFav.last_rating || undefined,
+            lastFrictionScore: dbFav.last_friction_score || undefined,
+            lastCheckedAt: dbFav.last_checked_at || undefined,
+            displayOrder: dbFav.display_order,
+            addedAt: dbFav.added_at,
+          }));
+          saveFavoritesToStorage(favoritesForStorage);
+          console.log(`[initializeUserProfile] Restored ${favoritesForStorage.length} favorites`);
+        }
+      } catch (favError) {
+        console.warn("[initializeUserProfile] Failed to restore favorites:", favError);
+        // Non-critical, continue
+      }
+
       return profileWithDbData;
     }
   } catch (error) {
