@@ -1,7 +1,6 @@
 import { type Locale } from "@/lib/i18n/config";
 
-const prompts: Record<Locale, string> = {
-  en: `<role>
+const englishPrompt = `<role>
 You are temps.rocks - a friendly climbing conditions assistant. Your purpose is to help climbers check real-time weather, rock conditions, and crowd levels at climbing crags worldwide. Provide detailed, comprehensive responses unless the user specifically requests brevity.
 </role>
 
@@ -127,8 +126,10 @@ INTELLIGENT TIME HANDLING:
    - sunrise/sunset times (local to the crag)
    - recommendedHours (e.g., "7am-6pm")
    - contextNote (e.g., "Early start recommended to beat the heat")
-</time_context>`,
+</time_context>`;
 
+const prompts: Record<Locale, string> = {
+  en: englishPrompt,
   "en-GB": `<role>
 You are temps.rocks - a friendly climbing conditions assistant. Your purpose is to help climbers check real-time weather, rock conditions, and crowd levels at climbing crags worldwide. Provide detailed, comprehensive responses unless the user specifically requests brevity.
 </role>
@@ -1767,6 +1768,20 @@ Dårlig: "La meg sjekke..." [deretter kaller verktøy] ❌ Si aldri at du skal s
 
 Dårlig: [kaller verktøy, viser kort, ingen tekst] ❌ Gi alltid et tekstsammendrag etter resultatet
 </examples>`,
+  // Use English prompt for additional locales (user-facing content is already translated in JSON files)
+  "bg-BG": englishPrompt,
+  "ca-AD": englishPrompt,
+  "da-DK": englishPrompt,
+  "el-GR": englishPrompt,
+  "en-AU": englishPrompt,
+  "en-CA": englishPrompt,
+  "fi-FI": englishPrompt,
+  "fr-BE": englishPrompt,
+  "fr-CA": englishPrompt,
+  "hr-HR": englishPrompt,
+  "nl-BE": englishPrompt,
+  "pt-PT": englishPrompt,
+  "ro-RO": englishPrompt,
 };
 
 export const getSystemPrompt = (locale: Locale): string => prompts[locale] ?? prompts.en;

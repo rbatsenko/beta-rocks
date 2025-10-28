@@ -1,4 +1,13 @@
 import { useMemo } from "react";
+import { useUnits } from "@/hooks/useUnits";
+import {
+  convertTemperature,
+  convertWindSpeed,
+  convertPrecipitation,
+  formatTemperature,
+  formatWindSpeed,
+  formatPrecipitation,
+} from "@/lib/units/conversions";
 
 /**
  * Hook for translating weather condition strings
@@ -7,6 +16,7 @@ import { useMemo } from "react";
 export function useConditionsTranslations(
   t: (key: string, params?: Record<string, string | number>) => string
 ) {
+  const { units } = useUnits();
   return useMemo(() => {
     const translateRating = (rating: string): string => {
       if (!rating) {
@@ -25,7 +35,10 @@ export function useConditionsTranslations(
       // Extract temperature from "Perfect temperature (X°C)"
       const perfectTempMatch = reason.match(/Perfect temperature \((-?\d+)°C\)/);
       if (perfectTempMatch) {
-        const translated = t("reasons.perfectTemp", { temp: perfectTempMatch[1] });
+        const tempCelsius = parseFloat(perfectTempMatch[1]);
+        const convertedTemp = convertTemperature(tempCelsius, "celsius", units.temperature);
+        const tempFormatted = formatTemperature(convertedTemp, units.temperature, 0);
+        const translated = t("reasons.perfectTemp", { temp: tempFormatted });
         // Check if translation was found (not the key itself and not empty)
         if (translated && !translated.startsWith("reasons.")) {
           return translated;
@@ -130,12 +143,14 @@ export function useConditionsTranslations(
       const tooWarmMatch = warning.match(/Too warm(?: for (\w+))? \((-?\d+)°C\)/);
       if (tooWarmMatch) {
         const rockType = tooWarmMatch[1] || "";
-        const temp = tooWarmMatch[2];
+        const tempCelsius = parseFloat(tooWarmMatch[2]);
+        const convertedTemp = convertTemperature(tempCelsius, "celsius", units.temperature);
+        const tempFormatted = formatTemperature(convertedTemp, units.temperature, 0);
         if (rockType) {
-          return t("warnings.tooWarm", { rockType, temp });
+          return t("warnings.tooWarm", { rockType, temp: tempFormatted });
         } else {
           // Simplified version without rock type
-          return t("warnings.tooWarm", { rockType: "", temp }).replace(" for ", "");
+          return t("warnings.tooWarm", { rockType: "", temp: tempFormatted }).replace(" for ", "");
         }
       }
 
@@ -147,8 +162,11 @@ export function useConditionsTranslations(
           return t("warnings.coldSuboptimal", { rockType: coldMatch[1] });
         } else if (coldMatch[2]) {
           // Simplified version with temperature
+          const tempCelsius = parseFloat(coldMatch[2]);
+          const convertedTemp = convertTemperature(tempCelsius, "celsius", units.temperature);
+          const tempFormatted = formatTemperature(convertedTemp, units.temperature, 0);
           return (
-            t("warnings.cold", { temp: coldMatch[2] }) ||
+            t("warnings.cold", { temp: tempFormatted }) ||
             t("warnings.coldSuboptimal", { rockType: "" }).replace(" for ", "")
           );
         }
@@ -167,13 +185,19 @@ export function useConditionsTranslations(
         /Very high winds \((-?\d+) km\/h\) - danger of blown off/
       );
       if (veryHighWindsMatch) {
-        return t("warnings.veryHighWinds", { wind: veryHighWindsMatch[1] });
+        const windKmh = parseFloat(veryHighWindsMatch[1]);
+        const convertedWind = convertWindSpeed(windKmh, "kmh", units.windSpeed);
+        const windFormatted = formatWindSpeed(convertedWind, units.windSpeed, 0);
+        return t("warnings.veryHighWinds", { wind: windFormatted });
       }
 
       // "High wind (X km/h)"
       const highWindMatch = warning.match(/High wind \((-?\d+) km\/h\)/);
       if (highWindMatch) {
-        return t("warnings.highWind", { wind: highWindMatch[1] });
+        const windKmh = parseFloat(highWindMatch[1]);
+        const convertedWind = convertWindSpeed(windKmh, "kmh", units.windSpeed);
+        const windFormatted = formatWindSpeed(convertedWind, units.windSpeed, 0);
+        return t("warnings.highWind", { wind: windFormatted });
       }
 
       // "Recent precipitation (X.Xmm) - will dry in ~Yh"
@@ -181,8 +205,11 @@ export function useConditionsTranslations(
         /Recent precipitation \(([0-9.]+)mm\) - will dry in ~(\d+)h/
       );
       if (recentPrecipMatch) {
+        const precipMm = parseFloat(recentPrecipMatch[1]);
+        const convertedPrecip = convertPrecipitation(precipMm, "mm", units.precipitation);
+        const precipFormatted = formatPrecipitation(convertedPrecip, units.precipitation, 1);
         return t("warnings.recentPrecip", {
-          precip: recentPrecipMatch[1],
+          precip: precipFormatted,
           hours: recentPrecipMatch[2],
         });
       }
@@ -233,5 +260,5 @@ export function useConditionsTranslations(
       translateWarning,
       translateTimeframe,
     };
-  }, [t]);
+  }, [t, units]);
 }

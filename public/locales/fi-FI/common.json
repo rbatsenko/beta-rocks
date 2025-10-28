@@ -1,0 +1,474 @@
+{
+  "header": {
+    "title": "temps.rocks"
+  },
+  "welcome": {
+    "heading": "Kysy kiipeilyöoloista",
+    "description": "Saa reaaliaikaista säätietoa, kitkamittauksia ja optimaaliset kiipeilyaikaikkunat mihin tahansa maailman kalliotyyppüään",
+    "exampleQueries": {
+      "query1": {
+        "display": "Olosuhteet Olhavassa tänään?",
+        "query": "Olosuhteet Olhavassa tänään?"
+      },
+      "query2": {
+        "display": "Onko Sipoo kuiva iltapäivällä?",
+        "query": "Onko Sipoo kuiva iltapäivällä?"
+      },
+      "query3": {
+        "display": "Olosuhteet Konnevuoressa huomenna?",
+        "query": "Olosuhteet Konnevuoressa huomenna?"
+      }
+    }
+  },
+  "chat": {
+    "analyzing": "Analysoidaan olosuhteita...",
+    "thinking": "Mietitään...",
+    "inputPlaceholder": "Kysy kalliosta tai sektorista...",
+    "clearChat": "Tyhjennä keskustelu",
+    "clearChatTooltip": "Tyhjennä nykyinen keskustelu",
+    "clearChatConfirm": "Tyhjennetäänkö keskustelu? Tämä poistaa kaikki viestit nykyisestä keskustelusta.",
+    "clearHistory": "Tyhjennä historia",
+    "clearHistoryConfirm": "Oletko varma, että haluat poistaa kaikki keskusteluhistorian? Tätä ei voi peruuttaa."
+  },
+  "conditions": {
+    "rating": "Arvio",
+    "details": "Yksityiskohdat",
+    "location": "Sijainti",
+    "favorite": "Suosikki",
+    "favorited": "Lisätty suosikkeihin",
+    "addReport": "Lisää raportti",
+    "viewCragPage": "Näytä alue"
+  },
+  "ratings": {
+    "great": "Loistava",
+    "good": "Hyvä",
+    "fair": "Kohtuullinen",
+    "poor": "Huono",
+    "nope": "Ei käy"
+  },
+  "reasons": {
+    "perfectTemp": "Ihanteellinen lämpötila ({{temp}})",
+    "tempTooHigh": "Lämpötila liian korkea - sormet voivat livahtaa",
+    "coldGoodFriction": "Kylmä, mutta hyvä {{rockType}}-kiven kitkalle",
+    "idealHumidity": "Ihanteellinen kosteus ({{humidity}}%)",
+    "lowHumidityGranite": "Alhainen kosteus parantaa kitkaa graniitissa",
+    "readyInHours": "Valmiina kiipelyyn noin {{hours}} tunnin kuluttua",
+    "acceptable": "Olosuhteet ovat hyväksyttävät"
+  },
+  "warnings": {
+    "tooWarm": "Liian lämmin {{rockType}}-kiven osalta ({{temp}})",
+    "coldSuboptimal": "Kylmä ja alle optimaalinen {{rockType}}-kiven osalta",
+    "highHumidity": "Korkea kosteus ({{humidity}}%) - kivi voi olla liukas",
+    "wetDangerousSandstone": "Kivi on tällä hetkellä kostea - vaarallinen kiipeillä (hiekkakivi heikkenee kosteutuessaan)",
+    "wetSlippery": "Kivi on tällä hetkellä kostea - liukkaat olosuhteet",
+    "veryHighWinds": "Erittäin kovat tuulet ({{wind}}) - vaara pudota tuuleen",
+    "highWind": "Kova tuuli ({{wind}})",
+    "recentPrecip": "Äskettäinen sade ({{precip}}) - kuivuu noin {{hours}}h kuluttua",
+    "currentlyWetDangerous": "Tällä hetkellä kostea - vaarallinen",
+    "currentlyWet": "Tällä hetkellä kostea",
+    "cold": "Cold ({{temp}})"
+  },
+  "weather": {
+    "clearSky": "Selkeä taivas",
+    "mainlyClear": "Enimmäkseen selkeä",
+    "partlyCloudy": "Osittain pilviä",
+    "overcast": "Pilvinen",
+    "fog": "Sumu",
+    "depositingRimeFrog": "Hyytävä sumua",
+    "lightDrizzle": "Kevyt tihkusade",
+    "moderateDrizzle": "Kohtalainen tihkusade",
+    "denseDrizzle": "Tiheä tihkusade",
+    "lightFreezingDrizzle": "Kevyt jäätävä tihkusade",
+    "denseFreezingDrizzle": "Tiheä jäätävä tihkusade",
+    "slightRain": "Heikko sade",
+    "moderateRain": "Kohtalainen sade",
+    "heavyRain": "Kova sade",
+    "lightFreezingRain": "Kevyt jäätävä sade",
+    "heavyFreezingRain": "Kova jäätävä sade",
+    "slightSnowFall": "Kevyt lumisade",
+    "moderateSnowFall": "Kohtalainen lumisade",
+    "heavySnowFall": "Kova lumisade",
+    "snowGrains": "Lumijyvät",
+    "slightRainShowers": "Kevyet sadekuurot",
+    "moderateRainShowers": "Kohtalaiset sadekuurot",
+    "violentRainShowers": "Väkevät sadekuurot",
+    "slightSnowShowers": "Kevyet lumikuurot",
+    "heavySnowShowers": "Voimakkaat lumikuurot",
+    "thunderstorm": "Ukkoskeli",
+    "thunderstormSlightHail": "Ukkoskeli pienellä rakeisuudella",
+    "thunderstormHeavyHail": "Ukkoskeli suurella rakeisuudella"
+  },
+  "timeframes": {
+    "now": "nyt",
+    "today": "tänään",
+    "tomorrow": "huomenna",
+    "thisAfternoon": "tänä iltapäivänä",
+    "thisEvening": "tänä iltana",
+    "tonight": "tänä yönä"
+  },
+  "disambiguation": {
+    "foundMultipleAreas": "Löytyi {{count}} kiipeilyaluetta hakusanalle \"{{location}}\". Valitse yksi:",
+    "foundMultipleLocations": "Löytyi useita sijainteja hakusanalle \"{{location}}\". Valitse yksi:",
+    "queryTemplate": "olosuhteet paikassa {{name}} ({{latitude}}, {{longitude}})"
+  },
+  "footer": {
+    "about": "Tietoa",
+    "privacy": "Yksityisyys",
+    "github": "GitHub",
+    "brand": "temps.rocks",
+    "description": "Ilmaiset kiipeilyolosuhteet kaikille. Rakennettu ❤️ kiipeilyyhteisölle.",
+    "attribution": "Tiedot lähteistä Open-Meteo, OpenBeta ja <osmLink>OpenStreetMap-osallistujat</osmLink>. Yhteisön tuottamat raportit.",
+    "copyright": "© 2025 temps.rocks. Kaikki oikeudet pidätetään."
+  },
+  "features": {
+    "heading": "Kaikki mitä tarvitset",
+    "subheading": "Kattavat kiipeilyolosuhteet käden ulottuvilla, täysin ilmaiseksi",
+    "realTimeWeather": {
+      "title": "Reaaliaikainen sää",
+      "description": "Tarkat ennusteet Open-Meteosta auringon-varjo laskelmilla tietyille sektoreille"
+    },
+    "chatInterface": {
+      "title": "Chat-rajapinta",
+      "description": "Luonnollisen kielen kyselyt tekoälyllä. Kysy missä tahansa kielessä, saa välittömiä vastauksia"
+    },
+    "communityReports": {
+      "title": "Yhteisön raportit",
+      "description": "Jaa olosuhteita, turvallisuusvaroituksia, pääsymuutoksia, betaa ja muuta. Auta kanssakiipeilijöitä reaaliaikaisilla päivityksillä useissa kategorioissa"
+    },
+    "globalCoverage": {
+      "title": "Maailmanlaajuinen kattavuus",
+      "description": "Mikä tahansa kalli tai sektori maailmanlaajuisesti OpenBeta-tietokantaintegroinnin kautta"
+    },
+    "worksOffline": {
+      "title": "Toimii offline-tilassa",
+      "description": "Paikallinen ensimmäinen suunnittelu. Tallenna tiedot offline-tilassa ja synkronoi laitteiden välillä synkronointiavaimella"
+    },
+    "privacyFirst": {
+      "title": "Yksityisyys ensin",
+      "description": "Oletuksena anonyymi. Ei tunnuksia tarvita. Tietosi pysyy sinulla"
+    }
+  },
+  "ui": {
+    "toggleTheme": "Vaihda teemaa",
+    "selectLanguage": "Valitse kieli",
+    "aboutApp": "Tietoa sovelluksesta"
+  },
+  "dialog": {
+    "close": "Sulje",
+    "cancel": "Peruuta",
+    "detailedConditions": "Yksityiskohtaiset olosuhteet",
+    "fullAnalysis": "Täydellinen sääanalyysi ja kiipeilyolosuhteiden ennuste",
+    "showMap": "Kartta",
+    "tabs": {
+      "overview": "Yleiskatsaus",
+      "hourly": "Tunneittain",
+      "daily": "14 päivää"
+    },
+    "currentRating": "Nykyinen arvio",
+    "currentConditions": "Nykyiset olosuhteet",
+    "currentWeather": "Nykyiset sääolosuhteet",
+    "temperature": "Lämpötila",
+    "humidity": "Kosteus",
+    "windSpeed": "Tuulen nopeus",
+    "precipitation": "Sademäärä",
+    "sunrise": "Auringonnousu",
+    "sunset": "Auringonlasku",
+    "high": "Korkea",
+    "low": "Matala",
+    "rain": "Sade",
+    "wind": "Tuuli",
+    "dry": "Kuiva",
+    "wet": "Kostea",
+    "precipitationContext": "Sademäärän konteksti",
+    "last24h": "Viimeiset 24h",
+    "last48h": "Viimeiset 48h",
+    "next24h": "Seuraavat 24h",
+    "dewPointSpread": "Kastepisteväli (kondensaation riski)",
+    "lowRisk": "✅ Matala riski - kivi pysyy kuivana",
+    "moderateRisk": "⚠️ Kohtalainen riski - seuraa kosteutta",
+    "highRisk": "❌ Korkea riski - kondensaatio todennäköinen",
+    "optimalWindows": "Optimaaliset kiipeilyaikaikkunat",
+    "nextDays": "Seuraavat 5 päivää",
+    "bestTime": "🌟 Paras aika",
+    "noOptimalConditions": "Ei optimaalisia olosuhteita seuraavien 5 päivän aikana",
+    "checkHourlyForecast": "Tarkista tunneittainen ennuste saadaksesi lisätietoja",
+    "weatherDisclaimer": "⚠️ Sääolosuhteet voivat muuttua nopeasti. Seuraa aina ennusteita ennen lähtöä ja tarkista olosuhteet saapuessasi.",
+    "window": "ikkuna",
+    "windows": "ikkunat",
+    "today": "Tänään",
+    "tomorrow": "Huomenna",
+    "showCompleteTimeline": "Näytä täydellinen aikajana",
+    "hour": "tunti",
+    "hours": "tuntia",
+    "period": "jakso",
+    "periods": "jaksot",
+    "noHourlyData": "Tunneittaista ennustedataa ei ole saatavilla",
+    "noDailyData": "Päivittäistä ennustedataa ei ole saatavilla",
+    "noOptimalHours": "Ei optimaalisia olosuhteita",
+    "forecastIndicators": "Ennusteen indikaattorit:",
+    "goodClimbingWindows": "Hyvät kiipeilyaikaikkunat",
+    "fairConditions": "Kohtalaiset olosuhteet",
+    "poorConditions": "Huonot olosuhteet",
+    "lessReliable": "Päivät 8-14: Vähemmän luotettava ennuste",
+    "lessReliableHourly": "Seuraavat tunnit vähemmän ennustettavissa",
+    "lessCertain": "VÄHEMMÄN VARMA",
+    "todayBadge": "TÄNÄÄN"
+  },
+  "timeContext": {
+    "sunrise": "Auringonnousu",
+    "sunset": "Auringonlasku",
+    "recommendedHours": "Suositellut kiipeilytunnit",
+    "totalDaylight": "Kokonaispäivänvalo",
+    "hoursOfDaylight": "{{hours}} tuntia päivänvaloa",
+    "earlyStartRecommended": "Varhain lähtö suositeltu lämmön välttämiseksi",
+    "limitedDaylight": "Rajoitettu päivänvalo - suunnittele vastaavasti",
+    "morningConditionsBest": "Parhaat olosuhteet aamulla",
+    "eveningSession": "Ilta-aikaiset olosuhteet",
+    "showAllHours": "Näytä kaikki 24 tuntia",
+    "showClimbingHoursOnly": "Näytä vain kiipeilytunnit",
+    "expandHours": "Laajenna nähdäksesi kaikki tunnit"
+  },
+  "rockTypes": {
+    "limestone": "kalkkikivi",
+    "granite": "graniitti",
+    "sandstone": "hiekkakivi",
+    "basalt": "basaltti",
+    "gneiss": "gneissi",
+    "quartzite": "kvartsiitti",
+    "conglomerate": "konglomeraatti",
+    "rhyolite": "liuskalava",
+    "porphyry": "porfyyri",
+    "andesite": "andesiitti",
+    "slate": "liuskekivi",
+    "schist": "liuskelevy",
+    "dolomite": "dolomiitti",
+    "volcanic": "vulkaaninen",
+    "phyllite": "fylliitti"
+  },
+  "sync": {
+    "notification": {
+      "title": "Synkronointiavain luotu",
+      "description": "Olemme luoneet ainutlaatuisen avaimen synkronoidaksemme suosikkejasi ja chatisi laitteiden välillä.",
+      "viewInSettings": "Näytä asetuksissa",
+      "viewMore": "Mikä on synkronointiavain?"
+    },
+    "banner": {
+      "title": "Tietosi synkronoidaan laitteiden välillä",
+      "description": "Suosikkisi, raportit ja keskusteluhistoria tallennetaan paikallisesti ja voidaan synkronoida muihin laitteisiin synkronointiavaimella.",
+      "learnMore": "Lisätietoja",
+      "dismiss": "Ymmärrän"
+    },
+    "status": {
+      "synced": "Synkronoitu",
+      "syncing": "Synkronoidaan...",
+      "offline": "Offline-tila"
+    }
+  },
+  "syncExplainer": {
+    "title": "How Sync Works",
+    "description": "Keep your data in sync across all your devices seamlessly and securely.",
+    "features": {
+      "syncKey": {
+        "title": "Unique Sync Key",
+        "description": "Each user gets a secure, unique key to sync their data across devices."
+      },
+      "multiDevice": {
+        "title": "Multi-Device Access",
+        "description": "Access your favorites and chat history from any device by using your sync key."
+      },
+      "privacy": {
+        "title": "Privacy First",
+        "description": "Your data is encrypted and only accessible with your sync key. No account required."
+      }
+    },
+    "openSettings": "Open Settings"
+  },
+  "profile": {
+    "anonymous": "Anonyymi",
+    "member": "Jäsen",
+    "anonymousMember": "Anonyymi jäsen",
+    "favorites": "Suosikit",
+    "recent": "Viimeaikaiset haut",
+    "stats": "Tilastosi",
+    "settings": "Asetukset",
+    "clearData": "Tyhjennä kaikki tiedot"
+  },
+  "stats": {
+    "title": "Tilastosi",
+    "description": "Aktiivisuutesi ja panoksesi temps.rocks-yhteisölle",
+    "reportsPosted": "Lähetetyt raportit",
+    "confirmationsGiven": "Annetut vahvistukset",
+    "favoritesCount": "Suosikit",
+    "memberSince": "Jäsen alkaen",
+    "lastActive": "Viimeksi aktiivinen",
+    "unknown": "Tuntematon",
+    "encourageReports": "Jaa paikallista tietämystäsi lähettämällä raportteja kiipeilyolosuhteista!",
+    "thankYou": "Kiitos panoksestasi kiipeilyyhteisölle!"
+  },
+  "settings": {
+    "title": "Asetukset",
+    "description": "Hallitse profiiliasi, synkronointiarvoasi ja asetuksiasi",
+    "save": "Tallenna",
+    "saving": "Tallennetaan...",
+    "displayName": {
+      "label": "Näyttönimi",
+      "description": "Nimesi, joka näkyy raporteissa ja vahvistuksissa (valinnainen)",
+      "placeholder": "Kirjoita nimesi...",
+      "saved": "Näyttönimi tallennettu",
+      "savedDescription": "Näyttönimesi on päivitetty onnistuneesti",
+      "saveFailed": "Tallennus epäonnistui",
+      "saveFailedDescription": "Näyttönimeäsi ei voitu tallentaa. Yritä uudelleen"
+    },
+    "units": {
+      "title": "Yksiköt ja mittaukset",
+      "description": "Valitse haluamasi yksiköt sää- ja kiipeilytiedoille",
+      "systemLabel": "Yksikköjärjestelmä",
+      "systemDescription": "Pikavalinnat yleisille yksikköjärjestelmille",
+      "systems": {
+        "metric": "Metrinen (°C, km/h, mm)",
+        "imperial": "Brittiläinen (°F, mph, tuumaa)",
+        "uk": "Iso-Britannia (°C, mph, mm)",
+        "custom": "Mukautettu"
+      },
+      "temperature": "Lämpötila",
+      "temperatureUnits": {
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Tuulen nopeus",
+      "windSpeedUnits": {
+        "kmh": "Kilometriä tunnissa (km/h)",
+        "mph": "Mailia tunnissa (mph)",
+        "ms": "Metriä sekunnissa (m/s)",
+        "knots": "Solmua (kn)"
+      },
+      "precipitation": "Sademäärä",
+      "precipitationUnits": {
+        "mm": "Millimetriä (mm)",
+        "inches": "Tuumaa (in)"
+      },
+      "distance": "Etäisyys",
+      "distanceUnits": {
+        "km": "Kilometriä (km)",
+        "miles": "Mailia (mi)"
+      },
+      "elevation": "Korkeus",
+      "elevationUnits": {
+        "meters": "Metriä (m)",
+        "feet": "Jalkaa (ft)"
+      },
+      "saved": "Yksiköt tallennettu",
+      "savedDescription": "Yksikköasetuksesi on päivitetty onnistuneesti",
+      "saveFailed": "Yksiköiden tallennus epäonnistui",
+      "saveFailedDescription": "Yksikköasetuksiasi ei voitu tallentaa. Yritä uudelleen"
+    },
+    "syncKey": {
+      "title": "Synkronointiavain",
+      "description": "Käytä tätä avainta synkronoidaksesi suosikkejasi ja asetuksiasi laitteiden välillä",
+      "label": "Synkronointiavoitesi",
+      "copy": "Kopioi synkronointiavain",
+      "showFullKey": "Näytä koko avain",
+      "hideKey": "Piilota avain",
+      "qrCode": "QR-koodi",
+      "qrDescription": "Skannaa tämä QR-koodi toisessa laitteessa synkronoidaksesi tietosi",
+      "restoreTitle": "Palauta toisesta laitteesta",
+      "restoreDescription": "Onko sinulla jo synkronointiavain? Liitä se tähän palauttaaksesi tietosi",
+      "restoreLabel": "Liitä synkronointiavaimesi",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Palauta synkronointiavain",
+      "restoring": "Palautetaan...",
+      "restoreSuccess": "Synkronointiavain palautettu onnistuneesti! Ladataan uudelleen...",
+      "restoreError": "Virheellinen synkronointiavaimen muoto. Tarkista ja yritä uudelleen.",
+      "saveNote": {
+        "title": "Tallenna synkronointiavaimesi",
+        "description": "Suosittelemme tallentamaan synkronointiavaimesi turvalliseen paikkaan, kuten Muistiinpanot-sovellukseen tai salasananhallintaohjelmaan. Tarvitset sitä palauttaaksesi tietosi muihin laitteisiin."
+      },
+      "warning": {
+        "title": "Pidä synkronointiavoitesi yksityisenä",
+        "description": "Kuka tahansa synkronointiavoimeasi voi käyttää pääsyä suosikkeihisi ja asetuksiisi. Älä jaa sitä julkisesti."
+      }
+    },
+    "dangerZone": {
+      "title": "Vaarallinen vyöhyke",
+      "description": "Nämä toiminnot ovat pysyviä ja niitä ei voi peruuttaa",
+      "deleteProfile": "Poista profiili",
+      "deleteProfileConfirm": "Oletko varma, että haluat poistaa profiilisi? Tämä poistaa pysyvästi kaikki tietosi, mukaan lukien suosikit, keskusteluhistoria ja asetukset. Tätä toimintoa ei voi peruuttaa.",
+      "deleteFailed": "Profiilin poisto epäonnistui. Yritä uudelleen."
+    }
+  },
+  "favorites": {
+    "title": "Suosikkikalliosi",
+    "description": "Sinulla on {{count}} suosikkisijaintia",
+    "empty": "Ei suosikkeita vielä",
+    "emptyMessage": "Et ole vielä lisännyt suosikkikalliota",
+    "emptyHint": "Klikkaa tähti-painiketta mistä tahansa olosuhtekorttista lisätäksesi sen suosikkeihisi",
+    "lastChecked": "Viimeksi tarkistettu",
+    "frictionScore": "Kitkascore",
+    "viewConditions": "Näytä olosuhteet",
+    "remove": "Poista"
+  },
+  "reports": {
+    "addReport": "Add Report",
+    "addReportDescription": "Share information about {{cragName}}",
+    "postingAs": "Posting as",
+    "category": "What would you like to report?",
+    "categories": {
+      "conditions": "Conditions",
+      "safety": "Safety",
+      "access": "Access",
+      "beta": "Beta",
+      "facilities": "Facilities",
+      "other": "Other"
+    },
+    "categoryDescriptions": {
+      "conditions": "Weather, friction, dryness, crowds",
+      "safety": "Loose bolts, rockfall, broken holds, hazards",
+      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "beta": "Current bolting works, route changes, new bolts",
+      "facilities": "Bathrooms, camping, water sources, amenities",
+      "other": "Anything else that doesn't fit above"
+    },
+    "dryness": "Dryness",
+    "wind": "Wind",
+    "crowds": "Crowds",
+    "additionalComments": "Additional comments (optional)",
+    "details": "Details",
+    "detailsRequired": "Please provide details about this report",
+    "placeholders": {
+      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
+      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
+      "access": "E.g., Gate closed until May, new parking lot behind library...",
+      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "facilities": "E.g., Toilet available at parking, no water source nearby...",
+      "other": "Describe what you'd like to report..."
+    },
+    "submit": "Submit Report",
+    "submitting": "Submitting...",
+    "helpful": "Helpful",
+    "loginToConfirm": "Please set up your profile to confirm reports",
+    "confirmFailed": "Failed to confirm report. Please try again.",
+    "ratings": {
+      "veryPoor": "Very Poor",
+      "poor": "Poor",
+      "okay": "Okay",
+      "good": "Good",
+      "excellent": "Excellent"
+    },
+    "scales": {
+      "veryWet": "Very wet",
+      "veryDry": "Perfect",
+      "calm": "Calm",
+      "veryWindy": "Very windy",
+      "empty": "Empty",
+      "veryCrowded": "Very crowded"
+    },
+    "recentReports": "Recent Reports",
+    "communityReports": "Community Reports",
+    "noReports": "No reports yet",
+    "beTheFirst": "Be the first to report",
+    "noReportsInCategory": "No reports in this category",
+    "filters": {
+      "all": "All"
+    }
+  }
+}

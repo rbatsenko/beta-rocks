@@ -18,17 +18,28 @@
         "display": "Jak tam Dupa Słonia?",
         "query": "Jak tam Dupa Słonia?"
       }
-    }
+    },
+    "yourFavorites": "Twoje ulubione",
+    "favoriteQuery": "Jakie są warunki na {{crag}}?"
   },
   "chat": {
     "analyzing": "Analizuję warunki...",
     "thinking": "Myślę...",
-    "inputPlaceholder": "Zapytaj o dowolną skałkę lub sektor..."
+    "inputPlaceholder": "Zapytaj o dowolną skałkę lub sektor...",
+    "clearHistory": "Wyczyść historię",
+    "clearHistoryConfirm": "Czy na pewno chcesz wyczyścić całą historię czatu? Tej operacji nie można cofnąć.",
+    "clearChat": "Wyczyść czat",
+    "clearChatTooltip": "Wyczyść bieżącą rozmowę",
+    "clearChatConfirm": "Wyczyścić twój czat? Spowoduje to usunięcie wszystkich wiadomości z bieżącej rozmowy."
   },
   "conditions": {
     "rating": "Ocena",
     "details": "Szczegóły",
-    "location": "Lokalizacja"
+    "location": "Lokalizacja",
+    "favorite": "Ulubione",
+    "favorited": "W ulubionych",
+    "addReport": "Dodaj raport",
+    "viewCragPage": "Zobacz skałkę"
   },
   "ratings": {
     "great": "Super",
@@ -38,7 +49,7 @@
     "nope": "Bardzo słabo"
   },
   "reasons": {
-    "perfectTemp": "Idealna temperatura ({{temp}}°C)",
+    "perfectTemp": "Idealna temperatura ({{temp}})",
     "tempTooHigh": "Za ciepło - dla optymalnego tarcia może być potrzebny wiatr",
     "coldGoodFriction": "Zimno ale dobre tarcie",
     "idealHumidity": "Idealna wilgotność ({{humidity}}%)",
@@ -47,16 +58,17 @@
     "acceptable": "Warunki akceptowalne"
   },
   "warnings": {
-    "tooWarm": "Za ciepło dla {{rockType}} ({{temp}}°C)",
+    "tooWarm": "Za ciepło dla {{rockType}} ({{temp}})",
     "coldSuboptimal": "Zimno - zabierz ciepłe ubrania i rozgrzej się porządnie",
     "highHumidity": "Wysoka wilgotność ({{humidity}}%) - może być gorsze tarcie",
     "wetDangerousSandstone": "Piaskowiec mokry - nie wspinaj się póki całkiem nie wyschnie!",
     "wetSlippery": "Skała mokra - ślisko",
-    "veryHighWinds": "Bardzo mocny wiatr ({{wind}} km/h) - może być nieprzyjemnie 😅",
-    "highWind": "Silny wiatr ({{wind}} km/h)",
-    "recentPrecip": "Niedawne opady ({{precip}}mm) - wyschnie za ~{{hours}}h",
+    "veryHighWinds": "Bardzo mocny wiatr ({{wind}}) - może być nieprzyjemnie 😅",
+    "highWind": "Silny wiatr ({{wind}})",
+    "recentPrecip": "Niedawne opady ({{precip}}) - wyschnie za ~{{hours}}h",
     "currentlyWetDangerous": "Obecnie mokro - poczekaj aż wyschnie",
-    "currentlyWet": "Mokro"
+    "currentlyWet": "Mokro",
+    "cold": "Cold ({{temp}})"
   },
   "weather": {
     "clearSky": "Bezchmurnie",
@@ -123,7 +135,7 @@
     },
     "communityReports": {
       "title": "Raporty społeczności",
-      "description": "Dziel się i potwierdzaj obecne warunki. Pomagaj innym z aktualizacjami na żywo"
+      "description": "Dziel się warunem, informacjami o bezpieczeństwie, zmianami w dostępie, stanie dróg/baldów i więcej. Pomóż wspinaczom aktualizacjami w czasie rzeczywistym w wielu kategoriach"
     },
     "globalCoverage": {
       "title": "Zasięg globalny",
@@ -145,6 +157,7 @@
   },
   "dialog": {
     "close": "Zamknij",
+    "cancel": "Anuluj",
     "detailedConditions": "Szczegółowe warunki",
     "fullAnalysis": "Pełna analiza pogody i prognoza warunków wspinaczkowych",
     "showMap": "Mapa",
@@ -218,20 +231,251 @@
     "expandHours": "Rozwiń, aby zobaczyć wszystkie godziny"
   },
   "rockTypes": {
-    "limestone": "wapień",
-    "granite": "granit",
-    "sandstone": "piaskowiec",
-    "basalt": "bazalt",
-    "gneiss": "gnejs",
-    "quartzite": "kwarcyt",
-    "conglomerate": "konglomerat",
-    "rhyolite": "riolit",
-    "porphyry": "porfir",
-    "andesite": "andezyt",
-    "slate": "łupek",
-    "schist": "łupek łyszczykowy",
-    "dolomite": "dolomit",
-    "volcanic": "wulkaniczny",
-    "phyllite": "fylit"
+    "granite": "Granit",
+    "sandstone": "Piaskowiec",
+    "limestone": "Wapień",
+    "basalt": "Bazalt",
+    "gneiss": "Gnejs",
+    "quartzite": "Kwarcyt",
+    "unknown": "Nieznany"
+  },
+  "sync": {
+    "banner": {
+      "title": "Twoje dane synchronizują się między urządzeniami",
+      "description": "Twoje ulubione, raporty i historia czatu są zapisywane lokalnie i mogą synchronizować się z innymi urządzeniami za pomocą klucza synchronizacji.",
+      "learnMore": "Dowiedz się więcej",
+      "dismiss": "Rozumiem"
+    },
+    "status": {
+      "synced": "Zsynchronizowano",
+      "syncing": "Synchronizacja...",
+      "offline": "Offline"
+    },
+    "notification": {
+      "title": "Klucz synchronizacji utworzony",
+      "description": "Wygenerowaliśmy unikalny klucz do synchronizacji twoich ulubionych i czatów między urządzeniami.",
+      "viewInSettings": "Zobacz w ustawieniach",
+      "viewMore": "Co to jest klucz synchronizacji?"
+    }
+  },
+  "syncExplainer": {
+    "title": "Jak działa synchronizacja",
+    "description": "Synchronizuj swoje dane na wszystkich urządzeniach w sposób bezpieczny i płynny.",
+    "features": {
+      "syncKey": {
+        "title": "Unikalny klucz synchronizacji",
+        "description": "Każdy użytkownik otrzymuje bezpieczny, unikalny klucz do synchronizacji danych między urządzeniami."
+      },
+      "multiDevice": {
+        "title": "Dostęp z wielu urządzeń",
+        "description": "Uzyskaj dostęp do swoich ulubionych i historii czatów z dowolnego urządzenia za pomocą klucza synchronizacji."
+      },
+      "privacy": {
+        "title": "Prywatność na pierwszym miejscu",
+        "description": "Twoje dane są zaszyfrowane i dostępne tylko za pomocą klucza synchronizacji. Nie wymaga konta."
+      }
+    },
+    "openSettings": "Otwórz ustawienia"
+  },
+  "profile": {
+    "anonymous": "Anonimowy",
+    "member": "Użytkownik",
+    "anonymousMember": "Anonimowy użytkownik",
+    "favorites": "Ulubione",
+    "recent": "Ostatnie wyszukiwania",
+    "stats": "Twoje statystyki",
+    "settings": "Ustawienia",
+    "clearData": "Wyczyść wszystkie dane"
+  },
+  "stats": {
+    "title": "Twoje statystyki",
+    "description": "Twoja aktywność i wkład w społeczność temps.rocks",
+    "reportsPosted": "Opublikowane raporty",
+    "confirmationsGiven": "Udzielone potwierdzenia",
+    "favoritesCount": "Ulubione",
+    "memberSince": "Członek od",
+    "lastActive": "Ostatnia aktywność",
+    "unknown": "Nieznane",
+    "encourageReports": "Podziel się swoją lokalną wiedzą, publikując raporty o warunkach na skałach!",
+    "thankYou": "Dziękujemy za wkład w społeczność wspinaczkową!"
+  },
+  "settings": {
+    "title": "Ustawienia",
+    "description": "Zarządzaj swoim profilem, kluczem synchronizacji i preferencjami",
+    "save": "Zapisz",
+    "saving": "Zapisywanie...",
+    "displayName": {
+      "label": "Nazwa wyświetlana",
+      "description": "Twoje imię wyświetlane w raportach i potwierdzeniach (opcjonalnie)",
+      "placeholder": "Wprowadź swoje imię...",
+      "saved": "Nazwa wyświetlana zapisana",
+      "savedDescription": "Twoja nazwa wyświetlana została pomyślnie zaktualizowana",
+      "saveFailed": "Nie udało się zapisać",
+      "saveFailedDescription": "Nie można zapisać Twojej nazwy wyświetlanej. Spróbuj ponownie"
+    },
+    "units": {
+      "title": "Jednostki i pomiary",
+      "description": "Wybierz preferowane jednostki dla danych pogodowych i wspinaczkowych",
+      "systemLabel": "System jednostek",
+      "systemDescription": "Szybkie ustawienia dla powszechnych systemów jednostek",
+      "systems": {
+        "metric": "Metryczny (°C, km/h, mm)",
+        "imperial": "Imperialny (°F, mph, cale)",
+        "uk": "UK (°C, mph, mm)",
+        "custom": "Niestandardowy"
+      },
+      "temperature": "Temperatura",
+      "temperatureUnits": {
+        "celsius": "Celsjusz (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Prędkość wiatru",
+      "windSpeedUnits": {
+        "kmh": "Kilometry na godzinę (km/h)",
+        "mph": "Mile na godzinę (mph)",
+        "ms": "Metry na sekundę (m/s)",
+        "knots": "Węzły (kn)"
+      },
+      "precipitation": "Opady",
+      "precipitationUnits": {
+        "mm": "Milimetry (mm)",
+        "inches": "Cale (in)"
+      },
+      "distance": "Odległość",
+      "distanceUnits": {
+        "km": "Kilometry (km)",
+        "miles": "Mile (mi)"
+      },
+      "elevation": "Wysokość",
+      "elevationUnits": {
+        "meters": "Metry (m)",
+        "feet": "Stopy (ft)"
+      },
+      "saved": "Jednostki zapisane",
+      "savedDescription": "Twoje preferencje jednostek zostały pomyślnie zaktualizowane",
+      "saveFailed": "Nie udało się zapisać jednostek",
+      "saveFailedDescription": "Nie można zapisać Twoich preferencji jednostek. Spróbuj ponownie"
+    },
+    "syncKey": {
+      "title": "Klucz synchronizacji",
+      "description": "Użyj tego klucza do synchronizacji ulubionych i ustawień między urządzeniami",
+      "label": "Twój klucz synchronizacji",
+      "copy": "Kopiuj klucz synchronizacji",
+      "showFullKey": "Pokaż pełny klucz",
+      "hideKey": "Ukryj klucz",
+      "qrCode": "Kod QR",
+      "qrDescription": "Zeskanuj ten kod QR na innym urządzeniu, aby zsynchronizować dane",
+      "restoreTitle": "Przywróć z innego urządzenia",
+      "restoreDescription": "Masz już klucz synchronizacji? Wklej go tutaj, aby przywrócić dane",
+      "restoreLabel": "Wklej swój klucz synchronizacji",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Przywróć klucz synchronizacji",
+      "restoring": "Przywracanie...",
+      "restoreSuccess": "Klucz synchronizacji pomyślnie przywrócony! Przeładowywanie...",
+      "restoreError": "Nieprawidłowy format klucza synchronizacji. Sprawdź i spróbuj ponownie.",
+      "saveNote": {
+        "title": "Zapisz swój klucz synchronizacji",
+        "description": "Zalecamy zapisanie klucza synchronizacji w bezpiecznym miejscu, takim jak aplikacja Notatki lub menedżer haseł. Będzie potrzebny do przywrócenia danych na innych urządzeniach."
+      },
+      "warning": {
+        "title": "Zachowaj swój klucz synchronizacji w tajemnicy",
+        "description": "Każdy, kto ma Twój klucz synchronizacji, może uzyskać dostęp do Twoich ulubionych i ustawień. Nie udostępniaj go publicznie."
+      }
+    },
+    "dangerZone": {
+      "title": "Strefa niebezpieczna",
+      "description": "Te działania są trwałe i nie można ich cofnąć",
+      "deleteProfile": "Usuń profil",
+      "deleteProfileConfirm": "Czy na pewno chcesz usunąć swój profil? Spowoduje to trwałe usunięcie wszystkich twoich danych, w tym ulubionych, historii czatu i ustawień. Tej czynności nie można cofnąć.",
+      "deleteFailed": "Nie udało się usunąć profilu. Spróbuj ponownie."
+    }
+  },
+  "favorites": {
+    "title": "Twoje ulubione skałki",
+    "description": "Masz {{count}} ulubionych lokalizacji",
+    "empty": "Brak ulubionych",
+    "emptyMessage": "Nie dodałeś jeszcze żadnych ulubionych skałek",
+    "emptyHint": "Kliknij gwiazdkę na karcie warunków, aby dodać ją do ulubionych",
+    "lastChecked": "Ostatnio sprawdzono",
+    "frictionScore": "Ocena tarcia",
+    "viewConditions": "Zobacz warunki",
+    "remove": "Usuń"
+  },
+  "reports": {
+    "addReport": "Dodaj zgłoszenie",
+    "addReportDescription": "Podziel się informacjami o {{cragName}}",
+    "postingAs": "Publikujesz jako",
+    "dryness": "Suchość",
+    "wind": "Wiatr",
+    "crowds": "Tłumy",
+    "additionalComments": "Dodatkowe uwagi (opcjonalne)",
+    "commentsPlaceholder": "Np: sektor wschodni wciąż wilgotny, ścieżka błotnista - uwaga, Droga X - woda sączy się ze szczeliny, chwyty śliskie...",
+    "submit": "Wyślij raport",
+    "submitting": "Wysyłanie...",
+    "helpful": "Pomocne",
+    "loginToConfirm": "Skonfiguruj swój profil, aby potwierdzać raporty",
+    "confirmFailed": "Nie udało się potwierdzić raportu. Spróbuj ponownie.",
+    "ratings": {
+      "veryPoor": "Bardzo słabo",
+      "poor": "Słabo",
+      "okay": "W porządku",
+      "good": "Dobrze",
+      "excellent": "Doskonale"
+    },
+    "scales": {
+      "veryWet": "Bardzo mokro",
+      "veryDry": "Idealnie",
+      "calm": "Spokojnie",
+      "veryWindy": "Bardzo wietrznie",
+      "empty": "Pusto",
+      "veryCrowded": "Bardzo tłoczno"
+    },
+    "recentReports": "Ostatnie raporty",
+    "communityReports": "Raporty społeczności",
+    "noReports": "Brak raportów",
+    "beTheFirst": "Zgłoś warunki jako pierwszy/a",
+    "noReportsMessage": "Bądź pierwszym/ą, który/a podzieli się warunkami na tej skałce",
+    "reportCount": "{{count}} raportów",
+    "viewAllReports": "Zobacz wszystkie raporty",
+    "category": "Co chcesz zgłosić?",
+    "categories": {
+      "conditions": "Warun",
+      "safety": "Bezpieczeństwo",
+      "access": "Dostęp",
+      "beta": "Patenty",
+      "facilities": "Udogodnienia",
+      "other": "Inne"
+    },
+    "categoryDescriptions": {
+      "conditions": "Pogoda, tarcie, suchość, tłumy",
+      "safety": "Luźne ringi, ruszające się kamienie, uszkodzone chwyty, zagrożenia",
+      "access": "Zamknięcia, zmiany parkingów, ograniczenia sezonowe, gniazda ptaków, owady",
+      "beta": "Zmiany przebiegu dróg, nowe obicie, prace ekiperskie",
+      "facilities": "Parking, toalety, kemping, woda, udogodnienia",
+      "other": "Cokolwiek innego, co nie pasuje do kategorii powyżej"
+    },
+    "details": "Szczegóły",
+    "detailsRequired": "Podaj szczegóły tego zgłoszenia",
+    "placeholders": {
+      "conditions": "Np. Sektor wschodni wciąż mokry, ścieżka zabłocona, leje się z rysy...",
+      "safety": "Np. Luźny ring na Drodze X, niebezpieczeństwo odpadnięcia bloku skalnego przy głównej ścianie...",
+      "access": "Np. Brama zamknięta do maja, nowy parking za biblioteką...",
+      "beta": "Np. Droga X przebita na nowo, nowa asekuracja na górze, trudniejsza wycena...",
+      "facilities": "Np. toaleta dostępna na parkingu, brak wody w pobliżu...",
+      "other": "Opisz, co chcesz zgłosić..."
+    },
+    "noReportsInCategory": "Brak raportów w tej kategorii",
+    "filters": {
+      "all": "Wszystkie"
+    }
+  },
+  "cragPage": {
+    "askAI": "Zapytaj AI",
+    "currentConditions": "Aktualne warunki",
+    "sectors": "Sektory",
+    "disclaimer": "Warunki pogodowe mogą się szybko zmieniać. Zawsze sprawdzaj warunki na miejscu i kieruj się własnym osądem.",
+    "askAIAboutCrag": "Zapytaj AI o tę skałkę",
+    "viewOnSunCalc": "Zobacz czasy słońca/księżyca",
+    "viewOnMap": "Zobacz na mapie"
   }
 }

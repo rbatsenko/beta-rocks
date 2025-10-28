@@ -35,6 +35,15 @@ import {
   groupHourlyByDay,
   groupWindowsByDay,
 } from "./ConditionsDetailDialog.utils";
+import { useUnits } from "@/hooks/useUnits";
+import {
+  convertTemperature,
+  convertWindSpeed,
+  convertPrecipitation,
+  formatTemperature,
+  formatWindSpeed,
+  formatPrecipitation,
+} from "@/lib/units/conversions";
 
 // This is the same interface as ConditionsDetailDialog uses
 interface ConditionsDetailContentProps {
@@ -120,6 +129,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
   const locale = getLocaleFromLanguage(language);
   const [activeTab, setActiveTab] = useState("overview");
   const tabSwitchStartRef = useRef<number | null>(null);
+  const { units } = useUnits();
 
   // Use h-full for sheet, calc height for dialog
   const scrollAreaHeight = variant === "sheet" ? "h-full" : "h-[calc(90vh-240px)]";
@@ -266,7 +276,15 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                         <span>{t("dialog.temperature")}</span>
                       </div>
                       <p className="text-lg font-semibold">
-                        {Math.round(data.current.temperature_c)}°C
+                        {formatTemperature(
+                          convertTemperature(
+                            data.current.temperature_c,
+                            "celsius",
+                            units.temperature
+                          ),
+                          units.temperature,
+                          0
+                        )}
                       </p>
                     </div>
                     <div className="bg-muted/50 rounded-lg p-3">
@@ -281,14 +299,30 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                         <Wind className="h-3 w-3" />
                         <span>{t("dialog.windSpeed")}</span>
                       </div>
-                      <p className="text-lg font-semibold">{data.current.windSpeed_kph}km/h</p>
+                      <p className="text-lg font-semibold">
+                        {formatWindSpeed(
+                          convertWindSpeed(data.current.windSpeed_kph, "kmh", units.windSpeed),
+                          units.windSpeed,
+                          0
+                        )}
+                      </p>
                     </div>
                     <div className="bg-muted/50 rounded-lg p-3">
                       <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
                         <CloudRain className="h-3 w-3" />
                         <span>{t("dialog.precipitation")}</span>
                       </div>
-                      <p className="text-lg font-semibold">{data.current.precipitation_mm}mm</p>
+                      <p className="text-lg font-semibold">
+                        {formatPrecipitation(
+                          convertPrecipitation(
+                            data.current.precipitation_mm,
+                            "mm",
+                            units.precipitation
+                          ),
+                          units.precipitation,
+                          1
+                        )}
+                      </p>
                     </div>
                     {(data.timeContext || data.astro) && (
                       <>
@@ -351,15 +385,45 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                   <div className="grid grid-cols-3 gap-3">
                     <div className="bg-muted/50 rounded-lg p-3">
                       <p className="text-xs text-muted-foreground">{t("dialog.last24h")}</p>
-                      <p className="text-lg font-semibold">{data.precipitationContext.last24h}mm</p>
+                      <p className="text-lg font-semibold">
+                        {formatPrecipitation(
+                          convertPrecipitation(
+                            data.precipitationContext.last24h,
+                            "mm",
+                            units.precipitation
+                          ),
+                          units.precipitation,
+                          1
+                        )}
+                      </p>
                     </div>
                     <div className="bg-muted/50 rounded-lg p-3">
                       <p className="text-xs text-muted-foreground">{t("dialog.last48h")}</p>
-                      <p className="text-lg font-semibold">{data.precipitationContext.last48h}mm</p>
+                      <p className="text-lg font-semibold">
+                        {formatPrecipitation(
+                          convertPrecipitation(
+                            data.precipitationContext.last48h,
+                            "mm",
+                            units.precipitation
+                          ),
+                          units.precipitation,
+                          1
+                        )}
+                      </p>
                     </div>
                     <div className="bg-muted/50 rounded-lg p-3">
                       <p className="text-xs text-muted-foreground">{t("dialog.next24h")}</p>
-                      <p className="text-lg font-semibold">{data.precipitationContext.next24h}mm</p>
+                      <p className="text-lg font-semibold">
+                        {formatPrecipitation(
+                          convertPrecipitation(
+                            data.precipitationContext.next24h,
+                            "mm",
+                            units.precipitation
+                          ),
+                          units.precipitation,
+                          1
+                        )}
+                      </p>
                     </div>
                   </div>
                   {data.dewPointSpread !== undefined && (
@@ -372,7 +436,13 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                             ? t("dialog.moderateRisk")
                             : t("dialog.highRisk")}
                       </p>
-                      <p className="text-lg font-semibold">{Math.round(data.dewPointSpread)}°C</p>
+                      <p className="text-lg font-semibold">
+                        {formatTemperature(
+                          convertTemperature(data.dewPointSpread, "celsius", units.temperature),
+                          units.temperature,
+                          0
+                        )}
+                      </p>
                     </div>
                   )}
                 </div>
@@ -505,7 +575,16 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                             <div className="flex items-center gap-2">
                                               <div className="flex items-center gap-0.5">
                                                 <ThermometerSun className="h-2.5 w-2.5" />
-                                                <span>{Math.round(hour.temp_c)}°C</span>
+                                                <span>
+                                                  {Math.round(
+                                                    convertTemperature(
+                                                      hour.temp_c,
+                                                      "celsius",
+                                                      units.temperature
+                                                    )
+                                                  )}
+                                                  {units.temperature === "celsius" ? "°C" : "°F"}
+                                                </span>
                                               </div>
                                               <div className="flex items-center gap-0.5">
                                                 <Droplets className="h-2.5 w-2.5" />
@@ -513,7 +592,22 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                               </div>
                                               <div className="flex items-center gap-0.5">
                                                 <Wind className="h-2.5 w-2.5" />
-                                                <span>{hour.wind_kph}km/h</span>
+                                                <span>
+                                                  {Math.round(
+                                                    convertWindSpeed(
+                                                      hour.wind_kph,
+                                                      "kmh",
+                                                      units.windSpeed
+                                                    )
+                                                  )}
+                                                  {units.windSpeed === "kmh"
+                                                    ? "km/h"
+                                                    : units.windSpeed === "mph"
+                                                      ? "mph"
+                                                      : units.windSpeed === "ms"
+                                                        ? "m/s"
+                                                        : "kn"}
+                                                </span>
                                               </div>
                                             </div>
                                           </div>
@@ -660,7 +754,16 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                     <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
                                       <div className="flex items-center gap-1">
                                         <ThermometerSun className="h-3 w-3" />
-                                        <span>{Math.round(hour.temp_c)}°C</span>
+                                        <span>
+                                          {Math.round(
+                                            convertTemperature(
+                                              hour.temp_c,
+                                              "celsius",
+                                              units.temperature
+                                            )
+                                          )}
+                                          {units.temperature === "celsius" ? "°C" : "°F"}
+                                        </span>
                                       </div>
                                       <div className="flex items-center gap-1">
                                         <Droplets className="h-3 w-3" />
@@ -668,13 +771,31 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                       </div>
                                       <div className="flex items-center gap-1">
                                         <Wind className="h-3 w-3" />
-                                        <span>{hour.wind_kph}km/h</span>
+                                        <span>
+                                          {Math.round(
+                                            convertWindSpeed(hour.wind_kph, "kmh", units.windSpeed)
+                                          )}
+                                          {units.windSpeed === "kmh"
+                                            ? "km/h"
+                                            : units.windSpeed === "mph"
+                                              ? "mph"
+                                              : units.windSpeed === "ms"
+                                                ? "m/s"
+                                                : "kn"}
+                                        </span>
                                       </div>
                                       <div
                                         className={`flex items-center gap-1 ${hour.precip_mm > 0 ? "text-blue-500" : ""}`}
                                       >
                                         <CloudRain className="h-3 w-3" />
-                                        <span>{hour.precip_mm}mm</span>
+                                        <span>
+                                          {convertPrecipitation(
+                                            hour.precip_mm,
+                                            "mm",
+                                            units.precipitation
+                                          ).toFixed(1)}
+                                          {units.precipitation === "mm" ? "mm" : "in"}
+                                        </span>
                                       </div>
                                     </div>
                                   </div>
@@ -767,7 +888,16 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                         <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-muted-foreground">
                                           <div className="flex items-center gap-0.5">
                                             <ThermometerSun className="h-2.5 w-2.5" />
-                                            <span>{Math.round(hour.temp_c)}°C</span>
+                                            <span>
+                                              {Math.round(
+                                                convertTemperature(
+                                                  hour.temp_c,
+                                                  "celsius",
+                                                  units.temperature
+                                                )
+                                              )}
+                                              {units.temperature === "celsius" ? "°C" : "°F"}
+                                            </span>
                                           </div>
                                           <div className="flex items-center gap-0.5">
                                             <Droplets className="h-2.5 w-2.5" />
@@ -775,13 +905,35 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                           </div>
                                           <div className="flex items-center gap-0.5">
                                             <Wind className="h-2.5 w-2.5" />
-                                            <span>{hour.wind_kph}km/h</span>
+                                            <span>
+                                              {Math.round(
+                                                convertWindSpeed(
+                                                  hour.wind_kph,
+                                                  "kmh",
+                                                  units.windSpeed
+                                                )
+                                              )}
+                                              {units.windSpeed === "kmh"
+                                                ? "km/h"
+                                                : units.windSpeed === "mph"
+                                                  ? "mph"
+                                                  : units.windSpeed === "ms"
+                                                    ? "m/s"
+                                                    : "kn"}
+                                            </span>
                                           </div>
                                           <div
                                             className={`flex items-center gap-0.5 ${hour.precip_mm > 0 ? "text-blue-500" : ""}`}
                                           >
                                             <CloudRain className="h-2.5 w-2.5" />
-                                            <span>{hour.precip_mm}mm</span>
+                                            <span>
+                                              {convertPrecipitation(
+                                                hour.precip_mm,
+                                                "mm",
+                                                units.precipitation
+                                              ).toFixed(1)}
+                                              {units.precipitation === "mm" ? "mm" : "in"}
+                                            </span>
                                           </div>
                                         </div>
                                       </div>
@@ -969,21 +1121,45 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                             <ThermometerSun className="h-3 w-3" />
                             <span>{t("dialog.high")}</span>
                           </div>
-                          <p className="text-lg font-semibold">{Math.round(day.tempMax)}°C</p>
+                          <p className="text-lg font-semibold">
+                            {formatTemperature(
+                              convertTemperature(day.tempMax, "celsius", units.temperature),
+                              units.temperature,
+                              0
+                            )}
+                          </p>
                         </div>
                         <div className="bg-background/50 rounded-lg p-2">
                           <div className="flex items-center gap-1 text-xs text-muted-foreground mb-1">
                             <ThermometerSun className="h-3 w-3" />
                             <span>{t("dialog.low")}</span>
                           </div>
-                          <p className="text-lg font-semibold">{Math.round(day.tempMin)}°C</p>
+                          <p className="text-lg font-semibold">
+                            {formatTemperature(
+                              convertTemperature(day.tempMin, "celsius", units.temperature),
+                              units.temperature,
+                              0
+                            )}
+                          </p>
                         </div>
-                        <div className="bg-background/50 rounded-lg p-2">
+                        <div
+                          className={`rounded-lg p-2 ${
+                            day.precipitation > 0.5
+                              ? "bg-red-100/80 dark:bg-red-900/20 border border-red-400/50 dark:border-red-700/30"
+                              : "bg-background/50"
+                          }`}
+                        >
                           <div className="flex items-center gap-1 text-xs text-muted-foreground mb-1">
                             <Droplets className="h-3 w-3" />
                             <span>{t("dialog.rain")}</span>
                           </div>
-                          <p className="text-lg font-semibold">{day.precipitation.toFixed(1)}mm</p>
+                          <p className="text-lg font-semibold">
+                            {formatPrecipitation(
+                              convertPrecipitation(day.precipitation, "mm", units.precipitation),
+                              units.precipitation,
+                              1
+                            )}
+                          </p>
                         </div>
                         <div className="bg-background/50 rounded-lg p-2">
                           <div className="flex items-center gap-1 text-xs text-muted-foreground mb-1">
@@ -991,7 +1167,11 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                             <span>{t("dialog.wind")}</span>
                           </div>
                           <p className="text-lg font-semibold">
-                            {Math.round(day.windSpeedMax)}km/h
+                            {formatWindSpeed(
+                              convertWindSpeed(day.windSpeedMax, "kmh", units.windSpeed),
+                              units.windSpeed,
+                              0
+                            )}
                           </p>
                         </div>
                       </div>

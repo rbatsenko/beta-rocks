@@ -23,12 +23,21 @@
   "chat": {
     "analyzing": "Analyserar förhållanden...",
     "thinking": "Tänker...",
-    "inputPlaceholder": "Fråga om valfri klippa eller sektor..."
+    "inputPlaceholder": "Fråga om valfri klippa eller sektor...",
+    "clearHistory": "Rensa historik",
+    "clearHistoryConfirm": "Är du säker på att du vill rensa all chatthistorik? Detta kan inte ångras.",
+    "clearChat": "Rensa chatt",
+    "clearChatTooltip": "Rensa den aktuella konversationen",
+    "clearChatConfirm": "Rensa din chatt? Detta tar bort alla meddelanden från den aktuella konversationen."
   },
   "conditions": {
     "rating": "Betyg",
     "details": "Detaljer",
-    "location": "Plats"
+    "location": "Plats",
+    "favorite": "Favorit",
+    "favorited": "I favoriter",
+    "addReport": "Lägg till rapport",
+    "viewCragPage": "Visa område"
   },
   "ratings": {
     "great": "Toppen",
@@ -38,7 +47,7 @@
     "nope": "Nej"
   },
   "reasons": {
-    "perfectTemp": "Perfekt temperatur ({{temp}}°C)",
+    "perfectTemp": "Perfekt temperatur ({{temp}})",
     "tempTooHigh": "Temperaturen är för hög - fingrarna kan halka",
     "coldGoodFriction": "Kallt men bra friktion för {{rockType}}",
     "idealHumidity": "Idealisk luftfuktighet ({{humidity}}%)",
@@ -47,16 +56,17 @@
     "acceptable": "Förhållandena är acceptabla"
   },
   "warnings": {
-    "tooWarm": "För varmt för {{rockType}} ({{temp}}°C)",
+    "tooWarm": "För varmt för {{rockType}} ({{temp}})",
     "coldSuboptimal": "Kallt och inte optimalt för {{rockType}}",
     "highHumidity": "Hög luftfuktighet ({{humidity}}%) - stenen kan bli hal",
     "wetDangerousSandstone": "Stenen är blöt - farligt att klättra (sandsten blir svag när den är blöt)",
     "wetSlippery": "Stenen är blöt - hala förhållanden",
-    "veryHighWinds": "Mycket hård vind ({{wind}} km/h) - risk för att blåsa av",
-    "highWind": "Hård vind ({{wind}} km/h)",
-    "recentPrecip": "Senaste nederbörd ({{precip}}mm) - torkar på ~{{hours}}h",
+    "veryHighWinds": "Mycket hård vind ({{wind}}) - risk för att blåsa av",
+    "highWind": "Hård vind ({{wind}})",
+    "recentPrecip": "Senaste nederbörd ({{precip}}) - torkar på ~{{hours}}h",
     "currentlyWetDangerous": "För närvarande blött - riskabelt",
-    "currentlyWet": "För närvarande blött"
+    "currentlyWet": "För närvarande blött",
+    "cold": "Cold ({{temp}})"
   },
   "weather": {
     "clearSky": "Klart",
@@ -124,7 +134,7 @@
     },
     "communityReports": {
       "title": "Communityrapporter",
-      "description": "Dela och bekräfta aktuella förhållanden. Hjälp andra klättrare med färska uppdateringar"
+      "description": "Dela förhållanden, säkerhetsvarningar, tillgänglighetsändringar, beta och mer. Hjälp medklättrare med realtidsuppdateringar i flera kategorier"
     },
     "globalCoverage": {
       "title": "Global täckning",
@@ -146,6 +156,7 @@
   },
   "dialog": {
     "close": "Stäng",
+    "cancel": "Avbryt",
     "detailedConditions": "Detaljerade förhållanden",
     "fullAnalysis": "Fullständig väderanalys och prognos för klättring",
     "showMap": "Karta",
@@ -234,5 +245,231 @@
     "dolomite": "dolomit",
     "volcanic": "vulkanisk",
     "phyllite": "fyllit"
+  },
+  "sync": {
+    "banner": {
+      "title": "Din data synkroniseras mellan enheter",
+      "description": "Dina favoriter, rapporter och chatthistorik sparas lokalt och kan synkroniseras till andra enheter med din synkroniseringsnyckel.",
+      "learnMore": "Läs mer",
+      "dismiss": "Jag förstår"
+    },
+    "status": {
+      "synced": "Synkroniserad",
+      "syncing": "Synkroniserar...",
+      "offline": "Offline"
+    },
+    "notification": {
+      "title": "Synkroniseringsnyckel skapad",
+      "description": "Vi har skapat en unik nyckel för att synkronisera dina favoriter och chattar mellan enheter.",
+      "viewInSettings": "Visa i inställningar",
+      "viewMore": "Vad är en synkroniseringsnyckel?"
+    }
+  },
+  "syncExplainer": {
+    "title": "How Sync Works",
+    "description": "Keep your data in sync across all your devices seamlessly and securely.",
+    "features": {
+      "syncKey": {
+        "title": "Unique Sync Key",
+        "description": "Each user gets a secure, unique key to sync their data across devices."
+      },
+      "multiDevice": {
+        "title": "Multi-Device Access",
+        "description": "Access your favorites and chat history from any device by using your sync key."
+      },
+      "privacy": {
+        "title": "Privacy First",
+        "description": "Your data is encrypted and only accessible with your sync key. No account required."
+      }
+    },
+    "openSettings": "Open Settings"
+  },
+  "profile": {
+    "anonymous": "Anonym",
+    "member": "Medlem",
+    "anonymousMember": "Anonym medlem",
+    "favorites": "Favoriter",
+    "recent": "Senaste sökningar",
+    "stats": "Din statistik",
+    "settings": "Inställningar",
+    "clearData": "Rensa all data"
+  },
+  "stats": {
+    "title": "Din statistik",
+    "description": "Din aktivitet och bidrag till temps.rocks-gemenskapen",
+    "reportsPosted": "Rapporter publicerade",
+    "confirmationsGiven": "Bekräftelser givna",
+    "favoritesCount": "Favoriter",
+    "memberSince": "Medlem sedan",
+    "lastActive": "Senast aktiv",
+    "unknown": "Okänd",
+    "encourageReports": "Dela med dig av din lokala kunskap genom att publicera rapporter om klippförhållanden!",
+    "thankYou": "Tack för ditt bidrag till klättergemenskapen!"
+  },
+  "settings": {
+    "title": "Inställningar",
+    "description": "Hantera din profil, synkroniseringsnyckel och preferenser",
+    "save": "Spara",
+    "saving": "Sparar...",
+    "displayName": {
+      "label": "Visningsnamn",
+      "description": "Ditt namn visas på rapporter och bekräftelser (valfritt)",
+      "placeholder": "Ange ditt namn...",
+      "saved": "Visningsnamn sparat",
+      "savedDescription": "Ditt visningsnamn har uppdaterats",
+      "saveFailed": "Sparandet misslyckades",
+      "saveFailedDescription": "Det gick inte att spara ditt visningsnamn. Försök igen"
+    },
+    "units": {
+      "title": "Enheter och mätningar",
+      "description": "Välj dina föredragna enheter för väder- och klätterdata",
+      "systemLabel": "Enhetssystem",
+      "systemDescription": "Snabba förinställningar för vanliga enhetssystem",
+      "systems": {
+        "metric": "Metriskt (°C, km/h, mm)",
+        "imperial": "Imperial (°F, mph, tum)",
+        "uk": "Storbritannien (°C, mph, mm)",
+        "custom": "Anpassad"
+      },
+      "temperature": "Temperatur",
+      "temperatureUnits": {
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Vindhastighet",
+      "windSpeedUnits": {
+        "kmh": "Kilometer per timme (km/h)",
+        "mph": "Miles per timme (mph)",
+        "ms": "Meter per sekund (m/s)",
+        "knots": "Knop (kn)"
+      },
+      "precipitation": "Nederbörd",
+      "precipitationUnits": {
+        "mm": "Millimeter (mm)",
+        "inches": "Tum (in)"
+      },
+      "distance": "Avstånd",
+      "distanceUnits": {
+        "km": "Kilometer (km)",
+        "miles": "Miles (mi)"
+      },
+      "elevation": "Höjd",
+      "elevationUnits": {
+        "meters": "Meter (m)",
+        "feet": "Fot (ft)"
+      },
+      "saved": "Enheter sparade",
+      "savedDescription": "Dina enhetsinställningar har uppdaterats",
+      "saveFailed": "Sparandet av enheter misslyckades",
+      "saveFailedDescription": "Det gick inte att spara dina enhetsinställningar. Försök igen"
+    },
+    "syncKey": {
+      "title": "Synkroniseringsnyckel",
+      "description": "Använd denna nyckel för att synka dina favoriter och inställningar mellan enheter",
+      "label": "Din synkroniseringsnyckel",
+      "copy": "Kopiera synkroniseringsnyckel",
+      "showFullKey": "Visa hela nyckeln",
+      "hideKey": "Dölj nyckel",
+      "qrCode": "QR-kod",
+      "qrDescription": "Skanna denna QR-kod på en annan enhet för att synka dina data",
+      "restoreTitle": "Återställ från en annan enhet",
+      "restoreDescription": "Har du redan en synkroniseringsnyckel? Klistra in den här för att återställa dina data",
+      "restoreLabel": "Klistra in din synkroniseringsnyckel",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Återställ synkroniseringsnyckel",
+      "restoring": "Återställer...",
+      "restoreSuccess": "Synkroniseringsnyckeln återställdes! Laddar om...",
+      "restoreError": "Ogiltigt format på synkroniseringsnyckeln. Kontrollera och försök igen.",
+      "saveNote": {
+        "title": "Spara din synkroniseringsnyckel",
+        "description": "Vi rekommenderar att du sparar din synkroniseringsnyckel på en säker plats som din Anteckningar-app eller lösenordshanterare. Du kommer att behöva den för att återställa dina data på andra enheter."
+      },
+      "warning": {
+        "title": "Håll din synkroniseringsnyckel privat",
+        "description": "Alla med din synkroniseringsnyckel kan komma åt dina favoriter och inställningar. Dela den inte offentligt."
+      }
+    },
+    "dangerZone": {
+      "title": "Farozon",
+      "description": "Dessa åtgärder är permanenta och kan inte ångras",
+      "deleteProfile": "Ta bort profil",
+      "deleteProfileConfirm": "Är du säker på att du vill ta bort din profil? Detta kommer permanent att ta bort all din data inklusive favoriter, chatthistorik och inställningar. Denna åtgärd kan inte ångras.",
+      "deleteFailed": "Det gick inte att ta bort profilen. Försök igen."
+    }
+  },
+  "favorites": {
+    "title": "Dina favoritklippor",
+    "description": "Du har {{count}} favoritplatser",
+    "empty": "Inga favoriter än",
+    "emptyMessage": "Du har inte lagt till några favoritklippor än",
+    "emptyHint": "Klicka på stjärnikonen på valfritt konditionskort för att lägga till den i dina favoriter",
+    "lastChecked": "Senast kontrollerad",
+    "frictionScore": "Friktionspoäng",
+    "viewConditions": "Visa förhållanden",
+    "remove": "Ta bort"
+  },
+  "reports": {
+    "addReport": "Add Report",
+    "addReportDescription": "Share information about {{cragName}}",
+    "postingAs": "Posting as",
+    "category": "What would you like to report?",
+    "categories": {
+      "conditions": "Conditions",
+      "safety": "Safety",
+      "access": "Access",
+      "beta": "Beta",
+      "facilities": "Facilities",
+      "other": "Other"
+    },
+    "categoryDescriptions": {
+      "conditions": "Weather, friction, dryness, crowds",
+      "safety": "Loose bolts, rockfall, broken holds, hazards",
+      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "beta": "Current bolting works, route changes, new bolts",
+      "facilities": "Bathrooms, camping, water sources, amenities",
+      "other": "Anything else that doesn't fit above"
+    },
+    "dryness": "Dryness",
+    "wind": "Wind",
+    "crowds": "Crowds",
+    "additionalComments": "Additional comments (optional)",
+    "details": "Details",
+    "detailsRequired": "Please provide details about this report",
+    "placeholders": {
+      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
+      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
+      "access": "E.g., Gate closed until May, new parking lot behind library...",
+      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "facilities": "E.g., Toilet available at parking, no water source nearby...",
+      "other": "Describe what you'd like to report..."
+    },
+    "submit": "Submit Report",
+    "submitting": "Submitting...",
+    "helpful": "Helpful",
+    "loginToConfirm": "Please set up your profile to confirm reports",
+    "confirmFailed": "Failed to confirm report. Please try again.",
+    "ratings": {
+      "veryPoor": "Very Poor",
+      "poor": "Poor",
+      "okay": "Okay",
+      "good": "Good",
+      "excellent": "Excellent"
+    },
+    "scales": {
+      "veryWet": "Very wet",
+      "veryDry": "Perfect",
+      "calm": "Calm",
+      "veryWindy": "Very windy",
+      "empty": "Empty",
+      "veryCrowded": "Very crowded"
+    },
+    "recentReports": "Recent Reports",
+    "communityReports": "Community Reports",
+    "noReports": "No reports yet",
+    "beTheFirst": "Be the first to report",
+    "noReportsInCategory": "No reports in this category",
+    "filters": {
+      "all": "All"
+    }
   }
 }

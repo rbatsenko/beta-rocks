@@ -23,12 +23,21 @@
   "chat": {
     "analyzing": "Аналізую умови...",
     "thinking": "Думаю...",
-    "inputPlaceholder": "Запитайте про будь-який скельний масив чи сектор..."
+    "inputPlaceholder": "Запитайте про будь-який скельний масив чи сектор...",
+    "clearHistory": "Очистити історію",
+    "clearHistoryConfirm": "Ви впевнені, що хочете очистити всю історію чату? Цю дію неможливо скасувати.",
+    "clearChat": "Очистити чат",
+    "clearChatTooltip": "Очистити поточну розмову",
+    "clearChatConfirm": "Очистити ваш чат? Це видалить усі повідомлення з поточної розмови."
   },
   "conditions": {
     "rating": "Оцінка",
     "details": "Деталі",
-    "location": "Локація"
+    "location": "Локація",
+    "favorite": "Обране",
+    "favorited": "В обраному",
+    "addReport": "Додати звіт",
+    "viewCragPage": "Переглянути район"
   },
   "ratings": {
     "great": "Чудово",
@@ -38,7 +47,7 @@
     "nope": "Ніяк"
   },
   "reasons": {
-    "perfectTemp": "Ідеальна температура ({{temp}}°C)",
+    "perfectTemp": "Ідеальна температура ({{temp}})",
     "tempTooHigh": "Занадто тепло — пальці можуть ковзати",
     "coldGoodFriction": "Холодно, але добре для тертя на {{rockType}}",
     "idealHumidity": "Ідеальна вологість ({{humidity}}%)",
@@ -47,7 +56,7 @@
     "acceptable": "Умови прийнятні"
   },
   "warnings": {
-    "tooWarm": "Занадто тепло для {{rockType}} ({{temp}}°C)",
+    "tooWarm": "Занадто тепло для {{rockType}} ({{temp}})",
     "coldSuboptimal": "Холодно й не надто добре для {{rockType}}",
     "highHumidity": "Висока вологість ({{humidity}}%) — може бути слизько",
     "wetDangerousSandstone": "Скала зараз мокра — лазіння небезпечне (пісковик слабшає, коли мокрий)",
@@ -56,7 +65,8 @@
     "highWind": "Сильний вітер ({{wind}} км/год)",
     "recentPrecip": "Недавні опади ({{precip}}мм) - висохне за ~{{hours}}год",
     "currentlyWetDangerous": "Зараз мокро — небезпечно",
-    "currentlyWet": "Зараз мокро"
+    "currentlyWet": "Зараз мокро",
+    "cold": "Cold ({{temp}})"
   },
   "weather": {
     "clearSky": "Ясно",
@@ -123,7 +133,7 @@
     },
     "communityReports": {
       "title": "Звіти спільноти",
-      "description": "Діліться та підтверджуйте поточні умови. Допомагайте іншим скелелазам актуальними оновленнями"
+      "description": "Діліться умовами, попередженнями безпеки, змінами доступу, бета та іншим. Допомагайте колегам-скелелазам оновленнями в реальному часі в різних категоріях"
     },
     "globalCoverage": {
       "title": "Глобальне покриття",
@@ -145,6 +155,7 @@
   },
   "dialog": {
     "close": "Закрити",
+    "cancel": "Скасувати",
     "detailedConditions": "Докладні умови",
     "fullAnalysis": "Повний аналіз погоди та прогноз умов для лазіння",
     "showMap": "Карта",
@@ -233,5 +244,231 @@
     "dolomite": "доломіт",
     "volcanic": "вулканічний",
     "phyllite": "філіт"
+  },
+  "sync": {
+    "banner": {
+      "title": "Ваші дані синхронізуються між пристроями",
+      "description": "Ваші улюблені місця, звіти та історія чату зберігаються локально і можуть синхронізуватися з іншими пристроями за допомогою вашого ключа синхронізації.",
+      "learnMore": "Дізнатися більше",
+      "dismiss": "Зрозуміло"
+    },
+    "status": {
+      "synced": "Синхронізовано",
+      "syncing": "Синхронізація...",
+      "offline": "Офлайн"
+    },
+    "notification": {
+      "title": "Ключ синхронізації створено",
+      "description": "Ми згенерували унікальний ключ для синхронізації ваших обраних і чатів між пристроями.",
+      "viewInSettings": "Переглянути в налаштуваннях",
+      "viewMore": "Що таке ключ синхронізації?"
+    }
+  },
+  "syncExplainer": {
+    "title": "Як працює синхронізація",
+    "description": "Зберігайте свої дані синхронізованими на всіх пристроях безпечно та безперешкодно.",
+    "features": {
+      "syncKey": {
+        "title": "Унікальний ключ синхронізації",
+        "description": "Кожен користувач отримує безпечний унікальний ключ для синхронізації даних між пристроями."
+      },
+      "multiDevice": {
+        "title": "Доступ з кількох пристроїв",
+        "description": "Отримуйте доступ до обраного та історії чатів з будь-якого пристрою за допомогою ключа синхронізації."
+      },
+      "privacy": {
+        "title": "Конфіденційність на першому місці",
+        "description": "Ваші дані зашифровані та доступні лише за допомогою ключа синхронізації. Обліковий запис не потрібен."
+      }
+    },
+    "openSettings": "Відкрити налаштування"
+  },
+  "profile": {
+    "anonymous": "Анонімний",
+    "member": "Учасник",
+    "anonymousMember": "Анонімний учасник",
+    "favorites": "Обране",
+    "recent": "Недавні пошуки",
+    "stats": "Ваша статистика",
+    "settings": "Налаштування",
+    "clearData": "Очистити всі дані"
+  },
+  "stats": {
+    "title": "Ваша статистика",
+    "description": "Ваша активність та внесок у спільноту temps.rocks",
+    "reportsPosted": "Опубліковані звіти",
+    "confirmationsGiven": "Надані підтвердження",
+    "favoritesCount": "Обране",
+    "memberSince": "Учасник з",
+    "lastActive": "Остання активність",
+    "unknown": "Невідомо",
+    "encourageReports": "Поділіться своїми місцевими знаннями, публікуючи звіти про умови на скелях!",
+    "thankYou": "Дякуємо за ваш внесок у скелелазну спільноту!"
+  },
+  "settings": {
+    "title": "Налаштування",
+    "description": "Керуйте своїм профілем, ключем синхронізації та налаштуваннями",
+    "save": "Зберегти",
+    "saving": "Збереження...",
+    "displayName": {
+      "label": "Ім'я для відображення",
+      "description": "Ваше ім'я, яке буде показано у звітах та підтвердженнях (необов'язково)",
+      "placeholder": "Введіть ваше ім'я...",
+      "saved": "Ім'я збережено",
+      "savedDescription": "Ваше ім'я для відображення успішно оновлено",
+      "saveFailed": "Не вдалося зберегти",
+      "saveFailedDescription": "Не вдалося зберегти ваше ім'я для відображення. Спробуйте ще раз"
+    },
+    "units": {
+      "title": "Одиниці вимірювання",
+      "description": "Оберіть бажані одиниці для погодних і скелелазних даних",
+      "systemLabel": "Система одиниць",
+      "systemDescription": "Швидкі налаштування для поширених систем одиниць",
+      "systems": {
+        "metric": "Метрична (°C, км/год, мм)",
+        "imperial": "Імперська (°F, миль/год, дюйми)",
+        "uk": "Британська (°C, миль/год, мм)",
+        "custom": "Власна"
+      },
+      "temperature": "Температура",
+      "temperatureUnits": {
+        "celsius": "Цельсій (°C)",
+        "fahrenheit": "Фаренгейт (°F)"
+      },
+      "windSpeed": "Швидкість вітру",
+      "windSpeedUnits": {
+        "kmh": "Кілометри на годину (км/год)",
+        "mph": "Милі на годину (миль/год)",
+        "ms": "Метри на секунду (м/с)",
+        "knots": "Вузли (kn)"
+      },
+      "precipitation": "Опади",
+      "precipitationUnits": {
+        "mm": "Міліметри (мм)",
+        "inches": "Дюйми (in)"
+      },
+      "distance": "Відстань",
+      "distanceUnits": {
+        "km": "Кілометри (км)",
+        "miles": "Милі (mi)"
+      },
+      "elevation": "Висота",
+      "elevationUnits": {
+        "meters": "Метри (м)",
+        "feet": "Фути (ft)"
+      },
+      "saved": "Одиниці збережено",
+      "savedDescription": "Ваші налаштування одиниць успішно оновлено",
+      "saveFailed": "Не вдалося зберегти одиниці",
+      "saveFailedDescription": "Не вдалося зберегти ваші налаштування одиниць. Спробуйте ще раз"
+    },
+    "syncKey": {
+      "title": "Ключ синхронізації",
+      "description": "Використовуйте цей ключ для синхронізації обраного та налаштувань між пристроями",
+      "label": "Ваш ключ синхронізації",
+      "copy": "Скопіювати ключ синхронізації",
+      "showFullKey": "Показати повний ключ",
+      "hideKey": "Приховати ключ",
+      "qrCode": "QR-код",
+      "qrDescription": "Скануйте цей QR-код на іншому пристрої, щоб синхронізувати дані",
+      "restoreTitle": "Відновити з іншого пристрою",
+      "restoreDescription": "Вже є ключ синхронізації? Вставте його тут, щоб відновити дані",
+      "restoreLabel": "Вставте ваш ключ синхронізації",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Відновити ключ синхронізації",
+      "restoring": "Відновлення...",
+      "restoreSuccess": "Ключ синхронізації успішно відновлено! Перезавантаження...",
+      "restoreError": "Недійсний формат ключа синхронізації. Будь ласка, перевірте і спробуйте знову.",
+      "saveNote": {
+        "title": "Збережіть ваш ключ синхронізації",
+        "description": "Ми рекомендуємо зберігати ключ синхронізації в безпечному місці, наприклад у додатку Нотатки або менеджері паролів. Він знадобиться вам для відновлення даних на інших пристроях."
+      },
+      "warning": {
+        "title": "Тримайте свій ключ синхронізації в таємниці",
+        "description": "Будь-хто, хто має ваш ключ синхронізації, може отримати доступ до вашого обраного та налаштувань. Не діліться ним публічно."
+      }
+    },
+    "dangerZone": {
+      "title": "Небезпечна зона",
+      "description": "Ці дії є постійними і не можуть бути скасовані",
+      "deleteProfile": "Видалити профіль",
+      "deleteProfileConfirm": "Ви впевнені, що хочете видалити свій профіль? Це назавжди видалить усі ваші дані, включаючи обране, історію чату та налаштування. Цю дію неможливо скасувати.",
+      "deleteFailed": "Не вдалося видалити профіль. Будь ласка, спробуйте ще раз."
+    }
+  },
+  "favorites": {
+    "title": "Ваші улюблені скелі",
+    "description": "У вас є {{count}} обраних локацій",
+    "empty": "Поки що немає обраного",
+    "emptyMessage": "Ви ще не додали жодних улюблених скель",
+    "emptyHint": "Натисніть зірку на картці умов, щоб додати її до обраного",
+    "lastChecked": "Останній раз перевірено",
+    "frictionScore": "Оцінка зчеплення",
+    "viewConditions": "Переглянути умови",
+    "remove": "Видалити"
+  },
+  "reports": {
+    "addReport": "Add Report",
+    "addReportDescription": "Share information about {{cragName}}",
+    "postingAs": "Posting as",
+    "category": "What would you like to report?",
+    "categories": {
+      "conditions": "Conditions",
+      "safety": "Safety",
+      "access": "Access",
+      "beta": "Beta",
+      "facilities": "Facilities",
+      "other": "Other"
+    },
+    "categoryDescriptions": {
+      "conditions": "Weather, friction, dryness, crowds",
+      "safety": "Loose bolts, rockfall, broken holds, hazards",
+      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "beta": "Current bolting works, route changes, new bolts",
+      "facilities": "Bathrooms, camping, water sources, amenities",
+      "other": "Anything else that doesn't fit above"
+    },
+    "dryness": "Dryness",
+    "wind": "Wind",
+    "crowds": "Crowds",
+    "additionalComments": "Additional comments (optional)",
+    "details": "Details",
+    "detailsRequired": "Please provide details about this report",
+    "placeholders": {
+      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
+      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
+      "access": "E.g., Gate closed until May, new parking lot behind library...",
+      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "facilities": "E.g., Toilet available at parking, no water source nearby...",
+      "other": "Describe what you'd like to report..."
+    },
+    "submit": "Submit Report",
+    "submitting": "Submitting...",
+    "helpful": "Helpful",
+    "loginToConfirm": "Please set up your profile to confirm reports",
+    "confirmFailed": "Failed to confirm report. Please try again.",
+    "ratings": {
+      "veryPoor": "Very Poor",
+      "poor": "Poor",
+      "okay": "Okay",
+      "good": "Good",
+      "excellent": "Excellent"
+    },
+    "scales": {
+      "veryWet": "Very wet",
+      "veryDry": "Perfect",
+      "calm": "Calm",
+      "veryWindy": "Very windy",
+      "empty": "Empty",
+      "veryCrowded": "Very crowded"
+    },
+    "recentReports": "Recent Reports",
+    "communityReports": "Community Reports",
+    "noReports": "No reports yet",
+    "beTheFirst": "Be the first to report",
+    "noReportsInCategory": "No reports in this category",
+    "filters": {
+      "all": "All"
+    }
   }
 }

@@ -11,7 +11,7 @@ import {
   isCrag,
   hasPreciseCoordinates,
 } from "@/lib/openbeta/client";
-import { searchCrags } from "@/lib/db/queries";
+import { searchCrags, findOrCreateCrag } from "@/lib/db/queries";
 import { resolveLocale } from "@/lib/i18n/config";
 import { getSystemPrompt } from "./prompts";
 import {
@@ -20,6 +20,8 @@ import {
   calculateGeminiCost,
 } from "@/lib/observability/chat-logger";
 import { createClient } from "@supabase/supabase-js";
+import type { UnitsConfig } from "@/lib/units/types";
+import { getWindSpeedSymbol } from "@/lib/units/conversions";
 
 export const maxDuration = 30;
 
@@ -616,11 +618,33 @@ const tools = {
           frictionScore: conditions.frictionRating,
         });
 
+        // Find or create crag in database to enable reports
+        let cragId: string | undefined;
+        try {
+          const crag = await findOrCreateCrag({
+            name: location,
+            lat,
+            lon,
+            country,
+            state,
+            municipality,
+            village,
+            rockType: detectedRockType,
+            source: "ai_chat",
+          });
+          cragId = crag.id;
+          console.log("[get_conditions] Crag found/created:", { cragId, name: crag.name });
+        } catch (error) {
+          console.error("[get_conditions] Failed to find/create crag:", error);
+          // Continue without cragId - reports won't work but conditions will
+        }
+
         return {
           location,
           locationDetails, // Add region/country or OpenBeta path
           latitude: lat,
           longitude: lon,
+          cragId, // Include crag ID for reports
           country,
           state,
           municipality,
@@ -725,11 +749,13 @@ export async function POST(req: Request) {
     language,
     userDateTime,
     userTimezone,
+    units,
   }: {
     messages: UIMessage[];
     language?: string;
     userDateTime?: string;
     userTimezone?: string;
+    units?: UnitsConfig;
   } = await req.json();
   const locale = resolveLocale(language);
 
@@ -747,13 +773,28 @@ export async function POST(req: Request) {
       })
     : "Unknown time";
 
+  // Build units context string if units are provided
+  const unitsContext = units
+    ? `
+
+UNITS PREFERENCES:
+The user prefers the following measurement units:
+- Temperature: ${units.temperature === "celsius" ? "Celsius (°C)" : "Fahrenheit (°F)"}
+- Wind Speed: ${getWindSpeedSymbol(units.windSpeed)}
+- Precipitation: ${units.precipitation === "mm" ? "millimeters (mm)" : "inches (in)"}
+- Distance: ${units.distance === "km" ? "kilometers (km)" : "miles (mi)"}
+- Elevation: ${units.elevation === "meters" ? "meters (m)" : "feet (ft)"}
+
+IMPORTANT: Always provide weather measurements in these preferred units when discussing conditions. Convert all values to match the user's preferences.`
+    : "";
+
   const systemPrompt = `${getSystemPrompt(locale)}
 
 CRITICAL TIME CONTEXT:
 Current user time: ${userTime}
 User timezone: ${userTimezone || "UTC"}
 When the user says "now" or "today", they mean relative to this time.
-When the user says "tomorrow", they mean the day after ${userTime}.`;
+When the user says "tomorrow", they mean the day after ${userTime}.${unitsContext}`;
 
   const result = streamText({
     model: google("gemini-2.5-flash"),

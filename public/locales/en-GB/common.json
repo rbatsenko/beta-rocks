@@ -23,12 +23,21 @@
   "chat": {
     "analyzing": "Analysing conditions...",
     "thinking": "Thinking...",
-    "inputPlaceholder": "Ask about any crag or sector..."
+    "inputPlaceholder": "Ask about any crag or sector...",
+    "clearHistory": "Clear History",
+    "clearHistoryConfirm": "Are you sure you want to clear all chat history? This cannot be undone.",
+    "clearChat": "Clear Chat",
+    "clearChatTooltip": "Clear the current conversation",
+    "clearChatConfirm": "Clear your chat? This will remove all messages from the current conversation."
   },
   "conditions": {
     "rating": "Rating",
     "details": "Details",
-    "location": "Location"
+    "location": "Location",
+    "favorite": "Favourite",
+    "favorited": "Favourited",
+    "addReport": "Add Report",
+    "viewCragPage": "View Crag"
   },
   "ratings": {
     "great": "Great",
@@ -38,7 +47,7 @@
     "nope": "Nope"
   },
   "reasons": {
-    "perfectTemp": "Perfect temperature ({{temp}}°C)",
+    "perfectTemp": "Perfect temperature ({{temp}})",
     "tempTooHigh": "Temperature too high - fingers may slip",
     "coldGoodFriction": "Cold but good for {{rockType}} friction",
     "idealHumidity": "Ideal humidity ({{humidity}}%)",
@@ -47,16 +56,17 @@
     "acceptable": "Conditions are acceptable"
   },
   "warnings": {
-    "tooWarm": "Too warm for {{rockType}} ({{temp}}°C)",
+    "tooWarm": "Too warm for {{rockType}} ({{temp}})",
     "coldSuboptimal": "Cold and suboptimal for {{rockType}}",
     "highHumidity": "High humidity ({{humidity}}%) - rock can be slippery",
     "wetDangerousSandstone": "Rock is currently wet - dangerous to climb (sandstone becomes weak when wet)",
     "wetSlippery": "Rock is currently wet - slippery conditions",
-    "veryHighWinds": "Very high winds ({{wind}} km/h) - danger of blown off",
-    "highWind": "High wind ({{wind}} km/h)",
-    "recentPrecip": "Recent precipitation ({{precip}}mm) - will dry in ~{{hours}}h",
+    "veryHighWinds": "Very high winds ({{wind}}) - danger of blown off",
+    "highWind": "High wind ({{wind}})",
+    "recentPrecip": "Recent precipitation ({{precip}}) - will dry in ~{{hours}}h",
     "currentlyWetDangerous": "Currently wet - dangerous",
-    "currentlyWet": "Currently wet"
+    "currentlyWet": "Currently wet",
+    "cold": "Cold ({{temp}})"
   },
   "weather": {
     "clearSky": "Clear sky",
@@ -123,7 +133,7 @@
     },
     "communityReports": {
       "title": "Community Reports",
-      "description": "Share and confirm current conditions. Help fellow climbers with real-time updates"
+      "description": "Share conditions, safety alerts, access changes, beta, and more. Help fellow climbers with real-time updates across multiple categories"
     },
     "globalCoverage": {
       "title": "Global Coverage",
@@ -145,6 +155,7 @@
   },
   "dialog": {
     "close": "Close",
+    "cancel": "Cancel",
     "detailedConditions": "Detailed Conditions",
     "fullAnalysis": "Full weather analysis and climbing conditions forecast",
     "showMap": "Map",
@@ -233,5 +244,231 @@
     "dolomite": "dolomite",
     "volcanic": "volcanic",
     "phyllite": "phyllite"
+  },
+  "sync": {
+    "banner": {
+      "title": "Your data syncs across devices",
+      "description": "Your favourites, reports, and chat history are saved locally and can sync to other devices using your sync key.",
+      "learnMore": "Learn more",
+      "dismiss": "Got it"
+    },
+    "status": {
+      "synced": "Synchronised",
+      "syncing": "Synchronising...",
+      "offline": "Offline"
+    },
+    "notification": {
+      "title": "Sync Key Created",
+      "description": "We've generated a unique key to sync your favourites and chat across devices.",
+      "viewInSettings": "View in Settings",
+      "viewMore": "What is sync key?"
+    }
+  },
+  "syncExplainer": {
+    "title": "How Sync Works",
+    "description": "Keep your data in sync across all your devices seamlessly and securely.",
+    "features": {
+      "syncKey": {
+        "title": "Unique Sync Key",
+        "description": "Each user gets a secure, unique key to sync their data across devices."
+      },
+      "multiDevice": {
+        "title": "Multi-Device Access",
+        "description": "Access your favourites and chat history from any device by using your sync key."
+      },
+      "privacy": {
+        "title": "Privacy First",
+        "description": "Your data is encrypted and only accessible with your sync key. No account required."
+      }
+    },
+    "openSettings": "Open Settings"
+  },
+  "profile": {
+    "anonymous": "Anonymous",
+    "member": "Member",
+    "anonymousMember": "Anonymous member",
+    "favorites": "Favourites",
+    "recent": "Recent Searches",
+    "stats": "Your Stats",
+    "settings": "Settings",
+    "clearData": "Clear All Data"
+  },
+  "stats": {
+    "title": "Your Stats",
+    "description": "Your activity and contributions to the temps.rocks community",
+    "reportsPosted": "Reports Posted",
+    "confirmationsGiven": "Confirmations Given",
+    "favoritesCount": "Favourites",
+    "memberSince": "Member since",
+    "lastActive": "Last active",
+    "unknown": "Unknown",
+    "encourageReports": "Share your local knowledge by posting reports about crag conditions!",
+    "thankYou": "Thanks for contributing to the climbing community!"
+  },
+  "settings": {
+    "title": "Settings",
+    "description": "Manage your profile, sync key, and preferences",
+    "save": "Save",
+    "saving": "Saving...",
+    "displayName": {
+      "label": "Display Name",
+      "description": "Your name shown on reports and confirmations (optional)",
+      "placeholder": "Enter your name...",
+      "saved": "Display name saved",
+      "savedDescription": "Your display name has been updated successfully",
+      "saveFailed": "Failed to save",
+      "saveFailedDescription": "Could not save your display name. Please try again"
+    },
+    "units": {
+      "title": "Units & Measurements",
+      "description": "Choose your preferred units for weather and climbing data",
+      "systemLabel": "Unit System",
+      "systemDescription": "Quick presets for common unit systems",
+      "systems": {
+        "metric": "Metric (°C, km/h, mm)",
+        "imperial": "Imperial (°F, mph, inches)",
+        "uk": "UK (°C, mph, mm)",
+        "custom": "Custom"
+      },
+      "temperature": "Temperature",
+      "temperatureUnits": {
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Wind Speed",
+      "windSpeedUnits": {
+        "kmh": "Kilometers per hour (km/h)",
+        "mph": "Miles per hour (mph)",
+        "ms": "Meters per second (m/s)",
+        "knots": "Knots (kn)"
+      },
+      "precipitation": "Precipitation",
+      "precipitationUnits": {
+        "mm": "Millimeters (mm)",
+        "inches": "Inches (in)"
+      },
+      "distance": "Distance",
+      "distanceUnits": {
+        "km": "Kilometers (km)",
+        "miles": "Miles (mi)"
+      },
+      "elevation": "Elevation",
+      "elevationUnits": {
+        "meters": "Meters (m)",
+        "feet": "Feet (ft)"
+      },
+      "saved": "Units saved",
+      "savedDescription": "Your unit preferences have been updated successfully",
+      "saveFailed": "Failed to save units",
+      "saveFailedDescription": "Could not save your unit preferences. Please try again"
+    },
+    "syncKey": {
+      "title": "Sync Key",
+      "description": "Use this key to sync your favourites and settings across devices",
+      "label": "Your Sync Key",
+      "copy": "Copy sync key",
+      "showFullKey": "Show full key",
+      "hideKey": "Hide key",
+      "qrCode": "QR Code",
+      "qrDescription": "Scan this QR code on another device to sync your data",
+      "restoreTitle": "Restore from Another Device",
+      "restoreDescription": "Already have a sync key? Paste it here to restore your data",
+      "restoreLabel": "Paste your sync key",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Restore Sync Key",
+      "restoring": "Restoring...",
+      "restoreSuccess": "Sync key restored successfully! Reloading...",
+      "restoreError": "Invalid sync key format. Please check and try again.",
+      "saveNote": {
+        "title": "Save Your Sync Key",
+        "description": "We recommend saving your sync key in a secure location like your Notes app or password manager. You'll need it to restore your data on other devices."
+      },
+      "warning": {
+        "title": "Keep your sync key private",
+        "description": "Anyone with your sync key can access your favourites and settings. Don't share it publicly."
+      }
+    },
+    "dangerZone": {
+      "title": "Danger Zone",
+      "description": "These actions are permanent and cannot be undone",
+      "deleteProfile": "Delete Profile",
+      "deleteProfileConfirm": "Are you sure you want to delete your profile? This will permanently remove all your data including favourites, chat history, and settings. This action cannot be undone.",
+      "deleteFailed": "Failed to delete profile. Please try again."
+    }
+  },
+  "favorites": {
+    "title": "Your Favourite Crags",
+    "description": "You have {{count}} favourite locations",
+    "empty": "No favourites yet",
+    "emptyMessage": "You haven't added any favourite crags yet",
+    "emptyHint": "Click the star button on any conditions card to add it to your favourites",
+    "lastChecked": "Last checked",
+    "frictionScore": "Friction score",
+    "viewConditions": "View Conditions",
+    "remove": "Remove"
+  },
+  "reports": {
+    "addReport": "Add Report",
+    "addReportDescription": "Share information about {{cragName}}",
+    "postingAs": "Posting as",
+    "category": "What would you like to report?",
+    "categories": {
+      "conditions": "Conditions",
+      "safety": "Safety",
+      "access": "Access",
+      "beta": "Beta",
+      "facilities": "Facilities",
+      "other": "Other"
+    },
+    "categoryDescriptions": {
+      "conditions": "Weather, friction, dryness, crowds",
+      "safety": "Loose bolts, rockfall, broken holds, hazards",
+      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "beta": "Current bolting works, route changes, new bolts",
+      "facilities": "Bathrooms, camping, water sources, amenities",
+      "other": "Anything else that doesn't fit above"
+    },
+    "dryness": "Dryness",
+    "wind": "Wind",
+    "crowds": "Crowds",
+    "additionalComments": "Additional comments (optional)",
+    "details": "Details",
+    "detailsRequired": "Please provide details about this report",
+    "placeholders": {
+      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
+      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
+      "access": "E.g., Gate closed until May, new parking lot behind library...",
+      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "facilities": "E.g., Toilet available at parking, no water source nearby...",
+      "other": "Describe what you'd like to report..."
+    },
+    "submit": "Submit Report",
+    "submitting": "Submitting...",
+    "helpful": "Helpful",
+    "loginToConfirm": "Please set up your profile to confirm reports",
+    "confirmFailed": "Failed to confirm report. Please try again.",
+    "ratings": {
+      "veryPoor": "Very Poor",
+      "poor": "Poor",
+      "okay": "Okay",
+      "good": "Good",
+      "excellent": "Excellent"
+    },
+    "scales": {
+      "veryWet": "Very wet",
+      "veryDry": "Perfect",
+      "calm": "Calm",
+      "veryWindy": "Very windy",
+      "empty": "Empty",
+      "veryCrowded": "Very crowded"
+    },
+    "recentReports": "Recent Reports",
+    "communityReports": "Community Reports",
+    "noReports": "No reports yet",
+    "beTheFirst": "Be the first to report",
+    "noReportsInCategory": "No reports in this category",
+    "filters": {
+      "all": "All"
+    }
   }
 }

@@ -23,12 +23,21 @@
   "chat": {
     "analyzing": "Analiziram razmere...",
     "thinking": "Razmišljam...",
-    "inputPlaceholder": "Vprašaj po kateremkoli plezališču ali sektorju..."
+    "inputPlaceholder": "Vprašaj po kateremkoli plezališču ali sektorju...",
+    "clearHistory": "Počisti zgodovino",
+    "clearHistoryConfirm": "Ali ste prepričani, da želite izbrisati vso zgodovino klepeta? Tega dejanja ni mogoče razveljaviti.",
+    "clearChat": "Izbriši klepet",
+    "clearChatTooltip": "Izbriši trenutni pogovor",
+    "clearChatConfirm": "Izbrisati vaš klepet? To bo odstranilo vsa sporočila iz trenutnega pogovora."
   },
   "conditions": {
     "rating": "Ocena",
     "details": "Podrobnosti",
-    "location": "Lokacija"
+    "location": "Lokacija",
+    "favorite": "Priljubljeno",
+    "favorited": "V priljubljenih",
+    "addReport": "Dodaj poročilo",
+    "viewCragPage": "Pokaži območje"
   },
   "ratings": {
     "great": "Odlično",
@@ -38,7 +47,7 @@
     "nope": "Nikakor"
   },
   "reasons": {
-    "perfectTemp": "Popolna temperatura ({{temp}}°C)",
+    "perfectTemp": "Popolna temperatura ({{temp}})",
     "tempTooHigh": "Temperatura previsoka - prsti lahko zdrsnejo",
     "coldGoodFriction": "Mrzlo, a dobro za trenje na {{rockType}}",
     "idealHumidity": "Idealna vlaga ({{humidity}}%)",
@@ -47,16 +56,17 @@
     "acceptable": "Razmere so sprejemljive"
   },
   "warnings": {
-    "tooWarm": "Prevroče za {{rockType}} ({{temp}}°C)",
+    "tooWarm": "Prevroče za {{rockType}} ({{temp}})",
     "coldSuboptimal": "Mrzlo in manj primerno za {{rockType}}",
     "highHumidity": "Visoka vlaga ({{humidity}}%) - skala je lahko spolzka",
     "wetDangerousSandstone": "Skala je mokra - nevarno za plezanje (peščenjak je občutljiv, ko je moker)",
     "wetSlippery": "Skala je mokra - spolzke razmere",
-    "veryHighWinds": "Zelo močan veter ({{wind}} km/h) - nevarnost sunkov",
-    "highWind": "Močan veter ({{wind}} km/h)",
-    "recentPrecip": "Nedavne padavine ({{precip}}mm) - bo suho čez ~{{hours}}h",
+    "veryHighWinds": "Zelo močan veter ({{wind}}) - nevarnost sunkov",
+    "highWind": "Močan veter ({{wind}})",
+    "recentPrecip": "Nedavne padavine ({{precip}}) - bo suho čez ~{{hours}}h",
     "currentlyWetDangerous": "Trenutno mokro - nevarno",
-    "currentlyWet": "Trenutno mokro"
+    "currentlyWet": "Trenutno mokro",
+    "cold": "Cold ({{temp}})"
   },
   "weather": {
     "clearSky": "Jasno nebo",
@@ -124,7 +134,7 @@
     },
     "communityReports": {
       "title": "Poročila skupnosti",
-      "description": "Deli in potrjuj trenutne razmere. Pomagaj drugim plezalcem s svežimi informacijami"
+      "description": "Delite pogoje, varnostna opozorila, spremembe dostopa, beta in več. Pomagajte soplezalcem s posodobitvami v realnem času v več kategorijah"
     },
     "globalCoverage": {
       "title": "Globalna pokritost",
@@ -146,6 +156,7 @@
   },
   "dialog": {
     "close": "Zapri",
+    "cancel": "Prekliči",
     "detailedConditions": "Podrobne razmere",
     "fullAnalysis": "Celotna vremenska analiza in napoved razmer za plezanje",
     "showMap": "Zemljevid",
@@ -234,5 +245,231 @@
     "dolomite": "dolomit",
     "volcanic": "vulkanski",
     "phyllite": "filit"
+  },
+  "sync": {
+    "banner": {
+      "title": "Vaši podatki se sinhronizirajo med napravami",
+      "description": "Vaše priljubljene, poročila in zgodovina klepeta so shranjeni lokalno in se lahko sinhronizirajo na druge naprave z vašim sinhronizacijskim ključem.",
+      "learnMore": "Več",
+      "dismiss": "Razumem"
+    },
+    "status": {
+      "synced": "Sinhronizirano",
+      "syncing": "Sinhronizacija...",
+      "offline": "Brez povezave"
+    },
+    "notification": {
+      "title": "Sinhronizacijski ključ ustvarjen",
+      "description": "Ustvarili smo edinstven ključ za sinhronizacijo vaših priljubljenih in klepetov med napravami.",
+      "viewInSettings": "Pogled v nastavitvah",
+      "viewMore": "Kaj je ključ za sinhronizacijo?"
+    }
+  },
+  "syncExplainer": {
+    "title": "How Sync Works",
+    "description": "Keep your data in sync across all your devices seamlessly and securely.",
+    "features": {
+      "syncKey": {
+        "title": "Unique Sync Key",
+        "description": "Each user gets a secure, unique key to sync their data across devices."
+      },
+      "multiDevice": {
+        "title": "Multi-Device Access",
+        "description": "Access your favorites and chat history from any device by using your sync key."
+      },
+      "privacy": {
+        "title": "Privacy First",
+        "description": "Your data is encrypted and only accessible with your sync key. No account required."
+      }
+    },
+    "openSettings": "Open Settings"
+  },
+  "profile": {
+    "anonymous": "Anonimen",
+    "member": "Član",
+    "anonymousMember": "Anonimen član",
+    "favorites": "Priljubljene",
+    "recent": "Nedavna iskanja",
+    "stats": "Tvoja statistika",
+    "settings": "Nastavitve",
+    "clearData": "Izbriši vse podatke"
+  },
+  "stats": {
+    "title": "Tvoja statistika",
+    "description": "Tvoja aktivnost in prispevki k skupnosti temps.rocks",
+    "reportsPosted": "Objavljenih poročil",
+    "confirmationsGiven": "Danih potrditev",
+    "favoritesCount": "Priljubljene",
+    "memberSince": "Član od",
+    "lastActive": "Nazadnje aktiven",
+    "unknown": "Neznano",
+    "encourageReports": "Delite svoje lokalno znanje z objavljanjem poročil o razmerah na skalah!",
+    "thankYou": "Hvala za prispevek k plezalni skupnosti!"
+  },
+  "settings": {
+    "title": "Nastavitve",
+    "description": "Upravljaj svoj profil, ključ za sinhronizacijo in nastavitve",
+    "save": "Shrani",
+    "saving": "Shranjujem...",
+    "displayName": {
+      "label": "Prikazno ime",
+      "description": "Tvoje ime, prikazano v poročilih in potrditvah (neobvezno)",
+      "placeholder": "Vnesi svoje ime...",
+      "saved": "Prikazno ime shranjeno",
+      "savedDescription": "Vaše prikazno ime je bilo uspešno posodobljeno",
+      "saveFailed": "Shranjevanje ni uspelo",
+      "saveFailedDescription": "Vašega prikaznega imena ni bilo mogoče shraniti. Prosimo, poskusite znova"
+    },
+    "units": {
+      "title": "Enote in meritve",
+      "description": "Izberite svoje preferenčne enote za vremenske in plezalne podatke",
+      "systemLabel": "Sistem enot",
+      "systemDescription": "Hitre prednastav for pogosto uporabljene sisteme enot",
+      "systems": {
+        "metric": "Metrični (°C, km/h, mm)",
+        "imperial": "Imperialni (°F, mph, palci)",
+        "uk": "Velika Britanija (°C, mph, mm)",
+        "custom": "Po meri"
+      },
+      "temperature": "Temperatura",
+      "temperatureUnits": {
+        "celsius": "Celzij (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Hitrost vetra",
+      "windSpeedUnits": {
+        "kmh": "Kilometri na uro (km/h)",
+        "mph": "Milje na uro (mph)",
+        "ms": "Metri na sekundo (m/s)",
+        "knots": "Vozli (kn)"
+      },
+      "precipitation": "Padavine",
+      "precipitationUnits": {
+        "mm": "Milimetri (mm)",
+        "inches": "Palci (in)"
+      },
+      "distance": "Razdalja",
+      "distanceUnits": {
+        "km": "Kilometri (km)",
+        "miles": "Milje (mi)"
+      },
+      "elevation": "Nadmorska višina",
+      "elevationUnits": {
+        "meters": "Metri (m)",
+        "feet": "Čevlji (ft)"
+      },
+      "saved": "Enote shranjene",
+      "savedDescription": "Vaše nastavitve enot so bile uspešno posodobljene",
+      "saveFailed": "Shranjevanje enot ni uspelo",
+      "saveFailedDescription": "Vaših nastavitev enot ni bilo mogoče shraniti. Prosimo, poskusite znova"
+    },
+    "syncKey": {
+      "title": "Ključ za sinhronizacijo",
+      "description": "Uporabi ta ključ za sinhronizacijo priljubljenih in nastavitev med napravami",
+      "label": "Tvoj ključ za sinhronizacijo",
+      "copy": "Kopiraj ključ za sinhronizacijo",
+      "showFullKey": "Prikaži celoten ključ",
+      "hideKey": "Skrij ključ",
+      "qrCode": "QR koda",
+      "qrDescription": "Skeniraj to QR kodo na drugi napravi za sinhronizacijo podatkov",
+      "restoreTitle": "Obnovi z druge naprave",
+      "restoreDescription": "Že imaš ključ za sinhronizacijo? Prilepi ga tukaj za obnovitev podatkov",
+      "restoreLabel": "Prilepi svoj ključ za sinhronizacijo",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Obnovi ključ za sinhronizacijo",
+      "restoring": "Obnavljam...",
+      "restoreSuccess": "Ključ za sinhronizacijo uspešno obnovljen! Ponovno nalaganje...",
+      "restoreError": "Neveljavna oblika ključa za sinhronizacijo. Preveri in poskusi znova.",
+      "saveNote": {
+        "title": "Shrani svoj ključ za sinhronizacijo",
+        "description": "Priporočamo, da shraniš ključ za sinhronizacijo na varnem mestu, kot je aplikacija Opombe ali upravitelj gesel. Potreboval ga boš za obnovitev podatkov na drugih napravah."
+      },
+      "warning": {
+        "title": "Ohrani ključ za sinhronizacijo zaseben",
+        "description": "Kdorkoli z tvojim ključem za sinhronizacijo lahko dostopa do tvojih priljubljenih in nastavitev. Ne deli ga javno."
+      }
+    },
+    "dangerZone": {
+      "title": "Nevarna cona",
+      "description": "Ta dejanja so trajna in jih ni mogoče razveljaviti",
+      "deleteProfile": "Izbriši profil",
+      "deleteProfileConfirm": "Ali ste prepričani, da želite izbrisati svoj profil? To bo trajno odstranilo vse vaše podatke, vključno s priljubljenimi, zgodovino klepeta in nastavitvami. Tega dejanja ni mogoče razveljaviti.",
+      "deleteFailed": "Profila ni bilo mogoče izbrisati. Poskusite znova."
+    }
+  },
+  "favorites": {
+    "title": "Tvoja priljubljena plezališča",
+    "description": "Imaš {{count}} priljubljenih lokacij",
+    "empty": "Še ni priljubljenih",
+    "emptyMessage": "Še nisi dodal nobenih priljubljenih plezališč",
+    "emptyHint": "Klikni na ikono zvezde na katerikoli kartici razmer, da jo dodaš med priljubljene",
+    "lastChecked": "Zadnjič preverjeno",
+    "frictionScore": "Ocena trenja",
+    "viewConditions": "Poglej razmere",
+    "remove": "Odstrani"
+  },
+  "reports": {
+    "addReport": "Add Report",
+    "addReportDescription": "Share information about {{cragName}}",
+    "postingAs": "Posting as",
+    "category": "What would you like to report?",
+    "categories": {
+      "conditions": "Conditions",
+      "safety": "Safety",
+      "access": "Access",
+      "beta": "Beta",
+      "facilities": "Facilities",
+      "other": "Other"
+    },
+    "categoryDescriptions": {
+      "conditions": "Weather, friction, dryness, crowds",
+      "safety": "Loose bolts, rockfall, broken holds, hazards",
+      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "beta": "Current bolting works, route changes, new bolts",
+      "facilities": "Bathrooms, camping, water sources, amenities",
+      "other": "Anything else that doesn't fit above"
+    },
+    "dryness": "Dryness",
+    "wind": "Wind",
+    "crowds": "Crowds",
+    "additionalComments": "Additional comments (optional)",
+    "details": "Details",
+    "detailsRequired": "Please provide details about this report",
+    "placeholders": {
+      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
+      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
+      "access": "E.g., Gate closed until May, new parking lot behind library...",
+      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "facilities": "E.g., Toilet available at parking, no water source nearby...",
+      "other": "Describe what you'd like to report..."
+    },
+    "submit": "Submit Report",
+    "submitting": "Submitting...",
+    "helpful": "Helpful",
+    "loginToConfirm": "Please set up your profile to confirm reports",
+    "confirmFailed": "Failed to confirm report. Please try again.",
+    "ratings": {
+      "veryPoor": "Very Poor",
+      "poor": "Poor",
+      "okay": "Okay",
+      "good": "Good",
+      "excellent": "Excellent"
+    },
+    "scales": {
+      "veryWet": "Very wet",
+      "veryDry": "Perfect",
+      "calm": "Calm",
+      "veryWindy": "Very windy",
+      "empty": "Empty",
+      "veryCrowded": "Very crowded"
+    },
+    "recentReports": "Recent Reports",
+    "communityReports": "Community Reports",
+    "noReports": "No reports yet",
+    "beTheFirst": "Be the first to report",
+    "noReportsInCategory": "No reports in this category",
+    "filters": {
+      "all": "All"
+    }
   }
 }

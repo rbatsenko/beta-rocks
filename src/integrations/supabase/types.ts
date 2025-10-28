@@ -86,6 +86,73 @@ export type Database = {
         };
         Relationships: [];
       };
+      chat_messages: {
+        Row: {
+          content: string;
+          created_at: string | null;
+          id: string;
+          role: string;
+          session_id: string;
+          tool_invocations: Json | null;
+        };
+        Insert: {
+          content: string;
+          created_at?: string | null;
+          id: string;
+          role: string;
+          session_id: string;
+          tool_invocations?: Json | null;
+        };
+        Update: {
+          content?: string;
+          created_at?: string | null;
+          id?: string;
+          role?: string;
+          session_id?: string;
+          tool_invocations?: Json | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "chat_messages_session_id_fkey";
+            columns: ["session_id"];
+            isOneToOne: false;
+            referencedRelation: "chat_sessions";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      chat_sessions: {
+        Row: {
+          created_at: string | null;
+          id: string;
+          title: string | null;
+          updated_at: string | null;
+          user_profile_id: string;
+        };
+        Insert: {
+          created_at?: string | null;
+          id?: string;
+          title?: string | null;
+          updated_at?: string | null;
+          user_profile_id: string;
+        };
+        Update: {
+          created_at?: string | null;
+          id?: string;
+          title?: string | null;
+          updated_at?: string | null;
+          user_profile_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "chat_sessions_user_profile_id_fkey";
+            columns: ["user_profile_id"];
+            isOneToOne: false;
+            referencedRelation: "user_profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       confirmations: {
         Row: {
           created_at: string | null;
@@ -181,6 +248,7 @@ export type Database = {
       reports: {
         Row: {
           author_id: string | null;
+          category: string;
           crag_id: string | null;
           created_at: string | null;
           id: string;
@@ -195,6 +263,7 @@ export type Database = {
         };
         Insert: {
           author_id?: string | null;
+          category?: string;
           crag_id?: string | null;
           created_at?: string | null;
           id?: string;
@@ -209,6 +278,7 @@ export type Database = {
         };
         Update: {
           author_id?: string | null;
+          category?: string;
           crag_id?: string | null;
           created_at?: string | null;
           id?: string;
@@ -364,12 +434,92 @@ export type Database = {
           },
         ];
       };
+      user_favorites: {
+        Row: {
+          added_at: string | null;
+          area_id: string | null;
+          area_name: string;
+          area_slug: string | null;
+          crag_id: string | null;
+          created_at: string | null;
+          display_order: number | null;
+          id: string;
+          last_checked_at: string | null;
+          last_friction_score: number | null;
+          last_rating: string | null;
+          latitude: number;
+          location: string | null;
+          longitude: number;
+          rock_type: string | null;
+          updated_at: string | null;
+          user_profile_id: string;
+        };
+        Insert: {
+          added_at?: string | null;
+          area_id?: string | null;
+          area_name: string;
+          area_slug?: string | null;
+          crag_id?: string | null;
+          created_at?: string | null;
+          display_order?: number | null;
+          id?: string;
+          last_checked_at?: string | null;
+          last_friction_score?: number | null;
+          last_rating?: string | null;
+          latitude: number;
+          location?: string | null;
+          longitude: number;
+          rock_type?: string | null;
+          updated_at?: string | null;
+          user_profile_id: string;
+        };
+        Update: {
+          added_at?: string | null;
+          area_id?: string | null;
+          area_name?: string;
+          area_slug?: string | null;
+          crag_id?: string | null;
+          created_at?: string | null;
+          display_order?: number | null;
+          id?: string;
+          last_checked_at?: string | null;
+          last_friction_score?: number | null;
+          last_rating?: string | null;
+          latitude?: number;
+          location?: string | null;
+          longitude?: number;
+          rock_type?: string | null;
+          updated_at?: string | null;
+          user_profile_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "user_favorites_crag_id_fkey";
+            columns: ["crag_id"];
+            isOneToOne: false;
+            referencedRelation: "crags";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "user_favorites_user_profile_id_fkey";
+            columns: ["user_profile_id"];
+            isOneToOne: false;
+            referencedRelation: "user_profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       user_profiles: {
         Row: {
           created_at: string | null;
           display_name: string | null;
           id: string;
           sync_key_hash: string;
+          units_distance: string | null;
+          units_elevation: string | null;
+          units_precipitation: string | null;
+          units_temperature: string | null;
+          units_wind_speed: string | null;
           updated_at: string | null;
         };
         Insert: {
@@ -377,6 +527,11 @@ export type Database = {
           display_name?: string | null;
           id?: string;
           sync_key_hash: string;
+          units_distance?: string | null;
+          units_elevation?: string | null;
+          units_precipitation?: string | null;
+          units_temperature?: string | null;
+          units_wind_speed?: string | null;
           updated_at?: string | null;
         };
         Update: {
@@ -384,15 +539,73 @@ export type Database = {
           display_name?: string | null;
           id?: string;
           sync_key_hash?: string;
+          units_distance?: string | null;
+          units_elevation?: string | null;
+          units_precipitation?: string | null;
+          units_temperature?: string | null;
+          units_wind_speed?: string | null;
           updated_at?: string | null;
         };
         Relationships: [];
+      };
+      user_stats: {
+        Row: {
+          confirmations_given: number | null;
+          created_at: string | null;
+          favorites_count: number | null;
+          last_active: string | null;
+          reports_posted: number | null;
+          updated_at: string | null;
+          user_profile_id: string;
+        };
+        Insert: {
+          confirmations_given?: number | null;
+          created_at?: string | null;
+          favorites_count?: number | null;
+          last_active?: string | null;
+          reports_posted?: number | null;
+          updated_at?: string | null;
+          user_profile_id: string;
+        };
+        Update: {
+          confirmations_given?: number | null;
+          created_at?: string | null;
+          favorites_count?: number | null;
+          last_active?: string | null;
+          reports_posted?: number | null;
+          updated_at?: string | null;
+          user_profile_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "user_stats_user_profile_id_fkey";
+            columns: ["user_profile_id"];
+            isOneToOne: true;
+            referencedRelation: "user_profiles";
+            referencedColumns: ["id"];
+          },
+        ];
       };
     };
     Views: {
       [_ in never]: never;
     };
     Functions: {
+      get_user_profile_by_hash: {
+        Args: { p_sync_key_hash: string };
+        Returns: {
+          created_at: string;
+          display_name: string;
+          id: string;
+          sync_key_hash: string;
+          units_distance: string;
+          units_elevation: string;
+          units_precipitation: string;
+          units_temperature: string;
+          units_wind_speed: string;
+          updated_at: string;
+        }[];
+      };
       immutable_unaccent: { Args: { "": string }; Returns: string };
       search_crags_unaccent: {
         Args: { search_query: string };
@@ -441,6 +654,29 @@ export type Database = {
       show_limit: { Args: never; Returns: number };
       show_trgm: { Args: { "": string }; Returns: string[] };
       unaccent: { Args: { "": string }; Returns: string };
+      update_user_profile_by_hash: {
+        Args: {
+          p_display_name?: string;
+          p_sync_key_hash: string;
+          p_units_distance?: string;
+          p_units_elevation?: string;
+          p_units_precipitation?: string;
+          p_units_temperature?: string;
+          p_units_wind_speed?: string;
+        };
+        Returns: {
+          created_at: string;
+          display_name: string;
+          id: string;
+          sync_key_hash: string;
+          units_distance: string;
+          units_elevation: string;
+          units_precipitation: string;
+          units_temperature: string;
+          units_wind_speed: string;
+          updated_at: string;
+        }[];
+      };
     };
     Enums: {
       [_ in never]: never;

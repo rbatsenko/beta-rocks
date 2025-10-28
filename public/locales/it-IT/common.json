@@ -23,12 +23,21 @@
   "chat": {
     "analyzing": "Analisi delle condizioni...",
     "thinking": "Sto pensando...",
-    "inputPlaceholder": "Chiedi di una falesia o settore..."
+    "inputPlaceholder": "Chiedi di una falesia o settore...",
+    "clearHistory": "Cancella cronologia",
+    "clearHistoryConfirm": "Sei sicuro di voler cancellare tutta la cronologia della chat? Questa azione non può essere annullata.",
+    "clearChat": "Cancella chat",
+    "clearChatTooltip": "Cancella la conversazione attuale",
+    "clearChatConfirm": "Cancellare la chat? Questo rimuoverà tutti i messaggi dalla conversazione attuale."
   },
   "conditions": {
     "rating": "Valutazione",
     "details": "Dettagli",
-    "location": "Località"
+    "location": "Località",
+    "favorite": "Preferito",
+    "favorited": "Nei preferiti",
+    "addReport": "Aggiungi rapporto",
+    "viewCragPage": "Vedi falesia"
   },
   "ratings": {
     "great": "Ottime",
@@ -38,7 +47,7 @@
     "nope": "Da evitare"
   },
   "reasons": {
-    "perfectTemp": "Temperatura perfetta ({{temp}}°C)",
+    "perfectTemp": "Temperatura perfetta ({{temp}})",
     "tempTooHigh": "Temperatura troppo alta - potresti scivolare",
     "coldGoodFriction": "Freddo ma con buona aderenza per {{rockType}}",
     "idealHumidity": "Umidità ideale ({{humidity}}%)",
@@ -47,16 +56,17 @@
     "acceptable": "Condizioni accettabili"
   },
   "warnings": {
-    "tooWarm": "Troppo caldo per {{rockType}} ({{temp}}°C)",
+    "tooWarm": "Troppo caldo per {{rockType}} ({{temp}})",
     "coldSuboptimal": "Freddo e poco ottimale per {{rockType}}",
     "highHumidity": "Umidità elevata ({{humidity}}%) - la roccia può essere scivolosa",
     "wetDangerousSandstone": "La roccia è bagnata - arrampicare sull'arenaria bagnata è pericoloso",
     "wetSlippery": "La roccia è bagnata - condizioni scivolose",
-    "veryHighWinds": "Vento molto forte ({{wind}} km/h) - rischio di sbilanciamento",
-    "highWind": "Vento forte ({{wind}} km/h)",
-    "recentPrecip": "Precipitazioni recenti ({{precip}}mm) - si asciugherà in ~{{hours}}h",
+    "veryHighWinds": "Vento molto forte ({{wind}}) - rischio di sbilanciamento",
+    "highWind": "Vento forte ({{wind}})",
+    "recentPrecip": "Precipitazioni recenti ({{precip}}) - si asciugherà in ~{{hours}}h",
     "currentlyWetDangerous": "Attualmente bagnato - pericoloso",
-    "currentlyWet": "Attualmente bagnato"
+    "currentlyWet": "Attualmente bagnato",
+    "cold": "Cold ({{temp}})"
   },
   "weather": {
     "clearSky": "Cielo sereno",
@@ -123,7 +133,7 @@
     },
     "communityReports": {
       "title": "Report della community",
-      "description": "Condividi e conferma le condizioni attuali. Aiuta altri climber con aggiornamenti in tempo reale"
+      "description": "Condividi condizioni, avvisi di sicurezza, modifiche di accesso, beta e altro. Aiuta gli scalatori con aggiornamenti in tempo reale in più categorie"
     },
     "globalCoverage": {
       "title": "Copertura globale",
@@ -143,8 +153,13 @@
     "selectLanguage": "Seleziona lingua",
     "aboutApp": "Info sull'app"
   },
+  "tabs": {
+    "overview": "Panoramica",
+    "reports": "Segnalazioni"
+  },
   "dialog": {
     "close": "Chiudi",
+    "cancel": "Annulla",
     "detailedConditions": "Condizioni dettagliate",
     "fullAnalysis": "Analisi completa del meteo e delle condizioni di arrampicata",
     "showMap": "Mappa",
@@ -233,5 +248,232 @@
     "dolomite": "dolomia",
     "volcanic": "vulcanico",
     "phyllite": "fillite"
+  },
+  "sync": {
+    "banner": {
+      "title": "I tuoi dati si sincronizzano tra dispositivi",
+      "description": "I tuoi preferiti, rapporti e cronologia chat sono salvati localmente e possono sincronizzarsi su altri dispositivi usando la tua chiave di sincronizzazione.",
+      "learnMore": "Scopri di più",
+      "dismiss": "Ho capito"
+    },
+    "status": {
+      "synced": "Sincronizzato",
+      "syncing": "Sincronizzazione...",
+      "offline": "Offline",
+      "clickToLearnMore": "Fai clic per saperne di più sulla sincronizzazione"
+    },
+    "notification": {
+      "title": "Chiave di sincronizzazione creata",
+      "description": "Abbiamo generato una chiave univoca per sincronizzare i tuoi preferiti e chat su tutti i dispositivi.",
+      "viewInSettings": "Visualizza nelle impostazioni",
+      "viewMore": "Cos'è una chiave di sincronizzazione?"
+    }
+  },
+  "syncExplainer": {
+    "title": "Come funziona la sincronizzazione",
+    "description": "Mantieni i tuoi dati sincronizzati su tutti i tuoi dispositivi in modo sicuro e senza interruzioni.",
+    "features": {
+      "syncKey": {
+        "title": "Chiave di sincronizzazione univoca",
+        "description": "Ogni utente riceve una chiave sicura e univoca per sincronizzare i propri dati."
+      },
+      "multiDevice": {
+        "title": "Accesso multi-dispositivo",
+        "description": "Accedi ai tuoi preferiti e alla cronologia chat da qualsiasi dispositivo usando la tua chiave di sincronizzazione."
+      },
+      "privacy": {
+        "title": "Privacy prima di tutto",
+        "description": "I tuoi dati sono crittografati e accessibili solo con la tua chiave di sincronizzazione. Nessun account richiesto."
+      }
+    },
+    "openSettings": "Apri impostazioni"
+  },
+  "profile": {
+    "anonymous": "Anonimo",
+    "member": "Membro",
+    "anonymousMember": "Membro anonimo",
+    "favorites": "Preferiti",
+    "recent": "Ricerche recenti",
+    "stats": "Le tue statistiche",
+    "settings": "Impostazioni",
+    "clearData": "Cancella tutti i dati"
+  },
+  "stats": {
+    "title": "Le tue statistiche",
+    "description": "La tua attività e contributi alla community temps.rocks",
+    "reportsPosted": "Report pubblicati",
+    "confirmationsGiven": "Conferme date",
+    "favoritesCount": "Preferiti",
+    "memberSince": "Membro dal",
+    "lastActive": "Ultima attività",
+    "unknown": "Sconosciuto",
+    "encourageReports": "Condividi la tua conoscenza locale pubblicando report sulle condizioni delle falesie!",
+    "thankYou": "Grazie per aver contribuito alla community di arrampicata!"
+  },
+  "settings": {
+    "title": "Impostazioni",
+    "description": "Gestisci il tuo profilo, la chiave di sincronizzazione e le preferenze",
+    "save": "Salva",
+    "saving": "Salvataggio in corso...",
+    "displayName": {
+      "label": "Nome visualizzato",
+      "description": "Il tuo nome mostrato nei report e nelle conferme (facoltativo)",
+      "placeholder": "Inserisci il tuo nome...",
+      "saved": "Nome salvato",
+      "savedDescription": "Il tuo nome visualizzato è stato aggiornato con successo",
+      "saveFailed": "Salvataggio non riuscito",
+      "saveFailedDescription": "Impossibile salvare il tuo nome visualizzato. Riprova"
+    },
+    "units": {
+      "title": "Unità e misure",
+      "description": "Scegli le unità preferite per i dati meteorologici e di arrampicata",
+      "systemLabel": "Sistema di unità",
+      "systemDescription": "Preimpostazioni rapide per i sistemi di unità più comuni",
+      "systems": {
+        "metric": "Metrico (°C, km/h, mm)",
+        "imperial": "Imperiale (°F, mph, pollici)",
+        "uk": "Regno Unito (°C, mph, mm)",
+        "custom": "Personalizzato"
+      },
+      "temperature": "Temperatura",
+      "temperatureUnits": {
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Velocità del vento",
+      "windSpeedUnits": {
+        "kmh": "Chilometri all'ora (km/h)",
+        "mph": "Miglia all'ora (mph)",
+        "ms": "Metri al secondo (m/s)",
+        "knots": "Nodi (kn)"
+      },
+      "precipitation": "Precipitazioni",
+      "precipitationUnits": {
+        "mm": "Millimetri (mm)",
+        "inches": "Pollici (in)"
+      },
+      "distance": "Distanza",
+      "distanceUnits": {
+        "km": "Chilometri (km)",
+        "miles": "Miglia (mi)"
+      },
+      "elevation": "Altitudine",
+      "elevationUnits": {
+        "meters": "Metri (m)",
+        "feet": "Piedi (ft)"
+      },
+      "saved": "Unità salvate",
+      "savedDescription": "Le tue preferenze delle unità sono state aggiornate con successo",
+      "saveFailed": "Salvataggio unità non riuscito",
+      "saveFailedDescription": "Impossibile salvare le tue preferenze delle unità. Riprova"
+    },
+    "syncKey": {
+      "title": "Chiave di sincronizzazione",
+      "description": "Usa questa chiave per sincronizzare i tuoi preferiti e le impostazioni tra dispositivi",
+      "label": "La tua chiave di sincronizzazione",
+      "copy": "Copia chiave di sincronizzazione",
+      "showFullKey": "Mostra chiave completa",
+      "hideKey": "Nascondi chiave",
+      "qrCode": "Codice QR",
+      "qrDescription": "Scansiona questo codice QR su un altro dispositivo per sincronizzare i tuoi dati",
+      "restoreTitle": "Ripristina da un altro dispositivo",
+      "restoreDescription": "Hai già una chiave di sincronizzazione? Incollala qui per ripristinare i tuoi dati",
+      "restoreLabel": "Incolla la tua chiave di sincronizzazione",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Ripristina chiave di sincronizzazione",
+      "restoring": "Ripristino in corso...",
+      "restoreSuccess": "Chiave di sincronizzazione ripristinata con successo! Ricaricamento...",
+      "restoreError": "Formato della chiave di sincronizzazione non valido. Controlla e riprova.",
+      "saveNote": {
+        "title": "Salva la tua chiave di sincronizzazione",
+        "description": "Ti consigliamo di salvare la tua chiave di sincronizzazione in un luogo sicuro come la tua app Note o un gestore di password. Ne avrai bisogno per ripristinare i tuoi dati su altri dispositivi."
+      },
+      "warning": {
+        "title": "Mantieni privata la tua chiave di sincronizzazione",
+        "description": "Chiunque abbia la tua chiave di sincronizzazione può accedere ai tuoi preferiti e alle impostazioni. Non condividerla pubblicamente."
+      }
+    },
+    "dangerZone": {
+      "title": "Zona pericolosa",
+      "description": "Queste azioni sono permanenti e non possono essere annullate",
+      "deleteProfile": "Elimina profilo",
+      "deleteProfileConfirm": "Sei sicuro di voler eliminare il tuo profilo? Questo rimuoverà permanentemente tutti i tuoi dati inclusi preferiti, cronologia chat e impostazioni. Questa azione non può essere annullata.",
+      "deleteFailed": "Impossibile eliminare il profilo. Riprova."
+    }
+  },
+  "favorites": {
+    "title": "Le tue falesie preferite",
+    "description": "Hai {{count}} località preferite",
+    "empty": "Nessun preferito",
+    "emptyMessage": "Non hai ancora aggiunto falesie preferite",
+    "emptyHint": "Clicca sull'icona della stella su qualsiasi scheda condizioni per aggiungerla ai tuoi preferiti",
+    "lastChecked": "Ultimo controllo",
+    "frictionScore": "Punteggio di aderenza",
+    "viewConditions": "Vedi condizioni",
+    "remove": "Rimuovi"
+  },
+  "reports": {
+    "addReport": "Add Report",
+    "addReportDescription": "Share information about {{cragName}}",
+    "postingAs": "Posting as",
+    "category": "What would you like to report?",
+    "categories": {
+      "conditions": "Conditions",
+      "safety": "Safety",
+      "access": "Access",
+      "beta": "Beta",
+      "facilities": "Facilities",
+      "other": "Other"
+    },
+    "categoryDescriptions": {
+      "conditions": "Weather, friction, dryness, crowds",
+      "safety": "Loose bolts, rockfall, broken holds, hazards",
+      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "beta": "Current bolting works, route changes, new bolts",
+      "facilities": "Bathrooms, camping, water sources, amenities",
+      "other": "Anything else that doesn't fit above"
+    },
+    "dryness": "Dryness",
+    "wind": "Wind",
+    "crowds": "Crowds",
+    "additionalComments": "Additional comments (optional)",
+    "details": "Details",
+    "detailsRequired": "Please provide details about this report",
+    "placeholders": {
+      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
+      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
+      "access": "E.g., Gate closed until May, new parking lot behind library...",
+      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "facilities": "E.g., Toilet available at parking, no water source nearby...",
+      "other": "Describe what you'd like to report..."
+    },
+    "submit": "Submit Report",
+    "submitting": "Submitting...",
+    "helpful": "Helpful",
+    "loginToConfirm": "Please set up your profile to confirm reports",
+    "confirmFailed": "Failed to confirm report. Please try again.",
+    "ratings": {
+      "veryPoor": "Very Poor",
+      "poor": "Poor",
+      "okay": "Okay",
+      "good": "Good",
+      "excellent": "Excellent"
+    },
+    "scales": {
+      "veryWet": "Very wet",
+      "veryDry": "Perfect",
+      "calm": "Calm",
+      "veryWindy": "Very windy",
+      "empty": "Empty",
+      "veryCrowded": "Very crowded"
+    },
+    "recentReports": "Recent Reports",
+    "communityReports": "Community Reports",
+    "noReports": "No reports yet",
+    "beTheFirst": "Be the first to report",
+    "noReportsInCategory": "No reports in this category",
+    "filters": {
+      "all": "All"
+    }
   }
 }
