@@ -16,10 +16,12 @@ import { Separator } from "@/components/ui/separator";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   getUserProfile,
-  updateUserProfile,
+  updateUserProfile as updateLocalUserProfile,
   formatSyncKeyForDisplay,
+  hashSyncKeyAsync,
   type UserProfile,
 } from "@/lib/auth/sync-key";
+import { fetchOrCreateUserProfile, updateUserProfile as updateDbUserProfile } from "@/lib/db/queries";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { QRCodeSVG } from "qrcode.react";
 
@@ -49,11 +51,20 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
 
     setIsSaving(true);
     try {
-      const updated = updateUserProfile({
+      // Update local storage
+      const updated = updateLocalUserProfile({
         displayName: displayName.trim() || undefined,
       });
       setUserProfile(updated);
-      // TODO: Sync to database
+
+      // Sync to database
+      if (updated.syncKey) {
+        const syncKeyHash = await hashSyncKeyAsync(updated.syncKey);
+        const dbProfile = await fetchOrCreateUserProfile(syncKeyHash);
+        await updateDbUserProfile(dbProfile.id, {
+          display_name: displayName.trim() || undefined,
+        });
+      }
     } catch (error) {
       console.error("Failed to save display name:", error);
     } finally {
@@ -149,9 +160,7 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
                   className="mt-1 h-auto p-0"
                   onClick={() => setShowFullKey(!showFullKey)}
                 >
-                  {showFullKey
-                    ? t("settings.syncKey.hideKey")
-                    : t("settings.syncKey.showFullKey")}
+                  {showFullKey ? t("settings.syncKey.hideKey") : t("settings.syncKey.showFullKey")}
                 </Button>
               </div>
 

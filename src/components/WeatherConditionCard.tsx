@@ -143,10 +143,10 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
   // Check if this location is already favorited
   useEffect(() => {
     if (data.latitude && data.longitude) {
-      const favorited = isFavorited(undefined, undefined);
+      const favorited = isFavorited(undefined, data.cragId);
       setIsFavorite(favorited);
     }
-  }, [data.latitude, data.longitude]);
+  }, [data.latitude, data.longitude, data.cragId]);
 
   logRender("WeatherConditionCard", {
     location: data.location,

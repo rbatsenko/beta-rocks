@@ -68,14 +68,29 @@ export async function createCrag(crag: TablesInsert<"crags">) {
 }
 
 /**
+ * Calculate distance between two points using Haversine formula
+ * Returns distance in meters for accurate geographic distance calculation
+ */
+function haversineDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const R = 6371000; // Earth's radius in meters
+  const φ1 = (lat1 * Math.PI) / 180;
+  const φ2 = (lat2 * Math.PI) / 180;
+  const Δφ = ((lat2 - lat1) * Math.PI) / 180;
+  const Δλ = ((lon2 - lon1) * Math.PI) / 180;
+
+  const a =
+    Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+    Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  return R * c; // Distance in meters
+}
+
+/**
  * Find a crag by coordinates within a tolerance (default ~100m = 0.001 degrees)
  * Returns the closest crag if multiple exist within tolerance
  */
-export async function findCragByCoordinates(
-  lat: number,
-  lon: number,
-  tolerance: number = 0.001
-) {
+export async function findCragByCoordinates(lat: number, lon: number, tolerance: number = 0.001) {
   // Query crags within bounding box
   const { data, error } = await supabase
     .from("crags")
@@ -88,16 +103,12 @@ export async function findCragByCoordinates(
   if (error) throw error;
   if (!data || data.length === 0) return null;
 
-  // Find closest crag if multiple exist
+  // Find closest crag using Haversine formula for accurate geographic distance
   let closest = data[0];
-  let minDistance = Math.sqrt(
-    Math.pow((closest.lat as number) - lat, 2) + Math.pow((closest.lon as number) - lon, 2)
-  );
+  let minDistance = haversineDistance(lat, lon, closest.lat as number, closest.lon as number);
 
   for (const crag of data.slice(1)) {
-    const distance = Math.sqrt(
-      Math.pow((crag.lat as number) - lat, 2) + Math.pow((crag.lon as number) - lon, 2)
-    );
+    const distance = haversineDistance(lat, lon, crag.lat as number, crag.lon as number);
     if (distance < minDistance) {
       minDistance = distance;
       closest = crag;
@@ -470,7 +481,7 @@ export async function createFavorite(favorite: any) {
 }
 
 export async function fetchFavoritesByUserProfile(userProfileId: string) {
-  const { data, error} = await supabase
+  const { data, error } = await supabase
     .from("user_favorites")
     .select("*")
     .eq("user_profile_id", userProfileId)
@@ -482,11 +493,7 @@ export async function fetchFavoritesByUserProfile(userProfileId: string) {
 }
 
 export async function fetchFavoriteById(id: string) {
-  const { data, error } = await supabase
-    .from("user_favorites")
-    .select("*")
-    .eq("id", id)
-    .single();
+  const { data, error } = await supabase.from("user_favorites").select("*").eq("id", id).single();
 
   if (error) throw error;
   return data;

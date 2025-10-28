@@ -133,9 +133,7 @@ export function updateFavoriteInStorage(id: string, updates: Partial<Favorite>):
 export function isFavorited(areaId?: string, cragId?: string): boolean {
   const favorites = getFavoritesFromStorage();
 
-  return favorites.some(
-    (f) => (areaId && f.areaId === areaId) || (cragId && f.cragId === cragId)
-  );
+  return favorites.some((f) => (areaId && f.areaId === areaId) || (cragId && f.cragId === cragId));
 }
 
 /**

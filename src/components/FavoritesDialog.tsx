@@ -87,9 +87,7 @@ export function FavoritesDialog({ open, onOpenChange, onViewConditions }: Favori
             <div className="flex flex-col items-center justify-center py-12 text-center">
               <Star className="h-16 w-16 text-muted-foreground/50 mb-4" />
               <p className="text-muted-foreground">{t("favorites.emptyMessage")}</p>
-              <p className="text-sm text-muted-foreground mt-2">
-                {t("favorites.emptyHint")}
-              </p>
+              <p className="text-sm text-muted-foreground mt-2">{t("favorites.emptyHint")}</p>
             </div>
           ) : (
             <div className="space-y-4">

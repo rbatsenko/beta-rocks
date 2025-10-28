@@ -13,6 +13,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,css}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,css}\"",
     "type-check": "tsc --noEmit",
+    "db:types": "supabase gen types typescript --project-id tgvcjhzjdyfloppunnna > src/integrations/supabase/types.ts",
     "import:osm": "tsx scripts/import-osm-crags.ts",
     "enrich:countries": "tsx scripts/enrich-countries.ts"
   },

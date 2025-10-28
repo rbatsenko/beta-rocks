@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ThumbsUp, User, Wind, Droplets, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -34,12 +34,10 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
   const { t } = useClientTranslation("common");
   const [isConfirming, setIsConfirming] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
-  const [confirmationCount, setConfirmationCount] = useState(
-    report.confirmations?.length || 0
-  );
+  const [confirmationCount, setConfirmationCount] = useState(report.confirmations?.length || 0);
 
   // Check if user has already confirmed this report
-  useState(() => {
+  useEffect(() => {
     const checkConfirmation = async () => {
       const profile = getUserProfile();
       if (!profile?.syncKey) return;
@@ -49,7 +47,7 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
       setIsConfirmed(confirmed);
     };
     checkConfirmation();
-  });
+  }, [report.id]);
 
   const handleConfirm = async () => {
     if (isConfirmed || isConfirming) return;

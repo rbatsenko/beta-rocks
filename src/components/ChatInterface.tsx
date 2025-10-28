@@ -675,8 +675,18 @@ const ChatInterface = () => {
         open={favoritesDialogOpen}
         onOpenChange={setFavoritesDialogOpen}
         onViewConditions={(favorite) => {
-          // TODO: Send message to chat to get conditions for this favorite location
-          console.log("View conditions for favorite:", favorite);
+          // Close the favorites dialog
+          setFavoritesDialogOpen(false);
+          // Send message to chat to get conditions for this favorite location
+          const message = `What are the conditions at ${favorite.areaName}?`;
+          sendMessage(
+            { text: message },
+            {
+              body: {
+                locale: language,
+              },
+            }
+          );
         }}
       />
     </>

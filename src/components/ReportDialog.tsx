@@ -104,9 +104,7 @@ export function ReportDialog({
             <MessageSquare className="h-5 w-5" />
             {t("reports.addReport")}
           </DialogTitle>
-          <DialogDescription>
-            {t("reports.addReportDescription", { cragName })}
-          </DialogDescription>
+          <DialogDescription>{t("reports.addReportDescription", { cragName })}</DialogDescription>
         </DialogHeader>
 
         <div className="space-y-6 py-4">
@@ -185,9 +183,7 @@ export function ReportDialog({
               rows={4}
               maxLength={500}
             />
-            <p className="text-xs text-muted-foreground text-right">
-              {text.length}/500
-            </p>
+            <p className="text-xs text-muted-foreground text-right">{text.length}/500</p>
           </div>
 
           {/* Submit Button */}
