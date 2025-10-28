@@ -231,7 +231,7 @@ export async function initializeUserProfile(): Promise<UserProfile> {
             cragId: dbFav.crag_id || undefined,
             areaName: dbFav.area_name,
             areaSlug: dbFav.area_slug || undefined,
-            location: dbFav.location,
+            location: dbFav.location || "",
             latitude: dbFav.latitude,
             longitude: dbFav.longitude,
             rockType: dbFav.rock_type || undefined,
@@ -239,7 +239,7 @@ export async function initializeUserProfile(): Promise<UserProfile> {
             lastFrictionScore: dbFav.last_friction_score || undefined,
             lastCheckedAt: dbFav.last_checked_at || undefined,
             displayOrder: dbFav.display_order,
-            addedAt: dbFav.added_at,
+            addedAt: dbFav.added_at || new Date().toISOString(),
           }));
           saveFavoritesToStorage(favoritesForStorage);
           console.log(`[initializeUserProfile] Restored ${favoritesForStorage.length} favorites`);
