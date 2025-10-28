@@ -383,6 +383,7 @@
       "restoreButton": "Sync-Schlüssel wiederherstellen",
       "restoring": "Wiederherstellung läuft...",
       "restoreSuccess": "Sync-Schlüssel erfolgreich wiederhergestellt! Wird neu geladen...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
       "restoreError": "Ungültiges Sync-Schlüssel-Format. Bitte überprüfen und erneut versuchen.",
       "saveNote": {
         "title": "Sync-Schlüssel speichern",

@@ -379,6 +379,7 @@
       "restoreButton": "Gjenopprett synkroniseringsnøkkel",
       "restoring": "Gjenoppretter...",
       "restoreSuccess": "Synkroniseringsnøkkelen ble gjenopprettet! Laster inn på nytt...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
       "restoreError": "Ugyldig format på synkroniseringsnøkkelen. Vennligst sjekk og prøv igjen.",
       "saveNote": {
         "title": "Lagre synkroniseringsnøkkelen din",

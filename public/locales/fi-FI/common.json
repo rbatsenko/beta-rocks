@@ -378,6 +378,7 @@
       "restoreButton": "Palauta synkronointiavain",
       "restoring": "Palautetaan...",
       "restoreSuccess": "Synkronointiavain palautettu onnistuneesti! Ladataan uudelleen...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
       "restoreError": "Virheellinen synkronointiavaimen muoto. Tarkista ja yritä uudelleen.",
       "saveNote": {
         "title": "Tallenna synkronointiavaimesi",

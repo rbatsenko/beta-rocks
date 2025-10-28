@@ -378,6 +378,7 @@
       "restoreButton": "Ripristina chiave di sincronizzazione",
       "restoring": "Ripristino in corso...",
       "restoreSuccess": "Chiave di sincronizzazione ripristinata con successo! Ricaricamento...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
       "restoreError": "Formato della chiave di sincronizzazione non valido. Controlla e riprova.",
       "saveNote": {
         "title": "Salva la tua chiave di sincronizzazione",

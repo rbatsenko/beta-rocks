@@ -378,6 +378,7 @@
       "restoreButton": "Відновити ключ синхронізації",
       "restoring": "Відновлення...",
       "restoreSuccess": "Ключ синхронізації успішно відновлено! Перезавантаження...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
       "restoreError": "Недійсний формат ключа синхронізації. Будь ласка, перевірте і спробуйте знову.",
       "saveNote": {
         "title": "Збережіть ваш ключ синхронізації",

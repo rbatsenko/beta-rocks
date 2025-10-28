@@ -378,6 +378,7 @@
       "restoreButton": "Възстановяване на ключ за синхронизация",
       "restoring": "Възстановяване...",
       "restoreSuccess": "Ключът за синхронизация е възстановен успешно! Презареждане...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
       "restoreError": "Невалиден формат на ключа за синхронизация. Моля, проверете и опитайте отново.",
       "saveNote": {
         "title": "Запазете вашия ключ за синхронизация",

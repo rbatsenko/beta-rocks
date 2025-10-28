@@ -378,6 +378,7 @@
       "restoreButton": "Επαναφορά κλειδιού συγχρονισμού",
       "restoring": "Επαναφορά...",
       "restoreSuccess": "Το κλειδί συγχρονισμού αποκαταστάθηκε επιτυχώς! Επαναφόρτωση...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
       "restoreError": "Μη έγκυρη μορφή κλειδιού συγχρονισμού. Παρακαλώ ελέγξτε και δοκιμάστε ξανά.",
       "saveNote": {
         "title": "Αποθηκεύστε το κλειδί συγχρονισμού σας",

@@ -378,6 +378,7 @@
       "restoreButton": "Restaurar clau de sincronització",
       "restoring": "Restaurant...",
       "restoreSuccess": "Clau de sincronització restaurada correctament! Recarregant...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
       "restoreError": "Format de clau de sincronització no vàlid. Si us plau, comprova i torna-ho a intentar.",
       "saveNote": {
         "title": "Desa la teva clau de sincronització",

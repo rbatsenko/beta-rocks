@@ -378,6 +378,7 @@
       "restoreButton": "Obnovi sync tipku",
       "restoring": "Obnovljavanje...",
       "restoreSuccess": "Sync tipka uspješno obnovljena! Ponovno učitavanje...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
       "restoreError": "Nevažeći format sync tipke. Provjeri i pokušaj ponovno.",
       "saveNote": {
         "title": "Spremi svoju sync tipku",

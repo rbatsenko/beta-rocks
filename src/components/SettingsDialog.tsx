@@ -164,14 +164,23 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
 
     setIsRestoring(true);
     try {
-      // Set the sync key in localStorage
+      // First, clear ALL local storage (sync key, user profile, etc.)
+      // This ensures we start fresh with the restored key
+      localStorage.clear();
+
+      // Set the new sync key in localStorage
       setSyncKey(keyToRestore);
 
-      // Show success message
-      alert(t("settings.syncKey.restoreSuccess"));
+      // Show success toast
+      toast({
+        title: t("settings.syncKey.restoreSuccess"),
+        description: t("settings.syncKey.restoreSuccessDescription"),
+      });
 
-      // Reload the page to sync data
-      window.location.reload();
+      // Give user time to see the toast, then reload
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     } catch (error) {
       console.error("Failed to restore sync key:", error);
       setRestoreError(t("settings.syncKey.restoreError"));

@@ -378,6 +378,7 @@
       "restoreButton": "Obnovit synchronizační klíč",
       "restoring": "Obnovování...",
       "restoreSuccess": "Synchronizační klíč byl úspěšně obnoven! Obnovování stránky...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
       "restoreError": "Neplatný formát synchronizačního klíče. Zkontrolujte a zkuste to znovu.",
       "saveNote": {
         "title": "Uložte svůj synchronizační klíč",

@@ -378,6 +378,7 @@
       "restoreButton": "Synchronisatietoets herstellen",
       "restoring": "Herstellen...",
       "restoreSuccess": "Synchronisatietoets succesvol hersteld! Herladen...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
       "restoreError": "Ongeldig synchronisatietoets formaat. Controleer en probeer opnieuw.",
       "saveNote": {
         "title": "Bewaar je synchronisatietoets",

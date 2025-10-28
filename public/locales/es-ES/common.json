@@ -383,6 +383,7 @@
       "restoreButton": "Restaurar clave de sincronización",
       "restoring": "Restaurando...",
       "restoreSuccess": "Clave de sincronización restaurada correctamente. Recargando...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
       "restoreError": "Formato de clave de sincronización no válido. Por favor, compruebe e inténtelo de nuevo.",
       "saveNote": {
         "title": "Guarde su clave de sincronización",

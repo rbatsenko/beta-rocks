@@ -378,6 +378,7 @@
       "restoreButton": "Restaurează cheia de sincronizare",
       "restoring": "Se restaurează...",
       "restoreSuccess": "Cheie de sincronizare restaurată cu succes! Se reîncarcă...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
       "restoreError": "Format cheie de sincronizare invalid. Te rog verifică și încearcă din nou.",
       "saveNote": {
         "title": "Salvează cheia de sincronizare",
