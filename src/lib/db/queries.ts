@@ -91,6 +91,10 @@ function haversineDistance(lat1: number, lon1: number, lat2: number, lon2: numbe
  * Returns the closest crag if multiple exist within tolerance
  */
 export async function findCragByCoordinates(lat: number, lon: number, tolerance: number = 0.001) {
+  console.log(
+    `[findCragByCoordinates] Searching for crag at lat=${lat}, lon=${lon}, tolerance=${tolerance}`
+  );
+
   // Query crags within bounding box
   const { data, error } = await supabase
     .from("crags")
@@ -100,21 +104,42 @@ export async function findCragByCoordinates(lat: number, lon: number, tolerance:
     .gte("lon", lon - tolerance)
     .lte("lon", lon + tolerance);
 
-  if (error) throw error;
+  if (error) {
+    console.error(`[findCragByCoordinates] Query error:`, error);
+    throw error;
+  }
+
+  console.log(`[findCragByCoordinates] Found ${data?.length || 0} crags in bounding box`);
+  if (data && data.length > 0) {
+    console.log(
+      `[findCragByCoordinates] Crags:`,
+      data.map((c) => ({ id: c.id, name: c.name, lat: c.lat, lon: c.lon }))
+    );
+  }
+
   if (!data || data.length === 0) return null;
 
   // Find closest crag using Haversine formula for accurate geographic distance
   let closest = data[0];
-  let minDistance = haversineDistance(lat, lon, closest.lat as number, closest.lon as number);
+  let minDistance = haversineDistance(lat, lon, Number(closest.lat), Number(closest.lon));
+
+  console.log(
+    `[findCragByCoordinates] Initial closest: ${closest.name} at distance ${minDistance}m`
+  );
 
   for (const crag of data.slice(1)) {
-    const distance = haversineDistance(lat, lon, crag.lat as number, crag.lon as number);
+    const distance = haversineDistance(lat, lon, Number(crag.lat), Number(crag.lon));
+    console.log(
+      `[findCragByCoordinates] ${crag.name}: ${distance}m (current min: ${minDistance}m)`
+    );
     if (distance < minDistance) {
       minDistance = distance;
       closest = crag;
+      console.log(`[findCragByCoordinates] → New closest: ${crag.name}`);
     }
   }
 
+  console.log(`[findCragByCoordinates] Final result: ${closest.name} at ${minDistance}m`);
   return closest;
 }
 
@@ -252,15 +277,26 @@ export async function fetchReportsByCrag(cragId: string, limit = 20) {
       `
       *,
       author:user_profiles(id, display_name),
-      confirmations:confirmations(count)
+      confirmations(id)
     `
     )
     .eq("crag_id", cragId)
     .order("created_at", { ascending: false })
     .limit(limit);
 
-  if (error) throw error;
-  return data;
+  if (error) {
+    console.error("[fetchReportsByCrag] Error fetching reports:", error);
+    throw error;
+  }
+
+  // Transform the data to include confirmation count
+  const reportsWithCount =
+    data?.map((report) => ({
+      ...report,
+      confirmationCount: report.confirmations?.length || 0,
+    })) || [];
+
+  return reportsWithCount;
 }
 
 export async function fetchReportsBySector(sectorId: string, limit = 20) {
@@ -318,14 +354,19 @@ export async function deleteReport(id: string) {
 // ==================== USER PROFILES ====================
 
 export async function fetchOrCreateUserProfile(syncKeyHash: string) {
-  // Try to fetch existing
-  const { data: existing } = await supabase
+  // Try to fetch existing (ignore error if not found)
+  const { data: existing, error: fetchError } = await supabase
     .from("user_profiles")
     .select("*")
     .eq("sync_key_hash", syncKeyHash)
-    .single();
+    .maybeSingle();
 
   if (existing) return existing;
+
+  // Don't throw on "not found" errors
+  if (fetchError && fetchError.code !== "PGRST116") {
+    throw fetchError;
+  }
 
   // Create new profile
   const { data, error } = await supabase
@@ -340,6 +381,8 @@ export async function fetchOrCreateUserProfile(syncKeyHash: string) {
     .single();
 
   if (error) throw error;
+  if (!data) throw new Error("Failed to create user profile");
+
   return data;
 }
 
@@ -359,7 +402,7 @@ export async function updateUserProfile(id: string, updates: { display_name?: st
     })
     .eq("id", id)
     .select()
-    .single();
+    .maybeSingle();
 
   if (error) throw error;
   return data;

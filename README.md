@@ -43,12 +43,13 @@ GOOGLE_GENERATIVE_AI_API_KEY=<your-google-api-key>
 
 This project is built with:
 
-- **Next.js 15** - React framework for production
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Utility-first CSS
+- **Next.js 16** - React framework for production
+- **TypeScript** - Type safety with strict mode
+- **Tailwind CSS 4** - Utility-first CSS
 - **shadcn/ui** - High-quality React components
-- **Supabase** - PostgreSQL database & auth
+- **Supabase** - PostgreSQL database with RLS
 - **Vercel AI SDK** - AI-powered chat (Google Gemini 2.5 Flash)
+- **i18next** - Internationalization (17 locales)
 
 ## Project Structure
 
@@ -79,12 +80,18 @@ See [Vercel docs](https://vercel.com/docs) for more info.
 
 ## Features
 
-- **Chat interface** - Ask about climbing conditions naturally
-- **Real-time weather** - Open-Meteo integration
-- **Community reports** - Share and confirm conditions
+- **Chat interface** - Ask about climbing conditions naturally with AI-powered responses
+- **Real-time weather** - Open-Meteo integration with 14-day forecasts
+- **Friction analysis** - Rock type-specific friction scores (1-5 scale)
+- **Community reports** - Share conditions, safety issues, access updates, beta, and facilities info
+- **Report categories** - conditions, safety, access, beta, facilities, other
+- **Favorites** - Bookmark crags for quick access
+- **Chat history** - Persistent conversations across sessions
+- **Crag detail pages** - Dedicated pages for each crag with conditions, reports, and maps
 - **Offline support** - Local-first data storage
-- **Multi-device sync** - Sync across devices with a sync key
+- **Multi-device sync** - Sync across devices with a sync key (QR code support)
 - **Privacy-first** - No accounts required, anonymous by default
+- **17 languages** - Full internationalization support
 
 ## Learn More
 

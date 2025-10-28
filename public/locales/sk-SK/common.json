@@ -23,7 +23,12 @@
   "chat": {
     "analyzing": "Analyzujem podmienky...",
     "thinking": "Premýšľam...",
-    "inputPlaceholder": "Opýtajte sa na ktorúkoľvek skalu alebo sektor..."
+    "inputPlaceholder": "Opýtajte sa na ktorúkoľvek skalu alebo sektor...",
+    "clearHistory": "Vymazať históriu",
+    "clearHistoryConfirm": "Naozaj chcete vymazať celú históriu chatu? Túto akciu nie je možné vrátiť späť.",
+    "clearChat": "Vymazať chat",
+    "clearChatTooltip": "Vymazať aktuálnu konverzáciu",
+    "clearChatConfirm": "Vymazať váš chat? Týmto odstránite všetky správy z aktuálnej konverzácie."
   },
   "conditions": {
     "rating": "Hodnotenie",
@@ -238,6 +243,43 @@
     "volcanic": "sopečný",
     "phyllite": "fylit"
   },
+  "sync": {
+    "banner": {
+      "title": "Vaše dáta sa synchronizujú medzi zariadeniami",
+      "description": "Vaše obľúbené, správy a história chatu sú uložené lokálne a môžu sa synchronizovať na iné zariadenia pomocou vášho synchronizačného kľúča.",
+      "learnMore": "Zistiť viac",
+      "dismiss": "Rozumiem"
+    },
+    "status": {
+      "synced": "Synchronizované",
+      "syncing": "Synchronizácia...",
+      "offline": "Offline"
+    },
+    "notification": {
+      "title": "Synchronizačný kľúč vytvorený",
+      "description": "Vygenerovali sme jedinečný kľúč na synchronizáciu vašich obľúbených a chatov naprieč zariadeniami.",
+      "viewInSettings": "Zobraziť v nastavení"
+    }
+  },
+  "syncExplainer": {
+    "title": "How Sync Works",
+    "description": "Keep your data in sync across all your devices seamlessly and securely.",
+    "features": {
+      "syncKey": {
+        "title": "Unique Sync Key",
+        "description": "Each user gets a secure, unique key to sync their data across devices."
+      },
+      "multiDevice": {
+        "title": "Multi-Device Access",
+        "description": "Access your favorites and chat history from any device by using your sync key."
+      },
+      "privacy": {
+        "title": "Privacy First",
+        "description": "Your data is encrypted and only accessible with your sync key. No account required."
+      }
+    },
+    "openSettings": "Open Settings"
+  },
   "profile": {
     "anonymous": "Anonymný",
     "member": "Člen",
@@ -267,6 +309,18 @@
       "hideKey": "Skryť kľúč",
       "qrCode": "QR kód",
       "qrDescription": "Naskenujte tento QR kód na inom zariadení pre synchronizáciu dát",
+      "restoreTitle": "Obnoviť z iného zariadenia",
+      "restoreDescription": "Už máte synchronizačný kľúč? Vložte ho tu pre obnovenie dát",
+      "restoreLabel": "Vložte svoj synchronizačný kľúč",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Obnoviť synchronizačný kľúč",
+      "restoring": "Obnovovanie...",
+      "restoreSuccess": "Synchronizačný kľúč bol úspešne obnovený! Obnovovanie stránky...",
+      "restoreError": "Neplatný formát synchronizačného kľúča. Skontrolujte a skúste to znova.",
+      "saveNote": {
+        "title": "Uložte si synchronizačný kľúč",
+        "description": "Odporúčame uložiť synchronizačný kľúč na bezpečnom mieste, napríklad v aplikácii Poznámky alebo správcovi hesiel. Budete ho potrebovať na obnovenie dát na iných zariadeniach."
+      },
       "warning": {
         "title": "Uchovávajte svoj synchronizačný kľúč v súkromí",
         "description": "Ktokoľvek s vaším synchronizačným kľúčom môže pristupovať k vašim obľúbeným a nastaveniam. Nezdieľajte ho verejne."
@@ -275,7 +329,9 @@
     "dangerZone": {
       "title": "Nebezpečná zóna",
       "description": "Tieto akcie sú trvalé a nemožno ich vrátiť späť",
-      "clearData": "Vymazať všetky lokálne dáta"
+      "deleteProfile": "Odstrániť profil",
+      "deleteProfileConfirm": "Naozaj chcete odstrániť svoj profil? Týmto natrvalo odstránite všetky vaše údaje vrátane obľúbených, histórie chatu a nastavení. Túto akciu nie je možné vrátiť späť.",
+      "deleteFailed": "Nepodarilo sa odstrániť profil. Skúste to prosím znova."
     }
   },
   "favorites": {
@@ -297,7 +353,7 @@
     "wind": "Vietor",
     "crowds": "Návštevnosť",
     "additionalComments": "Ďalšie komentáre",
-    "commentsPlaceholder": "Popíšte aktuálne podmienky, kvalitu skaly, prístup atď.",
+    "commentsPlaceholder": "Napr: východný sektor stále vlhký, chodník blatistý - pozor, Cesta X - voda presakuje z trhliny, chyty šmykľavé...",
     "submit": "Odoslať report",
     "submitting": "Odosielanie...",
     "helpful": "Užitočné",
@@ -309,6 +365,14 @@
       "okay": "Ujde",
       "good": "Dobré",
       "excellent": "Vynikajúce"
+    },
+    "scales": {
+      "veryWet": "Veľmi mokré",
+      "veryDry": "Perfektné",
+      "calm": "Pokojne",
+      "veryWindy": "Veľmi veterné",
+      "empty": "Prázdne",
+      "veryCrowded": "Veľmi preplnené"
     },
     "recentReports": "Nedávne reporty",
     "noReports": "Zatiaľ žiadne reporty",

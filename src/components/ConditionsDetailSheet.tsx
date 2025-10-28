@@ -8,11 +8,13 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { ThermometerSun } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ThermometerSun, Sun } from "lucide-react";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { ConditionsDetailContent } from "./ConditionsDetailContent";
 import { MapPopover } from "./MapPopover";
 import { getCountryFlag } from "@/lib/utils/country-flag";
+import { getSunCalcUrl } from "@/lib/utils/urls";
 
 interface ConditionsDetailSheetProps {
   open: boolean;
@@ -111,6 +113,9 @@ export const ConditionsDetailSheet = memo(function ConditionsDetailSheet({
     };
   }, [data.village, data.municipality, data.state, data.country]);
 
+  // Generate SunCalc.org URL for sun position/shadow analysis
+  const sunCalcUrl = getSunCalcUrl(data.latitude, data.longitude);
+
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="right" className="w-full sm:max-w-3xl overflow-hidden p-0 flex flex-col">
@@ -139,6 +144,20 @@ export const ConditionsDetailSheet = memo(function ConditionsDetailSheet({
                   longitude={data.longitude}
                   locationName={data.location}
                 />
+              )}
+              {data.latitude && data.longitude && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    if (sunCalcUrl) window.open(sunCalcUrl, "_blank", "noopener,noreferrer");
+                  }}
+                  title="View sun position and shadow angles on SunCalc.org"
+                  className="h-8"
+                >
+                  <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  <span className="hidden sm:inline">SunCalc</span>
+                </Button>
               )}
             </span>
           </SheetDescription>

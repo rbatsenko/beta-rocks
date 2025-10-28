@@ -67,8 +67,12 @@ export function UserMenu({ onSettingsClick, onFavoritesClick }: UserMenuProps) {
 
   if (isLoading) {
     return (
-      <Button variant="ghost" size="icon" className="rounded-full" disabled>
-        <User className="h-5 w-5" />
+      <Button variant="ghost" className="rounded-full h-10 w-10 p-0" disabled>
+        <Avatar className="h-10 w-10">
+          <AvatarFallback className="bg-muted">
+            <User className="h-5 w-5 text-muted-foreground" />
+          </AvatarFallback>
+        </Avatar>
       </Button>
     );
   }

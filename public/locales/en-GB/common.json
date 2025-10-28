@@ -23,7 +23,12 @@
   "chat": {
     "analyzing": "Analysing conditions...",
     "thinking": "Thinking...",
-    "inputPlaceholder": "Ask about any crag or sector..."
+    "inputPlaceholder": "Ask about any crag or sector...",
+    "clearHistory": "Clear History",
+    "clearHistoryConfirm": "Are you sure you want to clear all chat history? This cannot be undone.",
+    "clearChat": "Clear Chat",
+    "clearChatTooltip": "Clear the current conversation",
+    "clearChatConfirm": "Clear your chat? This will remove all messages from the current conversation."
   },
   "conditions": {
     "rating": "Rating",
@@ -238,6 +243,43 @@
     "volcanic": "volcanic",
     "phyllite": "phyllite"
   },
+  "sync": {
+    "banner": {
+      "title": "Your data syncs across devices",
+      "description": "Your favourites, reports, and chat history are saved locally and can sync to other devices using your sync key.",
+      "learnMore": "Learn more",
+      "dismiss": "Got it"
+    },
+    "status": {
+      "synced": "Synchronised",
+      "syncing": "Synchronising...",
+      "offline": "Offline"
+    },
+    "notification": {
+      "title": "Sync Key Created",
+      "description": "We've generated a unique key to sync your favourites and chat across devices.",
+      "viewInSettings": "View in Settings"
+    }
+  },
+  "syncExplainer": {
+    "title": "How Sync Works",
+    "description": "Keep your data in sync across all your devices seamlessly and securely.",
+    "features": {
+      "syncKey": {
+        "title": "Unique Sync Key",
+        "description": "Each user gets a secure, unique key to sync their data across devices."
+      },
+      "multiDevice": {
+        "title": "Multi-Device Access",
+        "description": "Access your favourites and chat history from any device by using your sync key."
+      },
+      "privacy": {
+        "title": "Privacy First",
+        "description": "Your data is encrypted and only accessible with your sync key. No account required."
+      }
+    },
+    "openSettings": "Open Settings"
+  },
   "profile": {
     "anonymous": "Anonymous",
     "member": "Member",
@@ -267,6 +309,18 @@
       "hideKey": "Hide key",
       "qrCode": "QR Code",
       "qrDescription": "Scan this QR code on another device to sync your data",
+      "restoreTitle": "Restore from Another Device",
+      "restoreDescription": "Already have a sync key? Paste it here to restore your data",
+      "restoreLabel": "Paste your sync key",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Restore Sync Key",
+      "restoring": "Restoring...",
+      "restoreSuccess": "Sync key restored successfully! Reloading...",
+      "restoreError": "Invalid sync key format. Please check and try again.",
+      "saveNote": {
+        "title": "Save Your Sync Key",
+        "description": "We recommend saving your sync key in a secure location like your Notes app or password manager. You'll need it to restore your data on other devices."
+      },
       "warning": {
         "title": "Keep your sync key private",
         "description": "Anyone with your sync key can access your favourites and settings. Don't share it publicly."
@@ -275,7 +329,9 @@
     "dangerZone": {
       "title": "Danger Zone",
       "description": "These actions are permanent and cannot be undone",
-      "clearData": "Clear All Local Data"
+      "deleteProfile": "Delete Profile",
+      "deleteProfileConfirm": "Are you sure you want to delete your profile? This will permanently remove all your data including favourites, chat history, and settings. This action cannot be undone.",
+      "deleteFailed": "Failed to delete profile. Please try again."
     }
   },
   "favorites": {
@@ -297,7 +353,7 @@
     "wind": "Wind",
     "crowds": "Crowds",
     "additionalComments": "Additional Comments",
-    "commentsPlaceholder": "Describe current conditions, rock quality, approach, etc.",
+    "commentsPlaceholder": "E.g., East sector still wet, trail muddy - be careful, Route X - seeping from the crack, holds slippery...",
     "submit": "Submit Report",
     "submitting": "Submitting...",
     "helpful": "Helpful",
@@ -309,6 +365,14 @@
       "okay": "Okay",
       "good": "Good",
       "excellent": "Excellent"
+    },
+    "scales": {
+      "veryWet": "Very Wet",
+      "veryDry": "Perfect",
+      "calm": "Calm",
+      "veryWindy": "Very Windy",
+      "empty": "Empty",
+      "veryCrowded": "Very Crowded"
     },
     "recentReports": "Recent Reports",
     "noReports": "No reports yet",

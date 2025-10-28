@@ -20,15 +20,17 @@ import {
 } from "@/lib/storage/favorites";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { formatDistanceToNow } from "date-fns";
+import { useRouter } from "next/navigation";
+import { generateUniqueSlug } from "@/lib/utils/slug";
 
 interface FavoritesDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onViewConditions?: (favorite: Favorite) => void;
 }
 
-export function FavoritesDialog({ open, onOpenChange, onViewConditions }: FavoritesDialogProps) {
+export function FavoritesDialog({ open, onOpenChange }: FavoritesDialogProps) {
   const { t } = useClientTranslation("common");
+  const router = useRouter();
   const [favorites, setFavorites] = useState<Favorite[]>([]);
 
   useEffect(() => {
@@ -52,10 +54,14 @@ export function FavoritesDialog({ open, onOpenChange, onViewConditions }: Favori
   };
 
   const handleViewConditions = (favorite: Favorite) => {
-    if (onViewConditions) {
-      onViewConditions(favorite);
-      onOpenChange(false);
-    }
+    // Generate slug from the crag name and coordinates
+    const slug = generateUniqueSlug(favorite.areaName, favorite.latitude, favorite.longitude);
+
+    // Navigate to the crag page
+    router.push(`/location/${slug}`);
+
+    // Close the dialog
+    onOpenChange(false);
   };
 
   const getRatingColor = (rating?: string) => {
@@ -103,7 +109,8 @@ export function FavoritesDialog({ open, onOpenChange, onViewConditions }: Favori
                               variant="outline"
                               className={`${getRatingColor(favorite.lastRating)} text-white border-none`}
                             >
-                              {favorite.lastRating}
+                              {t(`ratings.${favorite.lastRating.toLowerCase()}`) ||
+                                favorite.lastRating}
                             </Badge>
                           )}
                         </CardTitle>
@@ -126,7 +133,9 @@ export function FavoritesDialog({ open, onOpenChange, onViewConditions }: Favori
                     {/* Rock Type */}
                     {favorite.rockType && (
                       <div className="flex items-center gap-2">
-                        <Badge variant="secondary">{favorite.rockType}</Badge>
+                        <Badge variant="secondary">
+                          {t(`rockTypes.${favorite.rockType}`) || favorite.rockType}
+                        </Badge>
                       </div>
                     )}
 

@@ -130,10 +130,39 @@ export function updateFavoriteInStorage(id: string, updates: Partial<Favorite>):
 /**
  * Check if a location is favorited
  */
-export function isFavorited(areaId?: string, cragId?: string): boolean {
+export function isFavorited(
+  areaId?: string,
+  cragId?: string,
+  coordinates?: { lat: number; lon: number }
+): boolean {
   const favorites = getFavoritesFromStorage();
 
-  return favorites.some((f) => (areaId && f.areaId === areaId) || (cragId && f.cragId === cragId));
+  return favorites.some(
+    (f) =>
+      (areaId && f.areaId === areaId) ||
+      (cragId && f.cragId === cragId) ||
+      (coordinates && f.latitude === coordinates.lat && f.longitude === coordinates.lon)
+  );
+}
+
+/**
+ * Get a favorite by its identifiers
+ */
+export function getFavorite(
+  areaId?: string,
+  cragId?: string,
+  coordinates?: { lat: number; lon: number }
+): Favorite | null {
+  const favorites = getFavoritesFromStorage();
+
+  return (
+    favorites.find(
+      (f) =>
+        (areaId && f.areaId === areaId) ||
+        (cragId && f.cragId === cragId) ||
+        (coordinates && f.latitude === coordinates.lat && f.longitude === coordinates.lon)
+    ) || null
+  );
 }
 
 /**

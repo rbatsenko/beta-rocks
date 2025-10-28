@@ -1,0 +1,383 @@
+{
+  "header": {
+    "title": "temps.rocks"
+  },
+  "welcome": {
+    "heading": "Pitaj o uvjetima penjanja",
+    "description": "Dobij podatke o vremenskim uvjetima u realnom vremenu, analizu trenja i optimalne vremenske prozore za penjanje na bilo kojem vrhuncu na svijetu",
+    "exampleQueries": {
+      "query1": {
+        "display": "Uvjeti u Paklenici danas?",
+        "query": "Uvjeti u Paklenici danas?"
+      },
+      "query2": {
+        "display": "Je li Mišja Peč suha poslijepodne?",
+        "query": "Je li Mišja Peč suha poslijepodne?"
+      },
+      "query3": {
+        "display": "Uvjeti na Marjanu sutra?",
+        "query": "Uvjeti na Marjanu sutra?"
+      }
+    }
+  },
+  "chat": {
+    "analyzing": "Analiziram uvjete...",
+    "thinking": "Razmišljam...",
+    "inputPlaceholder": "Pitaj o bilo kojem vrhuncu ili sektoru...",
+    "clearChat": "Obriši razgovor",
+    "clearChatTooltip": "Obriši trenutni razgovor",
+    "clearChatConfirm": "Obriši svoj razgovor? Ovo će ukloniti sve poruke iz trenutnog razgovora.",
+    "clearHistory": "Obriši povijest",
+    "clearHistoryConfirm": "Jesi li siguran/a da želiš obrisati svu povijest razgovora? Ovo se ne može vratiti."
+  },
+  "conditions": {
+    "rating": "Ocjena",
+    "details": "Detalji",
+    "location": "Lokacija",
+    "favorite": "Omiljeno",
+    "favorited": "Dodano u omiljene",
+    "addReport": "Dodaj izvještaj"
+  },
+  "ratings": {
+    "great": "Odličan",
+    "good": "Dobar",
+    "fair": "Zadovoljavajući",
+    "poor": "Loš",
+    "nope": "Nema šanse"
+  },
+  "reasons": {
+    "perfectTemp": "Savršena temperatura ({{temp}}°C)",
+    "tempTooHigh": "Temperatura je prevelika - prsti mogu skliznuti",
+    "coldGoodFriction": "Hladno ali dobro za trenje na {{rockType}}",
+    "idealHumidity": "Idealna vlažnost ({{humidity}}%)",
+    "lowHumidityGranite": "Niska vlažnost povoljno utječe na trenje na granitu",
+    "readyInHours": "Bit će spremno za penjanje za ~{{hours}} sati",
+    "acceptable": "Uvjeti su prihvatljivi"
+  },
+  "warnings": {
+    "tooWarm": "Premalo toplo za {{rockType}} ({{temp}}°C)",
+    "coldSuboptimal": "Hladno i neoptimalno za {{rockType}}",
+    "highHumidity": "Visoka vlažnost ({{humidity}}%) - stijena može biti skliznuta",
+    "wetDangerousSandstone": "Stijena je trenutno mokra - opasno za penjanje (pješčnjak postaje slaba tijekom penjanja)",
+    "wetSlippery": "Stijena je trenutno mokra - skliznuti uvjeti",
+    "veryHighWinds": "Vrlo jaki vjetrovi ({{wind}} km/h) - opasnost da budeš otklonje",
+    "highWind": "Jak vjetar ({{wind}} km/h)",
+    "recentPrecip": "Nedavne padavine ({{precip}}mm) - suhit će se za ~{{hours}}h",
+    "currentlyWetDangerous": "Trenutno mokro - opasno",
+    "currentlyWet": "Trenutno mokro"
+  },
+  "weather": {
+    "clearSky": "Vedro nebo",
+    "mainlyClear": "Uglavnom vedro",
+    "partlyCloudy": "Djelomično oblačno",
+    "overcast": "Oblačno",
+    "fog": "Magla",
+    "depositingRimeFog": "Magla sa naledenim rimom",
+    "lightDrizzle": "Laka sipnja",
+    "moderateDrizzle": "Umjerena sipnja",
+    "denseDrizzle": "Gusta sipnja",
+    "lightFreezingDrizzle": "Laka ledena sipnja",
+    "denseFreezingDrizzle": "Gusta ledena sipnja",
+    "slightRain": "Blagi kiš",
+    "moderateRain": "Umjeran kiš",
+    "heavyRain": "Jak kiš",
+    "lightFreezingRain": "Blagi ledeni kiš",
+    "heavyFreezingRain": "Jak ledeni kiš",
+    "slightSnowFall": "Blag snijeg",
+    "moderateSnowFall": "Umjeran snijeg",
+    "heavySnowFall": "Jak snijeg",
+    "snowGrains": "Pahulje sniega",
+    "slightRainShowers": "Blagih pljuskova kiša",
+    "moderateRainShowers": "Umjerenih pljuskova kiša",
+    "violentRainShowers": "Nasilnih pljuskova kiša",
+    "slightSnowShowers": "Blagih pljuskova sniega",
+    "heavySnowShowers": "Jakih pljuskova sniega",
+    "thunderstorm": "Oluja",
+    "thunderstormSlightHail": "Oluja s blagim tučom",
+    "thunderstormHeavyHail": "Oluja s jakom tuču"
+  },
+  "timeframes": {
+    "now": "sada",
+    "today": "danas",
+    "tomorrow": "sutra",
+    "thisAfternoon": "ovo popodne",
+    "thisEvening": "ove večeri",
+    "tonight": "noć"
+  },
+  "disambiguation": {
+    "foundMultipleAreas": "Pronađenih {{count}} područja za penjanje za \"{{location}}\". Molimo odaberi jedno:",
+    "foundMultipleLocations": "Pronađeno više lokacija za \"{{location}}\". Molimo odaberi jedno:",
+    "queryTemplate": "uvjeti na {{name}} ({{latitude}}, {{longitude}})"
+  },
+  "footer": {
+    "about": "O nama",
+    "privacy": "Privatnost",
+    "github": "GitHub",
+    "brand": "temps.rocks",
+    "description": "Besplatni uvjeti penjanja za sve. Izgrađeno s ❤️ za zajednicu penjača.",
+    "attribution": "Podaci iz Open-Meteo, OpenBeta i <osmLink>suradnika OpenStreetMap-a</osmLink>. Izvještaji vođeni zajednicom.",
+    "copyright": "© 2025 temps.rocks. Sva prava zadržana."
+  },
+  "features": {
+    "heading": "Sve što trebaš",
+    "subheading": "Sveobuhvatni uvjeti penjanja pri ruci, potpuno besplatno",
+    "realTimeWeather": {
+      "title": "Vremenske prognoze u realnom vremenu",
+      "description": "Točne prognoze iz Open-Meteo-a sa izračunima sunca/sjene za određene sektore"
+    },
+    "chatInterface": {
+      "title": "Chat sučelje",
+      "description": "Upiti u prirodnom jeziku vođeni AI-om. Pitaj na bilo kojem jeziku, dobij trenutne odgovore"
+    },
+    "communityReports": {
+      "title": "Izvještaji zajednice",
+      "description": "Dijeli i potvrdi trenutne uvjete. Pomozi ostalim penjačima s ažuriranjima u realnom vremenu"
+    },
+    "globalCoverage": {
+      "title": "Globalna pokrivenost",
+      "description": "Bilo koji vrhunac ili sektor na svijetu preko integracije OpenBeta baze podataka"
+    },
+    "worksOffline": {
+      "title": "Radi offline",
+      "description": "Lokalno-prvo rješenje. Spremi podatke offline i sinkroniziraj ga na različitim uređajima pomoću sync tipke"
+    },
+    "privacyFirst": {
+      "title": "Privatnost na prvom mjestu",
+      "description": "Anonimno je zadano. Nisu potrebni računi. Tvoji podaci ostaju tvoji"
+    }
+  },
+  "ui": {
+    "toggleTheme": "Prebaci temu",
+    "selectLanguage": "Odaberi jezik",
+    "aboutApp": "O aplikaciji"
+  },
+  "dialog": {
+    "close": "Zatvori",
+    "cancel": "Poništi",
+    "detailedConditions": "Detaljni uvjeti",
+    "fullAnalysis": "Potpuna vremenska analiza i prognoza uvjeta penjanja",
+    "showMap": "Karta",
+    "tabs": {
+      "overview": "Pregled",
+      "hourly": "Po satu",
+      "daily": "14 dana"
+    },
+    "currentRating": "Trenutna ocjena",
+    "currentConditions": "Trenutni uvjeti",
+    "currentWeather": "Trenutni vremenski uvjeti",
+    "temperature": "Temperatura",
+    "humidity": "Vlažnost",
+    "windSpeed": "Brzina vjetra",
+    "precipitation": "Padavine",
+    "sunrise": "Izlazak sunca",
+    "sunset": "Zalazak sunca",
+    "high": "Visoka",
+    "low": "Niska",
+    "rain": "Kiš",
+    "wind": "Vjetar",
+    "dry": "Suho",
+    "wet": "Mokro",
+    "precipitationContext": "Kontekst padavina",
+    "last24h": "Prethodnih 24h",
+    "last48h": "Prethodnih 48h",
+    "next24h": "Sljedeća 24h",
+    "dewPointSpread": "Razlika točke rosišta (rizik od kondenzacije)",
+    "lowRisk": "✅ Mali rizik - stijena bi trebala ostati suha",
+    "moderateRisk": "⚠️ Umjeren rizik - pazi na vlagu",
+    "highRisk": "❌ Visok rizik - kondenzacija je vjerojatna",
+    "optimalWindows": "Optimalni vremenski prozori za penjanje",
+    "nextDays": "Sljedećih 5 dana",
+    "bestTime": "🌟 Najbolje vrijeme",
+    "noOptimalConditions": "Nema optimalnih uvjeta u sljedećih 5 dana",
+    "checkHourlyForecast": "Provjeri prognozu po satu za više detalja",
+    "weatherDisclaimer": "⚠️ Vremenski uvjeti se mogu brzo promijeniti. Uvijek provjeri prognoze prije nego što kreneš i provjeri uvjete na mjestu.",
+    "window": "prozor",
+    "windows": "prozori",
+    "today": "Danas",
+    "tomorrow": "Sutra",
+    "showCompleteTimeline": "Prikaži cijelu vremensku liniju",
+    "hour": "sat",
+    "hours": "sati",
+    "period": "period",
+    "periods": "periodi",
+    "noHourlyData": "Nema dostupnih podataka po satu",
+    "noDailyData": "Nema dostupnih dnevnih podataka",
+    "noOptimalHours": "Nema optimalnih uvjeta na",
+    "forecastIndicators": "Pokazatelji prognoze:",
+    "goodClimbingWindows": "Dobri vremenski prozori za penjanje",
+    "fairConditions": "Zadovoljavajući uvjeti",
+    "poorConditions": "Loši uvjeti",
+    "lessReliable": "Dani 8-14: Manje pouzdane prognoze",
+    "lessReliableHourly": "Sljedeći sati manje predvidivi",
+    "lessCertain": "MANJE SIGURNO",
+    "todayBadge": "DANAS"
+  },
+  "timeContext": {
+    "sunrise": "Izlazak sunca",
+    "sunset": "Zalazak sunca",
+    "recommendedHours": "Preporučeni sati za penjanje",
+    "totalDaylight": "Ukupno dnevne svjetlosti",
+    "hoursOfDaylight": "{{hours}} sati dnevne svjetlosti",
+    "earlyStartRecommended": "Preporučuje se rani početak da izbjegneš toplinu",
+    "limitedDaylight": "Ograničena dnevna svjetlost - planiraj u skladu s tim",
+    "morningConditionsBest": "Najbolji uvjeti su ujutro",
+    "eveningSession": "Uvjeti za večernju sesiju",
+    "showAllHours": "Prikaži sve 24 sata",
+    "showClimbingHoursOnly": "Prikaži samo sate za penjanje",
+    "expandHours": "Proširi da vidiš sve sate"
+  },
+  "rockTypes": {
+    "limestone": "vapnenac",
+    "granite": "granit",
+    "sandstone": "pješčnjak",
+    "basalt": "bazalt",
+    "gneiss": "gnajss",
+    "quartzite": "kvarc",
+    "conglomerate": "konglomerat",
+    "rhyolite": "riolit",
+    "porphyry": "porfir",
+    "andesite": "andesit",
+    "slate": "škriljavac",
+    "schist": "šist",
+    "dolomite": "dolomit",
+    "volcanic": "vulkanski",
+    "phyllite": "filit"
+  },
+  "sync": {
+    "notification": {
+      "title": "Sync tipka je kreirana",
+      "description": "Generirali smo jedinstvenu tipku za sinkronizaciju tvojih omiljenih lokacija i razgovora između uređaja.",
+      "viewInSettings": "Pogledaj u postavkama"
+    },
+    "banner": {
+      "title": "Tvoji podaci se sinkroniziraju između uređaja",
+      "description": "Tvoje omiljene lokacije, izvještaji i povijest razgovora sprema se lokalno i mogu se sinkronizirati na druge uređaje pomoću tvoje sync tipke.",
+      "learnMore": "Saznaj više",
+      "dismiss": "Razumijem"
+    },
+    "status": {
+      "synced": "Sinkronizirano",
+      "syncing": "Sinkroniziranje...",
+      "offline": "Offline"
+    }
+  },
+  "syncExplainer": {
+    "title": "How Sync Works",
+    "description": "Keep your data in sync across all your devices seamlessly and securely.",
+    "features": {
+      "syncKey": {
+        "title": "Unique Sync Key",
+        "description": "Each user gets a secure, unique key to sync their data across devices."
+      },
+      "multiDevice": {
+        "title": "Multi-Device Access",
+        "description": "Access your favorites and chat history from any device by using your sync key."
+      },
+      "privacy": {
+        "title": "Privacy First",
+        "description": "Your data is encrypted and only accessible with your sync key. No account required."
+      }
+    },
+    "openSettings": "Open Settings"
+  },
+  "profile": {
+    "anonymous": "Anoniman/a",
+    "member": "Član",
+    "anonymousMember": "Anoniman/a član",
+    "favorites": "Omiljene lokacije",
+    "recent": "Nedavne pretrage",
+    "stats": "Vaše statistike",
+    "settings": "Postavke",
+    "clearData": "Obriši sve podatke"
+  },
+  "settings": {
+    "title": "Postavke",
+    "description": "Upravljaj svojom profilom, sync tipkom i preferencama",
+    "save": "Spremi",
+    "saving": "Spremanje...",
+    "displayName": {
+      "label": "Prikazno ime",
+      "description": "Tvoje ime prikazano na izvještajima i potvrdam (nije obavezno)",
+      "placeholder": "Unesite svoje ime..."
+    },
+    "syncKey": {
+      "title": "Sync tipka",
+      "description": "Koristi ovu tipku da sinkroniziraš tvoje omiljene lokacije i postavke između uređaja",
+      "label": "Tvoja sync tipka",
+      "copy": "Kopiraj sync tipku",
+      "showFullKey": "Prikaži punu tipku",
+      "hideKey": "Sakrij tipku",
+      "qrCode": "QR kod",
+      "qrDescription": "Skeniraj ovaj QR kod na drugom uređaju da sinkroniziraš svoje podatke",
+      "restoreTitle": "Obnovi s drugog uređaja",
+      "restoreDescription": "Već imaš sync tipku? Zalijepi je ovdje da obnovi svoje podatke",
+      "restoreLabel": "Zalijepi svoju sync tipku",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Obnovi sync tipku",
+      "restoring": "Obnovljavanje...",
+      "restoreSuccess": "Sync tipka uspješno obnovljena! Ponovno učitavanje...",
+      "restoreError": "Nevažeći format sync tipke. Provjeri i pokušaj ponovno.",
+      "saveNote": {
+        "title": "Spremi svoju sync tipku",
+        "description": "Preporučujemo da spremiš sync tipku na sigurno mjesto poput aplikacije Bilješke ili upravitelja lozinki. Trebat će ti za obnovu podataka na drugim uređajima."
+      },
+      "warning": {
+        "title": "Čuvaj svoju sync tipku privatnom",
+        "description": "Svako tko ima tvoju sync tipku može pristupiti tvojim omiljenim lokacijama i postavkama. Ne dijeli je javno."
+      }
+    },
+    "dangerZone": {
+      "title": "Opasna zona",
+      "description": "Ove akcije su trajne i ne mogu se vratiti",
+      "deleteProfile": "Obriši profil",
+      "deleteProfileConfirm": "Jesi li siguran/a da želiš obrisati svoj profil? Ovo će trajno ukloniti sve tvoje podatke uključujući omiljene lokacije, povijest razgovora i postavke. Ova akcija se ne može vratiti.",
+      "deleteFailed": "Brisanje profila nije uspjelo. Molimo pokušaj ponovno."
+    }
+  },
+  "favorites": {
+    "title": "Tvoji omiljeni vrhunci",
+    "description": "Imaš {{count}} omiljenih lokacija",
+    "empty": "Nema omiljenih lokacija",
+    "emptyMessage": "Nisi još dodao/la bilo koji omiljeni vrhunac",
+    "emptyHint": "Klikni na звёздиchnu tipku na bilo kojoj karti uvjeta da je dodaš u omiljene",
+    "lastChecked": "Zadnja provjera",
+    "frictionScore": "Ocjena trenja",
+    "viewConditions": "Pogledaj uvjete",
+    "remove": "Ukloni"
+  },
+  "reports": {
+    "addReport": "Dodaj izvještaj o uvjetima",
+    "addReportDescription": "Dijeli trenutne uvjete na {{cragName}}",
+    "postingAs": "Postavljanje kao",
+    "dryness": "Suhnost",
+    "wind": "Vjetar",
+    "crowds": "Gužva",
+    "additionalComments": "Dodatni komentari",
+    "commentsPlaceholder": "Npr., istočni sektor je još uvijek mokra, staza je blatnjava - budi pažljiv/a, Ruta X - kapaljka iz pukotine, držači su skliznuti...",
+    "submit": "Predaj izvještaj",
+    "submitting": "Slanje...",
+    "helpful": "Korisno",
+    "loginToConfirm": "Molimo postavi svoj profil da potvrdis izvještaje",
+    "confirmFailed": "Potvrđivanje izvještaja nije uspjelo. Molimo pokušaj ponovno.",
+    "ratings": {
+      "veryPoor": "Vrlo loš",
+      "poor": "Loš",
+      "okay": "Sasvim OK",
+      "good": "Dobar",
+      "excellent": "Odličan"
+    },
+    "scales": {
+      "veryWet": "Vrlo mokro",
+      "veryDry": "Savršeno",
+      "calm": "Mirno",
+      "veryWindy": "Vrlo vjetrovito",
+      "empty": "Prazno",
+      "veryCrowded": "Vrlo popularno"
+    },
+    "recentReports": "Nedavni izvještaji",
+    "noReports": "Nema izvještaja",
+    "noReportsMessage": "Budi prvi/prva koji/a će dijeliti uvjete na ovom vrhuncu",
+    "reportCount": "{{count}} izvještaja",
+    "viewAllReports": "Pogledaj sve izvještaje"
+  }
+}

@@ -978,7 +978,13 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                           </div>
                           <p className="text-lg font-semibold">{Math.round(day.tempMin)}°C</p>
                         </div>
-                        <div className="bg-background/50 rounded-lg p-2">
+                        <div
+                          className={`rounded-lg p-2 ${
+                            day.precipitation > 0.5
+                              ? "bg-red-100/80 dark:bg-red-900/20 border border-red-400/50 dark:border-red-700/30"
+                              : "bg-background/50"
+                          }`}
+                        >
                           <div className="flex items-center gap-1 text-xs text-muted-foreground mb-1">
                             <Droplets className="h-3 w-3" />
                             <span>{t("dialog.rain")}</span>

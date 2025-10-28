@@ -18,12 +18,19 @@
         "display": "Jak tam Dupa Słonia?",
         "query": "Jak tam Dupa Słonia?"
       }
-    }
+    },
+    "yourFavorites": "Twoje ulubione",
+    "favoriteQuery": "Jakie są warunki na {{crag}}?"
   },
   "chat": {
     "analyzing": "Analizuję warunki...",
     "thinking": "Myślę...",
-    "inputPlaceholder": "Zapytaj o dowolną skałkę lub sektor..."
+    "inputPlaceholder": "Zapytaj o dowolną skałkę lub sektor...",
+    "clearHistory": "Wyczyść historię",
+    "clearHistoryConfirm": "Czy na pewno chcesz wyczyścić całą historię czatu? Tej operacji nie można cofnąć.",
+    "clearChat": "Wyczyść czat",
+    "clearChatTooltip": "Wyczyść bieżącą rozmowę",
+    "clearChatConfirm": "Wyczyścić twój czat? Spowoduje to usunięcie wszystkich wiadomości z bieżącej rozmowy."
   },
   "conditions": {
     "rating": "Ocena",
@@ -222,26 +229,55 @@
     "expandHours": "Rozwiń, aby zobaczyć wszystkie godziny"
   },
   "rockTypes": {
-    "limestone": "wapień",
-    "granite": "granit",
-    "sandstone": "piaskowiec",
-    "basalt": "bazalt",
-    "gneiss": "gnejs",
-    "quartzite": "kwarcyt",
-    "conglomerate": "konglomerat",
-    "rhyolite": "riolit",
-    "porphyry": "porfir",
-    "andesite": "andezyt",
-    "slate": "łupek",
-    "schist": "łupek łyszczykowy",
-    "dolomite": "dolomit",
-    "volcanic": "wulkaniczny",
-    "phyllite": "fylit"
+    "granite": "Granit",
+    "sandstone": "Piaskowiec",
+    "limestone": "Wapień",
+    "basalt": "Bazalt",
+    "gneiss": "Gnejs",
+    "quartzite": "Kwarcyt",
+    "unknown": "Nieznany"
+  },
+  "sync": {
+    "banner": {
+      "title": "Twoje dane synchronizują się między urządzeniami",
+      "description": "Twoje ulubione, raporty i historia czatu są zapisywane lokalnie i mogą synchronizować się z innymi urządzeniami za pomocą klucza synchronizacji.",
+      "learnMore": "Dowiedz się więcej",
+      "dismiss": "Rozumiem"
+    },
+    "status": {
+      "synced": "Zsynchronizowano",
+      "syncing": "Synchronizacja...",
+      "offline": "Offline"
+    },
+    "notification": {
+      "title": "Klucz synchronizacji utworzony",
+      "description": "Wygenerowaliśmy unikalny klucz do synchronizacji twoich ulubionych i czatów między urządzeniami.",
+      "viewInSettings": "Zobacz w ustawieniach"
+    }
+  },
+  "syncExplainer": {
+    "title": "Jak działa synchronizacja",
+    "description": "Synchronizuj swoje dane na wszystkich urządzeniach w sposób bezpieczny i płynny.",
+    "features": {
+      "syncKey": {
+        "title": "Unikalny klucz synchronizacji",
+        "description": "Każdy użytkownik otrzymuje bezpieczny, unikalny klucz do synchronizacji danych między urządzeniami."
+      },
+      "multiDevice": {
+        "title": "Dostęp z wielu urządzeń",
+        "description": "Uzyskaj dostęp do swoich ulubionych i historii czatów z dowolnego urządzenia za pomocą klucza synchronizacji."
+      },
+      "privacy": {
+        "title": "Prywatność na pierwszym miejscu",
+        "description": "Twoje dane są zaszyfrowane i dostępne tylko za pomocą klucza synchronizacji. Nie wymaga konta."
+      }
+    },
+    "openSettings": "Otwórz ustawienia"
   },
   "profile": {
     "anonymous": "Anonimowy",
-    "member": "Członek",
-    "anonymousMember": "Anonimowy członek",
+    "member": "Użytkownik",
+    "anonymousMember": "Anonimowy użytkownik",
     "favorites": "Ulubione",
     "recent": "Ostatnie wyszukiwania",
     "stats": "Twoje statystyki",
@@ -267,6 +303,18 @@
       "hideKey": "Ukryj klucz",
       "qrCode": "Kod QR",
       "qrDescription": "Zeskanuj ten kod QR na innym urządzeniu, aby zsynchronizować dane",
+      "restoreTitle": "Przywróć z innego urządzenia",
+      "restoreDescription": "Masz już klucz synchronizacji? Wklej go tutaj, aby przywrócić dane",
+      "restoreLabel": "Wklej swój klucz synchronizacji",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Przywróć klucz synchronizacji",
+      "restoring": "Przywracanie...",
+      "restoreSuccess": "Klucz synchronizacji pomyślnie przywrócony! Przeładowywanie...",
+      "restoreError": "Nieprawidłowy format klucza synchronizacji. Sprawdź i spróbuj ponownie.",
+      "saveNote": {
+        "title": "Zapisz swój klucz synchronizacji",
+        "description": "Zalecamy zapisanie klucza synchronizacji w bezpiecznym miejscu, takim jak aplikacja Notatki lub menedżer haseł. Będzie potrzebny do przywrócenia danych na innych urządzeniach."
+      },
       "warning": {
         "title": "Zachowaj swój klucz synchronizacji w tajemnicy",
         "description": "Każdy, kto ma Twój klucz synchronizacji, może uzyskać dostęp do Twoich ulubionych i ustawień. Nie udostępniaj go publicznie."
@@ -275,7 +323,9 @@
     "dangerZone": {
       "title": "Strefa niebezpieczna",
       "description": "Te działania są trwałe i nie można ich cofnąć",
-      "clearData": "Wyczyść wszystkie dane lokalne"
+      "deleteProfile": "Usuń profil",
+      "deleteProfileConfirm": "Czy na pewno chcesz usunąć swój profil? Spowoduje to trwałe usunięcie wszystkich twoich danych, w tym ulubionych, historii czatu i ustawień. Tej czynności nie można cofnąć.",
+      "deleteFailed": "Nie udało się usunąć profilu. Spróbuj ponownie."
     }
   },
   "favorites": {
@@ -290,14 +340,14 @@
     "remove": "Usuń"
   },
   "reports": {
-    "addReport": "Dodaj raport warunków",
-    "addReportDescription": "Podziel się aktualnymi warunkami w {{cragName}}",
+    "addReport": "Dodaj zgłoszenie",
+    "addReportDescription": "Podziel się informacjami o {{cragName}}",
     "postingAs": "Publikujesz jako",
     "dryness": "Suchość",
     "wind": "Wiatr",
     "crowds": "Tłumy",
-    "additionalComments": "Dodatkowe komentarze",
-    "commentsPlaceholder": "Opisz aktualne warunki, jakość skały, podejście itp.",
+    "additionalComments": "Dodatkowe uwagi (opcjonalne)",
+    "commentsPlaceholder": "Np: sektor wschodni wciąż wilgotny, ścieżka błotnista - uwaga, Droga X - woda sączy się ze szczeliny, chwyty śliskie...",
     "submit": "Wyślij raport",
     "submitting": "Wysyłanie...",
     "helpful": "Pomocne",
@@ -310,10 +360,60 @@
       "good": "Dobrze",
       "excellent": "Doskonale"
     },
+    "scales": {
+      "veryWet": "Bardzo mokro",
+      "veryDry": "Idealnie",
+      "calm": "Spokojnie",
+      "veryWindy": "Bardzo wietrznie",
+      "empty": "Pusto",
+      "veryCrowded": "Bardzo tłoczno"
+    },
     "recentReports": "Ostatnie raporty",
+    "communityReports": "Raporty społeczności",
     "noReports": "Brak raportów",
-    "noReportsMessage": "Bądź pierwszy, który podzieli się warunkami na tej skałce",
+    "beTheFirst": "Zgłoś warunki jako pierwszy/a",
+    "noReportsMessage": "Bądź pierwszym/ą, który/a podzieli się warunkami na tej skałce",
     "reportCount": "{{count}} raportów",
-    "viewAllReports": "Zobacz wszystkie raporty"
+    "viewAllReports": "Zobacz wszystkie raporty",
+    "category": "Co chcesz zgłosić?",
+    "categories": {
+      "conditions": "Warunki",
+      "safety": "Bezpieczeństwo",
+      "access": "Dostęp",
+      "beta": "Beta",
+      "facilities": "Udogodnienia",
+      "other": "Inne"
+    },
+    "categoryDescriptions": {
+      "conditions": "Pogoda, tarcie, suchość, tłumy",
+      "safety": "Luźne ringi, odpady skalne, uszkodzone chwyty, zagrożenia",
+      "access": "Zamknięcia, zmiany parkingów, ograniczenia sezonowe",
+      "beta": "Zmiany dróg, nowe ringi, aktualizacje warunków",
+      "facilities": "Toalety, kemping, źródła wody, udogodnienia",
+      "other": "Cokolwiek innego, co nie pasuje powyżej"
+    },
+    "details": "Szczegóły",
+    "detailsRequired": "Podaj szczegóły tego zgłoszenia",
+    "placeholders": {
+      "conditions": "Np. Sektor wschodni wciąż mokry, szlak błotnisty, chwyty śliskie...",
+      "safety": "Np. Luźny ring na Drodze X wyciąg 2, niebezpieczeństwo opadów skalnych przy głównej ścianie...",
+      "access": "Np. Brama zamknięta do maja, nowy parking za biblioteką...",
+      "beta": "Np. Droga X przebita na nowo, nowa asekuracja na górze, trudniejszy stopień...",
+      "facilities": "Np. Toaleta przenośna dostępna na parkingu, brak źródła wody w pobliżu...",
+      "other": "Opisz, co chcesz zgłosić..."
+    },
+    "noReportsInCategory": "Brak raportów w tej kategorii",
+    "filters": {
+      "all": "Wszystkie"
+    }
+  },
+  "cragPage": {
+    "askAI": "Zapytaj AI",
+    "currentConditions": "Aktualne warunki",
+    "sectors": "Sektory",
+    "disclaimer": "Warunki pogodowe mogą się szybko zmieniać. Zawsze sprawdzaj warunki na miejscu i kieruj się własnym osądem.",
+    "askAIAboutCrag": "Zapytaj AI o tę skałkę",
+    "viewOnSunCalc": "Zobacz czasy słońca/księżyca",
+    "viewOnMap": "Zobacz na mapie"
   }
 }

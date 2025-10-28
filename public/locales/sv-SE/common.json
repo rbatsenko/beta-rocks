@@ -23,7 +23,12 @@
   "chat": {
     "analyzing": "Analyserar förhållanden...",
     "thinking": "Tänker...",
-    "inputPlaceholder": "Fråga om valfri klippa eller sektor..."
+    "inputPlaceholder": "Fråga om valfri klippa eller sektor...",
+    "clearHistory": "Rensa historik",
+    "clearHistoryConfirm": "Är du säker på att du vill rensa all chatthistorik? Detta kan inte ångras.",
+    "clearChat": "Rensa chatt",
+    "clearChatTooltip": "Rensa den aktuella konversationen",
+    "clearChatConfirm": "Rensa din chatt? Detta tar bort alla meddelanden från den aktuella konversationen."
   },
   "conditions": {
     "rating": "Betyg",
@@ -239,6 +244,43 @@
     "volcanic": "vulkanisk",
     "phyllite": "fyllit"
   },
+  "sync": {
+    "banner": {
+      "title": "Din data synkroniseras mellan enheter",
+      "description": "Dina favoriter, rapporter och chatthistorik sparas lokalt och kan synkroniseras till andra enheter med din synkroniseringsnyckel.",
+      "learnMore": "Läs mer",
+      "dismiss": "Jag förstår"
+    },
+    "status": {
+      "synced": "Synkroniserad",
+      "syncing": "Synkroniserar...",
+      "offline": "Offline"
+    },
+    "notification": {
+      "title": "Synkroniseringsnyckel skapad",
+      "description": "Vi har skapat en unik nyckel för att synkronisera dina favoriter och chattar mellan enheter.",
+      "viewInSettings": "Visa i inställningar"
+    }
+  },
+  "syncExplainer": {
+    "title": "How Sync Works",
+    "description": "Keep your data in sync across all your devices seamlessly and securely.",
+    "features": {
+      "syncKey": {
+        "title": "Unique Sync Key",
+        "description": "Each user gets a secure, unique key to sync their data across devices."
+      },
+      "multiDevice": {
+        "title": "Multi-Device Access",
+        "description": "Access your favorites and chat history from any device by using your sync key."
+      },
+      "privacy": {
+        "title": "Privacy First",
+        "description": "Your data is encrypted and only accessible with your sync key. No account required."
+      }
+    },
+    "openSettings": "Open Settings"
+  },
   "profile": {
     "anonymous": "Anonym",
     "member": "Medlem",
@@ -268,6 +310,18 @@
       "hideKey": "Dölj nyckel",
       "qrCode": "QR-kod",
       "qrDescription": "Skanna denna QR-kod på en annan enhet för att synka dina data",
+      "restoreTitle": "Återställ från en annan enhet",
+      "restoreDescription": "Har du redan en synkroniseringsnyckel? Klistra in den här för att återställa dina data",
+      "restoreLabel": "Klistra in din synkroniseringsnyckel",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Återställ synkroniseringsnyckel",
+      "restoring": "Återställer...",
+      "restoreSuccess": "Synkroniseringsnyckeln återställdes! Laddar om...",
+      "restoreError": "Ogiltigt format på synkroniseringsnyckeln. Kontrollera och försök igen.",
+      "saveNote": {
+        "title": "Spara din synkroniseringsnyckel",
+        "description": "Vi rekommenderar att du sparar din synkroniseringsnyckel på en säker plats som din Anteckningar-app eller lösenordshanterare. Du kommer att behöva den för att återställa dina data på andra enheter."
+      },
       "warning": {
         "title": "Håll din synkroniseringsnyckel privat",
         "description": "Alla med din synkroniseringsnyckel kan komma åt dina favoriter och inställningar. Dela den inte offentligt."
@@ -276,7 +330,9 @@
     "dangerZone": {
       "title": "Farozon",
       "description": "Dessa åtgärder är permanenta och kan inte ångras",
-      "clearData": "Rensa all lokal data"
+      "deleteProfile": "Ta bort profil",
+      "deleteProfileConfirm": "Är du säker på att du vill ta bort din profil? Detta kommer permanent att ta bort all din data inklusive favoriter, chatthistorik och inställningar. Denna åtgärd kan inte ångras.",
+      "deleteFailed": "Det gick inte att ta bort profilen. Försök igen."
     }
   },
   "favorites": {
@@ -298,7 +354,7 @@
     "wind": "Vind",
     "crowds": "Folksamling",
     "additionalComments": "Ytterligare kommentarer",
-    "commentsPlaceholder": "Beskriv aktuella förhållanden, bergets kvalitet, tillträde, etc.",
+    "commentsPlaceholder": "T.ex: östra sektorn fortfarande fuktig, stigen lerig - var försiktig, Led X - vatten sipprar från sprickan, grepp halkiga...",
     "submit": "Skicka rapport",
     "submitting": "Skickar...",
     "helpful": "Hjälpsam",
@@ -310,6 +366,14 @@
       "okay": "Okej",
       "good": "Bra",
       "excellent": "Utmärkt"
+    },
+    "scales": {
+      "veryWet": "Mycket vått",
+      "veryDry": "Perfekt",
+      "calm": "Lugnt",
+      "veryWindy": "Mycket blåsigt",
+      "empty": "Tomt",
+      "veryCrowded": "Mycket trångt"
     },
     "recentReports": "Senaste rapporter",
     "noReports": "Inga rapporter än",

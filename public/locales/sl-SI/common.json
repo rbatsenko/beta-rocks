@@ -23,7 +23,12 @@
   "chat": {
     "analyzing": "Analiziram razmere...",
     "thinking": "Razmišljam...",
-    "inputPlaceholder": "Vprašaj po kateremkoli plezališču ali sektorju..."
+    "inputPlaceholder": "Vprašaj po kateremkoli plezališču ali sektorju...",
+    "clearHistory": "Počisti zgodovino",
+    "clearHistoryConfirm": "Ali ste prepričani, da želite izbrisati vso zgodovino klepeta? Tega dejanja ni mogoče razveljaviti.",
+    "clearChat": "Izbriši klepet",
+    "clearChatTooltip": "Izbriši trenutni pogovor",
+    "clearChatConfirm": "Izbrisati vaš klepet? To bo odstranilo vsa sporočila iz trenutnega pogovora."
   },
   "conditions": {
     "rating": "Ocena",
@@ -239,6 +244,43 @@
     "volcanic": "vulkanski",
     "phyllite": "filit"
   },
+  "sync": {
+    "banner": {
+      "title": "Vaši podatki se sinhronizirajo med napravami",
+      "description": "Vaše priljubljene, poročila in zgodovina klepeta so shranjeni lokalno in se lahko sinhronizirajo na druge naprave z vašim sinhronizacijskim ključem.",
+      "learnMore": "Več",
+      "dismiss": "Razumem"
+    },
+    "status": {
+      "synced": "Sinhronizirano",
+      "syncing": "Sinhronizacija...",
+      "offline": "Brez povezave"
+    },
+    "notification": {
+      "title": "Sinhronizacijski ključ ustvarjen",
+      "description": "Ustvarili smo edinstven ključ za sinhronizacijo vaših priljubljenih in klepetov med napravami.",
+      "viewInSettings": "Pogled v nastavitvah"
+    }
+  },
+  "syncExplainer": {
+    "title": "How Sync Works",
+    "description": "Keep your data in sync across all your devices seamlessly and securely.",
+    "features": {
+      "syncKey": {
+        "title": "Unique Sync Key",
+        "description": "Each user gets a secure, unique key to sync their data across devices."
+      },
+      "multiDevice": {
+        "title": "Multi-Device Access",
+        "description": "Access your favorites and chat history from any device by using your sync key."
+      },
+      "privacy": {
+        "title": "Privacy First",
+        "description": "Your data is encrypted and only accessible with your sync key. No account required."
+      }
+    },
+    "openSettings": "Open Settings"
+  },
   "profile": {
     "anonymous": "Anonimen",
     "member": "Član",
@@ -268,6 +310,18 @@
       "hideKey": "Skrij ključ",
       "qrCode": "QR koda",
       "qrDescription": "Skeniraj to QR kodo na drugi napravi za sinhronizacijo podatkov",
+      "restoreTitle": "Obnovi z druge naprave",
+      "restoreDescription": "Že imaš ključ za sinhronizacijo? Prilepi ga tukaj za obnovitev podatkov",
+      "restoreLabel": "Prilepi svoj ključ za sinhronizacijo",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Obnovi ključ za sinhronizacijo",
+      "restoring": "Obnavljam...",
+      "restoreSuccess": "Ključ za sinhronizacijo uspešno obnovljen! Ponovno nalaganje...",
+      "restoreError": "Neveljavna oblika ključa za sinhronizacijo. Preveri in poskusi znova.",
+      "saveNote": {
+        "title": "Shrani svoj ključ za sinhronizacijo",
+        "description": "Priporočamo, da shraniš ključ za sinhronizacijo na varnem mestu, kot je aplikacija Opombe ali upravitelj gesel. Potreboval ga boš za obnovitev podatkov na drugih napravah."
+      },
       "warning": {
         "title": "Ohrani ključ za sinhronizacijo zaseben",
         "description": "Kdorkoli z tvojim ključem za sinhronizacijo lahko dostopa do tvojih priljubljenih in nastavitev. Ne deli ga javno."
@@ -276,7 +330,9 @@
     "dangerZone": {
       "title": "Nevarna cona",
       "description": "Ta dejanja so trajna in jih ni mogoče razveljaviti",
-      "clearData": "Izbriši vse lokalne podatke"
+      "deleteProfile": "Izbriši profil",
+      "deleteProfileConfirm": "Ali ste prepričani, da želite izbrisati svoj profil? To bo trajno odstranilo vse vaše podatke, vključno s priljubljenimi, zgodovino klepeta in nastavitvami. Tega dejanja ni mogoče razveljaviti.",
+      "deleteFailed": "Profila ni bilo mogoče izbrisati. Poskusite znova."
     }
   },
   "favorites": {
@@ -298,7 +354,7 @@
     "wind": "Veter",
     "crowds": "Gneča",
     "additionalComments": "Dodatni komentarji",
-    "commentsPlaceholder": "Opiši trenutne razmere, kvaliteto skale, dostop, itd.",
+    "commentsPlaceholder": "Npr: vzhodni sektor še vlažen, pot blatna - previdno, Smer X - voda pušča iz razpoke, prijemala drsijo...",
     "submit": "Oddaj poročilo",
     "submitting": "Oddajam...",
     "helpful": "Koristno",
@@ -310,6 +366,14 @@
       "okay": "V redu",
       "good": "Dobro",
       "excellent": "Odlično"
+    },
+    "scales": {
+      "veryWet": "Zelo mokro",
+      "veryDry": "Popolno",
+      "calm": "Mirno",
+      "veryWindy": "Zelo vetrovno",
+      "empty": "Prazno",
+      "veryCrowded": "Zelo polno"
     },
     "recentReports": "Nedavna poročila",
     "noReports": "Še ni poročil",

@@ -23,7 +23,12 @@
   "chat": {
     "analyzing": "Analyserer forhold...",
     "thinking": "Tenker...",
-    "inputPlaceholder": "Spør om et hvilket som helst crag eller sektor..."
+    "inputPlaceholder": "Spør om et hvilket som helst crag eller sektor...",
+    "clearHistory": "Tøm historikk",
+    "clearHistoryConfirm": "Er du sikker på at du vil tømme hele chattehistorikken? Dette kan ikke angres.",
+    "clearChat": "Tøm chat",
+    "clearChatTooltip": "Tøm den nåværende samtalen",
+    "clearChatConfirm": "Tømme chatten din? Dette vil fjerne alle meldinger fra den nåværende samtalen."
   },
   "conditions": {
     "rating": "Vurdering",
@@ -239,6 +244,43 @@
     "volcanic": "vulkansk",
     "phyllite": "fyllitt"
   },
+  "sync": {
+    "banner": {
+      "title": "Dataene dine synkroniseres mellom enheter",
+      "description": "Dine favoritter, rapporter og chattehistorikk lagres lokalt og kan synkroniseres til andre enheter med synkroniseringsnøkkelen din.",
+      "learnMore": "Lær mer",
+      "dismiss": "Jeg forstår"
+    },
+    "status": {
+      "synced": "Synkronisert",
+      "syncing": "Synkroniserer...",
+      "offline": "Frakoblet"
+    },
+    "notification": {
+      "title": "Synkroniseringsnøkkel opprettet",
+      "description": "Vi har generert en unik nøkkel for å synkronisere dine favoritter og chatter på tvers av enheter.",
+      "viewInSettings": "Vis i innstillinger"
+    }
+  },
+  "syncExplainer": {
+    "title": "How Sync Works",
+    "description": "Keep your data in sync across all your devices seamlessly and securely.",
+    "features": {
+      "syncKey": {
+        "title": "Unique Sync Key",
+        "description": "Each user gets a secure, unique key to sync their data across devices."
+      },
+      "multiDevice": {
+        "title": "Multi-Device Access",
+        "description": "Access your favorites and chat history from any device by using your sync key."
+      },
+      "privacy": {
+        "title": "Privacy First",
+        "description": "Your data is encrypted and only accessible with your sync key. No account required."
+      }
+    },
+    "openSettings": "Open Settings"
+  },
   "profile": {
     "anonymous": "Anonym",
     "member": "Medlem",
@@ -268,6 +310,18 @@
       "hideKey": "Skjul nøkkel",
       "qrCode": "QR-kode",
       "qrDescription": "Skann denne QR-koden på en annen enhet for å synkronisere dataene dine",
+      "restoreTitle": "Gjenopprett fra en annen enhet",
+      "restoreDescription": "Har du allerede en synkroniseringsnøkkel? Lim den inn her for å gjenopprette dataene dine",
+      "restoreLabel": "Lim inn synkroniseringsnøkkelen din",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Gjenopprett synkroniseringsnøkkel",
+      "restoring": "Gjenoppretter...",
+      "restoreSuccess": "Synkroniseringsnøkkelen ble gjenopprettet! Laster inn på nytt...",
+      "restoreError": "Ugyldig format på synkroniseringsnøkkelen. Vennligst sjekk og prøv igjen.",
+      "saveNote": {
+        "title": "Lagre synkroniseringsnøkkelen din",
+        "description": "Vi anbefaler å lagre synkroniseringsnøkkelen din på et sikkert sted som Notater-appen din eller en passordbehandler. Du vil trenge den for å gjenopprette dataene dine på andre enheter."
+      },
       "warning": {
         "title": "Hold synkroniseringsnøkkelen din privat",
         "description": "Alle med synkroniseringsnøkkelen din kan få tilgang til favorittene og innstillingene dine. Ikke del den offentlig."
@@ -276,7 +330,9 @@
     "dangerZone": {
       "title": "Faresone",
       "description": "Disse handlingene er permanente og kan ikke angres",
-      "clearData": "Slett all lokal data"
+      "deleteProfile": "Slett profil",
+      "deleteProfileConfirm": "Er du sikker på at du vil slette profilen din? Dette vil permanent fjerne all dataen din inkludert favoritter, chattehistorikk og innstillinger. Denne handlingen kan ikke angres.",
+      "deleteFailed": "Kunne ikke slette profilen. Vennligst prøv igjen."
     }
   },
   "favorites": {
@@ -298,7 +354,7 @@
     "wind": "Vind",
     "crowds": "Folkemengde",
     "additionalComments": "Tilleggskommentarer",
-    "commentsPlaceholder": "Beskriv gjeldende forhold, fjellkvalitet, tilkomst, etc.",
+    "commentsPlaceholder": "F.eks: østre sektor fremdeles fuktig, sti gjørmete - vær forsiktig, Rute X - vann siver fra sprekken, grep glatte...",
     "submit": "Send rapport",
     "submitting": "Sender...",
     "helpful": "Nyttig",
@@ -310,6 +366,14 @@
       "okay": "Helt greit",
       "good": "Bra",
       "excellent": "Utmerket"
+    },
+    "scales": {
+      "veryWet": "Veldig vått",
+      "veryDry": "Perfekt",
+      "calm": "Rolig",
+      "veryWindy": "Veldig vindfullt",
+      "empty": "Tomt",
+      "veryCrowded": "Veldig fullt"
     },
     "recentReports": "Nylige rapporter",
     "noReports": "Ingen rapporter ennå",

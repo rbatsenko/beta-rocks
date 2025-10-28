@@ -86,6 +86,73 @@ export type Database = {
         };
         Relationships: [];
       };
+      chat_messages: {
+        Row: {
+          content: string;
+          created_at: string | null;
+          id: string;
+          role: string;
+          session_id: string;
+          tool_invocations: Json | null;
+        };
+        Insert: {
+          content: string;
+          created_at?: string | null;
+          id: string;
+          role: string;
+          session_id: string;
+          tool_invocations?: Json | null;
+        };
+        Update: {
+          content?: string;
+          created_at?: string | null;
+          id?: string;
+          role?: string;
+          session_id?: string;
+          tool_invocations?: Json | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "chat_messages_session_id_fkey";
+            columns: ["session_id"];
+            isOneToOne: false;
+            referencedRelation: "chat_sessions";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      chat_sessions: {
+        Row: {
+          created_at: string | null;
+          id: string;
+          title: string | null;
+          updated_at: string | null;
+          user_profile_id: string;
+        };
+        Insert: {
+          created_at?: string | null;
+          id?: string;
+          title?: string | null;
+          updated_at?: string | null;
+          user_profile_id: string;
+        };
+        Update: {
+          created_at?: string | null;
+          id?: string;
+          title?: string | null;
+          updated_at?: string | null;
+          user_profile_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "chat_sessions_user_profile_id_fkey";
+            columns: ["user_profile_id"];
+            isOneToOne: false;
+            referencedRelation: "user_profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       confirmations: {
         Row: {
           created_at: string | null;
@@ -181,6 +248,7 @@ export type Database = {
       reports: {
         Row: {
           author_id: string | null;
+          category: string;
           crag_id: string | null;
           created_at: string | null;
           id: string;
@@ -195,6 +263,7 @@ export type Database = {
         };
         Insert: {
           author_id?: string | null;
+          category?: string;
           crag_id?: string | null;
           created_at?: string | null;
           id?: string;
@@ -209,6 +278,7 @@ export type Database = {
         };
         Update: {
           author_id?: string | null;
+          category?: string;
           crag_id?: string | null;
           created_at?: string | null;
           id?: string;

@@ -1,0 +1,383 @@
+{
+  "header": {
+    "title": "temps.rocks"
+  },
+  "welcome": {
+    "heading": "Demandez les conditions d'escalade",
+    "description": "Obtenez la météo en temps réel, une analyse de friction et les meilleures fenêtres d'escalade pour n'importe quelle falaise dans le monde",
+    "exampleQueries": {
+      "query1": {
+        "display": "Conditions à Squamish aujourd'hui ?",
+        "query": "Conditions à Squamish aujourd'hui ?"
+      },
+      "query2": {
+        "display": "Est-ce que Val-David est sec cet après-midi ?",
+        "query": "Est-ce que Val-David est sec cet après-midi ?"
+      },
+      "query3": {
+        "display": "Conditions au Mont-Tremblant demain ?",
+        "query": "Conditions au Mont-Tremblant demain ?"
+      }
+    }
+  },
+  "chat": {
+    "analyzing": "Analyse des conditions...",
+    "thinking": "Réflexion...",
+    "inputPlaceholder": "Demandez pour une falaise ou un secteur...",
+    "clearHistory": "Effacer l'historique",
+    "clearHistoryConfirm": "Êtes-vous sûr de vouloir effacer tout l'historique de chat ? Cette action est irréversible.",
+    "clearChat": "Effacer le chat",
+    "clearChatTooltip": "Effacer la conversation actuelle",
+    "clearChatConfirm": "Effacer votre chat ? Cela supprimera tous les messages de la conversation actuelle."
+  },
+  "conditions": {
+    "rating": "Note",
+    "details": "Détails",
+    "location": "Localisation",
+    "favorite": "Favori",
+    "favorited": "En favoris",
+    "addReport": "Ajouter un rapport"
+  },
+  "ratings": {
+    "great": "Excellent",
+    "good": "Bon",
+    "fair": "Correct",
+    "poor": "Mauvais",
+    "nope": "À éviter"
+  },
+  "reasons": {
+    "perfectTemp": "Température parfaite ({{temp}}°C)",
+    "tempTooHigh": "Température trop élevée - les doigts peuvent glisser",
+    "coldGoodFriction": "Frais mais avec une bonne friction pour {{rockType}}",
+    "idealHumidity": "Humidité idéale ({{humidity}}%)",
+    "lowHumidityGranite": "Humidité basse, idéale pour l'adhérence sur granite",
+    "readyInHours": "Prêt pour grimper dans ~{{hours}} heures",
+    "acceptable": "Conditions acceptables"
+  },
+  "warnings": {
+    "tooWarm": "Trop chaud pour {{rockType}} ({{temp}}°C)",
+    "coldSuboptimal": "Froid et peu optimal pour {{rockType}}",
+    "highHumidity": "Humidité élevée ({{humidity}}%) - la roche peut être glissante",
+    "wetDangerousSandstone": "Roche mouillée - dangereux de grimper (le grès est fragile mouillé)",
+    "wetSlippery": "Roche mouillée - conditions glissantes",
+    "veryHighWinds": "Vent très fort ({{wind}} km/h) - risque de déséquilibre",
+    "highWind": "Vent fort ({{wind}} km/h)",
+    "recentPrecip": "Précipitations récentes ({{precip}}mm) - séchera dans ~{{hours}}h",
+    "currentlyWetDangerous": "Actuellement mouillé - dangereux",
+    "currentlyWet": "Actuellement mouillé"
+  },
+  "weather": {
+    "clearSky": "Ciel dégagé",
+    "mainlyClear": "Principalement dégagé",
+    "partlyCloudy": "Partiellement nuageux",
+    "overcast": "Couvert",
+    "fog": "Brouillard",
+    "depositingRimeFog": "Brouillard givrant",
+    "lightDrizzle": "Bruine légère",
+    "moderateDrizzle": "Bruine modérée",
+    "denseDrizzle": "Bruine dense",
+    "lightFreezingDrizzle": "Bruine verglaçante légère",
+    "denseFreezingDrizzle": "Bruine verglaçante forte",
+    "slightRain": "Pluie faible",
+    "moderateRain": "Pluie modérée",
+    "heavyRain": "Pluie forte",
+    "lightFreezingRain": "Pluie verglaçante légère",
+    "heavyFreezingRain": "Pluie verglaçante forte",
+    "slightSnowFall": "Neige faible",
+    "moderateSnowFall": "Neige modérée",
+    "heavySnowFall": "Neige forte",
+    "snowGrains": "Neige roulée",
+    "slightRainShowers": "Averses faibles",
+    "moderateRainShowers": "Averses modérées",
+    "violentRainShowers": "Averses fortes",
+    "slightSnowShowers": "Averses de neige faibles",
+    "heavySnowShowers": "Averses de neige fortes",
+    "thunderstorm": "Orage",
+    "thunderstormSlightHail": "Orage avec grêle faible",
+    "thunderstormHeavyHail": "Orage avec forte grêle"
+  },
+  "timeframes": {
+    "now": "maintenant",
+    "today": "aujourd'hui",
+    "tomorrow": "demain",
+    "thisAfternoon": "cet après-midi",
+    "thisEvening": "ce soir",
+    "tonight": "cette nuit"
+  },
+  "disambiguation": {
+    "foundMultipleAreas": "{{count}} sites d'escalade trouvés pour \"{{location}}\". Choisissez-en un :",
+    "foundMultipleLocations": "Plusieurs lieux trouvés pour \"{{location}}\". Choisissez-en un :",
+    "queryTemplate": "conditions à {{name}} ({{latitude}}, {{longitude}})"
+  },
+  "footer": {
+    "about": "À propos",
+    "privacy": "Confidentialité",
+    "github": "GitHub",
+    "brand": "temps.rocks",
+    "description": "Conditions d'escalade gratuites pour tous. Créé avec ❤️ pour la communauté des grimpeurs.",
+    "attribution": "Données d'Open-Meteo, d'OpenBeta et des <osmLink>contributeurs d'OpenStreetMap</osmLink>. Rapports communautaires.",
+    "copyright": "© 2025 temps.rocks. Tous droits réservés."
+  },
+  "features": {
+    "heading": "Tout ce qu'il vous faut",
+    "subheading": "Toutes les conditions d'escalade à portée de main, gratuitement",
+    "realTimeWeather": {
+      "title": "Météo en temps réel",
+      "description": "Prévisions précises d'Open-Meteo avec calcul soleil/ombre par secteur"
+    },
+    "chatInterface": {
+      "title": "Interface de chat",
+      "description": "Questions en langage naturel grâce à l'IA. Demandez dans n'importe quelle langue, obtenez des réponses instantanées"
+    },
+    "communityReports": {
+      "title": "Rapports communautaires",
+      "description": "Partagez et confirmez les conditions actuelles. Aidez les grimpeurs avec des mises à jour en direct"
+    },
+    "globalCoverage": {
+      "title": "Couverture mondiale",
+      "description": "Toute falaise ou secteur grâce à l'intégration de la base de données OpenBeta"
+    },
+    "worksOffline": {
+      "title": "Fonctionne hors ligne",
+      "description": "Conception orientée local. Enregistrez les données hors ligne et synchronisez-les entre vos appareils avec une clé"
+    },
+    "privacyFirst": {
+      "title": "Confidentialité d'abord",
+      "description": "Anonyme par défaut. Aucun compte requis. Vos données restent les vôtres"
+    }
+  },
+  "ui": {
+    "toggleTheme": "Changer de thème",
+    "selectLanguage": "Choisir la langue",
+    "aboutApp": "À propos de l'app"
+  },
+  "dialog": {
+    "close": "Fermer",
+    "cancel": "Annuler",
+    "detailedConditions": "Conditions détaillées",
+    "fullAnalysis": "Analyse complète de la météo et des conditions d'escalade",
+    "showMap": "Carte",
+    "tabs": {
+      "overview": "Vue d'ensemble",
+      "hourly": "Horaire",
+      "daily": "14 jours"
+    },
+    "currentRating": "Note actuelle",
+    "currentConditions": "Conditions actuelles",
+    "currentWeather": "Météo actuelle",
+    "temperature": "Température",
+    "humidity": "Humidité",
+    "windSpeed": "Vitesse du vent",
+    "precipitation": "Précipitations",
+    "sunrise": "Lever du soleil",
+    "sunset": "Coucher du soleil",
+    "high": "Max",
+    "low": "Min",
+    "rain": "Pluie",
+    "wind": "Vent",
+    "dry": "Sec",
+    "wet": "Humide",
+    "precipitationContext": "Contexte des précipitations",
+    "last24h": "Dernières 24 h",
+    "last48h": "Dernières 48 h",
+    "next24h": "Prochaines 24 h",
+    "dewPointSpread": "Écart au point de rosée (risque de condensation)",
+    "lowRisk": "✅ Risque faible - la roche devrait rester sèche",
+    "moderateRisk": "⚠️ Risque modéré - surveillez l'humidité",
+    "highRisk": "❌ Risque élevé - condensation probable",
+    "optimalWindows": "Fenêtres d'escalade optimales",
+    "nextDays": "5 prochains jours",
+    "bestTime": "🌟 Meilleur moment",
+    "noOptimalConditions": "Aucune condition optimale dans les 5 prochains jours",
+    "checkHourlyForecast": "Consultez les prévisions horaires pour plus de détails",
+    "weatherDisclaimer": "⚠️ La météo peut changer rapidement. Vérifiez les prévisions avant de partir et observez les conditions sur place.",
+    "window": "fenêtre",
+    "windows": "fenêtres",
+    "today": "Aujourd'hui",
+    "tomorrow": "Demain",
+    "showCompleteTimeline": "Afficher toute la chronologie",
+    "hour": "heure",
+    "hours": "heures",
+    "period": "période",
+    "periods": "périodes",
+    "noHourlyData": "Pas de données de prévision horaire disponibles",
+    "noDailyData": "Pas de données de prévision quotidienne disponibles",
+    "noOptimalHours": "Aucune fenêtre optimale le",
+    "forecastIndicators": "Indicateurs de prévision :",
+    "goodClimbingWindows": "Bonnes fenêtres d'escalade",
+    "fairConditions": "Conditions correctes",
+    "poorConditions": "Mauvaises conditions",
+    "lessReliable": "Jours 8-14 : prévision moins fiable",
+    "lessReliableHourly": "Prochaines heures moins prévisibles",
+    "lessCertain": "MOINS CERTAIN",
+    "todayBadge": "AUJOURD'HUI"
+  },
+  "timeContext": {
+    "sunrise": "Lever du soleil",
+    "sunset": "Coucher du soleil",
+    "recommendedHours": "Heures de grimpe recommandées",
+    "totalDaylight": "Lumière du jour totale",
+    "hoursOfDaylight": "{{hours}} heures de jour",
+    "earlyStartRecommended": "Départ matinal recommandé pour éviter la chaleur",
+    "limitedDaylight": "Lumière du jour limitée - planifiez en conséquence",
+    "morningConditionsBest": "Meilleures conditions le matin",
+    "eveningSession": "Conditions de session en soirée",
+    "showAllHours": "Afficher les 24 heures",
+    "showClimbingHoursOnly": "Afficher uniquement les heures de grimpe",
+    "expandHours": "Développer pour voir toutes les heures"
+  },
+  "rockTypes": {
+    "limestone": "calcaire",
+    "granite": "granite",
+    "sandstone": "grès",
+    "basalt": "basalte",
+    "gneiss": "gneiss",
+    "quartzite": "quartzite",
+    "conglomerate": "conglomérat",
+    "rhyolite": "rhyolite",
+    "porphyry": "porphyre",
+    "andesite": "andésite",
+    "slate": "ardoise",
+    "schist": "schiste",
+    "dolomite": "dolomite",
+    "volcanic": "volcanique",
+    "phyllite": "phyllite"
+  },
+  "sync": {
+    "banner": {
+      "title": "Vos données se synchronisent entre appareils",
+      "description": "Vos favoris, rapports et historique de chat sont enregistrés localement et peuvent se synchroniser sur d'autres appareils avec votre clé de synchronisation.",
+      "learnMore": "En savoir plus",
+      "dismiss": "Compris"
+    },
+    "status": {
+      "synced": "Synchronisé",
+      "syncing": "Synchronisation...",
+      "offline": "Hors ligne"
+    },
+    "notification": {
+      "title": "Clé de synchronisation créée",
+      "description": "Nous avons généré une clé unique pour synchroniser vos favoris et chats sur tous vos appareils.",
+      "viewInSettings": "Voir dans les paramètres"
+    }
+  },
+  "syncExplainer": {
+    "title": "Comment fonctionne la synchronisation",
+    "description": "Gardez vos données synchronisées sur tous vos appareils de manière transparente et sécurisée.",
+    "features": {
+      "syncKey": {
+        "title": "Clé de synchronisation unique",
+        "description": "Chaque utilisateur reçoit une clé sécurisée et unique pour synchroniser ses données entre appareils."
+      },
+      "multiDevice": {
+        "title": "Accès multi-appareils",
+        "description": "Accédez à vos favoris et à l'historique de vos conversations depuis n'importe quel appareil en utilisant votre clé de synchronisation."
+      },
+      "privacy": {
+        "title": "Confidentialité d'abord",
+        "description": "Vos données sont chiffrées et accessibles uniquement avec votre clé de synchronisation. Aucun compte requis."
+      }
+    },
+    "openSettings": "Ouvrir les paramètres"
+  },
+  "profile": {
+    "anonymous": "Anonyme",
+    "member": "Membre",
+    "anonymousMember": "Membre anonyme",
+    "favorites": "Favoris",
+    "recent": "Recherches récentes",
+    "stats": "Vos statistiques",
+    "settings": "Paramètres",
+    "clearData": "Effacer toutes les données"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "description": "Gérez votre profil, clé de synchronisation et préférences",
+    "save": "Enregistrer",
+    "saving": "Enregistrement...",
+    "displayName": {
+      "label": "Nom d'affichage",
+      "description": "Votre nom affiché sur les rapports et confirmations (optionnel)",
+      "placeholder": "Entrez votre nom..."
+    },
+    "syncKey": {
+      "title": "Clé de synchronisation",
+      "description": "Utilisez cette clé pour synchroniser vos favoris et paramètres entre vos appareils",
+      "label": "Votre clé de synchronisation",
+      "copy": "Copier la clé de synchronisation",
+      "showFullKey": "Afficher la clé complète",
+      "hideKey": "Masquer la clé",
+      "qrCode": "Code QR",
+      "qrDescription": "Scannez ce code QR sur un autre appareil pour synchroniser vos données",
+      "restoreTitle": "Restaurer depuis un autre appareil",
+      "restoreDescription": "Vous avez déjà une clé de synchronisation ? Collez-la ici pour restaurer vos données",
+      "restoreLabel": "Collez votre clé de synchronisation",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Restaurer la clé de synchronisation",
+      "restoring": "Restauration en cours...",
+      "restoreSuccess": "Clé de synchronisation restaurée avec succès ! Rechargement...",
+      "restoreError": "Format de clé de synchronisation invalide. Veuillez vérifier et réessayer.",
+      "saveNote": {
+        "title": "Enregistrer votre clé de synchronisation",
+        "description": "Nous vous recommandons d'enregistrer votre clé de synchronisation dans un endroit sûr comme votre application Notes ou un gestionnaire de mots de passe. Vous en aurez besoin pour restaurer vos données sur d'autres appareils."
+      },
+      "warning": {
+        "title": "Gardez votre clé de synchronisation privée",
+        "description": "Toute personne disposant de votre clé de synchronisation peut accéder à vos favoris et paramètres. Ne la partagez pas publiquement."
+      }
+    },
+    "dangerZone": {
+      "title": "Zone dangereuse",
+      "description": "Ces actions sont permanentes et ne peuvent pas être annulées",
+      "deleteProfile": "Supprimer le profil",
+      "deleteProfileConfirm": "Voulez-vous vraiment supprimer votre profil ? Cela supprimera définitivement toutes vos données, y compris les favoris, l'historique des discussions et les paramètres. Cette action ne peut pas être annulée.",
+      "deleteFailed": "Échec de la suppression du profil. Veuillez réessayer."
+    }
+  },
+  "favorites": {
+    "title": "Vos falaises favorites",
+    "description": "Vous avez {{count}} emplacements favoris",
+    "empty": "Aucun favori",
+    "emptyMessage": "Vous n'avez pas encore ajouté de falaises favorites",
+    "emptyHint": "Cliquez sur le bouton étoile sur n'importe quelle carte de conditions pour l'ajouter à vos favoris",
+    "lastChecked": "Dernière vérification",
+    "frictionScore": "Score de friction",
+    "viewConditions": "Voir les conditions",
+    "remove": "Retirer"
+  },
+  "reports": {
+    "addReport": "Ajouter un rapport de conditions",
+    "addReportDescription": "Partagez les conditions actuelles à {{cragName}}",
+    "postingAs": "Publier en tant que",
+    "dryness": "Sécheresse",
+    "wind": "Vent",
+    "crowds": "Affluence",
+    "additionalComments": "Commentaires supplémentaires",
+    "commentsPlaceholder": "Ex: secteur Est encore mouillé, sentier boueux - attention, Voie X - eau suinte de la fissure, prises glissantes...",
+    "submit": "Soumettre le rapport",
+    "submitting": "Envoi en cours...",
+    "helpful": "Utile",
+    "loginToConfirm": "Veuillez configurer votre profil pour confirmer les rapports",
+    "confirmFailed": "Échec de la confirmation du rapport. Veuillez réessayer.",
+    "ratings": {
+      "veryPoor": "Très mauvais",
+      "poor": "Mauvais",
+      "okay": "Acceptable",
+      "good": "Bon",
+      "excellent": "Excellent"
+    },
+    "scales": {
+      "veryWet": "Très mouillé",
+      "veryDry": "Parfait",
+      "calm": "Calme",
+      "veryWindy": "Très venteux",
+      "empty": "Vide",
+      "veryCrowded": "Très fréquenté"
+    },
+    "recentReports": "Rapports récents",
+    "noReports": "Aucun rapport",
+    "noReportsMessage": "Soyez le premier à partager les conditions de cette falaise",
+    "reportCount": "{{count}} rapports",
+    "viewAllReports": "Voir tous les rapports"
+  }
+}

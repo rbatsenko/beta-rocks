@@ -1,15 +1,15 @@
 "use client";
 
 import { useState, useMemo, useCallback, useEffect } from "react";
-import { useChat } from "@ai-sdk/react";
-import Link from "next/link";
+import { useChat, type UIMessage } from "@ai-sdk/react";
+import type { TFunction } from "i18next";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send, Loader2, CloudSun, Sun, Info } from "lucide-react";
-import { ThemeToggle } from "@/components/ThemeToggle";
-import { LanguageSelector } from "@/components/LanguageSelector";
+import { Send, Loader2, CloudSun, Sun, Info, RotateCcw, Star } from "lucide-react";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
+import { useChatHistory } from "@/hooks/useChatHistory";
+import { getFavoritesFromStorage } from "@/lib/storage/favorites";
 import { Message, MessageContent } from "@/components/ai-elements/message";
 import { Response } from "@/components/ai-elements/response";
 import {
@@ -30,15 +30,18 @@ const ScrollToBottomOnSignal = ({ signal }: { signal: number }) => {
   }, [signal, scrollToBottom]);
   return null;
 };
-import { ConditionsDetailDialog } from "@/components/ConditionsDetailDialog";
+import { Header } from "@/components/Header";
+import { HeaderActions } from "@/components/HeaderActions";
 import { ConditionsDetailSheet } from "@/components/ConditionsDetailSheet";
 import { WeatherConditionCard } from "@/components/WeatherConditionCard";
 import { DisambiguationOptions } from "@/components/DisambiguationOptions";
 import { FeaturesDialog } from "@/components/FeaturesDialog";
-import { UserMenu } from "@/components/UserMenu";
 import { SettingsDialog } from "@/components/SettingsDialog";
 import { FavoritesDialog } from "@/components/FavoritesDialog";
+import { SyncNotification } from "@/components/SyncNotification";
 import { logRender } from "@/lib/debug/render-log";
+import { ConfirmDialog } from "@/components/ConfirmDialog";
+import { SyncExplainerDialog } from "@/components/SyncExplainerDialog";
 
 interface ConditionsData {
   location: string;
@@ -182,24 +185,60 @@ interface DisambiguationResult {
   }>;
 }
 
-const ChatInterface = () => {
-  const { t, language } = useClientTranslation("common");
+// Separate component that only mounts after history is loaded
+// This ensures useChat initializes with the correct messages
+const ChatUI = ({
+  initialMessages,
+  saveMessage,
+  handleNewChat,
+  t,
+  language,
+}: {
+  initialMessages: UIMessage[];
+  saveMessage: (message: UIMessage) => Promise<void>;
+  handleNewChat: () => Promise<void>;
+  t: TFunction;
+  language: string;
+}) => {
   const [input, setInput] = useState("");
+
   const { messages, sendMessage, status } = useChat({
+    // Load initial messages from history
+    messages: initialMessages,
     // Throttle updates to 30ms for smoother text streaming
     experimental_throttle: 30,
+    // Save messages as they finish streaming
+    onFinish: async ({ message, messages: allMessages }) => {
+      // IMPORTANT: Save user message FIRST to ensure correct chronological order
+      // (find the last user message in the array)
+      const lastUserMessage = [...allMessages]
+        .reverse()
+        .find((m) => m.role === "user" && m.id !== message.id);
+
+      if (lastUserMessage) {
+        await saveMessage(lastUserMessage);
+      }
+
+      // Then save the assistant message
+      await saveMessage(message);
+    },
   });
-  const [detailsDialogOpen, setDetailsDialogOpen] = useState(false);
+
   const [detailsSheetOpen, setDetailsSheetOpen] = useState(false);
   const [selectedConditions, setSelectedConditions] = useState<ConditionsData | null>(null);
   const [featuresDialogOpen, setFeaturesDialogOpen] = useState(false);
   const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
   const [favoritesDialogOpen, setFavoritesDialogOpen] = useState(false);
+  const [syncExplainerDialogOpen, setSyncExplainerDialogOpen] = useState(false);
+  const [newChatConfirmOpen, setNewChatConfirmOpen] = useState(false);
   const [scrollSignal, setScrollSignal] = useState(0);
   // Store prefetched full 14-day data keyed by location coordinates
   const [prefetchedDataMap, setPrefetchedDataMap] = useState<Map<string, PrefetchedFullData>>(
     new Map()
   );
+
+  // Load favorites for quick actions
+  const favorites = useMemo(() => getFavoritesFromStorage(), [messages.length]);
 
   // Get translation functions (memoized)
   const translations = useConditionsTranslations(t);
@@ -228,12 +267,14 @@ const ChatInterface = () => {
 
   // Memoize submit handler
   const handleSubmit = useCallback(
-    (e: React.FormEvent) => {
+    async (e: React.FormEvent) => {
       e.preventDefault();
       if (!input.trim()) return;
 
       const userMessage = input.trim();
       setInput("");
+
+      // Let useChat handle adding the message - we'll save it in onFinish
       sendMessage(
         { text: userMessage },
         {
@@ -300,7 +341,7 @@ const ChatInterface = () => {
   logRender("ChatInterface", {
     messages: messages.length,
     status,
-    detailsOpen: detailsDialogOpen,
+    detailsOpen: detailsSheetOpen,
     selected: selectedConditions?.location ?? null,
     inputLen: input.length,
   });
@@ -310,32 +351,39 @@ const ChatInterface = () => {
   return (
     <>
       <div className="flex flex-col h-dvh">
-        {/* Header */}
-        <header className="border-b bg-background/95 backdrop-blur-sm supports-backdrop-filter:bg-background/60 sticky top-0 z-50">
-          <div className="container flex h-16 items-center justify-between px-4">
-            <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-              <CloudSun className="w-6 h-6 text-orange-500" />
-              <h1 className="text-xl font-bold">{t("header.title")}</h1>
-            </Link>
-            <div className="flex items-center gap-2">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => setFeaturesDialogOpen(true)}
-                className="rounded-full"
-              >
-                <Info className="h-5 w-5" />
-                <span className="sr-only">{t("ui.aboutApp")}</span>
-              </Button>
-              <LanguageSelector />
-              <ThemeToggle />
-              <UserMenu
-                onSettingsClick={() => setSettingsDialogOpen(true)}
-                onFavoritesClick={() => setFavoritesDialogOpen(true)}
-              />
-            </div>
-          </div>
-        </header>
+        <Header
+          actions={
+            <HeaderActions
+              onSyncClick={() => setSyncExplainerDialogOpen(true)}
+              onSettingsClick={() => setSettingsDialogOpen(true)}
+              onFavoritesClick={() => setFavoritesDialogOpen(true)}
+              extraActions={
+                <>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => setFeaturesDialogOpen(true)}
+                    className="rounded-full"
+                  >
+                    <Info className="h-5 w-5" />
+                    <span className="sr-only">{t("ui.aboutApp")}</span>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => setNewChatConfirmOpen(true)}
+                    disabled={messages.length === 0}
+                    className="rounded-full"
+                    title={t("chat.clearChatTooltip")}
+                  >
+                    <RotateCcw className="h-5 w-5" />
+                    <span className="sr-only">{t("chat.clearChat")}</span>
+                  </Button>
+                </>
+              }
+            />
+          }
+        />
 
         {/* Chat Area */}
         <div className="flex-1 overflow-hidden flex flex-col">
@@ -351,6 +399,13 @@ const ChatInterface = () => {
                   <p className="text-muted-foreground mb-8 max-w-md text-base">
                     {t("welcome.description")}
                   </p>
+
+                  {/* Sync Key Notification */}
+                  <SyncNotification
+                    onViewInSettings={() => setSettingsDialogOpen(true)}
+                    onViewMore={() => setSyncExplainerDialogOpen(true)}
+                  />
+
                   <div className="flex flex-wrap gap-2 justify-center max-w-lg">
                     {exampleQueries.map((example, idx) => (
                       <Button
@@ -364,6 +419,36 @@ const ChatInterface = () => {
                       </Button>
                     ))}
                   </div>
+
+                  {/* Favorites Quick Actions */}
+                  {favorites.length > 0 && (
+                    <div className="mt-8 w-full max-w-lg">
+                      <div className="flex items-center gap-2 justify-center mb-4">
+                        <Star className="h-4 w-4 text-orange-500" />
+                        <h3 className="text-sm font-medium text-muted-foreground">
+                          {t("welcome.yourFavorites")}
+                        </h3>
+                      </div>
+                      <div className="flex flex-wrap gap-2 justify-center">
+                        {favorites.slice(0, 6).map((favorite) => (
+                          <Button
+                            key={favorite.id}
+                            variant="outline"
+                            size="sm"
+                            onClick={() =>
+                              handleExampleClick(
+                                t("welcome.favoriteQuery", { crag: favorite.areaName })
+                              )
+                            }
+                            className="transition-smooth hover:scale-105"
+                          >
+                            <Star className="h-3 w-3 mr-1.5 fill-orange-500 text-orange-500" />
+                            {favorite.areaName}
+                          </Button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               ) : (
                 messages.map((message) => {
@@ -371,7 +456,7 @@ const ChatInterface = () => {
                   const hasExecutingTool =
                     message.role === "assistant" &&
                     message.parts.some(
-                      (part) =>
+                      (part: any) =>
                         part.type.startsWith("tool-") &&
                         "state" in part &&
                         part.state !== "output-available"
@@ -379,7 +464,7 @@ const ChatInterface = () => {
 
                   // Check if message has any content to show
                   const hasContent = message.parts.some(
-                    (part) =>
+                    (part: any) =>
                       part.type === "text" || ("state" in part && part.state === "output-available")
                   );
 
@@ -389,7 +474,7 @@ const ChatInterface = () => {
                   const isAssistant = message.role === "assistant";
                   const toolOutIdx = isAssistant
                     ? message.parts.findIndex(
-                        (p) =>
+                        (p: any) =>
                           p.type === "tool-get_conditions" &&
                           "state" in p &&
                           p.state === "output-available"
@@ -437,7 +522,7 @@ const ChatInterface = () => {
                             </span>
                           </div>
                         )}
-                        {message.parts.map((part, i) => {
+                        {message.parts.map((part: any, i: number) => {
                           // Render text parts
                           if (part.type === "text") {
                             if (shouldPreferLastText) {
@@ -535,7 +620,7 @@ const ChatInterface = () => {
                                 translateReason={translations.translateReason}
                                 onDetailsClick={() => {
                                   setSelectedConditions(getMergedConditions());
-                                  setDetailsDialogOpen(true);
+                                  setDetailsSheetOpen(true);
                                 }}
                                 onSheetClick={() => {
                                   setSelectedConditions(getMergedConditions());
@@ -577,7 +662,7 @@ const ChatInterface = () => {
                     (message) =>
                       message.role === "assistant" &&
                       message.parts.some(
-                        (part) =>
+                        (part: any) =>
                           part.type.startsWith("tool-") &&
                           "state" in part &&
                           part.state !== "output-available"
@@ -646,15 +731,6 @@ const ChatInterface = () => {
         </div>
       </div>
 
-      {/* Conditions Detail Dialog */}
-      {selectedConditions && (
-        <ConditionsDetailDialog
-          open={detailsDialogOpen}
-          onOpenChange={setDetailsDialogOpen}
-          data={selectedConditions}
-        />
-      )}
-
       {/* Conditions Detail Sheet */}
       {selectedConditions && (
         <ConditionsDetailSheet
@@ -670,26 +746,145 @@ const ChatInterface = () => {
       {/* Settings Dialog */}
       <SettingsDialog open={settingsDialogOpen} onOpenChange={setSettingsDialogOpen} />
 
+      {/* Sync Explainer Dialog */}
+      <SyncExplainerDialog
+        open={syncExplainerDialogOpen}
+        onOpenChange={setSyncExplainerDialogOpen}
+        onOpenSettings={() => setSettingsDialogOpen(true)}
+      />
+
       {/* Favorites Dialog */}
-      <FavoritesDialog
-        open={favoritesDialogOpen}
-        onOpenChange={setFavoritesDialogOpen}
-        onViewConditions={(favorite) => {
-          // Close the favorites dialog
-          setFavoritesDialogOpen(false);
-          // Send message to chat to get conditions for this favorite location
-          const message = `What are the conditions at ${favorite.areaName}?`;
-          sendMessage(
-            { text: message },
-            {
-              body: {
-                locale: language,
-              },
-            }
-          );
+      <FavoritesDialog open={favoritesDialogOpen} onOpenChange={setFavoritesDialogOpen} />
+
+      {/* Clear Chat Confirmation Dialog */}
+      <ConfirmDialog
+        open={newChatConfirmOpen}
+        onOpenChange={setNewChatConfirmOpen}
+        onConfirm={() => {
+          setNewChatConfirmOpen(false);
+          handleNewChat();
         }}
+        title={t("chat.clearChat")}
+        description={t("chat.clearChatConfirm")}
+        confirmText={t("chat.clearChat")}
+        cancelText={t("dialog.cancel")}
+        variant="destructive"
       />
     </>
+  );
+};
+
+// Props passed from Server Component for SSR
+interface ChatInterfaceProps {
+  initialSyncKey?: string;
+  initialDisplayName?: string;
+  initialSessionId?: string;
+}
+
+// Main ChatInterface component that handles history loading
+const ChatInterface = ({
+  initialSyncKey: _initialSyncKey,
+  initialDisplayName: _initialDisplayName,
+  initialSessionId,
+}: ChatInterfaceProps = {}) => {
+  const { t, language } = useClientTranslation("common");
+  const [featuresDialogOpen, setFeaturesDialogOpen] = useState(false);
+  const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
+  const [favoritesDialogOpen, setFavoritesDialogOpen] = useState(false);
+  const [syncExplainerDialogOpen, setSyncExplainerDialogOpen] = useState(false);
+
+  // Chat history integration - pass server props to skip loading
+  const { initialMessages, isLoadingHistory, saveMessage, handleNewChat } =
+    useChatHistory(initialSessionId);
+
+  // Only mount ChatUI after history loads to ensure useChat initializes with correct messages
+  if (isLoadingHistory) {
+    // Render the layout with a loader in the messages area (not full page)
+    // Keep header and input visible during loading
+    return (
+      <div className="flex flex-col h-dvh">
+        <Header
+          actions={
+            <HeaderActions
+              onSyncClick={() => setSyncExplainerDialogOpen(true)}
+              onSettingsClick={() => setSettingsDialogOpen(true)}
+              onFavoritesClick={() => setFavoritesDialogOpen(true)}
+              extraActions={
+                <>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => setFeaturesDialogOpen(true)}
+                    className="rounded-full"
+                  >
+                    <Info className="h-5 w-5" />
+                    <span className="sr-only">{t("ui.aboutApp")}</span>
+                  </Button>
+                  <Button variant="outline" size="icon" disabled className="rounded-full">
+                    <RotateCcw className="h-5 w-5" />
+                    <span className="sr-only">{t("chat.clearChat")}</span>
+                  </Button>
+                </>
+              }
+            />
+          }
+        />
+        <div className="flex-1 overflow-hidden flex items-center justify-center">
+          <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+        </div>
+
+        {/* Dialogs - render even during loading so buttons work */}
+        <FeaturesDialog open={featuresDialogOpen} onOpenChange={setFeaturesDialogOpen} />
+        <SettingsDialog open={settingsDialogOpen} onOpenChange={setSettingsDialogOpen} />
+        <FavoritesDialog open={favoritesDialogOpen} onOpenChange={setFavoritesDialogOpen} />
+        <SyncExplainerDialog
+          open={syncExplainerDialogOpen}
+          onOpenChange={setSyncExplainerDialogOpen}
+          onOpenSettings={() => setSettingsDialogOpen(true)}
+        />
+        {/* Input bar - visible during loading but disabled */}
+        <div className="border-t bg-background">
+          <div className="container max-w-3xl px-4 py-4">
+            <form className="flex gap-2">
+              <Input placeholder={t("chat.inputPlaceholder")} className="flex-1" disabled />
+              <Button type="submit" size="icon" disabled>
+                <Send className="w-4 h-4" />
+              </Button>
+            </form>
+            {/* Footer Links */}
+            <div className="flex items-center justify-center gap-4 mt-3 text-xs text-muted-foreground">
+              <a href="#" className="hover:text-foreground transition-colors">
+                {t("footer.about")}
+              </a>
+              <span>•</span>
+              <a href="#" className="hover:text-foreground transition-colors">
+                {t("footer.privacy")}
+              </a>
+              <span>•</span>
+              <a
+                href="https://github.com/rbatsenko/temps-rocks"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground transition-colors"
+              >
+                {t("footer.github")}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Once loaded, render the full chat UI
+  return (
+    <ChatUI
+      initialMessages={initialMessages}
+      saveMessage={saveMessage}
+      handleNewChat={handleNewChat}
+      t={t}
+      language={language}
+    />
   );
 };
 

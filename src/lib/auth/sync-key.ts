@@ -1,9 +1,11 @@
 /**
  * Sync key utilities for user authentication and multi-device sync
  * Handles sync key generation, hashing, and storage
+ * Uses both localStorage (client-side) and cookies (SSR-compatible)
  */
 
 import { createHash } from "crypto";
+import { setUserProfileCookies, clearUserCookies } from "./cookie-actions";
 
 const SYNC_KEY_STORAGE_KEY = "temps_rocks_sync_key";
 const USER_PROFILE_STORAGE_KEY = "temps_rocks_user_profile";
@@ -94,12 +96,15 @@ export function setSyncKey(key: string): void {
 /**
  * Clear the sync key (logout / reset)
  */
-export function clearSyncKey(): void {
+export async function clearSyncKey(): Promise<void> {
   if (typeof window === "undefined") {
     throw new Error("clearSyncKey can only be called in browser environment");
   }
   localStorage.removeItem(SYNC_KEY_STORAGE_KEY);
   localStorage.removeItem(USER_PROFILE_STORAGE_KEY);
+
+  // Also clear cookies
+  await clearUserCookies();
 }
 
 /**
@@ -150,13 +155,16 @@ export function getUserProfile(): UserProfile | null {
 }
 
 /**
- * Save user profile to localStorage
+ * Save user profile to localStorage and cookies
  */
-export function saveUserProfile(profile: UserProfile): void {
+export async function saveUserProfile(profile: UserProfile): Promise<void> {
   if (typeof window === "undefined") {
     throw new Error("saveUserProfile can only be called in browser environment");
   }
   localStorage.setItem(USER_PROFILE_STORAGE_KEY, JSON.stringify(profile));
+
+  // Also set cookies for SSR
+  await setUserProfileCookies(profile.syncKey, profile.displayName);
 }
 
 /**
@@ -165,6 +173,8 @@ export function saveUserProfile(profile: UserProfile): void {
 export async function initializeUserProfile(): Promise<UserProfile> {
   const existingProfile = getUserProfile();
   if (existingProfile) {
+    // Also ensure cookies are set for existing profiles
+    await setUserProfileCookies(existingProfile.syncKey, existingProfile.displayName);
     return existingProfile;
   }
 
@@ -179,14 +189,14 @@ export async function initializeUserProfile(): Promise<UserProfile> {
     updatedAt: now,
   };
 
-  saveUserProfile(newProfile);
+  await saveUserProfile(newProfile);
   return newProfile;
 }
 
 /**
  * Update user profile (e.g., display name)
  */
-export function updateUserProfile(updates: Partial<UserProfile>): UserProfile {
+export async function updateUserProfile(updates: Partial<UserProfile>): Promise<UserProfile> {
   const current = getUserProfile();
   if (!current) {
     throw new Error("No user profile found");
@@ -198,6 +208,6 @@ export function updateUserProfile(updates: Partial<UserProfile>): UserProfile {
     updatedAt: new Date().toISOString(),
   };
 
-  saveUserProfile(updated);
+  await saveUserProfile(updated);
   return updated;
 }

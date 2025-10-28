@@ -9,6 +9,7 @@ import {
   addFavoriteToStorage,
   removeFavoriteFromStorage,
   isFavorited,
+  getFavorite,
 } from "@/lib/storage/favorites";
 import { ReportDialog } from "@/components/ReportDialog";
 
@@ -143,8 +144,17 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
   // Check if this location is already favorited
   useEffect(() => {
     if (data.latitude && data.longitude) {
-      const favorited = isFavorited(undefined, data.cragId);
+      const coords = { lat: data.latitude, lon: data.longitude };
+      const favorited = isFavorited(undefined, data.cragId, coords);
       setIsFavorite(favorited);
+
+      // Get the favorite ID if it exists
+      if (favorited) {
+        const existing = getFavorite(undefined, data.cragId, coords);
+        if (existing) {
+          setFavoriteId(existing.id);
+        }
+      }
     }
   }, [data.latitude, data.longitude, data.cragId]);
 
@@ -206,17 +216,10 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
 
   return (
     <div className="bg-muted/50 rounded-lg p-3 sm:p-4 border border-border w-full max-w-2xl transition-all duration-500 ease-out will-change-[max-width,transform]">
-      <div
-        className={
-          `grid items-start gap-x-2 gap-y-1.5 sm:gap-x-3 sm:gap-y-2 transition-all duration-500 ease-out ` +
-          (hasEmoji
-            ? "grid-cols-[auto_1fr] sm:grid-cols-[auto_1fr_min-content]"
-            : "grid-cols-[1fr] sm:grid-cols-[1fr_min-content]")
-        }
-      >
+      <div className="flex gap-3 sm:gap-4">
         {/* Weather emoji */}
         {hasEmoji && (
-          <div className="row-start-1 col-start-1 shrink-0 w-10 sm:w-12 text-center">
+          <div className="shrink-0 w-10 sm:w-12 text-center">
             <div
               className="text-3xl sm:text-4xl leading-none"
               title={translateWeather(getWeatherDescription(data.current!.weatherCode))}
@@ -232,9 +235,8 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
         )}
 
         {/* Main content */}
-        <div
-          className={`${hasEmoji ? "col-start-2" : "col-start-1"} min-w-0 space-y-1 sm:space-y-1.5`}
-        >
+        <div className="flex-1 min-w-0 space-y-2 sm:space-y-2.5">
+          {/* Header */}
           <div className="space-y-0.5">
             <div className="font-semibold text-base">🧗 {data.location}</div>
             {(locationText || countryFlag) && (
@@ -250,114 +252,93 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
               </div>
             )}
           </div>
+
+          {/* Action buttons row */}
+          {(data.hourlyConditions || data.optimalWindows) && (
+            <div className="flex flex-wrap gap-2">
+              {data.latitude && data.longitude && (
+                <MapPopover
+                  latitude={data.latitude}
+                  longitude={data.longitude}
+                  locationName={data.location}
+                />
+              )}
+              <Button
+                variant={isFavorite ? "default" : "outline"}
+                size="sm"
+                onClick={() => {
+                  if (isFavorite && favoriteId) {
+                    removeFavoriteFromStorage(favoriteId);
+                    setIsFavorite(false);
+                    setFavoriteId(null);
+                  } else if (data.latitude && data.longitude) {
+                    try {
+                      const favorite = addFavoriteToStorage({
+                        areaName: data.location,
+                        location: `${data.country || ""}${data.state ? ", " + data.state : ""}`,
+                        latitude: data.latitude,
+                        longitude: data.longitude,
+                        cragId: data.cragId,
+                        rockType: data.rockType,
+                        lastRating: data.rating,
+                        lastFrictionScore: data.frictionScore,
+                        lastCheckedAt: new Date().toISOString(),
+                        displayOrder: 0,
+                      });
+                      setIsFavorite(true);
+                      setFavoriteId(favorite.id);
+                    } catch (error) {
+                      console.error("Failed to add favorite:", error);
+                    }
+                  }
+                }}
+                title={isFavorite ? "Remove from favorites" : "Add to favorites"}
+                className={isFavorite ? "bg-orange-500 hover:bg-orange-600" : ""}
+              >
+                <Star className={`w-4 h-4 ${isFavorite ? "fill-current" : ""}`} />
+                {isFavorite ? favoritedLabel : favoriteLabel}
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setReportDialogOpen(true)}
+                disabled={!data.cragId}
+                title="Add condition report"
+              >
+                <MessageSquare className="w-4 h-4" />
+                {addReportLabel}
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={onSheetClick || onDetailsClick}
+                title="View details"
+              >
+                <Info className="w-4 h-4" />
+                {detailsLabel}
+              </Button>
+            </div>
+          )}
+
+          {/* Conditions */}
           <div className="font-medium">
             {conditionsLabel}: {translateRating(data.rating)} ({data.frictionScore}/5)
           </div>
+
+          {/* Warnings */}
+          {data.warnings && data.warnings.length > 0 && (
+            <div className="text-destructive font-semibold text-sm animate-in fade-in-0 slide-in-from-bottom-2 duration-500">
+              ⚠️ {data.warnings.map(translateWarning).join(", ")}
+            </div>
+          )}
+
+          {/* Reasons */}
+          {data.reasons && data.reasons.length > 0 && (
+            <div className="text-sm opacity-80 animate-in fade-in-0 slide-in-from-bottom-2 duration-500 delay-100">
+              {data.reasons.map(translateReason).join(", ")}
+            </div>
+          )}
         </div>
-
-        {/* Details buttons */}
-        {(data.hourlyConditions || data.optimalWindows) && (
-          <div
-            className={
-              `${hasEmoji ? "col-start-2" : "col-start-1"} row-start-2 ` +
-              `${hasEmoji ? "sm:col-start-3" : "sm:col-start-2"} sm:row-start-1 ` +
-              "flex flex-wrap gap-2 justify-self-start sm:justify-self-end sm:max-w-fit"
-            }
-          >
-            {data.latitude && data.longitude && (
-              <MapPopover
-                latitude={data.latitude}
-                longitude={data.longitude}
-                locationName={data.location}
-              />
-            )}
-            <Button
-              variant={isFavorite ? "default" : "outline"}
-              size="sm"
-              onClick={() => {
-                if (isFavorite && favoriteId) {
-                  removeFavoriteFromStorage(favoriteId);
-                  setIsFavorite(false);
-                  setFavoriteId(null);
-                } else if (data.latitude && data.longitude) {
-                  try {
-                    const favorite = addFavoriteToStorage({
-                      areaName: data.location,
-                      location: `${data.country || ""}${data.state ? ", " + data.state : ""}`,
-                      latitude: data.latitude,
-                      longitude: data.longitude,
-                      rockType: data.rockType,
-                      lastRating: data.rating,
-                      lastFrictionScore: data.frictionScore,
-                      lastCheckedAt: new Date().toISOString(),
-                      displayOrder: 0,
-                    });
-                    setIsFavorite(true);
-                    setFavoriteId(favorite.id);
-                  } catch (error) {
-                    console.error("Failed to add favorite:", error);
-                  }
-                }
-              }}
-              title={isFavorite ? "Remove from favorites" : "Add to favorites"}
-              className={isFavorite ? "bg-orange-500 hover:bg-orange-600" : ""}
-            >
-              <Star className={`w-4 h-4 mr-1 ${isFavorite ? "fill-current" : ""}`} />
-              {isFavorite ? favoritedLabel : favoriteLabel}
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setReportDialogOpen(true)}
-              disabled={!data.cragId}
-              title="Add condition report"
-            >
-              <MessageSquare className="w-4 h-4 mr-1" />
-              {addReportLabel}
-            </Button>
-            {/* {onSheetClick && (
-              <Button variant="outline" size="sm" onClick={onSheetClick} title="Open in side panel">
-                <PanelRightOpen className="w-4 h-4 mr-1" />
-                Panel
-              </Button>
-            )} */}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={onSheetClick || onDetailsClick}
-              title="View details"
-            >
-              <Info className="w-4 h-4 mr-1" />
-              {detailsLabel}
-            </Button>
-          </div>
-        )}
-
-        {/* Warnings */}
-        {data.warnings && data.warnings.length > 0 && (
-          <div
-            className={
-              `text-destructive font-semibold text-sm ${hasEmoji ? "col-start-2" : "col-start-1"} ` +
-              `${hasEmoji ? "sm:col-start-2" : "sm:col-start-1"} ` +
-              `animate-in fade-in-0 slide-in-from-bottom-2 duration-500`
-            }
-          >
-            ⚠️ {data.warnings.map(translateWarning).join(", ")}
-          </div>
-        )}
-
-        {/* Reasons */}
-        {data.reasons && data.reasons.length > 0 && (
-          <div
-            className={
-              `text-sm opacity-80 ${hasEmoji ? "col-start-2" : "col-start-1"} ` +
-              `${hasEmoji ? "sm:col-start-2" : "sm:col-start-1"} ` +
-              `animate-in fade-in-0 slide-in-from-bottom-2 duration-500 delay-100`
-            }
-          >
-            {data.reasons.map(translateReason).join(", ")}
-          </div>
-        )}
       </div>
 
       {/* Report Dialog */}

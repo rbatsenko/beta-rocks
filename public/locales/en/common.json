@@ -5,6 +5,8 @@
   "welcome": {
     "heading": "Ask about climbing conditions",
     "description": "Get real-time weather, friction analysis, and optimal climbing windows for any crag worldwide",
+    "yourFavorites": "Your Favorites",
+    "favoriteQuery": "What are conditions at {{crag}}?",
     "exampleQueries": {
       "query1": {
         "display": "Little Cottonwood Canyon conditions tomorrow?",
@@ -23,7 +25,12 @@
   "chat": {
     "analyzing": "Analyzing conditions...",
     "thinking": "Thinking...",
-    "inputPlaceholder": "Ask about any crag or sector..."
+    "inputPlaceholder": "Ask about any crag or sector...",
+    "clearChat": "Clear Chat",
+    "clearChatTooltip": "Clear the current conversation",
+    "clearChatConfirm": "Clear your chat? This will remove all messages from the current conversation.",
+    "clearHistory": "Clear History",
+    "clearHistoryConfirm": "Are you sure you want to clear all chat history? This cannot be undone."
   },
   "conditions": {
     "rating": "Rating",
@@ -146,6 +153,10 @@
     "selectLanguage": "Select language",
     "aboutApp": "About app"
   },
+  "tabs": {
+    "overview": "Overview",
+    "reports": "Reports"
+  },
   "dialog": {
     "close": "Close",
     "cancel": "Cancel",
@@ -238,6 +249,60 @@
     "volcanic": "volcanic",
     "phyllite": "phyllite"
   },
+  "sync": {
+    "notification": {
+      "title": "Sync Key Created",
+      "description": "We've generated a unique key to sync your favorites and chat across devices.",
+      "viewInSettings": "View in Settings",
+      "viewMore": "What is sync key?"
+    },
+    "banner": {
+      "title": "Your data syncs across devices",
+      "description": "Your favorites, reports, and chat history are saved locally and can sync to other devices using your sync key.",
+      "learnMore": "Learn more",
+      "dismiss": "Got it"
+    },
+    "status": {
+      "synced": "Synced",
+      "syncing": "Syncing...",
+      "offline": "Offline",
+      "clickToLearnMore": "Click to learn more about sync"
+    },
+    "page": {
+      "validating": "Validating sync key...",
+      "invalidTitle": "Invalid Sync Key",
+      "noKeyError": "No sync key found in URL",
+      "invalidKeyError": "Invalid sync key format",
+      "goHome": "Go to Home",
+      "restoreTitle": "Restore Your Data",
+      "restoreDescription": "This will restore your favorites, chat history, and settings from another device",
+      "syncKeyLabel": "Sync Key",
+      "restoreSuccess": "Sync key restored! Redirecting...",
+      "cancel": "Cancel",
+      "restore": "Restore",
+      "replaceWarning": "This will replace any existing data on this device with data from your sync key",
+      "restoreError": "Failed to restore sync key. Please try again."
+    }
+  },
+  "syncExplainer": {
+    "title": "How Sync Works",
+    "description": "Keep your data in sync across all your devices seamlessly and securely.",
+    "features": {
+      "syncKey": {
+        "title": "Unique Sync Key",
+        "description": "Each user gets a secure, unique key to sync their data across devices."
+      },
+      "multiDevice": {
+        "title": "Multi-Device Access",
+        "description": "Access your favorites and chat history from any device by using your sync key."
+      },
+      "privacy": {
+        "title": "Privacy First",
+        "description": "Your data is encrypted and only accessible with your sync key. No account required."
+      }
+    },
+    "openSettings": "Open Settings"
+  },
   "profile": {
     "anonymous": "Anonymous",
     "member": "Member",
@@ -267,6 +332,18 @@
       "hideKey": "Hide key",
       "qrCode": "QR Code",
       "qrDescription": "Scan this QR code on another device to sync your data",
+      "restoreTitle": "Restore from Another Device",
+      "restoreDescription": "Already have a sync key? Paste it here to restore your data",
+      "restoreLabel": "Paste your sync key",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Restore Sync Key",
+      "restoring": "Restoring...",
+      "restoreSuccess": "Sync key restored successfully! Reloading...",
+      "restoreError": "Invalid sync key format. Please check and try again.",
+      "saveNote": {
+        "title": "Save Your Sync Key",
+        "description": "We recommend saving your sync key in a secure location like your Notes app or password manager. You'll need it to restore your data on other devices."
+      },
       "warning": {
         "title": "Keep your sync key private",
         "description": "Anyone with your sync key can access your favorites and settings. Don't share it publicly."
@@ -275,7 +352,9 @@
     "dangerZone": {
       "title": "Danger Zone",
       "description": "These actions are permanent and cannot be undone",
-      "clearData": "Clear All Local Data"
+      "deleteProfile": "Delete Profile",
+      "deleteProfileConfirm": "Are you sure you want to delete your profile? This will permanently remove all your data including favorites, chat history, and settings. This action cannot be undone.",
+      "deleteFailed": "Failed to delete profile. Please try again."
     }
   },
   "favorites": {
@@ -287,17 +366,45 @@
     "lastChecked": "Last checked",
     "frictionScore": "Friction score",
     "viewConditions": "View Conditions",
-    "remove": "Remove"
+    "remove": "Remove",
+    "loginToFavorite": "Please set up your profile to favorite locations",
+    "errorToggling": "Failed to toggle favorite. Please try again."
   },
   "reports": {
-    "addReport": "Add Condition Report",
-    "addReportDescription": "Share current conditions at {{cragName}}",
+    "addReport": "Add Report",
+    "addReportDescription": "Share information about {{cragName}}",
     "postingAs": "Posting as",
+    "category": "What would you like to report?",
+    "categories": {
+      "conditions": "Conditions",
+      "safety": "Safety",
+      "access": "Access",
+      "beta": "Beta",
+      "facilities": "Facilities",
+      "other": "Other"
+    },
+    "categoryDescriptions": {
+      "conditions": "Weather, friction, dryness, crowds",
+      "safety": "Loose bolts, rockfall, broken holds, hazards",
+      "access": "Closures, parking changes, seasonal restrictions",
+      "beta": "Route changes, new bolts, conditions updates",
+      "facilities": "Bathrooms, camping, water sources, amenities",
+      "other": "Anything else that doesn't fit above"
+    },
     "dryness": "Dryness",
     "wind": "Wind",
     "crowds": "Crowds",
-    "additionalComments": "Additional Comments",
-    "commentsPlaceholder": "Describe current conditions, rock quality, approach, etc.",
+    "additionalComments": "Additional comments (optional)",
+    "details": "Details",
+    "detailsRequired": "Please provide details about this report",
+    "placeholders": {
+      "conditions": "E.g., East sector still wet, trail muddy, holds slippery...",
+      "safety": "E.g., Loose bolt on Route X pitch 2, rockfall hazard near main wall...",
+      "access": "E.g., Gate closed until May, new parking lot behind library...",
+      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "facilities": "E.g., Porta-potty available at parking, no water source nearby...",
+      "other": "Describe what you'd like to report..."
+    },
     "submit": "Submit Report",
     "submitting": "Submitting...",
     "helpful": "Helpful",
@@ -310,10 +417,39 @@
       "good": "Good",
       "excellent": "Excellent"
     },
+    "scales": {
+      "veryWet": "Very wet",
+      "veryDry": "Perfect",
+      "calm": "Calm",
+      "veryWindy": "Very windy",
+      "empty": "Empty",
+      "veryCrowded": "Very crowded"
+    },
     "recentReports": "Recent Reports",
+    "communityReports": "Community Reports",
     "noReports": "No reports yet",
-    "noReportsMessage": "Be the first to share conditions at this crag",
-    "reportCount": "{{count}} reports",
-    "viewAllReports": "View All Reports"
+    "beTheFirst": "Be the first to report",
+    "noReportsInCategory": "No reports in this category",
+    "filters": {
+      "all": "All"
+    }
+  },
+  "cragPage": {
+    "askAI": "Ask AI",
+    "currentConditions": "Current Conditions",
+    "sectors": "Sectors",
+    "disclaimer": "Weather conditions can change rapidly. Always verify conditions on arrival and use your best judgment.",
+    "askAIAboutCrag": "Ask AI about this crag",
+    "viewOnSunCalc": "View sun/moon times",
+    "viewOnMap": "View on map"
+  },
+  "rockTypes": {
+    "granite": "Granite",
+    "sandstone": "Sandstone",
+    "limestone": "Limestone",
+    "basalt": "Basalt",
+    "gneiss": "Gneiss",
+    "quartzite": "Quartzite",
+    "unknown": "Unknown"
   }
 }

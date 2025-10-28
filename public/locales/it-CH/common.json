@@ -23,7 +23,12 @@
   "chat": {
     "analyzing": "Analisi delle condizioni...",
     "thinking": "Sto pensando...",
-    "inputPlaceholder": "Chiedi di una falesia o settore..."
+    "inputPlaceholder": "Chiedi di una falesia o settore...",
+    "clearHistory": "Cancella cronologia",
+    "clearHistoryConfirm": "Sei sicuro di voler cancellare tutta la cronologia della chat? Questa azione non può essere annullata.",
+    "clearChat": "Cancella chat",
+    "clearChatTooltip": "Cancella la conversazione attuale",
+    "clearChatConfirm": "Cancellare la chat? Questo rimuoverà tutti i messaggi dalla conversazione attuale."
   },
   "conditions": {
     "rating": "Valutazione",
@@ -238,6 +243,43 @@
     "volcanic": "vulcanico",
     "phyllite": "fillite"
   },
+  "sync": {
+    "banner": {
+      "title": "I tuoi dati si sincronizzano tra dispositivi",
+      "description": "I tuoi preferiti, rapporti e cronologia chat sono salvati localmente e possono sincronizzarsi su altri dispositivi usando la tua chiave di sincronizzazione.",
+      "learnMore": "Scopri di più",
+      "dismiss": "Ho capito"
+    },
+    "status": {
+      "synced": "Sincronizzato",
+      "syncing": "Sincronizzazione...",
+      "offline": "Offline"
+    },
+    "notification": {
+      "title": "Chiave di sincronizzazione creata",
+      "description": "Abbiamo generato una chiave univoca per sincronizzare i tuoi preferiti e chat su tutti i dispositivi.",
+      "viewInSettings": "Visualizza nelle impostazioni"
+    }
+  },
+  "syncExplainer": {
+    "title": "Come funziona la sincronizzazione",
+    "description": "Mantieni i tuoi dati sincronizzati su tutti i tuoi dispositivi in modo fluido e sicuro.",
+    "features": {
+      "syncKey": {
+        "title": "Chiave di sincronizzazione unica",
+        "description": "Ogni utente riceve una chiave sicura e unica per sincronizzare i propri dati tra dispositivi."
+      },
+      "multiDevice": {
+        "title": "Accesso multi-dispositivo",
+        "description": "Accedi ai tuoi preferiti e alla cronologia chat da qualsiasi dispositivo utilizzando la tua chiave di sincronizzazione."
+      },
+      "privacy": {
+        "title": "Privacy prima di tutto",
+        "description": "I tuoi dati sono crittografati e accessibili solo con la tua chiave di sincronizzazione. Non è richiesto alcun account."
+      }
+    },
+    "openSettings": "Apri impostazioni"
+  },
   "profile": {
     "anonymous": "Anonimo",
     "member": "Membro",
@@ -267,6 +309,18 @@
       "hideKey": "Nascondi chiave",
       "qrCode": "Codice QR",
       "qrDescription": "Scansiona questo codice QR su un altro dispositivo per sincronizzare i tuoi dati",
+      "restoreTitle": "Ripristina da un altro dispositivo",
+      "restoreDescription": "Hai già una chiave di sincronizzazione? Incollala qui per ripristinare i tuoi dati",
+      "restoreLabel": "Incolla la tua chiave di sincronizzazione",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Ripristina chiave di sincronizzazione",
+      "restoring": "Ripristino in corso...",
+      "restoreSuccess": "Chiave di sincronizzazione ripristinata con successo! Ricaricamento...",
+      "restoreError": "Formato della chiave di sincronizzazione non valido. Controlla e riprova.",
+      "saveNote": {
+        "title": "Salva la tua chiave di sincronizzazione",
+        "description": "Ti consigliamo di salvare la tua chiave di sincronizzazione in un luogo sicuro come la tua app Note o un gestore di password. Ne avrai bisogno per ripristinare i tuoi dati su altri dispositivi."
+      },
       "warning": {
         "title": "Mantieni privata la tua chiave di sincronizzazione",
         "description": "Chiunque abbia la tua chiave di sincronizzazione può accedere ai tuoi preferiti e alle impostazioni. Non condividerla pubblicamente."
@@ -275,7 +329,9 @@
     "dangerZone": {
       "title": "Zona pericolosa",
       "description": "Queste azioni sono permanenti e non possono essere annullate",
-      "clearData": "Cancella tutti i dati locali"
+      "deleteProfile": "Elimina profilo",
+      "deleteProfileConfirm": "Sei sicuro di voler eliminare il tuo profilo? Questo rimuoverà permanentemente tutti i tuoi dati inclusi preferiti, cronologia chat e impostazioni. Questa azione non può essere annullata.",
+      "deleteFailed": "Impossibile eliminare il profilo. Riprova."
     }
   },
   "favorites": {
@@ -297,7 +353,7 @@
     "wind": "Vento",
     "crowds": "Affollamento",
     "additionalComments": "Commenti aggiuntivi",
-    "commentsPlaceholder": "Descrivi le condizioni attuali, la qualità della roccia, l'avvicinamento, ecc.",
+    "commentsPlaceholder": "Es: settore Est ancora umido, sentiero fangoso - attenzione, Via X - acqua filtra dalla fessura, prese scivolose...",
     "submit": "Invia report",
     "submitting": "Invio in corso...",
     "helpful": "Utile",
@@ -309,6 +365,14 @@
       "okay": "Accettabili",
       "good": "Buone",
       "excellent": "Eccellenti"
+    },
+    "scales": {
+      "veryWet": "Molto bagnato",
+      "veryDry": "Perfetto",
+      "calm": "Calmo",
+      "veryWindy": "Molto ventoso",
+      "empty": "Vuoto",
+      "veryCrowded": "Molto affollato"
     },
     "recentReports": "Report recenti",
     "noReports": "Nessun report",

@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Copy, Check, Key, AlertTriangle } from "lucide-react";
+import { Copy, Check, Key, AlertTriangle, Info, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ConfirmDialog } from "@/components/ConfirmDialog";
 import {
   Dialog,
   DialogContent,
@@ -19,12 +20,15 @@ import {
   updateUserProfile as updateLocalUserProfile,
   formatSyncKeyForDisplay,
   hashSyncKeyAsync,
+  isValidSyncKey,
+  setSyncKey,
   type UserProfile,
 } from "@/lib/auth/sync-key";
 import {
   fetchOrCreateUserProfile,
   updateUserProfile as updateDbUserProfile,
 } from "@/lib/db/queries";
+import { deleteUserProfile } from "@/lib/chat/history.service";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { QRCodeSVG } from "qrcode.react";
 
@@ -40,6 +44,10 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
   const [isSaving, setIsSaving] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   const [showFullKey, setShowFullKey] = useState(false);
+  const [deleteProfileConfirmOpen, setDeleteProfileConfirmOpen] = useState(false);
+  const [restoreSyncKey, setRestoreSyncKey] = useState("");
+  const [isRestoring, setIsRestoring] = useState(false);
+  const [restoreError, setRestoreError] = useState("");
 
   useEffect(() => {
     if (open) {
@@ -54,8 +62,8 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
 
     setIsSaving(true);
     try {
-      // Update local storage
-      const updated = updateLocalUserProfile({
+      // Update local storage and cookies
+      const updated = await updateLocalUserProfile({
         displayName: displayName.trim() || undefined,
       });
       setUserProfile(updated);
@@ -90,6 +98,35 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
   const getSyncUrl = () => {
     if (!userProfile?.syncKey) return "";
     return `${window.location.origin}/sync?key=${userProfile.syncKey}`;
+  };
+
+  const handleRestoreSyncKey = async () => {
+    setRestoreError("");
+
+    // Trim the input
+    const keyToRestore = restoreSyncKey.trim();
+
+    // Validate the sync key format
+    if (!isValidSyncKey(keyToRestore)) {
+      setRestoreError(t("settings.syncKey.restoreError"));
+      return;
+    }
+
+    setIsRestoring(true);
+    try {
+      // Set the sync key in localStorage
+      setSyncKey(keyToRestore);
+
+      // Show success message
+      alert(t("settings.syncKey.restoreSuccess"));
+
+      // Reload the page to sync data
+      window.location.reload();
+    } catch (error) {
+      console.error("Failed to restore sync key:", error);
+      setRestoreError(t("settings.syncKey.restoreError"));
+      setIsRestoring(false);
+    }
   };
 
   return (
@@ -178,6 +215,19 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
                 </p>
               </div>
 
+              {/* Save Note */}
+              <div className="flex gap-3 p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+                <Info className="h-5 w-5 text-blue-500 shrink-0 mt-0.5" />
+                <div className="space-y-1 text-sm">
+                  <p className="font-medium text-blue-900 dark:text-blue-100">
+                    {t("settings.syncKey.saveNote.title")}
+                  </p>
+                  <p className="text-blue-800 dark:text-blue-200">
+                    {t("settings.syncKey.saveNote.description")}
+                  </p>
+                </div>
+              </div>
+
               {/* Warning */}
               <div className="flex gap-3 p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg">
                 <AlertTriangle className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
@@ -189,6 +239,41 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
                     {t("settings.syncKey.warning.description")}
                   </p>
                 </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Restore Sync Key Section */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Upload className="h-5 w-5" />
+                {t("settings.syncKey.restoreTitle")}
+              </CardTitle>
+              <CardDescription>{t("settings.syncKey.restoreDescription")}</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label htmlFor="restoreSyncKey">{t("settings.syncKey.restoreLabel")}</Label>
+                <div className="flex gap-2 mt-2">
+                  <Input
+                    id="restoreSyncKey"
+                    value={restoreSyncKey}
+                    onChange={(e) => {
+                      setRestoreSyncKey(e.target.value);
+                      setRestoreError("");
+                    }}
+                    placeholder={t("settings.syncKey.restorePlaceholder")}
+                    className="font-mono text-sm"
+                    disabled={isRestoring}
+                  />
+                  <Button onClick={handleRestoreSyncKey} disabled={isRestoring || !restoreSyncKey}>
+                    {isRestoring
+                      ? t("settings.syncKey.restoring")
+                      : t("settings.syncKey.restoreButton")}
+                  </Button>
+                </div>
+                {restoreError && <p className="text-sm text-destructive mt-2">{restoreError}</p>}
               </div>
             </CardContent>
           </Card>
@@ -205,12 +290,35 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
                 {t("settings.dangerZone.description")}
               </p>
             </div>
-            <Button variant="destructive" disabled>
-              {t("settings.dangerZone.clearData")}
+            <Button variant="destructive" onClick={() => setDeleteProfileConfirmOpen(true)}>
+              {t("settings.dangerZone.deleteProfile")}
             </Button>
           </div>
         </div>
       </DialogContent>
+
+      {/* Delete Profile Confirmation Dialog */}
+      <ConfirmDialog
+        open={deleteProfileConfirmOpen}
+        onOpenChange={setDeleteProfileConfirmOpen}
+        onConfirm={async () => {
+          try {
+            await deleteUserProfile();
+            setDeleteProfileConfirmOpen(false);
+            onOpenChange(false);
+            // Reload the page to reset everything
+            window.location.reload();
+          } catch (error) {
+            console.error("Failed to delete profile:", error);
+            alert(t("settings.dangerZone.deleteFailed"));
+          }
+        }}
+        title={t("settings.dangerZone.deleteProfile")}
+        description={t("settings.dangerZone.deleteProfileConfirm")}
+        confirmText={t("settings.dangerZone.deleteProfile")}
+        cancelText={t("dialog.cancel")}
+        variant="destructive"
+      />
     </Dialog>
   );
 }

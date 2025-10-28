@@ -4,18 +4,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-temps.rocks is a free, chat-first web app that helps climbers check real-time conditions at crags, sectors, and routes worldwide. It uses AI (Google Gemini 2.5 Flash via Vercel AI SDK) to provide intelligent climbing condition analysis based on weather data, rock type, and climbing-specific factors.
+temps.rocks is a free, chat-first web app that helps climbers check real-time conditions at crags, sectors, and routes worldwide. It uses AI (Google Gemini 2.5 Flash via Vercel AI SDK) to provide intelligent climbing condition analysis based on weather data, rock type, and climbing-specific factors. Features include user profiles with multi-device sync, chat history persistence, favorites bookmarking, and community reports with categories.
 
 **Key Technologies:**
 
-- Next.js 15 (App Router with Turbopack)
+- Next.js 16 (App Router with Turbopack)
 - TypeScript with strict mode
-- Tailwind CSS + shadcn/ui components
-- Supabase (PostgreSQL database)
+- Tailwind CSS 4 + shadcn/ui components
+- Supabase (PostgreSQL database with RLS)
 - Vercel AI SDK (streaming chat with tools)
 - i18next for internationalization (17 locales)
 - OpenBeta GraphQL API (climbing database)
 - Open-Meteo API (weather data)
+- QR code generation for sync keys
 
 ## Development Commands
 
@@ -118,15 +119,89 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
 - **Granite/Gneiss**: Fast drying (2h), performs well in cold temps, low humidity preferred
 - **Limestone**: More humidity-tolerant, moderate drying time
 
+### User Profiles & Sync System
+
+**Architecture**: Offline-first with Supabase sync
+
+- Anonymous user profiles created on first visit with unique sync keys
+- Sync key = 16-character identifier for restoring profile on other devices
+- LocalStorage for immediate persistence, Supabase for cross-device sync
+- No account/email required - privacy-focused approach
+- Sync status indicator in header (synced/syncing/offline)
+
+**Key Files**:
+
+- `src/lib/auth/sync-key.ts`: Sync key generation, validation, hashing
+- `src/lib/auth/cookie-actions.ts`: Cookie management for user profile
+- `src/hooks/useSyncStatus.ts`: React hook for sync state management
+- `src/app/sync/page.tsx`: Sync restoration page for secondary devices
+- `src/components/SyncNotification.tsx`: Dismissible banner alerting users to sync
+- `src/components/SyncExplainerDialog.tsx`: Educational dialog about sync
+
+### Chat History Persistence
+
+**Feature**: Save and restore chat conversations across sessions
+
+- Chat sessions stored in `chat_sessions` table with titles
+- Individual messages stored in `chat_messages` table
+- Automatic background sync to database when online
+- LocalStorage fallback for offline usage
+- Clear chat (current session) and clear history (all sessions) options
+
+**Key Files**:
+
+- `src/lib/chat/history.service.ts`: Chat history CRUD operations
+- `src/hooks/useChatHistory.ts`: React hook integrating with Vercel AI SDK
+- Migration: `supabase/migrations/20251028063433_add_chat_history.sql`
+
+### Favorites System
+
+**Feature**: Bookmark crags for quick access to conditions
+
+- Heart icon on WeatherConditionCard and crag detail pages
+- Favorites displayed on welcome screen with quick query buttons
+- Cached friction scores and ratings for fast display
+- Works with both database crags and external OpenBeta areas
+- Syncs across devices via user profile
+
+**Key Files**:
+
+- `src/lib/storage/favorites.ts`: Favorites CRUD operations
+- `src/components/FavoritesDialog.tsx`: Favorites list modal
+- Migration: `supabase/migrations/20251028054257_add_user_favorites.sql`
+
+### Reports System
+
+**Feature**: Community-submitted reports with 6 categories
+
+- **Categories**: conditions, safety, access, beta, facilities, other
+- Condition ratings (1-5): dryness, wind, crowds (conditions category only)
+- Category-specific placeholders and validation
+- Helpful/unhelpful voting with user profile integration
+- Filter tabs on crag pages to view reports by category
+
+**Key Files**:
+
+- `src/components/ReportDialog.tsx`: Multi-category report submission
+- `src/components/ReportCard.tsx`: Report display with category badges
+- Migration: `supabase/migrations/20251028135542_add_report_categories.sql`
+
 ### Component Structure
 
 **Main Components** (src/components/):
 
-- `ChatInterface.tsx`: Primary chat UI with Vercel AI SDK's `useChat` hook
-- `ConditionsDetailDialog.tsx`: Large modal showing detailed weather analysis, charts (recharts), hourly forecasts
+- `ChatInterface.tsx`: Primary chat UI with Vercel AI SDK's `useChat` hook, integrated with chat history and sync
+- `CragPageContent.tsx`: Rich detail view for crag pages with conditions, reports, sectors, maps
+- `ConditionsDetailSheet.tsx`: Sheet-based detail view with weather analysis, charts, hourly forecasts
 - `DisambiguationOptions.tsx`: Renders location options when multiple matches found
-- `WeatherConditionCard.tsx`: Compact card showing current conditions with friction rating
+- `WeatherConditionCard.tsx`: Compact card showing current conditions with friction rating and favorite toggle
+- `ReportCard.tsx`: Display community reports with category badges and voting
+- `ReportDialog.tsx`: Multi-category report submission form
+- `FavoritesDialog.tsx`: User's favorited crags with cached conditions
+- `SettingsDialog.tsx`: User profile, sync key management, display name editor
+- `Header.tsx`: App header with sync status and user menu
 - `LanguageSelector.tsx`: I18n language switcher
+- `ConfirmDialog.tsx`: Generic confirmation dialog for destructive actions
 
 **shadcn/ui Components** (src/components/ui/): Pre-built, customizable components from shadcn/ui library
 
@@ -145,8 +220,21 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
 
 **Database** (src/lib/db/queries.ts):
 
-- Supabase queries for user reports, confirmations (TODO: not fully implemented)
-- See `docs/SUPABASE_SETUP.md` for schema
+- Supabase queries for user profiles, favorites, reports, confirmations, chat history
+- Complete CRUD operations with RLS policies for security
+- Anonymous user support via sync_key_hash lookups
+- Optimized with indexes on frequently queried columns
+
+**Database Schema** (see migrations in `supabase/migrations/`):
+
+- `user_profiles`: User identity with sync_key_hash, display_name
+- `user_stats`: Aggregate statistics (reports posted, confirmations given, favorites count)
+- `user_favorites`: Bookmarked crags with cached conditions
+- `chat_sessions`: Conversation sessions with titles
+- `chat_messages`: Individual chat messages with tool invocations
+- `reports`: Community reports with category, ratings, and text
+- `confirmations`: User confirmations/votes on reports
+- `crags`, `sectors`, `routes`: Climbing area data from OpenBeta
 
 ### Internationalization (i18n)
 
@@ -167,9 +255,18 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
 
 - `chat/route.ts`: Main streaming chat endpoint with tool calling
 - `conditions/route.ts`: Direct conditions API (bypasses chat)
-- `sync/[key]/route.ts`: Multi-device sync (not yet implemented)
-- `reports/route.ts`: Community condition reports
-- `confirmations/route.ts`: Report confirmations
+- `reports/route.ts`: Community condition reports with category support
+- `confirmations/route.ts`: Report confirmations/voting
+
+### Dynamic Routes (src/app/)
+
+- `location/[slug]/page.tsx`: Crag detail pages with ISR (5-minute revalidation)
+  - Slug-based lookup (name or coordinates)
+  - Server-side conditions calculation
+  - Reports list with category filtering
+  - Sector information display
+  - Map embeds and external links
+- `sync/page.tsx`: Sync key restoration page for secondary devices
 
 ## Important Patterns
 
@@ -212,10 +309,10 @@ First letter after type is lowercase: `fix: correct friction calculation` (not `
 
 ## Known Limitations
 
-- Community reports (add_report, confirm_report tools) not fully implemented in database
-- Multi-device sync feature stubbed but not functional
 - No automated tests yet (consider adding Jest + React Testing Library)
 - Weather data limited to 14 days (Open-Meteo free tier)
+- No email/password authentication - relies on sync keys only
+- QR code sync requires manual key entry on device (no camera scanning yet)
 
 ## Deployment
 

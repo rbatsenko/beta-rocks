@@ -32,7 +32,7 @@ export function MapPopover({ latitude, longitude, locationName }: MapPopoverProp
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>
         <Button variant="outline" size="sm" title={t("dialog.showMap")}>
-          <MapPin className="w-4 h-4 mr-1" />
+          <MapPin className="w-4 h-4" />
           {t("dialog.showMap")}
         </Button>
       </PopoverTrigger>

@@ -1,0 +1,383 @@
+{
+  "header": {
+    "title": "temps.rocks"
+  },
+  "welcome": {
+    "heading": "Spørg om klatrebetingelser",
+    "description": "Få realtidsvejr, friktionsanalyse og optimale klatretider for alle klatrepladser i verden",
+    "exampleQueries": {
+      "query1": {
+        "display": "Forhold i Stevns Klint i dag?",
+        "query": "Forhold i Stevns Klint i dag?"
+      },
+      "query2": {
+        "display": "Er Bornholm tør i eftermiddag?",
+        "query": "Er Bornholm tør i eftermiddag?"
+      },
+      "query3": {
+        "display": "Forhold i Møns Klint i morgen?",
+        "query": "Forhold i Møns Klint i morgen?"
+      }
+    }
+  },
+  "chat": {
+    "analyzing": "Analyserer betingelser...",
+    "thinking": "Tænker...",
+    "inputPlaceholder": "Spørg om en hvilken som helst klatrepladser eller sektor...",
+    "clearChat": "Ryd chat",
+    "clearChatTooltip": "Ryd den aktuelle samtale",
+    "clearChatConfirm": "Vil du rydde din chat? Dette vil fjerne alle beskeder fra den aktuelle samtale.",
+    "clearHistory": "Ryd historik",
+    "clearHistoryConfirm": "Er du sikker på, at du vil rydde hele chathistorikken? Dette kan ikke fortrydes."
+  },
+  "conditions": {
+    "rating": "Vurdering",
+    "details": "Detaljer",
+    "location": "Placering",
+    "favorite": "Favorit",
+    "favorited": "Markeret som favorit",
+    "addReport": "Tilføj rapport"
+  },
+  "ratings": {
+    "great": "Fremragende",
+    "good": "God",
+    "fair": "Acceptabel",
+    "poor": "Dårlig",
+    "nope": "Nej"
+  },
+  "reasons": {
+    "perfectTemp": "Perfekt temperatur ({{temp}}°C)",
+    "tempTooHigh": "Temperatur for høj - fingre kan glide",
+    "coldGoodFriction": "Koldt men godt for {{rockType}} friktion",
+    "idealHumidity": "Ideal fugtighed ({{humidity}}%)",
+    "lowHumidityGranite": "Lav fugtighed hjælper friktionen på granit",
+    "readyInHours": "Vil være klar til at klatre om ~{{hours}} timer",
+    "acceptable": "Betingelserne er acceptable"
+  },
+  "warnings": {
+    "tooWarm": "For varm til {{rockType}} ({{temp}}°C)",
+    "coldSuboptimal": "Koldt og ikke idealt til {{rockType}}",
+    "highHumidity": "Høj fugtighed ({{humidity}}%) - sten kan være glat",
+    "wetDangerousSandstone": "Stenen er i øjeblikket våd - farlig at klatre (sandsten bliver svag når det er vådt)",
+    "wetSlippery": "Stenen er i øjeblikket våd - glatte forhold",
+    "veryHighWinds": "Meget høje vinde ({{wind}} km/t) - fare for at blive blæst ned",
+    "highWind": "Høj vind ({{wind}} km/t)",
+    "recentPrecip": "Nylig nedbør ({{precip}}mm) - tørrer om ~{{hours}}t",
+    "currentlyWetDangerous": "I øjeblikket våd - farlig",
+    "currentlyWet": "I øjeblikket våd"
+  },
+  "weather": {
+    "clearSky": "Klar himmel",
+    "mainlyClear": "Hovedsageligt klart",
+    "partlyCloudy": "Delvis skyet",
+    "overcast": "Overskyet",
+    "fog": "Tåge",
+    "depositingRimeFog": "Isomsluttet tåge",
+    "lightDrizzle": "Let stille regn",
+    "moderateDrizzle": "Moderat stille regn",
+    "denseDrizzle": "Tæt stille regn",
+    "lightFreezingDrizzle": "Lett frysende stille regn",
+    "denseFreezingDrizzle": "Tæt frysende stille regn",
+    "slightRain": "Let regn",
+    "moderateRain": "Moderat regn",
+    "heavyRain": "Kraftig regn",
+    "lightFreezingRain": "Let frysende regn",
+    "heavyFreezingRain": "Kraftig frysende regn",
+    "slightSnowFall": "Let snefald",
+    "moderateSnowFall": "Moderat snefald",
+    "heavySnowFall": "Kraftigt snefald",
+    "snowGrains": "Snekorn",
+    "slightRainShowers": "Let regnskyl",
+    "moderateRainShowers": "Moderat regnskyl",
+    "violentRainShowers": "Voldsom regnskyl",
+    "slightSnowShowers": "Let sneskyl",
+    "heavySnowShowers": "Kraftig sneskyl",
+    "thunderstorm": "Tordenvejr",
+    "thunderstormSlightHail": "Tordenvejr med let hagl",
+    "thunderstormHeavyHail": "Tordenvejr med kraftigt hagl"
+  },
+  "timeframes": {
+    "now": "nu",
+    "today": "i dag",
+    "tomorrow": "i morgen",
+    "thisAfternoon": "i dag eftermiddag",
+    "thisEvening": "i aften",
+    "tonight": "i nat"
+  },
+  "disambiguation": {
+    "foundMultipleAreas": "Fandt {{count}} klatrepladser for \"{{location}}\". Vælg venligst en:",
+    "foundMultipleLocations": "Fandt flere placeringer for \"{{location}}\". Vælg venligst en:",
+    "queryTemplate": "betingelser ved {{name}} ({{latitude}}, {{longitude}})"
+  },
+  "footer": {
+    "about": "Om",
+    "privacy": "Privatliv",
+    "github": "GitHub",
+    "brand": "temps.rocks",
+    "description": "Gratis klatrebetingelser for alle. Bygget med ❤️ for klatresamfundet.",
+    "attribution": "Data fra Open-Meteo, OpenBeta og <osmLink>OpenStreetMap-bidragydere</osmLink>. Samfundsbaserede rapporter.",
+    "copyright": "© 2025 temps.rocks. Alle rettigheder forbeholdt."
+  },
+  "features": {
+    "heading": "Alt hvad du har brug for",
+    "subheading": "Omfattende klatrebetingelser ved dine fingerspidser, helt gratis",
+    "realTimeWeather": {
+      "title": "Realtidsvejr",
+      "description": "Præcise prognoser fra Open-Meteo med sol-/skyggeberegninger for specifikke sektorer"
+    },
+    "chatInterface": {
+      "title": "Chat-grænseflade",
+      "description": "Naturlige spørgsmål drevet af AI. Spørg på ethvert sprog, få øjeblikkelige svar"
+    },
+    "communityReports": {
+      "title": "Samfundsrapporter",
+      "description": "Del og bekræft aktuelle betingelser. Hjælp andre klatrer med realtidsopdateringer"
+    },
+    "globalCoverage": {
+      "title": "Global dækning",
+      "description": "Enhver klatrepladser verden over via OpenBeta databaseintegration"
+    },
+    "worksOffline": {
+      "title": "Fungerer offline",
+      "description": "Lokalt-første design. Gem data offline og synkroniser på tværs af enheder med en synknøgle"
+    },
+    "privacyFirst": {
+      "title": "Privatlivsførste",
+      "description": "Anonym som standard. Ingen konti krævet. Dine data forbliver dine"
+    }
+  },
+  "ui": {
+    "toggleTheme": "Skift tema",
+    "selectLanguage": "Vælg sprog",
+    "aboutApp": "Om app"
+  },
+  "dialog": {
+    "close": "Luk",
+    "cancel": "Annuller",
+    "detailedConditions": "Detaljerede betingelser",
+    "fullAnalysis": "Fuld vejranalyse og prognose for klatrebetingelser",
+    "showMap": "Kort",
+    "tabs": {
+      "overview": "Oversigt",
+      "hourly": "Timelig",
+      "daily": "14-dages"
+    },
+    "currentRating": "Aktuel vurdering",
+    "currentConditions": "Aktuelle betingelser",
+    "currentWeather": "Aktuelle vejrforhold",
+    "temperature": "Temperatur",
+    "humidity": "Fugtighed",
+    "windSpeed": "Vindhastighed",
+    "precipitation": "Nedbør",
+    "sunrise": "Solopgang",
+    "sunset": "Solnedgang",
+    "high": "Høj",
+    "low": "Lav",
+    "rain": "Regn",
+    "wind": "Vind",
+    "dry": "Tør",
+    "wet": "Våd",
+    "precipitationContext": "Nedbørkontekst",
+    "last24h": "Sidste 24 timer",
+    "last48h": "Sidste 48 timer",
+    "next24h": "Næste 24 timer",
+    "dewPointSpread": "Dugpunktsspredning (kondenseringsrisiko)",
+    "lowRisk": "✅ Lav risiko - sten skulle forblive tør",
+    "moderateRisk": "⚠️ Moderat risiko - hold øje med fugt",
+    "highRisk": "❌ Høj risiko - kondensering sandsynlig",
+    "optimalWindows": "Optimale klattrevindue",
+    "nextDays": "Næste 5 dage",
+    "bestTime": "🌟 Bedste tid",
+    "noOptimalConditions": "Ingen optimale betingelser de næste 5 dage",
+    "checkHourlyForecast": "Tjek timefriprognosen for flere detaljer",
+    "weatherDisclaimer": "⚠️ Vejrforhold kan ændre sig hurtigt. Overvåg altid prognoser før du går afsted og tjek betingelserne ved ankomst.",
+    "window": "vindue",
+    "windows": "vinduer",
+    "today": "I dag",
+    "tomorrow": "I morgen",
+    "showCompleteTimeline": "Vis komplet tidslinje",
+    "hour": "time",
+    "hours": "timer",
+    "period": "periode",
+    "periods": "perioder",
+    "noHourlyData": "Ingen timefriprognosedata tilgængelige",
+    "noDailyData": "Ingen daglig prognosedata tilgængelige",
+    "noOptimalHours": "Ingen optimale betingelser på",
+    "forecastIndicators": "Prognoseindikatorer:",
+    "goodClimbingWindows": "Gode klatrevindue",
+    "fairConditions": "Acceptable betingelser",
+    "poorConditions": "Dårlige betingelser",
+    "lessReliable": "Dage 8-14: Mindre pålidelig prognose",
+    "lessReliableHourly": "Næste timer mindre forudsigelig",
+    "lessCertain": "MINDRE SIKKER",
+    "todayBadge": "I DAG"
+  },
+  "timeContext": {
+    "sunrise": "Solopgang",
+    "sunset": "Solnedgang",
+    "recommendedHours": "Anbefalede klatretimer",
+    "totalDaylight": "Samlet dagslys",
+    "hoursOfDaylight": "{{hours}} timers dagslys",
+    "earlyStartRecommended": "Tidlig start anbefalet for at slå varmen",
+    "limitedDaylight": "Begrænset dagslys - plan i overensstemmelse",
+    "morningConditionsBest": "Bedst betingelser om morgenen",
+    "eveningSession": "Aftentime betingelser",
+    "showAllHours": "Vis alle 24 timer",
+    "showClimbingHoursOnly": "Vis kun klatretimer",
+    "expandHours": "Udvid for at se alle timer"
+  },
+  "rockTypes": {
+    "limestone": "kalksten",
+    "granite": "granit",
+    "sandstone": "sandsten",
+    "basalt": "basalt",
+    "gneiss": "gnejs",
+    "quartzite": "kvartit",
+    "conglomerate": "konglomerat",
+    "rhyolite": "riolit",
+    "porphyry": "porfyr",
+    "andesite": "andezit",
+    "slate": "skifer",
+    "schist": "glimmerskifer",
+    "dolomite": "dolomit",
+    "volcanic": "vulkansk",
+    "phyllite": "fyllit"
+  },
+  "sync": {
+    "notification": {
+      "title": "Synknøgle oprettet",
+      "description": "Vi har genereret en unik nøgle for at synkronisere dine favoritter og chat på tværs af enheder.",
+      "viewInSettings": "Vis i indstillinger"
+    },
+    "banner": {
+      "title": "Dine data synkroniseres på tværs af enheder",
+      "description": "Dine favoritter, rapporter og chathistorik gemmes lokalt og kan synkroniseres til andre enheder ved hjælp af din synknøgle.",
+      "learnMore": "Lær mere",
+      "dismiss": "Okay"
+    },
+    "status": {
+      "synced": "Synkroniseret",
+      "syncing": "Synkroniserer...",
+      "offline": "Offline"
+    }
+  },
+  "syncExplainer": {
+    "title": "How Sync Works",
+    "description": "Keep your data in sync across all your devices seamlessly and securely.",
+    "features": {
+      "syncKey": {
+        "title": "Unique Sync Key",
+        "description": "Each user gets a secure, unique key to sync their data across devices."
+      },
+      "multiDevice": {
+        "title": "Multi-Device Access",
+        "description": "Access your favorites and chat history from any device by using your sync key."
+      },
+      "privacy": {
+        "title": "Privacy First",
+        "description": "Your data is encrypted and only accessible with your sync key. No account required."
+      }
+    },
+    "openSettings": "Open Settings"
+  },
+  "profile": {
+    "anonymous": "Anonym",
+    "member": "Medlem",
+    "anonymousMember": "Anonym medlem",
+    "favorites": "Favoritter",
+    "recent": "Seneste søgninger",
+    "stats": "Dine statistikker",
+    "settings": "Indstillinger",
+    "clearData": "Ryd alle data"
+  },
+  "settings": {
+    "title": "Indstillinger",
+    "description": "Administrer din profil, synknøgle og præferencer",
+    "save": "Gem",
+    "saving": "Gemmer...",
+    "displayName": {
+      "label": "Visningsnavn",
+      "description": "Dit navn vist på rapporter og bekræftelser (valgfrit)",
+      "placeholder": "Indtast dit navn..."
+    },
+    "syncKey": {
+      "title": "Synknøgle",
+      "description": "Brug denne nøgle til at synkronisere dine favoritter og indstillinger på tværs af enheder",
+      "label": "Din synknøgle",
+      "copy": "Kopier synknøgle",
+      "showFullKey": "Vis fuldt nøgle",
+      "hideKey": "Skjul nøgle",
+      "qrCode": "QR-kode",
+      "qrDescription": "Scan denne QR-kode på en anden enhed for at synkronisere dine data",
+      "restoreTitle": "Gendan fra en anden enhed",
+      "restoreDescription": "Har du allerede en synknøgle? Indsæt den her for at gendanne dine data",
+      "restoreLabel": "Indsæt din synknøgle",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Gendan synknøgle",
+      "restoring": "Gendanner...",
+      "restoreSuccess": "Synknøgle gendannet succesfuldt! Genindlæser...",
+      "restoreError": "Ugyldigt synknøgleformat. Tjek venligst og prøv igen.",
+      "saveNote": {
+        "title": "Gem din synknøgle",
+        "description": "Vi anbefaler at gemme din synknøgle et sikkert sted som din Noter-app eller en adgangskodeadministrator. Du får brug for den til at gendanne dine data på andre enheder."
+      },
+      "warning": {
+        "title": "Hold din synknøgle privat",
+        "description": "Enhver med din synknøgle kan få adgang til dine favoritter og indstillinger. Del den ikke offentligt."
+      }
+    },
+    "dangerZone": {
+      "title": "Farlig zone",
+      "description": "Disse handlinger er permanente og kan ikke fortrydes",
+      "deleteProfile": "Slet profil",
+      "deleteProfileConfirm": "Er du sikker på, at du vil slette din profil? Dette vil permanent fjerne alle dine data, herunder favoritter, chathistorik og indstillinger. Denne handling kan ikke fortrydes.",
+      "deleteFailed": "Kunne ikke slette profil. Prøv igen."
+    }
+  },
+  "favorites": {
+    "title": "Dine favoritklatrepladser",
+    "description": "Du har {{count}} favoritplaceringer",
+    "empty": "Ingen favoritter endnu",
+    "emptyMessage": "Du har ikke tilføjet nogle favoritklatrepladser endnu",
+    "emptyHint": "Klik på stjerne-knappen på ethvert betingelseskort for at tilføje det til dine favoritter",
+    "lastChecked": "Senest tjekket",
+    "frictionScore": "Frikton score",
+    "viewConditions": "Se betingelser",
+    "remove": "Fjern"
+  },
+  "reports": {
+    "addReport": "Tilføj betingelsesrapport",
+    "addReportDescription": "Del aktuelle betingelser på {{cragName}}",
+    "postingAs": "Udskriver som",
+    "dryness": "Tørhed",
+    "wind": "Vind",
+    "crowds": "Mennesker",
+    "additionalComments": "Yderligere kommentarer",
+    "commentsPlaceholder": "F.eks. Østsektor stadig våd, sti mudret - pas på, Rute X - drypper fra sprækken, greb glatte...",
+    "submit": "Indsend rapport",
+    "submitting": "Indsender...",
+    "helpful": "Hjælpsom",
+    "loginToConfirm": "Vær venlig at opsætte din profil for at bekræfte rapporter",
+    "confirmFailed": "Kunne ikke bekræfte rapport. Prøv igen.",
+    "ratings": {
+      "veryPoor": "Meget dårlig",
+      "poor": "Dårlig",
+      "okay": "Okay",
+      "good": "God",
+      "excellent": "Fremragende"
+    },
+    "scales": {
+      "veryWet": "Meget våd",
+      "veryDry": "Perfekt",
+      "calm": "Roligt",
+      "veryWindy": "Meget blæsende",
+      "empty": "Tomt",
+      "veryCrowded": "Meget fyldt"
+    },
+    "recentReports": "Seneste rapporter",
+    "noReports": "Ingen rapporter endnu",
+    "noReportsMessage": "Vær den første til at dele betingelser på denne klatrepladser",
+    "reportCount": "{{count}} rapporter",
+    "viewAllReports": "Se alle rapporter"
+  }
+}

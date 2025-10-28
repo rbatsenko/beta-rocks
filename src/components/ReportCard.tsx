@@ -1,7 +1,19 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ThumbsUp, User, Wind, Droplets, Users } from "lucide-react";
+import {
+  ThumbsUp,
+  User,
+  Wind,
+  Droplets,
+  Users,
+  CloudSun,
+  AlertTriangle,
+  Lock,
+  Mountain,
+  Home,
+  MessageSquare,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -11,8 +23,11 @@ import { hashSyncKeyAsync } from "@/lib/auth/sync-key";
 import { createConfirmation, hasUserConfirmedReport } from "@/lib/db/queries";
 import { getUserProfile } from "@/lib/auth/sync-key";
 
+type ReportCategory = "conditions" | "safety" | "access" | "beta" | "facilities" | "other";
+
 interface Report {
   id: string;
+  category?: ReportCategory;
   text: string | null;
   rating_dry: number | null;
   rating_wind: number | null;
@@ -94,6 +109,43 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
     return "N/A";
   };
 
+  const getCategoryIcon = (category: ReportCategory) => {
+    const iconClass = "h-3.5 w-3.5";
+    switch (category) {
+      case "conditions":
+        return <CloudSun className={iconClass} />;
+      case "safety":
+        return <AlertTriangle className={iconClass} />;
+      case "access":
+        return <Lock className={iconClass} />;
+      case "beta":
+        return <Mountain className={iconClass} />;
+      case "facilities":
+        return <Home className={iconClass} />;
+      default:
+        return <MessageSquare className={iconClass} />;
+    }
+  };
+
+  const getCategoryColor = (category: ReportCategory) => {
+    switch (category) {
+      case "conditions":
+        return "bg-blue-500/10 text-blue-700 border-blue-200";
+      case "safety":
+        return "bg-red-500/10 text-red-700 border-red-200";
+      case "access":
+        return "bg-yellow-500/10 text-yellow-700 border-yellow-200";
+      case "beta":
+        return "bg-purple-500/10 text-purple-700 border-purple-200";
+      case "facilities":
+        return "bg-green-500/10 text-green-700 border-green-200";
+      default:
+        return "bg-gray-500/10 text-gray-700 border-gray-200";
+    }
+  };
+
+  const category = report.category || "conditions";
+
   return (
     <Card>
       <CardContent className="p-4">
@@ -104,42 +156,52 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
             <span className="text-sm font-medium">
               {report.author?.display_name || t("profile.anonymous")}
             </span>
+            {/* Category Badge */}
+            <Badge variant="outline" className={`gap-1.5 ${getCategoryColor(category)}`}>
+              {getCategoryIcon(category)}
+              <span className="text-xs font-medium">{t(`reports.categories.${category}`)}</span>
+            </Badge>
           </div>
           <span className="text-xs text-muted-foreground">
             {formatDistanceToNow(new Date(report.created_at), { addSuffix: true })}
           </span>
         </div>
 
-        {/* Ratings */}
-        <div className="flex flex-wrap gap-2 mb-3">
-          {report.rating_dry !== null && (
-            <Badge variant="outline" className="gap-1.5">
-              <Droplets className="h-3 w-3" />
-              <span className="text-xs">
-                {t("reports.dryness")}: {getRatingLabel(report.rating_dry)}
-              </span>
-              <div className={`h-2 w-2 rounded-full ${getRatingColor(report.rating_dry)}`} />
-            </Badge>
+        {/* Ratings - Only show for conditions reports */}
+        {category === "conditions" &&
+          (report.rating_dry !== null ||
+            report.rating_wind !== null ||
+            report.rating_crowds !== null) && (
+            <div className="flex flex-wrap gap-2 mb-3">
+              {report.rating_dry !== null && (
+                <Badge variant="outline" className="gap-1.5">
+                  <Droplets className="h-3 w-3" />
+                  <span className="text-xs">
+                    {t("reports.dryness")}: {getRatingLabel(report.rating_dry)}
+                  </span>
+                  <div className={`h-2 w-2 rounded-full ${getRatingColor(report.rating_dry)}`} />
+                </Badge>
+              )}
+              {report.rating_wind !== null && (
+                <Badge variant="outline" className="gap-1.5">
+                  <Wind className="h-3 w-3" />
+                  <span className="text-xs">
+                    {t("reports.wind")}: {getRatingLabel(report.rating_wind)}
+                  </span>
+                  <div className={`h-2 w-2 rounded-full ${getRatingColor(report.rating_wind)}`} />
+                </Badge>
+              )}
+              {report.rating_crowds !== null && (
+                <Badge variant="outline" className="gap-1.5">
+                  <Users className="h-3 w-3" />
+                  <span className="text-xs">
+                    {t("reports.crowds")}: {getRatingLabel(report.rating_crowds)}
+                  </span>
+                  <div className={`h-2 w-2 rounded-full ${getRatingColor(report.rating_crowds)}`} />
+                </Badge>
+              )}
+            </div>
           )}
-          {report.rating_wind !== null && (
-            <Badge variant="outline" className="gap-1.5">
-              <Wind className="h-3 w-3" />
-              <span className="text-xs">
-                {t("reports.wind")}: {getRatingLabel(report.rating_wind)}
-              </span>
-              <div className={`h-2 w-2 rounded-full ${getRatingColor(report.rating_wind)}`} />
-            </Badge>
-          )}
-          {report.rating_crowds !== null && (
-            <Badge variant="outline" className="gap-1.5">
-              <Users className="h-3 w-3" />
-              <span className="text-xs">
-                {t("reports.crowds")}: {getRatingLabel(report.rating_crowds)}
-              </span>
-              <div className={`h-2 w-2 rounded-full ${getRatingColor(report.rating_crowds)}`} />
-            </Badge>
-          )}
-        </div>
 
         {/* Text */}
         {report.text && (
@@ -155,7 +217,7 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
             disabled={isConfirmed || isConfirming}
             className={isConfirmed ? "bg-orange-500 hover:bg-orange-600" : ""}
           >
-            <ThumbsUp className={`h-3 w-3 mr-1.5 ${isConfirmed ? "fill-current" : ""}`} />
+            <ThumbsUp className={`h-3 w-3 ${isConfirmed ? "fill-current" : ""}`} />
             {t("reports.helpful")} {confirmationCount > 0 && `(${confirmationCount})`}
           </Button>
         </div>

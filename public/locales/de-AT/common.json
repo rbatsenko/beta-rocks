@@ -23,7 +23,12 @@
   "chat": {
     "analyzing": "Analysiere die Bedingungen...",
     "thinking": "Am Überlegen...",
-    "inputPlaceholder": "Frag nach einem Klettergebiet oder Sektor..."
+    "inputPlaceholder": "Frag nach einem Klettergebiet oder Sektor...",
+    "clearHistory": "Verlauf löschen",
+    "clearHistoryConfirm": "Sind Sie sicher, dass Sie den gesamten Chat-Verlauf löschen möchten? Dies kann nicht rückgängig gemacht werden.",
+    "clearChat": "Chat löschen",
+    "clearChatTooltip": "Aktuelle Konversation löschen",
+    "clearChatConfirm": "Chat löschen? Dadurch werden alle Nachrichten aus der aktuellen Konversation entfernt."
   },
   "conditions": {
     "rating": "Bewertung",
@@ -238,6 +243,43 @@
     "volcanic": "Vulkanisch",
     "phyllite": "Phyllit"
   },
+  "sync": {
+    "banner": {
+      "title": "Ihre Daten werden geräteübergreifend synchronisiert",
+      "description": "Ihre Favoriten, Berichte und Chat-Verlauf werden lokal gespeichert und können mit Ihrem Sync-Schlüssel auf andere Geräte synchronisiert werden.",
+      "learnMore": "Mehr erfahren",
+      "dismiss": "Verstanden"
+    },
+    "status": {
+      "synced": "Synchronisiert",
+      "syncing": "Synchronisiere...",
+      "offline": "Offline"
+    },
+    "notification": {
+      "title": "Sync-Schlüssel erstellt",
+      "description": "Wir haben einen eindeutigen Schlüssel erstellt, um Ihre Favoriten und Chats geräteübergreifend zu synchronisieren.",
+      "viewInSettings": "In Einstellungen ansehen"
+    }
+  },
+  "syncExplainer": {
+    "title": "So funktioniert die Synchronisierung",
+    "description": "Halten Sie Ihre Daten nahtlos und sicher auf all Ihren Geräten synchron.",
+    "features": {
+      "syncKey": {
+        "title": "Einzigartiger Sync-Schlüssel",
+        "description": "Jeder Benutzer erhält einen sicheren, einzigartigen Schlüssel zur Synchronisierung seiner Daten zwischen Geräten."
+      },
+      "multiDevice": {
+        "title": "Mehrgerätezugriff",
+        "description": "Greifen Sie von jedem Gerät aus auf Ihre Favoriten und Chat-Historie zu, indem Sie Ihren Sync-Schlüssel verwenden."
+      },
+      "privacy": {
+        "title": "Privatsphäre zuerst",
+        "description": "Ihre Daten sind verschlüsselt und nur mit Ihrem Sync-Schlüssel zugänglich. Kein Konto erforderlich."
+      }
+    },
+    "openSettings": "Einstellungen öffnen"
+  },
   "profile": {
     "anonymous": "Anonym",
     "member": "Mitglied",
@@ -267,6 +309,18 @@
       "hideKey": "Schlüssel verbergen",
       "qrCode": "QR-Code",
       "qrDescription": "Scanne diesen QR-Code auf einem anderen Gerät, um deine Daten zu synchronisieren",
+      "restoreTitle": "Von einem anderen Gerät wiederherstellen",
+      "restoreDescription": "Hast du bereits einen Sync-Schlüssel? Füge ihn hier ein, um deine Daten wiederherzustellen",
+      "restoreLabel": "Sync-Schlüssel einfügen",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Sync-Schlüssel wiederherstellen",
+      "restoring": "Wiederherstellung läuft...",
+      "restoreSuccess": "Sync-Schlüssel erfolgreich wiederhergestellt! Wird neu geladen...",
+      "restoreError": "Ungültiges Sync-Schlüssel-Format. Bitte überprüfen und erneut versuchen.",
+      "saveNote": {
+        "title": "Sync-Schlüssel speichern",
+        "description": "Wir empfehlen, deinen Sync-Schlüssel an einem sicheren Ort wie deiner Notizen-App oder einem Passwort-Manager zu speichern. Du benötigst ihn, um deine Daten auf anderen Geräten wiederherzustellen."
+      },
       "warning": {
         "title": "Halte deinen Sync-Schlüssel geheim",
         "description": "Jeder mit deinem Sync-Schlüssel kann auf deine Favoriten und Einstellungen zugreifen. Teile ihn nicht öffentlich."
@@ -275,7 +329,9 @@
     "dangerZone": {
       "title": "Gefahrenzone",
       "description": "Diese Aktionen sind dauerhaft und können nicht rückgängig gemacht werden",
-      "clearData": "Alle lokalen Daten löschen"
+      "deleteProfile": "Profil löschen",
+      "deleteProfileConfirm": "Möchten Sie Ihr Profil wirklich löschen? Dadurch werden alle Ihre Daten einschließlich Favoriten, Chat-Verlauf und Einstellungen dauerhaft entfernt. Diese Aktion kann nicht rückgängig gemacht werden.",
+      "deleteFailed": "Profil konnte nicht gelöscht werden. Bitte versuchen Sie es erneut."
     }
   },
   "favorites": {
@@ -297,7 +353,7 @@
     "wind": "Wind",
     "crowds": "Andrang",
     "additionalComments": "Zusätzliche Kommentare",
-    "commentsPlaceholder": "Beschreibe die aktuellen Bedingungen, Felsqualität, Zugang usw.",
+    "commentsPlaceholder": "Z.B. Ostsektor noch nass, Weg matschig - Vorsicht, Route X - Wasser sickert aus Riss, Griffe rutschig...",
     "submit": "Bericht absenden",
     "submitting": "Sende...",
     "helpful": "Hilfreich",
@@ -309,6 +365,14 @@
       "okay": "Okay",
       "good": "Gut",
       "excellent": "Ausgezeichnet"
+    },
+    "scales": {
+      "veryWet": "Sehr nass",
+      "veryDry": "Perfekt",
+      "calm": "Windstill",
+      "veryWindy": "Sehr windig",
+      "empty": "Leer",
+      "veryCrowded": "Sehr überfüllt"
     },
     "recentReports": "Aktuelle Berichte",
     "noReports": "Noch keine Berichte",
