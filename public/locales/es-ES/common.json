@@ -263,7 +263,8 @@
     "notification": {
       "title": "Clave de sincronización creada",
       "description": "Hemos generado una clave única para sincronizar tus favoritos y chats en todos tus dispositivos.",
-      "viewInSettings": "Ver en ajustes"
+      "viewInSettings": "Ver en ajustes",
+      "viewMore": "¿Qué es una clave de sincronización?"
     }
   },
   "syncExplainer": {

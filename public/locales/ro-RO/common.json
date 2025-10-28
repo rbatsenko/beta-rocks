@@ -247,7 +247,8 @@
     "notification": {
       "title": "Cheie de Sincronizare Creată",
       "description": "Am generat o cheie unică pentru a sincroniza favoritele și chat-ul între dispozitive.",
-      "viewInSettings": "Vizualizează în Setări"
+      "viewInSettings": "Vizualizează în Setări",
+      "viewMore": "Ce este o cheie de sincronizare?"
     },
     "banner": {
       "title": "Datele tale se sincronizează între dispozitive",

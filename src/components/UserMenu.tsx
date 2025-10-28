@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { User, Settings, Star, Clock, BarChart3, LogOut } from "lucide-react";
+import { User, Settings, Star, Clock, BarChart3, LogOut, Info, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -18,9 +18,18 @@ import { useClientTranslation } from "@/hooks/useClientTranslation";
 interface UserMenuProps {
   onSettingsClick: () => void;
   onFavoritesClick: () => void;
+  onAboutClick?: () => void;
+  onClearChatClick?: () => void;
+  isClearChatDisabled?: boolean;
 }
 
-export function UserMenu({ onSettingsClick, onFavoritesClick }: UserMenuProps) {
+export function UserMenu({
+  onSettingsClick,
+  onFavoritesClick,
+  onAboutClick,
+  onClearChatClick,
+  isClearChatDisabled,
+}: UserMenuProps) {
   const { t } = useClientTranslation("common");
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -109,6 +118,22 @@ export function UserMenu({ onSettingsClick, onFavoritesClick }: UserMenuProps) {
           <span>{t("profile.stats")}</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
+        {onAboutClick && (
+          <DropdownMenuItem onClick={onAboutClick} className="cursor-pointer md:hidden">
+            <Info className="mr-2 h-4 w-4" />
+            <span>{t("ui.aboutApp")}</span>
+          </DropdownMenuItem>
+        )}
+        {onClearChatClick && (
+          <DropdownMenuItem
+            onClick={onClearChatClick}
+            className="cursor-pointer md:hidden"
+            disabled={isClearChatDisabled}
+          >
+            <RotateCcw className="mr-2 h-4 w-4" />
+            <span>{t("chat.clearChat")}</span>
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem onClick={onSettingsClick} className="cursor-pointer">
           <Settings className="mr-2 h-4 w-4" />
           <span>{t("profile.settings")}</span>

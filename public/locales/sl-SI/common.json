@@ -259,7 +259,8 @@
     "notification": {
       "title": "Sinhronizacijski ključ ustvarjen",
       "description": "Ustvarili smo edinstven ključ za sinhronizacijo vaših priljubljenih in klepetov med napravami.",
-      "viewInSettings": "Pogled v nastavitvah"
+      "viewInSettings": "Pogled v nastavitvah",
+      "viewMore": "Kaj je ključ za sinhronizacijo?"
     }
   },
   "syncExplainer": {

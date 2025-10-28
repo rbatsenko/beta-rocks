@@ -247,7 +247,8 @@
     "notification": {
       "title": "Sync tipka je kreirana",
       "description": "Generirali smo jedinstvenu tipku za sinkronizaciju tvojih omiljenih lokacija i razgovora između uređaja.",
-      "viewInSettings": "Pogledaj u postavkama"
+      "viewInSettings": "Pogledaj u postavkama",
+      "viewMore": "Što je ključ za sinkronizaciju?"
     },
     "banner": {
       "title": "Tvoji podaci se sinkroniziraju između uređaja",

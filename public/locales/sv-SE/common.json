@@ -259,7 +259,8 @@
     "notification": {
       "title": "Synkroniseringsnyckel skapad",
       "description": "Vi har skapat en unik nyckel för att synkronisera dina favoriter och chattar mellan enheter.",
-      "viewInSettings": "Visa i inställningar"
+      "viewInSettings": "Visa i inställningar",
+      "viewMore": "Vad är en synkroniseringsnyckel?"
     }
   },
   "syncExplainer": {

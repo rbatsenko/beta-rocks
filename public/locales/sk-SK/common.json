@@ -258,7 +258,8 @@
     "notification": {
       "title": "Synchronizačný kľúč vytvorený",
       "description": "Vygenerovali sme jedinečný kľúč na synchronizáciu vašich obľúbených a chatov naprieč zariadeniami.",
-      "viewInSettings": "Zobraziť v nastavení"
+      "viewInSettings": "Zobraziť v nastavení",
+      "viewMore": "Čo je synchronizačný kľúč?"
     }
   },
   "syncExplainer": {

@@ -247,7 +247,8 @@
     "notification": {
       "title": "Sync Key Created",
       "description": "We've generated a unique key to sync your favourites and chat across devices.",
-      "viewInSettings": "View in Settings"
+      "viewInSettings": "View in Settings",
+      "viewMore": "What is sync key?"
     },
     "banner": {
       "title": "Your data syncs across devices",

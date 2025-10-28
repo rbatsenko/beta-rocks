@@ -3,16 +3,16 @@
     "title": "temps.rocks"
   },
   "welcome": {
-    "heading": "Kysy kiipeily\u00f6oloista",
-    "description": "Saa reaaliaikaista s\u00e4\u00e4tietoa, kitkamittauksia ja optimaaliset kiipeilyaikaikkunat mihin tahansa maailman kalliotyypp\u00fc\u00e4\u00e4n",
+    "heading": "Kysy kiipeilyöoloista",
+    "description": "Saa reaaliaikaista säätietoa, kitkamittauksia ja optimaaliset kiipeilyaikaikkunat mihin tahansa maailman kalliotyyppüään",
     "exampleQueries": {
       "query1": {
         "display": "Olosuhteet Olhavassa tänään?",
         "query": "Olosuhteet Olhavassa tänään?"
       },
       "query2": {
-        "display": "Onko Sipoo kuiva iltap\u00e4iv\u00e4ll\u00e4?",
-        "query": "Onko Sipoo kuiva iltap\u00e4iv\u00e4ll\u00e4?"
+        "display": "Onko Sipoo kuiva iltapäivällä?",
+        "query": "Onko Sipoo kuiva iltapäivällä?"
       },
       "query3": {
         "display": "Olosuhteet Konnevuoressa huomenna?",
@@ -22,49 +22,49 @@
   },
   "chat": {
     "analyzing": "Analysoidaan olosuhteita...",
-    "thinking": "Mietit\u00e4\u00e4n...",
+    "thinking": "Mietitään...",
     "inputPlaceholder": "Kysy kalliosta tai sektorista...",
-    "clearChat": "Tyhjenn\u00e4 keskustelu",
-    "clearChatTooltip": "Tyhjenn\u00e4 nykyinen keskustelu",
-    "clearChatConfirm": "Tyhjennet\u00e4\u00e4nk\u00f6 keskustelu? T\u00e4m\u00e4 poistaa kaikki viestit nykyisest\u00e4 keskustelusta.",
-    "clearHistory": "Tyhjenn\u00e4 historia",
-    "clearHistoryConfirm": "Oletko varma, ett\u00e4 haluat poistaa kaikki keskusteluhistorian? T\u00e4t\u00e4 ei voi peruuttaa."
+    "clearChat": "Tyhjennä keskustelu",
+    "clearChatTooltip": "Tyhjennä nykyinen keskustelu",
+    "clearChatConfirm": "Tyhjennetäänkö keskustelu? Tämä poistaa kaikki viestit nykyisestä keskustelusta.",
+    "clearHistory": "Tyhjennä historia",
+    "clearHistoryConfirm": "Oletko varma, että haluat poistaa kaikki keskusteluhistorian? Tätä ei voi peruuttaa."
   },
   "conditions": {
     "rating": "Arvio",
     "details": "Yksityiskohdat",
     "location": "Sijainti",
     "favorite": "Suosikki",
-    "favorited": "Lis\u00e4tty suosikkeihin",
-    "addReport": "Lis\u00e4\u00e4 raportti"
+    "favorited": "Lisätty suosikkeihin",
+    "addReport": "Lisää raportti"
   },
   "ratings": {
     "great": "Loistava",
-    "good": "Hyv\u00e4",
+    "good": "Hyvä",
     "fair": "Kohtuullinen",
     "poor": "Huono",
-    "nope": "Ei k\u00e4y"
+    "nope": "Ei käy"
   },
   "reasons": {
-    "perfectTemp": "Ihanteellinen l\u00e4mp\u00f6tila ({{temp}}°C)",
-    "tempTooHigh": "L\u00e4mp\u00f6tila liian korkea - sormet voivat livahtaa",
-    "coldGoodFriction": "Kylm\u00e4, mutta hyvä {{rockType}}-kiven kitkalle",
+    "perfectTemp": "Ihanteellinen lämpötila ({{temp}}°C)",
+    "tempTooHigh": "Lämpötila liian korkea - sormet voivat livahtaa",
+    "coldGoodFriction": "Kylmä, mutta hyvä {{rockType}}-kiven kitkalle",
     "idealHumidity": "Ihanteellinen kosteus ({{humidity}}%)",
     "lowHumidityGranite": "Alhainen kosteus parantaa kitkaa graniitissa",
     "readyInHours": "Valmiina kiipelyyn noin {{hours}} tunnin kuluttua",
-    "acceptable": "Olosuhteet ovat hyv\u00e4ksytt\u00e4v\u00e4t"
+    "acceptable": "Olosuhteet ovat hyväksyttävät"
   },
   "warnings": {
-    "tooWarm": "Liian l\u00e4mmin {{rockType}}-kiven osalta ({{temp}}°C)",
-    "coldSuboptimal": "Kylm\u00e4 ja alle optimaalinen {{rockType}}-kiven osalta",
+    "tooWarm": "Liian lämmin {{rockType}}-kiven osalta ({{temp}}°C)",
+    "coldSuboptimal": "Kylmä ja alle optimaalinen {{rockType}}-kiven osalta",
     "highHumidity": "Korkea kosteus ({{humidity}}%) - kivi voi olla liukas",
-    "wetDangerousSandstone": "Kivi on t\u00e4ll\u00e4 hetkell\u00e4 kostea - vaarallinen kiipeill\u00e4 (hiekkakivi heikkenee kosteutuessaan)",
-    "wetSlippery": "Kivi on t\u00e4ll\u00e4 hetkell\u00e4 kostea - liukkaat olosuhteet",
+    "wetDangerousSandstone": "Kivi on tällä hetkellä kostea - vaarallinen kiipeillä (hiekkakivi heikkenee kosteutuessaan)",
+    "wetSlippery": "Kivi on tällä hetkellä kostea - liukkaat olosuhteet",
     "veryHighWinds": "Erittäin kovat tuulet ({{wind}} km/h) - vaara pudota tuuleen",
     "highWind": "Kova tuuli ({{wind}} km/h)",
     "recentPrecip": "Äskettäinen sade ({{precip}}mm) - kuivuu noin {{hours}}h kuluttua",
-    "currentlyWetDangerous": "T\u00e4ll\u00e4 hetkell\u00e4 kostea - vaarallinen",
-    "currentlyWet": "T\u00e4ll\u00e4 hetkell\u00e4 kostea"
+    "currentlyWetDangerous": "Tällä hetkellä kostea - vaarallinen",
+    "currentlyWet": "Tällä hetkellä kostea"
   },
   "weather": {
     "clearSky": "Selkeä taivas",
@@ -247,7 +247,8 @@
     "notification": {
       "title": "Synkronointiavain luotu",
       "description": "Olemme luoneet ainutlaatuisen avaimen synkronoidaksemme suosikkejasi ja chatisi laitteiden välillä.",
-      "viewInSettings": "Näytä asetuksissa"
+      "viewInSettings": "Näytä asetuksissa",
+      "viewMore": "Mikä on synkronointiavain?"
     },
     "banner": {
       "title": "Tietosi synkronoidaan laitteiden välillä",

@@ -252,7 +252,8 @@
     "notification": {
       "title": "Klucz synchronizacji utworzony",
       "description": "Wygenerowaliśmy unikalny klucz do synchronizacji twoich ulubionych i czatów między urządzeniami.",
-      "viewInSettings": "Zobacz w ustawieniach"
+      "viewInSettings": "Zobacz w ustawieniach",
+      "viewMore": "Co to jest klucz synchronizacji?"
     }
   },
   "syncExplainer": {

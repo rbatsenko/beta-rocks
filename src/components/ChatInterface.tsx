@@ -357,13 +357,16 @@ const ChatUI = ({
               onSyncClick={() => setSyncExplainerDialogOpen(true)}
               onSettingsClick={() => setSettingsDialogOpen(true)}
               onFavoritesClick={() => setFavoritesDialogOpen(true)}
+              onAboutClick={() => setFeaturesDialogOpen(true)}
+              onClearChatClick={() => setNewChatConfirmOpen(true)}
+              isClearChatDisabled={messages.length === 0}
               extraActions={
                 <>
                   <Button
                     variant="outline"
                     size="icon"
                     onClick={() => setFeaturesDialogOpen(true)}
-                    className="rounded-full"
+                    className="rounded-full hidden md:flex"
                   >
                     <Info className="h-5 w-5" />
                     <span className="sr-only">{t("ui.aboutApp")}</span>
@@ -373,7 +376,7 @@ const ChatUI = ({
                     size="icon"
                     onClick={() => setNewChatConfirmOpen(true)}
                     disabled={messages.length === 0}
-                    className="rounded-full"
+                    className="rounded-full hidden md:flex"
                     title={t("chat.clearChatTooltip")}
                   >
                     <RotateCcw className="h-5 w-5" />
@@ -809,18 +812,26 @@ const ChatInterface = ({
               onSyncClick={() => setSyncExplainerDialogOpen(true)}
               onSettingsClick={() => setSettingsDialogOpen(true)}
               onFavoritesClick={() => setFavoritesDialogOpen(true)}
+              onAboutClick={() => setFeaturesDialogOpen(true)}
+              onClearChatClick={() => {}}
+              isClearChatDisabled={true}
               extraActions={
                 <>
                   <Button
                     variant="outline"
                     size="icon"
                     onClick={() => setFeaturesDialogOpen(true)}
-                    className="rounded-full"
+                    className="rounded-full hidden md:flex"
                   >
                     <Info className="h-5 w-5" />
                     <span className="sr-only">{t("ui.aboutApp")}</span>
                   </Button>
-                  <Button variant="outline" size="icon" disabled className="rounded-full">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    disabled
+                    className="rounded-full hidden md:flex"
+                  >
                     <RotateCcw className="h-5 w-5" />
                     <span className="sr-only">{t("chat.clearChat")}</span>
                   </Button>

@@ -258,7 +258,8 @@
     "notification": {
       "title": "Clé de synchronisation créée",
       "description": "Nous avons généré une clé unique pour synchroniser vos favoris et chats sur tous vos appareils.",
-      "viewInSettings": "Voir dans les paramètres"
+      "viewInSettings": "Voir dans les paramètres",
+      "viewMore": "Qu'est-ce qu'une clé de synchronisation ?"
     }
   },
   "syncExplainer": {

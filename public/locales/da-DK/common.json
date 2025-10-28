@@ -247,7 +247,8 @@
     "notification": {
       "title": "Synknøgle oprettet",
       "description": "Vi har genereret en unik nøgle for at synkronisere dine favoritter og chat på tværs af enheder.",
-      "viewInSettings": "Vis i indstillinger"
+      "viewInSettings": "Vis i indstillinger",
+      "viewMore": "Hvad er en synkroniseringsnøgle?"
     },
     "banner": {
       "title": "Dine data synkroniseres på tværs af enheder",

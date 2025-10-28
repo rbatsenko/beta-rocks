@@ -258,7 +258,8 @@
     "notification": {
       "title": "Chiave di sincronizzazione creata",
       "description": "Abbiamo generato una chiave univoca per sincronizzare i tuoi preferiti e chat su tutti i dispositivi.",
-      "viewInSettings": "Visualizza nelle impostazioni"
+      "viewInSettings": "Visualizza nelle impostazioni",
+      "viewMore": "Cos'è una chiave di sincronizzazione?"
     }
   },
   "syncExplainer": {

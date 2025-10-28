@@ -15,6 +15,12 @@ interface HeaderActionsProps {
   onFavoritesClick: () => void;
   /** Optional extra actions to show before the common actions */
   extraActions?: ReactNode;
+  /** Optional callback for about/info action (shown in menu on mobile) */
+  onAboutClick?: () => void;
+  /** Optional callback for clear chat action (shown in menu on mobile) */
+  onClearChatClick?: () => void;
+  /** Whether clear chat is disabled */
+  isClearChatDisabled?: boolean;
 }
 
 export function HeaderActions({
@@ -22,6 +28,9 @@ export function HeaderActions({
   onSettingsClick,
   onFavoritesClick,
   extraActions,
+  onAboutClick,
+  onClearChatClick,
+  isClearChatDisabled,
 }: HeaderActionsProps) {
   const { t } = useClientTranslation("common");
   const syncStatus = useSyncStatus();
@@ -40,7 +49,13 @@ export function HeaderActions({
       {extraActions}
       <LanguageSelector />
       <ThemeToggle />
-      <UserMenu onSettingsClick={onSettingsClick} onFavoritesClick={onFavoritesClick} />
+      <UserMenu
+        onSettingsClick={onSettingsClick}
+        onFavoritesClick={onFavoritesClick}
+        onAboutClick={onAboutClick}
+        onClearChatClick={onClearChatClick}
+        isClearChatDisabled={isClearChatDisabled}
+      />
     </>
   );
 }

@@ -263,7 +263,8 @@
     "notification": {
       "title": "Sync-Schlüssel erstellt",
       "description": "Wir haben einen eindeutigen Schlüssel erstellt, um Ihre Favoriten und Chats geräteübergreifend zu synchronisieren.",
-      "viewInSettings": "In Einstellungen ansehen"
+      "viewInSettings": "In Einstellungen ansehen",
+      "viewMore": "Was ist der Sync-Schlüssel?"
     }
   },
   "syncExplainer": {

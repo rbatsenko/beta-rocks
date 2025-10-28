@@ -247,7 +247,8 @@
     "notification": {
       "title": "Synchronisatietoets aangemaakt",
       "description": "We hebben een unieke toets gegenereerd om je favorieten en chat over apparaten heen te synchroniseren.",
-      "viewInSettings": "Bekijk in Instellingen"
+      "viewInSettings": "Bekijk in Instellingen",
+      "viewMore": "Wat is een synchronisatiesleutel?"
     },
     "banner": {
       "title": "Je gegevens synchroniseren op apparaten",

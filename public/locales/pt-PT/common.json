@@ -247,7 +247,8 @@
     "notification": {
       "title": "Chave de Sincronização Criada",
       "description": "Gerámos uma chave única para sincronizar os seus favoritos e chat entre dispositivos.",
-      "viewInSettings": "Ver nas Definições"
+      "viewInSettings": "Ver nas Definições",
+      "viewMore": "O que é uma chave de sincronização?"
     },
     "banner": {
       "title": "Os seus dados sincronizam entre dispositivos",

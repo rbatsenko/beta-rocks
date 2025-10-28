@@ -247,7 +247,8 @@
     "notification": {
       "title": "Clau de sincronització creada",
       "description": "Hem generat una clau única per sincronitzar els teus preferits i xat entre dispositius.",
-      "viewInSettings": "Veure a configuració"
+      "viewInSettings": "Veure a configuració",
+      "viewMore": "Què és una clau de sincronització?"
     },
     "banner": {
       "title": "Les teves dades se sincronitzen entre dispositius",
