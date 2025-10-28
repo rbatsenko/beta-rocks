@@ -451,12 +451,9 @@ export async function fetchRouteWithDetails(routeId: string) {
 }
 
 // ==================== USER FAVORITES ====================
-// NOTE: Types for user_favorites and user_stats tables will be available after
-// running the migration and regenerating Supabase types. Until then, using 'any' for these queries.
 
 export async function createFavorite(favorite: any) {
   const { data, error } = await supabase
-    // @ts-expect-error - user_favorites table not yet in generated types
     .from("user_favorites")
     .insert({
       id: uuidv4(),
@@ -473,8 +470,7 @@ export async function createFavorite(favorite: any) {
 }
 
 export async function fetchFavoritesByUserProfile(userProfileId: string) {
-  const { data, error } = await supabase
-    // @ts-expect-error - user_favorites table not yet in generated types
+  const { data, error} = await supabase
     .from("user_favorites")
     .select("*")
     .eq("user_profile_id", userProfileId)
@@ -487,7 +483,6 @@ export async function fetchFavoritesByUserProfile(userProfileId: string) {
 
 export async function fetchFavoriteById(id: string) {
   const { data, error } = await supabase
-    // @ts-expect-error - user_favorites table not yet in generated types
     .from("user_favorites")
     .select("*")
     .eq("id", id)
@@ -499,7 +494,6 @@ export async function fetchFavoriteById(id: string) {
 
 export async function updateFavorite(id: string, updates: Record<string, unknown>) {
   const { data, error } = await supabase
-    // @ts-expect-error - user_favorites table not yet in generated types
     .from("user_favorites")
     .update({
       ...updates,
@@ -514,7 +508,6 @@ export async function updateFavorite(id: string, updates: Record<string, unknown
 }
 
 export async function deleteFavorite(id: string) {
-  // @ts-expect-error - user_favorites table not yet in generated types
   const { error } = await supabase.from("user_favorites").delete().eq("id", id);
 
   if (error) throw error;
@@ -525,7 +518,6 @@ export async function checkIsFavorite(
   areaId?: string,
   cragId?: string
 ): Promise<boolean> {
-  // @ts-expect-error - user_favorites table not yet in generated types
   const query = supabase.from("user_favorites");
 
   let selectQuery = query
@@ -548,7 +540,6 @@ export async function checkIsFavorite(
 
 export async function removeFavoriteByArea(userProfileId: string, areaId: string) {
   const { error } = await supabase
-    // @ts-expect-error - user_favorites table not yet in generated types
     .from("user_favorites")
     .delete()
     .eq("user_profile_id", userProfileId)
@@ -559,7 +550,6 @@ export async function removeFavoriteByArea(userProfileId: string, areaId: string
 
 export async function removeFavoriteByCrag(userProfileId: string, cragId: string) {
   const { error } = await supabase
-    // @ts-expect-error - user_favorites table not yet in generated types
     .from("user_favorites")
     .delete()
     .eq("user_profile_id", userProfileId)
@@ -573,7 +563,6 @@ export async function removeFavoriteByCrag(userProfileId: string, cragId: string
 export async function fetchOrCreateUserStats(userProfileId: string) {
   // Try to fetch existing
   const { data: existing } = await supabase
-    // @ts-expect-error - user_stats table not yet in generated types
     .from("user_stats")
     .select("*")
     .eq("user_profile_id", userProfileId)
@@ -583,7 +572,6 @@ export async function fetchOrCreateUserStats(userProfileId: string) {
 
   // Create new stats
   const { data, error } = await supabase
-    // @ts-expect-error - user_stats table not yet in generated types
     .from("user_stats")
     .insert({
       user_profile_id: userProfileId,
@@ -606,7 +594,6 @@ export async function updateUserStats(
   }
 ) {
   const { data, error } = await supabase
-    // @ts-expect-error - user_stats table not yet in generated types
     .from("user_stats")
     .update({
       ...updates,

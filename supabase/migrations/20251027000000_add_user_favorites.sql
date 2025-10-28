@@ -4,7 +4,7 @@
 CREATE TABLE public.user_favorites (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_profile_id UUID NOT NULL REFERENCES public.user_profiles(id) ON DELETE CASCADE,
-  crag_id UUID REFERENCES public.crags(id) ON DELETE CASCADE,
+  crag_id TEXT REFERENCES public.crags(id) ON DELETE CASCADE,
   area_id TEXT, -- OpenBeta area ID (for crags not yet in our database)
   area_name TEXT NOT NULL,
   area_slug TEXT,
