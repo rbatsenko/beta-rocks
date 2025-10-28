@@ -183,6 +183,52 @@ export async function initializeUserProfile(): Promise<UserProfile> {
     const syncKeyHash =
       existingProfile.syncKeyHash || (await hashSyncKeyAsync(existingProfile.syncKey));
     await setUserProfileCookies(syncKeyHash, existingProfile.displayName);
+
+    // Check if favorites need restoration (might be missing after sync key restore)
+    try {
+      const { getFavoritesFromStorage } = await import("@/lib/storage/favorites");
+      const localFavorites = getFavoritesFromStorage();
+
+      // If no local favorites, try to restore from database
+      if (localFavorites.length === 0) {
+        const { fetchOrCreateUserProfile, fetchFavoritesByUserProfile } = await import(
+          "@/lib/db/queries"
+        );
+        const dbProfile = await fetchOrCreateUserProfile(syncKeyHash);
+
+        if (dbProfile) {
+          const dbFavorites = await fetchFavoritesByUserProfile(dbProfile.id);
+          if (dbFavorites && dbFavorites.length > 0) {
+            const { saveFavoritesToStorage } = await import("@/lib/storage/favorites");
+            const favoritesForStorage = dbFavorites.map((dbFav) => ({
+              id: dbFav.id,
+              userProfileId: dbFav.user_profile_id,
+              areaId: dbFav.area_id || undefined,
+              cragId: dbFav.crag_id || undefined,
+              areaName: dbFav.area_name,
+              areaSlug: dbFav.area_slug || undefined,
+              location: dbFav.location || "",
+              latitude: dbFav.latitude,
+              longitude: dbFav.longitude,
+              rockType: dbFav.rock_type || undefined,
+              lastRating: dbFav.last_rating || undefined,
+              lastFrictionScore: dbFav.last_friction_score || undefined,
+              lastCheckedAt: dbFav.last_checked_at || undefined,
+              displayOrder: dbFav.display_order ?? 0,
+              addedAt: dbFav.added_at || new Date().toISOString(),
+            }));
+            saveFavoritesToStorage(favoritesForStorage);
+            console.log(
+              `[initializeUserProfile] Lazy-restored ${favoritesForStorage.length} favorites`
+            );
+          }
+        }
+      }
+    } catch (error) {
+      console.warn("[initializeUserProfile] Failed to lazy-restore favorites:", error);
+      // Non-critical, continue
+    }
+
     return existingProfile;
   }
 
