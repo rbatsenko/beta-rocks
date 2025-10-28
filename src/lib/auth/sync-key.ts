@@ -238,7 +238,7 @@ export async function initializeUserProfile(): Promise<UserProfile> {
             lastRating: dbFav.last_rating || undefined,
             lastFrictionScore: dbFav.last_friction_score || undefined,
             lastCheckedAt: dbFav.last_checked_at || undefined,
-            displayOrder: dbFav.display_order,
+            displayOrder: dbFav.display_order ?? 0,
             addedAt: dbFav.added_at || new Date().toISOString(),
           }));
           saveFavoritesToStorage(favoritesForStorage);
