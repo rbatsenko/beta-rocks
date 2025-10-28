@@ -28,7 +28,6 @@ export function HeaderActions({
 
   return (
     <>
-      {extraActions}
       <Button
         variant="ghost"
         size="sm"
@@ -38,6 +37,7 @@ export function HeaderActions({
       >
         <SyncStatusIndicator status={syncStatus} />
       </Button>
+      {extraActions}
       <LanguageSelector />
       <ThemeToggle />
       <UserMenu onSettingsClick={onSettingsClick} onFavoritesClick={onFavoritesClick} />
