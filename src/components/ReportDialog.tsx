@@ -23,6 +23,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Slider } from "@/components/ui/slider";
 import { Calendar } from "@/components/ui/calendar";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { getUserProfile, initializeUserProfile, hashSyncKeyAsync } from "@/lib/auth/sync-key";
@@ -135,7 +136,7 @@ export function ReportDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl">
+      <DialogContent className="max-w-2xl max-h-[90vh]">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <MessageSquare className="h-5 w-5" />
@@ -144,7 +145,8 @@ export function ReportDialog({
           <DialogDescription>{t("reports.addReportDescription", { cragName })}</DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-3 py-4">
+        <ScrollArea className="max-h-[70vh] pr-4">
+          <div className="space-y-3 py-4">
           {/* Author Preview */}
           <div className="bg-muted/50 rounded-lg p-3">
             <p className="text-sm text-muted-foreground">
@@ -327,7 +329,8 @@ export function ReportDialog({
               )}
             </Button>
           </div>
-        </div>
+          </div>
+        </ScrollArea>
       </DialogContent>
     </Dialog>
   );

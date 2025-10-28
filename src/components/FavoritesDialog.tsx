@@ -43,11 +43,15 @@ export function FavoritesDialog({ open, onOpenChange }: FavoritesDialogProps) {
   }, [open]);
 
   const loadFavorites = async () => {
+    // Load from localStorage immediately (instant, no delay)
+    const storedFavorites = getFavoritesFromStorage();
+    setFavorites(storedFavorites);
+    console.log(`[FavoritesDialog] Loaded ${storedFavorites.length} favorites from localStorage`);
+
+    // Then sync from database in the background
     try {
-      // Get user profile
       const profile = getUserProfile();
       if (!profile) {
-        setFavorites([]);
         return;
       }
 
@@ -78,20 +82,17 @@ export function FavoritesDialog({ open, onOpenChange }: FavoritesDialogProps) {
 
           // Update localStorage to keep it in sync
           saveFavoritesToStorage(favoritesForStorage);
-          setFavorites(favoritesForStorage);
-          console.log(`[FavoritesDialog] Loaded ${favoritesForStorage.length} favorites from DB`);
-          return;
+
+          // Only update state if different from what we already have
+          if (JSON.stringify(favoritesForStorage) !== JSON.stringify(storedFavorites)) {
+            setFavorites(favoritesForStorage);
+            console.log(`[FavoritesDialog] Updated ${favoritesForStorage.length} favorites from DB`);
+          }
         }
       }
-
-      // Fallback to localStorage if DB fetch fails or is empty
-      const stored = getFavoritesFromStorage();
-      setFavorites(stored);
     } catch (error) {
-      console.error("[FavoritesDialog] Failed to load favorites from DB:", error);
-      // Fallback to localStorage
-      const stored = getFavoritesFromStorage();
-      setFavorites(stored);
+      console.error("[FavoritesDialog] Failed to sync favorites from DB:", error);
+      // Already showing localStorage data, no need to fallback
     }
   };
 

@@ -246,11 +246,17 @@ const ChatUI = ({
     new Map()
   );
 
-  // Load favorites for quick actions (from database)
+  // Load favorites for quick actions (localStorage first, then sync from DB)
   const [favorites, setFavorites] = useState<Favorite[]>([]);
 
   useEffect(() => {
     const loadFavorites = async () => {
+      // Load from localStorage immediately (instant, no delay)
+      const storedFavorites = getFavoritesFromStorage();
+      setFavorites(storedFavorites);
+      console.log(`[ChatInterface] Loaded ${storedFavorites.length} favorites from localStorage`);
+
+      // Then sync from database in the background
       try {
         const profile = getUserProfile();
         if (!profile) return;
@@ -278,13 +284,17 @@ const ChatUI = ({
               displayOrder: dbFav.display_order ?? 0,
               addedAt: dbFav.added_at || new Date().toISOString(),
             }));
-            setFavorites(favoritesForStorage);
+
+            // Only update state if different from what we already have
+            if (JSON.stringify(favoritesForStorage) !== JSON.stringify(storedFavorites)) {
+              setFavorites(favoritesForStorage);
+              console.log(`[ChatInterface] Updated ${favoritesForStorage.length} favorites from DB`);
+            }
           }
         }
       } catch (error) {
-        console.warn("[ChatInterface] Failed to load favorites:", error);
-        // Fallback to localStorage
-        setFavorites(getFavoritesFromStorage());
+        console.warn("[ChatInterface] Failed to sync favorites from DB:", error);
+        // Already showing localStorage data, no need to fallback
       }
     };
 

@@ -10,6 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Card, CardContent } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { fetchOrCreateUserStats, fetchOrCreateUserProfile } from "@/lib/db/queries";
 import { getUserProfile, hashSyncKeyAsync } from "@/lib/auth/sync-key";
@@ -92,7 +93,7 @@ export function StatsDialog({ open, onOpenChange }: StatsDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl">
+      <DialogContent className="max-w-2xl max-h-[90vh]">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <BarChart3 className="h-5 w-5 text-orange-500" />
@@ -106,7 +107,8 @@ export function StatsDialog({ open, onOpenChange }: StatsDialogProps) {
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500" />
           </div>
         ) : (
-          <div className="space-y-6">
+          <ScrollArea className="max-h-[60vh] pr-4">
+            <div className="space-y-6">
             {/* Main Stats Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {statCards.map((stat) => (
@@ -152,7 +154,8 @@ export function StatsDialog({ open, onOpenChange }: StatsDialogProps) {
                 {stats?.reports_posted === 0 ? t("stats.encourageReports") : t("stats.thankYou")}
               </p>
             </div>
-          </div>
+            </div>
+          </ScrollArea>
         )}
       </DialogContent>
     </Dialog>
