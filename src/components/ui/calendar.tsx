@@ -23,9 +23,7 @@ function Calendar({
     <DayPicker
       showOutsideDays={showOutsideDays}
       className={cn(
-        "bg-background group/calendar p-4 [--cell-size:2.5rem] [[data-slot=card-content]_&]:bg-transparent [[data-slot=popover-content]_&]:bg-transparent shadow-sm rounded-lg",
-        String.raw`rtl:**:[.rdp-button\_next>svg]:rotate-180`,
-        String.raw`rtl:**:[.rdp-button\_previous>svg]:rotate-180`,
+        "group/calendar p-3 [--cell-size:2.25rem]",
         className
       )}
       captionLayout={captionLayout}
@@ -91,14 +89,14 @@ function Calendar({
         range_middle: cn("rounded-none", defaultClassNames.range_middle),
         range_end: cn("bg-accent rounded-r-md", defaultClassNames.range_end),
         today: cn(
-          "bg-orange-50 text-orange-600 font-semibold rounded-md data-[selected=true]:rounded-none dark:bg-orange-950 dark:text-orange-400",
+          "bg-orange-100 text-orange-900 font-bold dark:bg-orange-900 dark:text-orange-100",
           defaultClassNames.today
         ),
         outside: cn(
-          "text-muted-foreground/40 aria-selected:text-muted-foreground/50",
+          "text-muted-foreground opacity-50",
           defaultClassNames.outside
         ),
-        disabled: cn("text-muted-foreground/30 line-through cursor-not-allowed", defaultClassNames.disabled),
+        disabled: cn("text-muted-foreground opacity-30 line-through", defaultClassNames.disabled),
         hidden: cn("invisible", defaultClassNames.hidden),
         ...classNames,
       }}
@@ -163,24 +161,19 @@ function CalendarDayButton({
       data-range-end={modifiers.range_end}
       data-range-middle={modifiers.range_middle}
       className={cn(
+        // Base button styles
+        "h-9 w-9 p-0 font-normal text-sm",
         // Selected dates - orange brand color
-        "data-[selected-single=true]:bg-orange-500 data-[selected-single=true]:text-white data-[selected-single=true]:hover:bg-orange-600 data-[selected-single=true]:font-semibold",
+        "data-[selected-single=true]:bg-orange-500 data-[selected-single=true]:text-white data-[selected-single=true]:hover:bg-orange-600 data-[selected-single=true]:font-bold",
         // Range selections
-        "data-[range-middle=true]:bg-orange-100 data-[range-middle=true]:text-orange-900 dark:data-[range-middle=true]:bg-orange-950 dark:data-[range-middle=true]:text-orange-100",
+        "data-[range-middle=true]:bg-orange-100 data-[range-middle=true]:text-orange-900",
         "data-[range-start=true]:bg-orange-500 data-[range-start=true]:text-white data-[range-end=true]:bg-orange-500 data-[range-end=true]:text-white",
+        // Disabled styling with line-through
+        "disabled:text-muted-foreground disabled:opacity-40 disabled:line-through",
+        // Hover for available dates
+        "hover:bg-accent hover:text-accent-foreground",
         // Focus states
-        "group-data-[focused=true]/day:border-orange-500 group-data-[focused=true]/day:ring-orange-500/50",
-        // Base styles
-        "flex aspect-square h-auto w-full min-w-[--cell-size] flex-col gap-1 font-normal leading-none",
-        // Border radius
-        "data-[range-end=true]:rounded-md data-[range-middle=true]:rounded-none data-[range-start=true]:rounded-md",
-        // Focus ring
-        "group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 group-data-[focused=true]/day:ring-[3px]",
-        // Disabled styling - more subtle
-        "aria-disabled:opacity-30 aria-disabled:cursor-not-allowed",
-        // Hover for non-selected
-        "hover:bg-orange-50 hover:text-orange-900 dark:hover:bg-orange-950/50 dark:hover:text-orange-100",
-        "[&>span]:text-xs [&>span]:opacity-70",
+        "focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2",
         defaultClassNames.day,
         className
       )}
