@@ -378,29 +378,29 @@
     "viewAllReports": "Zobacz wszystkie raporty",
     "category": "Co chcesz zgłosić?",
     "categories": {
-      "conditions": "Warunki",
+      "conditions": "Warun",
       "safety": "Bezpieczeństwo",
       "access": "Dostęp",
-      "beta": "Beta",
+      "beta": "Patenty",
       "facilities": "Udogodnienia",
       "other": "Inne"
     },
     "categoryDescriptions": {
       "conditions": "Pogoda, tarcie, suchość, tłumy",
-      "safety": "Luźne ringi, odpady skalne, uszkodzone chwyty, zagrożenia",
+      "safety": "Luźne ringi, ruszające się kamienie, uszkodzone chwyty, zagrożenia",
       "access": "Zamknięcia, zmiany parkingów, ograniczenia sezonowe",
-      "beta": "Zmiany dróg, nowe ringi, aktualizacje warunków",
-      "facilities": "Toalety, kemping, źródła wody, udogodnienia",
-      "other": "Cokolwiek innego, co nie pasuje powyżej"
+      "beta": "Zmiany przebiegu dróg, nowe obicie, prace ekiperskie",
+      "facilities": "Parking, toalety, kemping, woda, udogodnienia",
+      "other": "Cokolwiek innego, co nie pasuje do kategorii powyżej"
     },
     "details": "Szczegóły",
     "detailsRequired": "Podaj szczegóły tego zgłoszenia",
     "placeholders": {
-      "conditions": "Np. Sektor wschodni wciąż mokry, szlak błotnisty, chwyty śliskie...",
-      "safety": "Np. Luźny ring na Drodze X wyciąg 2, niebezpieczeństwo opadów skalnych przy głównej ścianie...",
+      "conditions": "Np. Sektor wschodni wciąż mokry, ścieżka zabłocona, leje się z rysy...",
+      "safety": "Np. Luźny ring na Drodze X, niebezpieczeństwo odpadnięcia bloku skalnego przy głównej ścianie...",
       "access": "Np. Brama zamknięta do maja, nowy parking za biblioteką...",
-      "beta": "Np. Droga X przebita na nowo, nowa asekuracja na górze, trudniejszy stopień...",
-      "facilities": "Np. Toaleta przenośna dostępna na parkingu, brak źródła wody w pobliżu...",
+      "beta": "Np. Droga X przebita na nowo, nowa asekuracja na górze, trudniejsza wycena...",
+      "facilities": "Np. toaleta dostępna na parkingu, brak wody w pobliżu...",
       "other": "Opisz, co chcesz zgłosić..."
     },
     "noReportsInCategory": "Brak raportów w tej kategorii",
