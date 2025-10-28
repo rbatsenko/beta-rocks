@@ -172,6 +172,9 @@ export async function saveUserProfile(profile: UserProfile): Promise<void> {
 
 /**
  * Initialize user profile (create if doesn't exist)
+ * If a local profile exists, returns it (for existing users)
+ * If only a sync key exists (e.g., after restore), fetches from database
+ * Otherwise creates a new profile
  */
 export async function initializeUserProfile(): Promise<UserProfile> {
   const existingProfile = getUserProfile();
@@ -185,8 +188,43 @@ export async function initializeUserProfile(): Promise<UserProfile> {
 
   const syncKey = getOrCreateSyncKey();
   const syncKeyHash = await hashSyncKeyAsync(syncKey);
-  const now = new Date().toISOString();
 
+  // Check if this sync key has a profile in the database
+  // This happens after sync key restoration
+  try {
+    const { fetchOrCreateUserProfile } = await import("@/lib/db/queries");
+    const dbProfile = await fetchOrCreateUserProfile(syncKeyHash);
+
+    // If database profile exists with data, use it
+    if (dbProfile) {
+      const now = new Date().toISOString();
+      const profileWithDbData: UserProfile = {
+        syncKey,
+        syncKeyHash,
+        displayName: dbProfile.display_name || undefined,
+        units: dbProfile.units_temperature
+          ? {
+              temperature: dbProfile.units_temperature as any,
+              windSpeed: dbProfile.units_wind_speed as any,
+              precipitation: dbProfile.units_precipitation as any,
+              distance: dbProfile.units_distance as any,
+              elevation: dbProfile.units_elevation as any,
+            }
+          : undefined,
+        createdAt: dbProfile.created_at || now,
+        updatedAt: dbProfile.updated_at || now,
+      };
+
+      await saveUserProfile(profileWithDbData);
+      return profileWithDbData;
+    }
+  } catch (error) {
+    console.warn("[initializeUserProfile] Failed to fetch from database:", error);
+    // Continue to create new profile
+  }
+
+  // No database profile, create new local profile
+  const now = new Date().toISOString();
   const newProfile: UserProfile = {
     syncKey,
     syncKeyHash,
