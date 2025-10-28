@@ -80,9 +80,43 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
 
   useEffect(() => {
     if (open) {
-      const profile = getUserProfile();
-      setUserProfile(profile);
-      setDisplayName(profile?.displayName || "");
+      // Load profile and sync from database
+      const loadProfile = async () => {
+        const profile = getUserProfile();
+        setUserProfile(profile);
+        setDisplayName(profile?.displayName || "");
+
+        // Sync from database to get latest updates from other devices
+        if (profile?.syncKey) {
+          try {
+            const syncKeyHash = await hashSyncKeyAsync(profile.syncKey);
+            const dbProfile = await fetchOrCreateUserProfile(syncKeyHash);
+
+            // Update localStorage if database has newer data
+            if (dbProfile) {
+              const updatedProfile = await updateLocalUserProfile({
+                displayName: dbProfile.display_name || undefined,
+                units: dbProfile.units_temperature
+                  ? {
+                      temperature: dbProfile.units_temperature as any,
+                      windSpeed: dbProfile.units_wind_speed as any,
+                      precipitation: dbProfile.units_precipitation as any,
+                      distance: dbProfile.units_distance as any,
+                      elevation: dbProfile.units_elevation as any,
+                    }
+                  : undefined,
+              });
+              setUserProfile(updatedProfile);
+              setDisplayName(updatedProfile.displayName || "");
+            }
+          } catch (error) {
+            console.warn("[SettingsDialog] Failed to sync from database:", error);
+            // Non-critical, continue with local profile
+          }
+        }
+      };
+
+      loadProfile();
 
       // Initialize units state
       setTemperature(units.temperature);
