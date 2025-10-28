@@ -168,7 +168,7 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
               {formatDistanceToNow(new Date(report.observed_at), { addSuffix: true })}
             </span>
             <span className="text-[10px] text-muted-foreground/70">
-              {format(new Date(report.observed_at), "MMM d, yyyy")}
+              {format(new Date(report.observed_at), "MMM d, yyyy HH:mm")}
             </span>
           </div>
         </div>
