@@ -511,6 +511,7 @@ export function CragPageContent({
       <SyncExplainerDialog
         open={syncExplainerDialogOpen}
         onOpenChange={setSyncExplainerDialogOpen}
+        onOpenSettings={() => setSettingsDialogOpen(true)}
       />
     </div>
   );
