@@ -378,6 +378,7 @@
       "restoreButton": "Restore Sync Key",
       "restoring": "Restoring...",
       "restoreSuccess": "Sync key restored successfully! Reloading...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
       "restoreError": "Invalid sync key format. Please check and try again.",
       "saveNote": {
         "title": "Save Your Sync Key",

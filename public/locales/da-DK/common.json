@@ -378,6 +378,7 @@
       "restoreButton": "Gendan synknøgle",
       "restoring": "Gendanner...",
       "restoreSuccess": "Synknøgle gendannet succesfuldt! Genindlæser...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
       "restoreError": "Ugyldigt synknøgleformat. Tjek venligst og prøv igen.",
       "saveNote": {
         "title": "Gem din synknøgle",

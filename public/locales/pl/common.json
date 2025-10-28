@@ -372,6 +372,7 @@
       "restoreButton": "Przywróć klucz synchronizacji",
       "restoring": "Przywracanie...",
       "restoreSuccess": "Klucz synchronizacji pomyślnie przywrócony! Przeładowywanie...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
       "restoreError": "Nieprawidłowy format klucza synchronizacji. Sprawdź i spróbuj ponownie.",
       "saveNote": {
         "title": "Zapisz swój klucz synchronizacji",

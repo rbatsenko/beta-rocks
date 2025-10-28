@@ -379,6 +379,7 @@
       "restoreButton": "Obnovi ključ za sinhronizacijo",
       "restoring": "Obnavljam...",
       "restoreSuccess": "Ključ za sinhronizacijo uspešno obnovljen! Ponovno nalaganje...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
       "restoreError": "Neveljavna oblika ključa za sinhronizacijo. Preveri in poskusi znova.",
       "saveNote": {
         "title": "Shrani svoj ključ za sinhronizacijo",

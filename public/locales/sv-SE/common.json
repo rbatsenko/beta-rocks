@@ -379,6 +379,7 @@
       "restoreButton": "Återställ synkroniseringsnyckel",
       "restoring": "Återställer...",
       "restoreSuccess": "Synkroniseringsnyckeln återställdes! Laddar om...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
       "restoreError": "Ogiltigt format på synkroniseringsnyckeln. Kontrollera och försök igen.",
       "saveNote": {
         "title": "Spara din synkroniseringsnyckel",

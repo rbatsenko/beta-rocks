@@ -378,6 +378,7 @@
       "restoreButton": "Restaurar chave de sincronização",
       "restoring": "A restaurar...",
       "restoreSuccess": "Chave de sincronização restaurada com sucesso! A recarregar...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
       "restoreError": "Formato de chave de sincronização inválido. Por favor verifique e tente novamente.",
       "saveNote": {
         "title": "Guarde a sua chave de sincronização",
