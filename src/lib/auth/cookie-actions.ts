@@ -17,12 +17,18 @@ const COOKIE_OPTIONS = {
 };
 
 /**
- * Set user profile cookies (sync key + display name)
+ * Set user profile cookies (sync key hash + display name)
+ * SECURITY: Stores only the hashed sync key, not the raw key
  */
-export async function setUserProfileCookies(syncKey: string, displayName?: string) {
+export async function setUserProfileCookies(syncKeyHash: string, displayName?: string) {
   const cookieStore = await cookies();
 
-  cookieStore.set("temps_sync_key", syncKey, COOKIE_OPTIONS);
+  // Store hash only, never raw sync key
+  cookieStore.set("temps_sync_key_hash", syncKeyHash, {
+    ...COOKIE_OPTIONS,
+    httpOnly: false, // Needs to be accessible to client JS for profile operations
+    secure: true, // Always use HTTPS (even in dev)
+  });
 
   if (displayName) {
     cookieStore.set("temps_display_name", displayName, COOKIE_OPTIONS);
@@ -46,6 +52,8 @@ export async function setSessionCookie(sessionId: string) {
 export async function clearUserCookies() {
   const cookieStore = await cookies();
 
+  cookieStore.delete("temps_sync_key_hash");
+  // Also delete old cookie name for backward compatibility
   cookieStore.delete("temps_sync_key");
   cookieStore.delete("temps_display_name");
   cookieStore.delete("temps_current_session_id");

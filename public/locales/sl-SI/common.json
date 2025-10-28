@@ -36,7 +36,8 @@
     "location": "Lokacija",
     "favorite": "Priljubljeno",
     "favorited": "V priljubljenih",
-    "addReport": "Dodaj poročilo"
+    "addReport": "Dodaj poročilo",
+    "viewCragPage": "Pokaži območje"
   },
   "ratings": {
     "great": "Odlično",
@@ -46,7 +47,7 @@
     "nope": "Nikakor"
   },
   "reasons": {
-    "perfectTemp": "Popolna temperatura ({{temp}}°C)",
+    "perfectTemp": "Popolna temperatura ({{temp}})",
     "tempTooHigh": "Temperatura previsoka - prsti lahko zdrsnejo",
     "coldGoodFriction": "Mrzlo, a dobro za trenje na {{rockType}}",
     "idealHumidity": "Idealna vlaga ({{humidity}}%)",
@@ -55,16 +56,17 @@
     "acceptable": "Razmere so sprejemljive"
   },
   "warnings": {
-    "tooWarm": "Prevroče za {{rockType}} ({{temp}}°C)",
+    "tooWarm": "Prevroče za {{rockType}} ({{temp}})",
     "coldSuboptimal": "Mrzlo in manj primerno za {{rockType}}",
     "highHumidity": "Visoka vlaga ({{humidity}}%) - skala je lahko spolzka",
     "wetDangerousSandstone": "Skala je mokra - nevarno za plezanje (peščenjak je občutljiv, ko je moker)",
     "wetSlippery": "Skala je mokra - spolzke razmere",
-    "veryHighWinds": "Zelo močan veter ({{wind}} km/h) - nevarnost sunkov",
-    "highWind": "Močan veter ({{wind}} km/h)",
-    "recentPrecip": "Nedavne padavine ({{precip}}mm) - bo suho čez ~{{hours}}h",
+    "veryHighWinds": "Zelo močan veter ({{wind}}) - nevarnost sunkov",
+    "highWind": "Močan veter ({{wind}})",
+    "recentPrecip": "Nedavne padavine ({{precip}}) - bo suho čez ~{{hours}}h",
     "currentlyWetDangerous": "Trenutno mokro - nevarno",
-    "currentlyWet": "Trenutno mokro"
+    "currentlyWet": "Trenutno mokro",
+    "cold": "Cold ({{temp}})"
   },
   "weather": {
     "clearSky": "Jasno nebo",
@@ -132,7 +134,7 @@
     },
     "communityReports": {
       "title": "Poročila skupnosti",
-      "description": "Deli in potrjuj trenutne razmere. Pomagaj drugim plezalcem s svežimi informacijami"
+      "description": "Delite pogoje, varnostna opozorila, spremembe dostopa, beta in več. Pomagajte soplezalcem s posodobitvami v realnem času v več kategorijah"
     },
     "globalCoverage": {
       "title": "Globalna pokritost",
@@ -292,6 +294,18 @@
     "settings": "Nastavitve",
     "clearData": "Izbriši vse podatke"
   },
+  "stats": {
+    "title": "Tvoja statistika",
+    "description": "Tvoja aktivnost in prispevki k skupnosti temps.rocks",
+    "reportsPosted": "Objavljenih poročil",
+    "confirmationsGiven": "Danih potrditev",
+    "favoritesCount": "Priljubljene",
+    "memberSince": "Član od",
+    "lastActive": "Nazadnje aktiven",
+    "unknown": "Neznano",
+    "encourageReports": "Delite svoje lokalno znanje z objavljanjem poročil o razmerah na skalah!",
+    "thankYou": "Hvala za prispevek k plezalni skupnosti!"
+  },
   "settings": {
     "title": "Nastavitve",
     "description": "Upravljaj svoj profil, ključ za sinhronizacijo in nastavitve",
@@ -300,7 +314,54 @@
     "displayName": {
       "label": "Prikazno ime",
       "description": "Tvoje ime, prikazano v poročilih in potrditvah (neobvezno)",
-      "placeholder": "Vnesi svoje ime..."
+      "placeholder": "Vnesi svoje ime...",
+      "saved": "Prikazno ime shranjeno",
+      "savedDescription": "Vaše prikazno ime je bilo uspešno posodobljeno",
+      "saveFailed": "Shranjevanje ni uspelo",
+      "saveFailedDescription": "Vašega prikaznega imena ni bilo mogoče shraniti. Prosimo, poskusite znova"
+    },
+    "units": {
+      "title": "Enote in meritve",
+      "description": "Izberite svoje preferenčne enote za vremenske in plezalne podatke",
+      "systemLabel": "Sistem enot",
+      "systemDescription": "Hitre prednastav for pogosto uporabljene sisteme enot",
+      "systems": {
+        "metric": "Metrični (°C, km/h, mm)",
+        "imperial": "Imperialni (°F, mph, palci)",
+        "uk": "Velika Britanija (°C, mph, mm)",
+        "custom": "Po meri"
+      },
+      "temperature": "Temperatura",
+      "temperatureUnits": {
+        "celsius": "Celzij (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Hitrost vetra",
+      "windSpeedUnits": {
+        "kmh": "Kilometri na uro (km/h)",
+        "mph": "Milje na uro (mph)",
+        "ms": "Metri na sekundo (m/s)",
+        "knots": "Vozli (kn)"
+      },
+      "precipitation": "Padavine",
+      "precipitationUnits": {
+        "mm": "Milimetri (mm)",
+        "inches": "Palci (in)"
+      },
+      "distance": "Razdalja",
+      "distanceUnits": {
+        "km": "Kilometri (km)",
+        "miles": "Milje (mi)"
+      },
+      "elevation": "Nadmorska višina",
+      "elevationUnits": {
+        "meters": "Metri (m)",
+        "feet": "Čevlji (ft)"
+      },
+      "saved": "Enote shranjene",
+      "savedDescription": "Vaše nastavitve enot so bile uspešno posodobljene",
+      "saveFailed": "Shranjevanje enot ni uspelo",
+      "saveFailedDescription": "Vaših nastavitev enot ni bilo mogoče shraniti. Prosimo, poskusite znova"
     },
     "syncKey": {
       "title": "Ključ za sinhronizacijo",
@@ -348,38 +409,67 @@
     "remove": "Odstrani"
   },
   "reports": {
-    "addReport": "Dodaj poročilo o razmerah",
-    "addReportDescription": "Deli trenutne razmere na {{cragName}}",
-    "postingAs": "Objavljaš kot",
-    "dryness": "Suhota",
-    "wind": "Veter",
-    "crowds": "Gneča",
-    "additionalComments": "Dodatni komentarji",
-    "commentsPlaceholder": "Npr: vzhodni sektor še vlažen, pot blatna - previdno, Smer X - voda pušča iz razpoke, prijemala drsijo...",
-    "submit": "Oddaj poročilo",
-    "submitting": "Oddajam...",
-    "helpful": "Koristno",
-    "loginToConfirm": "Prosim nastavi svoj profil za potrditev poročil",
-    "confirmFailed": "Potrditev poročila ni uspela. Poskusi ponovno.",
+    "addReport": "Add Report",
+    "addReportDescription": "Share information about {{cragName}}",
+    "postingAs": "Posting as",
+    "category": "What would you like to report?",
+    "categories": {
+      "conditions": "Conditions",
+      "safety": "Safety",
+      "access": "Access",
+      "beta": "Beta",
+      "facilities": "Facilities",
+      "other": "Other"
+    },
+    "categoryDescriptions": {
+      "conditions": "Weather, friction, dryness, crowds",
+      "safety": "Loose bolts, rockfall, broken holds, hazards",
+      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "beta": "Current bolting works, route changes, new bolts",
+      "facilities": "Bathrooms, camping, water sources, amenities",
+      "other": "Anything else that doesn't fit above"
+    },
+    "dryness": "Dryness",
+    "wind": "Wind",
+    "crowds": "Crowds",
+    "additionalComments": "Additional comments (optional)",
+    "details": "Details",
+    "detailsRequired": "Please provide details about this report",
+    "placeholders": {
+      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
+      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
+      "access": "E.g., Gate closed until May, new parking lot behind library...",
+      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "facilities": "E.g., Toilet available at parking, no water source nearby...",
+      "other": "Describe what you'd like to report..."
+    },
+    "submit": "Submit Report",
+    "submitting": "Submitting...",
+    "helpful": "Helpful",
+    "loginToConfirm": "Please set up your profile to confirm reports",
+    "confirmFailed": "Failed to confirm report. Please try again.",
     "ratings": {
-      "veryPoor": "Zelo slabo",
-      "poor": "Slabo",
-      "okay": "V redu",
-      "good": "Dobro",
-      "excellent": "Odlično"
+      "veryPoor": "Very Poor",
+      "poor": "Poor",
+      "okay": "Okay",
+      "good": "Good",
+      "excellent": "Excellent"
     },
     "scales": {
-      "veryWet": "Zelo mokro",
-      "veryDry": "Popolno",
-      "calm": "Mirno",
-      "veryWindy": "Zelo vetrovno",
-      "empty": "Prazno",
-      "veryCrowded": "Zelo polno"
+      "veryWet": "Very wet",
+      "veryDry": "Perfect",
+      "calm": "Calm",
+      "veryWindy": "Very windy",
+      "empty": "Empty",
+      "veryCrowded": "Very crowded"
     },
-    "recentReports": "Nedavna poročila",
-    "noReports": "Še ni poročil",
-    "noReportsMessage": "Bodi prvi, ki deli razmere na tem plezališču",
-    "reportCount": "{{count}} poročil",
-    "viewAllReports": "Poglej vsa poročila"
+    "recentReports": "Recent Reports",
+    "communityReports": "Community Reports",
+    "noReports": "No reports yet",
+    "beTheFirst": "Be the first to report",
+    "noReportsInCategory": "No reports in this category",
+    "filters": {
+      "all": "All"
+    }
   }
 }

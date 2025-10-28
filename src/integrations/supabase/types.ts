@@ -515,6 +515,11 @@ export type Database = {
           display_name: string | null;
           id: string;
           sync_key_hash: string;
+          units_distance: string | null;
+          units_elevation: string | null;
+          units_precipitation: string | null;
+          units_temperature: string | null;
+          units_wind_speed: string | null;
           updated_at: string | null;
         };
         Insert: {
@@ -522,6 +527,11 @@ export type Database = {
           display_name?: string | null;
           id?: string;
           sync_key_hash: string;
+          units_distance?: string | null;
+          units_elevation?: string | null;
+          units_precipitation?: string | null;
+          units_temperature?: string | null;
+          units_wind_speed?: string | null;
           updated_at?: string | null;
         };
         Update: {
@@ -529,6 +539,11 @@ export type Database = {
           display_name?: string | null;
           id?: string;
           sync_key_hash?: string;
+          units_distance?: string | null;
+          units_elevation?: string | null;
+          units_precipitation?: string | null;
+          units_temperature?: string | null;
+          units_wind_speed?: string | null;
           updated_at?: string | null;
         };
         Relationships: [];
@@ -576,6 +591,21 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      get_user_profile_by_hash: {
+        Args: { p_sync_key_hash: string };
+        Returns: {
+          created_at: string;
+          display_name: string;
+          id: string;
+          sync_key_hash: string;
+          units_distance: string;
+          units_elevation: string;
+          units_precipitation: string;
+          units_temperature: string;
+          units_wind_speed: string;
+          updated_at: string;
+        }[];
+      };
       immutable_unaccent: { Args: { "": string }; Returns: string };
       search_crags_unaccent: {
         Args: { search_query: string };
@@ -624,6 +654,29 @@ export type Database = {
       show_limit: { Args: never; Returns: number };
       show_trgm: { Args: { "": string }; Returns: string[] };
       unaccent: { Args: { "": string }; Returns: string };
+      update_user_profile_by_hash: {
+        Args: {
+          p_display_name?: string;
+          p_sync_key_hash: string;
+          p_units_distance?: string;
+          p_units_elevation?: string;
+          p_units_precipitation?: string;
+          p_units_temperature?: string;
+          p_units_wind_speed?: string;
+        };
+        Returns: {
+          created_at: string;
+          display_name: string;
+          id: string;
+          sync_key_hash: string;
+          units_distance: string;
+          units_elevation: string;
+          units_precipitation: string;
+          units_temperature: string;
+          units_wind_speed: string;
+          updated_at: string;
+        }[];
+      };
     };
     Enums: {
       [_ in never]: never;

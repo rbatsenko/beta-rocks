@@ -36,7 +36,8 @@
     "location": "Τοποθεσία",
     "favorite": "Αγαπημένη",
     "favorited": "Σημειώθηκε ως αγαπημένη",
-    "addReport": "Προσθήκη αναφοράς"
+    "addReport": "Προσθήκη αναφοράς",
+    "viewCragPage": "Προβολή περιοχής"
   },
   "ratings": {
     "great": "Εξαιρετικό",
@@ -46,7 +47,7 @@
     "nope": "Όχι καν"
   },
   "reasons": {
-    "perfectTemp": "Τέλεια θερμοκρασία ({{temp}}°C)",
+    "perfectTemp": "Τέλεια θερμοκρασία ({{temp}})",
     "tempTooHigh": "Θερμοκρασία πολύ υψηλή - τα δάχτυλα ολισθαίνουν",
     "coldGoodFriction": "Κρύο αλλά καλή τριβή για {{rockType}}",
     "idealHumidity": "Ιδανική υγρασία ({{humidity}}%)",
@@ -55,16 +56,17 @@
     "acceptable": "Οι συνθήκες είναι αποδεκτές"
   },
   "warnings": {
-    "tooWarm": "Πολύ ζεστό για {{rockType}} ({{temp}}°C)",
+    "tooWarm": "Πολύ ζεστό για {{rockType}} ({{temp}})",
     "coldSuboptimal": "Κρύο και μη βέλτιστο για {{rockType}}",
     "highHumidity": "Υψηλή υγρασία ({{humidity}}%) - το πέτρωμα μπορεί να ολισθαίνει",
     "wetDangerousSandstone": "Το πέτρωμα είναι ήδη υγρό - επικίνδυνο για αναρρίχηση (ο ψαμμίτης ασθενεί όταν είναι υγρός)",
     "wetSlippery": "Το πέτρωμα είναι υγρό - ολισθηρές συνθήκες",
     "veryHighWinds": "Πολύ δυνατοί άνεμοι ({{wind}} χλμ/ώ) - κίνδυνος να πεταχτείτε",
     "highWind": "Δυνατός άνεμος ({{wind}} χλμ/ώ)",
-    "recentPrecip": "Πρόσφατες βροχοπτώσεις ({{precip}}mm) - θα στεγνώσει σε ~{{hours}}ώ",
+    "recentPrecip": "Πρόσφατες βροχοπτώσεις ({{precip}}) - θα στεγνώσει σε ~{{hours}}ώ",
     "currentlyWetDangerous": "Υγρό αυτήν τη στιγμή - επικίνδυνο",
-    "currentlyWet": "Υγρό αυτήν τη στιγμή"
+    "currentlyWet": "Υγρό αυτήν τη στιγμή",
+    "cold": "Cold ({{temp}})"
   },
   "weather": {
     "clearSky": "Καθαρός ουρανός",
@@ -131,7 +133,7 @@
     },
     "communityReports": {
       "title": "Αναφορές κοινότητας",
-      "description": "Μοιραστείτε και επιβεβαιώστε τις τρέχουσες συνθήκες. Βοηθήστε τους συναδέλφους αναρριχητές με ενημερώσεις σε πραγματικό χρόνο"
+      "description": "Μοιραστείτε συνθήκες, ειδοποιήσεις ασφαλείας, αλλαγές πρόσβασης, beta και άλλα. Βοηθήστε συναναρριχητές με ενημερώσεις σε πραγματικό χρόνο σε πολλές κατηγορίες"
     },
     "globalCoverage": {
       "title": "Παγκόσμια κάλυψη",
@@ -291,6 +293,18 @@
     "settings": "Ρυθμίσεις",
     "clearData": "Εκκαθάριση όλων των δεδομένων"
   },
+  "stats": {
+    "title": "Οι στατιστικές σας",
+    "description": "Η δραστηριότητά σας και οι συνεισφορές σας στην κοινότητα temps.rocks",
+    "reportsPosted": "Δημοσιευμένες αναφορές",
+    "confirmationsGiven": "Δοθείσες επιβεβαιώσεις",
+    "favoritesCount": "Αγαπημένα",
+    "memberSince": "Μέλος από",
+    "lastActive": "Τελευταία δραστηριότητα",
+    "unknown": "Άγνωστο",
+    "encourageReports": "Μοιραστείτε τις τοπικές σας γνώσεις δημοσιεύοντας αναφορές για τις συνθήκες στα βράχια!",
+    "thankYou": "Ευχαριστούμε για τη συνεισφορά σας στην κοινότητα αναρρίχησης!"
+  },
   "settings": {
     "title": "Ρυθμίσεις",
     "description": "Διαχείριση του προφίλ σας, του κλειδιού συγχρονισμού και των προτιμήσεών σας",
@@ -299,7 +313,54 @@
     "displayName": {
       "label": "Εμφανιζόμενο όνομα",
       "description": "Το όνομά σας που εμφανίζεται στις αναφορές και τις επιβεβαιώσεις (προαιρετικό)",
-      "placeholder": "Εισαγάγετε το όνομά σας..."
+      "placeholder": "Εισαγάγετε το όνομά σας...",
+      "saved": "Το εμφανιζόμενο όνομα αποθηκεύτηκε",
+      "savedDescription": "Το εμφανιζόμενο όνομά σας ενημερώθηκε με επιτυχία",
+      "saveFailed": "Η αποθήκευση απέτυχε",
+      "saveFailedDescription": "Δεν ήταν δυνατή η αποθήκευση του εμφανιζόμενου ονόματός σας. Παρακαλώ δοκιμάστε ξανά"
+    },
+    "units": {
+      "title": "Μονάδες και μετρήσεις",
+      "description": "Επιλέξτε τις προτιμώμενες μονάδες μέτρησης για καιρικά δεδομένα και δεδομένα αναρρίχησης",
+      "systemLabel": "Σύστημα μονάδων",
+      "systemDescription": "Γρήγορες προεπιλογές για κοινά συστήματα μονάδων",
+      "systems": {
+        "metric": "Μετρικό (°C, km/h, mm)",
+        "imperial": "Αυτοκρατορικό (°F, mph, ίντσες)",
+        "uk": "Ηνωμένο Βασίλειο (°C, mph, mm)",
+        "custom": "Προσαρμοσμένο"
+      },
+      "temperature": "Θερμοκρασία",
+      "temperatureUnits": {
+        "celsius": "Κελσίου (°C)",
+        "fahrenheit": "Φαρενάιτ (°F)"
+      },
+      "windSpeed": "Ταχύτητα ανέμου",
+      "windSpeedUnits": {
+        "kmh": "Χιλιόμετρα ανά ώρα (km/h)",
+        "mph": "Μίλια ανά ώρα (mph)",
+        "ms": "Μέτρα ανά δευτερόλεπτο (m/s)",
+        "knots": "Κόμβοι (kn)"
+      },
+      "precipitation": "Κατακρημνίσματα",
+      "precipitationUnits": {
+        "mm": "Χιλιοστόμετρα (mm)",
+        "inches": "Ίντσες (in)"
+      },
+      "distance": "Απόσταση",
+      "distanceUnits": {
+        "km": "Χιλιόμετρα (km)",
+        "miles": "Μίλια (mi)"
+      },
+      "elevation": "Υψόμετρο",
+      "elevationUnits": {
+        "meters": "Μέτρα (m)",
+        "feet": "Πόδια (ft)"
+      },
+      "saved": "Οι μονάδες αποθηκεύτηκαν",
+      "savedDescription": "Οι προτιμήσεις μονάδων σας ενημερώθηκαν με επιτυχία",
+      "saveFailed": "Η αποθήκευση μονάδων απέτυχε",
+      "saveFailedDescription": "Δεν ήταν δυνατή η αποθήκευση των προτιμήσεων μονάδων σας. Παρακαλώ δοκιμάστε ξανά"
     },
     "syncKey": {
       "title": "Κλειδί συγχρονισμού",
@@ -347,38 +408,67 @@
     "remove": "Αφαίρεση"
   },
   "reports": {
-    "addReport": "Προσθήκη αναφοράς συνθηκών",
-    "addReportDescription": "Μοιραστείτε τρέχουσες συνθήκες στο {{cragName}}",
-    "postingAs": "Δημοσίευση ως",
-    "dryness": "Ξηρότητα",
-    "wind": "Άνεμος",
-    "crowds": "Πλήθος",
-    "additionalComments": "Πρόσθετα σχόλια",
-    "commentsPlaceholder": "π.χ., Ανατολικός τομέας ακόμη υγρός, μονοπάτι λάσπη - προσοχή, Διαδρομή X - λήψη από τη ρωγμή, λαβές ολισθηρές...",
-    "submit": "Υποβολή αναφοράς",
-    "submitting": "Υποβολή...",
-    "helpful": "Χρήσιμο",
-    "loginToConfirm": "Παρακαλώ ρυθμίστε το προφίλ σας για επιβεβαίωση αναφορών",
-    "confirmFailed": "Αποτυχία επιβεβαίωσης αναφοράς. Παρακαλώ δοκιμάστε ξανά.",
+    "addReport": "Add Report",
+    "addReportDescription": "Share information about {{cragName}}",
+    "postingAs": "Posting as",
+    "category": "What would you like to report?",
+    "categories": {
+      "conditions": "Conditions",
+      "safety": "Safety",
+      "access": "Access",
+      "beta": "Beta",
+      "facilities": "Facilities",
+      "other": "Other"
+    },
+    "categoryDescriptions": {
+      "conditions": "Weather, friction, dryness, crowds",
+      "safety": "Loose bolts, rockfall, broken holds, hazards",
+      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "beta": "Current bolting works, route changes, new bolts",
+      "facilities": "Bathrooms, camping, water sources, amenities",
+      "other": "Anything else that doesn't fit above"
+    },
+    "dryness": "Dryness",
+    "wind": "Wind",
+    "crowds": "Crowds",
+    "additionalComments": "Additional comments (optional)",
+    "details": "Details",
+    "detailsRequired": "Please provide details about this report",
+    "placeholders": {
+      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
+      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
+      "access": "E.g., Gate closed until May, new parking lot behind library...",
+      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "facilities": "E.g., Toilet available at parking, no water source nearby...",
+      "other": "Describe what you'd like to report..."
+    },
+    "submit": "Submit Report",
+    "submitting": "Submitting...",
+    "helpful": "Helpful",
+    "loginToConfirm": "Please set up your profile to confirm reports",
+    "confirmFailed": "Failed to confirm report. Please try again.",
     "ratings": {
-      "veryPoor": "Πολύ κακό",
-      "poor": "Κακό",
-      "okay": "Ικανοποιητικό",
-      "good": "Καλό",
-      "excellent": "Εξαιρετικό"
+      "veryPoor": "Very Poor",
+      "poor": "Poor",
+      "okay": "Okay",
+      "good": "Good",
+      "excellent": "Excellent"
     },
     "scales": {
-      "veryWet": "Πολύ υγρό",
-      "veryDry": "Τέλειο",
-      "calm": "Ήρεμο",
-      "veryWindy": "Πολύ αέρας",
-      "empty": "Άδειο",
-      "veryCrowded": "Πολύ συνωστισμένο"
+      "veryWet": "Very wet",
+      "veryDry": "Perfect",
+      "calm": "Calm",
+      "veryWindy": "Very windy",
+      "empty": "Empty",
+      "veryCrowded": "Very crowded"
     },
-    "recentReports": "Πρόσφατες αναφορές",
-    "noReports": "Δεν υπάρχουν αναφορές ακόμη",
-    "noReportsMessage": "Γίνε ο πρώτος που μοιράζεται συνθήκες σε αυτό το τοίχωμα",
-    "reportCount": "{{count}} αναφορές",
-    "viewAllReports": "Προβολή όλων των αναφορών"
+    "recentReports": "Recent Reports",
+    "communityReports": "Community Reports",
+    "noReports": "No reports yet",
+    "beTheFirst": "Be the first to report",
+    "noReportsInCategory": "No reports in this category",
+    "filters": {
+      "all": "All"
+    }
   }
 }

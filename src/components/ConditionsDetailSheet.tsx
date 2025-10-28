@@ -1,6 +1,7 @@
 "use client";
 
 import { memo, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import {
   Sheet,
   SheetContent,
@@ -9,12 +10,13 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { ThermometerSun, Sun } from "lucide-react";
+import { ThermometerSun, Sun, ArrowRight } from "lucide-react";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { ConditionsDetailContent } from "./ConditionsDetailContent";
 import { MapPopover } from "./MapPopover";
 import { getCountryFlag } from "@/lib/utils/country-flag";
 import { getSunCalcUrl } from "@/lib/utils/urls";
+import { generateUniqueSlug } from "@/lib/utils/slug";
 
 interface ConditionsDetailSheetProps {
   open: boolean;
@@ -98,6 +100,7 @@ export const ConditionsDetailSheet = memo(function ConditionsDetailSheet({
   data,
 }: ConditionsDetailSheetProps) {
   const { t } = useClientTranslation("common");
+  const router = useRouter();
 
   // Build detailed location string with flag (same logic as Dialog)
   const { locationText, countryFlag } = useMemo(() => {
@@ -116,10 +119,19 @@ export const ConditionsDetailSheet = memo(function ConditionsDetailSheet({
   // Generate SunCalc.org URL for sun position/shadow analysis
   const sunCalcUrl = getSunCalcUrl(data.latitude, data.longitude);
 
+  // Handler for navigating to full crag page
+  const handleViewCragPage = () => {
+    if (data.latitude && data.longitude) {
+      const slug = generateUniqueSlug(data.location, data.latitude, data.longitude);
+      router.push(`/location/${slug}`);
+      onOpenChange(false); // Close the sheet
+    }
+  };
+
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="right" className="w-full sm:max-w-3xl overflow-hidden p-0 flex flex-col">
-        <SheetHeader className="px-4 sm:px-6 pt-3 sm:pt-6 pb-2 sm:pb-4 pr-12 border-b shrink-0">
+        <SheetHeader className="px-4 sm:px-6 pt-3 sm:pt-4 pb-2 sm:pb-3 pr-12 border-b shrink-0 space-y-2">
           <SheetTitle className="text-lg sm:text-xl font-semibold">
             <div className="flex items-center gap-1.5 sm:gap-2">
               <ThermometerSun className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
@@ -128,39 +140,51 @@ export const ConditionsDetailSheet = memo(function ConditionsDetailSheet({
               </span>
             </div>
           </SheetTitle>
-          <SheetDescription className="flex flex-col gap-1 sm:gap-2">
-            <span className="hidden sm:inline">{t("dialog.fullAnalysis")}</span>
-            <span className="flex items-center gap-1.5 sm:gap-2">
-              {(locationText || countryFlag) && (
-                <span className="text-xs sm:text-sm text-muted-foreground flex-1 truncate">
-                  📍 {locationText}
-                  {locationText && countryFlag && ", "}
-                  {countryFlag} {data.country}
-                </span>
-              )}
-              {data.latitude && data.longitude && (
-                <MapPopover
-                  latitude={data.latitude}
-                  longitude={data.longitude}
-                  locationName={data.location}
-                />
-              )}
-              {data.latitude && data.longitude && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    if (sunCalcUrl) window.open(sunCalcUrl, "_blank", "noopener,noreferrer");
-                  }}
-                  title="View sun position and shadow angles on SunCalc.org"
-                  className="h-8"
-                >
-                  <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  <span className="hidden sm:inline">SunCalc</span>
-                </Button>
-              )}
-            </span>
+          <SheetDescription className="flex flex-col gap-1">
+            <span className="hidden sm:inline text-xs">{t("dialog.fullAnalysis")}</span>
+            {(locationText || countryFlag) && (
+              <span className="text-xs text-muted-foreground">
+                📍 {locationText}
+                {locationText && countryFlag && ", "}
+                {countryFlag} {data.country}
+              </span>
+            )}
           </SheetDescription>
+          <div className="flex flex-wrap gap-2 pt-1">
+            {data.latitude && data.longitude && (
+              <MapPopover
+                latitude={data.latitude}
+                longitude={data.longitude}
+                locationName={data.location}
+              />
+            )}
+            {data.latitude && data.longitude && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  if (sunCalcUrl) window.open(sunCalcUrl, "_blank", "noopener,noreferrer");
+                }}
+                title="View sun position and shadow angles on SunCalc.org"
+                className="h-8"
+              >
+                <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span className="hidden sm:inline">SunCalc</span>
+              </Button>
+            )}
+            {data.latitude && data.longitude && (
+              <Button
+                variant="default"
+                size="sm"
+                onClick={handleViewCragPage}
+                title={t("conditions.viewCragPage")}
+                className="h-8 bg-orange-500 hover:bg-orange-600"
+              >
+                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span className="hidden sm:inline">{t("conditions.viewCragPage")}</span>
+              </Button>
+            )}
+          </div>
         </SheetHeader>
         <div className="flex-1 overflow-hidden px-4 sm:px-6 py-3 sm:py-4">
           <ConditionsDetailContent variant="sheet" data={data} />

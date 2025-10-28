@@ -13,6 +13,7 @@ interface HeaderActionsProps {
   onSyncClick: () => void;
   onSettingsClick: () => void;
   onFavoritesClick: () => void;
+  onStatsClick: () => void;
   /** Optional extra actions to show before the common actions */
   extraActions?: ReactNode;
   /** Optional callback for about/info action (shown in menu on mobile) */
@@ -27,6 +28,7 @@ export function HeaderActions({
   onSyncClick,
   onSettingsClick,
   onFavoritesClick,
+  onStatsClick,
   extraActions,
   onAboutClick,
   onClearChatClick,
@@ -52,6 +54,7 @@ export function HeaderActions({
       <UserMenu
         onSettingsClick={onSettingsClick}
         onFavoritesClick={onFavoritesClick}
+        onStatsClick={onStatsClick}
         onAboutClick={onAboutClick}
         onClearChatClick={onClearChatClick}
         isClearChatDisabled={isClearChatDisabled}

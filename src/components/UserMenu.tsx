@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { User, Settings, Star, Clock, BarChart3, LogOut, Info, RotateCcw } from "lucide-react";
+import { User, Settings, Star, BarChart3, Info, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -18,6 +18,7 @@ import { useClientTranslation } from "@/hooks/useClientTranslation";
 interface UserMenuProps {
   onSettingsClick: () => void;
   onFavoritesClick: () => void;
+  onStatsClick: () => void;
   onAboutClick?: () => void;
   onClearChatClick?: () => void;
   isClearChatDisabled?: boolean;
@@ -26,6 +27,7 @@ interface UserMenuProps {
 export function UserMenu({
   onSettingsClick,
   onFavoritesClick,
+  onStatsClick,
   onAboutClick,
   onClearChatClick,
   isClearChatDisabled,
@@ -109,11 +111,7 @@ export function UserMenu({
           <Star className="mr-2 h-4 w-4" />
           <span>{t("profile.favorites")}</span>
         </DropdownMenuItem>
-        <DropdownMenuItem disabled className="cursor-not-allowed">
-          <Clock className="mr-2 h-4 w-4" />
-          <span>{t("profile.recent")}</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem disabled className="cursor-not-allowed">
+        <DropdownMenuItem onClick={onStatsClick} className="cursor-pointer">
           <BarChart3 className="mr-2 h-4 w-4" />
           <span>{t("profile.stats")}</span>
         </DropdownMenuItem>
@@ -137,11 +135,6 @@ export function UserMenu({
         <DropdownMenuItem onClick={onSettingsClick} className="cursor-pointer">
           <Settings className="mr-2 h-4 w-4" />
           <span>{t("profile.settings")}</span>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem disabled className="text-muted-foreground cursor-not-allowed">
-          <LogOut className="mr-2 h-4 w-4" />
-          <span>{t("profile.clearData")}</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -223,10 +223,26 @@ export const getInitialLanguage = (): Locale => getPreferredLanguage() ?? i18nCo
 
 let initPromise: Promise<I18nInstance> | null = null;
 
+// Reset initialization on hot reload (only in development)
+if (typeof window !== "undefined" && typeof module !== "undefined" && (module as any).hot) {
+  (module as any).hot.dispose(() => {
+    initPromise = null;
+  });
+}
+
 export const initI18n = (): Promise<I18nInstance> => {
   if (!initPromise) {
     initPromise = (async () => {
       const initialLanguage = getInitialLanguage();
+
+      // If already initialized, just change language
+      if (i18n.isInitialized) {
+        const currentLanguage = resolveLocale(i18n.language);
+        if (currentLanguage !== initialLanguage) {
+          await i18n.changeLanguage(initialLanguage);
+        }
+        return i18n;
+      }
 
       await i18n.use(initReactI18next).init({
         lng: initialLanguage,

@@ -36,7 +36,8 @@
     "location": "Locatie",
     "favorite": "Favoriet",
     "favorited": "Gemarkeerd als favoriet",
-    "addReport": "Rapport toevoegen"
+    "addReport": "Rapport toevoegen",
+    "viewCragPage": "Bekijk gebied"
   },
   "ratings": {
     "great": "Geweldig",
@@ -46,7 +47,7 @@
     "nope": "Nee"
   },
   "reasons": {
-    "perfectTemp": "Perfecte temperatuur ({{temp}}°C)",
+    "perfectTemp": "Perfecte temperatuur ({{temp}})",
     "tempTooHigh": "Temperatuur te hoog - vingers kunnen glippen",
     "coldGoodFriction": "Koud maar goed voor {{rockType}} wrijving",
     "idealHumidity": "Ideale vochtigheid ({{humidity}}%)",
@@ -55,16 +56,17 @@
     "acceptable": "Condities zijn aanvaardbaar"
   },
   "warnings": {
-    "tooWarm": "Te warm voor {{rockType}} ({{temp}}°C)",
+    "tooWarm": "Te warm voor {{rockType}} ({{temp}})",
     "coldSuboptimal": "Koud en niet optimaal voor {{rockType}}",
     "highHumidity": "Hoge vochtigheid ({{humidity}}%) - rots kan glad zijn",
     "wetDangerousSandstone": "Rots is momenteel nat - gevaarlijk om te klimmen (zandsteenbeweegt zwak wanneer nat)",
     "wetSlippery": "Rots is momenteel nat - gladde condities",
-    "veryHighWinds": "Zeer sterke wind ({{wind}} km/h) - gevaar om afgeblazen te worden",
-    "highWind": "Sterke wind ({{wind}} km/h)",
-    "recentPrecip": "Recent neerslag ({{precip}}mm) - zal drogen in ~{{hours}}h",
+    "veryHighWinds": "Zeer sterke wind ({{wind}}) - gevaar om afgeblazen te worden",
+    "highWind": "Sterke wind ({{wind}})",
+    "recentPrecip": "Recent neerslag ({{precip}}) - zal drogen in ~{{hours}}h",
     "currentlyWetDangerous": "Momenteel nat - gevaarlijk",
-    "currentlyWet": "Momenteel nat"
+    "currentlyWet": "Momenteel nat",
+    "cold": "Cold ({{temp}})"
   },
   "weather": {
     "clearSky": "Heldere lucht",
@@ -131,7 +133,7 @@
     },
     "communityReports": {
       "title": "Gemeenschapsrapporten",
-      "description": "Deel en bevestig huidige condities. Help medeklimmers met real-time updates"
+      "description": "Deel omstandigheden, veiligheidswaarschuwingen, toegangswijzigingen, beta en meer. Help mede-klimmers met realtime updates in meerdere categorieën"
     },
     "globalCoverage": {
       "title": "Mondiale dekking",
@@ -291,6 +293,18 @@
     "settings": "Instellingen",
     "clearData": "Alle gegevens wissen"
   },
+  "stats": {
+    "title": "Jouw statistieken",
+    "description": "Jouw activiteit en bijdragen aan de temps.rocks community",
+    "reportsPosted": "Rapporten geplaatst",
+    "confirmationsGiven": "Bevestigingen gegeven",
+    "favoritesCount": "Favorieten",
+    "memberSince": "Lid sinds",
+    "lastActive": "Laatst actief",
+    "unknown": "Onbekend",
+    "encourageReports": "Deel je lokale kennis door rapporten te plaatsen over rotsomstandigheden!",
+    "thankYou": "Bedankt voor je bijdrage aan de klimgemeenschap!"
+  },
   "settings": {
     "title": "Instellingen",
     "description": "Beheer je profiel, synchronisatietoets en voorkeuren",
@@ -299,7 +313,54 @@
     "displayName": {
       "label": "Weergavenaam",
       "description": "Je naam die wordt weergegeven op rapporten en bevestigingen (optioneel)",
-      "placeholder": "Voer je naam in..."
+      "placeholder": "Voer je naam in...",
+      "saved": "Weergavenaam opgeslagen",
+      "savedDescription": "Uw weergavenaam is succesvol bijgewerkt",
+      "saveFailed": "Opslaan mislukt",
+      "saveFailedDescription": "Kan uw weergavenaam niet opslaan. Probeer het opnieuw"
+    },
+    "units": {
+      "title": "Eenheden en metingen",
+      "description": "Kies je voorkeurseenheden voor weer- en klimgegevens",
+      "systemLabel": "Eenhedensysteem",
+      "systemDescription": "Snelle voorinstellingen voor veelgebruikte eenhedensystemen",
+      "systems": {
+        "metric": "Metrisch (°C, km/u, mm)",
+        "imperial": "Imperiaal (°F, mph, inches)",
+        "uk": "VK (°C, mph, mm)",
+        "custom": "Aangepast"
+      },
+      "temperature": "Temperatuur",
+      "temperatureUnits": {
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Windsnelheid",
+      "windSpeedUnits": {
+        "kmh": "Kilometer per uur (km/u)",
+        "mph": "Mijl per uur (mph)",
+        "ms": "Meter per seconde (m/s)",
+        "knots": "Knopen (kn)"
+      },
+      "precipitation": "Neerslag",
+      "precipitationUnits": {
+        "mm": "Millimeter (mm)",
+        "inches": "Inches (in)"
+      },
+      "distance": "Afstand",
+      "distanceUnits": {
+        "km": "Kilometer (km)",
+        "miles": "Mijl (mi)"
+      },
+      "elevation": "Hoogte",
+      "elevationUnits": {
+        "meters": "Meter (m)",
+        "feet": "Voet (ft)"
+      },
+      "saved": "Eenheden opgeslagen",
+      "savedDescription": "Uw eenheidsvoorkeuren zijn succesvol bijgewerkt",
+      "saveFailed": "Opslaan van eenheden mislukt",
+      "saveFailedDescription": "Kan uw eenheidsvoorkeuren niet opslaan. Probeer het opnieuw"
     },
     "syncKey": {
       "title": "Synchronisatietoets",
@@ -347,38 +408,67 @@
     "remove": "Verwijderen"
   },
   "reports": {
-    "addReport": "Rapport voor condities toevoegen",
-    "addReportDescription": "Deel huidige condities bij {{cragName}}",
-    "postingAs": "Posten als",
-    "dryness": "Droogheid",
+    "addReport": "Add Report",
+    "addReportDescription": "Share information about {{cragName}}",
+    "postingAs": "Posting as",
+    "category": "What would you like to report?",
+    "categories": {
+      "conditions": "Conditions",
+      "safety": "Safety",
+      "access": "Access",
+      "beta": "Beta",
+      "facilities": "Facilities",
+      "other": "Other"
+    },
+    "categoryDescriptions": {
+      "conditions": "Weather, friction, dryness, crowds",
+      "safety": "Loose bolts, rockfall, broken holds, hazards",
+      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "beta": "Current bolting works, route changes, new bolts",
+      "facilities": "Bathrooms, camping, water sources, amenities",
+      "other": "Anything else that doesn't fit above"
+    },
+    "dryness": "Dryness",
     "wind": "Wind",
-    "crowds": "Menigte",
-    "additionalComments": "Aanvullende opmerkingen",
-    "commentsPlaceholder": "Bijv. Oostelijke sector nog nat, pad modderig - voorzichtig, Route X - zuipen uit de spleet, grepen glad...",
-    "submit": "Rapport indienen",
-    "submitting": "Rapport indienen...",
-    "helpful": "Nuttig",
-    "loginToConfirm": "Stel je profiel in om rapporten te bevestigen",
-    "confirmFailed": "Kan rapport niet bevestigen. Probeer het opnieuw.",
+    "crowds": "Crowds",
+    "additionalComments": "Additional comments (optional)",
+    "details": "Details",
+    "detailsRequired": "Please provide details about this report",
+    "placeholders": {
+      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
+      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
+      "access": "E.g., Gate closed until May, new parking lot behind library...",
+      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "facilities": "E.g., Toilet available at parking, no water source nearby...",
+      "other": "Describe what you'd like to report..."
+    },
+    "submit": "Submit Report",
+    "submitting": "Submitting...",
+    "helpful": "Helpful",
+    "loginToConfirm": "Please set up your profile to confirm reports",
+    "confirmFailed": "Failed to confirm report. Please try again.",
     "ratings": {
-      "veryPoor": "Zeer slecht",
-      "poor": "Slecht",
-      "okay": "Oké",
-      "good": "Goed",
-      "excellent": "Uitstekend"
+      "veryPoor": "Very Poor",
+      "poor": "Poor",
+      "okay": "Okay",
+      "good": "Good",
+      "excellent": "Excellent"
     },
     "scales": {
-      "veryWet": "Erg nat",
+      "veryWet": "Very wet",
       "veryDry": "Perfect",
-      "calm": "Kalm",
-      "veryWindy": "Erg winderig",
-      "empty": "Leeg",
-      "veryCrowded": "Erg druk"
+      "calm": "Calm",
+      "veryWindy": "Very windy",
+      "empty": "Empty",
+      "veryCrowded": "Very crowded"
     },
-    "recentReports": "Recente rapporten",
-    "noReports": "Nog geen rapporten",
-    "noReportsMessage": "Wees de eerste om condities bij deze rots te delen",
-    "reportCount": "{{count}} rapporten",
-    "viewAllReports": "Bekijk alle rapporten"
+    "recentReports": "Recent Reports",
+    "communityReports": "Community Reports",
+    "noReports": "No reports yet",
+    "beTheFirst": "Be the first to report",
+    "noReportsInCategory": "No reports in this category",
+    "filters": {
+      "all": "All"
+    }
   }
 }

@@ -20,6 +20,8 @@ import {
   calculateGeminiCost,
 } from "@/lib/observability/chat-logger";
 import { createClient } from "@supabase/supabase-js";
+import type { UnitsConfig } from "@/lib/units/types";
+import { getWindSpeedSymbol } from "@/lib/units/conversions";
 
 export const maxDuration = 30;
 
@@ -747,11 +749,13 @@ export async function POST(req: Request) {
     language,
     userDateTime,
     userTimezone,
+    units,
   }: {
     messages: UIMessage[];
     language?: string;
     userDateTime?: string;
     userTimezone?: string;
+    units?: UnitsConfig;
   } = await req.json();
   const locale = resolveLocale(language);
 
@@ -769,13 +773,28 @@ export async function POST(req: Request) {
       })
     : "Unknown time";
 
+  // Build units context string if units are provided
+  const unitsContext = units
+    ? `
+
+UNITS PREFERENCES:
+The user prefers the following measurement units:
+- Temperature: ${units.temperature === "celsius" ? "Celsius (°C)" : "Fahrenheit (°F)"}
+- Wind Speed: ${getWindSpeedSymbol(units.windSpeed)}
+- Precipitation: ${units.precipitation === "mm" ? "millimeters (mm)" : "inches (in)"}
+- Distance: ${units.distance === "km" ? "kilometers (km)" : "miles (mi)"}
+- Elevation: ${units.elevation === "meters" ? "meters (m)" : "feet (ft)"}
+
+IMPORTANT: Always provide weather measurements in these preferred units when discussing conditions. Convert all values to match the user's preferences.`
+    : "";
+
   const systemPrompt = `${getSystemPrompt(locale)}
 
 CRITICAL TIME CONTEXT:
 Current user time: ${userTime}
 User timezone: ${userTimezone || "UTC"}
 When the user says "now" or "today", they mean relative to this time.
-When the user says "tomorrow", they mean the day after ${userTime}.`;
+When the user says "tomorrow", they mean the day after ${userTime}.${unitsContext}`;
 
   const result = streamText({
     model: google("gemini-2.5-flash"),

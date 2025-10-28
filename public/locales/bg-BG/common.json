@@ -36,7 +36,8 @@
     "location": "Местоположение",
     "favorite": "Любимо",
     "favorited": "Добавено като любимо",
-    "addReport": "Добавяне на доклад"
+    "addReport": "Добавяне на доклад",
+    "viewCragPage": "Виж района"
   },
   "ratings": {
     "great": "Отличные",
@@ -46,7 +47,7 @@
     "nope": "Не"
   },
   "reasons": {
-    "perfectTemp": "Идеална температура ({{temp}}°C)",
+    "perfectTemp": "Идеална температура ({{temp}})",
     "tempTooHigh": "Температурата е твърде висока - пръстите може да хлъзнат",
     "coldGoodFriction": "Студено, но добро за триенето на {{rockType}}",
     "idealHumidity": "Идеална влажност ({{humidity}}%)",
@@ -55,7 +56,7 @@
     "acceptable": "Условията са приемливи"
   },
   "warnings": {
-    "tooWarm": "Твърде топло за {{rockType}} ({{temp}}°C)",
+    "tooWarm": "Твърде топло за {{rockType}} ({{temp}})",
     "coldSuboptimal": "Студено и неоптимално за {{rockType}}",
     "highHumidity": "Висока влажност ({{humidity}}%) - скалата може да е хлъзгава",
     "wetDangerousSandstone": "Скалата е в момента мокра - опасна за катерене (пясъчникът постава слаб когато е мокър)",
@@ -64,7 +65,8 @@
     "highWind": "Силен вятър ({{wind}} км/ч)",
     "recentPrecip": "Скорошни валежи ({{precip}}мм) - ще се изсушат в ~{{hours}}ч",
     "currentlyWetDangerous": "В момента мокро - опасна",
-    "currentlyWet": "В момента мокро"
+    "currentlyWet": "В момента мокро",
+    "cold": "Cold ({{temp}})"
   },
   "weather": {
     "clearSky": "Ясно небе",
@@ -131,7 +133,7 @@
     },
     "communityReports": {
       "title": "Доклади на общността",
-      "description": "Споделяне и потвърждение на текущите условия. Помогнете на другите катеначи с обновления в реалното време"
+      "description": "Споделете условия, предупреждения за безопасност, промени в достъпа, бета и още. Помогнете на колеги катерачи с актуализации в реално време в множество категории"
     },
     "globalCoverage": {
       "title": "Глобално покритие",
@@ -291,6 +293,18 @@
     "settings": "Настройки",
     "clearData": "Изчистване на всички данни"
   },
+  "stats": {
+    "title": "Вашите статистики",
+    "description": "Вашата активност и приноси към общността temps.rocks",
+    "reportsPosted": "Публикувани доклади",
+    "confirmationsGiven": "Дадени потвърждения",
+    "favoritesCount": "Любимци",
+    "memberSince": "Член от",
+    "lastActive": "Последна активност",
+    "unknown": "Неизвестно",
+    "encourageReports": "Споделете местните си познания, публикувайки доклади за условията на скалите!",
+    "thankYou": "Благодарим ви за приноса към катерачната общност!"
+  },
   "settings": {
     "title": "Настройки",
     "description": "Управление на вашия профил, ключ за синхронизация и предпочитания",
@@ -299,7 +313,54 @@
     "displayName": {
       "label": "Показово име",
       "description": "Вашето име, показано на доклади и потвърждения (по желание)",
-      "placeholder": "Въведете вашето име..."
+      "placeholder": "Въведете вашето име...",
+      "saved": "Показваното име е запазено",
+      "savedDescription": "Вашето показвано име беше успешно актуализирано",
+      "saveFailed": "Запазването не успя",
+      "saveFailedDescription": "Не може да се запази вашето показвано име. Моля, опитайте отново"
+    },
+    "units": {
+      "title": "Единици и измервания",
+      "description": "Изберете предпочитаните си единици за времето и данните за катерене",
+      "systemLabel": "Система от единици",
+      "systemDescription": "Бързи настройки за често срещани системи от единици",
+      "systems": {
+        "metric": "Метрична (°C, км/ч, мм)",
+        "imperial": "Империална (°F, мили/ч, инчове)",
+        "uk": "Великобритания (°C, мили/ч, мм)",
+        "custom": "Персонализирана"
+      },
+      "temperature": "Температура",
+      "temperatureUnits": {
+        "celsius": "Целзий (°C)",
+        "fahrenheit": "Фаренхайт (°F)"
+      },
+      "windSpeed": "Скорост на вятъра",
+      "windSpeedUnits": {
+        "kmh": "Километри в час (км/ч)",
+        "mph": "Мили в час (мили/ч)",
+        "ms": "Метри в секунда (м/с)",
+        "knots": "Възли (kn)"
+      },
+      "precipitation": "Валежи",
+      "precipitationUnits": {
+        "mm": "Милиметри (мм)",
+        "inches": "Инчове (in)"
+      },
+      "distance": "Разстояние",
+      "distanceUnits": {
+        "km": "Километри (км)",
+        "miles": "Мили (mi)"
+      },
+      "elevation": "Надморска височина",
+      "elevationUnits": {
+        "meters": "Метри (м)",
+        "feet": "Фута (ft)"
+      },
+      "saved": "Единиците са запазени",
+      "savedDescription": "Вашите предпочитания за единици бяха успешно актуализирани",
+      "saveFailed": "Запазването на единиците не успя",
+      "saveFailedDescription": "Не може да се запазят вашите предпочитания за единици. Моля, опитайте отново"
     },
     "syncKey": {
       "title": "Ключ за синхронизация",
@@ -347,38 +408,67 @@
     "remove": "Премахване"
   },
   "reports": {
-    "addReport": "Добавяне на доклад за условия",
-    "addReportDescription": "Поделете текущите условия при {{cragName}}",
-    "postingAs": "Публикуване като",
-    "dryness": "Сухота",
-    "wind": "Вятър",
-    "crowds": "Натовареност",
-    "additionalComments": "Допълнителни коментари",
-    "commentsPlaceholder": "Напр., източната сектор все още е мокра, пътека мокра - бъдете внимателни, маршрут X - сухо от пукнатина, дръжките хлъзгави...",
-    "submit": "Изпращане на доклад",
-    "submitting": "Изпращане...",
-    "helpful": "Полезно",
-    "loginToConfirm": "Моля, настройте вашия профил, за да потвърдите доклади",
-    "confirmFailed": "Неудаче при потвърждаване на доклада. Моля, опитайте отново.",
+    "addReport": "Add Report",
+    "addReportDescription": "Share information about {{cragName}}",
+    "postingAs": "Posting as",
+    "category": "What would you like to report?",
+    "categories": {
+      "conditions": "Conditions",
+      "safety": "Safety",
+      "access": "Access",
+      "beta": "Beta",
+      "facilities": "Facilities",
+      "other": "Other"
+    },
+    "categoryDescriptions": {
+      "conditions": "Weather, friction, dryness, crowds",
+      "safety": "Loose bolts, rockfall, broken holds, hazards",
+      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "beta": "Current bolting works, route changes, new bolts",
+      "facilities": "Bathrooms, camping, water sources, amenities",
+      "other": "Anything else that doesn't fit above"
+    },
+    "dryness": "Dryness",
+    "wind": "Wind",
+    "crowds": "Crowds",
+    "additionalComments": "Additional comments (optional)",
+    "details": "Details",
+    "detailsRequired": "Please provide details about this report",
+    "placeholders": {
+      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
+      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
+      "access": "E.g., Gate closed until May, new parking lot behind library...",
+      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "facilities": "E.g., Toilet available at parking, no water source nearby...",
+      "other": "Describe what you'd like to report..."
+    },
+    "submit": "Submit Report",
+    "submitting": "Submitting...",
+    "helpful": "Helpful",
+    "loginToConfirm": "Please set up your profile to confirm reports",
+    "confirmFailed": "Failed to confirm report. Please try again.",
     "ratings": {
-      "veryPoor": "Много лошо",
-      "poor": "Лошо",
-      "okay": "Окей",
-      "good": "Добре",
-      "excellent": "Отлично"
+      "veryPoor": "Very Poor",
+      "poor": "Poor",
+      "okay": "Okay",
+      "good": "Good",
+      "excellent": "Excellent"
     },
     "scales": {
-      "veryWet": "Много мокро",
-      "veryDry": "Идеално",
-      "calm": "Спокойно",
-      "veryWindy": "Много ветровито",
-      "empty": "Празно",
-      "veryCrowded": "Много натовареност"
+      "veryWet": "Very wet",
+      "veryDry": "Perfect",
+      "calm": "Calm",
+      "veryWindy": "Very windy",
+      "empty": "Empty",
+      "veryCrowded": "Very crowded"
     },
-    "recentReports": "Скорошни доклади",
-    "noReports": "Никакви доклади досега",
-    "noReportsMessage": "Бъдете първи, които да споделите условия при този крег",
-    "reportCount": "{{count}} доклади",
-    "viewAllReports": "Преглед на всички доклади"
+    "recentReports": "Recent Reports",
+    "communityReports": "Community Reports",
+    "noReports": "No reports yet",
+    "beTheFirst": "Be the first to report",
+    "noReportsInCategory": "No reports in this category",
+    "filters": {
+      "all": "All"
+    }
   }
 }

@@ -36,7 +36,8 @@
     "location": "Miesto",
     "favorite": "Obľúbené",
     "favorited": "V obľúbených",
-    "addReport": "Pridať hlásenie"
+    "addReport": "Pridať hlásenie",
+    "viewCragPage": "Zobraziť oblasť"
   },
   "ratings": {
     "great": "Skvelé",
@@ -46,7 +47,7 @@
     "nope": "Vôbec"
   },
   "reasons": {
-    "perfectTemp": "Perfektná teplota ({{temp}}°C)",
+    "perfectTemp": "Perfektná teplota ({{temp}})",
     "tempTooHigh": "Teplota príliš vysoká - prsty môžu kĺzať",
     "coldGoodFriction": "Chladno, ale dobré pre trenie na {{rockType}}",
     "idealHumidity": "Ideálna vlhkosť ({{humidity}}%)",
@@ -55,16 +56,17 @@
     "acceptable": "Podmienky sú prijateľné"
   },
   "warnings": {
-    "tooWarm": "Príliš teplo pre {{rockType}} ({{temp}}°C)",
+    "tooWarm": "Príliš teplo pre {{rockType}} ({{temp}})",
     "coldSuboptimal": "Chladno a neoptimálne pre {{rockType}}",
     "highHumidity": "Vysoká vlhkosť ({{humidity}}%) - skala môže byť klzká",
     "wetDangerousSandstone": "Skala je momentálne mokrá - nebezpečné pre lezenie (pieskoviec je slabý keď je mokrý)",
     "wetSlippery": "Skala je momentálne mokrá - klzké podmienky",
-    "veryHighWinds": "Veľmi silný vietor ({{wind}} km/h) - nebezpečenstvo sfúknutia",
-    "highWind": "Silný vietor ({{wind}} km/h)",
-    "recentPrecip": "Nedávne zrážky ({{precip}}mm) - uschnú za ~{{hours}}h",
+    "veryHighWinds": "Veľmi silný vietor ({{wind}}) - nebezpečenstvo sfúknutia",
+    "highWind": "Silný vietor ({{wind}})",
+    "recentPrecip": "Nedávne zrážky ({{precip}}) - uschnú za ~{{hours}}h",
     "currentlyWetDangerous": "Momentálne mokro - nebezpečné",
-    "currentlyWet": "Momentálne mokro"
+    "currentlyWet": "Momentálne mokro",
+    "cold": "Cold ({{temp}})"
   },
   "weather": {
     "clearSky": "Jasná obloha",
@@ -131,7 +133,7 @@
     },
     "communityReports": {
       "title": "Komunitné reporty",
-      "description": "Zdieľajte a potvrdzujte aktuálne podmienky. Pomôžte ostatným lezcom s aktuálnymi informáciami"
+      "description": "Zdieľajte podmienky, bezpečnostné upozornenia, zmeny prístupu, beta a ďalšie. Pomôžte spolulezcom s aktualizáciami v reálnom čase naprieč viacerými kategóriami"
     },
     "globalCoverage": {
       "title": "Globálne pokrytie",
@@ -291,6 +293,18 @@
     "settings": "Nastavenia",
     "clearData": "Vymazať všetky dáta"
   },
+  "stats": {
+    "title": "Vaše štatistiky",
+    "description": "Vaša aktivita a príspevky do komunity temps.rocks",
+    "reportsPosted": "Odoslané hlásenia",
+    "confirmationsGiven": "Udelené potvrdenia",
+    "favoritesCount": "Obľúbené",
+    "memberSince": "Člen od",
+    "lastActive": "Naposledy aktívny",
+    "unknown": "Neznáme",
+    "encourageReports": "Zdieľajte svoje miestne znalosti zasielaním hlásení o podmienkach na skalách!",
+    "thankYou": "Ďakujeme za váš príspevok do lezeckej komunity!"
+  },
   "settings": {
     "title": "Nastavenia",
     "description": "Spravujte svoj profil, synchronizačný kľúč a predvoľby",
@@ -299,7 +313,54 @@
     "displayName": {
       "label": "Zobrazované meno",
       "description": "Vaše meno zobrazené pri reportoch a potvrdeniach (voliteľné)",
-      "placeholder": "Zadajte svoje meno..."
+      "placeholder": "Zadajte svoje meno...",
+      "saved": "Zobrazované meno uložené",
+      "savedDescription": "Vaše zobrazované meno bolo úspešne aktualizované",
+      "saveFailed": "Ukladanie zlyhalo",
+      "saveFailedDescription": "Vaše zobrazované meno sa nepodarilo uložiť. Skúste to prosím znova"
+    },
+    "units": {
+      "title": "Jednotky a merania",
+      "description": "Vyberte preferované jednotky pre údaje o počasí a lezení",
+      "systemLabel": "Systém jednotiek",
+      "systemDescription": "Rýchle nastavenia pre bežné systémy jednotiek",
+      "systems": {
+        "metric": "Metrický (°C, km/h, mm)",
+        "imperial": "Imperiálny (°F, mph, palce)",
+        "uk": "Veľká Británia (°C, mph, mm)",
+        "custom": "Vlastný"
+      },
+      "temperature": "Teplota",
+      "temperatureUnits": {
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Rýchlosť vetra",
+      "windSpeedUnits": {
+        "kmh": "Kilometre za hodinu (km/h)",
+        "mph": "Míle za hodinu (mph)",
+        "ms": "Metre za sekundu (m/s)",
+        "knots": "Uzly (kn)"
+      },
+      "precipitation": "Zrážky",
+      "precipitationUnits": {
+        "mm": "Milimetre (mm)",
+        "inches": "Palce (in)"
+      },
+      "distance": "Vzdialenosť",
+      "distanceUnits": {
+        "km": "Kilometre (km)",
+        "miles": "Míle (mi)"
+      },
+      "elevation": "Nadmorská výška",
+      "elevationUnits": {
+        "meters": "Metre (m)",
+        "feet": "Stopy (ft)"
+      },
+      "saved": "Jednotky uložené",
+      "savedDescription": "Vaše preferencie jednotiek boli úspešne aktualizované",
+      "saveFailed": "Ukladanie jednotiek zlyhalo",
+      "saveFailedDescription": "Vaše preferencie jednotiek sa nepodarilo uložiť. Skúste to prosím znova"
     },
     "syncKey": {
       "title": "Synchronizačný kľúč",
@@ -347,38 +408,67 @@
     "remove": "Odstrániť"
   },
   "reports": {
-    "addReport": "Pridať report o podmienkach",
-    "addReportDescription": "Zdieľajte aktuálne podmienky na {{cragName}}",
-    "postingAs": "Pridávate ako",
-    "dryness": "Sucho",
-    "wind": "Vietor",
-    "crowds": "Návštevnosť",
-    "additionalComments": "Ďalšie komentáre",
-    "commentsPlaceholder": "Napr: východný sektor stále vlhký, chodník blatistý - pozor, Cesta X - voda presakuje z trhliny, chyty šmykľavé...",
-    "submit": "Odoslať report",
-    "submitting": "Odosielanie...",
-    "helpful": "Užitočné",
-    "loginToConfirm": "Pre potvrdenie reportov si prosím nastavte profil",
-    "confirmFailed": "Nepodarilo sa potvrdiť report. Skúste to prosím znova.",
+    "addReport": "Add Report",
+    "addReportDescription": "Share information about {{cragName}}",
+    "postingAs": "Posting as",
+    "category": "What would you like to report?",
+    "categories": {
+      "conditions": "Conditions",
+      "safety": "Safety",
+      "access": "Access",
+      "beta": "Beta",
+      "facilities": "Facilities",
+      "other": "Other"
+    },
+    "categoryDescriptions": {
+      "conditions": "Weather, friction, dryness, crowds",
+      "safety": "Loose bolts, rockfall, broken holds, hazards",
+      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "beta": "Current bolting works, route changes, new bolts",
+      "facilities": "Bathrooms, camping, water sources, amenities",
+      "other": "Anything else that doesn't fit above"
+    },
+    "dryness": "Dryness",
+    "wind": "Wind",
+    "crowds": "Crowds",
+    "additionalComments": "Additional comments (optional)",
+    "details": "Details",
+    "detailsRequired": "Please provide details about this report",
+    "placeholders": {
+      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
+      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
+      "access": "E.g., Gate closed until May, new parking lot behind library...",
+      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "facilities": "E.g., Toilet available at parking, no water source nearby...",
+      "other": "Describe what you'd like to report..."
+    },
+    "submit": "Submit Report",
+    "submitting": "Submitting...",
+    "helpful": "Helpful",
+    "loginToConfirm": "Please set up your profile to confirm reports",
+    "confirmFailed": "Failed to confirm report. Please try again.",
     "ratings": {
-      "veryPoor": "Veľmi zlé",
-      "poor": "Zlé",
-      "okay": "Ujde",
-      "good": "Dobré",
-      "excellent": "Vynikajúce"
+      "veryPoor": "Very Poor",
+      "poor": "Poor",
+      "okay": "Okay",
+      "good": "Good",
+      "excellent": "Excellent"
     },
     "scales": {
-      "veryWet": "Veľmi mokré",
-      "veryDry": "Perfektné",
-      "calm": "Pokojne",
-      "veryWindy": "Veľmi veterné",
-      "empty": "Prázdne",
-      "veryCrowded": "Veľmi preplnené"
+      "veryWet": "Very wet",
+      "veryDry": "Perfect",
+      "calm": "Calm",
+      "veryWindy": "Very windy",
+      "empty": "Empty",
+      "veryCrowded": "Very crowded"
     },
-    "recentReports": "Nedávne reporty",
-    "noReports": "Zatiaľ žiadne reporty",
-    "noReportsMessage": "Buďte prvý, kto zdieľa podmienky na tejto skale",
-    "reportCount": "{{count}} reportov",
-    "viewAllReports": "Zobraziť všetky reporty"
+    "recentReports": "Recent Reports",
+    "communityReports": "Community Reports",
+    "noReports": "No reports yet",
+    "beTheFirst": "Be the first to report",
+    "noReportsInCategory": "No reports in this category",
+    "filters": {
+      "all": "All"
+    }
   }
 }

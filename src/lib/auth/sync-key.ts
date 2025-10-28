@@ -6,6 +6,7 @@
 
 import { createHash } from "crypto";
 import { setUserProfileCookies, clearUserCookies } from "./cookie-actions";
+import type { UnitsConfig } from "@/lib/units/types";
 
 const SYNC_KEY_STORAGE_KEY = "temps_rocks_sync_key";
 const USER_PROFILE_STORAGE_KEY = "temps_rocks_user_profile";
@@ -132,6 +133,7 @@ export interface UserProfile {
   syncKey: string;
   syncKeyHash?: string;
   displayName?: string;
+  units?: UnitsConfig;
   createdAt: string;
   updatedAt: string;
 }
@@ -163,8 +165,9 @@ export async function saveUserProfile(profile: UserProfile): Promise<void> {
   }
   localStorage.setItem(USER_PROFILE_STORAGE_KEY, JSON.stringify(profile));
 
-  // Also set cookies for SSR
-  await setUserProfileCookies(profile.syncKey, profile.displayName);
+  // Also set cookies for SSR (use hash, never raw sync key)
+  const syncKeyHash = profile.syncKeyHash || (await hashSyncKeyAsync(profile.syncKey));
+  await setUserProfileCookies(syncKeyHash, profile.displayName);
 }
 
 /**
@@ -173,8 +176,10 @@ export async function saveUserProfile(profile: UserProfile): Promise<void> {
 export async function initializeUserProfile(): Promise<UserProfile> {
   const existingProfile = getUserProfile();
   if (existingProfile) {
-    // Also ensure cookies are set for existing profiles
-    await setUserProfileCookies(existingProfile.syncKey, existingProfile.displayName);
+    // Also ensure cookies are set for existing profiles (use hash, never raw sync key)
+    const syncKeyHash =
+      existingProfile.syncKeyHash || (await hashSyncKeyAsync(existingProfile.syncKey));
+    await setUserProfileCookies(syncKeyHash, existingProfile.displayName);
     return existingProfile;
   }
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useCallback, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { useChat, type UIMessage } from "@ai-sdk/react";
 import type { TFunction } from "i18next";
 import { Button } from "@/components/ui/button";
@@ -9,7 +10,9 @@ import { Send, Loader2, CloudSun, Sun, Info, RotateCcw, Star } from "lucide-reac
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
 import { useChatHistory } from "@/hooks/useChatHistory";
+import { useUnits } from "@/hooks/useUnits";
 import { getFavoritesFromStorage } from "@/lib/storage/favorites";
+import { generateUniqueSlug } from "@/lib/utils/slug";
 import { Message, MessageContent } from "@/components/ai-elements/message";
 import { Response } from "@/components/ai-elements/response";
 import {
@@ -42,6 +45,7 @@ import { SyncNotification } from "@/components/SyncNotification";
 import { logRender } from "@/lib/debug/render-log";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
 import { SyncExplainerDialog } from "@/components/SyncExplainerDialog";
+import { StatsDialog } from "@/components/StatsDialog";
 
 interface ConditionsData {
   location: string;
@@ -200,7 +204,9 @@ const ChatUI = ({
   t: TFunction;
   language: string;
 }) => {
+  const router = useRouter();
   const [input, setInput] = useState("");
+  const { units } = useUnits();
 
   const { messages, sendMessage, status } = useChat({
     // Load initial messages from history
@@ -229,6 +235,7 @@ const ChatUI = ({
   const [featuresDialogOpen, setFeaturesDialogOpen] = useState(false);
   const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
   const [favoritesDialogOpen, setFavoritesDialogOpen] = useState(false);
+  const [statsDialogOpen, setStatsDialogOpen] = useState(false);
   const [syncExplainerDialogOpen, setSyncExplainerDialogOpen] = useState(false);
   const [newChatConfirmOpen, setNewChatConfirmOpen] = useState(false);
   const [scrollSignal, setScrollSignal] = useState(0);
@@ -282,13 +289,14 @@ const ChatUI = ({
             language: language,
             userDateTime: new Date().toISOString(),
             userTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            units: units,
           },
         }
       );
       // Signal scroll to bottom within Conversation provider
       setScrollSignal((s) => s + 1);
     },
-    [input, language, sendMessage]
+    [input, language, sendMessage, units]
   );
 
   // Memoize example click handler
@@ -302,13 +310,14 @@ const ChatUI = ({
             language: language,
             userDateTime: new Date().toISOString(),
             userTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            units: units,
           },
         }
       );
       // Signal scroll to bottom within Conversation provider
       setScrollSignal((s) => s + 1);
     },
-    [language, sendMessage]
+    [language, sendMessage, units]
   );
 
   // Memoize disambiguation option handler
@@ -321,11 +330,12 @@ const ChatUI = ({
             language: language,
             userDateTime: new Date().toISOString(),
             userTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            units: units,
           },
         }
       );
     },
-    [language, sendMessage]
+    [language, sendMessage, units]
   );
 
   // Handle prefetched full data from WeatherConditionCard
@@ -357,6 +367,7 @@ const ChatUI = ({
               onSyncClick={() => setSyncExplainerDialogOpen(true)}
               onSettingsClick={() => setSettingsDialogOpen(true)}
               onFavoritesClick={() => setFavoritesDialogOpen(true)}
+              onStatsClick={() => setStatsDialogOpen(true)}
               onAboutClick={() => setFeaturesDialogOpen(true)}
               onClearChatClick={() => setNewChatConfirmOpen(true)}
               isClearChatDisabled={messages.length === 0}
@@ -438,11 +449,14 @@ const ChatUI = ({
                             key={favorite.id}
                             variant="outline"
                             size="sm"
-                            onClick={() =>
-                              handleExampleClick(
-                                t("welcome.favoriteQuery", { crag: favorite.areaName })
-                              )
-                            }
+                            onClick={() => {
+                              const slug = generateUniqueSlug(
+                                favorite.areaName,
+                                favorite.latitude,
+                                favorite.longitude
+                              );
+                              router.push(`/location/${slug}`);
+                            }}
                             className="transition-smooth hover:scale-105"
                           >
                             <Star className="h-3 w-3 mr-1.5 fill-orange-500 text-orange-500" />
@@ -633,8 +647,8 @@ const ChatUI = ({
                                 conditionsLabel={t("conditions.rating")}
                                 detailsLabel={t("conditions.details")}
                                 favoriteLabel={t("conditions.favorite")}
-                                favoritedLabel={t("conditions.favorited")}
                                 addReportLabel={t("conditions.addReport")}
+                                viewCragPageLabel={t("conditions.viewCragPage")}
                               />
                             );
                           }
@@ -759,6 +773,9 @@ const ChatUI = ({
       {/* Favorites Dialog */}
       <FavoritesDialog open={favoritesDialogOpen} onOpenChange={setFavoritesDialogOpen} />
 
+      {/* Stats Dialog */}
+      <StatsDialog open={statsDialogOpen} onOpenChange={setStatsDialogOpen} />
+
       {/* Clear Chat Confirmation Dialog */}
       <ConfirmDialog
         open={newChatConfirmOpen}
@@ -794,6 +811,7 @@ const ChatInterface = ({
   const [featuresDialogOpen, setFeaturesDialogOpen] = useState(false);
   const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
   const [favoritesDialogOpen, setFavoritesDialogOpen] = useState(false);
+  const [statsDialogOpen, setStatsDialogOpen] = useState(false);
   const [syncExplainerDialogOpen, setSyncExplainerDialogOpen] = useState(false);
 
   // Chat history integration - pass server props to skip loading
@@ -812,6 +830,7 @@ const ChatInterface = ({
               onSyncClick={() => setSyncExplainerDialogOpen(true)}
               onSettingsClick={() => setSettingsDialogOpen(true)}
               onFavoritesClick={() => setFavoritesDialogOpen(true)}
+              onStatsClick={() => setStatsDialogOpen(true)}
               onAboutClick={() => setFeaturesDialogOpen(true)}
               onClearChatClick={() => {}}
               isClearChatDisabled={true}
@@ -848,6 +867,7 @@ const ChatInterface = ({
         <FeaturesDialog open={featuresDialogOpen} onOpenChange={setFeaturesDialogOpen} />
         <SettingsDialog open={settingsDialogOpen} onOpenChange={setSettingsDialogOpen} />
         <FavoritesDialog open={favoritesDialogOpen} onOpenChange={setFavoritesDialogOpen} />
+        <StatsDialog open={statsDialogOpen} onOpenChange={setStatsDialogOpen} />
         <SyncExplainerDialog
           open={syncExplainerDialogOpen}
           onOpenChange={setSyncExplainerDialogOpen}

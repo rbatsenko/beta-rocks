@@ -36,7 +36,8 @@
     "location": "Plats",
     "favorite": "Favorit",
     "favorited": "I favoriter",
-    "addReport": "Lägg till rapport"
+    "addReport": "Lägg till rapport",
+    "viewCragPage": "Visa område"
   },
   "ratings": {
     "great": "Toppen",
@@ -46,7 +47,7 @@
     "nope": "Nej"
   },
   "reasons": {
-    "perfectTemp": "Perfekt temperatur ({{temp}}°C)",
+    "perfectTemp": "Perfekt temperatur ({{temp}})",
     "tempTooHigh": "Temperaturen är för hög - fingrarna kan halka",
     "coldGoodFriction": "Kallt men bra friktion för {{rockType}}",
     "idealHumidity": "Idealisk luftfuktighet ({{humidity}}%)",
@@ -55,16 +56,17 @@
     "acceptable": "Förhållandena är acceptabla"
   },
   "warnings": {
-    "tooWarm": "För varmt för {{rockType}} ({{temp}}°C)",
+    "tooWarm": "För varmt för {{rockType}} ({{temp}})",
     "coldSuboptimal": "Kallt och inte optimalt för {{rockType}}",
     "highHumidity": "Hög luftfuktighet ({{humidity}}%) - stenen kan bli hal",
     "wetDangerousSandstone": "Stenen är blöt - farligt att klättra (sandsten blir svag när den är blöt)",
     "wetSlippery": "Stenen är blöt - hala förhållanden",
-    "veryHighWinds": "Mycket hård vind ({{wind}} km/h) - risk för att blåsa av",
-    "highWind": "Hård vind ({{wind}} km/h)",
-    "recentPrecip": "Senaste nederbörd ({{precip}}mm) - torkar på ~{{hours}}h",
+    "veryHighWinds": "Mycket hård vind ({{wind}}) - risk för att blåsa av",
+    "highWind": "Hård vind ({{wind}})",
+    "recentPrecip": "Senaste nederbörd ({{precip}}) - torkar på ~{{hours}}h",
     "currentlyWetDangerous": "För närvarande blött - riskabelt",
-    "currentlyWet": "För närvarande blött"
+    "currentlyWet": "För närvarande blött",
+    "cold": "Cold ({{temp}})"
   },
   "weather": {
     "clearSky": "Klart",
@@ -132,7 +134,7 @@
     },
     "communityReports": {
       "title": "Communityrapporter",
-      "description": "Dela och bekräfta aktuella förhållanden. Hjälp andra klättrare med färska uppdateringar"
+      "description": "Dela förhållanden, säkerhetsvarningar, tillgänglighetsändringar, beta och mer. Hjälp medklättrare med realtidsuppdateringar i flera kategorier"
     },
     "globalCoverage": {
       "title": "Global täckning",
@@ -292,6 +294,18 @@
     "settings": "Inställningar",
     "clearData": "Rensa all data"
   },
+  "stats": {
+    "title": "Din statistik",
+    "description": "Din aktivitet och bidrag till temps.rocks-gemenskapen",
+    "reportsPosted": "Rapporter publicerade",
+    "confirmationsGiven": "Bekräftelser givna",
+    "favoritesCount": "Favoriter",
+    "memberSince": "Medlem sedan",
+    "lastActive": "Senast aktiv",
+    "unknown": "Okänd",
+    "encourageReports": "Dela med dig av din lokala kunskap genom att publicera rapporter om klippförhållanden!",
+    "thankYou": "Tack för ditt bidrag till klättergemenskapen!"
+  },
   "settings": {
     "title": "Inställningar",
     "description": "Hantera din profil, synkroniseringsnyckel och preferenser",
@@ -300,7 +314,54 @@
     "displayName": {
       "label": "Visningsnamn",
       "description": "Ditt namn visas på rapporter och bekräftelser (valfritt)",
-      "placeholder": "Ange ditt namn..."
+      "placeholder": "Ange ditt namn...",
+      "saved": "Visningsnamn sparat",
+      "savedDescription": "Ditt visningsnamn har uppdaterats",
+      "saveFailed": "Sparandet misslyckades",
+      "saveFailedDescription": "Det gick inte att spara ditt visningsnamn. Försök igen"
+    },
+    "units": {
+      "title": "Enheter och mätningar",
+      "description": "Välj dina föredragna enheter för väder- och klätterdata",
+      "systemLabel": "Enhetssystem",
+      "systemDescription": "Snabba förinställningar för vanliga enhetssystem",
+      "systems": {
+        "metric": "Metriskt (°C, km/h, mm)",
+        "imperial": "Imperial (°F, mph, tum)",
+        "uk": "Storbritannien (°C, mph, mm)",
+        "custom": "Anpassad"
+      },
+      "temperature": "Temperatur",
+      "temperatureUnits": {
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Vindhastighet",
+      "windSpeedUnits": {
+        "kmh": "Kilometer per timme (km/h)",
+        "mph": "Miles per timme (mph)",
+        "ms": "Meter per sekund (m/s)",
+        "knots": "Knop (kn)"
+      },
+      "precipitation": "Nederbörd",
+      "precipitationUnits": {
+        "mm": "Millimeter (mm)",
+        "inches": "Tum (in)"
+      },
+      "distance": "Avstånd",
+      "distanceUnits": {
+        "km": "Kilometer (km)",
+        "miles": "Miles (mi)"
+      },
+      "elevation": "Höjd",
+      "elevationUnits": {
+        "meters": "Meter (m)",
+        "feet": "Fot (ft)"
+      },
+      "saved": "Enheter sparade",
+      "savedDescription": "Dina enhetsinställningar har uppdaterats",
+      "saveFailed": "Sparandet av enheter misslyckades",
+      "saveFailedDescription": "Det gick inte att spara dina enhetsinställningar. Försök igen"
     },
     "syncKey": {
       "title": "Synkroniseringsnyckel",
@@ -348,38 +409,67 @@
     "remove": "Ta bort"
   },
   "reports": {
-    "addReport": "Lägg till förhållanderapport",
-    "addReportDescription": "Dela aktuella förhållanden vid {{cragName}}",
-    "postingAs": "Publicerar som",
-    "dryness": "Torrhet",
-    "wind": "Vind",
-    "crowds": "Folksamling",
-    "additionalComments": "Ytterligare kommentarer",
-    "commentsPlaceholder": "T.ex: östra sektorn fortfarande fuktig, stigen lerig - var försiktig, Led X - vatten sipprar från sprickan, grepp halkiga...",
-    "submit": "Skicka rapport",
-    "submitting": "Skickar...",
-    "helpful": "Hjälpsam",
-    "loginToConfirm": "Vänligen ställ in din profil för att bekräfta rapporter",
-    "confirmFailed": "Misslyckades med att bekräfta rapport. Försök igen.",
+    "addReport": "Add Report",
+    "addReportDescription": "Share information about {{cragName}}",
+    "postingAs": "Posting as",
+    "category": "What would you like to report?",
+    "categories": {
+      "conditions": "Conditions",
+      "safety": "Safety",
+      "access": "Access",
+      "beta": "Beta",
+      "facilities": "Facilities",
+      "other": "Other"
+    },
+    "categoryDescriptions": {
+      "conditions": "Weather, friction, dryness, crowds",
+      "safety": "Loose bolts, rockfall, broken holds, hazards",
+      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "beta": "Current bolting works, route changes, new bolts",
+      "facilities": "Bathrooms, camping, water sources, amenities",
+      "other": "Anything else that doesn't fit above"
+    },
+    "dryness": "Dryness",
+    "wind": "Wind",
+    "crowds": "Crowds",
+    "additionalComments": "Additional comments (optional)",
+    "details": "Details",
+    "detailsRequired": "Please provide details about this report",
+    "placeholders": {
+      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
+      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
+      "access": "E.g., Gate closed until May, new parking lot behind library...",
+      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "facilities": "E.g., Toilet available at parking, no water source nearby...",
+      "other": "Describe what you'd like to report..."
+    },
+    "submit": "Submit Report",
+    "submitting": "Submitting...",
+    "helpful": "Helpful",
+    "loginToConfirm": "Please set up your profile to confirm reports",
+    "confirmFailed": "Failed to confirm report. Please try again.",
     "ratings": {
-      "veryPoor": "Mycket dåligt",
-      "poor": "Dåligt",
-      "okay": "Okej",
-      "good": "Bra",
-      "excellent": "Utmärkt"
+      "veryPoor": "Very Poor",
+      "poor": "Poor",
+      "okay": "Okay",
+      "good": "Good",
+      "excellent": "Excellent"
     },
     "scales": {
-      "veryWet": "Mycket vått",
-      "veryDry": "Perfekt",
-      "calm": "Lugnt",
-      "veryWindy": "Mycket blåsigt",
-      "empty": "Tomt",
-      "veryCrowded": "Mycket trångt"
+      "veryWet": "Very wet",
+      "veryDry": "Perfect",
+      "calm": "Calm",
+      "veryWindy": "Very windy",
+      "empty": "Empty",
+      "veryCrowded": "Very crowded"
     },
-    "recentReports": "Senaste rapporter",
-    "noReports": "Inga rapporter än",
-    "noReportsMessage": "Bli den första att dela förhållanden vid denna klippa",
-    "reportCount": "{{count}} rapporter",
-    "viewAllReports": "Visa alla rapporter"
+    "recentReports": "Recent Reports",
+    "communityReports": "Community Reports",
+    "noReports": "No reports yet",
+    "beTheFirst": "Be the first to report",
+    "noReportsInCategory": "No reports in this category",
+    "filters": {
+      "all": "All"
+    }
   }
 }

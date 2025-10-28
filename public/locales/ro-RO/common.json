@@ -36,7 +36,8 @@
     "location": "Locație",
     "favorite": "Favorit",
     "favorited": "Adăugat la favorite",
-    "addReport": "Adaugă Raport"
+    "addReport": "Adaugă Raport",
+    "viewCragPage": "Vezi zona"
   },
   "ratings": {
     "great": "Excelent",
@@ -46,7 +47,7 @@
     "nope": "Nu"
   },
   "reasons": {
-    "perfectTemp": "Temperatură perfectă ({{temp}}°C)",
+    "perfectTemp": "Temperatură perfectă ({{temp}})",
     "tempTooHigh": "Temperatură prea ridicată - degetele pot aluneca",
     "coldGoodFriction": "Rece, dar bun pentru fricțiunea pe {{rockType}}",
     "idealHumidity": "Umiditate ideală ({{humidity}}%)",
@@ -55,16 +56,17 @@
     "acceptable": "Condițiile sunt acceptabile"
   },
   "warnings": {
-    "tooWarm": "Prea cald pentru {{rockType}} ({{temp}}°C)",
+    "tooWarm": "Prea cald pentru {{rockType}} ({{temp}})",
     "coldSuboptimal": "Rece și suboptimal pentru {{rockType}}",
     "highHumidity": "Umiditate ridicată ({{humidity}}%) - stânca poate fi alunecoasă",
     "wetDangerousSandstone": "Stânca este în prezent umedă - periculos de escaladă (nisipul devine slab când e ud)",
     "wetSlippery": "Stânca este în prezent umedă - condiții alunecoase",
-    "veryHighWinds": "Vânturi foarte puternice ({{wind}} km/h) - pericol de a fi suflat jos",
-    "highWind": "Vânt puternic ({{wind}} km/h)",
-    "recentPrecip": "Precipitații recente ({{precip}}mm) - va se usca în aproximativ {{hours}}h",
+    "veryHighWinds": "Vânturi foarte puternice ({{wind}}) - pericol de a fi suflat jos",
+    "highWind": "Vânt puternic ({{wind}})",
+    "recentPrecip": "Precipitații recente ({{precip}}) - va se usca în aproximativ {{hours}}h",
     "currentlyWetDangerous": "În prezent umedă - periculos",
-    "currentlyWet": "În prezent umedă"
+    "currentlyWet": "În prezent umedă",
+    "cold": "Cold ({{temp}})"
   },
   "weather": {
     "clearSky": "Cer senin",
@@ -131,7 +133,7 @@
     },
     "communityReports": {
       "title": "Rapoarte Comunității",
-      "description": "Partajează și confirmă condițiile curente. Ajută alți escaladori cu actualizări în timp real"
+      "description": "Împărtășește condiții, alerte de securitate, modificări de acces, beta și altele. Ajută colegii alpiniști cu actualizări în timp real în mai multe categorii"
     },
     "globalCoverage": {
       "title": "Acoperire Globală",
@@ -291,6 +293,18 @@
     "settings": "Setări",
     "clearData": "Șterge Toate Datele"
   },
+  "stats": {
+    "title": "Statisticile tale",
+    "description": "Activitatea ta și contribuțiile la comunitatea temps.rocks",
+    "reportsPosted": "Rapoarte postate",
+    "confirmationsGiven": "Confirmări date",
+    "favoritesCount": "Favorite",
+    "memberSince": "Membru din",
+    "lastActive": "Ultima activitate",
+    "unknown": "Necunoscut",
+    "encourageReports": "Împărtășește-ți cunoștințele locale postând rapoarte despre condițiile de la stânci!",
+    "thankYou": "Mulțumim pentru contribuția ta la comunitatea de escaladă!"
+  },
   "settings": {
     "title": "Setări",
     "description": "Gestionează profilul, cheia de sincronizare și preferințele",
@@ -299,7 +313,54 @@
     "displayName": {
       "label": "Nume Afișat",
       "description": "Numele tău afișat pe rapoarte și confirmări (opțional)",
-      "placeholder": "Introdu-ți numele..."
+      "placeholder": "Introdu-ți numele...",
+      "saved": "Nume afișat salvat",
+      "savedDescription": "Numele tău afișat a fost actualizat cu succes",
+      "saveFailed": "Salvarea a eșuat",
+      "saveFailedDescription": "Nu s-a putut salva numele tău afișat. Te rugăm să încerci din nou"
+    },
+    "units": {
+      "title": "Unități și măsurători",
+      "description": "Alege unitățile preferate pentru datele meteo și de alpinism",
+      "systemLabel": "Sistem de unități",
+      "systemDescription": "Presetări rapide pentru sistemele de unități comune",
+      "systems": {
+        "metric": "Metric (°C, km/h, mm)",
+        "imperial": "Imperial (°F, mph, inchi)",
+        "uk": "Regatul Unit (°C, mph, mm)",
+        "custom": "Personalizat"
+      },
+      "temperature": "Temperatură",
+      "temperatureUnits": {
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Viteza vântului",
+      "windSpeedUnits": {
+        "kmh": "Kilometri pe oră (km/h)",
+        "mph": "Mile pe oră (mph)",
+        "ms": "Metri pe secundă (m/s)",
+        "knots": "Noduri (kn)"
+      },
+      "precipitation": "Precipitații",
+      "precipitationUnits": {
+        "mm": "Milimetri (mm)",
+        "inches": "Inchi (in)"
+      },
+      "distance": "Distanță",
+      "distanceUnits": {
+        "km": "Kilometri (km)",
+        "miles": "Mile (mi)"
+      },
+      "elevation": "Altitudine",
+      "elevationUnits": {
+        "meters": "Metri (m)",
+        "feet": "Picioare (ft)"
+      },
+      "saved": "Unități salvate",
+      "savedDescription": "Preferințele tale pentru unități au fost actualizate cu succes",
+      "saveFailed": "Salvarea unităților a eșuat",
+      "saveFailedDescription": "Nu s-au putut salva preferințele tale pentru unități. Te rugăm să încerci din nou"
     },
     "syncKey": {
       "title": "Cheie de Sincronizare",
@@ -347,38 +408,67 @@
     "remove": "Elimină"
   },
   "reports": {
-    "addReport": "Adaugă Raport de Condiții",
-    "addReportDescription": "Partajează condițiile curente la {{cragName}}",
-    "postingAs": "Postare ca",
-    "dryness": "Uscăciune",
-    "wind": "Vânt",
-    "crowds": "Mulțimi",
-    "additionalComments": "Comentarii suplimentare",
-    "commentsPlaceholder": "De ex., Sectorul Est încă umed, cărări noroase - fii atent, Ruta X - picături din crăpătură, ținuturi alunecoase...",
-    "submit": "Trimite Raport",
-    "submitting": "Se trimite...",
-    "helpful": "Util",
-    "loginToConfirm": "Te rog configurează profilul pentru a confirma rapoarte",
-    "confirmFailed": "Nu s-a putut confirma raportul. Te rog încearcă din nou.",
+    "addReport": "Add Report",
+    "addReportDescription": "Share information about {{cragName}}",
+    "postingAs": "Posting as",
+    "category": "What would you like to report?",
+    "categories": {
+      "conditions": "Conditions",
+      "safety": "Safety",
+      "access": "Access",
+      "beta": "Beta",
+      "facilities": "Facilities",
+      "other": "Other"
+    },
+    "categoryDescriptions": {
+      "conditions": "Weather, friction, dryness, crowds",
+      "safety": "Loose bolts, rockfall, broken holds, hazards",
+      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "beta": "Current bolting works, route changes, new bolts",
+      "facilities": "Bathrooms, camping, water sources, amenities",
+      "other": "Anything else that doesn't fit above"
+    },
+    "dryness": "Dryness",
+    "wind": "Wind",
+    "crowds": "Crowds",
+    "additionalComments": "Additional comments (optional)",
+    "details": "Details",
+    "detailsRequired": "Please provide details about this report",
+    "placeholders": {
+      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
+      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
+      "access": "E.g., Gate closed until May, new parking lot behind library...",
+      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "facilities": "E.g., Toilet available at parking, no water source nearby...",
+      "other": "Describe what you'd like to report..."
+    },
+    "submit": "Submit Report",
+    "submitting": "Submitting...",
+    "helpful": "Helpful",
+    "loginToConfirm": "Please set up your profile to confirm reports",
+    "confirmFailed": "Failed to confirm report. Please try again.",
     "ratings": {
-      "veryPoor": "Foarte Slab",
-      "poor": "Slab",
+      "veryPoor": "Very Poor",
+      "poor": "Poor",
       "okay": "Okay",
-      "good": "Bun",
-      "excellent": "Excelent"
+      "good": "Good",
+      "excellent": "Excellent"
     },
     "scales": {
-      "veryWet": "Foarte umed",
+      "veryWet": "Very wet",
       "veryDry": "Perfect",
       "calm": "Calm",
-      "veryWindy": "Foarte vântos",
-      "empty": "Gol",
-      "veryCrowded": "Foarte aglomerat"
+      "veryWindy": "Very windy",
+      "empty": "Empty",
+      "veryCrowded": "Very crowded"
     },
-    "recentReports": "Rapoarte Recente",
-    "noReports": "Niciun raport încă",
-    "noReportsMessage": "Fii primul care partajează condiții la această prag",
-    "reportCount": "{{count}} rapoarte",
-    "viewAllReports": "Vizualizează Toate Rapoartele"
+    "recentReports": "Recent Reports",
+    "communityReports": "Community Reports",
+    "noReports": "No reports yet",
+    "beTheFirst": "Be the first to report",
+    "noReportsInCategory": "No reports in this category",
+    "filters": {
+      "all": "All"
+    }
   }
 }

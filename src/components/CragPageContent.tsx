@@ -26,8 +26,10 @@ import { ReportDialog } from "@/components/ReportDialog";
 import { HeaderActions } from "@/components/HeaderActions";
 import { SettingsDialog } from "@/components/SettingsDialog";
 import { FavoritesDialog } from "@/components/FavoritesDialog";
+import { StatsDialog } from "@/components/StatsDialog";
 import { SyncExplainerDialog } from "@/components/SyncExplainerDialog";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
+import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
 import { useRouter } from "next/navigation";
 import {
   addFavoriteToStorage,
@@ -36,6 +38,7 @@ import {
   getFavorite,
 } from "@/lib/storage/favorites";
 import { getSunCalcUrl, getGoogleMapsUrl, getOpenStreetMapEmbedUrl } from "@/lib/utils/urls";
+import { getCountryFlag } from "@/lib/utils/country-flag";
 
 type ReportCategory = "conditions" | "safety" | "access" | "beta" | "facilities" | "other";
 
@@ -125,6 +128,7 @@ export function CragPageContent({
   sectors,
 }: CragPageContentProps) {
   const { t } = useClientTranslation("common");
+  const { translateReason, translateWarning } = useConditionsTranslations(t);
   const router = useRouter();
   const [isFavorite, setIsFavorite] = useState(false);
   const [favoriteId, setFavoriteId] = useState<string | null>(null);
@@ -132,6 +136,7 @@ export function CragPageContent({
   const [reports] = useState(initialReports);
   const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
   const [favoritesDialogOpen, setFavoritesDialogOpen] = useState(false);
+  const [statsDialogOpen, setStatsDialogOpen] = useState(false);
   const [syncExplainerDialogOpen, setSyncExplainerDialogOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<"all" | ReportCategory>("all");
 
@@ -158,6 +163,7 @@ export function CragPageContent({
   // Format location details
   const locationParts = [crag.village, crag.municipality, crag.state, crag.country].filter(Boolean);
   const locationString = locationParts.join(", ");
+  const countryFlag = getCountryFlag(crag.country);
 
   // Format conditions data for ConditionsDetailContent
   const conditionsData = {
@@ -237,6 +243,7 @@ export function CragPageContent({
             onSyncClick={() => setSyncExplainerDialogOpen(true)}
             onSettingsClick={() => setSettingsDialogOpen(true)}
             onFavoritesClick={() => setFavoritesDialogOpen(true)}
+            onStatsClick={() => setStatsDialogOpen(true)}
           />
         }
       />
@@ -251,7 +258,10 @@ export function CragPageContent({
                 {locationString && (
                   <div className="flex items-center gap-2 text-muted-foreground">
                     <MapPin className="h-4 w-4 shrink-0" />
-                    <p className="text-sm sm:text-base">{locationString}</p>
+                    <p className="text-sm sm:text-base">
+                      {locationString}
+                      {countryFlag && ` ${countryFlag}`}
+                    </p>
                   </div>
                 )}
               </div>
@@ -361,9 +371,18 @@ export function CragPageContent({
             {conditions.reasons && conditions.reasons.length > 0 && (
               <ul className="text-sm space-y-1 text-muted-foreground">
                 {conditions.reasons.map((reason, i) => (
-                  <li key={i}>• {reason}</li>
+                  <li key={i}>• {translateReason(reason)}</li>
                 ))}
               </ul>
+            )}
+            {conditions.warnings && conditions.warnings.length > 0 && (
+              <div className="space-y-1 mt-3">
+                {conditions.warnings.map((warning, i) => (
+                  <p key={i} className="text-sm text-destructive">
+                    ⚠️ {translateWarning(warning)}
+                  </p>
+                ))}
+              </div>
             )}
           </CardContent>
         </Card>
@@ -506,6 +525,9 @@ export function CragPageContent({
 
       {/* Favorites Dialog */}
       <FavoritesDialog open={favoritesDialogOpen} onOpenChange={setFavoritesDialogOpen} />
+
+      {/* Stats Dialog */}
+      <StatsDialog open={statsDialogOpen} onOpenChange={setStatsDialogOpen} />
 
       {/* Sync Explainer Dialog */}
       <SyncExplainerDialog

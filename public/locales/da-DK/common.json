@@ -36,7 +36,8 @@
     "location": "Placering",
     "favorite": "Favorit",
     "favorited": "Markeret som favorit",
-    "addReport": "Tilføj rapport"
+    "addReport": "Tilføj rapport",
+    "viewCragPage": "Se område"
   },
   "ratings": {
     "great": "Fremragende",
@@ -46,7 +47,7 @@
     "nope": "Nej"
   },
   "reasons": {
-    "perfectTemp": "Perfekt temperatur ({{temp}}°C)",
+    "perfectTemp": "Perfekt temperatur ({{temp}})",
     "tempTooHigh": "Temperatur for høj - fingre kan glide",
     "coldGoodFriction": "Koldt men godt for {{rockType}} friktion",
     "idealHumidity": "Ideal fugtighed ({{humidity}}%)",
@@ -55,16 +56,17 @@
     "acceptable": "Betingelserne er acceptable"
   },
   "warnings": {
-    "tooWarm": "For varm til {{rockType}} ({{temp}}°C)",
+    "tooWarm": "For varm til {{rockType}} ({{temp}})",
     "coldSuboptimal": "Koldt og ikke idealt til {{rockType}}",
     "highHumidity": "Høj fugtighed ({{humidity}}%) - sten kan være glat",
     "wetDangerousSandstone": "Stenen er i øjeblikket våd - farlig at klatre (sandsten bliver svag når det er vådt)",
     "wetSlippery": "Stenen er i øjeblikket våd - glatte forhold",
     "veryHighWinds": "Meget høje vinde ({{wind}} km/t) - fare for at blive blæst ned",
     "highWind": "Høj vind ({{wind}} km/t)",
-    "recentPrecip": "Nylig nedbør ({{precip}}mm) - tørrer om ~{{hours}}t",
+    "recentPrecip": "Nylig nedbør ({{precip}}) - tørrer om ~{{hours}}t",
     "currentlyWetDangerous": "I øjeblikket våd - farlig",
-    "currentlyWet": "I øjeblikket våd"
+    "currentlyWet": "I øjeblikket våd",
+    "cold": "Cold ({{temp}})"
   },
   "weather": {
     "clearSky": "Klar himmel",
@@ -131,7 +133,7 @@
     },
     "communityReports": {
       "title": "Samfundsrapporter",
-      "description": "Del og bekræft aktuelle betingelser. Hjælp andre klatrer med realtidsopdateringer"
+      "description": "Del forhold, sikkerhedsadvarsler, adgangsændringer, beta og mere. Hjælp medklatrere med realtidsopdateringer på tværs af flere kategorier"
     },
     "globalCoverage": {
       "title": "Global dækning",
@@ -291,6 +293,18 @@
     "settings": "Indstillinger",
     "clearData": "Ryd alle data"
   },
+  "stats": {
+    "title": "Dine statistikker",
+    "description": "Din aktivitet og bidrag til temps.rocks-fællesskabet",
+    "reportsPosted": "Rapporter indsendt",
+    "confirmationsGiven": "Bekræftelser givet",
+    "favoritesCount": "Favoritter",
+    "memberSince": "Medlem siden",
+    "lastActive": "Sidst aktiv",
+    "unknown": "Ukendt",
+    "encourageReports": "Del din lokale viden ved at indsende rapporter om klatreforhold!",
+    "thankYou": "Tak for dit bidrag til klatrefællesskabet!"
+  },
   "settings": {
     "title": "Indstillinger",
     "description": "Administrer din profil, synknøgle og præferencer",
@@ -299,7 +313,54 @@
     "displayName": {
       "label": "Visningsnavn",
       "description": "Dit navn vist på rapporter og bekræftelser (valgfrit)",
-      "placeholder": "Indtast dit navn..."
+      "placeholder": "Indtast dit navn...",
+      "saved": "Vist navn gemt",
+      "savedDescription": "Dit viste navn er blevet opdateret",
+      "saveFailed": "Gemning mislykkedes",
+      "saveFailedDescription": "Kunne ikke gemme dit viste navn. Prøv venligst igen"
+    },
+    "units": {
+      "title": "Enheder og målinger",
+      "description": "Vælg dine foretrukne enheder til vejr- og klatredata",
+      "systemLabel": "Enhedssystem",
+      "systemDescription": "Hurtige forudindstillinger til almindelige enhedssystemer",
+      "systems": {
+        "metric": "Metrisk (°C, km/h, mm)",
+        "imperial": "Imperial (°F, mph, tommer)",
+        "uk": "Storbritannien (°C, mph, mm)",
+        "custom": "Tilpasset"
+      },
+      "temperature": "Temperatur",
+      "temperatureUnits": {
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Vindhastighed",
+      "windSpeedUnits": {
+        "kmh": "Kilometer i timen (km/h)",
+        "mph": "Miles i timen (mph)",
+        "ms": "Meter i sekundet (m/s)",
+        "knots": "Knob (kn)"
+      },
+      "precipitation": "Nedbør",
+      "precipitationUnits": {
+        "mm": "Millimeter (mm)",
+        "inches": "Tommer (in)"
+      },
+      "distance": "Afstand",
+      "distanceUnits": {
+        "km": "Kilometer (km)",
+        "miles": "Miles (mi)"
+      },
+      "elevation": "Højde",
+      "elevationUnits": {
+        "meters": "Meter (m)",
+        "feet": "Fod (ft)"
+      },
+      "saved": "Enheder gemt",
+      "savedDescription": "Dine enhedsindstillinger er blevet opdateret",
+      "saveFailed": "Gemning af enheder mislykkedes",
+      "saveFailedDescription": "Kunne ikke gemme dine enhedsindstillinger. Prøv venligst igen"
     },
     "syncKey": {
       "title": "Synknøgle",
@@ -347,38 +408,67 @@
     "remove": "Fjern"
   },
   "reports": {
-    "addReport": "Tilføj betingelsesrapport",
-    "addReportDescription": "Del aktuelle betingelser på {{cragName}}",
-    "postingAs": "Udskriver som",
-    "dryness": "Tørhed",
-    "wind": "Vind",
-    "crowds": "Mennesker",
-    "additionalComments": "Yderligere kommentarer",
-    "commentsPlaceholder": "F.eks. Østsektor stadig våd, sti mudret - pas på, Rute X - drypper fra sprækken, greb glatte...",
-    "submit": "Indsend rapport",
-    "submitting": "Indsender...",
-    "helpful": "Hjælpsom",
-    "loginToConfirm": "Vær venlig at opsætte din profil for at bekræfte rapporter",
-    "confirmFailed": "Kunne ikke bekræfte rapport. Prøv igen.",
+    "addReport": "Add Report",
+    "addReportDescription": "Share information about {{cragName}}",
+    "postingAs": "Posting as",
+    "category": "What would you like to report?",
+    "categories": {
+      "conditions": "Conditions",
+      "safety": "Safety",
+      "access": "Access",
+      "beta": "Beta",
+      "facilities": "Facilities",
+      "other": "Other"
+    },
+    "categoryDescriptions": {
+      "conditions": "Weather, friction, dryness, crowds",
+      "safety": "Loose bolts, rockfall, broken holds, hazards",
+      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "beta": "Current bolting works, route changes, new bolts",
+      "facilities": "Bathrooms, camping, water sources, amenities",
+      "other": "Anything else that doesn't fit above"
+    },
+    "dryness": "Dryness",
+    "wind": "Wind",
+    "crowds": "Crowds",
+    "additionalComments": "Additional comments (optional)",
+    "details": "Details",
+    "detailsRequired": "Please provide details about this report",
+    "placeholders": {
+      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
+      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
+      "access": "E.g., Gate closed until May, new parking lot behind library...",
+      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "facilities": "E.g., Toilet available at parking, no water source nearby...",
+      "other": "Describe what you'd like to report..."
+    },
+    "submit": "Submit Report",
+    "submitting": "Submitting...",
+    "helpful": "Helpful",
+    "loginToConfirm": "Please set up your profile to confirm reports",
+    "confirmFailed": "Failed to confirm report. Please try again.",
     "ratings": {
-      "veryPoor": "Meget dårlig",
-      "poor": "Dårlig",
+      "veryPoor": "Very Poor",
+      "poor": "Poor",
       "okay": "Okay",
-      "good": "God",
-      "excellent": "Fremragende"
+      "good": "Good",
+      "excellent": "Excellent"
     },
     "scales": {
-      "veryWet": "Meget våd",
-      "veryDry": "Perfekt",
-      "calm": "Roligt",
-      "veryWindy": "Meget blæsende",
-      "empty": "Tomt",
-      "veryCrowded": "Meget fyldt"
+      "veryWet": "Very wet",
+      "veryDry": "Perfect",
+      "calm": "Calm",
+      "veryWindy": "Very windy",
+      "empty": "Empty",
+      "veryCrowded": "Very crowded"
     },
-    "recentReports": "Seneste rapporter",
-    "noReports": "Ingen rapporter endnu",
-    "noReportsMessage": "Vær den første til at dele betingelser på denne klatrepladser",
-    "reportCount": "{{count}} rapporter",
-    "viewAllReports": "Se alle rapporter"
+    "recentReports": "Recent Reports",
+    "communityReports": "Community Reports",
+    "noReports": "No reports yet",
+    "beTheFirst": "Be the first to report",
+    "noReportsInCategory": "No reports in this category",
+    "filters": {
+      "all": "All"
+    }
   }
 }

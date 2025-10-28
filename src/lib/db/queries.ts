@@ -4,7 +4,7 @@
  */
 
 import { supabase } from "@/integrations/supabase/client";
-import { TablesInsert } from "@/integrations/supabase/types";
+import { Tables, TablesInsert } from "@/integrations/supabase/types";
 import { v4 as uuidv4 } from "uuid";
 
 // ==================== CRAGS ====================
@@ -353,22 +353,25 @@ export async function deleteReport(id: string) {
 
 // ==================== USER PROFILES ====================
 
-export async function fetchOrCreateUserProfile(syncKeyHash: string) {
-  // Try to fetch existing (ignore error if not found)
-  const { data: existing, error: fetchError } = await supabase
-    .from("user_profiles")
-    .select("*")
-    .eq("sync_key_hash", syncKeyHash)
-    .maybeSingle();
+export async function fetchOrCreateUserProfile(
+  syncKeyHash: string
+): Promise<Tables<"user_profiles">> {
+  // Try to fetch existing using secure RPC function
+  const { data: existing, error: fetchError } = await supabase.rpc("get_user_profile_by_hash", {
+    p_sync_key_hash: syncKeyHash,
+  });
 
-  if (existing) return existing;
-
-  // Don't throw on "not found" errors
-  if (fetchError && fetchError.code !== "PGRST116") {
-    throw fetchError;
+  // RPC returns array, check if we got a result
+  if (existing && Array.isArray(existing) && existing.length > 0) {
+    return existing[0] as Tables<"user_profiles">;
   }
 
-  // Create new profile
+  // Don't throw on RPC errors, just create new profile
+  if (fetchError) {
+    console.warn("[fetchOrCreateUserProfile] RPC error:", fetchError);
+  }
+
+  // Create new profile (INSERT policy still allows this)
   const { data, error } = await supabase
     .from("user_profiles")
     .insert({
@@ -387,25 +390,44 @@ export async function fetchOrCreateUserProfile(syncKeyHash: string) {
 }
 
 export async function fetchUserProfile(id: string) {
+  // NOTE: This function won't work with current RLS policies as direct SELECT is blocked
+  // Use fetchOrCreateUserProfile(syncKeyHash) instead
   const { data, error } = await supabase.from("user_profiles").select("*").eq("id", id).single();
 
   if (error) throw error;
   return data;
 }
 
-export async function updateUserProfile(id: string, updates: { display_name?: string }) {
-  const { data, error } = await supabase
-    .from("user_profiles")
-    .update({
-      ...updates,
-      updated_at: new Date().toISOString(),
-    })
-    .eq("id", id)
-    .select()
-    .maybeSingle();
+export async function updateUserProfile(
+  syncKeyHash: string,
+  updates: {
+    display_name?: string;
+    units_temperature?: string;
+    units_wind_speed?: string;
+    units_precipitation?: string;
+    units_distance?: string;
+    units_elevation?: string;
+  }
+) {
+  // Use secure RPC function that verifies ownership via sync_key_hash
+  const { data, error } = await supabase.rpc("update_user_profile_by_hash", {
+    p_sync_key_hash: syncKeyHash,
+    p_display_name: updates.display_name || undefined,
+    p_units_temperature: updates.units_temperature || undefined,
+    p_units_wind_speed: updates.units_wind_speed || undefined,
+    p_units_precipitation: updates.units_precipitation || undefined,
+    p_units_distance: updates.units_distance || undefined,
+    p_units_elevation: updates.units_elevation || undefined,
+  });
 
   if (error) throw error;
-  return data;
+
+  // RPC returns array, get first element
+  if (!data || data.length === 0) {
+    throw new Error("Failed to update user profile");
+  }
+
+  return data[0];
 }
 
 // ==================== CONFIRMATIONS ====================

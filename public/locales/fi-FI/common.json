@@ -36,7 +36,8 @@
     "location": "Sijainti",
     "favorite": "Suosikki",
     "favorited": "Lisätty suosikkeihin",
-    "addReport": "Lisää raportti"
+    "addReport": "Lisää raportti",
+    "viewCragPage": "Näytä alue"
   },
   "ratings": {
     "great": "Loistava",
@@ -46,7 +47,7 @@
     "nope": "Ei käy"
   },
   "reasons": {
-    "perfectTemp": "Ihanteellinen lämpötila ({{temp}}°C)",
+    "perfectTemp": "Ihanteellinen lämpötila ({{temp}})",
     "tempTooHigh": "Lämpötila liian korkea - sormet voivat livahtaa",
     "coldGoodFriction": "Kylmä, mutta hyvä {{rockType}}-kiven kitkalle",
     "idealHumidity": "Ihanteellinen kosteus ({{humidity}}%)",
@@ -55,16 +56,17 @@
     "acceptable": "Olosuhteet ovat hyväksyttävät"
   },
   "warnings": {
-    "tooWarm": "Liian lämmin {{rockType}}-kiven osalta ({{temp}}°C)",
+    "tooWarm": "Liian lämmin {{rockType}}-kiven osalta ({{temp}})",
     "coldSuboptimal": "Kylmä ja alle optimaalinen {{rockType}}-kiven osalta",
     "highHumidity": "Korkea kosteus ({{humidity}}%) - kivi voi olla liukas",
     "wetDangerousSandstone": "Kivi on tällä hetkellä kostea - vaarallinen kiipeillä (hiekkakivi heikkenee kosteutuessaan)",
     "wetSlippery": "Kivi on tällä hetkellä kostea - liukkaat olosuhteet",
-    "veryHighWinds": "Erittäin kovat tuulet ({{wind}} km/h) - vaara pudota tuuleen",
-    "highWind": "Kova tuuli ({{wind}} km/h)",
-    "recentPrecip": "Äskettäinen sade ({{precip}}mm) - kuivuu noin {{hours}}h kuluttua",
+    "veryHighWinds": "Erittäin kovat tuulet ({{wind}}) - vaara pudota tuuleen",
+    "highWind": "Kova tuuli ({{wind}})",
+    "recentPrecip": "Äskettäinen sade ({{precip}}) - kuivuu noin {{hours}}h kuluttua",
     "currentlyWetDangerous": "Tällä hetkellä kostea - vaarallinen",
-    "currentlyWet": "Tällä hetkellä kostea"
+    "currentlyWet": "Tällä hetkellä kostea",
+    "cold": "Cold ({{temp}})"
   },
   "weather": {
     "clearSky": "Selkeä taivas",
@@ -131,7 +133,7 @@
     },
     "communityReports": {
       "title": "Yhteisön raportit",
-      "description": "Jaa ja vahvista nykyisiä olosuhteita. Auta muita kiipeilijöitä reaaliaikaisilla päivityksillä"
+      "description": "Jaa olosuhteita, turvallisuusvaroituksia, pääsymuutoksia, betaa ja muuta. Auta kanssakiipeilijöitä reaaliaikaisilla päivityksillä useissa kategorioissa"
     },
     "globalCoverage": {
       "title": "Maailmanlaajuinen kattavuus",
@@ -291,6 +293,18 @@
     "settings": "Asetukset",
     "clearData": "Tyhjennä kaikki tiedot"
   },
+  "stats": {
+    "title": "Tilastosi",
+    "description": "Aktiivisuutesi ja panoksesi temps.rocks-yhteisölle",
+    "reportsPosted": "Lähetetyt raportit",
+    "confirmationsGiven": "Annetut vahvistukset",
+    "favoritesCount": "Suosikit",
+    "memberSince": "Jäsen alkaen",
+    "lastActive": "Viimeksi aktiivinen",
+    "unknown": "Tuntematon",
+    "encourageReports": "Jaa paikallista tietämystäsi lähettämällä raportteja kiipeilyolosuhteista!",
+    "thankYou": "Kiitos panoksestasi kiipeilyyhteisölle!"
+  },
   "settings": {
     "title": "Asetukset",
     "description": "Hallitse profiiliasi, synkronointiarvoasi ja asetuksiasi",
@@ -299,7 +313,54 @@
     "displayName": {
       "label": "Näyttönimi",
       "description": "Nimesi, joka näkyy raporteissa ja vahvistuksissa (valinnainen)",
-      "placeholder": "Kirjoita nimesi..."
+      "placeholder": "Kirjoita nimesi...",
+      "saved": "Näyttönimi tallennettu",
+      "savedDescription": "Näyttönimesi on päivitetty onnistuneesti",
+      "saveFailed": "Tallennus epäonnistui",
+      "saveFailedDescription": "Näyttönimeäsi ei voitu tallentaa. Yritä uudelleen"
+    },
+    "units": {
+      "title": "Yksiköt ja mittaukset",
+      "description": "Valitse haluamasi yksiköt sää- ja kiipeilytiedoille",
+      "systemLabel": "Yksikköjärjestelmä",
+      "systemDescription": "Pikavalinnat yleisille yksikköjärjestelmille",
+      "systems": {
+        "metric": "Metrinen (°C, km/h, mm)",
+        "imperial": "Brittiläinen (°F, mph, tuumaa)",
+        "uk": "Iso-Britannia (°C, mph, mm)",
+        "custom": "Mukautettu"
+      },
+      "temperature": "Lämpötila",
+      "temperatureUnits": {
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Tuulen nopeus",
+      "windSpeedUnits": {
+        "kmh": "Kilometriä tunnissa (km/h)",
+        "mph": "Mailia tunnissa (mph)",
+        "ms": "Metriä sekunnissa (m/s)",
+        "knots": "Solmua (kn)"
+      },
+      "precipitation": "Sademäärä",
+      "precipitationUnits": {
+        "mm": "Millimetriä (mm)",
+        "inches": "Tuumaa (in)"
+      },
+      "distance": "Etäisyys",
+      "distanceUnits": {
+        "km": "Kilometriä (km)",
+        "miles": "Mailia (mi)"
+      },
+      "elevation": "Korkeus",
+      "elevationUnits": {
+        "meters": "Metriä (m)",
+        "feet": "Jalkaa (ft)"
+      },
+      "saved": "Yksiköt tallennettu",
+      "savedDescription": "Yksikköasetuksesi on päivitetty onnistuneesti",
+      "saveFailed": "Yksiköiden tallennus epäonnistui",
+      "saveFailedDescription": "Yksikköasetuksiasi ei voitu tallentaa. Yritä uudelleen"
     },
     "syncKey": {
       "title": "Synkronointiavain",
@@ -347,38 +408,67 @@
     "remove": "Poista"
   },
   "reports": {
-    "addReport": "Lisää olosuhteiden raportti",
-    "addReportDescription": "Jaa nykyiset olosuhteet paikassa {{cragName}}",
-    "postingAs": "Postataan nimellä",
-    "dryness": "Kuivuus",
-    "wind": "Tuuli",
-    "crowds": "Väkijoukot",
-    "additionalComments": "Lisäkommentit",
-    "commentsPlaceholder": "Esim. itäinen sektori vielä kostea, polku mudainen - varokaa, Reitti X - huurteiset pinnat, kupin pidot liukkaita...",
-    "submit": "Lähetä raportti",
-    "submitting": "Lähetetään...",
-    "helpful": "Hyödyllinen",
-    "loginToConfirm": "Aseta profiili vahvistaaksesi raportit",
-    "confirmFailed": "Raportin vahvistaminen epäonnistui. Yritä uudelleen.",
+    "addReport": "Add Report",
+    "addReportDescription": "Share information about {{cragName}}",
+    "postingAs": "Posting as",
+    "category": "What would you like to report?",
+    "categories": {
+      "conditions": "Conditions",
+      "safety": "Safety",
+      "access": "Access",
+      "beta": "Beta",
+      "facilities": "Facilities",
+      "other": "Other"
+    },
+    "categoryDescriptions": {
+      "conditions": "Weather, friction, dryness, crowds",
+      "safety": "Loose bolts, rockfall, broken holds, hazards",
+      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "beta": "Current bolting works, route changes, new bolts",
+      "facilities": "Bathrooms, camping, water sources, amenities",
+      "other": "Anything else that doesn't fit above"
+    },
+    "dryness": "Dryness",
+    "wind": "Wind",
+    "crowds": "Crowds",
+    "additionalComments": "Additional comments (optional)",
+    "details": "Details",
+    "detailsRequired": "Please provide details about this report",
+    "placeholders": {
+      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
+      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
+      "access": "E.g., Gate closed until May, new parking lot behind library...",
+      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "facilities": "E.g., Toilet available at parking, no water source nearby...",
+      "other": "Describe what you'd like to report..."
+    },
+    "submit": "Submit Report",
+    "submitting": "Submitting...",
+    "helpful": "Helpful",
+    "loginToConfirm": "Please set up your profile to confirm reports",
+    "confirmFailed": "Failed to confirm report. Please try again.",
     "ratings": {
-      "veryPoor": "Erittäin huono",
-      "poor": "Huono",
-      "okay": "OK",
-      "good": "Hyvä",
-      "excellent": "Erinomainen"
+      "veryPoor": "Very Poor",
+      "poor": "Poor",
+      "okay": "Okay",
+      "good": "Good",
+      "excellent": "Excellent"
     },
     "scales": {
-      "veryWet": "Erittäin kostea",
-      "veryDry": "Täydellinen",
-      "calm": "Tyyntä",
-      "veryWindy": "Erittäin tuulinen",
-      "empty": "Tyhjä",
-      "veryCrowded": "Erittäin täynnä"
+      "veryWet": "Very wet",
+      "veryDry": "Perfect",
+      "calm": "Calm",
+      "veryWindy": "Very windy",
+      "empty": "Empty",
+      "veryCrowded": "Very crowded"
     },
-    "recentReports": "Viimeaikaiset raportit",
-    "noReports": "Ei raportteja vielä",
-    "noReportsMessage": "Ole ensimmäinen, joka jakaa olosuhteet tässä kalliossa",
-    "reportCount": "{{count}} raporttia",
-    "viewAllReports": "Näytä kaikki raportit"
+    "recentReports": "Recent Reports",
+    "communityReports": "Community Reports",
+    "noReports": "No reports yet",
+    "beTheFirst": "Be the first to report",
+    "noReportsInCategory": "No reports in this category",
+    "filters": {
+      "all": "All"
+    }
   }
 }

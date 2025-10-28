@@ -36,7 +36,8 @@
     "location": "Ubicació",
     "favorite": "Preferit",
     "favorited": "Afegit als preferits",
-    "addReport": "Afegir informe"
+    "addReport": "Afegir informe",
+    "viewCragPage": "Veure zona"
   },
   "ratings": {
     "great": "Excel·lent",
@@ -46,7 +47,7 @@
     "nope": "No"
   },
   "reasons": {
-    "perfectTemp": "Temperatura perfecta ({{temp}}°C)",
+    "perfectTemp": "Temperatura perfecta ({{temp}})",
     "tempTooHigh": "Temperatura massa alta - els dits poden relliscar",
     "coldGoodFriction": "Fred però bona fricció per a {{rockType}}",
     "idealHumidity": "Humitat ideal ({{humidity}}%)",
@@ -55,16 +56,17 @@
     "acceptable": "Les condicions són acceptables"
   },
   "warnings": {
-    "tooWarm": "Massa calor per a {{rockType}} ({{temp}}°C)",
+    "tooWarm": "Massa calor per a {{rockType}} ({{temp}})",
     "coldSuboptimal": "Fred i no òptim per a {{rockType}}",
     "highHumidity": "Humitat alta ({{humidity}}%) - la roca pot ser lliscosa",
     "wetDangerousSandstone": "La roca està actualment humida - perillos per escalada (l'arenisca es debilita quan està humida)",
     "wetSlippery": "La roca està actualment humida - condicions lliscoses",
-    "veryHighWinds": "Vents molt forts ({{wind}} km/h) - perill de ser arrossegat",
-    "highWind": "Vent fort ({{wind}} km/h)",
-    "recentPrecip": "Precipitació recent ({{precip}}mm) - s'assecarà en ~{{hours}}h",
+    "veryHighWinds": "Vents molt forts ({{wind}}) - perill de ser arrossegat",
+    "highWind": "Vent fort ({{wind}})",
+    "recentPrecip": "Precipitació recent ({{precip}}) - s'assecarà en ~{{hours}}h",
     "currentlyWetDangerous": "Actualment humit - perillos",
-    "currentlyWet": "Actualment humit"
+    "currentlyWet": "Actualment humit",
+    "cold": "Cold ({{temp}})"
   },
   "weather": {
     "clearSky": "Cel clar",
@@ -131,7 +133,7 @@
     },
     "communityReports": {
       "title": "Informes comunitaris",
-      "description": "Comparteix i confirma les condicions actuals. Ajuda els altres escaladors amb actualitzacions en temps real"
+      "description": "Comparteix condicions, alertes de seguretat, canvis d'accés, beta i més. Ajuda escaladors companys amb actualitzacions en temps real en diverses categories"
     },
     "globalCoverage": {
       "title": "Cobertura mundial",
@@ -291,6 +293,18 @@
     "settings": "Configuració",
     "clearData": "Esborrar totes les dades"
   },
+  "stats": {
+    "title": "Les teves estadístiques",
+    "description": "La teva activitat i contribucions a la comunitat temps.rocks",
+    "reportsPosted": "Informes publicats",
+    "confirmationsGiven": "Confirmacions donades",
+    "favoritesCount": "Preferits",
+    "memberSince": "Membre des de",
+    "lastActive": "Última activitat",
+    "unknown": "Desconegut",
+    "encourageReports": "Comparteix el teu coneixement local publicant informes sobre les condicions de les vies!",
+    "thankYou": "Gràcies per contribuir a la comunitat d'escalada!"
+  },
   "settings": {
     "title": "Configuració",
     "description": "Gestiona el teu perfil, clau de sincronització i preferències",
@@ -299,7 +313,54 @@
     "displayName": {
       "label": "Nom de visualització",
       "description": "El teu nom mostrat en informes i confirmacions (opcional)",
-      "placeholder": "Introdueix el teu nom..."
+      "placeholder": "Introdueix el teu nom...",
+      "saved": "Nom de visualització desat",
+      "savedDescription": "El vostre nom de visualització s'ha actualitzat correctament",
+      "saveFailed": "Error en desar",
+      "saveFailedDescription": "No s'ha pogut desar el vostre nom de visualització. Torneu-ho a provar"
+    },
+    "units": {
+      "title": "Unitats i mesures",
+      "description": "Tria les unitats preferides per a dades meteorològiques i d'escalada",
+      "systemLabel": "Sistema d'unitats",
+      "systemDescription": "Configuracions ràpides per a sistemes d'unitats comuns",
+      "systems": {
+        "metric": "Mètric (°C, km/h, mm)",
+        "imperial": "Imperial (°F, mph, polzades)",
+        "uk": "Regne Unit (°C, mph, mm)",
+        "custom": "Personalitzat"
+      },
+      "temperature": "Temperatura",
+      "temperatureUnits": {
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Velocitat del vent",
+      "windSpeedUnits": {
+        "kmh": "Quilòmetres per hora (km/h)",
+        "mph": "Milles per hora (mph)",
+        "ms": "Metres per segon (m/s)",
+        "knots": "Nusos (kn)"
+      },
+      "precipitation": "Precipitació",
+      "precipitationUnits": {
+        "mm": "Mil·límetres (mm)",
+        "inches": "Polzades (in)"
+      },
+      "distance": "Distància",
+      "distanceUnits": {
+        "km": "Quilòmetres (km)",
+        "miles": "Milles (mi)"
+      },
+      "elevation": "Altitud",
+      "elevationUnits": {
+        "meters": "Metres (m)",
+        "feet": "Peus (ft)"
+      },
+      "saved": "Unitats desades",
+      "savedDescription": "Les vostres preferències d'unitats s'han actualitzat correctament",
+      "saveFailed": "Error en desar unitats",
+      "saveFailedDescription": "No s'han pogut desar les vostres preferències d'unitats. Torneu-ho a provar"
     },
     "syncKey": {
       "title": "Clau de sincronització",
@@ -347,38 +408,67 @@
     "remove": "Eliminar"
   },
   "reports": {
-    "addReport": "Afegir informe de condicions",
-    "addReportDescription": "Comparteix les condicions actuals a {{cragName}}",
-    "postingAs": "Publicant com",
-    "dryness": "Sequedat",
-    "wind": "Vent",
-    "crowds": "Multitudes",
-    "additionalComments": "Comentaris addicionals",
-    "commentsPlaceholder": "Per exemple, sector est encara humit, camí fangós - tingueu cura, ruta X - sortint de la grieta, aferres lliscoses...",
-    "submit": "Enviar informe",
-    "submitting": "Enviant...",
-    "helpful": "Útil",
-    "loginToConfirm": "Si us plau, configura el teu perfil per confirmar informes",
-    "confirmFailed": "Error en confirmar l'informe. Si us plau, torna-ho a intentar.",
+    "addReport": "Add Report",
+    "addReportDescription": "Share information about {{cragName}}",
+    "postingAs": "Posting as",
+    "category": "What would you like to report?",
+    "categories": {
+      "conditions": "Conditions",
+      "safety": "Safety",
+      "access": "Access",
+      "beta": "Beta",
+      "facilities": "Facilities",
+      "other": "Other"
+    },
+    "categoryDescriptions": {
+      "conditions": "Weather, friction, dryness, crowds",
+      "safety": "Loose bolts, rockfall, broken holds, hazards",
+      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "beta": "Current bolting works, route changes, new bolts",
+      "facilities": "Bathrooms, camping, water sources, amenities",
+      "other": "Anything else that doesn't fit above"
+    },
+    "dryness": "Dryness",
+    "wind": "Wind",
+    "crowds": "Crowds",
+    "additionalComments": "Additional comments (optional)",
+    "details": "Details",
+    "detailsRequired": "Please provide details about this report",
+    "placeholders": {
+      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
+      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
+      "access": "E.g., Gate closed until May, new parking lot behind library...",
+      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "facilities": "E.g., Toilet available at parking, no water source nearby...",
+      "other": "Describe what you'd like to report..."
+    },
+    "submit": "Submit Report",
+    "submitting": "Submitting...",
+    "helpful": "Helpful",
+    "loginToConfirm": "Please set up your profile to confirm reports",
+    "confirmFailed": "Failed to confirm report. Please try again.",
     "ratings": {
-      "veryPoor": "Molt dolent",
-      "poor": "Dolent",
-      "okay": "Correcte",
-      "good": "Bé",
-      "excellent": "Excel·lent"
+      "veryPoor": "Very Poor",
+      "poor": "Poor",
+      "okay": "Okay",
+      "good": "Good",
+      "excellent": "Excellent"
     },
     "scales": {
-      "veryWet": "Molt humit",
-      "veryDry": "Perfecte",
-      "calm": "Calma",
-      "veryWindy": "Molt ventós",
-      "empty": "Buit",
-      "veryCrowded": "Molt ple"
+      "veryWet": "Very wet",
+      "veryDry": "Perfect",
+      "calm": "Calm",
+      "veryWindy": "Very windy",
+      "empty": "Empty",
+      "veryCrowded": "Very crowded"
     },
-    "recentReports": "Informes recents",
-    "noReports": "Cap informe encara",
-    "noReportsMessage": "Sigues el primer en compartir condicions en aquest esparelló",
-    "reportCount": "{{count}} informes",
-    "viewAllReports": "Veure tots els informes"
+    "recentReports": "Recent Reports",
+    "communityReports": "Community Reports",
+    "noReports": "No reports yet",
+    "beTheFirst": "Be the first to report",
+    "noReportsInCategory": "No reports in this category",
+    "filters": {
+      "all": "All"
+    }
   }
 }

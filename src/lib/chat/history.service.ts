@@ -23,6 +23,7 @@ const STORAGE_KEYS = {
   CURRENT_SESSION_ID: "temps_current_session_id",
   MESSAGES: "temps_chat_messages",
   LAST_SYNC: "temps_last_sync",
+  USER_PROFILE: "temps_user_profile",
 } as const;
 
 export interface ChatSession {
@@ -405,7 +406,7 @@ export async function deleteUserProfile(): Promise<void> {
   localStorage.removeItem(STORAGE_KEYS.MESSAGES);
   localStorage.removeItem(STORAGE_KEYS.CURRENT_SESSION_ID);
   localStorage.removeItem(STORAGE_KEYS.LAST_SYNC);
-  localStorage.removeItem("temps_user_profile");
+  localStorage.removeItem(STORAGE_KEYS.USER_PROFILE);
   localStorage.removeItem("temps_sync_banner_dismissed");
   localStorage.removeItem("temps_sync_notification_dismissed");
 }

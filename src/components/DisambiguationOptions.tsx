@@ -1,8 +1,9 @@
 import { memo, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { useStickToBottomContext } from "use-stick-to-bottom";
 import { logRender } from "@/lib/debug/render-log";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
+import { generateUniqueSlug } from "@/lib/utils/slug";
 
 interface DisambiguationOption {
   id: string;
@@ -32,11 +33,11 @@ interface DisambiguationOptionsProps {
 export const DisambiguationOptions = memo(function DisambiguationOptions({
   result,
   displayMessage,
-  queryTemplate,
-  onOptionSelect,
+  queryTemplate: _queryTemplate,
+  onOptionSelect: _onOptionSelect,
 }: DisambiguationOptionsProps) {
-  const { scrollToBottom } = useStickToBottomContext();
   const { t } = useClientTranslation("common");
+  const router = useRouter();
 
   logRender("DisambiguationOptions", {
     options: result.options.length,
@@ -57,22 +58,11 @@ export const DisambiguationOptions = memo(function DisambiguationOptions({
 
   const handleOptionClick = useCallback(
     (option: DisambiguationOption) => {
-      const queryText = queryTemplate
-        .replace("{{name}}", option.name + (option.rockType ? ` ${option.rockType}` : ""))
-        .replace("{{latitude}}", option.latitude.toString())
-        .replace("{{longitude}}", option.longitude.toString());
-
-      onOptionSelect(queryText);
-      // Ensure the chat view jumps to the latest message
-      try {
-        scrollToBottom();
-        // Also schedule after the message enqueues to cover async updates
-        setTimeout(() => scrollToBottom(), 0);
-      } catch {
-        // no-op
-      }
+      // Navigate directly to the crag page instead of querying AI
+      const slug = generateUniqueSlug(option.name, option.latitude, option.longitude);
+      router.push(`/location/${slug}`);
     },
-    [queryTemplate, onOptionSelect, scrollToBottom]
+    [router]
   );
 
   return (

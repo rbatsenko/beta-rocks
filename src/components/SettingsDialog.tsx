@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Copy, Check, Key, AlertTriangle, Info, Upload } from "lucide-react";
+import { Copy, Check, Key, AlertTriangle, Info, Upload, Settings2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
 import {
@@ -15,6 +15,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   getUserProfile,
   updateUserProfile as updateLocalUserProfile,
@@ -31,6 +38,17 @@ import {
 import { deleteUserProfile } from "@/lib/chat/history.service";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { QRCodeSVG } from "qrcode.react";
+import { useUnits } from "@/hooks/useUnits";
+import { UNIT_PRESETS, detectUnitSystem, type UnitSystem } from "@/lib/units/types";
+import { useToast } from "@/hooks/use-toast";
+import type {
+  TemperatureUnit,
+  WindSpeedUnit,
+  PrecipitationUnit,
+  DistanceUnit,
+  ElevationUnit,
+} from "@/lib/units/types";
+import { configToDbUnits } from "@/lib/units/storage";
 
 interface SettingsDialogProps {
   open: boolean;
@@ -39,9 +57,20 @@ interface SettingsDialogProps {
 
 export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
   const { t } = useClientTranslation("common");
+  const { units, updateUnits } = useUnits();
+  const { toast } = useToast();
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [displayName, setDisplayName] = useState("");
   const [isSaving, setIsSaving] = useState(false);
+  const [isSavingUnits, setIsSavingUnits] = useState(false);
+
+  // Units state
+  const [unitSystem, setUnitSystem] = useState<UnitSystem>("metric");
+  const [temperature, setTemperature] = useState<TemperatureUnit>("celsius");
+  const [windSpeed, setWindSpeed] = useState<WindSpeedUnit>("kmh");
+  const [precipitation, setPrecipitation] = useState<PrecipitationUnit>("mm");
+  const [distance, setDistance] = useState<DistanceUnit>("km");
+  const [elevation, setElevation] = useState<ElevationUnit>("meters");
   const [isCopied, setIsCopied] = useState(false);
   const [showFullKey, setShowFullKey] = useState(false);
   const [deleteProfileConfirmOpen, setDeleteProfileConfirmOpen] = useState(false);
@@ -54,8 +83,16 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
       const profile = getUserProfile();
       setUserProfile(profile);
       setDisplayName(profile?.displayName || "");
+
+      // Initialize units state
+      setTemperature(units.temperature);
+      setWindSpeed(units.windSpeed);
+      setPrecipitation(units.precipitation);
+      setDistance(units.distance);
+      setElevation(units.elevation);
+      setUnitSystem(detectUnitSystem(units));
     }
-  }, [open]);
+  }, [open, units]);
 
   const handleSaveDisplayName = async () => {
     if (!userProfile) return;
@@ -71,13 +108,26 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
       // Sync to database
       if (updated.syncKey) {
         const syncKeyHash = await hashSyncKeyAsync(updated.syncKey);
-        const dbProfile = await fetchOrCreateUserProfile(syncKeyHash);
-        await updateDbUserProfile(dbProfile.id, {
+        // Ensure profile exists in DB
+        await fetchOrCreateUserProfile(syncKeyHash);
+        // Update profile using secure RPC (no need to fetch ID first)
+        await updateDbUserProfile(syncKeyHash, {
           display_name: displayName.trim() || undefined,
         });
       }
+
+      // Show success toast
+      toast({
+        title: t("settings.displayName.saved"),
+        description: t("settings.displayName.savedDescription"),
+      });
     } catch (error) {
       console.error("Failed to save display name:", error);
+      toast({
+        title: t("settings.displayName.saveFailed"),
+        description: t("settings.displayName.saveFailedDescription"),
+        variant: "destructive",
+      });
     } finally {
       setIsSaving(false);
     }
@@ -129,6 +179,61 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
     }
   };
 
+  const handleUnitSystemChange = (system: UnitSystem) => {
+    setUnitSystem(system);
+    if (system !== "custom") {
+      const preset = UNIT_PRESETS[system];
+      setTemperature(preset.temperature);
+      setWindSpeed(preset.windSpeed);
+      setPrecipitation(preset.precipitation);
+      setDistance(preset.distance);
+      setElevation(preset.elevation);
+    }
+  };
+
+  const handleSaveUnits = async () => {
+    setIsSavingUnits(true);
+    try {
+      const newUnits = {
+        temperature,
+        windSpeed,
+        precipitation,
+        distance,
+        elevation,
+      };
+
+      // Update local storage via hook
+      await updateUnits(newUnits);
+
+      // Sync to database
+      if (userProfile?.syncKey) {
+        const syncKeyHash = await hashSyncKeyAsync(userProfile.syncKey);
+        // Ensure profile exists in DB
+        await fetchOrCreateUserProfile(syncKeyHash);
+        // Update profile using secure RPC (no need to fetch ID first)
+        await updateDbUserProfile(syncKeyHash, configToDbUnits(newUnits));
+      }
+
+      // Update unit system detection
+      setUnitSystem(detectUnitSystem(newUnits));
+
+      // Show success toast
+      toast({
+        title: t("settings.units.saved"),
+        description: t("settings.units.savedDescription"),
+      });
+    } catch (error) {
+      console.error("Failed to save units:", error);
+      toast({
+        title: t("settings.units.saveFailed"),
+        description: t("settings.units.saveFailedDescription"),
+        variant: "destructive",
+      });
+    } finally {
+      setIsSavingUnits(false);
+    }
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
@@ -159,6 +264,168 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
               </div>
             </div>
           </div>
+
+          <Separator />
+
+          {/* Units Section */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Settings2 className="h-5 w-5" />
+                {t("settings.units.title")}
+              </CardTitle>
+              <CardDescription>{t("settings.units.description")}</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {/* Unit System Preset */}
+              <div>
+                <Label htmlFor="unitSystem">{t("settings.units.systemLabel")}</Label>
+                <p className="text-sm text-muted-foreground mb-2">
+                  {t("settings.units.systemDescription")}
+                </p>
+                <Select
+                  value={unitSystem}
+                  onValueChange={(v) => handleUnitSystemChange(v as UnitSystem)}
+                >
+                  <SelectTrigger id="unitSystem">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="metric">{t("settings.units.systems.metric")}</SelectItem>
+                    <SelectItem value="imperial">{t("settings.units.systems.imperial")}</SelectItem>
+                    <SelectItem value="uk">{t("settings.units.systems.uk")}</SelectItem>
+                    <SelectItem value="custom">{t("settings.units.systems.custom")}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Individual Unit Controls */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Temperature */}
+                <div>
+                  <Label htmlFor="temperature">{t("settings.units.temperature")}</Label>
+                  <Select
+                    value={temperature}
+                    onValueChange={(v) => {
+                      setTemperature(v as TemperatureUnit);
+                      setUnitSystem("custom");
+                    }}
+                  >
+                    <SelectTrigger id="temperature">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="celsius">
+                        {t("settings.units.temperatureUnits.celsius")}
+                      </SelectItem>
+                      <SelectItem value="fahrenheit">
+                        {t("settings.units.temperatureUnits.fahrenheit")}
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Wind Speed */}
+                <div>
+                  <Label htmlFor="windSpeed">{t("settings.units.windSpeed")}</Label>
+                  <Select
+                    value={windSpeed}
+                    onValueChange={(v) => {
+                      setWindSpeed(v as WindSpeedUnit);
+                      setUnitSystem("custom");
+                    }}
+                  >
+                    <SelectTrigger id="windSpeed">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="kmh">{t("settings.units.windSpeedUnits.kmh")}</SelectItem>
+                      <SelectItem value="mph">{t("settings.units.windSpeedUnits.mph")}</SelectItem>
+                      <SelectItem value="ms">{t("settings.units.windSpeedUnits.ms")}</SelectItem>
+                      <SelectItem value="knots">
+                        {t("settings.units.windSpeedUnits.knots")}
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Precipitation */}
+                <div>
+                  <Label htmlFor="precipitation">{t("settings.units.precipitation")}</Label>
+                  <Select
+                    value={precipitation}
+                    onValueChange={(v) => {
+                      setPrecipitation(v as PrecipitationUnit);
+                      setUnitSystem("custom");
+                    }}
+                  >
+                    <SelectTrigger id="precipitation">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="mm">
+                        {t("settings.units.precipitationUnits.mm")}
+                      </SelectItem>
+                      <SelectItem value="inches">
+                        {t("settings.units.precipitationUnits.inches")}
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Distance */}
+                <div>
+                  <Label htmlFor="distance">{t("settings.units.distance")}</Label>
+                  <Select
+                    value={distance}
+                    onValueChange={(v) => {
+                      setDistance(v as DistanceUnit);
+                      setUnitSystem("custom");
+                    }}
+                  >
+                    <SelectTrigger id="distance">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="km">{t("settings.units.distanceUnits.km")}</SelectItem>
+                      <SelectItem value="miles">
+                        {t("settings.units.distanceUnits.miles")}
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Elevation */}
+                <div>
+                  <Label htmlFor="elevation">{t("settings.units.elevation")}</Label>
+                  <Select
+                    value={elevation}
+                    onValueChange={(v) => {
+                      setElevation(v as ElevationUnit);
+                      setUnitSystem("custom");
+                    }}
+                  >
+                    <SelectTrigger id="elevation">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="meters">
+                        {t("settings.units.elevationUnits.meters")}
+                      </SelectItem>
+                      <SelectItem value="feet">
+                        {t("settings.units.elevationUnits.feet")}
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              {/* Save Button */}
+              <Button onClick={handleSaveUnits} disabled={isSavingUnits} className="w-full">
+                {isSavingUnits ? t("settings.saving") : t("settings.save")}
+              </Button>
+            </CardContent>
+          </Card>
 
           <Separator />
 

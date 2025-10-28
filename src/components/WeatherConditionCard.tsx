@@ -1,6 +1,7 @@
 import { memo, useMemo, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Info, Star, MessageSquare } from "lucide-react";
+import { Info, Star, MessageSquare, ArrowRight } from "lucide-react";
 import { getWeatherEmoji, getWeatherDescription } from "@/lib/utils/weather-emojis";
 import { logRender } from "@/lib/debug/render-log";
 import { MapPopover } from "@/components/MapPopover";
@@ -12,6 +13,9 @@ import {
   getFavorite,
 } from "@/lib/storage/favorites";
 import { ReportDialog } from "@/components/ReportDialog";
+import { generateUniqueSlug } from "@/lib/utils/slug";
+import { useUnits } from "@/hooks/useUnits";
+import { convertTemperature } from "@/lib/units/conversions";
 
 interface ConditionsData {
   location: string;
@@ -112,8 +116,8 @@ interface WeatherConditionCardProps {
   conditionsLabel: string;
   detailsLabel: string;
   favoriteLabel: string;
-  favoritedLabel: string;
   addReportLabel: string;
+  viewCragPageLabel: string;
 }
 
 function isNightTime(date: Date): boolean {
@@ -133,13 +137,15 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
   conditionsLabel,
   detailsLabel,
   favoriteLabel,
-  favoritedLabel,
   addReportLabel,
+  viewCragPageLabel,
 }: WeatherConditionCardProps) {
   const hasEmoji = data.current?.weatherCode !== undefined;
+  const router = useRouter();
   const [isFavorite, setIsFavorite] = useState(false);
   const [favoriteId, setFavoriteId] = useState<string | null>(null);
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
+  const { units } = useUnits();
 
   // Check if this location is already favorited
   useEffect(() => {
@@ -228,7 +234,10 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
             </div>
             {typeof data.current?.temperature_c === "number" && (
               <div className="mt-1 text-[10px] sm:text-xs leading-tight text-muted-foreground">
-                {Math.round(data.current.temperature_c)}°C
+                {Math.round(
+                  convertTemperature(data.current.temperature_c, "celsius", units.temperature)
+                )}
+                {units.temperature === "celsius" ? "°C" : "°F"}
               </div>
             )}
           </div>
@@ -238,7 +247,24 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
         <div className="flex-1 min-w-0 space-y-2 sm:space-y-2.5">
           {/* Header */}
           <div className="space-y-0.5">
-            <div className="font-semibold text-base">🧗 {data.location}</div>
+            <div className="font-semibold text-base flex items-center gap-1.5">
+              🧗
+              {data.latitude && data.longitude ? (
+                <button
+                  onClick={() => {
+                    const slug = generateUniqueSlug(data.location, data.latitude!, data.longitude!);
+                    router.push(`/location/${slug}`);
+                  }}
+                  className="hover:text-orange-500 transition-colors cursor-pointer inline-flex items-center gap-1 group"
+                  title={viewCragPageLabel}
+                >
+                  <span>{data.location}</span>
+                  <ArrowRight className="w-4 h-4 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity" />
+                </button>
+              ) : (
+                <span>{data.location}</span>
+              )}
+            </div>
             {(locationText || countryFlag) && (
               <div className="text-xs text-muted-foreground">
                 📍 {locationText}
@@ -257,14 +283,16 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
           {(data.hourlyConditions || data.optimalWindows) && (
             <div className="flex flex-wrap gap-2">
               {data.latitude && data.longitude && (
-                <MapPopover
-                  latitude={data.latitude}
-                  longitude={data.longitude}
-                  locationName={data.location}
-                />
+                <div>
+                  <MapPopover
+                    latitude={data.latitude}
+                    longitude={data.longitude}
+                    locationName={data.location}
+                  />
+                </div>
               )}
               <Button
-                variant={isFavorite ? "default" : "outline"}
+                variant="outline"
                 size="sm"
                 onClick={() => {
                   if (isFavorite && favoriteId) {
@@ -293,10 +321,10 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
                   }
                 }}
                 title={isFavorite ? "Remove from favorites" : "Add to favorites"}
-                className={isFavorite ? "bg-orange-500 hover:bg-orange-600" : ""}
+                className={isFavorite ? "bg-orange-500 hover:bg-orange-600 text-white" : ""}
               >
                 <Star className={`w-4 h-4 ${isFavorite ? "fill-current" : ""}`} />
-                {isFavorite ? favoritedLabel : favoriteLabel}
+                {favoriteLabel}
               </Button>
               <Button
                 variant="outline"

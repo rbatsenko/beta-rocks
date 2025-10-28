@@ -36,7 +36,8 @@
     "location": "Ort",
     "favorite": "Favorit",
     "favorited": "In Favoriten",
-    "addReport": "Bericht hinzufügen"
+    "addReport": "Bericht hinzufügen",
+    "viewCragPage": "Gebiet ansehen"
   },
   "ratings": {
     "great": "Top",
@@ -46,7 +47,7 @@
     "nope": "Lass es"
   },
   "reasons": {
-    "perfectTemp": "Perfekte Temperatur ({{temp}}°C)",
+    "perfectTemp": "Perfekte Temperatur ({{temp}})",
     "tempTooHigh": "Zu warm - die Finger rutschen sonst",
     "coldGoodFriction": "Frisch, aber super Reibung für {{rockType}}",
     "idealHumidity": "Ideale Luftfeuchtigkeit ({{humidity}}%)",
@@ -55,16 +56,17 @@
     "acceptable": "Eh in Ordnung"
   },
   "warnings": {
-    "tooWarm": "Zu warm für {{rockType}} ({{temp}}°C)",
+    "tooWarm": "Zu warm für {{rockType}} ({{temp}})",
     "coldSuboptimal": "Kalt und nicht ideal für {{rockType}}",
     "highHumidity": "Hohe Luftfeuchte ({{humidity}}%) - der Fels kann schmierig sein",
     "wetDangerousSandstone": "Fels ist nass - nicht klettern, vor allem Sandstein leidet",
     "wetSlippery": "Fels ist nass - rutschige Bedingungen",
-    "veryHighWinds": "Sehr starker Wind ({{wind}} km/h) - Gefahr verblasen zu werden",
-    "highWind": "Starker Wind ({{wind}} km/h)",
-    "recentPrecip": "Kürzliche Niederschläge ({{precip}}mm) - trocknet in ~{{hours}}h",
+    "veryHighWinds": "Sehr starker Wind ({{wind}}) - Gefahr verblasen zu werden",
+    "highWind": "Starker Wind ({{wind}})",
+    "recentPrecip": "Kürzliche Niederschläge ({{precip}}) - trocknet in ~{{hours}}h",
     "currentlyWetDangerous": "Gerade nass - gefährlich",
-    "currentlyWet": "Derzeit nass"
+    "currentlyWet": "Derzeit nass",
+    "cold": "Cold ({{temp}})"
   },
   "weather": {
     "clearSky": "Wolkenlos",
@@ -131,7 +133,7 @@
     },
     "communityReports": {
       "title": "Community-Reports",
-      "description": "Teile und bestätige aktuelle Bedingungen. Hilf anderen Bergsportler:innen mit Live-Updates"
+      "description": "Teile Bedingungen, Sicherheitshinweise, Zugangsänderungen, Beta und mehr. Hilf Kletterern mit Echtzeit-Updates in verschiedenen Kategorien"
     },
     "globalCoverage": {
       "title": "Globale Abdeckung",
@@ -291,6 +293,18 @@
     "settings": "Einstellungen",
     "clearData": "Alle Daten löschen"
   },
+  "stats": {
+    "title": "Deine Statistiken",
+    "description": "Deine Aktivität und Beiträge zur temps.rocks Community",
+    "reportsPosted": "Berichte erstellt",
+    "confirmationsGiven": "Bestätigungen gegeben",
+    "favoritesCount": "Favoriten",
+    "memberSince": "Mitglied seit",
+    "lastActive": "Zuletzt aktiv",
+    "unknown": "Unbekannt",
+    "encourageReports": "Teile dein lokales Wissen, indem du Berichte über Felsbedingungen veröffentlichst!",
+    "thankYou": "Danke für deinen Beitrag zur Klettergemeinschaft!"
+  },
   "settings": {
     "title": "Einstellungen",
     "description": "Verwalte dein Profil, deinen Sync-Schlüssel und deine Einstellungen",
@@ -299,7 +313,54 @@
     "displayName": {
       "label": "Anzeigename",
       "description": "Dein Name, der bei Berichten und Bestätigungen angezeigt wird (optional)",
-      "placeholder": "Gib deinen Namen ein..."
+      "placeholder": "Gib deinen Namen ein...",
+      "saved": "Anzeigename gespeichert",
+      "savedDescription": "Dein Anzeigename wurde erfolgreich aktualisiert",
+      "saveFailed": "Speichern fehlgeschlagen",
+      "saveFailedDescription": "Dein Anzeigename konnte nicht gespeichert werden. Bitte versuche es erneut"
+    },
+    "units": {
+      "title": "Einheiten und Maße",
+      "description": "Wähle deine bevorzugten Einheiten für Wetter- und Kletterdaten",
+      "systemLabel": "Einheitensystem",
+      "systemDescription": "Schnelleinstellungen für gängige Einheitensysteme",
+      "systems": {
+        "metric": "Metrisch (°C, km/h, mm)",
+        "imperial": "Imperial (°F, mph, Zoll)",
+        "uk": "UK (°C, mph, mm)",
+        "custom": "Benutzerdefiniert"
+      },
+      "temperature": "Temperatur",
+      "temperatureUnits": {
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Windgeschwindigkeit",
+      "windSpeedUnits": {
+        "kmh": "Kilometer pro Stunde (km/h)",
+        "mph": "Meilen pro Stunde (mph)",
+        "ms": "Meter pro Sekunde (m/s)",
+        "knots": "Knoten (kn)"
+      },
+      "precipitation": "Niederschlag",
+      "precipitationUnits": {
+        "mm": "Millimeter (mm)",
+        "inches": "Zoll (in)"
+      },
+      "distance": "Entfernung",
+      "distanceUnits": {
+        "km": "Kilometer (km)",
+        "miles": "Meilen (mi)"
+      },
+      "elevation": "Höhe",
+      "elevationUnits": {
+        "meters": "Meter (m)",
+        "feet": "Fuß (ft)"
+      },
+      "saved": "Einheiten gespeichert",
+      "savedDescription": "Deine Einheiteneinstellungen wurden erfolgreich aktualisiert",
+      "saveFailed": "Einheiten speichern fehlgeschlagen",
+      "saveFailedDescription": "Deine Einheiteneinstellungen konnten nicht gespeichert werden. Bitte versuche es erneut"
     },
     "syncKey": {
       "title": "Sync-Schlüssel",
@@ -347,38 +408,67 @@
     "remove": "Entfernen"
   },
   "reports": {
-    "addReport": "Bedingungsbericht hinzufügen",
-    "addReportDescription": "Aktuelle Bedingungen bei {{cragName}} teilen",
-    "postingAs": "Posten als",
-    "dryness": "Trockenheit",
+    "addReport": "Add Report",
+    "addReportDescription": "Share information about {{cragName}}",
+    "postingAs": "Posting as",
+    "category": "What would you like to report?",
+    "categories": {
+      "conditions": "Conditions",
+      "safety": "Safety",
+      "access": "Access",
+      "beta": "Beta",
+      "facilities": "Facilities",
+      "other": "Other"
+    },
+    "categoryDescriptions": {
+      "conditions": "Weather, friction, dryness, crowds",
+      "safety": "Loose bolts, rockfall, broken holds, hazards",
+      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "beta": "Current bolting works, route changes, new bolts",
+      "facilities": "Bathrooms, camping, water sources, amenities",
+      "other": "Anything else that doesn't fit above"
+    },
+    "dryness": "Dryness",
     "wind": "Wind",
-    "crowds": "Andrang",
-    "additionalComments": "Zusätzliche Kommentare",
-    "commentsPlaceholder": "Z.B. Ostsektor noch nass, Weg matschig - Vorsicht, Route X - Wasser sickert aus Riss, Griffe rutschig...",
-    "submit": "Bericht absenden",
-    "submitting": "Sende...",
-    "helpful": "Hilfreich",
-    "loginToConfirm": "Bitte richte dein Profil ein, um Berichte zu bestätigen",
-    "confirmFailed": "Bestätigung fehlgeschlagen. Bitte versuche es erneut.",
+    "crowds": "Crowds",
+    "additionalComments": "Additional comments (optional)",
+    "details": "Details",
+    "detailsRequired": "Please provide details about this report",
+    "placeholders": {
+      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
+      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
+      "access": "E.g., Gate closed until May, new parking lot behind library...",
+      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "facilities": "E.g., Toilet available at parking, no water source nearby...",
+      "other": "Describe what you'd like to report..."
+    },
+    "submit": "Submit Report",
+    "submitting": "Submitting...",
+    "helpful": "Helpful",
+    "loginToConfirm": "Please set up your profile to confirm reports",
+    "confirmFailed": "Failed to confirm report. Please try again.",
     "ratings": {
-      "veryPoor": "Sehr schlecht",
-      "poor": "Schlecht",
+      "veryPoor": "Very Poor",
+      "poor": "Poor",
       "okay": "Okay",
-      "good": "Gut",
-      "excellent": "Ausgezeichnet"
+      "good": "Good",
+      "excellent": "Excellent"
     },
     "scales": {
-      "veryWet": "Sehr nass",
-      "veryDry": "Perfekt",
-      "calm": "Windstill",
-      "veryWindy": "Sehr windig",
-      "empty": "Leer",
-      "veryCrowded": "Sehr überfüllt"
+      "veryWet": "Very wet",
+      "veryDry": "Perfect",
+      "calm": "Calm",
+      "veryWindy": "Very windy",
+      "empty": "Empty",
+      "veryCrowded": "Very crowded"
     },
-    "recentReports": "Aktuelle Berichte",
-    "noReports": "Noch keine Berichte",
-    "noReportsMessage": "Sei der Erste, der die Bedingungen an diesem Fels teilt",
-    "reportCount": "{{count}} Berichte",
-    "viewAllReports": "Alle Berichte ansehen"
+    "recentReports": "Recent Reports",
+    "communityReports": "Community Reports",
+    "noReports": "No reports yet",
+    "beTheFirst": "Be the first to report",
+    "noReportsInCategory": "No reports in this category",
+    "filters": {
+      "all": "All"
+    }
   }
 }

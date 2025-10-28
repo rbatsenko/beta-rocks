@@ -36,7 +36,8 @@
     "location": "Location",
     "favorite": "Favourite",
     "favorited": "Favourited",
-    "addReport": "Add Report"
+    "addReport": "Add Report",
+    "viewCragPage": "View Crag"
   },
   "ratings": {
     "great": "Great",
@@ -46,7 +47,7 @@
     "nope": "Nope"
   },
   "reasons": {
-    "perfectTemp": "Perfect temperature ({{temp}}°C)",
+    "perfectTemp": "Perfect temperature ({{temp}})",
     "tempTooHigh": "Temperature too high - fingers may slip",
     "coldGoodFriction": "Cold but good for {{rockType}} friction",
     "idealHumidity": "Ideal humidity ({{humidity}}%)",
@@ -55,16 +56,17 @@
     "acceptable": "Conditions are acceptable"
   },
   "warnings": {
-    "tooWarm": "Too warm for {{rockType}} ({{temp}}°C)",
+    "tooWarm": "Too warm for {{rockType}} ({{temp}})",
     "coldSuboptimal": "Cold and suboptimal for {{rockType}}",
     "highHumidity": "High humidity ({{humidity}}%) - rock can be slippery",
     "wetDangerousSandstone": "Rock is currently wet - dangerous to climb (sandstone becomes weak when wet)",
     "wetSlippery": "Rock is currently wet - slippery conditions",
-    "veryHighWinds": "Very high winds ({{wind}} km/h) - danger of blown off",
-    "highWind": "High wind ({{wind}} km/h)",
-    "recentPrecip": "Recent precipitation ({{precip}}mm) - will dry in ~{{hours}}h",
+    "veryHighWinds": "Very high winds ({{wind}}) - danger of blown off",
+    "highWind": "High wind ({{wind}})",
+    "recentPrecip": "Recent precipitation ({{precip}}) - will dry in ~{{hours}}h",
     "currentlyWetDangerous": "Currently wet - dangerous",
-    "currentlyWet": "Currently wet"
+    "currentlyWet": "Currently wet",
+    "cold": "Cold ({{temp}})"
   },
   "weather": {
     "clearSky": "Clear sky",
@@ -131,7 +133,7 @@
     },
     "communityReports": {
       "title": "Community Reports",
-      "description": "Share and confirm current conditions. Help fellow climbers with real-time updates"
+      "description": "Share conditions, safety alerts, access changes, beta, and more. Help fellow climbers with real-time updates across multiple categories"
     },
     "globalCoverage": {
       "title": "Global Coverage",
@@ -291,6 +293,18 @@
     "settings": "Settings",
     "clearData": "Clear All Data"
   },
+  "stats": {
+    "title": "Your Stats",
+    "description": "Your activity and contributions to the temps.rocks community",
+    "reportsPosted": "Reports Posted",
+    "confirmationsGiven": "Confirmations Given",
+    "favoritesCount": "Favourites",
+    "memberSince": "Member since",
+    "lastActive": "Last active",
+    "unknown": "Unknown",
+    "encourageReports": "Share your local knowledge by posting reports about crag conditions!",
+    "thankYou": "Thanks for contributing to the climbing community!"
+  },
   "settings": {
     "title": "Settings",
     "description": "Manage your profile, sync key, and preferences",
@@ -299,7 +313,54 @@
     "displayName": {
       "label": "Display Name",
       "description": "Your name shown on reports and confirmations (optional)",
-      "placeholder": "Enter your name..."
+      "placeholder": "Enter your name...",
+      "saved": "Display name saved",
+      "savedDescription": "Your display name has been updated successfully",
+      "saveFailed": "Failed to save",
+      "saveFailedDescription": "Could not save your display name. Please try again"
+    },
+    "units": {
+      "title": "Units & Measurements",
+      "description": "Choose your preferred units for weather and climbing data",
+      "systemLabel": "Unit System",
+      "systemDescription": "Quick presets for common unit systems",
+      "systems": {
+        "metric": "Metric (°C, km/h, mm)",
+        "imperial": "Imperial (°F, mph, inches)",
+        "uk": "UK (°C, mph, mm)",
+        "custom": "Custom"
+      },
+      "temperature": "Temperature",
+      "temperatureUnits": {
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Wind Speed",
+      "windSpeedUnits": {
+        "kmh": "Kilometers per hour (km/h)",
+        "mph": "Miles per hour (mph)",
+        "ms": "Meters per second (m/s)",
+        "knots": "Knots (kn)"
+      },
+      "precipitation": "Precipitation",
+      "precipitationUnits": {
+        "mm": "Millimeters (mm)",
+        "inches": "Inches (in)"
+      },
+      "distance": "Distance",
+      "distanceUnits": {
+        "km": "Kilometers (km)",
+        "miles": "Miles (mi)"
+      },
+      "elevation": "Elevation",
+      "elevationUnits": {
+        "meters": "Meters (m)",
+        "feet": "Feet (ft)"
+      },
+      "saved": "Units saved",
+      "savedDescription": "Your unit preferences have been updated successfully",
+      "saveFailed": "Failed to save units",
+      "saveFailedDescription": "Could not save your unit preferences. Please try again"
     },
     "syncKey": {
       "title": "Sync Key",
@@ -347,14 +408,40 @@
     "remove": "Remove"
   },
   "reports": {
-    "addReport": "Add Condition Report",
-    "addReportDescription": "Share current conditions at {{cragName}}",
+    "addReport": "Add Report",
+    "addReportDescription": "Share information about {{cragName}}",
     "postingAs": "Posting as",
+    "category": "What would you like to report?",
+    "categories": {
+      "conditions": "Conditions",
+      "safety": "Safety",
+      "access": "Access",
+      "beta": "Beta",
+      "facilities": "Facilities",
+      "other": "Other"
+    },
+    "categoryDescriptions": {
+      "conditions": "Weather, friction, dryness, crowds",
+      "safety": "Loose bolts, rockfall, broken holds, hazards",
+      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "beta": "Current bolting works, route changes, new bolts",
+      "facilities": "Bathrooms, camping, water sources, amenities",
+      "other": "Anything else that doesn't fit above"
+    },
     "dryness": "Dryness",
     "wind": "Wind",
     "crowds": "Crowds",
-    "additionalComments": "Additional comments",
-    "commentsPlaceholder": "E.g., East sector still wet, trail muddy - be careful, Route X - sipping from the crack, holds slippery...",
+    "additionalComments": "Additional comments (optional)",
+    "details": "Details",
+    "detailsRequired": "Please provide details about this report",
+    "placeholders": {
+      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
+      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
+      "access": "E.g., Gate closed until May, new parking lot behind library...",
+      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "facilities": "E.g., Toilet available at parking, no water source nearby...",
+      "other": "Describe what you'd like to report..."
+    },
     "submit": "Submit Report",
     "submitting": "Submitting...",
     "helpful": "Helpful",
@@ -376,9 +463,12 @@
       "veryCrowded": "Very crowded"
     },
     "recentReports": "Recent Reports",
+    "communityReports": "Community Reports",
     "noReports": "No reports yet",
-    "noReportsMessage": "Be the first to share conditions at this crag",
-    "reportCount": "{{count}} reports",
-    "viewAllReports": "View All Reports"
+    "beTheFirst": "Be the first to report",
+    "noReportsInCategory": "No reports in this category",
+    "filters": {
+      "all": "All"
+    }
   }
 }

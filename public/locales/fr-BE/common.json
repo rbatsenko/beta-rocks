@@ -36,7 +36,8 @@
     "location": "Emplacement",
     "favorite": "Favori",
     "favorited": "En favoris",
-    "addReport": "Ajouter un rapport"
+    "addReport": "Ajouter un rapport",
+    "viewCragPage": "Voir le site"
   },
   "ratings": {
     "great": "Excellent",
@@ -46,7 +47,7 @@
     "nope": "À éviter"
   },
   "reasons": {
-    "perfectTemp": "Température parfaite ({{temp}}°C)",
+    "perfectTemp": "Température parfaite ({{temp}})",
     "tempTooHigh": "Température trop élevée - les doigts peuvent glisser",
     "coldGoodFriction": "Frais mais avec une bonne friction pour {{rockType}}",
     "idealHumidity": "Humidité idéale ({{humidity}}%)",
@@ -55,16 +56,17 @@
     "acceptable": "Conditions acceptables"
   },
   "warnings": {
-    "tooWarm": "Trop chaud pour {{rockType}} ({{temp}}°C)",
+    "tooWarm": "Trop chaud pour {{rockType}} ({{temp}})",
     "coldSuboptimal": "Froid et peu optimal pour {{rockType}}",
     "highHumidity": "Humidité élevée ({{humidity}}%) - la roche peut être glissante",
     "wetDangerousSandstone": "Roche mouillée - dangereux de grimper (le grès est fragile humide)",
     "wetSlippery": "Roche mouillée - conditions glissantes",
-    "veryHighWinds": "Vent très fort ({{wind}} km/h) - risque de déséquilibre",
-    "highWind": "Vent fort ({{wind}} km/h)",
-    "recentPrecip": "Précipitations récentes ({{precip}}mm) - séchera dans ~{{hours}}h",
+    "veryHighWinds": "Vent très fort ({{wind}}) - risque de déséquilibre",
+    "highWind": "Vent fort ({{wind}})",
+    "recentPrecip": "Précipitations récentes ({{precip}}) - séchera dans ~{{hours}}h",
     "currentlyWetDangerous": "Actuellement mouillé - dangereux",
-    "currentlyWet": "Actuellement mouillé"
+    "currentlyWet": "Actuellement mouillé",
+    "cold": "Cold ({{temp}})"
   },
   "weather": {
     "clearSky": "Ciel dégagé",
@@ -131,7 +133,7 @@
     },
     "communityReports": {
       "title": "Rapports communautaires",
-      "description": "Partagez et confirmez les conditions actuelles. Aidez les grimpeurs avec des mises à jour en direct"
+      "description": "Partagez conditions, alertes de sécurité, changements d'accès, beta et plus. Aidez les grimpeurs avec des mises à jour en temps réel dans plusieurs catégories"
     },
     "globalCoverage": {
       "title": "Couverture mondiale",
@@ -291,6 +293,18 @@
     "settings": "Paramètres",
     "clearData": "Effacer toutes les données"
   },
+  "stats": {
+    "title": "Vos statistiques",
+    "description": "Votre activité et contributions à la communauté temps.rocks",
+    "reportsPosted": "Rapports publiés",
+    "confirmationsGiven": "Confirmations données",
+    "favoritesCount": "Favoris",
+    "memberSince": "Membre depuis",
+    "lastActive": "Dernière activité",
+    "unknown": "Inconnu",
+    "encourageReports": "Partagez vos connaissances locales en publiant des rapports sur les conditions des falaises !",
+    "thankYou": "Merci de contribuer à la communauté des grimpeurs !"
+  },
   "settings": {
     "title": "Paramètres",
     "description": "Gérez votre profil, clé de synchronisation et préférences",
@@ -299,7 +313,54 @@
     "displayName": {
       "label": "Nom d'affichage",
       "description": "Votre nom affiché sur les rapports et confirmations (optionnel)",
-      "placeholder": "Entrez votre nom..."
+      "placeholder": "Entrez votre nom...",
+      "saved": "Nom d'affichage enregistré",
+      "savedDescription": "Votre nom d'affichage a été mis à jour avec succès",
+      "saveFailed": "Échec de l'enregistrement",
+      "saveFailedDescription": "Impossible d'enregistrer votre nom d'affichage. Veuillez réessayer"
+    },
+    "units": {
+      "title": "Unités et mesures",
+      "description": "Choisissez vos unités préférées pour les données météo et d'escalade",
+      "systemLabel": "Système d'unités",
+      "systemDescription": "Préréglages rapides pour les systèmes d'unités courants",
+      "systems": {
+        "metric": "Métrique (°C, km/h, mm)",
+        "imperial": "Impérial (°F, mph, pouces)",
+        "uk": "Royaume-Uni (°C, mph, mm)",
+        "custom": "Personnalisé"
+      },
+      "temperature": "Température",
+      "temperatureUnits": {
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Vitesse du vent",
+      "windSpeedUnits": {
+        "kmh": "Kilomètres par heure (km/h)",
+        "mph": "Miles par heure (mph)",
+        "ms": "Mètres par seconde (m/s)",
+        "knots": "Nœuds (kn)"
+      },
+      "precipitation": "Précipitations",
+      "precipitationUnits": {
+        "mm": "Millimètres (mm)",
+        "inches": "Pouces (in)"
+      },
+      "distance": "Distance",
+      "distanceUnits": {
+        "km": "Kilomètres (km)",
+        "miles": "Miles (mi)"
+      },
+      "elevation": "Altitude",
+      "elevationUnits": {
+        "meters": "Mètres (m)",
+        "feet": "Pieds (ft)"
+      },
+      "saved": "Unités enregistrées",
+      "savedDescription": "Vos préférences d'unités ont été mises à jour avec succès",
+      "saveFailed": "Échec de l'enregistrement des unités",
+      "saveFailedDescription": "Impossible d'enregistrer vos préférences d'unités. Veuillez réessayer"
     },
     "syncKey": {
       "title": "Clé de synchronisation",
@@ -347,38 +408,67 @@
     "remove": "Retirer"
   },
   "reports": {
-    "addReport": "Ajouter un rapport de conditions",
-    "addReportDescription": "Partagez les conditions actuelles à {{cragName}}",
-    "postingAs": "Publier en tant que",
-    "dryness": "Sécheresse",
-    "wind": "Vent",
-    "crowds": "Affluence",
-    "additionalComments": "Commentaires supplémentaires",
-    "commentsPlaceholder": "Ex: secteur Est encore humide, sentier boueux - attention, Voie X - eau suinte de la fissure, prises glissantes...",
-    "submit": "Soumettre le rapport",
-    "submitting": "Envoi en cours...",
-    "helpful": "Utile",
-    "loginToConfirm": "Veuillez configurer votre profil pour confirmer les rapports",
-    "confirmFailed": "Échec de la confirmation du rapport. Veuillez réessayer.",
+    "addReport": "Add Report",
+    "addReportDescription": "Share information about {{cragName}}",
+    "postingAs": "Posting as",
+    "category": "What would you like to report?",
+    "categories": {
+      "conditions": "Conditions",
+      "safety": "Safety",
+      "access": "Access",
+      "beta": "Beta",
+      "facilities": "Facilities",
+      "other": "Other"
+    },
+    "categoryDescriptions": {
+      "conditions": "Weather, friction, dryness, crowds",
+      "safety": "Loose bolts, rockfall, broken holds, hazards",
+      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "beta": "Current bolting works, route changes, new bolts",
+      "facilities": "Bathrooms, camping, water sources, amenities",
+      "other": "Anything else that doesn't fit above"
+    },
+    "dryness": "Dryness",
+    "wind": "Wind",
+    "crowds": "Crowds",
+    "additionalComments": "Additional comments (optional)",
+    "details": "Details",
+    "detailsRequired": "Please provide details about this report",
+    "placeholders": {
+      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
+      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
+      "access": "E.g., Gate closed until May, new parking lot behind library...",
+      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "facilities": "E.g., Toilet available at parking, no water source nearby...",
+      "other": "Describe what you'd like to report..."
+    },
+    "submit": "Submit Report",
+    "submitting": "Submitting...",
+    "helpful": "Helpful",
+    "loginToConfirm": "Please set up your profile to confirm reports",
+    "confirmFailed": "Failed to confirm report. Please try again.",
     "ratings": {
-      "veryPoor": "Très mauvais",
-      "poor": "Mauvais",
-      "okay": "Acceptable",
-      "good": "Bon",
+      "veryPoor": "Very Poor",
+      "poor": "Poor",
+      "okay": "Okay",
+      "good": "Good",
       "excellent": "Excellent"
     },
     "scales": {
-      "veryWet": "Très humide",
-      "veryDry": "Parfait",
-      "calm": "Calme",
-      "veryWindy": "Très venteux",
-      "empty": "Vide",
-      "veryCrowded": "Très fréquenté"
+      "veryWet": "Very wet",
+      "veryDry": "Perfect",
+      "calm": "Calm",
+      "veryWindy": "Very windy",
+      "empty": "Empty",
+      "veryCrowded": "Very crowded"
     },
-    "recentReports": "Rapports récents",
-    "noReports": "Aucun rapport",
-    "noReportsMessage": "Soyez le premier à partager les conditions de cette falaise",
-    "reportCount": "{{count}} rapports",
-    "viewAllReports": "Voir tous les rapports"
+    "recentReports": "Recent Reports",
+    "communityReports": "Community Reports",
+    "noReports": "No reports yet",
+    "beTheFirst": "Be the first to report",
+    "noReportsInCategory": "No reports in this category",
+    "filters": {
+      "all": "All"
+    }
   }
 }

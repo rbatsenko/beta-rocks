@@ -38,7 +38,8 @@
     "location": "Lokalizacja",
     "favorite": "Ulubione",
     "favorited": "W ulubionych",
-    "addReport": "Dodaj raport"
+    "addReport": "Dodaj raport",
+    "viewCragPage": "Zobacz skałkę"
   },
   "ratings": {
     "great": "Super",
@@ -48,7 +49,7 @@
     "nope": "Bardzo słabo"
   },
   "reasons": {
-    "perfectTemp": "Idealna temperatura ({{temp}}°C)",
+    "perfectTemp": "Idealna temperatura ({{temp}})",
     "tempTooHigh": "Za ciepło - dla optymalnego tarcia może być potrzebny wiatr",
     "coldGoodFriction": "Zimno ale dobre tarcie",
     "idealHumidity": "Idealna wilgotność ({{humidity}}%)",
@@ -57,16 +58,17 @@
     "acceptable": "Warunki akceptowalne"
   },
   "warnings": {
-    "tooWarm": "Za ciepło dla {{rockType}} ({{temp}}°C)",
+    "tooWarm": "Za ciepło dla {{rockType}} ({{temp}})",
     "coldSuboptimal": "Zimno - zabierz ciepłe ubrania i rozgrzej się porządnie",
     "highHumidity": "Wysoka wilgotność ({{humidity}}%) - może być gorsze tarcie",
     "wetDangerousSandstone": "Piaskowiec mokry - nie wspinaj się póki całkiem nie wyschnie!",
     "wetSlippery": "Skała mokra - ślisko",
-    "veryHighWinds": "Bardzo mocny wiatr ({{wind}} km/h) - może być nieprzyjemnie 😅",
-    "highWind": "Silny wiatr ({{wind}} km/h)",
-    "recentPrecip": "Niedawne opady ({{precip}}mm) - wyschnie za ~{{hours}}h",
+    "veryHighWinds": "Bardzo mocny wiatr ({{wind}}) - może być nieprzyjemnie 😅",
+    "highWind": "Silny wiatr ({{wind}})",
+    "recentPrecip": "Niedawne opady ({{precip}}) - wyschnie za ~{{hours}}h",
     "currentlyWetDangerous": "Obecnie mokro - poczekaj aż wyschnie",
-    "currentlyWet": "Mokro"
+    "currentlyWet": "Mokro",
+    "cold": "Cold ({{temp}})"
   },
   "weather": {
     "clearSky": "Bezchmurnie",
@@ -133,7 +135,7 @@
     },
     "communityReports": {
       "title": "Raporty społeczności",
-      "description": "Dziel się i potwierdzaj obecne warunki. Pomagaj innym z aktualizacjami na żywo"
+      "description": "Dziel się warunem, informacjami o bezpieczeństwie, zmianami w dostępie, stanie dróg/baldów i więcej. Pomóż wspinaczom aktualizacjami w czasie rzeczywistym w wielu kategoriach"
     },
     "globalCoverage": {
       "title": "Zasięg globalny",
@@ -285,6 +287,18 @@
     "settings": "Ustawienia",
     "clearData": "Wyczyść wszystkie dane"
   },
+  "stats": {
+    "title": "Twoje statystyki",
+    "description": "Twoja aktywność i wkład w społeczność temps.rocks",
+    "reportsPosted": "Opublikowane raporty",
+    "confirmationsGiven": "Udzielone potwierdzenia",
+    "favoritesCount": "Ulubione",
+    "memberSince": "Członek od",
+    "lastActive": "Ostatnia aktywność",
+    "unknown": "Nieznane",
+    "encourageReports": "Podziel się swoją lokalną wiedzą, publikując raporty o warunkach na skałach!",
+    "thankYou": "Dziękujemy za wkład w społeczność wspinaczkową!"
+  },
   "settings": {
     "title": "Ustawienia",
     "description": "Zarządzaj swoim profilem, kluczem synchronizacji i preferencjami",
@@ -293,7 +307,54 @@
     "displayName": {
       "label": "Nazwa wyświetlana",
       "description": "Twoje imię wyświetlane w raportach i potwierdzeniach (opcjonalnie)",
-      "placeholder": "Wprowadź swoje imię..."
+      "placeholder": "Wprowadź swoje imię...",
+      "saved": "Nazwa wyświetlana zapisana",
+      "savedDescription": "Twoja nazwa wyświetlana została pomyślnie zaktualizowana",
+      "saveFailed": "Nie udało się zapisać",
+      "saveFailedDescription": "Nie można zapisać Twojej nazwy wyświetlanej. Spróbuj ponownie"
+    },
+    "units": {
+      "title": "Jednostki i pomiary",
+      "description": "Wybierz preferowane jednostki dla danych pogodowych i wspinaczkowych",
+      "systemLabel": "System jednostek",
+      "systemDescription": "Szybkie ustawienia dla powszechnych systemów jednostek",
+      "systems": {
+        "metric": "Metryczny (°C, km/h, mm)",
+        "imperial": "Imperialny (°F, mph, cale)",
+        "uk": "UK (°C, mph, mm)",
+        "custom": "Niestandardowy"
+      },
+      "temperature": "Temperatura",
+      "temperatureUnits": {
+        "celsius": "Celsjusz (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Prędkość wiatru",
+      "windSpeedUnits": {
+        "kmh": "Kilometry na godzinę (km/h)",
+        "mph": "Mile na godzinę (mph)",
+        "ms": "Metry na sekundę (m/s)",
+        "knots": "Węzły (kn)"
+      },
+      "precipitation": "Opady",
+      "precipitationUnits": {
+        "mm": "Milimetry (mm)",
+        "inches": "Cale (in)"
+      },
+      "distance": "Odległość",
+      "distanceUnits": {
+        "km": "Kilometry (km)",
+        "miles": "Mile (mi)"
+      },
+      "elevation": "Wysokość",
+      "elevationUnits": {
+        "meters": "Metry (m)",
+        "feet": "Stopy (ft)"
+      },
+      "saved": "Jednostki zapisane",
+      "savedDescription": "Twoje preferencje jednostek zostały pomyślnie zaktualizowane",
+      "saveFailed": "Nie udało się zapisać jednostek",
+      "saveFailedDescription": "Nie można zapisać Twoich preferencji jednostek. Spróbuj ponownie"
     },
     "syncKey": {
       "title": "Klucz synchronizacji",
@@ -388,7 +449,7 @@
     "categoryDescriptions": {
       "conditions": "Pogoda, tarcie, suchość, tłumy",
       "safety": "Luźne ringi, ruszające się kamienie, uszkodzone chwyty, zagrożenia",
-      "access": "Zamknięcia, zmiany parkingów, ograniczenia sezonowe",
+      "access": "Zamknięcia, zmiany parkingów, ograniczenia sezonowe, gniazda ptaków, owady",
       "beta": "Zmiany przebiegu dróg, nowe obicie, prace ekiperskie",
       "facilities": "Parking, toalety, kemping, woda, udogodnienia",
       "other": "Cokolwiek innego, co nie pasuje do kategorii powyżej"

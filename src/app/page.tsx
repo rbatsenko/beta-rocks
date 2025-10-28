@@ -4,7 +4,8 @@ import ChatInterface from "@/components/ChatInterface";
 export default async function Home() {
   // Read user profile and session from cookies (SSR)
   const cookieStore = await cookies();
-  const syncKey = cookieStore.get("temps_sync_key")?.value;
+  // Note: syncKeyHash is stored in cookie but not currently used (kept for future use)
+  const syncKeyHash = cookieStore.get("temps_sync_key_hash")?.value;
   const displayName = cookieStore.get("temps_display_name")?.value;
   const sessionId = cookieStore.get("temps_current_session_id")?.value;
 
@@ -12,7 +13,7 @@ export default async function Home() {
   // This eliminates the need for client-side loading
   return (
     <ChatInterface
-      initialSyncKey={syncKey}
+      initialSyncKey={syncKeyHash}
       initialDisplayName={displayName}
       initialSessionId={sessionId}
     />
