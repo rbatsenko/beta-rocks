@@ -100,16 +100,6 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
     return "bg-red-500";
   };
 
-  const getRatingLabel = (rating: number | null) => {
-    if (!rating) return "N/A";
-    if (rating === 1) return t("reports.ratings.veryPoor");
-    if (rating === 2) return t("reports.ratings.poor");
-    if (rating === 3) return t("reports.ratings.okay");
-    if (rating === 4) return t("reports.ratings.good");
-    if (rating === 5) return t("reports.ratings.excellent");
-    return "N/A";
-  };
-
   const getCategoryIcon = (category: ReportCategory) => {
     const iconClass = "h-3.5 w-3.5";
     switch (category) {
@@ -183,7 +173,7 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
                 <Badge variant="outline" className="gap-1.5">
                   <Droplets className="h-3 w-3" />
                   <span className="text-xs">
-                    {t("reports.dryness")}: {getRatingLabel(report.rating_dry)}
+                    {t("reports.dryness")}: <span className="font-semibold">{report.rating_dry}/5</span>
                   </span>
                   <div className={`h-2 w-2 rounded-full ${getRatingColor(report.rating_dry)}`} />
                 </Badge>
@@ -192,7 +182,7 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
                 <Badge variant="outline" className="gap-1.5">
                   <Wind className="h-3 w-3" />
                   <span className="text-xs">
-                    {t("reports.wind")}: {getRatingLabel(report.rating_wind)}
+                    {t("reports.wind")}: <span className="font-semibold">{report.rating_wind}/5</span>
                   </span>
                   <div className={`h-2 w-2 rounded-full ${getRatingColor(report.rating_wind)}`} />
                 </Badge>
@@ -201,7 +191,7 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
                 <Badge variant="outline" className="gap-1.5">
                   <Users className="h-3 w-3" />
                   <span className="text-xs">
-                    {t("reports.crowds")}: {getRatingLabel(report.rating_crowds)}
+                    {t("reports.crowds")}: <span className="font-semibold">{report.rating_crowds}/5</span>
                   </span>
                   <div className={`h-2 w-2 rounded-full ${getRatingColor(report.rating_crowds)}`} />
                 </Badge>

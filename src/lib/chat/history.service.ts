@@ -70,6 +70,41 @@ export async function getCurrentSession(): Promise<ChatSession> {
     }
   }
 
+  // If no local session, check if user has existing sessions in DB
+  // This handles profile restoration on new devices
+  const localProfile = getUserProfile();
+  if (localProfile) {
+    try {
+      const syncKeyHash = await hashSyncKeyAsync(localProfile.syncKey);
+      const { data: dbProfile } = await supabase
+        .from("user_profiles")
+        .select("id")
+        .eq("sync_key_hash", syncKeyHash)
+        .maybeSingle();
+
+      if (dbProfile) {
+        // Fetch user's most recent session
+        const { data: recentSession } = await supabase
+          .from("chat_sessions")
+          .select("*")
+          .eq("user_profile_id", dbProfile.id)
+          .order("updated_at", { ascending: false })
+          .limit(1)
+          .maybeSingle();
+
+        if (recentSession) {
+          console.log("[getCurrentSession] Restored existing session:", recentSession.id);
+          // Store session ID locally and in cookie
+          localStorage.setItem(STORAGE_KEYS.CURRENT_SESSION_ID, recentSession.id);
+          await setSessionCookie(recentSession.id);
+          return recentSession;
+        }
+      }
+    } catch (err) {
+      console.error("[getCurrentSession] Failed to fetch existing session:", err);
+    }
+  }
+
   // Create new session (either no localStorage ID, or session not found in DB)
   return await createNewSession();
 }
@@ -156,7 +191,7 @@ export async function saveChatMessage(
 }
 
 /**
- * Sync a message to Supabase
+ * Sync a message to Supabase (push local → DB)
  */
 async function syncToSupabase(message: ChatMessage): Promise<void> {
   emitSyncStatus("syncing");
@@ -177,6 +212,78 @@ async function syncToSupabase(message: ChatMessage): Promise<void> {
 
   localStorage.setItem(STORAGE_KEYS.LAST_SYNC, new Date().toISOString());
   emitSyncStatus("synced");
+}
+
+/**
+ * Sync from Supabase to localStorage (pull DB → local)
+ * Checks for new messages in the database and updates localStorage
+ */
+export async function syncFromSupabase(): Promise<void> {
+  try {
+    emitSyncStatus("syncing");
+
+    // Get current session
+    const currentSessionId = localStorage.getItem(STORAGE_KEYS.CURRENT_SESSION_ID);
+    if (!currentSessionId) {
+      emitSyncStatus("synced");
+      return;
+    }
+
+    // Fetch all messages for current session from DB
+    const { data: dbMessages, error } = await supabase
+      .from("chat_messages")
+      .select("*")
+      .eq("session_id", currentSessionId)
+      .order("created_at", { ascending: true });
+
+    if (error) {
+      console.error("[syncFromSupabase] Failed to fetch messages:", error);
+      emitSyncStatus("offline");
+      return;
+    }
+
+    if (!dbMessages || dbMessages.length === 0) {
+      emitSyncStatus("synced");
+      return;
+    }
+
+    // Get local messages
+    const localMessages = loadMessagesFromLocalStorage();
+
+    // Check if DB has different/newer messages
+    const localIds = new Set(localMessages.map((m) => m.id));
+    const dbIds = new Set(dbMessages.map((m: any) => m.id));
+
+    // Find messages in DB but not in local
+    const newMessages = dbMessages.filter((m: any) => !localIds.has(m.id));
+
+    // Find messages in local but not in DB (shouldn't happen, but handle it)
+    const localOnlyMessages = localMessages.filter((m) => !dbIds.has(m.id));
+
+    if (newMessages.length > 0) {
+      console.log(
+        `[syncFromSupabase] Found ${newMessages.length} new messages in DB, syncing to localStorage`
+      );
+      // Replace localStorage with DB version (source of truth)
+      localStorage.setItem(STORAGE_KEYS.MESSAGES, JSON.stringify(dbMessages));
+      localStorage.setItem(STORAGE_KEYS.LAST_SYNC, new Date().toISOString());
+    } else if (localOnlyMessages.length > 0) {
+      console.log(
+        `[syncFromSupabase] Found ${localOnlyMessages.length} local-only messages, pushing to DB`
+      );
+      // Push local-only messages to DB
+      for (const msg of localOnlyMessages) {
+        await syncToSupabase(msg).catch((err) =>
+          console.error("[syncFromSupabase] Failed to push local message:", err)
+        );
+      }
+    }
+
+    emitSyncStatus("synced");
+  } catch (err) {
+    console.error("[syncFromSupabase] Sync failed:", err);
+    emitSyncStatus("offline");
+  }
 }
 
 /**

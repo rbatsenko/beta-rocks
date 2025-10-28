@@ -656,7 +656,9 @@ const tools = {
                 category: r.category,
                 text: r.text?.substring(0, 50) + '...',
                 observedAt: r.observed_at,
-                author: r.author?.display_name || 'Anonymous'
+                author: r.author?.display_name || 'Anonymous',
+                authorObject: r.author, // Raw author object for debugging
+                authorId: r.author_id
               }))
             });
           } catch (error) {

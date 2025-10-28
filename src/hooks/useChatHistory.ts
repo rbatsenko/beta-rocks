@@ -13,6 +13,7 @@ import {
   saveChatMessage,
   startNewChat,
   clearAllChatHistory,
+  syncFromSupabase,
 } from "@/lib/chat/history.service";
 
 export function useChatHistory(initialSessionId?: string) {
@@ -56,6 +57,19 @@ export function useChatHistory(initialSessionId?: string) {
             });
             setInitialMessages(uiMessages);
             setIsLoadingHistory(false);
+
+            // Sync from DB in background (non-blocking) - both chat and favorites
+            Promise.all([
+              syncFromSupabase().catch((err) =>
+                console.error("[useChatHistory] Background chat sync failed:", err)
+              ),
+              import("@/lib/storage/favorites")
+                .then((mod) => mod.syncFavoritesFromSupabase())
+                .catch((err) =>
+                  console.error("[useChatHistory] Background favorites sync failed:", err)
+                ),
+            ]);
+
             return; // Skip async loading
           }
         } catch (err) {
@@ -82,6 +96,25 @@ export function useChatHistory(initialSessionId?: string) {
         setIsLoadingHistory(false);
       });
   }, [initialSessionId]);
+
+  // Bidirectional sync: pull DB updates when window gains focus
+  useEffect(() => {
+    const handleFocus = async () => {
+      console.log("[useChatHistory] Window focused, syncing from DB...");
+      // Sync both chat messages and favorites
+      await Promise.all([
+        syncFromSupabase().catch((err) =>
+          console.error("[useChatHistory] Chat sync failed:", err)
+        ),
+        import("@/lib/storage/favorites")
+          .then((mod) => mod.syncFavoritesFromSupabase())
+          .catch((err) => console.error("[useChatHistory] Favorites sync failed:", err)),
+      ]);
+    };
+
+    window.addEventListener("focus", handleFocus);
+    return () => window.removeEventListener("focus", handleFocus);
+  }, []);
 
   // Save a message (called when new messages arrive)
   const saveMessage = useCallback(async (message: UIMessage) => {
