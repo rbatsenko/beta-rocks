@@ -42,12 +42,17 @@ export default function SyncPage() {
 
     setIsRestoring(true);
     try {
-      // Set the sync key in localStorage
+      // First, clear ALL local storage (sync key, user profile, favorites, chat history, etc.)
+      // This ensures we start fresh with the restored key and prevents data conflicts
+      localStorage.clear();
+
+      // Set the new sync key in localStorage
       setSyncKey(syncKey);
 
-      // Redirect to home after a brief delay
+      // Redirect to home with full page reload after a brief delay
+      // Using window.location.href instead of router.push to ensure all state is reset
       setTimeout(() => {
-        router.push("/?synced=true");
+        window.location.href = "/?synced=true";
       }, 1000);
     } catch (err) {
       console.error("Failed to restore sync key:", err);
