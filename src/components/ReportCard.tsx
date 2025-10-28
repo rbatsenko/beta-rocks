@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
-import { formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow, format } from "date-fns";
 import { hashSyncKeyAsync } from "@/lib/auth/sync-key";
 import { createConfirmation, hasUserConfirmedReport } from "@/lib/db/queries";
 import { getUserProfile } from "@/lib/auth/sync-key";
@@ -131,17 +131,17 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
   const getCategoryColor = (category: ReportCategory) => {
     switch (category) {
       case "conditions":
-        return "bg-blue-500/10 text-blue-700 border-blue-200";
+        return "bg-blue-500/10 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800";
       case "safety":
-        return "bg-red-500/10 text-red-700 border-red-200";
+        return "bg-red-500/10 text-red-700 dark:text-red-300 border-red-200 dark:border-red-800";
       case "access":
-        return "bg-yellow-500/10 text-yellow-700 border-yellow-200";
+        return "bg-yellow-500/10 text-yellow-700 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800";
       case "beta":
-        return "bg-purple-500/10 text-purple-700 border-purple-200";
+        return "bg-purple-500/10 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-800";
       case "facilities":
-        return "bg-green-500/10 text-green-700 border-green-200";
+        return "bg-green-500/10 text-green-700 dark:text-green-300 border-green-200 dark:border-green-800";
       default:
-        return "bg-gray-500/10 text-gray-700 border-gray-200";
+        return "bg-gray-500/10 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800";
     }
   };
 
@@ -163,9 +163,14 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
               <span className="text-xs font-medium">{t(`reports.categories.${category}`)}</span>
             </Badge>
           </div>
-          <span className="text-xs text-muted-foreground">
-            {formatDistanceToNow(new Date(report.observed_at), { addSuffix: true })}
-          </span>
+          <div className="flex flex-col items-end text-right">
+            <span className="text-xs text-muted-foreground">
+              {formatDistanceToNow(new Date(report.observed_at), { addSuffix: true })}
+            </span>
+            <span className="text-[10px] text-muted-foreground/70">
+              {format(new Date(report.observed_at), "MMM d, yyyy")}
+            </span>
+          </div>
         </div>
 
         {/* Ratings - Only show for conditions reports */}

@@ -39,6 +39,7 @@ import {
 } from "@/lib/storage/favorites";
 import { getSunCalcUrl, getGoogleMapsUrl, getOpenStreetMapEmbedUrl } from "@/lib/utils/urls";
 import { getCountryFlag } from "@/lib/utils/country-flag";
+import { fetchReportsByCrag } from "@/lib/db/queries";
 
 type ReportCategory = "conditions" | "safety" | "access" | "beta" | "facilities" | "other";
 
@@ -133,7 +134,7 @@ export function CragPageContent({
   const [isFavorite, setIsFavorite] = useState(false);
   const [favoriteId, setFavoriteId] = useState<string | null>(null);
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
-  const [reports] = useState(initialReports);
+  const [reports, setReports] = useState(initialReports);
   const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
   const [favoritesDialogOpen, setFavoritesDialogOpen] = useState(false);
   const [statsDialogOpen, setStatsDialogOpen] = useState(false);
@@ -159,6 +160,22 @@ export function CragPageContent({
       }
     }
   }, [crag.id, crag.lat, crag.lon]);
+
+  // Fetch fresh reports on mount (bypasses ISR cache for user-generated content)
+  useEffect(() => {
+    const loadFreshReports = async () => {
+      try {
+        const freshReports = await fetchReportsByCrag(crag.id, 20);
+        setReports(freshReports);
+        console.log(`[CragPageContent] Loaded ${freshReports.length} fresh reports for ${crag.id}`);
+      } catch (error) {
+        console.error("[CragPageContent] Failed to fetch fresh reports:", error);
+        // Keep initialReports if fetch fails
+      }
+    };
+
+    loadFreshReports();
+  }, [crag.id]);
 
   // Format location details
   const locationParts = [crag.village, crag.municipality, crag.state, crag.country].filter(Boolean);
@@ -206,10 +223,16 @@ export function CragPageContent({
     }
   };
 
-  const handleReportCreated = useCallback(() => {
-    // Reload reports by triggering a router refresh
-    router.refresh();
-  }, [router]);
+  const handleReportCreated = useCallback(async () => {
+    // Reload reports directly (no router refresh needed - reports fetch client-side)
+    try {
+      const freshReports = await fetchReportsByCrag(crag.id, 20);
+      setReports(freshReports);
+      console.log(`[CragPageContent] Reloaded ${freshReports.length} reports after creation`);
+    } catch (error) {
+      console.error("[CragPageContent] Failed to reload reports:", error);
+    }
+  }, [crag.id]);
 
   const handleAskAI = () => {
     // Navigate to home page with crag pre-filled in chat
