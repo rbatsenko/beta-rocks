@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { I18nProvider } from "@/components/providers/I18nProvider";
 import { QueryProvider } from "@/components/providers/QueryProvider";
+import { RootLayoutClient } from "@/components/RootLayoutClient";
 import { Toaster } from "@/components/ui/toaster";
 import "@/index.css";
 
@@ -54,7 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <QueryProvider>
             <I18nProvider>
-              {children}
+              <RootLayoutClient>{children}</RootLayoutClient>
               <Toaster />
             </I18nProvider>
           </QueryProvider>
