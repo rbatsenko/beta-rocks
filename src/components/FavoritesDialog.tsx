@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Star, Trash2, MapPin, Clock } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { Star, Trash2, MapPin, Clock, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -16,6 +16,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   useFavorites,
   useRemoveFavorite,
+  useUpdateFavorite,
   type Favorite,
 } from "@/hooks/queries/useFavoritesQueries";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
@@ -37,10 +38,81 @@ export function FavoritesDialog({ open, onOpenChange }: FavoritesDialogProps) {
   const router = useRouter();
   const { startLoading } = useLoadingState();
   const [favoriteToDelete, setFavoriteToDelete] = useState<Favorite | null>(null);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   // React Query hooks for favorites
   const { data: favorites = [], isLoading } = useFavorites();
   const removeFavorite = useRemoveFavorite();
+  const updateFavorite = useUpdateFavorite();
+
+  // Refresh conditions for all favorites
+  const refreshConditions = useCallback(async () => {
+    if (!favorites.length || isRefreshing) return;
+
+    setIsRefreshing(true);
+    console.log("[FavoritesDialog] Refreshing conditions for", favorites.length, "favorites");
+
+    try {
+      // Fetch conditions for each favorite in parallel (limit to 5 at a time to avoid rate limiting)
+      const refreshPromises = favorites.slice(0, 10).map(async (favorite) => {
+        try {
+          // Only refresh if last checked was more than 5 minutes ago
+          const lastChecked = favorite.lastCheckedAt
+            ? new Date(favorite.lastCheckedAt).getTime()
+            : 0;
+          const now = Date.now();
+          const fiveMinutes = 5 * 60 * 1000;
+
+          if (now - lastChecked < fiveMinutes) {
+            console.log(`[FavoritesDialog] Skipping ${favorite.areaName} (recently updated)`);
+            return;
+          }
+
+          const params = new URLSearchParams({
+            lat: favorite.latitude.toString(),
+            lon: favorite.longitude.toString(),
+            rockType: favorite.rockType || "unknown",
+          });
+
+          const response = await fetch(`/api/conditions?${params}`);
+          if (!response.ok) {
+            console.warn(`[FavoritesDialog] Failed to fetch conditions for ${favorite.areaName}`);
+            return;
+          }
+
+          const data = await response.json();
+
+          // Update the favorite with new conditions
+          await updateFavorite.mutateAsync({
+            id: favorite.id,
+            updates: {
+              lastRating: data.rating,
+              lastFrictionScore: data.frictionRating,
+              lastCheckedAt: new Date().toISOString(),
+            },
+          });
+
+          console.log(`[FavoritesDialog] Updated conditions for ${favorite.areaName}`);
+        } catch (error) {
+          console.error(
+            `[FavoritesDialog] Error refreshing ${favorite.areaName}:`,
+            error
+          );
+        }
+      });
+
+      await Promise.allSettled(refreshPromises);
+    } finally {
+      setIsRefreshing(false);
+    }
+  }, [favorites, isRefreshing, updateFavorite]);
+
+  // Refresh conditions when dialog opens
+  useEffect(() => {
+    if (open && favorites.length > 0) {
+      refreshConditions();
+    }
+  }, [open]); // Only trigger on open change, not on favorites change to avoid loops
 
   const handleRemove = (favorite: Favorite) => {
     setFavoriteToDelete(favorite);
@@ -83,11 +155,16 @@ export function FavoritesDialog({ open, onOpenChange }: FavoritesDialogProps) {
           <DialogTitle className="flex items-center gap-2">
             <Star className="h-5 w-5 text-orange-500" />
             {t("favorites.title")}
+            {isRefreshing && (
+              <RefreshCw className="h-4 w-4 text-muted-foreground animate-spin" />
+            )}
           </DialogTitle>
           <DialogDescription>
             {favorites.length === 0
               ? t("favorites.empty")
-              : t("favorites.description", { count: favorites.length })}
+              : isRefreshing
+                ? t("favorites.refreshing") || "Refreshing conditions..."
+                : t("favorites.description", { count: favorites.length })}
           </DialogDescription>
         </DialogHeader>
 

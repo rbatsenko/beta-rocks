@@ -14,7 +14,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { fetchOrCreateUserStats, fetchOrCreateUserProfile } from "@/lib/db/queries";
 import { getUserProfile, hashSyncKeyAsync } from "@/lib/auth/sync-key";
-import { formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow, format } from "date-fns";
+import { getDateFnsLocale } from "@/lib/i18n/date-locales";
 import {
   getUserStatsFromStorage,
   saveUserStatsToStorage,
@@ -35,7 +36,8 @@ interface UserStats {
 }
 
 export function StatsDialog({ open, onOpenChange }: StatsDialogProps) {
-  const { t } = useClientTranslation("common");
+  const { t, i18n } = useClientTranslation("common");
+  const dateLocale = getDateFnsLocale(i18n.language);
   const [stats, setStats] = useState<UserStats | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -155,7 +157,7 @@ export function StatsDialog({ open, onOpenChange }: StatsDialogProps) {
                   <span>
                     {t("stats.memberSince")}:{" "}
                     {stats?.created_at
-                      ? new Date(stats.created_at).toLocaleDateString()
+                      ? format(new Date(stats.created_at), "PPP", { locale: dateLocale })
                       : t("stats.unknown")}
                   </span>
                 </div>
@@ -164,7 +166,10 @@ export function StatsDialog({ open, onOpenChange }: StatsDialogProps) {
                     <TrendingUp className="h-4 w-4" />
                     <span>
                       {t("stats.lastActive")}:{" "}
-                      {formatDistanceToNow(new Date(stats.last_active), { addSuffix: true })}
+                      {formatDistanceToNow(new Date(stats.last_active), {
+                        addSuffix: true,
+                        locale: dateLocale,
+                      })}
                     </span>
                   </div>
                 )}
