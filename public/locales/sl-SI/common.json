@@ -1,6 +1,6 @@
 {
   "header": {
-    "title": "temps.rocks"
+    "title": "beta.rocks"
   },
   "welcome": {
     "heading": "Vprašaj po plezalnih razmerah",
@@ -116,10 +116,10 @@
     "about": "O nas",
     "privacy": "Zasebnost",
     "github": "GitHub",
-    "brand": "temps.rocks",
+    "brand": "beta.rocks",
     "description": "Brezplačne plezalne razmere za vse. Z ljubeznijo do plezalne skupnosti.",
     "attribution": "Podatki Open-Meteo, OpenBeta in <osmLink>sodelavcev OpenStreetMap</osmLink>. Pognano s skupnostjo.",
-    "copyright": "© 2025 temps.rocks. Vse pravice pridržane."
+    "copyright": "© 2025 beta.rocks. Vse pravice pridržane."
   },
   "features": {
     "heading": "Vse, kar potrebuješ",
@@ -296,7 +296,7 @@
   },
   "stats": {
     "title": "Tvoja statistika",
-    "description": "Tvoja aktivnost in prispevki k skupnosti temps.rocks",
+    "description": "Tvoja aktivnost in prispevki k skupnosti beta.rocks",
     "reportsPosted": "Objavljenih poročil",
     "confirmationsGiven": "Danih potrditev",
     "favoritesCount": "Priljubljene",

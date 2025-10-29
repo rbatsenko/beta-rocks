@@ -1,6 +1,6 @@
 {
   "header": {
-    "title": "temps.rocks"
+    "title": "beta.rocks"
   },
   "welcome": {
     "heading": "Pergunte sobre condições de escalada",
@@ -115,10 +115,10 @@
     "about": "Sobre",
     "privacy": "Privacidade",
     "github": "GitHub",
-    "brand": "temps.rocks",
+    "brand": "beta.rocks",
     "description": "Condições de escalada gratuitas para todos. Feito com ❤️ para a comunidade de escalada.",
     "attribution": "Dados de Open-Meteo, OpenBeta e <osmLink>contribuidores do OpenStreetMap</osmLink>. Relatórios alimentados pela comunidade.",
-    "copyright": "© 2025 temps.rocks. Todos os direitos reservados."
+    "copyright": "© 2025 beta.rocks. Todos os direitos reservados."
   },
   "features": {
     "heading": "Tudo o Que Precisa",
@@ -295,7 +295,7 @@
   },
   "stats": {
     "title": "Suas estatísticas",
-    "description": "Sua atividade e contribuições para a comunidade temps.rocks",
+    "description": "Sua atividade e contribuições para a comunidade beta.rocks",
     "reportsPosted": "Relatórios publicados",
     "confirmationsGiven": "Confirmações dadas",
     "favoritesCount": "Favoritos",

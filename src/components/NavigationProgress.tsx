@@ -70,9 +70,14 @@ export function NavigationProgress() {
 
   return (
     <>
-      {/* Top loading bar */}
-      <div className="fixed top-0 left-0 right-0 z-50">
-        <div className="h-1 bg-gradient-to-r from-orange-400 via-orange-600 to-orange-400 animate-pulse" />
+      {/* Top loading bar - vibrant and visible */}
+      <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-orange-500/20 overflow-hidden">
+        <div
+          className="h-full bg-orange-500 shadow-lg shadow-orange-500/50"
+          style={{
+            animation: 'indeterminate 1.5s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite',
+          }}
+        />
       </div>
 
       {/* Full-screen loading overlay for very slow loads */}
@@ -85,6 +90,22 @@ export function NavigationProgress() {
           </div>
         </div>
       )}
+
+      <style jsx>{`
+        @keyframes indeterminate {
+          0% {
+            transform: translateX(-100%);
+            width: 30%;
+          }
+          50% {
+            width: 50%;
+          }
+          100% {
+            transform: translateX(400%);
+            width: 30%;
+          }
+        }
+      `}</style>
     </>
   );
 }

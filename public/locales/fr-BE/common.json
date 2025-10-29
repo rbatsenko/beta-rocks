@@ -1,6 +1,6 @@
 {
   "header": {
-    "title": "temps.rocks"
+    "title": "beta.rocks"
   },
   "welcome": {
     "heading": "Demandez les conditions d'escalade",
@@ -115,10 +115,10 @@
     "about": "À propos",
     "privacy": "Confidentialité",
     "github": "GitHub",
-    "brand": "temps.rocks",
+    "brand": "beta.rocks",
     "description": "Conditions d'escalade gratuites pour tous. Créé avec ❤️ pour la communauté des grimpeurs.",
     "attribution": "Données d'Open-Meteo, d'OpenBeta et des <osmLink>contributeurs d'OpenStreetMap</osmLink>. Rapports communautaires.",
-    "copyright": "© 2025 temps.rocks. Tous droits réservés."
+    "copyright": "© 2025 beta.rocks. Tous droits réservés."
   },
   "features": {
     "heading": "Tout ce qu'il vous faut",
@@ -295,7 +295,7 @@
   },
   "stats": {
     "title": "Vos statistiques",
-    "description": "Votre activité et contributions à la communauté temps.rocks",
+    "description": "Votre activité et contributions à la communauté beta.rocks",
     "reportsPosted": "Rapports publiés",
     "confirmationsGiven": "Confirmations données",
     "favoritesCount": "Favoris",

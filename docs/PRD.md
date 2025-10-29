@@ -2,11 +2,11 @@ Perfect 👌 here’s a **Product Requirements Document (PRD)** in Markdown, wri
 
 ---
 
-# temps.rocks – Product Requirements Document (PRD)
+# beta.rocks – Product Requirements Document (PRD)
 
 ## 🌍 Overview
 
-**temps.rocks** is a free, chat-first web app that helps climbers check real-time conditions at crags, sectors, and even specific routes.
+**beta.rocks** is a free, chat-first web app that helps climbers check real-time conditions at crags, sectors, and even specific routes.
 It combines **forecast data (Open-Meteo)**, **sun/shade (suncalc)**, **crag/sector/route data (OpenBeta)**, and **community reports**.
 The app is **local-first** (works offline, stores data in local storage/IndexedDB) with optional sync across devices via a **sync key**.
 
@@ -110,7 +110,7 @@ The app is **local-first** (works offline, stores data in local storage/IndexedD
 ### 8. **Sharing**
 
 - Each crag/sector/route has a shareable URL:
-  - `temps.rocks/siurana/el-pati/la-rambla`
+  - `beta.rocks/siurana/el-pati/la-rambla`
 
 - Page shows:
   - Current forecast summary.

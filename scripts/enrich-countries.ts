@@ -74,7 +74,7 @@ async function reverseGeocode(
   try {
     const response = await fetch(url, {
       headers: {
-        "User-Agent": "temps.rocks climbing weather app",
+        "User-Agent": "beta.rocks climbing weather app",
       },
     });
 

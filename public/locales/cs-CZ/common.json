@@ -1,6 +1,6 @@
 {
   "header": {
-    "title": "temps.rocks"
+    "title": "beta.rocks"
   },
   "welcome": {
     "heading": "Zeptej se na podmínky pro lezení",
@@ -115,10 +115,10 @@
     "about": "O aplikaci",
     "privacy": "Soukromí",
     "github": "GitHub",
-    "brand": "temps.rocks",
+    "brand": "beta.rocks",
     "description": "Bezplatné podmínky pro lezení pro všechny. Vytvořeno s ❤️ pro lezeckou komunitu.",
     "attribution": "Data z Open-Meteo, OpenBeta a <osmLink>přispěvatelů OpenStreetMap</osmLink>. Podpořeno komunitou.",
-    "copyright": "© 2025 temps.rocks. Všechna práva vyhrazena."
+    "copyright": "© 2025 beta.rocks. Všechna práva vyhrazena."
   },
   "features": {
     "heading": "Vše, co potřebuješ",
@@ -295,7 +295,7 @@
   },
   "stats": {
     "title": "Vaše statistiky",
-    "description": "Vaše aktivita a příspěvky do komunity temps.rocks",
+    "description": "Vaše aktivita a příspěvky do komunity beta.rocks",
     "reportsPosted": "Odeslaná hlášení",
     "confirmationsGiven": "Udělená potvrzení",
     "favoritesCount": "Oblíbené",

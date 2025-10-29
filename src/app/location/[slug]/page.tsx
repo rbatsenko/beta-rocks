@@ -230,14 +230,14 @@ export async function generateMetadata({
     const location = [crag.municipality, crag.state, crag.country].filter(Boolean).join(", ");
 
     return {
-      title: `${crag.name} - Real-time Climbing Conditions | temps.rocks`,
+      title: `${crag.name} - Real-time Climbing Conditions | beta.rocks`,
       description: `Live conditions for ${crag.name}${location ? ` in ${location}` : ""}. Currently ${conditions.rating} (${conditions.frictionScore}/5). Check weather, friction, and community reports.`,
       openGraph: {
         title: `${crag.name} Climbing Conditions`,
         description: `${conditions.rating} conditions today - ${conditions.frictionScore}/5 friction score. ${conditions.isDry ? "Dry" : "Wet"}. ${crag.rock_type ? `${crag.rock_type} rock.` : ""}`,
         type: "website",
         locale: "en_US",
-        siteName: "temps.rocks",
+        siteName: "beta.rocks",
       },
       twitter: {
         card: "summary_large_image",

@@ -1,6 +1,6 @@
 {
   "header": {
-    "title": "temps.rocks"
+    "title": "beta.rocks"
   },
   "welcome": {
     "heading": "Pregunta sobre les condicions d'escalada",
@@ -115,10 +115,10 @@
     "about": "Sobre",
     "privacy": "Privacitat",
     "github": "GitHub",
-    "brand": "temps.rocks",
+    "brand": "beta.rocks",
     "description": "Condicions d'escalada gratuïtes per a tothom. Construït amb ❤️ per a la comunitat d'escalada.",
     "attribution": "Dades de Open-Meteo, OpenBeta i <osmLink>col·laboradors d'OpenStreetMap</osmLink>. Informes impulsats per la comunitat.",
-    "copyright": "© 2025 temps.rocks. Tots els drets reservats."
+    "copyright": "© 2025 beta.rocks. Tots els drets reservats."
   },
   "features": {
     "heading": "Tot el que necessites",
@@ -295,7 +295,7 @@
   },
   "stats": {
     "title": "Les teves estadístiques",
-    "description": "La teva activitat i contribucions a la comunitat temps.rocks",
+    "description": "La teva activitat i contribucions a la comunitat beta.rocks",
     "reportsPosted": "Informes publicats",
     "confirmationsGiven": "Confirmacions donades",
     "favoritesCount": "Preferits",

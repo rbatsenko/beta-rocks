@@ -1,6 +1,6 @@
 {
   "header": {
-    "title": "temps.rocks"
+    "title": "beta.rocks"
   },
   "welcome": {
     "heading": "Запитайте про умови для скелелазіння",
@@ -115,10 +115,10 @@
     "about": "Про нас",
     "privacy": "Конфіденційність",
     "github": "GitHub",
-    "brand": "temps.rocks",
+    "brand": "beta.rocks",
     "description": "Безкоштовні умови для скелелазіння для всіх. Створено з ❤️ для спільноти скелелазів.",
     "attribution": "Дані від Open-Meteo, OpenBeta та <osmLink>учасників OpenStreetMap</osmLink>. Звітність від спільноти.",
-    "copyright": "© 2025 temps.rocks. Усі права захищено."
+    "copyright": "© 2025 beta.rocks. Усі права захищено."
   },
   "features": {
     "heading": "Усе, що потрібно",
@@ -295,7 +295,7 @@
   },
   "stats": {
     "title": "Ваша статистика",
-    "description": "Ваша активність та внесок у спільноту temps.rocks",
+    "description": "Ваша активність та внесок у спільноту beta.rocks",
     "reportsPosted": "Опубліковані звіти",
     "confirmationsGiven": "Надані підтвердження",
     "favoritesCount": "Обране",

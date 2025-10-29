@@ -1,6 +1,6 @@
 {
   "header": {
-    "title": "temps.rocks"
+    "title": "beta.rocks"
   },
   "welcome": {
     "heading": "Pitaj o uvjetima penjanja",
@@ -115,10 +115,10 @@
     "about": "O nama",
     "privacy": "Privatnost",
     "github": "GitHub",
-    "brand": "temps.rocks",
+    "brand": "beta.rocks",
     "description": "Besplatni uvjeti penjanja za sve. Izgrađeno s ❤️ za zajednicu penjača.",
     "attribution": "Podaci iz Open-Meteo, OpenBeta i <osmLink>suradnika OpenStreetMap-a</osmLink>. Izvještaji vođeni zajednicom.",
-    "copyright": "© 2025 temps.rocks. Sva prava zadržana."
+    "copyright": "© 2025 beta.rocks. Sva prava zadržana."
   },
   "features": {
     "heading": "Sve što trebaš",
@@ -295,7 +295,7 @@
   },
   "stats": {
     "title": "Vaše statistike",
-    "description": "Vaša aktivnost i doprinosi zajednici temps.rocks",
+    "description": "Vaša aktivnost i doprinosi zajednici beta.rocks",
     "reportsPosted": "Objavljenih izvještaja",
     "confirmationsGiven": "Danih potvrda",
     "favoritesCount": "Omiljene lokacije",

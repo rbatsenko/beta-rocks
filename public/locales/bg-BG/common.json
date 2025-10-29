@@ -1,6 +1,6 @@
 {
   "header": {
-    "title": "temps.rocks"
+    "title": "beta.rocks"
   },
   "welcome": {
     "heading": "Попитайте за условията на катеренето",
@@ -115,10 +115,10 @@
     "about": "За нас",
     "privacy": "Приватност",
     "github": "GitHub",
-    "brand": "temps.rocks",
+    "brand": "beta.rocks",
     "description": "Безплатни условия на катеренето за всички. Направено с ❤️ за катерачната общност.",
     "attribution": "Данни от Open-Meteo, OpenBeta и <osmLink>участници на OpenStreetMap</osmLink>. Доклади насочени от общност.",
-    "copyright": "© 2025 temps.rocks. Всички права запазени."
+    "copyright": "© 2025 beta.rocks. Всички права запазени."
   },
   "features": {
     "heading": "Всичко, което имаш нужда",
@@ -295,7 +295,7 @@
   },
   "stats": {
     "title": "Вашите статистики",
-    "description": "Вашата активност и приноси към общността temps.rocks",
+    "description": "Вашата активност и приноси към общността beta.rocks",
     "reportsPosted": "Публикувани доклади",
     "confirmationsGiven": "Дадени потвърждения",
     "favoritesCount": "Любимци",

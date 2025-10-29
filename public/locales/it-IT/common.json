@@ -1,6 +1,6 @@
 {
   "header": {
-    "title": "temps.rocks"
+    "title": "beta.rocks"
   },
   "welcome": {
     "heading": "Chiedi le condizioni di arrampicata",
@@ -115,10 +115,10 @@
     "about": "Informazioni",
     "privacy": "Privacy",
     "github": "GitHub",
-    "brand": "temps.rocks",
+    "brand": "beta.rocks",
     "description": "Condizioni di arrampicata gratuite per tutti. Creato con ❤️ per la comunità dei climber.",
     "attribution": "Dati da Open-Meteo, OpenBeta e <osmLink>contributori di OpenStreetMap</osmLink>. Report della community.",
-    "copyright": "© 2025 temps.rocks. Tutti i diritti riservati."
+    "copyright": "© 2025 beta.rocks. Tutti i diritti riservati."
   },
   "features": {
     "heading": "Tutto ciò che ti serve",
@@ -300,7 +300,7 @@
   },
   "stats": {
     "title": "Le tue statistiche",
-    "description": "La tua attività e contributi alla community temps.rocks",
+    "description": "La tua attività e contributi alla community beta.rocks",
     "reportsPosted": "Report pubblicati",
     "confirmationsGiven": "Conferme date",
     "favoritesCount": "Preferiti",

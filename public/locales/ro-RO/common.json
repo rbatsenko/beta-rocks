@@ -1,6 +1,6 @@
 {
   "header": {
-    "title": "temps.rocks"
+    "title": "beta.rocks"
   },
   "welcome": {
     "heading": "Întreabă despre condițiile de escaladă",
@@ -115,10 +115,10 @@
     "about": "Despre",
     "privacy": "Confidențialitate",
     "github": "GitHub",
-    "brand": "temps.rocks",
+    "brand": "beta.rocks",
     "description": "Condiții gratuite de escaladă pentru toți. Construit cu ❤️ pentru comunitatea escaladei.",
     "attribution": "Date de la Open-Meteo, OpenBeta și <osmLink>colaboratorii OpenStreetMap</osmLink>. Rapoarte alimentate de comunitate.",
-    "copyright": "© 2025 temps.rocks. Toate drepturile rezervate."
+    "copyright": "© 2025 beta.rocks. Toate drepturile rezervate."
   },
   "features": {
     "heading": "Tot ce ai nevoie",
@@ -295,7 +295,7 @@
   },
   "stats": {
     "title": "Statisticile tale",
-    "description": "Activitatea ta și contribuțiile la comunitatea temps.rocks",
+    "description": "Activitatea ta și contribuțiile la comunitatea beta.rocks",
     "reportsPosted": "Rapoarte postate",
     "confirmationsGiven": "Confirmări date",
     "favoritesCount": "Favorite",

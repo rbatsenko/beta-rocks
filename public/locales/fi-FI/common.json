@@ -1,6 +1,6 @@
 {
   "header": {
-    "title": "temps.rocks"
+    "title": "beta.rocks"
   },
   "welcome": {
     "heading": "Kysy kiipeilyöoloista",
@@ -115,10 +115,10 @@
     "about": "Tietoa",
     "privacy": "Yksityisyys",
     "github": "GitHub",
-    "brand": "temps.rocks",
+    "brand": "beta.rocks",
     "description": "Ilmaiset kiipeilyolosuhteet kaikille. Rakennettu ❤️ kiipeilyyhteisölle.",
     "attribution": "Tiedot lähteistä Open-Meteo, OpenBeta ja <osmLink>OpenStreetMap-osallistujat</osmLink>. Yhteisön tuottamat raportit.",
-    "copyright": "© 2025 temps.rocks. Kaikki oikeudet pidätetään."
+    "copyright": "© 2025 beta.rocks. Kaikki oikeudet pidätetään."
   },
   "features": {
     "heading": "Kaikki mitä tarvitset",
@@ -295,7 +295,7 @@
   },
   "stats": {
     "title": "Tilastosi",
-    "description": "Aktiivisuutesi ja panoksesi temps.rocks-yhteisölle",
+    "description": "Aktiivisuutesi ja panoksesi beta.rocks-yhteisölle",
     "reportsPosted": "Lähetetyt raportit",
     "confirmationsGiven": "Annetut vahvistukset",
     "favoritesCount": "Suosikit",

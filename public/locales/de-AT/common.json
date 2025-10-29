@@ -1,6 +1,6 @@
 {
   "header": {
-    "title": "temps.rocks"
+    "title": "beta.rocks"
   },
   "welcome": {
     "heading": "Frag nach den Kletterbedingungen",
@@ -115,10 +115,10 @@
     "about": "Über uns",
     "privacy": "Datenschutz",
     "github": "GitHub",
-    "brand": "temps.rocks",
+    "brand": "beta.rocks",
     "description": "Kostenlose Kletterinfos für alle. Mit ❤️ für die alpine Community gebaut.",
     "attribution": "Daten von Open-Meteo, OpenBeta und <osmLink>OpenStreetMap-Mitwirkenden</osmLink>. Community-Reports.",
-    "copyright": "© 2025 temps.rocks. Alle Rechte vorbehalten."
+    "copyright": "© 2025 beta.rocks. Alle Rechte vorbehalten."
   },
   "features": {
     "heading": "Alles was du brauchst",
@@ -295,7 +295,7 @@
   },
   "stats": {
     "title": "Deine Statistiken",
-    "description": "Deine Aktivität und Beiträge zur temps.rocks Community",
+    "description": "Deine Aktivität und Beiträge zur beta.rocks Community",
     "reportsPosted": "Berichte erstellt",
     "confirmationsGiven": "Bestätigungen gegeben",
     "favoritesCount": "Favoriten",

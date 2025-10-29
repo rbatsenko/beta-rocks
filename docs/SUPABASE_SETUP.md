@@ -287,7 +287,7 @@ For multi-device sync:
 1. Generate on first visit (browser)
 2. Store in localStorage
 3. Hash with SHA-256 for database (never store raw key)
-4. QR code: `temps.rocks/sync?key=<key>`
+4. QR code: `beta.rocks/sync?key=<key>`
 
 ```typescript
 import { sha256 } from "crypto-js";

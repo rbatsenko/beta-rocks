@@ -88,7 +88,7 @@ export async function getWeatherForecast(
     //    This reduces refetching across invocations/regions when supported.
     const response = await fetch(url.toString(), {
       headers: {
-        "User-Agent": "temps.rocks",
+        "User-Agent": "beta.rocks",
       },
       // Enable Next.js data cache for this request
       // Note: works in Route Handlers and Edge runtime as a best-effort cache.

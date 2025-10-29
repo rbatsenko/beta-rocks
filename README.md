@@ -1,6 +1,6 @@
-# temps.rocks
+# beta.rocks
 
-A free, chat-first web app that helps climbers check real-time conditions at crags, sectors, and routes worldwide. Built with Next.js, React, and deployed on Vercel.
+Get the beta on any crag worldwide. A free, chat-first web app that provides real-time conditions, community reports, and route information for climbers. Built with Next.js, React, and deployed on Vercel.
 
 ## Getting Started
 

@@ -1,6 +1,6 @@
 # React Native App Strategy: Maximum Code Reuse
 
-This document outlines the comprehensive strategy for creating a React Native mobile app for temps.rocks with 85-90% code reuse from the existing Next.js web application.
+This document outlines the comprehensive strategy for creating a React Native mobile app for beta.rocks with 85-90% code reuse from the existing Next.js web application.
 
 ## Architecture Overview: Monorepo with Shared Packages
 
@@ -248,7 +248,7 @@ import { useChatHistory } from '@temps/shared/hooks/useChatHistory'
 
 export default function ChatScreen() {
   const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
-    api: 'https://temps.rocks/api/chat', // Your existing endpoint!
+    api: 'https://beta.rocks/api/chat', // Your existing endpoint!
     // Or run locally in mobile: 'http://localhost:3000/api/chat'
   })
 
@@ -365,7 +365,7 @@ import { Stack } from 'expo-router'
 export default function RootLayout() {
   return (
     <Stack>
-      <Stack.Screen name="index" options={{ title: 'temps.rocks' }} />
+      <Stack.Screen name="index" options={{ title: 'beta.rocks' }} />
       <Stack.Screen name="settings" />
       <Stack.Screen name="sync" options={{ title: 'Sync Device' }} />
       <Stack.Screen

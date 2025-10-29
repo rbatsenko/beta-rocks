@@ -1,5 +1,5 @@
 /**
- * Database query helpers for temps.rocks
+ * Database query helpers for beta.rocks
  * All queries use the Supabase client with proper types
  */
 

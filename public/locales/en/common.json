@@ -1,6 +1,6 @@
 {
   "header": {
-    "title": "temps.rocks"
+    "title": "beta.rocks"
   },
   "welcome": {
     "heading": "Ask about climbing conditions",
@@ -124,10 +124,10 @@
     "about": "About",
     "privacy": "Privacy",
     "github": "GitHub",
-    "brand": "temps.rocks",
+    "brand": "beta.rocks",
     "description": "Free climbing conditions for everyone. Built with ❤️ for the climbing community.",
     "attribution": "Data from Open-Meteo, OpenBeta, and <osmLink>OpenStreetMap contributors</osmLink>. Community-powered reports.",
-    "copyright": "© 2025 temps.rocks. All rights reserved."
+    "copyright": "© 2025 beta.rocks. All rights reserved."
   },
   "features": {
     "heading": "Everything You Need",
@@ -325,7 +325,7 @@
   },
   "stats": {
     "title": "Your Stats",
-    "description": "Your activity and contributions to the temps.rocks community",
+    "description": "Your activity and contributions to the beta.rocks community",
     "reportsPosted": "Reports Posted",
     "confirmationsGiven": "Confirmations Given",
     "favoritesCount": "Favorites",

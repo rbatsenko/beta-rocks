@@ -48,7 +48,7 @@ export async function searchLocations(
 
     const response = await fetch(url.toString(), {
       headers: {
-        "User-Agent": "temps.rocks",
+        "User-Agent": "beta.rocks",
       },
     });
 

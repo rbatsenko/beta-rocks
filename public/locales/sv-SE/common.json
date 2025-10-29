@@ -1,6 +1,6 @@
 {
   "header": {
-    "title": "temps.rocks"
+    "title": "beta.rocks"
   },
   "welcome": {
     "heading": "Fråga om klätterförhållanden",
@@ -116,10 +116,10 @@
     "about": "Om",
     "privacy": "Sekretess",
     "github": "GitHub",
-    "brand": "temps.rocks",
+    "brand": "beta.rocks",
     "description": "Gratis klätterförhållanden för alla. Byggt med kärlek till communityt.",
     "attribution": "Data från Open-Meteo, OpenBeta och <osmLink>OpenStreetMap-bidragsgivare</osmLink>. Drivs av communityt.",
-    "copyright": "© 2025 temps.rocks. Alla rättigheter förbehållna."
+    "copyright": "© 2025 beta.rocks. Alla rättigheter förbehållna."
   },
   "features": {
     "heading": "Allt du behöver",
@@ -296,7 +296,7 @@
   },
   "stats": {
     "title": "Din statistik",
-    "description": "Din aktivitet och bidrag till temps.rocks-gemenskapen",
+    "description": "Din aktivitet och bidrag till beta.rocks-gemenskapen",
     "reportsPosted": "Rapporter publicerade",
     "confirmationsGiven": "Bekräftelser givna",
     "favoritesCount": "Favoriter",

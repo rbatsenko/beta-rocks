@@ -1,5 +1,5 @@
 /**
- * Units system for temps.rocks
+ * Units system for beta.rocks
  * Handles temperature, wind speed, precipitation, distance, and elevation units
  */
 

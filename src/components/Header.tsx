@@ -10,7 +10,7 @@ interface HeaderProps {
 }
 
 /**
- * Shared header component used across temps.rocks
+ * Shared header component used across beta.rocks
  * Displays the logo/branding on the left and custom actions on the right
  */
 export function Header({ actions }: HeaderProps) {
@@ -19,7 +19,7 @@ export function Header({ actions }: HeaderProps) {
       <div className="container flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
           <CloudSun className="w-6 h-6 text-orange-500" />
-          <h1 className="text-xl font-bold">temps.rocks</h1>
+          <h1 className="text-xl font-bold">beta.rocks</h1>
         </Link>
         {actions && <div className="flex items-center gap-2">{actions}</div>}
       </div>

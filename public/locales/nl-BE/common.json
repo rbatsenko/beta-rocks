@@ -1,6 +1,6 @@
 {
   "header": {
-    "title": "temps.rocks"
+    "title": "beta.rocks"
   },
   "welcome": {
     "heading": "Vraag naar klimcondities",
@@ -115,10 +115,10 @@
     "about": "Over",
     "privacy": "Privacy",
     "github": "GitHub",
-    "brand": "temps.rocks",
+    "brand": "beta.rocks",
     "description": "Gratis klimcondities voor iedereen. Gebouwd met ❤️ voor de klimgemeenschap.",
     "attribution": "Gegevens van Open-Meteo, OpenBeta en <osmLink>OpenStreetMap bijdragers</osmLink>. Door de gemeenschap aangestuurde rapporten.",
-    "copyright": "© 2025 temps.rocks. Alle rechten voorbehouden."
+    "copyright": "© 2025 beta.rocks. Alle rechten voorbehouden."
   },
   "features": {
     "heading": "Alles wat je nodig hebt",
@@ -295,7 +295,7 @@
   },
   "stats": {
     "title": "Jouw statistieken",
-    "description": "Jouw activiteit en bijdragen aan de temps.rocks community",
+    "description": "Jouw activiteit en bijdragen aan de beta.rocks community",
     "reportsPosted": "Rapporten geplaatst",
     "confirmationsGiven": "Bevestigingen gegeven",
     "favoritesCount": "Favorieten",

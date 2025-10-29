@@ -1,6 +1,6 @@
 {
   "header": {
-    "title": "temps.rocks"
+    "title": "beta.rocks"
   },
   "welcome": {
     "heading": "Zapytaj o warunki wspinaczkowe",
@@ -117,10 +117,10 @@
     "about": "O nas",
     "privacy": "Prywatność",
     "github": "GitHub",
-    "brand": "temps.rocks",
+    "brand": "beta.rocks",
     "description": "Darmowe raporty wspinaczkowe dla każdego. Stworzone z ❤️ dla wspinaczkowej społeczności.",
     "attribution": "Dane z Open-Meteo, OpenBeta i <osmLink>współtwórców OpenStreetMap</osmLink>. Raporty społecznościowe.",
-    "copyright": "© 2025 temps.rocks. Wszelkie prawa zastrzeżone."
+    "copyright": "© 2025 beta.rocks. Wszelkie prawa zastrzeżone."
   },
   "features": {
     "heading": "Wszystko czego potrzebujesz",
@@ -290,7 +290,7 @@
   },
   "stats": {
     "title": "Twoje statystyki",
-    "description": "Twoja aktywność i wkład w społeczność temps.rocks",
+    "description": "Twoja aktywność i wkład w społeczność beta.rocks",
     "reportsPosted": "Opublikowane raporty",
     "confirmationsGiven": "Udzielone potwierdzenia",
     "favoritesCount": "Ulubione",
