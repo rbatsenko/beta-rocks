@@ -32,7 +32,11 @@ export default function LocationLayout({ children }: { children: React.ReactNode
       <SettingsDialog open={settingsDialogOpen} onOpenChange={setSettingsDialogOpen} />
       <FavoritesDialog open={favoritesDialogOpen} onOpenChange={setFavoritesDialogOpen} />
       <StatsDialog open={statsDialogOpen} onOpenChange={setStatsDialogOpen} />
-      <SyncExplainerDialog open={syncExplainerDialogOpen} onOpenChange={setSyncExplainerDialogOpen} />
+      <SyncExplainerDialog
+        open={syncExplainerDialogOpen}
+        onOpenChange={setSyncExplainerDialogOpen}
+        onOpenSettings={() => setSettingsDialogOpen(true)}
+      />
     </>
   );
 }
