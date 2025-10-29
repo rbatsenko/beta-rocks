@@ -123,7 +123,7 @@ export const ConditionsDetailSheet = memo(function ConditionsDetailSheet({
   const handleViewCragPage = () => {
     if (data.latitude && data.longitude) {
       const slug = generateUniqueSlug(data.location, data.latitude, data.longitude);
-      
+
       router.push(`/location/${slug}`);
       onOpenChange(false); // Close the sheet
     }

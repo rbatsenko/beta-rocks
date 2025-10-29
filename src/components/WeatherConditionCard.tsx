@@ -245,7 +245,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
                 <button
                   onClick={() => {
                     const slug = generateUniqueSlug(data.location, data.latitude!, data.longitude!);
-                    
+
                     router.push(`/location/${slug}`);
                   }}
                   className="hover:text-orange-500 transition-colors cursor-pointer inline-flex items-center gap-1 group"
