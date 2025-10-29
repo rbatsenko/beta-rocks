@@ -104,9 +104,7 @@ export function FavoritesDialog({ open, onOpenChange }: FavoritesDialogProps) {
                   <CardHeader className="pb-3">
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex-1 min-w-0">
-                        <CardTitle className="text-base truncate">
-                          {favorite.areaName}
-                        </CardTitle>
+                        <CardTitle className="text-base truncate">{favorite.areaName}</CardTitle>
                         <CardDescription className="flex items-center gap-1 mt-1 text-xs">
                           <MapPin className="h-3 w-3 flex-shrink-0" />
                           <span className="truncate">{favorite.location}</span>

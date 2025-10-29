@@ -38,8 +38,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "beta.rocks",
-    description:
-      "Get conditions, community reports, and route information for any crag worldwide.",
+    description: "Get conditions, community reports, and route information for any crag worldwide.",
   },
   robots: {
     index: true,
