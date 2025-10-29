@@ -4,7 +4,7 @@ import {
   searchCrags,
   findCragByCoordinates,
 } from "@/lib/db/queries";
-import { generateSlug, parseCoordinatesFromSlug, getBaseSlug } from "@/lib/utils/slug";
+import { generateSlug, generateUniqueSlug, parseCoordinatesFromSlug, getBaseSlug } from "@/lib/utils/slug";
 import { CragConditionsClient } from "@/components/CragConditionsClient";
 
 // Enable ISR with 5-minute revalidation
@@ -14,7 +14,18 @@ export const revalidate = 300;
 async function getCragBySlug(slug: string) {
   console.log(`[getCragBySlug] Processing slug: ${slug}`);
 
-  // Try name-based search
+  // OPTIMIZATION: Try coordinate lookup first (fast and precise)
+  const coords = parseCoordinatesFromSlug(slug);
+  if (coords) {
+    console.log(`[getCragBySlug] Found coordinates in slug: ${coords.lat}, ${coords.lon}`);
+    const crag = await findCragByCoordinates(coords.lat, coords.lon, 0.01);
+    if (crag) {
+      console.log(`[getCragBySlug] Found crag by coordinates: ${crag.name}`);
+      return crag;
+    }
+  }
+
+  // Fallback: name-based search (for legacy URLs without coordinates)
   const baseSlug = getBaseSlug(slug);
   const slugParts = baseSlug.split("-");
   const searchName = slugParts[slugParts.length - 1];
@@ -36,25 +47,7 @@ async function getCragBySlug(slug: string) {
       return exactMatch;
     }
 
-    // Use coordinates to disambiguate
-    const coords = parseCoordinatesFromSlug(slug);
-    if (coords) {
-      const crag = await findCragByCoordinates(coords.lat, coords.lon, 0.01);
-      if (crag) {
-        return crag;
-      }
-    }
-
     return results[0];
-  }
-
-  // Fallback: pure coordinate lookup
-  const coords = parseCoordinatesFromSlug(slug);
-  if (coords) {
-    const crag = await findCragByCoordinates(coords.lat, coords.lon, 0.01);
-    if (crag) {
-      return crag;
-    }
   }
 
   return null;
@@ -119,9 +112,10 @@ export async function generateStaticParams() {
 
     console.log(`[generateStaticParams] Generating paths for ${crags.length} crags`);
 
-    // Generate slugs for all crags
+    // Generate unique slugs with coordinates for all crags
+    // This ensures each crag gets a unique URL and fast lookups
     return crags.map((crag) => ({
-      slug: generateSlug(crag.name),
+      slug: generateUniqueSlug(crag.name, crag.lat, crag.lon),
     }));
   } catch (error) {
     console.error("[generateStaticParams] Error:", error);
