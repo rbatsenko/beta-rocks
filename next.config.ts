@@ -7,7 +7,6 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     viewTransition: true,
-    instrumentationHook: true,
   },
 };
 
