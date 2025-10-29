@@ -118,16 +118,16 @@
     "privacy": "Prywatność",
     "github": "GitHub",
     "brand": "temps.rocks",
-    "description": "Darmowe warunki wspinaczkowe dla każdego. Stworzone z ❤️ dla wspinaczkowej społeczności.",
+    "description": "Darmowe raporty wspinaczkowe dla każdego. Stworzone z ❤️ dla wspinaczkowej społeczności.",
     "attribution": "Dane z Open-Meteo, OpenBeta i <osmLink>współtwórców OpenStreetMap</osmLink>. Raporty społecznościowe.",
     "copyright": "© 2025 temps.rocks. Wszelkie prawa zastrzeżone."
   },
   "features": {
     "heading": "Wszystko czego potrzebujesz",
-    "subheading": "Warunki pogodowe do wspinania w zasięgu ręki, całkowicie za darmo",
+    "subheading": "Warunki pogodowe i raporty w zasięgu ręki, całkowicie za darmo",
     "realTimeWeather": {
       "title": "Pogoda na żywo",
-      "description": "Dokładne prognozy z Open-Meteo z kalkulacją słońca/cienia dla konkretnych sektorów"
+      "description": "Dokładne prognozy z Open-Meteo z linkiem do słońca/cienia dla konkretnych sektorów"
     },
     "chatInterface": {
       "title": "Interfejs czatu",
@@ -195,7 +195,7 @@
     "bestTime": "Najlepszy czas",
     "noOptimalConditions": "Brak optymalnych warunków w ciągu najbliższych 5 dni",
     "checkHourlyForecast": "Sprawdź prognozę godzinową",
-    "weatherDisclaimer": "⚠️ Pogoda może się szybko zmieniać. Monitoruj prognozy przed wyjazdem i sprawdź warunki na miejscu.",
+    "weatherDisclaimer": "⚠️ Pogoda może się szybko zmieniać. Monitoruj prognozy na bieżąco przed wyjazdem.",
     "window": "okno",
     "windows": "okna",
     "today": "Dzisiaj",
@@ -243,7 +243,7 @@
   "sync": {
     "banner": {
       "title": "Twoje dane synchronizują się między urządzeniami",
-      "description": "Twoje ulubione, raporty i historia czatu są zapisywane lokalnie i mogą synchronizować się z innymi urządzeniami za pomocą klucza synchronizacji.",
+      "description": "Twoje ulubione skałki, raporty i czat są zapisywane lokalnie i mogą synchronizować się z innymi urządzeniami za pomocą klucza synchronizacji.",
       "learnMore": "Dowiedz się więcej",
       "dismiss": "Rozumiem"
     },
@@ -261,7 +261,7 @@
   },
   "syncExplainer": {
     "title": "Jak działa synchronizacja",
-    "description": "Synchronizuj swoje dane na wszystkich urządzeniach w sposób bezpieczny i płynny.",
+    "description": "Synchronizuj swoje dane na wszystkich urządzeniach w bezpieczny i prosty sposób.",
     "features": {
       "syncKey": {
         "title": "Unikalny klucz synchronizacji",
@@ -269,11 +269,11 @@
       },
       "multiDevice": {
         "title": "Dostęp z wielu urządzeń",
-        "description": "Uzyskaj dostęp do swoich ulubionych i historii czatów z dowolnego urządzenia za pomocą klucza synchronizacji."
+        "description": "Uzyskaj dostęp do swoich ulubionych skałek i czatu z dowolnego urządzenia za pomocą klucza synchronizacji."
       },
       "privacy": {
         "title": "Prywatność na pierwszym miejscu",
-        "description": "Twoje dane są zaszyfrowane i dostępne tylko za pomocą klucza synchronizacji. Nie wymaga konta."
+        "description": "Twoje dane są zaszyfrowane i dostępne tylko za pomocą klucza synchronizacji. Rejestracja nie jest wymagana."
       }
     },
     "openSettings": "Otwórz ustawienia"
@@ -297,7 +297,7 @@
     "memberSince": "Członek od",
     "lastActive": "Ostatnia aktywność",
     "unknown": "Nieznane",
-    "encourageReports": "Podziel się swoją lokalną wiedzą, publikując raporty o warunkach na skałach!",
+    "encourageReports": "Podziel się swoją lokalną wiedzą, publikując raporty o warunkach w skałach!",
     "thankYou": "Dziękujemy za wkład w społeczność wspinaczkową!"
   },
   "settings": {
@@ -307,12 +307,12 @@
     "saving": "Zapisywanie...",
     "displayName": {
       "label": "Nazwa wyświetlana",
-      "description": "Twoje imię wyświetlane w raportach i potwierdzeniach (opcjonalnie)",
-      "placeholder": "Wprowadź swoje imię...",
-      "saved": "Nazwa wyświetlana zapisana",
-      "savedDescription": "Twoja nazwa wyświetlana została pomyślnie zaktualizowana",
+      "description": "Twoja nazwa użytkownika wyświetlana w raportach i potwierdzeniach (opcjonalnie)",
+      "placeholder": "Wprowadź swoją nazwę użytkownika...",
+      "saved": "Nazwa użytkownika zapisana",
+      "savedDescription": "Twoja nazwa użytkownika została pomyślnie zaktualizowana",
       "saveFailed": "Nie udało się zapisać",
-      "saveFailedDescription": "Nie można zapisać Twojej nazwy wyświetlanej. Spróbuj ponownie"
+      "saveFailedDescription": "Nie można zapisać twojej nazwy użytkownika. Spróbuj ponownie"
     },
     "units": {
       "title": "Jednostki i pomiary",
@@ -359,7 +359,7 @@
     },
     "syncKey": {
       "title": "Klucz synchronizacji",
-      "description": "Użyj tego klucza do synchronizacji ulubionych i ustawień między urządzeniami",
+      "description": "Użyj tego klucza do synchronizacji ulubionych skałek i ustawień między urządzeniami",
       "label": "Twój klucz synchronizacji",
       "copy": "Kopiuj klucz synchronizacji",
       "showFullKey": "Pokaż pełny klucz",
@@ -373,7 +373,7 @@
       "restoreButton": "Przywróć klucz synchronizacji",
       "restoring": "Przywracanie...",
       "restoreSuccess": "Klucz synchronizacji pomyślnie przywrócony! Przeładowywanie...",
-      "restoreSuccessDescription": "Your data will be restored after reload",
+      "restoreSuccessDescription": "Twoje dane zostaną przywrócone po przeładowaniu",
       "restoreError": "Nieprawidłowy format klucza synchronizacji. Sprawdź i spróbuj ponownie.",
       "saveNote": {
         "title": "Zapisz swój klucz synchronizacji",
@@ -381,14 +381,14 @@
       },
       "warning": {
         "title": "Zachowaj swój klucz synchronizacji w tajemnicy",
-        "description": "Każdy, kto ma Twój klucz synchronizacji, może uzyskać dostęp do Twoich ulubionych i ustawień. Nie udostępniaj go publicznie."
+        "description": "Każdy, kto ma Twój klucz synchronizacji, może uzyskać dostęp do Twoich ulubionych skałek i ustawień. Nie udostępniaj go publicznie."
       }
     },
     "dangerZone": {
       "title": "Strefa niebezpieczna",
       "description": "Te działania są trwałe i nie można ich cofnąć",
       "deleteProfile": "Usuń profil",
-      "deleteProfileConfirm": "Czy na pewno chcesz usunąć swój profil? Spowoduje to trwałe usunięcie wszystkich twoich danych, w tym ulubionych, historii czatu i ustawień. Tej czynności nie można cofnąć.",
+      "deleteProfileConfirm": "Czy na pewno chcesz usunąć swój profil? Spowoduje to trwałe usunięcie wszystkich twoich danych, w tym ulubionych skałek, historii czatu i ustawień. Tej czynności nie można cofnąć.",
       "deleteFailed": "Nie udało się usunąć profilu. Spróbuj ponownie."
     }
   },
