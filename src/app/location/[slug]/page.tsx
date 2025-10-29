@@ -260,15 +260,15 @@ export async function generateMetadata({
 // Pre-render top crags at build time (optional - comment out for faster builds)
 export async function generateStaticParams() {
   try {
-    // Fetch top 50 crags from database
+    // Fetch top 5 crags from database (reduced to avoid Open-Meteo rate limits)
     const crags = await searchCrags("");
 
     if (!crags || crags.length === 0) {
       return [];
     }
 
-    // Generate slugs for pre-rendering
-    return crags.slice(0, 50).map((crag) => ({
+    // Generate slugs for pre-rendering (only top 5 to avoid 429 errors)
+    return crags.slice(0, 5).map((crag) => ({
       slug: generateSlug(crag.name),
     }));
   } catch (error) {
