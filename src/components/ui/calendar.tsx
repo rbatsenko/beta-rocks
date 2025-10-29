@@ -86,7 +86,7 @@ function Calendar({
         range_middle: cn("rounded-none", defaultClassNames.range_middle),
         range_end: cn("bg-accent rounded-r-md", defaultClassNames.range_end),
         today: cn(
-          "bg-orange-100 text-orange-900 font-bold dark:bg-orange-900 dark:text-orange-100",
+          "bg-orange-100 text-orange-900 font-bold dark:bg-orange-900 dark:text-orange-100 rounded-md",
           defaultClassNames.today
         ),
         outside: cn("text-muted-foreground opacity-50", defaultClassNames.outside),
@@ -164,8 +164,8 @@ function CalendarDayButton({
         "data-[range-start=true]:bg-orange-500 data-[range-start=true]:text-white data-[range-end=true]:bg-orange-500 data-[range-end=true]:text-white",
         // Disabled styling with line-through
         "disabled:text-muted-foreground disabled:opacity-40 disabled:line-through",
-        // Hover for available dates
-        "hover:bg-accent hover:text-accent-foreground",
+        // Hover for available dates - subtle orange tint
+        "hover:bg-orange-100 hover:text-orange-900 dark:hover:bg-orange-900/20 dark:hover:text-orange-100",
         // Focus states
         "focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2",
         defaultClassNames.day,

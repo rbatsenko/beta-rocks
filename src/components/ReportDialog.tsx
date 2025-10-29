@@ -31,8 +31,18 @@ import { createReport } from "@/lib/db/queries";
 import { fetchOrCreateUserProfile } from "@/lib/db/queries";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import { getDateFnsLocale, getLocalizedDateFormat } from "@/lib/i18n/date-locales";
 
-type ReportCategory = "conditions" | "safety" | "access" | "beta" | "facilities" | "other";
+type ReportCategory = "conditions" | "safety" | "access" | "climbing_info" | "facilities" | "other";
+
+const categories: ReportCategory[] = [
+  "conditions",
+  "safety",
+  "access",
+  "climbing_info",
+  "facilities",
+  "other",
+];
 
 interface ReportDialogProps {
   open: boolean;
@@ -49,7 +59,9 @@ export function ReportDialog({
   cragName,
   onReportCreated,
 }: ReportDialogProps) {
-  const { t } = useClientTranslation("common");
+  const { t, i18n } = useClientTranslation("common");
+  const dateLocale = getDateFnsLocale(i18n.language);
+  const dateFormat = getLocalizedDateFormat(i18n.language);
   const [category, setCategory] = useState<ReportCategory>("conditions");
   const [dryRating, setDryRating] = useState([3]);
   const [windRating, setWindRating] = useState([3]);
@@ -84,7 +96,7 @@ export function ReportDialog({
         return <AlertTriangle className={iconClass} />;
       case "access":
         return <Lock className={iconClass} />;
-      case "beta":
+      case "climbing_info":
         return <Mountain className={iconClass} />;
       case "facilities":
         return <Home className={iconClass} />;
@@ -145,10 +157,10 @@ export function ReportDialog({
           <DialogDescription>{t("reports.addReportDescription", { cragName })}</DialogDescription>
         </DialogHeader>
 
-        <ScrollArea className="max-h-[70vh] pr-4">
-          <div className="space-y-3 py-4">
+        <ScrollArea className="max-h-[70vh] pr-6">
+          <div className="space-y-4 pb-2 px-1">
             {/* Author Preview */}
-            <div className="bg-muted/50 rounded-lg p-3">
+            <div className="bg-muted/50 rounded-lg p-4">
               <p className="text-sm text-muted-foreground">
                 {t("reports.postingAs")}:{" "}
                 <span className="font-medium text-foreground">
@@ -158,14 +170,16 @@ export function ReportDialog({
             </div>
 
             {/* Observation Date */}
-            <div className="space-y-2">
-              <Label className="text-sm font-medium">{t("reports.observationDate")}</Label>
+            <div className="mb-6">
+              <Label className="text-sm font-medium block mb-1">
+                {t("reports.observationDate")}
+              </Label>
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
                     className={cn(
-                      "w-full justify-start text-left font-normal h-11 px-4 bg-background hover:bg-accent hover:text-accent-foreground border-2 transition-colors",
+                      "w-full justify-start text-left font-normal h-11 px-4 bg-background hover:bg-orange-50 dark:hover:bg-orange-900/10 border-2 transition-colors",
                       !observedAt && "text-muted-foreground"
                     )}
                   >
@@ -174,7 +188,7 @@ export function ReportDialog({
                       {observedAt ? (
                         <>
                           <span className="text-sm font-medium">
-                            {format(observedAt, "EEEE, MMMM d, yyyy")}
+                            {format(observedAt, dateFormat, { locale: dateLocale })}
                           </span>
                           <span className="text-xs text-muted-foreground">
                             {(() => {
@@ -194,13 +208,13 @@ export function ReportDialog({
                                 const daysAgo = Math.floor(
                                   (today.getTime() - observedAt.getTime()) / (1000 * 60 * 60 * 24)
                                 );
-                                return `${daysAgo} days ago`;
+                                return t("time.daysAgo", { count: daysAgo });
                               }
                             })()}
                           </span>
                         </>
                       ) : (
-                        <span>Pick a date</span>
+                        <span>{t("time.pickDate")}</span>
                       )}
                     </div>
                   </Button>
@@ -233,7 +247,15 @@ export function ReportDialog({
                   <Calendar
                     mode="single"
                     selected={observedAt}
-                    onSelect={(date) => date && setObservedAt(date)}
+                    onSelect={(date) => {
+                      if (!date) return;
+                      // Preserve the current time component when selecting a new date
+                      const newDate = new Date(date);
+                      newDate.setHours(observedAt.getHours());
+                      newDate.setMinutes(observedAt.getMinutes());
+                      newDate.setSeconds(observedAt.getSeconds());
+                      setObservedAt(newDate);
+                    }}
                     disabled={(date) => {
                       const sevenDaysAgo = new Date();
                       sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
@@ -241,31 +263,24 @@ export function ReportDialog({
                       tomorrow.setDate(tomorrow.getDate() + 1);
                       return date < sevenDaysAgo || date > tomorrow;
                     }}
-                    initialFocus
+                    locale={dateLocale}
+                    weekStartsOn={i18n.language === "en" || i18n.language.startsWith("en-") ? 0 : 1}
+                    autoFocus
                     className="rounded-md"
                   />
                 </PopoverContent>
               </Popover>
-              <p className="text-xs text-muted-foreground flex items-center gap-1">
+              <p className="text-xs text-muted-foreground flex items-center gap-1 mt-1">
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-orange-500" />
                 {t("reports.observationDateHelp")}
               </p>
             </div>
 
             {/* Category Selection */}
-            <div className="space-y-2">
-              <Label>{t("reports.category")}</Label>
-              <div className="grid grid-cols-2 gap-2">
-                {(
-                  [
-                    "conditions",
-                    "safety",
-                    "access",
-                    "beta",
-                    "facilities",
-                    "other",
-                  ] as ReportCategory[]
-                ).map((cat) => (
+            <div>
+              <Label className="block mb-2">{t("reports.category")}</Label>
+              <div className="grid grid-cols-2 gap-2.5">
+                {categories.map((cat) => (
                   <button
                     key={cat}
                     type="button"
@@ -281,18 +296,15 @@ export function ReportDialog({
                   </button>
                 ))}
               </div>
-              <p className="text-xs text-muted-foreground">
-                {t(`reports.categoryDescriptions.${category}`)}
-              </p>
             </div>
 
             {/* Condition Ratings - Only for "conditions" category */}
             {category === "conditions" && (
-              <>
+              <div className="my-6 space-y-1">
                 {/* Dryness Rating */}
-                <div className="space-y-1">
-                  <Label>{t("reports.dryness")}</Label>
-                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                <div>
+                  <Label className="block mb-2">{t("reports.dryness")}</Label>
+                  <div className="flex items-center justify-between text-xs text-muted-foreground mb-2">
                     <span>{t("reports.scales.veryWet")}</span>
                     <span>{t("reports.scales.veryDry")}</span>
                   </div>
@@ -310,9 +322,9 @@ export function ReportDialog({
                 </div>
 
                 {/* Wind Rating */}
-                <div className="space-y-1">
-                  <Label>{t("reports.wind")}</Label>
-                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                <div>
+                  <Label className="block mb-2">{t("reports.wind")}</Label>
+                  <div className="flex items-center justify-between text-xs text-muted-foreground mb-2">
                     <span>{t("reports.scales.veryWindy")}</span>
                     <span>{t("reports.scales.calm")}</span>
                   </div>
@@ -330,9 +342,9 @@ export function ReportDialog({
                 </div>
 
                 {/* Crowds Rating */}
-                <div className="space-y-1">
-                  <Label>{t("reports.crowds")}</Label>
-                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                <div>
+                  <Label className="block mb-2">{t("reports.crowds")}</Label>
+                  <div className="flex items-center justify-between text-xs text-muted-foreground mb-2">
                     <span>{t("reports.scales.veryCrowded")}</span>
                     <span>{t("reports.scales.empty")}</span>
                   </div>
@@ -348,12 +360,12 @@ export function ReportDialog({
                     <span className="text-xl font-bold text-orange-500">{crowdsRating[0]}/5</span>
                   </div>
                 </div>
-              </>
+              </div>
             )}
 
             {/* Additional Comments */}
-            <div className="space-y-2">
-              <Label htmlFor="report-text">
+            <div>
+              <Label htmlFor="report-text" className="block mb-2">
                 {category === "conditions" ? t("reports.additionalComments") : t("reports.details")}
                 {category !== "conditions" && <span className="text-destructive ml-1">*</span>}
               </Label>
@@ -361,7 +373,7 @@ export function ReportDialog({
                 id="report-text"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                placeholder={t(`reports.placeholders.${category}`)}
+                placeholder={t(`reports.categoryDescriptions.${category}`)}
                 rows={category === "conditions" ? 4 : 6}
                 maxLength={500}
                 required={category !== "conditions"}

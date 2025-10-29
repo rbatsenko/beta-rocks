@@ -110,7 +110,10 @@
   },
   "time": {
     "today": "Today",
-    "yesterday": "Yesterday"
+    "yesterday": "Yesterday",
+    "daysAgo_one": "{{count}} day ago",
+    "daysAgo_other": "{{count}} days ago",
+    "pickDate": "Pick a date"
   },
   "disambiguation": {
     "foundMultipleAreas": "Found {{count}} climbing areas for \"{{location}}\". Please choose one:",
@@ -166,6 +169,7 @@
   "dialog": {
     "close": "Close",
     "cancel": "Cancel",
+    "delete": "Delete",
     "detailedConditions": "Detailed Conditions",
     "fullAnalysis": "Full weather analysis and climbing conditions forecast",
     "showMap": "Map",
@@ -433,6 +437,8 @@
     "frictionScore": "Friction score",
     "viewConditions": "View Conditions",
     "remove": "Remove",
+    "confirmDelete": "Remove Favorite?",
+    "confirmDeleteDescription": "Are you sure you want to remove {{name}} from your favorites?",
     "loginToFavorite": "Please set up your profile to favorite locations",
     "errorToggling": "Failed to toggle favorite. Please try again."
   },
@@ -447,7 +453,7 @@
       "conditions": "Conditions",
       "safety": "Safety",
       "access": "Access",
-      "beta": "Beta",
+      "climbing_info": "Climbing Info",
       "facilities": "Facilities",
       "other": "Other"
     },
@@ -455,7 +461,7 @@
       "conditions": "Weather, friction, dryness, crowds",
       "safety": "Loose bolts, rockfall, broken holds, hazards",
       "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
-      "beta": "Current bolting works, route changes, new bolts",
+      "climbing_info": "Rebolting, hardware updates, route changes, permadraws",
       "facilities": "Bathrooms, camping, water sources, amenities",
       "other": "Anything else that doesn't fit above"
     },
@@ -492,6 +498,27 @@
       "veryWindy": "Very windy",
       "empty": "Empty",
       "veryCrowded": "Very crowded"
+    },
+    "drynessLabels": {
+      "1": "Very wet",
+      "2": "Wet",
+      "3": "Slightly damp",
+      "4": "Mostly dry",
+      "5": "Very dry"
+    },
+    "windLabels": {
+      "1": "Very windy",
+      "2": "Windy",
+      "3": "Moderate",
+      "4": "Light breeze",
+      "5": "Calm"
+    },
+    "crowdsLabels": {
+      "1": "Very crowded",
+      "2": "Crowded",
+      "3": "Moderate",
+      "4": "Few people",
+      "5": "Empty"
     },
     "recentReports": "Recent Reports",
     "communityReports": "Community Reports",

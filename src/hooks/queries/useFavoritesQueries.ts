@@ -136,17 +136,19 @@ export function useAddFavorite() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (
-      favorite: Omit<Favorite, "id" | "userProfileId" | "addedAt" | "displayOrder">
-    ): Promise<Favorite> => {
+    mutationFn: async (data: {
+      favorite: Omit<Favorite, "id" | "userProfileId" | "addedAt" | "displayOrder">;
+      previousFavorites: Favorite[];
+    }): Promise<Favorite> => {
+      const { favorite, previousFavorites } = data;
+
       const userId = await getUserProfileId();
       if (!userId) {
         throw new Error("No user profile found");
       }
 
-      // Get current favorites to determine display order
-      const currentFavorites = queryClient.getQueryData<Favorite[]>(favoritesKeys.all) || [];
-      const maxOrder = currentFavorites.reduce((max, fav) => Math.max(max, fav.displayOrder), -1);
+      // Use previousFavorites (before optimistic update) to check for duplicates
+      const maxOrder = previousFavorites.reduce((max, fav) => Math.max(max, fav.displayOrder), -1);
 
       const favoriteWithMetadata: Omit<Favorite, "id" | "addedAt"> = {
         ...favorite,
@@ -154,8 +156,8 @@ export function useAddFavorite() {
         displayOrder: maxOrder + 1,
       };
 
-      // Check if already exists
-      const exists = currentFavorites.some(
+      // Check if already exists in the ORIGINAL favorites (before optimistic update)
+      const exists = previousFavorites.some(
         (f) =>
           (f.areaId && f.areaId === favorite.areaId) ||
           (f.cragId && f.cragId === favorite.cragId) ||
@@ -178,7 +180,9 @@ export function useAddFavorite() {
 
       return dbFavoriteToClient(dbFavorite);
     },
-    onMutate: async (newFavorite) => {
+    onMutate: async (data) => {
+      const newFavorite = data.favorite;
+
       // Cancel outgoing refetches
       await queryClient.cancelQueries({ queryKey: favoritesKeys.all });
 

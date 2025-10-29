@@ -418,7 +418,7 @@
       "conditions": "Conditions",
       "safety": "Safety",
       "access": "Access",
-      "beta": "Beta",
+      "climbing_info": "Klatreinfo",
       "facilities": "Facilities",
       "other": "Other"
     },
@@ -426,7 +426,7 @@
       "conditions": "Weather, friction, dryness, crowds",
       "safety": "Loose bolts, rockfall, broken holds, hazards",
       "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
-      "beta": "Current bolting works, route changes, new bolts",
+      "climbing_info": "Rebulting, utstyrsoppdateringer, ruteendringer, faste quickdraws",
       "facilities": "Bathrooms, camping, water sources, amenities",
       "other": "Anything else that doesn't fit above"
     },
@@ -440,7 +440,7 @@
       "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
       "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
       "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
       "facilities": "E.g., Toilet available at parking, no water source nearby...",
       "other": "Describe what you'd like to report..."
     },
@@ -464,6 +464,27 @@
       "empty": "Empty",
       "veryCrowded": "Very crowded"
     },
+    "drynessLabels": {
+      "1": "Veldig vått",
+      "2": "Vått",
+      "3": "Litt fuktig",
+      "4": "Stort sett tørt",
+      "5": "Veldig tørt"
+    },
+    "windLabels": {
+      "1": "Veldig blåsende",
+      "2": "Blåsende",
+      "3": "Moderat",
+      "4": "Lett bris",
+      "5": "Rolig"
+    },
+    "crowdsLabels": {
+      "1": "Veldig fullt",
+      "2": "Fullt",
+      "3": "Moderat",
+      "4": "Få personer",
+      "5": "Tomt"
+    },
     "recentReports": "Recent Reports",
     "communityReports": "Community Reports",
     "noReports": "No reports yet",
@@ -472,11 +493,14 @@
     "filters": {
       "all": "All"
     },
-    "observationDate": "When did you observe this?",
-    "observationDateHelp": "You can report conditions up to 7 days back"
+    "observationDate": "Når observerte du dette?",
+    "observationDateHelp": "Du kan rapportere forhold opptil 7 dager tilbake"
   },
   "time": {
-    "today": "Today",
-    "yesterday": "Yesterday"
+    "today": "I dag",
+    "yesterday": "I går",
+    "daysAgo_one": "{{count}} dag siden",
+    "daysAgo_other": "{{count}} dager siden",
+    "pickDate": "Velg en dato"
   }
 }

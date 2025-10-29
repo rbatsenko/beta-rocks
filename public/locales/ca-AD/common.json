@@ -417,7 +417,7 @@
       "conditions": "Conditions",
       "safety": "Safety",
       "access": "Access",
-      "beta": "Beta",
+      "climbing_info": "Info escalada",
       "facilities": "Facilities",
       "other": "Other"
     },
@@ -425,7 +425,7 @@
       "conditions": "Weather, friction, dryness, crowds",
       "safety": "Loose bolts, rockfall, broken holds, hazards",
       "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
-      "beta": "Current bolting works, route changes, new bolts",
+      "climbing_info": "Reequipament, actualitzacions d'equipament, canvis de vies, cintes fixes",
       "facilities": "Bathrooms, camping, water sources, amenities",
       "other": "Anything else that doesn't fit above"
     },
@@ -439,7 +439,7 @@
       "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
       "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
       "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
       "facilities": "E.g., Toilet available at parking, no water source nearby...",
       "other": "Describe what you'd like to report..."
     },
@@ -463,6 +463,27 @@
       "empty": "Empty",
       "veryCrowded": "Very crowded"
     },
+    "drynessLabels": {
+      "1": "Molt humit",
+      "2": "Humit",
+      "3": "Lleugerament humit",
+      "4": "Majoritàriament sec",
+      "5": "Molt sec"
+    },
+    "windLabels": {
+      "1": "Molt ventós",
+      "2": "Ventós",
+      "3": "Moderat",
+      "4": "Brisa lleugera",
+      "5": "Calm"
+    },
+    "crowdsLabels": {
+      "1": "Molt ple",
+      "2": "Ple",
+      "3": "Moderat",
+      "4": "Poca gent",
+      "5": "Buit"
+    },
     "recentReports": "Recent Reports",
     "communityReports": "Community Reports",
     "noReports": "No reports yet",
@@ -471,11 +492,14 @@
     "filters": {
       "all": "All"
     },
-    "observationDate": "When did you observe this?",
-    "observationDateHelp": "You can report conditions up to 7 days back"
+    "observationDate": "Quan vas observar això?",
+    "observationDateHelp": "Pots informar de condicions fins a 7 dies enrere"
   },
   "time": {
-    "today": "Today",
-    "yesterday": "Yesterday"
+    "today": "Avui",
+    "yesterday": "Ahir",
+    "daysAgo_one": "fa {{count}} dia",
+    "daysAgo_other": "fa {{count}} dies",
+    "pickDate": "Trieu una data"
   }
 }

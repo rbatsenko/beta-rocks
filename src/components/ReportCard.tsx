@@ -18,12 +18,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
-import { formatDistanceToNow, format } from "date-fns";
+import { format, differenceInCalendarDays } from "date-fns";
 import { hashSyncKeyAsync } from "@/lib/auth/sync-key";
 import { createConfirmation, hasUserConfirmedReport } from "@/lib/db/queries";
 import { getUserProfile } from "@/lib/auth/sync-key";
+import { getDateFnsLocale } from "@/lib/i18n/date-locales";
 
-type ReportCategory = "conditions" | "safety" | "access" | "beta" | "facilities" | "other";
+type ReportCategory = "conditions" | "safety" | "access" | "climbing_info" | "facilities" | "other";
 
 interface Report {
   id: string;
@@ -47,7 +48,8 @@ interface ReportCardProps {
 }
 
 export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
-  const { t } = useClientTranslation("common");
+  const { t, i18n } = useClientTranslation("common");
+  const dateLocale = getDateFnsLocale(i18n.language);
   const [isConfirming, setIsConfirming] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [confirmationCount, setConfirmationCount] = useState(report.confirmations?.length || 0);
@@ -93,13 +95,6 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
     }
   };
 
-  const getRatingColor = (rating: number | null) => {
-    if (!rating) return "bg-muted";
-    if (rating >= 4) return "bg-green-500";
-    if (rating === 3) return "bg-yellow-500";
-    return "bg-red-500";
-  };
-
   const getCategoryIcon = (category: ReportCategory) => {
     const iconClass = "h-3.5 w-3.5";
     switch (category) {
@@ -109,7 +104,7 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
         return <AlertTriangle className={iconClass} />;
       case "access":
         return <Lock className={iconClass} />;
-      case "beta":
+      case "climbing_info":
         return <Mountain className={iconClass} />;
       case "facilities":
         return <Home className={iconClass} />;
@@ -126,7 +121,7 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
         return "bg-red-500/10 text-red-700 dark:text-red-300 border-red-200 dark:border-red-800";
       case "access":
         return "bg-yellow-500/10 text-yellow-700 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800";
-      case "beta":
+      case "climbing_info":
         return "bg-purple-500/10 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-800";
       case "facilities":
         return "bg-green-500/10 text-green-700 dark:text-green-300 border-green-200 dark:border-green-800";
@@ -137,12 +132,26 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
 
   const category = report.category || "conditions";
 
+  // Format relative time based on calendar days, not hours
+  const getRelativeTime = (date: Date) => {
+    const now = new Date();
+    const daysDiff = differenceInCalendarDays(now, date);
+
+    if (daysDiff === 0) {
+      return t("time.today");
+    } else if (daysDiff === 1) {
+      return t("time.yesterday");
+    } else {
+      return t("time.daysAgo", { count: daysDiff });
+    }
+  };
+
   return (
     <Card>
       <CardContent className="p-4">
         {/* Header */}
-        <div className="flex items-start justify-between mb-3">
-          <div className="flex items-center gap-2">
+        <div className="flex items-start justify-between mb-4 gap-3">
+          <div className="flex items-center gap-2.5 flex-wrap">
             <User className="h-4 w-4 text-muted-foreground" />
             <span className="text-sm font-medium">
               {report.author?.display_name || t("profile.anonymous")}
@@ -153,12 +162,12 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
               <span className="text-xs font-medium">{t(`reports.categories.${category}`)}</span>
             </Badge>
           </div>
-          <div className="flex flex-col items-end text-right">
+          <div className="flex flex-col items-end text-right gap-0.5">
             <span className="text-xs text-muted-foreground">
-              {formatDistanceToNow(new Date(report.observed_at), { addSuffix: true })}
+              {getRelativeTime(new Date(report.observed_at))}
             </span>
             <span className="text-[10px] text-muted-foreground/70">
-              {format(new Date(report.observed_at), "MMM d, yyyy HH:mm")}
+              {format(new Date(report.observed_at), "Pp", { locale: dateLocale })}
             </span>
           </div>
         </div>
@@ -173,30 +182,33 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
                 <Badge variant="outline" className="gap-1.5">
                   <Droplets className="h-3 w-3" />
                   <span className="text-xs">
-                    {t("reports.dryness")}:{" "}
-                    <span className="font-semibold">{report.rating_dry}/5</span>
+                    {t("reports.dryness")}: {report.rating_dry}/5
                   </span>
-                  <div className={`h-2 w-2 rounded-full ${getRatingColor(report.rating_dry)}`} />
+                  <span className="text-xs text-muted-foreground">
+                    ({t(`reports.drynessLabels.${report.rating_dry}`)})
+                  </span>
                 </Badge>
               )}
               {report.rating_wind !== null && (
                 <Badge variant="outline" className="gap-1.5">
                   <Wind className="h-3 w-3" />
                   <span className="text-xs">
-                    {t("reports.wind")}:{" "}
-                    <span className="font-semibold">{report.rating_wind}/5</span>
+                    {t("reports.wind")}: {report.rating_wind}/5
                   </span>
-                  <div className={`h-2 w-2 rounded-full ${getRatingColor(report.rating_wind)}`} />
+                  <span className="text-xs text-muted-foreground">
+                    ({t(`reports.windLabels.${report.rating_wind}`)})
+                  </span>
                 </Badge>
               )}
               {report.rating_crowds !== null && (
                 <Badge variant="outline" className="gap-1.5">
                   <Users className="h-3 w-3" />
                   <span className="text-xs">
-                    {t("reports.crowds")}:{" "}
-                    <span className="font-semibold">{report.rating_crowds}/5</span>
+                    {t("reports.crowds")}: {report.rating_crowds}/5
                   </span>
-                  <div className={`h-2 w-2 rounded-full ${getRatingColor(report.rating_crowds)}`} />
+                  <span className="text-xs text-muted-foreground">
+                    ({t(`reports.crowdsLabels.${report.rating_crowds}`)})
+                  </span>
                 </Badge>
               )}
             </div>

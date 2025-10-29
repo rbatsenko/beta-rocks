@@ -594,6 +594,26 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      fetch_reports_by_crag_sorted: {
+        Args: { p_crag_id: string; p_limit?: number };
+        Returns: {
+          author: Json;
+          author_id: string;
+          category: string;
+          confirmations: Json;
+          crag_id: string;
+          created_at: string;
+          id: string;
+          observed_at: string;
+          rating_crowds: number;
+          rating_dry: number;
+          rating_wind: number;
+          route_id: string;
+          sector_id: string;
+          text: string;
+          updated_at: string;
+        }[];
+      };
       get_user_profile_by_hash: {
         Args: { p_sync_key_hash: string };
         Returns: {

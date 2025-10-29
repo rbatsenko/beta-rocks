@@ -417,7 +417,7 @@
       "conditions": "Conditions",
       "safety": "Safety",
       "access": "Access",
-      "beta": "Beta",
+      "climbing_info": "Информация за катерене",
       "facilities": "Facilities",
       "other": "Other"
     },
@@ -425,7 +425,7 @@
       "conditions": "Weather, friction, dryness, crowds",
       "safety": "Loose bolts, rockfall, broken holds, hazards",
       "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
-      "beta": "Current bolting works, route changes, new bolts",
+      "climbing_info": "Преоборудване, актуализации на оборудването, промени в маршрутите, фиксирани куикдроуове",
       "facilities": "Bathrooms, camping, water sources, amenities",
       "other": "Anything else that doesn't fit above"
     },
@@ -439,7 +439,7 @@
       "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
       "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
       "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
       "facilities": "E.g., Toilet available at parking, no water source nearby...",
       "other": "Describe what you'd like to report..."
     },
@@ -463,6 +463,27 @@
       "empty": "Empty",
       "veryCrowded": "Very crowded"
     },
+    "drynessLabels": {
+      "1": "Много мокро",
+      "2": "Мокро",
+      "3": "Леко влажно",
+      "4": "Предимно сухо",
+      "5": "Много сухо"
+    },
+    "windLabels": {
+      "1": "Много ветровито",
+      "2": "Ветровито",
+      "3": "Умерено",
+      "4": "Лек бриз",
+      "5": "Спокойно"
+    },
+    "crowdsLabels": {
+      "1": "Много пълно",
+      "2": "Пълно",
+      "3": "Умерено",
+      "4": "Малко хора",
+      "5": "Празно"
+    },
     "recentReports": "Recent Reports",
     "communityReports": "Community Reports",
     "noReports": "No reports yet",
@@ -471,11 +492,14 @@
     "filters": {
       "all": "All"
     },
-    "observationDate": "When did you observe this?",
-    "observationDateHelp": "You can report conditions up to 7 days back"
+    "observationDate": "Кога наблюдавахте това?",
+    "observationDateHelp": "Можете да докладвате условия до 7 дни назад"
   },
   "time": {
-    "today": "Today",
-    "yesterday": "Yesterday"
+    "today": "Днес",
+    "yesterday": "Вчера",
+    "daysAgo_one": "преди {{count}} ден",
+    "daysAgo_other": "преди {{count}} дни",
+    "pickDate": "Изберете дата"
   }
 }

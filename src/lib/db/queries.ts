@@ -283,18 +283,12 @@ export async function createReport(report: TablesInsert<"reports">) {
 }
 
 export async function fetchReportsByCrag(cragId: string, limit = 20) {
-  const { data, error } = await supabase
-    .from("reports")
-    .select(
-      `
-      *,
-      author:user_profiles(id, display_name),
-      confirmations(id)
-    `
-    )
-    .eq("crag_id", cragId)
-    .order("observed_at", { ascending: false })
-    .limit(limit);
+  // Use RPC function for date-grouped sorting: ORDER BY DATE(observed_at) DESC, created_at DESC
+  // This groups reports by observation day, with newest submissions first within each day
+  const { data, error } = await supabase.rpc("fetch_reports_by_crag_sorted", {
+    p_crag_id: cragId,
+    p_limit: limit,
+  });
 
   if (error) {
     console.error("[fetchReportsByCrag] Error fetching reports:", error);
@@ -303,7 +297,7 @@ export async function fetchReportsByCrag(cragId: string, limit = 20) {
 
   // Transform the data to include confirmation count
   const reportsWithCount =
-    data?.map((report) => ({
+    data?.map((report: any) => ({
       ...report,
       confirmationCount: report.confirmations?.length || 0,
     })) || [];

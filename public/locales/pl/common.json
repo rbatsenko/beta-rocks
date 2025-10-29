@@ -158,6 +158,7 @@
   "dialog": {
     "close": "Zamknij",
     "cancel": "Anuluj",
+    "delete": "Usuń",
     "detailedConditions": "Szczegółowe warunki",
     "fullAnalysis": "Pełna analiza pogody i prognoza warunków wspinaczkowych",
     "showMap": "Mapa",
@@ -400,7 +401,9 @@
     "lastChecked": "Ostatnio sprawdzono",
     "frictionScore": "Ocena tarcia",
     "viewConditions": "Zobacz warunki",
-    "remove": "Usuń"
+    "remove": "Usuń",
+    "confirmDelete": "Usunąć z ulubionych?",
+    "confirmDeleteDescription": "Czy na pewno chcesz usunąć {{name}} z ulubionych?"
   },
   "reports": {
     "addReport": "Dodaj zgłoszenie",
@@ -431,6 +434,27 @@
       "empty": "Pusto",
       "veryCrowded": "Bardzo tłoczno"
     },
+    "drynessLabels": {
+      "1": "Bardzo mokro",
+      "2": "Mokro",
+      "3": "Lekko wilgotno",
+      "4": "Przeważnie sucho",
+      "5": "Bardzo sucho"
+    },
+    "windLabels": {
+      "1": "Bardzo wietrznie",
+      "2": "Wietrznie",
+      "3": "Umiarkowanie",
+      "4": "Lekka bryza",
+      "5": "Spokojnie"
+    },
+    "crowdsLabels": {
+      "1": "Bardzo tłoczno",
+      "2": "Tłoczno",
+      "3": "Umiarkowanie",
+      "4": "Mało osób",
+      "5": "Pusto"
+    },
     "recentReports": "Ostatnie raporty",
     "communityReports": "Raporty społeczności",
     "noReports": "Brak raportów",
@@ -443,7 +467,7 @@
       "conditions": "Warun",
       "safety": "Bezpieczeństwo",
       "access": "Dostęp",
-      "beta": "Patenty",
+      "climbing_info": "Info wspinaczkowe",
       "facilities": "Udogodnienia",
       "other": "Inne"
     },
@@ -451,7 +475,7 @@
       "conditions": "Pogoda, tarcie, suchość, tłumy",
       "safety": "Luźne ringi, ruszające się kamienie, uszkodzone chwyty, zagrożenia",
       "access": "Zamknięcia, zmiany parkingów, ograniczenia sezonowe, gniazda ptaków, owady",
-      "beta": "Zmiany przebiegu dróg, nowe obicie, prace ekiperskie",
+      "climbing_info": "Wymiana ringów, ekspresów, zmiana przebiegu linii, asekuracja",
       "facilities": "Parking, toalety, kemping, woda, udogodnienia",
       "other": "Cokolwiek innego, co nie pasuje do kategorii powyżej"
     },
@@ -461,7 +485,7 @@
       "conditions": "Np. Sektor wschodni wciąż mokry, ścieżka zabłocona, leje się z rysy...",
       "safety": "Np. Luźny ring na Drodze X, niebezpieczeństwo odpadnięcia bloku skalnego przy głównej ścianie...",
       "access": "Np. Brama zamknięta do maja, nowy parking za biblioteką...",
-      "beta": "Np. Droga X przebita na nowo, nowa asekuracja na górze, trudniejsza wycena...",
+      "climbing_info": "Np. Droga X przebita na nowo, nowe ringi ze stali nierdzewnej, dodane stałe ekspresówki...",
       "facilities": "Np. toaleta dostępna na parkingu, brak wody w pobliżu...",
       "other": "Opisz, co chcesz zgłosić..."
     },
@@ -469,8 +493,8 @@
     "filters": {
       "all": "Wszystkie"
     },
-    "observationDate": "When did you observe this?",
-    "observationDateHelp": "You can report conditions up to 7 days back"
+    "observationDate": "Kiedy to zaobserwowałeś/aś?",
+    "observationDateHelp": "Możesz zgłaszać warunki do 7 dni wstecz"
   },
   "cragPage": {
     "askAI": "Zapytaj AI",
@@ -482,7 +506,12 @@
     "viewOnMap": "Zobacz na mapie"
   },
   "time": {
-    "today": "Today",
-    "yesterday": "Yesterday"
+    "today": "Dzisiaj",
+    "yesterday": "Wczoraj",
+    "daysAgo_one": "{{count}} dzień temu",
+    "daysAgo_few": "{{count}} dni temu",
+    "daysAgo_many": "{{count}} dni temu",
+    "daysAgo_other": "{{count}} dni temu",
+    "pickDate": "Wybierz datę"
   }
 }

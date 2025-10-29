@@ -32,6 +32,7 @@ import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
 import { useRouter } from "next/navigation";
 import {
+  useFavorites,
   useIsFavorited,
   useAddFavorite,
   useRemoveFavorite,
@@ -40,7 +41,7 @@ import { getSunCalcUrl, getGoogleMapsUrl, getOpenStreetMapEmbedUrl } from "@/lib
 import { getCountryFlag } from "@/lib/utils/country-flag";
 import { fetchReportsByCrag } from "@/lib/db/queries";
 
-type ReportCategory = "conditions" | "safety" | "access" | "beta" | "facilities" | "other";
+type ReportCategory = "conditions" | "safety" | "access" | "climbing_info" | "facilities" | "other";
 
 interface CragPageContentProps {
   crag: {
@@ -139,6 +140,7 @@ export function CragPageContent({
   const [selectedCategory, setSelectedCategory] = useState<"all" | ReportCategory>("all");
 
   // React Query hooks for favorites
+  const { data: favorites = [] } = useFavorites();
   const { isFavorited, favorite } = useIsFavorited(crag.id, undefined, {
     lat: crag.lat,
     lon: crag.lon,
@@ -191,15 +193,18 @@ export function CragPageContent({
       removeFavorite.mutate(favorite.id);
     } else {
       addFavorite.mutate({
-        areaName: crag.name,
-        location: locationString,
-        latitude: crag.lat,
-        longitude: crag.lon,
-        cragId: crag.id,
-        rockType: crag.rock_type || undefined,
-        lastRating: conditions.rating,
-        lastFrictionScore: conditions.frictionScore,
-        lastCheckedAt: new Date().toISOString(),
+        favorite: {
+          areaName: crag.name,
+          location: locationString,
+          latitude: crag.lat,
+          longitude: crag.lon,
+          cragId: crag.id,
+          rockType: crag.rock_type || undefined,
+          lastRating: conditions.rating,
+          lastFrictionScore: conditions.frictionScore,
+          lastCheckedAt: new Date().toISOString(),
+        },
+        previousFavorites: favorites,
       });
     }
   };
@@ -230,7 +235,7 @@ export function CragPageContent({
         return <AlertTriangle className={iconClass} />;
       case "access":
         return <Lock className={iconClass} />;
-      case "beta":
+      case "climbing_info":
         return <Mountain className={iconClass} />;
       case "facilities":
         return <Home className={iconClass} />;
@@ -420,7 +425,7 @@ export function CragPageContent({
                   "conditions",
                   "safety",
                   "access",
-                  "beta",
+                  "climbing_info",
                   "facilities",
                   "other",
                 ] as ReportCategory[]

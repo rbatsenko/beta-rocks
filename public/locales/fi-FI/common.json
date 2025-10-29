@@ -417,7 +417,7 @@
       "conditions": "Conditions",
       "safety": "Safety",
       "access": "Access",
-      "beta": "Beta",
+      "climbing_info": "Kiipeilytiedot",
       "facilities": "Facilities",
       "other": "Other"
     },
@@ -425,7 +425,7 @@
       "conditions": "Weather, friction, dryness, crowds",
       "safety": "Loose bolts, rockfall, broken holds, hazards",
       "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
-      "beta": "Current bolting works, route changes, new bolts",
+      "climbing_info": "Uudelleenpulttaus, varustepäivitykset, reittien muutokset, kiinteät pikalenkit",
       "facilities": "Bathrooms, camping, water sources, amenities",
       "other": "Anything else that doesn't fit above"
     },
@@ -439,7 +439,7 @@
       "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
       "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
       "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
       "facilities": "E.g., Toilet available at parking, no water source nearby...",
       "other": "Describe what you'd like to report..."
     },
@@ -463,6 +463,27 @@
       "empty": "Empty",
       "veryCrowded": "Very crowded"
     },
+    "drynessLabels": {
+      "1": "Erittäin märkä",
+      "2": "Märkä",
+      "3": "Hieman kostea",
+      "4": "Pääosin kuiva",
+      "5": "Erittäin kuiva"
+    },
+    "windLabels": {
+      "1": "Erittäin tuulinen",
+      "2": "Tuulinen",
+      "3": "Kohtalainen",
+      "4": "Kevyt tuulenvire",
+      "5": "Tyyni"
+    },
+    "crowdsLabels": {
+      "1": "Erittäin täynnä",
+      "2": "Täynnä",
+      "3": "Kohtalainen",
+      "4": "Vähän ihmisiä",
+      "5": "Tyhjä"
+    },
     "recentReports": "Recent Reports",
     "communityReports": "Community Reports",
     "noReports": "No reports yet",
@@ -471,11 +492,14 @@
     "filters": {
       "all": "All"
     },
-    "observationDate": "When did you observe this?",
-    "observationDateHelp": "You can report conditions up to 7 days back"
+    "observationDate": "Milloin havaitsit tämän?",
+    "observationDateHelp": "Voit raportoida olosuhteita jopa 7 päivää taaksepäin"
   },
   "time": {
-    "today": "Today",
-    "yesterday": "Yesterday"
+    "today": "Tänään",
+    "yesterday": "Eilen",
+    "daysAgo_one": "{{count}} päivä sitten",
+    "daysAgo_other": "{{count}} päivää sitten",
+    "pickDate": "Valitse päivämäärä"
   }
 }

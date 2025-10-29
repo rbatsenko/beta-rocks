@@ -417,7 +417,7 @@
       "conditions": "Conditions",
       "safety": "Safety",
       "access": "Access",
-      "beta": "Beta",
+      "climbing_info": "Climbing Info",
       "facilities": "Facilities",
       "other": "Other"
     },
@@ -425,7 +425,7 @@
       "conditions": "Weather, friction, dryness, crowds",
       "safety": "Loose bolts, rockfall, broken holds, hazards",
       "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
-      "beta": "Current bolting works, route changes, new bolts",
+      "climbing_info": "Rebolting, hardware updates, route changes, permadraws",
       "facilities": "Bathrooms, camping, water sources, amenities",
       "other": "Anything else that doesn't fit above"
     },
@@ -439,7 +439,7 @@
       "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
       "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
       "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
       "facilities": "E.g., Toilet available at parking, no water source nearby...",
       "other": "Describe what you'd like to report..."
     },
@@ -463,6 +463,27 @@
       "empty": "Empty",
       "veryCrowded": "Very crowded"
     },
+    "drynessLabels": {
+      "1": "Very wet",
+      "2": "Wet",
+      "3": "Slightly damp",
+      "4": "Mostly dry",
+      "5": "Very dry"
+    },
+    "windLabels": {
+      "1": "Very windy",
+      "2": "Windy",
+      "3": "Moderate",
+      "4": "Light breeze",
+      "5": "Calm"
+    },
+    "crowdsLabels": {
+      "1": "Very crowded",
+      "2": "Crowded",
+      "3": "Moderate",
+      "4": "Few people",
+      "5": "Empty"
+    },
     "recentReports": "Recent Reports",
     "communityReports": "Community Reports",
     "noReports": "No reports yet",
@@ -476,6 +497,9 @@
   },
   "time": {
     "today": "Today",
-    "yesterday": "Yesterday"
+    "yesterday": "Yesterday",
+    "daysAgo_one": "{{count}} day ago",
+    "daysAgo_other": "{{count}} days ago",
+    "pickDate": "Pick a date"
   }
 }

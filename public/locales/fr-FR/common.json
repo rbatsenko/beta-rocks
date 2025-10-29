@@ -422,7 +422,7 @@
       "conditions": "Conditions",
       "safety": "Safety",
       "access": "Access",
-      "beta": "Beta",
+      "climbing_info": "Infos escalade",
       "facilities": "Facilities",
       "other": "Other"
     },
@@ -430,7 +430,7 @@
       "conditions": "Weather, friction, dryness, crowds",
       "safety": "Loose bolts, rockfall, broken holds, hazards",
       "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
-      "beta": "Current bolting works, route changes, new bolts",
+      "climbing_info": "Rééquipement, mises à jour du matériel, changements de voies, dégaines fixes",
       "facilities": "Bathrooms, camping, water sources, amenities",
       "other": "Anything else that doesn't fit above"
     },
@@ -444,7 +444,7 @@
       "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
       "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
       "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
       "facilities": "E.g., Toilet available at parking, no water source nearby...",
       "other": "Describe what you'd like to report..."
     },
@@ -468,6 +468,27 @@
       "empty": "Empty",
       "veryCrowded": "Very crowded"
     },
+    "drynessLabels": {
+      "1": "Très humide",
+      "2": "Humide",
+      "3": "Légèrement humide",
+      "4": "Majoritairement sec",
+      "5": "Très sec"
+    },
+    "windLabels": {
+      "1": "Très venteux",
+      "2": "Venteux",
+      "3": "Modéré",
+      "4": "Légère brise",
+      "5": "Calme"
+    },
+    "crowdsLabels": {
+      "1": "Très bondé",
+      "2": "Bondé",
+      "3": "Modéré",
+      "4": "Peu de monde",
+      "5": "Vide"
+    },
     "recentReports": "Recent Reports",
     "communityReports": "Community Reports",
     "noReports": "No reports yet",
@@ -476,11 +497,14 @@
     "filters": {
       "all": "All"
     },
-    "observationDate": "When did you observe this?",
-    "observationDateHelp": "You can report conditions up to 7 days back"
+    "observationDate": "Quand avez-vous observé cela?",
+    "observationDateHelp": "Vous pouvez signaler les conditions jusqu'à 7 jours en arrière"
   },
   "time": {
-    "today": "Today",
-    "yesterday": "Yesterday"
+    "today": "Aujourd'hui",
+    "yesterday": "Hier",
+    "daysAgo_one": "il y a {{count}} jour",
+    "daysAgo_other": "il y a {{count}} jours",
+    "pickDate": "Choisir une date"
   }
 }

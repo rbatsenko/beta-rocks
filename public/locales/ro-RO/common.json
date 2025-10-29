@@ -417,7 +417,7 @@
       "conditions": "Conditions",
       "safety": "Safety",
       "access": "Access",
-      "beta": "Beta",
+      "climbing_info": "Info escaladă",
       "facilities": "Facilities",
       "other": "Other"
     },
@@ -425,7 +425,7 @@
       "conditions": "Weather, friction, dryness, crowds",
       "safety": "Loose bolts, rockfall, broken holds, hazards",
       "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
-      "beta": "Current bolting works, route changes, new bolts",
+      "climbing_info": "Reechipare, actualizări echipament, schimbări rute, quickdraw-uri fixe",
       "facilities": "Bathrooms, camping, water sources, amenities",
       "other": "Anything else that doesn't fit above"
     },
@@ -439,7 +439,7 @@
       "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
       "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
       "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
       "facilities": "E.g., Toilet available at parking, no water source nearby...",
       "other": "Describe what you'd like to report..."
     },
@@ -463,6 +463,27 @@
       "empty": "Empty",
       "veryCrowded": "Very crowded"
     },
+    "drynessLabels": {
+      "1": "Foarte umed",
+      "2": "Umed",
+      "3": "Ușor umed",
+      "4": "Preponderent uscat",
+      "5": "Foarte uscat"
+    },
+    "windLabels": {
+      "1": "Foarte vântos",
+      "2": "Vântos",
+      "3": "Moderat",
+      "4": "Briză ușoară",
+      "5": "Calm"
+    },
+    "crowdsLabels": {
+      "1": "Foarte aglomerat",
+      "2": "Aglomerat",
+      "3": "Moderat",
+      "4": "Puțini oameni",
+      "5": "Gol"
+    },
     "recentReports": "Recent Reports",
     "communityReports": "Community Reports",
     "noReports": "No reports yet",
@@ -471,11 +492,15 @@
     "filters": {
       "all": "All"
     },
-    "observationDate": "When did you observe this?",
-    "observationDateHelp": "You can report conditions up to 7 days back"
+    "observationDate": "Când ai observat asta?",
+    "observationDateHelp": "Puteți raporta condiții până la 7 zile în urmă"
   },
   "time": {
-    "today": "Today",
-    "yesterday": "Yesterday"
+    "today": "Astăzi",
+    "yesterday": "Ieri",
+    "daysAgo_one": "acum {{count}} zi",
+    "daysAgo_few": "acum {{count}} zile",
+    "daysAgo_other": "acum {{count}} de zile",
+    "pickDate": "Alegeți o dată"
   }
 }

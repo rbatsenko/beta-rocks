@@ -417,7 +417,7 @@
       "conditions": "Conditions",
       "safety": "Safety",
       "access": "Access",
-      "beta": "Beta",
+      "climbing_info": "Lezecké informace",
       "facilities": "Facilities",
       "other": "Other"
     },
@@ -425,7 +425,7 @@
       "conditions": "Weather, friction, dryness, crowds",
       "safety": "Loose bolts, rockfall, broken holds, hazards",
       "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
-      "beta": "Current bolting works, route changes, new bolts",
+      "climbing_info": "Přebolcování, aktualizace vybavení, změny cest, permanentní expresky",
       "facilities": "Bathrooms, camping, water sources, amenities",
       "other": "Anything else that doesn't fit above"
     },
@@ -439,7 +439,7 @@
       "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
       "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
       "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
       "facilities": "E.g., Toilet available at parking, no water source nearby...",
       "other": "Describe what you'd like to report..."
     },
@@ -463,6 +463,27 @@
       "empty": "Empty",
       "veryCrowded": "Very crowded"
     },
+    "drynessLabels": {
+      "1": "Velmi mokro",
+      "2": "Mokro",
+      "3": "Mírně vlhko",
+      "4": "Většinou sucho",
+      "5": "Velmi sucho"
+    },
+    "windLabels": {
+      "1": "Velmi větrno",
+      "2": "Větrno",
+      "3": "Mírně",
+      "4": "Lehký vítr",
+      "5": "Klidno"
+    },
+    "crowdsLabels": {
+      "1": "Velmi přeplněno",
+      "2": "Přeplněno",
+      "3": "Mírně",
+      "4": "Málo lidí",
+      "5": "Prázdno"
+    },
     "recentReports": "Recent Reports",
     "communityReports": "Community Reports",
     "noReports": "No reports yet",
@@ -471,11 +492,16 @@
     "filters": {
       "all": "All"
     },
-    "observationDate": "When did you observe this?",
-    "observationDateHelp": "You can report conditions up to 7 days back"
+    "observationDate": "Kdy jste to pozorovali?",
+    "observationDateHelp": "Můžete hlásit podmínky až 7 dní zpět"
   },
   "time": {
-    "today": "Today",
-    "yesterday": "Yesterday"
+    "today": "Dnes",
+    "yesterday": "Včera",
+    "daysAgo_one": "před {{count}} dnem",
+    "daysAgo_few": "před {{count}} dny",
+    "daysAgo_many": "před {{count}} dny",
+    "daysAgo_other": "před {{count}} dny",
+    "pickDate": "Vyberte datum"
   }
 }

@@ -7,6 +7,7 @@ import { logRender } from "@/lib/debug/render-log";
 import { MapPopover } from "@/components/MapPopover";
 import { getCountryFlag } from "@/lib/utils/country-flag";
 import {
+  useFavorites,
   useIsFavorited,
   useAddFavorite,
   useRemoveFavorite,
@@ -146,6 +147,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
   const { units } = useUnits();
 
   // React Query hooks for favorites
+  const { data: favorites = [] } = useFavorites();
   const { isFavorited, favorite } = useIsFavorited(
     data.cragId,
     undefined,
@@ -273,13 +275,11 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
           {(data.hourlyConditions || data.optimalWindows) && (
             <div className="flex flex-wrap gap-2">
               {data.latitude && data.longitude && (
-                <div>
-                  <MapPopover
-                    latitude={data.latitude}
-                    longitude={data.longitude}
-                    locationName={data.location}
-                  />
-                </div>
+                <MapPopover
+                  latitude={data.latitude}
+                  longitude={data.longitude}
+                  locationName={data.location}
+                />
               )}
               <Button
                 variant="outline"
@@ -289,15 +289,18 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
                     removeFavorite.mutate(favorite.id);
                   } else if (data.latitude && data.longitude) {
                     addFavorite.mutate({
-                      areaName: data.location,
-                      location: `${data.country || ""}${data.state ? ", " + data.state : ""}`,
-                      latitude: data.latitude,
-                      longitude: data.longitude,
-                      cragId: data.cragId,
-                      rockType: data.rockType,
-                      lastRating: data.rating,
-                      lastFrictionScore: data.frictionScore,
-                      lastCheckedAt: new Date().toISOString(),
+                      favorite: {
+                        areaName: data.location,
+                        location: `${data.country || ""}${data.state ? ", " + data.state : ""}`,
+                        latitude: data.latitude,
+                        longitude: data.longitude,
+                        cragId: data.cragId,
+                        rockType: data.rockType,
+                        lastRating: data.rating,
+                        lastFrictionScore: data.frictionScore,
+                        lastCheckedAt: new Date().toISOString(),
+                      },
+                      previousFavorites: favorites,
                     });
                   }
                 }}
