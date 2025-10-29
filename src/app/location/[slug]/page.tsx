@@ -1,66 +1,145 @@
-"use client";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import {
+  searchCrags,
+  findCragByCoordinates,
+} from "@/lib/db/queries";
+import { generateSlug, parseCoordinatesFromSlug, getBaseSlug } from "@/lib/utils/slug";
+import { CragConditionsClient } from "@/components/CragConditionsClient";
 
-import { useParams } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
-import { CragPageContent } from "@/components/CragPageContent";
-import { Loader2 } from "lucide-react";
+// Enable ISR with 5-minute revalidation
+export const revalidate = 300;
 
-async function fetchLocationData(slug: string) {
-  const res = await fetch(`/api/location/${slug}`);
-  if (!res.ok) {
-    throw new Error("Failed to load location data");
+// Fetch crag by slug (server-side only, for SEO)
+async function getCragBySlug(slug: string) {
+  console.log(`[getCragBySlug] Processing slug: ${slug}`);
+
+  // Try name-based search
+  const baseSlug = getBaseSlug(slug);
+  const slugParts = baseSlug.split("-");
+  const searchName = slugParts[slugParts.length - 1];
+
+  console.log(`[getCragBySlug] Searching by name: "${searchName}"`);
+
+  const results = await searchCrags(searchName);
+
+  if (results && results.length > 0) {
+    console.log(`[getCragBySlug] Found ${results.length} results by name`);
+
+    if (results.length === 1) {
+      return results[0];
+    }
+
+    // Try exact slug match
+    const exactMatch = results.find((crag) => generateSlug(crag.name) === baseSlug);
+    if (exactMatch) {
+      return exactMatch;
+    }
+
+    // Use coordinates to disambiguate
+    const coords = parseCoordinatesFromSlug(slug);
+    if (coords) {
+      const crag = await findCragByCoordinates(coords.lat, coords.lon, 0.01);
+      if (crag) {
+        return crag;
+      }
+    }
+
+    return results[0];
   }
-  return res.json();
+
+  // Fallback: pure coordinate lookup
+  const coords = parseCoordinatesFromSlug(slug);
+  if (coords) {
+    const crag = await findCragByCoordinates(coords.lat, coords.lon, 0.01);
+    if (crag) {
+      return crag;
+    }
+  }
+
+  return null;
 }
 
-export default function LocationPage() {
-  const params = useParams();
-  const slug = params?.slug as string;
+// Generate metadata for SEO
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  try {
+    const { slug } = await params;
+    const crag = await getCragBySlug(slug);
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["location", slug],
-    queryFn: () => fetchLocationData(slug),
-    staleTime: 5 * 60 * 1000, // 5 minutes
-    gcTime: 10 * 60 * 1000, // 10 minutes
-  });
+    if (!crag) {
+      return {
+        title: "Location Not Found",
+        description: "The climbing location you are looking for could not be found.",
+      };
+    }
 
-  if (isLoading) {
-    return (
-      <main className="container mx-auto px-4 py-6 max-w-5xl">
-        <div className="flex items-center justify-center min-h-[60vh]">
-          <div className="flex flex-col items-center gap-4 bg-card p-8 rounded-lg shadow-xl border-2 border-orange-500/20">
-            <Loader2 className="h-16 w-16 text-orange-500 animate-spin" />
-            <div className="text-center">
-              <p className="text-lg font-medium text-foreground">Loading conditions...</p>
-              <p className="text-sm text-muted-foreground mt-1">Fetching weather data...</p>
-            </div>
-          </div>
-        </div>
-      </main>
-    );
+    const location = [crag.municipality, crag.state, crag.country].filter(Boolean).join(", ");
+
+    return {
+      title: `${crag.name} - Real-time Climbing Conditions | beta.rocks`,
+      description: `Live conditions for ${crag.name}${location ? ` in ${location}` : ""}. Check real-time weather, friction, and community reports.`,
+      openGraph: {
+        title: `${crag.name} Climbing Conditions`,
+        description: `Real-time climbing conditions for ${crag.name}. ${crag.rock_type ? `${crag.rock_type} rock.` : ""}`,
+        type: "website",
+        locale: "en_US",
+        siteName: "beta.rocks",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: `${crag.name} Climbing Conditions`,
+        description: `Check live conditions at ${crag.name}`,
+      },
+      alternates: {
+        canonical: `/location/${slug}`,
+      },
+    };
+  } catch (error) {
+    console.error("[generateMetadata] Error:", error);
+    return {
+      title: "Error Loading Location",
+      description: "There was an error loading the climbing location.",
+    };
+  }
+}
+
+// Generate static params for all crags (SEO optimization)
+export async function generateStaticParams() {
+  try {
+    // Fetch all crags from database
+    const crags = await searchCrags("");
+
+    if (!crags || crags.length === 0) {
+      return [];
+    }
+
+    console.log(`[generateStaticParams] Generating paths for ${crags.length} crags`);
+
+    // Generate slugs for all crags
+    return crags.map((crag) => ({
+      slug: generateSlug(crag.name),
+    }));
+  } catch (error) {
+    console.error("[generateStaticParams] Error:", error);
+    return [];
+  }
+}
+
+// Main page component (server component for SEO)
+export default async function LocationPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+
+  // Fetch only crag data server-side (fast DB query, no API calls)
+  const crag = await getCragBySlug(slug);
+
+  if (!crag) {
+    notFound();
   }
 
-  if (error || !data) {
-    return (
-      <main className="container mx-auto px-4 py-6 max-w-5xl">
-        <div className="flex items-center justify-center min-h-[60vh]">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold text-destructive mb-2">Error Loading Location</h1>
-            <p className="text-muted-foreground">
-              {error instanceof Error ? error.message : "Failed to load location data"}
-            </p>
-          </div>
-        </div>
-      </main>
-    );
-  }
-
-  return (
-    <CragPageContent
-      crag={data.crag}
-      conditions={data.conditions}
-      reports={data.reports}
-      sectors={data.sectors}
-    />
-  );
+  // Return static HTML with crag info + client component for weather
+  return <CragConditionsClient crag={crag} />;
 }

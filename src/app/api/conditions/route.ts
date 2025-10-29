@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { computeConditions, RockType } from "@/lib/conditions/conditions.service";
 import { getWeatherForecast } from "@/lib/external-apis/open-meteo";
+import { fetchReportsByCrag, fetchSectorsByCrag } from "@/lib/db/queries";
 
 /**
  * GET /api/conditions
@@ -11,6 +12,7 @@ import { getWeatherForecast } from "@/lib/external-apis/open-meteo";
  * - lon: number (longitude)
  * - rockType: string (granite, sandstone, limestone, basalt, gneiss, quartzite, unknown)
  * - recentPrecipMm: number (optional, recent precipitation in mm)
+ * - cragId: string (optional, if provided will fetch reports and sectors)
  */
 export async function GET(request: NextRequest) {
   try {
@@ -18,6 +20,7 @@ export async function GET(request: NextRequest) {
     const lon = request.nextUrl.searchParams.get("lon");
     const rockType = (request.nextUrl.searchParams.get("rockType") || "unknown") as RockType;
     const recentPrecipMm = parseFloat(request.nextUrl.searchParams.get("recentPrecipMm") || "0");
+    const cragId = request.nextUrl.searchParams.get("cragId");
 
     console.log("[Conditions API] Received request:", {
       lat,
@@ -43,8 +46,12 @@ export async function GET(request: NextRequest) {
 
     console.log("[Conditions API] Fetching weather forecast for:", { latitude, longitude });
 
-    // Fetch weather data (14 days for full forecast)
-    const forecast = await getWeatherForecast(latitude, longitude, 14);
+    // Fetch weather data and optional reports/sectors in parallel
+    const [forecast, reports, sectors] = await Promise.all([
+      getWeatherForecast(latitude, longitude, 14),
+      cragId ? fetchReportsByCrag(cragId, 20).catch(() => []) : Promise.resolve([]),
+      cragId ? fetchSectorsByCrag(cragId).catch(() => []) : Promise.resolve([]),
+    ]);
 
     console.log("[Conditions API] Weather forecast received:", {
       latitude,
@@ -129,6 +136,9 @@ export async function GET(request: NextRequest) {
             sunset: forecast.daily[0].sunset,
           }
         : undefined,
+      // Include reports and sectors if cragId was provided
+      reports: reports || [],
+      sectors: sectors || [],
       updatedAt: new Date().toISOString(),
     });
   } catch (error) {
