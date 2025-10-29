@@ -13,8 +13,8 @@ import { generateSlug, parseCoordinatesFromSlug, getBaseSlug } from "@/lib/utils
 import { CragPageContent } from "@/components/CragPageContent";
 import type { RockType } from "@/lib/conditions/conditions.service";
 
-// ISR: Revalidate every 5 minutes
-export const revalidate = 300;
+// Disable caching to show loading.tsx during navigation
+export const dynamic = 'force-dynamic';
 
 // Allow dynamic params (generate on-demand if not pre-rendered)
 export const dynamicParams = true;

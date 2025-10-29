@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { I18nProvider } from "@/components/providers/I18nProvider";
 import { QueryProvider } from "@/components/providers/QueryProvider";
-import { NavigationProgress } from "@/components/NavigationProgress";
 import { Toaster } from "@/components/ui/toaster";
 import "@/index.css";
 
@@ -52,7 +51,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       </head>
       <body>
-        <NavigationProgress />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <QueryProvider>
             <I18nProvider>
