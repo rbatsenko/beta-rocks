@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
-import { useRouter as useNextRouter, usePathname } from "next/navigation";
+import { useEffect, useState, useCallback, createContext, useContext } from "react";
+import { usePathname } from "next/navigation";
 import { Loader2 } from "lucide-react";
-import { createContext, useContext } from "react";
 
 /**
  * Context to track navigation loading state globally
