@@ -58,15 +58,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <QueryProvider>
             <I18nProvider>
               <LoadingProvider>
-                <Suspense fallback={null}>
-                  <NavigationProgress />
-                </Suspense>
                 {children}
                 <Toaster />
               </LoadingProvider>
             </I18nProvider>
           </QueryProvider>
         </ThemeProvider>
+        <Suspense fallback={null}>
+          <NavigationProgress />
+        </Suspense>
       </body>
     </html>
   );
