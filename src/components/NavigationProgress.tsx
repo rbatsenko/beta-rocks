@@ -50,8 +50,8 @@ export function NavigationProgress() {
 
   useEffect(() => {
     if (isLoading) {
-      // Show loading bar after 300ms (avoid flash for fast navigations)
-      const barTimer = setTimeout(() => setShowBar(true), 300);
+      // Show loading bar after 100ms (reduced from 300ms for better ISR page feedback)
+      const barTimer = setTimeout(() => setShowBar(true), 100);
 
       // Show full overlay after 1.5s (for very slow loads)
       const overlayTimer = setTimeout(() => setShowOverlay(true), 1500);

@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   typescript: {
     tsconfigPath: "./tsconfig.json",
   },
+  experimental: {
+    viewTransition: true,
+  },
 };
 
 export default nextConfig;
