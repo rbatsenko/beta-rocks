@@ -1,20 +1,50 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useLinkStatus } from "next/link";
+import { usePathname } from "next/navigation";
 import { Loader2 } from "lucide-react";
+import { getNavigationEmitter } from "../../instrumentation-client";
 
 /**
- * Global navigation progress indicator using Next.js built-in useLinkStatus.
- * Automatically detects navigation and shows loading state - works in production!
+ * Global navigation progress indicator using Next.js instrumentation API.
+ * Tracks ALL navigation including router.push() and Link clicks - works in production!
  */
 export function NavigationProgress() {
-  const { pending } = useLinkStatus();
+  const pathname = usePathname();
+  const [isNavigating, setIsNavigating] = useState(false);
   const [showBar, setShowBar] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
 
+  // Subscribe to global navigation events
   useEffect(() => {
-    if (pending) {
+    const emitter = getNavigationEmitter();
+
+    const handleStart = () => {
+      setIsNavigating(true);
+    };
+
+    const handleEnd = () => {
+      setIsNavigating(false);
+    };
+
+    emitter.addEventListener("navigationStart", handleStart);
+    emitter.addEventListener("navigationEnd", handleEnd);
+
+    return () => {
+      emitter.removeEventListener("navigationStart", handleStart);
+      emitter.removeEventListener("navigationEnd", handleEnd);
+    };
+  }, []);
+
+  // End navigation when pathname changes (page loaded)
+  useEffect(() => {
+    const emitter = getNavigationEmitter();
+    emitter.endNavigation();
+  }, [pathname]);
+
+  // Show loading UI after delays
+  useEffect(() => {
+    if (isNavigating) {
       // Show loading bar after 100ms
       const barTimer = setTimeout(() => setShowBar(true), 100);
 
@@ -29,7 +59,7 @@ export function NavigationProgress() {
       setShowBar(false);
       setShowOverlay(false);
     }
-  }, [pending]);
+  }, [isNavigating]);
 
   if (!showBar) return null;
 
