@@ -3,8 +3,8 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Pitaj o uvjetima penjanja",
-    "description": "Dobij podatke o vremenskim uvjetima u realnom vremenu, analizu trenja i optimalne vremenske prozore za penjanje na bilo kojem vrhuncu na svijetu",
+    "heading": "Dobij beta za svaku stijenu",
+    "description": "Uvjeti u stvarnom vremenu, izvješća zajednice i informacije o smjerovima na stijenama širom svijeta",
     "exampleQueries": {
       "query1": {
         "display": "Uvjeti u Paklenici danas?",

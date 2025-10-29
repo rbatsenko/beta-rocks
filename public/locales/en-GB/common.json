@@ -3,8 +3,8 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Ask about climbing conditions",
-    "description": "Get real-time weather, friction analysis, and optimal climbing windows for any crag worldwide",
+    "heading": "Get the beta on any crag",
+    "description": "Real-time conditions, community reports, and route information for crags worldwide",
     "exampleQueries": {
       "query1": {
         "display": "Stanage conditions tomorrow?",

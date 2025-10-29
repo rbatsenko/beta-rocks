@@ -3,8 +3,8 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Pregunta sobre les condicions d'escalada",
-    "description": "Obtén informació meteorològica en temps real, análisi de fricció i finestres d'escalada òptimes per a qualsevol esparelló del món",
+    "heading": "Aconsegueix la beta de qualsevol roca",
+    "description": "Condicions en temps real, informes de la comunitat i informació sobre vies a roques de tot el món",
     "exampleQueries": {
       "query1": {
         "display": "Condicions a les Agulles d'Engolasters avui?",

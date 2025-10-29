@@ -3,8 +3,8 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Frag nach den Kletterbedingungen",
-    "description": "Hol dir Wetter in Echtzeit, Reibungsanalyse und die besten Kletterfenster für jedes Gebiet in den Alpen und darüber hinaus",
+    "heading": "Hol dir die Beta zu jedem Felsen",
+    "description": "Echtzeit-Bedingungen, Community-Berichte und Routeninformationen für Felsen weltweit",
     "exampleQueries": {
       "query1": {
         "display": "Wie schaut's morgen im Zillertal aus?",

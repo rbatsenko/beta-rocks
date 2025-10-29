@@ -3,8 +3,8 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Pregunta por las condiciones de escalada",
-    "description": "Obtén meteorología en tiempo real, análisis de fricción y las mejores ventanas de escalada para cualquier escuela del mundo",
+    "heading": "Consigue el beta de cualquier roca",
+    "description": "Condiciones en tiempo real, reportes de la comunidad e información de vías en rocas de todo el mundo",
     "exampleQueries": {
       "query1": {
         "display": "¿Habrá buen tacto en Siurana mañana?",

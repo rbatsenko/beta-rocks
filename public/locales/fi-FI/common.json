@@ -3,8 +3,8 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Kysy kiipeilyöoloista",
-    "description": "Saa reaaliaikaista säätietoa, kitkamittauksia ja optimaaliset kiipeilyaikaikkunat mihin tahansa maailman kalliotyyppüään",
+    "heading": "Hanki beta mistä tahansa kalliosta",
+    "description": "Reaaliaikaiset olosuhteet, yhteisöraportit ja reittitiedot kallioista ympäri maailmaa",
     "exampleQueries": {
       "query1": {
         "display": "Olosuhteet Olhavassa tänään?",

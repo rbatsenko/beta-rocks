@@ -3,8 +3,8 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Demandez les conditions d'escalade",
-    "description": "Obtenez la météo en temps réel, une analyse de friction et les meilleures fenêtres d'escalade pour n'importe quelle falaise dans le monde",
+    "heading": "Obtenez le topo de n'importe quel site",
+    "description": "Conditions en temps réel, rapports communautaires et informations sur les voies dans le monde entier",
     "exampleQueries": {
       "query1": {
         "display": "Quel sera l'état de Fontainebleau demain ?",

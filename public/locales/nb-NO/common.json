@@ -3,8 +3,8 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Spør om klatreforhold",
-    "description": "Få sanntidsvær, friksjonsanalyse og de beste klatretidene for alle crag i verden",
+    "heading": "Få beta om enhver klippe",
+    "description": "Sanntidsforhold, fellesskapsrapporter og ruteinformasjon for klipper verden over",
     "exampleQueries": {
       "query1": {
         "display": "Hvordan er forholdene i Flatanger i morgen?",

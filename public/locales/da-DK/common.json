@@ -3,8 +3,8 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Spørg om klatrebetingelser",
-    "description": "Få realtidsvejr, friktionsanalyse og optimale klatretider for alle klatrepladser i verden",
+    "heading": "Få beta om enhver klippe",
+    "description": "Realtidsforhold, fællesskabsrapporter og ruteinformation for klipper verden over",
     "exampleQueries": {
       "query1": {
         "display": "Forhold i Stevns Klint i dag?",

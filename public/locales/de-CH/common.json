@@ -3,8 +3,8 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Frag nach Kletterbedingungen",
-    "description": "Erhalte Wetterdaten in Echtzeit, Reibungsanalysen und die besten Kletterfenster für jeden Fels weltweit",
+    "heading": "Hol dir die Beta zu jedem Felsen",
+    "description": "Echtzeit-Bedingungen, Community-Berichte und Routeninformationen für Felsen weltweit",
     "exampleQueries": {
       "query1": {
         "display": "Wie sind die Bedingungen im Gasterntal morgen?",

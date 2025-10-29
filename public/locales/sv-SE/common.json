@@ -3,8 +3,8 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Fråga om klätterförhållanden",
-    "description": "Få väder i realtid, friktionsanalys och bästa klätterfönster för alla klippor i världen",
+    "heading": "Få beta om vilken klippa som helst",
+    "description": "Realtidsförhållanden, communityrapporter och ruttinformation för klippor världen över",
     "exampleQueries": {
       "query1": {
         "display": "Hur blir det i Bohuslän i helgen?",

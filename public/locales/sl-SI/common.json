@@ -3,8 +3,8 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Vprašaj po plezalnih razmerah",
-    "description": "Pridobi vreme v živo, analizo trenja in najboljše termine za plezanje na kateremkoli plezališču na svetu",
+    "heading": "Pridobi beta za vsako plezališče",
+    "description": "Razmere v realnem času, poročila skupnosti in informacije o smereh na plezališčih po vsem svetu",
     "exampleQueries": {
       "query1": {
         "display": "Kakšne bodo razmere v Ospu jutri?",

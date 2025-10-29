@@ -3,8 +3,8 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Pergunte sobre condições de escalada",
-    "description": "Obtenha clima em tempo real, análise de fricção e janelas de escalada ótimas para qualquer crag em todo o mundo",
+    "heading": "Obtenha o beta de qualquer rocha",
+    "description": "Condições em tempo real, relatórios da comunidade e informações sobre vias em rochas do mundo inteiro",
     "exampleQueries": {
       "query1": {
         "display": "Condições em Peneda-Gerês hoje?",

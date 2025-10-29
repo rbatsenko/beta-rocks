@@ -3,8 +3,8 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Zapytaj o warunki wspinaczkowe",
-    "description": "Sprawdź pogodę w czasie rzeczywistym, analizę tarcia i optymalne okna wspinaczkowe dla dowolnej skałki na świecie",
+    "heading": "Zdobądź betę o każdej skałce",
+    "description": "Warunki w czasie rzeczywistym, raporty społeczności i informacje o drogach na skałkach na całym świecie",
     "exampleQueries": {
       "query1": {
         "display": "Jaki warun w Sokolikach jutro?",

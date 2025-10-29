@@ -3,8 +3,8 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Vraag naar klimcondities",
-    "description": "Ontvang real-time weer, wrijvingsanalyse en optimale klimvensters voor elke rots ter wereld",
+    "heading": "Krijg de beta van elke rots",
+    "description": "Realtime omstandigheden, gemeenschapsrapporten en route-informatie voor rotsen wereldwijd",
     "exampleQueries": {
       "query1": {
         "display": "Freyr omstandigheden vandaag?",

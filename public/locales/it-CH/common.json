@@ -3,8 +3,8 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Chiedi le condizioni di arrampicata",
-    "description": "Ottieni meteo in tempo reale, analisi dell'aderenza e le migliori finestre di scalata per qualsiasi falesia nel mondo",
+    "heading": "Ottieni la beta di ogni falesia",
+    "description": "Condizioni in tempo reale, report della community e informazioni sulle vie nelle falesie di tutto il mondo",
     "exampleQueries": {
       "query1": {
         "display": "Che condizioni ci sono a Cresciano domani?",
