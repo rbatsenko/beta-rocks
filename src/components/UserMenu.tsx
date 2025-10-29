@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { User, Settings, Star, BarChart3, Info, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,8 +11,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { initializeUserProfile, type UserProfile } from "@/lib/auth/sync-key";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
+import { useUserProfile } from "@/hooks/useUserProfile";
 
 interface UserMenuProps {
   onSettingsClick: () => void;
@@ -33,23 +32,7 @@ export function UserMenu({
   isClearChatDisabled,
 }: UserMenuProps) {
   const { t } = useClientTranslation("common");
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    async function loadProfile() {
-      try {
-        const profile = await initializeUserProfile();
-        setUserProfile(profile);
-      } catch (error) {
-        console.error("Failed to initialize user profile:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    loadProfile();
-  }, []);
+  const { data: userProfile, isLoading } = useUserProfile();
 
   // Get initials for avatar
   const getInitials = () => {

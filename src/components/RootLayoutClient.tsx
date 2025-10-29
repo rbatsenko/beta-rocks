@@ -8,6 +8,7 @@ import { SettingsDialog } from "@/components/SettingsDialog";
 import { FavoritesDialog } from "@/components/FavoritesDialog";
 import { StatsDialog } from "@/components/StatsDialog";
 import { SyncExplainerDialog } from "@/components/SyncExplainerDialog";
+import { useUserProfile } from "@/hooks/useUserProfile";
 
 export function RootLayoutClient({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -15,6 +16,9 @@ export function RootLayoutClient({ children }: { children: React.ReactNode }) {
   const [favoritesDialogOpen, setFavoritesDialogOpen] = useState(false);
   const [statsDialogOpen, setStatsDialogOpen] = useState(false);
   const [syncExplainerDialogOpen, setSyncExplainerDialogOpen] = useState(false);
+
+  // Prefetch user profile on app load (caches it globally)
+  useUserProfile();
 
   // Show header on location pages
   const showHeader = pathname?.startsWith("/location");
