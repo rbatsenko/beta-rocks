@@ -4,7 +4,6 @@ import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { CragPageContent } from "@/components/CragPageContent";
 import { Loader2 } from "lucide-react";
-import { Header } from "@/components/Header";
 
 async function fetchLocationData(slug: string) {
   const res = await fetch(`/api/location/${slug}`);
@@ -27,38 +26,32 @@ export default function LocationPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        <main className="container mx-auto px-4 py-6 max-w-5xl">
-          <div className="flex items-center justify-center min-h-[60vh]">
-            <div className="flex flex-col items-center gap-4 bg-card p-8 rounded-lg shadow-xl border-2 border-orange-500/20">
-              <Loader2 className="h-16 w-16 text-orange-500 animate-spin" />
-              <div className="text-center">
-                <p className="text-lg font-medium text-foreground">Loading conditions...</p>
-                <p className="text-sm text-muted-foreground mt-1">Fetching weather data...</p>
-              </div>
+      <main className="container mx-auto px-4 py-6 max-w-5xl">
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <div className="flex flex-col items-center gap-4 bg-card p-8 rounded-lg shadow-xl border-2 border-orange-500/20">
+            <Loader2 className="h-16 w-16 text-orange-500 animate-spin" />
+            <div className="text-center">
+              <p className="text-lg font-medium text-foreground">Loading conditions...</p>
+              <p className="text-sm text-muted-foreground mt-1">Fetching weather data...</p>
             </div>
           </div>
-        </main>
-      </div>
+        </div>
+      </main>
     );
   }
 
   if (error || !data) {
     return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        <main className="container mx-auto px-4 py-6 max-w-5xl">
-          <div className="flex items-center justify-center min-h-[60vh]">
-            <div className="text-center">
-              <h1 className="text-2xl font-bold text-destructive mb-2">Error Loading Location</h1>
-              <p className="text-muted-foreground">
-                {error instanceof Error ? error.message : "Failed to load location data"}
-              </p>
-            </div>
+      <main className="container mx-auto px-4 py-6 max-w-5xl">
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-destructive mb-2">Error Loading Location</h1>
+            <p className="text-muted-foreground">
+              {error instanceof Error ? error.message : "Failed to load location data"}
+            </p>
           </div>
-        </main>
-      </div>
+        </div>
+      </main>
     );
   }
 

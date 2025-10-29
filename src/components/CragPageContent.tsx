@@ -19,15 +19,9 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Header } from "@/components/Header";
 import { ConditionsDetailContent } from "@/components/ConditionsDetailContent";
 import { ReportCard } from "@/components/ReportCard";
 import { ReportDialog } from "@/components/ReportDialog";
-import { HeaderActions } from "@/components/HeaderActions";
-import { SettingsDialog } from "@/components/SettingsDialog";
-import { FavoritesDialog } from "@/components/FavoritesDialog";
-import { StatsDialog } from "@/components/StatsDialog";
-import { SyncExplainerDialog } from "@/components/SyncExplainerDialog";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
 import { useRouter } from "next/navigation";
@@ -133,10 +127,6 @@ export function CragPageContent({
   const router = useRouter();
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
   const [reports, setReports] = useState(initialReports);
-  const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
-  const [favoritesDialogOpen, setFavoritesDialogOpen] = useState(false);
-  const [statsDialogOpen, setStatsDialogOpen] = useState(false);
-  const [syncExplainerDialogOpen, setSyncExplainerDialogOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<"all" | ReportCategory>("all");
 
   // React Query hooks for favorites
@@ -246,17 +236,6 @@ export function CragPageContent({
 
   return (
     <div className="min-h-screen bg-background">
-      <Header
-        actions={
-          <HeaderActions
-            onSyncClick={() => setSyncExplainerDialogOpen(true)}
-            onSettingsClick={() => setSettingsDialogOpen(true)}
-            onFavoritesClick={() => setFavoritesDialogOpen(true)}
-            onStatsClick={() => setStatsDialogOpen(true)}
-          />
-        }
-      />
-
       <main className="container mx-auto px-4 py-6 max-w-5xl">
         {/* Hero Section */}
         <div className="mb-8">
@@ -527,22 +506,6 @@ export function CragPageContent({
         cragId={crag.id}
         cragName={crag.name}
         onReportCreated={handleReportCreated}
-      />
-
-      {/* Settings Dialog */}
-      <SettingsDialog open={settingsDialogOpen} onOpenChange={setSettingsDialogOpen} />
-
-      {/* Favorites Dialog */}
-      <FavoritesDialog open={favoritesDialogOpen} onOpenChange={setFavoritesDialogOpen} />
-
-      {/* Stats Dialog */}
-      <StatsDialog open={statsDialogOpen} onOpenChange={setStatsDialogOpen} />
-
-      {/* Sync Explainer Dialog */}
-      <SyncExplainerDialog
-        open={syncExplainerDialogOpen}
-        onOpenChange={setSyncExplainerDialogOpen}
-        onOpenSettings={() => setSettingsDialogOpen(true)}
       />
     </div>
   );
