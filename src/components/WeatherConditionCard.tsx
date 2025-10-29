@@ -17,7 +17,6 @@ import { generateUniqueSlug } from "@/lib/utils/slug";
 import { useUnits } from "@/hooks/useUnits";
 import { convertTemperature } from "@/lib/units/conversions";
 import { useState } from "react";
-import { useLoadingState } from "@/components/NavigationProgress";
 
 interface ConditionsData {
   location: string;
@@ -144,7 +143,6 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
 }: WeatherConditionCardProps) {
   const hasEmoji = data.current?.weatherCode !== undefined;
   const router = useRouter();
-  const { startLoading } = useLoadingState();
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
   const { units } = useUnits();
 
@@ -247,7 +245,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
                 <button
                   onClick={() => {
                     const slug = generateUniqueSlug(data.location, data.latitude!, data.longitude!);
-                    startLoading();
+                    
                     router.push(`/location/${slug}`);
                   }}
                   className="hover:text-orange-500 transition-colors cursor-pointer inline-flex items-center gap-1 group"

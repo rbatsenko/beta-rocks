@@ -17,7 +17,6 @@ import { MapPopover } from "./MapPopover";
 import { getCountryFlag } from "@/lib/utils/country-flag";
 import { getSunCalcUrl } from "@/lib/utils/urls";
 import { generateUniqueSlug } from "@/lib/utils/slug";
-import { useLoadingState } from "@/components/NavigationProgress";
 
 interface ConditionsDetailSheetProps {
   open: boolean;
@@ -102,7 +101,6 @@ export const ConditionsDetailSheet = memo(function ConditionsDetailSheet({
 }: ConditionsDetailSheetProps) {
   const { t } = useClientTranslation("common");
   const router = useRouter();
-  const { startLoading } = useLoadingState();
 
   // Build detailed location string with flag (same logic as Dialog)
   const { locationText, countryFlag } = useMemo(() => {
@@ -125,7 +123,7 @@ export const ConditionsDetailSheet = memo(function ConditionsDetailSheet({
   const handleViewCragPage = () => {
     if (data.latitude && data.longitude) {
       const slug = generateUniqueSlug(data.location, data.latitude, data.longitude);
-      startLoading();
+      
       router.push(`/location/${slug}`);
       onOpenChange(false); // Close the sheet
     }

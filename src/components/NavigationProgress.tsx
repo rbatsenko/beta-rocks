@@ -1,56 +1,21 @@
 "use client";
 
-import { useEffect, useState, useCallback, createContext, useContext } from "react";
-import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useLinkStatus } from "next/link";
 import { Loader2 } from "lucide-react";
 
 /**
- * Context to track navigation loading state globally
- */
-const LoadingContext = createContext({
-  isLoading: false,
-  startLoading: () => {},
-  stopLoading: () => {},
-});
-
-export function LoadingProvider({ children }: { children: React.ReactNode }) {
-  const [isLoading, setIsLoading] = useState(false);
-  const pathname = usePathname();
-
-  // Stop loading when pathname changes (navigation complete)
-  useEffect(() => {
-    setIsLoading(false);
-  }, [pathname]);
-
-  const startLoading = useCallback(() => setIsLoading(true), []);
-  const stopLoading = useCallback(() => setIsLoading(false), []);
-
-  return (
-    <LoadingContext.Provider value={{ isLoading, startLoading, stopLoading }}>
-      {children}
-    </LoadingContext.Provider>
-  );
-}
-
-/**
- * Hook to manually control loading state (for router.push calls)
- */
-export function useLoadingState() {
-  return useContext(LoadingContext);
-}
-
-/**
- * Global navigation progress indicator.
- * Shows when isLoading is true in LoadingContext.
+ * Global navigation progress indicator using Next.js built-in useLinkStatus.
+ * Automatically detects navigation and shows loading state - works in production!
  */
 export function NavigationProgress() {
-  const { isLoading } = useContext(LoadingContext);
+  const { pending } = useLinkStatus();
   const [showBar, setShowBar] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
 
   useEffect(() => {
-    if (isLoading) {
-      // Show loading bar after 100ms (reduced from 300ms for better ISR page feedback)
+    if (pending) {
+      // Show loading bar after 100ms
       const barTimer = setTimeout(() => setShowBar(true), 100);
 
       // Show full overlay after 1.5s (for very slow loads)
@@ -64,7 +29,7 @@ export function NavigationProgress() {
       setShowBar(false);
       setShowOverlay(false);
     }
-  }, [isLoading]);
+  }, [pending]);
 
   if (!showBar) return null;
 

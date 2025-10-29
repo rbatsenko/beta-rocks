@@ -10,9 +10,8 @@ import { Send, Loader2, CloudSun, Sun, Info, RotateCcw, Star } from "lucide-reac
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
 import { useUnits } from "@/hooks/useUnits";
-import { useFavorites } from "@/hooks/queries/useFavoritesQueries";
+import { useFavorites } from "@/hooks/queries/useFavoritesQueries"
 import { generateUniqueSlug } from "@/lib/utils/slug";
-import { useLoadingState } from "@/components/NavigationProgress";
 import {
   useCurrentSession,
   useChatMessages,
@@ -211,7 +210,6 @@ const ChatUI = ({
   language: string;
 }) => {
   const router = useRouter();
-  const { startLoading } = useLoadingState();
   const [input, setInput] = useState("");
   const { units } = useUnits();
 
@@ -485,7 +483,6 @@ const ChatUI = ({
                                 favorite.latitude,
                                 favorite.longitude
                               );
-                              startLoading();
                               router.push(`/location/${slug}`);
                             }}
                             className="transition-smooth hover:scale-105"

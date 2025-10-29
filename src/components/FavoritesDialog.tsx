@@ -22,7 +22,6 @@ import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useRouter } from "next/navigation";
 import { generateUniqueSlug } from "@/lib/utils/slug";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
-import { useLoadingState } from "@/components/NavigationProgress";
 
 interface FavoritesDialogProps {
   open: boolean;
@@ -32,7 +31,6 @@ interface FavoritesDialogProps {
 export function FavoritesDialog({ open, onOpenChange }: FavoritesDialogProps) {
   const { t } = useClientTranslation("common");
   const router = useRouter();
-  const { startLoading } = useLoadingState();
   const [favoriteToDelete, setFavoriteToDelete] = useState<Favorite | null>(null);
 
   // React Query hooks for favorites
@@ -53,9 +51,6 @@ export function FavoritesDialog({ open, onOpenChange }: FavoritesDialogProps) {
   const handleViewConditions = (favorite: Favorite) => {
     // Generate slug from the crag name and coordinates
     const slug = generateUniqueSlug(favorite.areaName, favorite.latitude, favorite.longitude);
-
-    // Start loading indicator
-    startLoading();
 
     // Navigate to the crag page
     router.push(`/location/${slug}`);

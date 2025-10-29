@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { I18nProvider } from "@/components/providers/I18nProvider";
 import { QueryProvider } from "@/components/providers/QueryProvider";
-import { LoadingProvider, NavigationProgress } from "@/components/NavigationProgress";
+import { NavigationProgress } from "@/components/NavigationProgress";
 import { Toaster } from "@/components/ui/toaster";
 import "@/index.css";
 
@@ -56,10 +56,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <QueryProvider>
             <I18nProvider>
-              <LoadingProvider>
-                {children}
-                <Toaster />
-              </LoadingProvider>
+              {children}
+              <Toaster />
             </I18nProvider>
           </QueryProvider>
         </ThemeProvider>
