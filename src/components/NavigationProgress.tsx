@@ -1,104 +1,51 @@
 "use client";
 
+import { useLinkStatus } from "next/link";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import { Loader2 } from "lucide-react";
-import { getNavigationEmitter } from "../../instrumentation-client";
 
 /**
- * Global navigation progress indicator using Next.js instrumentation API.
- * Tracks ALL navigation including router.push() and Link clicks - works in production!
+ * Global navigation progress bar.
+ * Shows at the top during page navigation.
  */
 export function NavigationProgress() {
-  const pathname = usePathname();
-  const [isNavigating, setIsNavigating] = useState(false);
-  const [showBar, setShowBar] = useState(false);
-  const [showOverlay, setShowOverlay] = useState(false);
+  const { pending } = useLinkStatus();
+  const [progress, setProgress] = useState(0);
 
-  // Subscribe to global navigation events
   useEffect(() => {
-    const emitter = getNavigationEmitter();
+    console.log("[NavigationProgress] pending:", pending);
 
-    const handleStart = () => {
-      setIsNavigating(true);
-    };
+    if (pending) {
+      // Start progress immediately
+      setProgress(30);
 
-    const handleEnd = () => {
-      setIsNavigating(false);
-    };
-
-    emitter.addEventListener("navigationStart", handleStart);
-    emitter.addEventListener("navigationEnd", handleEnd);
-
-    return () => {
-      emitter.removeEventListener("navigationStart", handleStart);
-      emitter.removeEventListener("navigationEnd", handleEnd);
-    };
-  }, []);
-
-  // End navigation when pathname changes (page loaded)
-  useEffect(() => {
-    const emitter = getNavigationEmitter();
-    emitter.endNavigation();
-  }, [pathname]);
-
-  // Show loading UI after delays
-  useEffect(() => {
-    if (isNavigating) {
-      // Show loading bar after 100ms
-      const barTimer = setTimeout(() => setShowBar(true), 100);
-
-      // Show full overlay after 1.5s (for very slow loads)
-      const overlayTimer = setTimeout(() => setShowOverlay(true), 1500);
+      // Gradually increase
+      const timer1 = setTimeout(() => setProgress(50), 200);
+      const timer2 = setTimeout(() => setProgress(70), 500);
+      const timer3 = setTimeout(() => setProgress(90), 1000);
 
       return () => {
-        clearTimeout(barTimer);
-        clearTimeout(overlayTimer);
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+        clearTimeout(timer3);
       };
     } else {
-      setShowBar(false);
-      setShowOverlay(false);
+      // Complete and reset
+      setProgress(100);
+      const resetTimer = setTimeout(() => setProgress(0), 300);
+      return () => clearTimeout(resetTimer);
     }
-  }, [isNavigating]);
+  }, [pending]);
 
-  if (!showBar) return null;
+  if (progress === 0) return null;
 
   return (
-    <>
-      {/* Top loading bar - thin and animated */}
-      <div
-        className="fixed top-0 left-0 right-0 z-50"
-        style={{
-          height: "3px",
-          backgroundColor: "#f97316",
-          animation: "progress 2s ease-in-out infinite",
-        }}
-      />
-
-      {/* Full-screen loading overlay for very slow loads */}
-      {showOverlay && (
-        <div className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm flex items-center justify-center animate-in fade-in duration-300">
-          <div className="flex flex-col items-center gap-4">
-            <Loader2 className="h-12 w-12 text-orange-500 animate-spin" />
-            <p className="text-sm text-muted-foreground">Loading conditions...</p>
-            <p className="text-xs text-muted-foreground/70">Fetching weather data...</p>
-          </div>
-        </div>
-      )}
-
-      <style jsx>{`
-        @keyframes progress {
-          0% {
-            width: 10%;
-          }
-          50% {
-            width: 70%;
-          }
-          100% {
-            width: 95%;
-          }
-        }
-      `}</style>
-    </>
+    <div
+      className="fixed top-0 left-0 right-0 z-[9999] h-1 bg-orange-500 shadow-lg shadow-orange-500/50"
+      style={{
+        width: `${progress}%`,
+        transition: "width 300ms ease-out, opacity 300ms",
+        opacity: progress === 100 ? 0 : 1,
+      }}
+    />
   );
 }

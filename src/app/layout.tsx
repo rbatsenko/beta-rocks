@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { I18nProvider } from "@/components/providers/I18nProvider";
 import { QueryProvider } from "@/components/providers/QueryProvider";
@@ -53,6 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       </head>
       <body>
+        <NavigationProgress />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <QueryProvider>
             <I18nProvider>
@@ -61,9 +61,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </I18nProvider>
           </QueryProvider>
         </ThemeProvider>
-        <Suspense fallback={null}>
-          <NavigationProgress />
-        </Suspense>
       </body>
     </html>
   );
