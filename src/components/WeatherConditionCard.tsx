@@ -324,7 +324,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
           <div className="space-y-0.5">
             <div className="font-semibold text-base flex items-center gap-1.5">
               🧗
-              {data.latitude && data.longitude ? (
+              {data.cragId || data.cragSlug ? (
                 <button
                   onClick={() => {
                     const slug =
@@ -376,16 +376,17 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
                 <Star className={`w-4 h-4 ${isFavorited ? "fill-current" : ""}`} />
                 {favoriteLabel}
               </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleAddReport}
-                disabled={!data.cragId}
-                title="Add condition report"
-              >
-                <MessageSquare className="w-4 h-4" />
-                {addReportLabel}
-              </Button>
+              {data.cragId && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleAddReport}
+                  title="Add condition report"
+                >
+                  <MessageSquare className="w-4 h-4" />
+                  {addReportLabel}
+                </Button>
+              )}
               <Button
                 variant="outline"
                 size="sm"
