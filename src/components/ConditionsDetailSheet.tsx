@@ -26,6 +26,7 @@ interface ConditionsDetailSheetProps {
     locationDetails?: string;
     latitude?: number;
     longitude?: number;
+    cragSlug?: string;
     country?: string;
     state?: string;
     municipality?: string;
@@ -122,7 +123,7 @@ export const ConditionsDetailSheet = memo(function ConditionsDetailSheet({
   // Handler for navigating to full crag page
   const handleViewCragPage = () => {
     if (data.latitude && data.longitude) {
-      const slug = generateUniqueSlug(data.location, data.latitude, data.longitude);
+      const slug = data.cragSlug || generateUniqueSlug(data.location, data.latitude, data.longitude);
 
       router.push(`/location/${slug}`);
       onOpenChange(false); // Close the sheet

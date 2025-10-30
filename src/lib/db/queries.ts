@@ -28,6 +28,23 @@ export async function fetchCragById(id: string) {
   return data;
 }
 
+export async function fetchCragBySlug(slug: string) {
+  const { data, error } = await supabase
+    .from("crags")
+    .select("*")
+    .eq("slug", slug)
+    .single();
+
+  if (error) {
+    // Don't throw on "not found" errors, return null instead
+    if (error.code === "PGRST116") {
+      return null;
+    }
+    throw error;
+  }
+  return data;
+}
+
 export async function searchCrags(query: string) {
   // Use RPC call with accent-insensitive search that includes both crags AND sectors
   // This handles cases like:
@@ -57,6 +74,7 @@ export async function createCrag(crag: TablesInsert<"crags">) {
     .insert({
       id: uuidv4(),
       ...crag,
+      slug: crag.slug || '', // Empty string triggers auto-generation
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     })
@@ -175,6 +193,7 @@ export async function findOrCreateCrag(params: {
     village: params.village || null,
     rock_type: params.rockType || null,
     source: params.source || "user_report",
+    slug: '', // Empty string triggers auto-generation by trigger
   });
 
   return newCrag;

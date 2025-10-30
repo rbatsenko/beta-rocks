@@ -60,6 +60,7 @@ const tools = {
       let aspects: number[] | undefined = undefined;
       let climbingTypes: string[] | undefined = undefined;
       let cragId: string | undefined = undefined;
+      let cragSlug: string | undefined = undefined;
 
       // If no coordinates provided, search for location
       if (!lat || !lon) {
@@ -83,6 +84,11 @@ const tools = {
               lat = result.lat;
               lon = result.lon;
               cragId = result.id; // Capture crag ID for fetching reports
+              // Capture slug for URL generation (use parent_crag_slug for sectors)
+              const isSector = "result_type" in result && result.result_type === "sector";
+              cragSlug = isSector && "parent_crag_slug" in result
+                ? result.parent_crag_slug || undefined
+                : result.slug || undefined;
               detectedRockType = (detectedRockType || (result.rock_type as RockType)) as RockType;
 
               // Capture detailed location data
@@ -93,7 +99,6 @@ const tools = {
 
               // Capture metadata for AI context
               // For sectors, include parent crag description (e.g., Fontainebleau sandstone warning)
-              const isSector = "result_type" in result && result.result_type === "sector";
               const parentDesc =
                 isSector && "parent_crag_description" in result
                   ? result.parent_crag_description
@@ -102,7 +107,8 @@ const tools = {
               if (isSector && parentDesc) {
                 // Combine sector description + parent crag description (parent desc has critical safety info)
                 const sectorDesc = result.description || "";
-                description = sectorDesc ? `${sectorDesc}\n\n${parentDesc}` : parentDesc;
+                const parentDescStr = String(parentDesc);
+                description = sectorDesc ? `${sectorDesc}\n\n${parentDescStr}` : parentDescStr;
               } else {
                 description = result.description || undefined;
               }
@@ -153,6 +159,11 @@ const tools = {
                       ? item.parent_crag_name // Show parent crag for sectors
                       : item.country; // Show country for crags
 
+                  // Use parent_crag_slug for sectors, slug for crags
+                  const slug = isSector && "parent_crag_slug" in item
+                    ? item.parent_crag_slug
+                    : item.slug;
+
                   return {
                     id: item.id,
                     name: item.name,
@@ -160,6 +171,7 @@ const tools = {
                     latitude: item.lat,
                     longitude: item.lon,
                     rockType: item.rock_type || "unknown",
+                    cragSlug: slug || null,
                   };
                 }),
               };
@@ -242,6 +254,7 @@ const tools = {
                     latitude: crag.metadata.lat,
                     longitude: crag.metadata.lng,
                     rockType: extractRockType(crag),
+                    cragSlug: null, // OpenBeta areas don't have slugs yet
                   })),
                 };
               }
@@ -297,6 +310,7 @@ const tools = {
                     location: locationParts.join(", ") || "Unknown",
                     latitude: result.latitude,
                     longitude: result.longitude,
+                    cragSlug: null, // Geocoding results don't have slugs
                   };
                 }),
               };
@@ -359,7 +373,8 @@ const tools = {
                   description,
                   rock_type,
                   climbing_types,
-                  aspects
+                  aspects,
+                  slug
                 )
               `
               )
@@ -401,6 +416,11 @@ const tools = {
                   aspects = parent.aspects;
                 }
 
+                // Capture parent crag slug for URL generation
+                if (parent.slug) {
+                  cragSlug = parent.slug;
+                }
+
                 console.log("[get_conditions] Enriched with parent crag data:", {
                   parentName: parent.name,
                   rockType: detectedRockType,
@@ -432,6 +452,10 @@ const tools = {
                 }
                 if (crag.aspects && crag.aspects.length > 0) {
                   aspects = crag.aspects;
+                }
+                // Capture crag slug for URL generation
+                if (crag.slug) {
+                  cragSlug = crag.slug;
                 }
               }
             }
@@ -635,13 +659,14 @@ const tools = {
               source: "ai_chat",
             });
             cragId = crag.id;
-            console.log("[get_conditions] Crag found/created:", { cragId, name: crag.name });
+            cragSlug = crag.slug || undefined;
+            console.log("[get_conditions] Crag found/created:", { cragId, cragSlug, name: crag.name });
           } catch (error) {
             console.error("[get_conditions] Failed to find/create crag:", error);
             // Continue without cragId - reports won't work but conditions will
           }
         } else {
-          console.log("[get_conditions] Using cragId from local search:", cragId);
+          console.log("[get_conditions] Using cragId from local search:", cragId, "slug:", cragSlug);
         }
 
         // Fetch recent community reports for this crag
@@ -675,6 +700,7 @@ const tools = {
           latitude: lat,
           longitude: lon,
           cragId, // Include crag ID for reports
+          cragSlug, // Include slug for URL generation
           country,
           state,
           municipality,

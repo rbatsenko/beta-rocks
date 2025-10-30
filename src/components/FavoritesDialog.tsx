@@ -49,8 +49,8 @@ export function FavoritesDialog({ open, onOpenChange }: FavoritesDialogProps) {
   };
 
   const handleViewConditions = (favorite: Favorite) => {
-    // Generate slug from the crag name and coordinates
-    const slug = generateUniqueSlug(favorite.areaName, favorite.latitude, favorite.longitude);
+    // Use stored slug if available, otherwise generate one for backward compatibility
+    const slug = favorite.areaSlug || generateUniqueSlug(favorite.areaName, favorite.latitude, favorite.longitude);
 
     // Navigate to the crag page
     router.push(`/location/${slug}`);

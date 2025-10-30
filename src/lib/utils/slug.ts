@@ -96,3 +96,27 @@ export function parseCoordinatesFromSlug(slug: string): { lat: number; lon: numb
 export function getBaseSlug(slug: string): string {
   return slug.replace(/(-?\d+-\d+)--(-?\d+-\d+)$/, "");
 }
+
+/**
+ * Generate a slug from a crag object (prefers stored slug field)
+ * Falls back to coordinate-based slug for backward compatibility
+ * @param crag - Crag object with slug, name, lat, lon
+ * @returns SEO-friendly slug
+ */
+export function getCragSlug(crag: {
+  slug?: string | null;
+  name: string;
+  lat: number;
+  lon: number;
+}): string {
+  // Prefer stored slug from database
+  if (crag.slug) {
+    return crag.slug;
+  }
+
+  // Fallback to coordinate-based slug (old system)
+  console.warn(
+    `[getCragSlug] Crag "${crag.name}" missing slug field, generating coordinate-based slug`
+  );
+  return generateUniqueSlug(crag.name, crag.lat, crag.lon);
+}

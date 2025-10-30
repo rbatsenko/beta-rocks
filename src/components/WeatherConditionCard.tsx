@@ -30,6 +30,7 @@ interface ConditionsData {
   latitude?: number;
   longitude?: number;
   cragId?: string;
+  cragSlug?: string;
   country?: string;
   state?: string;
   municipality?: string;
@@ -244,8 +245,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
               {data.latitude && data.longitude ? (
                 <button
                   onClick={() => {
-                    const slug = generateUniqueSlug(data.location, data.latitude!, data.longitude!);
-
+                    const slug = data.cragSlug || generateUniqueSlug(data.location, data.latitude!, data.longitude!);
                     router.push(`/location/${slug}`);
                   }}
                   className="hover:text-orange-500 transition-colors cursor-pointer inline-flex items-center gap-1 group"

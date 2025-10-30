@@ -478,7 +478,8 @@ const ChatUI = ({
                             variant="outline"
                             size="sm"
                             onClick={() => {
-                              const slug = generateUniqueSlug(
+                              // Use stored slug if available, otherwise generate one for backward compatibility
+                              const slug = favorite.areaSlug || generateUniqueSlug(
                                 favorite.areaName,
                                 favorite.latitude,
                                 favorite.longitude

@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
-  searchCrags,
+  fetchCragBySlug,
   fetchReportsByCrag,
   fetchSectorsByCrag,
   findCragByCoordinates,
 } from "@/lib/db/queries";
 import { getWeatherForecast } from "@/lib/external-apis/open-meteo";
 import { computeConditions } from "@/lib/conditions/conditions.service";
-import { parseCoordinatesFromSlug, getBaseSlug, generateSlug } from "@/lib/utils/slug";
+import { parseCoordinatesFromSlug } from "@/lib/utils/slug";
 import type { RockType } from "@/lib/conditions/conditions.service";
 
 export const dynamic = "force-dynamic";
@@ -20,39 +20,16 @@ export async function GET(
     const { slug } = await params;
     console.log(`[API /location/${slug}] Processing request`);
 
-    // Find crag by slug
-    const baseSlug = getBaseSlug(slug);
-    const slugParts = baseSlug.split("-");
-    const searchName = slugParts[slugParts.length - 1];
-
-    const results = await searchCrags(searchName);
-
     let crag = null;
 
-    if (results && results.length > 0) {
-      if (results.length === 1) {
-        crag = results[0];
-      } else {
-        // Multiple results - try exact slug match
-        const exactMatch = results.find((c) => generateSlug(c.name) === baseSlug);
-        if (exactMatch) {
-          crag = exactMatch;
-        } else {
-          // Try coordinate disambiguation
-          const coords = parseCoordinatesFromSlug(slug);
-          if (coords) {
-            crag = await findCragByCoordinates(coords.lat, coords.lon, 0.01);
-          } else {
-            crag = results[0];
-          }
-        }
-      }
-    }
+    // Try direct slug lookup first (new system)
+    crag = await fetchCragBySlug(slug);
 
-    // Fallback to coordinate lookup
+    // Fallback to old coordinate-based slug parsing for backward compatibility
     if (!crag) {
       const coords = parseCoordinatesFromSlug(slug);
       if (coords) {
+        console.log(`[API /location/${slug}] Falling back to coordinate lookup`);
         crag = await findCragByCoordinates(coords.lat, coords.lon, 0.01);
       }
     }
