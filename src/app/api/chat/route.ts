@@ -22,6 +22,7 @@ import {
 import { createClient } from "@supabase/supabase-js";
 import type { UnitsConfig } from "@/lib/units/types";
 import { getWindSpeedSymbol } from "@/lib/units/conversions";
+import { getDefaultUnitsForLocale } from "@/lib/units/types";
 
 export const maxDuration = 30;
 
@@ -934,6 +935,9 @@ export async function POST(req: Request) {
   } = await req.json();
   const locale = resolveLocale(language);
 
+  // Get units: use provided units or default to locale-appropriate units
+  const effectiveUnits = units || getDefaultUnitsForLocale(locale);
+
   // Format user's current time for the AI
   const userTime = userDateTime
     ? new Date(userDateTime).toLocaleString("en-US", {
@@ -948,20 +952,19 @@ export async function POST(req: Request) {
       })
     : "Unknown time";
 
-  // Build units context string if units are provided
-  const unitsContext = units
-    ? `
+  // Build units context string (always include, either from user preference or locale default)
+  const unitsContext = `
 
 UNITS PREFERENCES:
 The user prefers the following measurement units:
-- Temperature: ${units.temperature === "celsius" ? "Celsius (°C)" : "Fahrenheit (°F)"}
-- Wind Speed: ${getWindSpeedSymbol(units.windSpeed)}
-- Precipitation: ${units.precipitation === "mm" ? "millimeters (mm)" : "inches (in)"}
-- Distance: ${units.distance === "km" ? "kilometers (km)" : "miles (mi)"}
-- Elevation: ${units.elevation === "meters" ? "meters (m)" : "feet (ft)"}
+- Temperature: ${effectiveUnits.temperature === "celsius" ? "Celsius (°C)" : "Fahrenheit (°F)"}
+- Wind Speed: ${getWindSpeedSymbol(effectiveUnits.windSpeed)}
+- Precipitation: ${effectiveUnits.precipitation === "mm" ? "millimeters (mm)" : "inches (in)"}
+- Distance: ${effectiveUnits.distance === "km" ? "kilometers (km)" : "miles (mi)"}
+- Elevation: ${effectiveUnits.elevation === "meters" ? "meters (m)" : "feet (ft)"}
 
-IMPORTANT: Always provide weather measurements in these preferred units when discussing conditions. Convert all values to match the user's preferences.`
-    : "";
+IMPORTANT: Always provide weather measurements in these preferred units when discussing conditions. Convert all values to match the user's preferences.
+For nearby matches: Use the distance unit from preferences (${effectiveUnits.distance === "km" ? "km/m" : "mi/ft"}).`;
 
   const systemPrompt = `${getSystemPrompt(locale)}
 
