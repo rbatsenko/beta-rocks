@@ -462,7 +462,18 @@
       "warning": {
         "title": "Houd je synchronisatietoets privé",
         "description": "Iedereen met je synchronisatietoets kan toegang krijgen tot je favorieten en instellingen. Deel deze niet openbaar."
-      }
+      },
+      "emailButton": "Stuur synchronisatietoets naar jezelf via e-mail",
+      "emailLabel": "E-mailadres",
+      "emailPlaceholder": "jij@example.be",
+      "emailSend": "Verzenden",
+      "emailSending": "Verzenden...",
+      "emailPrivacy": "We bewaren je e-mail niet - het wordt slechts één keer gebruikt om je synchronisatietoets te verzenden.",
+      "emailSent": "E-mail verzonden!",
+      "emailSentDescription": "Controleer je inbox op {{email}}",
+      "emailFailed": "Verzenden van e-mail mislukt",
+      "emailFailedDescription": "Probeer het opnieuw of kopieer je synchronisatietoets handmatig.",
+      "emailInvalid": "Voer een geldig e-mailadres in"
     },
     "dangerZone": {
       "title": "Gevaarlijke zone",

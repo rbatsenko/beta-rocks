@@ -467,7 +467,18 @@
       "warning": {
         "title": "Halte deinen Sync-Schlüssel geheim",
         "description": "Jeder mit deinem Sync-Schlüssel kann auf deine Favoriten und Einstellungen zugreifen. Teile ihn nicht öffentlich."
-      }
+      },
+      "emailButton": "Sync-Schlüssel per E-Mail an dich senden",
+      "emailLabel": "E-Mail-Adresse",
+      "emailPlaceholder": "du@example.de",
+      "emailSend": "Senden",
+      "emailSending": "Wird gesendet...",
+      "emailPrivacy": "Wir speichern deine E-Mail nicht - sie wird nur einmal zum Senden deines Sync-Schlüssels verwendet.",
+      "emailSent": "E-Mail gesendet!",
+      "emailSentDescription": "Überprüfe deinen Posteingang unter {{email}}",
+      "emailFailed": "E-Mail senden fehlgeschlagen",
+      "emailFailedDescription": "Bitte versuche es erneut oder kopiere deinen Sync-Schlüssel manuell.",
+      "emailInvalid": "Bitte gib eine gültige E-Mail-Adresse ein"
     },
     "dangerZone": {
       "title": "Gefahrenzone",

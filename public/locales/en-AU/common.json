@@ -387,7 +387,18 @@
       "warning": {
         "title": "Keep your sync key private",
         "description": "Anyone with your sync key can access your favourites and settings. Don't share it publicly."
-      }
+      },
+      "emailButton": "Email Sync Key to Yourself",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "you@example.com.au",
+      "emailSend": "Send",
+      "emailSending": "Sending...",
+      "emailPrivacy": "We don't store your email - it's only used once to send your sync key.",
+      "emailSent": "Email sent!",
+      "emailSentDescription": "Check your inbox at {{email}}",
+      "emailFailed": "Failed to send email",
+      "emailFailedDescription": "Please try again or copy your sync key manually.",
+      "emailInvalid": "Please enter a valid email address"
     },
     "dangerZone": {
       "title": "Danger Zone",

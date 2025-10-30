@@ -467,7 +467,18 @@
       "warning": {
         "title": "Mantieni privata la tua chiave di sincronizzazione",
         "description": "Chiunque abbia la tua chiave di sincronizzazione può accedere ai tuoi preferiti e alle impostazioni. Non condividerla pubblicamente."
-      }
+      },
+      "emailButton": "Invia la chiave di sincronizzazione via email",
+      "emailLabel": "Indirizzo email",
+      "emailPlaceholder": "tu@example.it",
+      "emailSend": "Invia",
+      "emailSending": "Invio in corso...",
+      "emailPrivacy": "Non memorizziamo la tua email - viene utilizzata solo una volta per inviare la tua chiave di sincronizzazione.",
+      "emailSent": "Email inviata!",
+      "emailSentDescription": "Controlla la tua casella di posta su {{email}}",
+      "emailFailed": "Invio email fallito",
+      "emailFailedDescription": "Riprova o copia manualmente la tua chiave di sincronizzazione.",
+      "emailInvalid": "Inserisci un indirizzo email valido"
     },
     "dangerZone": {
       "title": "Zona pericolosa",

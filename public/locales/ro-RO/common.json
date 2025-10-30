@@ -462,7 +462,18 @@
       "warning": {
         "title": "Ține cheia de sincronizare privată",
         "description": "Oricine are cheia de sincronizare poate accesa favoritele și setările. Nu o partaja public."
-      }
+      },
+      "emailButton": "Trimite cheia de sincronizare prin email",
+      "emailLabel": "Adresa de email",
+      "emailPlaceholder": "tu@example.ro",
+      "emailSend": "Trimite",
+      "emailSending": "Se trimite...",
+      "emailPrivacy": "Nu stocăm emailul tău - este folosit doar o dată pentru a trimite cheia de sincronizare.",
+      "emailSent": "Email trimis!",
+      "emailSentDescription": "Verifică căsuța ta de email la {{email}}",
+      "emailFailed": "Trimiterea emailului a eșuat",
+      "emailFailedDescription": "Te rog încearcă din nou sau copiază manual cheia de sincronizare.",
+      "emailInvalid": "Te rog introdu o adresă de email validă"
     },
     "dangerZone": {
       "title": "Zona de Pericol",

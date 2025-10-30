@@ -388,7 +388,18 @@
       "warning": {
         "title": "Håll din synkroniseringsnyckel privat",
         "description": "Alla med din synkroniseringsnyckel kan komma åt dina favoriter och inställningar. Dela den inte offentligt."
-      }
+      },
+      "emailButton": "E-posta synkroniseringsnyckel till dig själv",
+      "emailLabel": "E-postadress",
+      "emailPlaceholder": "dig@example.se",
+      "emailSend": "Skicka",
+      "emailSending": "Skickar...",
+      "emailPrivacy": "Vi lagrar inte din e-post - den används endast en gång för att skicka din synkroniseringsnyckel.",
+      "emailSent": "E-post skickad!",
+      "emailSentDescription": "Kontrollera din inkorg på {{email}}",
+      "emailFailed": "Misslyckades att skicka e-post",
+      "emailFailedDescription": "Försök igen eller kopiera din synkroniseringsnyckel manuellt.",
+      "emailInvalid": "Ange en giltig e-postadress"
     },
     "dangerZone": {
       "title": "Farozon",

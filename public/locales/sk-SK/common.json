@@ -462,7 +462,18 @@
       "warning": {
         "title": "Uchovávajte svoj synchronizačný kľúč v súkromí",
         "description": "Ktokoľvek s vaším synchronizačným kľúčom môže pristupovať k vašim obľúbeným a nastaveniam. Nezdieľajte ho verejne."
-      }
+      },
+      "emailButton": "Poslať synchronizačný kľúč na e-mail",
+      "emailLabel": "E-mailová adresa",
+      "emailPlaceholder": "vas@example.sk",
+      "emailSend": "Poslať",
+      "emailSending": "Posielanie...",
+      "emailPrivacy": "Neukladáme váš e-mail - je použitý len raz na odoslanie synchronizačného kľúča.",
+      "emailSent": "E-mail odoslaný!",
+      "emailSentDescription": "Skontrolujte svoju doručenú poštu na {{email}}",
+      "emailFailed": "Odoslanie e-mailu zlyhalo",
+      "emailFailedDescription": "Skúste to znova alebo skopírujte synchronizačný kľúč ručne.",
+      "emailInvalid": "Zadajte prosím platnú e-mailovú adresu"
     },
     "dangerZone": {
       "title": "Nebezpečná zóna",

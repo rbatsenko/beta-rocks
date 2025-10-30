@@ -387,7 +387,18 @@
       "warning": {
         "title": "Gardez votre clé de synchronisation privée",
         "description": "Toute personne disposant de votre clé de synchronisation peut accéder à vos favoris et paramètres. Ne la partagez pas publiquement."
-      }
+      },
+      "emailButton": "Envoyer la clé de synchronisation par e-mail",
+      "emailLabel": "Adresse e-mail",
+      "emailPlaceholder": "vous@example.ch",
+      "emailSend": "Envoyer",
+      "emailSending": "Envoi en cours...",
+      "emailPrivacy": "Nous ne stockons pas votre e-mail - il est utilisé une seule fois pour envoyer votre clé de synchronisation.",
+      "emailSent": "E-mail envoyé !",
+      "emailSentDescription": "Vérifiez votre boîte de réception à {{email}}",
+      "emailFailed": "Échec de l'envoi de l'e-mail",
+      "emailFailedDescription": "Veuillez réessayer ou copier votre clé de synchronisation manuellement.",
+      "emailInvalid": "Veuillez entrer une adresse e-mail valide"
     },
     "dangerZone": {
       "title": "Zone dangereuse",

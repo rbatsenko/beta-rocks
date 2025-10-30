@@ -387,7 +387,18 @@
       "warning": {
         "title": "Hold din synknøgle privat",
         "description": "Enhver med din synknøgle kan få adgang til dine favoritter og indstillinger. Del den ikke offentligt."
-      }
+      },
+      "emailButton": "Send synknøgle til dig selv på e-mail",
+      "emailLabel": "E-mailadresse",
+      "emailPlaceholder": "dig@example.dk",
+      "emailSend": "Send",
+      "emailSending": "Sender...",
+      "emailPrivacy": "Vi gemmer ikke din e-mail - den bruges kun én gang til at sende din synknøgle.",
+      "emailSent": "E-mail sendt!",
+      "emailSentDescription": "Tjek din indbakke på {{email}}",
+      "emailFailed": "Kunne ikke sende e-mail",
+      "emailFailedDescription": "Prøv igen eller kopier din synknøgle manuelt.",
+      "emailInvalid": "Indtast venligst en gyldig e-mailadresse"
     },
     "dangerZone": {
       "title": "Farlig zone",

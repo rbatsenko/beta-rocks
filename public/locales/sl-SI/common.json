@@ -463,7 +463,18 @@
       "warning": {
         "title": "Ohrani ključ za sinhronizacijo zaseben",
         "description": "Kdorkoli z tvojim ključem za sinhronizacijo lahko dostopa do tvojih priljubljenih in nastavitev. Ne deli ga javno."
-      }
+      },
+      "emailButton": "Pošlji ključ za sinhronizacijo na e-pošto",
+      "emailLabel": "E-poštni naslov",
+      "emailPlaceholder": "ti@example.si",
+      "emailSend": "Pošlji",
+      "emailSending": "Pošiljanje...",
+      "emailPrivacy": "Ne shranjujemo tvojega e-poštnega naslova - uporabljen je samo enkrat za pošiljanje tvojega ključa za sinhronizacijo.",
+      "emailSent": "E-pošta poslana!",
+      "emailSentDescription": "Preveri svojo e-pošto na {{email}}",
+      "emailFailed": "Pošiljanje e-pošte ni uspelo",
+      "emailFailedDescription": "Prosimo, poskusi znova ali ročno kopiraj ključ za sinhronizacijo.",
+      "emailInvalid": "Prosimo, vnesi veljaven e-poštni naslov"
     },
     "dangerZone": {
       "title": "Nevarna cona",

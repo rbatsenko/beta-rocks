@@ -457,7 +457,18 @@
       "warning": {
         "title": "Zachowaj swój klucz synchronizacji w tajemnicy",
         "description": "Każdy, kto ma Twój klucz synchronizacji, może uzyskać dostęp do Twoich ulubionych skałek i ustawień. Nie udostępniaj go publicznie."
-      }
+      },
+      "emailButton": "Wyślij klucz synchronizacji na e-mail",
+      "emailLabel": "Adres e-mail",
+      "emailPlaceholder": "ty@example.pl",
+      "emailSend": "Wyślij",
+      "emailSending": "Wysyłanie...",
+      "emailPrivacy": "Nie przechowujemy Twojego e-maila - jest używany tylko raz do wysłania klucza synchronizacji.",
+      "emailSent": "E-mail wysłany!",
+      "emailSentDescription": "Sprawdź swoją skrzynkę odbiorczą na {{email}}",
+      "emailFailed": "Nie udało się wysłać e-maila",
+      "emailFailedDescription": "Spróbuj ponownie lub skopiuj klucz synchronizacji ręcznie.",
+      "emailInvalid": "Wprowadź prawidłowy adres e-mail"
     },
     "dangerZone": {
       "title": "Strefa niebezpieczna",

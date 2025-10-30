@@ -387,7 +387,18 @@
       "warning": {
         "title": "Mantén la teva clau de sincronització privada",
         "description": "Qualsevol persona amb la teva clau de sincronització pot accedir als teus preferits i configuració. No la comparteixis públicament."
-      }
+      },
+      "emailButton": "Enviar clau de sincronització per correu electrònic",
+      "emailLabel": "Adreça de correu electrònic",
+      "emailPlaceholder": "tu@example.ad",
+      "emailSend": "Enviar",
+      "emailSending": "Enviant...",
+      "emailPrivacy": "No emmagatzemem el vostre correu electrònic - només s'utilitza una vegada per enviar la vostra clau de sincronització.",
+      "emailSent": "Correu electrònic enviat!",
+      "emailSentDescription": "Comproveu la vostra safata d'entrada a {{email}}",
+      "emailFailed": "Error en enviar el correu electrònic",
+      "emailFailedDescription": "Torneu-ho a provar o copieu la vostra clau de sincronització manualment.",
+      "emailInvalid": "Introduïu una adreça de correu electrònic vàlida"
     },
     "dangerZone": {
       "title": "Zona de perill",

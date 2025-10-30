@@ -462,7 +462,18 @@
       "warning": {
         "title": "Mantenha a sua chave de sincronização privada",
         "description": "Qualquer pessoa com a sua chave de sincronização pode aceder aos seus favoritos e definições. Não a partilhe publicamente."
-      }
+      },
+      "emailButton": "Enviar chave de sincronização por email",
+      "emailLabel": "Endereço de email",
+      "emailPlaceholder": "voce@example.pt",
+      "emailSend": "Enviar",
+      "emailSending": "A enviar...",
+      "emailPrivacy": "Não armazenamos o seu email - é usado apenas uma vez para enviar a sua chave de sincronização.",
+      "emailSent": "Email enviado!",
+      "emailSentDescription": "Verifique a sua caixa de entrada em {{email}}",
+      "emailFailed": "Falha ao enviar email",
+      "emailFailedDescription": "Por favor tente novamente ou copie manualmente a sua chave de sincronização.",
+      "emailInvalid": "Por favor introduza um endereço de email válido"
     },
     "dangerZone": {
       "title": "Zona de Perigo",

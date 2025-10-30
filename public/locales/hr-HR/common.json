@@ -462,7 +462,18 @@
       "warning": {
         "title": "Čuvaj svoju sync tipku privatnom",
         "description": "Svako tko ima tvoju sync tipku može pristupiti tvojim omiljenim lokacijama i postavkama. Ne dijeli je javno."
-      }
+      },
+      "emailButton": "Pošalji sync tipku na e-mail",
+      "emailLabel": "E-mail adresa",
+      "emailPlaceholder": "ti@example.hr",
+      "emailSend": "Pošalji",
+      "emailSending": "Slanje...",
+      "emailPrivacy": "Ne pohranjujemo tvoj e-mail - koristi se samo jednom za slanje tvoje sync tipke.",
+      "emailSent": "E-mail poslan!",
+      "emailSentDescription": "Provjeri svoj inbox na {{email}}",
+      "emailFailed": "Slanje e-maila nije uspjelo",
+      "emailFailedDescription": "Molimo pokušaj ponovno ili kopiraj sync tipku ručno.",
+      "emailInvalid": "Molimo unesi valjanu e-mail adresu"
     },
     "dangerZone": {
       "title": "Opasna zona",

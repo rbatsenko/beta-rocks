@@ -388,7 +388,18 @@
       "warning": {
         "title": "Hold synkroniseringsnøkkelen din privat",
         "description": "Alle med synkroniseringsnøkkelen din kan få tilgang til favorittene og innstillingene dine. Ikke del den offentlig."
-      }
+      },
+      "emailButton": "Send synkroniseringsnøkkel til deg selv på e-post",
+      "emailLabel": "E-postadresse",
+      "emailPlaceholder": "deg@example.no",
+      "emailSend": "Send",
+      "emailSending": "Sender...",
+      "emailPrivacy": "Vi lagrer ikke e-posten din - den brukes kun en gang for å sende synkroniseringsnøkkelen din.",
+      "emailSent": "E-post sendt!",
+      "emailSentDescription": "Sjekk innboksen din på {{email}}",
+      "emailFailed": "Klarte ikke å sende e-post",
+      "emailFailedDescription": "Vennligst prøv igjen eller kopier synkroniseringsnøkkelen din manuelt.",
+      "emailInvalid": "Vennligst oppgi en gyldig e-postadresse"
     },
     "dangerZone": {
       "title": "Faresone",

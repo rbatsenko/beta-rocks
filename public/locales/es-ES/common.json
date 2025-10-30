@@ -467,7 +467,18 @@
       "warning": {
         "title": "Mantenga su clave de sincronización privada",
         "description": "Cualquier persona con su clave de sincronización puede acceder a sus favoritos y ajustes. No la comparta públicamente."
-      }
+      },
+      "emailButton": "Enviar clave de sincronización por correo electrónico",
+      "emailLabel": "Dirección de correo electrónico",
+      "emailPlaceholder": "tu@example.es",
+      "emailSend": "Enviar",
+      "emailSending": "Enviando...",
+      "emailPrivacy": "No almacenamos su correo electrónico - solo se usa una vez para enviar su clave de sincronización.",
+      "emailSent": "Correo electrónico enviado!",
+      "emailSentDescription": "Compruebe su bandeja de entrada en {{email}}",
+      "emailFailed": "Error al enviar el correo electrónico",
+      "emailFailedDescription": "Inténtelo de nuevo o copie su clave de sincronización manualmente.",
+      "emailInvalid": "Introduzca una dirección de correo electrónico válida"
     },
     "dangerZone": {
       "title": "Zona de peligro",

@@ -387,7 +387,18 @@
       "warning": {
         "title": "Pidä synkronointiavoitesi yksityisenä",
         "description": "Kuka tahansa synkronointiavoimeasi voi käyttää pääsyä suosikkeihisi ja asetuksiisi. Älä jaa sitä julkisesti."
-      }
+      },
+      "emailButton": "Lähetä synkronointiavain itsellesi sähköpostilla",
+      "emailLabel": "Sähköpostiosoite",
+      "emailPlaceholder": "sina@example.fi",
+      "emailSend": "Lähetä",
+      "emailSending": "Lähetetään...",
+      "emailPrivacy": "Emme tallenna sähköpostiasi - sitä käytetään vain kerran synkronointiavaimesi lähettämiseen.",
+      "emailSent": "Sähköposti lähetetty!",
+      "emailSentDescription": "Tarkista saapuneet viestisi osoitteessa {{email}}",
+      "emailFailed": "Sähköpostin lähetys epäonnistui",
+      "emailFailedDescription": "Yritä uudelleen tai kopioi synkronointiavaimesi manuaalisesti.",
+      "emailInvalid": "Anna kelvollinen sähköpostiosoite"
     },
     "dangerZone": {
       "title": "Vaarallinen vyöhyke",
