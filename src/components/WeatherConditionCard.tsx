@@ -33,6 +33,8 @@ interface ConditionsData {
   longitude?: number;
   cragId?: string;
   cragSlug?: string;
+  searchedFor?: string; // Original search term when showing nearby crag
+  nearbyMatchDistance?: number; // Distance in meters to nearby crag
   country?: string;
   state?: string;
   municipality?: string;
@@ -281,19 +283,30 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
     }
   }, [data.latitude, data.longitude, data.rockType, data.location, onFullDataFetched]);
 
-  // Build location details with flag
-  const { locationText, countryFlag } = useMemo(() => {
+  // Build location details with flag and nearby match distance
+  const { locationText, countryFlag, nearbyText } = useMemo(() => {
     const parts = [
       data.village,
       data.municipality && data.municipality !== data.village ? data.municipality : null,
       data.state,
     ].filter(Boolean);
 
+    // Format nearby match distance
+    let nearbyFormatted = null;
+    if (data.searchedFor && data.nearbyMatchDistance !== undefined) {
+      const distanceKm = data.nearbyMatchDistance / 1000;
+      const distanceStr = distanceKm >= 1
+        ? `${distanceKm.toFixed(1)}km`
+        : `${data.nearbyMatchDistance}m`;
+      nearbyFormatted = `${distanceStr} from ${data.searchedFor}`;
+    }
+
     return {
       locationText: parts.join(", "),
       countryFlag: getCountryFlag(data.country),
+      nearbyText: nearbyFormatted,
     };
-  }, [data.village, data.municipality, data.state, data.country]);
+  }, [data.village, data.municipality, data.state, data.country, data.searchedFor, data.nearbyMatchDistance]);
 
   return (
     <div className="bg-muted/50 rounded-lg p-3 sm:p-4 border border-border w-full max-w-2xl transition-all duration-500 ease-out will-change-[max-width,transform]">
@@ -342,11 +355,13 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
                 <span>{data.location}</span>
               )}
             </div>
-            {(locationText || countryFlag) && (
+            {(locationText || countryFlag || nearbyText) && (
               <div className="text-xs text-muted-foreground">
                 📍 {locationText}
                 {locationText && countryFlag && ", "}
                 {countryFlag} {data.country}
+                {nearbyText && (locationText || countryFlag) && " • "}
+                {nearbyText}
               </div>
             )}
             {hasEmoji && (

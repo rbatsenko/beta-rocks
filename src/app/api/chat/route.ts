@@ -61,6 +61,8 @@ const tools = {
       let climbingTypes: string[] | undefined = undefined;
       let cragId: string | undefined = undefined;
       let cragSlug: string | undefined = undefined;
+      let searchedFor: string | undefined = undefined; // Original search term when showing nearby crag
+      let nearbyMatchDistance: number | undefined = undefined; // Distance in meters to nearby crag
 
       // If no coordinates provided, search for location
       if (!lat || !lon) {
@@ -700,6 +702,21 @@ const tools = {
             if (nearbyCrag) {
               cragId = nearbyCrag.id;
               cragSlug = nearbyCrag.slug || undefined;
+
+              // Calculate distance using Haversine formula
+              const R = 6371000; // Earth's radius in meters
+              const φ1 = (lat * Math.PI) / 180;
+              const φ2 = (Number(nearbyCrag.lat) * Math.PI) / 180;
+              const Δφ = ((Number(nearbyCrag.lat) - lat) * Math.PI) / 180;
+              const Δλ = ((Number(nearbyCrag.lon) - lon) * Math.PI) / 180;
+              const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+                        Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+              const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+              nearbyMatchDistance = Math.round(R * c); // Distance in meters
+
+              // Store original search term
+              searchedFor = location;
+
               // Update location to actual crag name to avoid confusion
               location = nearbyCrag.name;
               // Update location data from the crag
@@ -712,6 +729,8 @@ const tools = {
                 cragId,
                 cragSlug,
                 name: nearbyCrag.name,
+                originalSearch: searchedFor,
+                distance: `${nearbyMatchDistance}m`,
                 updatedLocation: location,
               });
             } else {
@@ -767,6 +786,8 @@ const tools = {
           longitude: lon,
           cragId, // Include crag ID for reports
           cragSlug, // Include slug for URL generation
+          searchedFor, // Original search term when showing nearby crag
+          nearbyMatchDistance, // Distance in meters to nearby crag
           country,
           state,
           municipality,
