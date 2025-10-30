@@ -96,8 +96,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const location = getLocationString(crag);
-  const title = `${crag.name} - Climbing Conditions & Weather | beta.rocks`;
-  const description = `Real-time climbing conditions for ${crag.name} in ${location}. Check weather forecasts, friction scores, and community reports for your next climbing session.`;
+  const title = `${crag.name} - Conditions & Community Reports | beta.rocks`;
+  const description = `Climbing conditions and community reports for ${crag.name} in ${location}. Real-time weather, friction scores, and beta from fellow climbers for planning your session.`;
 
   return {
     title,
@@ -105,11 +105,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     keywords: [
       crag.name,
       "climbing conditions",
-      "weather forecast",
+      "community reports",
+      "climbing beta",
       "rock climbing",
       "friction score",
+      "weather forecast",
       location,
-      "climbing reports",
+      "crag conditions",
+      "climber reports",
       crag.rock_type,
     ].filter((keyword): keyword is string => Boolean(keyword)),
     openGraph: {
