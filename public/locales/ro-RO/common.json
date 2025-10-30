@@ -492,6 +492,11 @@
     "filters": {
       "all": "All"
     },
+    "staleness": {
+      "outdated": "Învechit",
+      "older": "Mai vechi",
+      "veryOld": "Foarte vechi"
+    },
     "observationDate": "Când ai observat asta?",
     "observationDateHelp": "Puteți raporta condiții până la 7 zile în urmă"
   },

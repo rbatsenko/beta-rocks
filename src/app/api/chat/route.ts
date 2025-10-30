@@ -86,9 +86,10 @@ const tools = {
               cragId = result.id; // Capture crag ID for fetching reports
               // Capture slug for URL generation (use parent_crag_slug for sectors)
               const isSector = "result_type" in result && result.result_type === "sector";
-              cragSlug = isSector && "parent_crag_slug" in result
-                ? result.parent_crag_slug || undefined
-                : result.slug || undefined;
+              cragSlug =
+                isSector && "parent_crag_slug" in result
+                  ? result.parent_crag_slug || undefined
+                  : result.slug || undefined;
               detectedRockType = (detectedRockType || (result.rock_type as RockType)) as RockType;
 
               // Capture detailed location data
@@ -160,9 +161,8 @@ const tools = {
                       : item.country; // Show country for crags
 
                   // Use parent_crag_slug for sectors, slug for crags
-                  const slug = isSector && "parent_crag_slug" in item
-                    ? item.parent_crag_slug
-                    : item.slug;
+                  const slug =
+                    isSector && "parent_crag_slug" in item ? item.parent_crag_slug : item.slug;
 
                   return {
                     id: item.id,
@@ -660,13 +660,22 @@ const tools = {
             });
             cragId = crag.id;
             cragSlug = crag.slug || undefined;
-            console.log("[get_conditions] Crag found/created:", { cragId, cragSlug, name: crag.name });
+            console.log("[get_conditions] Crag found/created:", {
+              cragId,
+              cragSlug,
+              name: crag.name,
+            });
           } catch (error) {
             console.error("[get_conditions] Failed to find/create crag:", error);
             // Continue without cragId - reports won't work but conditions will
           }
         } else {
-          console.log("[get_conditions] Using cragId from local search:", cragId, "slug:", cragSlug);
+          console.log(
+            "[get_conditions] Using cragId from local search:",
+            cragId,
+            "slug:",
+            cragSlug
+          );
         }
 
         // Fetch recent community reports for this crag

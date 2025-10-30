@@ -492,6 +492,11 @@
     "filters": {
       "all": "All"
     },
+    "staleness": {
+      "outdated": "Zastaralé",
+      "older": "Starší",
+      "veryOld": "Velmi staré"
+    },
     "observationDate": "Kdy jste to pozorovali?",
     "observationDateHelp": "Můžete hlásit podmínky až 7 dní zpět"
   },

@@ -435,7 +435,9 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
                     variant={selectedCategory === "all" ? "default" : "outline"}
                     size="sm"
                     onClick={() => setSelectedCategory("all")}
-                    className={selectedCategory === "all" ? "bg-orange-500 hover:bg-orange-600" : ""}
+                    className={
+                      selectedCategory === "all" ? "bg-orange-500 hover:bg-orange-600" : ""
+                    }
                   >
                     {t("reports.filters.all")} ({reports.length})
                   </Button>

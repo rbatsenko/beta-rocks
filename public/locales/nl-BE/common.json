@@ -492,6 +492,11 @@
     "filters": {
       "all": "All"
     },
+    "staleness": {
+      "outdated": "Verouderd",
+      "older": "Ouder",
+      "veryOld": "Zeer oud"
+    },
     "observationDate": "Wanneer heb je dit waargenomen?",
     "observationDateHelp": "Je kunt condities tot 7 dagen terug melden"
   },

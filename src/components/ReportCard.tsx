@@ -132,6 +132,30 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
 
   const category = report.category || "conditions";
 
+  // Calculate staleness based on category-specific relevance windows
+  const getReportStaleness = () => {
+    const observedDate = new Date(report.observed_at);
+    const ageInDays = differenceInCalendarDays(new Date(), observedDate);
+
+    // Category-specific freshness windows (in days)
+    const categoryRelevance: Record<ReportCategory, number> = {
+      conditions: 3,           // 3 days fresh (weather-dependent)
+      safety: 14,             // 14 days fresh (temporary hazards)
+      access: 30,             // 30 days fresh (closures change slowly)
+      climbing_info: Infinity, // always fresh (timeless info)
+      facilities: Infinity,    // always fresh (stable infrastructure)
+      other: 14,              // 14 days fresh (moderate default)
+    };
+
+    const freshWindow = categoryRelevance[category];
+
+    if (ageInDays <= freshWindow) return { status: "fresh", ageInDays };
+    if (ageInDays <= 30) return { status: "older", ageInDays };
+    return { status: "very_old", ageInDays };
+  };
+
+  const staleness = getReportStaleness();
+
   // Format relative time based on calendar days, not hours
   const getRelativeTime = (date: Date) => {
     const now = new Date();
@@ -146,8 +170,11 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
     }
   };
 
+  // Determine opacity based on staleness
+  const cardOpacity = staleness.status === "older" ? "opacity-80" : staleness.status === "very_old" ? "opacity-60" : "";
+
   return (
-    <Card>
+    <Card className={cardOpacity}>
       <CardContent className="p-4">
         {/* Header */}
         <div className="flex items-start justify-between mb-4 gap-3">
@@ -161,6 +188,22 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
               {getCategoryIcon(category)}
               <span className="text-xs font-medium">{t(`reports.categories.${category}`)}</span>
             </Badge>
+            {/* Staleness Badge */}
+            {staleness.status === "older" && category === "conditions" && (
+              <Badge variant="outline" className="gap-1.5 bg-red-500/10 text-red-700 dark:text-red-300 border-red-200 dark:border-red-800">
+                <span className="text-xs font-medium">{t("reports.staleness.outdated")}</span>
+              </Badge>
+            )}
+            {staleness.status === "older" && category !== "conditions" && category !== "climbing_info" && category !== "facilities" && (
+              <Badge variant="outline" className="gap-1.5 bg-yellow-500/10 text-yellow-700 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800">
+                <span className="text-xs font-medium">{t("reports.staleness.older")}</span>
+              </Badge>
+            )}
+            {staleness.status === "very_old" && (
+              <Badge variant="outline" className="gap-1.5 bg-gray-500/10 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800">
+                <span className="text-xs font-medium">{t("reports.staleness.veryOld")}</span>
+              </Badge>
+            )}
           </div>
           <div className="flex flex-col items-end text-right gap-0.5">
             <span className="text-xs text-muted-foreground">

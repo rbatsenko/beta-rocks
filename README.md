@@ -93,34 +93,40 @@ See [Vercel docs](https://vercel.com/docs) for more info.
 ## Features
 
 ### Core
+
 - **Chat interface** - Ask about climbing conditions naturally with AI-powered responses (Google Gemini 2.5 Flash)
 - **Real-time weather** - Open-Meteo integration with 14-day forecasts
 - **Friction analysis** - Rock type-specific friction scores (1-5 scale) with weather-aware drying calculations
 - **OpenBeta integration** - 200,000+ climbing areas worldwide with precise coordinates
 
 ### Community
+
 - **Community reports** - Share conditions, safety issues, access updates, beta, and facilities info
 - **Report categories** - conditions, safety, access, beta, facilities, other
 - **Report voting** - Helpful/unhelpful confirmations with user stats tracking
 - **User profiles** - Optional display names, anonymous by default
 
 ### Organization
+
 - **Favorites** - Bookmark crags with cached friction scores for quick access
 - **Chat history** - Persistent conversations across sessions with automatic titles
 - **User stats** - Track reports posted, confirmations given, and favorites count
 
 ### Sharing & Pages
+
 - **Crag detail pages** - ISR-generated pages with coordinate-based slugs (5min revalidation)
 - **Direct condition links** - Shareable URLs for any crag (e.g., `/location/45.123,-73.456`)
 - **Maps & external links** - Embedded maps, OpenBeta links, Mountain Project integration
 
 ### Sync & Privacy
+
 - **Multi-device sync** - 16-character sync keys with QR code generation
 - **Offline support** - LocalStorage + Supabase sync with online/offline indicators
 - **Privacy-first** - No accounts, no email, anonymous by default with optional display names
 - **Row-level security** - Supabase RLS policies protect user data
 
 ### i18n
+
 - **17 languages** - Full internationalization support with region-specific fallbacks
 
 ## Learn More

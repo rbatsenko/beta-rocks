@@ -527,6 +527,11 @@
     "noReportsInCategory": "No reports in this category",
     "filters": {
       "all": "All"
+    },
+    "staleness": {
+      "outdated": "Outdated",
+      "older": "Older",
+      "veryOld": "Very Old"
     }
   },
   "cragPage": {

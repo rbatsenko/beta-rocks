@@ -492,6 +492,11 @@
     "filters": {
       "all": "All"
     },
+    "staleness": {
+      "outdated": "Zastarjelo",
+      "older": "Starije",
+      "veryOld": "Vrlo staro"
+    },
     "observationDate": "Kada ste ovo primijetili?",
     "observationDateHelp": "Možete prijaviti uvjete do 7 dana unazad"
   },

@@ -67,9 +67,7 @@ export async function GET(
       dailyForecast: weather.daily,
     };
 
-    console.log(
-      `[API /conditions/${cragId}] Successfully computed conditions for ${crag.name}`
-    );
+    console.log(`[API /conditions/${cragId}] Successfully computed conditions for ${crag.name}`);
 
     return NextResponse.json({
       conditions,

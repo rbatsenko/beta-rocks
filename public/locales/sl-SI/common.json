@@ -493,6 +493,11 @@
     "filters": {
       "all": "All"
     },
+    "staleness": {
+      "outdated": "Zastarelo",
+      "older": "Starejše",
+      "veryOld": "Zelo staro"
+    },
     "observationDate": "Kdaj ste to opazili?",
     "observationDateHelp": "Poročate lahko o razmerah do 7 dni nazaj"
   },

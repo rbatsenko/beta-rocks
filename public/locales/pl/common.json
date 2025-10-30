@@ -493,6 +493,11 @@
     "filters": {
       "all": "Wszystkie"
     },
+    "staleness": {
+      "outdated": "Nieaktualne",
+      "older": "Starsze",
+      "veryOld": "Bardzo stare"
+    },
     "observationDate": "Kiedy to zaobserwowałeś/aś?",
     "observationDateHelp": "Możesz zgłaszać warunki do 7 dni wstecz"
   },

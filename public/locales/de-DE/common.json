@@ -497,6 +497,11 @@
     "filters": {
       "all": "All"
     },
+    "staleness": {
+      "outdated": "Veraltet",
+      "older": "Älter",
+      "veryOld": "Sehr alt"
+    },
     "observationDate": "Wann haben Sie das beobachtet?",
     "observationDateHelp": "Sie können Bedingungen bis zu 7 Tage zurück melden"
   },

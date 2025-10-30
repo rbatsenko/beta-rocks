@@ -492,6 +492,11 @@
     "filters": {
       "all": "All"
     },
+    "staleness": {
+      "outdated": "Остаряло",
+      "older": "По-старо",
+      "veryOld": "Много старо"
+    },
     "observationDate": "Кога наблюдавахте това?",
     "observationDateHelp": "Можете да докладвате условия до 7 дни назад"
   },
