@@ -97,7 +97,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const location = getLocationString(crag);
   const title = `${crag.name} - Conditions & Community Reports | beta.rocks`;
-  const description = `Climbing conditions and community reports for ${crag.name} in ${location}. Real-time weather, friction scores, and beta from fellow climbers for planning your session.`;
+  const description = `Climbing conditions and community reports for ${crag.name} in ${location}. Real-time weather, friction scores, and info from fellow climbers for planning your session.`;
 
   return {
     title,
@@ -106,7 +106,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       crag.name,
       "climbing conditions",
       "community reports",
-      "climbing beta",
+      "climbing info",
       "rock climbing",
       "friction score",
       "weather forecast",
