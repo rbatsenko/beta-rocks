@@ -37,7 +37,7 @@ import { z } from "zod";
 // Validation schema
 const SendSyncKeySchema = z.object({
   email: z.string().email("Invalid email address"),
-  syncKey: z.string().min(16, "Invalid sync key").max(16, "Invalid sync key"),
+  syncKey: z.string().uuid("Invalid sync key"),
 });
 
 // Email template
