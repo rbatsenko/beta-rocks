@@ -19,6 +19,7 @@ import { generateUniqueSlug } from "@/lib/utils/slug";
 import { useUnits } from "@/hooks/useUnits";
 import { convertTemperature } from "@/lib/units/conversions";
 import { getUserProfile, type UserProfile } from "@/lib/auth/sync-key";
+import { useClientTranslation } from "@/hooks/useClientTranslation";
 
 interface ConditionsData {
   location: string;
@@ -148,6 +149,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
 }: WeatherConditionCardProps) {
   const hasEmoji = data.current?.weatherCode !== undefined;
   const router = useRouter();
+  const { t } = useClientTranslation("common");
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showProfileCreated, setShowProfileCreated] = useState(false);
@@ -298,7 +300,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
       const distanceStr = distanceKm >= 1
         ? `${distanceKm.toFixed(1)}km`
         : `${data.nearbyMatchDistance}m`;
-      nearbyFormatted = `${distanceStr} from ${data.searchedFor}`;
+      nearbyFormatted = t("nearbyMatch.distance", { distance: distanceStr, location: data.searchedFor });
     }
 
     return {

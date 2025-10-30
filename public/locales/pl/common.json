@@ -599,5 +599,8 @@
     "conditions": "Ładowanie warunków...",
     "weatherData": "Pobieranie danych pogodowych...",
     "reports": "Ładowanie raportów..."
+  },
+  "nearbyMatch": {
+    "distance": "{{distance}} od {{location}}"
   }
 }

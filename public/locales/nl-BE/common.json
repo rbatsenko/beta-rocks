@@ -587,5 +587,8 @@
     "conditions": "Omstandigheden laden...",
     "weatherData": "Weergegevens ophalen...",
     "reports": "Meldingen laden..."
+  },
+  "nearbyMatch": {
+    "distance": "{{distance}} van {{location}}"
   }
 }

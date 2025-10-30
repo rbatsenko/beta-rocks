@@ -589,5 +589,8 @@
     "conditions": "Завантаження умов...",
     "weatherData": "Отримання даних про погоду...",
     "reports": "Завантаження звітів..."
+  },
+  "nearbyMatch": {
+    "distance": "{{distance}} від {{location}}"
   }
 }

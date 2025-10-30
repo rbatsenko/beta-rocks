@@ -588,5 +588,8 @@
     "conditions": "Se încarcă condițiile...",
     "weatherData": "Se obțin datele meteo...",
     "reports": "Se încarcă rapoartele..."
+  },
+  "nearbyMatch": {
+    "distance": "{{distance}} de la {{location}}"
   }
 }

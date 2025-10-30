@@ -502,5 +502,8 @@
     "daysAgo_one": "fa {{count}} dia",
     "daysAgo_other": "fa {{count}} dies",
     "pickDate": "Trieu una data"
+  },
+  "nearbyMatch": {
+    "distance": "{{distance}} des de {{location}}"
   }
 }

@@ -588,5 +588,8 @@
     "conditions": "Učitavanje uvjeta...",
     "weatherData": "Dohvaćanje vremenskih podataka...",
     "reports": "Učitavanje izvješća..."
+  },
+  "nearbyMatch": {
+    "distance": "{{distance}} od {{location}}"
   }
 }

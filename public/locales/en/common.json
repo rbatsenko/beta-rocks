@@ -654,5 +654,8 @@
   },
   "errors": {
     "failedToLoadConditions": "Failed to load conditions. Please try again."
+  },
+  "nearbyMatch": {
+    "distance": "{{distance}} from {{location}}"
   }
 }

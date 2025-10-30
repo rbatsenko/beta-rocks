@@ -502,5 +502,8 @@
     "daysAgo_one": "il y a {{count}} jour",
     "daysAgo_other": "il y a {{count}} jours",
     "pickDate": "Choisir une date"
+  },
+  "nearbyMatch": {
+    "distance": "{{distance}} depuis {{location}}"
   }
 }

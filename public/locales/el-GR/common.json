@@ -502,5 +502,8 @@
     "daysAgo_one": "πριν από {{count}} ημέρα",
     "daysAgo_other": "πριν από {{count}} ημέρες",
     "pickDate": "Επιλέξτε ημερομηνία"
+  },
+  "nearbyMatch": {
+    "distance": "{{distance}} από {{location}}"
   }
 }

@@ -589,5 +589,8 @@
     "conditions": "Načítavam podmienky...",
     "weatherData": "Získavam údaje o počasí...",
     "reports": "Načítavam hlásenia..."
+  },
+  "nearbyMatch": {
+    "distance": "{{distance}} od {{location}}"
   }
 }

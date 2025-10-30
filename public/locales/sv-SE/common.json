@@ -503,5 +503,8 @@
     "daysAgo_one": "{{count}} dag sedan",
     "daysAgo_other": "{{count}} dagar sedan",
     "pickDate": "Välj ett datum"
+  },
+  "nearbyMatch": {
+    "distance": "{{distance}} från {{location}}"
   }
 }
