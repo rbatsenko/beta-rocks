@@ -119,20 +119,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: `https://beta.rocks/location/${slug}`,
       siteName: "beta.rocks",
       locale: "en_US",
-      images: [
-        {
-          url: "https://beta.rocks/og-image.png", // You'll need to create this
-          width: 1200,
-          height: 630,
-          alt: `${crag.name} climbing conditions`,
-        },
-      ],
+      // Images are auto-generated from /src/app/opengraph-image.jpg by Next.js
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: ["https://beta.rocks/og-image.png"] as string[],
+      // Images are auto-generated from /src/app/opengraph-image.jpg by Next.js
     },
   };
 }
