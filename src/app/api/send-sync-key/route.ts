@@ -51,7 +51,7 @@ function generateEmailHTML(syncKey: string): string {
   <title>Your beta.rocks Sync Key</title>
 </head>
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
-  <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 10px 10px 0 0; text-align: center;">
+  <div style="background: linear-gradient(135deg, #f97316 0%, #92400e 100%); padding: 30px; border-radius: 10px 10px 0 0; text-align: center;">
     <h1 style="color: white; margin: 0; font-size: 28px;">beta.rocks</h1>
     <p style="color: rgba(255, 255, 255, 0.9); margin: 10px 0 0 0;">Your Sync Key</p>
   </div>
@@ -59,17 +59,17 @@ function generateEmailHTML(syncKey: string): string {
   <div style="background: #f8f9fa; padding: 30px; border-radius: 0 0 10px 10px;">
     <p style="margin-top: 0;">Here's your beta.rocks sync key:</p>
 
-    <div style="background: white; padding: 20px; border-radius: 8px; border: 2px solid #667eea; margin: 20px 0;">
-      <code style="font-size: 24px; font-weight: bold; letter-spacing: 2px; color: #667eea; word-break: break-all;">${syncKey}</code>
+    <div style="background: white; padding: 20px; border-radius: 8px; border: 2px solid #f97316; margin: 20px 0;">
+      <code style="font-size: 24px; font-weight: bold; letter-spacing: 2px; color: #f97316; word-break: break-all;">${syncKey}</code>
     </div>
 
     <p style="margin-bottom: 10px;"><strong>Save this key somewhere safe.</strong> You'll need it to sync your favorites, reports, and votes across devices.</p>
 
-    <h2 style="color: #667eea; font-size: 20px; margin-top: 30px;">How to Sync Another Device</h2>
+    <h2 style="color: #f97316; font-size: 20px; margin-top: 30px;">How to Sync Another Device</h2>
 
     <ol style="padding-left: 20px;">
-      <li style="margin-bottom: 10px;">Visit <a href="https://beta.rocks/sync" style="color: #667eea; text-decoration: none;">beta.rocks/sync</a></li>
-      <li style="margin-bottom: 10px;">Enter your sync key</li>
+      <li style="margin-bottom: 10px;">Visit <a href="https://beta.rocks/sync?key=${syncKey}" style="color: #f97316; text-decoration: none;">beta.rocks/sync</a></li>
+      <li style="margin-bottom: 10px;">Click "Restore" to confirm</li>
       <li style="margin-bottom: 10px;">Your data will be restored instantly</li>
     </ol>
 
@@ -92,8 +92,8 @@ ${syncKey}
 Save this key somewhere safe. You'll need it to sync your favorites, reports, and votes across devices.
 
 To sync another device:
-1. Visit https://beta.rocks/sync
-2. Enter this sync key
+1. Visit https://beta.rocks/sync?key=${syncKey}
+2. Click "Restore" to confirm
 3. Your data will be restored instantly
 
 ---
