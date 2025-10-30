@@ -42,9 +42,6 @@ const SendSyncKeySchema = z.object({
 
 // Email template
 function generateEmailHTML(syncKey: string): string {
-  // Inline SVG logo as data URI for email compatibility
-  const logoDataUri = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"%3E%3Ccircle cx="50" cy="50" r="35" fill="%23F59E0B" opacity="0.9"/%3E%3Cg stroke="%23F59E0B" stroke-width="4" stroke-linecap="round" opacity="0.7"%3E%3Cline x1="50" y1="8" x2="50" y2="18"/%3E%3Cline x1="50" y1="82" x2="50" y2="92"/%3E%3Cline x1="8" y1="50" x2="18" y2="50"/%3E%3Cline x1="82" y1="50" x2="92" y2="50"/%3E%3Cline x1="19" y1="19" x2="27" y2="27"/%3E%3Cline x1="73" y1="73" x2="81" y2="81"/%3E%3Cline x1="81" y1="19" x2="73" y2="27"/%3E%3Cline x1="27" y1="73" x2="19" y2="81"/%3E%3C/g%3E%3Cpath d="M 35 65 Q 40 75 50 76 Q 60 75 65 65" fill="%2392400E" opacity="0.8" stroke="%2392400E" stroke-width="1"/%3E%3C/svg%3E';
-
   return `
 <!DOCTYPE html>
 <html>
@@ -55,7 +52,6 @@ function generateEmailHTML(syncKey: string): string {
 </head>
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
   <div style="background: linear-gradient(135deg, #f97316 0%, #92400e 100%); padding: 30px; border-radius: 10px 10px 0 0; text-align: center;">
-    <img src="${logoDataUri}" alt="beta.rocks" width="60" height="60" style="margin-bottom: 15px; display: inline-block;" />
     <h1 style="color: white; margin: 0; font-size: 28px;">beta.rocks</h1>
     <p style="color: rgba(255, 255, 255, 0.9); margin: 10px 0 0 0;">Your Sync Key</p>
   </div>
