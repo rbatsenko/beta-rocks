@@ -598,7 +598,7 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
                 ) : (
                   <div className="space-y-2">
                     <Label htmlFor="emailAddress">{t("settings.syncKey.emailLabel")}</Label>
-                    <div className="flex gap-2">
+                    <div className="flex flex-col sm:flex-row gap-2">
                       <Input
                         id="emailAddress"
                         type="email"
@@ -611,25 +611,30 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
                             handleEmailSyncKey();
                           }
                         }}
+                        className="flex-1"
                       />
-                      <Button
-                        onClick={handleEmailSyncKey}
-                        disabled={isSendingEmail || !emailAddress}
-                        size="sm"
-                      >
-                        {isSendingEmail ? t("settings.syncKey.emailSending") : t("settings.syncKey.emailSend")}
-                      </Button>
-                      <Button
-                        variant="outline"
-                        onClick={() => {
-                          setShowEmailInput(false);
-                          setEmailAddress("");
-                        }}
-                        disabled={isSendingEmail}
-                        size="sm"
-                      >
-                        {t("common.cancel")}
-                      </Button>
+                      <div className="flex gap-2">
+                        <Button
+                          onClick={handleEmailSyncKey}
+                          disabled={isSendingEmail || !emailAddress}
+                          size="sm"
+                          className="flex-1 sm:flex-none"
+                        >
+                          {isSendingEmail ? t("settings.syncKey.emailSending") : t("settings.syncKey.emailSend")}
+                        </Button>
+                        <Button
+                          variant="outline"
+                          onClick={() => {
+                            setShowEmailInput(false);
+                            setEmailAddress("");
+                          }}
+                          disabled={isSendingEmail}
+                          size="sm"
+                          className="flex-1 sm:flex-none"
+                        >
+                          {t("cancel")}
+                        </Button>
+                      </div>
                     </div>
                     <p className="text-xs text-muted-foreground">
                       {t("settings.syncKey.emailPrivacy")}
