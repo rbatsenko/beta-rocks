@@ -8,6 +8,7 @@ import { getDefaultUnitsForLocale, type UnitsConfig } from "./types";
 import type { Tables } from "@/integrations/supabase/types";
 
 const UNITS_STORAGE_KEY = "temps_rocks_units";
+const UNITS_LOCALE_KEY = "temps_rocks_units_locale";
 
 /**
  * Convert database user_profiles row to UnitsConfig
@@ -67,19 +68,22 @@ export function getStoredUnits(): UnitsConfig | null {
 }
 
 /**
- * Save units to localStorage
+ * Save units to localStorage with the locale they were set for
  */
-export function saveStoredUnits(units: UnitsConfig): void {
+export function saveStoredUnits(units: UnitsConfig, locale?: string): void {
   if (typeof window === "undefined") {
     return;
   }
 
   localStorage.setItem(UNITS_STORAGE_KEY, JSON.stringify(units));
+  if (locale) {
+    localStorage.setItem(UNITS_LOCALE_KEY, locale);
+  }
 }
 
 /**
  * Get units for the current user
- * Priority: user profile > localStorage > locale default > metric
+ * Priority: user profile > localStorage (if locale matches) > locale default
  */
 export function getUserUnits(locale: string): UnitsConfig {
   // Check user profile first
@@ -88,9 +92,14 @@ export function getUserUnits(locale: string): UnitsConfig {
     return profile.units;
   }
 
-  // Check localStorage
+  // Check localStorage, but only if locale hasn't changed
   const stored = getStoredUnits();
-  if (stored) {
+  if (stored && typeof window !== "undefined") {
+    const storedLocale = localStorage.getItem(UNITS_LOCALE_KEY);
+    // If locale changed since units were saved, reset to new locale defaults
+    if (storedLocale && storedLocale !== locale) {
+      return getDefaultUnitsForLocale(locale);
+    }
     return stored;
   }
 
@@ -102,9 +111,9 @@ export function getUserUnits(locale: string): UnitsConfig {
  * Update units for the current user
  * Saves to both localStorage and user profile
  */
-export async function updateUserUnits(units: UnitsConfig): Promise<void> {
-  // Save to localStorage
-  saveStoredUnits(units);
+export async function updateUserUnits(units: UnitsConfig, locale?: string): Promise<void> {
+  // Save to localStorage with locale
+  saveStoredUnits(units, locale);
 
   // Update user profile
   const profile = getUserProfile();
@@ -120,15 +129,32 @@ export async function updateUserUnits(units: UnitsConfig): Promise<void> {
 
 /**
  * Initialize units based on locale (called on first visit or locale change)
+ * If locale changed, resets to new locale defaults (unless user has explicit profile settings)
  */
 export async function initializeUnitsForLocale(locale: string): Promise<UnitsConfig> {
   const current = getUserUnits(locale);
 
-  // If no units set yet, initialize with locale defaults
+  // Check if locale changed since last time
+  const storedLocale = typeof window !== "undefined" ? localStorage.getItem(UNITS_LOCALE_KEY) : null;
+  const localeChanged = storedLocale && storedLocale !== locale;
+
+  // If no units set yet, or locale changed (and no user profile), initialize with locale defaults
   if (!getStoredUnits() && !getUserProfile()?.units) {
     const defaultUnits = getDefaultUnitsForLocale(locale);
-    await updateUserUnits(defaultUnits);
+    await updateUserUnits(defaultUnits, locale);
     return defaultUnits;
+  }
+
+  // If locale changed and user doesn't have explicit profile settings, reset to new defaults
+  if (localeChanged && !getUserProfile()?.units) {
+    const defaultUnits = getDefaultUnitsForLocale(locale);
+    await updateUserUnits(defaultUnits, locale);
+    return defaultUnits;
+  }
+
+  // Update stored locale to current locale (for next time)
+  if (typeof window !== "undefined") {
+    localStorage.setItem(UNITS_LOCALE_KEY, locale);
   }
 
   return current;
