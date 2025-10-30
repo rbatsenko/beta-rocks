@@ -26,12 +26,14 @@ import { Calendar } from "@/components/ui/calendar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
-import { getUserProfile, initializeUserProfile, hashSyncKeyAsync } from "@/lib/auth/sync-key";
+import { getUserProfile, hashSyncKeyAsync, type UserProfile } from "@/lib/auth/sync-key";
 import { createReport } from "@/lib/db/queries";
 import { fetchOrCreateUserProfile } from "@/lib/db/queries";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { getDateFnsLocale, getLocalizedDateFormat } from "@/lib/i18n/date-locales";
+import { ProfileCreationModal } from "@/components/ProfileCreationModal";
+import { ProfileCreatedDialog } from "@/components/ProfileCreatedDialog";
 
 type ReportCategory = "conditions" | "safety" | "access" | "climbing_info" | "facilities" | "other";
 
@@ -70,6 +72,9 @@ export function ReportDialog({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [displayName, setDisplayName] = useState<string | null>(null);
   const [observedAt, setObservedAt] = useState<Date>(new Date());
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [showProfileCreated, setShowProfileCreated] = useState(false);
+  const [newSyncKey, setNewSyncKey] = useState<string>("");
 
   useEffect(() => {
     if (open) {
@@ -105,7 +110,20 @@ export function ReportDialog({
     }
   };
 
+  const handleProfileCreated = (profile: UserProfile) => {
+    setNewSyncKey(profile.syncKey);
+    setShowProfileModal(false);
+    setShowProfileCreated(true);
+  };
+
   const handleSubmit = async () => {
+    // Check for profile first
+    const profile = getUserProfile();
+    if (!profile) {
+      setShowProfileModal(true);
+      return;
+    }
+
     // Validate required fields
     if (category !== "conditions" && !text.trim()) {
       alert(t("reports.detailsRequired"));
@@ -114,8 +132,11 @@ export function ReportDialog({
 
     setIsSubmitting(true);
     try {
-      // Initialize or get user profile
-      const localProfile = await initializeUserProfile();
+      // Get user profile (already validated above)
+      const localProfile = getUserProfile();
+      if (!localProfile) {
+        throw new Error("User profile required");
+      }
 
       // Get or create user profile in database
       const syncKeyHash = await hashSyncKeyAsync(localProfile.syncKey);
@@ -403,6 +424,28 @@ export function ReportDialog({
             </div>
           </div>
         </ScrollArea>
+
+        {/* Profile Creation Modal */}
+        <ProfileCreationModal
+          open={showProfileModal}
+          onOpenChange={setShowProfileModal}
+          trigger="report"
+          onCreated={handleProfileCreated}
+        />
+
+        {/* Profile Created Dialog */}
+        <ProfileCreatedDialog
+          open={showProfileCreated}
+          onOpenChange={(open) => {
+            setShowProfileCreated(open);
+            // When closed, automatically retry the report submission
+            if (!open && newSyncKey) {
+              handleSubmit();
+            }
+          }}
+          syncKey={newSyncKey}
+          completedAction={t("reports.readyToPost")}
+        />
       </DialogContent>
     </Dialog>
   );

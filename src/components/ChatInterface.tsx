@@ -12,6 +12,7 @@ import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
 import { useUnits } from "@/hooks/useUnits";
 import { useFavorites } from "@/hooks/queries/useFavoritesQueries";
 import { generateUniqueSlug } from "@/lib/utils/slug";
+import { getUserProfile } from "@/lib/auth/sync-key";
 import {
   useCurrentSession,
   useChatMessages,
@@ -48,7 +49,6 @@ import { DisambiguationOptions } from "@/components/DisambiguationOptions";
 import { FeaturesDialog } from "@/components/FeaturesDialog";
 import { SettingsDialog } from "@/components/SettingsDialog";
 import { FavoritesDialog } from "@/components/FavoritesDialog";
-import { SyncNotification } from "@/components/SyncNotification";
 import { logRender } from "@/lib/debug/render-log";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
 import { SyncExplainerDialog } from "@/components/SyncExplainerDialog";
@@ -204,7 +204,7 @@ const ChatUI = ({
   t,
   language,
 }: {
-  sessionId: string;
+  sessionId: string | undefined;
   initialMessages: UIMessage[];
   t: TFunction;
   language: string;
@@ -222,8 +222,11 @@ const ChatUI = ({
     messages: initialMessages,
     // Throttle updates to 30ms for smoother text streaming
     experimental_throttle: 30,
-    // Save messages as they finish streaming
+    // Save messages as they finish streaming (only if user has a session)
     onFinish: async ({ message, messages: allMessages }) => {
+      // Skip saving for anonymous users (no session)
+      if (!sessionId) return;
+
       // IMPORTANT: Save user message FIRST to ensure correct chronological order
       // (find the last user message in the array)
       const lastUserMessage = [...allMessages]
@@ -264,6 +267,12 @@ const ChatUI = ({
   // Handler for clearing current session
   const handleNewChat = useCallback(async () => {
     try {
+      // For anonymous users (no session), just reload the page
+      if (!sessionId) {
+        window.location.href = "/";
+        return;
+      }
+
       await clearSessionMutation.mutateAsync(sessionId);
       // Navigate to home to reset the chat interface
       window.location.href = "/";
@@ -441,12 +450,6 @@ const ChatUI = ({
                   <p className="text-muted-foreground mb-8 max-w-md text-base">
                     {t("welcome.description")}
                   </p>
-
-                  {/* Sync Key Notification */}
-                  <SyncNotification
-                    onViewInSettings={() => setSettingsDialogOpen(true)}
-                    onViewMore={() => setSyncExplainerDialogOpen(true)}
-                  />
 
                   <div className="flex flex-wrap gap-2 justify-center max-w-lg">
                     {exampleQueries.map((example, idx) => (
@@ -845,6 +848,9 @@ const ChatInterface = ({
   const [statsDialogOpen, setStatsDialogOpen] = useState(false);
   const [syncExplainerDialogOpen, setSyncExplainerDialogOpen] = useState(false);
 
+  // Check if user has profile (for session management)
+  const userProfile = typeof window !== 'undefined' ? getUserProfile() : null;
+
   // React Query hooks for session and messages
   const { data: session, isLoading: isLoadingSession } = useCurrentSession();
   const { data: messages = [], isLoading: isLoadingMessages } = useChatMessages(session?.id);
@@ -857,8 +863,8 @@ const ChatInterface = ({
   // Combined loading state
   const isLoadingHistory = isLoadingSession || isLoadingMessages;
 
-  // Only mount ChatUI after history loads to ensure useChat initializes with correct messages
-  if (isLoadingHistory || !session) {
+  // Only mount ChatUI after history loads OR if user has no profile (anonymous users skip session loading)
+  if (userProfile && (isLoadingHistory || !session)) {
     // Render the layout with a loader in the messages area (not full page)
     // Keep header and input visible during loading
     return (
@@ -947,8 +953,9 @@ const ChatInterface = ({
   }
 
   // Once loaded, render the full chat UI
+  // For anonymous users, session will be undefined - that's OK, chat will work without persistence
   return (
-    <ChatUI sessionId={session.id} initialMessages={initialMessages} t={t} language={language} />
+    <ChatUI sessionId={session?.id} initialMessages={initialMessages} t={t} language={language} />
   );
 };
 

@@ -288,6 +288,81 @@
     },
     "openSettings": "Apri impostazioni"
   },
+  "profileCreation": {
+    "title": "Crea il tuo profilo",
+    "subtitle": "Registrazione orientata alla privacy - nessun dato personale richiesto",
+    "createProfile": "Crea profilo",
+    "creating": "Creazione...",
+    "maybeLater": "Forse più tardi",
+    "tabs": {
+      "create": "Crea profilo",
+      "signIn": "Accedi"
+    },
+    "signIn": {
+      "title": "Hai già una chiave di sincronizzazione?",
+      "description": "Inserisci la tua chiave di sincronizzazione per ripristinare il tuo profilo e i tuoi dati",
+      "syncKeyLabel": "Chiave di sincronizzazione",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Accedi",
+      "signingIn": "Accesso in corso...",
+      "invalidKey": "Formato chiave di sincronizzazione non valido. Verifica e riprova."
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Salva i preferiti su tutti i dispositivi",
+        "description": "Segna le tue falesie preferite e accedi da qualsiasi dispositivo"
+      },
+      "report": {
+        "title": "Condividi report con la community",
+        "description": "Aiuta gli altri climbers condividendo condizioni, avvisi di sicurezza e beta"
+      },
+      "vote": {
+        "title": "Vota i report utili",
+        "description": "Supporta la community confermando i report utili"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "Nessuna email o password richiesta",
+        "description": "Rispettiamo la tua privacy. Solo una chiave di sincronizzazione, nessun dato personale"
+      },
+      "syncKey": {
+        "title": "Crea solo una chiave di sincronizzazione",
+        "description": "Un identificatore univoco che sincronizza i tuoi dati su tutti i dispositivi"
+      },
+      "multiDevice": {
+        "title": "Salvala o fotografa il codice QR",
+        "description": "Usa la tua chiave di sincronizzazione per ripristinare il profilo su altri dispositivi"
+      }
+    }
+  },
+  "profileCreated": {
+    "title": "Profilo creato!",
+    "description": "Il tuo profilo è stato creato con successo. Salva la tua chiave di sincronizzazione per accedere ai tuoi dati su altri dispositivi.",
+    "actionCompleted": "{{action}} completato!",
+    "syncKeyLabel": "La tua chiave di sincronizzazione",
+    "syncKeyDescription": "Questa è la tua chiave univoca per sincronizzare tra dispositivi",
+    "qrCodeLabel": "Codice QR",
+    "qrCodeDescription": "Scansiona questo codice QR su un altro dispositivo per sincronizzare i tuoi dati",
+    "privacyTitle": "Importante: Salva la tua chiave di sincronizzazione",
+    "saveKeySafe": "Salva questa chiave in un posto sicuro",
+    "screenshotQR": "Oppure fai uno screenshot di questo codice QR",
+    "needForSync": "Ti servirà per sincronizzare altri dispositivi",
+    "gotIt": "Ho capito!",
+    "copied": "Copiato!",
+    "copy": "Copia",
+    "emailSection": {
+      "title": "Invia via email (facoltativo)",
+      "privacyNote1": "NON memorizziamo la tua email",
+      "privacyNote2": "Questo è solo un invio una tantum",
+      "privacyNote3": "Mai salvata nel nostro database",
+      "emailPlaceholder": "tua@email.it",
+      "sendButton": "Invia email",
+      "sending": "Invio...",
+      "success": "Email inviata! Controlla la tua casella",
+      "error": "Impossibile inviare l'email. Riprova."
+    }
+  },
   "profile": {
     "anonymous": "Anonimo",
     "member": "Membro",
@@ -450,6 +525,7 @@
     },
     "submit": "Submit Report",
     "submitting": "Submitting...",
+    "readyToPost": "Profile created! You're ready to post your report.",
     "helpful": "Helpful",
     "loginToConfirm": "Please set up your profile to confirm reports",
     "confirmFailed": "Failed to confirm report. Please try again.",

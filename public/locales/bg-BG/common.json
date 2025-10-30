@@ -265,23 +265,98 @@
     }
   },
   "syncExplainer": {
-    "title": "How Sync Works",
-    "description": "Keep your data in sync across all your devices seamlessly and securely.",
+    "title": "Как работи синхронизацията",
+    "description": "Поддържайте данните си синхронизирани на всички устройства безопасно и безпроблемно.",
     "features": {
       "syncKey": {
-        "title": "Unique Sync Key",
-        "description": "Each user gets a secure, unique key to sync their data across devices."
+        "title": "Уникален ключ за синхронизация",
+        "description": "Всеки потребител получава защитен, уникален ключ за синхронизиране на данните между устройства."
       },
       "multiDevice": {
-        "title": "Multi-Device Access",
-        "description": "Access your favorites and chat history from any device by using your sync key."
+        "title": "Достъп от множество устройства",
+        "description": "Достъпвайте любими и история на чат от всяко устройство с помощта на вашия ключ за синхронизация."
       },
       "privacy": {
-        "title": "Privacy First",
-        "description": "Your data is encrypted and only accessible with your sync key. No account required."
+        "title": "Поверителност на първо място",
+        "description": "Вашите данни са криптирани и достъпни само с вашия ключ за синхронизация. Не се изисква акаунт."
       }
     },
-    "openSettings": "Open Settings"
+    "openSettings": "Отвори настройки"
+  },
+  "profileCreation": {
+    "title": "Създайте своя профил",
+    "subtitle": "Регистрация с приоритет на поверителността - не са необходими лични данни",
+    "createProfile": "Създай профил",
+    "creating": "Създаване...",
+    "maybeLater": "Може би по-късно",
+    "tabs": {
+      "create": "Създай профил",
+      "signIn": "Вход"
+    },
+    "signIn": {
+      "title": "Вече имате ключ за синхронизация?",
+      "description": "Въведете ключа за синхронизация, за да възстановите профила и данните си",
+      "syncKeyLabel": "Ключ за синхронизация",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Вход",
+      "signingIn": "Влизане...",
+      "invalidKey": "Невалиден формат на ключа за синхронизация. Моля, проверете и опитайте отново."
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Запазете любими на всички устройства",
+        "description": "Маркирайте любимите си скали и осъществете достъп от всяко устройство"
+      },
+      "report": {
+        "title": "Споделяйте доклади с общността",
+        "description": "Помогнете на другите катерачи, като споделяте условия, предупреждения за безопасност и бета"
+      },
+      "vote": {
+        "title": "Гласувайте за полезни доклади",
+        "description": "Подкрепете общността, като потвърждавате полезни доклади"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "Без имейл или парола",
+        "description": "Уважаваме вашата поверителност. Само ключ за синхронизация, без лични данни"
+      },
+      "syncKey": {
+        "title": "Създава само ключ за синхронизация",
+        "description": "Уникален идентификатор, който синхронизира данните ви между устройствата"
+      },
+      "multiDevice": {
+        "title": "Запазете го или направете снимка на QR кода",
+        "description": "Използвайте ключа за синхронизация, за да възстановите профила на други устройства"
+      }
+    }
+  },
+  "profileCreated": {
+    "title": "Профилът е създаден!",
+    "description": "Вашият профил беше създаден успешно. Запазете ключа за синхронизация, за да получите достъп до данните на други устройства.",
+    "actionCompleted": "{{action}} завършено!",
+    "syncKeyLabel": "Вашият ключ за синхронизация",
+    "syncKeyDescription": "Това е вашият уникален ключ за синхронизация между устройства",
+    "qrCodeLabel": "QR код",
+    "qrCodeDescription": "Сканирайте този QR код на друго устройство, за да синхронизирате данните",
+    "privacyTitle": "Важно: Запазете ключа за синхронизация",
+    "saveKeySafe": "Запазете този ключ на сигурно място",
+    "screenshotQR": "Или направете снимка на екрана на този QR код",
+    "needForSync": "Ще ви е необходим за синхронизация на други устройства",
+    "gotIt": "Разбрах!",
+    "copied": "Копирано!",
+    "copy": "Копирай",
+    "emailSection": {
+      "title": "Изпрати на имейл (по избор)",
+      "privacyNote1": "НЕ съхраняваме вашия имейл",
+      "privacyNote2": "Това е само еднократно изпращане",
+      "privacyNote3": "Никога не се записва в нашата база данни",
+      "emailPlaceholder": "vash@email.bg",
+      "sendButton": "Изпрати имейл",
+      "sending": "Изпращане...",
+      "success": "Имейлът е изпратен! Проверете входящата си кутия",
+      "error": "Неуспешно изпращане на имейл. Моля, опитайте отново."
+    }
   },
   "profile": {
     "anonymous": "Анонимен",
@@ -445,6 +520,7 @@
     },
     "submit": "Submit Report",
     "submitting": "Submitting...",
+    "readyToPost": "Profile created! You're ready to post your report.",
     "helpful": "Helpful",
     "loginToConfirm": "Please set up your profile to confirm reports",
     "confirmFailed": "Failed to confirm report. Please try again.",

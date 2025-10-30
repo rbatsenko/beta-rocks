@@ -265,23 +265,98 @@
     }
   },
   "syncExplainer": {
-    "title": "How Sync Works",
-    "description": "Keep your data in sync across all your devices seamlessly and securely.",
+    "title": "Kako funkcionira sinkronizacija",
+    "description": "Držite svoje podatke sinkroniziranima na svim uređajima sigurno i bez prekida.",
     "features": {
       "syncKey": {
-        "title": "Unique Sync Key",
-        "description": "Each user gets a secure, unique key to sync their data across devices."
+        "title": "Jedinstveni ključ za sinkronizaciju",
+        "description": "Svaki korisnik dobiva siguran, jedinstven ključ za sinkronizaciju podataka između uređaja."
       },
       "multiDevice": {
-        "title": "Multi-Device Access",
-        "description": "Access your favorites and chat history from any device by using your sync key."
+        "title": "Pristup s više uređaja",
+        "description": "Pristupite svojim omiljenim i povijesti chata s bilo kojeg uređaja pomoću ključa za sinkronizaciju."
       },
       "privacy": {
-        "title": "Privacy First",
-        "description": "Your data is encrypted and only accessible with your sync key. No account required."
+        "title": "Privatnost na prvom mjestu",
+        "description": "Vaši podaci su šifrirani i dostupni samo s vašim ključem za sinkronizaciju. Račun nije potreban."
       }
     },
-    "openSettings": "Open Settings"
+    "openSettings": "Otvori postavke"
+  },
+  "profileCreation": {
+    "title": "Kreirajte svoj profil",
+    "subtitle": "Registracija s privatnošću na prvom mjestu - nisu potrebni osobni podaci",
+    "createProfile": "Kreiraj profil",
+    "creating": "Kreiram...",
+    "maybeLater": "Možda kasnije",
+    "tabs": {
+      "create": "Kreiraj profil",
+      "signIn": "Prijava"
+    },
+    "signIn": {
+      "title": "Već imaš ključ za sinkronizaciju?",
+      "description": "Unesi svoj ključ za sinkronizaciju da vratiš svoj profil i podatke",
+      "syncKeyLabel": "Ključ za sinkronizaciju",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Prijava",
+      "signingIn": "Prijava u tijeku...",
+      "invalidKey": "Nevažeći format ključa za sinkronizaciju. Provjeri i pokušaj ponovno."
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Spremite omiljene na svim uređajima",
+        "description": "Označite svoje omiljene stijene i pristupite s bilo kojeg uređaja"
+      },
+      "report": {
+        "title": "Dijelite izvještaje sa zajednicom",
+        "description": "Pomozite drugim penjačima dijeleći uvjete, sigurnosna upozorenja i beta"
+      },
+      "vote": {
+        "title": "Glasajte za korisne izvještaje",
+        "description": "Podržite zajednicu potvrđujući korisne izvještaje"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "Bez e-pošte ili lozinke",
+        "description": "Poštujemo vašu privatnost. Samo ključ za sinkronizaciju, bez osobnih podataka"
+      },
+      "syncKey": {
+        "title": "Kreira samo ključ za sinkronizaciju",
+        "description": "Jedinstveni identifikator koji sinkronizira vaše podatke između uređaja"
+      },
+      "multiDevice": {
+        "title": "Spremite ga ili fotografirajte QR kod",
+        "description": "Koristite ključ za sinkronizaciju za vraćanje profila na drugim uređajima"
+      }
+    }
+  },
+  "profileCreated": {
+    "title": "Profil kreiran!",
+    "description": "Vaš profil je uspješno kreiran. Spremite ključ za sinkronizaciju za pristup podacima na drugim uređajima.",
+    "actionCompleted": "{{action}} završeno!",
+    "syncKeyLabel": "Vaš ključ za sinkronizaciju",
+    "syncKeyDescription": "Ovo je vaš jedinstveni ključ za sinkronizaciju između uređaja",
+    "qrCodeLabel": "QR kod",
+    "qrCodeDescription": "Skenirajte ovaj QR kod na drugom uređaju za sinkronizaciju podataka",
+    "privacyTitle": "Važno: Spremite ključ za sinkronizaciju",
+    "saveKeySafe": "Spremite ovaj ključ na sigurno mjesto",
+    "screenshotQR": "Ili napravite snimku ekrana ovog QR koda",
+    "needForSync": "Trebat će vam za sinkronizaciju drugih uređaja",
+    "gotIt": "Razumijem!",
+    "copied": "Kopirano!",
+    "copy": "Kopiraj",
+    "emailSection": {
+      "title": "Pošalji na e-mail (neobavezno)",
+      "privacyNote1": "NE pohranjujemo tvoj e-mail",
+      "privacyNote2": "Ovo je samo jednokratno slanje",
+      "privacyNote3": "Nikada se ne sprema u našu bazu podataka",
+      "emailPlaceholder": "tvoj@email.hr",
+      "sendButton": "Pošalji e-mail",
+      "sending": "Slanje...",
+      "success": "E-mail poslan! Provjeri svoju pristiglu poštu",
+      "error": "Slanje e-maila nije uspjelo. Molimo pokušaj ponovno."
+    }
   },
   "profile": {
     "anonymous": "Anoniman/a",
@@ -445,6 +520,7 @@
     },
     "submit": "Submit Report",
     "submitting": "Submitting...",
+    "readyToPost": "Profile created! You're ready to post your report.",
     "helpful": "Helpful",
     "loginToConfirm": "Please set up your profile to confirm reports",
     "confirmFailed": "Failed to confirm report. Please try again.",

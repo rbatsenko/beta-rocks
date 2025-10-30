@@ -288,6 +288,81 @@
     },
     "openSettings": "Ouvrir les paramètres"
   },
+  "profileCreation": {
+    "title": "Créer votre profil",
+    "subtitle": "Inscription respectueuse de la vie privée - aucune donnée personnelle requise",
+    "createProfile": "Créer un profil",
+    "creating": "Création...",
+    "maybeLater": "Peut-être plus tard",
+    "tabs": {
+      "create": "Créer un profil",
+      "signIn": "Se connecter"
+    },
+    "signIn": {
+      "title": "Vous avez déjà une clé de synchronisation ?",
+      "description": "Entrez votre clé de synchronisation pour restaurer votre profil et vos données",
+      "syncKeyLabel": "Clé de synchronisation",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Se connecter",
+      "signingIn": "Connexion...",
+      "invalidKey": "Format de clé de synchronisation invalide. Veuillez vérifier et réessayer."
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Enregistrer les favoris sur tous les appareils",
+        "description": "Marquez vos falaises préférées et accédez-y depuis n'importe quel appareil"
+      },
+      "report": {
+        "title": "Partager des rapports avec la communauté",
+        "description": "Aidez les autres grimpeurs en partageant les conditions, alertes de sécurité et beta"
+      },
+      "vote": {
+        "title": "Voter pour les rapports utiles",
+        "description": "Soutenez la communauté en confirmant les rapports utiles"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "Pas d'e-mail ou de mot de passe requis",
+        "description": "Nous respectons votre vie privée. Juste une clé de synchronisation, aucune donnée personnelle"
+      },
+      "syncKey": {
+        "title": "Crée uniquement une clé de synchronisation",
+        "description": "Un identifiant unique qui synchronise vos données sur tous les appareils"
+      },
+      "multiDevice": {
+        "title": "Enregistrez-la ou photographiez le code QR",
+        "description": "Utilisez votre clé de synchronisation pour restaurer votre profil sur d'autres appareils"
+      }
+    }
+  },
+  "profileCreated": {
+    "title": "Profil créé !",
+    "description": "Votre profil a été créé avec succès. Enregistrez votre clé de synchronisation pour accéder à vos données sur d'autres appareils.",
+    "actionCompleted": "{{action}} terminé !",
+    "syncKeyLabel": "Votre clé de synchronisation",
+    "syncKeyDescription": "Ceci est votre clé unique pour synchroniser vos appareils",
+    "qrCodeLabel": "Code QR",
+    "qrCodeDescription": "Scannez ce code QR sur un autre appareil pour synchroniser vos données",
+    "privacyTitle": "Important : Enregistrez votre clé de synchronisation",
+    "saveKeySafe": "Enregistrez cette clé dans un endroit sûr",
+    "screenshotQR": "Ou faites une capture d'écran de ce code QR",
+    "needForSync": "Vous en aurez besoin pour synchroniser d'autres appareils",
+    "gotIt": "Compris !",
+    "copied": "Copié !",
+    "copy": "Copier",
+    "emailSection": {
+      "title": "Envoyer par e-mail (facultatif)",
+      "privacyNote1": "Nous NE stockons PAS votre e-mail",
+      "privacyNote2": "Ceci est un envoi unique seulement",
+      "privacyNote3": "Jamais enregistré dans notre base de données",
+      "emailPlaceholder": "votre@email.fr",
+      "sendButton": "Envoyer l'e-mail",
+      "sending": "Envoi...",
+      "success": "E-mail envoyé ! Vérifiez votre boîte de réception",
+      "error": "Échec de l'envoi de l'e-mail. Veuillez réessayer."
+    }
+  },
   "profile": {
     "anonymous": "Anonyme",
     "member": "Membre",
@@ -450,6 +525,7 @@
     },
     "submit": "Submit Report",
     "submitting": "Submitting...",
+    "readyToPost": "Profile created! You're ready to post your report.",
     "helpful": "Helpful",
     "loginToConfirm": "Please set up your profile to confirm reports",
     "confirmFailed": "Failed to confirm report. Please try again.",

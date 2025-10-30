@@ -288,6 +288,81 @@
     },
     "openSettings": "Einstellungen öffnen"
   },
+  "profileCreation": {
+    "title": "Profil erstellen",
+    "subtitle": "Datenschutzfreundliche Registrierung - keine persönlichen Daten erforderlich",
+    "createProfile": "Profil erstellen",
+    "creating": "Wird erstellt...",
+    "maybeLater": "Vielleicht später",
+    "tabs": {
+      "create": "Profil erstellen",
+      "signIn": "Anmelden"
+    },
+    "signIn": {
+      "title": "Haben Sie bereits einen Sync-Schlüssel?",
+      "description": "Geben Sie Ihren Sync-Schlüssel ein, um Ihr Profil und Ihre Daten wiederherzustellen",
+      "syncKeyLabel": "Sync-Schlüssel",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Anmelden",
+      "signingIn": "Anmeldung läuft...",
+      "invalidKey": "Ungültiges Sync-Schlüssel-Format. Bitte prüfen und erneut versuchen."
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Favoriten geräteübergreifend speichern",
+        "description": "Markieren Sie Ihre Lieblingsfelsen und greifen Sie von jedem Gerät darauf zu"
+      },
+      "report": {
+        "title": "Meldungen mit der Community teilen",
+        "description": "Helfen Sie anderen Kletterern, indem Sie Bedingungen, Sicherheitshinweise und Beta teilen"
+      },
+      "vote": {
+        "title": "Über hilfreiche Meldungen abstimmen",
+        "description": "Unterstützen Sie die Community, indem Sie nützliche Meldungen bestätigen"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "Keine E-Mail oder Passwort erforderlich",
+        "description": "Wir respektieren Ihre Privatsphäre. Nur ein Sync-Schlüssel, keine persönlichen Daten"
+      },
+      "syncKey": {
+        "title": "Erstellt nur einen Sync-Schlüssel",
+        "description": "Eine eindeutige Kennung, die Ihre Daten geräteübergreifend synchronisiert"
+      },
+      "multiDevice": {
+        "title": "Speichern oder QR-Code fotografieren",
+        "description": "Verwenden Sie Ihren Sync-Schlüssel, um Ihr Profil auf anderen Geräten wiederherzustellen"
+      }
+    }
+  },
+  "profileCreated": {
+    "title": "Profil erstellt!",
+    "description": "Ihr Profil wurde erfolgreich erstellt. Speichern Sie Ihren Sync-Schlüssel, um auf anderen Geräten auf Ihre Daten zuzugreifen.",
+    "actionCompleted": "{{action}} abgeschlossen!",
+    "syncKeyLabel": "Ihr Sync-Schlüssel",
+    "syncKeyDescription": "Dies ist Ihr eindeutiger Schlüssel zur geräteübergreifenden Synchronisierung",
+    "qrCodeLabel": "QR-Code",
+    "qrCodeDescription": "Scannen Sie diesen QR-Code auf einem anderen Gerät, um Ihre Daten zu synchronisieren",
+    "privacyTitle": "Wichtig: Speichern Sie Ihren Sync-Schlüssel",
+    "saveKeySafe": "Bewahren Sie diesen Schlüssel an einem sicheren Ort auf",
+    "screenshotQR": "Oder machen Sie einen Screenshot dieses QR-Codes",
+    "needForSync": "Sie benötigen ihn für die Synchronisierung anderer Geräte",
+    "gotIt": "Verstanden!",
+    "copied": "Kopiert!",
+    "copy": "Kopieren",
+    "emailSection": {
+      "title": "Per E-Mail senden (optional)",
+      "privacyNote1": "Wir speichern Ihre E-Mail NICHT",
+      "privacyNote2": "Dies ist nur ein einmaliger Versand",
+      "privacyNote3": "Wird niemals in unserer Datenbank gespeichert",
+      "emailPlaceholder": "ihre@email.de",
+      "sendButton": "E-Mail senden",
+      "sending": "Wird gesendet...",
+      "success": "E-Mail gesendet! Überprüfen Sie Ihr Postfach",
+      "error": "E-Mail konnte nicht gesendet werden. Bitte versuchen Sie es erneut."
+    }
+  },
   "profile": {
     "anonymous": "Anonym",
     "member": "Mitglied",
@@ -450,6 +525,7 @@
     },
     "submit": "Submit Report",
     "submitting": "Submitting...",
+    "readyToPost": "Profile created! You're ready to post your report.",
     "helpful": "Helpful",
     "loginToConfirm": "Please set up your profile to confirm reports",
     "confirmFailed": "Failed to confirm report. Please try again.",

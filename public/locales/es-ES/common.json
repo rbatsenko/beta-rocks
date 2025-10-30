@@ -288,6 +288,81 @@
     },
     "openSettings": "Abrir ajustes"
   },
+  "profileCreation": {
+    "title": "Crear tu perfil",
+    "subtitle": "Registro que prioriza la privacidad - sin datos personales requeridos",
+    "createProfile": "Crear perfil",
+    "creating": "Creando...",
+    "maybeLater": "Quizás más tarde",
+    "tabs": {
+      "create": "Crear perfil",
+      "signIn": "Iniciar sesión"
+    },
+    "signIn": {
+      "title": "¿Ya tienes una clave de sincronización?",
+      "description": "Introduce tu clave de sincronización para restaurar tu perfil y datos",
+      "syncKeyLabel": "Clave de sincronización",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Iniciar sesión",
+      "signingIn": "Iniciando sesión...",
+      "invalidKey": "Formato de clave de sincronización no válido. Por favor, verifica e inténtalo de nuevo."
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Guardar favoritos en todos los dispositivos",
+        "description": "Marca tus rocódromos favoritos y accede a ellos desde cualquier dispositivo"
+      },
+      "report": {
+        "title": "Compartir informes con la comunidad",
+        "description": "Ayuda a otros escaladores compartiendo condiciones, alertas de seguridad y beta"
+      },
+      "vote": {
+        "title": "Votar por informes útiles",
+        "description": "Apoya la comunidad confirmando informes útiles"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "Sin correo electrónico ni contraseña",
+        "description": "Respetamos tu privacidad. Solo una clave de sincronización, sin datos personales"
+      },
+      "syncKey": {
+        "title": "Solo crea una clave de sincronización",
+        "description": "Un identificador único que sincroniza tus datos en todos los dispositivos"
+      },
+      "multiDevice": {
+        "title": "Guárdala o fotografía el código QR",
+        "description": "Usa tu clave de sincronización para restaurar tu perfil en otros dispositivos"
+      }
+    }
+  },
+  "profileCreated": {
+    "title": "¡Perfil creado!",
+    "description": "Tu perfil se ha creado correctamente. Guarda tu clave de sincronización para acceder a tus datos en otros dispositivos.",
+    "actionCompleted": "¡{{action}} completado!",
+    "syncKeyLabel": "Tu clave de sincronización",
+    "syncKeyDescription": "Esta es tu clave única para sincronizar entre dispositivos",
+    "qrCodeLabel": "Código QR",
+    "qrCodeDescription": "Escanea este código QR en otro dispositivo para sincronizar tus datos",
+    "privacyTitle": "Importante: Guarda tu clave de sincronización",
+    "saveKeySafe": "Guarda esta clave en un lugar seguro",
+    "screenshotQR": "O haz una captura de pantalla de este código QR",
+    "needForSync": "La necesitarás para sincronizar otros dispositivos",
+    "gotIt": "¡Entendido!",
+    "copied": "¡Copiado!",
+    "copy": "Copiar",
+    "emailSection": {
+      "title": "Enviar por correo (opcional)",
+      "privacyNote1": "NO almacenamos tu correo electrónico",
+      "privacyNote2": "Esto es solo un envío único",
+      "privacyNote3": "Nunca guardado en nuestra base de datos",
+      "emailPlaceholder": "tu@email.es",
+      "sendButton": "Enviar correo",
+      "sending": "Enviando...",
+      "success": "¡Correo enviado! Revisa tu bandeja de entrada",
+      "error": "Error al enviar el correo. Por favor, inténtalo de nuevo."
+    }
+  },
   "profile": {
     "anonymous": "Anónimo",
     "member": "Miembro",
@@ -450,6 +525,7 @@
     },
     "submit": "Submit Report",
     "submitting": "Submitting...",
+    "readyToPost": "Profile created! You're ready to post your report.",
     "helpful": "Helpful",
     "loginToConfirm": "Please set up your profile to confirm reports",
     "confirmFailed": "Failed to confirm report. Please try again.",

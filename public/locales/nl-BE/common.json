@@ -265,23 +265,98 @@
     }
   },
   "syncExplainer": {
-    "title": "How Sync Works",
-    "description": "Keep your data in sync across all your devices seamlessly and securely.",
+    "title": "Hoe synchronisatie werkt",
+    "description": "Houd uw gegevens naadloos en veilig gesynchroniseerd op al uw apparaten.",
     "features": {
       "syncKey": {
-        "title": "Unique Sync Key",
-        "description": "Each user gets a secure, unique key to sync their data across devices."
+        "title": "Unieke synchronisatiesleutel",
+        "description": "Elke gebruiker krijgt een veilige, unieke sleutel om hun gegevens te synchroniseren tussen apparaten."
       },
       "multiDevice": {
-        "title": "Multi-Device Access",
-        "description": "Access your favorites and chat history from any device by using your sync key."
+        "title": "Multi-apparaat toegang",
+        "description": "Toegang tot uw favorieten en chatgeschiedenis vanaf elk apparaat met uw synchronisatiesleutel."
       },
       "privacy": {
-        "title": "Privacy First",
-        "description": "Your data is encrypted and only accessible with your sync key. No account required."
+        "title": "Privacy eerst",
+        "description": "Uw gegevens zijn versleuteld en alleen toegankelijk met uw synchronisatiesleutel. Geen account vereist."
       }
     },
-    "openSettings": "Open Settings"
+    "openSettings": "Instellingen openen"
+  },
+  "profileCreation": {
+    "title": "Maak uw profiel aan",
+    "subtitle": "Privacy-first registratie - geen persoonlijke gegevens vereist",
+    "createProfile": "Profiel aanmaken",
+    "creating": "Aanmaken...",
+    "maybeLater": "Misschien later",
+    "tabs": {
+      "create": "Profiel aanmaken",
+      "signIn": "Inloggen"
+    },
+    "signIn": {
+      "title": "Heeft u al een synchronisatiesleutel?",
+      "description": "Voer uw synchronisatiesleutel in om uw profiel en gegevens te herstellen",
+      "syncKeyLabel": "Synchronisatiesleutel",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Inloggen",
+      "signingIn": "Inloggen...",
+      "invalidKey": "Ongeldig formaat synchronisatiesleutel. Controleer en probeer opnieuw."
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Favorieten opslaan op alle apparaten",
+        "description": "Markeer uw favoriete rotsen en toegang vanaf elk apparaat"
+      },
+      "report": {
+        "title": "Deel rapporten met de gemeenschap",
+        "description": "Help medeklimmers door voorwaarden, veiligheidswaarschuwingen en beta te delen"
+      },
+      "vote": {
+        "title": "Stem op nuttige rapporten",
+        "description": "Steun de gemeenschap door nuttige rapporten te bevestigen"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "Geen e-mail of wachtwoord vereist",
+        "description": "We respecteren uw privacy. Alleen een synchronisatiesleutel, geen persoonlijke gegevens"
+      },
+      "syncKey": {
+        "title": "Maakt alleen een synchronisatiesleutel aan",
+        "description": "Een unieke identificatie die uw gegevens synchroniseert tussen apparaten"
+      },
+      "multiDevice": {
+        "title": "Bewaar het of fotografeer de QR-code",
+        "description": "Gebruik uw synchronisatiesleutel om uw profiel op andere apparaten te herstellen"
+      }
+    }
+  },
+  "profileCreated": {
+    "title": "Profiel aangemaakt!",
+    "description": "Uw profiel is succesvol aangemaakt. Bewaar uw synchronisatiesleutel om toegang te krijgen tot uw gegevens op andere apparaten.",
+    "actionCompleted": "{{action}} voltooid!",
+    "syncKeyLabel": "Uw synchronisatiesleutel",
+    "syncKeyDescription": "Dit is uw unieke sleutel voor synchronisatie tussen apparaten",
+    "qrCodeLabel": "QR-code",
+    "qrCodeDescription": "Scan deze QR-code op een ander apparaat om uw gegevens te synchroniseren",
+    "privacyTitle": "Belangrijk: Bewaar uw synchronisatiesleutel",
+    "saveKeySafe": "Bewaar deze sleutel op een veilige plaats",
+    "screenshotQR": "Of maak een screenshot van deze QR-code",
+    "needForSync": "U heeft het nodig om andere apparaten te synchroniseren",
+    "gotIt": "Begrepen!",
+    "copied": "Gekopieerd!",
+    "copy": "Kopiëren",
+    "emailSection": {
+      "title": "Verzenden via e-mail (optioneel)",
+      "privacyNote1": "We slaan uw e-mail NIET op",
+      "privacyNote2": "Dit is slechts een eenmalige verzending",
+      "privacyNote3": "Nooit opgeslagen in onze database",
+      "emailPlaceholder": "uw@email.be",
+      "sendButton": "E-mail versturen",
+      "sending": "Verzenden...",
+      "success": "E-mail verzonden! Controleer uw inbox",
+      "error": "Verzenden e-mail mislukt. Probeer het opnieuw."
+    }
   },
   "profile": {
     "anonymous": "Anoniem",
@@ -445,6 +520,7 @@
     },
     "submit": "Submit Report",
     "submitting": "Submitting...",
+    "readyToPost": "Profile created! You're ready to post your report.",
     "helpful": "Helpful",
     "loginToConfirm": "Please set up your profile to confirm reports",
     "confirmFailed": "Failed to confirm report. Please try again.",

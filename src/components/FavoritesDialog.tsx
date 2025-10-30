@@ -22,6 +22,9 @@ import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useRouter } from "next/navigation";
 import { generateUniqueSlug } from "@/lib/utils/slug";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
+import { ProfileCreationModal } from "@/components/ProfileCreationModal";
+import { ProfileCreatedDialog } from "@/components/ProfileCreatedDialog";
+import { getUserProfile, type UserProfile } from "@/lib/auth/sync-key";
 
 interface FavoritesDialogProps {
   open: boolean;
@@ -32,12 +35,37 @@ export function FavoritesDialog({ open, onOpenChange }: FavoritesDialogProps) {
   const { t } = useClientTranslation("common");
   const router = useRouter();
   const [favoriteToDelete, setFavoriteToDelete] = useState<Favorite | null>(null);
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [showProfileCreated, setShowProfileCreated] = useState(false);
+  const [newSyncKey, setNewSyncKey] = useState<string>("");
 
   // React Query hooks for favorites
   const { data: favorites = [], isLoading } = useFavorites();
   const removeFavorite = useRemoveFavorite();
 
+  const handleProfileCreated = (profile: UserProfile) => {
+    setNewSyncKey(profile.syncKey);
+    setShowProfileModal(false);
+    setShowProfileCreated(true);
+
+    // Complete the pending delete action
+    if (favoriteToDelete) {
+      removeFavorite.mutate(favoriteToDelete.id);
+      setFavoriteToDelete(null);
+    }
+  };
+
   const handleRemove = (favorite: Favorite) => {
+    const profile = getUserProfile();
+
+    if (!profile) {
+      // No profile - show creation modal
+      setFavoriteToDelete(favorite);
+      setShowProfileModal(true);
+      return;
+    }
+
+    // Has profile - proceed with delete confirmation
     setFavoriteToDelete(favorite);
   };
 
@@ -135,7 +163,7 @@ export function FavoritesDialog({ open, onOpenChange }: FavoritesDialogProps) {
       </DialogContent>
 
       <ConfirmDialog
-        open={!!favoriteToDelete}
+        open={!!favoriteToDelete && !showProfileModal}
         onOpenChange={(open) => !open && setFavoriteToDelete(null)}
         onConfirm={confirmDelete}
         title={t("favorites.confirmDelete")}
@@ -145,6 +173,22 @@ export function FavoritesDialog({ open, onOpenChange }: FavoritesDialogProps) {
         confirmText={t("dialog.delete")}
         cancelText={t("dialog.cancel")}
         variant="destructive"
+      />
+
+      {/* Profile Creation Modal */}
+      <ProfileCreationModal
+        open={showProfileModal}
+        onOpenChange={setShowProfileModal}
+        trigger="favorite"
+        onCreated={handleProfileCreated}
+      />
+
+      {/* Profile Created Dialog */}
+      <ProfileCreatedDialog
+        open={showProfileCreated}
+        onOpenChange={setShowProfileCreated}
+        syncKey={newSyncKey}
+        completedAction={t("favorites.removed")}
       />
     </Dialog>
   );

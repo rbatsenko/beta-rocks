@@ -265,23 +265,98 @@
     }
   },
   "syncExplainer": {
-    "title": "How Sync Works",
-    "description": "Keep your data in sync across all your devices seamlessly and securely.",
+    "title": "Cum funcționează sincronizarea",
+    "description": "Păstrați datele sincronizate pe toate dispozitivele în mod sigur și fără întreruperi.",
     "features": {
       "syncKey": {
-        "title": "Unique Sync Key",
-        "description": "Each user gets a secure, unique key to sync their data across devices."
+        "title": "Cheie de sincronizare unică",
+        "description": "Fiecare utilizator primește o cheie unică și securizată pentru sincronizarea datelor între dispozitive."
       },
       "multiDevice": {
-        "title": "Multi-Device Access",
-        "description": "Access your favorites and chat history from any device by using your sync key."
+        "title": "Acces multi-dispozitiv",
+        "description": "Accesați favoritele și istoricul chat-ului de pe orice dispozitiv folosind cheia de sincronizare."
       },
       "privacy": {
-        "title": "Privacy First",
-        "description": "Your data is encrypted and only accessible with your sync key. No account required."
+        "title": "Confidențialitate pe primul loc",
+        "description": "Datele dvs. sunt criptate și accesibile doar cu cheia de sincronizare. Nu este nevoie de cont."
       }
     },
-    "openSettings": "Open Settings"
+    "openSettings": "Deschide setările"
+  },
+  "profileCreation": {
+    "title": "Creați-vă profilul",
+    "subtitle": "Înregistrare cu confidențialitate pe primul loc - fără date personale necesare",
+    "createProfile": "Creează profil",
+    "creating": "Se creează...",
+    "maybeLater": "Poate mai târziu",
+    "tabs": {
+      "create": "Creează profil",
+      "signIn": "Autentificare"
+    },
+    "signIn": {
+      "title": "Ai deja o cheie de sincronizare?",
+      "description": "Introdu cheia de sincronizare pentru a restabili profilul și datele",
+      "syncKeyLabel": "Cheie de sincronizare",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Autentificare",
+      "signingIn": "Autentificare în curs...",
+      "invalidKey": "Format cheie de sincronizare invalid. Te rog verifică și încearcă din nou."
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Salvați favoritele pe toate dispozitivele",
+        "description": "Marcați stâncile favorite și accesați de pe orice dispozitiv"
+      },
+      "report": {
+        "title": "Partajați rapoarte cu comunitatea",
+        "description": "Ajutați alți alpiniști partajând condiții, alerte de siguranță și beta"
+      },
+      "vote": {
+        "title": "Votați rapoartele utile",
+        "description": "Sprijiniți comunitatea confirmând rapoartele utile"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "Fără email sau parolă",
+        "description": "Respectăm confidențialitatea dvs. Doar o cheie de sincronizare, fără date personale"
+      },
+      "syncKey": {
+        "title": "Creează doar o cheie de sincronizare",
+        "description": "Un identificator unic care sincronizează datele între dispozitive"
+      },
+      "multiDevice": {
+        "title": "Salvați-o sau fotografiați codul QR",
+        "description": "Folosiți cheia de sincronizare pentru a restaura profilul pe alte dispozitive"
+      }
+    }
+  },
+  "profileCreated": {
+    "title": "Profil creat!",
+    "description": "Profilul dvs. a fost creat cu succes. Salvați cheia de sincronizare pentru a accesa datele pe alte dispozitive.",
+    "actionCompleted": "{{action}} finalizat!",
+    "syncKeyLabel": "Cheia dvs. de sincronizare",
+    "syncKeyDescription": "Aceasta este cheia dvs. unică pentru sincronizare între dispozitive",
+    "qrCodeLabel": "Cod QR",
+    "qrCodeDescription": "Scanați acest cod QR pe alt dispozitiv pentru a sincroniza datele",
+    "privacyTitle": "Important: Salvați cheia de sincronizare",
+    "saveKeySafe": "Salvați această cheie într-un loc sigur",
+    "screenshotQR": "Sau faceți o captură de ecran a acestui cod QR",
+    "needForSync": "Veți avea nevoie de ea pentru sincronizarea altor dispozitive",
+    "gotIt": "Am înțeles!",
+    "copied": "Copiat!",
+    "copy": "Copiază",
+    "emailSection": {
+      "title": "Trimite la e-mail (opțional)",
+      "privacyNote1": "NU stocăm e-mailul tău",
+      "privacyNote2": "Aceasta este doar o trimitere unică",
+      "privacyNote3": "Niciodată salvat în baza noastră de date",
+      "emailPlaceholder": "tau@email.ro",
+      "sendButton": "Trimite e-mail",
+      "sending": "Se trimite...",
+      "success": "E-mail trimis! Verifică-ți inbox-ul",
+      "error": "Nu s-a putut trimite e-mailul. Te rog încearcă din nou."
+    }
   },
   "profile": {
     "anonymous": "Anonim",
@@ -445,6 +520,7 @@
     },
     "submit": "Submit Report",
     "submitting": "Submitting...",
+    "readyToPost": "Profile created! You're ready to post your report.",
     "helpful": "Helpful",
     "loginToConfirm": "Please set up your profile to confirm reports",
     "confirmFailed": "Failed to confirm report. Please try again.",

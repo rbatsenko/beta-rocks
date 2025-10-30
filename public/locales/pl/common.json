@@ -3,8 +3,8 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Informacje o dowolnej skałce",
-    "description": "Warun na bieżąco, raporty społeczności i informacje o drogach na całym świecie",
+    "heading": "Info o dowolnej skałce",
+    "description": "Warun na bieżąco, raporty społeczności i informacje o rejonach i drogach na całym świecie",
     "exampleQueries": {
       "query1": {
         "display": "Jaki warun w Sokolikach jutro?",
@@ -278,6 +278,81 @@
     },
     "openSettings": "Otwórz ustawienia"
   },
+  "profileCreation": {
+    "title": "Utwórz swój profil",
+    "subtitle": "Rejestracja z prywatnością na pierwszym miejscu - bez danych osobowych",
+    "createProfile": "Utwórz profil",
+    "creating": "Tworzę...",
+    "maybeLater": "Może później",
+    "tabs": {
+      "create": "Utwórz profil",
+      "signIn": "Zaloguj się"
+    },
+    "signIn": {
+      "title": "Masz już klucz synchronizacji?",
+      "description": "Wprowadź klucz synchronizacji, aby przywrócić swój profil i dane",
+      "syncKeyLabel": "Klucz synchronizacji",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Zaloguj się",
+      "signingIn": "Logowanie...",
+      "invalidKey": "Nieprawidłowy format klucza synchronizacji. Sprawdź i spróbuj ponownie."
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Zapisz ulubione na wszystkich urządzeniach",
+        "description": "Dodaj do zakładek swoje ulubione skałki i uzyskaj do nich dostęp z dowolnego urządzenia"
+      },
+      "report": {
+        "title": "Dziel się raportami ze społecznością",
+        "description": "Pomóż wspinaczom, dzieląc się warunem, alertami bezpieczeństwa i betą"
+      },
+      "vote": {
+        "title": "Głosuj na pomocne raporty",
+        "description": "Wspieraj społeczność, potwierdzając przydatne raporty"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "Bez e-maila i hasła",
+        "description": "Szanujemy Twoją prywatność. Tylko klucz synchronizacji, bez danych osobowych"
+      },
+      "syncKey": {
+        "title": "Tworzy tylko klucz synchronizacji",
+        "description": "Unikalny identyfikator synchronizujący dane między urządzeniami"
+      },
+      "multiDevice": {
+        "title": "Zapisz lub zrób zrzut ekranu QR",
+        "description": "Użyj klucza synchronizacji, aby przywrócić profil na innych urządzeniach"
+      }
+    }
+  },
+  "profileCreated": {
+    "title": "Profil utworzony!",
+    "description": "Twój profil został pomyślnie utworzony. Zapisz klucz synchronizacji, aby uzyskać dostęp do danych na innych urządzeniach.",
+    "actionCompleted": "{{action}} ukończono!",
+    "syncKeyLabel": "Twój klucz synchronizacji",
+    "syncKeyDescription": "To jest Twój unikalny klucz do synchronizacji między urządzeniami",
+    "qrCodeLabel": "Kod QR",
+    "qrCodeDescription": "Zeskanuj ten kod QR na innym urządzeniu, aby zsynchronizować dane",
+    "privacyTitle": "Ważne: Zapisz swój klucz synchronizacji",
+    "saveKeySafe": "Zapisz ten klucz w bezpiecznym miejscu",
+    "screenshotQR": "Lub zrób zrzut ekranu tego kodu QR",
+    "needForSync": "Będzie potrzebny do synchronizacji innych urządzeń",
+    "gotIt": "Rozumiem!",
+    "copied": "Skopiowano!",
+    "copy": "Kopiuj",
+    "emailSection": {
+      "title": "Wyślij na e-mail (opcjonalnie)",
+      "privacyNote1": "NIE przechowujemy Twojego e-maila",
+      "privacyNote2": "To tylko jednorazowe wysłanie",
+      "privacyNote3": "Nigdy nie zapisywane w naszej bazie danych",
+      "emailPlaceholder": "twoj@email.pl",
+      "sendButton": "Wyślij e-mail",
+      "sending": "Wysyłanie...",
+      "success": "E-mail wysłany! Sprawdź swoją skrzynkę",
+      "error": "Nie udało się wysłać e-maila. Spróbuj ponownie."
+    }
+  },
   "profile": {
     "anonymous": "Anonimowy",
     "member": "Użytkownik",
@@ -416,6 +491,7 @@
     "commentsPlaceholder": "Np: sektor wschodni wciąż wilgotny, ścieżka błotnista - uwaga, Droga X - woda sączy się ze szczeliny, chwyty śliskie...",
     "submit": "Wyślij raport",
     "submitting": "Wysyłanie...",
+    "readyToPost": "Profile created! You're ready to post your report.",
     "helpful": "Pomocne",
     "loginToConfirm": "Skonfiguruj swój profil, aby potwierdzać raporty",
     "confirmFailed": "Nie udało się potwierdzić raportu. Spróbuj ponownie.",

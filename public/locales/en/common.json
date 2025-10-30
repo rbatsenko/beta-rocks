@@ -257,7 +257,8 @@
     "schist": "schist",
     "dolomite": "dolomite",
     "volcanic": "volcanic",
-    "phyllite": "phyllite"
+    "phyllite": "phyllite",
+    "gritstone": "gritstone"
   },
   "sync": {
     "notification": {
@@ -312,6 +313,83 @@
       }
     },
     "openSettings": "Open Settings"
+  },
+  "profileCreation": {
+    "title": "Create Your Profile",
+    "subtitle": "Privacy-first registration - no personal data required",
+    "createProfile": "Create Profile",
+    "creating": "Creating...",
+    "maybeLater": "Maybe Later",
+    "tabs": {
+      "create": "Create Profile",
+      "signIn": "Sign In"
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Save Favorites Across Devices",
+        "description": "Bookmark your favorite crags and access them from any device"
+      },
+      "report": {
+        "title": "Share Reports with Community",
+        "description": "Help fellow climbers by sharing conditions, safety alerts, and beta"
+      },
+      "vote": {
+        "title": "Vote on Helpful Reports",
+        "description": "Support the community by confirming useful reports"
+      },
+      "manual": {
+        "title": "Save Your Data Across Devices",
+        "description": "Sync your favorites, reports, and chat history on all your devices"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "No Email or Password Required",
+        "description": "We respect your privacy. Just a sync key, no personal data needed"
+      },
+      "syncKey": {
+        "title": "Just Creates a Sync Key",
+        "description": "A unique identifier that syncs your data across devices"
+      },
+      "multiDevice": {
+        "title": "Save It, Screenshot the QR Code, or Email It",
+        "description": "Use your sync key to restore your profile on other devices"
+      }
+    },
+    "signIn": {
+      "title": "Already Have a Sync Key?",
+      "description": "Enter your sync key to restore your profile and data",
+      "syncKeyLabel": "Sync Key",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Sign In",
+      "signingIn": "Signing in...",
+      "invalidKey": "Invalid sync key format. Please check and try again."
+    }
+  },
+  "profileCreated": {
+    "title": "Profile Created!",
+    "description": "Your profile has been created successfully. Save your sync key to access your data on other devices.",
+    "actionCompleted": "{{action}} completed!",
+    "syncKeyLabel": "Your Sync Key",
+    "syncKeyDescription": "This is your unique key for syncing across devices",
+    "qrCodeLabel": "QR Code",
+    "qrCodeDescription": "Scan this QR code on another device to sync your data",
+    "privacyTitle": "Important: Save Your Sync Key",
+    "saveKeySafe": "Save this key somewhere safe",
+    "screenshotQR": "Or screenshot this QR code",
+    "needForSync": "You'll need it to sync other devices",
+    "gotIt": "Got it!",
+    "emailSection": {
+      "title": "Send to Email (Optional)",
+      "privacyNote1": "We DON'T store your email",
+      "privacyNote2": "This is a one-time send only",
+      "privacyNote3": "Never saved to our database",
+      "emailPlaceholder": "your@email.com",
+      "sendButton": "Send Email",
+      "sending": "Sending...",
+      "success": "Email sent! Check your inbox",
+      "error": "Failed to send email. Please try again."
+    }
   },
   "profile": {
     "anonymous": "Anonymous",
@@ -417,7 +495,18 @@
       "warning": {
         "title": "Keep your sync key private",
         "description": "Anyone with your sync key can access your favorites and settings. Don't share it publicly."
-      }
+      },
+      "emailButton": "Email Sync Key to Yourself",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "you@example.com",
+      "emailSend": "Send",
+      "emailSending": "Sending...",
+      "emailPrivacy": "We don't store your email - it's only used once to send your sync key.",
+      "emailSent": "Email sent!",
+      "emailSentDescription": "Your sync key has been sent to {{email}}",
+      "emailFailed": "Failed to send email",
+      "emailFailedDescription": "Please try again or copy your sync key manually.",
+      "emailInvalid": "Please enter a valid email address"
     },
     "dangerZone": {
       "title": "Danger Zone",
@@ -440,7 +529,10 @@
     "confirmDelete": "Remove Favorite?",
     "confirmDeleteDescription": "Are you sure you want to remove {{name}} from your favorites?",
     "loginToFavorite": "Please set up your profile to favorite locations",
-    "errorToggling": "Failed to toggle favorite. Please try again."
+    "errorToggling": "Failed to toggle favorite. Please try again.",
+    "added": "Crag added to favorites",
+    "removed": "Crag removed from favorites",
+    "loading": "Loading favorites..."
   },
   "reports": {
     "addReport": "Add Report",
@@ -481,9 +573,11 @@
     },
     "submit": "Submit Report",
     "submitting": "Submitting...",
+    "readyToPost": "Profile created! You're ready to post your report.",
     "helpful": "Helpful",
     "loginToConfirm": "Please set up your profile to confirm reports",
     "confirmFailed": "Failed to confirm report. Please try again.",
+    "voteReady": "You can now vote on reports",
     "ratings": {
       "veryPoor": "Very Poor",
       "poor": "Poor",
@@ -550,6 +644,7 @@
     "basalt": "Basalt",
     "gneiss": "Gneiss",
     "quartzite": "Quartzite",
+    "gritstone": "Gritstone",
     "unknown": "Unknown"
   },
   "loading": {

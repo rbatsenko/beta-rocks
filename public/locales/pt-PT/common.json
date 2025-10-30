@@ -265,23 +265,98 @@
     }
   },
   "syncExplainer": {
-    "title": "How Sync Works",
-    "description": "Keep your data in sync across all your devices seamlessly and securely.",
+    "title": "Como funciona a sincronização",
+    "description": "Mantenha os seus dados sincronizados em todos os seus dispositivos de forma segura e contínua.",
     "features": {
       "syncKey": {
-        "title": "Unique Sync Key",
-        "description": "Each user gets a secure, unique key to sync their data across devices."
+        "title": "Chave de sincronização única",
+        "description": "Cada utilizador recebe uma chave segura e única para sincronizar os seus dados entre dispositivos."
       },
       "multiDevice": {
-        "title": "Multi-Device Access",
-        "description": "Access your favorites and chat history from any device by using your sync key."
+        "title": "Acesso multi-dispositivo",
+        "description": "Aceda aos seus favoritos e histórico de chat a partir de qualquer dispositivo usando a sua chave de sincronização."
       },
       "privacy": {
-        "title": "Privacy First",
-        "description": "Your data is encrypted and only accessible with your sync key. No account required."
+        "title": "Privacidade em primeiro lugar",
+        "description": "Os seus dados estão encriptados e acessíveis apenas com a sua chave de sincronização. Não é necessária conta."
       }
     },
-    "openSettings": "Open Settings"
+    "openSettings": "Abrir definições"
+  },
+  "profileCreation": {
+    "title": "Criar o seu perfil",
+    "subtitle": "Registo com privacidade em primeiro lugar - sem dados pessoais necessários",
+    "createProfile": "Criar perfil",
+    "creating": "A criar...",
+    "maybeLater": "Talvez mais tarde",
+    "tabs": {
+      "create": "Criar perfil",
+      "signIn": "Iniciar sessão"
+    },
+    "signIn": {
+      "title": "Já tem uma chave de sincronização?",
+      "description": "Introduza a sua chave de sincronização para restaurar o seu perfil e dados",
+      "syncKeyLabel": "Chave de sincronização",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Iniciar sessão",
+      "signingIn": "A iniciar sessão...",
+      "invalidKey": "Formato de chave de sincronização inválido. Verifique e tente novamente."
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Guardar favoritos em todos os dispositivos",
+        "description": "Marque as suas falésias favoritas e aceda a partir de qualquer dispositivo"
+      },
+      "report": {
+        "title": "Partilhar relatórios com a comunidade",
+        "description": "Ajude outros escaladores partilhando condições, alertas de segurança e beta"
+      },
+      "vote": {
+        "title": "Votar em relatórios úteis",
+        "description": "Apoie a comunidade confirmando relatórios úteis"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "Sem e-mail ou palavra-passe",
+        "description": "Respeitamos a sua privacidade. Apenas uma chave de sincronização, sem dados pessoais"
+      },
+      "syncKey": {
+        "title": "Cria apenas uma chave de sincronização",
+        "description": "Um identificador único que sincroniza os seus dados entre dispositivos"
+      },
+      "multiDevice": {
+        "title": "Guarde-a ou fotografe o código QR",
+        "description": "Use a sua chave de sincronização para restaurar o seu perfil noutros dispositivos"
+      }
+    }
+  },
+  "profileCreated": {
+    "title": "Perfil criado!",
+    "description": "O seu perfil foi criado com sucesso. Guarde a sua chave de sincronização para aceder aos seus dados noutros dispositivos.",
+    "actionCompleted": "{{action}} concluído!",
+    "syncKeyLabel": "A sua chave de sincronização",
+    "syncKeyDescription": "Esta é a sua chave única para sincronizar entre dispositivos",
+    "qrCodeLabel": "Código QR",
+    "qrCodeDescription": "Digitalize este código QR noutro dispositivo para sincronizar os seus dados",
+    "privacyTitle": "Importante: Guarde a sua chave de sincronização",
+    "saveKeySafe": "Guarde esta chave num local seguro",
+    "screenshotQR": "Ou tire uma captura de ecrã deste código QR",
+    "needForSync": "Precisará dela para sincronizar outros dispositivos",
+    "gotIt": "Compreendi!",
+    "copied": "Copiado!",
+    "copy": "Copiar",
+    "emailSection": {
+      "title": "Enviar por e-mail (opcional)",
+      "privacyNote1": "NÃO armazenamos o seu e-mail",
+      "privacyNote2": "Isto é apenas um envio único",
+      "privacyNote3": "Nunca guardado na nossa base de dados",
+      "emailPlaceholder": "seu@email.pt",
+      "sendButton": "Enviar e-mail",
+      "sending": "A enviar...",
+      "success": "E-mail enviado! Verifique a sua caixa de entrada",
+      "error": "Falha ao enviar e-mail. Tente novamente."
+    }
   },
   "profile": {
     "anonymous": "Anónimo",
@@ -445,6 +520,7 @@
     },
     "submit": "Submit Report",
     "submitting": "Submitting...",
+    "readyToPost": "Profile created! You're ready to post your report.",
     "helpful": "Helpful",
     "loginToConfirm": "Please set up your profile to confirm reports",
     "confirmFailed": "Failed to confirm report. Please try again.",

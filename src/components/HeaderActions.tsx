@@ -8,6 +8,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { UserMenu } from "@/components/UserMenu";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useSyncStatus } from "@/hooks/useSyncStatus";
+import { getUserProfile } from "@/lib/auth/sync-key";
 
 interface HeaderActionsProps {
   onSyncClick: () => void;
@@ -37,17 +38,22 @@ export function HeaderActions({
   const { t } = useClientTranslation("common");
   const syncStatus = useSyncStatus();
 
+  // Only show sync status for users with profiles
+  const hasProfile = typeof window !== 'undefined' ? !!getUserProfile() : false;
+
   return (
     <>
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={onSyncClick}
-        className="cursor-pointer hover:bg-muted/50"
-        title={t("sync.status.clickToLearnMore")}
-      >
-        <SyncStatusIndicator status={syncStatus} />
-      </Button>
+      {hasProfile && (
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={onSyncClick}
+          className="cursor-pointer hover:bg-muted/50"
+          title={t("sync.status.clickToLearnMore")}
+        >
+          <SyncStatusIndicator status={syncStatus} />
+        </Button>
+      )}
       {extraActions}
       <LanguageSelector />
       <ThemeToggle />

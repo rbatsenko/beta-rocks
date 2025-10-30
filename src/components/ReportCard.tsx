@@ -19,10 +19,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { format, differenceInCalendarDays } from "date-fns";
-import { hashSyncKeyAsync } from "@/lib/auth/sync-key";
+import { hashSyncKeyAsync, type UserProfile } from "@/lib/auth/sync-key";
 import { createConfirmation, hasUserConfirmedReport } from "@/lib/db/queries";
 import { getUserProfile } from "@/lib/auth/sync-key";
 import { getDateFnsLocale } from "@/lib/i18n/date-locales";
+import { ProfileCreationModal } from "@/components/ProfileCreationModal";
+import { ProfileCreatedDialog } from "@/components/ProfileCreatedDialog";
 
 type ReportCategory = "conditions" | "safety" | "access" | "climbing_info" | "facilities" | "other";
 
@@ -53,6 +55,9 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
   const [isConfirming, setIsConfirming] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [confirmationCount, setConfirmationCount] = useState(report.confirmations?.length || 0);
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [showProfileCreated, setShowProfileCreated] = useState(false);
+  const [newSyncKey, setNewSyncKey] = useState<string>("");
 
   // Check if user has already confirmed this report
   useEffect(() => {
@@ -70,14 +75,16 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
   const handleConfirm = async () => {
     if (isConfirmed || isConfirming) return;
 
+    const profile = getUserProfile();
+    if (!profile?.syncKey) {
+      // Show profile creation modal instead of alert
+      setShowProfileModal(true);
+      return;
+    }
+
+    // Proceed with existing confirmation logic
     setIsConfirming(true);
     try {
-      const profile = getUserProfile();
-      if (!profile?.syncKey) {
-        alert(t("reports.loginToConfirm"));
-        return;
-      }
-
       const syncKeyHash = await hashSyncKeyAsync(profile.syncKey);
       await createConfirmation(report.id, syncKeyHash);
 
@@ -93,6 +100,17 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
     } finally {
       setIsConfirming(false);
     }
+  };
+
+  const handleProfileCreated = (profile: UserProfile) => {
+    setNewSyncKey(profile.syncKey);
+    setShowProfileModal(false);
+    setShowProfileCreated(true);
+
+    // After showing success, automatically perform the confirmation
+    setTimeout(() => {
+      handleConfirm();
+    }, 500);
   };
 
   const getCategoryIcon = (category: ReportCategory) => {
@@ -276,6 +294,22 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
           </Button>
         </div>
       </CardContent>
+
+      {/* Profile Creation Modal */}
+      <ProfileCreationModal
+        open={showProfileModal}
+        onOpenChange={setShowProfileModal}
+        trigger="vote"
+        onCreated={handleProfileCreated}
+      />
+
+      {/* Profile Created Success Dialog */}
+      <ProfileCreatedDialog
+        open={showProfileCreated}
+        onOpenChange={setShowProfileCreated}
+        syncKey={newSyncKey}
+        completedAction={t("reports.voteReady")}
+      />
     </Card>
   );
 }

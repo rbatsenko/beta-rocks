@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Copy, Check, Key, AlertTriangle, Info, Upload, Settings2 } from "lucide-react";
+import { Copy, Check, Key, AlertTriangle, Info, Upload, Settings2, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
 import {
@@ -78,6 +78,9 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
   const [restoreSyncKey, setRestoreSyncKey] = useState("");
   const [isRestoring, setIsRestoring] = useState(false);
   const [restoreError, setRestoreError] = useState("");
+  const [emailAddress, setEmailAddress] = useState("");
+  const [isSendingEmail, setIsSendingEmail] = useState(false);
+  const [showEmailInput, setShowEmailInput] = useState(false);
 
   useEffect(() => {
     if (open) {
@@ -183,6 +186,60 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
   const getSyncUrl = () => {
     if (!userProfile?.syncKey) return "";
     return `${window.location.origin}/sync?key=${userProfile.syncKey}`;
+  };
+
+  const handleEmailSyncKey = async () => {
+    if (!userProfile?.syncKey) return;
+
+    // Basic validation
+    if (!emailAddress || !emailAddress.includes("@")) {
+      toast({
+        title: t("settings.syncKey.emailInvalid"),
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSendingEmail(true);
+    try {
+      const response = await fetch("/api/send-sync-key", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: emailAddress,
+          syncKey: userProfile.syncKey
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to send email");
+      }
+
+      toast({
+        title: t("settings.syncKey.emailSent"),
+        description: t("settings.syncKey.emailSentDescription", { email: emailAddress }),
+      });
+
+      // Reset email input
+      setEmailAddress("");
+      setShowEmailInput(false);
+    } catch (error) {
+      console.error("Error sending sync key email:", error);
+      toast({
+        title: t("settings.syncKey.emailFailed"),
+        description:
+          error instanceof Error
+            ? error.message
+            : t("settings.syncKey.emailFailedDescription"),
+        variant: "destructive",
+      });
+    } finally {
+      setIsSendingEmail(false);
+    }
   };
 
   const handleRestoreSyncKey = async () => {
@@ -524,6 +581,61 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
                 <p className="text-xs text-muted-foreground text-center max-w-md">
                   {t("settings.syncKey.qrDescription")}
                 </p>
+              </div>
+
+              {/* Email Sync Key */}
+              <div>
+                {!showEmailInput ? (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setShowEmailInput(true)}
+                    className="w-full"
+                  >
+                    <Mail className="h-4 w-4 mr-2" />
+                    {t("settings.syncKey.emailButton")}
+                  </Button>
+                ) : (
+                  <div className="space-y-2">
+                    <Label htmlFor="emailAddress">{t("settings.syncKey.emailLabel")}</Label>
+                    <div className="flex gap-2">
+                      <Input
+                        id="emailAddress"
+                        type="email"
+                        placeholder={t("settings.syncKey.emailPlaceholder")}
+                        value={emailAddress}
+                        onChange={(e) => setEmailAddress(e.target.value)}
+                        disabled={isSendingEmail}
+                        onKeyPress={(e) => {
+                          if (e.key === "Enter" && !isSendingEmail) {
+                            handleEmailSyncKey();
+                          }
+                        }}
+                      />
+                      <Button
+                        onClick={handleEmailSyncKey}
+                        disabled={isSendingEmail || !emailAddress}
+                        size="sm"
+                      >
+                        {isSendingEmail ? t("settings.syncKey.emailSending") : t("settings.syncKey.emailSend")}
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => {
+                          setShowEmailInput(false);
+                          setEmailAddress("");
+                        }}
+                        disabled={isSendingEmail}
+                        size="sm"
+                      >
+                        {t("common.cancel")}
+                      </Button>
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                      {t("settings.syncKey.emailPrivacy")}
+                    </p>
+                  </div>
+                )}
               </div>
 
               {/* Save Note */}

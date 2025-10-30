@@ -24,6 +24,8 @@ import { Separator } from "@/components/ui/separator";
 import { ConditionsDetailContent } from "@/components/ConditionsDetailContent";
 import { ReportCard } from "@/components/ReportCard";
 import { ReportDialog } from "@/components/ReportDialog";
+import { ProfileCreationModal } from "@/components/ProfileCreationModal";
+import { ProfileCreatedDialog } from "@/components/ProfileCreatedDialog";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
 import { useRouter } from "next/navigation";
@@ -36,6 +38,7 @@ import {
 import { getSunCalcUrl, getGoogleMapsUrl, getOpenStreetMapEmbedUrl } from "@/lib/utils/urls";
 import { getCountryFlag } from "@/lib/utils/country-flag";
 import { fetchReportsByCrag } from "@/lib/db/queries";
+import { getUserProfile, type UserProfile } from "@/lib/auth/sync-key";
 
 type ReportCategory = "conditions" | "safety" | "access" | "climbing_info" | "facilities" | "other";
 
@@ -137,6 +140,10 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
   const router = useRouter();
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<"all" | ReportCategory>("all");
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [showProfileCreated, setShowProfileCreated] = useState(false);
+  const [newSyncKey, setNewSyncKey] = useState<string>("");
+  const [pendingAction, setPendingAction] = useState<"add" | "remove" | "report" | null>(null);
 
   // React Query for conditions (client-side)
   const {
@@ -197,7 +204,48 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
       }
     : null;
 
+  const handleProfileCreated = (profile: UserProfile) => {
+    setNewSyncKey(profile.syncKey);
+    setShowProfileModal(false);
+    setShowProfileCreated(true);
+
+    // Complete the pending action
+    if (pendingAction === "add") {
+      addFavorite.mutate({
+        favorite: {
+          areaName: crag.name,
+          location: locationString,
+          latitude: crag.lat,
+          longitude: crag.lon,
+          cragId: crag.id,
+          rockType: crag.rock_type || undefined,
+          lastRating: conditions?.rating || "unknown",
+          lastFrictionScore: conditions?.frictionScore || 0,
+          lastCheckedAt: new Date().toISOString(),
+        },
+        previousFavorites: favorites,
+      });
+    } else if (pendingAction === "remove" && favorite) {
+      removeFavorite.mutate(favorite.id);
+    } else if (pendingAction === "report") {
+      // Open report dialog after profile creation
+      setReportDialogOpen(true);
+    }
+
+    setPendingAction(null);
+  };
+
   const handleToggleFavorite = () => {
+    const profile = getUserProfile();
+
+    if (!profile) {
+      // No profile - show creation modal
+      setPendingAction(isFavorited ? "remove" : "add");
+      setShowProfileModal(true);
+      return;
+    }
+
+    // Has profile - proceed with favorite action
     if (isFavorited && favorite) {
       removeFavorite.mutate(favorite.id);
     } else {
@@ -223,6 +271,20 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
     await refetchReports();
     console.log(`[CragPageContent] Refetched reports after creation`);
   }, [refetchReports]);
+
+  const handleAddReport = () => {
+    const profile = getUserProfile();
+
+    if (!profile) {
+      // No profile - show creation modal
+      setPendingAction("report");
+      setShowProfileModal(true);
+      return;
+    }
+
+    // Has profile - open report dialog
+    setReportDialogOpen(true);
+  };
 
   const handleAskAI = () => {
     // Navigate to home page with crag pre-filled in chat
@@ -409,7 +471,7 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-2xl font-semibold">{t("reports.communityReports")}</h2>
             <Button
-              onClick={() => setReportDialogOpen(true)}
+              onClick={handleAddReport}
               className="bg-orange-500 hover:bg-orange-600"
             >
               <Plus className="h-4 w-4" />
@@ -474,7 +536,7 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
                   <CardContent className="p-12 text-center">
                     <p className="text-muted-foreground mb-4">{t("reports.noReports")}</p>
                     <Button
-                      onClick={() => setReportDialogOpen(true)}
+                      onClick={handleAddReport}
                       variant="outline"
                       className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20"
                     >
@@ -552,6 +614,28 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
         cragId={crag.id}
         cragName={crag.name}
         onReportCreated={handleReportCreated}
+      />
+
+      {/* Profile Creation Modal */}
+      <ProfileCreationModal
+        open={showProfileModal}
+        onOpenChange={setShowProfileModal}
+        trigger={
+          pendingAction === "report"
+            ? "report"
+            : pendingAction === "add" || pendingAction === "remove"
+              ? "favorite"
+              : "manual"
+        }
+        onCreated={handleProfileCreated}
+      />
+
+      {/* Profile Created Dialog */}
+      <ProfileCreatedDialog
+        open={showProfileCreated}
+        onOpenChange={setShowProfileCreated}
+        syncKey={newSyncKey}
+        completedAction={t("favorites.added")}
       />
     </div>
   );

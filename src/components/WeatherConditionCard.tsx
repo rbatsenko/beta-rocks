@@ -1,4 +1,4 @@
-import { memo, useMemo, useEffect } from "react";
+import { memo, useMemo, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Info, Star, MessageSquare, ArrowRight } from "lucide-react";
@@ -13,10 +13,12 @@ import {
   useRemoveFavorite,
 } from "@/hooks/queries/useFavoritesQueries";
 import { ReportDialog } from "@/components/ReportDialog";
+import { ProfileCreationModal } from "@/components/ProfileCreationModal";
+import { ProfileCreatedDialog } from "@/components/ProfileCreatedDialog";
 import { generateUniqueSlug } from "@/lib/utils/slug";
 import { useUnits } from "@/hooks/useUnits";
 import { convertTemperature } from "@/lib/units/conversions";
-import { useState } from "react";
+import { getUserProfile, type UserProfile } from "@/lib/auth/sync-key";
 
 interface ConditionsData {
   location: string;
@@ -145,6 +147,10 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
   const hasEmoji = data.current?.weatherCode !== undefined;
   const router = useRouter();
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [showProfileCreated, setShowProfileCreated] = useState(false);
+  const [newSyncKey, setNewSyncKey] = useState<string>("");
+  const [pendingAction, setPendingAction] = useState<"add" | "remove" | null>(null);
   const { units } = useUnits();
 
   // React Query hooks for favorites
@@ -163,6 +169,65 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
     warnings: data.warnings?.length ?? 0,
     reasons: data.reasons?.length ?? 0,
   });
+
+  const handleProfileCreated = (profile: UserProfile) => {
+    setNewSyncKey(profile.syncKey);
+    setShowProfileModal(false);
+    setShowProfileCreated(true);
+
+    // Complete the pending action
+    if (pendingAction === "add" && data.latitude && data.longitude) {
+      addFavorite.mutate({
+        favorite: {
+          areaName: data.location,
+          location: `${data.country || ""}${data.state ? ", " + data.state : ""}`,
+          latitude: data.latitude,
+          longitude: data.longitude,
+          cragId: data.cragId,
+          rockType: data.rockType,
+          lastRating: data.rating,
+          lastFrictionScore: data.frictionScore,
+          lastCheckedAt: new Date().toISOString(),
+        },
+        previousFavorites: favorites,
+      });
+    } else if (pendingAction === "remove" && favorite) {
+      removeFavorite.mutate(favorite.id);
+    }
+
+    setPendingAction(null);
+  };
+
+  const handleFavoriteToggle = () => {
+    const profile = getUserProfile();
+
+    if (!profile) {
+      // No profile - show creation modal
+      setPendingAction(isFavorited ? "remove" : "add");
+      setShowProfileModal(true);
+      return;
+    }
+
+    // Has profile - proceed with favorite action
+    if (isFavorited && favorite) {
+      removeFavorite.mutate(favorite.id);
+    } else if (data.latitude && data.longitude) {
+      addFavorite.mutate({
+        favorite: {
+          areaName: data.location,
+          location: `${data.country || ""}${data.state ? ", " + data.state : ""}`,
+          latitude: data.latitude,
+          longitude: data.longitude,
+          cragId: data.cragId,
+          rockType: data.rockType,
+          lastRating: data.rating,
+          lastFrictionScore: data.frictionScore,
+          lastCheckedAt: new Date().toISOString(),
+        },
+        previousFavorites: favorites,
+      });
+    }
+  };
 
   // Prefetch full 14-day data from /api/conditions when card is shown
   // This reduces AI token costs by 87% while maintaining UX
@@ -287,26 +352,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => {
-                  if (isFavorited && favorite) {
-                    removeFavorite.mutate(favorite.id);
-                  } else if (data.latitude && data.longitude) {
-                    addFavorite.mutate({
-                      favorite: {
-                        areaName: data.location,
-                        location: `${data.country || ""}${data.state ? ", " + data.state : ""}`,
-                        latitude: data.latitude,
-                        longitude: data.longitude,
-                        cragId: data.cragId,
-                        rockType: data.rockType,
-                        lastRating: data.rating,
-                        lastFrictionScore: data.frictionScore,
-                        lastCheckedAt: new Date().toISOString(),
-                      },
-                      previousFavorites: favorites,
-                    });
-                  }
-                }}
+                onClick={handleFavoriteToggle}
                 title={isFavorited ? "Remove from favorites" : "Add to favorites"}
                 className={isFavorited ? "bg-orange-500 hover:bg-orange-600 text-white" : ""}
               >
@@ -369,6 +415,22 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
           }}
         />
       )}
+
+      {/* Profile Creation Modal */}
+      <ProfileCreationModal
+        open={showProfileModal}
+        onOpenChange={setShowProfileModal}
+        trigger="favorite"
+        onCreated={handleProfileCreated}
+      />
+
+      {/* Profile Created Dialog */}
+      <ProfileCreatedDialog
+        open={showProfileCreated}
+        onOpenChange={setShowProfileCreated}
+        syncKey={newSyncKey}
+        completedAction={favoriteLabel}
+      />
     </div>
   );
 });

@@ -12,7 +12,7 @@
  * - History preservation across refreshes
  */
 
-import { getUserProfile, initializeUserProfile, hashSyncKeyAsync } from "@/lib/auth/sync-key";
+import { getUserProfile, hashSyncKeyAsync } from "@/lib/auth/sync-key";
 import { fetchOrCreateUserProfile } from "@/lib/db/queries";
 import { supabase } from "@/integrations/supabase/client";
 import type { UIMessage } from "ai";
@@ -111,10 +111,15 @@ export async function getCurrentSession(): Promise<ChatSession> {
 
 /**
  * Create a new chat session
+ * Requires existing user profile
  */
 export async function createNewSession(): Promise<ChatSession> {
-  // Get or create user profile
-  const localProfile = await initializeUserProfile();
+  // Get existing user profile (must exist to create session)
+  const localProfile = getUserProfile();
+  if (!localProfile) {
+    throw new Error("Must have user profile to create chat session");
+  }
+
   const syncKeyHash = await hashSyncKeyAsync(localProfile.syncKey);
 
   // Get or create user in database

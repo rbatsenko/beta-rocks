@@ -18,7 +18,7 @@
 
 import { useQuery, useMutation, useQueryClient, UseQueryResult } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { getUserProfile, initializeUserProfile, hashSyncKeyAsync } from "@/lib/auth/sync-key";
+import { getUserProfile, hashSyncKeyAsync } from "@/lib/auth/sync-key";
 import { fetchOrCreateUserProfile } from "@/lib/db/queries";
 import { setSessionCookie } from "@/lib/auth/cookie-actions";
 import { emitSyncStatus } from "@/hooks/useSyncStatus";
@@ -53,15 +53,22 @@ export interface ChatMessage {
 
 /**
  * Get or create current chat session
- * Automatically fetches or creates a session for the current user
+ * Only runs if user has a profile (no auto-creation)
  */
 export function useCurrentSession() {
+  // Check if user profile exists (don't create one)
+  const hasProfile = typeof window !== 'undefined' ? !!getUserProfile() : false;
+
   return useQuery({
     queryKey: chatKeys.currentSession(),
     queryFn: async (): Promise<ChatSession> => {
       try {
-        // Get or create user profile
-        const localProfile = await initializeUserProfile();
+        // Get existing user profile (don't initialize)
+        const localProfile = getUserProfile();
+        if (!localProfile) {
+          throw new Error("No user profile found");
+        }
+
         const syncKeyHash = await hashSyncKeyAsync(localProfile.syncKey);
         const dbProfile = await fetchOrCreateUserProfile(syncKeyHash);
 
@@ -111,6 +118,7 @@ export function useCurrentSession() {
     gcTime: 1000 * 60 * 30, // 30 minutes garbage collection time (renamed from cacheTime)
     refetchOnWindowFocus: false, // Session doesn't need refetch on focus
     retry: 2,
+    enabled: hasProfile, // Only fetch if user has a profile
   });
 }
 
@@ -269,8 +277,12 @@ export function useCreateSession() {
   return useMutation({
     mutationFn: async (): Promise<ChatSession> => {
       try {
-        // Get or create user profile
-        const localProfile = await initializeUserProfile();
+        // Get existing user profile (user must have profile to create session)
+        const localProfile = getUserProfile();
+        if (!localProfile) {
+          throw new Error("Must have user profile to create chat session");
+        }
+
         const syncKeyHash = await hashSyncKeyAsync(localProfile.syncKey);
         const dbProfile = await fetchOrCreateUserProfile(syncKeyHash);
 

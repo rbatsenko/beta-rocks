@@ -265,23 +265,98 @@
     }
   },
   "syncExplainer": {
-    "title": "How Sync Works",
-    "description": "Keep your data in sync across all your devices seamlessly and securely.",
+    "title": "Ako funguje synchronizácia",
+    "description": "Udržujte svoje dáta synchronizované na všetkých zariadeniach bezpečne a jednoducho.",
     "features": {
       "syncKey": {
-        "title": "Unique Sync Key",
-        "description": "Each user gets a secure, unique key to sync their data across devices."
+        "title": "Jedinečný synchronizačný kľúč",
+        "description": "Každý používateľ získa bezpečný, jedinečný kľúč na synchronizáciu dát naprieč zariadeniami."
       },
       "multiDevice": {
-        "title": "Multi-Device Access",
-        "description": "Access your favorites and chat history from any device by using your sync key."
+        "title": "Prístup z viacerých zariadení",
+        "description": "Pristupujte k svojim obľúbeným a histórii chatu z akéhokoľvek zariadenia pomocou synchronizačného kľúča."
       },
       "privacy": {
-        "title": "Privacy First",
-        "description": "Your data is encrypted and only accessible with your sync key. No account required."
+        "title": "Súkromie na prvom mieste",
+        "description": "Vaše dáta sú šifrované a prístupné len s vaším synchronizačným kľúčom. Nie je potrebný účet."
       }
     },
-    "openSettings": "Open Settings"
+    "openSettings": "Otvoriť nastavenia"
+  },
+  "profileCreation": {
+    "title": "Vytvoriť profil",
+    "subtitle": "Registrácia s dôrazom na súkromie - nie sú vyžadované žiadne osobné údaje",
+    "createProfile": "Vytvoriť profil",
+    "creating": "Vytváram...",
+    "maybeLater": "Možno neskôr",
+    "tabs": {
+      "create": "Vytvoriť profil",
+      "signIn": "Prihlásiť sa"
+    },
+    "signIn": {
+      "title": "Už máte synchronizačný kľúč?",
+      "description": "Zadajte svoj synchronizačný kľúč na obnovenie profilu a dát",
+      "syncKeyLabel": "Synchronizačný kľúč",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Prihlásiť sa",
+      "signingIn": "Prihlasujem sa...",
+      "invalidKey": "Neplatný formát synchronizačného kľúča. Skontrolujte a skúste to znova."
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Ukladajte obľúbené naprieč zariadeniami",
+        "description": "Označte svoje obľúbené skaly a pristupujte k nim z akéhokoľvek zariadenia"
+      },
+      "report": {
+        "title": "Zdieľajte hlásenia s komunitou",
+        "description": "Pomôžte spolulezcom zdieľaním podmienok, bezpečnostných upozornení a beta"
+      },
+      "vote": {
+        "title": "Hlasujte o užitočných hláseniach",
+        "description": "Podporte komunitu potvrdzovaním užitočných hlásení"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "Bez e-mailu alebo hesla",
+        "description": "Rešpektujeme vaše súkromie. Len synchronizačný kľúč, žiadne osobné údaje"
+      },
+      "syncKey": {
+        "title": "Vytvorí iba synchronizačný kľúč",
+        "description": "Jedinečný identifikátor, ktorý synchronizuje vaše dáta naprieč zariadeniami"
+      },
+      "multiDevice": {
+        "title": "Uložte si ho alebo odfotografujte QR kód",
+        "description": "Použite synchronizačný kľúč na obnovenie profilu na iných zariadeniach"
+      }
+    }
+  },
+  "profileCreated": {
+    "title": "Profil vytvorený!",
+    "description": "Váš profil bol úspešne vytvorený. Uložte si synchronizačný kľúč pre prístup k dátam na iných zariadeniach.",
+    "actionCompleted": "{{action}} dokončené!",
+    "syncKeyLabel": "Váš synchronizačný kľúč",
+    "syncKeyDescription": "Toto je váš jedinečný kľúč pre synchronizáciu naprieč zariadeniami",
+    "qrCodeLabel": "QR kód",
+    "qrCodeDescription": "Naskenujte tento QR kód na inom zariadení pre synchronizáciu dát",
+    "privacyTitle": "Dôležité: Uložte si synchronizačný kľúč",
+    "saveKeySafe": "Uložte tento kľúč na bezpečné miesto",
+    "screenshotQR": "Alebo odfotografujte tento QR kód",
+    "needForSync": "Budete ho potrebovať na synchronizáciu ďalších zariadení",
+    "gotIt": "Rozumiem!",
+    "copied": "Skopírované!",
+    "copy": "Kopírovať",
+    "emailSection": {
+      "title": "Poslať na e-mail (voliteľné)",
+      "privacyNote1": "Váš e-mail NEUKLADÁME",
+      "privacyNote2": "Toto je len jednorazové odoslanie",
+      "privacyNote3": "Nikdy neuložené do našej databázy",
+      "emailPlaceholder": "vas@email.sk",
+      "sendButton": "Poslať e-mail",
+      "sending": "Odosielam...",
+      "success": "E-mail odoslaný! Skontrolujte svoju schránku",
+      "error": "Nepodarilo sa odoslať e-mail. Skúste to prosím znova."
+    }
   },
   "profile": {
     "anonymous": "Anonymný",
@@ -445,6 +520,7 @@
     },
     "submit": "Submit Report",
     "submitting": "Submitting...",
+    "readyToPost": "Profile created! You're ready to post your report.",
     "helpful": "Helpful",
     "loginToConfirm": "Please set up your profile to confirm reports",
     "confirmFailed": "Failed to confirm report. Please try again.",

@@ -283,6 +283,81 @@
     },
     "openSettings": "Відкрити налаштування"
   },
+  "profileCreation": {
+    "title": "Створіть свій профіль",
+    "subtitle": "Реєстрація з пріоритетом конфіденційності - особисті дані не потрібні",
+    "createProfile": "Створити профіль",
+    "creating": "Створюю...",
+    "maybeLater": "Можливо пізніше",
+    "tabs": {
+      "create": "Створити профіль",
+      "signIn": "Увійти"
+    },
+    "signIn": {
+      "title": "Вже є ключ синхронізації?",
+      "description": "Введіть ключ синхронізації, щоб відновити профіль і дані",
+      "syncKeyLabel": "Ключ синхронізації",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Увійти",
+      "signingIn": "Вхід...",
+      "invalidKey": "Недійсний формат ключа синхронізації. Будь ласка, перевірте і спробуйте знову."
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Зберігайте обране на всіх пристроях",
+        "description": "Додайте до закладок улюблені скелі та отримуйте доступ з будь-якого пристрою"
+      },
+      "report": {
+        "title": "Діліться звітами зі спільнотою",
+        "description": "Допоможіть іншим скелелазам, діліться умовами, попередженнями безпеки та бетою"
+      },
+      "vote": {
+        "title": "Голосуйте за корисні звіти",
+        "description": "Підтримуйте спільноту, підтверджуючи корисні звіти"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "Без електронної пошти чи пароля",
+        "description": "Ми поважаємо вашу конфіденційність. Тільки ключ синхронізації, жодних особистих даних"
+      },
+      "syncKey": {
+        "title": "Створює лише ключ синхронізації",
+        "description": "Унікальний ідентифікатор, який синхронізує ваші дані між пристроями"
+      },
+      "multiDevice": {
+        "title": "Збережіть його або зробіть скріншот QR-коду",
+        "description": "Використовуйте ключ синхронізації для відновлення профілю на інших пристроях"
+      }
+    }
+  },
+  "profileCreated": {
+    "title": "Профіль створено!",
+    "description": "Ваш профіль успішно створено. Збережіть ключ синхронізації для доступу до даних на інших пристроях.",
+    "actionCompleted": "{{action}} завершено!",
+    "syncKeyLabel": "Ваш ключ синхронізації",
+    "syncKeyDescription": "Це ваш унікальний ключ для синхронізації між пристроями",
+    "qrCodeLabel": "QR-код",
+    "qrCodeDescription": "Відскануйте цей QR-код на іншому пристрої для синхронізації даних",
+    "privacyTitle": "Важливо: Збережіть ключ синхронізації",
+    "saveKeySafe": "Збережіть цей ключ у безпечному місці",
+    "screenshotQR": "Або зробіть скріншот цього QR-коду",
+    "needForSync": "Він знадобиться для синхронізації інших пристроїв",
+    "gotIt": "Зрозуміло!",
+    "copied": "Скопійовано!",
+    "copy": "Копіювати",
+    "emailSection": {
+      "title": "Надіслати на email (необов'язково)",
+      "privacyNote1": "Ми НЕ зберігаємо ваш email",
+      "privacyNote2": "Це лише одноразове надсилання",
+      "privacyNote3": "Ніколи не зберігається в нашій базі даних",
+      "emailPlaceholder": "vash@email.ua",
+      "sendButton": "Надіслати email",
+      "sending": "Надсилання...",
+      "success": "Email надіслано! Перевірте свою скриньку",
+      "error": "Не вдалося надіслати email. Спробуйте ще раз."
+    }
+  },
   "profile": {
     "anonymous": "Анонімний",
     "member": "Учасник",
@@ -445,6 +520,7 @@
     },
     "submit": "Submit Report",
     "submitting": "Submitting...",
+    "readyToPost": "Profile created! You're ready to post your report.",
     "helpful": "Helpful",
     "loginToConfirm": "Please set up your profile to confirm reports",
     "confirmFailed": "Failed to confirm report. Please try again.",

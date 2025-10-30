@@ -265,23 +265,98 @@
     }
   },
   "syncExplainer": {
-    "title": "How Sync Works",
-    "description": "Keep your data in sync across all your devices seamlessly and securely.",
+    "title": "Jak funguje synchronizace",
+    "description": "Udržujte svá data synchronizovaná na všech zařízeních bezpečně a jednoduše.",
     "features": {
       "syncKey": {
-        "title": "Unique Sync Key",
-        "description": "Each user gets a secure, unique key to sync their data across devices."
+        "title": "Jedinečný synchronizační klíč",
+        "description": "Každý uživatel získá bezpečný, jedinečný klíč pro synchronizaci dat napříč zařízeními."
       },
       "multiDevice": {
-        "title": "Multi-Device Access",
-        "description": "Access your favorites and chat history from any device by using your sync key."
+        "title": "Přístup z více zařízení",
+        "description": "Přistupujte ke svým oblíbeným a historii chatu z jakéhokoli zařízení pomocí synchronizačního klíče."
       },
       "privacy": {
-        "title": "Privacy First",
-        "description": "Your data is encrypted and only accessible with your sync key. No account required."
+        "title": "Soukromí na prvním místě",
+        "description": "Vaše data jsou šifrována a přístupná pouze s vaším synchronizačním klíčem. Není potřeba účet."
       }
     },
-    "openSettings": "Open Settings"
+    "openSettings": "Otevřít nastavení"
+  },
+  "profileCreation": {
+    "title": "Vytvořit profil",
+    "subtitle": "Registrace s důrazem na soukromí - nejsou vyžadovány žádné osobní údaje",
+    "createProfile": "Vytvořit profil",
+    "creating": "Vytvářím...",
+    "maybeLater": "Možná později",
+    "tabs": {
+      "create": "Vytvořit profil",
+      "signIn": "Přihlásit se"
+    },
+    "signIn": {
+      "title": "Už máte synchronizační klíč?",
+      "description": "Zadejte svůj synchronizační klíč pro obnovení profilu a dat",
+      "syncKeyLabel": "Synchronizační klíč",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Přihlásit se",
+      "signingIn": "Přihlašuji se...",
+      "invalidKey": "Neplatný formát synchronizačního klíče. Zkontrolujte a zkuste to znovu."
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Ukládejte oblíbené napříč zařízeními",
+        "description": "Označte své oblíbené skály a přistupujte k nim z jakéhokoli zařízení"
+      },
+      "report": {
+        "title": "Sdílejte hlášení s komunitou",
+        "description": "Pomozte spolulezců sdílením podmínek, bezpečnostních upozornění a beta"
+      },
+      "vote": {
+        "title": "Hlasujte o užitečných hlášeních",
+        "description": "Podpořte komunitu potvrzováním užitečných hlášení"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "Bez e-mailu nebo hesla",
+        "description": "Respektujeme vaše soukromí. Pouze synchronizační klíč, žádné osobní údaje"
+      },
+      "syncKey": {
+        "title": "Vytvoří pouze synchronizační klíč",
+        "description": "Jedinečný identifikátor, který synchronizuje vaše data napříč zařízeními"
+      },
+      "multiDevice": {
+        "title": "Uložte si ho nebo vyfotografujte QR kód",
+        "description": "Použijte synchronizační klíč k obnovení profilu na jiných zařízeních"
+      }
+    }
+  },
+  "profileCreated": {
+    "title": "Profil vytvořen!",
+    "description": "Váš profil byl úspěšně vytvořen. Uložte si synchronizační klíč pro přístup k datům na jiných zařízeních.",
+    "actionCompleted": "{{action}} dokončeno!",
+    "syncKeyLabel": "Váš synchronizační klíč",
+    "syncKeyDescription": "Toto je váš jedinečný klíč pro synchronizaci napříč zařízeními",
+    "qrCodeLabel": "QR kód",
+    "qrCodeDescription": "Naskenujte tento QR kód na jiném zařízení pro synchronizaci dat",
+    "privacyTitle": "Důležité: Uložte si synchronizační klíč",
+    "saveKeySafe": "Uložte tento klíč na bezpečné místo",
+    "screenshotQR": "Nebo vyfotografujte tento QR kód",
+    "needForSync": "Budete ho potřebovat k synchronizaci dalších zařízení",
+    "gotIt": "Rozumím!",
+    "copied": "Zkopírováno!",
+    "copy": "Kopírovat",
+    "emailSection": {
+      "title": "Poslat na e-mail (volitelné)",
+      "privacyNote1": "Váš e-mail NEUKLÁDÁME",
+      "privacyNote2": "Jedná se pouze o jednorázové odeslání",
+      "privacyNote3": "Nikdy neuloženo do naší databáze",
+      "emailPlaceholder": "vas@email.cz",
+      "sendButton": "Poslat e-mail",
+      "sending": "Odesílání...",
+      "success": "E-mail odeslán! Zkontrolujte svou schránku",
+      "error": "Nepodařilo se odeslat e-mail. Zkuste to prosím znovu."
+    }
   },
   "profile": {
     "anonymous": "Anonymní",
@@ -445,6 +520,7 @@
     },
     "submit": "Submit Report",
     "submitting": "Submitting...",
+    "readyToPost": "Profile created! You're ready to post your report.",
     "helpful": "Helpful",
     "loginToConfirm": "Please set up your profile to confirm reports",
     "confirmFailed": "Failed to confirm report. Please try again.",
