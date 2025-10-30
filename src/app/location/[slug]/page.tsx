@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 import { CragPageContent } from "@/components/CragPageContent";
 import { fetchCragBySlug, fetchSectorsByCrag, findCragByCoordinates } from "@/lib/db/queries";
 import { parseCoordinatesFromSlug } from "@/lib/utils/slug";
@@ -8,6 +9,132 @@ export const revalidate = 300;
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+// Helper function to get location string
+function getLocationString(crag: any): string {
+  const parts = [];
+
+  if (crag.municipality) parts.push(crag.municipality);
+  else if (crag.village) parts.push(crag.village);
+
+  if (crag.state) parts.push(crag.state);
+  if (crag.country) {
+    // Convert country code to name if possible
+    const countryNames: Record<string, string> = {
+      US: "United States",
+      FR: "France",
+      IT: "Italy",
+      ES: "Spain",
+      DE: "Germany",
+      PL: "Poland",
+      CZ: "Czech Republic",
+      SK: "Slovakia",
+      AT: "Austria",
+      CH: "Switzerland",
+      SI: "Slovenia",
+      HR: "Croatia",
+      GB: "United Kingdom",
+      UK: "United Kingdom",
+      BE: "Belgium",
+      NL: "Netherlands",
+      NO: "Norway",
+      SE: "Sweden",
+      FI: "Finland",
+      DK: "Denmark",
+      PT: "Portugal",
+      GR: "Greece",
+      BG: "Bulgaria",
+      RO: "Romania",
+      HU: "Hungary",
+      RS: "Serbia",
+      BA: "Bosnia and Herzegovina",
+      ME: "Montenegro",
+      MK: "North Macedonia",
+      AL: "Albania",
+      TR: "Turkey",
+      CA: "Canada",
+      AU: "Australia",
+      NZ: "New Zealand",
+      ZA: "South Africa",
+      TH: "Thailand",
+      JP: "Japan",
+      CN: "China",
+      AR: "Argentina",
+      CL: "Chile",
+      BR: "Brazil",
+      MX: "Mexico",
+    };
+    parts.push(countryNames[crag.country] || crag.country);
+  }
+
+  return parts.length > 0 ? parts.join(", ") : "Unknown location";
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+
+  let crag = null;
+
+  // Try direct slug lookup first
+  crag = await fetchCragBySlug(slug);
+
+  // Fallback to coordinate-based lookup
+  if (!crag) {
+    const coords = parseCoordinatesFromSlug(slug);
+    if (coords) {
+      crag = await findCragByCoordinates(coords.lat, coords.lon, 0.01);
+    }
+  }
+
+  // Default metadata if crag not found
+  if (!crag) {
+    return {
+      title: "Crag Not Found | temps.rocks",
+      description: "The climbing crag you're looking for could not be found.",
+    };
+  }
+
+  const location = getLocationString(crag);
+  const title = `${crag.name} - Climbing Conditions & Weather | temps.rocks`;
+  const description = `Real-time climbing conditions for ${crag.name} in ${location}. Check weather forecasts, friction scores, and community reports for your next climbing session.`;
+
+  return {
+    title,
+    description,
+    keywords: [
+      crag.name,
+      "climbing conditions",
+      "weather forecast",
+      "rock climbing",
+      "friction score",
+      location,
+      "climbing reports",
+      crag.rock_type,
+    ].filter((keyword): keyword is string => Boolean(keyword)),
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      url: `https://temps.rocks/location/${slug}`,
+      siteName: "temps.rocks",
+      locale: "en_US",
+      images: [
+        {
+          url: "https://temps.rocks/og-image.png", // You'll need to create this
+          width: 1200,
+          height: 630,
+          alt: `${crag.name} climbing conditions`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["https://temps.rocks/og-image.png"] as string[],
+    },
+  };
 }
 
 export default async function LocationPage({ params }: PageProps) {
