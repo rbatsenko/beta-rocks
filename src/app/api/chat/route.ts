@@ -11,7 +11,7 @@ import {
   isCrag,
   hasPreciseCoordinates,
 } from "@/lib/openbeta/client";
-import { searchCrags, findOrCreateCrag, fetchReportsByCrag } from "@/lib/db/queries";
+import { searchCrags, findCragNearby, fetchReportsByCrag } from "@/lib/db/queries";
 import { resolveLocale } from "@/lib/i18n/config";
 import { getSystemPrompt } from "./prompts";
 import {
@@ -693,30 +693,25 @@ const tools = {
           frictionScore: conditions.frictionRating,
         });
 
-        // Find or create crag in database to enable reports (if not already found via local search)
+        // Search for nearby crags in database to enable reports (if not already found via local search)
         if (!cragId) {
           try {
-            const crag = await findOrCreateCrag({
-              name: location,
-              lat,
-              lon,
-              country,
-              state,
-              municipality,
-              village,
-              rockType: detectedRockType,
-              source: "ai_chat",
-            });
-            cragId = crag.id;
-            cragSlug = crag.slug || undefined;
-            console.log("[get_conditions] Crag found/created:", {
-              cragId,
-              cragSlug,
-              name: crag.name,
-            });
+            const nearbyCrag = await findCragNearby(lat, lon, 5000); // 5km radius
+            if (nearbyCrag) {
+              cragId = nearbyCrag.id;
+              cragSlug = nearbyCrag.slug || undefined;
+              console.log("[get_conditions] Found nearby crag:", {
+                cragId,
+                cragSlug,
+                name: nearbyCrag.name,
+              });
+            } else {
+              console.log("[get_conditions] No crags found within 5km - conditions only, no reports");
+              // Continue without cragId - conditions will work but reports/favorites won't
+            }
           } catch (error) {
-            console.error("[get_conditions] Failed to find/create crag:", error);
-            // Continue without cragId - reports won't work but conditions will
+            console.error("[get_conditions] Failed to search for nearby crag:", error);
+            // Continue without cragId - conditions will work but reports/favorites won't
           }
         } else {
           console.log(

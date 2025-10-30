@@ -158,8 +158,66 @@ export async function findCragByCoordinates(lat: number, lon: number, tolerance:
 }
 
 /**
+ * Find nearby crags within a radius (default 5km)
+ * Returns the closest crag if multiple exist within radius
+ * Does NOT create new crags - read-only operation
+ */
+export async function findCragNearby(lat: number, lon: number, radiusMeters: number = 5000) {
+  // Convert radius to approximate degrees (1 degree ≈ 111km at equator)
+  const radiusDegrees = radiusMeters / 111000;
+
+  console.log(
+    `[findCragNearby] Searching for crags within ${radiusMeters}m of lat=${lat}, lon=${lon}`
+  );
+
+  // Query crags within bounding box
+  const { data, error } = await supabase
+    .from("crags")
+    .select("*")
+    .gte("lat", lat - radiusDegrees)
+    .lte("lat", lat + radiusDegrees)
+    .gte("lon", lon - radiusDegrees)
+    .lte("lon", lon + radiusDegrees);
+
+  if (error) {
+    console.error(`[findCragNearby] Query error:`, error);
+    throw error;
+  }
+
+  console.log(`[findCragNearby] Found ${data?.length || 0} crags in bounding box`);
+
+  if (!data || data.length === 0) {
+    console.log("[findCragNearby] No crags found nearby");
+    return null;
+  }
+
+  // Filter by actual distance and find closest
+  let closest = null;
+  let minDistance = Infinity;
+
+  for (const crag of data) {
+    const distance = haversineDistance(lat, lon, Number(crag.lat), Number(crag.lon));
+    console.log(`[findCragNearby] ${crag.name}: ${distance}m`);
+
+    if (distance <= radiusMeters && distance < minDistance) {
+      minDistance = distance;
+      closest = crag;
+    }
+  }
+
+  if (closest) {
+    console.log(`[findCragNearby] Closest crag: ${closest.name} at ${minDistance}m`);
+  } else {
+    console.log(`[findCragNearby] No crags within ${radiusMeters}m radius`);
+  }
+
+  return closest;
+}
+
+/**
  * Find or create a crag at given coordinates
  * Useful for ensuring all users see the same reports for a location
+ * @deprecated Use findCragNearby instead to avoid polluting DB with non-climbing locations
  */
 export async function findOrCreateCrag(params: {
   name: string;
