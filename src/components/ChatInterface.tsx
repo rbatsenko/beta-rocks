@@ -761,9 +761,12 @@ const ChatUI = ({
             </form>
             {/* Footer Links */}
             <div className="flex items-center justify-center gap-4 mt-3 text-xs text-muted-foreground">
-              <a href="#" className="hover:text-foreground transition-colors">
+              <button
+                onClick={() => setFeaturesDialogOpen(true)}
+                className="hover:text-foreground transition-colors cursor-pointer"
+              >
                 {t("footer.about")}
-              </a>
+              </button>
               <span>•</span>
               <a href="#" className="hover:text-foreground transition-colors">
                 {t("footer.privacy")}
@@ -929,9 +932,12 @@ const ChatInterface = ({
             </form>
             {/* Footer Links */}
             <div className="flex items-center justify-center gap-4 mt-3 text-xs text-muted-foreground">
-              <a href="#" className="hover:text-foreground transition-colors">
+              <button
+                onClick={() => setFeaturesDialogOpen(true)}
+                className="hover:text-foreground transition-colors cursor-pointer"
+              >
                 {t("footer.about")}
-              </a>
+              </button>
               <span>•</span>
               <a href="#" className="hover:text-foreground transition-colors">
                 {t("footer.privacy")}
