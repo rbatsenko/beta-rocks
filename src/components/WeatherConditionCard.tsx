@@ -324,7 +324,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
           <div className="space-y-0.5">
             <div className="font-semibold text-base flex items-center gap-1.5">
               🧗
-              {data.cragId || data.cragSlug ? (
+              {(data.cragId && data.cragId !== "") || (data.cragSlug && data.cragSlug !== "") ? (
                 <button
                   onClick={() => {
                     const slug =

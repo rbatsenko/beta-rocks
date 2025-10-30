@@ -707,11 +707,15 @@ const tools = {
               });
             } else {
               console.log("[get_conditions] No crags found within 5km - conditions only, no reports");
-              // Continue without cragId - conditions will work but reports/favorites won't
+              // Explicitly set to undefined to ensure no crag page link shows
+              cragId = undefined;
+              cragSlug = undefined;
             }
           } catch (error) {
             console.error("[get_conditions] Failed to search for nearby crag:", error);
-            // Continue without cragId - conditions will work but reports/favorites won't
+            // Explicitly set to undefined to ensure no crag page link shows
+            cragId = undefined;
+            cragSlug = undefined;
           }
         } else {
           console.log(
