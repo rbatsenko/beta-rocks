@@ -124,7 +124,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       locale: "en_US",
       images: [
         {
-          url: "https://beta.rocks/opengraph-image",
+          url: "https://beta.rocks/opengraph-image.jpg",
           width: 1200,
           height: 630,
           alt: `${crag.name} climbing conditions and community reports`,
@@ -135,7 +135,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: "summary_large_image",
       title,
       description,
-      images: ["https://beta.rocks/opengraph-image"],
+      images: ["https://beta.rocks/opengraph-image.jpg"],
     },
   };
 }
