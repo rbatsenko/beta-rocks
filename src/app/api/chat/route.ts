@@ -700,10 +700,19 @@ const tools = {
             if (nearbyCrag) {
               cragId = nearbyCrag.id;
               cragSlug = nearbyCrag.slug || undefined;
+              // Update location to actual crag name to avoid confusion
+              location = nearbyCrag.name;
+              // Update location data from the crag
+              detectedRockType = (nearbyCrag.rock_type as RockType) || detectedRockType;
+              country = nearbyCrag.country || country;
+              state = nearbyCrag.state || state;
+              municipality = nearbyCrag.municipality || municipality;
+              village = nearbyCrag.village || village;
               console.log("[get_conditions] Found nearby crag:", {
                 cragId,
                 cragSlug,
                 name: nearbyCrag.name,
+                updatedLocation: location,
               });
             } else {
               console.log("[get_conditions] No crags found within 5km - conditions only, no reports");
