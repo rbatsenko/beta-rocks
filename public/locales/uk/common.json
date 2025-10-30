@@ -503,5 +503,10 @@
     "daysAgo_many": "{{count}} днів тому",
     "daysAgo_other": "{{count}} днів тому",
     "pickDate": "Оберіть дату"
+  },
+  "loading": {
+    "conditions": "Завантаження умов...",
+    "weatherData": "Отримання даних про погоду...",
+    "reports": "Завантаження звітів..."
   }
 }

@@ -506,5 +506,10 @@
     "daysAgo_one": "hace {{count}} día",
     "daysAgo_other": "hace {{count}} días",
     "pickDate": "Elegir fecha"
+  },
+  "loading": {
+    "conditions": "Cargando condiciones...",
+    "weatherData": "Obteniendo datos meteorológicos...",
+    "reports": "Cargando reportes..."
   }
 }

@@ -546,5 +546,13 @@
     "gneiss": "Gneiss",
     "quartzite": "Quartzite",
     "unknown": "Unknown"
+  },
+  "loading": {
+    "conditions": "Loading conditions...",
+    "weatherData": "Fetching weather data...",
+    "reports": "Loading reports..."
+  },
+  "errors": {
+    "failedToLoadConditions": "Failed to load conditions. Please try again."
   }
 }

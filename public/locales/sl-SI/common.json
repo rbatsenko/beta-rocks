@@ -504,5 +504,10 @@
     "daysAgo_few": "pred {{count}} dnevi",
     "daysAgo_other": "pred {{count}} dnevi",
     "pickDate": "Izberite datum"
+  },
+  "loading": {
+    "conditions": "Nalaganje pogojev...",
+    "weatherData": "Pridobivanje vremenskih podatkov...",
+    "reports": "Nalaganje poročil..."
   }
 }

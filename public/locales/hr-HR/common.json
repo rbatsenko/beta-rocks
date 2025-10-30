@@ -502,5 +502,10 @@
     "daysAgo_few": "prije {{count}} dana",
     "daysAgo_other": "prije {{count}} dana",
     "pickDate": "Odaberite datum"
+  },
+  "loading": {
+    "conditions": "Učitavanje uvjeta...",
+    "weatherData": "Dohvaćanje vremenskih podataka...",
+    "reports": "Učitavanje izvješća..."
   }
 }

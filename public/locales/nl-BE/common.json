@@ -501,5 +501,10 @@
     "daysAgo_one": "{{count}} dag geleden",
     "daysAgo_other": "{{count}} dagen geleden",
     "pickDate": "Kies een datum"
+  },
+  "loading": {
+    "conditions": "Omstandigheden laden...",
+    "weatherData": "Weergegevens ophalen...",
+    "reports": "Meldingen laden..."
   }
 }

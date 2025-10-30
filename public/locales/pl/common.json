@@ -513,5 +513,10 @@
     "daysAgo_many": "{{count}} dni temu",
     "daysAgo_other": "{{count}} dni temu",
     "pickDate": "Wybierz datę"
+  },
+  "loading": {
+    "conditions": "Ładowanie warunków...",
+    "weatherData": "Pobieranie danych pogodowych...",
+    "reports": "Ładowanie raportów..."
   }
 }

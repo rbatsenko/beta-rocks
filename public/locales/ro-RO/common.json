@@ -502,5 +502,10 @@
     "daysAgo_few": "acum {{count}} zile",
     "daysAgo_other": "acum {{count}} de zile",
     "pickDate": "Alegeți o dată"
+  },
+  "loading": {
+    "conditions": "Se încarcă condițiile...",
+    "weatherData": "Se obțin datele meteo...",
+    "reports": "Se încarcă rapoartele..."
   }
 }

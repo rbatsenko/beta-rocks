@@ -503,5 +503,10 @@
     "daysAgo_many": "pred {{count}} dňami",
     "daysAgo_other": "pred {{count}} dňami",
     "pickDate": "Vyberte dátum"
+  },
+  "loading": {
+    "conditions": "Načítavam podmienky...",
+    "weatherData": "Získavam údaje o počasí...",
+    "reports": "Načítavam hlásenia..."
   }
 }
