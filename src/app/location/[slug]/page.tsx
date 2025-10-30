@@ -90,13 +90,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   // Default metadata if crag not found
   if (!crag) {
     return {
-      title: "Crag Not Found | temps.rocks",
+      title: "Crag Not Found | beta.rocks",
       description: "The climbing crag you're looking for could not be found.",
     };
   }
 
   const location = getLocationString(crag);
-  const title = `${crag.name} - Climbing Conditions & Weather | temps.rocks`;
+  const title = `${crag.name} - Climbing Conditions & Weather | beta.rocks`;
   const description = `Real-time climbing conditions for ${crag.name} in ${location}. Check weather forecasts, friction scores, and community reports for your next climbing session.`;
 
   return {
@@ -116,12 +116,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description,
       type: "website",
-      url: `https://temps.rocks/location/${slug}`,
-      siteName: "temps.rocks",
+      url: `https://beta.rocks/location/${slug}`,
+      siteName: "beta.rocks",
       locale: "en_US",
       images: [
         {
-          url: "https://temps.rocks/og-image.png", // You'll need to create this
+          url: "https://beta.rocks/og-image.png", // You'll need to create this
           width: 1200,
           height: 630,
           alt: `${crag.name} climbing conditions`,
@@ -132,7 +132,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: "summary_large_image",
       title,
       description,
-      images: ["https://temps.rocks/og-image.png"] as string[],
+      images: ["https://beta.rocks/og-image.png"] as string[],
     },
   };
 }
