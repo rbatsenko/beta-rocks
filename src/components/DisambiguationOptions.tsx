@@ -58,9 +58,9 @@ export const DisambiguationOptions = memo(function DisambiguationOptions({
       // Send a chat message with the selected location
       // Include coordinates for precise location resolution
       const query = queryTemplate
-        .replace("{location}", option.name)
-        .replace("{latitude}", option.latitude.toString())
-        .replace("{longitude}", option.longitude.toString());
+        .replace("{{name}}", option.name)
+        .replace("{{latitude}}", option.latitude.toString())
+        .replace("{{longitude}}", option.longitude.toString());
       onOptionSelect(query);
     },
     [queryTemplate, onOptionSelect]
