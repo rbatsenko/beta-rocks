@@ -1,4 +1,6 @@
-Perfect 👌 here’s a **Product Requirements Document (PRD)** in Markdown, written so you can drop it straight into **Lovable** or **v0** and start generating scaffolding from it.
+Perfect 👌 here's a **Product Requirements Document (PRD)** in Markdown, written so you can drop it straight into **Lovable** or **v0** and start generating scaffolding from it.
+
+> **⚠️ Historical Planning Document**: This PRD reflects the initial project planning. Many features described here have been implemented, but implementation details differ from the original plan. For current architecture and implementation status, see `CLAUDE.md` and `AGENTS.md`. Notable changes: using Supabase exclusively (not Cloudflare KV/Neon), user profiles with sync keys are fully implemented, chat history and favorites systems are operational, and community reports with categories are live.
 
 ---
 

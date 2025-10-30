@@ -4,18 +4,19 @@ Guidance for AI coding agents working in this repository. Adapted from CLAUDE.md
 
 ## Project Overview
 
-beta.rocks is a free, chat-first web app that helps climbers check real-time conditions at crags, sectors, and routes worldwide. It uses AI (Google Gemini 2.5 Flash via Vercel AI SDK) to analyze conditions based on weather, rock type, and climbing-specific factors.
+beta.rocks is a free, chat-first web app that helps climbers check real-time conditions at crags, sectors, and routes worldwide. It uses AI (Google Gemini 2.5 Flash via Vercel AI SDK) to analyze conditions based on weather, rock type, and climbing-specific factors. Features include user profiles with multi-device sync, chat history persistence, favorites bookmarking, and community reports with categories.
 
 Key technologies:
 
-- Next.js 15 (App Router, Turbopack)
+- Next.js 16 (App Router, Turbopack)
 - TypeScript (strict mode)
-- Tailwind CSS + shadcn/ui
-- Supabase (PostgreSQL)
+- Tailwind CSS 4 + shadcn/ui
+- Supabase (PostgreSQL with RLS)
 - Vercel AI SDK (streaming chat + tools)
-- i18next (12 locales)
+- i18next (17 locales)
 - OpenBeta GraphQL API (climbing database)
 - Open-Meteo API (weather data)
+- QR code generation for sync keys
 
 ## Development
 
@@ -99,41 +100,134 @@ Rock-type guidance:
 - Granite/Gneiss: fast drying (~2h), prefers cold/low humidity
 - Limestone: moderate drying, more humidity-tolerant
 
+### User Profiles & Sync System
+
+**Architecture**: Offline-first with Supabase sync
+
+- Anonymous user profiles created on first visit with unique sync keys
+- Sync key = 16-character identifier for restoring profile on other devices
+- LocalStorage for immediate persistence, Supabase for cross-device sync
+- No account/email required - privacy-focused approach
+- Sync status indicator in header (synced/syncing/offline)
+
+**Key Files**:
+
+- `src/lib/auth/sync-key.ts`: Sync key generation, validation, hashing
+- `src/lib/auth/cookie-actions.ts`: Cookie management for user profile
+- `src/hooks/useSyncStatus.ts`: React hook for sync state management
+- `src/app/sync/page.tsx`: Sync restoration page for secondary devices
+- `src/components/SyncNotification.tsx`: Dismissible banner alerting users to sync
+- `src/components/SyncExplainerDialog.tsx`: Educational dialog about sync
+
+### Chat History Persistence
+
+**Feature**: Save and restore chat conversations across sessions
+
+- Chat sessions stored in `chat_sessions` table with titles
+- Individual messages stored in `chat_messages` table
+- Automatic background sync to database when online
+- LocalStorage fallback for offline usage
+- Clear chat (current session) and clear history (all sessions) options
+
+**Key Files**:
+
+- `src/lib/chat/history.service.ts`: Chat history CRUD operations
+- `src/hooks/useChatHistory.ts`: React hook integrating with Vercel AI SDK
+- Migration: `supabase/migrations/20251028063433_add_chat_history.sql`
+
+### Favorites System
+
+**Feature**: Bookmark crags for quick access to conditions
+
+- Heart icon on WeatherConditionCard and crag detail pages
+- Favorites displayed on welcome screen with quick query buttons
+- Cached friction scores and ratings for fast display
+- Works with both database crags and external OpenBeta areas
+- Syncs across devices via user profile
+
+**Key Files**:
+
+- `src/lib/storage/favorites.ts`: Favorites CRUD operations
+- `src/components/FavoritesDialog.tsx`: Favorites list modal
+- Migration: `supabase/migrations/20251028054257_add_user_favorites.sql`
+
+### Reports System
+
+**Feature**: Community-submitted reports with 6 categories
+
+- **Categories**: conditions, safety, access, beta, facilities, other
+- Condition ratings (1-5): dryness, wind, crowds (conditions category only)
+- Category-specific placeholders and validation
+- Helpful/unhelpful voting with user profile integration
+- Filter tabs on crag pages to view reports by category
+
+**Key Files**:
+
+- `src/components/ReportDialog.tsx`: Multi-category report submission
+- `src/components/ReportCard.tsx`: Report display with category badges
+- Migration: `supabase/migrations/20251028135542_add_report_categories.sql`
+
 ### Components (`src/components/`)
 
-- `ChatInterface.tsx` – main chat UI using `useChat`
-- `ConditionsDetailDialog.tsx` – detailed analysis, charts, hourly forecasts
-- `DisambiguationOptions.tsx` – renders selectable options for ambiguous locations
-- `WeatherConditionCard.tsx` – compact current conditions display
-- `LanguageSelector.tsx` – locale switcher
-- `components/ui/` – shadcn/ui components
+- `ChatInterface.tsx` – main chat UI using `useChat`, integrated with chat history and sync
+- `CragPageContent.tsx` – rich detail view for crag pages with conditions, reports, sectors, maps
+- `ConditionsDetailSheet.tsx` – sheet-based detail view with weather analysis, charts, hourly forecasts
+- `DisambiguationOptions.tsx` – renders location options when multiple matches found
+- `WeatherConditionCard.tsx` – compact card showing current conditions with friction rating and favorite toggle
+- `ReportCard.tsx` – display community reports with category badges and voting
+- `ReportDialog.tsx` – multi-category report submission form
+- `FavoritesDialog.tsx` – user's favorited crags with cached conditions
+- `SettingsDialog.tsx` – user profile, sync key management, display name editor
+- `Header.tsx` – app header with sync status and user menu
+- `LanguageSelector.tsx` – i18n language switcher
+- `ConfirmDialog.tsx` – generic confirmation dialog for destructive actions
+- `components/ui/` – shadcn/ui components (pre-built, customizable)
 
 ### Data Layer
 
-- OpenBeta client (`src/lib/openbeta/client.ts`): `searchAreas`, `getAreaByUuid`, `formatAreaPath`, helpers `isCrag`, `hasPreciseCoordinates`, `extractRockType`.
-- External APIs (`src/lib/external-apis/`): `open-meteo.ts` (forecast), `geocoding.ts` (fallback search).
-- Database (`src/lib/db/queries.ts`): Supabase queries for reports/confirmations (partially implemented). See `docs/SUPABASE_SETUP.md`.
+- **OpenBeta client** (`src/lib/openbeta/client.ts`): `searchAreas`, `getAreaByUuid`, `formatAreaPath`, helpers `isCrag`, `hasPreciseCoordinates`, `extractRockType`.
+- **External APIs** (`src/lib/external-apis/`): `open-meteo.ts` (forecast), `geocoding.ts` (fallback search).
+- **Database** (`src/lib/db/queries.ts`): Supabase queries for user profiles, favorites, reports, confirmations, chat history. Complete CRUD operations with RLS policies for security. Anonymous user support via sync_key_hash lookups. Optimized with indexes on frequently queried columns.
+- **Database Schema** (see migrations in `supabase/migrations/`):
+  - `user_profiles`: User identity with sync_key_hash, display_name
+  - `user_stats`: Aggregate statistics (reports posted, confirmations given, favorites count)
+  - `user_favorites`: Bookmarked crags with cached conditions
+  - `chat_sessions`: Conversation sessions with titles
+  - `chat_messages`: Individual chat messages with tool invocations
+  - `reports`: Community reports with category, ratings, and text
+  - `confirmations`: User confirmations/votes on reports
+  - `crags`, `sectors`, `routes`: Climbing area data from OpenBeta
 
 ### Internationalization (i18n)
 
-- 12 locales in `src/lib/i18n/config.ts` and `public/locales/{locale}/common.json`.
-- Client: `useClientTranslation` hook.
-- Server: `resolveLocale()` utility.
-- Middleware sets cookie using Vercel geo headers.
+- 17 locales in `src/lib/i18n/config.ts` and `public/locales/{locale}/common.json`.
+- Client: `useClientTranslation` hook for React components.
+- Server: `resolveLocale()` for API routes.
+- Locale detection via browser headers, stored in cookies via middleware.
+- Special multilingual handling for Switzerland (de-CH, fr-CH, it-CH) based on browser language preference.
 
 Add translations:
 
-1. Add key to `public/locales/en/common.json`.
-2. Propagate to other locale files.
-3. Use `matchLocale()` for region fallbacks.
+1. Add key to `public/locales/en/common.json` (source of truth).
+2. Add to all other locale files.
+3. Use `matchLocale()` for region-specific fallback (e.g., `en-US` → `en`).
 
 ### API Routes (`src/app/api/`)
 
-- `chat/route.ts` – streaming chat endpoint with tools
-- `conditions/route.ts` – direct conditions API
-- `sync/[key]/route.ts` – multi-device sync (stub)
-- `reports/route.ts` – community reports
-- `confirmations/route.ts` – report confirmations
+- `chat/route.ts` – main streaming chat endpoint with tool calling
+- `conditions/route.ts` – direct conditions API (bypasses chat)
+- `reports/route.ts` – community condition reports with category support
+- `confirmations/route.ts` – report confirmations/voting
+
+### Dynamic Routes (`src/app/`)
+
+- `location/[slug]/page.tsx` – crag detail pages with ISR (5-minute revalidation)
+  - Slug-based lookup (name or coordinates)
+  - Server-side conditions calculation
+  - Reports list with category filtering
+  - Sector information display
+  - Map embeds and external links
+- `sync/page.tsx` – sync key restoration page for secondary devices
 
 ## Important Patterns & Conventions
 
@@ -162,10 +256,10 @@ Agent guidance (do/don’t):
 
 ## Known Limitations
 
-- Community reports/confirmations not fully wired to DB.
-- Multi-device sync is stubbed.
 - No automated tests yet (consider Jest + React Testing Library).
-- Weather limited to 14 days (Open-Meteo free tier).
+- Weather data limited to 14 days (Open-Meteo free tier).
+- No email/password authentication - relies on sync keys only.
+- QR code sync requires manual key entry on device (no camera scanning yet).
 
 ## Deployment
 

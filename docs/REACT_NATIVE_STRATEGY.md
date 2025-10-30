@@ -5,7 +5,7 @@ This document outlines the comprehensive strategy for creating a React Native mo
 ## Architecture Overview: Monorepo with Shared Packages
 
 ```
-temps-rocks/
+beta-rocks/
 ├── apps/
 │   ├── web/              # Existing Next.js app (moved here)
 │   └── mobile/           # New Expo app with Expo Router

@@ -764,7 +764,7 @@ const ChatUI = ({
               </a>
               <span>•</span>
               <a
-                href="https://github.com/rbatsenko/temps-rocks"
+                href="https://github.com/rbatsenko/beta-rocks"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-foreground transition-colors"
@@ -929,7 +929,7 @@ const ChatInterface = ({
               </a>
               <span>•</span>
               <a
-                href="https://github.com/rbatsenko/temps-rocks"
+                href="https://github.com/rbatsenko/beta-rocks"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-foreground transition-colors"
