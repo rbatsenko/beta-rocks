@@ -79,8 +79,57 @@ const tools = {
 
           if (localCrags && localCrags.length > 0) {
             if (localCrags.length === 1) {
-              // Perfect! Single crag/sector found locally
+              // Single crag/sector found locally
               const result = localCrags[0];
+
+              // Check if metadata is complete (country, state, municipality, or village present)
+              const hasCompleteMetadata = !!(result.country || result.state || result.municipality || result.village);
+
+              if (!hasCompleteMetadata) {
+                // Metadata incomplete - could be ambiguous place name, cross-check with geocoding
+                console.log("[get_conditions] Single result has incomplete metadata, checking for ambiguous place name");
+
+                try {
+                  const geocodedMultiple = await searchLocationMultiple(location, 5);
+
+                  if (geocodedMultiple && geocodedMultiple.length > 1) {
+                    // Found multiple places with this name - show disambiguation
+                    console.log("[get_conditions] Found multiple locations in geocoding, returning disambiguation");
+
+                    return {
+                      disambiguate: true,
+                      source: "geocoding",
+                      message: `Found multiple locations for "${location}". Please choose one:`,
+                      translationKey: "disambiguation.foundMultipleLocations",
+                      translationParams: { location },
+                      options: geocodedMultiple.map((result) => {
+                        // Build location string with region and country
+                        const locationParts = [];
+                        if (result.admin1) locationParts.push(result.admin1); // State/Region
+                        if (result.country) locationParts.push(result.country);
+
+                        return {
+                          id: `${result.latitude},${result.longitude}`,
+                          name: result.name,
+                          location: locationParts.join(", ") || "Unknown",
+                          latitude: result.latitude,
+                          longitude: result.longitude,
+                          cragSlug: null, // Geocoding results don't have slugs
+                        };
+                      }),
+                    };
+                  }
+
+                  console.log("[get_conditions] Geocoding returned ≤1 result, using local DB crag");
+                } catch (geocodingError) {
+                  console.log("[get_conditions] Geocoding cross-check failed, using local DB crag:", {
+                    error: geocodingError instanceof Error ? geocodingError.message : String(geocodingError),
+                  });
+                  // Fall through to use local result
+                }
+              }
+
+              // Use local DB result (metadata complete OR geocoding confirmed single location)
               lat = result.lat;
               lon = result.lon;
               cragId = result.id; // Capture crag ID for fetching reports

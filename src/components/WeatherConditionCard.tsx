@@ -150,7 +150,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showProfileCreated, setShowProfileCreated] = useState(false);
   const [newSyncKey, setNewSyncKey] = useState<string>("");
-  const [pendingAction, setPendingAction] = useState<"add" | "remove" | null>(null);
+  const [pendingAction, setPendingAction] = useState<"add" | "remove" | "report" | null>(null);
   const { units } = useUnits();
 
   // React Query hooks for favorites
@@ -193,6 +193,9 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
       });
     } else if (pendingAction === "remove" && favorite) {
       removeFavorite.mutate(favorite.id);
+    } else if (pendingAction === "report") {
+      // Open report dialog after profile creation
+      setReportDialogOpen(true);
     }
 
     setPendingAction(null);
@@ -227,6 +230,20 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
         previousFavorites: favorites,
       });
     }
+  };
+
+  const handleAddReport = () => {
+    const profile = getUserProfile();
+
+    if (!profile) {
+      // No profile - show creation modal
+      setPendingAction("report");
+      setShowProfileModal(true);
+      return;
+    }
+
+    // Has profile - open report dialog
+    setReportDialogOpen(true);
   };
 
   // Prefetch full 14-day data from /api/conditions when card is shown
@@ -362,7 +379,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => setReportDialogOpen(true)}
+                onClick={handleAddReport}
                 disabled={!data.cragId}
                 title="Add condition report"
               >
@@ -420,7 +437,13 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
       <ProfileCreationModal
         open={showProfileModal}
         onOpenChange={setShowProfileModal}
-        trigger="favorite"
+        trigger={
+          pendingAction === "report"
+            ? "report"
+            : pendingAction === "add" || pendingAction === "remove"
+              ? "favorite"
+              : "manual"
+        }
         onCreated={handleProfileCreated}
       />
 
