@@ -134,7 +134,7 @@
     },
     "communityReports": {
       "title": "Poročila skupnosti",
-      "description": "Delite pogoje, varnostna opozorila, spremembe dostopa, beta in več. Pomagajte soplezalcem s posodobitvami v realnem času v več kategorijah"
+      "description": "Delite pogoje, varnostna opozorila, spremembe dostopa, plezalne informacije in več. Pomagajte soplezalcem s posodobitvami v realnem času v več kategorijah"
     },
     "globalCoverage": {
       "title": "Globalna pokritost",
@@ -146,7 +146,7 @@
     },
     "privacyFirst": {
       "title": "Zasebnost na prvem mestu",
-      "description": "Privzeto anonimno. Brez uporabniških računov. Tvoji podatki ostanejo tvoji"
+      "description": "Ne samo da ne potrebujemo tvojih podatkov - ne želimo jih! Privzeto anonimno. Brez računov, brez sledenja. Tvoji podatki ostanejo tvoji."
     }
   },
   "ui": {
@@ -310,7 +310,7 @@
       },
       "report": {
         "title": "Delite poročila s skupnostjo",
-        "description": "Pomagajte drugim plezalcem s souporabo pogojev, varnostnih opozoril in beta"
+        "description": "Pomagajte drugim plezalcem s souporabo pogojev, varnostnih opozoril in plezalnih informacij"
       },
       "vote": {
         "title": "Glasujte za uporabna poročila",

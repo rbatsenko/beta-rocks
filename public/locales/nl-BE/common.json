@@ -133,7 +133,7 @@
     },
     "communityReports": {
       "title": "Gemeenschapsrapporten",
-      "description": "Deel omstandigheden, veiligheidswaarschuwingen, toegangswijzigingen, beta en meer. Help mede-klimmers met realtime updates in meerdere categorieën"
+      "description": "Deel omstandigheden, veiligheidswaarschuwingen, toegangswijzigingen, kliminfo en meer. Help mede-klimmers met realtime updates in meerdere categorieën"
     },
     "globalCoverage": {
       "title": "Mondiale dekking",
@@ -145,7 +145,7 @@
     },
     "privacyFirst": {
       "title": "Privacy eerst",
-      "description": "Standaard anoniem. Geen accounts vereist. Je gegevens blijven van jou"
+      "description": "We hebben je gegevens niet alleen niet nodig - we willen ze niet! Standaard anoniem. Geen accounts, geen tracking. Je gegevens blijven van jou."
     }
   },
   "ui": {
@@ -309,7 +309,7 @@
       },
       "report": {
         "title": "Deel rapporten met de gemeenschap",
-        "description": "Help medeklimmers door voorwaarden, veiligheidswaarschuwingen en beta te delen"
+        "description": "Help medeklimmers door voorwaarden, veiligheidswaarschuwingen en kliminfo te delen"
       },
       "vote": {
         "title": "Stem op nuttige rapporten",

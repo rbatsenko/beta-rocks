@@ -134,7 +134,7 @@
     },
     "communityReports": {
       "title": "Communityrapporter",
-      "description": "Dela förhållanden, säkerhetsvarningar, tillgänglighetsändringar, beta och mer. Hjälp medklättrare med realtidsuppdateringar i flera kategorier"
+      "description": "Dela förhållanden, säkerhetsvarningar, tillgänglighetsändringar, klätterinfo och mer. Hjälp medklättrare med realtidsuppdateringar i flera kategorier"
     },
     "globalCoverage": {
       "title": "Global täckning",
@@ -146,7 +146,7 @@
     },
     "privacyFirst": {
       "title": "Integritet först",
-      "description": "Anonymt som standard. Inga konton krävs. Dina data förblir dina"
+      "description": "Vi behöver inte bara inte din data - vi vill inte ha den! Anonymt som standard. Inga konton, ingen spårning. Dina data förblir dina."
     }
   },
   "ui": {

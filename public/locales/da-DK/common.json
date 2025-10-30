@@ -133,7 +133,7 @@
     },
     "communityReports": {
       "title": "Samfundsrapporter",
-      "description": "Del forhold, sikkerhedsadvarsler, adgangsændringer, beta og mere. Hjælp medklatrere med realtidsopdateringer på tværs af flere kategorier"
+      "description": "Del forhold, sikkerhedsadvarsler, adgangsændringer, klatreinfo og mere. Hjælp medklatrere med realtidsopdateringer på tværs af flere kategorier"
     },
     "globalCoverage": {
       "title": "Global dækning",
@@ -145,7 +145,7 @@
     },
     "privacyFirst": {
       "title": "Privatlivsførste",
-      "description": "Anonym som standard. Ingen konti krævet. Dine data forbliver dine"
+      "description": "Vi har ikke kun ikke brug for dine data - vi vil ikke have dem! Anonym som standard. Ingen konti, ingen sporing. Dine data forbliver dine."
     }
   },
   "ui": {

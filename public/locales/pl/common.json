@@ -135,7 +135,7 @@
     },
     "communityReports": {
       "title": "Raporty społeczności",
-      "description": "Dziel się warunem, informacjami o bezpieczeństwie, zmianami w dostępie, stanie dróg/baldów i więcej. Pomóż wspinaczom aktualizacjami w czasie rzeczywistym w wielu kategoriach"
+      "description": "Dziel się warunem, informacjami o bezpieczeństwie, zmianami w dostępie, infami wspinaczkowymi i więcej. Pomóż wspinaczom aktualizacjami w czasie rzeczywistym w wielu kategoriach"
     },
     "globalCoverage": {
       "title": "Zasięg globalny",
@@ -147,7 +147,7 @@
     },
     "privacyFirst": {
       "title": "Prywatność na pierwszym miejscu",
-      "description": "Anonimowość domyślnie. Nie wymagane konta. Twoje dane pozostają Twoje"
+      "description": "Nie tylko nie potrzebujemy Twoich danych - nie chcemy ich! Anonimowość domyślnie. Bez kont, bez śledzenia. Twoje dane pozostają Twoje."
     }
   },
   "ui": {
@@ -304,7 +304,7 @@
       },
       "report": {
         "title": "Dziel się raportami ze społecznością",
-        "description": "Pomóż wspinaczom, dzieląc się warunem, alertami bezpieczeństwa i betą"
+        "description": "Pomóż wspinaczom, dzieląc się warunem, alertami bezpieczeństwa i infami wspinaczkowymi"
       },
       "vote": {
         "title": "Głosuj na pomocne raporty",

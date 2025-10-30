@@ -133,7 +133,7 @@
     },
     "communityReports": {
       "title": "Community-Berichte",
-      "description": "Teile Bedingungen, Sicherheitshinweise, Zugangsänderungen, Beta und mehr. Hilf Kletterern mit Echtzeit-Updates in verschiedenen Kategorien"
+      "description": "Teile Bedingungen, Sicherheitshinweise, Zugangsänderungen, Kletterinfos und mehr. Hilf Kletterern mit Echtzeit-Updates in verschiedenen Kategorien"
     },
     "globalCoverage": {
       "title": "Globale Abdeckung",
@@ -145,7 +145,7 @@
     },
     "privacyFirst": {
       "title": "Datenschutz zuerst",
-      "description": "Standardmäßig anonym. Keine Accounts nötig. Deine Daten gehören dir"
+      "description": "Wir brauchen deine Daten nicht nur nicht - wir wollen sie gar nicht! Standardmäßig anonym. Keine Accounts, kein Tracking. Deine Daten gehören dir."
     }
   },
   "ui": {

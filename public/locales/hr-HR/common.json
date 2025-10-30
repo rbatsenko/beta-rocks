@@ -133,7 +133,7 @@
     },
     "communityReports": {
       "title": "Izvještaji zajednice",
-      "description": "Dijelite uvjete, sigurnosna upozorenja, promjene pristupa, beta i više. Pomozite kolegama penjačima s ažuriranjima u stvarnom vremenu kroz više kategorija"
+      "description": "Dijelite uvjete, sigurnosna upozorenja, promjene pristupa, informacije o penjanju i više. Pomozite kolegama penjačima s ažuriranjima u stvarnom vremenu kroz više kategorija"
     },
     "globalCoverage": {
       "title": "Globalna pokrivenost",
@@ -145,7 +145,7 @@
     },
     "privacyFirst": {
       "title": "Privatnost na prvom mjestu",
-      "description": "Anonimno je zadano. Nisu potrebni računi. Tvoji podaci ostaju tvoji"
+      "description": "Ne samo da nam ne trebaju tvoji podaci - ne želimo ih! Anonimno po zadanim postavkama. Bez računa, bez praćenja. Tvoji podaci ostaju tvoji."
     }
   },
   "ui": {
@@ -309,7 +309,7 @@
       },
       "report": {
         "title": "Dijelite izvještaje sa zajednicom",
-        "description": "Pomozite drugim penjačima dijeleći uvjete, sigurnosna upozorenja i beta"
+        "description": "Pomozite drugim penjačima dijeleći uvjete, sigurnosna upozorenja i informacije o penjanju"
       },
       "vote": {
         "title": "Glasajte za korisne izvještaje",

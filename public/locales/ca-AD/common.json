@@ -133,7 +133,7 @@
     },
     "communityReports": {
       "title": "Informes comunitaris",
-      "description": "Comparteix condicions, alertes de seguretat, canvis d'accés, beta i més. Ajuda escaladors companys amb actualitzacions en temps real en diverses categories"
+      "description": "Comparteix condicions, alertes de seguretat, canvis d'accés, info d'escalada i més. Ajuda escaladors companys amb actualitzacions en temps real en diverses categories"
     },
     "globalCoverage": {
       "title": "Cobertura mundial",
@@ -145,7 +145,7 @@
     },
     "privacyFirst": {
       "title": "Privacitat primer",
-      "description": "Anònim per defecte. No requereix comptes. Les teves dades son teves"
+      "description": "No només no necessitem les teves dades - no les volem! Anònim per defecte. Sense comptes, sense seguiment. Les teves dades són teves."
     }
   },
   "ui": {

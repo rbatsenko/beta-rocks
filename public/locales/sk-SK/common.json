@@ -133,7 +133,7 @@
     },
     "communityReports": {
       "title": "Komunitné reporty",
-      "description": "Zdieľajte podmienky, bezpečnostné upozornenia, zmeny prístupu, beta a ďalšie. Pomôžte spolulezcom s aktualizáciami v reálnom čase naprieč viacerými kategóriami"
+      "description": "Zdieľajte podmienky, bezpečnostné upozornenia, zmeny prístupu, info o lezení a ďalšie. Pomôžte spolulezcom s aktualizáciami v reálnom čase naprieč viacerými kategóriami"
     },
     "globalCoverage": {
       "title": "Globálne pokrytie",
@@ -145,7 +145,7 @@
     },
     "privacyFirst": {
       "title": "Súkromie na prvom mieste",
-      "description": "Anonymné v predvolenom nastavení. Nie je potrebný účet. Vaše dáta zostávajú vaše"
+      "description": "Nielen že vaše dáta nepotrebujeme - nechceme ich! Anonymné v predvolenom nastavení. Žiadne účty, žiadne sledovanie. Vaše dáta zostávajú vaše."
     }
   },
   "ui": {
@@ -309,7 +309,7 @@
       },
       "report": {
         "title": "Zdieľajte hlásenia s komunitou",
-        "description": "Pomôžte spolulezcom zdieľaním podmienok, bezpečnostných upozornení a beta"
+        "description": "Pomôžte spolulezcom zdieľaním podmienok, bezpečnostných upozornení a info o lezení"
       },
       "vote": {
         "title": "Hlasujte o užitočných hláseniach",

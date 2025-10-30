@@ -133,7 +133,7 @@
     },
     "communityReports": {
       "title": "Community Reports",
-      "description": "Share conditions, safety alerts, access changes, beta, and more. Help fellow climbers with real-time updates across multiple categories"
+      "description": "Share conditions, safety alerts, access changes, route info, and more. Help fellow climbers with real-time updates across multiple categories"
     },
     "globalCoverage": {
       "title": "Global Coverage",
@@ -145,7 +145,7 @@
     },
     "privacyFirst": {
       "title": "Privacy First",
-      "description": "Anonymous by default. No accounts required. Your data stays yours"
+      "description": "We don't just not need your data - we don't want it! Anonymous by default. No accounts, no tracking. Your data stays yours."
     }
   },
   "ui": {

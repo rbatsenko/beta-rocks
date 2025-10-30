@@ -133,7 +133,7 @@
     },
     "communityReports": {
       "title": "Rapports communautaires",
-      "description": "Partagez conditions, alertes de sécurité, changements d'accès, beta et plus. Aidez les grimpeurs avec des mises à jour en temps réel dans plusieurs catégories"
+      "description": "Partagez conditions, alertes de sécurité, changements d'accès, infos d'escalade et plus. Aidez les grimpeurs avec des mises à jour en temps réel dans plusieurs catégories"
     },
     "globalCoverage": {
       "title": "Couverture mondiale",
@@ -145,7 +145,7 @@
     },
     "privacyFirst": {
       "title": "Confidentialité d'abord",
-      "description": "Anonyme par défaut. Aucun compte requis. Vos données restent les vôtres"
+      "description": "Non seulement nous n'avons pas besoin de vos données - nous n'en voulons pas ! Anonyme par défaut. Aucun compte, aucun suivi. Vos données restent les vôtres."
     }
   },
   "ui": {

@@ -133,7 +133,7 @@
     },
     "communityReports": {
       "title": "Rapoarte Comunității",
-      "description": "Împărtășește condiții, alerte de securitate, modificări de acces, beta și altele. Ajută colegii alpiniști cu actualizări în timp real în mai multe categorii"
+      "description": "Împărtășește condiții, alerte de securitate, modificări de acces, informații despre căț și altele. Ajută colegii alpiniști cu actualizări în timp real în mai multe categorii"
     },
     "globalCoverage": {
       "title": "Acoperire Globală",
@@ -145,7 +145,7 @@
     },
     "privacyFirst": {
       "title": "Confidențialitate în Prim Plan",
-      "description": "Anonim implicit. Nu sunt necesare conturi. Datele tale rămân ale tale"
+      "description": "Nu doar că nu avem nevoie de datele tale - nu le vrem! Anonim implicit. Fără conturi, fără urmărire. Datele tale rămân ale tale."
     }
   },
   "ui": {
@@ -309,7 +309,7 @@
       },
       "report": {
         "title": "Partajați rapoarte cu comunitatea",
-        "description": "Ajutați alți alpiniști partajând condiții, alerte de siguranță și beta"
+        "description": "Ajutați alți alpiniști partajând condiții, alerte de siguranță și informații despre căț"
       },
       "vote": {
         "title": "Votați rapoartele utile",

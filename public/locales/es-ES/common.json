@@ -133,7 +133,7 @@
     },
     "communityReports": {
       "title": "Informes de la comunidad",
-      "description": "Comparte condiciones, alertas de seguridad, cambios de acceso, beta y más. Ayuda a escaladores con actualizaciones en tiempo real en múltiples categorías"
+      "description": "Comparte condiciones, alertas de seguridad, cambios de acceso, información de escalada y más. Ayuda a escaladores con actualizaciones en tiempo real en múltiples categorías"
     },
     "globalCoverage": {
       "title": "Cobertura global",
@@ -145,7 +145,7 @@
     },
     "privacyFirst": {
       "title": "Privacidad ante todo",
-      "description": "Anonimato por defecto. No necesitas cuentas. Tus datos siguen siendo tuyos"
+      "description": "No solo no necesitamos tus datos - ¡no los queremos! Anonimato por defecto. Sin cuentas, sin seguimiento. Tus datos siguen siendo tuyos."
     }
   },
   "ui": {
@@ -314,7 +314,7 @@
       },
       "report": {
         "title": "Compartir informes con la comunidad",
-        "description": "Ayuda a otros escaladores compartiendo condiciones, alertas de seguridad y beta"
+        "description": "Ayuda a otros escaladores compartiendo condiciones, alertas de seguridad e información de escalada"
       },
       "vote": {
         "title": "Votar por informes útiles",

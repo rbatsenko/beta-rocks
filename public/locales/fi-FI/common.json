@@ -133,7 +133,7 @@
     },
     "communityReports": {
       "title": "Yhteisön raportit",
-      "description": "Jaa olosuhteita, turvallisuusvaroituksia, pääsymuutoksia, betaa ja muuta. Auta kanssakiipeilijöitä reaaliaikaisilla päivityksillä useissa kategorioissa"
+      "description": "Jaa olosuhteita, turvallisuusvaroituksia, pääsymuutoksia, kiipeilytietoja ja muuta. Auta kanssakiipeilijöitä reaaliaikaisilla päivityksillä useissa kategorioissa"
     },
     "globalCoverage": {
       "title": "Maailmanlaajuinen kattavuus",
@@ -145,7 +145,7 @@
     },
     "privacyFirst": {
       "title": "Yksityisyys ensin",
-      "description": "Oletuksena anonyymi. Ei tunnuksia tarvita. Tietosi pysyy sinulla"
+      "description": "Emme vain tarvitse tietojasi - emme halua niitä! Oletuksena anonyymi. Ei tilejä, ei seurantaa. Tietosi pysyy sinulla."
     }
   },
   "ui": {

@@ -142,7 +142,7 @@
     },
     "communityReports": {
       "title": "Community Reports",
-      "description": "Share conditions, safety alerts, access changes, beta, and more. Help fellow climbers with real-time updates across multiple categories"
+      "description": "Share conditions, safety alerts, access changes, route info, and more. Help fellow climbers with real-time updates across multiple categories"
     },
     "globalCoverage": {
       "title": "Global Coverage",
@@ -154,7 +154,7 @@
     },
     "privacyFirst": {
       "title": "Privacy First",
-      "description": "Anonymous by default. No accounts required. Your data stays yours"
+      "description": "We don't just not need your data - we don't want it! Anonymous by default. No accounts, no tracking. Your data stays yours."
     }
   },
   "ui": {
@@ -331,7 +331,7 @@
       },
       "report": {
         "title": "Share Reports with Community",
-        "description": "Help fellow climbers by sharing conditions, safety alerts, and beta"
+        "description": "Help fellow climbers by sharing conditions, safety alerts, and route info"
       },
       "vote": {
         "title": "Vote on Helpful Reports",
@@ -567,7 +567,7 @@
       "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
       "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
       "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "beta": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
+      "climbing_info": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
       "facilities": "E.g., Toilet available at parking, no water source nearby...",
       "other": "Describe what you'd like to report..."
     },
