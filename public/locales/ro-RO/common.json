@@ -3,7 +3,7 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Obține beta pentru orice stâncă",
+    "heading": "Obține informații despre orice stâncă",
     "description": "Condiții în timp real, rapoarte ale comunității și informații despre rute pe stânci din întreaga lume",
     "exampleQueries": {
       "query1": {
@@ -146,6 +146,38 @@
     "privacyFirst": {
       "title": "Confidențialitate în Prim Plan",
       "description": "Nu doar că nu avem nevoie de datele tale - nu le vrem! Anonim implicit. Fără conturi, fără urmărire. Datele tale rămân ale tale."
+    }
+  },
+  "privacy": {
+    "heading": "Politica de Confidențialitate",
+    "subheading": "Nu doar că nu avem nevoie de datele tale - nu le vrem!",
+    "whatWeDontCollect": {
+      "title": "Ce Nu Colectăm",
+      "description": "Nicio adresă de e-mail, niciun nume, niciun număr de telefon, nicio adresă IP, nicio analiză, niciun pixel de urmărire, niciun cookie (cu excepția celor esențiale), nicio urmărire a comportamentului utilizatorului. Literalmente nu te putem identifica."
+    },
+    "whatYouControl": {
+      "title": "Ce Controlezi Tu",
+      "description": "Favoritele tale, rapoartele și istoricul chat-ului sunt stocate mai întâi local pe dispozitivul tău. Tu alegi dacă le sincronizezi pe alte dispozitive folosind o cheie de sincronizare anonimă. Totul rămâne pe dispozitivul tău decât dacă activezi explicit sincronizarea."
+    },
+    "howSyncWorks": {
+      "title": "Cum Funcționează Sincronizarea",
+      "description": "Când sincronizezi, stocăm datele tale legate de o cheie de sincronizare criptată - nu de identitatea ta. Cheia de sincronizare este un UUID aleatoriu pe care îl controlezi. Nu o putem lega de tine. Nu este necesară nicio adresă de e-mail, nu este necesar niciun cont."
+    },
+    "openSource": {
+      "title": "Sursă Deschisă",
+      "description": "Întreaga noastră bază de cod este open source pe GitHub. Poți audita exact ce facem cu datele tale (spoiler: nimic). Transparență totală, zero urmăritori ascunși."
+    },
+    "yourRights": {
+      "title": "Drepturile Tale",
+      "description": "Poți șterge toate datele tale oricând din Setări. Cheia ta de sincronizare, controlul tău. Oprești sincronizarea? Datele rămân doar pe dispozitivul tău. Vrei un nou început? Șterge totul cu o atingere."
+    },
+    "dataSecurity": {
+      "title": "Securitatea Datelor",
+      "description": "Cheile de sincronizare sunt criptate criptografic înainte de stocare. Folosim Supabase cu politici Row Level Security. Chiar dacă baza noastră de date ar scăpa, cheile de sincronizare nu ar putea fi decriptate pentru a identifica utilizatorii."
+    },
+    "footer": {
+      "tldr": "TL;DR: Am construit această aplicație pentru alpiniști, nu pentru colectarea datelor. Confidențialitatea ta nu este o funcționalitate - este fundația.",
+      "github": "Codul sursă complet disponibil pe <githubLink>GitHub</githubLink>"
     }
   },
   "ui": {

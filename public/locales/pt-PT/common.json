@@ -3,7 +3,7 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Obtenha o beta de qualquer rocha",
+    "heading": "Obtenha informação sobre qualquer rocha",
     "description": "Condições em tempo real, relatórios da comunidade e informações sobre vias em rochas do mundo inteiro",
     "exampleQueries": {
       "query1": {
@@ -146,6 +146,38 @@
     "privacyFirst": {
       "title": "Privacidade em Primeiro Lugar",
       "description": "Não só não precisamos dos seus dados - não os queremos! Anónimo por padrão. Sem contas, sem rastreamento. Os seus dados permanecem seus."
+    }
+  },
+  "privacy": {
+    "heading": "Política de Privacidade",
+    "subheading": "Não só não precisamos dos seus dados - não os queremos!",
+    "whatWeDontCollect": {
+      "title": "O Que Não Recolhemos",
+      "description": "Sem endereços de e-mail, sem nomes, sem números de telefone, sem endereços IP, sem analytics, sem pixels de rastreamento, sem cookies (exceto os essenciais), sem rastreamento de comportamento do utilizador. Literalmente não conseguimos identificá-lo."
+    },
+    "whatYouControl": {
+      "title": "O Que Controla",
+      "description": "Os seus favoritos, relatórios e histórico de chat são armazenados localmente no seu dispositivo primeiro. Escolhe se quer sincronizá-los entre dispositivos usando uma chave de sincronização anónima. Tudo fica no seu dispositivo a menos que ative explicitamente a sincronização."
+    },
+    "howSyncWorks": {
+      "title": "Como Funciona a Sincronização",
+      "description": "Quando sincroniza, armazenamos os seus dados ligados a uma chave de sincronização encriptada - não à sua identidade. A chave de sincronização é um UUID aleatório que controla. Não conseguimos ligá-la a si. Sem e-mail necessário, sem conta necessária."
+    },
+    "openSource": {
+      "title": "Código Aberto",
+      "description": "Todo o nosso código-fonte é open source no GitHub. Pode auditar exatamente o que fazemos com os seus dados (spoiler: nada). Transparência total, zero rastreadores escondidos."
+    },
+    "yourRights": {
+      "title": "Os Seus Direitos",
+      "description": "Pode eliminar todos os seus dados a qualquer momento nas Definições. A sua chave de sincronização, o seu controle. Parar de sincronizar? Os dados ficam apenas no seu dispositivo. Quer um novo começo? Limpe tudo com um toque."
+    },
+    "dataSecurity": {
+      "title": "Segurança de Dados",
+      "description": "As chaves de sincronização são encriptadas criptograficamente antes do armazenamento. Usamos Supabase com políticas Row Level Security. Mesmo que a nossa base de dados vazasse, as chaves de sincronização não poderiam ser desencriptadas para identificar utilizadores."
+    },
+    "footer": {
+      "tldr": "TL;DR: Construímos esta aplicação para escaladores, não para recolha de dados. A sua privacidade não é uma funcionalidade - é a fundação.",
+      "github": "Código-fonte completo disponível no <githubLink>GitHub</githubLink>"
     }
   },
   "ui": {

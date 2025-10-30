@@ -3,7 +3,7 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Krijg de beta van elke rots",
+    "heading": "Krijg info over elke rots",
     "description": "Realtime omstandigheden, gemeenschapsrapporten en route-informatie voor rotsen wereldwijd",
     "exampleQueries": {
       "query1": {
@@ -146,6 +146,38 @@
     "privacyFirst": {
       "title": "Privacy eerst",
       "description": "We hebben je gegevens niet alleen niet nodig - we willen ze niet! Standaard anoniem. Geen accounts, geen tracking. Je gegevens blijven van jou."
+    }
+  },
+  "privacy": {
+    "heading": "Privacybeleid",
+    "subheading": "We hebben je gegevens niet alleen niet nodig - we willen ze niet!",
+    "whatWeDontCollect": {
+      "title": "Wat We Niet Verzamelen",
+      "description": "Geen e-mailadressen, geen namen, geen telefoonnummers, geen IP-adressen, geen analytics, geen trackingpixels, geen cookies (behalve essentiële), geen gebruikersgedragstracking. We kunnen je letterlijk niet identificeren."
+    },
+    "whatYouControl": {
+      "title": "Wat Jij Controleert",
+      "description": "Je favorieten, rapporten en chatgeschiedenis worden eerst lokaal op je apparaat opgeslagen. Jij kiest of je ze synchroniseert tussen apparaten met een anonieme synchronisatiesleutel. Alles blijft op je apparaat tenzij je expliciet synchronisatie inschakelt."
+    },
+    "howSyncWorks": {
+      "title": "Hoe Synchronisatie Werkt",
+      "description": "Wanneer je synchroniseert, slaan we je gegevens op gekoppeld aan een gehashte synchronisatiesleutel - niet aan je identiteit. De synchronisatiesleutel is een willekeurige UUID die jij controleert. We kunnen het niet aan jou koppelen. Geen e-mail vereist, geen account nodig."
+    },
+    "openSource": {
+      "title": "Open Source",
+      "description": "Onze volledige codebase is open source op GitHub. Je kunt precies controleren wat we met je gegevens doen (spoiler: niets). Volledige transparantie, nul verborgen trackers."
+    },
+    "yourRights": {
+      "title": "Jouw Rechten",
+      "description": "Je kunt al je gegevens op elk moment verwijderen vanuit Instellingen. Jouw synchronisatiesleutel, jouw controle. Stoppen met synchroniseren? Gegevens blijven alleen op je apparaat. Een nieuwe start? Wis alles met één tik."
+    },
+    "dataSecurity": {
+      "title": "Gegevensbeveiliging",
+      "description": "Synchronisatiesleutels worden cryptografisch gehasht voor opslag. We gebruiken Supabase met Row Level Security-beleid. Zelfs als onze database lek zou zijn, kunnen synchronisatiesleutels niet worden teruggedraaid om gebruikers te identificeren."
+    },
+    "footer": {
+      "tldr": "TL;DR: We hebben deze app gebouwd voor klimmers, niet voor gegevensverzameling. Je privacy is geen functie - het is de fundering.",
+      "github": "Volledige broncode beschikbaar op <githubLink>GitHub</githubLink>"
     }
   },
   "ui": {

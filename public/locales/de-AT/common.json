@@ -3,7 +3,7 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Hol dir die Beta zu jedem Felsen",
+    "heading": "Infos zu jedem Felsen",
     "description": "Echtzeit-Bedingungen, Community-Berichte und Routeninformationen für Felsen weltweit",
     "exampleQueries": {
       "query1": {
@@ -146,6 +146,38 @@
     "privacyFirst": {
       "title": "Datenschutz voran",
       "description": "Wir brauchen deine Daten nicht nur nicht - wir wollen sie gar nicht! Standardmäßig anonym. Keine Accounts, kein Tracking. Deine Daten bleiben deine."
+    }
+  },
+  "privacy": {
+    "heading": "Datenschutzerklärung",
+    "subheading": "Wir brauchen deine Daten nicht nur nicht - wir wollen sie gar nicht!",
+    "whatWeDontCollect": {
+      "title": "Was wir nicht sammeln",
+      "description": "Keine E-Mail-Adressen, keine Namen, keine Telefonnummern, keine IP-Adressen, keine Analytics, keine Tracking-Pixel, keine Cookies (außer essentiellen), keine Verhaltensanalyse. Wir können dich buchstäblich nicht identifizieren."
+    },
+    "whatYouControl": {
+      "title": "Was du kontrollierst",
+      "description": "Deine Favoriten, Berichte und Chat-Verlauf werden zuerst lokal auf deinem Gerät gespeichert. Du entscheidest, ob du sie mit einem anonymen Sync-Schlüssel auf andere Geräte synchronisierst. Alles bleibt auf deinem Gerät, es sei denn, du aktivierst die Synchronisierung explizit."
+    },
+    "howSyncWorks": {
+      "title": "Wie Synchronisierung funktioniert",
+      "description": "Wenn du synchronisierst, speichern wir deine Daten verknüpft mit einem gehashten Sync-Schlüssel - nicht mit deiner Identität. Der Sync-Schlüssel ist eine zufällige UUID, die du kontrollierst. Wir können ihn nicht mit dir in Verbindung bringen. Keine E-Mail erforderlich, kein Konto nötig."
+    },
+    "openSource": {
+      "title": "Open Source",
+      "description": "Unsere gesamte Codebasis ist Open Source auf GitHub. Du kannst genau prüfen, was wir mit deinen Daten machen (Spoiler: nichts). Volle Transparenz, null versteckte Tracker."
+    },
+    "yourRights": {
+      "title": "Deine Rechte",
+      "description": "Du kannst jederzeit alle deine Daten aus den Einstellungen löschen. Dein Sync-Schlüssel, deine Kontrolle. Synchronisierung stoppen? Daten bleiben nur auf deinem Gerät. Neustart gewünscht? Alles mit einem Klick löschen."
+    },
+    "dataSecurity": {
+      "title": "Datensicherheit",
+      "description": "Sync-Schlüssel werden vor der Speicherung kryptographisch gehasht. Wir nutzen Supabase mit Row Level Security-Richtlinien. Selbst wenn unsere Datenbank geleakt würde, könnten Sync-Schlüssel nicht rückentwickelt werden, um Benutzer zu identifizieren."
+    },
+    "footer": {
+      "tldr": "TL;DR: Wir haben diese App für Kletterer gebaut, nicht für Datensammlung. Deine Privatsphäre ist kein Feature - sie ist das Fundament.",
+      "github": "Vollständiger Quellcode verfügbar auf <githubLink>GitHub</githubLink>"
     }
   },
   "ui": {

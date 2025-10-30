@@ -3,7 +3,7 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Få beta om vilken klippa som helst",
+    "heading": "Få information om vilken klippa som helst",
     "description": "Realtidsförhållanden, communityrapporter och ruttinformation för klippor världen över",
     "exampleQueries": {
       "query1": {
@@ -147,6 +147,38 @@
     "privacyFirst": {
       "title": "Integritet först",
       "description": "Vi behöver inte bara inte din data - vi vill inte ha den! Anonymt som standard. Inga konton, ingen spårning. Dina data förblir dina."
+    }
+  },
+  "privacy": {
+    "heading": "Integritetspolicy",
+    "subheading": "Vi behöver inte bara inte din data - vi vill inte ha den!",
+    "whatWeDontCollect": {
+      "title": "Vad vi inte samlar in",
+      "description": "Inga e-postadresser, inga namn, inga telefonnummer, inga IP-adresser, ingen analys, inga spårningspixlar, inga cookies (förutom nödvändiga), ingen beteendespårning. Vi kan bokstavligt talat inte identifiera dig."
+    },
+    "whatYouControl": {
+      "title": "Vad du kontrollerar",
+      "description": "Dina favoriter, rapporter och chatthistorik lagras först lokalt på din enhet. Du väljer om du vill synkronisera dem över enheter med en anonym synkroniseringsnyckel. Allt stannar på din enhet om du inte uttryckligen aktiverar synkronisering."
+    },
+    "howSyncWorks": {
+      "title": "Hur synkronisering fungerar",
+      "description": "När du synkroniserar lagrar vi din data kopplad till en hashad synkroniseringsnyckel - inte din identitet. Synkroniseringsnyckeln är ett slumpmässigt UUID som du kontrollerar. Vi kan inte koppla den till dig. Ingen e-post krävs, inget konto behövs."
+    },
+    "openSource": {
+      "title": "Öppen källkod",
+      "description": "Hela vår kodbas är öppen källkod på GitHub. Du kan granska exakt vad vi gör med din data (spoiler: ingenting). Full transparens, noll dolda spårare."
+    },
+    "yourRights": {
+      "title": "Dina rättigheter",
+      "description": "Du kan radera all din data när som helst från Inställningar. Din synkroniseringsnyckel, din kontroll. Sluta synkronisera? Data stannar bara på din enhet. Vill du börja om? Rensa allt med ett tryck."
+    },
+    "dataSecurity": {
+      "title": "Datasäkerhet",
+      "description": "Synkroniseringsnycklar är kryptografiskt hashade före lagring. Vi använder Supabase med Row Level Security-policyer. Även om vår databas läckte skulle synkroniseringsnycklar inte kunna reverse-engineeras för att identifiera användare."
+    },
+    "footer": {
+      "tldr": "TL;DR: Vi byggde denna app för klättrare, inte för datainsamling. Din integritet är inte en funktion - det är grunden.",
+      "github": "Fullständig källkod tillgänglig på <githubLink>GitHub</githubLink>"
     }
   },
   "ui": {

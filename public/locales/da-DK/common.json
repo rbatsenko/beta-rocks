@@ -3,7 +3,7 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Få beta om enhver klippe",
+    "heading": "Få information om enhver klippe",
     "description": "Realtidsforhold, fællesskabsrapporter og ruteinformation for klipper verden over",
     "exampleQueries": {
       "query1": {
@@ -146,6 +146,38 @@
     "privacyFirst": {
       "title": "Privatlivsførste",
       "description": "Vi har ikke kun ikke brug for dine data - vi vil ikke have dem! Anonym som standard. Ingen konti, ingen sporing. Dine data forbliver dine."
+    }
+  },
+  "privacy": {
+    "heading": "Fortrolighedspolitik",
+    "subheading": "Vi har ikke kun ikke brug for dine data - vi vil ikke have dem!",
+    "whatWeDontCollect": {
+      "title": "Hvad vi ikke indsamler",
+      "description": "Ingen e-mailadresser, ingen navne, ingen telefonnumre, ingen IP-adresser, ingen analytics, ingen sporingspixels, ingen cookies (undtagen essentielle), ingen adfærdssporing. Vi kan bogstaveligt talt ikke identificere dig."
+    },
+    "whatYouControl": {
+      "title": "Hvad du kontrollerer",
+      "description": "Dine favoritter, rapporter og chathistorik gemmes først lokalt på din enhed. Du vælger, om du vil synkronisere dem på tværs af enheder med en anonym synkroniseringsnøgle. Alt forbliver på din enhed, medmindre du udtrykkeligt aktiverer synkronisering."
+    },
+    "howSyncWorks": {
+      "title": "Sådan fungerer synkronisering",
+      "description": "Når du synkroniserer, gemmer vi dine data knyttet til en hashet synkroniseringsnøgle - ikke din identitet. Synkroniseringsnøglen er en tilfældig UUID, som du kontrollerer. Vi kan ikke knytte den til dig. Ingen e-mail påkrævet, ingen konto nødvendig."
+    },
+    "openSource": {
+      "title": "Open Source",
+      "description": "Vores hele kodebase er open source på GitHub. Du kan kontrollere præcis, hvad vi gør med dine data (spoiler: intet). Fuld gennemsigtighed, nul skjulte trackere."
+    },
+    "yourRights": {
+      "title": "Dine rettigheder",
+      "description": "Du kan slette alle dine data når som helst fra Indstillinger. Din synkroniseringsnøgle, din kontrol. Stop synkronisering? Data forbliver kun på din enhed. Vil du have en ny start? Ryd alt med et tryk."
+    },
+    "dataSecurity": {
+      "title": "Datasikkerhed",
+      "description": "Synkroniseringsnøgler er kryptografisk hashet før lagring. Vi bruger Supabase med Row Level Security-politikker. Selv hvis vores database lækker, kan synkroniseringsnøgler ikke reverse-engineeres for at identificere brugere."
+    },
+    "footer": {
+      "tldr": "TL;DR: Vi byggede denne app til klatrere, ikke til dataindsamling. Dit privatliv er ikke en funktion - det er fundamentet.",
+      "github": "Fuld kildekode tilgængelig på <githubLink>GitHub</githubLink>"
     }
   },
   "ui": {

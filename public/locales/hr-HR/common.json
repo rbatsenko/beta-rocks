@@ -3,7 +3,7 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Dobij beta za svaku stijenu",
+    "heading": "Dobij informacije za svaku stijenu",
     "description": "Uvjeti u stvarnom vremenu, izvješća zajednice i informacije o smjerovima na stijenama širom svijeta",
     "exampleQueries": {
       "query1": {
@@ -146,6 +146,38 @@
     "privacyFirst": {
       "title": "Privatnost na prvom mjestu",
       "description": "Ne samo da nam ne trebaju tvoji podaci - ne želimo ih! Anonimno po zadanim postavkama. Bez računa, bez praćenja. Tvoji podaci ostaju tvoji."
+    }
+  },
+  "privacy": {
+    "heading": "Pravila Privatnosti",
+    "subheading": "Ne samo da nam ne trebaju tvoji podaci - ne želimo ih!",
+    "whatWeDontCollect": {
+      "title": "Što Ne Prikupljamo",
+      "description": "Nema e-mail adresa, nema imena, nema telefonskih brojeva, nema IP adresa, nema analitike, nema piksela za praćenje, nema kolačića (osim osnovnih), nema praćenja korisničkog ponašanja. Doslovno te ne možemo identificirati."
+    },
+    "whatYouControl": {
+      "title": "Što Ti Kontroliraš",
+      "description": "Tvoji omiljeni, izvještaji i povijest razgovora najprije se spremaju lokalno na tvom uređaju. Ti biraš hoćeš li ih sinkronizirati između uređaja pomoću anonimnog sync ključa. Sve ostaje na tvom uređaju osim ako eksplicitno ne uključiš sinkronizaciju."
+    },
+    "howSyncWorks": {
+      "title": "Kako Funkcionira Sinkronizacija",
+      "description": "Kada sinkroniziraš, tvoje podatke pohranjujemo povezane s hashiranim sync ključem - ne s tvojim identitetom. Sync ključ je nasumični UUID koji ti kontroliraš. Ne možemo ga povezati s tobom. Nije potreban e-mail, nije potreban račun."
+    },
+    "openSource": {
+      "title": "Otvoreni Kod",
+      "description": "Cijela naša codebase je otvorena na GitHubu. Možeš provjeriti što točno radimo s tvojim podacima (spoiler: ništa). Potpuna transparentnost, nula skrivenih pratitelja."
+    },
+    "yourRights": {
+      "title": "Tvoja Prava",
+      "description": "Možeš izbrisati sve svoje podatke bilo kada iz Postavki. Tvoj sync ključ, tvoja kontrola. Prestaneš s sinkronizacijom? Podaci ostaju samo na tvom uređaju. Želiš novi početak? Obriši sve jednim klikom."
+    },
+    "dataSecurity": {
+      "title": "Sigurnost Podataka",
+      "description": "Sync ključevi su kriptografski hashirani prije pohrane. Koristimo Supabase s Row Level Security politikama. Čak i da nam baza podataka procuri, sync ključevi se ne bi mogli dešifrirati kako bi identificirali korisnike."
+    },
+    "footer": {
+      "tldr": "TL;DR: Izgradili smo ovu aplikaciju za penjače, ne za prikupljanje podataka. Tvoja privatnost nije značajka - ona je temelj.",
+      "github": "Potpuni izvorni kod dostupan na <githubLink>GitHubu</githubLink>"
     }
   },
   "ui": {

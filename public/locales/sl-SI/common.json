@@ -3,7 +3,7 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Pridobi beta za vsako plezališče",
+    "heading": "Pridobi informacije za vsako plezališče",
     "description": "Razmere v realnem času, poročila skupnosti in informacije o smereh na plezališčih po vsem svetu",
     "exampleQueries": {
       "query1": {
@@ -147,6 +147,38 @@
     "privacyFirst": {
       "title": "Zasebnost na prvem mestu",
       "description": "Ne samo da ne potrebujemo tvojih podatkov - ne želimo jih! Privzeto anonimno. Brez računov, brez sledenja. Tvoji podatki ostanejo tvoji."
+    }
+  },
+  "privacy": {
+    "heading": "Politika Zasebnosti",
+    "subheading": "Ne samo, da ne potrebujemo tvojih podatkov - ne želimo jih!",
+    "whatWeDontCollect": {
+      "title": "Kaj Ne Zbiramo",
+      "description": "Brez e-poštnih naslovov, brez imen, brez telefonskih številk, brez IP naslovov, brez analitike, brez sledilnih pikslov, brez piškotkov (razen nujnih), brez sledenja uporabniškega vedenja. Dobesedno te ne moremo identificirati."
+    },
+    "whatYouControl": {
+      "title": "Kaj Nadzoruješ",
+      "description": "Tvoji priljubljeni, poročila in zgodovina pogovorov so najprej shranjeni lokalno na tvoji napravi. Ti se odločiš, ali jih boš sinhroniziral med napravami s pomočjo anonimnega ključa. Vse ostaja na tvoji napravi, razen če izrecno vključiš sinhronizacijo."
+    },
+    "howSyncWorks": {
+      "title": "Kako Deluje Sinhronizacija",
+      "description": "Ko sinhroniziraš, tvoje podatke shranimo povezane s hashiranim ključem - ne s tvojo identiteto. Ključ je naključni UUID, ki ga nadzoruješ ti. Ne moremo ga povezati s teboj. Ni potreben e-naslov, ni potreben račun."
+    },
+    "openSource": {
+      "title": "Odprta Koda",
+      "description": "Celotna naša koda je odprta na GitHubu. Lahko preveriš, kaj točno počnemo s tvojimi podatki (spoiler: nič). Popolna preglednost, nič skritih sledilcev."
+    },
+    "yourRights": {
+      "title": "Tvoje Pravice",
+      "description": "Vse svoje podatke lahko kadarkoli izbrišeš v nastavitvah. Tvoj ključ, tvoj nadzor. Prenehaš sinhronizirati? Podatki ostanejo samo na tvoji napravi. Želiš nov začetek? Izbriši vse z enim klikom."
+    },
+    "dataSecurity": {
+      "title": "Varnost Podatkov",
+      "description": "Ključi so kriptografsko hashirani pred shranjevanjem. Uporabljamo Supabase z Row Level Security politikami. Tudi če bi naša baza podatkov uhajala, ključev ne bi bilo mogoče dešifrirati za identifikacijo uporabnikov."
+    },
+    "footer": {
+      "tldr": "TL;DR: To aplikacijo smo zgradili za plezalce, ne za zbiranje podatkov. Tvoja zasebnost ni funkcija - je temelj.",
+      "github": "Celotna izvorna koda na voljo na <githubLink>GitHubu</githubLink>"
     }
   },
   "ui": {

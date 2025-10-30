@@ -635,7 +635,7 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
                           size="sm"
                           className="flex-1 sm:flex-none"
                         >
-                          {t("cancel")}
+                          {t("dialog.cancel")}
                         </Button>
                       </div>
                     </div>

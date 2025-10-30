@@ -3,7 +3,7 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Ottieni la beta di ogni falesia",
+    "heading": "Ottieni info su ogni falesia",
     "description": "Condizioni in tempo reale, report della community e informazioni sulle vie nelle falesie di tutto il mondo",
     "exampleQueries": {
       "query1": {
@@ -146,6 +146,38 @@
     "privacyFirst": {
       "title": "Privacy prima di tutto",
       "description": "Non solo non ci servono i tuoi dati - non li vogliamo! Anonimato di default. Nessun account, nessun tracciamento. I tuoi dati restano tuoi."
+    }
+  },
+  "privacy": {
+    "heading": "Informativa sulla Privacy",
+    "subheading": "Non solo non ci servono i tuoi dati - non li vogliamo!",
+    "whatWeDontCollect": {
+      "title": "Cosa Non Raccogliamo",
+      "description": "Nessun indirizzo email, nessun nome, nessun numero di telefono, nessun indirizzo IP, nessuna analytics, nessun pixel di tracciamento, nessun cookie (tranne quelli essenziali), nessun tracciamento del comportamento. Non possiamo letteralmente identificarti."
+    },
+    "whatYouControl": {
+      "title": "Cosa Controlli Tu",
+      "description": "I tuoi preferiti, rapporti e cronologia chat sono salvati prima localmente sul tuo dispositivo. Tu scegli se sincronizzarli su altri dispositivi usando una chiave di sincronizzazione anonima. Tutto resta sul tuo dispositivo a meno che tu non attivi esplicitamente la sincronizzazione."
+    },
+    "howSyncWorks": {
+      "title": "Come Funziona la Sincronizzazione",
+      "description": "Quando sincronizzi, memorizziamo i tuoi dati collegati a una chiave di sincronizzazione crittografata - non alla tua identità. La chiave di sincronizzazione è un UUID casuale che controlli tu. Non possiamo collegarla a te. Nessuna email richiesta, nessun account necessario."
+    },
+    "openSource": {
+      "title": "Open Source",
+      "description": "L'intero nostro codice sorgente è open source su GitHub. Puoi verificare esattamente cosa facciamo con i tuoi dati (spoiler: niente). Trasparenza totale, zero tracker nascosti."
+    },
+    "yourRights": {
+      "title": "I Tuoi Diritti",
+      "description": "Puoi eliminare tutti i tuoi dati in qualsiasi momento dalle Impostazioni. La tua chiave di sincronizzazione, il tuo controllo. Vuoi smettere di sincronizzare? I dati restano solo sul tuo dispositivo. Vuoi un nuovo inizio? Cancella tutto con un tocco."
+    },
+    "dataSecurity": {
+      "title": "Sicurezza dei Dati",
+      "description": "Le chiavi di sincronizzazione sono crittografate prima della memorizzazione. Usiamo Supabase con politiche Row Level Security. Anche se il nostro database trapelasse, le chiavi di sincronizzazione non potrebbero essere decodificate per identificare gli utenti."
+    },
+    "footer": {
+      "tldr": "TL;DR: Abbiamo costruito questa app per i climber, non per raccogliere dati. La tua privacy non è una funzionalità - è la base.",
+      "github": "Codice sorgente completo disponibile su <githubLink>GitHub</githubLink>"
     }
   },
   "ui": {

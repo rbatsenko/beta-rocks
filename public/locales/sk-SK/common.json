@@ -3,7 +3,7 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Získaj beta o každej skale",
+    "heading": "Získaj informácie o každej skale",
     "description": "Získajte aktuálne počasie, analýzu trenia a optimálne okná na lezenie na ktorejkoľvek skale po celom svete",
     "exampleQueries": {
       "query1": {
@@ -146,6 +146,38 @@
     "privacyFirst": {
       "title": "Súkromie na prvom mieste",
       "description": "Nielen že vaše dáta nepotrebujeme - nechceme ich! Anonymné v predvolenom nastavení. Žiadne účty, žiadne sledovanie. Vaše dáta zostávajú vaše."
+    }
+  },
+  "privacy": {
+    "heading": "Zásady ochrany osobných údajov",
+    "subheading": "Nielen že vaše dáta nepotrebujeme - nechceme ich!",
+    "whatWeDontCollect": {
+      "title": "Čo nezhromažďujeme",
+      "description": "Žiadne e-mailové adresy, žiadne mená, žiadne telefónne čísla, žiadne IP adresy, žiadna analytika, žiadne sledovacie pixely, žiadne cookies (okrem nevyhnutných), žiadne sledovanie správania používateľov. Doslova vás nemôžeme identifikovať."
+    },
+    "whatYouControl": {
+      "title": "Čo kontrolujete",
+      "description": "Vaše obľúbené, správy a história chatu sú najprv uložené lokálne na vašom zariadení. Vy rozhodujete, či ich synchronizovať medzi zariadeniami pomocou anonymného synchronizačného kľúča. Všetko zostáva na vašom zariadení, pokiaľ explicitne nepovolíte synchronizáciu."
+    },
+    "howSyncWorks": {
+      "title": "Ako funguje synchronizácia",
+      "description": "Keď synchronizujete, ukladáme vaše dáta prepojené s hashovaným synchronizačným kľúčom - nie s vašou identitou. Synchronizačný kľúč je náhodné UUID, ktoré kontrolujete vy. Nemôžeme ho s vami spojiť. Bez požadovaného e-mailu, bez potreby účtu."
+    },
+    "openSource": {
+      "title": "Open Source",
+      "description": "Celý náš zdrojový kód je open source na GitHube. Môžete presne skontrolovať, čo robíme s vašimi dátami (spoiler: nič). Plná transparentnosť, nula skrytých trackerov."
+    },
+    "yourRights": {
+      "title": "Vaše práva",
+      "description": "Môžete kedykoľvek vymazať všetky svoje dáta z Nastavení. Váš synchronizačný kľúč, vaša kontrola. Prestať synchronizovať? Dáta zostanú iba na vašom zariadení. Chcete nový začiatok? Vymažte všetko jedným kliknutím."
+    },
+    "dataSecurity": {
+      "title": "Zabezpečenie dát",
+      "description": "Synchronizačné kľúče sú kryptograficky hashované pred uložením. Používame Supabase s politikami Row Level Security. Aj keby naša databáza unikla, synchronizačné kľúče by nemohli byť spätne dekódované na identifikáciu používateľov."
+    },
+    "footer": {
+      "tldr": "TL;DR: Postavili sme túto aplikáciu pre lezkov, nie pre zber dát. Vaše súkromie nie je funkcia - je to základ.",
+      "github": "Kompletný zdrojový kód dostupný na <githubLink>GitHub</githubLink>"
     }
   },
   "ui": {

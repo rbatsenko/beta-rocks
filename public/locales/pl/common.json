@@ -3,7 +3,7 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Info o dowolnej skałce",
+    "heading": "Uzyskaj informacje o każdym skałkowisku",
     "description": "Warun na bieżąco, raporty społeczności i informacje o rejonach i drogach na całym świecie",
     "exampleQueries": {
       "query1": {
@@ -148,6 +148,38 @@
     "privacyFirst": {
       "title": "Prywatność na pierwszym miejscu",
       "description": "Nie tylko nie potrzebujemy Twoich danych - nie chcemy ich! Anonimowość domyślnie. Bez kont, bez śledzenia. Twoje dane pozostają Twoje."
+    }
+  },
+  "privacy": {
+    "heading": "Polityka Prywatności",
+    "subheading": "Nie tylko nie potrzebujemy Twoich danych - nie chcemy ich!",
+    "whatWeDontCollect": {
+      "title": "Czego nie zbieramy",
+      "description": "Żadnych adresów e-mail, imion, numerów telefonów, adresów IP, analityki, pikseli śledzących, ciasteczek (poza niezbędnymi), śledzenia zachowań użytkowników. Dosłownie nie możemy Cię zidentyfikować."
+    },
+    "whatYouControl": {
+      "title": "Co kontrolujesz",
+      "description": "Twoje ulubione, raporty i historia czatu są najpierw zapisywane lokalnie na Twoim urządzeniu. Sam decydujesz, czy synchronizować je między urządzeniami za pomocą anonimowego klucza synchronizacji. Wszystko pozostaje na Twoim urządzeniu, chyba że wyraźnie włączysz synchronizację."
+    },
+    "howSyncWorks": {
+      "title": "Jak działa synchronizacja",
+      "description": "Kiedy synchronizujesz, przechowujemy Twoje dane powiązane z zahashowanym kluczem synchronizacji - nie z Twoją tożsamością. Klucz synchronizacji to losowy UUID, którym Ty kontrolujesz. Nie możemy go powiązać z Tobą. Bez wymaganego e-maila, bez potrzeby konta."
+    },
+    "openSource": {
+      "title": "Open Source",
+      "description": "Cały nasz kod źródłowy jest otwarty na GitHubie. Możesz sprawdzić dokładnie, co robimy z Twoimi danymi (spoiler: nic). Pełna przejrzystość, zero ukrytych trackerów."
+    },
+    "yourRights": {
+      "title": "Twoje prawa",
+      "description": "Możesz w każdej chwili usunąć wszystkie swoje dane z Ustawień. Twój klucz synchronizacji, Twoja kontrola. Przestaniesz synchronizować? Dane pozostają tylko na Twoim urządzeniu. Chcesz zacząć od nowa? Wyczyść wszystko jednym kliknięciem."
+    },
+    "dataSecurity": {
+      "title": "Bezpieczeństwo danych",
+      "description": "Klucze synchronizacji są kryptograficznie hashowane przed zapisem. Używamy Supabase z politykami Row Level Security. Nawet gdyby nasza baza danych wyciekła, kluczy synchronizacji nie da się odwrócić, aby zidentyfikować użytkowników."
+    },
+    "footer": {
+      "tldr": "TL;DR: Zbudowaliśmy tę aplikację dla wspinaczy, nie do zbierania danych. Twoja prywatność nie jest funkcją - to fundament.",
+      "github": "Pełny kod źródłowy dostępny na <githubLink>GitHub</githubLink>"
     }
   },
   "ui": {

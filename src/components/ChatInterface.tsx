@@ -47,6 +47,7 @@ import { ConditionsDetailSheet } from "@/components/ConditionsDetailSheet";
 import { WeatherConditionCard } from "@/components/WeatherConditionCard";
 import { DisambiguationOptions } from "@/components/DisambiguationOptions";
 import { FeaturesDialog } from "@/components/FeaturesDialog";
+import { PrivacyDialog } from "@/components/PrivacyDialog";
 import { SettingsDialog } from "@/components/SettingsDialog";
 import { FavoritesDialog } from "@/components/FavoritesDialog";
 import { logRender } from "@/lib/debug/render-log";
@@ -253,6 +254,7 @@ const ChatUI = ({
   const [detailsSheetOpen, setDetailsSheetOpen] = useState(false);
   const [selectedConditions, setSelectedConditions] = useState<ConditionsData | null>(null);
   const [featuresDialogOpen, setFeaturesDialogOpen] = useState(false);
+  const [privacyDialogOpen, setPrivacyDialogOpen] = useState(false);
   const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
   const [favoritesDialogOpen, setFavoritesDialogOpen] = useState(false);
   const [statsDialogOpen, setStatsDialogOpen] = useState(false);
@@ -768,9 +770,12 @@ const ChatUI = ({
                 {t("footer.about")}
               </button>
               <span>•</span>
-              <a href="#" className="hover:text-foreground transition-colors">
+              <button
+                onClick={() => setPrivacyDialogOpen(true)}
+                className="hover:text-foreground transition-colors cursor-pointer"
+              >
                 {t("footer.privacy")}
-              </a>
+              </button>
               <span>•</span>
               <a
                 href="https://github.com/rbatsenko/beta-rocks"
@@ -796,6 +801,9 @@ const ChatUI = ({
 
       {/* Features / About App Dialog */}
       <FeaturesDialog open={featuresDialogOpen} onOpenChange={setFeaturesDialogOpen} />
+
+      {/* Privacy Dialog */}
+      <PrivacyDialog open={privacyDialogOpen} onOpenChange={setPrivacyDialogOpen} />
 
       {/* Settings Dialog */}
       <SettingsDialog open={settingsDialogOpen} onOpenChange={setSettingsDialogOpen} />
@@ -846,6 +854,7 @@ const ChatInterface = ({
 }: ChatInterfaceProps = {}) => {
   const { t, language } = useClientTranslation("common");
   const [featuresDialogOpen, setFeaturesDialogOpen] = useState(false);
+  const [privacyDialogOpen, setPrivacyDialogOpen] = useState(false);
   const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
   const [favoritesDialogOpen, setFavoritesDialogOpen] = useState(false);
   const [statsDialogOpen, setStatsDialogOpen] = useState(false);
@@ -913,6 +922,7 @@ const ChatInterface = ({
 
         {/* Dialogs - render even during loading so buttons work */}
         <FeaturesDialog open={featuresDialogOpen} onOpenChange={setFeaturesDialogOpen} />
+        <PrivacyDialog open={privacyDialogOpen} onOpenChange={setPrivacyDialogOpen} />
         <SettingsDialog open={settingsDialogOpen} onOpenChange={setSettingsDialogOpen} />
         <FavoritesDialog open={favoritesDialogOpen} onOpenChange={setFavoritesDialogOpen} />
         <StatsDialog open={statsDialogOpen} onOpenChange={setStatsDialogOpen} />
@@ -939,9 +949,12 @@ const ChatInterface = ({
                 {t("footer.about")}
               </button>
               <span>•</span>
-              <a href="#" className="hover:text-foreground transition-colors">
+              <button
+                onClick={() => setPrivacyDialogOpen(true)}
+                className="hover:text-foreground transition-colors cursor-pointer"
+              >
                 {t("footer.privacy")}
-              </a>
+              </button>
               <span>•</span>
               <a
                 href="https://github.com/rbatsenko/beta-rocks"

@@ -3,7 +3,7 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Hanki beta mistä tahansa kalliosta",
+    "heading": "Hanki tietoa mistä tahansa kalliosta",
     "description": "Reaaliaikaiset olosuhteet, yhteisöraportit ja reittitiedot kallioista ympäri maailmaa",
     "exampleQueries": {
       "query1": {
@@ -146,6 +146,38 @@
     "privacyFirst": {
       "title": "Yksityisyys ensin",
       "description": "Emme vain tarvitse tietojasi - emme halua niitä! Oletuksena anonyymi. Ei tilejä, ei seurantaa. Tietosi pysyy sinulla."
+    }
+  },
+  "privacy": {
+    "heading": "Tietosuojakäytäntö",
+    "subheading": "Emme vain tarvitse tietojasi - emme halua niitä!",
+    "whatWeDontCollect": {
+      "title": "Mitä emme kerää",
+      "description": "Ei sähköpostiosoitteita, ei nimiä, ei puhelinnumeroita, ei IP-osoitteita, ei analytiikkaa, ei seurantapikseleitä, ei evästeitä (paitsi välttämättömät), ei käyttäytymisen seurantaa. Emme voi kirjaimellisesti tunnistaa sinua."
+    },
+    "whatYouControl": {
+      "title": "Mitä hallitset",
+      "description": "Suosikkisi, raportit ja keskusteluhistoria tallennetaan ensin paikallisesti laitteellesi. Päätät itse, synkronoidaanko ne laitteiden välillä nimettömällä synkronointiavaimella. Kaikki pysyy laitteellasi, ellet nimenomaisesti ota synkronointia käyttöön."
+    },
+    "howSyncWorks": {
+      "title": "Kuinka synkronointi toimii",
+      "description": "Kun synkronoit, tallennamme tietosi linkitettynä hajautettuun synkronointiavaimeen - emme henkilöllisyyteesi. Synkronointiavain on satunnainen UUID, jota hallitset. Emme voi yhdistää sitä sinuun. Ei sähköpostia vaadita, ei tiliä tarvita."
+    },
+    "openSource": {
+      "title": "Avoin lähdekoodi",
+      "description": "Koko koodikantamme on avointa lähdekoodia GitHubissa. Voit tarkistaa tarkalleen, mitä teemme tiedoillasi (spoileri: ei mitään). Täysi läpinäkyvyys, nolla piilotettuja seuraimia."
+    },
+    "yourRights": {
+      "title": "Oikeutesi",
+      "description": "Voit poistaa kaikki tietosi milloin tahansa Asetuksista. Synkronointiavaimesi, sinun hallinnassasi. Lopeta synkronointi? Tiedot pysyvät vain laitteellasi. Haluatko aloittaa alusta? Tyhjennä kaikki yhdellä napautuksella."
+    },
+    "dataSecurity": {
+      "title": "Tietoturva",
+      "description": "Synkronointiavaimet hajautetaan kryptografisesti ennen tallennusta. Käytämme Supabasea Row Level Security -käytäntöjen kanssa. Vaikka tietokantamme vuotaisi, synkronointiavaimia ei voida purkaa käyttäjien tunnistamiseksi."
+    },
+    "footer": {
+      "tldr": "TL;DR: Rakensimme tämän sovelluksen kiipeilijöille, emme tiedonkeruuta varten. Yksityisyytesi ei ole ominaisuus - se on perusta.",
+      "github": "Täydellinen lähdekoodi saatavilla <githubLink>GitHubissa</githubLink>"
     }
   },
   "ui": {

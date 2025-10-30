@@ -3,7 +3,7 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Get the beta on any crag",
+    "heading": "Get info on any crag",
     "description": "Real-time conditions, community reports, and route information for crags worldwide",
     "exampleQueries": {
       "query1": {
@@ -146,6 +146,38 @@
     "privacyFirst": {
       "title": "Privacy First",
       "description": "We don't just not need your data - we don't want it! Anonymous by default. No accounts, no tracking. Your data stays yours."
+    }
+  },
+  "privacy": {
+    "heading": "Privacy Policy",
+    "subheading": "We don't just not need your data - we don't want it!",
+    "whatWeDontCollect": {
+      "title": "What We Don't Collect",
+      "description": "No email addresses, no names, no phone numbers, no IP addresses, no analytics, no tracking pixels, no cookies (except essential ones), no user behavior tracking. We literally can't identify you."
+    },
+    "whatYouControl": {
+      "title": "What You Control",
+      "description": "Your favorites, reports, and chat history are stored locally on your device first. You choose whether to sync them across devices using an anonymous sync key. Everything stays on your device unless you explicitly enable sync."
+    },
+    "howSyncWorks": {
+      "title": "How Sync Works",
+      "description": "When you sync, we store your data linked to a hashed sync key - not your identity. The sync key is a random UUID that you control. We can't link it to you. No email required, no account needed."
+    },
+    "openSource": {
+      "title": "Open Source",
+      "description": "Our entire codebase is open source on GitHub. You can audit exactly what we do with your data (spoiler: nothing). Full transparency, zero hidden trackers."
+    },
+    "yourRights": {
+      "title": "Your Rights",
+      "description": "You can delete all your data anytime from Settings. Your sync key, your control. Stop syncing? Data stays on your device only. Want a fresh start? Clear everything with one tap."
+    },
+    "dataSecurity": {
+      "title": "Data Security",
+      "description": "Sync keys are cryptographically hashed before storage. We use Supabase with Row Level Security policies. Even if our database leaked, sync keys couldn't be reverse-engineered to identify users."
+    },
+    "footer": {
+      "tldr": "TL;DR: We built this app for climbers, not for data collection. Your privacy isn't a feature - it's the foundation.",
+      "github": "Full source code available on <githubLink>GitHub</githubLink>"
     }
   },
   "ui": {
