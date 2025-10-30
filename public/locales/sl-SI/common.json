@@ -315,6 +315,10 @@
       "vote": {
         "title": "Glasujte za uporabna poročila",
         "description": "Podprite skupnost s potrjevanjem uporabnih poročil"
+      },
+      "manual": {
+        "title": "Shranite svoje podatke na vseh napravah",
+        "description": "Sinhronizirajte svoje priljubljene, poročila in zgodovino klepetov na vseh svojih napravah"
       }
     },
     "features": {
@@ -327,7 +331,7 @@
         "description": "Edinstven identifikator, ki sinhronizira vaše podatke med napravami"
       },
       "multiDevice": {
-        "title": "Shranite ga ali fotografirajte QR kodo",
+        "title": "Shranite ga, fotografirajte QR kodo ali pošljite po e-pošti",
         "description": "Uporabite sinhronizacijski ključ za obnovitev profila na drugih napravah"
       }
     }

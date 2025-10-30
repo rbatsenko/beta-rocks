@@ -319,6 +319,10 @@
       "vote": {
         "title": "Vota i report utili",
         "description": "Supporta la community confermando i report utili"
+      },
+      "manual": {
+        "title": "Salva i tuoi dati su tutti i dispositivi",
+        "description": "Sincronizza i tuoi preferiti, report e cronologia chat su tutti i tuoi dispositivi"
       }
     },
     "features": {
@@ -331,7 +335,7 @@
         "description": "Un identificatore univoco che sincronizza i tuoi dati su tutti i dispositivi"
       },
       "multiDevice": {
-        "title": "Salvala o fotografa il codice QR",
+        "title": "Salvala, fotografa il QR o inviala via email",
         "description": "Usa la tua chiave di sincronizzazione per ripristinare il profilo su altri dispositivi"
       }
     }

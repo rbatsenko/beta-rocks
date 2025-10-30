@@ -314,6 +314,10 @@
       "vote": {
         "title": "Glasajte za korisne izvještaje",
         "description": "Podržite zajednicu potvrđujući korisne izvještaje"
+      },
+      "manual": {
+        "title": "Spremite svoje podatke na svim uređajima",
+        "description": "Sinkronizirajte svoje favorite, izvještaje i povijest razgovora na svim svojim uređajima"
       }
     },
     "features": {
@@ -326,7 +330,7 @@
         "description": "Jedinstveni identifikator koji sinkronizira vaše podatke između uređaja"
       },
       "multiDevice": {
-        "title": "Spremite ga ili fotografirajte QR kod",
+        "title": "Spremite ga, fotografirajte QR kod ili pošaljite emailom",
         "description": "Koristite ključ za sinkronizaciju za vraćanje profila na drugim uređajima"
       }
     }

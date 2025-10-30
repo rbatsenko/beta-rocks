@@ -309,6 +309,10 @@
       "vote": {
         "title": "Głosuj na pomocne raporty",
         "description": "Wspieraj społeczność, potwierdzając przydatne raporty"
+      },
+      "manual": {
+        "title": "Zapisz swoje dane na wszystkich urządzeniach",
+        "description": "Synchronizuj swoje ulubione, raporty i historię czatu na wszystkich swoich urządzeniach"
       }
     },
     "features": {
@@ -321,7 +325,7 @@
         "description": "Unikalny identyfikator synchronizujący dane między urządzeniami"
       },
       "multiDevice": {
-        "title": "Zapisz lub zrób zrzut ekranu QR",
+        "title": "Zapisz, zrób zrzut ekranu QR lub wyślij mailem",
         "description": "Użyj klucza synchronizacji, aby przywrócić profil na innych urządzeniach"
       }
     }

@@ -319,6 +319,10 @@
       "vote": {
         "title": "Über hilfreiche Meldungen abstimmen",
         "description": "Unterstützen Sie die Community, indem Sie nützliche Meldungen bestätigen"
+      },
+      "manual": {
+        "title": "Speichern Sie Ihre Daten auf allen Geräten",
+        "description": "Synchronisieren Sie Ihre Favoriten, Meldungen und Chatverlauf auf allen Ihren Geräten"
       }
     },
     "features": {
@@ -331,7 +335,7 @@
         "description": "Eine eindeutige Kennung, die Ihre Daten geräteübergreifend synchronisiert"
       },
       "multiDevice": {
-        "title": "Speichern oder QR-Code fotografieren",
+        "title": "Speichern, QR-Code fotografieren oder per E-Mail senden",
         "description": "Verwenden Sie Ihren Sync-Schlüssel, um Ihr Profil auf anderen Geräten wiederherzustellen"
       }
     }

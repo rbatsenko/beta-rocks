@@ -319,6 +319,10 @@
       "vote": {
         "title": "Voter pour les rapports utiles",
         "description": "Soutenez la communauté en confirmant les rapports utiles"
+      },
+      "manual": {
+        "title": "Sauvegardez vos données sur tous vos appareils",
+        "description": "Synchronisez vos favoris, rapports et historique de discussion sur tous vos appareils"
       }
     },
     "features": {
@@ -331,7 +335,7 @@
         "description": "Un identifiant unique qui synchronise vos données sur tous les appareils"
       },
       "multiDevice": {
-        "title": "Enregistrez-la ou photographiez le code QR",
+        "title": "Enregistrez-la, capturez le QR ou envoyez par e-mail",
         "description": "Utilisez votre clé de synchronisation pour restaurer votre profil sur d'autres appareils"
       }
     }

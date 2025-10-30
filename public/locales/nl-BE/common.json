@@ -314,6 +314,10 @@
       "vote": {
         "title": "Stem op nuttige rapporten",
         "description": "Steun de gemeenschap door nuttige rapporten te bevestigen"
+      },
+      "manual": {
+        "title": "Bewaar je gegevens op al je apparaten",
+        "description": "Synchroniseer je favorieten, rapporten en chatgeschiedenis op al je apparaten"
       }
     },
     "features": {
@@ -326,7 +330,7 @@
         "description": "Een unieke identificatie die uw gegevens synchroniseert tussen apparaten"
       },
       "multiDevice": {
-        "title": "Bewaar het of fotografeer de QR-code",
+        "title": "Bewaar het, fotografeer de QR-code of stuur per e-mail",
         "description": "Gebruik uw synchronisatiesleutel om uw profiel op andere apparaten te herstellen"
       }
     }

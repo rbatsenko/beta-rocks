@@ -314,6 +314,10 @@
       "vote": {
         "title": "Votați rapoartele utile",
         "description": "Sprijiniți comunitatea confirmând rapoartele utile"
+      },
+      "manual": {
+        "title": "Salvează-ți datele pe toate dispozitivele",
+        "description": "Sincronizează-ți favoritele, rapoartele și istoricul conversațiilor pe toate dispozitivele tale"
       }
     },
     "features": {
@@ -326,7 +330,7 @@
         "description": "Un identificator unic care sincronizează datele între dispozitive"
       },
       "multiDevice": {
-        "title": "Salvați-o sau fotografiați codul QR",
+        "title": "Salvați-o, fotografiați codul QR sau trimiteți prin e-mail",
         "description": "Folosiți cheia de sincronizare pentru a restaura profilul pe alte dispozitive"
       }
     }

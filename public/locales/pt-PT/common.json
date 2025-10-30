@@ -314,6 +314,10 @@
       "vote": {
         "title": "Votar em relatórios úteis",
         "description": "Apoie a comunidade confirmando relatórios úteis"
+      },
+      "manual": {
+        "title": "Guarde os seus dados em todos os dispositivos",
+        "description": "Sincronize os seus favoritos, relatórios e histórico de conversas em todos os seus dispositivos"
       }
     },
     "features": {
@@ -326,7 +330,7 @@
         "description": "Um identificador único que sincroniza os seus dados entre dispositivos"
       },
       "multiDevice": {
-        "title": "Guarde-a ou fotografe o código QR",
+        "title": "Guarde-a, fotografe o código QR ou envie por e-mail",
         "description": "Use a sua chave de sincronização para restaurar o seu perfil noutros dispositivos"
       }
     }

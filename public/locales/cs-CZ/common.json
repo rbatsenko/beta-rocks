@@ -314,6 +314,10 @@
       "vote": {
         "title": "Hlasujte o užitečných hlášeních",
         "description": "Podpořte komunitu potvrzováním užitečných hlášení"
+      },
+      "manual": {
+        "title": "Uložte si data na všech zařízeních",
+        "description": "Synchronizujte své oblíbené, hlášení a historii chatů na všech svých zařízeních"
       }
     },
     "features": {
@@ -326,7 +330,7 @@
         "description": "Jedinečný identifikátor, který synchronizuje vaše data napříč zařízeními"
       },
       "multiDevice": {
-        "title": "Uložte si ho nebo vyfotografujte QR kód",
+        "title": "Uložte si ho, vyfotografujte QR kód nebo jej pošlete e-mailem",
         "description": "Použijte synchronizační klíč k obnovení profilu na jiných zařízeních"
       }
     }
