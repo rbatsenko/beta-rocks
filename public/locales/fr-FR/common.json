@@ -536,60 +536,60 @@
     "remove": "Retirer"
   },
   "reports": {
-    "addReport": "Add Report",
-    "addReportDescription": "Share information about {{cragName}}",
-    "postingAs": "Posting as",
-    "category": "What would you like to report?",
+    "addReport": "Ajouter un rapport",
+    "addReportDescription": "Partagez des informations sur {{cragName}}",
+    "postingAs": "Publier en tant que",
+    "category": "Que souhaitez-vous signaler ?",
     "categories": {
       "conditions": "Conditions",
-      "safety": "Safety",
-      "access": "Access",
+      "safety": "Sécurité",
+      "access": "Accès",
       "climbing_info": "Infos escalade",
-      "facilities": "Facilities",
-      "other": "Other"
+      "facilities": "Installations",
+      "other": "Autre"
     },
     "categoryDescriptions": {
-      "conditions": "Weather, friction, dryness, crowds",
-      "safety": "Loose bolts, rockfall, broken holds, hazards",
-      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "conditions": "Météo, adhérence, sécheresse, affluence",
+      "safety": "Dégaines desserrées, chutes de pierres, prises cassées, dangers",
+      "access": "Fermetures, changements de parking, restrictions saisonnières, nids d'oiseaux, insectes",
       "climbing_info": "Rééquipement, mises à jour du matériel, changements de voies, dégaines fixes",
-      "facilities": "Bathrooms, camping, water sources, amenities",
-      "other": "Anything else that doesn't fit above"
+      "facilities": "Toilettes, camping, points d'eau, commodités",
+      "other": "Tout ce qui ne correspond pas aux catégories ci-dessus"
     },
-    "dryness": "Dryness",
-    "wind": "Wind",
-    "crowds": "Crowds",
-    "additionalComments": "Additional comments (optional)",
-    "details": "Details",
-    "detailsRequired": "Please provide details about this report",
+    "dryness": "Sécheresse",
+    "wind": "Vent",
+    "crowds": "Affluence",
+    "additionalComments": "Commentaires supplémentaires (optionnel)",
+    "details": "Détails",
+    "detailsRequired": "Veuillez fournir des détails sur ce rapport",
     "placeholders": {
-      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
-      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
-      "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
-      "facilities": "E.g., Toilet available at parking, no water source nearby...",
-      "other": "Describe what you'd like to report..."
+      "conditions": "Ex : Secteur Est encore mouillé, sentier boueux, fissure qui suinte...",
+      "safety": "Ex : Dégaine desserrée sur la Voie X, danger de chute de pierres près du mur principal...",
+      "access": "Ex : Portail fermé jusqu'en mai, nouveau parking derrière la bibliothèque...",
+      "climbing_info": "Ex : Voie X rééquipée avec dégaines inox, nouvelles dégaines permanentes installées, relais amélioré...",
+      "facilities": "Ex : Toilettes disponibles au parking, pas de point d'eau à proximité...",
+      "other": "Décrivez ce que vous souhaitez signaler..."
     },
-    "submit": "Submit Report",
-    "submitting": "Submitting...",
-    "readyToPost": "Profile created! You're ready to post your report.",
-    "helpful": "Helpful",
-    "loginToConfirm": "Please set up your profile to confirm reports",
-    "confirmFailed": "Failed to confirm report. Please try again.",
+    "submit": "Envoyer le rapport",
+    "submitting": "Envoi en cours...",
+    "readyToPost": "Profil créé ! Vous êtes prêt à publier votre rapport.",
+    "helpful": "Utile",
+    "loginToConfirm": "Veuillez configurer votre profil pour confirmer les rapports",
+    "confirmFailed": "Échec de la confirmation du rapport. Veuillez réessayer.",
     "ratings": {
-      "veryPoor": "Very Poor",
-      "poor": "Poor",
-      "okay": "Okay",
-      "good": "Good",
+      "veryPoor": "Très mauvais",
+      "poor": "Mauvais",
+      "okay": "Correct",
+      "good": "Bon",
       "excellent": "Excellent"
     },
     "scales": {
-      "veryWet": "Very wet",
-      "veryDry": "Perfect",
-      "calm": "Calm",
-      "veryWindy": "Very windy",
-      "empty": "Empty",
-      "veryCrowded": "Very crowded"
+      "veryWet": "Très humide",
+      "veryDry": "Parfait",
+      "calm": "Calme",
+      "veryWindy": "Très venteux",
+      "empty": "Vide",
+      "veryCrowded": "Très bondé"
     },
     "drynessLabels": {
       "1": "Très humide",
@@ -612,21 +612,22 @@
       "4": "Peu de monde",
       "5": "Vide"
     },
-    "recentReports": "Recent Reports",
-    "communityReports": "Community Reports",
-    "noReports": "No reports yet",
-    "beTheFirst": "Be the first to report",
-    "noReportsInCategory": "No reports in this category",
+    "recentReports": "Rapports récents",
+    "communityReports": "Rapports communautaires",
+    "noReports": "Aucun rapport pour le moment",
+    "beTheFirst": "Soyez le premier à signaler",
+    "noReportsInCategory": "Aucun rapport dans cette catégorie",
     "filters": {
-      "all": "All"
+      "all": "Tous"
     },
     "staleness": {
       "outdated": "Obsolète",
       "older": "Plus ancien",
       "veryOld": "Très ancien"
     },
-    "observationDate": "Quand avez-vous observé cela?",
-    "observationDateHelp": "Vous pouvez signaler les conditions jusqu'à 7 jours en arrière"
+    "observationDate": "Quand avez-vous observé cela ?",
+    "observationDateHelp": "Vous pouvez signaler les conditions jusqu'à 7 jours en arrière",
+    "voteReady": "Vous pouvez maintenant voter pour les rapports"
   },
   "time": {
     "today": "Aujourd'hui",

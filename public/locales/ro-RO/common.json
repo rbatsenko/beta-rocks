@@ -531,60 +531,61 @@
     "remove": "Elimină"
   },
   "reports": {
-    "addReport": "Add Report",
-    "addReportDescription": "Share information about {{cragName}}",
-    "postingAs": "Posting as",
-    "category": "What would you like to report?",
+    "addReport": "Adaugă raport",
+    "addReportDescription": "Împărtășește informații despre {{cragName}}",
+    "postingAs": "Postezi ca",
+    "category": "Ce ai vrea să raportezi?",
     "categories": {
-      "conditions": "Conditions",
-      "safety": "Safety",
-      "access": "Access",
+      "conditions": "Condiții",
+      "safety": "Siguranță",
+      "access": "Acces",
       "climbing_info": "Info escaladă",
-      "facilities": "Facilities",
-      "other": "Other"
+      "facilities": "Facilități",
+      "other": "Altele"
     },
     "categoryDescriptions": {
-      "conditions": "Weather, friction, dryness, crowds",
-      "safety": "Loose bolts, rockfall, broken holds, hazards",
-      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "conditions": "Vreme, fricțiune, uscare, aglomerație",
+      "safety": "Piulițe șubrede, prăbușiri de pietre, prize rupte, pericole",
+      "access": "Închideri, schimbări la parcare, restricții sezoniere, cuiburi de păsări, insecte",
       "climbing_info": "Reechipare, actualizări echipament, schimbări rute, quickdraw-uri fixe",
-      "facilities": "Bathrooms, camping, water sources, amenities",
-      "other": "Anything else that doesn't fit above"
+      "facilities": "Toalete, camping, surse de apă, facilități",
+      "other": "Orice altceva care nu se încadrează mai sus"
     },
-    "dryness": "Dryness",
-    "wind": "Wind",
-    "crowds": "Crowds",
-    "additionalComments": "Additional comments (optional)",
-    "details": "Details",
-    "detailsRequired": "Please provide details about this report",
+    "dryness": "Uscare",
+    "wind": "Vânt",
+    "crowds": "Aglomerație",
+    "additionalComments": "Comentarii suplimentare (opțional)",
+    "details": "Detalii",
+    "detailsRequired": "Te rog furnizează detalii despre acest raport",
     "placeholders": {
-      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
-      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
-      "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
-      "facilities": "E.g., Toilet available at parking, no water source nearby...",
-      "other": "Describe what you'd like to report..."
+      "conditions": "Ex., Sectorul est încă ud, poteca noroioasă, fisura picură...",
+      "safety": "Ex., Piuliță șubred pe Ruta X, pericol de prăbușire de pietre lângă peretele principal...",
+      "access": "Ex., Poartă închisă până în mai, parcare nouă în spatele bibliotecii...",
+      "climbing_info": "Ex., Ruta X reechipată cu piulițe din oțel inoxidabil, quickdraw-uri fixe noi instalate, ancoră îmbunătățită...",
+      "facilities": "Ex., Toaletă disponibilă la parcare, nicio sursă de apă în apropiere...",
+      "other": "Descrie ce ai vrea să raportezi..."
     },
-    "submit": "Submit Report",
-    "submitting": "Submitting...",
-    "readyToPost": "Profile created! You're ready to post your report.",
-    "helpful": "Helpful",
-    "loginToConfirm": "Please set up your profile to confirm reports",
-    "confirmFailed": "Failed to confirm report. Please try again.",
+    "submit": "Trimite raportul",
+    "submitting": "Se trimite...",
+    "readyToPost": "Profil creat! Ești gata să postezi raportul.",
+    "helpful": "Util",
+    "loginToConfirm": "Te rog configurează-ți profilul pentru a confirma rapoarte",
+    "confirmFailed": "Nu s-a putut confirma raportul. Te rog încearcă din nou.",
+    "voteReady": "Acum poți vota rapoarte",
     "ratings": {
-      "veryPoor": "Very Poor",
-      "poor": "Poor",
-      "okay": "Okay",
-      "good": "Good",
-      "excellent": "Excellent"
+      "veryPoor": "Foarte slab",
+      "poor": "Slab",
+      "okay": "Acceptabil",
+      "good": "Bun",
+      "excellent": "Excelent"
     },
     "scales": {
-      "veryWet": "Very wet",
+      "veryWet": "Foarte umed",
       "veryDry": "Perfect",
       "calm": "Calm",
-      "veryWindy": "Very windy",
-      "empty": "Empty",
-      "veryCrowded": "Very crowded"
+      "veryWindy": "Foarte vântos",
+      "empty": "Gol",
+      "veryCrowded": "Foarte aglomerat"
     },
     "drynessLabels": {
       "1": "Foarte umed",
@@ -607,13 +608,13 @@
       "4": "Puțini oameni",
       "5": "Gol"
     },
-    "recentReports": "Recent Reports",
-    "communityReports": "Community Reports",
-    "noReports": "No reports yet",
-    "beTheFirst": "Be the first to report",
-    "noReportsInCategory": "No reports in this category",
+    "recentReports": "Rapoarte recente",
+    "communityReports": "Rapoarte comunitare",
+    "noReports": "Niciun raport încă",
+    "beTheFirst": "Fii primul care raportează",
+    "noReportsInCategory": "Niciun raport în această categorie",
     "filters": {
-      "all": "All"
+      "all": "Toate"
     },
     "staleness": {
       "outdated": "Învechit",

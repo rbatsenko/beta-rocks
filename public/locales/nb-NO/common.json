@@ -453,60 +453,61 @@
     "remove": "Fjern"
   },
   "reports": {
-    "addReport": "Add Report",
-    "addReportDescription": "Share information about {{cragName}}",
-    "postingAs": "Posting as",
-    "category": "What would you like to report?",
+    "addReport": "Legg til rapport",
+    "addReportDescription": "Del informasjon om {{cragName}}",
+    "postingAs": "Publiserer som",
+    "category": "Hva vil du rapportere?",
     "categories": {
-      "conditions": "Conditions",
-      "safety": "Safety",
-      "access": "Access",
+      "conditions": "Forhold",
+      "safety": "Sikkerhet",
+      "access": "Tilgang",
       "climbing_info": "Klatreinfo",
-      "facilities": "Facilities",
-      "other": "Other"
+      "facilities": "Fasiliteter",
+      "other": "Annet"
     },
     "categoryDescriptions": {
-      "conditions": "Weather, friction, dryness, crowds",
-      "safety": "Loose bolts, rockfall, broken holds, hazards",
-      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "conditions": "Vær, friksjon, tørrhet, folkemengde",
+      "safety": "Løse bolter, steinsprang, ødelagte grep, farer",
+      "access": "Stenging, parkeringsendringer, sesongbegrensninger, fuglereir, insekter",
       "climbing_info": "Rebulting, utstyrsoppdateringer, ruteendringer, faste quickdraws",
-      "facilities": "Bathrooms, camping, water sources, amenities",
-      "other": "Anything else that doesn't fit above"
+      "facilities": "Toalett, camping, vannkilder, fasiliteter",
+      "other": "Alt annet som ikke passer over"
     },
-    "dryness": "Dryness",
-    "wind": "Wind",
-    "crowds": "Crowds",
-    "additionalComments": "Additional comments (optional)",
-    "details": "Details",
-    "detailsRequired": "Please provide details about this report",
+    "dryness": "Tørrhet",
+    "wind": "Vind",
+    "crowds": "Folkemengde",
+    "additionalComments": "Flere kommentarer (valgfritt)",
+    "details": "Detaljer",
+    "detailsRequired": "Vennligst oppgi detaljer om denne rapporten",
     "placeholders": {
-      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
-      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
-      "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
-      "facilities": "E.g., Toilet available at parking, no water source nearby...",
-      "other": "Describe what you'd like to report..."
+      "conditions": "F.eks., Østsektoren fortsatt våt, sti gjørmete, sprekk sipper...",
+      "safety": "F.eks., Løs bolt på rute X, steinsprang-fare nær hovedveggen...",
+      "access": "F.eks., Port stengt til mai, ny parkeringsplass bak biblioteket...",
+      "climbing_info": "F.eks., Rute X rebultet med rustfrie bolter, nye faste quickdraws installert, ankerfeste oppgradert...",
+      "facilities": "F.eks., Toalett tilgjengelig ved parkering, ingen vannkilde i nærheten...",
+      "other": "Beskriv hva du vil rapportere..."
     },
-    "submit": "Submit Report",
-    "submitting": "Submitting...",
-    "readyToPost": "Profile created! You're ready to post your report.",
-    "helpful": "Helpful",
-    "loginToConfirm": "Please set up your profile to confirm reports",
-    "confirmFailed": "Failed to confirm report. Please try again.",
+    "submit": "Send inn rapport",
+    "submitting": "Sender inn...",
+    "readyToPost": "Profil opprettet! Du er klar til å publisere rapporten din.",
+    "helpful": "Nyttig",
+    "loginToConfirm": "Vennligst sett opp profilen din for å bekrefte rapporter",
+    "confirmFailed": "Kunne ikke bekrefte rapport. Vennligst prøv igjen.",
+    "voteReady": "Du kan nå stemme på rapporter",
     "ratings": {
-      "veryPoor": "Very Poor",
-      "poor": "Poor",
-      "okay": "Okay",
-      "good": "Good",
-      "excellent": "Excellent"
+      "veryPoor": "Veldig dårlig",
+      "poor": "Dårlig",
+      "okay": "OK",
+      "good": "Bra",
+      "excellent": "Utmerket"
     },
     "scales": {
-      "veryWet": "Very wet",
-      "veryDry": "Perfect",
-      "calm": "Calm",
-      "veryWindy": "Very windy",
-      "empty": "Empty",
-      "veryCrowded": "Very crowded"
+      "veryWet": "Veldig vått",
+      "veryDry": "Perfekt",
+      "calm": "Rolig",
+      "veryWindy": "Veldig blåsende",
+      "empty": "Tomt",
+      "veryCrowded": "Veldig fullt"
     },
     "drynessLabels": {
       "1": "Veldig vått",
@@ -529,13 +530,18 @@
       "4": "Få personer",
       "5": "Tomt"
     },
-    "recentReports": "Recent Reports",
-    "communityReports": "Community Reports",
-    "noReports": "No reports yet",
-    "beTheFirst": "Be the first to report",
-    "noReportsInCategory": "No reports in this category",
+    "recentReports": "Siste rapporter",
+    "communityReports": "Samfunnsrapporter",
+    "noReports": "Ingen rapporter ennå",
+    "beTheFirst": "Vær den første til å rapportere",
+    "noReportsInCategory": "Ingen rapporter i denne kategorien",
     "filters": {
-      "all": "All"
+      "all": "Alle"
+    },
+    "staleness": {
+      "outdated": "Utdatert",
+      "older": "Eldre",
+      "veryOld": "Veldig gammel"
     },
     "observationDate": "Når observerte du dette?",
     "observationDateHelp": "Du kan rapportere forhold opptil 7 dager tilbake"

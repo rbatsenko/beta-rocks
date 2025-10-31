@@ -531,60 +531,61 @@
     "remove": "Verwijderen"
   },
   "reports": {
-    "addReport": "Add Report",
-    "addReportDescription": "Share information about {{cragName}}",
-    "postingAs": "Posting as",
-    "category": "What would you like to report?",
+    "addReport": "Rapport toevoegen",
+    "addReportDescription": "Deel informatie over {{cragName}}",
+    "postingAs": "Plaatsen als",
+    "category": "Wat wil je melden?",
     "categories": {
-      "conditions": "Conditions",
-      "safety": "Safety",
-      "access": "Access",
+      "conditions": "Condities",
+      "safety": "Veiligheid",
+      "access": "Toegang",
       "climbing_info": "Kliminfo",
-      "facilities": "Facilities",
-      "other": "Other"
+      "facilities": "Voorzieningen",
+      "other": "Overig"
     },
     "categoryDescriptions": {
-      "conditions": "Weather, friction, dryness, crowds",
-      "safety": "Loose bolts, rockfall, broken holds, hazards",
-      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "conditions": "Weer, wrijving, droogte, drukte",
+      "safety": "Losse bouten, steenslag, gebroken grepen, gevaren",
+      "access": "Sluitingen, parkeerveranderingen, seizoensgebonden beperkingen, vogelnesten, insecten",
       "climbing_info": "Herboulonnering, equipment updates, route wijzigingen, vaste quickdraws",
-      "facilities": "Bathrooms, camping, water sources, amenities",
-      "other": "Anything else that doesn't fit above"
+      "facilities": "Toiletten, camping, waterbronnen, voorzieningen",
+      "other": "Alles anders dat hierboven niet past"
     },
-    "dryness": "Dryness",
+    "dryness": "Droogte",
     "wind": "Wind",
-    "crowds": "Crowds",
-    "additionalComments": "Additional comments (optional)",
+    "crowds": "Drukte",
+    "additionalComments": "Extra opmerkingen (optioneel)",
     "details": "Details",
-    "detailsRequired": "Please provide details about this report",
+    "detailsRequired": "Geef alstublieft details over dit rapport",
     "placeholders": {
-      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
-      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
-      "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
-      "facilities": "E.g., Toilet available at parking, no water source nearby...",
-      "other": "Describe what you'd like to report..."
+      "conditions": "Bijv., Oostsector nog nat, pad modderig, scheur lekt...",
+      "safety": "Bijv., Losse bout op route X, steenslaggevaar bij hoofdwand...",
+      "access": "Bijv., Poort gesloten tot mei, nieuwe parkeerplaats achter bibliotheek...",
+      "climbing_info": "Bijv., Route X herboulonneerd met roestvrijstalen bouten, nieuwe vaste quickdraws geïnstalleerd, anker verbeterd...",
+      "facilities": "Bijv., Toilet beschikbaar bij parkeerplaats, geen waterbron in de buurt...",
+      "other": "Beschrijf wat je wilt melden..."
     },
-    "submit": "Submit Report",
-    "submitting": "Submitting...",
-    "readyToPost": "Profile created! You're ready to post your report.",
-    "helpful": "Helpful",
-    "loginToConfirm": "Please set up your profile to confirm reports",
-    "confirmFailed": "Failed to confirm report. Please try again.",
+    "submit": "Rapport indienen",
+    "submitting": "Indienen...",
+    "readyToPost": "Profiel aangemaakt! Je bent klaar om je rapport te plaatsen.",
+    "helpful": "Nuttig",
+    "loginToConfirm": "Stel je profiel in om rapporten te bevestigen",
+    "confirmFailed": "Kan rapport niet bevestigen. Probeer opnieuw.",
+    "voteReady": "Je kunt nu stemmen op rapporten",
     "ratings": {
-      "veryPoor": "Very Poor",
-      "poor": "Poor",
-      "okay": "Okay",
-      "good": "Good",
-      "excellent": "Excellent"
+      "veryPoor": "Zeer slecht",
+      "poor": "Slecht",
+      "okay": "Oké",
+      "good": "Goed",
+      "excellent": "Uitstekend"
     },
     "scales": {
-      "veryWet": "Very wet",
+      "veryWet": "Zeer nat",
       "veryDry": "Perfect",
-      "calm": "Calm",
-      "veryWindy": "Very windy",
-      "empty": "Empty",
-      "veryCrowded": "Very crowded"
+      "calm": "Kalm",
+      "veryWindy": "Zeer winderig",
+      "empty": "Leeg",
+      "veryCrowded": "Zeer druk"
     },
     "drynessLabels": {
       "1": "Zeer nat",
@@ -607,13 +608,13 @@
       "4": "Weinig mensen",
       "5": "Leeg"
     },
-    "recentReports": "Recent Reports",
-    "communityReports": "Community Reports",
-    "noReports": "No reports yet",
-    "beTheFirst": "Be the first to report",
-    "noReportsInCategory": "No reports in this category",
+    "recentReports": "Recente rapporten",
+    "communityReports": "Gemeenschapsrapporten",
+    "noReports": "Nog geen rapporten",
+    "beTheFirst": "Wees de eerste om te rapporteren",
+    "noReportsInCategory": "Geen rapporten in deze categorie",
     "filters": {
-      "all": "All"
+      "all": "Alle"
     },
     "staleness": {
       "outdated": "Verouderd",

@@ -7,23 +7,23 @@
     "description": "Echtzeit-Bedingungen, Community-Berichte und Routeninformationen für Felsen weltweit",
     "exampleQueries": {
       "query1": {
-        "display": "Wie schaut's morgen im Zillertal aus?",
-        "query": "Wie sind die Bedingungen im Zillertal morgen?"
+        "display": "Wie wird der Grip im Frankenjura morgen?",
+        "query": "Wie sind die Bedingungen im Frankenjura morgen?"
       },
       "query2": {
-        "display": "Ist die Hohe Wand heute Nachmittag trocken?",
-        "query": "Ist die Hohe Wand heute Nachmittag trocken?"
+        "display": "Ist die Sächsische Schweiz heute Nachmittag trocken?",
+        "query": "Ist die Sächsische Schweiz heute Nachmittag trocken?"
       },
       "query3": {
-        "display": "Kommt gutes Wetter am Kanzianiberg fürs Wochenende?",
-        "query": "Wie sind die Bedingungen am Kanzianiberg am Wochenende?"
+        "display": "Wie wird das Wetter in Kochel am Wochenende?",
+        "query": "Wie sind die Bedingungen in Kochel dieses Wochenende?"
       }
     }
   },
   "chat": {
-    "analyzing": "Analysiere die Bedingungen...",
-    "thinking": "Am Überlegen...",
-    "inputPlaceholder": "Frag nach einem Klettergebiet oder Sektor...",
+    "analyzing": "Analysiere Bedingungen...",
+    "thinking": "Denke nach...",
+    "inputPlaceholder": "Frag nach einem Fels oder Sektor...",
     "clearHistory": "Verlauf löschen",
     "clearHistoryConfirm": "Sind Sie sicher, dass Sie den gesamten Chat-Verlauf löschen möchten? Dies kann nicht rückgängig gemacht werden.",
     "clearChat": "Chat löschen",
@@ -42,55 +42,55 @@
   "ratings": {
     "great": "Top",
     "good": "Gut",
-    "fair": "Passt",
-    "poor": "Schwach",
-    "nope": "Lass es"
+    "fair": "Okay",
+    "poor": "Schlecht",
+    "nope": "Keine Chance"
   },
   "reasons": {
     "perfectTemp": "Perfekte Temperatur ({{temp}})",
-    "tempTooHigh": "Zu warm - die Finger rutschen sonst",
-    "coldGoodFriction": "Frisch, aber super Reibung für {{rockType}}",
+    "tempTooHigh": "Temperatur zu hoch - Finger könnten rutschen",
+    "coldGoodFriction": "Kühl, aber gute Reibung für {{rockType}}",
     "idealHumidity": "Ideale Luftfeuchtigkeit ({{humidity}}%)",
-    "lowHumidityGranite": "Wenig Feuchte bringt mehr Grip auf Granit",
-    "readyInHours": "In ~{{hours}} Stunden kletterfit",
-    "acceptable": "Eh in Ordnung"
+    "lowHumidityGranite": "Niedrige Luftfeuchtigkeit verbessert die Reibung auf Granit",
+    "readyInHours": "In ~{{hours}} Stunden kletterbar",
+    "acceptable": "Akzeptable Bedingungen"
   },
   "warnings": {
     "tooWarm": "Zu warm für {{rockType}} ({{temp}})",
-    "coldSuboptimal": "Kalt und nicht ideal für {{rockType}}",
-    "highHumidity": "Hohe Luftfeuchte ({{humidity}}%) - der Fels kann schmierig sein",
-    "wetDangerousSandstone": "Fels ist nass - nicht klettern, vor allem Sandstein leidet",
+    "coldSuboptimal": "Kalt und suboptimal für {{rockType}}",
+    "highHumidity": "Hohe Luftfeuchtigkeit ({{humidity}}%) - Fels kann rutschig sein",
+    "wetDangerousSandstone": "Fels ist nass - gefährlich zu klettern (Sandstein wird weich, wenn er nass ist)",
     "wetSlippery": "Fels ist nass - rutschige Bedingungen",
-    "veryHighWinds": "Sehr starker Wind ({{wind}}) - Gefahr verblasen zu werden",
+    "veryHighWinds": "Sehr starker Wind ({{wind}}) - Gefahr vom Fels geweht zu werden",
     "highWind": "Starker Wind ({{wind}})",
     "recentPrecip": "Kürzliche Niederschläge ({{precip}}) - trocknet in ~{{hours}}h",
-    "currentlyWetDangerous": "Gerade nass - gefährlich",
+    "currentlyWetDangerous": "Derzeit nass - gefährlich",
     "currentlyWet": "Derzeit nass",
     "cold": "Cold ({{temp}})"
   },
   "weather": {
-    "clearSky": "Wolkenlos",
-    "mainlyClear": "Meistens klar",
+    "clearSky": "Klarer Himmel",
+    "mainlyClear": "Überwiegend klar",
     "partlyCloudy": "Teilweise bewölkt",
     "overcast": "Bedeckt",
     "fog": "Nebel",
-    "depositingRimeFog": "Raureifnebel",
-    "lightDrizzle": "Leichter Niesel",
-    "moderateDrizzle": "Mäßiger Niesel",
-    "denseDrizzle": "Starker Niesel",
+    "depositingRimeFog": "Raureif-Nebel",
+    "lightDrizzle": "Leichter Nieselregen",
+    "moderateDrizzle": "Mäßiger Nieselregen",
+    "denseDrizzle": "Starker Nieselregen",
     "lightFreezingDrizzle": "Leichter gefrierender Niesel",
     "denseFreezingDrizzle": "Starker gefrierender Niesel",
     "slightRain": "Leichter Regen",
-    "moderateRain": "Mittelstarker Regen",
+    "moderateRain": "Mäßiger Regen",
     "heavyRain": "Starker Regen",
     "lightFreezingRain": "Leichter gefrierender Regen",
     "heavyFreezingRain": "Starker gefrierender Regen",
     "slightSnowFall": "Leichter Schneefall",
-    "moderateSnowFall": "Mittelstarker Schneefall",
+    "moderateSnowFall": "Mäßiger Schneefall",
     "heavySnowFall": "Starker Schneefall",
     "snowGrains": "Schneegriesel",
     "slightRainShowers": "Leichte Schauer",
-    "moderateRainShowers": "Mittelstarke Schauer",
+    "moderateRainShowers": "Mäßige Schauer",
     "violentRainShowers": "Heftige Schauer",
     "slightSnowShowers": "Leichte Schneeschauer",
     "heavySnowShowers": "Starke Schneeschauer",
@@ -107,8 +107,8 @@
     "tonight": "heute Nacht"
   },
   "disambiguation": {
-    "foundMultipleAreas": "Es gibt {{count}} Kletterspots für \"{{location}}\". Such dir einen aus:",
-    "foundMultipleLocations": "Mehrere Orte für \"{{location}}\" gefunden. Bitte auswählen:",
+    "foundMultipleAreas": "Es wurden {{count}} Klettergebiete für \"{{location}}\" gefunden. Bitte wähle eines:",
+    "foundMultipleLocations": "Es wurden mehrere Orte für \"{{location}}\" gefunden. Bitte wähle einen:",
     "queryTemplate": "Bedingungen in {{name}} ({{latitude}}, {{longitude}})"
   },
   "footer": {
@@ -116,36 +116,36 @@
     "privacy": "Datenschutz",
     "github": "GitHub",
     "brand": "beta.rocks",
-    "description": "Kostenlose Kletterinfos für alle. Mit ❤️ für die alpine Community gebaut.",
-    "attribution": "Daten von Open-Meteo, OpenBeta und <osmLink>OpenStreetMap-Mitwirkenden</osmLink>. Community-Reports.",
+    "description": "Kostenlose Kletterbedingungen für alle. Mit ❤️ für die Kletterszene gebaut.",
+    "attribution": "Daten von Open-Meteo, OpenBeta und <osmLink>OpenStreetMap-Mitwirkenden</osmLink>. Community-getriebene Berichte.",
     "copyright": "© 2025 beta.rocks. Alle Rechte vorbehalten."
   },
   "features": {
-    "heading": "Alles was du brauchst",
-    "subheading": "Alle Kletterbedingungen griffbereit, komplett gratis",
+    "heading": "Alles, was du brauchst",
+    "subheading": "Umfassende Kletterbedingungen direkt zur Hand, komplett kostenlos",
     "realTimeWeather": {
-      "title": "Live-Wetter",
-      "description": "Exakte Open-Meteo-Prognosen mit Sonnen-/Schattenberechnung für einzelne Sektoren"
+      "title": "Wetter in Echtzeit",
+      "description": "Präzise Open-Meteo-Vorhersagen mit Sonnen-/Schattenberechnung für einzelne Sektoren"
     },
     "chatInterface": {
-      "title": "Chat-Interface",
-      "description": "Natürlichsprachliche Fragen dank KI. Frag in jeder Sprache und bekomm sofort Antworten"
+      "title": "Chat-Oberfläche",
+      "description": "Natürlichsprachliche Anfragen mit KI-Unterstützung. Frag in jeder Sprache und erhalte sofort Antworten"
     },
     "communityReports": {
-      "title": "Community-Reports",
+      "title": "Community-Berichte",
       "description": "Teile Bedingungen, Sicherheitshinweise, Zugangsänderungen, Kletterinfos und mehr. Hilf Kletterern mit Echtzeit-Updates in verschiedenen Kategorien"
     },
     "globalCoverage": {
       "title": "Globale Abdeckung",
-      "description": "Jeder Spot weltweit durch die OpenBeta-Integration"
+      "description": "Jeder Fels oder Sektor weltweit durch die OpenBeta-Integration"
     },
     "worksOffline": {
-      "title": "Offline nutzbar",
-      "description": "Local-first-Design. Speichere Daten offline und synchronisiere sie mit einem Schlüssel"
+      "title": "Funktioniert offline",
+      "description": "Local-first-Design. Speichere Daten offline und synchronisiere sie per Schlüssel zwischen Geräten"
     },
     "privacyFirst": {
-      "title": "Datenschutz voran",
-      "description": "Wir brauchen deine Daten nicht nur nicht - wir wollen sie gar nicht! Standardmäßig anonym. Keine Accounts, kein Tracking. Deine Daten bleiben deine."
+      "title": "Datenschutz zuerst",
+      "description": "Wir brauchen deine Daten nicht nur nicht - wir wollen sie gar nicht! Standardmäßig anonym. Keine Accounts, kein Tracking. Deine Daten gehören dir."
     }
   },
   "privacy": {
@@ -185,11 +185,15 @@
     "selectLanguage": "Sprache wählen",
     "aboutApp": "Über die App"
   },
+  "tabs": {
+    "overview": "Übersicht",
+    "reports": "Berichte"
+  },
   "dialog": {
     "close": "Schließen",
     "cancel": "Abbrechen",
-    "detailedConditions": "Detailbedingungen",
-    "fullAnalysis": "Komplette Wetter- und Bedingungsanalyse",
+    "detailedConditions": "Detaillierte Bedingungen",
+    "fullAnalysis": "Umfassende Wetter- und Kletteranalyse",
     "showMap": "Karte",
     "tabs": {
       "overview": "Überblick",
@@ -215,35 +219,35 @@
     "last24h": "Letzte 24 h",
     "last48h": "Letzte 48 h",
     "next24h": "Nächste 24 h",
-    "dewPointSpread": "Abstand zum Taupunkt (Kondensationsrisiko)",
-    "lowRisk": "✅ Geringes Risiko - der Fels bleibt trocken",
-    "moderateRisk": "⚠️ Mittleres Risiko - beobachte die Feuchte",
+    "dewPointSpread": "Differenz zum Taupunkt (Kondensationsrisiko)",
+    "lowRisk": "✅ Geringes Risiko - Fels sollte trocken bleiben",
+    "moderateRisk": "⚠️ Mittleres Risiko - Feuchte im Blick behalten",
     "highRisk": "❌ Hohes Risiko - Kondensation wahrscheinlich",
-    "optimalWindows": "Beste Kletterfenster",
+    "optimalWindows": "Optimale Kletterfenster",
     "nextDays": "Nächste 5 Tage",
-    "bestTime": "🌟 Bester Zeitpunkt",
+    "bestTime": "🌟 Beste Zeit",
     "noOptimalConditions": "Keine optimalen Bedingungen in den nächsten 5 Tagen",
-    "checkHourlyForecast": "Schau in die stündliche Prognose für Details",
-    "weatherDisclaimer": "⚠️ Wetter dreht schnell. Check die Prognose vorm Losfahren und schau dir die Bedingungen vor Ort an.",
+    "checkHourlyForecast": "Sieh dir die stündliche Vorhersage für Details an",
+    "weatherDisclaimer": "⚠️ Wetter kann sich schnell ändern. Prüfe die Vorhersage vor der Abfahrt und kontrolliere die Bedingungen vor Ort.",
     "window": "Fenster",
     "windows": "Fenster",
     "today": "Heute",
     "tomorrow": "Morgen",
-    "showCompleteTimeline": "Gesamten Verlauf anzeigen",
+    "showCompleteTimeline": "Kompletten Verlauf anzeigen",
     "hour": "Stunde",
     "hours": "Stunden",
     "period": "Zeitraum",
     "periods": "Zeiträume",
-    "noHourlyData": "Keine stündlichen Daten verfügbar",
-    "noDailyData": "Keine täglichen Daten verfügbar",
+    "noHourlyData": "Keine stündlichen Vorhersagedaten verfügbar",
+    "noDailyData": "Keine täglichen Vorhersagedaten verfügbar",
     "noOptimalHours": "Keine optimalen Bedingungen am",
-    "forecastIndicators": "Vorhersage-Indikatoren:",
-    "goodClimbingWindows": "Gute Fenster",
-    "fairConditions": "Passt schon",
+    "forecastIndicators": "Vorhersageindikatoren:",
+    "goodClimbingWindows": "Gute Kletterfenster",
+    "fairConditions": "Ordentliche Bedingungen",
     "poorConditions": "Schlechte Bedingungen",
-    "lessReliable": "Tage 8-14: weniger verlässliche Prognose",
-    "lessReliableHourly": "Nächste Stunden weniger verlässlich",
-    "lessCertain": "UNSICHER",
+    "lessReliable": "Tage 8-14: Weniger verlässliche Vorhersage",
+    "lessReliableHourly": "Nächste Stunden weniger vorhersehbar",
+    "lessCertain": "UNSICHERER",
     "todayBadge": "HEUTE"
   },
   "timeContext": {
@@ -287,7 +291,8 @@
     "status": {
       "synced": "Synchronisiert",
       "syncing": "Synchronisiere...",
-      "offline": "Offline"
+      "offline": "Offline",
+      "clickToLearnMore": "Klicken Sie, um mehr über die Synchronisierung zu erfahren"
     },
     "notification": {
       "title": "Sync-Schlüssel erstellt",
@@ -298,22 +303,101 @@
   },
   "syncExplainer": {
     "title": "So funktioniert die Synchronisierung",
-    "description": "Halten Sie Ihre Daten nahtlos und sicher auf all Ihren Geräten synchron.",
+    "description": "Halten Sie Ihre Daten nahtlos und sicher auf allen Geräten synchron.",
     "features": {
       "syncKey": {
-        "title": "Einzigartiger Sync-Schlüssel",
-        "description": "Jeder Benutzer erhält einen sicheren, einzigartigen Schlüssel zur Synchronisierung seiner Daten zwischen Geräten."
+        "title": "Eindeutiger Sync-Schlüssel",
+        "description": "Jeder Benutzer erhält einen sicheren, eindeutigen Schlüssel zur Synchronisierung seiner Daten."
       },
       "multiDevice": {
-        "title": "Mehrgerätezugriff",
-        "description": "Greifen Sie von jedem Gerät aus auf Ihre Favoriten und Chat-Historie zu, indem Sie Ihren Sync-Schlüssel verwenden."
+        "title": "Zugriff von mehreren Geräten",
+        "description": "Greifen Sie mit Ihrem Sync-Schlüssel von jedem Gerät auf Ihre Favoriten und Ihren Chat-Verlauf zu."
       },
       "privacy": {
-        "title": "Privatsphäre zuerst",
+        "title": "Datenschutz zuerst",
         "description": "Ihre Daten sind verschlüsselt und nur mit Ihrem Sync-Schlüssel zugänglich. Kein Konto erforderlich."
       }
     },
     "openSettings": "Einstellungen öffnen"
+  },
+  "profileCreation": {
+    "title": "Profil erstellen",
+    "subtitle": "Datenschutzfreundliche Registrierung - keine persönlichen Daten erforderlich",
+    "createProfile": "Profil erstellen",
+    "creating": "Wird erstellt...",
+    "maybeLater": "Vielleicht später",
+    "tabs": {
+      "create": "Profil erstellen",
+      "signIn": "Anmelden"
+    },
+    "signIn": {
+      "title": "Haben Sie bereits einen Sync-Schlüssel?",
+      "description": "Geben Sie Ihren Sync-Schlüssel ein, um Ihr Profil und Ihre Daten wiederherzustellen",
+      "syncKeyLabel": "Sync-Schlüssel",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Anmelden",
+      "signingIn": "Anmeldung läuft...",
+      "invalidKey": "Ungültiges Sync-Schlüssel-Format. Bitte prüfen und erneut versuchen."
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Favoriten geräteübergreifend speichern",
+        "description": "Markieren Sie Ihre Lieblingsfelsen und greifen Sie von jedem Gerät darauf zu"
+      },
+      "report": {
+        "title": "Meldungen mit der Community teilen",
+        "description": "Helfen Sie anderen Kletterern, indem Sie Bedingungen, Sicherheitshinweise und Kletterinfos teilen"
+      },
+      "vote": {
+        "title": "Über hilfreiche Meldungen abstimmen",
+        "description": "Unterstützen Sie die Community, indem Sie nützliche Meldungen bestätigen"
+      },
+      "manual": {
+        "title": "Speichern Sie Ihre Daten auf allen Geräten",
+        "description": "Synchronisieren Sie Ihre Favoriten, Meldungen und Chatverlauf auf allen Ihren Geräten"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "Keine E-Mail oder Passwort erforderlich",
+        "description": "Wir respektieren Ihre Privatsphäre. Nur ein Sync-Schlüssel, keine persönlichen Daten"
+      },
+      "syncKey": {
+        "title": "Erstellt nur einen Sync-Schlüssel",
+        "description": "Eine eindeutige Kennung, die Ihre Daten geräteübergreifend synchronisiert"
+      },
+      "multiDevice": {
+        "title": "Speichern, QR-Code fotografieren oder per E-Mail senden",
+        "description": "Verwenden Sie Ihren Sync-Schlüssel, um Ihr Profil auf anderen Geräten wiederherzustellen"
+      }
+    }
+  },
+  "profileCreated": {
+    "title": "Profil erstellt!",
+    "description": "Ihr Profil wurde erfolgreich erstellt. Speichern Sie Ihren Sync-Schlüssel, um auf anderen Geräten auf Ihre Daten zuzugreifen.",
+    "actionCompleted": "{{action}} abgeschlossen!",
+    "syncKeyLabel": "Ihr Sync-Schlüssel",
+    "syncKeyDescription": "Dies ist Ihr eindeutiger Schlüssel zur geräteübergreifenden Synchronisierung",
+    "qrCodeLabel": "QR-Code",
+    "qrCodeDescription": "Scannen Sie diesen QR-Code auf einem anderen Gerät, um Ihre Daten zu synchronisieren",
+    "privacyTitle": "Wichtig: Speichern Sie Ihren Sync-Schlüssel",
+    "saveKeySafe": "Bewahren Sie diesen Schlüssel an einem sicheren Ort auf",
+    "screenshotQR": "Oder machen Sie einen Screenshot dieses QR-Codes",
+    "needForSync": "Sie benötigen ihn für die Synchronisierung anderer Geräte",
+    "gotIt": "Verstanden!",
+    "copied": "Kopiert!",
+    "copy": "Kopieren",
+    "emailSection": {
+      "title": "Per E-Mail senden (optional)",
+      "privacyNote1": "Wir speichern Ihre E-Mail NICHT",
+      "privacyNote2": "Dies ist nur ein einmaliger Versand",
+      "privacyNote3": "Wird niemals in unserer Datenbank gespeichert",
+      "emailPlaceholder": "ihre@email.de",
+      "sendButton": "E-Mail senden",
+      "sending": "Wird gesendet...",
+      "success": "E-Mail gesendet! Überprüfen Sie Ihr Postfach",
+      "error": "E-Mail konnte nicht gesendet werden. Bitte versuchen Sie es erneut."
+    }
   },
   "profile": {
     "anonymous": "Anonym",
@@ -422,7 +506,7 @@
       },
       "emailButton": "Sync-Schlüssel per E-Mail an dich senden",
       "emailLabel": "E-Mail-Adresse",
-      "emailPlaceholder": "du@example.at",
+      "emailPlaceholder": "du@example.de",
       "emailSend": "Senden",
       "emailSending": "Wird gesendet...",
       "emailPrivacy": "Wir speichern deine E-Mail nicht - sie wird nur einmal zum Senden deines Sync-Schlüssels verwendet.",
@@ -452,60 +536,60 @@
     "remove": "Entfernen"
   },
   "reports": {
-    "addReport": "Add Report",
-    "addReportDescription": "Share information about {{cragName}}",
-    "postingAs": "Posting as",
-    "category": "What would you like to report?",
+    "addReport": "Bericht hinzufügen",
+    "addReportDescription": "Informationen über {{cragName}} teilen",
+    "postingAs": "Posten als",
+    "category": "Was möchtest du melden?",
     "categories": {
-      "conditions": "Conditions",
-      "safety": "Safety",
-      "access": "Access",
+      "conditions": "Bedingungen",
+      "safety": "Sicherheit",
+      "access": "Zugang",
       "climbing_info": "Kletterinfos",
-      "facilities": "Facilities",
-      "other": "Other"
+      "facilities": "Einrichtungen",
+      "other": "Sonstiges"
     },
     "categoryDescriptions": {
-      "conditions": "Weather, friction, dryness, crowds",
-      "safety": "Loose bolts, rockfall, broken holds, hazards",
-      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "conditions": "Wetter, Reibung, Trockenheit, Andrang",
+      "safety": "Lockere Haken, Steinschlag, gebrochene Griffe, Gefahren",
+      "access": "Sperrungen, Parkplatzänderungen, saisonale Beschränkungen, Vogelnester, Insekten",
       "climbing_info": "Neuverschraubungen, Ausrüstungsaktualisierungen, Routenänderungen, Fixexpresschlingen",
-      "facilities": "Bathrooms, camping, water sources, amenities",
-      "other": "Anything else that doesn't fit above"
+      "facilities": "Toiletten, Camping, Wasserquellen, Annehmlichkeiten",
+      "other": "Alles andere, das nicht in die obigen Kategorien passt"
     },
-    "dryness": "Dryness",
+    "dryness": "Trockenheit",
     "wind": "Wind",
-    "crowds": "Crowds",
-    "additionalComments": "Additional comments (optional)",
+    "crowds": "Andrang",
+    "additionalComments": "Zusätzliche Kommentare (optional)",
     "details": "Details",
-    "detailsRequired": "Please provide details about this report",
+    "detailsRequired": "Bitte gib Details zu diesem Bericht an",
     "placeholders": {
-      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
-      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
-      "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
-      "facilities": "E.g., Toilet available at parking, no water source nearby...",
-      "other": "Describe what you'd like to report..."
+      "conditions": "Z.B. Ostsektor noch nass, Weg matschig, Riss tropft...",
+      "safety": "Z.B. Lockerer Haken an Route X, Steinschlaggefahr nahe der Hauptwand...",
+      "access": "Z.B. Tor bis Mai geschlossen, neuer Parkplatz hinter der Bibliothek...",
+      "climbing_info": "Z.B. Route X neu verschraubt mit Edelstahlhaken, neue Fixexpresschlingen installiert, Stand aufgerüstet...",
+      "facilities": "Z.B. Toilette am Parkplatz verfügbar, keine Wasserquelle in der Nähe...",
+      "other": "Beschreibe, was du melden möchtest..."
     },
-    "submit": "Submit Report",
-    "submitting": "Submitting...",
-    "readyToPost": "Profile created! You're ready to post your report.",
-    "helpful": "Helpful",
-    "loginToConfirm": "Please set up your profile to confirm reports",
-    "confirmFailed": "Failed to confirm report. Please try again.",
+    "submit": "Bericht absenden",
+    "submitting": "Wird gesendet...",
+    "readyToPost": "Profil erstellt! Du kannst jetzt deinen Bericht posten.",
+    "helpful": "Hilfreich",
+    "loginToConfirm": "Bitte richte dein Profil ein, um Berichte zu bestätigen",
+    "confirmFailed": "Bestätigung des Berichts fehlgeschlagen. Bitte versuche es erneut.",
     "ratings": {
-      "veryPoor": "Very Poor",
-      "poor": "Poor",
+      "veryPoor": "Sehr schlecht",
+      "poor": "Schlecht",
       "okay": "Okay",
-      "good": "Good",
-      "excellent": "Excellent"
+      "good": "Gut",
+      "excellent": "Ausgezeichnet"
     },
     "scales": {
-      "veryWet": "Very wet",
-      "veryDry": "Perfect",
-      "calm": "Calm",
-      "veryWindy": "Very windy",
-      "empty": "Empty",
-      "veryCrowded": "Very crowded"
+      "veryWet": "Sehr nass",
+      "veryDry": "Perfekt",
+      "calm": "Ruhig",
+      "veryWindy": "Sehr windig",
+      "empty": "Leer",
+      "veryCrowded": "Sehr voll"
     },
     "drynessLabels": {
       "1": "Sehr nass",
@@ -528,16 +612,22 @@
       "4": "Wenige Leute",
       "5": "Leer"
     },
-    "recentReports": "Recent Reports",
-    "communityReports": "Community Reports",
-    "noReports": "No reports yet",
-    "beTheFirst": "Be the first to report",
-    "noReportsInCategory": "No reports in this category",
+    "recentReports": "Aktuelle Berichte",
+    "communityReports": "Community-Berichte",
+    "noReports": "Noch keine Berichte",
+    "beTheFirst": "Sei der Erste, der berichtet",
+    "noReportsInCategory": "Keine Berichte in dieser Kategorie",
     "filters": {
-      "all": "All"
+      "all": "Alle"
+    },
+    "staleness": {
+      "outdated": "Veraltet",
+      "older": "Älter",
+      "veryOld": "Sehr alt"
     },
     "observationDate": "Wann haben Sie das beobachtet?",
-    "observationDateHelp": "Sie können Bedingungen bis zu 7 Tage zurück melden"
+    "observationDateHelp": "Sie können Bedingungen bis zu 7 Tage zurück melden",
+    "voteReady": "Du kannst jetzt über Berichte abstimmen"
   },
   "time": {
     "today": "Heute",
@@ -545,6 +635,11 @@
     "daysAgo_one": "vor {{count}} Tag",
     "daysAgo_other": "vor {{count}} Tagen",
     "pickDate": "Datum wählen"
+  },
+  "loading": {
+    "conditions": "Bedingungen werden geladen...",
+    "weatherData": "Wetterdaten werden abgerufen...",
+    "reports": "Meldungen werden geladen..."
   },
   "nearbyMatch": {
     "distance": "{{distance}} von {{location}}"

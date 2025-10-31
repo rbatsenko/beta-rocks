@@ -531,60 +531,61 @@
     "remove": "Видалити"
   },
   "reports": {
-    "addReport": "Add Report",
-    "addReportDescription": "Share information about {{cragName}}",
-    "postingAs": "Posting as",
-    "category": "What would you like to report?",
+    "addReport": "Додати звіт",
+    "addReportDescription": "Поділіться інформацією про {{cragName}}",
+    "postingAs": "Публікуєте як",
+    "category": "Про що ви хочете повідомити?",
     "categories": {
-      "conditions": "Conditions",
-      "safety": "Safety",
-      "access": "Access",
+      "conditions": "Умови",
+      "safety": "Безпека",
+      "access": "Доступ",
       "climbing_info": "Інформація про лазіння",
-      "facilities": "Facilities",
-      "other": "Other"
+      "facilities": "Зручності",
+      "other": "Інше"
     },
     "categoryDescriptions": {
-      "conditions": "Weather, friction, dryness, crowds",
-      "safety": "Loose bolts, rockfall, broken holds, hazards",
-      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "conditions": "Погода, зчеплення, сухість, натовп",
+      "safety": "Розхитані болти, обвали каміння, зламані зачіпки, небезпеки",
+      "access": "Закриття, зміни парковок, сезонні обмеження, птахи, комахи",
       "climbing_info": "Нові болти, оновлення обладнання, зміни маршрутів, перманентні оттяжки",
-      "facilities": "Bathrooms, camping, water sources, amenities",
-      "other": "Anything else that doesn't fit above"
+      "facilities": "Туалети, кемпінг, джерела води, зручності",
+      "other": "Все інше, що не підходить вище"
     },
-    "dryness": "Dryness",
-    "wind": "Wind",
-    "crowds": "Crowds",
-    "additionalComments": "Additional comments (optional)",
-    "details": "Details",
-    "detailsRequired": "Please provide details about this report",
+    "dryness": "Сухість",
+    "wind": "Вітер",
+    "crowds": "Натовп",
+    "additionalComments": "Додаткові коментарі (необов'язково)",
+    "details": "Деталі",
+    "detailsRequired": "Будь ласка, надайте деталі про цей звіт",
     "placeholders": {
-      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
-      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
-      "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
-      "facilities": "E.g., Toilet available at parking, no water source nearby...",
-      "other": "Describe what you'd like to report..."
+      "conditions": "Напр., Східний сектор все ще мокрий, стежка брудна, тріщина капає...",
+      "safety": "Напр., Розхитаний болт на маршруті X, небезпека обвалу каміння біля головної стіни...",
+      "access": "Напр., Ворота закриті до травня, нова парковка за бібліотекою...",
+      "climbing_info": "Напр., Маршрут X оснащений новими болтами з нержавійки, встановлені нові перманентні оттяжки, поліпшено станцію...",
+      "facilities": "Напр., Туалет доступний на парковці, немає джерела води поблизу...",
+      "other": "Опишіть, про що ви хочете повідомити..."
     },
-    "submit": "Submit Report",
-    "submitting": "Submitting...",
-    "readyToPost": "Profile created! You're ready to post your report.",
-    "helpful": "Helpful",
-    "loginToConfirm": "Please set up your profile to confirm reports",
-    "confirmFailed": "Failed to confirm report. Please try again.",
+    "submit": "Надіслати звіт",
+    "submitting": "Надсилання...",
+    "readyToPost": "Профіль створено! Ви готові опублікувати свій звіт.",
+    "helpful": "Корисно",
+    "loginToConfirm": "Будь ласка, налаштуйте свій профіль, щоб підтверджувати звіти",
+    "confirmFailed": "Не вдалося підтвердити звіт. Будь ласка, спробуйте ще раз.",
+    "voteReady": "Тепер ви можете голосувати за звіти",
     "ratings": {
-      "veryPoor": "Very Poor",
-      "poor": "Poor",
-      "okay": "Okay",
-      "good": "Good",
-      "excellent": "Excellent"
+      "veryPoor": "Дуже погано",
+      "poor": "Погано",
+      "okay": "Нормально",
+      "good": "Добре",
+      "excellent": "Відмінно"
     },
     "scales": {
-      "veryWet": "Very wet",
-      "veryDry": "Perfect",
-      "calm": "Calm",
-      "veryWindy": "Very windy",
-      "empty": "Empty",
-      "veryCrowded": "Very crowded"
+      "veryWet": "Дуже мокро",
+      "veryDry": "Ідеально",
+      "calm": "Спокійно",
+      "veryWindy": "Дуже вітряно",
+      "empty": "Пусто",
+      "veryCrowded": "Дуже людно"
     },
     "drynessLabels": {
       "1": "Дуже мокро",
@@ -607,13 +608,13 @@
       "4": "Мало людей",
       "5": "Пусто"
     },
-    "recentReports": "Recent Reports",
-    "communityReports": "Community Reports",
-    "noReports": "No reports yet",
-    "beTheFirst": "Be the first to report",
-    "noReportsInCategory": "No reports in this category",
+    "recentReports": "Останні звіти",
+    "communityReports": "Звіти спільноти",
+    "noReports": "Поки що немає звітів",
+    "beTheFirst": "Будьте першим, хто повідомить",
+    "noReportsInCategory": "Немає звітів у цій категорії",
     "filters": {
-      "all": "All"
+      "all": "Усі"
     },
     "staleness": {
       "outdated": "Застаріле",
