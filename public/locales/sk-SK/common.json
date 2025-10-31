@@ -531,60 +531,61 @@
     "remove": "Odstrániť"
   },
   "reports": {
-    "addReport": "Add Report",
-    "addReportDescription": "Share information about {{cragName}}",
-    "postingAs": "Posting as",
-    "category": "What would you like to report?",
+    "addReport": "Pridať hlásenie",
+    "addReportDescription": "Zdieľajte informácie o {{cragName}}",
+    "postingAs": "Prispievate ako",
+    "category": "Čo chcete nahlásiť?",
     "categories": {
-      "conditions": "Conditions",
-      "safety": "Safety",
-      "access": "Access",
+      "conditions": "Podmienky",
+      "safety": "Bezpečnosť",
+      "access": "Prístup",
       "climbing_info": "Lezecké informácie",
-      "facilities": "Facilities",
-      "other": "Other"
+      "facilities": "Zázemie",
+      "other": "Ostatné"
     },
     "categoryDescriptions": {
-      "conditions": "Weather, friction, dryness, crowds",
-      "safety": "Loose bolts, rockfall, broken holds, hazards",
-      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "conditions": "Počasie, trenie, suchosť, preplnenosť",
+      "safety": "Uvoľnené skrutky, pády kameňov, zlomené chyty, nebezpečenstvá",
+      "access": "Uzávery, zmeny parkovania, sezónne obmedzenia, vtáčie hniezda, hmyz",
       "climbing_info": "Prebolcovanie, aktualizácie vybavenia, zmeny ciest, permanentné expresky",
-      "facilities": "Bathrooms, camping, water sources, amenities",
-      "other": "Anything else that doesn't fit above"
+      "facilities": "Toalety, kempovanie, zdroje vody, vybavenie",
+      "other": "Čokoľvek iné, čo nezapadá vyššie"
     },
-    "dryness": "Dryness",
-    "wind": "Wind",
-    "crowds": "Crowds",
-    "additionalComments": "Additional comments (optional)",
-    "details": "Details",
-    "detailsRequired": "Please provide details about this report",
+    "dryness": "Suchosť",
+    "wind": "Vietor",
+    "crowds": "Preplnenosť",
+    "additionalComments": "Ďalšie komentáre (voliteľné)",
+    "details": "Podrobnosti",
+    "detailsRequired": "Uveďte prosím podrobnosti o tomto hlásení",
     "placeholders": {
-      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
-      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
-      "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
-      "facilities": "E.g., Toilet available at parking, no water source nearby...",
-      "other": "Describe what you'd like to report..."
+      "conditions": "Napr., Východný sektor stále mokrý, chodník bahnitý, trhlina kvapká...",
+      "safety": "Napr., Uvoľnená skrutka na ceste X, nebezpečenstvo pádu kameňov pri hlavnej stene...",
+      "access": "Napr., Brána zatvorená do mája, nové parkovisko za knižnicou...",
+      "climbing_info": "Napr., Cesta X prebolcovaná nehrdzavejúcimi skrutkami, nainštalované nové permanentné expresky, vylepšené istenie...",
+      "facilities": "Napr., Toaleta k dispozícii na parkovisku, žiadny zdroj vody v blízkosti...",
+      "other": "Popíšte, čo chcete nahlásiť..."
     },
-    "submit": "Submit Report",
-    "submitting": "Submitting...",
-    "readyToPost": "Profile created! You're ready to post your report.",
-    "helpful": "Helpful",
-    "loginToConfirm": "Please set up your profile to confirm reports",
-    "confirmFailed": "Failed to confirm report. Please try again.",
+    "submit": "Odoslať hlásenie",
+    "submitting": "Odosiela sa...",
+    "readyToPost": "Profil vytvorený! Môžete uverejniť svoje hlásenie.",
+    "helpful": "Užitočné",
+    "loginToConfirm": "Nastavte prosím svoj profil na potvrdenie hlásení",
+    "confirmFailed": "Potvrdenie hlásenia zlyhalo. Skúste to prosím znova.",
+    "voteReady": "Teraz môžete hlasovať o hláseniach",
     "ratings": {
-      "veryPoor": "Very Poor",
-      "poor": "Poor",
-      "okay": "Okay",
-      "good": "Good",
-      "excellent": "Excellent"
+      "veryPoor": "Veľmi zlé",
+      "poor": "Zlé",
+      "okay": "Prijateľné",
+      "good": "Dobré",
+      "excellent": "Výborné"
     },
     "scales": {
-      "veryWet": "Very wet",
-      "veryDry": "Perfect",
-      "calm": "Calm",
-      "veryWindy": "Very windy",
-      "empty": "Empty",
-      "veryCrowded": "Very crowded"
+      "veryWet": "Veľmi mokro",
+      "veryDry": "Perfektné",
+      "calm": "Pokojne",
+      "veryWindy": "Veľmi veterno",
+      "empty": "Prázdno",
+      "veryCrowded": "Veľmi preplnené"
     },
     "drynessLabels": {
       "1": "Veľmi mokro",
@@ -607,13 +608,13 @@
       "4": "Málo ľudí",
       "5": "Prázdno"
     },
-    "recentReports": "Recent Reports",
-    "communityReports": "Community Reports",
-    "noReports": "No reports yet",
-    "beTheFirst": "Be the first to report",
-    "noReportsInCategory": "No reports in this category",
+    "recentReports": "Nedávne hlásenia",
+    "communityReports": "Komunitné hlásenia",
+    "noReports": "Zatiaľ žiadne hlásenia",
+    "beTheFirst": "Buďte prvý, kto nahlási",
+    "noReportsInCategory": "V tejto kategórii nie sú žiadne hlásenia",
     "filters": {
-      "all": "All"
+      "all": "Všetky"
     },
     "staleness": {
       "outdated": "Neaktuálne",

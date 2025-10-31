@@ -453,60 +453,61 @@
     "remove": "Ta bort"
   },
   "reports": {
-    "addReport": "Add Report",
-    "addReportDescription": "Share information about {{cragName}}",
-    "postingAs": "Posting as",
-    "category": "What would you like to report?",
+    "addReport": "Lägg till rapport",
+    "addReportDescription": "Dela information om {{cragName}}",
+    "postingAs": "Publicerar som",
+    "category": "Vad vill du rapportera?",
     "categories": {
-      "conditions": "Conditions",
-      "safety": "Safety",
-      "access": "Access",
+      "conditions": "Förhållanden",
+      "safety": "Säkerhet",
+      "access": "Tillgång",
       "climbing_info": "Klätterinfo",
-      "facilities": "Facilities",
-      "other": "Other"
+      "facilities": "Faciliteter",
+      "other": "Annat"
     },
     "categoryDescriptions": {
-      "conditions": "Weather, friction, dryness, crowds",
-      "safety": "Loose bolts, rockfall, broken holds, hazards",
-      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "conditions": "Väder, friktion, torrhet, trängsel",
+      "safety": "Lösa bultar, stenras, trasiga grepp, faror",
+      "access": "Stängningar, parkeringsändringar, säsongsbegränsningar, fågelbon, insekter",
       "climbing_info": "Ombultning, uppdateringar av utrustning, ruttändringar, fasta quickdraws",
-      "facilities": "Bathrooms, camping, water sources, amenities",
-      "other": "Anything else that doesn't fit above"
+      "facilities": "Toaletter, camping, vattenkällor, bekvämligheter",
+      "other": "Allt annat som inte passar ovan"
     },
-    "dryness": "Dryness",
-    "wind": "Wind",
-    "crowds": "Crowds",
-    "additionalComments": "Additional comments (optional)",
-    "details": "Details",
-    "detailsRequired": "Please provide details about this report",
+    "dryness": "Torrhet",
+    "wind": "Vind",
+    "crowds": "Trängsel",
+    "additionalComments": "Ytterligare kommentarer (valfritt)",
+    "details": "Detaljer",
+    "detailsRequired": "Vänligen ange detaljer om denna rapport",
     "placeholders": {
-      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
-      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
-      "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
-      "facilities": "E.g., Toilet available at parking, no water source nearby...",
-      "other": "Describe what you'd like to report..."
+      "conditions": "T.ex., Ostsektorn fortfarande våt, leden lerig, sprickan droppar...",
+      "safety": "T.ex., Lös bult på rutt X, stenrasfara vid huvudväggen...",
+      "access": "T.ex., Grind stängd till maj, ny parkering bakom biblioteket...",
+      "climbing_info": "T.ex., Rutt X ombultad med rostfria bultar, nya fasta quickdraws installerade, fäste uppgraderat...",
+      "facilities": "T.ex., Toalett tillgänglig vid parkeringen, ingen vattenkälla i närheten...",
+      "other": "Beskriv vad du vill rapportera..."
     },
-    "submit": "Submit Report",
-    "submitting": "Submitting...",
-    "readyToPost": "Profile created! You're ready to post your report.",
-    "helpful": "Helpful",
-    "loginToConfirm": "Please set up your profile to confirm reports",
-    "confirmFailed": "Failed to confirm report. Please try again.",
+    "submit": "Skicka rapport",
+    "submitting": "Skickar...",
+    "readyToPost": "Profil skapad! Du är redo att posta din rapport.",
+    "helpful": "Hjälpsam",
+    "loginToConfirm": "Vänligen konfigurera din profil för att bekräfta rapporter",
+    "confirmFailed": "Misslyckades att bekräfta rapport. Vänligen försök igen.",
+    "voteReady": "Du kan nu rösta på rapporter",
     "ratings": {
-      "veryPoor": "Very Poor",
-      "poor": "Poor",
-      "okay": "Okay",
-      "good": "Good",
-      "excellent": "Excellent"
+      "veryPoor": "Mycket dåligt",
+      "poor": "Dåligt",
+      "okay": "Okej",
+      "good": "Bra",
+      "excellent": "Utmärkt"
     },
     "scales": {
-      "veryWet": "Very wet",
-      "veryDry": "Perfect",
-      "calm": "Calm",
-      "veryWindy": "Very windy",
-      "empty": "Empty",
-      "veryCrowded": "Very crowded"
+      "veryWet": "Mycket vått",
+      "veryDry": "Perfekt",
+      "calm": "Lugnt",
+      "veryWindy": "Mycket blåsigt",
+      "empty": "Tomt",
+      "veryCrowded": "Mycket fullt"
     },
     "drynessLabels": {
       "1": "Mycket vått",
@@ -529,13 +530,18 @@
       "4": "Få personer",
       "5": "Tomt"
     },
-    "recentReports": "Recent Reports",
-    "communityReports": "Community Reports",
-    "noReports": "No reports yet",
-    "beTheFirst": "Be the first to report",
-    "noReportsInCategory": "No reports in this category",
+    "recentReports": "Senaste rapporter",
+    "communityReports": "Gemenskapsrapporter",
+    "noReports": "Inga rapporter ännu",
+    "beTheFirst": "Var först med att rapportera",
+    "noReportsInCategory": "Inga rapporter i denna kategori",
     "filters": {
-      "all": "All"
+      "all": "Alla"
+    },
+    "staleness": {
+      "outdated": "Föråldrad",
+      "older": "Äldre",
+      "veryOld": "Mycket gammal"
     },
     "observationDate": "När observerade du detta?",
     "observationDateHelp": "Du kan rapportera förhållanden upp till 7 dagar tillbaka"

@@ -7,16 +7,16 @@
     "description": "Echtzeit-Bedingungen, Community-Berichte und Routeninformationen für Felsen weltweit",
     "exampleQueries": {
       "query1": {
-        "display": "Wie sind die Bedingungen im Gasterntal morgen?",
-        "query": "Wie sind die Bedingungen im Gasterntal morgen?"
+        "display": "Wie wird der Grip im Frankenjura morgen?",
+        "query": "Wie sind die Bedingungen im Frankenjura morgen?"
       },
       "query2": {
-        "display": "Ist Voralpsee heute Nachmittag trocken?",
-        "query": "Ist Voralpsee heute Nachmittag trocken?"
+        "display": "Ist die Sächsische Schweiz heute Nachmittag trocken?",
+        "query": "Ist die Sächsische Schweiz heute Nachmittag trocken?"
       },
       "query3": {
-        "display": "Wie sieht's in Gimmelwald aus?",
-        "query": "Wie sind die Bedingungen in Gimmelwald?"
+        "display": "Wie wird das Wetter in Kochel am Wochenende?",
+        "query": "Wie sind die Bedingungen in Kochel dieses Wochenende?"
       }
     }
   },
@@ -185,6 +185,10 @@
     "selectLanguage": "Sprache wählen",
     "aboutApp": "Über die App"
   },
+  "tabs": {
+    "overview": "Übersicht",
+    "reports": "Berichte"
+  },
   "dialog": {
     "close": "Schließen",
     "cancel": "Abbrechen",
@@ -287,7 +291,8 @@
     "status": {
       "synced": "Synchronisiert",
       "syncing": "Synchronisiere...",
-      "offline": "Offline"
+      "offline": "Offline",
+      "clickToLearnMore": "Klicken Sie, um mehr über die Synchronisierung zu erfahren"
     },
     "notification": {
       "title": "Sync-Schlüssel erstellt",
@@ -298,22 +303,101 @@
   },
   "syncExplainer": {
     "title": "So funktioniert die Synchronisierung",
-    "description": "Halten Sie Ihre Daten nahtlos und sicher auf all Ihren Geräten synchron.",
+    "description": "Halten Sie Ihre Daten nahtlos und sicher auf allen Geräten synchron.",
     "features": {
       "syncKey": {
-        "title": "Einzigartiger Sync-Schlüssel",
-        "description": "Jeder Benutzer erhält einen sicheren, einzigartigen Schlüssel zur Synchronisierung seiner Daten zwischen Geräten."
+        "title": "Eindeutiger Sync-Schlüssel",
+        "description": "Jeder Benutzer erhält einen sicheren, eindeutigen Schlüssel zur Synchronisierung seiner Daten."
       },
       "multiDevice": {
-        "title": "Mehrgerätezugriff",
-        "description": "Greifen Sie von jedem Gerät aus auf Ihre Favoriten und Chat-Historie zu, indem Sie Ihren Sync-Schlüssel verwenden."
+        "title": "Zugriff von mehreren Geräten",
+        "description": "Greifen Sie mit Ihrem Sync-Schlüssel von jedem Gerät auf Ihre Favoriten und Ihren Chat-Verlauf zu."
       },
       "privacy": {
-        "title": "Privatsphäre zuerst",
+        "title": "Datenschutz zuerst",
         "description": "Ihre Daten sind verschlüsselt und nur mit Ihrem Sync-Schlüssel zugänglich. Kein Konto erforderlich."
       }
     },
     "openSettings": "Einstellungen öffnen"
+  },
+  "profileCreation": {
+    "title": "Profil erstellen",
+    "subtitle": "Datenschutzfreundliche Registrierung - keine persönlichen Daten erforderlich",
+    "createProfile": "Profil erstellen",
+    "creating": "Wird erstellt...",
+    "maybeLater": "Vielleicht später",
+    "tabs": {
+      "create": "Profil erstellen",
+      "signIn": "Anmelden"
+    },
+    "signIn": {
+      "title": "Haben Sie bereits einen Sync-Schlüssel?",
+      "description": "Geben Sie Ihren Sync-Schlüssel ein, um Ihr Profil und Ihre Daten wiederherzustellen",
+      "syncKeyLabel": "Sync-Schlüssel",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Anmelden",
+      "signingIn": "Anmeldung läuft...",
+      "invalidKey": "Ungültiges Sync-Schlüssel-Format. Bitte prüfen und erneut versuchen."
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Favoriten geräteübergreifend speichern",
+        "description": "Markieren Sie Ihre Lieblingsfelsen und greifen Sie von jedem Gerät darauf zu"
+      },
+      "report": {
+        "title": "Meldungen mit der Community teilen",
+        "description": "Helfen Sie anderen Kletterern, indem Sie Bedingungen, Sicherheitshinweise und Kletterinfos teilen"
+      },
+      "vote": {
+        "title": "Über hilfreiche Meldungen abstimmen",
+        "description": "Unterstützen Sie die Community, indem Sie nützliche Meldungen bestätigen"
+      },
+      "manual": {
+        "title": "Speichern Sie Ihre Daten auf allen Geräten",
+        "description": "Synchronisieren Sie Ihre Favoriten, Meldungen und Chatverlauf auf allen Ihren Geräten"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "Keine E-Mail oder Passwort erforderlich",
+        "description": "Wir respektieren Ihre Privatsphäre. Nur ein Sync-Schlüssel, keine persönlichen Daten"
+      },
+      "syncKey": {
+        "title": "Erstellt nur einen Sync-Schlüssel",
+        "description": "Eine eindeutige Kennung, die Ihre Daten geräteübergreifend synchronisiert"
+      },
+      "multiDevice": {
+        "title": "Speichern, QR-Code fotografieren oder per E-Mail senden",
+        "description": "Verwenden Sie Ihren Sync-Schlüssel, um Ihr Profil auf anderen Geräten wiederherzustellen"
+      }
+    }
+  },
+  "profileCreated": {
+    "title": "Profil erstellt!",
+    "description": "Ihr Profil wurde erfolgreich erstellt. Speichern Sie Ihren Sync-Schlüssel, um auf anderen Geräten auf Ihre Daten zuzugreifen.",
+    "actionCompleted": "{{action}} abgeschlossen!",
+    "syncKeyLabel": "Ihr Sync-Schlüssel",
+    "syncKeyDescription": "Dies ist Ihr eindeutiger Schlüssel zur geräteübergreifenden Synchronisierung",
+    "qrCodeLabel": "QR-Code",
+    "qrCodeDescription": "Scannen Sie diesen QR-Code auf einem anderen Gerät, um Ihre Daten zu synchronisieren",
+    "privacyTitle": "Wichtig: Speichern Sie Ihren Sync-Schlüssel",
+    "saveKeySafe": "Bewahren Sie diesen Schlüssel an einem sicheren Ort auf",
+    "screenshotQR": "Oder machen Sie einen Screenshot dieses QR-Codes",
+    "needForSync": "Sie benötigen ihn für die Synchronisierung anderer Geräte",
+    "gotIt": "Verstanden!",
+    "copied": "Kopiert!",
+    "copy": "Kopieren",
+    "emailSection": {
+      "title": "Per E-Mail senden (optional)",
+      "privacyNote1": "Wir speichern Ihre E-Mail NICHT",
+      "privacyNote2": "Dies ist nur ein einmaliger Versand",
+      "privacyNote3": "Wird niemals in unserer Datenbank gespeichert",
+      "emailPlaceholder": "ihre@email.de",
+      "sendButton": "E-Mail senden",
+      "sending": "Wird gesendet...",
+      "success": "E-Mail gesendet! Überprüfen Sie Ihr Postfach",
+      "error": "E-Mail konnte nicht gesendet werden. Bitte versuchen Sie es erneut."
+    }
   },
   "profile": {
     "anonymous": "Anonym",
@@ -352,8 +436,8 @@
       "saveFailedDescription": "Dein Anzeigename konnte nicht gespeichert werden. Bitte versuche es erneut"
     },
     "units": {
-      "title": "Einheiten und Masse",
-      "description": "Wählen Sie Ihre bevorzugten Einheiten für Wetter- und Kletterdaten",
+      "title": "Einheiten und Maße",
+      "description": "Wähle deine bevorzugten Einheiten für Wetter- und Kletterdaten",
       "systemLabel": "Einheitensystem",
       "systemDescription": "Schnelleinstellungen für gängige Einheitensysteme",
       "systems": {
@@ -387,7 +471,7 @@
       "elevation": "Höhe",
       "elevationUnits": {
         "meters": "Meter (m)",
-        "feet": "Fuss (ft)"
+        "feet": "Fuß (ft)"
       },
       "saved": "Einheiten gespeichert",
       "savedDescription": "Deine Einheiteneinstellungen wurden erfolgreich aktualisiert",
@@ -422,7 +506,7 @@
       },
       "emailButton": "Sync-Schlüssel per E-Mail an dich senden",
       "emailLabel": "E-Mail-Adresse",
-      "emailPlaceholder": "du@example.ch",
+      "emailPlaceholder": "du@example.de",
       "emailSend": "Senden",
       "emailSending": "Wird gesendet...",
       "emailPrivacy": "Wir speichern deine E-Mail nicht - sie wird nur einmal zum Senden deines Sync-Schlüssels verwendet.",
@@ -452,60 +536,60 @@
     "remove": "Entfernen"
   },
   "reports": {
-    "addReport": "Add Report",
-    "addReportDescription": "Share information about {{cragName}}",
-    "postingAs": "Posting as",
-    "category": "What would you like to report?",
+    "addReport": "Bericht hinzufügen",
+    "addReportDescription": "Informationen über {{cragName}} teilen",
+    "postingAs": "Posten als",
+    "category": "Was möchtest du melden?",
     "categories": {
-      "conditions": "Conditions",
-      "safety": "Safety",
-      "access": "Access",
+      "conditions": "Bedingungen",
+      "safety": "Sicherheit",
+      "access": "Zugang",
       "climbing_info": "Kletterinfos",
-      "facilities": "Facilities",
-      "other": "Other"
+      "facilities": "Einrichtungen",
+      "other": "Sonstiges"
     },
     "categoryDescriptions": {
-      "conditions": "Weather, friction, dryness, crowds",
-      "safety": "Loose bolts, rockfall, broken holds, hazards",
-      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "conditions": "Wetter, Reibung, Trockenheit, Andrang",
+      "safety": "Lockere Haken, Steinschlag, gebrochene Griffe, Gefahren",
+      "access": "Sperrungen, Parkplatzänderungen, saisonale Beschränkungen, Vogelnester, Insekten",
       "climbing_info": "Neuverschraubungen, Ausrüstungsaktualisierungen, Routenänderungen, Fixexpresschlingen",
-      "facilities": "Bathrooms, camping, water sources, amenities",
-      "other": "Anything else that doesn't fit above"
+      "facilities": "Toiletten, Camping, Wasserquellen, Annehmlichkeiten",
+      "other": "Alles andere, das nicht in die obigen Kategorien passt"
     },
-    "dryness": "Dryness",
+    "dryness": "Trockenheit",
     "wind": "Wind",
-    "crowds": "Crowds",
-    "additionalComments": "Additional comments (optional)",
+    "crowds": "Andrang",
+    "additionalComments": "Zusätzliche Kommentare (optional)",
     "details": "Details",
-    "detailsRequired": "Please provide details about this report",
+    "detailsRequired": "Bitte gib Details zu diesem Bericht an",
     "placeholders": {
-      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
-      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
-      "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
-      "facilities": "E.g., Toilet available at parking, no water source nearby...",
-      "other": "Describe what you'd like to report..."
+      "conditions": "Z.B. Ostsektor noch nass, Weg matschig, Riss tropft...",
+      "safety": "Z.B. Lockerer Haken an Route X, Steinschlaggefahr nahe der Hauptwand...",
+      "access": "Z.B. Tor bis Mai geschlossen, neuer Parkplatz hinter der Bibliothek...",
+      "climbing_info": "Z.B. Route X neu verschraubt mit Edelstahlhaken, neue Fixexpresschlingen installiert, Stand aufgerüstet...",
+      "facilities": "Z.B. Toilette am Parkplatz verfügbar, keine Wasserquelle in der Nähe...",
+      "other": "Beschreibe, was du melden möchtest..."
     },
-    "submit": "Submit Report",
-    "submitting": "Submitting...",
-    "readyToPost": "Profile created! You're ready to post your report.",
-    "helpful": "Helpful",
-    "loginToConfirm": "Please set up your profile to confirm reports",
-    "confirmFailed": "Failed to confirm report. Please try again.",
+    "submit": "Bericht absenden",
+    "submitting": "Wird gesendet...",
+    "readyToPost": "Profil erstellt! Du kannst jetzt deinen Bericht posten.",
+    "helpful": "Hilfreich",
+    "loginToConfirm": "Bitte richte dein Profil ein, um Berichte zu bestätigen",
+    "confirmFailed": "Bestätigung des Berichts fehlgeschlagen. Bitte versuche es erneut.",
     "ratings": {
-      "veryPoor": "Very Poor",
-      "poor": "Poor",
+      "veryPoor": "Sehr schlecht",
+      "poor": "Schlecht",
       "okay": "Okay",
-      "good": "Good",
-      "excellent": "Excellent"
+      "good": "Gut",
+      "excellent": "Ausgezeichnet"
     },
     "scales": {
-      "veryWet": "Very wet",
-      "veryDry": "Perfect",
-      "calm": "Calm",
-      "veryWindy": "Very windy",
-      "empty": "Empty",
-      "veryCrowded": "Very crowded"
+      "veryWet": "Sehr nass",
+      "veryDry": "Perfekt",
+      "calm": "Ruhig",
+      "veryWindy": "Sehr windig",
+      "empty": "Leer",
+      "veryCrowded": "Sehr voll"
     },
     "drynessLabels": {
       "1": "Sehr nass",
@@ -528,16 +612,22 @@
       "4": "Wenige Leute",
       "5": "Leer"
     },
-    "recentReports": "Recent Reports",
-    "communityReports": "Community Reports",
-    "noReports": "No reports yet",
-    "beTheFirst": "Be the first to report",
-    "noReportsInCategory": "No reports in this category",
+    "recentReports": "Aktuelle Berichte",
+    "communityReports": "Community-Berichte",
+    "noReports": "Noch keine Berichte",
+    "beTheFirst": "Sei der Erste, der berichtet",
+    "noReportsInCategory": "Keine Berichte in dieser Kategorie",
     "filters": {
-      "all": "All"
+      "all": "Alle"
+    },
+    "staleness": {
+      "outdated": "Veraltet",
+      "older": "Älter",
+      "veryOld": "Sehr alt"
     },
     "observationDate": "Wann haben Sie das beobachtet?",
-    "observationDateHelp": "Sie können Bedingungen bis zu 7 Tage zurück melden"
+    "observationDateHelp": "Sie können Bedingungen bis zu 7 Tage zurück melden",
+    "voteReady": "Du kannst jetzt über Berichte abstimmen"
   },
   "time": {
     "today": "Heute",
@@ -545,6 +635,11 @@
     "daysAgo_one": "vor {{count}} Tag",
     "daysAgo_other": "vor {{count}} Tagen",
     "pickDate": "Datum wählen"
+  },
+  "loading": {
+    "conditions": "Bedingungen werden geladen...",
+    "weatherData": "Wetterdaten werden abgerufen...",
+    "reports": "Meldungen werden geladen..."
   },
   "nearbyMatch": {
     "distance": "{{distance}} von {{location}}"

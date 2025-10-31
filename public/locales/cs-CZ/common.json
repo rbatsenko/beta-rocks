@@ -531,60 +531,61 @@
     "remove": "Odstranit"
   },
   "reports": {
-    "addReport": "Add Report",
-    "addReportDescription": "Share information about {{cragName}}",
-    "postingAs": "Posting as",
-    "category": "What would you like to report?",
+    "addReport": "Přidat hlášení",
+    "addReportDescription": "Sdílet informace o {{cragName}}",
+    "postingAs": "Odesílání jako",
+    "category": "Co chcete nahlásit?",
     "categories": {
-      "conditions": "Conditions",
-      "safety": "Safety",
-      "access": "Access",
+      "conditions": "Podmínky",
+      "safety": "Bezpečnost",
+      "access": "Přístup",
       "climbing_info": "Lezecké informace",
-      "facilities": "Facilities",
-      "other": "Other"
+      "facilities": "Zázemí",
+      "other": "Ostatní"
     },
     "categoryDescriptions": {
-      "conditions": "Weather, friction, dryness, crowds",
-      "safety": "Loose bolts, rockfall, broken holds, hazards",
-      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "conditions": "Počasí, tření, suchost, přeplněnost",
+      "safety": "Uvolněné skoby, pády kamenů, zlomené chyty, nebezpečí",
+      "access": "Uzavírky, změny parkování, sezónní omezení, ptačí hnízda, hmyz",
       "climbing_info": "Přebolcování, aktualizace vybavení, změny cest, permanentní expresky",
-      "facilities": "Bathrooms, camping, water sources, amenities",
-      "other": "Anything else that doesn't fit above"
+      "facilities": "Toalety, kempování, zdroje vody, vybavení",
+      "other": "Cokoli jiného, co se nehodí výše"
     },
-    "dryness": "Dryness",
-    "wind": "Wind",
-    "crowds": "Crowds",
-    "additionalComments": "Additional comments (optional)",
-    "details": "Details",
-    "detailsRequired": "Please provide details about this report",
+    "dryness": "Suchost",
+    "wind": "Vítr",
+    "crowds": "Přeplněnost",
+    "additionalComments": "Další komentáře (volitelné)",
+    "details": "Podrobnosti",
+    "detailsRequired": "Uveďte prosím podrobnosti o tomto hlášení",
     "placeholders": {
-      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
-      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
-      "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
-      "facilities": "E.g., Toilet available at parking, no water source nearby...",
-      "other": "Describe what you'd like to report..."
+      "conditions": "Např., Východní sektor stále mokrý, cesta zabahněná, trhlina capající...",
+      "safety": "Např., Uvolněná skoba na cestě X, nebezpečí pádu kamenů u hlavní stěny...",
+      "access": "Např., Závora zavřená do května, nové parkoviště za knihovnou...",
+      "climbing_info": "Např., Cesta X přebolcovaná nerezovými skobami, instalovány nové permanentní expresky, vylepšeno jistidlo...",
+      "facilities": "Např., Toaleta k dispozici u parkoviště, žádný zdroj vody v blízkosti...",
+      "other": "Popište, co chcete nahlásit..."
     },
-    "submit": "Submit Report",
-    "submitting": "Submitting...",
-    "readyToPost": "Profile created! You're ready to post your report.",
-    "helpful": "Helpful",
-    "loginToConfirm": "Please set up your profile to confirm reports",
-    "confirmFailed": "Failed to confirm report. Please try again.",
+    "submit": "Odeslat hlášení",
+    "submitting": "Odesílání...",
+    "readyToPost": "Profil vytvořen! Můžete odeslat své hlášení.",
+    "helpful": "Užitečné",
+    "loginToConfirm": "Nastavte prosím svůj profil pro potvrzování hlášení",
+    "confirmFailed": "Nepodařilo se potvrdit hlášení. Zkuste to prosím znovu.",
+    "voteReady": "Nyní můžete hlasovat o hlášeních",
     "ratings": {
-      "veryPoor": "Very Poor",
-      "poor": "Poor",
-      "okay": "Okay",
-      "good": "Good",
-      "excellent": "Excellent"
+      "veryPoor": "Velmi špatné",
+      "poor": "Špatné",
+      "okay": "Ujde to",
+      "good": "Dobré",
+      "excellent": "Výborné"
     },
     "scales": {
-      "veryWet": "Very wet",
-      "veryDry": "Perfect",
-      "calm": "Calm",
-      "veryWindy": "Very windy",
-      "empty": "Empty",
-      "veryCrowded": "Very crowded"
+      "veryWet": "Velmi mokro",
+      "veryDry": "Perfektní",
+      "calm": "Klidno",
+      "veryWindy": "Velmi větrno",
+      "empty": "Prázdno",
+      "veryCrowded": "Velmi přeplněno"
     },
     "drynessLabels": {
       "1": "Velmi mokro",
@@ -607,13 +608,13 @@
       "4": "Málo lidí",
       "5": "Prázdno"
     },
-    "recentReports": "Recent Reports",
-    "communityReports": "Community Reports",
-    "noReports": "No reports yet",
-    "beTheFirst": "Be the first to report",
-    "noReportsInCategory": "No reports in this category",
+    "recentReports": "Nedávná hlášení",
+    "communityReports": "Komunitní hlášení",
+    "noReports": "Zatím žádná hlášení",
+    "beTheFirst": "Buďte první, kdo nahlásí",
+    "noReportsInCategory": "V této kategorii nejsou žádná hlášení",
     "filters": {
-      "all": "All"
+      "all": "Všechny"
     },
     "staleness": {
       "outdated": "Zastaralé",

@@ -452,60 +452,61 @@
     "remove": "Poista"
   },
   "reports": {
-    "addReport": "Add Report",
-    "addReportDescription": "Share information about {{cragName}}",
-    "postingAs": "Posting as",
-    "category": "What would you like to report?",
+    "addReport": "Lisää raportti",
+    "addReportDescription": "Jaa tietoja kohteesta {{cragName}}",
+    "postingAs": "Lähetetään nimellä",
+    "category": "Mitä haluat raportoida?",
     "categories": {
-      "conditions": "Conditions",
-      "safety": "Safety",
-      "access": "Access",
+      "conditions": "Olosuhteet",
+      "safety": "Turvallisuus",
+      "access": "Pääsy",
       "climbing_info": "Kiipeilytiedot",
-      "facilities": "Facilities",
-      "other": "Other"
+      "facilities": "Tilat",
+      "other": "Muu"
     },
     "categoryDescriptions": {
-      "conditions": "Weather, friction, dryness, crowds",
-      "safety": "Loose bolts, rockfall, broken holds, hazards",
-      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "conditions": "Sää, kitka, kuivuus, ruuhkaisuus",
+      "safety": "Löysät pultit, kiviä putoilee, rikkinäiset otteet, vaarat",
+      "access": "Sulkemiset, pysäköintimuutokset, kausirajoitukset, lintupesät, hyönteiset",
       "climbing_info": "Uudelleenpulttaus, varustepäivitykset, reittien muutokset, kiinteät pikalenkit",
-      "facilities": "Bathrooms, camping, water sources, amenities",
-      "other": "Anything else that doesn't fit above"
+      "facilities": "WC:t, leirintä, vesilähteet, mukavuudet",
+      "other": "Kaikki muu, mikä ei sovi yllä oleviin"
     },
-    "dryness": "Dryness",
-    "wind": "Wind",
-    "crowds": "Crowds",
-    "additionalComments": "Additional comments (optional)",
-    "details": "Details",
-    "detailsRequired": "Please provide details about this report",
+    "dryness": "Kuivuus",
+    "wind": "Tuuli",
+    "crowds": "Ruuhkaisuus",
+    "additionalComments": "Lisäkommentit (valinnainen)",
+    "details": "Tiedot",
+    "detailsRequired": "Anna tietoja tästä raportista",
     "placeholders": {
-      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
-      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
-      "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
-      "facilities": "E.g., Toilet available at parking, no water source nearby...",
-      "other": "Describe what you'd like to report..."
+      "conditions": "Esim., Itäsektori edelleen märkä, polku mutainen, halkeama tippuu...",
+      "safety": "Esim., Löysä pultti reitillä X, kiviä putoilee pääseinän lähellä...",
+      "access": "Esim., Portti kiinni toukokuuhun, uusi parkkipaikka kirjaston takana...",
+      "climbing_info": "Esim., Reitti X uudelleenpultattu ruostumattomilla pulteilla, uudet kiinteät pikalenkit asennettu, ankkuri päivitetty...",
+      "facilities": "Esim., WC saatavilla pysäköintialueella, ei vesilähdettä lähistöllä...",
+      "other": "Kuvaile mitä haluat raportoida..."
     },
-    "submit": "Submit Report",
-    "submitting": "Submitting...",
-    "readyToPost": "Profile created! You're ready to post your report.",
-    "helpful": "Helpful",
-    "loginToConfirm": "Please set up your profile to confirm reports",
-    "confirmFailed": "Failed to confirm report. Please try again.",
+    "submit": "Lähetä raportti",
+    "submitting": "Lähetetään...",
+    "readyToPost": "Profiili luotu! Voit lähettää raporttisi.",
+    "helpful": "Hyödyllinen",
+    "loginToConfirm": "Aseta profiilisi vahvistaaksesi raportteja",
+    "confirmFailed": "Raportin vahvistus epäonnistui. Yritä uudelleen.",
+    "voteReady": "Voit nyt äänestää raportteja",
     "ratings": {
-      "veryPoor": "Very Poor",
-      "poor": "Poor",
-      "okay": "Okay",
-      "good": "Good",
-      "excellent": "Excellent"
+      "veryPoor": "Erittäin huono",
+      "poor": "Huono",
+      "okay": "OK",
+      "good": "Hyvä",
+      "excellent": "Erinomainen"
     },
     "scales": {
-      "veryWet": "Very wet",
-      "veryDry": "Perfect",
-      "calm": "Calm",
-      "veryWindy": "Very windy",
-      "empty": "Empty",
-      "veryCrowded": "Very crowded"
+      "veryWet": "Erittäin märkä",
+      "veryDry": "Täydellinen",
+      "calm": "Tyyni",
+      "veryWindy": "Erittäin tuulinen",
+      "empty": "Tyhjä",
+      "veryCrowded": "Erittäin täynnä"
     },
     "drynessLabels": {
       "1": "Erittäin märkä",
@@ -528,13 +529,18 @@
       "4": "Vähän ihmisiä",
       "5": "Tyhjä"
     },
-    "recentReports": "Recent Reports",
-    "communityReports": "Community Reports",
-    "noReports": "No reports yet",
-    "beTheFirst": "Be the first to report",
-    "noReportsInCategory": "No reports in this category",
+    "recentReports": "Viimeisimmät raportit",
+    "communityReports": "Yhteisön raportit",
+    "noReports": "Ei raportteja vielä",
+    "beTheFirst": "Ole ensimmäinen raportoimaan",
+    "noReportsInCategory": "Ei raportteja tässä kategoriassa",
     "filters": {
-      "all": "All"
+      "all": "Kaikki"
+    },
+    "staleness": {
+      "outdated": "Vanhentunut",
+      "older": "Vanhempi",
+      "veryOld": "Erittäin vanha"
     },
     "observationDate": "Milloin havaitsit tämän?",
     "observationDateHelp": "Voit raportoida olosuhteita jopa 7 päivää taaksepäin"

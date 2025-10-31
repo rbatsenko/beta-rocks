@@ -7,16 +7,16 @@
     "description": "Conditions en temps réel, rapports communautaires et informations sur les voies dans le monde entier",
     "exampleQueries": {
       "query1": {
-        "display": "Conditions à Freyr aujourd'hui ?",
-        "query": "Conditions à Freyr aujourd'hui ?"
+        "display": "Quel sera l'état de Fontainebleau demain ?",
+        "query": "Quelles seront les conditions à Fontainebleau demain ?"
       },
       "query2": {
-        "display": "Est-ce que Marche-les-Dames est sec cet après-midi ?",
-        "query": "Est-ce que Marche-les-Dames est sec cet après-midi ?"
+        "display": "Ceüse sera-t-elle sèche cet après-midi ?",
+        "query": "Ceüse sera-t-elle sèche cet après-midi ?"
       },
       "query3": {
-        "display": "Conditions à Dave demain ?",
-        "query": "Conditions à Dave demain ?"
+        "display": "Quel temps est prévu dans les Gorges du Verdon ce week-end ?",
+        "query": "Quelles conditions dans les Gorges du Verdon ce week-end ?"
       }
     }
   },
@@ -185,6 +185,10 @@
     "selectLanguage": "Choisir la langue",
     "aboutApp": "À propos de l'app"
   },
+  "tabs": {
+    "overview": "Aperçu",
+    "reports": "Rapports"
+  },
   "dialog": {
     "close": "Fermer",
     "cancel": "Annuler",
@@ -287,7 +291,8 @@
     "status": {
       "synced": "Synchronisé",
       "syncing": "Synchronisation...",
-      "offline": "Hors ligne"
+      "offline": "Hors ligne",
+      "clickToLearnMore": "Cliquez pour en savoir plus sur la synchronisation"
     },
     "notification": {
       "title": "Clé de synchronisation créée",
@@ -302,11 +307,11 @@
     "features": {
       "syncKey": {
         "title": "Clé de synchronisation unique",
-        "description": "Chaque utilisateur reçoit une clé sécurisée et unique pour synchroniser ses données entre appareils."
+        "description": "Chaque utilisateur reçoit une clé sécurisée et unique pour synchroniser ses données."
       },
       "multiDevice": {
         "title": "Accès multi-appareils",
-        "description": "Accédez à vos favoris et à l'historique de vos conversations depuis n'importe quel appareil en utilisant votre clé de synchronisation."
+        "description": "Accédez à vos favoris et à votre historique de chat depuis n'importe quel appareil avec votre clé de synchronisation."
       },
       "privacy": {
         "title": "Confidentialité d'abord",
@@ -314,6 +319,85 @@
       }
     },
     "openSettings": "Ouvrir les paramètres"
+  },
+  "profileCreation": {
+    "title": "Créer votre profil",
+    "subtitle": "Inscription respectueuse de la vie privée - aucune donnée personnelle requise",
+    "createProfile": "Créer un profil",
+    "creating": "Création...",
+    "maybeLater": "Peut-être plus tard",
+    "tabs": {
+      "create": "Créer un profil",
+      "signIn": "Se connecter"
+    },
+    "signIn": {
+      "title": "Vous avez déjà une clé de synchronisation ?",
+      "description": "Entrez votre clé de synchronisation pour restaurer votre profil et vos données",
+      "syncKeyLabel": "Clé de synchronisation",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Se connecter",
+      "signingIn": "Connexion...",
+      "invalidKey": "Format de clé de synchronisation invalide. Veuillez vérifier et réessayer."
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Enregistrer les favoris sur tous les appareils",
+        "description": "Marquez vos falaises préférées et accédez-y depuis n'importe quel appareil"
+      },
+      "report": {
+        "title": "Partager des rapports avec la communauté",
+        "description": "Aidez les autres grimpeurs en partageant les conditions, alertes de sécurité et infos d'escalade"
+      },
+      "vote": {
+        "title": "Voter pour les rapports utiles",
+        "description": "Soutenez la communauté en confirmant les rapports utiles"
+      },
+      "manual": {
+        "title": "Sauvegardez vos données sur tous vos appareils",
+        "description": "Synchronisez vos favoris, rapports et historique de discussion sur tous vos appareils"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "Pas d'e-mail ou de mot de passe requis",
+        "description": "Nous respectons votre vie privée. Juste une clé de synchronisation, aucune donnée personnelle"
+      },
+      "syncKey": {
+        "title": "Crée uniquement une clé de synchronisation",
+        "description": "Un identifiant unique qui synchronise vos données sur tous les appareils"
+      },
+      "multiDevice": {
+        "title": "Enregistrez-la, capturez le QR ou envoyez par e-mail",
+        "description": "Utilisez votre clé de synchronisation pour restaurer votre profil sur d'autres appareils"
+      }
+    }
+  },
+  "profileCreated": {
+    "title": "Profil créé !",
+    "description": "Votre profil a été créé avec succès. Enregistrez votre clé de synchronisation pour accéder à vos données sur d'autres appareils.",
+    "actionCompleted": "{{action}} terminé !",
+    "syncKeyLabel": "Votre clé de synchronisation",
+    "syncKeyDescription": "Ceci est votre clé unique pour synchroniser vos appareils",
+    "qrCodeLabel": "Code QR",
+    "qrCodeDescription": "Scannez ce code QR sur un autre appareil pour synchroniser vos données",
+    "privacyTitle": "Important : Enregistrez votre clé de synchronisation",
+    "saveKeySafe": "Enregistrez cette clé dans un endroit sûr",
+    "screenshotQR": "Ou faites une capture d'écran de ce code QR",
+    "needForSync": "Vous en aurez besoin pour synchroniser d'autres appareils",
+    "gotIt": "Compris !",
+    "copied": "Copié !",
+    "copy": "Copier",
+    "emailSection": {
+      "title": "Envoyer par e-mail (facultatif)",
+      "privacyNote1": "Nous NE stockons PAS votre e-mail",
+      "privacyNote2": "Ceci est un envoi unique seulement",
+      "privacyNote3": "Jamais enregistré dans notre base de données",
+      "emailPlaceholder": "votre@email.fr",
+      "sendButton": "Envoyer l'e-mail",
+      "sending": "Envoi...",
+      "success": "E-mail envoyé ! Vérifiez votre boîte de réception",
+      "error": "Échec de l'envoi de l'e-mail. Veuillez réessayer."
+    }
   },
   "profile": {
     "anonymous": "Anonyme",
@@ -422,7 +506,7 @@
       },
       "emailButton": "Envoyer la clé de synchronisation par e-mail",
       "emailLabel": "Adresse e-mail",
-      "emailPlaceholder": "vous@example.be",
+      "emailPlaceholder": "vous@example.fr",
       "emailSend": "Envoyer",
       "emailSending": "Envoi en cours...",
       "emailPrivacy": "Nous ne stockons pas votre e-mail - il est utilisé une seule fois pour envoyer votre clé de synchronisation.",
@@ -452,60 +536,60 @@
     "remove": "Retirer"
   },
   "reports": {
-    "addReport": "Add Report",
-    "addReportDescription": "Share information about {{cragName}}",
-    "postingAs": "Posting as",
-    "category": "What would you like to report?",
+    "addReport": "Ajouter un rapport",
+    "addReportDescription": "Partagez des informations sur {{cragName}}",
+    "postingAs": "Publier en tant que",
+    "category": "Que souhaitez-vous signaler ?",
     "categories": {
       "conditions": "Conditions",
-      "safety": "Safety",
-      "access": "Access",
+      "safety": "Sécurité",
+      "access": "Accès",
       "climbing_info": "Infos escalade",
-      "facilities": "Facilities",
-      "other": "Other"
+      "facilities": "Installations",
+      "other": "Autre"
     },
     "categoryDescriptions": {
-      "conditions": "Weather, friction, dryness, crowds",
-      "safety": "Loose bolts, rockfall, broken holds, hazards",
-      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "conditions": "Météo, adhérence, sécheresse, affluence",
+      "safety": "Dégaines desserrées, chutes de pierres, prises cassées, dangers",
+      "access": "Fermetures, changements de parking, restrictions saisonnières, nids d'oiseaux, insectes",
       "climbing_info": "Rééquipement, mises à jour du matériel, changements de voies, dégaines fixes",
-      "facilities": "Bathrooms, camping, water sources, amenities",
-      "other": "Anything else that doesn't fit above"
+      "facilities": "Toilettes, camping, points d'eau, commodités",
+      "other": "Tout ce qui ne correspond pas aux catégories ci-dessus"
     },
-    "dryness": "Dryness",
-    "wind": "Wind",
-    "crowds": "Crowds",
-    "additionalComments": "Additional comments (optional)",
-    "details": "Details",
-    "detailsRequired": "Please provide details about this report",
+    "dryness": "Sécheresse",
+    "wind": "Vent",
+    "crowds": "Affluence",
+    "additionalComments": "Commentaires supplémentaires (optionnel)",
+    "details": "Détails",
+    "detailsRequired": "Veuillez fournir des détails sur ce rapport",
     "placeholders": {
-      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
-      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
-      "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
-      "facilities": "E.g., Toilet available at parking, no water source nearby...",
-      "other": "Describe what you'd like to report..."
+      "conditions": "Ex : Secteur Est encore mouillé, sentier boueux, fissure qui suinte...",
+      "safety": "Ex : Dégaine desserrée sur la Voie X, danger de chute de pierres près du mur principal...",
+      "access": "Ex : Portail fermé jusqu'en mai, nouveau parking derrière la bibliothèque...",
+      "climbing_info": "Ex : Voie X rééquipée avec dégaines inox, nouvelles dégaines permanentes installées, relais amélioré...",
+      "facilities": "Ex : Toilettes disponibles au parking, pas de point d'eau à proximité...",
+      "other": "Décrivez ce que vous souhaitez signaler..."
     },
-    "submit": "Submit Report",
-    "submitting": "Submitting...",
-    "readyToPost": "Profile created! You're ready to post your report.",
-    "helpful": "Helpful",
-    "loginToConfirm": "Please set up your profile to confirm reports",
-    "confirmFailed": "Failed to confirm report. Please try again.",
+    "submit": "Envoyer le rapport",
+    "submitting": "Envoi en cours...",
+    "readyToPost": "Profil créé ! Vous êtes prêt à publier votre rapport.",
+    "helpful": "Utile",
+    "loginToConfirm": "Veuillez configurer votre profil pour confirmer les rapports",
+    "confirmFailed": "Échec de la confirmation du rapport. Veuillez réessayer.",
     "ratings": {
-      "veryPoor": "Very Poor",
-      "poor": "Poor",
-      "okay": "Okay",
-      "good": "Good",
+      "veryPoor": "Très mauvais",
+      "poor": "Mauvais",
+      "okay": "Correct",
+      "good": "Bon",
       "excellent": "Excellent"
     },
     "scales": {
-      "veryWet": "Very wet",
-      "veryDry": "Perfect",
-      "calm": "Calm",
-      "veryWindy": "Very windy",
-      "empty": "Empty",
-      "veryCrowded": "Very crowded"
+      "veryWet": "Très humide",
+      "veryDry": "Parfait",
+      "calm": "Calme",
+      "veryWindy": "Très venteux",
+      "empty": "Vide",
+      "veryCrowded": "Très bondé"
     },
     "drynessLabels": {
       "1": "Très humide",
@@ -528,16 +612,22 @@
       "4": "Peu de monde",
       "5": "Vide"
     },
-    "recentReports": "Recent Reports",
-    "communityReports": "Community Reports",
-    "noReports": "No reports yet",
-    "beTheFirst": "Be the first to report",
-    "noReportsInCategory": "No reports in this category",
+    "recentReports": "Rapports récents",
+    "communityReports": "Rapports communautaires",
+    "noReports": "Aucun rapport pour le moment",
+    "beTheFirst": "Soyez le premier à signaler",
+    "noReportsInCategory": "Aucun rapport dans cette catégorie",
     "filters": {
-      "all": "All"
+      "all": "Tous"
     },
-    "observationDate": "Quand avez-vous observé cela?",
-    "observationDateHelp": "Vous pouvez signaler les conditions jusqu'à 7 jours en arrière"
+    "staleness": {
+      "outdated": "Obsolète",
+      "older": "Plus ancien",
+      "veryOld": "Très ancien"
+    },
+    "observationDate": "Quand avez-vous observé cela ?",
+    "observationDateHelp": "Vous pouvez signaler les conditions jusqu'à 7 jours en arrière",
+    "voteReady": "Vous pouvez maintenant voter pour les rapports"
   },
   "time": {
     "today": "Aujourd'hui",
@@ -545,6 +635,11 @@
     "daysAgo_one": "il y a {{count}} jour",
     "daysAgo_other": "il y a {{count}} jours",
     "pickDate": "Choisir une date"
+  },
+  "loading": {
+    "conditions": "Chargement des conditions...",
+    "weatherData": "Récupération des données météo...",
+    "reports": "Chargement des rapports..."
   },
   "nearbyMatch": {
     "distance": "{{distance}} depuis {{location}}"

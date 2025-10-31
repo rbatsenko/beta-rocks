@@ -499,60 +499,61 @@
     "remove": "Премахване"
   },
   "reports": {
-    "addReport": "Add Report",
-    "addReportDescription": "Share information about {{cragName}}",
-    "postingAs": "Posting as",
-    "category": "What would you like to report?",
+    "addReport": "Добавяне на доклад",
+    "addReportDescription": "Споделете информация за {{cragName}}",
+    "postingAs": "Публикуване като",
+    "category": "Какво бихте искали да докладвате?",
     "categories": {
-      "conditions": "Conditions",
-      "safety": "Safety",
-      "access": "Access",
+      "conditions": "Условия",
+      "safety": "Безопасност",
+      "access": "Достъп",
       "climbing_info": "Информация за катерене",
-      "facilities": "Facilities",
-      "other": "Other"
+      "facilities": "Съоръжения",
+      "other": "Друго"
     },
     "categoryDescriptions": {
-      "conditions": "Weather, friction, dryness, crowds",
-      "safety": "Loose bolts, rockfall, broken holds, hazards",
-      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "conditions": "Време, триене, сухота, претрупаност",
+      "safety": "Хлабави болтове, свличане на скали, счупени хватове, опасности",
+      "access": "Затваряния, промени в паркинга, сезонни ограничения, гнезда на птици, насекоми",
       "climbing_info": "Преоборудване, актуализации на оборудването, промени в маршрутите, фиксирани куикдроуове",
-      "facilities": "Bathrooms, camping, water sources, amenities",
-      "other": "Anything else that doesn't fit above"
+      "facilities": "Тоалетни, къмпинг, водни източници, удобства",
+      "other": "Всичко друго, което не попада в горните категории"
     },
-    "dryness": "Dryness",
-    "wind": "Wind",
-    "crowds": "Crowds",
-    "additionalComments": "Additional comments (optional)",
-    "details": "Details",
-    "detailsRequired": "Please provide details about this report",
+    "dryness": "Сухота",
+    "wind": "Вятър",
+    "crowds": "Претрупаност",
+    "additionalComments": "Допълнителни коментари (по избор)",
+    "details": "Детайли",
+    "detailsRequired": "Моля, предоставете детайли за този доклад",
     "placeholders": {
-      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
-      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
-      "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
-      "facilities": "E.g., Toilet available at parking, no water source nearby...",
-      "other": "Describe what you'd like to report..."
+      "conditions": "Напр., Източният сектор все още е мокър, пътеката е кална, пукнатината цеди вода...",
+      "safety": "Напр., Хлабав болт на маршрут X, опасност от свличане на скали близо до основната стена...",
+      "access": "Напр., Портата е затворена до май, нов паркинг зад библиотеката...",
+      "climbing_info": "Напр., Маршрут X е преоборудван с болтове от неръждаема стомана, инсталирани нови фиксирани куикдроуове, подобрена котва...",
+      "facilities": "Напр., Тоалетна налична на паркинга, няма водоизточник наблизо...",
+      "other": "Опишете какво бихте искали да докладвате..."
     },
-    "submit": "Submit Report",
-    "submitting": "Submitting...",
-    "readyToPost": "Profile created! You're ready to post your report.",
-    "helpful": "Helpful",
-    "loginToConfirm": "Please set up your profile to confirm reports",
-    "confirmFailed": "Failed to confirm report. Please try again.",
+    "submit": "Изпращане на доклад",
+    "submitting": "Изпращане...",
+    "readyToPost": "Профилът е създаден! Готови сте да публикувате доклада си.",
+    "helpful": "Полезно",
+    "loginToConfirm": "Моля, настройте профила си, за да потвърждавате доклади",
+    "confirmFailed": "Неуспешно потвърждаване на доклад. Моля, опитайте отново.",
+    "voteReady": "Вече можете да гласувате за доклади",
     "ratings": {
-      "veryPoor": "Very Poor",
-      "poor": "Poor",
-      "okay": "Okay",
-      "good": "Good",
-      "excellent": "Excellent"
+      "veryPoor": "Много лошо",
+      "poor": "Лошо",
+      "okay": "Приемливо",
+      "good": "Добро",
+      "excellent": "Отлично"
     },
     "scales": {
-      "veryWet": "Very wet",
-      "veryDry": "Perfect",
-      "calm": "Calm",
-      "veryWindy": "Very windy",
-      "empty": "Empty",
-      "veryCrowded": "Very crowded"
+      "veryWet": "Много мокро",
+      "veryDry": "Перфектно",
+      "calm": "Спокойно",
+      "veryWindy": "Много ветровито",
+      "empty": "Празно",
+      "veryCrowded": "Много претрупано"
     },
     "drynessLabels": {
       "1": "Много мокро",
@@ -575,13 +576,13 @@
       "4": "Малко хора",
       "5": "Празно"
     },
-    "recentReports": "Recent Reports",
-    "communityReports": "Community Reports",
-    "noReports": "No reports yet",
-    "beTheFirst": "Be the first to report",
-    "noReportsInCategory": "No reports in this category",
+    "recentReports": "Последни доклади",
+    "communityReports": "Доклади от общността",
+    "noReports": "Все още няма доклади",
+    "beTheFirst": "Бъдете първи, който докладва",
+    "noReportsInCategory": "Няма доклади в тази категория",
     "filters": {
-      "all": "All"
+      "all": "Всички"
     },
     "staleness": {
       "outdated": "Остаряло",

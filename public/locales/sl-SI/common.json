@@ -532,60 +532,61 @@
     "remove": "Odstrani"
   },
   "reports": {
-    "addReport": "Add Report",
-    "addReportDescription": "Share information about {{cragName}}",
-    "postingAs": "Posting as",
-    "category": "What would you like to report?",
+    "addReport": "Dodaj poročilo",
+    "addReportDescription": "Deli informacije o {{cragName}}",
+    "postingAs": "Objavljaš kot",
+    "category": "Kaj bi rad prijavil?",
     "categories": {
-      "conditions": "Conditions",
-      "safety": "Safety",
-      "access": "Access",
+      "conditions": "Razmere",
+      "safety": "Varnost",
+      "access": "Dostop",
       "climbing_info": "Informacije o plezanju",
-      "facilities": "Facilities",
-      "other": "Other"
+      "facilities": "Objekti",
+      "other": "Drugo"
     },
     "categoryDescriptions": {
-      "conditions": "Weather, friction, dryness, crowds",
-      "safety": "Loose bolts, rockfall, broken holds, hazards",
-      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "conditions": "Vreme, trenje, suhost, gneča",
+      "safety": "Rahla sidra, odpadajoče kamenje, zlomljeni prijemi, nevarnosti",
+      "access": "Zaprtja, spremembe parkirišč, sezonske omejitve, gnezda ptic, žuželke",
       "climbing_info": "Ponovna namestitev sider, posodobitve opreme, spremembe poti, fiksne vponke",
-      "facilities": "Bathrooms, camping, water sources, amenities",
-      "other": "Anything else that doesn't fit above"
+      "facilities": "Stranišča, kampiranje, viri vode, objekti",
+      "other": "Karkoli drugega, kar ne ustreza zgoraj"
     },
-    "dryness": "Dryness",
-    "wind": "Wind",
-    "crowds": "Crowds",
-    "additionalComments": "Additional comments (optional)",
-    "details": "Details",
-    "detailsRequired": "Please provide details about this report",
+    "dryness": "Suhost",
+    "wind": "Veter",
+    "crowds": "Gneča",
+    "additionalComments": "Dodatni komentarji (neobvezno)",
+    "details": "Podrobnosti",
+    "detailsRequired": "Prosimo, navedite podrobnosti o tem poročilu",
     "placeholders": {
-      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
-      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
-      "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
-      "facilities": "E.g., Toilet available at parking, no water source nearby...",
-      "other": "Describe what you'd like to report..."
+      "conditions": "Npr., Vzhodni sektor še vedno moker, pot blatna, razpoka curi...",
+      "safety": "Npr., Rahlo sidro na poti X, nevarnost odpadajočega kamenja pri glavni steni...",
+      "access": "Npr., Vrata zaprta do maja, novo parkirišče za knjižnico...",
+      "climbing_info": "Npr., Pot X ponovno nameščena s sidri iz nerjavnega jekla, nameščene nove fiksne vponke, izboljšana fiksna točka...",
+      "facilities": "Npr., Stranišče na voljo na parkirišču, ni vira vode v bližini...",
+      "other": "Opiši, kaj bi rad prijavil..."
     },
-    "submit": "Submit Report",
-    "submitting": "Submitting...",
-    "readyToPost": "Profile created! You're ready to post your report.",
-    "helpful": "Helpful",
-    "loginToConfirm": "Please set up your profile to confirm reports",
-    "confirmFailed": "Failed to confirm report. Please try again.",
+    "submit": "Pošlji poročilo",
+    "submitting": "Pošiljam...",
+    "readyToPost": "Profil ustvarjen! Pripravljen si za objavo poročila.",
+    "helpful": "Koristno",
+    "loginToConfirm": "Prosimo, nastavi svoj profil za potrditev poročil",
+    "confirmFailed": "Potrjevanje poročila ni uspelo. Prosimo, poskusi znova.",
+    "voteReady": "Zdaj lahko glasuješ o poročilih",
     "ratings": {
-      "veryPoor": "Very Poor",
-      "poor": "Poor",
-      "okay": "Okay",
-      "good": "Good",
-      "excellent": "Excellent"
+      "veryPoor": "Zelo slabo",
+      "poor": "Slabo",
+      "okay": "V redu",
+      "good": "Dobro",
+      "excellent": "Odlično"
     },
     "scales": {
-      "veryWet": "Very wet",
-      "veryDry": "Perfect",
-      "calm": "Calm",
-      "veryWindy": "Very windy",
-      "empty": "Empty",
-      "veryCrowded": "Very crowded"
+      "veryWet": "Zelo mokro",
+      "veryDry": "Popolno",
+      "calm": "Mirno",
+      "veryWindy": "Zelo vetrovno",
+      "empty": "Prazno",
+      "veryCrowded": "Zelo polno"
     },
     "drynessLabels": {
       "1": "Zelo mokro",
@@ -608,13 +609,13 @@
       "4": "Malo ljudi",
       "5": "Prazno"
     },
-    "recentReports": "Recent Reports",
-    "communityReports": "Community Reports",
-    "noReports": "No reports yet",
-    "beTheFirst": "Be the first to report",
-    "noReportsInCategory": "No reports in this category",
+    "recentReports": "Nedavna poročila",
+    "communityReports": "Poročila skupnosti",
+    "noReports": "Še ni poročil",
+    "beTheFirst": "Bodi prvi, ki prijaviš",
+    "noReportsInCategory": "V tej kategoriji ni poročil",
     "filters": {
-      "all": "All"
+      "all": "Vsi"
     },
     "staleness": {
       "outdated": "Zastarelo",

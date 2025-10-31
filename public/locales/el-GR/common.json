@@ -420,60 +420,61 @@
     "remove": "Αφαίρεση"
   },
   "reports": {
-    "addReport": "Add Report",
-    "addReportDescription": "Share information about {{cragName}}",
-    "postingAs": "Posting as",
-    "category": "What would you like to report?",
+    "addReport": "Προσθήκη αναφοράς",
+    "addReportDescription": "Μοιραστείτε πληροφορίες για {{cragName}}",
+    "postingAs": "Ανάρτηση ως",
+    "category": "Τι θα θέλατε να αναφέρετε;",
     "categories": {
-      "conditions": "Conditions",
-      "safety": "Safety",
-      "access": "Access",
+      "conditions": "Συνθήκες",
+      "safety": "Ασφάλεια",
+      "access": "Πρόσβαση",
       "climbing_info": "Πληροφορίες αναρρίχησης",
-      "facilities": "Facilities",
-      "other": "Other"
+      "facilities": "Εγκαταστάσεις",
+      "other": "Άλλο"
     },
     "categoryDescriptions": {
-      "conditions": "Weather, friction, dryness, crowds",
-      "safety": "Loose bolts, rockfall, broken holds, hazards",
-      "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
+      "conditions": "Καιρός, τριβή, ξηρότητα, συνωστισμός",
+      "safety": "Χαλαρά μπουλόνια, πτώση βράχων, σπασμένα πιασίματα, κίνδυνοι",
+      "access": "Κλεισίματα, αλλαγές πάρκινγκ, εποχιακοί περιορισμοί, φωλιές πτηνών, έντομα",
       "climbing_info": "Ανακατασκευή, ενημερώσεις εξοπλισμού, αλλαγές διαδρομών, μόνιμα quickdraws",
-      "facilities": "Bathrooms, camping, water sources, amenities",
-      "other": "Anything else that doesn't fit above"
+      "facilities": "Τουαλέτες, κατασκήνωση, πηγές νερού, ανέσεις",
+      "other": "Οτιδήποτε άλλο που δεν ταιριάζει παραπάνω"
     },
-    "dryness": "Dryness",
-    "wind": "Wind",
-    "crowds": "Crowds",
-    "additionalComments": "Additional comments (optional)",
-    "details": "Details",
-    "detailsRequired": "Please provide details about this report",
+    "dryness": "Ξηρότητα",
+    "wind": "Άνεμος",
+    "crowds": "Συνωστισμός",
+    "additionalComments": "Επιπλέον σχόλια (προαιρετικά)",
+    "details": "Λεπτομέρειες",
+    "detailsRequired": "Παρακαλώ δώστε λεπτομέρειες για αυτήν την αναφορά",
     "placeholders": {
-      "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
-      "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
-      "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
-      "facilities": "E.g., Toilet available at parking, no water source nearby...",
-      "other": "Describe what you'd like to report..."
+      "conditions": "Π.χ., Ανατολικός τομέας ακόμα υγρός, μονοπάτι λασπώδες, ρωγμή στάζει...",
+      "safety": "Π.χ., Χαλαρό μπουλόνι στη διαδρομή X, κίνδυνος πτώσης βράχων κοντά στον κύριο τοίχο...",
+      "access": "Π.χ., Πύλη κλειστή μέχρι τον Μάιο, νέο πάρκινγκ πίσω από τη βιβλιοθήκη...",
+      "climbing_info": "Π.χ., Διαδρομή X ανακατασκευάστηκε με μπουλόνια από ανοξείδωτο χάλυβα, εγκαταστάθηκαν νέα μόνιμα quickdraws, αναβαθμίστηκε η αγκύρωση...",
+      "facilities": "Π.χ., Τουαλέτα διαθέσιμη στο πάρκινγκ, καμία πηγή νερού κοντά...",
+      "other": "Περιγράψτε τι θέλετε να αναφέρετε..."
     },
-    "submit": "Submit Report",
-    "submitting": "Submitting...",
-    "readyToPost": "Profile created! You're ready to post your report.",
-    "helpful": "Helpful",
-    "loginToConfirm": "Please set up your profile to confirm reports",
-    "confirmFailed": "Failed to confirm report. Please try again.",
+    "submit": "Υποβολή αναφοράς",
+    "submitting": "Υποβολή...",
+    "readyToPost": "Το προφίλ δημιουργήθηκε! Είστε έτοιμοι να αναρτήσετε την αναφορά σας.",
+    "helpful": "Χρήσιμο",
+    "loginToConfirm": "Παρακαλώ ρυθμίστε το προφίλ σας για να επιβεβαιώνετε αναφορές",
+    "confirmFailed": "Αποτυχία επιβεβαίωσης αναφοράς. Παρακαλώ δοκιμάστε ξανά.",
+    "voteReady": "Μπορείτε τώρα να ψηφίσετε αναφορές",
     "ratings": {
-      "veryPoor": "Very Poor",
-      "poor": "Poor",
-      "okay": "Okay",
-      "good": "Good",
-      "excellent": "Excellent"
+      "veryPoor": "Πολύ κακό",
+      "poor": "Κακό",
+      "okay": "Μέτριο",
+      "good": "Καλό",
+      "excellent": "Άριστο"
     },
     "scales": {
-      "veryWet": "Very wet",
-      "veryDry": "Perfect",
-      "calm": "Calm",
-      "veryWindy": "Very windy",
-      "empty": "Empty",
-      "veryCrowded": "Very crowded"
+      "veryWet": "Πολύ υγρό",
+      "veryDry": "Τέλειο",
+      "calm": "Ήρεμος",
+      "veryWindy": "Πολύ ανεμώδης",
+      "empty": "Άδειο",
+      "veryCrowded": "Πολύ γεμάτο"
     },
     "drynessLabels": {
       "1": "Πολύ υγρό",
@@ -496,13 +497,18 @@
       "4": "Λίγοι άνθρωποι",
       "5": "Άδειο"
     },
-    "recentReports": "Recent Reports",
-    "communityReports": "Community Reports",
-    "noReports": "No reports yet",
-    "beTheFirst": "Be the first to report",
-    "noReportsInCategory": "No reports in this category",
+    "recentReports": "Πρόσφατες αναφορές",
+    "communityReports": "Αναφορές κοινότητας",
+    "noReports": "Δεν υπάρχουν ακόμα αναφορές",
+    "beTheFirst": "Γίνετε ο πρώτος που θα αναφέρει",
+    "noReportsInCategory": "Δεν υπάρχουν αναφορές σε αυτήν την κατηγορία",
     "filters": {
-      "all": "All"
+      "all": "Όλες"
+    },
+    "staleness": {
+      "outdated": "Ξεπερασμένο",
+      "older": "Παλαιότερο",
+      "veryOld": "Πολύ παλιό"
     },
     "observationDate": "Πότε το παρατηρήσατε αυτό;",
     "observationDateHelp": "Μπορείτε να αναφέρετε συνθήκες έως και 7 ημέρες πίσω"
