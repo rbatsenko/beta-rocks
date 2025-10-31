@@ -166,11 +166,11 @@
     },
     "whatYouControl": {
       "title": "What You Control",
-      "description": "Your favorites, reports, and chat history are stored locally on your device first. You choose whether to sync them across devices using an anonymous sync key. Everything stays on your device unless you explicitly enable sync."
+      "description": "Your favorites, reports, and chat history are stored locally on your device first, then automatically synced to our database to enable seamless multi-device access. You can access your data on any device using your sync key. You can delete all your data anytime from Settings."
     },
     "howSyncWorks": {
       "title": "How Sync Works",
-      "description": "When you sync, we store your data linked to a hashed sync key - not your identity. The sync key is a random UUID that you control. We can't link it to you. No email required, no account needed."
+      "description": "When you use beta.rocks, we automatically create an anonymous sync key and sync your data to our database. Data is linked to a hashed sync key - not your identity. The sync key is a random identifier that only you have access to. We can't link it to you. No email required, no account needed."
     },
     "openSource": {
       "title": "Open Source",

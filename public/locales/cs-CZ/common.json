@@ -157,11 +157,11 @@
     },
     "whatYouControl": {
       "title": "Co kontroluješ",
-      "description": "Tvé oblíbené, zprávy a historie chatu jsou nejprve uloženy lokálně na tvém zařízení. Ty rozhoduješ, zda je synchronizovat mezi zařízeními pomocí anonymního synchronizačního klíče. Všechno zůstává na tvém zařízení, pokud explicitně nepovolíš synchronizaci."
+      "description": "Vaše oblíbené, hlášení a historie chatu jsou nejprve uloženy lokálně ve vašem zařízení a poté automaticky synchronizovány s naší databází, aby byl umožněn bezproblémový přístup z více zařízení. K vašim datům můžete přistupovat na jakémkoli zařízení pomocí synchronizačního klíče. Všechna vaše data můžete kdykoli smazat v Nastavení."
     },
     "howSyncWorks": {
       "title": "Jak funguje synchronizace",
-      "description": "Když synchronizuješ, ukládáme tvá data propojená s hashovaným synchronizačním klíčem - ne s tvou identitou. Synchronizační klíč je náhodné UUID, které kontroluješ ty. Nemůžeme ho s tebou spojit. Bez požadovaného e-mailu, bez potřeby účtu."
+      "description": "Když používáte beta.rocks, automaticky vytvoříme anonymní synchronizační klíč a synchronizujeme vaše data s naší databází. Data jsou spojena s hašovaným synchronizačním klíčem - ne s vaší identitou. Synchronizační klíč je náhodný identifikátor, ke kterému máte přístup pouze vy. Nemůžeme ho s vámi spojit. Není vyžadován email, není potřeba účet."
     },
     "openSource": {
       "title": "Open Source",

@@ -157,11 +157,11 @@
     },
     "whatYouControl": {
       "title": "Ce que vous contrôlez",
-      "description": "Vos favoris, rapports et historique de chat sont d'abord stockés localement sur votre appareil. Vous choisissez de les synchroniser sur d'autres appareils avec une clé anonyme. Tout reste sur votre appareil sauf si vous activez explicitement la synchronisation."
+      "description": "Vos favoris, rapports et historique de chat sont d'abord stockés localement sur votre appareil, puis automatiquement synchronisés avec notre base de données pour permettre un accès transparent sur plusieurs appareils. Vous pouvez accéder à vos données sur n'importe quel appareil en utilisant votre clé de synchronisation. Vous pouvez supprimer toutes vos données à tout moment depuis les Paramètres."
     },
     "howSyncWorks": {
       "title": "Comment fonctionne la synchronisation",
-      "description": "Lorsque vous synchronisez, nous stockons vos données liées à une clé de synchronisation hachée - pas à votre identité. La clé de synchronisation est un UUID aléatoire que vous contrôlez. Nous ne pouvons pas la lier à vous. Aucun e-mail requis, aucun compte nécessaire."
+      "description": "Lorsque vous utilisez beta.rocks, nous créons automatiquement une clé de synchronisation anonyme et synchronisons vos données avec notre base de données. Les données sont liées à une clé de synchronisation hachée - pas à votre identité. La clé de synchronisation est un identifiant aléatoire auquel vous seul avez accès. Nous ne pouvons pas la lier à vous. Aucun e-mail requis, aucun compte nécessaire."
     },
     "openSource": {
       "title": "Open Source",

@@ -157,11 +157,11 @@
     },
     "whatYouControl": {
       "title": "Was du kontrollierst",
-      "description": "Deine Favoriten, Berichte und Chat-Verlauf werden zuerst lokal auf deinem Gerät gespeichert. Du entscheidest, ob du sie mit einem anonymen Sync-Schlüssel auf andere Geräte synchronisierst. Alles bleibt auf deinem Gerät, es sei denn, du aktivierst die Synchronisierung explizit."
+      "description": "Deine Favoriten, Berichte und Chat-Verlauf werden zuerst lokal auf deinem Gerät gespeichert und dann automatisch mit unserer Datenbank synchronisiert, um nahtlosen Zugriff über mehrere Geräte zu ermöglichen. Du kannst auf jedem Gerät mit deinem Sync-Schlüssel auf deine Daten zugreifen. Du kannst alle deine Daten jederzeit in den Einstellungen löschen."
     },
     "howSyncWorks": {
       "title": "Wie Synchronisierung funktioniert",
-      "description": "Wenn du synchronisierst, speichern wir deine Daten verknüpft mit einem gehashten Sync-Schlüssel - nicht mit deiner Identität. Der Sync-Schlüssel ist eine zufällige UUID, die du kontrollierst. Wir können ihn nicht mit dir in Verbindung bringen. Keine E-Mail erforderlich, kein Konto nötig."
+      "description": "Wenn du beta.rocks nutzt, erstellen wir automatisch einen anonymen Sync-Schlüssel und synchronisieren deine Daten mit unserer Datenbank. Die Daten werden mit einem gehashten Sync-Schlüssel verknüpft - nicht mit deiner Identität. Der Sync-Schlüssel ist eine zufällige Kennung, auf die nur du Zugriff hast. Wir können sie nicht mit dir verknüpfen. Keine E-Mail erforderlich, kein Konto nötig."
     },
     "openSource": {
       "title": "Open Source",

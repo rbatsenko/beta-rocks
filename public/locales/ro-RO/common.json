@@ -157,11 +157,11 @@
     },
     "whatYouControl": {
       "title": "Ce Controlezi Tu",
-      "description": "Favoritele tale, rapoartele și istoricul chat-ului sunt stocate mai întâi local pe dispozitivul tău. Tu alegi dacă le sincronizezi pe alte dispozitive folosind o cheie de sincronizare anonimă. Totul rămâne pe dispozitivul tău decât dacă activezi explicit sincronizarea."
+      "description": "Favoritele, rapoartele și istoricul chat-ului tău sunt stocate local pe dispozitivul tău mai întâi, apoi sincronizate automat cu baza noastră de date pentru a permite accesul fluid de pe mai multe dispozitive. Poți accesa datele tale pe orice dispozitiv folosind cheia ta de sincronizare. Poți șterge toate datele tale oricând din Setări."
     },
     "howSyncWorks": {
       "title": "Cum Funcționează Sincronizarea",
-      "description": "Când sincronizezi, stocăm datele tale legate de o cheie de sincronizare criptată - nu de identitatea ta. Cheia de sincronizare este un UUID aleatoriu pe care îl controlezi. Nu o putem lega de tine. Nu este necesară nicio adresă de e-mail, nu este necesar niciun cont."
+      "description": "Când folosești beta.rocks, creăm automat o cheie de sincronizare anonimă și sincronizăm datele tale cu baza noastră de date. Datele sunt legate de o cheie de sincronizare hașurată - nu de identitatea ta. Cheia de sincronizare este un identificator aleatoriu la care doar tu ai acces. Nu o putem lega de tine. Fără email necesar, fără cont necesar."
     },
     "openSource": {
       "title": "Sursă Deschisă",

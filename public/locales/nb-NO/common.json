@@ -158,11 +158,11 @@
     },
     "whatYouControl": {
       "title": "Hva Du Kontrollerer",
-      "description": "Dine favoritter, rapporter og chattehistorikk lagres først lokalt på enheten din. Du velger om du vil synkronisere dem på tvers av enheter med en anonym synkroniseringsnøkkel. Alt forblir på enheten din med mindre du eksplisitt aktiverer synkronisering."
+      "description": "Favorittene dine, rapporter og chathistorikk lagres først lokalt på enheten din og synkroniseres deretter automatisk til databasen vår for å muliggjøre sømløs tilgang fra flere enheter. Du kan få tilgang til dataene dine på hvilken som helst enhet ved å bruke synkroniseringsnøkkelen din. Du kan slette alle dataene dine når som helst fra Innstillinger."
     },
     "howSyncWorks": {
       "title": "Hvordan Synkronisering Fungerer",
-      "description": "Når du synkroniserer, lagrer vi dataene dine koblet til en hashet synkroniseringsnøkkel - ikke din identitet. Synkroniseringsnøkkelen er en tilfeldig UUID du kontrollerer. Vi kan ikke koble den til deg. Ingen e-post påkrevd, ingen konto nødvendig."
+      "description": "Når du bruker beta.rocks, oppretter vi automatisk en anonym synkroniseringsnøkkel og synkroniserer dataene dine til databasen vår. Data er koblet til en hashet synkroniseringsnøkkel - ikke identiteten din. Synkroniseringsnøkkelen er en tilfeldig identifikator som bare du har tilgang til. Vi kan ikke koble den til deg. Ingen e-post nødvendig, ingen konto nødvendig."
     },
     "openSource": {
       "title": "Åpen Kildekode",

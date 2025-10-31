@@ -157,11 +157,11 @@
     },
     "whatYouControl": {
       "title": "Mitä hallitset",
-      "description": "Suosikkisi, raportit ja keskusteluhistoria tallennetaan ensin paikallisesti laitteellesi. Päätät itse, synkronoidaanko ne laitteiden välillä nimettömällä synkronointiavaimella. Kaikki pysyy laitteellasi, ellet nimenomaisesti ota synkronointia käyttöön."
+      "description": "Suosikkisi, raportit ja chat-historia tallennetaan ensin paikallisesti laitteellesi ja synkronoidaan sitten automaattisesti tietokantaamme saumattoman usean laitteen käytön mahdollistamiseksi. Voit käyttää tietojasi millä tahansa laitteella synkronointiavaimellasi. Voit poistaa kaikki tietosi milloin tahansa Asetuksista."
     },
     "howSyncWorks": {
       "title": "Kuinka synkronointi toimii",
-      "description": "Kun synkronoit, tallennamme tietosi linkitettynä hajautettuun synkronointiavaimeen - emme henkilöllisyyteesi. Synkronointiavain on satunnainen UUID, jota hallitset. Emme voi yhdistää sitä sinuun. Ei sähköpostia vaadita, ei tiliä tarvita."
+      "description": "Kun käytät beta.rocksia, luomme automaattisesti nimettömän synkronointiavaimen ja synkronoimme tietosi tietokantaamme. Tiedot on linkitetty hajautettuun synkronointiavaimeen - ei identiteettiisi. Synkronointiavain on satunnainen tunniste, johon vain sinulla on pääsy. Emme voi yhdistää sitä sinuun. Sähköpostia ei tarvita, tiliä ei vaadita."
     },
     "openSource": {
       "title": "Avoin lähdekoodi",
