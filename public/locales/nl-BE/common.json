@@ -53,7 +53,10 @@
     "idealHumidity": "Ideale vochtigheid ({{humidity}}%)",
     "lowHumidityGranite": "Lage vochtigheid helpt wrijving op graniet",
     "readyInHours": "Klaar om te klimmen over ~{{hours}} uur",
-    "acceptable": "Condities zijn aanvaardbaar"
+    "acceptable": "Condities zijn aanvaardbaar",
+    "goodHumidity": "Good humidity ({{humidity}}%)",
+    "lowCondensationRisk": "Low condensation risk (dew point spread {{dewPointSpread}})",
+    "lowHumidityFriction": "Low humidity aids friction"
   },
   "warnings": {
     "tooWarm": "Te warm voor {{rockType}} ({{temp}})",
@@ -66,7 +69,12 @@
     "recentPrecip": "Recent neerslag ({{precip}}) - zal drogen in ~{{hours}}h",
     "currentlyWetDangerous": "Momenteel nat - gevaarlijk",
     "currentlyWet": "Momenteel nat",
-    "cold": "Cold ({{temp}})"
+    "cold": "Cold ({{temp}})",
+    "veryHighCondensationRisk": "Very high condensation risk (dew point spread {{dewPointSpread}}) - rock surface likely damp",
+    "highCondensationRisk": "High condensation risk (dew point spread {{dewPointSpread}})",
+    "highCondensationRiskSimple": "High condensation risk",
+    "moderateCondensationRisk": "Moderate condensation risk (dew point spread {{dewPointSpread}})",
+    "condensationRisk": "Condensation risk ({{dewPointSpread}})"
   },
   "weather": {
     "clearSky": "Heldere lucht",

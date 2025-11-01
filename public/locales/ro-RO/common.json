@@ -53,7 +53,10 @@
     "idealHumidity": "Umiditate ideală ({{humidity}}%)",
     "lowHumidityGranite": "Umiditate scăzută ajută fricțiunea pe granit",
     "readyInHours": "Va fi gata de escaladă în aproximativ {{hours}} ore",
-    "acceptable": "Condițiile sunt acceptabile"
+    "acceptable": "Condițiile sunt acceptabile",
+    "goodHumidity": "Good humidity ({{humidity}}%)",
+    "lowCondensationRisk": "Low condensation risk (dew point spread {{dewPointSpread}})",
+    "lowHumidityFriction": "Low humidity aids friction"
   },
   "warnings": {
     "tooWarm": "Prea cald pentru {{rockType}} ({{temp}})",
@@ -66,7 +69,12 @@
     "recentPrecip": "Precipitații recente ({{precip}}) - va se usca în aproximativ {{hours}}h",
     "currentlyWetDangerous": "În prezent umedă - periculos",
     "currentlyWet": "În prezent umedă",
-    "cold": "Cold ({{temp}})"
+    "cold": "Cold ({{temp}})",
+    "veryHighCondensationRisk": "Very high condensation risk (dew point spread {{dewPointSpread}}) - rock surface likely damp",
+    "highCondensationRisk": "High condensation risk (dew point spread {{dewPointSpread}})",
+    "highCondensationRiskSimple": "High condensation risk",
+    "moderateCondensationRisk": "Moderate condensation risk (dew point spread {{dewPointSpread}})",
+    "condensationRisk": "Condensation risk ({{dewPointSpread}})"
   },
   "weather": {
     "clearSky": "Cer senin",

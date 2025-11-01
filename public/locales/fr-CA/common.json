@@ -53,7 +53,10 @@
     "idealHumidity": "Humidité idéale ({{humidity}}%)",
     "lowHumidityGranite": "Humidité faible, idéale pour l'adhérence sur granite",
     "readyInHours": "Prêt pour grimper dans ~{{hours}} heures",
-    "acceptable": "Conditions acceptables"
+    "acceptable": "Conditions acceptables",
+    "goodHumidity": "Good humidity ({{humidity}}%)",
+    "lowCondensationRisk": "Low condensation risk (dew point spread {{dewPointSpread}})",
+    "lowHumidityFriction": "Low humidity aids friction"
   },
   "warnings": {
     "tooWarm": "Trop chaud pour {{rockType}} ({{temp}})",
@@ -66,7 +69,12 @@
     "recentPrecip": "Précipitations récentes ({{precip}}) - séchera dans ~{{hours}}h",
     "currentlyWetDangerous": "Actuellement mouillé - dangereux",
     "currentlyWet": "Actuellement mouillé",
-    "cold": "Cold ({{temp}})"
+    "cold": "Cold ({{temp}})",
+    "veryHighCondensationRisk": "Very high condensation risk (dew point spread {{dewPointSpread}}) - rock surface likely damp",
+    "highCondensationRisk": "High condensation risk (dew point spread {{dewPointSpread}})",
+    "highCondensationRiskSimple": "High condensation risk",
+    "moderateCondensationRisk": "Moderate condensation risk (dew point spread {{dewPointSpread}})",
+    "condensationRisk": "Condensation risk ({{dewPointSpread}})"
   },
   "weather": {
     "clearSky": "Ciel dégagé",

@@ -53,7 +53,10 @@
     "idealHumidity": "Ιδανική υγρασία ({{humidity}}%)",
     "lowHumidityGranite": "Η χαμηλή υγρασία βοηθά την τριβή στο γρανίτη",
     "readyInHours": "Θα είναι έτοιμο για αναρρίχηση σε ~{{hours}} ώρες",
-    "acceptable": "Οι συνθήκες είναι αποδεκτές"
+    "acceptable": "Οι συνθήκες είναι αποδεκτές",
+    "goodHumidity": "Good humidity ({{humidity}}%)",
+    "lowCondensationRisk": "Low condensation risk (dew point spread {{dewPointSpread}})",
+    "lowHumidityFriction": "Low humidity aids friction"
   },
   "warnings": {
     "tooWarm": "Πολύ ζεστό για {{rockType}} ({{temp}})",
@@ -66,7 +69,12 @@
     "recentPrecip": "Πρόσφατες βροχοπτώσεις ({{precip}}) - θα στεγνώσει σε ~{{hours}}ώ",
     "currentlyWetDangerous": "Υγρό αυτήν τη στιγμή - επικίνδυνο",
     "currentlyWet": "Υγρό αυτήν τη στιγμή",
-    "cold": "Cold ({{temp}})"
+    "cold": "Cold ({{temp}})",
+    "veryHighCondensationRisk": "Very high condensation risk (dew point spread {{dewPointSpread}}) - rock surface likely damp",
+    "highCondensationRisk": "High condensation risk (dew point spread {{dewPointSpread}})",
+    "highCondensationRiskSimple": "High condensation risk",
+    "moderateCondensationRisk": "Moderate condensation risk (dew point spread {{dewPointSpread}})",
+    "condensationRisk": "Condensation risk ({{dewPointSpread}})"
   },
   "weather": {
     "clearSky": "Καθαρός ουρανός",
