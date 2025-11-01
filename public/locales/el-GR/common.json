@@ -53,7 +53,10 @@
     "idealHumidity": "Ιδανική υγρασία ({{humidity}}%)",
     "lowHumidityGranite": "Η χαμηλή υγρασία βοηθά την τριβή στο γρανίτη",
     "readyInHours": "Θα είναι έτοιμο για αναρρίχηση σε ~{{hours}} ώρες",
-    "acceptable": "Οι συνθήκες είναι αποδεκτές"
+    "acceptable": "Οι συνθήκες είναι αποδεκτές",
+    "goodHumidity": "Καλή υγρασία ({{humidity}}%)",
+    "lowCondensationRisk": "Χαμηλός κίνδυνος συμπύκνωσης (διαφορά σημείου δρόσου {{dewPointSpread}})",
+    "lowHumidityFriction": "Η χαμηλή υγρασία βελτιώνει την τριβή"
   },
   "warnings": {
     "tooWarm": "Πολύ ζεστό για {{rockType}} ({{temp}})",
@@ -66,7 +69,12 @@
     "recentPrecip": "Πρόσφατες βροχοπτώσεις ({{precip}}) - θα στεγνώσει σε ~{{hours}}ώ",
     "currentlyWetDangerous": "Υγρό αυτήν τη στιγμή - επικίνδυνο",
     "currentlyWet": "Υγρό αυτήν τη στιγμή",
-    "cold": "Cold ({{temp}})"
+    "cold": "Cold ({{temp}})",
+    "veryHighCondensationRisk": "Πολύ υψηλός κίνδυνος συμπύκνωσης (διαφορά σημείου δρόσου {{dewPointSpread}}) - η επιφάνεια του βράχου πιθανώς υγρή",
+    "highCondensationRisk": "Υψηλός κίνδυνος συμπύκνωσης (διαφορά σημείου δρόσου {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Υψηλός κίνδυνος συμπύκνωσης",
+    "moderateCondensationRisk": "Μέτριος κίνδυνος συμπύκνωσης (διαφορά σημείου δρόσου {{dewPointSpread}})",
+    "condensationRisk": "Κίνδυνος συμπύκνωσης ({{dewPointSpread}})"
   },
   "weather": {
     "clearSky": "Καθαρός ουρανός",

@@ -55,7 +55,10 @@
     "idealHumidity": "Idealna wilgotność ({{humidity}}%)",
     "lowHumidityGranite": "Niska wilgotność pomaga na granicie",
     "readyInHours": "Gotowe do wspinania za ~{{hours}} godzin",
-    "acceptable": "Warunki akceptowalne"
+    "acceptable": "Warunki akceptowalne",
+    "goodHumidity": "Dobra wilgotność ({{humidity}}%)",
+    "lowCondensationRisk": "Niskie ryzyko kondensacji (rozpiętość punktu rosy {{dewPointSpread}})",
+    "lowHumidityFriction": "Niska wilgotność poprawia tarcie"
   },
   "warnings": {
     "tooWarm": "Za ciepło dla {{rockType}} ({{temp}})",
@@ -68,7 +71,12 @@
     "recentPrecip": "Niedawne opady ({{precip}}) - wyschnie za ~{{hours}}h",
     "currentlyWetDangerous": "Obecnie mokro - poczekaj aż wyschnie",
     "currentlyWet": "Mokro",
-    "cold": "Cold ({{temp}})"
+    "cold": "Cold ({{temp}})",
+    "veryHighCondensationRisk": "Bardzo wysokie ryzyko kondensacji (rozpiętość punktu rosy {{dewPointSpread}}) - powierzchnia skały prawdopodobnie wilgotna",
+    "highCondensationRisk": "Wysokie ryzyko kondensacji (rozpiętość punktu rosy {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Wysokie ryzyko kondensacji",
+    "moderateCondensationRisk": "Umiarkowane ryzyko kondensacji (rozpiętość punktu rosy {{dewPointSpread}})",
+    "condensationRisk": "Ryzyko kondensacji ({{dewPointSpread}})"
   },
   "weather": {
     "clearSky": "Bezchmurnie",

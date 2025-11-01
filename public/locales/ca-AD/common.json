@@ -53,7 +53,10 @@
     "idealHumidity": "Humitat ideal ({{humidity}}%)",
     "lowHumidityGranite": "La baixa humitat ajuda la fricció al granit",
     "readyInHours": "Estarà llest per escalada en ~{{hours}} hores",
-    "acceptable": "Les condicions són acceptables"
+    "acceptable": "Les condicions són acceptables",
+    "goodHumidity": "Bona humitat ({{humidity}}%)",
+    "lowCondensationRisk": "Baix risc de condensació (diferència de punt de rosada {{dewPointSpread}})",
+    "lowHumidityFriction": "La baixa humitat millora la fricció"
   },
   "warnings": {
     "tooWarm": "Massa calor per a {{rockType}} ({{temp}})",
@@ -66,7 +69,12 @@
     "recentPrecip": "Precipitació recent ({{precip}}) - s'assecarà en ~{{hours}}h",
     "currentlyWetDangerous": "Actualment humit - perillos",
     "currentlyWet": "Actualment humit",
-    "cold": "Cold ({{temp}})"
+    "cold": "Cold ({{temp}})",
+    "veryHighCondensationRisk": "Risc molt alt de condensació (diferència de punt de rosada {{dewPointSpread}}) - superfície de la roca probablement humida",
+    "highCondensationRisk": "Alt risc de condensació (diferència de punt de rosada {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Alt risc de condensació",
+    "moderateCondensationRisk": "Risc moderat de condensació (diferència de punt de rosada {{dewPointSpread}})",
+    "condensationRisk": "Risc de condensació ({{dewPointSpread}})"
   },
   "weather": {
     "clearSky": "Cel clar",

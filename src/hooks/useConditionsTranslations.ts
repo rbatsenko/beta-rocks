@@ -46,10 +46,25 @@ export function useConditionsTranslations(
         return reason; // Fallback to original
       }
 
-      // Extract humidity from "Ideal humidity (X%)"
-      const idealHumidityMatch = reason.match(/Ideal humidity \((-?\d+)%\)/);
-      if (idealHumidityMatch) {
-        const translated = t("reasons.idealHumidity", { humidity: idealHumidityMatch[1] });
+      // Extract humidity from "Good humidity (X%)" or "Ideal humidity (X%)"
+      const goodHumidityMatch = reason.match(/(?:Good|Ideal) humidity \((-?\d+)%\)/);
+      if (goodHumidityMatch) {
+        const translated = t("reasons.goodHumidity", { humidity: goodHumidityMatch[1] });
+        if (translated && !translated.startsWith("reasons.")) {
+          return translated;
+        }
+        return reason;
+      }
+
+      // Extract dew point spread from "Low condensation risk (dew point spread X°C)"
+      const lowCondensationMatch = reason.match(
+        /Low condensation risk \(dew point spread ([\d.]+)°C\)/
+      );
+      if (lowCondensationMatch) {
+        const dewPointCelsius = parseFloat(lowCondensationMatch[1]);
+        const convertedTemp = convertTemperature(dewPointCelsius, "celsius", units.temperature);
+        const tempFormatted = formatTemperature(convertedTemp, units.temperature, 1);
+        const translated = t("reasons.lowCondensationRisk", { dewPointSpread: tempFormatted });
         if (translated && !translated.startsWith("reasons.")) {
           return translated;
         }
@@ -81,8 +96,11 @@ export function useConditionsTranslations(
         const translated = t("reasons.tempTooHigh");
         return translated && !translated.startsWith("reasons.") ? translated : reason;
       }
-      if (reason === "Low humidity aids friction on granite") {
-        const translated = t("reasons.lowHumidityGranite");
+      if (
+        reason === "Low humidity aids friction on granite" ||
+        reason === "Low humidity aids friction"
+      ) {
+        const translated = t("reasons.lowHumidityFriction");
         return translated && !translated.startsWith("reasons.") ? translated : reason;
       }
       if (reason === "Conditions are acceptable") {
@@ -178,6 +196,52 @@ export function useConditionsTranslations(
       );
       if (highHumidityMatch) {
         return t("warnings.highHumidity", { humidity: highHumidityMatch[1] });
+      }
+
+      // "Very high condensation risk (dew point spread X°C) - rock surface likely damp"
+      const veryHighCondensationMatch = warning.match(
+        /Very high condensation risk \(dew point spread ([\d.]+)°C\) - rock surface likely damp/
+      );
+      if (veryHighCondensationMatch) {
+        const dewPointCelsius = parseFloat(veryHighCondensationMatch[1]);
+        const convertedTemp = convertTemperature(dewPointCelsius, "celsius", units.temperature);
+        const tempFormatted = formatTemperature(convertedTemp, units.temperature, 1);
+        return t("warnings.veryHighCondensationRisk", { dewPointSpread: tempFormatted });
+      }
+
+      // "High condensation risk (dew point spread X°C)" or just "High condensation risk"
+      const highCondensationMatch = warning.match(
+        /High condensation risk(?: \(dew point spread ([\d.]+)°C\))?/
+      );
+      if (highCondensationMatch) {
+        if (highCondensationMatch[1]) {
+          const dewPointCelsius = parseFloat(highCondensationMatch[1]);
+          const convertedTemp = convertTemperature(dewPointCelsius, "celsius", units.temperature);
+          const tempFormatted = formatTemperature(convertedTemp, units.temperature, 1);
+          return t("warnings.highCondensationRisk", { dewPointSpread: tempFormatted });
+        } else {
+          return t("warnings.highCondensationRiskSimple");
+        }
+      }
+
+      // "Moderate condensation risk (dew point spread X°C)"
+      const moderateCondensationMatch = warning.match(
+        /Moderate condensation risk \(dew point spread ([\d.]+)°C\)/
+      );
+      if (moderateCondensationMatch) {
+        const dewPointCelsius = parseFloat(moderateCondensationMatch[1]);
+        const convertedTemp = convertTemperature(dewPointCelsius, "celsius", units.temperature);
+        const tempFormatted = formatTemperature(convertedTemp, units.temperature, 1);
+        return t("warnings.moderateCondensationRisk", { dewPointSpread: tempFormatted });
+      }
+
+      // "Condensation risk (X°C)" - simplified hourly version
+      const condensationRiskMatch = warning.match(/Condensation risk \(([\d.]+)°C\)/);
+      if (condensationRiskMatch) {
+        const dewPointCelsius = parseFloat(condensationRiskMatch[1]);
+        const convertedTemp = convertTemperature(dewPointCelsius, "celsius", units.temperature);
+        const tempFormatted = formatTemperature(convertedTemp, units.temperature, 1);
+        return t("warnings.condensationRisk", { dewPointSpread: tempFormatted });
       }
 
       // "Very high winds (X km/h) - danger of blown off"

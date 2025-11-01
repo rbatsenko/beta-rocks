@@ -53,7 +53,10 @@
     "idealHumidity": "Ідеальна вологість ({{humidity}}%)",
     "lowHumidityGranite": "Низька вологість покращує тертя на граніті",
     "readyInHours": "Буде готово для лазіння приблизно за {{hours}} год.",
-    "acceptable": "Умови прийнятні"
+    "acceptable": "Умови прийнятні",
+    "goodHumidity": "Хороша вологість ({{humidity}}%)",
+    "lowCondensationRisk": "Низький ризик конденсації (різниця точок роси {{dewPointSpread}})",
+    "lowHumidityFriction": "Низька вологість покращує тертя"
   },
   "warnings": {
     "tooWarm": "Занадто тепло для {{rockType}} ({{temp}})",
@@ -66,7 +69,12 @@
     "recentPrecip": "Недавні опади ({{precip}}мм) - висохне за ~{{hours}}год",
     "currentlyWetDangerous": "Зараз мокро — небезпечно",
     "currentlyWet": "Зараз мокро",
-    "cold": "Cold ({{temp}})"
+    "cold": "Cold ({{temp}})",
+    "veryHighCondensationRisk": "Дуже високий ризик конденсації (різниця точок роси {{dewPointSpread}}) - поверхня скелі ймовірно волога",
+    "highCondensationRisk": "Високий ризик конденсації (різниця точок роси {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Високий ризик конденсації",
+    "moderateCondensationRisk": "Помірний ризик конденсації (різниця точок роси {{dewPointSpread}})",
+    "condensationRisk": "Ризик конденсації ({{dewPointSpread}})"
   },
   "weather": {
     "clearSky": "Ясно",

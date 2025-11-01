@@ -209,7 +209,7 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
         },
         body: JSON.stringify({
           email: emailAddress,
-          syncKey: userProfile.syncKey
+          syncKey: userProfile.syncKey,
         }),
       });
 
@@ -232,9 +232,7 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
       toast({
         title: t("settings.syncKey.emailFailed"),
         description:
-          error instanceof Error
-            ? error.message
-            : t("settings.syncKey.emailFailedDescription"),
+          error instanceof Error ? error.message : t("settings.syncKey.emailFailedDescription"),
         variant: "destructive",
       });
     } finally {
@@ -623,7 +621,9 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
                           size="sm"
                           className="flex-1 sm:flex-none"
                         >
-                          {isSendingEmail ? t("settings.syncKey.emailSending") : t("settings.syncKey.emailSend")}
+                          {isSendingEmail
+                            ? t("settings.syncKey.emailSending")
+                            : t("settings.syncKey.emailSend")}
                         </Button>
                         <Button
                           variant="outline"

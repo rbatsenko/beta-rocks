@@ -53,7 +53,10 @@
     "idealHumidity": "Ideal fugtighed ({{humidity}}%)",
     "lowHumidityGranite": "Lav fugtighed hjælper friktionen på granit",
     "readyInHours": "Vil være klar til at klatre om ~{{hours}} timer",
-    "acceptable": "Betingelserne er acceptable"
+    "acceptable": "Betingelserne er acceptable",
+    "goodHumidity": "God luftfugtighed ({{humidity}}%)",
+    "lowCondensationRisk": "Lav risiko for kondens (dugpunktsspredning {{dewPointSpread}})",
+    "lowHumidityFriction": "Lav luftfugtighed forbedrer friktion"
   },
   "warnings": {
     "tooWarm": "For varm til {{rockType}} ({{temp}})",
@@ -66,7 +69,12 @@
     "recentPrecip": "Nylig nedbør ({{precip}}) - tørrer om ~{{hours}}t",
     "currentlyWetDangerous": "I øjeblikket våd - farlig",
     "currentlyWet": "I øjeblikket våd",
-    "cold": "Cold ({{temp}})"
+    "cold": "Cold ({{temp}})",
+    "veryHighCondensationRisk": "Meget høj risiko for kondens (dugpunktsspredning {{dewPointSpread}}) - klippeoverflade sandsynligvis fugtig",
+    "highCondensationRisk": "Høj risiko for kondens (dugpunktsspredning {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Høj risiko for kondens",
+    "moderateCondensationRisk": "Moderat risiko for kondens (dugpunktsspredning {{dewPointSpread}})",
+    "condensationRisk": "Risiko for kondens ({{dewPointSpread}})"
   },
   "weather": {
     "clearSky": "Klar himmel",

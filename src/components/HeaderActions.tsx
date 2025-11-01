@@ -39,7 +39,7 @@ export function HeaderActions({
   const syncStatus = useSyncStatus();
 
   // Only show sync status for users with profiles
-  const hasProfile = typeof window !== 'undefined' ? !!getUserProfile() : false;
+  const hasProfile = typeof window !== "undefined" ? !!getUserProfile() : false;
 
   return (
     <>

@@ -53,7 +53,10 @@
     "idealHumidity": "Idealna vlažnost ({{humidity}}%)",
     "lowHumidityGranite": "Niska vlažnost povoljno utječe na trenje na granitu",
     "readyInHours": "Bit će spremno za penjanje za ~{{hours}} sati",
-    "acceptable": "Uvjeti su prihvatljivi"
+    "acceptable": "Uvjeti su prihvatljivi",
+    "goodHumidity": "Dobra vlažnost ({{humidity}}%)",
+    "lowCondensationRisk": "Nizak rizik kondenzacije (razlika točke rosišta {{dewPointSpread}})",
+    "lowHumidityFriction": "Niska vlažnost poboljšava trenje"
   },
   "warnings": {
     "tooWarm": "Premalo toplo za {{rockType}} ({{temp}})",
@@ -66,7 +69,12 @@
     "recentPrecip": "Nedavne padavine ({{precip}}) - suhit će se za ~{{hours}}h",
     "currentlyWetDangerous": "Trenutno mokro - opasno",
     "currentlyWet": "Trenutno mokro",
-    "cold": "Cold ({{temp}})"
+    "cold": "Cold ({{temp}})",
+    "veryHighCondensationRisk": "Vrlo visok rizik kondenzacije (razlika točke rosišta {{dewPointSpread}}) - površina stijene vjerojatno vlažna",
+    "highCondensationRisk": "Visok rizik kondenzacije (razlika točke rosišta {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Visok rizik kondenzacije",
+    "moderateCondensationRisk": "Umjeren rizik kondenzacije (razlika točke rosišta {{dewPointSpread}})",
+    "condensationRisk": "Rizik kondenzacije ({{dewPointSpread}})"
   },
   "weather": {
     "clearSky": "Vedro nebo",

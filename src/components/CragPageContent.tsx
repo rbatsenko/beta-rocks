@@ -46,6 +46,7 @@ interface CragPageContentProps {
   crag: {
     id: string;
     name: string;
+    slug: string | null;
     lat: number;
     lon: number;
     rock_type: string | null;
@@ -214,6 +215,7 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
       addFavorite.mutate({
         favorite: {
           areaName: crag.name,
+          areaSlug: crag.slug || undefined,
           location: locationString,
           latitude: crag.lat,
           longitude: crag.lon,
@@ -252,6 +254,7 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
       addFavorite.mutate({
         favorite: {
           areaName: crag.name,
+          areaSlug: crag.slug || undefined,
           location: locationString,
           latitude: crag.lat,
           longitude: crag.lon,
@@ -343,6 +346,7 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
                   variant={isFavorited ? "default" : "outline"}
                   size="sm"
                   onClick={handleToggleFavorite}
+                  disabled={addFavorite.isPending || removeFavorite.isPending}
                   title={isFavorited ? "Remove from favorites" : "Add to favorites"}
                   className={isFavorited ? "bg-orange-500 hover:bg-orange-600" : ""}
                 >
@@ -470,10 +474,7 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
         <div className="mb-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-2xl font-semibold">{t("reports.communityReports")}</h2>
-            <Button
-              onClick={handleAddReport}
-              className="bg-orange-500 hover:bg-orange-600"
-            >
+            <Button onClick={handleAddReport} className="bg-orange-500 hover:bg-orange-600">
               <Plus className="h-4 w-4" />
               {t("reports.addReport")}
             </Button>

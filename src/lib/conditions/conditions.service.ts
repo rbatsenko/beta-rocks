@@ -292,21 +292,46 @@ export function computeConditions(
     reasons.push(`Cold but good for ${rockType} friction`);
   }
 
+  // === DEW POINT SPREAD ASSESSMENT (condensation risk) ===
+  // Dew point spread is more reliable than relative humidity for friction
+  // Low spread = risk of condensation on rock surface = poor friction
+  if (dewPointSpread <= 1) {
+    // Very high risk of condensation - rock surface will be damp
+    frictionScore -= 2;
+    warnings.push(
+      `Very high condensation risk (dew point spread ${dewPointSpread}°C) - rock surface likely damp`
+    );
+  } else if (dewPointSpread <= 2) {
+    // High risk of condensation
+    frictionScore -= 1.5;
+    warnings.push(`High condensation risk (dew point spread ${dewPointSpread}°C)`);
+  } else if (dewPointSpread <= 3) {
+    // Moderate risk
+    frictionScore -= 0.8;
+    warnings.push(`Moderate condensation risk (dew point spread ${dewPointSpread}°C)`);
+  } else if (dewPointSpread > 5) {
+    // Good conditions - no condensation risk
+    frictionScore += 0.5;
+    reasons.push(`Low condensation risk (dew point spread ${dewPointSpread}°C)`);
+  }
+
   // === HUMIDITY ASSESSMENT ===
+  // Still consider relative humidity but with less weight since dew point is more accurate
   const inOptimalHumidity =
     current.humidity >= optimalHumidity.min && current.humidity <= optimalHumidity.max;
   const highHumidity = current.humidity > maxHumidity;
   const lowHumidity = current.humidity < optimalHumidity.min;
 
   if (inOptimalHumidity) {
-    frictionScore += 1;
-    reasons.push(`Ideal humidity (${Math.round(current.humidity)}%)`);
-  } else if (highHumidity) {
-    frictionScore -= 1.5;
-    warnings.push(`High humidity (${Math.round(current.humidity)}%) - rock can be slippery`);
+    frictionScore += 0.5; // Reduced from 1.0 since dew point is more important
+    reasons.push(`Good humidity (${Math.round(current.humidity)}%)`);
+  } else if (highHumidity && dewPointSpread > 3) {
+    // Only penalize high humidity if there's no condensation risk (already penalized above)
+    frictionScore -= 0.5; // Reduced from 1.5 since dew point handles condensation
+    warnings.push(`High humidity (${Math.round(current.humidity)}%)`);
   } else if (lowHumidity && (rockType === "granite" || rockType === "gneiss")) {
-    frictionScore += 0.5;
-    reasons.push("Low humidity aids friction on granite");
+    frictionScore += 0.3;
+    reasons.push("Low humidity aids friction");
   }
 
   // === WETNESS & DRYING ===
@@ -446,17 +471,33 @@ function computeHourlyFrictionScore(
     score += 1;
   }
 
-  // Humidity assessment
-  if (hour.humidity >= optimalHumidity.min && hour.humidity <= optimalHumidity.max) {
-    score += 1;
-  } else if (hour.humidity > maxHumidity) {
+  // Dew point spread assessment (more accurate than raw humidity)
+  const dewPoint = calculateDewPoint(hour.temp_c, hour.humidity);
+  const dewPointSpread = Math.round((hour.temp_c - dewPoint) * 10) / 10;
+
+  if (dewPointSpread <= 1) {
+    score -= 2;
+    warnings.push(`Condensation risk (${dewPointSpread}°C)`);
+  } else if (dewPointSpread <= 2) {
     score -= 1.5;
+    warnings.push(`High condensation risk`);
+  } else if (dewPointSpread <= 3) {
+    score -= 0.8;
+  } else if (dewPointSpread > 5) {
+    score += 0.5;
+  }
+
+  // Humidity assessment (with reduced weight)
+  if (hour.humidity >= optimalHumidity.min && hour.humidity <= optimalHumidity.max) {
+    score += 0.5; // Reduced from 1.0
+  } else if (hour.humidity > maxHumidity && dewPointSpread > 3) {
+    score -= 0.5; // Reduced from 1.5, only if no condensation risk
     warnings.push(`High humidity (${Math.round(hour.humidity)}%)`);
   } else if (
     hour.humidity < optimalHumidity.min &&
     (rockType === "granite" || rockType === "gneiss")
   ) {
-    score += 0.5;
+    score += 0.3; // Reduced from 0.5
   }
 
   // Wetness assessment

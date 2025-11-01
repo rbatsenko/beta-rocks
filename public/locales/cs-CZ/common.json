@@ -53,7 +53,10 @@
     "idealHumidity": "Ideální vlhkost ({{humidity}}%)",
     "lowHumidityGranite": "Nízká vlhkost pomáhá tření na žule",
     "readyInHours": "Bude připraveno k lezení za ~{{hours}} hodin",
-    "acceptable": "Podmínky jsou přijatelné"
+    "acceptable": "Podmínky jsou přijatelné",
+    "goodHumidity": "Dobrá vlhkost ({{humidity}}%)",
+    "lowCondensationRisk": "Nízké riziko kondenzace (rozpětí rosného bodu {{dewPointSpread}})",
+    "lowHumidityFriction": "Nízká vlhkost zlepšuje tření"
   },
   "warnings": {
     "tooWarm": "Příliš teplo pro {{rockType}} ({{temp}})",
@@ -66,7 +69,12 @@
     "recentPrecip": "Nedávné srážky ({{precip}}) - uschne za ~{{hours}}h",
     "currentlyWetDangerous": "Momentálně mokro - nebezpečné",
     "currentlyWet": "Momentálně mokro",
-    "cold": "Cold ({{temp}})"
+    "cold": "Cold ({{temp}})",
+    "veryHighCondensationRisk": "Velmi vysoké riziko kondenzace (rozpětí rosného bodu {{dewPointSpread}}) - povrch skály pravděpodobně vlhký",
+    "highCondensationRisk": "Vysoké riziko kondenzace (rozpětí rosného bodu {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Vysoké riziko kondenzace",
+    "moderateCondensationRisk": "Mírné riziko kondenzace (rozpětí rosného bodu {{dewPointSpread}})",
+    "condensationRisk": "Riziko kondenzace ({{dewPointSpread}})"
   },
   "weather": {
     "clearSky": "Jasná obloha",

@@ -135,7 +135,8 @@ export async function initializeUnitsForLocale(locale: string): Promise<UnitsCon
   const current = getUserUnits(locale);
 
   // Check if locale changed since last time
-  const storedLocale = typeof window !== "undefined" ? localStorage.getItem(UNITS_LOCALE_KEY) : null;
+  const storedLocale =
+    typeof window !== "undefined" ? localStorage.getItem(UNITS_LOCALE_KEY) : null;
   const localeChanged = storedLocale && storedLocale !== locale;
 
   // If no units set yet, or locale changed (and no user profile), initialize with locale defaults
