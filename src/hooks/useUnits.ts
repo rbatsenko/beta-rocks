@@ -39,15 +39,18 @@ export function useUnits() {
   }, [language]);
 
   // Update units
-  const updateUnits = useCallback(async (newUnits: UnitsConfig) => {
-    try {
-      await updateUserUnits(newUnits, language);
-      setUnits(newUnits);
-    } catch (error) {
-      console.error("Failed to update units:", error);
-      throw error;
-    }
-  }, [language]);
+  const updateUnits = useCallback(
+    async (newUnits: UnitsConfig) => {
+      try {
+        await updateUserUnits(newUnits, language);
+        setUnits(newUnits);
+      } catch (error) {
+        console.error("Failed to update units:", error);
+        throw error;
+      }
+    },
+    [language]
+  );
 
   return {
     units,

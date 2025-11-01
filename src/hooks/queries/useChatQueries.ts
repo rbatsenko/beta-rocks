@@ -57,7 +57,7 @@ export interface ChatMessage {
  */
 export function useCurrentSession() {
   // Check if user profile exists (don't create one)
-  const hasProfile = typeof window !== 'undefined' ? !!getUserProfile() : false;
+  const hasProfile = typeof window !== "undefined" ? !!getUserProfile() : false;
 
   return useQuery({
     queryKey: chatKeys.currentSession(),

@@ -86,18 +86,27 @@ const tools = {
               const result = localCrags[0];
 
               // Check if metadata is complete (country, state, municipality, or village present)
-              const hasCompleteMetadata = !!(result.country || result.state || result.municipality || result.village);
+              const hasCompleteMetadata = !!(
+                result.country ||
+                result.state ||
+                result.municipality ||
+                result.village
+              );
 
               if (!hasCompleteMetadata) {
                 // Metadata incomplete - could be ambiguous place name, cross-check with geocoding
-                console.log("[get_conditions] Single result has incomplete metadata, checking for ambiguous place name");
+                console.log(
+                  "[get_conditions] Single result has incomplete metadata, checking for ambiguous place name"
+                );
 
                 try {
                   const geocodedMultiple = await searchLocationMultiple(location, 5);
 
                   if (geocodedMultiple && geocodedMultiple.length > 1) {
                     // Found multiple places with this name - show disambiguation
-                    console.log("[get_conditions] Found multiple locations in geocoding, returning disambiguation");
+                    console.log(
+                      "[get_conditions] Found multiple locations in geocoding, returning disambiguation"
+                    );
 
                     return {
                       disambiguate: true,
@@ -125,9 +134,15 @@ const tools = {
 
                   console.log("[get_conditions] Geocoding returned ≤1 result, using local DB crag");
                 } catch (geocodingError) {
-                  console.log("[get_conditions] Geocoding cross-check failed, using local DB crag:", {
-                    error: geocodingError instanceof Error ? geocodingError.message : String(geocodingError),
-                  });
+                  console.log(
+                    "[get_conditions] Geocoding cross-check failed, using local DB crag:",
+                    {
+                      error:
+                        geocodingError instanceof Error
+                          ? geocodingError.message
+                          : String(geocodingError),
+                    }
+                  );
                   // Fall through to use local result
                 }
               }
@@ -710,8 +725,9 @@ const tools = {
               const φ2 = (Number(nearbyCrag.lat) * Math.PI) / 180;
               const Δφ = ((Number(nearbyCrag.lat) - lat) * Math.PI) / 180;
               const Δλ = ((Number(nearbyCrag.lon) - lon) * Math.PI) / 180;
-              const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-                        Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+              const a =
+                Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+                Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
               const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
               nearbyMatchDistance = Math.round(R * c); // Distance in meters
 
@@ -735,7 +751,9 @@ const tools = {
                 updatedLocation: location,
               });
             } else {
-              console.log("[get_conditions] No crags found within 5km - conditions only, no reports");
+              console.log(
+                "[get_conditions] No crags found within 5km - conditions only, no reports"
+              );
               // Explicitly set to undefined to ensure no crag page link shows
               cragId = undefined;
               cragSlug = undefined;

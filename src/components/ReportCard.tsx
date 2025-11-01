@@ -157,12 +157,12 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
 
     // Category-specific freshness windows (in days)
     const categoryRelevance: Record<ReportCategory, number> = {
-      conditions: 3,           // 3 days fresh (weather-dependent)
-      safety: 14,             // 14 days fresh (temporary hazards)
-      access: 30,             // 30 days fresh (closures change slowly)
+      conditions: 3, // 3 days fresh (weather-dependent)
+      safety: 14, // 14 days fresh (temporary hazards)
+      access: 30, // 30 days fresh (closures change slowly)
       climbing_info: Infinity, // always fresh (timeless info)
-      facilities: Infinity,    // always fresh (stable infrastructure)
-      other: 14,              // 14 days fresh (moderate default)
+      facilities: Infinity, // always fresh (stable infrastructure)
+      other: 14, // 14 days fresh (moderate default)
     };
 
     const freshWindow = categoryRelevance[category];
@@ -189,7 +189,12 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
   };
 
   // Determine opacity based on staleness
-  const cardOpacity = staleness.status === "older" ? "opacity-80" : staleness.status === "very_old" ? "opacity-60" : "";
+  const cardOpacity =
+    staleness.status === "older"
+      ? "opacity-80"
+      : staleness.status === "very_old"
+        ? "opacity-60"
+        : "";
 
   return (
     <Card className={cardOpacity}>
@@ -208,17 +213,29 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
             </Badge>
             {/* Staleness Badge */}
             {staleness.status === "older" && category === "conditions" && (
-              <Badge variant="outline" className="gap-1.5 bg-red-500/10 text-red-700 dark:text-red-300 border-red-200 dark:border-red-800">
+              <Badge
+                variant="outline"
+                className="gap-1.5 bg-red-500/10 text-red-700 dark:text-red-300 border-red-200 dark:border-red-800"
+              >
                 <span className="text-xs font-medium">{t("reports.staleness.outdated")}</span>
               </Badge>
             )}
-            {staleness.status === "older" && category !== "conditions" && category !== "climbing_info" && category !== "facilities" && (
-              <Badge variant="outline" className="gap-1.5 bg-yellow-500/10 text-yellow-700 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800">
-                <span className="text-xs font-medium">{t("reports.staleness.older")}</span>
-              </Badge>
-            )}
+            {staleness.status === "older" &&
+              category !== "conditions" &&
+              category !== "climbing_info" &&
+              category !== "facilities" && (
+                <Badge
+                  variant="outline"
+                  className="gap-1.5 bg-yellow-500/10 text-yellow-700 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800"
+                >
+                  <span className="text-xs font-medium">{t("reports.staleness.older")}</span>
+                </Badge>
+              )}
             {staleness.status === "very_old" && (
-              <Badge variant="outline" className="gap-1.5 bg-gray-500/10 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800">
+              <Badge
+                variant="outline"
+                className="gap-1.5 bg-gray-500/10 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800"
+              >
                 <span className="text-xs font-medium">{t("reports.staleness.veryOld")}</span>
               </Badge>
             )}

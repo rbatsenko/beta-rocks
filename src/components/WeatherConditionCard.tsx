@@ -297,10 +297,12 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
     let nearbyFormatted = null;
     if (data.searchedFor && data.nearbyMatchDistance !== undefined) {
       const distanceKm = data.nearbyMatchDistance / 1000;
-      const distanceStr = distanceKm >= 1
-        ? `${distanceKm.toFixed(1)}km`
-        : `${data.nearbyMatchDistance}m`;
-      nearbyFormatted = t("nearbyMatch.distance", { distance: distanceStr, location: data.searchedFor });
+      const distanceStr =
+        distanceKm >= 1 ? `${distanceKm.toFixed(1)}km` : `${data.nearbyMatchDistance}m`;
+      nearbyFormatted = t("nearbyMatch.distance", {
+        distance: distanceStr,
+        location: data.searchedFor,
+      });
     }
 
     return {
@@ -308,7 +310,14 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
       countryFlag: getCountryFlag(data.country),
       nearbyText: nearbyFormatted,
     };
-  }, [data.village, data.municipality, data.state, data.country, data.searchedFor, data.nearbyMatchDistance]);
+  }, [
+    data.village,
+    data.municipality,
+    data.state,
+    data.country,
+    data.searchedFor,
+    data.nearbyMatchDistance,
+  ]);
 
   return (
     <div className="bg-muted/50 rounded-lg p-3 sm:p-4 border border-border w-full max-w-2xl transition-all duration-500 ease-out will-change-[max-width,transform]">

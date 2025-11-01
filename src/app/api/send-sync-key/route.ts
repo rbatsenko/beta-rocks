@@ -114,10 +114,7 @@ export async function POST(request: NextRequest) {
     const validation = SendSyncKeySchema.safeParse(body);
 
     if (!validation.success) {
-      return NextResponse.json(
-        { error: validation.error.issues[0].message },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: validation.error.issues[0].message }, { status: 400 });
     }
 
     const { email, syncKey } = validation.data;
@@ -156,8 +153,7 @@ export async function POST(request: NextRequest) {
       console.error("Resend package not installed:", error);
       return NextResponse.json(
         {
-          error:
-            "Email service not available. Please install the resend package.",
+          error: "Email service not available. Please install the resend package.",
         },
         { status: 503 }
       );

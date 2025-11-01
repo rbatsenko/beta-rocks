@@ -277,11 +277,7 @@ export function ProfileCreationModal({
             </div>
 
             <div className="flex gap-2 justify-end">
-              <Button
-                variant="ghost"
-                onClick={() => onOpenChange(false)}
-                disabled={isSigningIn}
-              >
+              <Button variant="ghost" onClick={() => onOpenChange(false)} disabled={isSigningIn}>
                 {t("profileCreation.maybeLater")}
               </Button>
               <Button onClick={handleSignIn} disabled={isSigningIn || !syncKeyInput.trim()}>

@@ -8,7 +8,7 @@ import { getUserProfile, type UserProfile } from "@/lib/auth/sync-key";
  */
 export function useUserProfile() {
   // Check if profile exists (don't create)
-  const hasProfile = typeof window !== 'undefined' ? !!getUserProfile() : false;
+  const hasProfile = typeof window !== "undefined" ? !!getUserProfile() : false;
 
   return useQuery({
     queryKey: ["userProfile"],

@@ -861,7 +861,7 @@ const ChatInterface = ({
   const [syncExplainerDialogOpen, setSyncExplainerDialogOpen] = useState(false);
 
   // Check if user has profile (for session management)
-  const userProfile = typeof window !== 'undefined' ? getUserProfile() : null;
+  const userProfile = typeof window !== "undefined" ? getUserProfile() : null;
 
   // React Query hooks for session and messages
   const { data: session, isLoading: isLoadingSession } = useCurrentSession();

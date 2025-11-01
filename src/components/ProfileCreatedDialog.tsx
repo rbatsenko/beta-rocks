@@ -166,9 +166,7 @@ export function ProfileCreatedDialog({
           <div className="space-y-3 pt-4 border-t">
             <div className="flex items-center gap-2">
               <Mail className="h-4 w-4 text-muted-foreground" />
-              <h3 className="text-sm font-medium">
-                {t("profileCreated.emailSection.title")}
-              </h3>
+              <h3 className="text-sm font-medium">{t("profileCreated.emailSection.title")}</h3>
             </div>
 
             <div className="flex gap-3 p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
@@ -196,7 +194,9 @@ export function ProfileCreatedDialog({
                 disabled={!isValidEmail(email) || sending || emailSent}
                 variant="outline"
               >
-                {sending ? t("profileCreated.emailSection.sending") : t("profileCreated.emailSection.sendButton")}
+                {sending
+                  ? t("profileCreated.emailSection.sending")
+                  : t("profileCreated.emailSection.sendButton")}
               </Button>
             </div>
 
@@ -212,9 +212,7 @@ export function ProfileCreatedDialog({
             {emailError && (
               <div className="flex gap-3 p-3 bg-red-500/10 border border-red-500/20 rounded-lg">
                 <Info className="h-5 w-5 text-red-500 shrink-0" />
-                <p className="text-sm text-red-800 dark:text-red-200">
-                  {emailError}
-                </p>
+                <p className="text-sm text-red-800 dark:text-red-200">{emailError}</p>
               </div>
             )}
           </div>
