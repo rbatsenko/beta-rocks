@@ -54,9 +54,9 @@
     "lowHumidityGranite": "Ниската влажност помага триенето върху гранит",
     "readyInHours": "Ще е готово за катерене за ~{{hours}} часа",
     "acceptable": "Условията са приемливи",
-    "goodHumidity": "Good humidity ({{humidity}}%)",
-    "lowCondensationRisk": "Low condensation risk (dew point spread {{dewPointSpread}})",
-    "lowHumidityFriction": "Low humidity aids friction"
+    "goodHumidity": "Добра влажност ({{humidity}}%)",
+    "lowCondensationRisk": "Нисък риск от кондензация (разстояние до точка на роса {{dewPointSpread}})",
+    "lowHumidityFriction": "Ниската влажност подобрява триенето"
   },
   "warnings": {
     "tooWarm": "Твърде топло за {{rockType}} ({{temp}})",
@@ -70,11 +70,11 @@
     "currentlyWetDangerous": "В момента мокро - опасна",
     "currentlyWet": "В момента мокро",
     "cold": "Cold ({{temp}})",
-    "veryHighCondensationRisk": "Very high condensation risk (dew point spread {{dewPointSpread}}) - rock surface likely damp",
-    "highCondensationRisk": "High condensation risk (dew point spread {{dewPointSpread}})",
-    "highCondensationRiskSimple": "High condensation risk",
-    "moderateCondensationRisk": "Moderate condensation risk (dew point spread {{dewPointSpread}})",
-    "condensationRisk": "Condensation risk ({{dewPointSpread}})"
+    "veryHighCondensationRisk": "Много висок риск от кондензация (разстояние до точка на роса {{dewPointSpread}}) - повърхността на скалата вероятно е мокра",
+    "highCondensationRisk": "Висок риск от кондензация (разстояние до точка на роса {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Висок риск от кондензация",
+    "moderateCondensationRisk": "Умерен риск от кондензация (разстояние до точка на роса {{dewPointSpread}})",
+    "condensationRisk": "Риск от кондензация ({{dewPointSpread}})"
   },
   "weather": {
     "clearSky": "Ясно небе",

@@ -54,9 +54,9 @@
     "lowHumidityGranite": "Umidità bassa che favorisce l'aderenza sul granito",
     "readyInHours": "Pronto per scalare tra ~{{hours}} ore",
     "acceptable": "Condizioni accettabili",
-    "goodHumidity": "Good humidity ({{humidity}}%)",
-    "lowCondensationRisk": "Low condensation risk (dew point spread {{dewPointSpread}})",
-    "lowHumidityFriction": "Low humidity aids friction"
+    "goodHumidity": "Buona umidità ({{humidity}}%)",
+    "lowCondensationRisk": "Basso rischio di condensazione (differenza dal punto di rugiada {{dewPointSpread}})",
+    "lowHumidityFriction": "Bassa umidità migliora l'attrito"
   },
   "warnings": {
     "tooWarm": "Troppo caldo per {{rockType}} ({{temp}})",
@@ -70,11 +70,11 @@
     "currentlyWetDangerous": "Attualmente bagnato - pericoloso",
     "currentlyWet": "Attualmente bagnato",
     "cold": "Cold ({{temp}})",
-    "veryHighCondensationRisk": "Very high condensation risk (dew point spread {{dewPointSpread}}) - rock surface likely damp",
-    "highCondensationRisk": "High condensation risk (dew point spread {{dewPointSpread}})",
-    "highCondensationRiskSimple": "High condensation risk",
-    "moderateCondensationRisk": "Moderate condensation risk (dew point spread {{dewPointSpread}})",
-    "condensationRisk": "Condensation risk ({{dewPointSpread}})"
+    "veryHighCondensationRisk": "Rischio di condensazione molto alto (differenza dal punto di rugiada {{dewPointSpread}}) - superficie rocciosa probabilmente umida",
+    "highCondensationRisk": "Alto rischio di condensazione (differenza dal punto di rugiada {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Alto rischio di condensazione",
+    "moderateCondensationRisk": "Rischio moderato di condensazione (differenza dal punto di rugiada {{dewPointSpread}})",
+    "condensationRisk": "Rischio di condensazione ({{dewPointSpread}})"
   },
   "weather": {
     "clearSky": "Cielo sereno",

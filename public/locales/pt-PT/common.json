@@ -54,9 +54,9 @@
     "lowHumidityGranite": "Baixa humidade favorece a fricção no granito",
     "readyInHours": "Estará pronto para escalar em ~{{hours}} horas",
     "acceptable": "As condições são aceitáveis",
-    "goodHumidity": "Good humidity ({{humidity}}%)",
-    "lowCondensationRisk": "Low condensation risk (dew point spread {{dewPointSpread}})",
-    "lowHumidityFriction": "Low humidity aids friction"
+    "goodHumidity": "Boa humidade ({{humidity}}%)",
+    "lowCondensationRisk": "Baixo risco de condensação (diferença do ponto de orvalho {{dewPointSpread}})",
+    "lowHumidityFriction": "Baixa humidade melhora o atrito"
   },
   "warnings": {
     "tooWarm": "Muito quente para {{rockType}} ({{temp}})",
@@ -70,11 +70,11 @@
     "currentlyWetDangerous": "Atualmente molhado - perigoso",
     "currentlyWet": "Atualmente molhado",
     "cold": "Cold ({{temp}})",
-    "veryHighCondensationRisk": "Very high condensation risk (dew point spread {{dewPointSpread}}) - rock surface likely damp",
-    "highCondensationRisk": "High condensation risk (dew point spread {{dewPointSpread}})",
-    "highCondensationRiskSimple": "High condensation risk",
-    "moderateCondensationRisk": "Moderate condensation risk (dew point spread {{dewPointSpread}})",
-    "condensationRisk": "Condensation risk ({{dewPointSpread}})"
+    "veryHighCondensationRisk": "Risco muito alto de condensação (diferença do ponto de orvalho {{dewPointSpread}}) - superfície da rocha provavelmente húmida",
+    "highCondensationRisk": "Alto risco de condensação (diferença do ponto de orvalho {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Alto risco de condensação",
+    "moderateCondensationRisk": "Risco moderado de condensação (diferença do ponto de orvalho {{dewPointSpread}})",
+    "condensationRisk": "Risco de condensação ({{dewPointSpread}})"
   },
   "weather": {
     "clearSky": "Céu limpo",

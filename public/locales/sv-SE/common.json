@@ -54,9 +54,9 @@
     "lowHumidityGranite": "Låg fuktighet ger bättre friktion på granit",
     "readyInHours": "Klättring möjlig om ~{{hours}} timmar",
     "acceptable": "Förhållandena är acceptabla",
-    "goodHumidity": "Good humidity ({{humidity}}%)",
-    "lowCondensationRisk": "Low condensation risk (dew point spread {{dewPointSpread}})",
-    "lowHumidityFriction": "Low humidity aids friction"
+    "goodHumidity": "Bra luftfuktighet ({{humidity}}%)",
+    "lowCondensationRisk": "Låg risk för kondens (daggpunktsspread {{dewPointSpread}})",
+    "lowHumidityFriction": "Låg luftfuktighet förbättrar friktion"
   },
   "warnings": {
     "tooWarm": "För varmt för {{rockType}} ({{temp}})",
@@ -70,11 +70,11 @@
     "currentlyWetDangerous": "För närvarande blött - riskabelt",
     "currentlyWet": "För närvarande blött",
     "cold": "Cold ({{temp}})",
-    "veryHighCondensationRisk": "Very high condensation risk (dew point spread {{dewPointSpread}}) - rock surface likely damp",
-    "highCondensationRisk": "High condensation risk (dew point spread {{dewPointSpread}})",
-    "highCondensationRiskSimple": "High condensation risk",
-    "moderateCondensationRisk": "Moderate condensation risk (dew point spread {{dewPointSpread}})",
-    "condensationRisk": "Condensation risk ({{dewPointSpread}})"
+    "veryHighCondensationRisk": "Mycket hög risk för kondens (daggpunktsspread {{dewPointSpread}}) - klippyta troligen fuktig",
+    "highCondensationRisk": "Hög risk för kondens (daggpunktsspread {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Hög risk för kondens",
+    "moderateCondensationRisk": "Måttlig risk för kondens (daggpunktsspread {{dewPointSpread}})",
+    "condensationRisk": "Risk för kondens ({{dewPointSpread}})"
   },
   "weather": {
     "clearSky": "Klart",

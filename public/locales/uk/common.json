@@ -54,9 +54,9 @@
     "lowHumidityGranite": "Низька вологість покращує тертя на граніті",
     "readyInHours": "Буде готово для лазіння приблизно за {{hours}} год.",
     "acceptable": "Умови прийнятні",
-    "goodHumidity": "Good humidity ({{humidity}}%)",
-    "lowCondensationRisk": "Low condensation risk (dew point spread {{dewPointSpread}})",
-    "lowHumidityFriction": "Low humidity aids friction"
+    "goodHumidity": "Хороша вологість ({{humidity}}%)",
+    "lowCondensationRisk": "Низький ризик конденсації (різниця точок роси {{dewPointSpread}})",
+    "lowHumidityFriction": "Низька вологість покращує тертя"
   },
   "warnings": {
     "tooWarm": "Занадто тепло для {{rockType}} ({{temp}})",
@@ -70,11 +70,11 @@
     "currentlyWetDangerous": "Зараз мокро — небезпечно",
     "currentlyWet": "Зараз мокро",
     "cold": "Cold ({{temp}})",
-    "veryHighCondensationRisk": "Very high condensation risk (dew point spread {{dewPointSpread}}) - rock surface likely damp",
-    "highCondensationRisk": "High condensation risk (dew point spread {{dewPointSpread}})",
-    "highCondensationRiskSimple": "High condensation risk",
-    "moderateCondensationRisk": "Moderate condensation risk (dew point spread {{dewPointSpread}})",
-    "condensationRisk": "Condensation risk ({{dewPointSpread}})"
+    "veryHighCondensationRisk": "Дуже високий ризик конденсації (різниця точок роси {{dewPointSpread}}) - поверхня скелі ймовірно волога",
+    "highCondensationRisk": "Високий ризик конденсації (різниця точок роси {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Високий ризик конденсації",
+    "moderateCondensationRisk": "Помірний ризик конденсації (різниця точок роси {{dewPointSpread}})",
+    "condensationRisk": "Ризик конденсації ({{dewPointSpread}})"
   },
   "weather": {
     "clearSky": "Ясно",

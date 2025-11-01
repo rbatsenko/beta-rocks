@@ -54,9 +54,9 @@
     "lowHumidityGranite": "Niedrige Luftfeuchtigkeit verbessert die Reibung auf Granit",
     "readyInHours": "In ~{{hours}} Stunden kletterbar",
     "acceptable": "Akzeptable Bedingungen",
-    "goodHumidity": "Good humidity ({{humidity}}%)",
-    "lowCondensationRisk": "Low condensation risk (dew point spread {{dewPointSpread}})",
-    "lowHumidityFriction": "Low humidity aids friction"
+    "goodHumidity": "Gute Luftfeuchtigkeit ({{humidity}}%)",
+    "lowCondensationRisk": "Geringes Kondensationsrisiko (Taupunktabstand {{dewPointSpread}})",
+    "lowHumidityFriction": "Niedrige Luftfeuchtigkeit verbessert Reibung"
   },
   "warnings": {
     "tooWarm": "Zu warm für {{rockType}} ({{temp}})",
@@ -70,11 +70,11 @@
     "currentlyWetDangerous": "Derzeit nass - gefährlich",
     "currentlyWet": "Derzeit nass",
     "cold": "Cold ({{temp}})",
-    "veryHighCondensationRisk": "Very high condensation risk (dew point spread {{dewPointSpread}}) - rock surface likely damp",
-    "highCondensationRisk": "High condensation risk (dew point spread {{dewPointSpread}})",
-    "highCondensationRiskSimple": "High condensation risk",
-    "moderateCondensationRisk": "Moderate condensation risk (dew point spread {{dewPointSpread}})",
-    "condensationRisk": "Condensation risk ({{dewPointSpread}})"
+    "veryHighCondensationRisk": "Sehr hohes Kondensationsrisiko (Taupunktabstand {{dewPointSpread}}) - Felsoberfläche wahrscheinlich feucht",
+    "highCondensationRisk": "Hohes Kondensationsrisiko (Taupunktabstand {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Hohes Kondensationsrisiko",
+    "moderateCondensationRisk": "Mäßiges Kondensationsrisiko (Taupunktabstand {{dewPointSpread}})",
+    "condensationRisk": "Kondensationsrisiko ({{dewPointSpread}})"
   },
   "weather": {
     "clearSky": "Klarer Himmel",

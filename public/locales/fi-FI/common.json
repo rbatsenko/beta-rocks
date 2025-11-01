@@ -54,9 +54,9 @@
     "lowHumidityGranite": "Alhainen kosteus parantaa kitkaa graniitissa",
     "readyInHours": "Valmiina kiipelyyn noin {{hours}} tunnin kuluttua",
     "acceptable": "Olosuhteet ovat hyväksyttävät",
-    "goodHumidity": "Good humidity ({{humidity}}%)",
-    "lowCondensationRisk": "Low condensation risk (dew point spread {{dewPointSpread}})",
-    "lowHumidityFriction": "Low humidity aids friction"
+    "goodHumidity": "Hyvä kosteus ({{humidity}}%)",
+    "lowCondensationRisk": "Pieni tiivistymisriski (kastepisteväli {{dewPointSpread}})",
+    "lowHumidityFriction": "Alhainen kosteus parantaa kitkaa"
   },
   "warnings": {
     "tooWarm": "Liian lämmin {{rockType}}-kiven osalta ({{temp}})",
@@ -70,11 +70,11 @@
     "currentlyWetDangerous": "Tällä hetkellä kostea - vaarallinen",
     "currentlyWet": "Tällä hetkellä kostea",
     "cold": "Cold ({{temp}})",
-    "veryHighCondensationRisk": "Very high condensation risk (dew point spread {{dewPointSpread}}) - rock surface likely damp",
-    "highCondensationRisk": "High condensation risk (dew point spread {{dewPointSpread}})",
-    "highCondensationRiskSimple": "High condensation risk",
-    "moderateCondensationRisk": "Moderate condensation risk (dew point spread {{dewPointSpread}})",
-    "condensationRisk": "Condensation risk ({{dewPointSpread}})"
+    "veryHighCondensationRisk": "Erittäin suuri tiivistymisriski (kastepisteväli {{dewPointSpread}}) - kallion pinta todennäköisesti kostea",
+    "highCondensationRisk": "Suuri tiivistymisriski (kastepisteväli {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Suuri tiivistymisriski",
+    "moderateCondensationRisk": "Kohtalainen tiivistymisriski (kastepisteväli {{dewPointSpread}})",
+    "condensationRisk": "Tiivistymisriski ({{dewPointSpread}})"
   },
   "weather": {
     "clearSky": "Selkeä taivas",

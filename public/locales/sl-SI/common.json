@@ -54,9 +54,9 @@
     "lowHumidityGranite": "Nizka vlaga izboljša trenje na granitu",
     "readyInHours": "Za plezanje pripravljeno v ~{{hours}} urah",
     "acceptable": "Razmere so sprejemljive",
-    "goodHumidity": "Good humidity ({{humidity}}%)",
-    "lowCondensationRisk": "Low condensation risk (dew point spread {{dewPointSpread}})",
-    "lowHumidityFriction": "Low humidity aids friction"
+    "goodHumidity": "Dobra vlažnost ({{humidity}}%)",
+    "lowCondensationRisk": "Nizko tveganje za kondenzacijo (razlika rosišča {{dewPointSpread}})",
+    "lowHumidityFriction": "Nizka vlažnost izboljša oprijem"
   },
   "warnings": {
     "tooWarm": "Prevroče za {{rockType}} ({{temp}})",
@@ -70,11 +70,11 @@
     "currentlyWetDangerous": "Trenutno mokro - nevarno",
     "currentlyWet": "Trenutno mokro",
     "cold": "Cold ({{temp}})",
-    "veryHighCondensationRisk": "Very high condensation risk (dew point spread {{dewPointSpread}}) - rock surface likely damp",
-    "highCondensationRisk": "High condensation risk (dew point spread {{dewPointSpread}})",
-    "highCondensationRiskSimple": "High condensation risk",
-    "moderateCondensationRisk": "Moderate condensation risk (dew point spread {{dewPointSpread}})",
-    "condensationRisk": "Condensation risk ({{dewPointSpread}})"
+    "veryHighCondensationRisk": "Zelo visoko tveganje za kondenzacijo (razlika rosišča {{dewPointSpread}}) - površina skale verjetno mokra",
+    "highCondensationRisk": "Visoko tveganje za kondenzacijo (razlika rosišča {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Visoko tveganje za kondenzacijo",
+    "moderateCondensationRisk": "Zmerno tveganje za kondenzacijo (razlika rosišča {{dewPointSpread}})",
+    "condensationRisk": "Tveganje za kondenzacijo ({{dewPointSpread}})"
   },
   "weather": {
     "clearSky": "Jasno nebo",

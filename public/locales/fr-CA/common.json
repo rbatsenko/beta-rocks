@@ -54,9 +54,9 @@
     "lowHumidityGranite": "Humidité faible, idéale pour l'adhérence sur granite",
     "readyInHours": "Prêt pour grimper dans ~{{hours}} heures",
     "acceptable": "Conditions acceptables",
-    "goodHumidity": "Good humidity ({{humidity}}%)",
-    "lowCondensationRisk": "Low condensation risk (dew point spread {{dewPointSpread}})",
-    "lowHumidityFriction": "Low humidity aids friction"
+    "goodHumidity": "Bonne humidité ({{humidity}}%)",
+    "lowCondensationRisk": "Faible risque de condensation (écart au point de rosée {{dewPointSpread}})",
+    "lowHumidityFriction": "Faible humidité améliore l'adhérence"
   },
   "warnings": {
     "tooWarm": "Trop chaud pour {{rockType}} ({{temp}})",
@@ -70,11 +70,11 @@
     "currentlyWetDangerous": "Actuellement mouillé - dangereux",
     "currentlyWet": "Actuellement mouillé",
     "cold": "Cold ({{temp}})",
-    "veryHighCondensationRisk": "Very high condensation risk (dew point spread {{dewPointSpread}}) - rock surface likely damp",
-    "highCondensationRisk": "High condensation risk (dew point spread {{dewPointSpread}})",
-    "highCondensationRiskSimple": "High condensation risk",
-    "moderateCondensationRisk": "Moderate condensation risk (dew point spread {{dewPointSpread}})",
-    "condensationRisk": "Condensation risk ({{dewPointSpread}})"
+    "veryHighCondensationRisk": "Très haut risque de condensation (écart au point de rosée {{dewPointSpread}}) - surface du rocher probablement humide",
+    "highCondensationRisk": "Haut risque de condensation (écart au point de rosée {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Haut risque de condensation",
+    "moderateCondensationRisk": "Risque modéré de condensation (écart au point de rosée {{dewPointSpread}})",
+    "condensationRisk": "Risque de condensation ({{dewPointSpread}})"
   },
   "weather": {
     "clearSky": "Ciel dégagé",

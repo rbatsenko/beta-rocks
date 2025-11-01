@@ -54,9 +54,9 @@
     "lowHumidityGranite": "Nízka vlhkosť pomáha treniu na žule",
     "readyInHours": "Bude pripravené na lezenie za ~{{hours}} hodín",
     "acceptable": "Podmienky sú prijateľné",
-    "goodHumidity": "Good humidity ({{humidity}}%)",
-    "lowCondensationRisk": "Low condensation risk (dew point spread {{dewPointSpread}})",
-    "lowHumidityFriction": "Low humidity aids friction"
+    "goodHumidity": "Dobrá vlhkosť ({{humidity}}%)",
+    "lowCondensationRisk": "Nízke riziko kondenzácie (rozpätie rosného bodu {{dewPointSpread}})",
+    "lowHumidityFriction": "Nízka vlhkosť zlepšuje trenie"
   },
   "warnings": {
     "tooWarm": "Príliš teplo pre {{rockType}} ({{temp}})",
@@ -70,11 +70,11 @@
     "currentlyWetDangerous": "Momentálne mokro - nebezpečné",
     "currentlyWet": "Momentálne mokro",
     "cold": "Cold ({{temp}})",
-    "veryHighCondensationRisk": "Very high condensation risk (dew point spread {{dewPointSpread}}) - rock surface likely damp",
-    "highCondensationRisk": "High condensation risk (dew point spread {{dewPointSpread}})",
-    "highCondensationRiskSimple": "High condensation risk",
-    "moderateCondensationRisk": "Moderate condensation risk (dew point spread {{dewPointSpread}})",
-    "condensationRisk": "Condensation risk ({{dewPointSpread}})"
+    "veryHighCondensationRisk": "Veľmi vysoké riziko kondenzácie (rozpätie rosného bodu {{dewPointSpread}}) - povrch skaly pravdepodobne vlhký",
+    "highCondensationRisk": "Vysoké riziko kondenzácie (rozpätie rosného bodu {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Vysoké riziko kondenzácie",
+    "moderateCondensationRisk": "Mierne riziko kondenzácie (rozpätie rosného bodu {{dewPointSpread}})",
+    "condensationRisk": "Riziko kondenzácie ({{dewPointSpread}})"
   },
   "weather": {
     "clearSky": "Jasná obloha",
