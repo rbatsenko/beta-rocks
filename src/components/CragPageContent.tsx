@@ -46,6 +46,7 @@ interface CragPageContentProps {
   crag: {
     id: string;
     name: string;
+    slug: string | null;
     lat: number;
     lon: number;
     rock_type: string | null;
