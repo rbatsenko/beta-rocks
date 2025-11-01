@@ -214,6 +214,7 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
       addFavorite.mutate({
         favorite: {
           areaName: crag.name,
+          areaSlug: crag.slug || undefined,
           location: locationString,
           latitude: crag.lat,
           longitude: crag.lon,
@@ -252,6 +253,7 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
       addFavorite.mutate({
         favorite: {
           areaName: crag.name,
+          areaSlug: crag.slug || undefined,
           location: locationString,
           latitude: crag.lat,
           longitude: crag.lon,
@@ -343,6 +345,7 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
                   variant={isFavorited ? "default" : "outline"}
                   size="sm"
                   onClick={handleToggleFavorite}
+                  disabled={addFavorite.isPending || removeFavorite.isPending}
                   title={isFavorited ? "Remove from favorites" : "Add to favorites"}
                   className={isFavorited ? "bg-orange-500 hover:bg-orange-600" : ""}
                 >

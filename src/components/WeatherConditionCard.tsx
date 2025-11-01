@@ -387,6 +387,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
                 variant="outline"
                 size="sm"
                 onClick={handleFavoriteToggle}
+                disabled={addFavorite.isPending || removeFavorite.isPending}
                 title={isFavorited ? "Remove from favorites" : "Add to favorites"}
                 className={isFavorited ? "bg-orange-500 hover:bg-orange-600 text-white" : ""}
               >
