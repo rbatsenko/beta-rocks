@@ -157,11 +157,11 @@
     },
     "whatYouControl": {
       "title": "Čo kontrolujete",
-      "description": "Vaše obľúbené, hlásenia a história chatu sú najprv uložené lokálne vo vašom zariadení a potom automaticky synchronizované s našou databázou, aby bol umožnený bezproblémový prístup z viacerých zariadení. K vašim dátam môžete pristupovať na akomkoľvek zariadení pomocou synchronizačného kľúča. Všetky vaše dáta môžete kedykoľvek vymazať v Nastaveniach."
+      "description": "Vaše obľúbené, hlásenia a história chatu sú uložené lokálne vo vašom zariadení. Pre prístup k nim z viacerých zariadení si môžete vytvoriť anonymný profil. Keď máte profil, vaše dáta sa automaticky synchronizujú, aby bol umožnený prístup z viacerých zariadení. Všetky vaše dáta môžete kedykoľvek vymazať v Nastaveniach."
     },
     "howSyncWorks": {
       "title": "Ako funguje synchronizácia",
-      "description": "Keď používate beta.rocks, automaticky vytvoríme anonymný synchronizačný kľúč a synchronizujeme vaše dáta s našou databázou. Dáta sú spojené s hašovaným synchronizačným kľúčom - nie s vašou identitou. Synchronizačný kľúč je náhodný identifikátor, ku ktorému máte prístup iba vy. Nemôžeme ho s vami spojiť. Nie je vyžadovaný email, nie je potrebný účet."
+      "description": "Keď vytvoríte profil, vygenerujeme anonymný synchronizačný kľúč a synchronizujeme vaše dáta s našou databázou. Dáta sú spojené s hašovaným synchronizačným kľúčom - nie s vašou identitou. Synchronizačný kľúč je náhodný identifikátor, ku ktorému máte prístup iba vy. Nemôžeme ho s vami spojiť. Nie je vyžadovaný email, nie je potrebný účet."
     },
     "openSource": {
       "title": "Open Source",

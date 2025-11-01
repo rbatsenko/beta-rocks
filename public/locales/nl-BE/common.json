@@ -157,11 +157,11 @@
     },
     "whatYouControl": {
       "title": "Wat Jij Controleert",
-      "description": "Je favorieten, rapporten en chatgeschiedenis worden eerst lokaal op je apparaat opgeslagen en vervolgens automatisch gesynchroniseerd met onze database om naadloze toegang vanaf meerdere apparaten mogelijk te maken. Je kunt je gegevens op elk apparaat openen met je synchronisatiesleutel. Je kunt al je gegevens op elk moment verwijderen vanuit Instellingen."
+      "description": "Je favorieten, rapporten en chatgeschiedenis worden lokaal op je apparaat opgeslagen. Om er vanaf meerdere apparaten toegang toe te hebben, kun je een anoniem profiel aanmaken. Zodra je een profiel hebt, worden je gegevens automatisch gesynchroniseerd om toegang vanaf meerdere apparaten mogelijk te maken. Je kunt al je gegevens op elk moment verwijderen vanuit Instellingen."
     },
     "howSyncWorks": {
       "title": "Hoe Synchronisatie Werkt",
-      "description": "Wanneer je beta.rocks gebruikt, maken we automatisch een anonieme synchronisatiesleutel aan en synchroniseren we je gegevens met onze database. Gegevens zijn gekoppeld aan een gehashte synchronisatiesleutel - niet aan je identiteit. De synchronisatiesleutel is een willekeurige identifier waar alleen jij toegang toe hebt. We kunnen het niet aan jou koppelen. Geen e-mail vereist, geen account nodig."
+      "description": "Wanneer je een profiel aanmaakt, genereren we een anonieme synchronisatiesleutel en synchroniseren we je gegevens met onze database. Gegevens zijn gekoppeld aan een gehashte synchronisatiesleutel - niet aan je identiteit. De synchronisatiesleutel is een willekeurige identifier waar alleen jij toegang toe hebt. We kunnen het niet aan jou koppelen. Geen e-mail vereist, geen account nodig."
     },
     "openSource": {
       "title": "Open Source",

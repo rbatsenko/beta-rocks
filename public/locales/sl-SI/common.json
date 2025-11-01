@@ -158,11 +158,11 @@
     },
     "whatYouControl": {
       "title": "Kaj Nadzoruješ",
-      "description": "Vaši priljubljeni, poročila in zgodovina klepeta se najprej shranijo lokalno na vaši napravi in nato samodejno sinhronizirajo z našo podatkovno bazo, da omogočimo nemoten dostop z več naprav. Do svojih podatkov lahko dostopate na kateri koli napravi z uporabo sinhronizacijskega ključa. Vse svoje podatke lahko kadarkoli izbrišete v Nastavitvah."
+      "description": "Vaši priljubljeni, poročila in zgodovina klepeta se shranijo lokalno na vaši napravi. Za dostop z več naprav lahko ustvarite anonimni profil. Ko imate profil, se vaši podatki samodejno sinhronizirajo, da omogočijo dostop z več naprav. Vse svoje podatke lahko kadarkoli izbrišete v Nastavitvah."
     },
     "howSyncWorks": {
       "title": "Kako Deluje Sinhronizacija",
-      "description": "Ko uporabljate beta.rocks, samodejno ustvarimo anonimni sinhronizacijski ključ in sinhroniziramo vaše podatke z našo podatkovno bazo. Podatki so povezani s heširanim sinhronizacijskim ključem - ne z vašo identiteto. Sinhronizacijski ključ je naključni identifikator, do katerega imate dostop le vi. Ne moremo ga povezati z vami. Ni potreben e-poštni naslov, ni potreben račun."
+      "description": "Ko ustvarite profil, ustvarimo anonimni sinhronizacijski ključ in sinhroniziramo vaše podatke z našo podatkovno bazo. Podatki so povezani s heširanim sinhronizacijskim ključem - ne z vašo identiteto. Sinhronizacijski ključ je naključni identifikator, do katerega imate dostop le vi. Ne moremo ga povezati z vami. Ni potreben e-poštni naslov, ni potreben račun."
     },
     "openSource": {
       "title": "Odprta Koda",

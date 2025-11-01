@@ -157,11 +157,11 @@
     },
     "whatYouControl": {
       "title": "Lo que controlas",
-      "description": "Tus favoritos, reportes e historial de chat se almacenan localmente en tu dispositivo primero y luego se sincronizan automáticamente con nuestra base de datos para permitir un acceso fluido desde múltiples dispositivos. Puedes acceder a tus datos en cualquier dispositivo usando tu clave de sincronización. Puedes eliminar todos tus datos en cualquier momento desde Configuración."
+      "description": "Tus favoritos, reportes e historial de chat se almacenan localmente en tu dispositivo. Para acceder a ellos desde múltiples dispositivos, puedes crear un perfil anónimo. Una vez que tienes un perfil, tus datos se sincronizan automáticamente para permitir el acceso desde múltiples dispositivos. Puedes eliminar todos tus datos en cualquier momento desde Configuración."
     },
     "howSyncWorks": {
       "title": "Cómo funciona la sincronización",
-      "description": "Cuando usas beta.rocks, creamos automáticamente una clave de sincronización anónima y sincronizamos tus datos con nuestra base de datos. Los datos están vinculados a una clave de sincronización hasheada - no a tu identidad. La clave de sincronización es un identificador aleatorio al que solo tú tienes acceso. No podemos vincularla contigo. Sin correo requerido, sin cuenta necesaria."
+      "description": "Cuando creas un perfil, generamos una clave de sincronización anónima y sincronizamos tus datos con nuestra base de datos. Los datos están vinculados a una clave de sincronización hasheada - no a tu identidad. La clave de sincronización es un identificador aleatorio al que solo tú tienes acceso. No podemos vincularla contigo. Sin correo requerido, sin cuenta necesaria."
     },
     "openSource": {
       "title": "Código Abierto",

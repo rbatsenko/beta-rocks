@@ -157,11 +157,11 @@
     },
     "whatYouControl": {
       "title": "Što Ti Kontroliraš",
-      "description": "Vaši favoriti, izvješća i povijest chata prvo se pohranjuju lokalno na vašem uređaju, a zatim se automatski sinkroniziraju s našom bazom podataka kako bi omogućili besprijekoran pristup s više uređaja. Možete pristupiti svojim podacima na bilo kojem uređaju pomoću ključa za sinkronizaciju. Možete izbrisati sve svoje podatke u bilo kojem trenutku iz Postavki."
+      "description": "Vaši favoriti, izvješća i povijest chata pohranjuju se lokalno na vašem uređaju. Za pristup s više uređaja možete stvoriti anoniman profil. Nakon što imate profil, vaši se podaci automatski sinkroniziraju kako bi omogućili pristup s više uređaja. Možete izbrisati sve svoje podatke u bilo kojem trenutku iz Postavki."
     },
     "howSyncWorks": {
       "title": "Kako Funkcionira Sinkronizacija",
-      "description": "Kada koristite beta.rocks, automatski stvaramo anoniman ključ za sinkronizaciju i sinkroniziramo vaše podatke s našom bazom podataka. Podaci su povezani s heširanim ključem za sinkronizaciju - ne s vašim identitetom. Ključ za sinkronizaciju je slučajan identifikator kojem samo vi imate pristup. Ne možemo ga povezati s vama. Nije potreban email, nije potreban račun."
+      "description": "Kada stvorite profil, generiramo anoniman ključ za sinkronizaciju i sinkroniziramo vaše podatke s našom bazom podataka. Podaci su povezani s heširanim ključem za sinkronizaciju - ne s vašim identitetom. Ključ za sinkronizaciju je slučajan identifikator kojem samo vi imate pristup. Ne možemo ga povezati s vama. Nije potreban email, nije potreban račun."
     },
     "openSource": {
       "title": "Otvoreni Kod",
