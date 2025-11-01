@@ -170,7 +170,7 @@
     },
     "yourRights": {
       "title": "Dina rättigheter",
-      "description": "Du kan radera all din data när som helst från Inställningar. Din synkroniseringsnyckel, din kontroll. Sluta synkronisera? Data stannar bara på din enhet. Vill du börja om? Rensa allt med ett tryck."
+      "description": "Du kan radera din profil när som helst från Inställningar. Detta tar bort dina favoriter, chatthistorik och profil från vår databas. Gemenskapsrapporter du har postat förblir synliga (anonymt) för att hjälpa andra klättrare. Full kontroll över dina data."
     },
     "dataSecurity": {
       "title": "Datasäkerhet",

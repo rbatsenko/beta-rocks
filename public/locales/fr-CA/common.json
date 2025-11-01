@@ -169,7 +169,7 @@
     },
     "yourRights": {
       "title": "Vos droits",
-      "description": "Vous pouvez supprimer toutes vos données à tout moment depuis les Paramètres. Votre clé de synchronisation, votre contrôle. Arrêter la synchronisation ? Les données restent uniquement sur votre appareil. Envie d'un nouveau départ ? Effacez tout en un clic."
+      "description": "Vous pouvez supprimer votre profil à tout moment depuis les Paramètres. Cela supprime vos favoris, votre historique de chat et votre profil de notre base de données. Les rapports communautaires que vous avez publiés restent visibles (anonymement) pour aider les autres grimpeurs. Contrôle total sur vos données."
     },
     "dataSecurity": {
       "title": "Sécurité des données",

@@ -170,7 +170,7 @@
     },
     "yourRights": {
       "title": "Dine Rettigheter",
-      "description": "Du kan slette alle dataene dine når som helst fra Innstillinger. Din synkroniseringsnøkkel, din kontroll. Stoppe synkronisering? Dataene forblir kun på enheten din. Ønsker en ny start? Tøm alt med ett trykk."
+      "description": "Du kan slette profilen din når som helst fra Innstillinger. Dette fjerner favorittene dine, chathistorikk og profil fra databasen vår. Fellesskapsrapporter du har lagt ut forblir synlige (anonymt) for å hjelpe andre klatrere.Fullstendig kontroll over dataene dine."
     },
     "dataSecurity": {
       "title": "Datasikkerhet",

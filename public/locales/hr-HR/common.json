@@ -169,7 +169,7 @@
     },
     "yourRights": {
       "title": "Tvoja Prava",
-      "description": "Možeš izbrisati sve svoje podatke bilo kada iz Postavki. Tvoj sync ključ, tvoja kontrola. Prestaneš s sinkronizacijom? Podaci ostaju samo na tvom uređaju. Želiš novi početak? Obriši sve jednim klikom."
+      "description": "Svoj profil možete izbrisati bilo kada iz Postavki. Time se uklanjaju vaši favoriti, povijest chata i profil iz naše baze podataka. Izvješća zajednice koja ste objavili ostaju vidljiva (anonimno) kako bi pomogla drugim penjačima. Potpuna kontrola nad vašim podacima."
     },
     "dataSecurity": {
       "title": "Sigurnost Podataka",

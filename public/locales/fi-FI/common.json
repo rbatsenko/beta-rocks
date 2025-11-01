@@ -169,7 +169,7 @@
     },
     "yourRights": {
       "title": "Oikeutesi",
-      "description": "Voit poistaa kaikki tietosi milloin tahansa Asetuksista. Synkronointiavaimesi, sinun hallinnassasi. Lopeta synkronointi? Tiedot pysyvät vain laitteellasi. Haluatko aloittaa alusta? Tyhjennä kaikki yhdellä napautuksella."
+      "description": "Voit poistaa profiilisi milloin tahansa Asetuksista. Tämä poistaa suosikkisi, chat-historiasi ja profiilisi tietokannastamme. Julkaisemasi yhteisöraportit pysyvät näkyvinä (nimettömänä) auttaakseen muita kiipeilijöitä. Täysi hallinta tiedoistasi."
     },
     "dataSecurity": {
       "title": "Tietoturva",

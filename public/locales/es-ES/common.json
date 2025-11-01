@@ -169,7 +169,7 @@
     },
     "yourRights": {
       "title": "Tus derechos",
-      "description": "Puedes eliminar todos tus datos en cualquier momento desde Configuración. Tu clave de sincronización, tu control. ¿Dejar de sincronizar? Los datos quedan solo en tu dispositivo. ¿Quieres empezar de nuevo? Borra todo con un toque."
+      "description": "Puedes eliminar tu perfil en cualquier momento desde Configuración. Esto elimina tus favoritos, historial de chat y perfil de nuestra base de datos. Los reportes de la comunidad que publicaste permanecen visibles (anónimamente) para ayudar a otros escaladores. Control total sobre tus datos."
     },
     "dataSecurity": {
       "title": "Seguridad de datos",

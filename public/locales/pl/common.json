@@ -171,7 +171,7 @@
     },
     "yourRights": {
       "title": "Twoje prawa",
-      "description": "Możesz w każdej chwili usunąć wszystkie swoje dane z Ustawień. Twój klucz synchronizacji, Twoja kontrola. Przestaniesz synchronizować? Dane pozostają tylko na Twoim urządzeniu. Chcesz zacząć od nowa? Wyczyść wszystko jednym kliknięciem."
+      "description": "Możesz usunąć swój profil w dowolnym momencie z Ustawień. Spowoduje to usunięcie Twoich ulubionych, historii czatu i profilu z naszej bazy danych. Raporty społeczności, które opublikowałeś, pozostają widoczne (anonimowo), aby pomóc innym wspinaczom. Pełna kontrola nad swoimi danymi."
     },
     "dataSecurity": {
       "title": "Bezpieczeństwo danych",
