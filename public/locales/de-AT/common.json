@@ -157,11 +157,11 @@
     },
     "whatYouControl": {
       "title": "Was du kontrollierst",
-      "description": "Deine Favoriten, Berichte und Chat-Verlauf werden zuerst lokal auf deinem Gerät gespeichert. Du entscheidest, ob du sie mit einem anonymen Sync-Schlüssel auf andere Geräte synchronisierst. Alles bleibt auf deinem Gerät, es sei denn, du aktivierst die Synchronisierung explizit."
+      "description": "Deine Favoriten, Berichte und Chat-Verlauf werden lokal auf deinem Gerät gespeichert. Um von mehreren Geräten darauf zuzugreifen, kannst du ein anonymes Profil erstellen. Sobald du ein Profil hast, werden deine Daten automatisch synchronisiert, um den Zugriff von mehreren Geräten zu ermöglichen. Du kannst alle deine Daten jederzeit in den Einstellungen löschen."
     },
     "howSyncWorks": {
       "title": "Wie Synchronisierung funktioniert",
-      "description": "Wenn du synchronisierst, speichern wir deine Daten verknüpft mit einem gehashten Sync-Schlüssel - nicht mit deiner Identität. Der Sync-Schlüssel ist eine zufällige UUID, die du kontrollierst. Wir können ihn nicht mit dir in Verbindung bringen. Keine E-Mail erforderlich, kein Konto nötig."
+      "description": "Wenn du ein Profil erstellst, generieren wir einen anonymen Sync-Schlüssel und synchronisieren deine Daten mit unserer Datenbank. Die Daten werden mit einem gehashten Sync-Schlüssel verknüpft - nicht mit deiner Identität. Der Sync-Schlüssel ist eine zufällige Kennung, auf die nur du Zugriff hast. Wir können sie nicht mit dir verknüpfen. Keine E-Mail erforderlich, kein Konto nötig."
     },
     "openSource": {
       "title": "Open Source",
@@ -169,7 +169,7 @@
     },
     "yourRights": {
       "title": "Deine Rechte",
-      "description": "Du kannst jederzeit alle deine Daten aus den Einstellungen löschen. Dein Sync-Schlüssel, deine Kontrolle. Synchronisierung stoppen? Daten bleiben nur auf deinem Gerät. Neustart gewünscht? Alles mit einem Klick löschen."
+      "description": "Du kannst dein Profil jederzeit in den Einstellungen löschen. Dadurch werden deine Favoriten, dein Chat-Verlauf und dein Profil aus unserer Datenbank entfernt. Von dir veröffentlichte Community-Berichte bleiben (anonym) sichtbar, um anderen Kletterern zu helfen. Volle Kontrolle über deine Daten."
     },
     "dataSecurity": {
       "title": "Datensicherheit",

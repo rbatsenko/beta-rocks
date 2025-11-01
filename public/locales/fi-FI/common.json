@@ -157,11 +157,11 @@
     },
     "whatYouControl": {
       "title": "Mitä hallitset",
-      "description": "Suosikkisi, raportit ja keskusteluhistoria tallennetaan ensin paikallisesti laitteellesi. Päätät itse, synkronoidaanko ne laitteiden välillä nimettömällä synkronointiavaimella. Kaikki pysyy laitteellasi, ellet nimenomaisesti ota synkronointia käyttöön."
+      "description": "Suosikkisi, raportit ja chat-historia tallennetaan paikallisesti laitteellesi. Päästäksesi niihin usealta laitteelta voit luoda nimettömän profiilin. Kun sinulla on profiili, tietosi synkronoidaan automaattisesti usean laitteen käytön mahdollistamiseksi. Voit poistaa kaikki tietosi milloin tahansa Asetuksista."
     },
     "howSyncWorks": {
       "title": "Kuinka synkronointi toimii",
-      "description": "Kun synkronoit, tallennamme tietosi linkitettynä hajautettuun synkronointiavaimeen - emme henkilöllisyyteesi. Synkronointiavain on satunnainen UUID, jota hallitset. Emme voi yhdistää sitä sinuun. Ei sähköpostia vaadita, ei tiliä tarvita."
+      "description": "Kun luot profiilin, luomme nimettömän synkronointiavaimen ja synkronoimme tietosi tietokantaamme. Tiedot on linkitetty hajautettuun synkronointiavaimeen - ei identiteettiisi. Synkronointiavain on satunnainen tunniste, johon vain sinulla on pääsy. Emme voi yhdistää sitä sinuun. Sähköpostia ei tarvita, tiliä ei vaadita."
     },
     "openSource": {
       "title": "Avoin lähdekoodi",
@@ -169,7 +169,7 @@
     },
     "yourRights": {
       "title": "Oikeutesi",
-      "description": "Voit poistaa kaikki tietosi milloin tahansa Asetuksista. Synkronointiavaimesi, sinun hallinnassasi. Lopeta synkronointi? Tiedot pysyvät vain laitteellasi. Haluatko aloittaa alusta? Tyhjennä kaikki yhdellä napautuksella."
+      "description": "Voit poistaa profiilisi milloin tahansa Asetuksista. Tämä poistaa suosikkisi, chat-historiasi ja profiilisi tietokannastamme. Julkaisemasi yhteisöraportit pysyvät näkyvinä (nimettömänä) auttaakseen muita kiipeilijöitä. Täysi hallinta tiedoistasi."
     },
     "dataSecurity": {
       "title": "Tietoturva",

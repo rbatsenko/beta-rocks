@@ -157,11 +157,11 @@
     },
     "whatYouControl": {
       "title": "Cosa Controlli Tu",
-      "description": "I tuoi preferiti, rapporti e cronologia chat sono salvati prima localmente sul tuo dispositivo. Tu scegli se sincronizzarli su altri dispositivi usando una chiave di sincronizzazione anonima. Tutto resta sul tuo dispositivo a meno che tu non attivi esplicitamente la sincronizzazione."
+      "description": "I tuoi preferiti, rapporti e cronologia chat vengono archiviati localmente sul tuo dispositivo. Per accedervi da più dispositivi, puoi creare un profilo anonimo. Una volta che hai un profilo, i tuoi dati si sincronizzano automaticamente per consentire l'accesso da più dispositivi. Puoi eliminare tutti i tuoi dati in qualsiasi momento dalle Impostazioni."
     },
     "howSyncWorks": {
       "title": "Come Funziona la Sincronizzazione",
-      "description": "Quando sincronizzi, memorizziamo i tuoi dati collegati a una chiave di sincronizzazione crittografata - non alla tua identità. La chiave di sincronizzazione è un UUID casuale che controlli tu. Non possiamo collegarla a te. Nessuna email richiesta, nessun account necessario."
+      "description": "Quando crei un profilo, generiamo una chiave di sincronizzazione anonima e sincronizziamo i tuoi dati con il nostro database. I dati sono collegati a una chiave di sincronizzazione con hash - non alla tua identità. La chiave di sincronizzazione è un identificatore casuale a cui solo tu hai accesso. Non possiamo collegarla a te. Nessuna email richiesta, nessun account necessario."
     },
     "openSource": {
       "title": "Open Source",
@@ -169,7 +169,7 @@
     },
     "yourRights": {
       "title": "I Tuoi Diritti",
-      "description": "Puoi eliminare tutti i tuoi dati in qualsiasi momento dalle Impostazioni. La tua chiave di sincronizzazione, il tuo controllo. Vuoi smettere di sincronizzare? I dati restano solo sul tuo dispositivo. Vuoi un nuovo inizio? Cancella tutto con un tocco."
+      "description": "Puoi eliminare il tuo profilo in qualsiasi momento dalle Impostazioni. Questo rimuove i tuoi preferiti, la cronologia chat e il profilo dal nostro database. I rapporti della community che hai pubblicato rimangono visibili (in forma anonima) per aiutare altri scalatori. Pieno controllo sui tuoi dati."
     },
     "dataSecurity": {
       "title": "Sicurezza dei Dati",

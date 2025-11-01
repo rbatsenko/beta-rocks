@@ -157,11 +157,11 @@
     },
     "whatYouControl": {
       "title": "Co kontroluješ",
-      "description": "Tvé oblíbené, zprávy a historie chatu jsou nejprve uloženy lokálně na tvém zařízení. Ty rozhoduješ, zda je synchronizovat mezi zařízeními pomocí anonymního synchronizačního klíče. Všechno zůstává na tvém zařízení, pokud explicitně nepovolíš synchronizaci."
+      "description": "Vaše oblíbené, hlášení a historie chatu jsou uloženy lokálně ve vašem zařízení. Pro přístup k nim z více zařízení si můžete vytvořit anonymní profil. Jakmile máte profil, vaše data se automaticky synchronizují, aby byl umožněn přístup z více zařízení. Všechna vaše data můžete kdykoli smazat v Nastavení."
     },
     "howSyncWorks": {
       "title": "Jak funguje synchronizace",
-      "description": "Když synchronizuješ, ukládáme tvá data propojená s hashovaným synchronizačním klíčem - ne s tvou identitou. Synchronizační klíč je náhodné UUID, které kontroluješ ty. Nemůžeme ho s tebou spojit. Bez požadovaného e-mailu, bez potřeby účtu."
+      "description": "Když vytvoříte profil, vygenerujeme anonymní synchronizační klíč a synchronizujeme vaše data s naší databází. Data jsou spojena s hašovaným synchronizačním klíčem - ne s vaší identitou. Synchronizační klíč je náhodný identifikátor, ke kterému máte přístup pouze vy. Nemůžeme ho s vámi spojit. Není vyžadován email, není potřeba účet."
     },
     "openSource": {
       "title": "Open Source",
@@ -169,7 +169,7 @@
     },
     "yourRights": {
       "title": "Tvá práva",
-      "description": "Můžeš kdykoli smazat všechna svá data z Nastavení. Tvůj synchronizační klíč, tvá kontrola. Přestat synchronizovat? Data zůstanou pouze na tvém zařízení. Chceš nový začátek? Vymaž všechno jedním klepnutím."
+      "description": "Svůj profil můžete kdykoli smazat v Nastavení. Tím odstraníte své oblíbené položky, historii chatu a profil z naší databáze. Hlášení komunity, která jste zveřejnili, zůstanou viditelná (anonymně), aby pomohla ostatním lezců. Plná kontrola nad vašimi daty."
     },
     "dataSecurity": {
       "title": "Zabezpečení dat",

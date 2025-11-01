@@ -157,11 +157,11 @@
     },
     "whatYouControl": {
       "title": "O Que Controla",
-      "description": "Os seus favoritos, relatórios e histórico de chat são armazenados localmente no seu dispositivo primeiro. Escolhe se quer sincronizá-los entre dispositivos usando uma chave de sincronização anónima. Tudo fica no seu dispositivo a menos que ative explicitamente a sincronização."
+      "description": "Os teus favoritos, relatórios e histórico de chat são armazenados localmente no teu dispositivo. Para aceder aos mesmos a partir de vários dispositivos, podes criar um perfil anónimo. Assim que tiveres um perfil, os teus dados sincronizam automaticamente para permitir acesso a partir de vários dispositivos. Podes eliminar todos os teus dados a qualquer momento nas Definições."
     },
     "howSyncWorks": {
       "title": "Como Funciona a Sincronização",
-      "description": "Quando sincroniza, armazenamos os seus dados ligados a uma chave de sincronização encriptada - não à sua identidade. A chave de sincronização é um UUID aleatório que controla. Não conseguimos ligá-la a si. Sem e-mail necessário, sem conta necessária."
+      "description": "Quando crias um perfil, geramos uma chave de sincronização anónima e sincronizamos os teus dados com a nossa base de dados. Os dados estão ligados a uma chave de sincronização com hash - não à tua identidade. A chave de sincronização é um identificador aleatório ao qual só tu tens acesso. Não podemos ligá-la a ti. Sem email necessário, sem conta necessária."
     },
     "openSource": {
       "title": "Código Aberto",
@@ -169,7 +169,7 @@
     },
     "yourRights": {
       "title": "Os Seus Direitos",
-      "description": "Pode eliminar todos os seus dados a qualquer momento nas Definições. A sua chave de sincronização, o seu controle. Parar de sincronizar? Os dados ficam apenas no seu dispositivo. Quer um novo começo? Limpe tudo com um toque."
+      "description": "Podes eliminar o teu perfil a qualquer momento nas Definições. Isto remove os teus favoritos, histórico de chat e perfil da nossa base de dados. Os relatórios da comunidade que publicaste permanecem visíveis (anonimamente) para ajudar outros escaladores. Controlo total sobre os teus dados."
     },
     "dataSecurity": {
       "title": "Segurança de Dados",

@@ -158,11 +158,11 @@
     },
     "whatYouControl": {
       "title": "Hva Du Kontrollerer",
-      "description": "Dine favoritter, rapporter og chattehistorikk lagres først lokalt på enheten din. Du velger om du vil synkronisere dem på tvers av enheter med en anonym synkroniseringsnøkkel. Alt forblir på enheten din med mindre du eksplisitt aktiverer synkronisering."
+      "description": "Favorittene dine, rapporter og chathistorikk lagres lokalt på enheten din. For å få tilgang til dem fra flere enheter kan du opprette en anonym profil. Når du har en profil, synkroniseres dataene dine automatisk for å muliggjøre tilgang fra flere enheter. Du kan slette alle dataene dine når som helst fra Innstillinger."
     },
     "howSyncWorks": {
       "title": "Hvordan Synkronisering Fungerer",
-      "description": "Når du synkroniserer, lagrer vi dataene dine koblet til en hashet synkroniseringsnøkkel - ikke din identitet. Synkroniseringsnøkkelen er en tilfeldig UUID du kontrollerer. Vi kan ikke koble den til deg. Ingen e-post påkrevd, ingen konto nødvendig."
+      "description": "Når du oppretter en profil, genererer vi en anonym synkroniseringsnøkkel og synkroniserer dataene dine til databasen vår. Data er koblet til en hashet synkroniseringsnøkkel - ikke identiteten din. Synkroniseringsnøkkelen er en tilfeldig identifikator som bare du har tilgang til. Vi kan ikke koble den til deg. Ingen e-post nødvendig, ingen konto nødvendig."
     },
     "openSource": {
       "title": "Åpen Kildekode",
@@ -170,7 +170,7 @@
     },
     "yourRights": {
       "title": "Dine Rettigheter",
-      "description": "Du kan slette alle dataene dine når som helst fra Innstillinger. Din synkroniseringsnøkkel, din kontroll. Stoppe synkronisering? Dataene forblir kun på enheten din. Ønsker en ny start? Tøm alt med ett trykk."
+      "description": "Du kan slette profilen din når som helst fra Innstillinger. Dette fjerner favorittene dine, chathistorikk og profil fra databasen vår. Fellesskapsrapporter du har lagt ut forblir synlige (anonymt) for å hjelpe andre klatrere.Fullstendig kontroll over dataene dine."
     },
     "dataSecurity": {
       "title": "Datasikkerhet",

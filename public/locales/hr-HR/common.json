@@ -157,11 +157,11 @@
     },
     "whatYouControl": {
       "title": "Što Ti Kontroliraš",
-      "description": "Tvoji omiljeni, izvještaji i povijest razgovora najprije se spremaju lokalno na tvom uređaju. Ti biraš hoćeš li ih sinkronizirati između uređaja pomoću anonimnog sync ključa. Sve ostaje na tvom uređaju osim ako eksplicitno ne uključiš sinkronizaciju."
+      "description": "Vaši favoriti, izvješća i povijest chata pohranjuju se lokalno na vašem uređaju. Za pristup s više uređaja možete stvoriti anoniman profil. Nakon što imate profil, vaši se podaci automatski sinkroniziraju kako bi omogućili pristup s više uređaja. Možete izbrisati sve svoje podatke u bilo kojem trenutku iz Postavki."
     },
     "howSyncWorks": {
       "title": "Kako Funkcionira Sinkronizacija",
-      "description": "Kada sinkroniziraš, tvoje podatke pohranjujemo povezane s hashiranim sync ključem - ne s tvojim identitetom. Sync ključ je nasumični UUID koji ti kontroliraš. Ne možemo ga povezati s tobom. Nije potreban e-mail, nije potreban račun."
+      "description": "Kada stvorite profil, generiramo anoniman ključ za sinkronizaciju i sinkroniziramo vaše podatke s našom bazom podataka. Podaci su povezani s heširanim ključem za sinkronizaciju - ne s vašim identitetom. Ključ za sinkronizaciju je slučajan identifikator kojem samo vi imate pristup. Ne možemo ga povezati s vama. Nije potreban email, nije potreban račun."
     },
     "openSource": {
       "title": "Otvoreni Kod",
@@ -169,7 +169,7 @@
     },
     "yourRights": {
       "title": "Tvoja Prava",
-      "description": "Možeš izbrisati sve svoje podatke bilo kada iz Postavki. Tvoj sync ključ, tvoja kontrola. Prestaneš s sinkronizacijom? Podaci ostaju samo na tvom uređaju. Želiš novi početak? Obriši sve jednim klikom."
+      "description": "Svoj profil možete izbrisati bilo kada iz Postavki. Time se uklanjaju vaši favoriti, povijest chata i profil iz naše baze podataka. Izvješća zajednice koja ste objavili ostaju vidljiva (anonimno) kako bi pomogla drugim penjačima. Potpuna kontrola nad vašim podacima."
     },
     "dataSecurity": {
       "title": "Sigurnost Podataka",

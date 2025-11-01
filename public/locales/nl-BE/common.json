@@ -157,11 +157,11 @@
     },
     "whatYouControl": {
       "title": "Wat Jij Controleert",
-      "description": "Je favorieten, rapporten en chatgeschiedenis worden eerst lokaal op je apparaat opgeslagen. Jij kiest of je ze synchroniseert tussen apparaten met een anonieme synchronisatiesleutel. Alles blijft op je apparaat tenzij je expliciet synchronisatie inschakelt."
+      "description": "Je favorieten, rapporten en chatgeschiedenis worden lokaal op je apparaat opgeslagen. Om er vanaf meerdere apparaten toegang toe te hebben, kun je een anoniem profiel aanmaken. Zodra je een profiel hebt, worden je gegevens automatisch gesynchroniseerd om toegang vanaf meerdere apparaten mogelijk te maken. Je kunt al je gegevens op elk moment verwijderen vanuit Instellingen."
     },
     "howSyncWorks": {
       "title": "Hoe Synchronisatie Werkt",
-      "description": "Wanneer je synchroniseert, slaan we je gegevens op gekoppeld aan een gehashte synchronisatiesleutel - niet aan je identiteit. De synchronisatiesleutel is een willekeurige UUID die jij controleert. We kunnen het niet aan jou koppelen. Geen e-mail vereist, geen account nodig."
+      "description": "Wanneer je een profiel aanmaakt, genereren we een anonieme synchronisatiesleutel en synchroniseren we je gegevens met onze database. Gegevens zijn gekoppeld aan een gehashte synchronisatiesleutel - niet aan je identiteit. De synchronisatiesleutel is een willekeurige identifier waar alleen jij toegang toe hebt. We kunnen het niet aan jou koppelen. Geen e-mail vereist, geen account nodig."
     },
     "openSource": {
       "title": "Open Source",
@@ -169,7 +169,7 @@
     },
     "yourRights": {
       "title": "Jouw Rechten",
-      "description": "Je kunt al je gegevens op elk moment verwijderen vanuit Instellingen. Jouw synchronisatiesleutel, jouw controle. Stoppen met synchroniseren? Gegevens blijven alleen op je apparaat. Een nieuwe start? Wis alles met één tik."
+      "description": "Je kunt je profiel op elk moment verwijderen vanuit Instellingen. Dit verwijdert je favorieten, chatgeschiedenis en profiel uit onze database. Gemeenschapsrapporten die je hebt geplaatst blijven zichtbaar (anoniem) om andere klimmers te helpen. Volledige controle over je gegevens."
     },
     "dataSecurity": {
       "title": "Gegevensbeveiliging",

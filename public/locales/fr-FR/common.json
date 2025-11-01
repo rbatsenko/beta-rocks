@@ -157,11 +157,11 @@
     },
     "whatYouControl": {
       "title": "Ce que vous contrôlez",
-      "description": "Vos favoris, rapports et historique de chat sont d'abord stockés localement sur votre appareil. Vous choisissez de les synchroniser sur d'autres appareils avec une clé anonyme. Tout reste sur votre appareil sauf si vous activez explicitement la synchronisation."
+      "description": "Vos favoris, rapports et historique de chat sont stockés localement sur votre appareil. Pour y accéder depuis plusieurs appareils, vous pouvez créer un profil anonyme. Une fois que vous avez un profil, vos données se synchronisent automatiquement pour permettre l'accès depuis plusieurs appareils. Vous pouvez supprimer toutes vos données à tout moment depuis les Paramètres."
     },
     "howSyncWorks": {
       "title": "Comment fonctionne la synchronisation",
-      "description": "Lorsque vous synchronisez, nous stockons vos données liées à une clé de synchronisation hachée - pas à votre identité. La clé de synchronisation est un UUID aléatoire que vous contrôlez. Nous ne pouvons pas la lier à vous. Aucun e-mail requis, aucun compte nécessaire."
+      "description": "Lorsque vous créez un profil, nous générons une clé de synchronisation anonyme et synchronisons vos données avec notre base de données. Les données sont liées à une clé de synchronisation hachée - pas à votre identité. La clé de synchronisation est un identifiant aléatoire auquel vous seul avez accès. Nous ne pouvons pas la lier à vous. Aucun e-mail requis, aucun compte nécessaire."
     },
     "openSource": {
       "title": "Open Source",
@@ -169,7 +169,7 @@
     },
     "yourRights": {
       "title": "Vos droits",
-      "description": "Vous pouvez supprimer toutes vos données à tout moment depuis les Paramètres. Votre clé de synchronisation, votre contrôle. Arrêter la synchronisation ? Les données restent uniquement sur votre appareil. Envie d'un nouveau départ ? Effacez tout en un clic."
+      "description": "Vous pouvez supprimer votre profil à tout moment depuis les Paramètres. Cela supprime vos favoris, votre historique de chat et votre profil de notre base de données. Les rapports communautaires que vous avez publiés restent visibles (anonymement) pour aider les autres grimpeurs. Contrôle total sur vos données."
     },
     "dataSecurity": {
       "title": "Sécurité des données",

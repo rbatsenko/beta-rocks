@@ -158,11 +158,11 @@
     },
     "whatYouControl": {
       "title": "Vad du kontrollerar",
-      "description": "Dina favoriter, rapporter och chatthistorik lagras först lokalt på din enhet. Du väljer om du vill synkronisera dem över enheter med en anonym synkroniseringsnyckel. Allt stannar på din enhet om du inte uttryckligen aktiverar synkronisering."
+      "description": "Dina favoriter, rapporter och chatthistorik lagras lokalt på din enhet. För att komma åt dem från flera enheter kan du skapa en anonym profil. När du har en profil synkroniseras dina data automatiskt för att möjliggöra åtkomst från flera enheter. Du kan radera alla dina data när som helst från Inställningar."
     },
     "howSyncWorks": {
       "title": "Hur synkronisering fungerar",
-      "description": "När du synkroniserar lagrar vi din data kopplad till en hashad synkroniseringsnyckel - inte din identitet. Synkroniseringsnyckeln är ett slumpmässigt UUID som du kontrollerar. Vi kan inte koppla den till dig. Ingen e-post krävs, inget konto behövs."
+      "description": "När du skapar en profil genererar vi en anonym synkroniseringsnyckel och synkroniserar dina data med vår databas. Data är kopplad till en hashad synkroniseringsnyckel - inte din identitet. Synkroniseringsnyckeln är en slumpmässig identifierare som endast du har tillgång till. Vi kan inte koppla den till dig. Ingen e-post krävs, inget konto behövs."
     },
     "openSource": {
       "title": "Öppen källkod",
@@ -170,7 +170,7 @@
     },
     "yourRights": {
       "title": "Dina rättigheter",
-      "description": "Du kan radera all din data när som helst från Inställningar. Din synkroniseringsnyckel, din kontroll. Sluta synkronisera? Data stannar bara på din enhet. Vill du börja om? Rensa allt med ett tryck."
+      "description": "Du kan radera din profil när som helst från Inställningar. Detta tar bort dina favoriter, chatthistorik och profil från vår databas. Gemenskapsrapporter du har postat förblir synliga (anonymt) för att hjälpa andra klättrare. Full kontroll över dina data."
     },
     "dataSecurity": {
       "title": "Datasäkerhet",

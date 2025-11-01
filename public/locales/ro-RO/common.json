@@ -157,11 +157,11 @@
     },
     "whatYouControl": {
       "title": "Ce Controlezi Tu",
-      "description": "Favoritele tale, rapoartele și istoricul chat-ului sunt stocate mai întâi local pe dispozitivul tău. Tu alegi dacă le sincronizezi pe alte dispozitive folosind o cheie de sincronizare anonimă. Totul rămâne pe dispozitivul tău decât dacă activezi explicit sincronizarea."
+      "description": "Favoritele, rapoartele și istoricul chat-ului tău sunt stocate local pe dispozitivul tău. Pentru a accesa de pe mai multe dispozitive, poți crea un profil anonim. Odată ce ai un profil, datele tale se sincronizează automat pentru a permite accesul de pe mai multe dispozitive. Poți șterge toate datele tale oricând din Setări."
     },
     "howSyncWorks": {
       "title": "Cum Funcționează Sincronizarea",
-      "description": "Când sincronizezi, stocăm datele tale legate de o cheie de sincronizare criptată - nu de identitatea ta. Cheia de sincronizare este un UUID aleatoriu pe care îl controlezi. Nu o putem lega de tine. Nu este necesară nicio adresă de e-mail, nu este necesar niciun cont."
+      "description": "Când creezi un profil, generăm o cheie de sincronizare anonimă și sincronizăm datele tale cu baza noastră de date. Datele sunt legate de o cheie de sincronizare hașurată - nu de identitatea ta. Cheia de sincronizare este un identificator aleatoriu la care doar tu ai acces. Nu o putem lega de tine. Fără email necesar, fără cont necesar."
     },
     "openSource": {
       "title": "Sursă Deschisă",
@@ -169,7 +169,7 @@
     },
     "yourRights": {
       "title": "Drepturile Tale",
-      "description": "Poți șterge toate datele tale oricând din Setări. Cheia ta de sincronizare, controlul tău. Oprești sincronizarea? Datele rămân doar pe dispozitivul tău. Vrei un nou început? Șterge totul cu o atingere."
+      "description": "Îți poți șterge profilul oricând din Setări. Aceasta elimină favoritele, istoricul chat-ului și profilul din baza noastră de date. Rapoartele comunității pe care le-ai postat rămân vizibile (anonim) pentru a ajuta alți alpiniști. Control complet asupra datelor tale."
     },
     "dataSecurity": {
       "title": "Securitatea Datelor",

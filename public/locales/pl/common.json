@@ -159,11 +159,11 @@
     },
     "whatYouControl": {
       "title": "Co kontrolujesz",
-      "description": "Twoje ulubione, raporty i historia czatu są najpierw zapisywane lokalnie na Twoim urządzeniu. Sam decydujesz, czy synchronizować je między urządzeniami za pomocą anonimowego klucza synchronizacji. Wszystko pozostaje na Twoim urządzeniu, chyba że wyraźnie włączysz synchronizację."
+      "description": "Twoje ulubione, raporty i historia czatu są przechowywane lokalnie na Twoim urządzeniu. Aby uzyskać do nich dostęp z wielu urządzeń, możesz utworzyć anonimowy profil. Gdy masz profil, Twoje dane synchronizują się automatycznie, aby umożliwić dostęp z wielu urządzeń. Możesz usunąć wszystkie swoje dane w dowolnym momencie z Ustawień."
     },
     "howSyncWorks": {
       "title": "Jak działa synchronizacja",
-      "description": "Kiedy synchronizujesz, przechowujemy Twoje dane powiązane z zahashowanym kluczem synchronizacji - nie z Twoją tożsamością. Klucz synchronizacji to losowy UUID, którym Ty kontrolujesz. Nie możemy go powiązać z Tobą. Bez wymaganego e-maila, bez potrzeby konta."
+      "description": "Kiedy tworzysz profil, generujemy anonimowy klucz synchronizacji i synchronizujemy Twoje dane z naszą bazą danych. Dane są powiązane z zahaszowanym kluczem synchronizacji - nie z Twoją tożsamością. Klucz synchronizacji to losowy identyfikator, do którego tylko Ty masz dostęp. Nie możemy go powiązać z Tobą. Nie wymaga e-maila, nie wymaga konta."
     },
     "openSource": {
       "title": "Open Source",
@@ -171,7 +171,7 @@
     },
     "yourRights": {
       "title": "Twoje prawa",
-      "description": "Możesz w każdej chwili usunąć wszystkie swoje dane z Ustawień. Twój klucz synchronizacji, Twoja kontrola. Przestaniesz synchronizować? Dane pozostają tylko na Twoim urządzeniu. Chcesz zacząć od nowa? Wyczyść wszystko jednym kliknięciem."
+      "description": "Możesz usunąć swój profil w dowolnym momencie z Ustawień. Spowoduje to usunięcie Twoich ulubionych, historii czatu i profilu z naszej bazy danych. Raporty społeczności, które opublikowałeś, pozostają widoczne (anonimowo), aby pomóc innym wspinaczom. Pełna kontrola nad swoimi danymi."
     },
     "dataSecurity": {
       "title": "Bezpieczeństwo danych",

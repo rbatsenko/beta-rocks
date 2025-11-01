@@ -157,11 +157,11 @@
     },
     "whatYouControl": {
       "title": "Hvad du kontrollerer",
-      "description": "Dine favoritter, rapporter og chathistorik gemmes først lokalt på din enhed. Du vælger, om du vil synkronisere dem på tværs af enheder med en anonym synkroniseringsnøgle. Alt forbliver på din enhed, medmindre du udtrykkeligt aktiverer synkronisering."
+      "description": "Dine favoritter, rapporter og chathistorik gemmes lokalt på din enhed. For at få adgang til dem fra flere enheder kan du oprette en anonym profil. Når du har en profil, synkroniseres dine data automatisk for at muliggøre adgang fra flere enheder. Du kan slette alle dine data når som helst fra Indstillinger."
     },
     "howSyncWorks": {
       "title": "Sådan fungerer synkronisering",
-      "description": "Når du synkroniserer, gemmer vi dine data knyttet til en hashet synkroniseringsnøgle - ikke din identitet. Synkroniseringsnøglen er en tilfældig UUID, som du kontrollerer. Vi kan ikke knytte den til dig. Ingen e-mail påkrævet, ingen konto nødvendig."
+      "description": "Når du opretter en profil, genererer vi en anonym synkroniseringsnøgle og synkroniserer dine data til vores database. Data er knyttet til en hashet synkroniseringsnøgle - ikke din identitet. Synkroniseringsnøglen er en tilfældig identifikator, som kun du har adgang til. Vi kan ikke knytte den til dig. Ingen email påkrævet, ingen konto nødvendig."
     },
     "openSource": {
       "title": "Open Source",
@@ -169,7 +169,7 @@
     },
     "yourRights": {
       "title": "Dine rettigheder",
-      "description": "Du kan slette alle dine data når som helst fra Indstillinger. Din synkroniseringsnøgle, din kontrol. Stop synkronisering? Data forbliver kun på din enhed. Vil du have en ny start? Ryd alt med et tryk."
+      "description": "Du kan slette din profil når som helst fra Indstillinger. Dette fjerner dine favoritter, chathistorik og profil fra vores database. Fællesskabsrapporter du har postet forbliver synlige (anonymt) for at hjælpe andre klatrere. Fuld kontrol over dine data."
     },
     "dataSecurity": {
       "title": "Datasikkerhed",

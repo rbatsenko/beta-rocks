@@ -157,11 +157,11 @@
     },
     "whatYouControl": {
       "title": "Čo kontrolujete",
-      "description": "Vaše obľúbené, správy a história chatu sú najprv uložené lokálne na vašom zariadení. Vy rozhodujete, či ich synchronizovať medzi zariadeniami pomocou anonymného synchronizačného kľúča. Všetko zostáva na vašom zariadení, pokiaľ explicitne nepovolíte synchronizáciu."
+      "description": "Vaše obľúbené, hlásenia a história chatu sú uložené lokálne vo vašom zariadení. Pre prístup k nim z viacerých zariadení si môžete vytvoriť anonymný profil. Keď máte profil, vaše dáta sa automaticky synchronizujú, aby bol umožnený prístup z viacerých zariadení. Všetky vaše dáta môžete kedykoľvek vymazať v Nastaveniach."
     },
     "howSyncWorks": {
       "title": "Ako funguje synchronizácia",
-      "description": "Keď synchronizujete, ukladáme vaše dáta prepojené s hashovaným synchronizačným kľúčom - nie s vašou identitou. Synchronizačný kľúč je náhodné UUID, ktoré kontrolujete vy. Nemôžeme ho s vami spojiť. Bez požadovaného e-mailu, bez potreby účtu."
+      "description": "Keď vytvoríte profil, vygenerujeme anonymný synchronizačný kľúč a synchronizujeme vaše dáta s našou databázou. Dáta sú spojené s hašovaným synchronizačným kľúčom - nie s vašou identitou. Synchronizačný kľúč je náhodný identifikátor, ku ktorému máte prístup iba vy. Nemôžeme ho s vami spojiť. Nie je vyžadovaný email, nie je potrebný účet."
     },
     "openSource": {
       "title": "Open Source",
@@ -169,7 +169,7 @@
     },
     "yourRights": {
       "title": "Vaše práva",
-      "description": "Môžete kedykoľvek vymazať všetky svoje dáta z Nastavení. Váš synchronizačný kľúč, vaša kontrola. Prestať synchronizovať? Dáta zostanú iba na vašom zariadení. Chcete nový začiatok? Vymažte všetko jedným kliknutím."
+      "description": "Svoj profil môžete kedykoľvek vymazať v Nastaveniach. Tým odstránite svoje obľúbené položky, históriu chatu a profil z našej databázy. Hlásenia komunity, ktoré ste zverejnili, zostávajú viditeľné (anonymne), aby pomohli ostatným lezcom. Plná kontrola nad vašimi údajmi."
     },
     "dataSecurity": {
       "title": "Zabezpečenie dát",

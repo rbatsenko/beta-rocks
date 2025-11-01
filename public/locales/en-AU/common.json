@@ -157,11 +157,11 @@
     },
     "whatYouControl": {
       "title": "What You Control",
-      "description": "Your favorites, reports, and chat history are stored locally on your device first. You choose whether to sync them across devices using an anonymous sync key. Everything stays on your device unless you explicitly enable sync."
+      "description": "Your favorites, reports, and chat history are stored locally on your device. To access them across devices, you can create an anonymous profile. Once you have a profile, your data syncs automatically to enable multi-device access. You can delete all your data anytime from Settings."
     },
     "howSyncWorks": {
       "title": "How Sync Works",
-      "description": "When you sync, we store your data linked to a hashed sync key - not your identity. The sync key is a random UUID that you control. We can't link it to you. No email required, no account needed."
+      "description": "When you create a profile, we generate an anonymous sync key and sync your data to our database. Data is linked to a hashed sync key - not your identity. The sync key is a random identifier that only you have access to. We can't link it to you. No email required, no account needed."
     },
     "openSource": {
       "title": "Open Source",
@@ -169,7 +169,7 @@
     },
     "yourRights": {
       "title": "Your Rights",
-      "description": "You can delete all your data anytime from Settings. Your sync key, your control. Stop syncing? Data stays on your device only. Want a fresh start? Clear everything with one tap."
+      "description": "You can delete your profile anytime from Settings. This removes your favorites, chat history, and profile from our database. Community reports you posted remain visible (anonymously) to help other climbers. Full control over your data."
     },
     "dataSecurity": {
       "title": "Data Security",
