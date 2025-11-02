@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     "climbing weather",
   ],
   openGraph: {
-    title: "beta.rocks - Climbing Conditions, Weather & Reports for Any Crag",
+    title: "beta.rocks - Climbing conditions, weather & reports for any crag",
     description:
       "Real-time climbing conditions, weather forecasts, friction scores, and community reports for crags worldwide. Optimal climbing windows and route information.",
     url: "https://beta.rocks",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "beta.rocks - Climbing Conditions & Weather",
+    title: "beta.rocks - Climbing conditions & weather",
     description: "Real-time climbing conditions, weather forecasts, and community reports for crags worldwide.",
   },
   robots: {
