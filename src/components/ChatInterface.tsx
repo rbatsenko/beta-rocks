@@ -50,6 +50,7 @@ import { FeaturesDialog } from "@/components/FeaturesDialog";
 import { PrivacyDialog } from "@/components/PrivacyDialog";
 import { SettingsDialog } from "@/components/SettingsDialog";
 import { FavoritesDialog } from "@/components/FavoritesDialog";
+import { SearchDialog } from "@/components/SearchDialog";
 import { logRender } from "@/lib/debug/render-log";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
 import { SyncExplainerDialog } from "@/components/SyncExplainerDialog";
@@ -259,6 +260,7 @@ const ChatUI = ({
   const [favoritesDialogOpen, setFavoritesDialogOpen] = useState(false);
   const [statsDialogOpen, setStatsDialogOpen] = useState(false);
   const [syncExplainerDialogOpen, setSyncExplainerDialogOpen] = useState(false);
+  const [searchDialogOpen, setSearchDialogOpen] = useState(false);
   const [newChatConfirmOpen, setNewChatConfirmOpen] = useState(false);
   const [scrollSignal, setScrollSignal] = useState(0);
   // Store prefetched full 14-day data keyed by location coordinates
@@ -288,6 +290,19 @@ const ChatUI = ({
 
   // Get translation functions (memoized)
   const translations = useConditionsTranslations(t);
+
+  // ⌘K keyboard shortcut for search
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        setSearchDialogOpen(true);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   // Compute loading state from status (v5 API)
   const isLoading = useMemo(() => status === "submitted" || status === "streaming", [status]);
@@ -403,7 +418,7 @@ const ChatUI = ({
         <Header
           actions={
             <HeaderActions
-              onSyncClick={() => setSyncExplainerDialogOpen(true)}
+              onSearchClick={() => setSearchDialogOpen(true)}
               onSettingsClick={() => setSettingsDialogOpen(true)}
               onFavoritesClick={() => setFavoritesDialogOpen(true)}
               onStatsClick={() => setStatsDialogOpen(true)}
@@ -452,6 +467,14 @@ const ChatUI = ({
                   <p className="text-muted-foreground mb-8 max-w-md text-base">
                     {t("welcome.description")}
                   </p>
+
+                  {/* Search hint */}
+                  <div className="flex items-center gap-2 mb-6 text-sm text-muted-foreground">
+                    <span>{t("welcome.searchHint")}</span>
+                    <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                      <span className="text-xs">⌘/Ctrl</span>K
+                    </kbd>
+                  </div>
 
                   <div className="flex flex-wrap gap-2 justify-center max-w-lg">
                     {exampleQueries.map((example, idx) => (
@@ -799,6 +822,9 @@ const ChatUI = ({
         />
       )}
 
+      {/* Search Dialog */}
+      <SearchDialog open={searchDialogOpen} onOpenChange={setSearchDialogOpen} />
+
       {/* Features / About App Dialog */}
       <FeaturesDialog open={featuresDialogOpen} onOpenChange={setFeaturesDialogOpen} />
 
@@ -859,9 +885,23 @@ const ChatInterface = ({
   const [favoritesDialogOpen, setFavoritesDialogOpen] = useState(false);
   const [statsDialogOpen, setStatsDialogOpen] = useState(false);
   const [syncExplainerDialogOpen, setSyncExplainerDialogOpen] = useState(false);
+  const [searchDialogOpen, setSearchDialogOpen] = useState(false);
 
   // Check if user has profile (for session management)
   const userProfile = typeof window !== "undefined" ? getUserProfile() : null;
+
+  // ⌘K keyboard shortcut for search
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        setSearchDialogOpen(true);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   // React Query hooks for session and messages
   const { data: session, isLoading: isLoadingSession } = useCurrentSession();
@@ -884,7 +924,7 @@ const ChatInterface = ({
         <Header
           actions={
             <HeaderActions
-              onSyncClick={() => setSyncExplainerDialogOpen(true)}
+              onSearchClick={() => setSearchDialogOpen(true)}
               onSettingsClick={() => setSettingsDialogOpen(true)}
               onFavoritesClick={() => setFavoritesDialogOpen(true)}
               onStatsClick={() => setStatsDialogOpen(true)}
@@ -921,6 +961,7 @@ const ChatInterface = ({
         </div>
 
         {/* Dialogs - render even during loading so buttons work */}
+        <SearchDialog open={searchDialogOpen} onOpenChange={setSearchDialogOpen} />
         <FeaturesDialog open={featuresDialogOpen} onOpenChange={setFeaturesDialogOpen} />
         <PrivacyDialog open={privacyDialogOpen} onOpenChange={setPrivacyDialogOpen} />
         <SettingsDialog open={settingsDialogOpen} onOpenChange={setSettingsDialogOpen} />

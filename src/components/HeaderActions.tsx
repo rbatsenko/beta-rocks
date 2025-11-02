@@ -2,19 +2,17 @@
 
 import { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
-import { SyncStatusIndicator } from "@/components/SyncStatusIndicator";
+import { Search, Star } from "lucide-react";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { UserMenu } from "@/components/UserMenu";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
-import { useSyncStatus } from "@/hooks/useSyncStatus";
-import { getUserProfile } from "@/lib/auth/sync-key";
 
 interface HeaderActionsProps {
-  onSyncClick: () => void;
   onSettingsClick: () => void;
   onFavoritesClick: () => void;
   onStatsClick: () => void;
+  onSearchClick: () => void;
   /** Optional extra actions to show before the common actions */
   extraActions?: ReactNode;
   /** Optional callback for about/info action (shown in menu on mobile) */
@@ -26,34 +24,37 @@ interface HeaderActionsProps {
 }
 
 export function HeaderActions({
-  onSyncClick,
   onSettingsClick,
   onFavoritesClick,
   onStatsClick,
+  onSearchClick,
   extraActions,
   onAboutClick,
   onClearChatClick,
   isClearChatDisabled,
 }: HeaderActionsProps) {
   const { t } = useClientTranslation("common");
-  const syncStatus = useSyncStatus();
-
-  // Only show sync status for users with profiles
-  const hasProfile = typeof window !== "undefined" ? !!getUserProfile() : false;
 
   return (
     <>
-      {hasProfile && (
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={onSyncClick}
-          className="cursor-pointer hover:bg-muted/50"
-          title={t("sync.status.clickToLearnMore")}
-        >
-          <SyncStatusIndicator status={syncStatus} />
-        </Button>
-      )}
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={onSearchClick}
+        className="cursor-pointer hover:bg-muted/50"
+        title="Search crags (⌘K)"
+      >
+        <Search className="h-[1.2rem] w-[1.2rem]" />
+      </Button>
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={onFavoritesClick}
+        className="cursor-pointer hover:bg-muted/50 hidden md:flex"
+        title={t("profile.favorites")}
+      >
+        <Star className="h-[1.2rem] w-[1.2rem]" />
+      </Button>
       {extraActions}
       <LanguageSelector />
       <ThemeToggle />

@@ -5,6 +5,7 @@
   "welcome": {
     "heading": "Informacje o dowolnej skałce",
     "description": "Warun na bieżąco, raporty społeczności i informacje o rejonach i drogach na całym świecie",
+    "searchHint": "lub naciśnij",
     "exampleQueries": {
       "query1": {
         "display": "Jaki warun w Sokolikach jutro?",
@@ -31,6 +32,16 @@
     "clearChat": "Wyczyść czat",
     "clearChatTooltip": "Wyczyść bieżącą rozmowę",
     "clearChatConfirm": "Wyczyścić twój czat? Spowoduje to usunięcie wszystkich wiadomości z bieżącej rozmowy."
+  },
+  "search": {
+    "title": "Szukaj skałek",
+    "description": "Wyszukaj rejony wspinaczkowe po nazwie lub lokalizacji",
+    "placeholder": "Szukaj skałek... (np. 'Sokole Góry', 'Podlesice')",
+    "typeToSearch": "Zacznij pisać, aby wyszukać skałki...",
+    "noCragsFound": "Nie znaleziono skałek. Spróbuj innego wyszukiwania.",
+    "heading": "Skałki",
+    "toSelect": "aby wybrać",
+    "toClose": "aby zamknąć"
   },
   "conditions": {
     "rating": "Ocena",

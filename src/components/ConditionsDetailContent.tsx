@@ -22,6 +22,8 @@ import {
   Calendar,
   Sunrise,
   Sunset,
+  ArrowUp,
+  ArrowDown,
 } from "lucide-react";
 import { getWeatherEmoji, getWeatherDescription } from "@/lib/utils/weather-emojis";
 import { getLocaleFromLanguage } from "@/lib/utils/locale";
@@ -692,7 +694,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
 
                 return (
                   <div key={day} className="space-y-3">
-                    <h3 className="font-semibold flex items-center gap-2 sticky top-0 bg-background z-10 py-2">
+                    <h3 className="font-semibold flex items-center gap-2">
                       <Calendar className="w-4 h-4" />
                       {day}
                     </h3>
@@ -823,7 +825,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                       </div>
                     )}
 
-                    {/* Complete timeline - collapsible accordion */}
+                    {/* Complete timeline - collapsible accordion (shows all hours) */}
                     <Accordion type="single" collapsible className="mt-2">
                       <AccordionItem value="all-hours" className="border rounded-lg">
                         <AccordionTrigger className="px-3 py-2 hover:no-underline">
@@ -1116,12 +1118,12 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                       </div>
 
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                        <div className="bg-background/50 rounded-lg p-2">
-                          <div className="flex items-center gap-1 text-xs text-muted-foreground mb-1">
-                            <ThermometerSun className="h-3 w-3" />
-                            <span>{t("dialog.high")}</span>
+                        <div className="bg-orange-50/50 dark:bg-orange-950/20 border border-orange-200/50 dark:border-orange-800/30 rounded-lg p-2">
+                          <div className="flex items-center gap-1 text-xs text-orange-700 dark:text-orange-400 mb-1">
+                            <ArrowUp className="h-3 w-3" />
+                            <span className="font-medium">{t("dialog.high")}</span>
                           </div>
-                          <p className="text-lg font-semibold">
+                          <p className="text-lg font-semibold text-orange-900 dark:text-orange-200">
                             {formatTemperature(
                               convertTemperature(day.tempMax, "celsius", units.temperature),
                               units.temperature,
@@ -1129,12 +1131,12 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                             )}
                           </p>
                         </div>
-                        <div className="bg-background/50 rounded-lg p-2">
-                          <div className="flex items-center gap-1 text-xs text-muted-foreground mb-1">
-                            <ThermometerSun className="h-3 w-3" />
-                            <span>{t("dialog.low")}</span>
+                        <div className="bg-cyan-50/50 dark:bg-cyan-950/20 border border-cyan-200/50 dark:border-cyan-800/30 rounded-lg p-2">
+                          <div className="flex items-center gap-1 text-xs text-cyan-700 dark:text-cyan-400 mb-1">
+                            <ArrowDown className="h-3 w-3" />
+                            <span className="font-medium">{t("dialog.low")}</span>
                           </div>
-                          <p className="text-lg font-semibold">
+                          <p className="text-lg font-semibold text-cyan-900 dark:text-cyan-200">
                             {formatTemperature(
                               convertTemperature(day.tempMin, "celsius", units.temperature),
                               units.temperature,

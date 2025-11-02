@@ -150,6 +150,7 @@ const tools = {
               // Use local DB result (metadata complete OR geocoding confirmed single location)
               lat = result.lat;
               lon = result.lon;
+              location = result.name; // Use canonical name from DB instead of search term
               cragId = result.id; // Capture crag ID for fetching reports
               // Capture slug for URL generation (use parent_crag_slug for sectors)
               const isSector = "result_type" in result && result.result_type === "sector";
@@ -287,6 +288,7 @@ const tools = {
                 const crag = crags[0];
                 lat = crag.metadata.lat;
                 lon = crag.metadata.lng;
+                location = crag.area_name; // Use canonical name from OpenBeta instead of search term
                 detectedRockType = (detectedRockType || extractRockType(crag)) as RockType;
                 locationDetails = formatAreaPath(crag); // e.g., "Spain > Siurana > El Pati"
 

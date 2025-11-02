@@ -128,11 +128,6 @@ export const groupHourlyByDay = (
     grouped[dayKey].push(hour);
   });
 
-  // Filter to show every 3 hours to reduce clutter
-  Object.keys(grouped).forEach((key) => {
-    grouped[key] = grouped[key].filter((_, index) => index % 3 === 0);
-  });
-
   return grouped;
 };
 

@@ -252,7 +252,7 @@ export function computeConditions(
 
   if (hourly && hourly.length > 0) {
     hourlyConditions = computeHourlyConditions(hourly, rockType, recentPrecipitationMm, {
-      includeNightHours: options?.includeNightHours,
+      includeNightHours: true, // Always include all 24 hours
       latitude: weather.latitude,
       longitude: weather.longitude,
       maxDailyTemp: weather.maxDailyTemp,
