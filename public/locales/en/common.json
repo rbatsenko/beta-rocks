@@ -3,8 +3,8 @@
     "title": "beta.rocks"
   },
   "welcome": {
-    "heading": "Get info on any crag",
-    "description": "Real-time conditions, community reports, and route information for crags worldwide",
+    "heading": "Climbing conditions, weather & reports for any crag",
+    "description": "Real-time conditions, weather forecasts, and community reports for crags worldwide",
     "yourFavorites": "Your Favorites",
     "favoriteQuery": "What are conditions at {{crag}}?",
     "exampleQueries": {

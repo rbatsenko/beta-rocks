@@ -1,6 +1,6 @@
 # beta.rocks
 
-Get the beta on any crag worldwide. A free, chat-first web app that provides real-time conditions, community reports, and route information for climbers. Built with Next.js, React, and deployed on Vercel.
+Climbing conditions, weather, and reports for any crag worldwide. A free, chat-first web app that provides real-time conditions, weather forecasts, friction scores, and community reports for climbers. Built with Next.js, React, and deployed on Vercel.
 
 ## Getting Started
 
@@ -128,6 +128,56 @@ See [Vercel docs](https://vercel.com/docs) for more info.
 ### i18n
 
 - **17 languages** - Full internationalization support with region-specific fallbacks
+
+## Database Migrations
+
+This project uses Supabase for the database and includes automated migration deployment via GitHub Actions.
+
+### Automatic Migrations (Production)
+
+Migrations are automatically applied when changes to `supabase/migrations/` are pushed to the `main` branch.
+
+**Setup Required:**
+1. Go to your GitHub repository Settings > Secrets and variables > Actions
+2. Add the following secrets:
+   - `SUPABASE_ACCESS_TOKEN` - Your Supabase API access token
+   - `SUPABASE_DB_PASSWORD` - Your database password
+   - `SUPABASE_PROJECT_ID` - Your project reference ID (e.g., `tgvcjhzjdyfloppunnna`)
+
+See [.github/SUPABASE_MIGRATIONS.md](.github/SUPABASE_MIGRATIONS.md) for detailed setup instructions.
+
+### Local Migrations
+
+To apply migrations during local development:
+
+```bash
+# Install Supabase CLI globally
+npm install -g supabase
+
+# Link to your Supabase project
+supabase link --project-ref YOUR_PROJECT_ID
+
+# Apply pending migrations
+supabase db push
+```
+
+### Creating New Migrations
+
+```bash
+# Create a new migration file
+supabase migration new your_migration_name
+
+# Edit the generated file in supabase/migrations/
+# Add your SQL changes
+
+# Test locally
+supabase db push
+
+# Commit and push to apply in production
+git add supabase/migrations/
+git commit -m "feat: add your migration description"
+git push
+```
 
 ## Learn More
 

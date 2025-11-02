@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-beta.rocks is a free, chat-first web app that helps climbers get the beta on any crag worldwide. It uses AI (Google Gemini 2.5 Flash via Vercel AI SDK) to provide real-time conditions, community reports, and route information based on weather data, rock type, and climbing-specific factors. Features include user profiles with multi-device sync, chat history persistence, favorites bookmarking, and community reports with categories.
+beta.rocks is a free, chat-first web app that provides climbing conditions, weather forecasts, and community reports for any crag worldwide. It uses AI (Google Gemini 2.5 Flash via Vercel AI SDK) to provide real-time conditions, friction scores, and route information based on weather data, rock type, and climbing-specific factors. Features include user profiles with multi-device sync, chat history persistence, favorites bookmarking, and community reports with multi-select categories.
 
 **Key Technologies:**
 

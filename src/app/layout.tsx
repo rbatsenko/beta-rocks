@@ -7,13 +7,12 @@ import { Toaster } from "@/components/ui/toaster";
 import "@/index.css";
 
 export const metadata: Metadata = {
-  title: "beta.rocks - Get the Beta on Any Crag",
+  title: "beta.rocks - Climbing Conditions, Weather & Reports for Any Crag",
   description:
-    "Get conditions, community reports, and route information for any crag worldwide. Real-time weather, friction scores, and optimal climbing windows.",
+    "Real-time climbing conditions, weather forecasts, friction scores, and community reports for crags worldwide. Optimal climbing windows and route information.",
   authors: [{ name: "beta.rocks" }],
   keywords: [
     "climbing",
-    "beta",
     "conditions",
     "weather",
     "friction",
@@ -24,11 +23,12 @@ export const metadata: Metadata = {
     "community reports",
     "route information",
     "forecast",
+    "climbing weather",
   ],
   openGraph: {
-    title: "beta.rocks - Get the Beta on Any Crag",
+    title: "beta.rocks - Climbing Conditions, Weather & Reports for Any Crag",
     description:
-      "Get conditions, community reports, and route information for any crag worldwide. Real-time weather, friction scores, and optimal climbing windows.",
+      "Real-time climbing conditions, weather forecasts, friction scores, and community reports for crags worldwide. Optimal climbing windows and route information.",
     url: "https://beta.rocks",
     siteName: "beta.rocks",
     locale: "en_US",
@@ -36,8 +36,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "beta.rocks",
-    description: "Get conditions, community reports, and route information for any crag worldwide.",
+    title: "beta.rocks - Climbing Conditions & Weather",
+    description: "Real-time climbing conditions, weather forecasts, and community reports for crags worldwide.",
   },
   robots: {
     index: true,
