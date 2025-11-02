@@ -59,6 +59,7 @@ export async function GET(request: NextRequest) {
       climbingTypes: crag.climbing_types,
       latitude: Number(crag.lat),
       longitude: Number(crag.lon),
+      reportCount: Number(crag.report_count || 0),
       matchScore: crag.match_score,
       matchType: crag.match_type,
     }));

@@ -5,6 +5,7 @@
   "welcome": {
     "heading": "Obtenez des infos sur n'importe quel site",
     "description": "Conditions en temps réel, rapports communautaires et informations sur les voies dans le monde entier",
+    "searchHint": "Recherchez des sites directement avec",
     "exampleQueries": {
       "query1": {
         "display": "Quel sera l'état de Fontainebleau demain ?",
@@ -29,6 +30,17 @@
     "clearChat": "Effacer le chat",
     "clearChatTooltip": "Effacer la conversation actuelle",
     "clearChatConfirm": "Effacer votre chat ? Cela supprimera tous les messages de la conversation actuelle."
+  },
+  "search": {
+    "title": "Rechercher des sites",
+    "description": "Rechercher des sites d'escalade par nom ou localisation",
+    "placeholder": "Rechercher des sites... (ex. 'Fontainebleau', 'Ceüse')",
+    "typeToSearch": "Tapez pour rechercher des sites...",
+    "searching": "Recherche en cours...",
+    "noCragsFound": "Aucun site trouvé. Essayez un autre terme de recherche.",
+    "heading": "Sites",
+    "toSelect": "pour sélectionner",
+    "toClose": "pour fermer"
   },
   "conditions": {
     "rating": "Note",
@@ -636,6 +648,19 @@
     "observationDate": "Quand avez-vous observé cela ?",
     "observationDateHelp": "Vous pouvez signaler les conditions jusqu'à 7 jours en arrière",
     "voteReady": "Vous pouvez maintenant voter pour les rapports"
+  },
+  "cragPage": {
+    "askAI": "Demander à l'IA",
+    "currentConditions": "Conditions actuelles",
+    "sectors": "Secteurs",
+    "disclaimer": "Les conditions météorologiques peuvent changer rapidement. Vérifiez toujours les conditions sur place et faites preuve de jugement.",
+    "askAIAboutCrag": "Demander à l'IA à propos de ce site",
+    "viewOnSunCalc": "Voir les heures de soleil/lune",
+    "viewSunAngles": "Voir la position du soleil et les angles d'ombre",
+    "viewOnMap": "Voir sur la carte",
+    "viewOnGoogleMaps": "Voir sur Google Maps",
+    "addToFavorites": "Ajouter aux favoris",
+    "removeFromFavorites": "Retirer des favoris"
   },
   "time": {
     "today": "Aujourd'hui",

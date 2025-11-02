@@ -60,7 +60,6 @@ export function HeaderActions({
       <ThemeToggle />
       <UserMenu
         onSettingsClick={onSettingsClick}
-        onFavoritesClick={onFavoritesClick}
         onStatsClick={onStatsClick}
         onAboutClick={onAboutClick}
         onClearChatClick={onClearChatClick}

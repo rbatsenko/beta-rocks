@@ -5,6 +5,7 @@
   "welcome": {
     "heading": "Infos zu jedem Felsen",
     "description": "Echtzeit-Bedingungen, Community-Berichte und Routeninformationen für Felsen weltweit",
+    "searchHint": "Felsen direkt suchen mit",
     "exampleQueries": {
       "query1": {
         "display": "Wie wird der Grip im Frankenjura morgen?",
@@ -29,6 +30,17 @@
     "clearChat": "Chat löschen",
     "clearChatTooltip": "Aktuelle Konversation löschen",
     "clearChatConfirm": "Chat löschen? Dadurch werden alle Nachrichten aus der aktuellen Konversation entfernt."
+  },
+  "search": {
+    "title": "Felsen suchen",
+    "description": "Klettergebiete nach Name oder Standort suchen",
+    "placeholder": "Felsen suchen... (z.B. 'Frankenjura', 'Elbsandstein')",
+    "typeToSearch": "Tippen Sie, um nach Felsen zu suchen...",
+    "searching": "Suchen...",
+    "noCragsFound": "Keine Felsen gefunden. Versuchen Sie einen anderen Suchbegriff.",
+    "heading": "Felsen",
+    "toSelect": "zum Auswählen",
+    "toClose": "zum Schließen"
   },
   "conditions": {
     "rating": "Bewertung",
@@ -636,6 +648,19 @@
     "observationDate": "Wann haben Sie das beobachtet?",
     "observationDateHelp": "Sie können Bedingungen bis zu 7 Tage zurück melden",
     "voteReady": "Du kannst jetzt über Berichte abstimmen"
+  },
+  "cragPage": {
+    "askAI": "KI fragen",
+    "currentConditions": "Aktuelle Bedingungen",
+    "sectors": "Sektoren",
+    "disclaimer": "Wetterbedingungen können sich schnell ändern. Überprüfen Sie die Bedingungen immer vor Ort und nutzen Sie Ihr bestes Urteilsvermögen.",
+    "askAIAboutCrag": "KI über diesen Fels fragen",
+    "viewOnSunCalc": "Sonnen-/Mondzeiten ansehen",
+    "viewSunAngles": "Sonnenposition und Schattenwinkel ansehen",
+    "viewOnMap": "Auf Karte ansehen",
+    "viewOnGoogleMaps": "In Google Maps ansehen",
+    "addToFavorites": "Zu Favoriten hinzufügen",
+    "removeFromFavorites": "Aus Favoriten entfernen"
   },
   "time": {
     "today": "Heute",

@@ -5,6 +5,7 @@
   "welcome": {
     "heading": "Hanki tietoa mistä tahansa kalliosta",
     "description": "Reaaliaikaiset olosuhteet, yhteisöraportit ja reittitiedot kallioista ympäri maailmaa",
+    "searchHint": "Etsi kalliota suoraan",
     "exampleQueries": {
       "query1": {
         "display": "Olosuhteet Olhavassa tänään?",
@@ -29,6 +30,19 @@
     "clearChatConfirm": "Tyhjennetäänkö keskustelu? Tämä poistaa kaikki viestit nykyisestä keskustelusta.",
     "clearHistory": "Tyhjennä historia",
     "clearHistoryConfirm": "Oletko varma, että haluat poistaa kaikki keskusteluhistorian? Tätä ei voi peruuttaa."
+  },
+  "search": {
+    "title": "Etsi kalliota",
+    "description": "Etsi kiipeilypaikkoja nimen tai sijainnin perusteella",
+    "placeholder": "Etsi kalliota... (esim. 'Olhava', 'Konnevuori')",
+    "typeToSearch": "Kirjoita etsiäksesi kalliota...",
+    "searching": "Etsitään...",
+    "noCragsFound": "Kalliota ei löytynyt. Kokeile eri hakutermiä.",
+    "heading": "Kalliot",
+    "nearbyLocations": "Lähellä olevat paikat",
+    "nearbyLocation": "Paikka",
+    "toSelect": "valitaksesi",
+    "toClose": "sulkeaksesi"
   },
   "conditions": {
     "rating": "Arvio",
@@ -552,6 +566,19 @@
     },
     "observationDate": "Milloin havaitsit tämän?",
     "observationDateHelp": "Voit raportoida olosuhteita jopa 7 päivää taaksepäin"
+  },
+  "cragPage": {
+    "askAI": "Kysy AI:lta",
+    "currentConditions": "Nykyiset olosuhteet",
+    "sectors": "Sektorit",
+    "disclaimer": "Sääolosuhteet voivat muuttua nopeasti. Tarkista aina olosuhteet saapuessasi ja käytä parasta harkintaasi.",
+    "askAIAboutCrag": "Kysy AI:lta tästä kalliosta",
+    "viewOnSunCalc": "Näytä auringon/kuun ajat",
+    "viewSunAngles": "Näytä auringon sijainti ja varjokulmat",
+    "viewOnMap": "Näytä kartalla",
+    "viewOnGoogleMaps": "Näytä Google Mapsissa",
+    "addToFavorites": "Lisää suosikkeihin",
+    "removeFromFavorites": "Poista suosikeista"
   },
   "time": {
     "today": "Tänään",

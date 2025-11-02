@@ -5,6 +5,7 @@
   "welcome": {
     "heading": "Obtén información de cualquier roca",
     "description": "Condiciones en tiempo real, reportes de la comunidad e información de vías en rocas de todo el mundo",
+    "searchHint": "Busca escuelas directamente con",
     "exampleQueries": {
       "query1": {
         "display": "¿Habrá buen tacto en Siurana mañana?",
@@ -29,6 +30,19 @@
     "clearChat": "Borrar chat",
     "clearChatTooltip": "Borrar la conversación actual",
     "clearChatConfirm": "¿Borrar tu chat? Esto eliminará todos los mensajes de la conversación actual."
+  },
+  "search": {
+    "title": "Buscar escuelas",
+    "description": "Buscar zonas de escalada por nombre o ubicación",
+    "placeholder": "Buscar escuelas... (ej. 'Siurana', 'Rodellar')",
+    "typeToSearch": "Escribe para buscar escuelas...",
+    "searching": "Buscando...",
+    "noCragsFound": "No se encontraron escuelas. Prueba con otro término de búsqueda.",
+    "heading": "Escuelas",
+    "nearbyLocations": "Ubicaciones cercanas",
+    "nearbyLocation": "Ubicación",
+    "toSelect": "para seleccionar",
+    "toClose": "para cerrar"
   },
   "conditions": {
     "rating": "Valoración",
@@ -636,6 +650,19 @@
     "observationDate": "¿Cuándo observaste esto?",
     "observationDateHelp": "Puedes reportar condiciones hasta 7 días atrás",
     "voteReady": "Ya puedes votar en los informes"
+  },
+  "cragPage": {
+    "askAI": "Preguntar a la IA",
+    "currentConditions": "Condiciones actuales",
+    "sectors": "Sectores",
+    "disclaimer": "Las condiciones meteorológicas pueden cambiar rápidamente. Verifica siempre las condiciones al llegar y usa tu mejor juicio.",
+    "askAIAboutCrag": "Preguntar a la IA sobre esta escuela",
+    "viewOnSunCalc": "Ver horas de sol/luna",
+    "viewSunAngles": "Ver posición del sol y ángulos de sombra",
+    "viewOnMap": "Ver en el mapa",
+    "viewOnGoogleMaps": "Ver en Google Maps",
+    "addToFavorites": "Añadir a favoritos",
+    "removeFromFavorites": "Quitar de favoritos"
   },
   "time": {
     "today": "Hoy",

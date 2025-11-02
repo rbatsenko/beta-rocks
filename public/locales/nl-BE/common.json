@@ -18,7 +18,8 @@
         "display": "Dave omstandigheden morgen?",
         "query": "Dave omstandigheden morgen?"
       }
-    }
+    },
+    "searchHint": "Zoek klimrotsen direct met"
   },
   "chat": {
     "analyzing": "Condities analyseren...",
@@ -29,6 +30,19 @@
     "clearChatConfirm": "Wis je chat? Dit verwijdert alle berichten uit het huidige gesprek.",
     "clearHistory": "Geschiedenis wissen",
     "clearHistoryConfirm": "Weet je zeker dat je alle chatgeschiedenis wilt wissen? Dit kan niet ongedaan worden gemaakt."
+  },
+  "search": {
+    "title": "Zoek klimrotsen",
+    "description": "Zoek klimgebieden op naam of locatie",
+    "placeholder": "Zoek klimrotsen... (bijv. 'Freÿr', 'Dinant')",
+    "typeToSearch": "Typ om klimrotsen te zoeken...",
+    "searching": "Zoeken...",
+    "noCragsFound": "Geen klimrotsen gevonden. Probeer een andere zoekterm.",
+    "heading": "Klimrotsen",
+    "nearbyLocations": "Nabijgelegen locaties",
+    "nearbyLocation": "Locatie",
+    "toSelect": "om te selecteren",
+    "toClose": "om te sluiten"
   },
   "conditions": {
     "rating": "Beoordeling",
@@ -631,6 +645,19 @@
     },
     "observationDate": "Wanneer heb je dit waargenomen?",
     "observationDateHelp": "Je kunt condities tot 7 dagen terug melden"
+  },
+  "cragPage": {
+    "askAI": "Vraag AI",
+    "currentConditions": "Huidige omstandigheden",
+    "sectors": "Sectoren",
+    "disclaimer": "Weersomstandigheden kunnen snel veranderen. Controleer altijd de omstandigheden bij aankomst en gebruik je beste oordeel.",
+    "askAIAboutCrag": "Vraag AI over deze rots",
+    "viewOnSunCalc": "Bekijk zon/maan tijden",
+    "viewSunAngles": "Bekijk zonpositie en schaduwhoeken",
+    "viewOnMap": "Bekijk op kaart",
+    "viewOnGoogleMaps": "Bekijk op Google Maps",
+    "addToFavorites": "Toevoegen aan favorieten",
+    "removeFromFavorites": "Verwijderen uit favorieten"
   },
   "time": {
     "today": "Vandaag",

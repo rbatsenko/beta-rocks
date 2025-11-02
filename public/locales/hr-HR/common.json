@@ -18,7 +18,8 @@
         "display": "Uvjeti na Marjanu sutra?",
         "query": "Uvjeti na Marjanu sutra?"
       }
-    }
+    },
+    "searchHint": "Pretražite stijene izravno s"
   },
   "chat": {
     "analyzing": "Analiziram uvjete...",
@@ -29,6 +30,17 @@
     "clearChatConfirm": "Obriši svoj razgovor? Ovo će ukloniti sve poruke iz trenutnog razgovora.",
     "clearHistory": "Obriši povijest",
     "clearHistoryConfirm": "Jesi li siguran/a da želiš obrisati svu povijest razgovora? Ovo se ne može vratiti."
+  },
+  "search": {
+    "title": "Pretražite stijene",
+    "description": "Pretražite penjališta po imenu ili lokaciji",
+    "placeholder": "Pretražite stijene... (npr. 'Paklenica', 'Sljeme')",
+    "typeToSearch": "Upišite za pretragu stijena...",
+    "searching": "Pretraživanje...",
+    "noCragsFound": "Nema pronađenih stijena. Pokušajte drugi pojam za pretragu.",
+    "heading": "Stijene",
+    "toSelect": "za odabir",
+    "toClose": "za zatvaranje"
   },
   "conditions": {
     "rating": "Ocjena",
@@ -631,6 +643,19 @@
     },
     "observationDate": "Kada ste ovo primijetili?",
     "observationDateHelp": "Možete prijaviti uvjete do 7 dana unazad"
+  },
+  "cragPage": {
+    "askAI": "Pitaj AI",
+    "currentConditions": "Trenutni uvjeti",
+    "sectors": "Sektori",
+    "disclaimer": "Vremenski uvjeti se mogu brzo promijeniti. Uvijek provjerite uvjete po dolasku i koristite svoje najbolje prosuđivanje.",
+    "askAIAboutCrag": "Pitaj AI o ovoj stijeni",
+    "viewOnSunCalc": "Prikaži vremena sunca/mjeseca",
+    "viewSunAngles": "Prikaži položaj sunca i kutove sjene",
+    "viewOnMap": "Prikaži na karti",
+    "viewOnGoogleMaps": "Prikaži na Google Maps",
+    "addToFavorites": "Dodaj u favorite",
+    "removeFromFavorites": "Ukloni iz favorita"
   },
   "time": {
     "today": "Danas",

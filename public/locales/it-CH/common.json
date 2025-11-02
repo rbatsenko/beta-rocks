@@ -18,7 +18,8 @@
         "display": "Com'è il meteo in Ticino oggi?",
         "query": "Quali sono le condizioni in Ticino oggi?"
       }
-    }
+    },
+    "searchHint": "Cerca falesie direttamente con"
   },
   "chat": {
     "analyzing": "Analisi delle condizioni...",
@@ -29,6 +30,17 @@
     "clearChat": "Cancella chat",
     "clearChatTooltip": "Cancella la conversazione attuale",
     "clearChatConfirm": "Cancellare la chat? Questo rimuoverà tutti i messaggi dalla conversazione attuale."
+  },
+  "search": {
+    "title": "Cerca falesie",
+    "description": "Cerca aree di arrampicata per nome o posizione",
+    "placeholder": "Cerca falesie... (ad es. 'Arco', 'Finale Ligure')",
+    "typeToSearch": "Digita per cercare falesie...",
+    "searching": "Ricerca in corso...",
+    "noCragsFound": "Nessuna falesia trovata. Prova un altro termine di ricerca.",
+    "heading": "Falesie",
+    "toSelect": "per selezionare",
+    "toClose": "per chiudere"
   },
   "conditions": {
     "rating": "Valutazione",
@@ -552,6 +564,19 @@
       "older": "Più vecchio",
       "veryOld": "Molto vecchio"
     }
+  },
+  "cragPage": {
+    "askAI": "Chiedi all'IA",
+    "currentConditions": "Condizioni attuali",
+    "sectors": "Settori",
+    "disclaimer": "Le condizioni meteorologiche possono cambiare rapidamente. Verifica sempre le condizioni all'arrivo e usa il tuo miglior giudizio.",
+    "askAIAboutCrag": "Chiedi all'IA su questa falesia",
+    "viewOnSunCalc": "Vedi orari sole/luna",
+    "viewSunAngles": "Vedi posizione del sole e angoli d'ombra",
+    "viewOnMap": "Vedi sulla mappa",
+    "viewOnGoogleMaps": "Vedi su Google Maps",
+    "addToFavorites": "Aggiungi ai preferiti",
+    "removeFromFavorites": "Rimuovi dai preferiti"
   },
   "time": {
     "today": "Oggi",

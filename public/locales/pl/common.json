@@ -5,7 +5,7 @@
   "welcome": {
     "heading": "Informacje o dowolnej skałce",
     "description": "Warun na bieżąco, raporty społeczności i informacje o rejonach i drogach na całym świecie",
-    "searchHint": "lub naciśnij",
+    "searchHint": "Szukaj skałek bezpośrednio za pomocą",
     "exampleQueries": {
       "query1": {
         "display": "Jaki warun w Sokolikach jutro?",
@@ -38,8 +38,11 @@
     "description": "Wyszukaj rejony wspinaczkowe po nazwie lub lokalizacji",
     "placeholder": "Szukaj skałek... (np. 'Sokole Góry', 'Podlesice')",
     "typeToSearch": "Zacznij pisać, aby wyszukać skałki...",
+    "searching": "Wyszukiwanie...",
     "noCragsFound": "Nie znaleziono skałek. Spróbuj innego wyszukiwania.",
     "heading": "Skałki",
+    "nearbyLocations": "Pobliskie lokalizacje",
+    "nearbyLocation": "Lokalizacja",
     "toSelect": "aby wybrać",
     "toClose": "aby zamknąć"
   },
@@ -80,7 +83,7 @@
     "veryHighWinds": "Bardzo mocny wiatr ({{wind}}) - może być nieprzyjemnie 😅",
     "highWind": "Silny wiatr ({{wind}})",
     "recentPrecip": "Niedawne opady ({{precip}}) - wyschnie za ~{{hours}}h",
-    "currentlyWetDangerous": "Obecnie mokro - poczekaj aż wyschnie",
+    "currentlyWetDangerous": "Mokro - poczekaj aż wyschnie",
     "currentlyWet": "Mokro",
     "cold": "Cold ({{temp}})",
     "veryHighCondensationRisk": "Bardzo wysokie ryzyko kondensacji (rozpiętość punktu rosy {{dewPointSpread}}) - powierzchnia skały prawdopodobnie wilgotna",
@@ -650,7 +653,11 @@
     "disclaimer": "Warunki pogodowe mogą się szybko zmieniać. Zawsze sprawdzaj warunki na miejscu i kieruj się własnym osądem.",
     "askAIAboutCrag": "Zapytaj AI o tę skałkę",
     "viewOnSunCalc": "Zobacz czasy słońca/księżyca",
-    "viewOnMap": "Zobacz na mapie"
+    "viewSunAngles": "Zobacz pozycję słońca i kąty cienia",
+    "viewOnMap": "Zobacz na mapie",
+    "viewOnGoogleMaps": "Zobacz w Google Maps",
+    "addToFavorites": "Dodaj do ulubionych",
+    "removeFromFavorites": "Usuń z ulubionych"
   },
   "time": {
     "today": "Dzisiaj",

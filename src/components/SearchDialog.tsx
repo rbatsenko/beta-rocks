@@ -32,6 +32,7 @@ interface SearchResult {
   climbingTypes: string[] | null;
   latitude: number;
   longitude: number;
+  reportCount: number;
   matchScore: number;
   matchType: string;
 }
@@ -120,12 +121,18 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
                 {t("search.typeToSearch")}
               </CommandEmpty>
             )}
+            {loading && (
+              <div className="py-8 flex flex-col items-center justify-center gap-3">
+                <Loader2 className="h-6 w-6 animate-spin text-orange-500" />
+                <p className="text-sm text-muted-foreground">{t("search.searching")}</p>
+              </div>
+            )}
             {query && results.length === 0 && !loading && (
               <CommandEmpty className="py-6 text-center text-sm">
                 {t("search.noCragsFound")}
               </CommandEmpty>
             )}
-            {results.length > 0 && (
+            {results.length > 0 && !loading && (
               <CommandGroup heading={t("search.heading")}>
                 {results.map((result) => (
                   <CommandItem
@@ -141,6 +148,11 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
                         {result.rockType && (
                           <Badge variant="outline" className="text-xs shrink-0 border-orange-500/30 text-orange-700 dark:text-orange-400">
                             {result.rockType}
+                          </Badge>
+                        )}
+                        {result.reportCount > 0 && (
+                          <Badge variant="secondary" className="text-xs shrink-0">
+                            {result.reportCount} 💬
                           </Badge>
                         )}
                       </div>

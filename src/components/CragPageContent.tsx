@@ -350,7 +350,7 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
                   size="sm"
                   onClick={handleToggleFavorite}
                   disabled={addFavorite.isPending || removeFavorite.isPending}
-                  title={isFavorited ? "Remove from favorites" : "Add to favorites"}
+                  title={isFavorited ? t("cragPage.removeFromFavorites") : t("cragPage.addToFavorites")}
                   className={isFavorited ? "bg-orange-500 hover:bg-orange-600" : ""}
                 >
                   <Heart className={`h-4 w-4 ${isFavorited ? "fill-current" : ""}`} />
@@ -376,7 +376,7 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
                     const url = getSunCalcUrl(crag.lat, crag.lon);
                     if (url) window.open(url, "_blank", "noopener,noreferrer");
                   }}
-                  title="View sun position and shadow angles"
+                  title={t("cragPage.viewSunAngles")}
                 >
                   <Sun className="w-3.5 h-3.5" />
                   <span className="hidden sm:inline">SunCalc</span>
@@ -390,7 +390,7 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
                     const url = getGoogleMapsUrl(crag.lat, crag.lon);
                     if (url) window.open(url, "_blank", "noopener,noreferrer");
                   }}
-                  title="View on Google Maps"
+                  title={t("cragPage.viewOnGoogleMaps")}
                 >
                   <Map className="w-3.5 h-3.5" />
                   <span className="hidden sm:inline">{t("cragPage.viewOnMap")}</span>

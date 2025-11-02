@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { User, Settings, Star, BarChart3, Info, RotateCcw } from "lucide-react";
+import { User, Settings, BarChart3, Info, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -20,7 +20,6 @@ import type { UserProfile as UserProfileType } from "@/lib/auth/sync-key";
 
 interface UserMenuProps {
   onSettingsClick: () => void;
-  onFavoritesClick: () => void;
   onStatsClick: () => void;
   onAboutClick?: () => void;
   onClearChatClick?: () => void;
@@ -29,7 +28,6 @@ interface UserMenuProps {
 
 export function UserMenu({
   onSettingsClick,
-  onFavoritesClick,
   onStatsClick,
   onAboutClick,
   onClearChatClick,
@@ -140,10 +138,6 @@ export function UserMenu({
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={onFavoritesClick} className="cursor-pointer">
-          <Star className="mr-2 h-4 w-4" />
-          <span>{t("profile.favorites")}</span>
-        </DropdownMenuItem>
         <DropdownMenuItem onClick={onStatsClick} className="cursor-pointer">
           <BarChart3 className="mr-2 h-4 w-4" />
           <span>{t("profile.stats")}</span>

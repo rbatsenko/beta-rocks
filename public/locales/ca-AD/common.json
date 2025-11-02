@@ -5,6 +5,7 @@
   "welcome": {
     "heading": "Aconsegueix la beta de qualsevol roca",
     "description": "Condicions en temps real, informes de la comunitat i informació sobre vies a roques de tot el món",
+    "searchHint": "Cerca esparellons directament amb",
     "exampleQueries": {
       "query1": {
         "display": "Condicions a les Agulles d'Engolasters avui?",
@@ -29,6 +30,17 @@
     "clearChatConfirm": "Esborrar el teu xat? Això eliminarà tots els missatges de la conversa actual.",
     "clearHistory": "Esborrar historial",
     "clearHistoryConfirm": "Estàs segur que vols esborrar tot l'historial de xat? Això no es pot desfer."
+  },
+  "search": {
+    "title": "Cerca esparellons",
+    "description": "Cerca zones d'escalada per nom o ubicació",
+    "placeholder": "Cerca esparellons... (p. ex. 'Siurana', 'Montserrat')",
+    "typeToSearch": "Escriu per cercar esparellons...",
+    "searching": "Cercant...",
+    "noCragsFound": "No s'han trobat esparellons. Prova un altre terme de cerca.",
+    "heading": "Esparellons",
+    "toSelect": "per seleccionar",
+    "toClose": "per tancar"
   },
   "conditions": {
     "rating": "Valoració",
@@ -520,6 +532,19 @@
     },
     "observationDate": "Quan vas observar això?",
     "observationDateHelp": "Pots informar de condicions fins a 7 dies enrere"
+  },
+  "cragPage": {
+    "askAI": "Pregunta a la IA",
+    "currentConditions": "Condicions actuals",
+    "sectors": "Sectors",
+    "disclaimer": "Les condicions meteorològiques poden canviar ràpidament. Verifica sempre les condicions en arribar i utilitza el teu millor criteri.",
+    "askAIAboutCrag": "Pregunta a la IA sobre aquesta paret",
+    "viewOnSunCalc": "Veure horaris de sol/lluna",
+    "viewSunAngles": "Veure posició del sol i angles d'ombra",
+    "viewOnMap": "Veure al mapa",
+    "viewOnGoogleMaps": "Veure a Google Maps",
+    "addToFavorites": "Afegir a favorits",
+    "removeFromFavorites": "Eliminar de favorits"
   },
   "time": {
     "today": "Avui",

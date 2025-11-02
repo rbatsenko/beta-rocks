@@ -18,7 +18,8 @@
         "display": "Hvordan ser været ut for Uskedalen på lørdag?",
         "query": "Hvordan er forholdene i Uskedalen på lørdag?"
       }
-    }
+    },
+    "searchHint": "Søk klatrevegger direkte med"
   },
   "chat": {
     "analyzing": "Analyserer forhold...",
@@ -29,6 +30,19 @@
     "clearChat": "Tøm chat",
     "clearChatTooltip": "Tøm den nåværende samtalen",
     "clearChatConfirm": "Tømme chatten din? Dette vil fjerne alle meldinger fra den nåværende samtalen."
+  },
+  "search": {
+    "title": "Søk klatrevegger",
+    "description": "Søk etter klatreområder etter navn eller plassering",
+    "placeholder": "Søk klatrevegger... (f.eks. 'Flatanger', 'Lofoten')",
+    "typeToSearch": "Skriv for å søke etter klatrevegger...",
+    "searching": "Søker...",
+    "noCragsFound": "Ingen klatrevegger funnet. Prøv et annet søkeord.",
+    "heading": "Klatrevegger",
+    "nearbyLocations": "Nærliggende steder",
+    "nearbyLocation": "Sted",
+    "toSelect": "for å velge",
+    "toClose": "for å lukke"
   },
   "conditions": {
     "rating": "Vurdering",
@@ -553,6 +567,19 @@
     },
     "observationDate": "Når observerte du dette?",
     "observationDateHelp": "Du kan rapportere forhold opptil 7 dager tilbake"
+  },
+  "cragPage": {
+    "askAI": "Spør AI",
+    "currentConditions": "Nåværende forhold",
+    "sectors": "Sektorer",
+    "disclaimer": "Værforholdene kan endre seg raskt. Alltid sjekk forholdene ved ankomst og bruk din beste vurdering.",
+    "askAIAboutCrag": "Spør AI om denne klippen",
+    "viewOnSunCalc": "Vis sol/måne-tider",
+    "viewSunAngles": "Vis solposisjon og skyggevinkler",
+    "viewOnMap": "Vis på kart",
+    "viewOnGoogleMaps": "Vis på Google Maps",
+    "addToFavorites": "Legg til favoritter",
+    "removeFromFavorites": "Fjern fra favoritter"
   },
   "time": {
     "today": "I dag",

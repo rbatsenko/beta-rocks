@@ -5,6 +5,7 @@
   "welcome": {
     "heading": "Get info on any crag",
     "description": "Real-time conditions, community reports, and route information for crags worldwide",
+    "searchHint": "Search crags directly with",
     "exampleQueries": {
       "query1": {
         "display": "Stanage conditions tomorrow?",
@@ -29,6 +30,17 @@
     "clearChat": "Clear Chat",
     "clearChatTooltip": "Clear the current conversation",
     "clearChatConfirm": "Clear your chat? This will remove all messages from the current conversation."
+  },
+  "search": {
+    "title": "Search Crags",
+    "description": "Search for climbing areas by name or location",
+    "placeholder": "Search crags... (e.g. 'St Leger', 'kotecnik')",
+    "typeToSearch": "Type to search for crags...",
+    "searching": "Searching...",
+    "noCragsFound": "No crags found. Try a different search term.",
+    "heading": "Crags",
+    "toSelect": "to select",
+    "toClose": "to close"
   },
   "conditions": {
     "rating": "Rating",
@@ -546,6 +558,19 @@
     },
     "observationDate": "When did you observe this?",
     "observationDateHelp": "You can report conditions up to 7 days back"
+  },
+  "cragPage": {
+    "askAI": "Ask AI",
+    "currentConditions": "Current Conditions",
+    "sectors": "Sectors",
+    "disclaimer": "Weather conditions can change rapidly. Always verify conditions on arrival and use your best judgement.",
+    "askAIAboutCrag": "Ask AI about this crag",
+    "viewOnSunCalc": "View sun/moon times",
+    "viewSunAngles": "View sun position and shadow angles",
+    "viewOnMap": "View on map",
+    "viewOnGoogleMaps": "View on Google Maps",
+    "addToFavorites": "Add to favourites",
+    "removeFromFavorites": "Remove from favourites"
   },
   "time": {
     "today": "Today",

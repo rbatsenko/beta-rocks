@@ -5,7 +5,7 @@
   "welcome": {
     "heading": "Get info on any crag",
     "description": "Real-time conditions, community reports, and route information for crags worldwide",
-    "searchHint": "or press",
+    "searchHint": "Search crags directly with",
     "yourFavorites": "Your Favorites",
     "favoriteQuery": "What are conditions at {{crag}}?",
     "exampleQueries": {
@@ -38,8 +38,11 @@
     "description": "Search for climbing areas by name or location",
     "placeholder": "Search crags... (e.g. 'St Leger', 'kotecnik')",
     "typeToSearch": "Type to search for crags...",
+    "searching": "Searching...",
     "noCragsFound": "No crags found. Try a different search term.",
     "heading": "Crags",
+    "nearbyLocations": "Nearby Locations",
+    "nearbyLocation": "Location",
     "toSelect": "to select",
     "toClose": "to close"
   },
@@ -686,7 +689,11 @@
     "disclaimer": "Weather conditions can change rapidly. Always verify conditions on arrival and use your best judgment.",
     "askAIAboutCrag": "Ask AI about this crag",
     "viewOnSunCalc": "View sun/moon times",
-    "viewOnMap": "View on map"
+    "viewSunAngles": "View sun position and shadow angles",
+    "viewOnMap": "View on map",
+    "viewOnGoogleMaps": "View on Google Maps",
+    "addToFavorites": "Add to favorites",
+    "removeFromFavorites": "Remove from favorites"
   },
   "rockTypes": {
     "granite": "Granite",

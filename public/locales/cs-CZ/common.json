@@ -5,6 +5,7 @@
   "welcome": {
     "heading": "Získej informace o každé skále",
     "description": "Získej aktuální počasí, analýzu tření a optimální okna pro lezení na jakékoliv skále po celém světě",
+    "searchHint": "Vyhledávejte skály přímo pomocí",
     "exampleQueries": {
       "query1": {
         "display": "Jaké jsou podmínky na Holštejnu zítra?",
@@ -29,6 +30,19 @@
     "clearChat": "Vymazat chat",
     "clearChatTooltip": "Vymazat aktuální konverzaci",
     "clearChatConfirm": "Vymazat váš chat? Tímto odstraníte všechny zprávy z aktuální konverzace."
+  },
+  "search": {
+    "title": "Vyhledat skály",
+    "description": "Vyhledávání lezeckých oblastí podle názvu nebo polohy",
+    "placeholder": "Vyhledat skály... (např. 'Holštejn', 'Adrspach')",
+    "typeToSearch": "Začněte psát pro vyhledání skal...",
+    "searching": "Vyhledávání...",
+    "noCragsFound": "Nebyly nalezeny žádné skály. Zkuste jiný vyhledávací výraz.",
+    "heading": "Skály",
+    "nearbyLocations": "Okolní místa",
+    "nearbyLocation": "Místo",
+    "toSelect": "pro výběr",
+    "toClose": "pro zavření"
   },
   "conditions": {
     "rating": "Hodnocení",
@@ -631,6 +645,19 @@
     },
     "observationDate": "Kdy jste to pozorovali?",
     "observationDateHelp": "Můžete hlásit podmínky až 7 dní zpět"
+  },
+  "cragPage": {
+    "askAI": "Zeptat se AI",
+    "currentConditions": "Aktuální podmínky",
+    "sectors": "Sektory",
+    "disclaimer": "Povětrnostní podmínky se mohou rychle měnit. Vždy zkontrolujte podmínky na místě a používejte svůj nejlepší úsudek.",
+    "askAIAboutCrag": "Zeptat se AI na tuto skálu",
+    "viewOnSunCalc": "Zobrazit časy slunce/měsíce",
+    "viewSunAngles": "Zobrazit polohu slunce a úhly stínu",
+    "viewOnMap": "Zobrazit na mapě",
+    "viewOnGoogleMaps": "Zobrazit na Google Maps",
+    "addToFavorites": "Přidat do oblíbených",
+    "removeFromFavorites": "Odebrat z oblíbených"
   },
   "time": {
     "today": "Dnes",

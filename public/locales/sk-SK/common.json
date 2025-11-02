@@ -18,7 +18,8 @@
         "display": "Ako je na tom Višňové?",
         "query": "Ako je na tom Višňové?"
       }
-    }
+    },
+    "searchHint": "Vyhľadajte skaly priamo pomocou"
   },
   "chat": {
     "analyzing": "Analyzujem podmienky...",
@@ -29,6 +30,17 @@
     "clearChat": "Vymazať chat",
     "clearChatTooltip": "Vymazať aktuálnu konverzáciu",
     "clearChatConfirm": "Vymazať váš chat? Týmto odstránite všetky správy z aktuálnej konverzácie."
+  },
+  "search": {
+    "title": "Vyhľadať skaly",
+    "description": "Vyhľadávanie lezeckých oblastí podľa názvu alebo polohy",
+    "placeholder": "Vyhľadať skaly... (napr. 'Súľov', 'Turzovka')",
+    "typeToSearch": "Začnite písať pre vyhľadávanie skál...",
+    "searching": "Vyhľadávanie...",
+    "noCragsFound": "Neboli nájdené žiadne skaly. Skúste iný vyhľadávací výraz.",
+    "heading": "Skaly",
+    "toSelect": "pre výber",
+    "toClose": "pre zatvorenie"
   },
   "conditions": {
     "rating": "Hodnotenie",
@@ -631,6 +643,19 @@
     },
     "observationDate": "Kedy ste to pozorovali?",
     "observationDateHelp": "Môžete hlásiť podmienky až 7 dní späť"
+  },
+  "cragPage": {
+    "askAI": "Opýtať sa AI",
+    "currentConditions": "Aktuálne podmienky",
+    "sectors": "Sektory",
+    "disclaimer": "Poveternostné podmienky sa môžu rýchlo meniť. Vždy skontrolujte podmienky na mieste a použite svoj najlepší úsudok.",
+    "askAIAboutCrag": "Opýtať sa AI na túto skalu",
+    "viewOnSunCalc": "Zobraziť časy slnka/mesiaca",
+    "viewSunAngles": "Zobraziť polohu slnka a uhly tieňa",
+    "viewOnMap": "Zobraziť na mape",
+    "viewOnGoogleMaps": "Zobraziť na Google Maps",
+    "addToFavorites": "Pridať do obľúbených",
+    "removeFromFavorites": "Odstrániť z obľúbených"
   },
   "time": {
     "today": "Dnes",

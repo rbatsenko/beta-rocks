@@ -18,7 +18,8 @@
         "display": "Kako bo v Kotečniku ta konec tedna?",
         "query": "Kako bodo razmere v Kotečniku ta konec tedna?"
       }
-    }
+    },
+    "searchHint": "Išči plezališča neposredno z"
   },
   "chat": {
     "analyzing": "Analiziram razmere...",
@@ -29,6 +30,17 @@
     "clearChat": "Izbriši klepet",
     "clearChatTooltip": "Izbriši trenutni pogovor",
     "clearChatConfirm": "Izbrisati vaš klepet? To bo odstranilo vsa sporočila iz trenutnega pogovora."
+  },
+  "search": {
+    "title": "Išči plezališča",
+    "description": "Iskanje plezališč po imenu ali lokaciji",
+    "placeholder": "Išči plezališča... (npr. 'Osp', 'Kotečnik')",
+    "typeToSearch": "Vnesite za iskanje plezališč...",
+    "searching": "Iskanje...",
+    "noCragsFound": "Plezališča niso bila najdena. Poskusite z drugim iskalnim izrazom.",
+    "heading": "Plezališča",
+    "toSelect": "za izbiro",
+    "toClose": "za zapiranje"
   },
   "conditions": {
     "rating": "Ocena",
@@ -632,6 +644,19 @@
     },
     "observationDate": "Kdaj ste to opazili?",
     "observationDateHelp": "Poročate lahko o razmerah do 7 dni nazaj"
+  },
+  "cragPage": {
+    "askAI": "Vprašaj AI",
+    "currentConditions": "Trenutne razmere",
+    "sectors": "Sektorji",
+    "disclaimer": "Vremenske razmere se lahko hitro spremenijo. Vedno preverite razmere na kraju in uporabite svojo najboljšo presojo.",
+    "askAIAboutCrag": "Vprašaj AI o tej skali",
+    "viewOnSunCalc": "Prikaži čase sonca/lune",
+    "viewSunAngles": "Prikaži položaj sonca in kote sence",
+    "viewOnMap": "Prikaži na zemljevidu",
+    "viewOnGoogleMaps": "Prikaži na Google Maps",
+    "addToFavorites": "Dodaj med priljubljene",
+    "removeFromFavorites": "Odstrani iz priljubljenih"
   },
   "time": {
     "today": "Danes",

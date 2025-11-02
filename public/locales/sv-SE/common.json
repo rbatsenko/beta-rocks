@@ -18,7 +18,8 @@
         "display": "Vilket väder väntar i Häggsta på fredag?",
         "query": "Vilka förhållanden får vi i Häggsta på fredag?"
       }
-    }
+    },
+    "searchHint": "Sök klippor direkt med"
   },
   "chat": {
     "analyzing": "Analyserar förhållanden...",
@@ -29,6 +30,19 @@
     "clearChat": "Rensa chatt",
     "clearChatTooltip": "Rensa den aktuella konversationen",
     "clearChatConfirm": "Rensa din chatt? Detta tar bort alla meddelanden från den aktuella konversationen."
+  },
+  "search": {
+    "title": "Sök klippor",
+    "description": "Sök klätterområden efter namn eller plats",
+    "placeholder": "Sök klippor... (t.ex. 'Bohuslän', 'Kullaberg')",
+    "typeToSearch": "Skriv för att söka klippor...",
+    "searching": "Söker...",
+    "noCragsFound": "Inga klippor hittades. Prova en annan sökterm.",
+    "heading": "Klippor",
+    "nearbyLocations": "Närliggande platser",
+    "nearbyLocation": "Plats",
+    "toSelect": "för att välja",
+    "toClose": "för att stänga"
   },
   "conditions": {
     "rating": "Betyg",
@@ -553,6 +567,19 @@
     },
     "observationDate": "När observerade du detta?",
     "observationDateHelp": "Du kan rapportera förhållanden upp till 7 dagar tillbaka"
+  },
+  "cragPage": {
+    "askAI": "Fråga AI",
+    "currentConditions": "Nuvarande förhållanden",
+    "sectors": "Sektorer",
+    "disclaimer": "Väderförhållandena kan ändras snabbt. Kontrollera alltid förhållandena vid ankomst och använd ditt bästa omdöme.",
+    "askAIAboutCrag": "Fråga AI om denna klippa",
+    "viewOnSunCalc": "Visa sol/måntider",
+    "viewSunAngles": "Visa solposition och skuggvinklar",
+    "viewOnMap": "Visa på karta",
+    "viewOnGoogleMaps": "Visa på Google Maps",
+    "addToFavorites": "Lägg till favoriter",
+    "removeFromFavorites": "Ta bort från favoriter"
   },
   "time": {
     "today": "Idag",

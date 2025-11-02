@@ -5,6 +5,7 @@
   "welcome": {
     "heading": "Få information om enhver klippe",
     "description": "Realtidsforhold, fællesskabsrapporter og ruteinformation for klipper verden over",
+    "searchHint": "Søg efter klipper direkte med",
     "exampleQueries": {
       "query1": {
         "display": "Forhold i Stevns Klint i dag?",
@@ -29,6 +30,19 @@
     "clearChatConfirm": "Vil du rydde din chat? Dette vil fjerne alle beskeder fra den aktuelle samtale.",
     "clearHistory": "Ryd historik",
     "clearHistoryConfirm": "Er du sikker på, at du vil rydde hele chathistorikken? Dette kan ikke fortrydes."
+  },
+  "search": {
+    "title": "Søg klipper",
+    "description": "Søg efter klatreområder efter navn eller placering",
+    "placeholder": "Søg klipper... (f.eks. 'Stevns Klint', 'Bornholm')",
+    "typeToSearch": "Begynd at skrive for at søge efter klipper...",
+    "searching": "Søger...",
+    "noCragsFound": "Ingen klipper fundet. Prøv et andet søgeord.",
+    "heading": "Klipper",
+    "nearbyLocations": "Nærliggende placeringer",
+    "nearbyLocation": "Placering",
+    "toSelect": "for at vælge",
+    "toClose": "for at lukke"
   },
   "conditions": {
     "rating": "Vurdering",
@@ -552,6 +566,19 @@
     },
     "observationDate": "Hvornår observerede du dette?",
     "observationDateHelp": "Du kan rapportere forhold op til 7 dage tilbage"
+  },
+  "cragPage": {
+    "askAI": "Spørg AI",
+    "currentConditions": "Nuværende forhold",
+    "sectors": "Sektorer",
+    "disclaimer": "Vejrforholdene kan ændre sig hurtigt. Kontroller altid forholdene ved ankomst og brug din bedste vurdering.",
+    "askAIAboutCrag": "Spørg AI om denne klippe",
+    "viewOnSunCalc": "Vis sol/måne-tider",
+    "viewSunAngles": "Vis solposition og skyggevinkler",
+    "viewOnMap": "Vis på kort",
+    "viewOnGoogleMaps": "Vis på Google Maps",
+    "addToFavorites": "Tilføj til favoritter",
+    "removeFromFavorites": "Fjern fra favoritter"
   },
   "time": {
     "today": "I dag",

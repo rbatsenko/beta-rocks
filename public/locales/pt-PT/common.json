@@ -18,7 +18,8 @@
         "display": "Condições em Sintra amanhã?",
         "query": "Condições em Sintra amanhã?"
       }
-    }
+    },
+    "searchHint": "Pesquisar setores diretamente com"
   },
   "chat": {
     "analyzing": "A analisar condições...",
@@ -29,6 +30,19 @@
     "clearChatConfirm": "Limpar o seu chat? Isto irá remover todas as mensagens da conversa atual.",
     "clearHistory": "Limpar Histórico",
     "clearHistoryConfirm": "Tem a certeza que quer limpar todo o histórico de chat? Isto não pode ser desfeito."
+  },
+  "search": {
+    "title": "Pesquisar setores",
+    "description": "Pesquisar áreas de escalada por nome ou localização",
+    "placeholder": "Pesquisar setores... (ex. 'Sintra', 'Monsanto')",
+    "typeToSearch": "Digite para pesquisar setores...",
+    "searching": "Procurando...",
+    "noCragsFound": "Nenhum setor encontrado. Tente outro termo de pesquisa.",
+    "heading": "Setores",
+    "nearbyLocations": "Localizações próximas",
+    "nearbyLocation": "Localização",
+    "toSelect": "para selecionar",
+    "toClose": "para fechar"
   },
   "conditions": {
     "rating": "Classificação",
@@ -631,6 +645,19 @@
     },
     "observationDate": "Quando observou isto?",
     "observationDateHelp": "Pode reportar condições até 7 dias atrás"
+  },
+  "cragPage": {
+    "askAI": "Perguntar à IA",
+    "currentConditions": "Condições atuais",
+    "sectors": "Setores",
+    "disclaimer": "As condições meteorológicas podem mudar rapidamente. Verifique sempre as condições à chegada e use o seu melhor julgamento.",
+    "askAIAboutCrag": "Perguntar à IA sobre esta falésia",
+    "viewOnSunCalc": "Ver horários do sol/lua",
+    "viewSunAngles": "Ver posição do sol e ângulos de sombra",
+    "viewOnMap": "Ver no mapa",
+    "viewOnGoogleMaps": "Ver no Google Maps",
+    "addToFavorites": "Adicionar aos favoritos",
+    "removeFromFavorites": "Remover dos favoritos"
   },
   "time": {
     "today": "Hoje",

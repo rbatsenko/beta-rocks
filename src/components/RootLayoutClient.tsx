@@ -9,6 +9,7 @@ import { FavoritesDialog } from "@/components/FavoritesDialog";
 import { StatsDialog } from "@/components/StatsDialog";
 import { SyncExplainerDialog } from "@/components/SyncExplainerDialog";
 import { SearchDialog } from "@/components/SearchDialog";
+import { FeaturesDialog } from "@/components/FeaturesDialog";
 
 export function RootLayoutClient({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -17,6 +18,7 @@ export function RootLayoutClient({ children }: { children: React.ReactNode }) {
   const [statsDialogOpen, setStatsDialogOpen] = useState(false);
   const [syncExplainerDialogOpen, setSyncExplainerDialogOpen] = useState(false);
   const [searchDialogOpen, setSearchDialogOpen] = useState(false);
+  const [featuresDialogOpen, setFeaturesDialogOpen] = useState(false);
 
   // ⌘K keyboard shortcut for search
   useEffect(() => {
@@ -47,6 +49,7 @@ export function RootLayoutClient({ children }: { children: React.ReactNode }) {
               onSettingsClick={() => setSettingsDialogOpen(true)}
               onFavoritesClick={() => setFavoritesDialogOpen(true)}
               onStatsClick={() => setStatsDialogOpen(true)}
+              onAboutClick={() => setFeaturesDialogOpen(true)}
             />
           }
         />
@@ -58,6 +61,7 @@ export function RootLayoutClient({ children }: { children: React.ReactNode }) {
       <SettingsDialog open={settingsDialogOpen} onOpenChange={setSettingsDialogOpen} />
       <FavoritesDialog open={favoritesDialogOpen} onOpenChange={setFavoritesDialogOpen} />
       <StatsDialog open={statsDialogOpen} onOpenChange={setStatsDialogOpen} />
+      <FeaturesDialog open={featuresDialogOpen} onOpenChange={setFeaturesDialogOpen} />
       <SyncExplainerDialog
         open={syncExplainerDialogOpen}
         onOpenChange={setSyncExplainerDialogOpen}

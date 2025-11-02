@@ -29,6 +29,7 @@ import {
   ConversationScrollButton,
 } from "@/components/ai-elements/conversation";
 import { useStickToBottomContext } from "use-stick-to-bottom";
+import { useModifierKey } from "@/hooks/usePlatform";
 
 // Helper component: triggers scroll within StickToBottom context when `signal` changes
 const ScrollToBottomOnSignal = ({ signal }: { signal: number }) => {
@@ -211,6 +212,7 @@ const ChatUI = ({
   t: TFunction;
   language: string;
 }) => {
+  const modifierKey = useModifierKey();
   const router = useRouter();
   const [input, setInput] = useState("");
   const { units } = useUnits();
@@ -290,19 +292,6 @@ const ChatUI = ({
 
   // Get translation functions (memoized)
   const translations = useConditionsTranslations(t);
-
-  // ⌘K keyboard shortcut for search
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault();
-        setSearchDialogOpen(true);
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
 
   // Compute loading state from status (v5 API)
   const isLoading = useMemo(() => status === "submitted" || status === "streaming", [status]);
@@ -469,10 +458,11 @@ const ChatUI = ({
                   </p>
 
                   {/* Search hint */}
-                  <div className="flex items-center gap-2 mb-6 text-sm text-muted-foreground">
+                  <div className="inline-flex items-center gap-2 mb-6 text-sm text-muted-foreground bg-orange-50/50 dark:bg-orange-950/20 border border-orange-200/50 dark:border-orange-800/30 rounded-lg px-3 py-2">
+                    <Info className="h-4 w-4 text-orange-600 dark:text-orange-500 shrink-0" />
                     <span>{t("welcome.searchHint")}</span>
                     <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                      <span className="text-xs">⌘/Ctrl</span>K
+                      <span className="text-xs">{modifierKey === "Cmd" ? "⌘ + " : "Ctrl + "}K</span>
                     </kbd>
                   </div>
 
@@ -879,6 +869,7 @@ const ChatInterface = ({
   initialSessionId: _initialSessionId,
 }: ChatInterfaceProps = {}) => {
   const { t, language } = useClientTranslation("common");
+  const modifierKey = useModifierKey();
   const [featuresDialogOpen, setFeaturesDialogOpen] = useState(false);
   const [privacyDialogOpen, setPrivacyDialogOpen] = useState(false);
   const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
@@ -889,19 +880,6 @@ const ChatInterface = ({
 
   // Check if user has profile (for session management)
   const userProfile = typeof window !== "undefined" ? getUserProfile() : null;
-
-  // ⌘K keyboard shortcut for search
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault();
-        setSearchDialogOpen(true);
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
 
   // React Query hooks for session and messages
   const { data: session, isLoading: isLoadingSession } = useCurrentSession();
