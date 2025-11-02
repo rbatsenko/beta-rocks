@@ -581,9 +581,6 @@
     "observationDate": "When did you observe this?",
     "observationDateHelp": "You can report conditions up to 7 days back",
     "category": "What would you like to report?",
-    "selectMultipleCategories": "You can select multiple categories",
-    "selectAtLeastOneCategory": "Please select at least one category",
-    "additionalDetails": "Provide additional details about what you observed",
     "categories": {
       "conditions": "Conditions",
       "safety": "Safety",

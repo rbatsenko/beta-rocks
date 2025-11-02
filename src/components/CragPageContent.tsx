@@ -182,7 +182,7 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
   // Filter reports by selected category
   const filteredReports = useMemo(() => {
     if (selectedCategory === "all") return reports;
-    return reports.filter((report) => report.categories?.includes(selectedCategory));
+    return reports.filter((report) => report.category === selectedCategory);
   }, [reports, selectedCategory]);
 
   // Format location details
@@ -514,7 +514,7 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
                       "other",
                     ] as ReportCategory[]
                   ).map((category) => {
-                    const count = reports.filter((r) => r.categories?.includes(category)).length;
+                    const count = reports.filter((r) => r.category === category).length;
                     if (count === 0) return null;
                     return (
                       <Button
