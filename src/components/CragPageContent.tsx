@@ -54,7 +54,6 @@ interface CragPageContentProps {
     state: string | null;
     municipality: string | null;
     village: string | null;
-    slug: string | null;
   };
   sectors: any[];
 }
@@ -221,7 +220,6 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
           latitude: crag.lat,
           longitude: crag.lon,
           cragId: crag.id,
-          areaSlug: crag.slug || undefined,
           rockType: crag.rock_type || undefined,
           lastRating: conditions?.rating || "unknown",
           lastFrictionScore: conditions?.frictionScore || 0,
@@ -261,7 +259,6 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
           latitude: crag.lat,
           longitude: crag.lon,
           cragId: crag.id,
-          areaSlug: crag.slug || undefined,
           rockType: crag.rock_type || undefined,
           lastRating: conditions?.rating || "unknown",
           lastFrictionScore: conditions?.frictionScore || 0,

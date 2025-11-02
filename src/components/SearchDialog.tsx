@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { Search, Mountain, Loader2 } from "lucide-react";
+import { Mountain, Loader2 } from "lucide-react";
 import {
   Dialog,
   DialogContent,

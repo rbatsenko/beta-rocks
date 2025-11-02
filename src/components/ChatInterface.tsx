@@ -869,7 +869,6 @@ const ChatInterface = ({
   initialSessionId: _initialSessionId,
 }: ChatInterfaceProps = {}) => {
   const { t, language } = useClientTranslation("common");
-  const modifierKey = useModifierKey();
   const [featuresDialogOpen, setFeaturesDialogOpen] = useState(false);
   const [privacyDialogOpen, setPrivacyDialogOpen] = useState(false);
   const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
