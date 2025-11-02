@@ -50,7 +50,7 @@ export function HeaderActions({
         variant="ghost"
         size="icon"
         onClick={onFavoritesClick}
-        className="cursor-pointer hover:bg-muted/50 hidden md:flex"
+        className="cursor-pointer hover:bg-muted/50"
         title={t("profile.favorites")}
       >
         <Star className="h-[1.2rem] w-[1.2rem]" />
