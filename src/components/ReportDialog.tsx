@@ -64,7 +64,7 @@ export function ReportDialog({
   const { t, i18n } = useClientTranslation("common");
   const dateLocale = getDateFnsLocale(i18n.language);
   const dateFormat = getLocalizedDateFormat(i18n.language);
-  const [category, setCategory] = useState<ReportCategory>("conditions");
+  const [categories, setCategories] = useState<ReportCategory[]>(["conditions"]);
   const [dryRating, setDryRating] = useState([3]);
   const [windRating, setWindRating] = useState([3]);
   const [crowdsRating, setCrowdsRating] = useState([3]);
@@ -82,7 +82,7 @@ export function ReportDialog({
       const profile = getUserProfile();
       setDisplayName(profile?.displayName || null);
       // Reset form
-      setCategory("conditions");
+      setCategories(["conditions"]);
       setDryRating([3]);
       setWindRating([3]);
       setCrowdsRating([3]);
@@ -90,6 +90,17 @@ export function ReportDialog({
       setObservedAt(new Date());
     }
   }, [open]);
+
+  // Helper to toggle category selection
+  const toggleCategory = (cat: ReportCategory) => {
+    if (categories.includes(cat)) {
+      // Don't allow deselecting if it's the only category
+      if (categories.length === 1) return;
+      setCategories(categories.filter(c => c !== cat));
+    } else {
+      setCategories([...categories, cat]);
+    }
+  };
 
   // Helper to get category icon
   const getCategoryIcon = (cat: ReportCategory) => {
@@ -125,7 +136,12 @@ export function ReportDialog({
     }
 
     // Validate required fields
-    if (category !== "conditions" && !text.trim()) {
+    if (categories.length === 0) {
+      alert(t("reports.selectAtLeastOneCategory"));
+      return;
+    }
+
+    if (!categories.includes("conditions") && !text.trim()) {
       alert(t("reports.detailsRequired"));
       return;
     }
@@ -146,10 +162,10 @@ export function ReportDialog({
       await createReport({
         crag_id: cragId,
         author_id: dbProfile.id,
-        category: category,
-        rating_dry: category === "conditions" ? dryRating[0] : null,
-        rating_wind: category === "conditions" ? windRating[0] : null,
-        rating_crowds: category === "conditions" ? crowdsRating[0] : null,
+        categories: categories,
+        rating_dry: categories.includes("conditions") ? dryRating[0] : null,
+        rating_wind: categories.includes("conditions") ? windRating[0] : null,
+        rating_crowds: categories.includes("conditions") ? crowdsRating[0] : null,
         text: text.trim() || null,
         observed_at: observedAt.toISOString(),
       });
@@ -300,27 +316,33 @@ export function ReportDialog({
             {/* Category Selection */}
             <div>
               <Label className="block mb-2">{t("reports.category")}</Label>
+              <p className="text-xs text-muted-foreground mb-2">
+                {t("reports.selectMultipleCategories")}
+              </p>
               <div className="grid grid-cols-2 gap-2.5">
-                {categories.map((cat) => (
+                {(["conditions", "safety", "access", "climbing_info", "facilities", "other"] as ReportCategory[]).map((cat) => (
                   <button
                     key={cat}
                     type="button"
-                    onClick={() => setCategory(cat)}
+                    onClick={() => toggleCategory(cat)}
                     className={`flex items-center gap-2 p-3 rounded-lg border-2 transition-all ${
-                      category === cat
+                      categories.includes(cat)
                         ? "border-orange-500 bg-orange-500/10 text-orange-600"
                         : "border-border hover:border-orange-300 hover:bg-muted/50"
                     }`}
                   >
                     {getCategoryIcon(cat)}
                     <span className="text-sm font-medium">{t(`reports.categories.${cat}`)}</span>
+                    {categories.includes(cat) && (
+                      <span className="ml-auto text-orange-600">✓</span>
+                    )}
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Condition Ratings - Only for "conditions" category */}
-            {category === "conditions" && (
+            {/* Condition Ratings - Only when "conditions" category is selected */}
+            {categories.includes("conditions") && (
               <div className="my-6 space-y-1">
                 {/* Dryness Rating */}
                 <div>
@@ -387,17 +409,17 @@ export function ReportDialog({
             {/* Additional Comments */}
             <div>
               <Label htmlFor="report-text" className="block mb-2">
-                {category === "conditions" ? t("reports.additionalComments") : t("reports.details")}
-                {category !== "conditions" && <span className="text-destructive ml-1">*</span>}
+                {categories.includes("conditions") && categories.length === 1 ? t("reports.additionalComments") : t("reports.details")}
+                {!categories.includes("conditions") && <span className="text-destructive ml-1">*</span>}
               </Label>
               <Textarea
                 id="report-text"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                placeholder={t(`reports.categoryDescriptions.${category}`)}
-                rows={category === "conditions" ? 4 : 6}
+                placeholder={t("reports.additionalDetails")}
+                rows={categories.includes("conditions") && categories.length === 1 ? 4 : 6}
                 maxLength={500}
-                required={category !== "conditions"}
+                required={!categories.includes("conditions")}
               />
               <p className="text-xs text-muted-foreground text-right">{text.length}/500</p>
             </div>

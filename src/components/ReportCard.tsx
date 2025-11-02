@@ -30,7 +30,7 @@ type ReportCategory = "conditions" | "safety" | "access" | "climbing_info" | "fa
 
 interface Report {
   id: string;
-  category?: ReportCategory;
+  categories?: ReportCategory[];
   text: string | null;
   rating_dry: number | null;
   rating_wind: number | null;
@@ -148,7 +148,7 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
     }
   };
 
-  const category = report.category || "conditions";
+  const categories = report.categories || ["conditions"];
 
   // Calculate staleness based on category-specific relevance windows
   const getReportStaleness = () => {
@@ -165,7 +165,8 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
       other: 14, // 14 days fresh (moderate default)
     };
 
-    const freshWindow = categoryRelevance[category];
+    // Use the shortest freshness window among all categories
+    const freshWindow = Math.min(...categories.map(cat => categoryRelevance[cat]));
 
     if (ageInDays <= freshWindow) return { status: "fresh", ageInDays };
     if (ageInDays <= 30) return { status: "older", ageInDays };
@@ -206,13 +207,15 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
             <span className="text-sm font-medium">
               {report.author?.display_name || t("profile.anonymous")}
             </span>
-            {/* Category Badge */}
-            <Badge variant="outline" className={`gap-1.5 ${getCategoryColor(category)}`}>
-              {getCategoryIcon(category)}
-              <span className="text-xs font-medium">{t(`reports.categories.${category}`)}</span>
-            </Badge>
+            {/* Category Badges */}
+            {categories.map(cat => (
+              <Badge key={cat} variant="outline" className={`gap-1.5 ${getCategoryColor(cat)}`}>
+                {getCategoryIcon(cat)}
+                <span className="text-xs font-medium">{t(`reports.categories.${cat}`)}</span>
+              </Badge>
+            ))}
             {/* Staleness Badge */}
-            {staleness.status === "older" && category === "conditions" && (
+            {staleness.status === "older" && categories.includes("conditions") && (
               <Badge
                 variant="outline"
                 className="gap-1.5 bg-red-500/10 text-red-700 dark:text-red-300 border-red-200 dark:border-red-800"
@@ -221,9 +224,9 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
               </Badge>
             )}
             {staleness.status === "older" &&
-              category !== "conditions" &&
-              category !== "climbing_info" &&
-              category !== "facilities" && (
+              !categories.includes("conditions") &&
+              !categories.includes("climbing_info") &&
+              !categories.includes("facilities") && (
                 <Badge
                   variant="outline"
                   className="gap-1.5 bg-yellow-500/10 text-yellow-700 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800"
@@ -250,8 +253,8 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
           </div>
         </div>
 
-        {/* Ratings - Only show for conditions reports */}
-        {category === "conditions" &&
+        {/* Ratings - Only show for reports with conditions category */}
+        {categories.includes("conditions") &&
           (report.rating_dry !== null ||
             report.rating_wind !== null ||
             report.rating_crowds !== null) && (
