@@ -154,6 +154,16 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
     return hour >= 19 || hour < 7;
   };
 
+  // Helper to extract local time from ISO string without timezone conversion
+  const extractLocalTime = (isoString: string): string => {
+    // Extract time portion from ISO string (format: "2024-11-03T06:45:00+01:00" or "2024-11-03T06:45:00")
+    const match = isoString.match(/T(\d{2}):(\d{2})/);
+    if (match) {
+      return `${match[1]}:${match[2]}`;
+    }
+    return isoString;
+  };
+
   // groupHourlyByDay wrapper to pass required parameters
   const groupedHourlyData = useCallback(() => {
     return groupHourlyByDay(data.hourlyConditions, t, locale);
@@ -334,18 +344,10 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                             <span>{t("timeContext.sunrise")}</span>
                           </div>
                           <p className="text-lg font-semibold">
-                            {data.timeContext?.sunriseISO
-                              ? new Date(data.timeContext.sunriseISO).toLocaleTimeString(locale, {
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                  hour12: false,
-                                })
-                              : data.astro &&
-                                new Date(data.astro.sunrise).toLocaleTimeString(locale, {
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                  hour12: false,
-                                })}
+                            {data.astro?.sunrise
+                              ? extractLocalTime(data.astro.sunrise)
+                              : data.timeContext?.sunriseISO &&
+                                extractLocalTime(data.timeContext.sunriseISO)}
                           </p>
                         </div>
                         <div className="bg-muted/50 rounded-lg p-3">
@@ -354,18 +356,10 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                             <span>{t("timeContext.sunset")}</span>
                           </div>
                           <p className="text-lg font-semibold">
-                            {data.timeContext?.sunsetISO
-                              ? new Date(data.timeContext.sunsetISO).toLocaleTimeString(locale, {
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                  hour12: false,
-                                })
-                              : data.astro &&
-                                new Date(data.astro.sunset).toLocaleTimeString(locale, {
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                  hour12: false,
-                                })}
+                            {data.astro?.sunset
+                              ? extractLocalTime(data.astro.sunset)
+                              : data.timeContext?.sunsetISO &&
+                                extractLocalTime(data.timeContext.sunsetISO)}
                           </p>
                         </div>
                       </>
@@ -1181,23 +1175,11 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                       <div className="mt-3 flex items-center gap-3 text-xs text-muted-foreground">
                         <div className="flex items-center gap-1">
                           <Sunrise className="h-3 w-3 text-orange-500" />
-                          <span>
-                            {new Date(day.sunrise).toLocaleTimeString(locale, {
-                              hour: "2-digit",
-                              minute: "2-digit",
-                              hour12: false,
-                            })}
-                          </span>
+                          <span>{extractLocalTime(day.sunrise)}</span>
                         </div>
                         <div className="flex items-center gap-1">
                           <Sunset className="h-3 w-3 text-orange-600" />
-                          <span>
-                            {new Date(day.sunset).toLocaleTimeString(locale, {
-                              hour: "2-digit",
-                              minute: "2-digit",
-                              hour12: false,
-                            })}
-                          </span>
+                          <span>{extractLocalTime(day.sunset)}</span>
                         </div>
                       </div>
                     </div>
