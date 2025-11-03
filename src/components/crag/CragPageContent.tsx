@@ -16,6 +16,12 @@ import {
   Home,
   MessageSquare,
   Loader2,
+  ThermometerSun,
+  Droplets,
+  Wind,
+  CloudRain,
+  Sunrise,
+  Sunset,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -39,6 +45,17 @@ import { getSunCalcUrl, getGoogleMapsUrl, getOpenStreetMapEmbedUrl } from "@/lib
 import { getCountryFlag } from "@/lib/utils/country-flag";
 import { fetchReportsByCrag } from "@/lib/db/queries";
 import { getUserProfile, type UserProfile } from "@/lib/auth/sync-key";
+import { getWeatherEmoji, getWeatherDescription } from "@/lib/utils/weather-emojis";
+import { getLocaleFromLanguage } from "@/lib/utils/locale";
+import { useUnits } from "@/hooks/useUnits";
+import {
+  convertTemperature,
+  convertWindSpeed,
+  convertPrecipitation,
+  formatTemperature,
+  formatWindSpeed,
+  formatPrecipitation,
+} from "@/lib/units/conversions";
 
 type ReportCategory = "conditions" | "safety" | "access" | "climbing_info" | "facilities" | "other";
 
@@ -135,10 +152,18 @@ async function fetchReportsByCragId(cragId: string) {
   return fetchReportsByCrag(cragId, 20);
 }
 
+// Helper to detect if it's night time (7pm-7am)
+function isNightTime(date: Date): boolean {
+  const hour = date.getHours();
+  return hour >= 19 || hour < 7;
+}
+
 export function CragPageContent({ crag, sectors }: CragPageContentProps) {
-  const { t } = useClientTranslation("common");
-  const { translateReason, translateWarning } = useConditionsTranslations(t);
+  const { t, language } = useClientTranslation("common");
+  const locale = getLocaleFromLanguage(language);
+  const { translateReason, translateWarning, translateWeather } = useConditionsTranslations(t);
   const router = useRouter();
+  const { units } = useUnits();
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<"all" | ReportCategory>("all");
   const [showProfileModal, setShowProfileModal] = useState(false);
@@ -451,15 +476,141 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
                     <span className="text-2xl font-bold">{conditions.frictionScore}/5</span>
                   </div>
                 </div>
+
+                {/* Weather emoji and description */}
+                {conditions.current && (
+                  <div className="flex items-center gap-4 bg-muted/30 rounded-lg p-4 border border-border mb-4">
+                    <div className="text-6xl">
+                      {getWeatherEmoji(conditions.current.weatherCode, isNightTime(new Date()))}
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-lg font-semibold">
+                        {translateWeather(getWeatherDescription(conditions.current.weatherCode))}
+                      </p>
+                      <p className="text-sm text-muted-foreground">{t("dialog.currentWeather")}</p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Weather metrics grid */}
+                {conditions.current && (
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                    <div className="bg-muted/50 rounded-lg p-3">
+                      <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
+                        <ThermometerSun className="h-3 w-3" />
+                        <span>{t("dialog.temperature")}</span>
+                      </div>
+                      <p className="text-lg font-semibold">
+                        {formatTemperature(
+                          convertTemperature(
+                            conditions.current.temperature_c,
+                            "celsius",
+                            units.temperature
+                          ),
+                          units.temperature,
+                          0
+                        )}
+                      </p>
+                    </div>
+                    <div className="bg-muted/50 rounded-lg p-3">
+                      <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
+                        <Droplets className="h-3 w-3" />
+                        <span>{t("dialog.humidity")}</span>
+                      </div>
+                      <p className="text-lg font-semibold">{conditions.current.humidity}%</p>
+                    </div>
+                    <div className="bg-muted/50 rounded-lg p-3">
+                      <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
+                        <Wind className="h-3 w-3" />
+                        <span>{t("dialog.windSpeed")}</span>
+                      </div>
+                      <p className="text-lg font-semibold">
+                        {formatWindSpeed(
+                          convertWindSpeed(conditions.current.windSpeed_kph, "kmh", units.windSpeed),
+                          units.windSpeed,
+                          0
+                        )}
+                      </p>
+                    </div>
+                    <div className="bg-muted/50 rounded-lg p-3">
+                      <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
+                        <CloudRain className="h-3 w-3" />
+                        <span>{t("dialog.precipitation")}</span>
+                      </div>
+                      <p className="text-lg font-semibold">
+                        {formatPrecipitation(
+                          convertPrecipitation(
+                            conditions.current.precipitation_mm,
+                            "mm",
+                            units.precipitation
+                          ),
+                          units.precipitation,
+                          1
+                        )}
+                      </p>
+                    </div>
+                    {(conditions.timeContext || conditions.astro) && (
+                      <>
+                        <div className="bg-muted/50 rounded-lg p-3">
+                          <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
+                            <Sunrise className="h-3 w-3 text-orange-500" />
+                            <span>{t("timeContext.sunrise")}</span>
+                          </div>
+                          <p className="text-lg font-semibold">
+                            {conditions.timeContext?.sunriseISO
+                              ? new Date(conditions.timeContext.sunriseISO).toLocaleTimeString(
+                                  locale,
+                                  {
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                    hour12: false,
+                                  }
+                                )
+                              : conditions.astro &&
+                                new Date(conditions.astro.sunrise).toLocaleTimeString(locale, {
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                                  hour12: false,
+                                })}
+                          </p>
+                        </div>
+                        <div className="bg-muted/50 rounded-lg p-3">
+                          <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
+                            <Sunset className="h-3 w-3 text-orange-600" />
+                            <span>{t("timeContext.sunset")}</span>
+                          </div>
+                          <p className="text-lg font-semibold">
+                            {conditions.timeContext?.sunsetISO
+                              ? new Date(conditions.timeContext.sunsetISO).toLocaleTimeString(
+                                  locale,
+                                  {
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                    hour12: false,
+                                  }
+                                )
+                              : conditions.astro &&
+                                new Date(conditions.astro.sunset).toLocaleTimeString(locale, {
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                                  hour12: false,
+                                })}
+                          </p>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                )}
+
                 {conditions.reasons && conditions.reasons.length > 0 && (
-                  <ul className="text-sm space-y-1 text-muted-foreground">
+                  <ul className="text-sm space-y-1 text-muted-foreground mb-3">
                     {conditions.reasons.map((reason, i) => (
                       <li key={i}>• {translateReason(reason)}</li>
                     ))}
                   </ul>
                 )}
                 {conditions.warnings && conditions.warnings.length > 0 && (
-                  <div className="space-y-1 mt-3">
+                  <div className="space-y-1">
                     {conditions.warnings.map((warning, i) => (
                       <p key={i} className="text-sm text-destructive">
                         ⚠️ {translateWarning(warning)}
