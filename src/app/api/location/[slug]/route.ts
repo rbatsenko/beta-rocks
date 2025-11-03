@@ -56,6 +56,7 @@ export async function GET(
         humidity: weather.current.humidity,
         wind_kph: weather.current.windSpeed,
         precip_mm: weather.current.precipitation,
+        weatherCode: weather.current.weatherCode,
       },
       hourly: weather.hourly.map((hour) => ({
         time: hour.time,
@@ -86,6 +87,13 @@ export async function GET(
       ...rawConditions,
       frictionScore: rawConditions.frictionRating,
       dailyForecast: weather.daily,
+      current: {
+        temperature_c: weather.current.temperature,
+        humidity: weather.current.humidity,
+        windSpeed_kph: weather.current.windSpeed,
+        precipitation_mm: weather.current.precipitation,
+        weatherCode: weather.current.weatherCode,
+      },
     };
 
     return NextResponse.json({
