@@ -347,7 +347,9 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
                   size="sm"
                   onClick={handleToggleFavorite}
                   disabled={addFavorite.isPending || removeFavorite.isPending}
-                  title={isFavorited ? t("cragPage.removeFromFavorites") : t("cragPage.addToFavorites")}
+                  title={
+                    isFavorited ? t("cragPage.removeFromFavorites") : t("cragPage.addToFavorites")
+                  }
                   className={isFavorited ? "bg-orange-500 hover:bg-orange-600" : ""}
                 >
                   <Heart className={`h-4 w-4 ${isFavorited ? "fill-current" : ""}`} />

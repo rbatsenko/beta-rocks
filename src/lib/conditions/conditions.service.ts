@@ -731,4 +731,3 @@ export function findOptimalWindowsEnhanced(hourlyConditions: HourlyCondition[]):
 
   return windows;
 }
-

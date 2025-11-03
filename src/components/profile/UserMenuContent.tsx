@@ -1,10 +1,7 @@
 "use client";
 
 import { Star, BarChart3, Info, RotateCcw, Settings } from "lucide-react";
-import {
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-} from "@/components/ui/dropdown-menu";
+import { DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { LanguageSelector } from "@/components/common/LanguageSelector";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
