@@ -23,8 +23,8 @@ import { hashSyncKeyAsync, type UserProfile } from "@/lib/auth/sync-key";
 import { createConfirmation, hasUserConfirmedReport } from "@/lib/db/queries";
 import { getUserProfile } from "@/lib/auth/sync-key";
 import { getDateFnsLocale } from "@/lib/i18n/date-locales";
-import { ProfileCreationModal } from "@/components/ProfileCreationModal";
-import { ProfileCreatedDialog } from "@/components/ProfileCreatedDialog";
+import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal";
+import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog";
 
 type ReportCategory = "conditions" | "safety" | "access" | "climbing_info" | "facilities" | "other";
 

@@ -21,9 +21,9 @@ import {
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useRouter } from "next/navigation";
 import { generateUniqueSlug } from "@/lib/utils/slug";
-import { ConfirmDialog } from "@/components/ConfirmDialog";
-import { ProfileCreationModal } from "@/components/ProfileCreationModal";
-import { ProfileCreatedDialog } from "@/components/ProfileCreatedDialog";
+import { ConfirmDialog } from "@/components/dialogs/ConfirmDialog";
+import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal";
+import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog";
 import { getUserProfile, type UserProfile } from "@/lib/auth/sync-key";
 
 interface FavoritesDialogProps {

@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import ChatInterface from "@/components/ChatInterface";
+import ChatInterface from "@/components/chat/ChatInterface";
 
 export default async function Home() {
   // Read user profile and session from cookies (SSR)

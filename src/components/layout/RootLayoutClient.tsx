@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { Header } from "@/components/Header";
-import { HeaderActions } from "@/components/HeaderActions";
-import { SettingsDialog } from "@/components/SettingsDialog";
-import { FavoritesDialog } from "@/components/FavoritesDialog";
-import { StatsDialog } from "@/components/StatsDialog";
-import { SyncExplainerDialog } from "@/components/SyncExplainerDialog";
-import { SearchDialog } from "@/components/SearchDialog";
-import { FeaturesDialog } from "@/components/FeaturesDialog";
+import { Header } from "@/components/layout/Header";
+import { HeaderActions } from "@/components/layout/HeaderActions";
+import { SettingsDialog } from "@/components/profile/SettingsDialog";
+import { FavoritesDialog } from "@/components/profile/FavoritesDialog";
+import { StatsDialog } from "@/components/profile/StatsDialog";
+import { SyncExplainerDialog } from "@/components/profile/SyncExplainerDialog";
+import { SearchDialog } from "@/components/dialogs/SearchDialog";
+import { FeaturesDialog } from "@/components/dialogs/FeaturesDialog";
 
 export function RootLayoutClient({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();

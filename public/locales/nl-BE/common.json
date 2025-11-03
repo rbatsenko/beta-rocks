@@ -203,7 +203,9 @@
   "ui": {
     "toggleTheme": "Thema in-/uitschakelen",
     "selectLanguage": "Selecteer taal",
-    "aboutApp": "Over app"
+    "aboutApp": "Over app",
+    "language": "Taal",
+    "theme": "Thema"
   },
   "dialog": {
     "close": "Sluiten",

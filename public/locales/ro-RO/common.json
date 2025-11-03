@@ -203,7 +203,9 @@
   "ui": {
     "toggleTheme": "Comută tema",
     "selectLanguage": "Alege limba",
-    "aboutApp": "Despre aplicație"
+    "aboutApp": "Despre aplicație",
+    "language": "Limbă",
+    "theme": "Temă"
   },
   "dialog": {
     "close": "Închide",

@@ -171,7 +171,9 @@
   "ui": {
     "toggleTheme": "Canviar tema",
     "selectLanguage": "Selecciona idioma",
-    "aboutApp": "Sobre l'aplicació"
+    "aboutApp": "Sobre l'aplicació",
+    "language": "Idioma",
+    "theme": "Tema"
   },
   "dialog": {
     "close": "Tancar",

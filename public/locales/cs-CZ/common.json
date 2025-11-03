@@ -203,7 +203,9 @@
   "ui": {
     "toggleTheme": "Přepnout motiv",
     "selectLanguage": "Vybrat jazyk",
-    "aboutApp": "O aplikaci"
+    "aboutApp": "O aplikaci",
+    "language": "Jazyk",
+    "theme": "Motiv"
   },
   "dialog": {
     "close": "Zavřít",

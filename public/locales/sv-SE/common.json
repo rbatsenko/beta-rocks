@@ -204,7 +204,9 @@
   "ui": {
     "toggleTheme": "Byt tema",
     "selectLanguage": "Välj språk",
-    "aboutApp": "Om appen"
+    "aboutApp": "Om appen",
+    "language": "Språk",
+    "theme": "Tema"
   },
   "dialog": {
     "close": "Stäng",

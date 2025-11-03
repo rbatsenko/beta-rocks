@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Info, Star, MessageSquare, ArrowRight } from "lucide-react";
 import { getWeatherEmoji, getWeatherDescription } from "@/lib/utils/weather-emojis";
 import { logRender } from "@/lib/debug/render-log";
-import { MapPopover } from "@/components/MapPopover";
+import { MapPopover } from "@/components/crag/MapPopover";
 import { getCountryFlag } from "@/lib/utils/country-flag";
 import {
   useFavorites,
@@ -12,9 +12,9 @@ import {
   useAddFavorite,
   useRemoveFavorite,
 } from "@/hooks/queries/useFavoritesQueries";
-import { ReportDialog } from "@/components/ReportDialog";
-import { ProfileCreationModal } from "@/components/ProfileCreationModal";
-import { ProfileCreatedDialog } from "@/components/ProfileCreatedDialog";
+import { ReportDialog } from "@/components/reports/ReportDialog";
+import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal";
+import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog";
 import { generateUniqueSlug } from "@/lib/utils/slug";
 import { useUnits } from "@/hooks/useUnits";
 import { convertTemperature } from "@/lib/units/conversions";

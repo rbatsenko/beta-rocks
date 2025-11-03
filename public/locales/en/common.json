@@ -212,7 +212,9 @@
   "ui": {
     "toggleTheme": "Toggle theme",
     "selectLanguage": "Select language",
-    "aboutApp": "About app"
+    "aboutApp": "About app",
+    "language": "Language",
+    "theme": "Theme"
   },
   "tabs": {
     "overview": "Overview",

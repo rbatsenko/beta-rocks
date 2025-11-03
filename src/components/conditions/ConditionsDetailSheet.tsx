@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { ThermometerSun, Sun, ArrowRight } from "lucide-react";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { ConditionsDetailContent } from "./ConditionsDetailContent";
-import { MapPopover } from "./MapPopover";
+import { MapPopover } from "@/components/crag/MapPopover";
 import { getCountryFlag } from "@/lib/utils/country-flag";
 import { getSunCalcUrl } from "@/lib/utils/urls";
 import { generateUniqueSlug } from "@/lib/utils/slug";

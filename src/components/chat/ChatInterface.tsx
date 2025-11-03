@@ -42,20 +42,20 @@ const ScrollToBottomOnSignal = ({ signal }: { signal: number }) => {
   }, [signal, scrollToBottom]);
   return null;
 };
-import { Header } from "@/components/Header";
-import { HeaderActions } from "@/components/HeaderActions";
-import { ConditionsDetailSheet } from "@/components/ConditionsDetailSheet";
-import { WeatherConditionCard } from "@/components/WeatherConditionCard";
-import { DisambiguationOptions } from "@/components/DisambiguationOptions";
-import { FeaturesDialog } from "@/components/FeaturesDialog";
-import { PrivacyDialog } from "@/components/PrivacyDialog";
-import { SettingsDialog } from "@/components/SettingsDialog";
-import { FavoritesDialog } from "@/components/FavoritesDialog";
-import { SearchDialog } from "@/components/SearchDialog";
+import { Header } from "@/components/layout/Header";
+import { HeaderActions } from "@/components/layout/HeaderActions";
+import { ConditionsDetailSheet } from "@/components/conditions/ConditionsDetailSheet";
+import { WeatherConditionCard } from "@/components/conditions/WeatherConditionCard";
+import { DisambiguationOptions } from "@/components/chat/DisambiguationOptions";
+import { FeaturesDialog } from "@/components/dialogs/FeaturesDialog";
+import { PrivacyDialog } from "@/components/dialogs/PrivacyDialog";
+import { SettingsDialog } from "@/components/profile/SettingsDialog";
+import { FavoritesDialog } from "@/components/profile/FavoritesDialog";
+import { SearchDialog } from "@/components/dialogs/SearchDialog";
 import { logRender } from "@/lib/debug/render-log";
-import { ConfirmDialog } from "@/components/ConfirmDialog";
-import { SyncExplainerDialog } from "@/components/SyncExplainerDialog";
-import { StatsDialog } from "@/components/StatsDialog";
+import { ConfirmDialog } from "@/components/dialogs/ConfirmDialog";
+import { SyncExplainerDialog } from "@/components/profile/SyncExplainerDialog";
+import { StatsDialog } from "@/components/profile/StatsDialog";
 
 interface ConditionsData {
   location: string;

@@ -3,9 +3,9 @@
 import { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Search, Star } from "lucide-react";
-import { LanguageSelector } from "@/components/LanguageSelector";
-import { ThemeToggle } from "@/components/ThemeToggle";
-import { UserMenu } from "@/components/UserMenu";
+import { LanguageSelector } from "@/components/common/LanguageSelector";
+import { ThemeToggle } from "@/components/common/ThemeToggle";
+import { UserMenu } from "@/components/profile/UserMenu";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 
 interface HeaderActionsProps {
@@ -56,11 +56,14 @@ export function HeaderActions({
         <Star className="h-[1.2rem] w-[1.2rem]" />
       </Button>
       {extraActions}
-      <LanguageSelector />
-      <ThemeToggle />
+      <div className="hidden md:flex items-center gap-2">
+        <LanguageSelector />
+        <ThemeToggle />
+      </div>
       <UserMenu
         onSettingsClick={onSettingsClick}
         onStatsClick={onStatsClick}
+        onFavoritesClick={onFavoritesClick}
         onAboutClick={onAboutClick}
         onClearChatClick={onClearChatClick}
         isClearChatDisabled={isClearChatDisabled}

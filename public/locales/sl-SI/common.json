@@ -204,7 +204,9 @@
   "ui": {
     "toggleTheme": "Zamenjaj temo",
     "selectLanguage": "Izberi jezik",
-    "aboutApp": "O aplikaciji"
+    "aboutApp": "O aplikaciji",
+    "language": "Jezik",
+    "theme": "Tema"
   },
   "dialog": {
     "close": "Zapri",

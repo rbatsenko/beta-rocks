@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { I18nProvider } from "@/components/providers/I18nProvider";
 import { QueryProvider } from "@/components/providers/QueryProvider";
-import { RootLayoutClient } from "@/components/RootLayoutClient";
+import { RootLayoutClient } from "@/components/layout/RootLayoutClient";
 import { Toaster } from "@/components/ui/toaster";
 import "@/index.css";
 

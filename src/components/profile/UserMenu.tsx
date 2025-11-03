@@ -1,12 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { User, Settings, BarChart3, Info, RotateCcw } from "lucide-react";
+import { User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -14,13 +13,15 @@ import {
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useUserProfile } from "@/hooks/useUserProfile";
-import { ProfileCreationModal } from "@/components/ProfileCreationModal";
-import { ProfileCreatedDialog } from "@/components/ProfileCreatedDialog";
+import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal";
+import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog";
+import { UserMenuContent } from "@/components/profile/UserMenuContent";
 import type { UserProfile as UserProfileType } from "@/lib/auth/sync-key";
 
 interface UserMenuProps {
   onSettingsClick: () => void;
   onStatsClick: () => void;
+  onFavoritesClick: () => void;
   onAboutClick?: () => void;
   onClearChatClick?: () => void;
   isClearChatDisabled?: boolean;
@@ -29,6 +30,7 @@ interface UserMenuProps {
 export function UserMenu({
   onSettingsClick,
   onStatsClick,
+  onFavoritesClick,
   onAboutClick,
   onClearChatClick,
   isClearChatDisabled,
@@ -74,21 +76,35 @@ export function UserMenu({
     }, 2000);
   };
 
-  // No profile - show button to create profile
+  // No profile - show menu with basic options
   if (!userProfile && !isLoading) {
     return (
       <>
-        <Button
-          variant="ghost"
-          className="rounded-full h-10 w-10 p-0"
-          onClick={() => setShowProfileModal(true)}
-        >
-          <Avatar className="h-10 w-10">
-            <AvatarFallback className="bg-muted">
-              <User className="h-5 w-5 text-muted-foreground" />
-            </AvatarFallback>
-          </Avatar>
-        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="rounded-full h-10 w-10 p-0">
+              <Avatar className="h-10 w-10">
+                <AvatarFallback className="bg-muted">
+                  <User className="h-5 w-5 text-muted-foreground" />
+                </AvatarFallback>
+              </Avatar>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-56">
+            <DropdownMenuLabel>
+              <p className="text-sm font-medium leading-none">{t("profile.anonymous")}</p>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <UserMenuContent
+              onFavoritesClick={onFavoritesClick}
+              onStatsClick={onStatsClick}
+              onSettingsClick={onSettingsClick}
+              onAboutClick={onAboutClick}
+              onClearChatClick={onClearChatClick}
+              isClearChatDisabled={isClearChatDisabled}
+            />
+          </DropdownMenuContent>
+        </DropdownMenu>
 
         <ProfileCreationModal
           open={showProfileModal}
@@ -138,31 +154,14 @@ export function UserMenu({
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={onStatsClick} className="cursor-pointer">
-          <BarChart3 className="mr-2 h-4 w-4" />
-          <span>{t("profile.stats")}</span>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        {onAboutClick && (
-          <DropdownMenuItem onClick={onAboutClick} className="cursor-pointer md:hidden">
-            <Info className="mr-2 h-4 w-4" />
-            <span>{t("ui.aboutApp")}</span>
-          </DropdownMenuItem>
-        )}
-        {onClearChatClick && (
-          <DropdownMenuItem
-            onClick={onClearChatClick}
-            className="cursor-pointer md:hidden"
-            disabled={isClearChatDisabled}
-          >
-            <RotateCcw className="mr-2 h-4 w-4" />
-            <span>{t("chat.clearChat")}</span>
-          </DropdownMenuItem>
-        )}
-        <DropdownMenuItem onClick={onSettingsClick} className="cursor-pointer">
-          <Settings className="mr-2 h-4 w-4" />
-          <span>{t("profile.settings")}</span>
-        </DropdownMenuItem>
+        <UserMenuContent
+          onFavoritesClick={onFavoritesClick}
+          onStatsClick={onStatsClick}
+          onSettingsClick={onSettingsClick}
+          onAboutClick={onAboutClick}
+          onClearChatClick={onClearChatClick}
+          isClearChatDisabled={isClearChatDisabled}
+        />
       </DropdownMenuContent>
     </DropdownMenu>
   );

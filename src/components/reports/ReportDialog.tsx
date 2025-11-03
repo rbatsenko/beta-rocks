@@ -32,8 +32,8 @@ import { fetchOrCreateUserProfile } from "@/lib/db/queries";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { getDateFnsLocale, getLocalizedDateFormat } from "@/lib/i18n/date-locales";
-import { ProfileCreationModal } from "@/components/ProfileCreationModal";
-import { ProfileCreatedDialog } from "@/components/ProfileCreatedDialog";
+import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal";
+import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog";
 
 type ReportCategory = "conditions" | "safety" | "access" | "climbing_info" | "facilities" | "other";
 

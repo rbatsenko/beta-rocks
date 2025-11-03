@@ -203,7 +203,9 @@
   "ui": {
     "toggleTheme": "Prebaci temu",
     "selectLanguage": "Odaberi jezik",
-    "aboutApp": "O aplikaciji"
+    "aboutApp": "O aplikaciji",
+    "language": "Jezik",
+    "theme": "Tema"
   },
   "dialog": {
     "close": "Zatvori",

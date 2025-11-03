@@ -203,7 +203,9 @@
   "ui": {
     "toggleTheme": "Theme wechseln",
     "selectLanguage": "Sprache wählen",
-    "aboutApp": "Über die App"
+    "aboutApp": "Über die App",
+    "language": "Sprache",
+    "theme": "Theme"
   },
   "tabs": {
     "overview": "Übersicht",

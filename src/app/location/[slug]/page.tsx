@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { CragPageContent } from "@/components/CragPageContent";
+import { CragPageContent } from "@/components/crag/CragPageContent";
 import { fetchCragBySlug, fetchSectorsByCrag, findCragByCoordinates } from "@/lib/db/queries";
 import { parseCoordinatesFromSlug } from "@/lib/utils/slug";
 

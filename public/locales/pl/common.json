@@ -205,7 +205,9 @@
   "ui": {
     "toggleTheme": "Przełącz motyw",
     "selectLanguage": "Wybierz język",
-    "aboutApp": "O aplikacji"
+    "aboutApp": "O aplikacji",
+    "language": "Język",
+    "theme": "Motyw"
   },
   "dialog": {
     "close": "Zamknij",

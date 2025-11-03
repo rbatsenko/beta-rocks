@@ -203,7 +203,9 @@
   "ui": {
     "toggleTheme": "Vaihda teemaa",
     "selectLanguage": "Valitse kieli",
-    "aboutApp": "Tietoa sovelluksesta"
+    "aboutApp": "Tietoa sovelluksesta",
+    "language": "Kieli",
+    "theme": "Teema"
   },
   "dialog": {
     "close": "Sulje",

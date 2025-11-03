@@ -203,7 +203,9 @@
   "ui": {
     "toggleTheme": "Перемкнути тему",
     "selectLanguage": "Обрати мову",
-    "aboutApp": "Про застосунок"
+    "aboutApp": "Про застосунок",
+    "language": "Мова",
+    "theme": "Тема"
   },
   "dialog": {
     "close": "Закрити",

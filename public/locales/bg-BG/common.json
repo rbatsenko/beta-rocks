@@ -171,7 +171,9 @@
   "ui": {
     "toggleTheme": "Превключване на темата",
     "selectLanguage": "Изберете език",
-    "aboutApp": "За приложението"
+    "aboutApp": "За приложението",
+    "language": "Език",
+    "theme": "Тема"
   },
   "dialog": {
     "close": "Затваряне",

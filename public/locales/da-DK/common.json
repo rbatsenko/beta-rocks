@@ -203,7 +203,9 @@
   "ui": {
     "toggleTheme": "Skift tema",
     "selectLanguage": "Vælg sprog",
-    "aboutApp": "Om app"
+    "aboutApp": "Om app",
+    "language": "Sprog",
+    "theme": "Tema"
   },
   "dialog": {
     "close": "Luk",

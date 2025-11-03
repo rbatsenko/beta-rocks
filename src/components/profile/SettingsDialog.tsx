@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Copy, Check, Key, AlertTriangle, Info, Upload, Settings2, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ConfirmDialog } from "@/components/ConfirmDialog";
+import { ConfirmDialog } from "@/components/dialogs/ConfirmDialog";
 import {
   Dialog,
   DialogContent,

@@ -203,7 +203,9 @@
   "ui": {
     "toggleTheme": "Alternar tema",
     "selectLanguage": "Seleccionar idioma",
-    "aboutApp": "Sobre a aplicação"
+    "aboutApp": "Sobre a aplicação",
+    "language": "Idioma",
+    "theme": "Tema"
   },
   "dialog": {
     "close": "Fechar",
