@@ -738,6 +738,9 @@
     "gneiss": "Gneiss",
     "quartzite": "Quartzite",
     "gritstone": "Gritstone",
+    "conglomerate": "Conglomerate",
+    "volcanic": "Volcanic",
+    "dolomite": "Dolomite",
     "unknown": "Unknown"
   },
   "loading": {
@@ -750,5 +753,35 @@
   },
   "nearbyMatch": {
     "distance": "{{distance}} from {{location}}"
+  },
+  "cragCreation": {
+    "foundInOSM": "Found a climbing area in OpenStreetMap: \"{{name}}\". Would you like to add it to our database?",
+    "addCragButton": "Add This Crag",
+    "dialogTitle": "Add New Crag",
+    "dialogDescription": "Review and confirm the crag details from OpenStreetMap. You can edit the name and rock type.",
+    "name": "Name",
+    "namePlaceholder": "Enter crag name",
+    "rockType": "Rock Type",
+    "climbingTypes": "Climbing Types",
+    "location": "Location",
+    "locationUnknown": "Location unknown",
+    "coordinates": "Coordinates",
+    "osmAttribution": "Data from",
+    "creating": "Creating...",
+    "create": "Create Crag",
+    "errors": {
+      "failed": "Failed to create crag. Please try again.",
+      "duplicate": "A crag already exists at this location",
+      "duplicateFound": "A crag named \"{{name}}\" already exists {{distance}}m away",
+      "network": "Network error. Please check your connection and try again."
+    }
+  },
+  "climbingTypes": {
+    "sport": "Sport",
+    "trad": "Trad",
+    "boulder": "Boulder",
+    "ice": "Ice",
+    "mixed": "Mixed",
+    "aid": "Aid"
   }
 }

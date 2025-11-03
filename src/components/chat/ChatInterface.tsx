@@ -47,6 +47,7 @@ import { HeaderActions } from "@/components/layout/HeaderActions";
 import { ConditionsDetailSheet } from "@/components/conditions/ConditionsDetailSheet";
 import { WeatherConditionCard } from "@/components/conditions/WeatherConditionCard";
 import { DisambiguationOptions } from "@/components/chat/DisambiguationOptions";
+import { CreateCragSuggestion } from "@/components/chat/CreateCragSuggestion";
 import { FeaturesDialog } from "@/components/dialogs/FeaturesDialog";
 import { PrivacyDialog } from "@/components/dialogs/PrivacyDialog";
 import { SettingsDialog } from "@/components/profile/SettingsDialog";
@@ -197,6 +198,27 @@ interface DisambiguationResult {
     longitude: number;
     rockType?: string;
   }>;
+}
+
+interface CreateCragSuggestionResult {
+  suggestCragCreation: true;
+  message: string;
+  translationKey?: string;
+  translationParams?: Record<string, string | number>;
+  source: string;
+  suggestedCrag: {
+    name: string;
+    latitude: number;
+    longitude: number;
+    rockType?: string | null;
+    climbingTypes?: string[];
+    country?: string;
+    state?: string;
+    municipality?: string;
+    village?: string;
+    osmId?: string;
+    osmType?: "node" | "way" | "relation";
+  };
 }
 
 // Separate component that only mounts after history is loaded
@@ -621,6 +643,7 @@ const ChatUI = ({
                             const result = part.output as
                               | ConditionsData
                               | DisambiguationResult
+                              | CreateCragSuggestionResult
                               | { error: string; location: string };
 
                             // Handle error results
@@ -649,6 +672,23 @@ const ChatUI = ({
                                   displayMessage={displayMessage}
                                   queryTemplate={t("disambiguation.queryTemplate")}
                                   onOptionSelect={handleDisambiguationSelect}
+                                />
+                              );
+                            }
+
+                            // Handle crag creation suggestion
+                            if ("suggestCragCreation" in result && result.suggestCragCreation) {
+                              const displayMessage =
+                                result.translationKey && result.translationParams
+                                  ? t(result.translationKey, result.translationParams)
+                                  : result.message;
+
+                              return (
+                                <CreateCragSuggestion
+                                  key={i}
+                                  result={result}
+                                  displayMessage={displayMessage}
+                                  onCragCreated={handleDisambiguationSelect}
                                 />
                               );
                             }

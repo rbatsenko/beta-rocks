@@ -3,6 +3,13 @@ import { google } from "@ai-sdk/google";
 import { z } from "zod";
 import { searchLocationMultiple } from "@/lib/external-apis/geocoding";
 import { getWeatherForecast } from "@/lib/external-apis/open-meteo";
+import {
+  searchClimbingFeatures,
+  extractRockTypeFromNominatim,
+  extractClimbingTypesFromNominatim,
+  getCragNameFromNominatim,
+  getLocationFromNominatim,
+} from "@/lib/external-apis/nominatim";
 import { computeConditions, RockType } from "@/lib/conditions/conditions.service";
 import {
   searchAreas,
@@ -402,6 +409,70 @@ const tools = {
               name: geocoded.name,
               details: locationDetails,
             });
+
+            // STEP 3.2: Check if this location has climbing features in OSM
+            // If yes, suggest creating a crag entry
+            try {
+              console.log(
+                "[get_conditions] Checking Nominatim for climbing features near:",
+                location
+              );
+              const climbingFeatures = await searchClimbingFeatures({
+                lat,
+                lon,
+                radius: 5000, // 5km radius
+              });
+
+              if (climbingFeatures.length > 0) {
+                console.log(
+                  "[get_conditions] Found",
+                  climbingFeatures.length,
+                  "climbing features in OSM"
+                );
+
+                // Use the first/best match
+                const feature = climbingFeatures[0];
+                const suggestedName = getCragNameFromNominatim(feature);
+                const suggestedRockType = extractRockTypeFromNominatim(feature);
+                const suggestedClimbingTypes = extractClimbingTypesFromNominatim(feature);
+                const locationData = getLocationFromNominatim(feature);
+
+                // Return suggestion to create crag
+                return {
+                  suggestCragCreation: true,
+                  source: "nominatim",
+                  message: `Found a climbing area in OpenStreetMap: "${suggestedName}". Would you like to add it to our database?`,
+                  translationKey: "cragCreation.foundInOSM",
+                  translationParams: { name: suggestedName },
+                  suggestedCrag: {
+                    name: suggestedName,
+                    latitude: parseFloat(feature.lat),
+                    longitude: parseFloat(feature.lon),
+                    rockType: suggestedRockType,
+                    climbingTypes: suggestedClimbingTypes,
+                    country: locationData.country,
+                    state: locationData.state,
+                    municipality: locationData.municipality,
+                    village: locationData.village,
+                    osmId: String(feature.osm_id),
+                    osmType: feature.osm_type,
+                  },
+                };
+              }
+
+              console.log("[get_conditions] No climbing features found in OSM, proceeding with conditions");
+            } catch (nominatimError) {
+              console.log(
+                "[get_conditions] Nominatim check failed (non-critical), proceeding with conditions:",
+                {
+                  error:
+                    nominatimError instanceof Error
+                      ? nominatimError.message
+                      : String(nominatimError),
+                }
+              );
+              // Non-critical - continue to show weather conditions
+            }
           } catch (error) {
             console.error("[get_conditions] Geocoding error:", {
               location,
