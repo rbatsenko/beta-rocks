@@ -428,7 +428,7 @@
     "stats": "Je statistieken",
     "settings": "Instellingen",
     "clearData": "Alle gegevens wissen",
-    "yourReports": "Your Reports"
+    "yourReports": "Jouw rapporten"
   },
   "stats": {
     "title": "Jouw statistieken",
@@ -443,15 +443,15 @@
     "thankYou": "Bedankt voor je bijdrage aan de klimgemeenschap!"
   },
   "userReports": {
-    "title": "Your Reports",
-    "description": "{{count}} reports",
-    "empty": "No reports yet",
-    "emptyMessage": "You haven't posted any reports yet",
-    "emptyHint": "Share conditions and information about crags to help the community",
-    "loading": "Loading your reports...",
-    "loadFailed": "Failed to load reports",
-    "deleteSuccess": "Report deleted successfully",
-    "deleteFailed": "Failed to delete report"
+    "title": "Jouw rapporten",
+    "description": "{{count}} rapporten",
+    "empty": "Nog geen rapporten",
+    "emptyMessage": "Je hebt nog geen rapporten geplaatst",
+    "emptyHint": "Deel voorwaarden en informatie over rotsen om de gemeenschap te helpen",
+    "loading": "Je rapporten laden...",
+    "loadFailed": "Kon rapporten niet laden",
+    "deleteSuccess": "Rapport verwijderd",
+    "deleteFailed": "Kon rapport niet verwijderen"
   },
   "settings": {
     "title": "Instellingen",

@@ -345,11 +345,11 @@
     "member": "Medlem",
     "anonymousMember": "Anonym medlem",
     "favorites": "Favoritter",
+    "yourReports": "Dine Rapporter",
     "recent": "Seneste søgninger",
     "stats": "Dine statistikker",
     "settings": "Indstillinger",
-    "clearData": "Ryd alle data",
-    "yourReports": "Your Reports"
+    "clearData": "Ryd alle data"
   },
   "stats": {
     "title": "Dine statistikker",
@@ -364,15 +364,15 @@
     "thankYou": "Tak for dit bidrag til klatrefællesskabet!"
   },
   "userReports": {
-    "title": "Your Reports",
-    "description": "{{count}} reports",
-    "empty": "No reports yet",
-    "emptyMessage": "You haven't posted any reports yet",
-    "emptyHint": "Share conditions and information about crags to help the community",
-    "loading": "Loading your reports...",
-    "loadFailed": "Failed to load reports",
-    "deleteSuccess": "Report deleted successfully",
-    "deleteFailed": "Failed to delete report"
+    "title": "Dine Rapporter",
+    "description": "{{count}} rapporter",
+    "empty": "Ingen rapporter endnu",
+    "emptyMessage": "Du har ikke opslået nogen rapporter endnu",
+    "emptyHint": "Del informationer om forhold og klipper for at hjælpe fællesskabet",
+    "loading": "Indlæser dine rapporter...",
+    "loadFailed": "Kunne ikke indlæse rapporter",
+    "deleteSuccess": "Rapport slettet",
+    "deleteFailed": "Kunne ikke slette rapport"
   },
   "settings": {
     "title": "Indstillinger",

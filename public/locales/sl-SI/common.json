@@ -425,11 +425,11 @@
     "member": "Član",
     "anonymousMember": "Anonimen član",
     "favorites": "Priljubljene",
+    "yourReports": "Vaša Poročila",
     "recent": "Nedavna iskanja",
     "stats": "Tvoja statistika",
     "settings": "Nastavitve",
-    "clearData": "Izbriši vse podatke",
-    "yourReports": "Your Reports"
+    "clearData": "Izbriši vse podatke"
   },
   "stats": {
     "title": "Tvoja statistika",
@@ -444,15 +444,15 @@
     "thankYou": "Hvala za prispevek k plezalni skupnosti!"
   },
   "userReports": {
-    "title": "Your Reports",
-    "description": "{{count}} reports",
-    "empty": "No reports yet",
-    "emptyMessage": "You haven't posted any reports yet",
-    "emptyHint": "Share conditions and information about crags to help the community",
-    "loading": "Loading your reports...",
-    "loadFailed": "Failed to load reports",
-    "deleteSuccess": "Report deleted successfully",
-    "deleteFailed": "Failed to delete report"
+    "title": "Vaša Poročila",
+    "description": "{{count}} poročil",
+    "empty": "Še ni poročil",
+    "emptyMessage": "Še niste objavili nobenih poročil",
+    "emptyHint": "Delite informacije o pogojih in skalah, da pomagate skupnosti",
+    "loading": "Nalagam vaša poročila...",
+    "loadFailed": "Poročil ni bilo mogoče naložiti",
+    "deleteSuccess": "Poročilo uspešno izbrisano",
+    "deleteFailed": "Poročila ni bilo mogoče izbrisati"
   },
   "settings": {
     "title": "Nastavitve",

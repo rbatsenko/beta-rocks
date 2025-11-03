@@ -350,7 +350,7 @@
     "stats": "Din statistikk",
     "settings": "Innstillinger",
     "clearData": "Slett alle data",
-    "yourReports": "Your Reports"
+    "yourReports": "Dine rapporter"
   },
   "stats": {
     "title": "Din statistikk",
@@ -365,15 +365,15 @@
     "thankYou": "Takk for ditt bidrag til klatremiljøet!"
   },
   "userReports": {
-    "title": "Your Reports",
-    "description": "{{count}} reports",
-    "empty": "No reports yet",
-    "emptyMessage": "You haven't posted any reports yet",
-    "emptyHint": "Share conditions and information about crags to help the community",
-    "loading": "Loading your reports...",
-    "loadFailed": "Failed to load reports",
-    "deleteSuccess": "Report deleted successfully",
-    "deleteFailed": "Failed to delete report"
+    "title": "Dine rapporter",
+    "description": "{{count}} rapporter",
+    "empty": "Ingen rapporter ennå",
+    "emptyMessage": "Du har ikke lagt ut noen rapporter ennå",
+    "emptyHint": "Del forhold og informasjon om klatrevegger for å hjelpe fellesskapet",
+    "loading": "Laster dine rapporter...",
+    "loadFailed": "Kunne ikke laste inn rapporter",
+    "deleteSuccess": "Rapport slettet",
+    "deleteFailed": "Kunne ikke slette rapport"
   },
   "settings": {
     "title": "Innstillinger",

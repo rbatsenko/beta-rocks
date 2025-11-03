@@ -424,11 +424,11 @@
     "member": "Člen",
     "anonymousMember": "Anonymný člen",
     "favorites": "Obľúbené",
+    "yourReports": "Vaše Hlásenia",
     "recent": "Nedávne vyhľadávania",
     "stats": "Vaše štatistiky",
     "settings": "Nastavenia",
-    "clearData": "Vymazať všetky dáta",
-    "yourReports": "Your Reports"
+    "clearData": "Vymazať všetky dáta"
   },
   "stats": {
     "title": "Vaše štatistiky",
@@ -443,15 +443,15 @@
     "thankYou": "Ďakujeme za váš príspevok do lezeckej komunity!"
   },
   "userReports": {
-    "title": "Your Reports",
-    "description": "{{count}} reports",
-    "empty": "No reports yet",
-    "emptyMessage": "You haven't posted any reports yet",
-    "emptyHint": "Share conditions and information about crags to help the community",
-    "loading": "Loading your reports...",
-    "loadFailed": "Failed to load reports",
-    "deleteSuccess": "Report deleted successfully",
-    "deleteFailed": "Failed to delete report"
+    "title": "Vaše Hlásenia",
+    "description": "{{count}} hlásení",
+    "empty": "Zatiaľ žiadne hlásenia",
+    "emptyMessage": "Zatiaľ ste neodoslali žiadne hlásenia",
+    "emptyHint": "Zdieľajte informácie o podmienkach a skalách, aby ste pomohli komunite",
+    "loading": "Načítavam vaše hlásenia...",
+    "loadFailed": "Nepodarilo sa načítať hlásenia",
+    "deleteSuccess": "Hlásenie úspešne odstránené",
+    "deleteFailed": "Nepodarilo sa odstrániť hlásenie"
   },
   "settings": {
     "title": "Nastavenia",

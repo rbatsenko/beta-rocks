@@ -416,11 +416,11 @@
     "member": "Użytkownik",
     "anonymousMember": "Anonimowy użytkownik",
     "favorites": "Ulubione",
+    "yourReports": "Twoje raporty",
     "recent": "Ostatnie wyszukiwania",
     "stats": "Twoje statystyki",
     "settings": "Ustawienia",
-    "clearData": "Wyczyść wszystkie dane",
-    "yourReports": "Your Reports"
+    "clearData": "Wyczyść wszystkie dane"
   },
   "stats": {
     "title": "Twoje statystyki",
@@ -435,15 +435,15 @@
     "thankYou": "Dziękujemy za wkład w społeczność wspinaczkową!"
   },
   "userReports": {
-    "title": "Your Reports",
-    "description": "{{count}} reports",
-    "empty": "No reports yet",
-    "emptyMessage": "You haven't posted any reports yet",
-    "emptyHint": "Share conditions and information about crags to help the community",
-    "loading": "Loading your reports...",
-    "loadFailed": "Failed to load reports",
-    "deleteSuccess": "Report deleted successfully",
-    "deleteFailed": "Failed to delete report"
+    "title": "Twoje Raporty",
+    "description": "{{count}} raportów",
+    "empty": "Brak raportów",
+    "emptyMessage": "Nie opublikowałeś jeszcze żadnych raportów",
+    "emptyHint": "Dziel się warunkami i informacjami o skałkach, aby pomóc społeczności",
+    "loading": "Ładowanie twoich raportów...",
+    "loadFailed": "Nie udało się załadować raportów",
+    "deleteSuccess": "Raport pomyślnie usunięty",
+    "deleteFailed": "Nie udało się usunąć raportu"
   },
   "settings": {
     "title": "Ustawienia",

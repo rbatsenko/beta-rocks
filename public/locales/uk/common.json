@@ -428,7 +428,7 @@
     "stats": "Ваша статистика",
     "settings": "Налаштування",
     "clearData": "Очистити всі дані",
-    "yourReports": "Your Reports"
+    "yourReports": "Ваші звіти"
   },
   "stats": {
     "title": "Ваша статистика",
@@ -443,15 +443,15 @@
     "thankYou": "Дякуємо за ваш внесок у скелелазну спільноту!"
   },
   "userReports": {
-    "title": "Your Reports",
-    "description": "{{count}} reports",
-    "empty": "No reports yet",
-    "emptyMessage": "You haven't posted any reports yet",
-    "emptyHint": "Share conditions and information about crags to help the community",
-    "loading": "Loading your reports...",
-    "loadFailed": "Failed to load reports",
-    "deleteSuccess": "Report deleted successfully",
-    "deleteFailed": "Failed to delete report"
+    "title": "Ваші звіти",
+    "description": "{{count}} звітів",
+    "empty": "Ще немає звітів",
+    "emptyMessage": "Ви ще не опублікували жодних звітів",
+    "emptyHint": "Поділіться умовами та інформацією про скелі, щоб допомогти спільноті",
+    "loading": "Завантаження ваших звітів...",
+    "loadFailed": "Не вдалося завантажити звіти",
+    "deleteSuccess": "Звіт видалено",
+    "deleteFailed": "Не вдалося видалити звіт"
   },
   "settings": {
     "title": "Налаштування",

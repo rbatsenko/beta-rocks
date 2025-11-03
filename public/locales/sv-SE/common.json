@@ -350,7 +350,7 @@
     "stats": "Din statistik",
     "settings": "Inställningar",
     "clearData": "Rensa all data",
-    "yourReports": "Your Reports"
+    "yourReports": "Dina rapporter"
   },
   "stats": {
     "title": "Din statistik",
@@ -365,15 +365,15 @@
     "thankYou": "Tack för ditt bidrag till klättergemenskapen!"
   },
   "userReports": {
-    "title": "Your Reports",
-    "description": "{{count}} reports",
-    "empty": "No reports yet",
-    "emptyMessage": "You haven't posted any reports yet",
-    "emptyHint": "Share conditions and information about crags to help the community",
-    "loading": "Loading your reports...",
-    "loadFailed": "Failed to load reports",
-    "deleteSuccess": "Report deleted successfully",
-    "deleteFailed": "Failed to delete report"
+    "title": "Dina rapporter",
+    "description": "{{count}} rapporter",
+    "empty": "Inga rapporter ännu",
+    "emptyMessage": "Du har inte publicerat några rapporter ännu",
+    "emptyHint": "Dela förhållanden och information om klippor för att hjälpa gemenskapen",
+    "loading": "Laddar dina rapporter...",
+    "loadFailed": "Det gick inte att ladda rapporter",
+    "deleteSuccess": "Rapport raderad",
+    "deleteFailed": "Det gick inte att radera rapport"
   },
   "settings": {
     "title": "Inställningar",

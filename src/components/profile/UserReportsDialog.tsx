@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { MessageSquare, Edit, Trash2, MapPin, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,32 +18,15 @@ import { useRouter } from "next/navigation";
 import { generateUniqueSlug } from "@/lib/utils/slug";
 import { ConfirmDialog } from "@/components/dialogs/ConfirmDialog";
 import { ReportDialog } from "@/components/reports/ReportDialog";
-import { getUserProfile, hashSyncKeyAsync } from "@/lib/auth/sync-key";
-import { fetchOrCreateUserProfile, fetchReportsByAuthor, deleteReport } from "@/lib/db/queries";
 import { formatDistanceToNow } from "date-fns";
 import { getDateFnsLocale } from "@/lib/i18n/date-locales";
 import { useToast } from "@/hooks/use-toast";
-
-interface UserReport {
-  id: string;
-  category: string;
-  text: string | null;
-  rating_dry: number | null;
-  rating_wind: number | null;
-  rating_crowds: number | null;
-  observed_at: string;
-  expires_at: string | null;
-  lost_found_type: string | null;
-  author_id: string | null;
-  created_at: string;
-  crag: {
-    id: string;
-    name: string;
-    lat: number;
-    lon: number;
-    country: string;
-  } | null;
-}
+import {
+  useUserReports,
+  useDeleteReport,
+  useInvalidateReports,
+  type UserReport,
+} from "@/hooks/queries/useReportsQueries";
 
 interface UserReportsDialogProps {
   open: boolean;
@@ -56,45 +39,14 @@ export function UserReportsDialog({ open, onOpenChange }: UserReportsDialogProps
   const router = useRouter();
   const { toast } = useToast();
 
-  const [reports, setReports] = useState<UserReport[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // React Query hooks
+  const { data: reports = [], isLoading } = useUserReports();
+  const deleteReportMutation = useDeleteReport();
+  const invalidateReports = useInvalidateReports();
+
   const [reportToDelete, setReportToDelete] = useState<UserReport | null>(null);
   const [reportToEdit, setReportToEdit] = useState<UserReport | null>(null);
   const [showReportDialog, setShowReportDialog] = useState(false);
-
-  // Load user reports
-  useEffect(() => {
-    if (open) {
-      loadReports();
-    }
-  }, [open]);
-
-  const loadReports = async () => {
-    setIsLoading(true);
-    try {
-      const profile = getUserProfile();
-      if (!profile) {
-        setReports([]);
-        setIsLoading(false);
-        return;
-      }
-
-      const syncKeyHash = await hashSyncKeyAsync(profile.syncKey);
-      const dbProfile = await fetchOrCreateUserProfile(syncKeyHash);
-      const userReports = await fetchReportsByAuthor(dbProfile.id);
-
-      setReports(userReports as UserReport[]);
-    } catch (error) {
-      console.error("[UserReportsDialog] Error loading reports:", error);
-      toast({
-        title: t("userReports.loadFailed"),
-        description: error instanceof Error ? error.message : "Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   const handleEdit = (report: UserReport, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -111,24 +63,11 @@ export function UserReportsDialog({ open, onOpenChange }: UserReportsDialogProps
     if (!reportToDelete) return;
 
     try {
-      const profile = getUserProfile();
-      if (!profile) {
-        throw new Error("User profile required");
-      }
-
-      const syncKeyHash = await hashSyncKeyAsync(profile.syncKey);
-      const dbProfile = await fetchOrCreateUserProfile(syncKeyHash);
-
-      const deleted = await deleteReport(reportToDelete.id, dbProfile.id);
-
-      if (deleted) {
-        toast({
-          title: t("reports.deleted"),
-          description: t("userReports.deleteSuccess"),
-        });
-        // Reload reports
-        loadReports();
-      }
+      await deleteReportMutation.mutateAsync(reportToDelete.id);
+      toast({
+        title: t("reports.deleted"),
+        description: t("userReports.deleteSuccess"),
+      });
     } catch (error) {
       console.error("[UserReportsDialog] Error deleting report:", error);
       toast({
@@ -308,7 +247,7 @@ export function UserReportsDialog({ open, onOpenChange }: UserReportsDialogProps
           cragName={reportToEdit.crag.name}
           editReport={reportToEdit}
           onReportCreated={() => {
-            loadReports(); // Reload reports after edit
+            invalidateReports(); // Invalidate cache to refetch reports after edit
           }}
         />
       )}

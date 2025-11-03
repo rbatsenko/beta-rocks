@@ -392,11 +392,11 @@
     "member": "Член",
     "anonymousMember": "Анонимен член",
     "favorites": "Любимци",
+    "yourReports": "Вашите Доклади",
     "recent": "Скорошни търсения",
     "stats": "Вашите статистики",
     "settings": "Настройки",
-    "clearData": "Изчистване на всички данни",
-    "yourReports": "Your Reports"
+    "clearData": "Изчистване на всички данни"
   },
   "stats": {
     "title": "Вашите статистики",
@@ -411,15 +411,15 @@
     "thankYou": "Благодарим ви за приноса към катерачната общност!"
   },
   "userReports": {
-    "title": "Your Reports",
-    "description": "{{count}} reports",
-    "empty": "No reports yet",
-    "emptyMessage": "You haven't posted any reports yet",
-    "emptyHint": "Share conditions and information about crags to help the community",
-    "loading": "Loading your reports...",
-    "loadFailed": "Failed to load reports",
-    "deleteSuccess": "Report deleted successfully",
-    "deleteFailed": "Failed to delete report"
+    "title": "Вашите Доклади",
+    "description": "{{count}} доклада",
+    "empty": "Все още няма доклади",
+    "emptyMessage": "Все още не сте публикували доклади",
+    "emptyHint": "Споделете информация за условията и скалите, за да помогнете на общността",
+    "loading": "Зареждане на вашите доклади...",
+    "loadFailed": "Неуспешно зареждане на докладите",
+    "deleteSuccess": "Докладът е изтрит успешно",
+    "deleteFailed": "Неуспешно изтриване на доклада"
   },
   "settings": {
     "title": "Настройки",

@@ -345,11 +345,11 @@
     "member": "Membro",
     "anonymousMember": "Membro anonimo",
     "favorites": "Preferiti",
+    "yourReports": "I Tuoi Rapporti",
     "recent": "Ricerche recenti",
     "stats": "Le tue statistiche",
     "settings": "Impostazioni",
-    "clearData": "Cancella tutti i dati",
-    "yourReports": "Your Reports"
+    "clearData": "Cancella tutti i dati"
   },
   "stats": {
     "title": "Le tue statistiche",
@@ -364,15 +364,15 @@
     "thankYou": "Grazie per il tuo contributo alla comunità dei climber!"
   },
   "userReports": {
-    "title": "Your Reports",
-    "description": "{{count}} reports",
-    "empty": "No reports yet",
-    "emptyMessage": "You haven't posted any reports yet",
-    "emptyHint": "Share conditions and information about crags to help the community",
-    "loading": "Loading your reports...",
-    "loadFailed": "Failed to load reports",
-    "deleteSuccess": "Report deleted successfully",
-    "deleteFailed": "Failed to delete report"
+    "title": "I Tuoi Rapporti",
+    "description": "{{count}} rapporti",
+    "empty": "Nessun rapporto",
+    "emptyMessage": "Non hai ancora pubblicato rapporti",
+    "emptyHint": "Condividi informazioni sulle condizioni e sulle falesie per aiutare la comunità",
+    "loading": "Caricamento dei tuoi rapporti...",
+    "loadFailed": "Impossibile caricare i rapporti",
+    "deleteSuccess": "Rapporto eliminato con successo",
+    "deleteFailed": "Impossibile eliminare il rapporto"
   },
   "settings": {
     "title": "Impostazioni",

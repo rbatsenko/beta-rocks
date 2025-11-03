@@ -349,7 +349,7 @@
     "stats": "Tilastosi",
     "settings": "Asetukset",
     "clearData": "Tyhjennä kaikki tiedot",
-    "yourReports": "Your Reports"
+    "yourReports": "Omat raportit"
   },
   "stats": {
     "title": "Tilastosi",
@@ -364,15 +364,15 @@
     "thankYou": "Kiitos panoksestasi kiipeilyyhteisölle!"
   },
   "userReports": {
-    "title": "Your Reports",
-    "description": "{{count}} reports",
-    "empty": "No reports yet",
-    "emptyMessage": "You haven't posted any reports yet",
-    "emptyHint": "Share conditions and information about crags to help the community",
-    "loading": "Loading your reports...",
-    "loadFailed": "Failed to load reports",
-    "deleteSuccess": "Report deleted successfully",
-    "deleteFailed": "Failed to delete report"
+    "title": "Omat raportit",
+    "description": "{{count}} raporttia",
+    "empty": "Ei raportteja vielä",
+    "emptyMessage": "Et ole lähettänyt mitään raportteja vielä",
+    "emptyHint": "Jaa olosuhteita ja tietoja kallioista auttaaksesi yhteisöä",
+    "loading": "Ladataan raporttejasi...",
+    "loadFailed": "Raporttien lataaminen epäonnistui",
+    "deleteSuccess": "Raportti poistettu",
+    "deleteFailed": "Raportin poistaminen epäonnistui"
   },
   "settings": {
     "title": "Asetukset",

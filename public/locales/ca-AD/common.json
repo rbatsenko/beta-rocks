@@ -317,7 +317,7 @@
     "stats": "Les teves estadístiques",
     "settings": "Configuració",
     "clearData": "Esborrar totes les dades",
-    "yourReports": "Your Reports"
+    "yourReports": "Els teus informes"
   },
   "stats": {
     "title": "Les teves estadístiques",
@@ -332,15 +332,15 @@
     "thankYou": "Gràcies per contribuir a la comunitat d'escalada!"
   },
   "userReports": {
-    "title": "Your Reports",
-    "description": "{{count}} reports",
-    "empty": "No reports yet",
-    "emptyMessage": "You haven't posted any reports yet",
-    "emptyHint": "Share conditions and information about crags to help the community",
-    "loading": "Loading your reports...",
-    "loadFailed": "Failed to load reports",
-    "deleteSuccess": "Report deleted successfully",
-    "deleteFailed": "Failed to delete report"
+    "title": "Els teus informes",
+    "description": "{{count}} informes",
+    "empty": "Cap informe encara",
+    "emptyMessage": "Encara no has publicat cap informe",
+    "emptyHint": "Comparteix condicions i informació sobre esparellons per ajudar la comunitat",
+    "loading": "Carregant els teus informes...",
+    "loadFailed": "Error en carregar els informes",
+    "deleteSuccess": "Informe eliminat",
+    "deleteFailed": "Error en eliminar l'informe"
   },
   "settings": {
     "title": "Configuració",

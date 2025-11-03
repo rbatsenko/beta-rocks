@@ -424,11 +424,11 @@
     "member": "Član",
     "anonymousMember": "Anoniman/a član",
     "favorites": "Omiljene lokacije",
+    "yourReports": "Vaša Izvješća",
     "recent": "Nedavne pretrage",
     "stats": "Vaše statistike",
     "settings": "Postavke",
-    "clearData": "Obriši sve podatke",
-    "yourReports": "Your Reports"
+    "clearData": "Obriši sve podatke"
   },
   "stats": {
     "title": "Vaše statistike",
@@ -443,15 +443,15 @@
     "thankYou": "Hvala na doprinosu penjačkoj zajednici!"
   },
   "userReports": {
-    "title": "Your Reports",
-    "description": "{{count}} reports",
-    "empty": "No reports yet",
-    "emptyMessage": "You haven't posted any reports yet",
-    "emptyHint": "Share conditions and information about crags to help the community",
-    "loading": "Loading your reports...",
-    "loadFailed": "Failed to load reports",
-    "deleteSuccess": "Report deleted successfully",
-    "deleteFailed": "Failed to delete report"
+    "title": "Vaša Izvješća",
+    "description": "{{count}} izvješća",
+    "empty": "Još nema izvješća",
+    "emptyMessage": "Još niste objavili nijedno izvješće",
+    "emptyHint": "Podijelite informacije o uvjetima i stijenama kako biste pomogli zajednici",
+    "loading": "Učitavam vaša izvješća...",
+    "loadFailed": "Nije moguće učitati izvješća",
+    "deleteSuccess": "Izvješće uspješno izbrisano",
+    "deleteFailed": "Nije moguće izbrisati izvješće"
   },
   "settings": {
     "title": "Postavke",

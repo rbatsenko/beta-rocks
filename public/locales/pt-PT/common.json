@@ -428,7 +428,7 @@
     "stats": "As Suas Estatísticas",
     "settings": "Definições",
     "clearData": "Limpar Todos os Dados",
-    "yourReports": "Your Reports"
+    "yourReports": "Os seus relatórios"
   },
   "stats": {
     "title": "Suas estatísticas",
@@ -443,15 +443,15 @@
     "thankYou": "Obrigado por contribuir com a comunidade de escalada!"
   },
   "userReports": {
-    "title": "Your Reports",
-    "description": "{{count}} reports",
-    "empty": "No reports yet",
-    "emptyMessage": "You haven't posted any reports yet",
-    "emptyHint": "Share conditions and information about crags to help the community",
-    "loading": "Loading your reports...",
-    "loadFailed": "Failed to load reports",
-    "deleteSuccess": "Report deleted successfully",
-    "deleteFailed": "Failed to delete report"
+    "title": "Os seus relatórios",
+    "description": "{{count}} relatórios",
+    "empty": "Sem relatórios ainda",
+    "emptyMessage": "Ainda não publicou nenhum relatório",
+    "emptyHint": "Partilhe condições e informações sobre rochas para ajudar a comunidade",
+    "loading": "Carregando seus relatórios...",
+    "loadFailed": "Falha ao carregar relatórios",
+    "deleteSuccess": "Relatório eliminado",
+    "deleteFailed": "Falha ao eliminar relatório"
   },
   "settings": {
     "title": "Definições",

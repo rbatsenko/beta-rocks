@@ -313,11 +313,11 @@
     "member": "Μέλος",
     "anonymousMember": "Ανώνυμο μέλος",
     "favorites": "Αγαπημένα",
+    "yourReports": "Οι Αναφορές Σας",
     "recent": "Πρόσφατες αναζητήσεις",
     "stats": "Οι στατιστικές σας",
     "settings": "Ρυθμίσεις",
-    "clearData": "Εκκαθάριση όλων των δεδομένων",
-    "yourReports": "Your Reports"
+    "clearData": "Εκκαθάριση όλων των δεδομένων"
   },
   "stats": {
     "title": "Οι στατιστικές σας",
@@ -332,15 +332,15 @@
     "thankYou": "Ευχαριστούμε για τη συνεισφορά σας στην κοινότητα αναρρίχησης!"
   },
   "userReports": {
-    "title": "Your Reports",
-    "description": "{{count}} reports",
-    "empty": "No reports yet",
-    "emptyMessage": "You haven't posted any reports yet",
-    "emptyHint": "Share conditions and information about crags to help the community",
-    "loading": "Loading your reports...",
-    "loadFailed": "Failed to load reports",
-    "deleteSuccess": "Report deleted successfully",
-    "deleteFailed": "Failed to delete report"
+    "title": "Οι Αναφορές Σας",
+    "description": "{{count}} αναφορές",
+    "empty": "Δεν υπάρχουν αναφορές ακόμη",
+    "emptyMessage": "Δεν έχετε δημοσιεύσει αναφορές ακόμη",
+    "emptyHint": "Μοιραστείτε συνθήκες και πληροφορίες για βράχια για να βοηθήσετε την κοινότητα",
+    "loading": "Φόρτωση των αναφορών σας...",
+    "loadFailed": "Αποτυχία φόρτωσης αναφορών",
+    "deleteSuccess": "Η αναφορά διαγράφηκε επιτυχώς",
+    "deleteFailed": "Αποτυχία διαγραφής αναφοράς"
   },
   "settings": {
     "title": "Ρυθμίσεις",

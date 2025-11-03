@@ -429,11 +429,11 @@
     "member": "Miembro",
     "anonymousMember": "Miembro anónimo",
     "favorites": "Favoritos",
+    "yourReports": "Tus Informes",
     "recent": "Búsquedas recientes",
     "stats": "Tus estadísticas",
     "settings": "Ajustes",
-    "clearData": "Borrar todos los datos",
-    "yourReports": "Your Reports"
+    "clearData": "Borrar todos los datos"
   },
   "stats": {
     "title": "Tus estadísticas",
@@ -448,15 +448,15 @@
     "thankYou": "Gracias por contribuir a la comunidad escaladora!"
   },
   "userReports": {
-    "title": "Your Reports",
-    "description": "{{count}} reports",
-    "empty": "No reports yet",
-    "emptyMessage": "You haven't posted any reports yet",
-    "emptyHint": "Share conditions and information about crags to help the community",
-    "loading": "Loading your reports...",
-    "loadFailed": "Failed to load reports",
-    "deleteSuccess": "Report deleted successfully",
-    "deleteFailed": "Failed to delete report"
+    "title": "Tus Informes",
+    "description": "{{count}} informes",
+    "empty": "Ningún informe todavía",
+    "emptyMessage": "No has publicado ningún informe todavía",
+    "emptyHint": "Comparte información sobre condiciones y escuelas para ayudar a la comunidad",
+    "loading": "Cargando tus informes...",
+    "loadFailed": "Error al cargar los informes",
+    "deleteSuccess": "Informe eliminado con éxito",
+    "deleteFailed": "Error al eliminar el informe"
   },
   "settings": {
     "title": "Ajustes",
