@@ -536,7 +536,11 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
                       </div>
                       <p className="text-lg font-semibold">
                         {formatWindSpeed(
-                          convertWindSpeed(conditions.current.windSpeed_kph, "kmh", units.windSpeed),
+                          convertWindSpeed(
+                            conditions.current.windSpeed_kph,
+                            "kmh",
+                            units.windSpeed
+                          ),
                           units.windSpeed,
                           0
                         )}
