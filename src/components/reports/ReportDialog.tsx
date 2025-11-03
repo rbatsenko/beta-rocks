@@ -276,8 +276,7 @@ export function ReportDialog({
       console.error("Failed to submit report:", error);
       toast({
         title: isEditMode ? t("reports.updateFailed") : t("reports.submitFailed"),
-        description:
-          error instanceof Error ? error.message : "Please try again.",
+        description: error instanceof Error ? error.message : "Please try again.",
         variant: "destructive",
       });
     } finally {

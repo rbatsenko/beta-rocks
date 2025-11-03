@@ -391,7 +391,7 @@ export async function fetchReportsBySector(sectorId: string, limit = 20) {
 }
 
 export async function fetchReportsByRoute(routeId: string, limit = 20) {
-  const { data, error} = await supabase
+  const { data, error } = await supabase
     .from("reports")
     .select("*")
     .eq("route_id", routeId)
@@ -405,10 +405,12 @@ export async function fetchReportsByRoute(routeId: string, limit = 20) {
 export async function fetchReportsByAuthor(authorId: string, limit = 50) {
   const { data, error } = await supabase
     .from("reports")
-    .select(`
+    .select(
+      `
       *,
       crag:crags!reports_crag_id_fkey(id, name, latitude, longitude, country)
-    `)
+    `
+    )
     .eq("author_id", authorId)
     .order("created_at", { ascending: false })
     .limit(limit);

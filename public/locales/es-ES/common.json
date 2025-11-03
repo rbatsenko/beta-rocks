@@ -5,7 +5,7 @@
   "welcome": {
     "heading": "Obtén información de cualquier roca",
     "description": "Condiciones en tiempo real, reportes de la comunidad e información de vías en rocas de todo el mundo",
-    "searchHint": "Busca escuelas directamente con",
+    "searchHint": "Busca cualquier zona de escalada",
     "exampleQueries": {
       "query1": {
         "display": "¿Habrá buen tacto en Siurana mañana?",

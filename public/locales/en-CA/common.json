@@ -5,7 +5,7 @@
   "welcome": {
     "heading": "Get info on any crag",
     "description": "Real-time conditions, community reports, and route information for crags worldwide",
-    "searchHint": "Search crags directly with",
+    "searchHint": "Search for any climbing area",
     "exampleQueries": {
       "query1": {
         "display": "Squamish conditions today?",
@@ -36,7 +36,7 @@
   "search": {
     "title": "Search Crags",
     "description": "Search for climbing areas by name or location",
-    "placeholder": "Search crags... (e.g. 'St Leger', 'kotecnik')",
+    "placeholder": "Search crags... (e.g. 'St Leger', 'Kotecnik')",
     "typeToSearch": "Type to search for crags...",
     "searching": "Searching...",
     "noCragsFound": "No crags found. Try a different search term.",

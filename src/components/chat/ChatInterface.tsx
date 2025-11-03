@@ -6,7 +6,7 @@ import { useChat, type UIMessage } from "@ai-sdk/react";
 import type { TFunction } from "i18next";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send, Loader2, CloudSun, Sun, Info, RotateCcw, Star } from "lucide-react";
+import { Send, Loader2, CloudSun, Sun, Info, RotateCcw, Star, Search } from "lucide-react";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
 import { useUnits } from "@/hooks/useUnits";
@@ -462,9 +462,10 @@ const ChatUI = ({
                     onClick={() => setSearchDialogOpen(true)}
                     className="inline-flex items-center gap-2 mb-6 text-sm text-muted-foreground bg-orange-50/50 dark:bg-orange-950/20 border border-orange-200/50 dark:border-orange-800/30 rounded-lg px-3 py-2 hover:bg-orange-100/50 dark:hover:bg-orange-900/30 hover:border-orange-300/50 dark:hover:border-orange-700/50 transition-colors cursor-pointer"
                   >
-                    <Info className="h-4 w-4 text-orange-600 dark:text-orange-500 shrink-0" />
+                    <Search className="h-4 w-4 text-orange-600 dark:text-orange-500 shrink-0" />
                     <span>{t("welcome.searchHint")}</span>
-                    <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                    {/* Show keyboard shortcut on desktop only */}
+                    <kbd className="pointer-events-none hidden sm:inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                       <span className="text-xs">{modifierKey === "Cmd" ? "⌘ + " : "Ctrl + "}K</span>
                     </kbd>
                   </button>

@@ -5,7 +5,7 @@
   "welcome": {
     "heading": "Informacje o dowolnej skałce",
     "description": "Warun na bieżąco, raporty społeczności i informacje o rejonach i drogach na całym świecie",
-    "searchHint": "Szukaj skałek bezpośrednio za pomocą",
+    "searchHint": "Wyszukaj dowolny rejon wspinaczkowy",
     "exampleQueries": {
       "query1": {
         "display": "Jaki warun w Sokolikach jutro?",
@@ -36,7 +36,7 @@
   "search": {
     "title": "Szukaj skałek",
     "description": "Wyszukaj rejony wspinaczkowe po nazwie lub lokalizacji",
-    "placeholder": "Szukaj skałek... (np. 'Sokole Góry', 'Podlesice')",
+    "placeholder": "Szukaj skałek... (np. 'Sokoliki', 'Wampirek')",
     "typeToSearch": "Zacznij pisać, aby wyszukać skałki...",
     "searching": "Wyszukiwanie...",
     "noCragsFound": "Nie znaleziono skałek. Spróbuj innego wyszukiwania.",

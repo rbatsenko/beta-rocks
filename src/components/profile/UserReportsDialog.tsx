@@ -144,11 +144,7 @@ export function UserReportsDialog({ open, onOpenChange }: UserReportsDialogProps
   const handleViewCrag = (report: UserReport) => {
     if (!report.crag) return;
 
-    const slug = generateUniqueSlug(
-      report.crag.name,
-      report.crag.latitude,
-      report.crag.longitude
-    );
+    const slug = generateUniqueSlug(report.crag.name, report.crag.latitude, report.crag.longitude);
     router.push(`/location/${slug}`);
     onOpenChange(false);
   };
@@ -161,7 +157,10 @@ export function UserReportsDialog({ open, onOpenChange }: UserReportsDialogProps
   return (
     <>
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="max-w-4xl max-h-[90vh]" onOpenAutoFocus={(e) => e.preventDefault()}>
+        <DialogContent
+          className="max-w-4xl max-h-[90vh]"
+          onOpenAutoFocus={(e) => e.preventDefault()}
+        >
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <MessageSquare className="h-5 w-5 text-orange-500" />
@@ -203,7 +202,9 @@ export function UserReportsDialog({ open, onOpenChange }: UserReportsDialogProps
                             </Badge>
                             {report.lost_found_type && (
                               <Badge
-                                variant={report.lost_found_type === "lost" ? "destructive" : "default"}
+                                variant={
+                                  report.lost_found_type === "lost" ? "destructive" : "default"
+                                }
                                 className="text-xs"
                               >
                                 {t(`reports.lostFoundTypes.${report.lost_found_type}`)}
@@ -254,19 +255,25 @@ export function UserReportsDialog({ open, onOpenChange }: UserReportsDialogProps
                           {report.rating_dry && (
                             <div className="flex items-center gap-1">
                               <span>{t("reports.dryness")}:</span>
-                              <span className="font-medium text-orange-500">{report.rating_dry}/5</span>
+                              <span className="font-medium text-orange-500">
+                                {report.rating_dry}/5
+                              </span>
                             </div>
                           )}
                           {report.rating_wind && (
                             <div className="flex items-center gap-1">
                               <span>{t("reports.wind")}:</span>
-                              <span className="font-medium text-orange-500">{report.rating_wind}/5</span>
+                              <span className="font-medium text-orange-500">
+                                {report.rating_wind}/5
+                              </span>
                             </div>
                           )}
                           {report.rating_crowds && (
                             <div className="flex items-center gap-1">
                               <span>{t("reports.crowds")}:</span>
-                              <span className="font-medium text-orange-500">{report.rating_crowds}/5</span>
+                              <span className="font-medium text-orange-500">
+                                {report.rating_crowds}/5
+                              </span>
                             </div>
                           )}
                         </div>

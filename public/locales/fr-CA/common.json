@@ -5,7 +5,7 @@
   "welcome": {
     "heading": "Obtenez des infos sur n'importe quel site",
     "description": "Conditions en temps réel, rapports communautaires et informations sur les voies dans le monde entier",
-    "searchHint": "Recherchez des sites directement avec",
+    "searchHint": "Recherchez n'importe quelle zone d'escalade",
     "exampleQueries": {
       "query1": {
         "display": "Quel sera l'état de Fontainebleau demain ?",

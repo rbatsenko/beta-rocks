@@ -5,7 +5,7 @@
   "welcome": {
     "heading": "Infos zu jedem Felsen",
     "description": "Echtzeit-Bedingungen, Community-Berichte und Routeninformationen für Felsen weltweit",
-    "searchHint": "Felsen direkt suchen mit",
+    "searchHint": "Suche nach jedem Klettergebiet",
     "exampleQueries": {
       "query1": {
         "display": "Wie wird der Grip im Frankenjura morgen?",

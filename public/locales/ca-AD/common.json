@@ -5,7 +5,7 @@
   "welcome": {
     "heading": "Aconsegueix la beta de qualsevol roca",
     "description": "Condicions en temps real, informes de la comunitat i informació sobre vies a roques de tot el món",
-    "searchHint": "Cerca esparellons directament amb",
+    "searchHint": "Cerca qualsevol zona d'escalada",
     "exampleQueries": {
       "query1": {
         "display": "Condicions a les Agulles d'Engolasters avui?",

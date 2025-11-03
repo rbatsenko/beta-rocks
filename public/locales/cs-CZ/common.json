@@ -5,7 +5,7 @@
   "welcome": {
     "heading": "Získej informace o každé skále",
     "description": "Získej aktuální počasí, analýzu tření a optimální okna pro lezení na jakékoliv skále po celém světě",
-    "searchHint": "Vyhledávejte skály přímo pomocí",
+    "searchHint": "Vyhledejte libovolnou lezeckou oblast",
     "exampleQueries": {
       "query1": {
         "display": "Jaké jsou podmínky na Holštejnu zítra?",

@@ -5,7 +5,7 @@
   "welcome": {
     "heading": "Get info on any crag",
     "description": "Real-time conditions, community reports, and route information for crags worldwide",
-    "searchHint": "Search crags directly with",
+    "searchHint": "Search for any climbing area",
     "yourFavorites": "Your Favorites",
     "favoriteQuery": "What are conditions at {{crag}}?",
     "exampleQueries": {
@@ -36,7 +36,7 @@
   "search": {
     "title": "Search Crags",
     "description": "Search for climbing areas by name or location",
-    "placeholder": "Search crags... (e.g. 'St Leger', 'kotecnik')",
+    "placeholder": "Search crags... (e.g. 'St Leger', 'Kotecnik')",
     "typeToSearch": "Type to search for crags...",
     "searching": "Searching...",
     "noCragsFound": "No crags found. Try a different search term.",
@@ -297,22 +297,14 @@
     "expandHours": "Expand to see all hours"
   },
   "rockTypes": {
-    "limestone": "limestone",
-    "granite": "granite",
-    "sandstone": "sandstone",
-    "basalt": "basalt",
-    "gneiss": "gneiss",
-    "quartzite": "quartzite",
-    "conglomerate": "conglomerate",
-    "rhyolite": "rhyolite",
-    "porphyry": "porphyry",
-    "andesite": "andesite",
-    "slate": "slate",
-    "schist": "schist",
-    "dolomite": "dolomite",
-    "volcanic": "volcanic",
-    "phyllite": "phyllite",
-    "gritstone": "gritstone"
+    "granite": "Granite",
+    "sandstone": "Sandstone",
+    "limestone": "Limestone",
+    "basalt": "Basalt",
+    "gneiss": "Gneiss",
+    "quartzite": "Quartzite",
+    "gritstone": "Gritstone",
+    "unknown": "Unknown"
   },
   "sync": {
     "notification": {
@@ -747,16 +739,6 @@
     "viewOnGoogleMaps": "View on Google Maps",
     "addToFavorites": "Add to favorites",
     "removeFromFavorites": "Remove from favorites"
-  },
-  "rockTypes": {
-    "granite": "Granite",
-    "sandstone": "Sandstone",
-    "limestone": "Limestone",
-    "basalt": "Basalt",
-    "gneiss": "Gneiss",
-    "quartzite": "Quartzite",
-    "gritstone": "Gritstone",
-    "unknown": "Unknown"
   },
   "loading": {
     "conditions": "Loading conditions...",

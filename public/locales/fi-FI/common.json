@@ -5,7 +5,7 @@
   "welcome": {
     "heading": "Hanki tietoa mistä tahansa kalliosta",
     "description": "Reaaliaikaiset olosuhteet, yhteisöraportit ja reittitiedot kallioista ympäri maailmaa",
-    "searchHint": "Etsi kalliota suoraan",
+    "searchHint": "Etsi mitä tahansa kiipeilyaluetta",
     "exampleQueries": {
       "query1": {
         "display": "Olosuhteet Olhavassa tänään?",

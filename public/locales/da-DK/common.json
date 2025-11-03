@@ -5,7 +5,7 @@
   "welcome": {
     "heading": "Få information om enhver klippe",
     "description": "Realtidsforhold, fællesskabsrapporter og ruteinformation for klipper verden over",
-    "searchHint": "Søg efter klipper direkte med",
+    "searchHint": "Søg efter ethvert klatreområde",
     "exampleQueries": {
       "query1": {
         "display": "Forhold i Stevns Klint i dag?",
