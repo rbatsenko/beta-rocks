@@ -47,7 +47,6 @@ import { getCountryFlag } from "@/lib/utils/country-flag";
 import { fetchReportsByCrag } from "@/lib/db/queries";
 import { getUserProfile, type UserProfile } from "@/lib/auth/sync-key";
 import { getWeatherEmoji, getWeatherDescription } from "@/lib/utils/weather-emojis";
-import { getLocaleFromLanguage } from "@/lib/utils/locale";
 import { useUnits } from "@/hooks/useUnits";
 import {
   convertTemperature,
@@ -170,8 +169,7 @@ function extractLocalTime(isoString: string): string {
 }
 
 export function CragPageContent({ crag, sectors }: CragPageContentProps) {
-  const { t, language } = useClientTranslation("common");
-  const locale = getLocaleFromLanguage(language);
+  const { t } = useClientTranslation("common");
   const { translateReason, translateWarning, translateWeather } = useConditionsTranslations(t);
   const router = useRouter();
   const { units } = useUnits();

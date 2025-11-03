@@ -104,7 +104,7 @@ export type Database = {
           tool_invocations?: Json | null;
         };
         Update: {
-          content?: string | null;
+          content?: string;
           created_at?: string | null;
           id?: string;
           role?: string;
@@ -257,6 +257,7 @@ export type Database = {
           category: string;
           crag_id: string | null;
           created_at: string | null;
+          expires_at: string | null;
           id: string;
           lost_found_type: string | null;
           observed_at: string;
@@ -274,6 +275,7 @@ export type Database = {
           category?: string;
           crag_id?: string | null;
           created_at?: string | null;
+          expires_at?: string | null;
           id?: string;
           lost_found_type?: string | null;
           observed_at?: string;
@@ -291,6 +293,7 @@ export type Database = {
           category?: string;
           crag_id?: string | null;
           created_at?: string | null;
+          expires_at?: string | null;
           id?: string;
           lost_found_type?: string | null;
           observed_at?: string;
