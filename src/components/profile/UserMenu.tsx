@@ -16,6 +16,7 @@ import { useUserProfile } from "@/hooks/useUserProfile";
 import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal";
 import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog";
 import { UserMenuContent } from "@/components/profile/UserMenuContent";
+import { UserReportsDialog } from "@/components/profile/UserReportsDialog";
 import type { UserProfile as UserProfileType } from "@/lib/auth/sync-key";
 
 interface UserMenuProps {
@@ -40,6 +41,7 @@ export function UserMenu({
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showProfileCreated, setShowProfileCreated] = useState(false);
   const [newSyncKey, setNewSyncKey] = useState<string>("");
+  const [showReportsDialog, setShowReportsDialog] = useState(false);
 
   // Get initials for avatar
   const getInitials = () => {
@@ -97,6 +99,7 @@ export function UserMenu({
             <DropdownMenuSeparator />
             <UserMenuContent
               onFavoritesClick={onFavoritesClick}
+              onReportsClick={() => setShowReportsDialog(true)}
               onStatsClick={onStatsClick}
               onSettingsClick={onSettingsClick}
               onAboutClick={onAboutClick}
@@ -156,6 +159,7 @@ export function UserMenu({
         <DropdownMenuSeparator />
         <UserMenuContent
           onFavoritesClick={onFavoritesClick}
+          onReportsClick={() => setShowReportsDialog(true)}
           onStatsClick={onStatsClick}
           onSettingsClick={onSettingsClick}
           onAboutClick={onAboutClick}
@@ -163,6 +167,7 @@ export function UserMenu({
           isClearChatDisabled={isClearChatDisabled}
         />
       </DropdownMenuContent>
+      <UserReportsDialog open={showReportsDialog} onOpenChange={setShowReportsDialog} />
     </DropdownMenu>
   );
 }

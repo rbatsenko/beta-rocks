@@ -1,6 +1,6 @@
 "use client";
 
-import { Star, BarChart3, Info, RotateCcw, Settings } from "lucide-react";
+import { Star, BarChart3, Info, RotateCcw, Settings, MessageSquare } from "lucide-react";
 import { DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { LanguageSelector } from "@/components/common/LanguageSelector";
@@ -8,6 +8,7 @@ import { ThemeToggle } from "@/components/common/ThemeToggle";
 
 interface UserMenuContentProps {
   onFavoritesClick: () => void;
+  onReportsClick: () => void;
   onStatsClick: () => void;
   onSettingsClick: () => void;
   onAboutClick?: () => void;
@@ -17,10 +18,11 @@ interface UserMenuContentProps {
 
 /**
  * Shared menu content for UserMenu dropdown
- * Handles favorites, stats, language/theme settings, and other actions
+ * Handles favorites, reports, stats, language/theme settings, and other actions
  */
 export function UserMenuContent({
   onFavoritesClick,
+  onReportsClick,
   onStatsClick,
   onSettingsClick,
   onAboutClick,
@@ -34,6 +36,10 @@ export function UserMenuContent({
       <DropdownMenuItem onClick={onFavoritesClick} className="cursor-pointer">
         <Star className="mr-2 h-4 w-4" />
         <span>{t("profile.favorites")}</span>
+      </DropdownMenuItem>
+      <DropdownMenuItem onClick={onReportsClick} className="cursor-pointer">
+        <MessageSquare className="mr-2 h-4 w-4" />
+        <span>{t("profile.yourReports")}</span>
       </DropdownMenuItem>
       <DropdownMenuItem onClick={onStatsClick} className="cursor-pointer">
         <BarChart3 className="mr-2 h-4 w-4" />
