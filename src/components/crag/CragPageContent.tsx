@@ -158,6 +158,16 @@ function isNightTime(date: Date): boolean {
   return hour >= 19 || hour < 7;
 }
 
+// Helper to extract local time from ISO string without timezone conversion
+function extractLocalTime(isoString: string): string {
+  // Extract time portion from ISO string (format: "2024-11-03T06:45:00+01:00" or "2024-11-03T06:45:00")
+  const match = isoString.match(/T(\d{2}):(\d{2})/);
+  if (match) {
+    return `${match[1]}:${match[2]}`;
+  }
+  return isoString;
+}
+
 export function CragPageContent({ crag, sectors }: CragPageContentProps) {
   const { t, language } = useClientTranslation("common");
   const locale = getLocaleFromLanguage(language);
@@ -557,21 +567,10 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
                             <span>{t("timeContext.sunrise")}</span>
                           </div>
                           <p className="text-lg font-semibold">
-                            {conditions.timeContext?.sunriseISO
-                              ? new Date(conditions.timeContext.sunriseISO).toLocaleTimeString(
-                                  locale,
-                                  {
-                                    hour: "2-digit",
-                                    minute: "2-digit",
-                                    hour12: false,
-                                  }
-                                )
-                              : conditions.astro &&
-                                new Date(conditions.astro.sunrise).toLocaleTimeString(locale, {
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                  hour12: false,
-                                })}
+                            {conditions.astro?.sunrise
+                              ? extractLocalTime(conditions.astro.sunrise)
+                              : conditions.timeContext?.sunriseISO &&
+                                extractLocalTime(conditions.timeContext.sunriseISO)}
                           </p>
                         </div>
                         <div className="bg-muted/50 rounded-lg p-3">
@@ -580,21 +579,10 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
                             <span>{t("timeContext.sunset")}</span>
                           </div>
                           <p className="text-lg font-semibold">
-                            {conditions.timeContext?.sunsetISO
-                              ? new Date(conditions.timeContext.sunsetISO).toLocaleTimeString(
-                                  locale,
-                                  {
-                                    hour: "2-digit",
-                                    minute: "2-digit",
-                                    hour12: false,
-                                  }
-                                )
-                              : conditions.astro &&
-                                new Date(conditions.astro.sunset).toLocaleTimeString(locale, {
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                  hour12: false,
-                                })}
+                            {conditions.astro?.sunset
+                              ? extractLocalTime(conditions.astro.sunset)
+                              : conditions.timeContext?.sunsetISO &&
+                                extractLocalTime(conditions.timeContext.sunsetISO)}
                           </p>
                         </div>
                       </>

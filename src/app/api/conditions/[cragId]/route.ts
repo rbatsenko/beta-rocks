@@ -73,6 +73,10 @@ export async function GET(
         precipitation_mm: weather.current.precipitation,
         weatherCode: weather.current.weatherCode,
       },
+      astro: {
+        sunrise: weather.daily[0].sunrise,
+        sunset: weather.daily[0].sunset,
+      },
     };
 
     console.log(`[API /conditions/${cragId}] Successfully computed conditions for ${crag.name}`);

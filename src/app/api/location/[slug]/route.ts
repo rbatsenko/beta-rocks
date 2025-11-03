@@ -94,6 +94,10 @@ export async function GET(
         precipitation_mm: weather.current.precipitation,
         weatherCode: weather.current.weatherCode,
       },
+      astro: {
+        sunrise: weather.daily[0].sunrise,
+        sunset: weather.daily[0].sunset,
+      },
     };
 
     return NextResponse.json({
