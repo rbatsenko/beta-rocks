@@ -54,7 +54,7 @@ export async function GET(
       transformedWeather,
       (crag.rock_type as RockType) || "unknown",
       0,
-      { includeNightHours: false }
+      { includeNightHours: true }
     );
 
     if (!rawConditions || typeof rawConditions.frictionRating !== "number") {
