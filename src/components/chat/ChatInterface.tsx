@@ -56,6 +56,9 @@ import { logRender } from "@/lib/debug/render-log";
 import { ConfirmDialog } from "@/components/dialogs/ConfirmDialog";
 import { SyncExplainerDialog } from "@/components/profile/SyncExplainerDialog";
 import { StatsDialog } from "@/components/profile/StatsDialog";
+import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal";
+import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog";
+import type { UserProfile } from "@/lib/auth/sync-key";
 
 interface ConditionsData {
   location: string;
@@ -265,6 +268,12 @@ const ChatUI = ({
   const [searchDialogOpen, setSearchDialogOpen] = useState(false);
   const [newChatConfirmOpen, setNewChatConfirmOpen] = useState(false);
   const [scrollSignal, setScrollSignal] = useState(0);
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [showProfileCreated, setShowProfileCreated] = useState(false);
+  const [newSyncKey, setNewSyncKey] = useState<string>("");
+  const [pendingAction, setPendingAction] = useState<"favorites" | "stats" | "settings" | null>(
+    null
+  );
   // Store prefetched full 14-day data keyed by location coordinates
   const [prefetchedDataMap, setPrefetchedDataMap] = useState<Map<string, PrefetchedFullData>>(
     new Map()
@@ -286,6 +295,58 @@ const ChatUI = ({
       console.error("Failed to clear session:", error);
     }
   }, [clearSessionMutation, sessionId]);
+
+  // Handle profile creation completion
+  const handleProfileCreated = useCallback(
+    (profile: UserProfile) => {
+      setNewSyncKey(profile.syncKey);
+      setShowProfileModal(false);
+      setShowProfileCreated(true);
+
+      // Complete the pending action after profile creation
+      if (pendingAction === "favorites") {
+        setFavoritesDialogOpen(true);
+      } else if (pendingAction === "stats") {
+        setStatsDialogOpen(true);
+      } else if (pendingAction === "settings") {
+        setSettingsDialogOpen(true);
+      }
+
+      setPendingAction(null);
+    },
+    [pendingAction]
+  );
+
+  // Handle clicks with profile requirement check
+  const handleFavoritesClick = useCallback(() => {
+    const profile = getUserProfile();
+    if (!profile) {
+      setPendingAction("favorites");
+      setShowProfileModal(true);
+      return;
+    }
+    setFavoritesDialogOpen(true);
+  }, []);
+
+  const handleStatsClick = useCallback(() => {
+    const profile = getUserProfile();
+    if (!profile) {
+      setPendingAction("stats");
+      setShowProfileModal(true);
+      return;
+    }
+    setStatsDialogOpen(true);
+  }, []);
+
+  const handleSettingsClick = useCallback(() => {
+    const profile = getUserProfile();
+    if (!profile) {
+      setPendingAction("settings");
+      setShowProfileModal(true);
+      return;
+    }
+    setSettingsDialogOpen(true);
+  }, []);
 
   // React Query hook for favorites
   const { data: favorites = [] } = useFavorites();
@@ -408,9 +469,9 @@ const ChatUI = ({
           actions={
             <HeaderActions
               onSearchClick={() => setSearchDialogOpen(true)}
-              onSettingsClick={() => setSettingsDialogOpen(true)}
-              onFavoritesClick={() => setFavoritesDialogOpen(true)}
-              onStatsClick={() => setStatsDialogOpen(true)}
+              onSettingsClick={handleSettingsClick}
+              onFavoritesClick={handleFavoritesClick}
+              onStatsClick={handleStatsClick}
               onAboutClick={() => setFeaturesDialogOpen(true)}
               onClearChatClick={() => setNewChatConfirmOpen(true)}
               isClearChatDisabled={messages.length === 0}
@@ -840,6 +901,22 @@ const ChatUI = ({
 
       {/* Stats Dialog */}
       <StatsDialog open={statsDialogOpen} onOpenChange={setStatsDialogOpen} />
+
+      {/* Profile Creation Modal */}
+      <ProfileCreationModal
+        open={showProfileModal}
+        onOpenChange={setShowProfileModal}
+        trigger="manual"
+        onCreated={handleProfileCreated}
+      />
+
+      {/* Profile Created Dialog */}
+      <ProfileCreatedDialog
+        open={showProfileCreated}
+        onOpenChange={setShowProfileCreated}
+        syncKey={newSyncKey}
+        completedAction=""
+      />
 
       {/* Clear Chat Confirmation Dialog */}
       <ConfirmDialog

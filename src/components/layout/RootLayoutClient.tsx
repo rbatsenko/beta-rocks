@@ -10,6 +10,9 @@ import { StatsDialog } from "@/components/profile/StatsDialog";
 import { SyncExplainerDialog } from "@/components/profile/SyncExplainerDialog";
 import { SearchDialog } from "@/components/dialogs/SearchDialog";
 import { FeaturesDialog } from "@/components/dialogs/FeaturesDialog";
+import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal";
+import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog";
+import { getUserProfile, type UserProfile } from "@/lib/auth/sync-key";
 
 export function RootLayoutClient({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -19,6 +22,12 @@ export function RootLayoutClient({ children }: { children: React.ReactNode }) {
   const [syncExplainerDialogOpen, setSyncExplainerDialogOpen] = useState(false);
   const [searchDialogOpen, setSearchDialogOpen] = useState(false);
   const [featuresDialogOpen, setFeaturesDialogOpen] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [showProfileCreated, setShowProfileCreated] = useState(false);
+  const [newSyncKey, setNewSyncKey] = useState<string>("");
+  const [pendingAction, setPendingAction] = useState<"favorites" | "stats" | "settings" | null>(
+    null
+  );
 
   // ⌘K keyboard shortcut for search
   useEffect(() => {
@@ -36,6 +45,55 @@ export function RootLayoutClient({ children }: { children: React.ReactNode }) {
   // Profile creation is now on-demand (when user favorites, reports, or votes)
   // This prevents database bloat from casual visitors
 
+  // Handle profile creation completion
+  const handleProfileCreated = (profile: UserProfile) => {
+    setNewSyncKey(profile.syncKey);
+    setShowProfileModal(false);
+    setShowProfileCreated(true);
+
+    // Complete the pending action after profile creation
+    if (pendingAction === "favorites") {
+      setFavoritesDialogOpen(true);
+    } else if (pendingAction === "stats") {
+      setStatsDialogOpen(true);
+    } else if (pendingAction === "settings") {
+      setSettingsDialogOpen(true);
+    }
+
+    setPendingAction(null);
+  };
+
+  // Handle clicks with profile requirement check
+  const handleFavoritesClick = () => {
+    const profile = getUserProfile();
+    if (!profile) {
+      setPendingAction("favorites");
+      setShowProfileModal(true);
+      return;
+    }
+    setFavoritesDialogOpen(true);
+  };
+
+  const handleStatsClick = () => {
+    const profile = getUserProfile();
+    if (!profile) {
+      setPendingAction("stats");
+      setShowProfileModal(true);
+      return;
+    }
+    setStatsDialogOpen(true);
+  };
+
+  const handleSettingsClick = () => {
+    const profile = getUserProfile();
+    if (!profile) {
+      setPendingAction("settings");
+      setShowProfileModal(true);
+      return;
+    }
+    setSettingsDialogOpen(true);
+  };
+
   // Show header on location pages
   const showHeader = pathname?.startsWith("/location");
 
@@ -46,9 +104,9 @@ export function RootLayoutClient({ children }: { children: React.ReactNode }) {
           actions={
             <HeaderActions
               onSearchClick={() => setSearchDialogOpen(true)}
-              onSettingsClick={() => setSettingsDialogOpen(true)}
-              onFavoritesClick={() => setFavoritesDialogOpen(true)}
-              onStatsClick={() => setStatsDialogOpen(true)}
+              onSettingsClick={handleSettingsClick}
+              onFavoritesClick={handleFavoritesClick}
+              onStatsClick={handleStatsClick}
               onAboutClick={() => setFeaturesDialogOpen(true)}
             />
           }
@@ -66,6 +124,22 @@ export function RootLayoutClient({ children }: { children: React.ReactNode }) {
         open={syncExplainerDialogOpen}
         onOpenChange={setSyncExplainerDialogOpen}
         onOpenSettings={() => setSettingsDialogOpen(true)}
+      />
+
+      {/* Profile Creation Modal */}
+      <ProfileCreationModal
+        open={showProfileModal}
+        onOpenChange={setShowProfileModal}
+        trigger="manual"
+        onCreated={handleProfileCreated}
+      />
+
+      {/* Profile Created Dialog */}
+      <ProfileCreatedDialog
+        open={showProfileCreated}
+        onOpenChange={setShowProfileCreated}
+        syncKey={newSyncKey}
+        completedAction=""
       />
     </>
   );
