@@ -409,14 +409,52 @@ export async function fetchReportById(id: string) {
   return data;
 }
 
-export async function updateReport(id: string, updates: Record<string, unknown>) {
+/**
+ * Update a report (ownership verified by RLS policy)
+ * Only allows updating safe fields
+ */
+export async function updateReport(
+  reportId: string,
+  userProfileId: string,
+  updates: Partial<{
+    text: string;
+    category: string;
+    rating_dry: number;
+    rating_wind: number;
+    rating_crowds: number;
+    expires_at: string | null;
+    observed_at: string;
+    lost_found_type: string | null;
+  }>
+): Promise<Tables<"reports"> | null> {
+  // First verify the report exists and belongs to the user
+  const { data: existingReport, error: fetchError } = await supabase
+    .from("reports")
+    .select("*")
+    .eq("id", reportId)
+    .eq("author_id", userProfileId)
+    .single();
+
+  if (fetchError) {
+    if (fetchError.code === "PGRST116") {
+      // Not found or not owned by user
+      return null;
+    }
+    throw fetchError;
+  }
+
+  if (!existingReport) {
+    return null;
+  }
+
+  // Update the report
   const { data, error } = await supabase
     .from("reports")
     .update({
       ...updates,
       updated_at: new Date().toISOString(),
     })
-    .eq("id", id)
+    .eq("id", reportId)
     .select()
     .single();
 
@@ -424,10 +462,51 @@ export async function updateReport(id: string, updates: Record<string, unknown>)
   return data;
 }
 
-export async function deleteReport(id: string) {
-  const { error } = await supabase.from("reports").delete().eq("id", id);
+/**
+ * Delete a report (ownership verified by RLS policy)
+ * Decrements user stats automatically
+ * Confirmations are cascade-deleted by database
+ */
+export async function deleteReport(reportId: string, userProfileId: string): Promise<boolean> {
+  // First verify the report exists and belongs to the user
+  const { data: existingReport, error: fetchError } = await supabase
+    .from("reports")
+    .select("author_id")
+    .eq("id", reportId)
+    .eq("author_id", userProfileId)
+    .single();
+
+  if (fetchError) {
+    if (fetchError.code === "PGRST116") {
+      // Not found or not owned by user
+      return false;
+    }
+    throw fetchError;
+  }
+
+  if (!existingReport) {
+    return false;
+  }
+
+  // Delete the report
+  const { error } = await supabase.from("reports").delete().eq("id", reportId);
 
   if (error) throw error;
+
+  // Decrement user stats
+  if (userProfileId) {
+    try {
+      const stats = await fetchOrCreateUserStats(userProfileId);
+      await updateUserStats(userProfileId, {
+        reports_posted: Math.max(0, (stats.reports_posted || 0) - 1),
+      });
+    } catch (statsError) {
+      console.error("[deleteReport] Failed to decrement user stats:", statsError);
+      // Don't fail the delete if stats update fails
+    }
+  }
+
+  return true;
 }
 
 // ==================== USER PROFILES ====================

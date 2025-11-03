@@ -19,7 +19,9 @@
         "display": "Forhold i Møns Klint i morgen?",
         "query": "Forhold i Møns Klint i morgen?"
       }
-    }
+    },
+    "yourFavorites": "Dine favoritter",
+    "favoriteQuery": "Hvad er forholdene ved {{crag}}?"
   },
   "chat": {
     "analyzing": "Analyserer betingelser...",
@@ -266,7 +268,8 @@
     "lessReliable": "Dage 8-14: Mindre pålidelig prognose",
     "lessReliableHourly": "Næste timer mindre forudsigelig",
     "lessCertain": "MINDRE SIKKER",
-    "todayBadge": "I DAG"
+    "todayBadge": "I DAG",
+    "delete": "Slet"
   },
   "timeContext": {
     "sunrise": "Solopgang",
@@ -484,7 +487,8 @@
       "access": "Adgang",
       "climbing_info": "Klatreinfo",
       "facilities": "Faciliteter",
-      "other": "Andet"
+      "other": "Andet",
+      "lost_found": "Hittegods"
     },
     "categoryDescriptions": {
       "conditions": "Vejr, friktion, tørhed, trængsel",
@@ -492,7 +496,17 @@
       "access": "Lukninger, parkeringsændringer, sæsonbegrænsninger, fuglereder, insekter",
       "climbing_info": "Omboltning, opdateringer af udstyr, ruteændringer, faste quickdraws",
       "facilities": "Toiletter, camping, vandkilder, faciliteter",
-      "other": "Alt andet, der ikke passer ovenstående"
+      "other": "Alt andet, der ikke passer ovenstående",
+      "lost_found": "Tabt eller fundet udstyr og equipment"
+    },
+    "categoryHelp": {
+      "conditions": "Aktuelt vejr, friktion, tørhed, trængsel ved klippen",
+      "safety": "Farer i hele området, farlige forhold, presserende advarsler",
+      "access": "Parkering, lukninger, regler, sæsonbegrænsninger",
+      "climbing_info": "Rutespecifikke detaljer, beta, greb, udstyr, sværhedsgrader",
+      "facilities": "Toiletter, camping, vandkilder, faciliteter",
+      "other": "Alt andet, der ikke passer til ovenstående kategorier",
+      "lost_found": "Rapporter tabte genstande du leder efter eller fundne genstande du holder"
     },
     "dryness": "Tørhed",
     "wind": "Vind",
@@ -506,7 +520,8 @@
       "access": "F.eks., Port lukket indtil maj, ny parkeringsplads bag biblioteket...",
       "climbing_info": "F.eks., Rute X ombolttet med rustfri bolte, nye faste quickdraws installeret, sikring opgraderet...",
       "facilities": "F.eks., Toilet tilgængeligt ved parkering, ingen vandkilde i nærheden...",
-      "other": "Beskriv hvad du vil rapportere..."
+      "other": "Beskriv hvad du vil rapportere...",
+      "lost_found": "F.eks., Fundet blå kridt-pose ved base, mistet Black Diamond cam #2 ved parkering..."
     },
     "submit": "Indsend rapport",
     "submitting": "Indsender...",
@@ -565,7 +580,30 @@
       "veryOld": "Meget gammel"
     },
     "observationDate": "Hvornår observerede du dette?",
-    "observationDateHelp": "Du kan rapportere forhold op til 7 dage tilbage"
+    "observationDateHelp": "Du kan rapportere forhold op til 7 dage tilbage",
+    "lostFoundType": "Type",
+    "lostFoundTypes": {
+      "lost": "Tabt genstand",
+      "found": "Fundet genstand"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Vælg om dette er en tabt eller fundet genstand",
+    "lostBadge": "TABT",
+    "foundBadge": "FUNDET",
+    "expiresAt": "Gyldig indtil (valgfrit)",
+    "expiresAtHelp": "Angiv hvornår denne rapport bliver forældet (nyttig for midlertidige lukninger eller skiftende forhold)",
+    "noExpiry": "Udløber aldrig",
+    "expiredOn": "Udløbet {{date}}",
+    "edit": "Rediger",
+    "delete": "Slet",
+    "deleteConfirm": "Er du sikker på, at du vil slette denne rapport?",
+    "deleteConfirmTitle": "Slet rapport",
+    "updated": "Rapport opdateret",
+    "deleted": "Rapport slettet",
+    "editReport": "Rediger rapport",
+    "editReportDescription": "Opdater din rapport",
+    "updateReport": "Opdater rapport",
+    "updating": "Opdaterer..."
   },
   "cragPage": {
     "askAI": "Spørg AI",

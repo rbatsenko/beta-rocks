@@ -19,7 +19,9 @@
         "query": "Vilka förhållanden får vi i Häggsta på fredag?"
       }
     },
-    "searchHint": "Sök klippor direkt med"
+    "searchHint": "Sök klippor direkt med",
+    "yourFavorites": "Dina Favoriter",
+    "favoriteQuery": "Vilka är förhållandena vid {{crag}}?"
   },
   "chat": {
     "analyzing": "Analyserar förhållanden...",
@@ -267,7 +269,8 @@
     "lessReliable": "Dag 8-14: mindre tillförlitlig prognos",
     "lessReliableHourly": "Nästa timmar mindre förutsägbara",
     "lessCertain": "OSÄKRARE",
-    "todayBadge": "I DAG"
+    "todayBadge": "I DAG",
+    "delete": "Radera"
   },
   "timeContext": {
     "sunrise": "Soluppgång",
@@ -485,7 +488,8 @@
       "access": "Tillgång",
       "climbing_info": "Klätterinfo",
       "facilities": "Faciliteter",
-      "other": "Annat"
+      "other": "Annat",
+      "lost_found": "Hittegodsförvarning"
     },
     "categoryDescriptions": {
       "conditions": "Väder, friktion, torrhet, trängsel",
@@ -493,7 +497,17 @@
       "access": "Stängningar, parkeringsändringar, säsongsbegränsningar, fågelbon, insekter",
       "climbing_info": "Ombultning, uppdateringar av utrustning, ruttändringar, fasta quickdraws",
       "facilities": "Toaletter, camping, vattenkällor, bekvämligheter",
-      "other": "Allt annat som inte passar ovan"
+      "other": "Allt annat som inte passar ovan",
+      "lost_found": "Förlorat eller hittat utrustning"
+    },
+    "categoryHelp": {
+      "conditions": "Aktuellt väder, friktion, torrhet, trängsel vid klippan",
+      "safety": "Faror i hela området, farliga förhållanden, brådskande varningar",
+      "access": "Parkering, stängningar, regler, säsongsbegränsningar",
+      "climbing_info": "Ruttspecifika detaljer, beta, grepp, utrustning, svårighetsgrader",
+      "facilities": "Toaletter, camping, vattenkällor, bekvämligheter",
+      "other": "Allt annat som inte passar ovanstående kategorier",
+      "lost_found": "Rapportera förlorade föremål du letar efter eller hittade föremål du har"
     },
     "dryness": "Torrhet",
     "wind": "Vind",
@@ -507,7 +521,8 @@
       "access": "T.ex., Grind stängd till maj, ny parkering bakom biblioteket...",
       "climbing_info": "T.ex., Rutt X ombultad med rostfria bultar, nya fasta quickdraws installerade, fäste uppgraderat...",
       "facilities": "T.ex., Toalett tillgänglig vid parkeringen, ingen vattenkälla i närheten...",
-      "other": "Beskriv vad du vill rapportera..."
+      "other": "Beskriv vad du vill rapportera...",
+      "lost_found": "T.ex., Hittad blå kritpåse vid basen, förlorad Black Diamond cam #2 vid parkeringen..."
     },
     "submit": "Skicka rapport",
     "submitting": "Skickar...",
@@ -566,7 +581,30 @@
       "veryOld": "Mycket gammal"
     },
     "observationDate": "När observerade du detta?",
-    "observationDateHelp": "Du kan rapportera förhållanden upp till 7 dagar tillbaka"
+    "observationDateHelp": "Du kan rapportera förhållanden upp till 7 dagar tillbaka",
+    "lostFoundType": "Typ",
+    "lostFoundTypes": {
+      "lost": "Förlorat föremål",
+      "found": "Hittat föremål"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Välj om detta är ett förlorat eller hittat föremål",
+    "lostBadge": "FÖRLORAT",
+    "foundBadge": "HITTAT",
+    "expiresAt": "Giltigt till (valfritt)",
+    "expiresAtHelp": "Ange när denna rapport blir inaktuell (användbart för tillfälliga stängningar eller förändrade förhållanden)",
+    "noExpiry": "Går aldrig ut",
+    "expiredOn": "Utgick {{date}}",
+    "edit": "Redigera",
+    "delete": "Radera",
+    "deleteConfirm": "Är du säker på att du vill radera denna rapport?",
+    "deleteConfirmTitle": "Radera Rapport",
+    "updated": "Rapport uppdaterad",
+    "deleted": "Rapport raderad",
+    "editReport": "Redigera Rapport",
+    "editReportDescription": "Uppdatera din rapport",
+    "updateReport": "Uppdatera Rapport",
+    "updating": "Uppdaterar..."
   },
   "cragPage": {
     "askAI": "Fråga AI",

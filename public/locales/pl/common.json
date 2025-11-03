@@ -20,8 +20,8 @@
         "query": "Jak tam Dupa Słonia?"
       }
     },
-    "yourFavorites": "Twoje ulubione",
-    "favoriteQuery": "Jakie są warunki na {{crag}}?"
+    "yourFavorites": "Twoje Ulubione",
+    "favoriteQuery": "Jakie są warunki w {{crag}}?"
   },
   "chat": {
     "analyzing": "Analizuję warunki...",
@@ -614,7 +614,8 @@
       "access": "Dostęp",
       "climbing_info": "Info wspinaczkowe",
       "facilities": "Udogodnienia",
-      "other": "Inne"
+      "other": "Inne",
+      "lost_found": "Rzeczy znalezione"
     },
     "categoryDescriptions": {
       "conditions": "Pogoda, tarcie, suchość, tłumy",
@@ -622,7 +623,17 @@
       "access": "Zamknięcia, zmiany parkingów, ograniczenia sezonowe, gniazda ptaków, owady",
       "climbing_info": "Wymiana ringów, ekspresów, zmiana przebiegu linii, asekuracja",
       "facilities": "Parking, toalety, kemping, woda, udogodnienia",
-      "other": "Cokolwiek innego, co nie pasuje do kategorii powyżej"
+      "other": "Cokolwiek innego, co nie pasuje do kategorii powyżej",
+      "lost_found": "Zgubiony lub znaleziony sprzęt"
+    },
+    "categoryHelp": {
+      "conditions": "Aktualna pogoda, tarcie, suchość, tłumy na skałce",
+      "safety": "Zagrożenia w całym obszarze, niebezpieczne warunki, pilne ostrzeżenia",
+      "access": "Parking, zamknięcia, regulacje, ograniczenia sezonowe",
+      "climbing_info": "Szczegóły dotyczące dróg, beta, chwyty, sprzęt, trudności",
+      "facilities": "Toalety, kemping, źródła wody, udogodnienia",
+      "other": "Cokolwiek innego, co nie pasuje do powyższych kategorii",
+      "lost_found": "Zgłoś zgubione przedmioty, których szukasz, lub znalezione przedmioty, które masz"
     },
     "details": "Szczegóły",
     "detailsRequired": "Podaj szczegóły tego zgłoszenia",
@@ -630,9 +641,10 @@
       "conditions": "Np. Sektor wschodni wciąż mokry, ścieżka zabłocona, leje się z rysy...",
       "safety": "Np. Luźny ring na Drodze X, niebezpieczeństwo odpadnięcia bloku skalnego przy głównej ścianie...",
       "access": "Np. Brama zamknięta do maja, nowy parking za biblioteką...",
-      "climbing_info": "Np. Droga X przebita na nowo, nowe ringi ze stali nierdzewnej, dodane stałe ekspresówki...",
+      "climbing_info": "Np. Droga X przebita na nowo, nowe ringi ze stali nierdzewnej, dodane stałe ekspresy...",
       "facilities": "Np. toaleta dostępna na parkingu, brak wody w pobliżu...",
-      "other": "Opisz, co chcesz zgłosić..."
+      "other": "Opisz, co chcesz zgłosić...",
+      "lost_found": "Np., Znaleziono niebieski worek na magnezję przy podstawie, zgubiono Black Diamond cam #2 przy parkingu..."
     },
     "noReportsInCategory": "Brak raportów w tej kategorii",
     "filters": {
@@ -644,7 +656,30 @@
       "veryOld": "Bardzo stare"
     },
     "observationDate": "Kiedy to zaobserwowałeś/aś?",
-    "observationDateHelp": "Możesz zgłaszać warunki do 7 dni wstecz"
+    "observationDateHelp": "Możesz zgłaszać warunki do 7 dni wstecz",
+    "lostFoundType": "Typ",
+    "lostFoundTypes": {
+      "lost": "Zgubiony przedmiot",
+      "found": "Znaleziony przedmiot"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Wybierz, czy jest to zgubiony czy znaleziony przedmiot",
+    "lostBadge": "ZGUBIONY",
+    "foundBadge": "ZNALEZIONY",
+    "expiresAt": "Ważne do (opcjonalnie)",
+    "expiresAtHelp": "Ustaw, kiedy ten raport staje się nieaktualny (przydatne dla tymczasowych zamknięć lub zmieniających się warunków)",
+    "noExpiry": "Nigdy nie wygasa",
+    "expiredOn": "Wygasło {{date}}",
+    "edit": "Edytuj",
+    "delete": "Usuń",
+    "deleteConfirm": "Czy na pewno chcesz usunąć ten raport?",
+    "deleteConfirmTitle": "Usuń Raport",
+    "updated": "Raport zaktualizowany",
+    "deleted": "Raport usunięty",
+    "editReport": "Edytuj Raport",
+    "editReportDescription": "Zaktualizuj swój raport",
+    "updateReport": "Zaktualizuj Raport",
+    "updating": "Aktualizowanie..."
   },
   "cragPage": {
     "askAI": "Zapytaj AI",

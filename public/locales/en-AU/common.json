@@ -19,7 +19,9 @@
         "display": "Blue Mountains conditions tomorrow?",
         "query": "Blue Mountains conditions tomorrow?"
       }
-    }
+    },
+    "yourFavorites": "Your Favourites",
+    "favoriteQuery": "What are conditions at {{crag}}?"
   },
   "chat": {
     "analyzing": "Analysing conditions...",
@@ -266,7 +268,8 @@
     "lessReliable": "Days 8-14: Less reliable forecast",
     "lessReliableHourly": "Next hours less predictable",
     "lessCertain": "LESS CERTAIN",
-    "todayBadge": "TODAY"
+    "todayBadge": "TODAY",
+    "delete": "Delete"
   },
   "timeContext": {
     "sunrise": "Sunrise",
@@ -484,7 +487,8 @@
       "access": "Access",
       "climbing_info": "Climbing Info",
       "facilities": "Facilities",
-      "other": "Other"
+      "other": "Other",
+      "lost_found": "Lost & Found"
     },
     "categoryDescriptions": {
       "conditions": "Weather, friction, dryness, crowds",
@@ -492,7 +496,17 @@
       "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
       "climbing_info": "Rebolting, hardware updates, route changes, permadraws",
       "facilities": "Bathrooms, camping, water sources, amenities",
-      "other": "Anything else that doesn't fit above"
+      "other": "Anything else that doesn't fit above",
+      "lost_found": "Lost or found gear and equipment"
+    },
+    "categoryHelp": {
+      "conditions": "Current weather, friction, dryness, crowds at the crag",
+      "safety": "Area-wide hazards, dangerous conditions, urgent warnings",
+      "access": "Parking, closures, regulations, seasonal restrictions",
+      "climbing_info": "Route-specific details, beta, holds, gear, grades",
+      "facilities": "Restrooms, camping, water sources, amenities",
+      "other": "Anything else that doesn't fit the above categories",
+      "lost_found": "Report lost items you're looking for or found items you're holding"
     },
     "dryness": "Dryness",
     "wind": "Wind",
@@ -506,7 +520,8 @@
       "access": "E.g., Gate closed until May, new parking lot behind library...",
       "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
       "facilities": "E.g., Toilet available at parking, no water source nearby...",
-      "other": "Describe what you'd like to report..."
+      "other": "Describe what you'd like to report...",
+      "lost_found": "E.g., Found blue chalk bag at base of main wall, lost Black Diamond cam #2 near car park..."
     },
     "submit": "Submit Report",
     "submitting": "Submitting...",
@@ -559,7 +574,30 @@
       "all": "All"
     },
     "observationDate": "When did you observe this?",
-    "observationDateHelp": "You can report conditions up to 7 days back"
+    "observationDateHelp": "You can report conditions up to 7 days back",
+    "lostFoundType": "Type",
+    "lostFoundTypes": {
+      "lost": "Lost Item",
+      "found": "Found Item"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Please select whether this is a lost or found item",
+    "lostBadge": "LOST",
+    "foundBadge": "FOUND",
+    "expiresAt": "Valid until (optional)",
+    "expiresAtHelp": "Set when this report becomes outdated (useful for temporary closures or changing conditions)",
+    "noExpiry": "Never expires",
+    "expiredOn": "Expired {{date}}",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteConfirm": "Are you sure you want to delete this report?",
+    "deleteConfirmTitle": "Delete Report",
+    "updated": "Report updated",
+    "deleted": "Report deleted",
+    "editReport": "Edit Report",
+    "editReportDescription": "Update your report",
+    "updateReport": "Update Report",
+    "updating": "Updating..."
   },
   "cragPage": {
     "askAI": "Ask AI",

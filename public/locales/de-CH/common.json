@@ -19,7 +19,9 @@
         "display": "Wie wird das Wetter in Kochel am Wochenende?",
         "query": "Wie sind die Bedingungen in Kochel dieses Wochenende?"
       }
-    }
+    },
+    "yourFavorites": "Deine Favoriten",
+    "favoriteQuery": "Wie sind die Bedingungen in {{crag}}?"
   },
   "chat": {
     "analyzing": "Analysiere Bedingungen...",
@@ -270,7 +272,8 @@
     "lessReliable": "Tage 8-14: Weniger verlässliche Vorhersage",
     "lessReliableHourly": "Nächste Stunden weniger vorhersehbar",
     "lessCertain": "UNSICHERER",
-    "todayBadge": "HEUTE"
+    "todayBadge": "HEUTE",
+    "delete": "Löschen"
   },
   "timeContext": {
     "sunrise": "Sonnenaufgang",
@@ -568,7 +571,8 @@
       "access": "Zugang",
       "climbing_info": "Kletterinfos",
       "facilities": "Einrichtungen",
-      "other": "Sonstiges"
+      "other": "Sonstiges",
+      "lost_found": "Fundbüro"
     },
     "categoryDescriptions": {
       "conditions": "Wetter, Reibung, Trockenheit, Andrang",
@@ -576,7 +580,17 @@
       "access": "Sperrungen, Parkplatzänderungen, saisonale Beschränkungen, Vogelnester, Insekten",
       "climbing_info": "Neuverschraubungen, Ausrüstungsaktualisierungen, Routenänderungen, Fixexpresschlingen",
       "facilities": "Toiletten, Camping, Wasserquellen, Annehmlichkeiten",
-      "other": "Alles andere, das nicht in die obigen Kategorien passt"
+      "other": "Alles andere, das nicht in die obigen Kategorien passt",
+      "lost_found": "Verlorene oder gefundene Ausrüstung und Equipment"
+    },
+    "categoryHelp": {
+      "conditions": "Aktuelles Wetter, Reibung, Trockenheit, Andrang am Fels",
+      "safety": "Gefahren im gesamten Gebiet, gefährliche Bedingungen, dringende Warnungen",
+      "access": "Parken, Sperrungen, Regelungen, saisonale Beschränkungen",
+      "climbing_info": "Routenspezifische Details, Beta, Griffe, Ausrüstung, Schwierigkeitsgrade",
+      "facilities": "Toiletten, Camping, Wasserquellen, Annehmlichkeiten",
+      "other": "Alles andere, das nicht in die obigen Kategorien passt",
+      "lost_found": "Melde verlorene Gegenstände, die du suchst, oder gefundene Gegenstände, die du hast"
     },
     "dryness": "Trockenheit",
     "wind": "Wind",
@@ -590,7 +604,8 @@
       "access": "Z.B. Tor bis Mai geschlossen, neuer Parkplatz hinter der Bibliothek...",
       "climbing_info": "Z.B. Route X neu verschraubt mit Edelstahlhaken, neue Fixexpresschlingen installiert, Stand aufgerüstet...",
       "facilities": "Z.B. Toilette am Parkplatz verfügbar, keine Wasserquelle in der Nähe...",
-      "other": "Beschreibe, was du melden möchtest..."
+      "other": "Beschreibe, was du melden möchtest...",
+      "lost_found": "Z.B., Blauen Chalkbag am Wandfuß gefunden, Black Diamond Cam #2 am Parkplatz verloren..."
     },
     "submit": "Bericht absenden",
     "submitting": "Wird gesendet...",
@@ -649,7 +664,30 @@
     },
     "observationDate": "Wann haben Sie das beobachtet?",
     "observationDateHelp": "Sie können Bedingungen bis zu 7 Tage zurück melden",
-    "voteReady": "Du kannst jetzt über Berichte abstimmen"
+    "voteReady": "Du kannst jetzt über Berichte abstimmen",
+    "lostFoundType": "Typ",
+    "lostFoundTypes": {
+      "lost": "Verlorener Gegenstand",
+      "found": "Gefundener Gegenstand"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Bitte wähle, ob dies ein verlorener oder gefundener Gegenstand ist",
+    "lostBadge": "VERLOREN",
+    "foundBadge": "GEFUNDEN",
+    "expiresAt": "Gültig bis (optional)",
+    "expiresAtHelp": "Legen Sie fest, wann dieser Bericht veraltet ist (nützlich für vorübergehende Schliessungen oder sich ändernde Bedingungen)",
+    "noExpiry": "Läuft nie ab",
+    "expiredOn": "Abgelaufen am {{date}}",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "deleteConfirm": "Möchten Sie diesen Bericht wirklich löschen?",
+    "deleteConfirmTitle": "Bericht löschen",
+    "updated": "Bericht aktualisiert",
+    "deleted": "Bericht gelöscht",
+    "editReport": "Bericht bearbeiten",
+    "editReportDescription": "Aktualisieren Sie Ihren Bericht",
+    "updateReport": "Bericht aktualisieren",
+    "updating": "Wird aktualisiert..."
   },
   "cragPage": {
     "askAI": "KI fragen",

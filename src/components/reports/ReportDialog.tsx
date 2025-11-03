@@ -10,6 +10,8 @@ import {
   Mountain,
   Home,
   Calendar as CalendarIcon,
+  X,
+  Search,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,6 +27,7 @@ import { Slider } from "@/components/ui/slider";
 import { Calendar } from "@/components/ui/calendar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { getUserProfile, hashSyncKeyAsync, type UserProfile } from "@/lib/auth/sync-key";
 import { createReport } from "@/lib/db/queries";
@@ -35,7 +38,14 @@ import { getDateFnsLocale, getLocalizedDateFormat } from "@/lib/i18n/date-locale
 import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal";
 import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog";
 
-type ReportCategory = "conditions" | "safety" | "access" | "climbing_info" | "facilities" | "other";
+type ReportCategory =
+  | "conditions"
+  | "safety"
+  | "access"
+  | "climbing_info"
+  | "facilities"
+  | "lost_found"
+  | "other";
 
 const categories: ReportCategory[] = [
   "conditions",
@@ -43,8 +53,22 @@ const categories: ReportCategory[] = [
   "access",
   "climbing_info",
   "facilities",
+  "lost_found",
   "other",
 ];
+
+interface Report {
+  id: string;
+  category: string;
+  text: string | null;
+  rating_dry: number | null;
+  rating_wind: number | null;
+  rating_crowds: number | null;
+  observed_at: string;
+  expires_at: string | null;
+  lost_found_type: string | null;
+  author_id: string | null;
+}
 
 interface ReportDialogProps {
   open: boolean;
@@ -52,6 +76,7 @@ interface ReportDialogProps {
   cragId: string;
   cragName: string;
   onReportCreated?: () => void;
+  editReport?: Report; // Optional: if provided, dialog is in edit mode
 }
 
 export function ReportDialog({
@@ -60,18 +85,22 @@ export function ReportDialog({
   cragId,
   cragName,
   onReportCreated,
+  editReport,
 }: ReportDialogProps) {
   const { t, i18n } = useClientTranslation("common");
   const dateLocale = getDateFnsLocale(i18n.language);
   const dateFormat = getLocalizedDateFormat(i18n.language);
+  const isEditMode = !!editReport;
   const [category, setCategory] = useState<ReportCategory>("conditions");
   const [dryRating, setDryRating] = useState([3]);
   const [windRating, setWindRating] = useState([3]);
   const [crowdsRating, setCrowdsRating] = useState([3]);
   const [text, setText] = useState("");
+  const [lostFoundType, setLostFoundType] = useState<"lost" | "found" | "">("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [displayName, setDisplayName] = useState<string | null>(null);
   const [observedAt, setObservedAt] = useState<Date>(new Date());
+  const [expiresAt, setExpiresAt] = useState<Date | undefined>(undefined);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showProfileCreated, setShowProfileCreated] = useState(false);
   const [newSyncKey, setNewSyncKey] = useState<string>("");
@@ -81,15 +110,30 @@ export function ReportDialog({
       // Load display name from profile
       const profile = getUserProfile();
       setDisplayName(profile?.displayName || null);
-      // Reset form
-      setCategory("conditions");
-      setDryRating([3]);
-      setWindRating([3]);
-      setCrowdsRating([3]);
-      setText("");
-      setObservedAt(new Date());
+
+      if (isEditMode && editReport) {
+        // Pre-populate form with existing report data
+        setCategory(editReport.category as ReportCategory);
+        setDryRating([editReport.rating_dry || 3]);
+        setWindRating([editReport.rating_wind || 3]);
+        setCrowdsRating([editReport.rating_crowds || 3]);
+        setText(editReport.text || "");
+        setLostFoundType((editReport.lost_found_type as "lost" | "found") || "");
+        setObservedAt(new Date(editReport.observed_at));
+        setExpiresAt(editReport.expires_at ? new Date(editReport.expires_at) : undefined);
+      } else {
+        // Reset form for new report
+        setCategory("conditions");
+        setDryRating([3]);
+        setWindRating([3]);
+        setCrowdsRating([3]);
+        setText("");
+        setLostFoundType("");
+        setObservedAt(new Date());
+        setExpiresAt(undefined);
+      }
     }
-  }, [open]);
+  }, [open, isEditMode, editReport]);
 
   // Helper to get category icon
   const getCategoryIcon = (cat: ReportCategory) => {
@@ -105,6 +149,8 @@ export function ReportDialog({
         return <Mountain className={iconClass} />;
       case "facilities":
         return <Home className={iconClass} />;
+      case "lost_found":
+        return <Search className={iconClass} />;
       default:
         return <MessageSquare className={iconClass} />;
     }
@@ -130,6 +176,12 @@ export function ReportDialog({
       return;
     }
 
+    // Validate lost_found_type is required for lost_found category
+    if (category === "lost_found" && !lostFoundType) {
+      alert(t("reports.lostFoundTypeRequired"));
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       // Get user profile (already validated above)
@@ -142,17 +194,42 @@ export function ReportDialog({
       const syncKeyHash = await hashSyncKeyAsync(localProfile.syncKey);
       const dbProfile = await fetchOrCreateUserProfile(syncKeyHash);
 
-      // Create report
-      await createReport({
-        crag_id: cragId,
-        author_id: dbProfile.id,
-        category: category,
-        rating_dry: category === "conditions" ? dryRating[0] : null,
-        rating_wind: category === "conditions" ? windRating[0] : null,
-        rating_crowds: category === "conditions" ? crowdsRating[0] : null,
-        text: text.trim() || null,
-        observed_at: observedAt.toISOString(),
-      });
+      if (isEditMode && editReport) {
+        // Update existing report
+        const response = await fetch(`/api/reports/${editReport.id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userProfileId: dbProfile.id,
+            category: category,
+            rating_dry: category === "conditions" ? dryRating[0] : null,
+            rating_wind: category === "conditions" ? windRating[0] : null,
+            rating_crowds: category === "conditions" ? crowdsRating[0] : null,
+            text: text.trim() || null,
+            lost_found_type: category === "lost_found" ? lostFoundType : null,
+            observed_at: observedAt.toISOString(),
+            expires_at: expiresAt ? expiresAt.toISOString() : null,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to update report");
+        }
+      } else {
+        // Create new report
+        await createReport({
+          crag_id: cragId,
+          author_id: dbProfile.id,
+          category: category,
+          rating_dry: category === "conditions" ? dryRating[0] : null,
+          rating_wind: category === "conditions" ? windRating[0] : null,
+          rating_crowds: category === "conditions" ? crowdsRating[0] : null,
+          text: text.trim() || null,
+          lost_found_type: category === "lost_found" ? lostFoundType : null,
+          observed_at: observedAt.toISOString(),
+          expires_at: expiresAt ? expiresAt.toISOString() : null,
+        });
+      }
 
       // Success!
       onOpenChange(false);
@@ -161,7 +238,11 @@ export function ReportDialog({
       }
     } catch (error) {
       console.error("Failed to submit report:", error);
-      alert("Failed to submit report. Please try again.");
+      alert(
+        isEditMode
+          ? "Failed to update report. Please try again."
+          : "Failed to submit report. Please try again."
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -173,9 +254,13 @@ export function ReportDialog({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <MessageSquare className="h-5 w-5" />
-            {t("reports.addReport")}
+            {isEditMode ? t("reports.editReport") : t("reports.addReport")}
           </DialogTitle>
-          <DialogDescription>{t("reports.addReportDescription", { cragName })}</DialogDescription>
+          <DialogDescription>
+            {isEditMode
+              ? t("reports.editReportDescription")
+              : t("reports.addReportDescription", { cragName })}
+          </DialogDescription>
         </DialogHeader>
 
         <ScrollArea className="max-h-[70vh] pr-6">
@@ -319,6 +404,49 @@ export function ReportDialog({
               </div>
             </div>
 
+            {/* Lost/Found Type Selection - Only for "lost_found" category */}
+            {category === "lost_found" && (
+              <div>
+                <Label className="block mb-2">
+                  {t("reports.lostFoundType")} <span className="text-destructive">*</span>
+                </Label>
+                <RadioGroup
+                  value={lostFoundType}
+                  onValueChange={(value) => setLostFoundType(value as "lost" | "found")}
+                  className="grid grid-cols-2 gap-2.5"
+                >
+                  <div>
+                    <RadioGroupItem value="lost" id="lost" className="peer sr-only" />
+                    <Label
+                      htmlFor="lost"
+                      className="flex items-center justify-center gap-2 p-3 rounded-lg border-2 cursor-pointer transition-all peer-data-[state=checked]:border-orange-500 peer-data-[state=checked]:bg-orange-500/10 peer-data-[state=checked]:text-orange-600 hover:border-orange-300 hover:bg-muted/50"
+                    >
+                      <Search className="h-5 w-5" />
+                      <span className="text-sm font-medium">
+                        {t("reports.lostFoundTypes.lost")}
+                      </span>
+                    </Label>
+                  </div>
+                  <div>
+                    <RadioGroupItem value="found" id="found" className="peer sr-only" />
+                    <Label
+                      htmlFor="found"
+                      className="flex items-center justify-center gap-2 p-3 rounded-lg border-2 cursor-pointer transition-all peer-data-[state=checked]:border-orange-500 peer-data-[state=checked]:bg-orange-500/10 peer-data-[state=checked]:text-orange-600 hover:border-orange-300 hover:bg-muted/50"
+                    >
+                      <Search className="h-5 w-5" />
+                      <span className="text-sm font-medium">
+                        {t("reports.lostFoundTypes.found")}
+                      </span>
+                    </Label>
+                  </div>
+                </RadioGroup>
+                <p className="text-xs text-muted-foreground flex items-center gap-1 mt-1">
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-orange-500" />
+                  {t("reports.categoryHelp.lost_found")}
+                </p>
+              </div>
+            )}
+
             {/* Condition Ratings - Only for "conditions" category */}
             {category === "conditions" && (
               <div className="my-6 space-y-1">
@@ -394,13 +522,72 @@ export function ReportDialog({
                 id="report-text"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                placeholder={t(`reports.categoryDescriptions.${category}`)}
+                placeholder={t(`reports.placeholders.${category}`)}
                 rows={category === "conditions" ? 4 : 6}
                 maxLength={500}
                 required={category !== "conditions"}
               />
               <p className="text-xs text-muted-foreground text-right">{text.length}/500</p>
             </div>
+
+            {/* Expiry Date - Show for all categories except "conditions" */}
+            {category !== "conditions" && (
+              <div className="mb-6">
+                <Label className="text-sm font-medium block mb-1">{t("reports.expiresAt")}</Label>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        "w-full justify-start text-left font-normal h-11 px-4 bg-background hover:bg-orange-50 dark:hover:bg-orange-900/10 border-2 transition-colors",
+                        !expiresAt && "text-muted-foreground"
+                      )}
+                    >
+                      <CalendarIcon className="mr-3 h-4 w-4 text-orange-500" />
+                      {expiresAt ? (
+                        format(expiresAt, dateFormat, { locale: dateLocale })
+                      ) : (
+                        <span>{t("reports.noExpiry")}</span>
+                      )}
+                      {expiresAt && (
+                        <X
+                          className="ml-auto h-4 w-4 opacity-50 hover:opacity-100"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setExpiresAt(undefined);
+                          }}
+                        />
+                      )}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="center">
+                    <Calendar
+                      mode="single"
+                      selected={expiresAt}
+                      onSelect={(date) => {
+                        if (!date) return;
+                        setExpiresAt(date);
+                      }}
+                      disabled={(date) => {
+                        const today = new Date();
+                        today.setHours(0, 0, 0, 0);
+                        return date < today;
+                      }}
+                      locale={dateLocale}
+                      weekStartsOn={
+                        i18n.language === "en" || i18n.language.startsWith("en-") ? 0 : 1
+                      }
+                      autoFocus
+                      className="rounded-md"
+                    />
+                  </PopoverContent>
+                </Popover>
+                <p className="text-xs text-muted-foreground flex items-center gap-1 mt-1">
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-orange-500" />
+                  {t("reports.expiresAtHelp")}
+                </p>
+              </div>
+            )}
 
             {/* Submit Button */}
             <div className="flex gap-2 pt-2">
@@ -415,8 +602,10 @@ export function ReportDialog({
                 {isSubmitting ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" />
-                    {t("reports.submitting")}
+                    {isEditMode ? t("reports.updating") : t("reports.submitting")}
                   </>
+                ) : isEditMode ? (
+                  t("reports.updateReport")
                 ) : (
                   t("reports.submit")
                 )}

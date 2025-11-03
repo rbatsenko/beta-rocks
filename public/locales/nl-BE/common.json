@@ -19,7 +19,9 @@
         "query": "Dave omstandigheden morgen?"
       }
     },
-    "searchHint": "Zoek klimrotsen direct met"
+    "searchHint": "Zoek klimrotsen direct met",
+    "yourFavorites": "Uw Favorieten",
+    "favoriteQuery": "Wat zijn de omstandigheden bij {{crag}}?"
   },
   "chat": {
     "analyzing": "Condities analyseren...",
@@ -266,7 +268,8 @@
     "lessReliable": "Dagen 8-14: Minder betrouwbare voorspelling",
     "lessReliableHourly": "Volgende uren minder voorspelbaar",
     "lessCertain": "MINDER ZEKER",
-    "todayBadge": "VANDAAG"
+    "todayBadge": "VANDAAG",
+    "delete": "Verwijderen"
   },
   "timeContext": {
     "sunrise": "Zonsopgang",
@@ -563,7 +566,8 @@
       "access": "Toegang",
       "climbing_info": "Kliminfo",
       "facilities": "Voorzieningen",
-      "other": "Overig"
+      "other": "Overig",
+      "lost_found": "Verloren voorwerpen"
     },
     "categoryDescriptions": {
       "conditions": "Weer, wrijving, droogte, drukte",
@@ -571,7 +575,17 @@
       "access": "Sluitingen, parkeerveranderingen, seizoensgebonden beperkingen, vogelnesten, insecten",
       "climbing_info": "Herboulonnering, equipment updates, route wijzigingen, vaste quickdraws",
       "facilities": "Toiletten, camping, waterbronnen, voorzieningen",
-      "other": "Alles anders dat hierboven niet past"
+      "other": "Alles anders dat hierboven niet past",
+      "lost_found": "Verloren of gevonden uitrusting"
+    },
+    "categoryHelp": {
+      "conditions": "Huidig weer, wrijving, droogte, drukte bij de klif",
+      "safety": "Gevaren in het hele gebied, gevaarlijke omstandigheden, dringende waarschuwingen",
+      "access": "Parkeren, sluitingen, regelgeving, seizoensgebonden beperkingen",
+      "climbing_info": "Routespecifieke details, beta, grepen, uitrusting, moeilijkheidsgraden",
+      "facilities": "Toiletten, camping, waterbronnen, voorzieningen",
+      "other": "Alles anders dat niet in de bovenstaande categorieën past",
+      "lost_found": "Meld verloren items die je zoekt of gevonden items die je bij je hebt"
     },
     "dryness": "Droogte",
     "wind": "Wind",
@@ -585,7 +599,8 @@
       "access": "Bijv., Poort gesloten tot mei, nieuwe parkeerplaats achter bibliotheek...",
       "climbing_info": "Bijv., Route X herboulonneerd met roestvrijstalen bouten, nieuwe vaste quickdraws geïnstalleerd, anker verbeterd...",
       "facilities": "Bijv., Toilet beschikbaar bij parkeerplaats, geen waterbron in de buurt...",
-      "other": "Beschrijf wat je wilt melden..."
+      "other": "Beschrijf wat je wilt melden...",
+      "lost_found": "Bijv., Blauwe krijtzak gevonden aan de basis, Black Diamond cam #2 verloren bij de parking..."
     },
     "submit": "Rapport indienen",
     "submitting": "Indienen...",
@@ -644,7 +659,30 @@
       "veryOld": "Zeer oud"
     },
     "observationDate": "Wanneer heb je dit waargenomen?",
-    "observationDateHelp": "Je kunt condities tot 7 dagen terug melden"
+    "observationDateHelp": "Je kunt condities tot 7 dagen terug melden",
+    "lostFoundType": "Type",
+    "lostFoundTypes": {
+      "lost": "Verloren voorwerp",
+      "found": "Gevonden voorwerp"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Selecteer of dit een verloren of gevonden voorwerp is",
+    "lostBadge": "VERLOREN",
+    "foundBadge": "GEVONDEN",
+    "expiresAt": "Geldig tot (optioneel)",
+    "expiresAtHelp": "Stel in wanneer dit rapport verouderd wordt (nuttig voor tijdelijke sluitingen of veranderende omstandigheden)",
+    "noExpiry": "Verloopt nooit",
+    "expiredOn": "Verlopen op {{date}}",
+    "edit": "Bewerken",
+    "delete": "Verwijderen",
+    "deleteConfirm": "Weet u zeker dat u dit rapport wilt verwijderen?",
+    "deleteConfirmTitle": "Rapport Verwijderen",
+    "updated": "Rapport bijgewerkt",
+    "deleted": "Rapport verwijderd",
+    "editReport": "Rapport Bewerken",
+    "editReportDescription": "Werk uw rapport bij",
+    "updateReport": "Rapport Bijwerken",
+    "updating": "Bijwerken..."
   },
   "cragPage": {
     "askAI": "Vraag AI",

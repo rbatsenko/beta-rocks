@@ -104,7 +104,7 @@ export type Database = {
           tool_invocations?: Json | null;
         };
         Update: {
-          content?: string;
+          content?: string | null;
           created_at?: string | null;
           id?: string;
           role?: string;
@@ -258,6 +258,7 @@ export type Database = {
           crag_id: string | null;
           created_at: string | null;
           id: string;
+          lost_found_type: string | null;
           observed_at: string;
           photo_url: string | null;
           rating_crowds: number | null;
@@ -274,6 +275,7 @@ export type Database = {
           crag_id?: string | null;
           created_at?: string | null;
           id?: string;
+          lost_found_type?: string | null;
           observed_at?: string;
           photo_url?: string | null;
           rating_crowds?: number | null;
@@ -290,6 +292,7 @@ export type Database = {
           crag_id?: string | null;
           created_at?: string | null;
           id?: string;
+          lost_found_type?: string | null;
           observed_at?: string;
           photo_url?: string | null;
           rating_crowds?: number | null;
@@ -640,6 +643,27 @@ export type Database = {
         }[];
       };
       immutable_unaccent: { Args: { "": string }; Returns: string };
+      search_crags_enhanced: {
+        Args: { search_query: string };
+        Returns: {
+          climbing_types: string[];
+          country: string;
+          description: string;
+          id: string;
+          lat: number;
+          lon: number;
+          match_score: number;
+          match_type: string;
+          municipality: string;
+          name: string;
+          report_count: number;
+          rock_type: string;
+          slug: string;
+          source: string;
+          state: string;
+          village: string;
+        }[];
+      };
       search_crags_unaccent: {
         Args: { search_query: string };
         Returns: {

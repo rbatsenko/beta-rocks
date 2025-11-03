@@ -100,6 +100,8 @@ export async function POST(request: NextRequest) {
       rating_wind,
       rating_crowds,
       photo_url,
+      category,
+      lost_found_type,
     } = body;
 
     // Validate required fields
@@ -116,6 +118,21 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Ratings must be between 1-5" }, { status: 400 });
     }
 
+    // Validate lost_found_type
+    if (category === "lost_found") {
+      if (!lost_found_type || !["lost", "found"].includes(lost_found_type)) {
+        return NextResponse.json(
+          { error: "lost_found_type must be 'lost' or 'found' when category is 'lost_found'" },
+          { status: 400 }
+        );
+      }
+    } else if (lost_found_type) {
+      return NextResponse.json(
+        { error: "lost_found_type can only be set when category is 'lost_found'" },
+        { status: 400 }
+      );
+    }
+
     // Insert report into Supabase
     const { data, error } = await supabase
       .from("reports")
@@ -124,11 +141,13 @@ export async function POST(request: NextRequest) {
         sector_id: sectorId,
         route_id: routeId,
         author_id: authorId,
+        category,
         text,
         rating_dry,
         rating_wind,
         rating_crowds,
         photo_url,
+        lost_found_type,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       })

@@ -19,7 +19,9 @@
         "display": "Quel temps est prévu dans les Gorges du Verdon ce week-end ?",
         "query": "Quelles conditions dans les Gorges du Verdon ce week-end ?"
       }
-    }
+    },
+    "yourFavorites": "Vos Favoris",
+    "favoriteQuery": "Quelles sont les conditions à {{crag}} ?"
   },
   "chat": {
     "analyzing": "Analyse des conditions...",
@@ -270,7 +272,8 @@
     "lessReliable": "Jours 8-14 : prévision moins fiable",
     "lessReliableHourly": "Prochaines heures moins prévisibles",
     "lessCertain": "MOINS CERTAIN",
-    "todayBadge": "AUJOURD'HUI"
+    "todayBadge": "AUJOURD'HUI",
+    "delete": "Supprimer"
   },
   "timeContext": {
     "sunrise": "Lever du soleil",
@@ -568,7 +571,8 @@
       "access": "Accès",
       "climbing_info": "Infos escalade",
       "facilities": "Installations",
-      "other": "Autre"
+      "other": "Autre",
+      "lost_found": "Objets trouvés"
     },
     "categoryDescriptions": {
       "conditions": "Météo, adhérence, sécheresse, affluence",
@@ -576,7 +580,17 @@
       "access": "Fermetures, changements de parking, restrictions saisonnières, nids d'oiseaux, insectes",
       "climbing_info": "Rééquipement, mises à jour du matériel, changements de voies, dégaines fixes",
       "facilities": "Toilettes, camping, points d'eau, commodités",
-      "other": "Tout ce qui ne correspond pas aux catégories ci-dessus"
+      "other": "Tout ce qui ne correspond pas aux catégories ci-dessus",
+      "lost_found": "Équipement perdu ou trouvé"
+    },
+    "categoryHelp": {
+      "conditions": "Météo actuelle, adhérence, sécheresse, affluence sur le site",
+      "safety": "Dangers sur l'ensemble de la zone, conditions dangereuses, alertes urgentes",
+      "access": "Parking, fermetures, réglementations, restrictions saisonnières",
+      "climbing_info": "Détails spécifiques aux voies, topo, prises, matériel, cotations",
+      "facilities": "Toilettes, camping, points d'eau, commodités",
+      "other": "Tout ce qui ne correspond pas aux catégories ci-dessus",
+      "lost_found": "Signalez les objets perdus que vous cherchez ou les objets trouvés que vous détenez"
     },
     "dryness": "Sécheresse",
     "wind": "Vent",
@@ -590,7 +604,8 @@
       "access": "Ex : Portail fermé jusqu'en mai, nouveau parking derrière la bibliothèque...",
       "climbing_info": "Ex : Voie X rééquipée avec dégaines inox, nouvelles dégaines permanentes installées, relais amélioré...",
       "facilities": "Ex : Toilettes disponibles au parking, pas de point d'eau à proximité...",
-      "other": "Décrivez ce que vous souhaitez signaler..."
+      "other": "Décrivez ce que vous souhaitez signaler...",
+      "lost_found": "Par ex., Sac à magnésie bleu trouvé au pied du mur, perdu Black Diamond coinceur #2 près du parking..."
     },
     "submit": "Envoyer le rapport",
     "submitting": "Envoi en cours...",
@@ -649,7 +664,30 @@
     },
     "observationDate": "Quand avez-vous observé cela ?",
     "observationDateHelp": "Vous pouvez signaler les conditions jusqu'à 7 jours en arrière",
-    "voteReady": "Vous pouvez maintenant voter pour les rapports"
+    "voteReady": "Vous pouvez maintenant voter pour les rapports",
+    "lostFoundType": "Type",
+    "lostFoundTypes": {
+      "lost": "Objet perdu",
+      "found": "Objet trouvé"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Veuillez sélectionner s'il s'agit d'un objet perdu ou trouvé",
+    "lostBadge": "PERDU",
+    "foundBadge": "TROUVÉ",
+    "expiresAt": "Valide jusqu'au (facultatif)",
+    "expiresAtHelp": "Définissez quand ce rapport devient obsolète (utile pour les fermetures temporaires ou les conditions changeantes)",
+    "noExpiry": "N'expire jamais",
+    "expiredOn": "Expiré le {{date}}",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce rapport ?",
+    "deleteConfirmTitle": "Supprimer le Rapport",
+    "updated": "Rapport mis à jour",
+    "deleted": "Rapport supprimé",
+    "editReport": "Modifier le Rapport",
+    "editReportDescription": "Mettez à jour votre rapport",
+    "updateReport": "Mettre à jour le Rapport",
+    "updating": "Mise à jour..."
   },
   "cragPage": {
     "askAI": "Demander à l'IA",

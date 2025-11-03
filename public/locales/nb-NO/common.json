@@ -19,7 +19,9 @@
         "query": "Hvordan er forholdene i Uskedalen på lørdag?"
       }
     },
-    "searchHint": "Søk klatrevegger direkte med"
+    "searchHint": "Søk klatrevegger direkte med",
+    "yourFavorites": "Dine Favoritter",
+    "favoriteQuery": "Hva er forholdene ved {{crag}}?"
   },
   "chat": {
     "analyzing": "Analyserer forhold...",
@@ -267,7 +269,8 @@
     "lessReliable": "Dag 8-14: mindre pålitelig prognose",
     "lessReliableHourly": "Neste timer mindre forutsigbare",
     "lessCertain": "MER USIKKERT",
-    "todayBadge": "I DAG"
+    "todayBadge": "I DAG",
+    "delete": "Slett"
   },
   "timeContext": {
     "sunrise": "Soloppgang",
@@ -485,7 +488,8 @@
       "access": "Tilgang",
       "climbing_info": "Klatreinfo",
       "facilities": "Fasiliteter",
-      "other": "Annet"
+      "other": "Annet",
+      "lost_found": "Hittegods"
     },
     "categoryDescriptions": {
       "conditions": "Vær, friksjon, tørrhet, folkemengde",
@@ -493,7 +497,17 @@
       "access": "Stenging, parkeringsendringer, sesongbegrensninger, fuglereir, insekter",
       "climbing_info": "Rebulting, utstyrsoppdateringer, ruteendringer, faste quickdraws",
       "facilities": "Toalett, camping, vannkilder, fasiliteter",
-      "other": "Alt annet som ikke passer over"
+      "other": "Alt annet som ikke passer over",
+      "lost_found": "Tapt eller funnet utstyr"
+    },
+    "categoryHelp": {
+      "conditions": "Aktuelt vær, friksjon, tørrhet, folkemengde ved klatrestedet",
+      "safety": "Farer i hele området, farlige forhold, presserende advarsler",
+      "access": "Parkering, stenginger, regler, sesongbegrensninger",
+      "climbing_info": "Rutespesifikke detaljer, beta, grep, utstyr, vanskelighetsgrader",
+      "facilities": "Toaletter, camping, vannkilder, fasiliteter",
+      "other": "Alt annet som ikke passer ovennevnte kategorier",
+      "lost_found": "Rapporter tapte gjenstander du leter etter eller fundne gjenstander du har"
     },
     "dryness": "Tørrhet",
     "wind": "Vind",
@@ -507,7 +521,8 @@
       "access": "F.eks., Port stengt til mai, ny parkeringsplass bak biblioteket...",
       "climbing_info": "F.eks., Rute X rebultet med rustfrie bolter, nye faste quickdraws installert, ankerfeste oppgradert...",
       "facilities": "F.eks., Toalett tilgjengelig ved parkering, ingen vannkilde i nærheten...",
-      "other": "Beskriv hva du vil rapportere..."
+      "other": "Beskriv hva du vil rapportere...",
+      "lost_found": "F.eks., Funnet blå kalkpose ved bunnen, mistet Black Diamond cam #2 ved parkeringen..."
     },
     "submit": "Send inn rapport",
     "submitting": "Sender inn...",
@@ -566,7 +581,30 @@
       "veryOld": "Veldig gammel"
     },
     "observationDate": "Når observerte du dette?",
-    "observationDateHelp": "Du kan rapportere forhold opptil 7 dager tilbake"
+    "observationDateHelp": "Du kan rapportere forhold opptil 7 dager tilbake",
+    "lostFoundType": "Type",
+    "lostFoundTypes": {
+      "lost": "Tapt gjenstand",
+      "found": "Funnet gjenstand"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Velg om dette er en tapt eller funnet gjenstand",
+    "lostBadge": "TAPT",
+    "foundBadge": "FUNNET",
+    "expiresAt": "Gyldig til (valgfritt)",
+    "expiresAtHelp": "Angi når denne rapporten blir utdatert (nyttig for midlertidige stenginger eller skiftende forhold)",
+    "noExpiry": "Utløper aldri",
+    "expiredOn": "Utløpt {{date}}",
+    "edit": "Rediger",
+    "delete": "Slett",
+    "deleteConfirm": "Er du sikker på at du vil slette denne rapporten?",
+    "deleteConfirmTitle": "Slett Rapport",
+    "updated": "Rapport oppdatert",
+    "deleted": "Rapport slettet",
+    "editReport": "Rediger Rapport",
+    "editReportDescription": "Oppdater rapporten din",
+    "updateReport": "Oppdater Rapport",
+    "updating": "Oppdaterer..."
   },
   "cragPage": {
     "askAI": "Spør AI",

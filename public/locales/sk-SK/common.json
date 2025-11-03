@@ -19,7 +19,9 @@
         "query": "Ako je na tom Višňové?"
       }
     },
-    "searchHint": "Vyhľadajte skaly priamo pomocou"
+    "searchHint": "Vyhľadajte skaly priamo pomocou",
+    "yourFavorites": "Vaše Obľúbené",
+    "favoriteQuery": "Aké sú podmienky v {{crag}}?"
   },
   "chat": {
     "analyzing": "Analyzujem podmienky...",
@@ -266,7 +268,8 @@
     "lessReliable": "Dni 8-14: Menej spoľahlivá predpoveď",
     "lessReliableHourly": "Ďalšie hodiny menej predvídateľné",
     "lessCertain": "MENEJ ISTÉ",
-    "todayBadge": "DNES"
+    "todayBadge": "DNES",
+    "delete": "Vymazať"
   },
   "timeContext": {
     "sunrise": "Východ slnka",
@@ -563,7 +566,8 @@
       "access": "Prístup",
       "climbing_info": "Lezecké informácie",
       "facilities": "Zázemie",
-      "other": "Ostatné"
+      "other": "Ostatné",
+      "lost_found": "Stratené a nájdené"
     },
     "categoryDescriptions": {
       "conditions": "Počasie, trenie, suchosť, preplnenosť",
@@ -571,7 +575,17 @@
       "access": "Uzávery, zmeny parkovania, sezónne obmedzenia, vtáčie hniezda, hmyz",
       "climbing_info": "Prebolcovanie, aktualizácie vybavenia, zmeny ciest, permanentné expresky",
       "facilities": "Toalety, kempovanie, zdroje vody, vybavenie",
-      "other": "Čokoľvek iné, čo nezapadá vyššie"
+      "other": "Čokoľvek iné, čo nezapadá vyššie",
+      "lost_found": "Stratené alebo nájdené vybavenie"
+    },
+    "categoryHelp": {
+      "conditions": "Aktuálne počasie, trenie, suchosť, preplnenosť na skalách",
+      "safety": "Nebezpečenstvá v celej oblasti, nebezpečné podmienky, naliehavé varovania",
+      "access": "Parkovanie, uzávery, predpisy, sezónne obmedzenia",
+      "climbing_info": "Špecifické detaily ciest, beta, chyty, vybavenie, obťažnosť",
+      "facilities": "Toalety, kempovanie, zdroje vody, vybavenie",
+      "other": "Čokoľvek iné, čo nezapadá do vyššie uvedených kategórií",
+      "lost_found": "Nahláste stratené predmety, ktoré hľadáte, alebo nájdené predmety, ktoré máte"
     },
     "dryness": "Suchosť",
     "wind": "Vietor",
@@ -585,7 +599,8 @@
       "access": "Napr., Brána zatvorená do mája, nové parkovisko za knižnicou...",
       "climbing_info": "Napr., Cesta X prebolcovaná nehrdzavejúcimi skrutkami, nainštalované nové permanentné expresky, vylepšené istenie...",
       "facilities": "Napr., Toaleta k dispozícii na parkovisku, žiadny zdroj vody v blízkosti...",
-      "other": "Popíšte, čo chcete nahlásiť..."
+      "other": "Popíšte, čo chcete nahlásiť...",
+      "lost_found": "Napr., Nájdený modrý vrecko na magnézium pri základni, stratený Black Diamond friend #2 pri parkovisku..."
     },
     "submit": "Odoslať hlásenie",
     "submitting": "Odosiela sa...",
@@ -644,7 +659,30 @@
       "veryOld": "Veľmi staré"
     },
     "observationDate": "Kedy ste to pozorovali?",
-    "observationDateHelp": "Môžete hlásiť podmienky až 7 dní späť"
+    "observationDateHelp": "Môžete hlásiť podmienky až 7 dní späť",
+    "lostFoundType": "Typ",
+    "lostFoundTypes": {
+      "lost": "Stratená vec",
+      "found": "Nájdená vec"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Vyberte, či ide o stratenú alebo nájdenú vec",
+    "lostBadge": "STRATENÉ",
+    "foundBadge": "NÁJDENÉ",
+    "expiresAt": "Platné do (voliteľné)",
+    "expiresAtHelp": "Nastavte, kedy táto správa zastaráva (užitočné pre dočasné uzávery alebo menené podmienky)",
+    "noExpiry": "Nikdy nevyprší",
+    "expiredOn": "Vypršalo {{date}}",
+    "edit": "Upraviť",
+    "delete": "Vymazať",
+    "deleteConfirm": "Naozaj chcete vymazať túto správu?",
+    "deleteConfirmTitle": "Vymazať Správu",
+    "updated": "Správa aktualizovaná",
+    "deleted": "Správa vymazaná",
+    "editReport": "Upraviť Správu",
+    "editReportDescription": "Aktualizujte svoju správu",
+    "updateReport": "Aktualizovať Správu",
+    "updating": "Aktualizujem..."
   },
   "cragPage": {
     "askAI": "Opýtať sa AI",

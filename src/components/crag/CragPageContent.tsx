@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import {
   MapPin,
@@ -32,6 +32,7 @@ import { ReportCard } from "@/components/reports/ReportCard";
 import { ReportDialog } from "@/components/reports/ReportDialog";
 import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal";
 import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog";
+import { ConfirmDialog } from "@/components/dialogs/ConfirmDialog";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
 import { useRouter } from "next/navigation";
@@ -175,11 +176,14 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
   const router = useRouter();
   const { units } = useUnits();
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
+  const [editingReport, setEditingReport] = useState<any | null>(null);
+  const [deletingReportId, setDeletingReportId] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<"all" | ReportCategory>("all");
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showProfileCreated, setShowProfileCreated] = useState(false);
   const [newSyncKey, setNewSyncKey] = useState<string>("");
   const [pendingAction, setPendingAction] = useState<"add" | "remove" | "report" | null>(null);
+  const [currentUserProfileId, setCurrentUserProfileId] = useState<string | null>(null);
 
   // React Query for conditions (client-side)
   const {
@@ -214,10 +218,21 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
   const addFavorite = useAddFavorite();
   const removeFavorite = useRemoveFavorite();
 
-  // Filter reports by selected category
+  // Filter and sort reports by selected category (expired reports go to bottom)
   const filteredReports = useMemo(() => {
-    if (selectedCategory === "all") return reports;
-    return reports.filter((report) => report.category === selectedCategory);
+    let filtered =
+      selectedCategory === "all"
+        ? reports
+        : reports.filter((report) => report.category === selectedCategory);
+
+    // Sort: non-expired first, then expired, within each group maintain existing order
+    return filtered.sort((a, b) => {
+      const aExpired = a.expires_at && new Date(a.expires_at) < new Date();
+      const bExpired = b.expires_at && new Date(b.expires_at) < new Date();
+
+      if (aExpired === bExpired) return 0; // Maintain existing order within groups
+      return aExpired ? 1 : -1; // Expired go to bottom
+    });
   }, [reports, selectedCategory]);
 
   // Format location details
@@ -309,6 +324,62 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
     await refetchReports();
     console.log(`[CragPageContent] Refetched reports after creation`);
   }, [refetchReports]);
+
+  // Load current user profile ID for checking authorship
+  useEffect(() => {
+    const loadUserProfile = async () => {
+      const profile = getUserProfile();
+      if (profile) {
+        const { hashSyncKeyAsync } = await import("@/lib/auth/sync-key");
+        const { fetchOrCreateUserProfile } = await import("@/lib/db/queries");
+        const syncKeyHash = await hashSyncKeyAsync(profile.syncKey);
+        const dbProfile = await fetchOrCreateUserProfile(syncKeyHash);
+        setCurrentUserProfileId(dbProfile.id);
+      }
+    };
+    loadUserProfile();
+  }, []);
+
+  const handleEditReport = (report: any) => {
+    setEditingReport(report);
+    setReportDialogOpen(true);
+  };
+
+  const handleDeleteReport = (reportId: string) => {
+    setDeletingReportId(reportId);
+  };
+
+  const confirmDeleteReport = async () => {
+    if (!deletingReportId) return;
+
+    try {
+      const profile = getUserProfile();
+      if (!profile) return;
+
+      const { hashSyncKeyAsync } = await import("@/lib/auth/sync-key");
+      const { fetchOrCreateUserProfile } = await import("@/lib/db/queries");
+      const syncKeyHash = await hashSyncKeyAsync(profile.syncKey);
+      const dbProfile = await fetchOrCreateUserProfile(syncKeyHash);
+
+      const response = await fetch(
+        `/api/reports/${deletingReportId}?userProfileId=${dbProfile.id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete report");
+      }
+
+      // Refetch reports
+      await refetchReports();
+      setDeletingReportId(null);
+    } catch (error) {
+      console.error("Failed to delete report:", error);
+      alert("Failed to delete report. Please try again.");
+    }
+  };
 
   const handleAddReport = () => {
     const profile = getUserProfile();
@@ -703,6 +774,9 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
                       key={report.id}
                       report={report}
                       onConfirmationChange={handleReportCreated}
+                      onEdit={handleEditReport}
+                      onDelete={handleDeleteReport}
+                      currentUserProfileId={currentUserProfileId}
                     />
                   ))}
                 </div>
@@ -756,10 +830,16 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
       {/* Report Dialog */}
       <ReportDialog
         open={reportDialogOpen}
-        onOpenChange={setReportDialogOpen}
+        onOpenChange={(open) => {
+          setReportDialogOpen(open);
+          if (!open) {
+            setEditingReport(null); // Clear editing state when dialog closes
+          }
+        }}
         cragId={crag.id}
         cragName={crag.name}
         onReportCreated={handleReportCreated}
+        editReport={editingReport}
       />
 
       {/* Profile Creation Modal */}
@@ -782,6 +862,20 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
         onOpenChange={setShowProfileCreated}
         syncKey={newSyncKey}
         completedAction={t("favorites.added")}
+      />
+
+      {/* Delete Confirmation Dialog */}
+      <ConfirmDialog
+        open={!!deletingReportId}
+        onOpenChange={(open) => {
+          if (!open) setDeletingReportId(null);
+        }}
+        title={t("reports.deleteConfirmTitle")}
+        description={t("reports.deleteConfirm")}
+        confirmText={t("reports.delete")}
+        cancelText={t("dialog.cancel")}
+        onConfirm={confirmDeleteReport}
+        variant="destructive"
       />
     </div>
   );

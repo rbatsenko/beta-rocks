@@ -19,7 +19,9 @@
         "display": "Jak to vypadá v Labských pískovcích?",
         "query": "Jak to vypadá v Labských pískovcích?"
       }
-    }
+    },
+    "yourFavorites": "Vaše oblíbené",
+    "favoriteQuery": "Jaké jsou podmínky v {{crag}}?"
   },
   "chat": {
     "analyzing": "Analyzuji podmínky...",
@@ -266,7 +268,8 @@
     "lessReliable": "Dny 8-14: Méně spolehlivá předpověď",
     "lessReliableHourly": "Další hodiny méně předvídatelné",
     "lessCertain": "MÉNĚ JISTÉ",
-    "todayBadge": "DNES"
+    "todayBadge": "DNES",
+    "delete": "Smazat"
   },
   "timeContext": {
     "sunrise": "Východ slunce",
@@ -563,7 +566,8 @@
       "access": "Přístup",
       "climbing_info": "Lezecké informace",
       "facilities": "Zázemí",
-      "other": "Ostatní"
+      "other": "Ostatní",
+      "lost_found": "Ztráty a nálezy"
     },
     "categoryDescriptions": {
       "conditions": "Počasí, tření, suchost, přeplněnost",
@@ -571,7 +575,17 @@
       "access": "Uzavírky, změny parkování, sezónní omezení, ptačí hnízda, hmyz",
       "climbing_info": "Přebolcování, aktualizace vybavení, změny cest, permanentní expresky",
       "facilities": "Toalety, kempování, zdroje vody, vybavení",
-      "other": "Cokoli jiného, co se nehodí výše"
+      "other": "Cokoli jiného, co se nehodí výše",
+      "lost_found": "Ztracené nebo nalezené vybavení a výstroj"
+    },
+    "categoryHelp": {
+      "conditions": "Aktuální počasí, tření, suchost, přeplněnost na skalách",
+      "safety": "Nebezpečí v celé oblasti, nebezpečné podmínky, naléhavá varování",
+      "access": "Parkování, uzavírky, předpisy, sezónní omezení",
+      "climbing_info": "Specifické detaily cest, beta, chyty, vybavení, obtížnost",
+      "facilities": "Toalety, kempování, zdroje vody, vybavení",
+      "other": "Cokoli jiného, co se nehodí do výše uvedených kategorií",
+      "lost_found": "Nahlaste ztracené předměty, které hledáte, nebo nalezené předměty, které máte"
     },
     "dryness": "Suchost",
     "wind": "Vítr",
@@ -585,7 +599,8 @@
       "access": "Např., Závora zavřená do května, nové parkoviště za knihovnou...",
       "climbing_info": "Např., Cesta X přebolcovaná nerezovými skobami, instalovány nové permanentní expresky, vylepšeno jistidlo...",
       "facilities": "Např., Toaleta k dispozici u parkoviště, žádný zdroj vody v blízkosti...",
-      "other": "Popište, co chcete nahlásit..."
+      "other": "Popište, co chcete nahlásit...",
+      "lost_found": "Např., Nalezen modrý pytlík na magnezium u základny, ztracen Black Diamond friend #2 u parkoviště..."
     },
     "submit": "Odeslat hlášení",
     "submitting": "Odesílání...",
@@ -644,7 +659,30 @@
       "veryOld": "Velmi staré"
     },
     "observationDate": "Kdy jste to pozorovali?",
-    "observationDateHelp": "Můžete hlásit podmínky až 7 dní zpět"
+    "observationDateHelp": "Můžete hlásit podmínky až 7 dní zpět",
+    "lostFoundType": "Typ",
+    "lostFoundTypes": {
+      "lost": "Ztracená věc",
+      "found": "Nalezená věc"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Vyberte, zda se jedná o ztracenou nebo nalezenou věc",
+    "lostBadge": "ZTRACENO",
+    "foundBadge": "NALEZENO",
+    "expiresAt": "Platné do (volitelné)",
+    "expiresAtHelp": "Nastavte, kdy tato zpráva zastarává (užitečné pro dočasné uzávěry nebo měnící se podmínky)",
+    "noExpiry": "Nikdy nevyprší",
+    "expiredOn": "Vypršelo {{date}}",
+    "edit": "Upravit",
+    "delete": "Smazat",
+    "deleteConfirm": "Opravdu chcete smazat tuto zprávu?",
+    "deleteConfirmTitle": "Smazat zprávu",
+    "updated": "Zpráva aktualizována",
+    "deleted": "Zpráva smazána",
+    "editReport": "Upravit zprávu",
+    "editReportDescription": "Aktualizujte svou zprávu",
+    "updateReport": "Aktualizovat zprávu",
+    "updating": "Aktualizuji..."
   },
   "cragPage": {
     "askAI": "Zeptat se AI",

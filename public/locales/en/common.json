@@ -601,6 +601,7 @@
       "access": "Access",
       "climbing_info": "Climbing Info",
       "facilities": "Facilities",
+      "lost_found": "Lost & Found",
       "other": "Other"
     },
     "categoryDescriptions": {
@@ -609,7 +610,17 @@
       "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
       "climbing_info": "Rebolting, hardware updates, route changes, permadraws",
       "facilities": "Bathrooms, camping, water sources, amenities",
+      "lost_found": "Lost or found gear and equipment",
       "other": "Anything else that doesn't fit above"
+    },
+    "categoryHelp": {
+      "conditions": "Current weather, friction, dryness, crowds at the crag",
+      "safety": "Area-wide hazards, dangerous conditions, urgent warnings",
+      "access": "Parking, closures, regulations, seasonal restrictions",
+      "climbing_info": "Route-specific details, beta, holds, gear, grades",
+      "facilities": "Restrooms, camping, water sources, amenities",
+      "lost_found": "Report lost items you're looking for or found items you're holding",
+      "other": "Anything else that doesn't fit the above categories"
     },
     "dryness": "Dryness",
     "wind": "Wind",
@@ -623,8 +634,18 @@
       "access": "E.g., Gate closed until May, new parking lot behind library...",
       "climbing_info": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
       "facilities": "E.g., Toilet available at parking, no water source nearby...",
+      "lost_found": "E.g., Found blue chalk bag at base of main wall, lost Black Diamond cam #2 near parking...",
       "other": "Describe what you'd like to report..."
     },
+    "lostFoundType": "Type",
+    "lostFoundTypes": {
+      "lost": "Lost Item",
+      "found": "Found Item"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Please select whether this is a lost or found item",
+    "lostBadge": "LOST",
+    "foundBadge": "FOUND",
     "submit": "Submit Report",
     "submitting": "Submitting...",
     "readyToPost": "Profile created! You're ready to post your report.",
@@ -680,7 +701,21 @@
       "outdated": "Outdated",
       "older": "Older",
       "veryOld": "Very Old"
-    }
+    },
+    "expiresAt": "Valid until (optional)",
+    "expiresAtHelp": "Set when this report becomes outdated (useful for temporary closures or changing conditions)",
+    "noExpiry": "Never expires",
+    "expiredOn": "Expired {{date}}",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteConfirm": "Are you sure you want to delete this report?",
+    "deleteConfirmTitle": "Delete Report",
+    "updated": "Report updated",
+    "deleted": "Report deleted",
+    "editReport": "Edit Report",
+    "editReportDescription": "Update your report",
+    "updateReport": "Update Report",
+    "updating": "Updating..."
   },
   "cragPage": {
     "askAI": "Ask AI",

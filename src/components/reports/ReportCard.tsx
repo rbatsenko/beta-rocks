@@ -13,10 +13,20 @@ import {
   Mountain,
   Home,
   MessageSquare,
+  MoreVertical,
+  Edit,
+  Trash2,
+  Search,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { format, differenceInCalendarDays } from "date-fns";
 import { hashSyncKeyAsync, type UserProfile } from "@/lib/auth/sync-key";
@@ -26,7 +36,14 @@ import { getDateFnsLocale } from "@/lib/i18n/date-locales";
 import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal";
 import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog";
 
-type ReportCategory = "conditions" | "safety" | "access" | "climbing_info" | "facilities" | "other";
+type ReportCategory =
+  | "conditions"
+  | "safety"
+  | "access"
+  | "climbing_info"
+  | "facilities"
+  | "lost_found"
+  | "other";
 
 interface Report {
   id: string;
@@ -37,19 +54,31 @@ interface Report {
   rating_crowds: number | null;
   created_at: string;
   observed_at: string;
+  expires_at?: string | null;
+  lost_found_type?: string | null;
   author?: {
     id: string;
     display_name: string | null;
   } | null;
+  author_id?: string | null;
   confirmations?: { count: number }[] | null;
 }
 
 interface ReportCardProps {
   report: Report;
   onConfirmationChange?: () => void;
+  onEdit?: (report: Report) => void;
+  onDelete?: (reportId: string) => void;
+  currentUserProfileId?: string | null;
 }
 
-export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
+export function ReportCard({
+  report,
+  onConfirmationChange,
+  onEdit,
+  onDelete,
+  currentUserProfileId,
+}: ReportCardProps) {
   const { t, i18n } = useClientTranslation("common");
   const dateLocale = getDateFnsLocale(i18n.language);
   const [isConfirming, setIsConfirming] = useState(false);
@@ -126,6 +155,8 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
         return <Mountain className={iconClass} />;
       case "facilities":
         return <Home className={iconClass} />;
+      case "lost_found":
+        return <Search className={iconClass} />;
       default:
         return <MessageSquare className={iconClass} />;
     }
@@ -143,12 +174,22 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
         return "bg-purple-500/10 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-800";
       case "facilities":
         return "bg-green-500/10 text-green-700 dark:text-green-300 border-green-200 dark:border-green-800";
+      case "lost_found":
+        return "bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border-cyan-200 dark:border-cyan-800";
       default:
         return "bg-gray-500/10 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800";
     }
   };
 
   const category = report.category || "conditions";
+
+  // Check if report is expired
+  const isExpired = report.expires_at && new Date(report.expires_at) < new Date();
+
+  // Check if current user is the author
+  const isAuthor =
+    currentUserProfileId &&
+    (report.author_id === currentUserProfileId || report.author?.id === currentUserProfileId);
 
   // Calculate staleness based on category-specific relevance windows
   const getReportStaleness = () => {
@@ -162,6 +203,7 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
       access: 30, // 30 days fresh (closures change slowly)
       climbing_info: Infinity, // always fresh (timeless info)
       facilities: Infinity, // always fresh (stable infrastructure)
+      lost_found: 30, // 30 days fresh (lost items likely found/given up by then)
       other: 14, // 14 days fresh (moderate default)
     };
 
@@ -211,6 +253,36 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
               {getCategoryIcon(category)}
               <span className="text-xs font-medium">{t(`reports.categories.${category}`)}</span>
             </Badge>
+            {/* Lost/Found Badge */}
+            {category === "lost_found" && report.lost_found_type && (
+              <Badge
+                variant="outline"
+                className={`gap-1.5 font-semibold ${
+                  report.lost_found_type === "lost"
+                    ? "bg-red-500/15 text-red-700 dark:text-red-300 border-red-300 dark:border-red-700"
+                    : "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-700"
+                }`}
+              >
+                <span className="text-xs font-bold">
+                  {report.lost_found_type === "lost"
+                    ? t("reports.lostBadge")
+                    : t("reports.foundBadge")}
+                </span>
+              </Badge>
+            )}
+            {/* Expired Badge */}
+            {isExpired && (
+              <Badge
+                variant="outline"
+                className="gap-1.5 bg-gray-500/10 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-800"
+              >
+                <span className="text-xs font-medium">
+                  {t("reports.expiredOn", {
+                    date: format(new Date(report.expires_at!), "P", { locale: dateLocale }),
+                  })}
+                </span>
+              </Badge>
+            )}
             {/* Staleness Badge */}
             {staleness.status === "older" && category === "conditions" && (
               <Badge
@@ -240,13 +312,38 @@ export function ReportCard({ report, onConfirmationChange }: ReportCardProps) {
               </Badge>
             )}
           </div>
-          <div className="flex flex-col items-end text-right gap-0.5">
-            <span className="text-xs text-muted-foreground">
-              {getRelativeTime(new Date(report.observed_at))}
-            </span>
-            <span className="text-[10px] text-muted-foreground/70">
-              {format(new Date(report.observed_at), "Pp", { locale: dateLocale })}
-            </span>
+          <div className="flex items-start gap-2">
+            <div className="flex flex-col items-end text-right gap-0.5">
+              <span className="text-xs text-muted-foreground">
+                {getRelativeTime(new Date(report.observed_at))}
+              </span>
+              <span className="text-[10px] text-muted-foreground/70">
+                {format(new Date(report.observed_at), "Pp", { locale: dateLocale })}
+              </span>
+            </div>
+            {/* Edit/Delete Menu - Only show to author */}
+            {isAuthor && onEdit && onDelete && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                    <MoreVertical className="h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => onEdit(report)} className="cursor-pointer">
+                    <Edit className="mr-2 h-4 w-4" />
+                    {t("reports.edit")}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => onDelete(report.id)}
+                    className="cursor-pointer text-destructive focus:text-destructive"
+                  >
+                    <Trash2 className="mr-2 h-4 w-4" />
+                    {t("reports.delete")}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
           </div>
         </div>
 

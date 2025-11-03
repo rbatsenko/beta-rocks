@@ -19,7 +19,9 @@
         "query": "Condiții în Piatra Craiului mâine?"
       }
     },
-    "searchHint": "Caută perete direct cu"
+    "searchHint": "Caută perete direct cu",
+    "yourFavorites": "Favoritele Tale",
+    "favoriteQuery": "Care sunt condițiile la {{crag}}?"
   },
   "chat": {
     "analyzing": "Se analizează condițiile...",
@@ -266,7 +268,8 @@
     "lessReliable": "Zilele 8-14: Prognozele mai puțin fiabile",
     "lessReliableHourly": "Orele următoare mai puțin previzibile",
     "lessCertain": "MAI PUȚIN CERT",
-    "todayBadge": "ASTAZI"
+    "todayBadge": "ASTAZI",
+    "delete": "Șterge"
   },
   "timeContext": {
     "sunrise": "Răsărit",
@@ -563,7 +566,8 @@
       "access": "Acces",
       "climbing_info": "Info escaladă",
       "facilities": "Facilități",
-      "other": "Altele"
+      "other": "Altele",
+      "lost_found": "Obiecte pierdute și găsite"
     },
     "categoryDescriptions": {
       "conditions": "Vreme, fricțiune, uscare, aglomerație",
@@ -571,7 +575,17 @@
       "access": "Închideri, schimbări la parcare, restricții sezoniere, cuiburi de păsări, insecte",
       "climbing_info": "Reechipare, actualizări echipament, schimbări rute, quickdraw-uri fixe",
       "facilities": "Toalete, camping, surse de apă, facilități",
-      "other": "Orice altceva care nu se încadrează mai sus"
+      "other": "Orice altceva care nu se încadrează mai sus",
+      "lost_found": "Echipament pierdut sau găsit"
+    },
+    "categoryHelp": {
+      "conditions": "Vreme actuală, fricțiune, uscare, aglomerație la faleza",
+      "safety": "Pericole în întreaga zonă, condiții periculoase, avertismente urgente",
+      "access": "Parcare, închideri, reglementări, restricții sezoniere",
+      "climbing_info": "Detalii specifice rutelor, beta, prize, echipament, grade",
+      "facilities": "Toalete, camping, surse de apă, facilități",
+      "other": "Orice altceva care nu se încadrează în categoriile de mai sus",
+      "lost_found": "Raportează obiecte pierdute pe care le cauți sau obiecte găsite pe care le deții"
     },
     "dryness": "Uscare",
     "wind": "Vânt",
@@ -585,7 +599,8 @@
       "access": "Ex., Poartă închisă până în mai, parcare nouă în spatele bibliotecii...",
       "climbing_info": "Ex., Ruta X reechipată cu piulițe din oțel inoxidabil, quickdraw-uri fixe noi instalate, ancoră îmbunătățită...",
       "facilities": "Ex., Toaletă disponibilă la parcare, nicio sursă de apă în apropiere...",
-      "other": "Descrie ce ai vrea să raportezi..."
+      "other": "Descrie ce ai vrea să raportezi...",
+      "lost_found": "De ex., Găsit săculeț de magneziu albastru la bază, pierdut Black Diamond cam #2 lângă parcare..."
     },
     "submit": "Trimite raportul",
     "submitting": "Se trimite...",
@@ -644,7 +659,30 @@
       "veryOld": "Foarte vechi"
     },
     "observationDate": "Când ai observat asta?",
-    "observationDateHelp": "Puteți raporta condiții până la 7 zile în urmă"
+    "observationDateHelp": "Puteți raporta condiții până la 7 zile în urmă",
+    "lostFoundType": "Tip",
+    "lostFoundTypes": {
+      "lost": "Obiect pierdut",
+      "found": "Obiect găsit"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Selectează dacă este un obiect pierdut sau găsit",
+    "lostBadge": "PIERDUT",
+    "foundBadge": "GĂSIT",
+    "expiresAt": "Valabil până la (opțional)",
+    "expiresAtHelp": "Setați când acest raport devine învechit (util pentru închideri temporare sau condiții în schimbare)",
+    "noExpiry": "Nu expiră niciodată",
+    "expiredOn": "Expirat pe {{date}}",
+    "edit": "Editează",
+    "delete": "Șterge",
+    "deleteConfirm": "Sunteți sigur că doriți să ștergeți acest raport?",
+    "deleteConfirmTitle": "Șterge Raportul",
+    "updated": "Raport actualizat",
+    "deleted": "Raport șters",
+    "editReport": "Editează Raportul",
+    "editReportDescription": "Actualizați-vă raportul",
+    "updateReport": "Actualizează Raportul",
+    "updating": "Se actualizează..."
   },
   "cragPage": {
     "askAI": "Întreabă AI",

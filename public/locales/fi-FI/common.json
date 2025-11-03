@@ -19,7 +19,9 @@
         "display": "Olosuhteet Konnevuoressa huomenna?",
         "query": "Olosuhteet Konnevuoressa huomenna?"
       }
-    }
+    },
+    "yourFavorites": "Suosikkisi",
+    "favoriteQuery": "Mitkä ovat olosuhteet kohteessa {{crag}}?"
   },
   "chat": {
     "analyzing": "Analysoidaan olosuhteita...",
@@ -266,7 +268,8 @@
     "lessReliable": "Päivät 8-14: Vähemmän luotettava ennuste",
     "lessReliableHourly": "Seuraavat tunnit vähemmän ennustettavissa",
     "lessCertain": "VÄHEMMÄN VARMA",
-    "todayBadge": "TÄNÄÄN"
+    "todayBadge": "TÄNÄÄN",
+    "delete": "Poista"
   },
   "timeContext": {
     "sunrise": "Auringonnousu",
@@ -484,7 +487,8 @@
       "access": "Pääsy",
       "climbing_info": "Kiipeilytiedot",
       "facilities": "Tilat",
-      "other": "Muu"
+      "other": "Muu",
+      "lost_found": "Löytötavarat"
     },
     "categoryDescriptions": {
       "conditions": "Sää, kitka, kuivuus, ruuhkaisuus",
@@ -492,7 +496,17 @@
       "access": "Sulkemiset, pysäköintimuutokset, kausirajoitukset, lintupesät, hyönteiset",
       "climbing_info": "Uudelleenpulttaus, varustepäivitykset, reittien muutokset, kiinteät pikalenkit",
       "facilities": "WC:t, leirintä, vesilähteet, mukavuudet",
-      "other": "Kaikki muu, mikä ei sovi yllä oleviin"
+      "other": "Kaikki muu, mikä ei sovi yllä oleviin",
+      "lost_found": "Kadonnut tai löydetty varustus"
+    },
+    "categoryHelp": {
+      "conditions": "Nykyinen sää, kitka, kuivuus, ruuhkaisuus kalliolla",
+      "safety": "Vaarat koko alueella, vaaralliset olosuhteet, kiireelliset varoitukset",
+      "access": "Pysäköinti, sulkemiset, säännöt, kausirajoitukset",
+      "climbing_info": "Reittikohtaiset yksityiskohdat, beta, otteet, varusteet, vaikeusasteet",
+      "facilities": "WC:t, leirintä, vesilähteet, mukavuudet",
+      "other": "Kaikki muu, mikä ei sovi edellä mainittuihin kategorioihin",
+      "lost_found": "Ilmoita kadotetuista tavaroista, joita etsit, tai löydetyistä tavaroista, joita pidät"
     },
     "dryness": "Kuivuus",
     "wind": "Tuuli",
@@ -506,7 +520,8 @@
       "access": "Esim., Portti kiinni toukokuuhun, uusi parkkipaikka kirjaston takana...",
       "climbing_info": "Esim., Reitti X uudelleenpultattu ruostumattomilla pulteilla, uudet kiinteät pikalenkit asennettu, ankkuri päivitetty...",
       "facilities": "Esim., WC saatavilla pysäköintialueella, ei vesilähdettä lähistöllä...",
-      "other": "Kuvaile mitä haluat raportoida..."
+      "other": "Kuvaile mitä haluat raportoida...",
+      "lost_found": "Esim., Löydetty sininen liitupussi kalliojuurelta, kadonnut Black Diamond cam #2 parkkipaikan läheltä..."
     },
     "submit": "Lähetä raportti",
     "submitting": "Lähetetään...",
@@ -565,7 +580,30 @@
       "veryOld": "Erittäin vanha"
     },
     "observationDate": "Milloin havaitsit tämän?",
-    "observationDateHelp": "Voit raportoida olosuhteita jopa 7 päivää taaksepäin"
+    "observationDateHelp": "Voit raportoida olosuhteita jopa 7 päivää taaksepäin",
+    "lostFoundType": "Tyyppi",
+    "lostFoundTypes": {
+      "lost": "Kadonnut esine",
+      "found": "Löydetty esine"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Valitse onko tämä kadonnut vai löydetty esine",
+    "lostBadge": "KADONNUT",
+    "foundBadge": "LÖYDETTY",
+    "expiresAt": "Voimassa (valinnainen)",
+    "expiresAtHelp": "Aseta, milloin tämä raportti vanhenee (hyödyllinen väliaikaisille sulkemisille tai muuttuville olosuhteille)",
+    "noExpiry": "Ei vanhene koskaan",
+    "expiredOn": "Vanhentunut {{date}}",
+    "edit": "Muokkaa",
+    "delete": "Poista",
+    "deleteConfirm": "Haluatko varmasti poistaa tämän raportin?",
+    "deleteConfirmTitle": "Poista Raportti",
+    "updated": "Raportti päivitetty",
+    "deleted": "Raportti poistettu",
+    "editReport": "Muokkaa Raporttia",
+    "editReportDescription": "Päivitä raporttisi",
+    "updateReport": "Päivitä Raportti",
+    "updating": "Päivitetään..."
   },
   "cragPage": {
     "askAI": "Kysy AI:lta",

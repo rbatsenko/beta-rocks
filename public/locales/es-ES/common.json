@@ -19,7 +19,9 @@
         "display": "¿Qué tiempo hará en El Chorro este fin de semana?",
         "query": "¿Qué condiciones habrá en El Chorro (36.901, -4.764) este fin de semana?"
       }
-    }
+    },
+    "yourFavorites": "Tus Favoritos",
+    "favoriteQuery": "¿Cuáles son las condiciones en {{crag}}?"
   },
   "chat": {
     "analyzing": "Analizando condiciones...",
@@ -270,7 +272,8 @@
     "lessReliable": "Días 8-14: previsión menos fiable",
     "lessReliableHourly": "Próximas horas menos predecibles",
     "lessCertain": "MENOS SEGURO",
-    "todayBadge": "HOY"
+    "todayBadge": "HOY",
+    "delete": "Eliminar"
   },
   "timeContext": {
     "sunrise": "Amanecer",
@@ -568,7 +571,8 @@
       "access": "Acceso",
       "climbing_info": "Información de escalada",
       "facilities": "Instalaciones",
-      "other": "Otro"
+      "other": "Otro",
+      "lost_found": "Objetos perdidos"
     },
     "categoryDescriptions": {
       "conditions": "Clima, fricción, sequedad, afluencia",
@@ -576,7 +580,17 @@
       "access": "Cierres, cambios de aparcamiento, restricciones estacionales, nidos de aves, insectos",
       "climbing_info": "Reequipamiento, actualizaciones de material, cambios de rutas, cintas fijas",
       "facilities": "Baños, camping, fuentes de agua, servicios",
-      "other": "Cualquier otra cosa que no encaje arriba"
+      "other": "Cualquier otra cosa que no encaje arriba",
+      "lost_found": "Equipo perdido o encontrado"
+    },
+    "categoryHelp": {
+      "conditions": "Clima actual, fricción, sequedad, afluencia en el sector",
+      "safety": "Peligros en toda el área, condiciones peligrosas, advertencias urgentes",
+      "access": "Aparcamiento, cierres, regulaciones, restricciones estacionales",
+      "climbing_info": "Detalles específicos de rutas, beta, presas, material, grados",
+      "facilities": "Baños, camping, fuentes de agua, servicios",
+      "other": "Cualquier otra cosa que no encaje en las categorías anteriores",
+      "lost_found": "Reporta objetos perdidos que estás buscando u objetos encontrados que tienes"
     },
     "dryness": "Sequedad",
     "wind": "Viento",
@@ -590,7 +604,8 @@
       "access": "Ej: Puerta cerrada hasta mayo, nuevo aparcamiento detrás de la biblioteca...",
       "climbing_info": "Ej: Ruta X reequipada con seguros de acero inoxidable, nuevas cintas permanentes instaladas, reunión mejorada...",
       "facilities": "Ej: Aseo disponible en el aparcamiento, sin fuente de agua cerca...",
-      "other": "Describe lo que te gustaría informar..."
+      "other": "Describe lo que te gustaría informar...",
+      "lost_found": "Por ejemplo, Encontrada bolsa de magnesio azul en la base, perdido Black Diamond friend #2 cerca del aparcamiento..."
     },
     "submit": "Enviar informe",
     "submitting": "Enviando...",
@@ -649,7 +664,30 @@
     },
     "observationDate": "¿Cuándo observaste esto?",
     "observationDateHelp": "Puedes reportar condiciones hasta 7 días atrás",
-    "voteReady": "Ya puedes votar en los informes"
+    "voteReady": "Ya puedes votar en los informes",
+    "lostFoundType": "Tipo",
+    "lostFoundTypes": {
+      "lost": "Objeto perdido",
+      "found": "Objeto encontrado"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Selecciona si es un objeto perdido o encontrado",
+    "lostBadge": "PERDIDO",
+    "foundBadge": "ENCONTRADO",
+    "expiresAt": "Válido hasta (opcional)",
+    "expiresAtHelp": "Establece cuándo este informe queda obsoleto (útil para cierres temporales o condiciones cambiantes)",
+    "noExpiry": "Nunca caduca",
+    "expiredOn": "Caducado el {{date}}",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "deleteConfirm": "¿Estás seguro de que quieres eliminar este informe?",
+    "deleteConfirmTitle": "Eliminar Informe",
+    "updated": "Informe actualizado",
+    "deleted": "Informe eliminado",
+    "editReport": "Editar Informe",
+    "editReportDescription": "Actualiza tu informe",
+    "updateReport": "Actualizar Informe",
+    "updating": "Actualizando..."
   },
   "cragPage": {
     "askAI": "Preguntar a la IA",

@@ -19,7 +19,9 @@
         "display": "Condicions a Siurana demà?",
         "query": "Condicions a Siurana demà?"
       }
-    }
+    },
+    "yourFavorites": "Els teus favorits",
+    "favoriteQuery": "Quines són les condicions a {{crag}}?"
   },
   "chat": {
     "analyzing": "Analizant condicions...",
@@ -234,7 +236,8 @@
     "lessReliable": "Dies 8-14: Pronòstic menys fiable",
     "lessReliableHourly": "Pròximes hores menys previsibles",
     "lessCertain": "MENYS CERT",
-    "todayBadge": "AVUI"
+    "todayBadge": "AVUI",
+    "delete": "Elimina"
   },
   "timeContext": {
     "sunrise": "Sortida del sol",
@@ -452,7 +455,8 @@
       "access": "Accés",
       "climbing_info": "Info escalada",
       "facilities": "Instal·lacions",
-      "other": "Altre"
+      "other": "Altre",
+      "lost_found": "Objectes perduts i trobats"
     },
     "categoryDescriptions": {
       "conditions": "Temps, fricció, sequedat, gent",
@@ -460,7 +464,17 @@
       "access": "Tancaments, canvis d'aparcament, restriccions estacionals, nius d'ocells, insectes",
       "climbing_info": "Reequipament, actualitzacions d'equipament, canvis de vies, cintes fixes",
       "facilities": "Banys, càmping, fonts d'aigua, serveis",
-      "other": "Qualsevol altra cosa que no encaixi a dalt"
+      "other": "Qualsevol altra cosa que no encaixi a dalt",
+      "lost_found": "Equipament i material perdut o trobat"
+    },
+    "categoryHelp": {
+      "conditions": "Temps actual, fricció, sequedat, gent al sector",
+      "safety": "Perills a tota l'àrea, condicions perilloses, advertències urgents",
+      "access": "Aparcament, tancaments, regulacions, restriccions estacionals",
+      "climbing_info": "Detalls específics de vies, beta, preses, equipament, graus",
+      "facilities": "Banys, càmping, fonts d'aigua, serveis",
+      "other": "Qualsevol altra cosa que no encaixi a les categories anteriors",
+      "lost_found": "Informeu d'articles perduts que esteu buscant o articles trobats que teniu"
     },
     "dryness": "Sequedat",
     "wind": "Vent",
@@ -474,7 +488,8 @@
       "access": "P. ex., Barrera tancada fins el maig, nou aparcament darrere la biblioteca...",
       "climbing_info": "P. ex., Via X reequipada amb plaques d'acer inoxidable, noves cintes fixes instal·lades, reunió millorada...",
       "facilities": "P. ex., Lavabo disponible a l'aparcament, no hi ha font d'aigua a prop...",
-      "other": "Descriu el que voldries informar..."
+      "other": "Descriu el que voldries informar...",
+      "lost_found": "Per exemple, Bossa de magnesi blava trobada a la base, perdut Black Diamond friend #2 a prop de l'aparcament..."
     },
     "submit": "Enviar informe",
     "submitting": "Enviant...",
@@ -533,7 +548,30 @@
       "veryOld": "Molt antic"
     },
     "observationDate": "Quan vas observar això?",
-    "observationDateHelp": "Pots informar de condicions fins a 7 dies enrere"
+    "observationDateHelp": "Pots informar de condicions fins a 7 dies enrere",
+    "lostFoundType": "Tipus",
+    "lostFoundTypes": {
+      "lost": "Article perdut",
+      "found": "Article trobat"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Seleccioneu si és un article perdut o trobat",
+    "lostBadge": "PERDUT",
+    "foundBadge": "TROBAT",
+    "expiresAt": "Vàlid fins (opcional)",
+    "expiresAtHelp": "Estableix quan aquest informe quedarà obsolet (útil per a tancaments temporals o condicions canviants)",
+    "noExpiry": "No caduca mai",
+    "expiredOn": "Caducat el {{date}}",
+    "edit": "Edita",
+    "delete": "Elimina",
+    "deleteConfirm": "Esteu segur que voleu eliminar aquest informe?",
+    "deleteConfirmTitle": "Eliminar informe",
+    "updated": "Informe actualitzat",
+    "deleted": "Informe eliminat",
+    "editReport": "Editar informe",
+    "editReportDescription": "Actualitza el teu informe",
+    "updateReport": "Actualitzar informe",
+    "updating": "Actualitzant..."
   },
   "cragPage": {
     "askAI": "Pregunta a la IA",

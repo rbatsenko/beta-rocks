@@ -19,7 +19,9 @@
         "query": "Quali sono le condizioni in Ticino oggi?"
       }
     },
-    "searchHint": "Cerca falesie direttamente con"
+    "searchHint": "Cerca falesie direttamente con",
+    "yourFavorites": "I Tuoi Preferiti",
+    "favoriteQuery": "Quali sono le condizioni a {{crag}}?"
   },
   "chat": {
     "analyzing": "Analisi delle condizioni...",
@@ -266,7 +268,8 @@
     "lessReliable": "Giorni 8-14: previsione meno affidabile",
     "lessReliableHourly": "Prossime ore meno prevedibili",
     "lessCertain": "MENO CERTO",
-    "todayBadge": "OGGI"
+    "todayBadge": "OGGI",
+    "delete": "Elimina"
   },
   "timeContext": {
     "sunrise": "Alba",
@@ -486,7 +489,8 @@
       "access": "Accesso",
       "climbing_info": "Info arrampicata",
       "facilities": "Servizi",
-      "other": "Altro"
+      "other": "Altro",
+      "lost_found": "Oggetti smarriti"
     },
     "categoryDescriptions": {
       "conditions": "Meteo, aderenza, asciutto, affollamento",
@@ -494,7 +498,17 @@
       "access": "Chiusure, modifiche parcheggio, restrizioni stagionali, nidi di uccelli, insetti",
       "climbing_info": "Richiodatura, aggiornamenti attrezzatura, modifiche vie, rinvii fissi",
       "facilities": "Bagni, campeggio, fonti d'acqua, servizi",
-      "other": "Qualsiasi altra cosa che non rientra sopra"
+      "other": "Qualsiasi altra cosa che non rientra sopra",
+      "lost_found": "Attrezzatura smarrita o trovata"
+    },
+    "categoryHelp": {
+      "conditions": "Meteo attuale, aderenza, asciutto, affollamento alla falesia",
+      "safety": "Pericoli in tutta l'area, condizioni pericolose, avvisi urgenti",
+      "access": "Parcheggio, chiusure, regolamenti, restrizioni stagionali",
+      "climbing_info": "Dettagli specifici delle vie, beta, prese, attrezzatura, gradi",
+      "facilities": "Bagni, campeggio, fonti d'acqua, servizi",
+      "other": "Qualsiasi altra cosa che non rientra nelle categorie precedenti",
+      "lost_found": "Segnala oggetti smarriti che stai cercando o oggetti trovati che hai con te"
     },
     "dryness": "Asciutto",
     "wind": "Vento",
@@ -508,7 +522,8 @@
       "access": "Es., Cancello chiuso fino a maggio, nuovo parcheggio dietro la biblioteca...",
       "climbing_info": "Es., Via X richodata con chiodi inox, nuovi rinvii fissi installati, sosta migliorata...",
       "facilities": "Es., Bagno disponibile al parcheggio, nessuna fonte d'acqua nelle vicinanze...",
-      "other": "Descrivi cosa vuoi segnalare..."
+      "other": "Descrivi cosa vuoi segnalare...",
+      "lost_found": "Es., Trovato sacchetto di magnesite blu alla base, perso Black Diamond friend #2 vicino al parcheggio..."
     },
     "submit": "Invia Segnalazione",
     "submitting": "Invio in corso...",
@@ -565,7 +580,30 @@
       "outdated": "Obsoleto",
       "older": "Più vecchio",
       "veryOld": "Molto vecchio"
-    }
+    },
+    "lostFoundType": "Tipo",
+    "lostFoundTypes": {
+      "lost": "Oggetto smarrito",
+      "found": "Oggetto trovato"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Seleziona se si tratta di un oggetto smarrito o trovato",
+    "lostBadge": "SMARRITO",
+    "foundBadge": "TROVATO",
+    "expiresAt": "Valido fino a (opzionale)",
+    "expiresAtHelp": "Imposta quando questo rapporto diventa obsoleto (utile per chiusure temporanee o condizioni in evoluzione)",
+    "noExpiry": "Non scade mai",
+    "expiredOn": "Scaduto il {{date}}",
+    "edit": "Modifica",
+    "delete": "Elimina",
+    "deleteConfirm": "Sei sicuro di voler eliminare questo rapporto?",
+    "deleteConfirmTitle": "Elimina Rapporto",
+    "updated": "Rapporto aggiornato",
+    "deleted": "Rapporto eliminato",
+    "editReport": "Modifica Rapporto",
+    "editReportDescription": "Aggiorna il tuo rapporto",
+    "updateReport": "Aggiorna Rapporto",
+    "updating": "Aggiornamento..."
   },
   "cragPage": {
     "askAI": "Chiedi all'IA",

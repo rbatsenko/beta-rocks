@@ -19,7 +19,9 @@
         "query": "Kako bodo razmere v Kotečniku ta konec tedna?"
       }
     },
-    "searchHint": "Išči plezališča neposredno z"
+    "searchHint": "Išči plezališča neposredno z",
+    "yourFavorites": "Vaši Priljubljeni",
+    "favoriteQuery": "Kakšni so pogoji v {{crag}}?"
   },
   "chat": {
     "analyzing": "Analiziram razmere...",
@@ -267,7 +269,8 @@
     "lessReliable": "Dnevi 8-14: manj zanesljiva napoved",
     "lessReliableHourly": "Naslednje ure manj predvidljive",
     "lessCertain": "MANJ ZANESLJIVO",
-    "todayBadge": "DANES"
+    "todayBadge": "DANES",
+    "delete": "Izbriši"
   },
   "timeContext": {
     "sunrise": "Sončni vzhod",
@@ -564,7 +567,8 @@
       "access": "Dostop",
       "climbing_info": "Informacije o plezanju",
       "facilities": "Objekti",
-      "other": "Drugo"
+      "other": "Drugo",
+      "lost_found": "Najdeno in izgubljeno"
     },
     "categoryDescriptions": {
       "conditions": "Vreme, trenje, suhost, gneča",
@@ -572,7 +576,17 @@
       "access": "Zaprtja, spremembe parkirišč, sezonske omejitve, gnezda ptic, žuželke",
       "climbing_info": "Ponovna namestitev sider, posodobitve opreme, spremembe poti, fiksne vponke",
       "facilities": "Stranišča, kampiranje, viri vode, objekti",
-      "other": "Karkoli drugega, kar ne ustreza zgoraj"
+      "other": "Karkoli drugega, kar ne ustreza zgoraj",
+      "lost_found": "Izgubljena ali najdena oprema"
+    },
+    "categoryHelp": {
+      "conditions": "Trenutno vreme, trenje, suhost, gneča na plezališču",
+      "safety": "Nevarnosti na celotnem območju, nevarne razmere, nujna opozorila",
+      "access": "Parkiranje, zaprtja, predpisi, sezonske omejitve",
+      "climbing_info": "Specifične podrobnosti poti, beta, prijemi, oprema, težavnost",
+      "facilities": "Stranišča, kampiranje, viri vode, objekti",
+      "other": "Karkoli drugega, kar ne ustreza zgornjim kategorijam",
+      "lost_found": "Prijavite izgubljene predmete, ki jih iščete, ali najdene predmete, ki jih imate"
     },
     "dryness": "Suhost",
     "wind": "Veter",
@@ -586,7 +600,8 @@
       "access": "Npr., Vrata zaprta do maja, novo parkirišče za knjižnico...",
       "climbing_info": "Npr., Pot X ponovno nameščena s sidri iz nerjavnega jekla, nameščene nove fiksne vponke, izboljšana fiksna točka...",
       "facilities": "Npr., Stranišče na voljo na parkirišču, ni vira vode v bližini...",
-      "other": "Opiši, kaj bi rad prijavil..."
+      "other": "Opiši, kaj bi rad prijavil...",
+      "lost_found": "Npr., Najdena modra vrečka za magnezij pri podnožju, izgubljen Black Diamond cam #2 pri parkirišču..."
     },
     "submit": "Pošlji poročilo",
     "submitting": "Pošiljam...",
@@ -645,7 +660,30 @@
       "veryOld": "Zelo staro"
     },
     "observationDate": "Kdaj ste to opazili?",
-    "observationDateHelp": "Poročate lahko o razmerah do 7 dni nazaj"
+    "observationDateHelp": "Poročate lahko o razmerah do 7 dni nazaj",
+    "lostFoundType": "Vrsta",
+    "lostFoundTypes": {
+      "lost": "Izgubljen predmet",
+      "found": "Najden predmet"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Izberite, ali je to izgubljen ali najden predmet",
+    "lostBadge": "IZGUBLJENO",
+    "foundBadge": "NAJDENO",
+    "expiresAt": "Veljavno do (neobvezno)",
+    "expiresAtHelp": "Nastavite, kdaj to poročilo zastara (uporabno za začasne zapore ali spreminjajoče se pogoje)",
+    "noExpiry": "Nikoli ne poteče",
+    "expiredOn": "Poteklo {{date}}",
+    "edit": "Uredi",
+    "delete": "Izbriši",
+    "deleteConfirm": "Ali ste prepričani, da želite izbrisati to poročilo?",
+    "deleteConfirmTitle": "Izbriši Poročilo",
+    "updated": "Poročilo posodobljeno",
+    "deleted": "Poročilo izbrisano",
+    "editReport": "Uredi Poročilo",
+    "editReportDescription": "Posodobite svoje poročilo",
+    "updateReport": "Posodobi Poročilo",
+    "updating": "Posodabljanje..."
   },
   "cragPage": {
     "askAI": "Vprašaj AI",

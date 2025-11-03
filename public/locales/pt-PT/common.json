@@ -19,7 +19,9 @@
         "query": "Condições em Sintra amanhã?"
       }
     },
-    "searchHint": "Pesquisar setores diretamente com"
+    "searchHint": "Pesquisar setores diretamente com",
+    "yourFavorites": "Os Seus Favoritos",
+    "favoriteQuery": "Quais são as condições em {{crag}}?"
   },
   "chat": {
     "analyzing": "A analisar condições...",
@@ -266,7 +268,8 @@
     "lessReliable": "Dias 8-14: Previsão menos fiável",
     "lessReliableHourly": "Próximas horas menos previsíveis",
     "lessCertain": "MENOS CERTO",
-    "todayBadge": "HOJE"
+    "todayBadge": "HOJE",
+    "delete": "Eliminar"
   },
   "timeContext": {
     "sunrise": "Nascimento do Sol",
@@ -563,7 +566,8 @@
       "access": "Acesso",
       "climbing_info": "Info de escalada",
       "facilities": "Instalações",
-      "other": "Outro"
+      "other": "Outro",
+      "lost_found": "Perdidos e achados"
     },
     "categoryDescriptions": {
       "conditions": "Tempo, fricção, secura, multidões",
@@ -571,7 +575,17 @@
       "access": "Encerramentos, mudanças de estacionamento, restrições sazonais, ninhos de pássaros, insetos",
       "climbing_info": "Reequipamento, atualizações de equipamento, mudanças de vias, fitas fixas",
       "facilities": "Casas de banho, campismo, fontes de água, comodidades",
-      "other": "Qualquer outra coisa que não se enquadre acima"
+      "other": "Qualquer outra coisa que não se enquadre acima",
+      "lost_found": "Equipamento perdido ou encontrado"
+    },
+    "categoryHelp": {
+      "conditions": "Tempo atual, fricção, secura, multidões na falésia",
+      "safety": "Perigos em toda a área, condições perigosas, avisos urgentes",
+      "access": "Estacionamento, encerramentos, regulamentos, restrições sazonais",
+      "climbing_info": "Detalhes específicos de vias, beta, agarras, equipamento, graduações",
+      "facilities": "Casas de banho, campismo, fontes de água, comodidades",
+      "other": "Qualquer outra coisa que não se enquadre nas categorias anteriores",
+      "lost_found": "Reporte itens perdidos que está a procurar ou itens encontrados que tem consigo"
     },
     "dryness": "Secura",
     "wind": "Vento",
@@ -585,7 +599,8 @@
       "access": "Ex., Portão fechado até Maio, novo parque de estacionamento atrás da biblioteca...",
       "climbing_info": "Ex., Via X reequipada com parafusos de aço inoxidável, novas fitas fixas instaladas, reunião melhorada...",
       "facilities": "Ex., WC disponível no parque, sem fonte de água próxima...",
-      "other": "Descreva o que gostaria de reportar..."
+      "other": "Descreva o que gostaria de reportar...",
+      "lost_found": "Por ex., Saco de magnésio azul encontrado na base, perdido Black Diamond cam #2 perto do estacionamento..."
     },
     "submit": "Submeter relatório",
     "submitting": "A submeter...",
@@ -644,7 +659,30 @@
       "veryOld": "Muito antigo"
     },
     "observationDate": "Quando observou isto?",
-    "observationDateHelp": "Pode reportar condições até 7 dias atrás"
+    "observationDateHelp": "Pode reportar condições até 7 dias atrás",
+    "lostFoundType": "Tipo",
+    "lostFoundTypes": {
+      "lost": "Item perdido",
+      "found": "Item encontrado"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Selecione se é um item perdido ou encontrado",
+    "lostBadge": "PERDIDO",
+    "foundBadge": "ENCONTRADO",
+    "expiresAt": "Válido até (opcional)",
+    "expiresAtHelp": "Defina quando este relatório fica desatualizado (útil para encerramentos temporários ou condições em mudança)",
+    "noExpiry": "Nunca expira",
+    "expiredOn": "Expirou em {{date}}",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "deleteConfirm": "Tem a certeza de que deseja eliminar este relatório?",
+    "deleteConfirmTitle": "Eliminar Relatório",
+    "updated": "Relatório atualizado",
+    "deleted": "Relatório eliminado",
+    "editReport": "Editar Relatório",
+    "editReportDescription": "Atualize o seu relatório",
+    "updateReport": "Atualizar Relatório",
+    "updating": "A atualizar..."
   },
   "cragPage": {
     "askAI": "Perguntar à IA",
