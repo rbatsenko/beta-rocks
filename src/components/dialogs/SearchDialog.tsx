@@ -147,7 +147,7 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
                         <span className="font-medium truncate">{result.name}</span>
                         {result.rockType && (
                           <Badge variant="outline" className="text-xs shrink-0 border-orange-500/30 text-orange-700 dark:text-orange-400">
-                            {result.rockType}
+                            {t(`rockTypes.${result.rockType.toLowerCase()}`)}
                           </Badge>
                         )}
                         {result.reportCount > 0 && (
