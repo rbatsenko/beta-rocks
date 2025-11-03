@@ -37,6 +37,7 @@ import { cn } from "@/lib/utils";
 import { getDateFnsLocale, getLocalizedDateFormat } from "@/lib/i18n/date-locales";
 import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal";
 import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog";
+import { useToast } from "@/hooks/use-toast";
 
 type ReportCategory =
   | "conditions"
@@ -88,6 +89,7 @@ export function ReportDialog({
   editReport,
 }: ReportDialogProps) {
   const { t, i18n } = useClientTranslation("common");
+  const { toast } = useToast();
   const dateLocale = getDateFnsLocale(i18n.language);
   const dateFormat = getLocalizedDateFormat(i18n.language);
   const isEditMode = !!editReport;
@@ -172,13 +174,19 @@ export function ReportDialog({
 
     // Validate required fields
     if (category !== "conditions" && !text.trim()) {
-      alert(t("reports.detailsRequired"));
+      toast({
+        title: t("reports.detailsRequired"),
+        variant: "destructive",
+      });
       return;
     }
 
     // Validate lost_found_type is required for lost_found category
     if (category === "lost_found" && !lostFoundType) {
-      alert(t("reports.lostFoundTypeRequired"));
+      toast({
+        title: t("reports.lostFoundTypeRequired"),
+        variant: "destructive",
+      });
       return;
     }
 
@@ -195,6 +203,20 @@ export function ReportDialog({
       const dbProfile = await fetchOrCreateUserProfile(syncKeyHash);
 
       if (isEditMode && editReport) {
+        // Verify ownership before attempting update
+        if (editReport.author_id && editReport.author_id !== dbProfile.id) {
+          console.error("[ReportDialog] Author ID mismatch:", {
+            reportAuthorId: editReport.author_id,
+            currentUserId: dbProfile.id,
+          });
+          toast({
+            title: t("reports.updateFailed"),
+            description: "You can only edit your own reports.",
+            variant: "destructive",
+          });
+          return;
+        }
+
         // Update existing report
         const response = await fetch(`/api/reports/${editReport.id}`, {
           method: "PATCH",
@@ -213,8 +235,16 @@ export function ReportDialog({
         });
 
         if (!response.ok) {
-          throw new Error("Failed to update report");
+          const errorData = await response.json().catch(() => ({}));
+          console.error("[ReportDialog] Update failed:", errorData);
+          throw new Error(errorData.error || "Failed to update report");
         }
+
+        // Show success toast
+        toast({
+          title: t("reports.reportUpdated"),
+          description: t("reports.reportUpdatedDescription"),
+        });
       } else {
         // Create new report
         await createReport({
@@ -229,20 +259,27 @@ export function ReportDialog({
           observed_at: observedAt.toISOString(),
           expires_at: expiresAt ? expiresAt.toISOString() : null,
         });
+
+        // Show success toast
+        toast({
+          title: t("reports.reportCreated"),
+          description: t("reports.reportCreatedDescription"),
+        });
       }
 
-      // Success!
+      // Success! Close dialog and refresh
       onOpenChange(false);
       if (onReportCreated) {
         onReportCreated();
       }
     } catch (error) {
       console.error("Failed to submit report:", error);
-      alert(
-        isEditMode
-          ? "Failed to update report. Please try again."
-          : "Failed to submit report. Please try again."
-      );
+      toast({
+        title: isEditMode ? t("reports.updateFailed") : t("reports.submitFailed"),
+        description:
+          error instanceof Error ? error.message : "Please try again.",
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }

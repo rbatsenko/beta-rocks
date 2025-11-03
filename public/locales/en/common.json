@@ -715,7 +715,13 @@
     "editReport": "Edit Report",
     "editReportDescription": "Update your report",
     "updateReport": "Update Report",
-    "updating": "Updating..."
+    "updating": "Updating...",
+    "reportCreated": "Report created",
+    "reportCreatedDescription": "Your report has been posted successfully",
+    "reportUpdated": "Report updated",
+    "reportUpdatedDescription": "Your changes have been saved",
+    "updateFailed": "Update failed",
+    "submitFailed": "Submit failed"
   },
   "cragPage": {
     "askAI": "Ask AI",
