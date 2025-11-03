@@ -7,7 +7,7 @@ import { Toaster } from "@/components/ui/toaster";
 import "@/index.css";
 
 export const metadata: Metadata = {
-  title: "beta.rocks - Get the Beta on Any Crag",
+  title: "beta.rocks - Climbing Conditions, Weather & Reports for Any Crag",
   description:
     "Get conditions, community reports, and route information for any crag worldwide. Real-time weather, friction scores, and optimal climbing windows.",
   authors: [{ name: "beta.rocks" }],
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     "forecast",
   ],
   openGraph: {
-    title: "beta.rocks - Get the Beta on Any Crag",
+    title: "beta.rocks - Climbing Conditions, Weather & Reports for Any Crag",
     description:
       "Get conditions, community reports, and route information for any crag worldwide. Real-time weather, friction scores, and optimal climbing windows.",
     url: "https://beta.rocks",
