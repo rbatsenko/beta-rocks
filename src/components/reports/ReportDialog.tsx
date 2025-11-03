@@ -206,7 +206,7 @@ export function ReportDialog({
             rating_wind: category === "conditions" ? windRating[0] : null,
             rating_crowds: category === "conditions" ? crowdsRating[0] : null,
             text: text.trim() || null,
-            lost_found_type: category === "lost_found" ? lostFoundType : null,
+            ...(category === "lost_found" && { lost_found_type: lostFoundType }),
             observed_at: observedAt.toISOString(),
             expires_at: expiresAt ? expiresAt.toISOString() : null,
           }),
@@ -225,7 +225,7 @@ export function ReportDialog({
           rating_wind: category === "conditions" ? windRating[0] : null,
           rating_crowds: category === "conditions" ? crowdsRating[0] : null,
           text: text.trim() || null,
-          lost_found_type: category === "lost_found" ? lostFoundType : null,
+          ...(category === "lost_found" && { lost_found_type: lostFoundType }),
           observed_at: observedAt.toISOString(),
           expires_at: expiresAt ? expiresAt.toISOString() : null,
         });
