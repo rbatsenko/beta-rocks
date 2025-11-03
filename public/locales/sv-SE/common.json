@@ -349,7 +349,8 @@
     "recent": "Senaste sökningar",
     "stats": "Din statistik",
     "settings": "Inställningar",
-    "clearData": "Rensa all data"
+    "clearData": "Rensa all data",
+    "yourReports": "Your Reports"
   },
   "stats": {
     "title": "Din statistik",
@@ -362,6 +363,17 @@
     "unknown": "Okänd",
     "encourageReports": "Dela med dig av din lokala kunskap genom att publicera rapporter om klippförhållanden!",
     "thankYou": "Tack för ditt bidrag till klättergemenskapen!"
+  },
+  "userReports": {
+    "title": "Your Reports",
+    "description": "{{count}} reports",
+    "empty": "No reports yet",
+    "emptyMessage": "You haven't posted any reports yet",
+    "emptyHint": "Share conditions and information about crags to help the community",
+    "loading": "Loading your reports...",
+    "loadFailed": "Failed to load reports",
+    "deleteSuccess": "Report deleted successfully",
+    "deleteFailed": "Failed to delete report"
   },
   "settings": {
     "title": "Inställningar",

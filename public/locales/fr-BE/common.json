@@ -432,7 +432,8 @@
     "recent": "Recherches récentes",
     "stats": "Vos statistiques",
     "settings": "Paramètres",
-    "clearData": "Effacer toutes les données"
+    "clearData": "Effacer toutes les données",
+    "yourReports": "Your Reports"
   },
   "stats": {
     "title": "Vos statistiques",
@@ -445,6 +446,17 @@
     "unknown": "Inconnu",
     "encourageReports": "Partagez vos connaissances locales en publiant des rapports sur les conditions des falaises !",
     "thankYou": "Merci de contribuer à la communauté des grimpeurs !"
+  },
+  "userReports": {
+    "title": "Your Reports",
+    "description": "{{count}} reports",
+    "empty": "No reports yet",
+    "emptyMessage": "You haven't posted any reports yet",
+    "emptyHint": "Share conditions and information about crags to help the community",
+    "loading": "Loading your reports...",
+    "loadFailed": "Failed to load reports",
+    "deleteSuccess": "Report deleted successfully",
+    "deleteFailed": "Failed to delete report"
   },
   "settings": {
     "title": "Paramètres",

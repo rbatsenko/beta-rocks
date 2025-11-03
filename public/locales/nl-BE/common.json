@@ -427,7 +427,8 @@
     "recent": "Recente zoekopdrachten",
     "stats": "Je statistieken",
     "settings": "Instellingen",
-    "clearData": "Alle gegevens wissen"
+    "clearData": "Alle gegevens wissen",
+    "yourReports": "Your Reports"
   },
   "stats": {
     "title": "Jouw statistieken",
@@ -440,6 +441,17 @@
     "unknown": "Onbekend",
     "encourageReports": "Deel je lokale kennis door rapporten te plaatsen over rotsomstandigheden!",
     "thankYou": "Bedankt voor je bijdrage aan de klimgemeenschap!"
+  },
+  "userReports": {
+    "title": "Your Reports",
+    "description": "{{count}} reports",
+    "empty": "No reports yet",
+    "emptyMessage": "You haven't posted any reports yet",
+    "emptyHint": "Share conditions and information about crags to help the community",
+    "loading": "Loading your reports...",
+    "loadFailed": "Failed to load reports",
+    "deleteSuccess": "Report deleted successfully",
+    "deleteFailed": "Failed to delete report"
   },
   "settings": {
     "title": "Instellingen",

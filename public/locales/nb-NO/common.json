@@ -349,7 +349,8 @@
     "recent": "Nylige søk",
     "stats": "Din statistikk",
     "settings": "Innstillinger",
-    "clearData": "Slett alle data"
+    "clearData": "Slett alle data",
+    "yourReports": "Your Reports"
   },
   "stats": {
     "title": "Din statistikk",
@@ -362,6 +363,17 @@
     "unknown": "Ukjent",
     "encourageReports": "Del din lokale kunnskap ved å legge ut rapporter om klatreforhold!",
     "thankYou": "Takk for ditt bidrag til klatremiljøet!"
+  },
+  "userReports": {
+    "title": "Your Reports",
+    "description": "{{count}} reports",
+    "empty": "No reports yet",
+    "emptyMessage": "You haven't posted any reports yet",
+    "emptyHint": "Share conditions and information about crags to help the community",
+    "loading": "Loading your reports...",
+    "loadFailed": "Failed to load reports",
+    "deleteSuccess": "Report deleted successfully",
+    "deleteFailed": "Failed to delete report"
   },
   "settings": {
     "title": "Innstillinger",

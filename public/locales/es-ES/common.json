@@ -432,7 +432,8 @@
     "recent": "Búsquedas recientes",
     "stats": "Tus estadísticas",
     "settings": "Ajustes",
-    "clearData": "Borrar todos los datos"
+    "clearData": "Borrar todos los datos",
+    "yourReports": "Your Reports"
   },
   "stats": {
     "title": "Tus estadísticas",
@@ -445,6 +446,17 @@
     "unknown": "Desconocido",
     "encourageReports": "Comparte tu conocimiento local publicando informes sobre las condiciones de las escuelas!",
     "thankYou": "Gracias por contribuir a la comunidad escaladora!"
+  },
+  "userReports": {
+    "title": "Your Reports",
+    "description": "{{count}} reports",
+    "empty": "No reports yet",
+    "emptyMessage": "You haven't posted any reports yet",
+    "emptyHint": "Share conditions and information about crags to help the community",
+    "loading": "Loading your reports...",
+    "loadFailed": "Failed to load reports",
+    "deleteSuccess": "Report deleted successfully",
+    "deleteFailed": "Failed to delete report"
   },
   "settings": {
     "title": "Ajustes",

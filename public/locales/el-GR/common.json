@@ -316,7 +316,8 @@
     "recent": "Πρόσφατες αναζητήσεις",
     "stats": "Οι στατιστικές σας",
     "settings": "Ρυθμίσεις",
-    "clearData": "Εκκαθάριση όλων των δεδομένων"
+    "clearData": "Εκκαθάριση όλων των δεδομένων",
+    "yourReports": "Your Reports"
   },
   "stats": {
     "title": "Οι στατιστικές σας",
@@ -329,6 +330,17 @@
     "unknown": "Άγνωστο",
     "encourageReports": "Μοιραστείτε τις τοπικές σας γνώσεις δημοσιεύοντας αναφορές για τις συνθήκες στα βράχια!",
     "thankYou": "Ευχαριστούμε για τη συνεισφορά σας στην κοινότητα αναρρίχησης!"
+  },
+  "userReports": {
+    "title": "Your Reports",
+    "description": "{{count}} reports",
+    "empty": "No reports yet",
+    "emptyMessage": "You haven't posted any reports yet",
+    "emptyHint": "Share conditions and information about crags to help the community",
+    "loading": "Loading your reports...",
+    "loadFailed": "Failed to load reports",
+    "deleteSuccess": "Report deleted successfully",
+    "deleteFailed": "Failed to delete report"
   },
   "settings": {
     "title": "Ρυθμίσεις",

@@ -348,7 +348,8 @@
     "recent": "Viimeaikaiset haut",
     "stats": "Tilastosi",
     "settings": "Asetukset",
-    "clearData": "Tyhjennä kaikki tiedot"
+    "clearData": "Tyhjennä kaikki tiedot",
+    "yourReports": "Your Reports"
   },
   "stats": {
     "title": "Tilastosi",
@@ -361,6 +362,17 @@
     "unknown": "Tuntematon",
     "encourageReports": "Jaa paikallista tietämystäsi lähettämällä raportteja kiipeilyolosuhteista!",
     "thankYou": "Kiitos panoksestasi kiipeilyyhteisölle!"
+  },
+  "userReports": {
+    "title": "Your Reports",
+    "description": "{{count}} reports",
+    "empty": "No reports yet",
+    "emptyMessage": "You haven't posted any reports yet",
+    "emptyHint": "Share conditions and information about crags to help the community",
+    "loading": "Loading your reports...",
+    "loadFailed": "Failed to load reports",
+    "deleteSuccess": "Report deleted successfully",
+    "deleteFailed": "Failed to delete report"
   },
   "settings": {
     "title": "Asetukset",

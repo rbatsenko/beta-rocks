@@ -316,7 +316,8 @@
     "recent": "Búsquedes recents",
     "stats": "Les teves estadístiques",
     "settings": "Configuració",
-    "clearData": "Esborrar totes les dades"
+    "clearData": "Esborrar totes les dades",
+    "yourReports": "Your Reports"
   },
   "stats": {
     "title": "Les teves estadístiques",
@@ -329,6 +330,17 @@
     "unknown": "Desconegut",
     "encourageReports": "Comparteix el teu coneixement local publicant informes sobre les condicions de les vies!",
     "thankYou": "Gràcies per contribuir a la comunitat d'escalada!"
+  },
+  "userReports": {
+    "title": "Your Reports",
+    "description": "{{count}} reports",
+    "empty": "No reports yet",
+    "emptyMessage": "You haven't posted any reports yet",
+    "emptyHint": "Share conditions and information about crags to help the community",
+    "loading": "Loading your reports...",
+    "loadFailed": "Failed to load reports",
+    "deleteSuccess": "Report deleted successfully",
+    "deleteFailed": "Failed to delete report"
   },
   "settings": {
     "title": "Configuració",

@@ -427,7 +427,8 @@
     "recent": "Căutări Recente",
     "stats": "Statisticile Tale",
     "settings": "Setări",
-    "clearData": "Șterge Toate Datele"
+    "clearData": "Șterge Toate Datele",
+    "yourReports": "Your Reports"
   },
   "stats": {
     "title": "Statisticile tale",
@@ -440,6 +441,17 @@
     "unknown": "Necunoscut",
     "encourageReports": "Împărtășește-ți cunoștințele locale postând rapoarte despre condițiile de la stânci!",
     "thankYou": "Mulțumim pentru contribuția ta la comunitatea de escaladă!"
+  },
+  "userReports": {
+    "title": "Your Reports",
+    "description": "{{count}} reports",
+    "empty": "No reports yet",
+    "emptyMessage": "You haven't posted any reports yet",
+    "emptyHint": "Share conditions and information about crags to help the community",
+    "loading": "Loading your reports...",
+    "loadFailed": "Failed to load reports",
+    "deleteSuccess": "Report deleted successfully",
+    "deleteFailed": "Failed to delete report"
   },
   "settings": {
     "title": "Setări",

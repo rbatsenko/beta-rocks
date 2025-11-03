@@ -427,7 +427,8 @@
     "recent": "Nedávne vyhľadávania",
     "stats": "Vaše štatistiky",
     "settings": "Nastavenia",
-    "clearData": "Vymazať všetky dáta"
+    "clearData": "Vymazať všetky dáta",
+    "yourReports": "Your Reports"
   },
   "stats": {
     "title": "Vaše štatistiky",
@@ -440,6 +441,17 @@
     "unknown": "Neznáme",
     "encourageReports": "Zdieľajte svoje miestne znalosti zasielaním hlásení o podmienkach na skalách!",
     "thankYou": "Ďakujeme za váš príspevok do lezeckej komunity!"
+  },
+  "userReports": {
+    "title": "Your Reports",
+    "description": "{{count}} reports",
+    "empty": "No reports yet",
+    "emptyMessage": "You haven't posted any reports yet",
+    "emptyHint": "Share conditions and information about crags to help the community",
+    "loading": "Loading your reports...",
+    "loadFailed": "Failed to load reports",
+    "deleteSuccess": "Report deleted successfully",
+    "deleteFailed": "Failed to delete report"
   },
   "settings": {
     "title": "Nastavenia",

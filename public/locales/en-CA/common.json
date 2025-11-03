@@ -348,7 +348,8 @@
     "recent": "Recent Searches",
     "stats": "Your Stats",
     "settings": "Settings",
-    "clearData": "Clear All Data"
+    "clearData": "Clear All Data",
+    "yourReports": "Your Reports"
   },
   "stats": {
     "title": "Your Stats",
@@ -361,6 +362,17 @@
     "unknown": "Unknown",
     "encourageReports": "Share your local knowledge by posting reports about crag conditions!",
     "thankYou": "Thanks for contributing to the climbing community!"
+  },
+  "userReports": {
+    "title": "Your Reports",
+    "description": "{{count}} reports",
+    "empty": "No reports yet",
+    "emptyMessage": "You haven't posted any reports yet",
+    "emptyHint": "Share conditions and information about crags to help the community",
+    "loading": "Loading your reports...",
+    "loadFailed": "Failed to load reports",
+    "deleteSuccess": "Report deleted successfully",
+    "deleteFailed": "Failed to delete report"
   },
   "settings": {
     "title": "Settings",

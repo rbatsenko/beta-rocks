@@ -408,7 +408,7 @@ export async function fetchReportsByAuthor(authorId: string, limit = 50) {
     .select(
       `
       *,
-      crag:crags!reports_crag_id_fkey(id, name, latitude, longitude, country)
+      crag:crags!reports_crag_id_fkey(id, name, lat, lon, country)
     `
     )
     .eq("author_id", authorId)

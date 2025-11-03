@@ -39,8 +39,8 @@ interface UserReport {
   crag: {
     id: string;
     name: string;
-    latitude: number;
-    longitude: number;
+    lat: number;
+    lon: number;
     country: string;
   } | null;
 }
@@ -144,14 +144,9 @@ export function UserReportsDialog({ open, onOpenChange }: UserReportsDialogProps
   const handleViewCrag = (report: UserReport) => {
     if (!report.crag) return;
 
-    const slug = generateUniqueSlug(report.crag.name, report.crag.latitude, report.crag.longitude);
+    const slug = generateUniqueSlug(report.crag.name, report.crag.lat, report.crag.lon);
     router.push(`/location/${slug}`);
     onOpenChange(false);
-  };
-
-  const getCategoryIcon = (category: string) => {
-    // Return the appropriate icon based on category
-    return <MessageSquare className="h-4 w-4" />;
   };
 
   return (
