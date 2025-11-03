@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ArrowDownIcon } from "lucide-react";
 import type { ComponentProps } from "react";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 
 export type ConversationProps = ComponentProps<typeof StickToBottom>;
@@ -62,16 +62,36 @@ export type ConversationScrollButtonProps = ComponentProps<typeof Button>;
 
 export const ConversationScrollButton = ({
   className,
+  threshold = 200,
   ...props
-}: ConversationScrollButtonProps) => {
-  const { isAtBottom, scrollToBottom } = useStickToBottomContext();
+}: ConversationScrollButtonProps & { threshold?: number }) => {
+  const { scrollToBottom, scrollRef } = useStickToBottomContext();
+  const [showButton, setShowButton] = useState(false);
 
   const handleScrollToBottom = useCallback(() => {
     scrollToBottom();
   }, [scrollToBottom]);
 
+  // Track scroll position to implement custom threshold
+  useEffect(() => {
+    const scrollElement = scrollRef.current;
+    if (!scrollElement) return;
+
+    const handleScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } = scrollElement;
+      const distanceFromBottom = scrollHeight - scrollTop - clientHeight;
+      setShowButton(distanceFromBottom > threshold);
+    };
+
+    scrollElement.addEventListener("scroll", handleScroll);
+    // Initial check
+    handleScroll();
+
+    return () => scrollElement.removeEventListener("scroll", handleScroll);
+  }, [scrollRef, threshold]);
+
   return (
-    !isAtBottom && (
+    showButton && (
       <Button
         className={cn("absolute bottom-4 left-[50%] translate-x-[-50%] rounded-full", className)}
         onClick={handleScrollToBottom}
