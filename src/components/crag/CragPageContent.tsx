@@ -71,8 +71,10 @@ interface CragPageContentProps {
     state: string | null;
     municipality: string | null;
     village: string | null;
+    description: string | null;
   };
   sectors: any[];
+  currentSector?: any | null;
 }
 
 interface ConditionsData {
@@ -168,7 +170,7 @@ function extractLocalTime(isoString: string): string {
   return isoString;
 }
 
-export function CragPageContent({ crag, sectors }: CragPageContentProps) {
+export function CragPageContent({ crag, sectors, currentSector }: CragPageContentProps) {
   const { t } = useClientTranslation("common");
   const { translateReason, translateWarning, translateWeather } = useConditionsTranslations(t);
   const router = useRouter();
@@ -425,7 +427,16 @@ export function CragPageContent({ crag, sectors }: CragPageContentProps) {
           <div className="flex flex-col gap-3">
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1 min-w-0">
-                <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">{crag.name}</h1>
+                <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
+                  {currentSector ? (
+                    <>
+                      {currentSector.name}
+                      <span className="text-muted-foreground font-normal"> • {crag.name}</span>
+                    </>
+                  ) : (
+                    crag.name
+                  )}
+                </h1>
                 {locationString && (
                   <div className="flex items-center gap-2 text-muted-foreground">
                     <MapPin className="h-4 w-4 shrink-0" />

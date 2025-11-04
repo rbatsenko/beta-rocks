@@ -1,4 +1,4 @@
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { CragPageContent } from "@/components/crag/CragPageContent";
 import {
@@ -105,20 +105,18 @@ export default async function LocationPage({ params }: PageProps) {
   console.log(`[LocationPage] Processing slug: ${slug}`);
 
   let crag = null;
+  let sector = null;
 
   // Try direct slug lookup first (new system)
   crag = await fetchCragBySlug(slug);
 
   // If not found as crag, try as sector slug
   if (!crag) {
-    const sector = await fetchSectorBySlug(slug);
+    sector = await fetchSectorBySlug(slug);
     if (sector) {
-      console.log(`[LocationPage] Found sector: ${sector.name}, redirecting to parent crag`);
-      // Fetch parent crag and redirect to it
-      const parentCrag = await fetchCragById(sector.crag_id);
-      if (parentCrag && parentCrag.slug) {
-        redirect(`/location/${parentCrag.slug}`);
-      }
+      console.log(`[LocationPage] Found sector: ${sector.name}, fetching parent crag`);
+      // Fetch parent crag for sector context
+      crag = await fetchCragById(sector.crag_id);
     }
   }
 
@@ -143,7 +141,7 @@ export default async function LocationPage({ params }: PageProps) {
 
   console.log(`[LocationPage] Loaded ${sectors.length} sectors`);
 
-  // Pass crag and sectors to client component
+  // Pass crag, sectors, and current sector (if viewing a sector) to client component
   // Client component will fetch conditions and reports in parallel with React Query
-  return <CragPageContent crag={crag} sectors={sectors} />;
+  return <CragPageContent crag={crag} sectors={sectors} currentSector={sector} />;
 }
