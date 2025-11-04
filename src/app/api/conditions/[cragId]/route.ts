@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { fetchCragById } from "@/lib/db/queries";
+import { fetchCragById, fetchSectorById } from "@/lib/db/queries";
 import { getWeatherForecast } from "@/lib/external-apis/open-meteo";
 import { computeConditions } from "@/lib/conditions/conditions.service";
 import type { RockType } from "@/lib/conditions/conditions.service";
@@ -16,15 +16,44 @@ export async function GET(
     const { cragId } = await params;
     console.log(`[API /conditions/${cragId}] Processing request`);
 
-    // Fetch crag from database
-    const crag = await fetchCragById(cragId);
+    // Try to fetch as sector first, then fallback to crag
+    let sector = await fetchSectorById(cragId);
+    let crag = null;
+    let lat: number;
+    let lon: number;
+    let rockType: string | null;
+    let name: string;
 
-    if (!crag) {
-      return NextResponse.json({ error: "Crag not found" }, { status: 404 });
+    if (sector && sector.lat !== null && sector.lon !== null) {
+      // It's a sector with valid coordinates - use sector coordinates
+      // But we need the parent crag for rock type
+      crag = await fetchCragById(sector.crag_id);
+      if (!crag) {
+        return NextResponse.json({ error: "Parent crag not found" }, { status: 404 });
+      }
+
+      lat = sector.lat;
+      lon = sector.lon;
+      rockType = crag.rock_type; // Use parent crag's rock type
+      name = sector.name;
+      console.log(`[API /conditions/${cragId}] Using sector coordinates: ${lat}, ${lon}`);
+    } else {
+      // Not a sector or sector has no coordinates, try as crag
+      crag = await fetchCragById(cragId);
+
+      if (!crag) {
+        return NextResponse.json({ error: "Crag or sector not found" }, { status: 404 });
+      }
+
+      lat = crag.lat;
+      lon = crag.lon;
+      rockType = crag.rock_type;
+      name = crag.name;
+      console.log(`[API /conditions/${cragId}] Using crag coordinates: ${lat}, ${lon}`);
     }
 
     // Fetch weather data (14 days)
-    const weather = await getWeatherForecast(crag.lat, crag.lon, 14);
+    const weather = await getWeatherForecast(lat, lon, 14);
 
     if (!weather || !weather.current) {
       throw new Error("Failed to fetch weather data");
@@ -48,14 +77,14 @@ export async function GET(
         weatherCode: hour.weatherCode,
       })),
       daily: weather.daily,
-      latitude: crag.lat,
-      longitude: crag.lon,
+      latitude: lat,
+      longitude: lon,
     };
 
     // Compute conditions (cached for 1 hour with Cache Components)
     const rawConditions = await computeConditions(
       transformedWeather,
-      (crag.rock_type as RockType) || "unknown",
+      (rockType as RockType) || "unknown",
       0,
       { includeNightHours: true }
     );
@@ -81,7 +110,7 @@ export async function GET(
       },
     };
 
-    console.log(`[API /conditions/${cragId}] Successfully computed conditions for ${crag.name}`);
+    console.log(`[API /conditions/${cragId}] Successfully computed conditions for ${name}`);
 
     return NextResponse.json({
       conditions,

@@ -186,13 +186,18 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
   const [currentUserProfileId, setCurrentUserProfileId] = useState<string | null>(null);
 
   // React Query for conditions (client-side)
+  // Use sector ID if viewing a sector with valid coordinates, otherwise use crag ID
+  const locationId =
+    currentSector && currentSector.lat !== null && currentSector.lon !== null
+      ? currentSector.id
+      : crag.id;
   const {
     data: conditions,
     isLoading: isLoadingConditions,
     error: conditionsError,
   } = useQuery({
-    queryKey: ["conditions", crag.id],
-    queryFn: () => fetchConditionsByCragId(crag.id),
+    queryKey: ["conditions", locationId],
+    queryFn: () => fetchConditionsByCragId(locationId),
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes
   });
@@ -240,13 +245,19 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
   const locationString = locationParts.join(", ");
   const countryFlag = getCountryFlag(crag.country);
 
+  // Use sector coordinates if available and valid, otherwise use crag coordinates
+  const displayLat =
+    currentSector && currentSector.lat !== null ? currentSector.lat : crag.lat;
+  const displayLon =
+    currentSector && currentSector.lon !== null ? currentSector.lon : crag.lon;
+
   // Format conditions data for ConditionsDetailContent
   const conditionsData = conditions
     ? {
-        location: crag.name,
+        location: currentSector ? `${currentSector.name} • ${crag.name}` : crag.name,
         locationDetails: locationString,
-        latitude: crag.lat,
-        longitude: crag.lon,
+        latitude: displayLat,
+        longitude: displayLon,
         country: crag.country ?? undefined,
         state: crag.state ?? undefined,
         municipality: crag.municipality ?? undefined,
@@ -510,14 +521,14 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                 </Badge>
               )}
               <Badge variant="secondary" className="font-mono text-xs">
-                {crag.lat.toFixed(4)}, {crag.lon.toFixed(4)}
+                {displayLat.toFixed(4)}, {displayLon.toFixed(4)}
               </Badge>
-              {getSunCalcUrl(crag.lat, crag.lon) && (
+              {getSunCalcUrl(displayLat, displayLon) && (
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => {
-                    const url = getSunCalcUrl(crag.lat, crag.lon);
+                    const url = getSunCalcUrl(displayLat, displayLon);
                     if (url) window.open(url, "_blank", "noopener,noreferrer");
                   }}
                   title={t("cragPage.viewSunAngles")}
@@ -526,12 +537,12 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                   <span className="hidden sm:inline">SunCalc</span>
                 </Button>
               )}
-              {getGoogleMapsUrl(crag.lat, crag.lon) && (
+              {getGoogleMapsUrl(displayLat, displayLon) && (
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => {
-                    const url = getGoogleMapsUrl(crag.lat, crag.lon);
+                    const url = getGoogleMapsUrl(displayLat, displayLon);
                     if (url) window.open(url, "_blank", "noopener,noreferrer");
                   }}
                   title={t("cragPage.viewOnGoogleMaps")}
@@ -544,7 +555,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
           </div>
 
           {/* Small inline map */}
-          {getOpenStreetMapEmbedUrl(crag.lat, crag.lon) && (
+          {getOpenStreetMapEmbedUrl(displayLat, displayLon) && (
             <div className="mt-4">
               <iframe
                 width="100%"
@@ -553,7 +564,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                 scrolling="no"
                 marginHeight={0}
                 marginWidth={0}
-                src={getOpenStreetMapEmbedUrl(crag.lat, crag.lon)!}
+                src={getOpenStreetMapEmbedUrl(displayLat, displayLon)!}
                 className="rounded-lg border"
               />
             </div>
