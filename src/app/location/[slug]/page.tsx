@@ -34,9 +34,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
 
   let crag = null;
+  let sector = null;
 
   // Try direct slug lookup first
   crag = await fetchCragBySlug(slug);
+
+  // If not found as crag, try as sector slug
+  if (!crag) {
+    sector = await fetchSectorBySlug(slug);
+    if (sector) {
+      // Fetch parent crag for sector context
+      crag = await fetchCragById(sector.crag_id);
+    }
+  }
 
   // Fallback to coordinate-based lookup
   if (!crag) {
@@ -55,8 +65,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const location = getLocationString(crag);
-  const title = `${crag.name} - Conditions & Community Reports | beta.rocks`;
-  const description = `Climbing conditions and community reports for ${crag.name} in ${location}. Real-time weather, friction scores, and info from fellow climbers for planning your session.`;
+  const displayName = sector ? `${sector.name} • ${crag.name}` : crag.name;
+  const title = `${displayName} - Conditions & Community Reports | beta.rocks`;
+  const description = `Climbing conditions and community reports for ${displayName} in ${location}. Real-time weather, friction scores, and info from fellow climbers for planning your session.`;
 
   return {
     title,
@@ -86,7 +97,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           url: "https://beta.rocks/opengraph-image.jpg",
           width: 1200,
           height: 630,
-          alt: `${crag.name} climbing conditions and community reports`,
+          alt: `${displayName} climbing conditions and community reports`,
         },
       ],
     },
