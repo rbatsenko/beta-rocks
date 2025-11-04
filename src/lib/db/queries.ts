@@ -267,7 +267,7 @@ export async function fetchSectorsByCrag(cragId: string) {
 }
 
 export async function fetchSectorById(id: string) {
-  const { data, error} = await supabase.from("sectors").select("*").eq("id", id).single();
+  const { data, error } = await supabase.from("sectors").select("*").eq("id", id).single();
 
   if (error) throw error;
   return data;
