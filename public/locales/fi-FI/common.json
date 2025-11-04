@@ -486,7 +486,14 @@
     "lastChecked": "Viimeksi tarkistettu",
     "frictionScore": "Kitkascore",
     "viewConditions": "Näytä olosuhteet",
-    "remove": "Poista"
+    "remove": "Poista",
+    "confirmDelete": "Poista suosikeista?",
+    "confirmDeleteDescription": "Haluatko varmasti poistaa kohteen {{name}} suosikeista?",
+    "loginToFavorite": "Määritä profiilisi lisätäksesi sijainteja suosikkeihin",
+    "errorToggling": "Suosikin vaihtaminen epäonnistui. Yritä uudelleen.",
+    "added": "Kallio lisätty suosikkeihin",
+    "removed": "Kallio poistettu suosikeista",
+    "loading": "Ladataan suosikkeja..."
   },
   "reports": {
     "addReport": "Lisää raportti",

@@ -570,7 +570,14 @@
     "lastChecked": "Zuletzt überprüft",
     "frictionScore": "Reibungswert",
     "viewConditions": "Bedingungen ansehen",
-    "remove": "Entfernen"
+    "remove": "Entfernen",
+    "confirmDelete": "Aus Favoriten entfernen?",
+    "confirmDeleteDescription": "Bist du sicher, dass du {{name}} aus den Favoriten entfernen möchtest?",
+    "loginToFavorite": "Bitte richte dein Profil ein, um Standorte zu favorisieren",
+    "errorToggling": "Fehler beim Umschalten des Favoriten. Bitte versuche es erneut.",
+    "added": "Fels zu Favoriten hinzugefügt",
+    "removed": "Fels aus Favoriten entfernt",
+    "loading": "Lade Favoriten..."
   },
   "reports": {
     "addReport": "Bericht hinzufügen",

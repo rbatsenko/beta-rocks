@@ -565,7 +565,14 @@
     "lastChecked": "Naposledy zkontrolováno",
     "frictionScore": "Skóre tření",
     "viewConditions": "Zobrazit podmínky",
-    "remove": "Odstranit"
+    "remove": "Odstranit",
+    "confirmDelete": "Odebrat z oblíbených?",
+    "confirmDeleteDescription": "Jste si jisti, že chcete odebrat {{name}} z oblíbených?",
+    "loginToFavorite": "Prosím nastavte svůj profil pro přidání lokalit do oblíbených",
+    "errorToggling": "Nepodařilo se přepnout oblíbenou položku. Zkuste to znovu.",
+    "added": "Skála přidána do oblíbených",
+    "removed": "Skála odebrána z oblíbených",
+    "loading": "Načítání oblíbených..."
   },
   "reports": {
     "addReport": "Přidat hlášení",

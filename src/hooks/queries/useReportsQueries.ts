@@ -22,6 +22,7 @@ export interface UserReport {
   crag: {
     id: string;
     name: string;
+    slug: string | null;
     lat: number;
     lon: number;
     country: string;

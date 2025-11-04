@@ -3,9 +3,7 @@ import { Metadata } from "next";
 import { CragPageContent } from "@/components/crag/CragPageContent";
 import { fetchCragBySlug, fetchSectorsByCrag, findCragByCoordinates } from "@/lib/db/queries";
 import { parseCoordinatesFromSlug } from "@/lib/utils/slug";
-
-// Enable ISR with 5-minute revalidation
-export const revalidate = 300;
+import { getCountryName } from "@/lib/utils/country-flags";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -20,52 +18,7 @@ function getLocationString(crag: any): string {
 
   if (crag.state) parts.push(crag.state);
   if (crag.country) {
-    // Convert country code to name if possible
-    const countryNames: Record<string, string> = {
-      US: "United States",
-      FR: "France",
-      IT: "Italy",
-      ES: "Spain",
-      DE: "Germany",
-      PL: "Poland",
-      CZ: "Czech Republic",
-      SK: "Slovakia",
-      AT: "Austria",
-      CH: "Switzerland",
-      SI: "Slovenia",
-      HR: "Croatia",
-      GB: "United Kingdom",
-      UK: "United Kingdom",
-      BE: "Belgium",
-      NL: "Netherlands",
-      NO: "Norway",
-      SE: "Sweden",
-      FI: "Finland",
-      DK: "Denmark",
-      PT: "Portugal",
-      GR: "Greece",
-      BG: "Bulgaria",
-      RO: "Romania",
-      HU: "Hungary",
-      RS: "Serbia",
-      BA: "Bosnia and Herzegovina",
-      ME: "Montenegro",
-      MK: "North Macedonia",
-      AL: "Albania",
-      TR: "Turkey",
-      CA: "Canada",
-      AU: "Australia",
-      NZ: "New Zealand",
-      ZA: "South Africa",
-      TH: "Thailand",
-      JP: "Japan",
-      CN: "China",
-      AR: "Argentina",
-      CL: "Chile",
-      BR: "Brazil",
-      MX: "Mexico",
-    };
-    parts.push(countryNames[crag.country] || crag.country);
+    parts.push(getCountryName(crag.country));
   }
 
   return parts.length > 0 ? parts.join(", ") : "Unknown location";

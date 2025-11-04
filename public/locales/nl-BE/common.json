@@ -565,7 +565,14 @@
     "lastChecked": "Laatst gecontroleerd",
     "frictionScore": "Wrijvingsscore",
     "viewConditions": "Bekijk condities",
-    "remove": "Verwijderen"
+    "remove": "Verwijderen",
+    "confirmDelete": "Verwijderen uit favorieten?",
+    "confirmDeleteDescription": "Weet je zeker dat je {{name}} uit je favorieten wilt verwijderen?",
+    "loginToFavorite": "Stel uw profiel in om locaties aan favorieten toe te voegen",
+    "errorToggling": "Kan favoriet niet wijzigen. Probeer het opnieuw.",
+    "added": "Rots toegevoegd aan favorieten",
+    "removed": "Rots verwijderd uit favorieten",
+    "loading": "Favorieten laden..."
   },
   "reports": {
     "addReport": "Rapport toevoegen",

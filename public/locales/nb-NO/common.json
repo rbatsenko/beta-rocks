@@ -487,7 +487,14 @@
     "lastChecked": "Sist sjekket",
     "frictionScore": "Friksjonspoeng",
     "viewConditions": "Vis forhold",
-    "remove": "Fjern"
+    "remove": "Fjern",
+    "confirmDelete": "Fjern fra favoritter?",
+    "confirmDeleteDescription": "Er du sikker på at du vil fjerne {{name}} fra favorittene dine?",
+    "loginToFavorite": "Vennligst sett opp profilen din for å legge til steder i favoritter",
+    "errorToggling": "Kunne ikke bytte favoritt. Vennligst prøv igjen.",
+    "added": "Klippe lagt til favoritter",
+    "removed": "Klippe fjernet fra favoritter",
+    "loading": "Laster favoritter..."
   },
   "reports": {
     "addReport": "Legg til rapport",

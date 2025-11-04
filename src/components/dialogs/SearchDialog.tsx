@@ -35,6 +35,10 @@ interface SearchResult {
   reportCount: number;
   matchScore: number;
   matchType: string;
+  resultType?: "crag" | "sector";
+  parentCragName?: string | null;
+  parentCragId?: string | null;
+  parentCragSlug?: string | null;
 }
 
 interface SearchDialogProps {
@@ -144,7 +148,15 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
                     <Mountain className="mr-2 h-4 w-4 text-orange-500" />
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="font-medium truncate">{result.name}</span>
+                        <span className="font-medium truncate">
+                          {result.name}
+                          {result.resultType === "sector" && result.parentCragName && (
+                            <span className="text-muted-foreground font-normal">
+                              {" "}
+                              • {result.parentCragName}
+                            </span>
+                          )}
+                        </span>
                         {result.rockType && (
                           <Badge
                             variant="outline"

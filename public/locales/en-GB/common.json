@@ -486,7 +486,14 @@
     "lastChecked": "Last checked",
     "frictionScore": "Friction score",
     "viewConditions": "View Conditions",
-    "remove": "Remove"
+    "remove": "Remove",
+    "confirmDelete": "Remove Favourite?",
+    "confirmDeleteDescription": "Are you sure you want to remove {{name}} from your favourites?",
+    "loginToFavorite": "Please set up your profile to favourite locations",
+    "errorToggling": "Failed to toggle favourite. Please try again.",
+    "added": "Crag added to favourites",
+    "removed": "Crag removed from favourites",
+    "loading": "Loading favourites..."
   },
   "reports": {
     "addReport": "Add Report",

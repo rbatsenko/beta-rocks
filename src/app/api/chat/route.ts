@@ -689,7 +689,8 @@ const tools = {
         const maxDailyTemp = Math.max(...hourlyData.slice(0, 24).map((h) => h.temp_c));
 
         // Compute conditions - include ALL hours (including night) for UI to filter
-        const conditions = computeConditions(
+        // Cached for 1 hour with Cache Components
+        const conditions = await computeConditions(
           {
             current: {
               temp_c: forecast.current.temperature,

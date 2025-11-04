@@ -170,6 +170,23 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
 - `src/components/FavoritesDialog.tsx`: Favorites list modal
 - Migration: `supabase/migrations/20251028054257_add_user_favorites.sql`
 
+### Enhanced Search with Sectors
+
+**Feature**: Quick search (⌘K) that finds both crags and sectors
+
+- SearchDialog now searches both crags and sectors using `search_locations_enhanced()` function
+- Sectors display as "Sector Name • Parent Crag" (e.g., "Apremont • Fontainebleau")
+- Fuzzy matching with trigram similarity for typo tolerance
+- Results sorted by match score (exact > prefix > contains > fuzzy > location)
+- Clicking a sector navigates to its parent crag page
+- Particularly useful for areas like Fontainebleau with many named sectors
+
+**Key Files**:
+
+- `src/app/api/search/route.ts`: Search API endpoint
+- `src/components/dialogs/SearchDialog.tsx`: ⌘K search interface
+- Migration: `supabase/migrations/20251104101753_add_enhanced_search_with_sectors.sql`
+
 ### Reports System
 
 **Feature**: Community-submitted reports with 6 categories
@@ -217,6 +234,14 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
 
 - `open-meteo.ts`: Fetches 14-day weather forecast with hourly data
 - `geocoding.ts`: Fallback location search when OpenBeta doesn't find a crag
+
+**Country Utilities** (src/lib/utils/country-flags.ts):
+
+- `getCountryFlag()`: Converts country name or ISO code to flag emoji
+- `getCountryFlagWithFallback()`: Returns flag emoji or 🏔️ if not found
+- `getCountryName()`: Converts ISO 3166-1 alpha-2 code to full country name
+- Centralized mapping of 80+ countries with their ISO codes
+- Used for metadata generation and location display
 
 **Database** (src/lib/db/queries.ts):
 

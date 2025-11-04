@@ -565,7 +565,14 @@
     "lastChecked": "Zadnja provjera",
     "frictionScore": "Ocjena trenja",
     "viewConditions": "Pogledaj uvjete",
-    "remove": "Ukloni"
+    "remove": "Ukloni",
+    "confirmDelete": "Ukloniti iz favorita?",
+    "confirmDeleteDescription": "Jeste li sigurni da želite ukloniti {{name}} iz svojih favorita?",
+    "loginToFavorite": "Molimo postavite svoj profil za dodavanje lokacija u favorite",
+    "errorToggling": "Neuspjelo prebacivanje favorita. Pokušajte ponovo.",
+    "added": "Stijena dodana u favorite",
+    "removed": "Stijena uklonjena iz favorita",
+    "loading": "Učitavanje favorita..."
   },
   "reports": {
     "addReport": "Dodaj izvještaj",

@@ -570,7 +570,14 @@
     "lastChecked": "Última comprobación",
     "frictionScore": "Puntuación de fricción",
     "viewConditions": "Ver condiciones",
-    "remove": "Eliminar"
+    "remove": "Eliminar",
+    "confirmDelete": "¿Eliminar de favoritos?",
+    "confirmDeleteDescription": "¿Estás seguro de que quieres eliminar {{name}} de tus favoritos?",
+    "loginToFavorite": "Por favor configura tu perfil para agregar ubicaciones a favoritos",
+    "errorToggling": "Error al cambiar el favorito. Por favor inténtalo de nuevo.",
+    "added": "Roca agregada a favoritos",
+    "removed": "Roca eliminada de favoritos",
+    "loading": "Cargando favoritos..."
   },
   "reports": {
     "addReport": "Añadir informe",

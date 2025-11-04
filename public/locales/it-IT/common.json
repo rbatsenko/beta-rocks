@@ -570,7 +570,14 @@
     "lastChecked": "Ultimo controllo",
     "frictionScore": "Punteggio di aderenza",
     "viewConditions": "Vedi condizioni",
-    "remove": "Rimuovi"
+    "remove": "Rimuovi",
+    "confirmDelete": "Rimuovere dai preferiti?",
+    "confirmDeleteDescription": "Sei sicuro di voler rimuovere {{name}} dai tuoi preferiti?",
+    "loginToFavorite": "Si prega di configurare il profilo per aggiungere posizioni ai preferiti",
+    "errorToggling": "Impossibile cambiare il preferito. Riprova.",
+    "added": "Roccia aggiunta ai preferiti",
+    "removed": "Roccia rimossa dai preferiti",
+    "loading": "Caricamento preferiti..."
   },
   "reports": {
     "addReport": "Aggiungi Segnalazione",

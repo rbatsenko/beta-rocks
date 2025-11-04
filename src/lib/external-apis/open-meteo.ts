@@ -31,33 +31,19 @@ export interface ForecastData {
 
 /**
  * Fetch weather data from Open-Meteo API
- * @param lat - Latitude
- * @param lon - Longitude
+ * @param lat - Latitude (rounded to 3 decimals for cache key)
+ * @param lon - Longitude (rounded to 3 decimals for cache key)
  * @param days - Number of days to forecast (default 7)
  */
-// Simple in-memory cache for short-lived reuse within a single server instance
-type CacheEntry<T> = { expiresAt: number; value: T };
-const memoryCache = new Map<string, CacheEntry<ForecastData>>();
-
-function makeCacheKey(lat: number, lon: number, days: number) {
-  // Round coords a bit to avoid cache fragmentation from tiny differences
-  const rl = (n: number) => n.toFixed(3);
-  return `open-meteo:${rl(lat)}:${rl(lon)}:d${days}`;
-}
-
 export async function getWeatherForecast(
   lat: number,
   lon: number,
   days: number = 7
 ): Promise<ForecastData> {
   try {
-    // 1) Memory cache (per-instance), ~10 minutes TTL by default
-    const key = makeCacheKey(lat, lon, days);
-    const now = Date.now();
-    const hit = memoryCache.get(key);
-    if (hit && hit.expiresAt > now) {
-      return hit.value;
-    }
+    // Round coordinates to avoid cache fragmentation
+    const roundedLat = Number(lat.toFixed(3));
+    const roundedLon = Number(lon.toFixed(3));
 
     const url = new URL("https://api.open-meteo.com/v1/forecast");
     url.searchParams.append("latitude", lat.toString());
@@ -78,22 +64,17 @@ export async function getWeatherForecast(
     url.searchParams.append("forecast_days", days.toString());
 
     console.log("[Weather] Fetching forecast:", {
-      lat,
-      lon,
+      lat: roundedLat,
+      lon: roundedLon,
       days,
       url: url.toString(),
     });
 
-    // 2) Next.js Data Cache: revalidate every 10 minutes
-    //    This reduces refetching across invocations/regions when supported.
+    // Cache Components handles caching automatically - no need for manual fetch options
     const response = await fetch(url.toString(), {
       headers: {
         "User-Agent": "beta.rocks",
       },
-      // Enable Next.js data cache for this request
-      // Note: works in Route Handlers and Edge runtime as a best-effort cache.
-      next: { revalidate: 600 },
-      cache: "force-cache",
     });
 
     console.log("[Weather] Response status:", response.status);
@@ -148,8 +129,7 @@ export async function getWeatherForecast(
       })),
     };
 
-    // Store in memory cache for quick subsequent hits (10 minutes)
-    memoryCache.set(key, { value: result, expiresAt: now + 10 * 60 * 1000 });
+    // Cache Components handles caching automatically
     return result;
   } catch (error) {
     console.error("[Weather] Error:", {

@@ -10,7 +10,8 @@ import { computeConditions } from "@/lib/conditions/conditions.service";
 import { parseCoordinatesFromSlug } from "@/lib/utils/slug";
 import type { RockType } from "@/lib/conditions/conditions.service";
 
-export const dynamic = "force-dynamic";
+// With cacheComponents enabled, route segment configs are not compatible
+// Function-level caching handles data freshness
 
 export async function GET(
   _request: NextRequest,
@@ -71,8 +72,8 @@ export async function GET(
       longitude: crag.lon,
     };
 
-    // Compute conditions
-    const rawConditions = computeConditions(
+    // Compute conditions (cached for 1 hour with Cache Components)
+    const rawConditions = await computeConditions(
       transformedWeather,
       (crag.rock_type as RockType) || "unknown",
       0,

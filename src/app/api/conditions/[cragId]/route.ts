@@ -4,7 +4,9 @@ import { getWeatherForecast } from "@/lib/external-apis/open-meteo";
 import { computeConditions } from "@/lib/conditions/conditions.service";
 import type { RockType } from "@/lib/conditions/conditions.service";
 
-export const dynamic = "force-dynamic";
+// Function-level caching (computeConditions, getWeatherForecast) provides 1-hour cache
+// With cacheComponents enabled, route segment configs are not needed
+// Cache Components automatically handles caching and revalidation
 
 export async function GET(
   _request: NextRequest,
@@ -50,8 +52,8 @@ export async function GET(
       longitude: crag.lon,
     };
 
-    // Compute conditions
-    const rawConditions = computeConditions(
+    // Compute conditions (cached for 1 hour with Cache Components)
+    const rawConditions = await computeConditions(
       transformedWeather,
       (crag.rock_type as RockType) || "unknown",
       0,

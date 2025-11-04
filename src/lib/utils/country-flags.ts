@@ -121,3 +121,25 @@ export function getCountryFlagWithFallback(country: string | null | undefined): 
   const flag = getCountryFlag(country);
   return flag || "🏔️";
 }
+
+/**
+ * Inverse mapping: ISO code to country name
+ * Created once at module load time for performance
+ */
+const ISO_TO_COUNTRY: Record<string, string> = {};
+for (const [countryName, code] of Object.entries(COUNTRY_TO_ISO)) {
+  // Skip duplicate entries (like "USA" which maps to same code as "United States")
+  if (!ISO_TO_COUNTRY[code]) {
+    ISO_TO_COUNTRY[code] = countryName;
+  }
+}
+
+/**
+ * Convert ISO 3166-1 alpha-2 code to country name
+ * @param isoCode - ISO country code (e.g., "US", "FR")
+ * @returns Full country name or the original code if not found
+ */
+export function getCountryName(isoCode: string | null | undefined): string {
+  if (!isoCode) return "";
+  return ISO_TO_COUNTRY[isoCode.toUpperCase()] || isoCode;
+}

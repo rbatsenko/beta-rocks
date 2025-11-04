@@ -559,7 +559,12 @@
     "viewConditions": "Zobacz warunki",
     "remove": "Usuń",
     "confirmDelete": "Usunąć z ulubionych?",
-    "confirmDeleteDescription": "Czy na pewno chcesz usunąć {{name}} z ulubionych?"
+    "confirmDeleteDescription": "Czy na pewno chcesz usunąć {{name}} z ulubionych?",
+    "loginToFavorite": "Proszę skonfigurować swój profil, aby dodać lokalizacje do ulubionych",
+    "errorToggling": "Nie udało się przełączyć ulubionego. Spróbuj ponownie.",
+    "added": "Skała dodana do ulubionych",
+    "removed": "Skała usunięta z ulubionych",
+    "loading": "Ładowanie ulubionych..."
   },
   "reports": {
     "addReport": "Dodaj zgłoszenie",

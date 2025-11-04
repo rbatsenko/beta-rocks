@@ -487,7 +487,14 @@
     "lastChecked": "Senast kontrollerad",
     "frictionScore": "Friktionspoäng",
     "viewConditions": "Visa förhållanden",
-    "remove": "Ta bort"
+    "remove": "Ta bort",
+    "confirmDelete": "Ta bort från favoriter?",
+    "confirmDeleteDescription": "Är du säker på att du vill ta bort {{name}} från dina favoriter?",
+    "loginToFavorite": "Vänligen konfigurera din profil för att lägga till platser i favoriter",
+    "errorToggling": "Kunde inte växla favorit. Försök igen.",
+    "added": "Klippa tillagd i favoriter",
+    "removed": "Klippa borttagen från favoriter",
+    "loading": "Laddar favoriter..."
   },
   "reports": {
     "addReport": "Lägg till rapport",

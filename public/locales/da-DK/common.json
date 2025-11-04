@@ -486,7 +486,14 @@
     "lastChecked": "Senest tjekket",
     "frictionScore": "Frikton score",
     "viewConditions": "Se betingelser",
-    "remove": "Fjern"
+    "remove": "Fjern",
+    "confirmDelete": "Fjern fra favoritter?",
+    "confirmDeleteDescription": "Er du sikker på, at du vil fjerne {{name}} fra dine favoritter?",
+    "loginToFavorite": "Venligst opsæt din profil for at tilføje placeringer til favoritter",
+    "errorToggling": "Kunne ikke skifte favorit. Prøv venligst igen.",
+    "added": "Klippe tilføjet til favoritter",
+    "removed": "Klippe fjernet fra favoritter",
+    "loading": "Indlæser favoritter..."
   },
   "reports": {
     "addReport": "Tilføj rapport",

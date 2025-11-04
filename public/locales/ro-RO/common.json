@@ -565,7 +565,14 @@
     "lastChecked": "Verificat ultima oară",
     "frictionScore": "Scor de fricțiune",
     "viewConditions": "Vizualizează Condiții",
-    "remove": "Elimină"
+    "remove": "Elimină",
+    "confirmDelete": "Eliminați din favorite?",
+    "confirmDeleteDescription": "Sunteți sigur că doriți să eliminați {{name}} din favoritele dumneavoastră?",
+    "loginToFavorite": "Vă rugăm să vă configurați profilul pentru a adăuga locații la favorite",
+    "errorToggling": "Comutarea favoritului a eșuat. Vă rugăm să încercați din nou.",
+    "added": "Stâncă adăugată la favorite",
+    "removed": "Stâncă eliminată din favorite",
+    "loading": "Se încarcă favoritele..."
   },
   "reports": {
     "addReport": "Adaugă raport",

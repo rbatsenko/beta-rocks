@@ -454,7 +454,14 @@
     "lastChecked": "Últim cop comprovat",
     "frictionScore": "Puntuació de fricció",
     "viewConditions": "Veure condicions",
-    "remove": "Eliminar"
+    "remove": "Eliminar",
+    "confirmDelete": "Eliminar dels preferits?",
+    "confirmDeleteDescription": "Esteu segur que voleu eliminar {{name}} dels vostres preferits?",
+    "loginToFavorite": "Si us plau, configura el teu perfil per afegir ubicacions als preferits",
+    "errorToggling": "Error en canviar el preferit. Si us plau, torna-ho a provar.",
+    "added": "Roca afegida als preferits",
+    "removed": "Roca eliminada dels preferits",
+    "loading": "Carregant preferits..."
   },
   "reports": {
     "addReport": "Afegir informe",

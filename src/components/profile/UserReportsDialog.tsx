@@ -83,7 +83,9 @@ export function UserReportsDialog({ open, onOpenChange }: UserReportsDialogProps
   const handleViewCrag = (report: UserReport) => {
     if (!report.crag) return;
 
-    const slug = generateUniqueSlug(report.crag.name, report.crag.lat, report.crag.lon);
+    // Use stored slug if available, otherwise generate one for backward compatibility
+    const slug =
+      report.crag.slug || generateUniqueSlug(report.crag.name, report.crag.lat, report.crag.lon);
     router.push(`/location/${slug}`);
     onOpenChange(false);
   };

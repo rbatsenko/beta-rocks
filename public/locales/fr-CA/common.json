@@ -570,7 +570,14 @@
     "lastChecked": "Dernière vérification",
     "frictionScore": "Score de friction",
     "viewConditions": "Voir les conditions",
-    "remove": "Retirer"
+    "remove": "Retirer",
+    "confirmDelete": "Retirer des favoris ?",
+    "confirmDeleteDescription": "Êtes-vous sûr de vouloir retirer {{name}} de vos favoris ?",
+    "loginToFavorite": "Veuillez configurer votre profil pour ajouter des emplacements aux favoris",
+    "errorToggling": "Échec du basculement du favori. Veuillez réessayer.",
+    "added": "Rocher ajouté aux favoris",
+    "removed": "Rocher retiré des favoris",
+    "loading": "Chargement des favoris..."
   },
   "reports": {
     "addReport": "Ajouter un rapport",

@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
-export const runtime = "edge";
-export const dynamic = "force-dynamic";
+// With cacheComponents enabled, route segment configs are not compatible
+// Search should remain dynamic as it's user-specific
 
 /**
  * Autocomplete search API endpoint
@@ -36,8 +36,8 @@ export async function GET(request: NextRequest) {
 
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    // Call enhanced search function
-    const { data, error } = await supabase.rpc("search_crags_enhanced", {
+    // Call enhanced search function (includes both crags and sectors)
+    const { data, error } = await supabase.rpc("search_locations_enhanced", {
       search_query: query.trim(),
     });
 
@@ -47,21 +47,25 @@ export async function GET(request: NextRequest) {
     }
 
     // Transform results for frontend
-    const results = (data || []).map((crag: any) => ({
-      id: crag.id,
-      name: crag.name,
-      slug: crag.slug,
-      location: [crag.village, crag.municipality, crag.state, crag.country]
+    const results = (data || []).map((result: any) => ({
+      id: result.id,
+      name: result.name,
+      slug: result.slug || result.parent_crag_slug, // sectors use parent slug
+      location: [result.village, result.municipality, result.state, result.country]
         .filter(Boolean)
         .join(", "),
-      country: crag.country,
-      rockType: crag.rock_type,
-      climbingTypes: crag.climbing_types,
-      latitude: Number(crag.lat),
-      longitude: Number(crag.lon),
-      reportCount: Number(crag.report_count || 0),
-      matchScore: crag.match_score,
-      matchType: crag.match_type,
+      country: result.country,
+      rockType: result.rock_type,
+      climbingTypes: result.climbing_types,
+      latitude: Number(result.lat),
+      longitude: Number(result.lon),
+      reportCount: Number(result.report_count || 0),
+      matchScore: result.match_score,
+      matchType: result.match_type,
+      resultType: result.result_type,
+      parentCragName: result.parent_crag_name,
+      parentCragId: result.parent_crag_id,
+      parentCragSlug: result.parent_crag_slug,
     }));
 
     return NextResponse.json({ results });

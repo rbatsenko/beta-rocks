@@ -565,7 +565,14 @@
     "lastChecked": "Naposledy skontrolované",
     "frictionScore": "Skóre trenia",
     "viewConditions": "Zobraziť podmienky",
-    "remove": "Odstrániť"
+    "remove": "Odstrániť",
+    "confirmDelete": "Odstrániť z obľúbených?",
+    "confirmDeleteDescription": "Ste si istí, že chcete odstrániť {{name}} z obľúbených?",
+    "loginToFavorite": "Prosím nastavte svoj profil na pridanie lokalít do obľúbených",
+    "errorToggling": "Nepodarilo sa prepnúť obľúbenú položku. Skúste to znova.",
+    "added": "Skala pridaná do obľúbených",
+    "removed": "Skala odstránená z obľúbených",
+    "loading": "Načítavanie obľúbených..."
   },
   "reports": {
     "addReport": "Pridať hlásenie",

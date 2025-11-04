@@ -566,7 +566,14 @@
     "lastChecked": "Zadnjič preverjeno",
     "frictionScore": "Ocena trenja",
     "viewConditions": "Poglej razmere",
-    "remove": "Odstrani"
+    "remove": "Odstrani",
+    "confirmDelete": "Odstraniti iz priljubljenih?",
+    "confirmDeleteDescription": "Ste prepričani, da želite odstraniti {{name}} iz svojih priljubljenih?",
+    "loginToFavorite": "Prosimo, nastavite svoj profil za dodajanje lokacij med priljubljene",
+    "errorToggling": "Preklop priljubljenega ni uspel. Poskusite znova.",
+    "added": "Skala dodana med priljubljene",
+    "removed": "Skala odstranjena iz priljubljenih",
+    "loading": "Nalaganje priljubljenih..."
   },
   "reports": {
     "addReport": "Dodaj poročilo",

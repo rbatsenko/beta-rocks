@@ -75,7 +75,8 @@ export async function GET(request: NextRequest) {
     }));
 
     // Compute conditions with enhanced data (hourly conditions, optimal windows, etc.)
-    const conditions = computeConditions(
+    // Cached for 1 hour with Cache Components
+    const conditions = await computeConditions(
       {
         current: {
           temp_c: forecast.current.temperature,

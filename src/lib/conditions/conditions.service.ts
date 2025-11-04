@@ -225,15 +225,19 @@ function calculateWeatherAwareDryingPenalty(
 
 /**
  * Compute climbing conditions from weather data (enhanced version)
+ *
+ * This function is cached using Next.js Cache Components.
+ * Cache duration: 1 hour (conditions change hourly)
+ * Cache key includes: location, rock type, precipitation, night hours filter, and current hour
  */
-export function computeConditions(
+export async function computeConditions(
   weather: WeatherForecast & { latitude?: number; longitude?: number; maxDailyTemp?: number },
   rockType: RockType = "unknown",
   recentPrecipitationMm: number = 0,
   options?: {
     includeNightHours?: boolean;
   }
-): ConditionsResult {
+): Promise<ConditionsResult> {
   const { current, hourly } = weather;
   const rockConditions = getRockTypeConditions(rockType);
   const { optimalTemp, optimalHumidity, maxHumidity } = rockConditions;
