@@ -419,6 +419,30 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
     }
   };
 
+  // Helper to linkify URLs in text
+  const linkifyText = (text: string) => {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const parts = text.split(urlRegex);
+
+    return parts.map((part, index) => {
+      if (part.match(urlRegex)) {
+        return (
+          <a
+            key={index}
+            href={part}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-orange-500 hover:text-orange-600 underline"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {part}
+          </a>
+        );
+      }
+      return part;
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <main className="container mx-auto px-4 py-6 max-w-5xl">
@@ -445,6 +469,12 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                       {countryFlag && ` ${countryFlag}`}
                     </p>
                   </div>
+                )}
+                {/* Description with clickable links */}
+                {(currentSector?.description || crag.description) && (
+                  <p className="text-sm text-muted-foreground mt-2 max-w-2xl">
+                    {linkifyText(currentSector?.description || crag.description || "")}
+                  </p>
                 )}
               </div>
               <div className="flex items-center gap-2 shrink-0">
@@ -811,7 +841,15 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
               <h2 className="text-2xl font-semibold mb-4">{t("cragPage.sectors")}</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {sectors.map((sector) => (
-                  <Card key={sector.id} className="hover:shadow-md transition-shadow">
+                  <Card
+                    key={sector.id}
+                    className="hover:shadow-md transition-shadow cursor-pointer"
+                    onClick={() => {
+                      if (sector.slug) {
+                        router.push(`/location/${sector.slug}`);
+                      }
+                    }}
+                  >
                     <CardContent className="p-4">
                       <h3 className="font-semibold mb-1">{sector.name}</h3>
                       {sector.description && (
