@@ -1,7 +1,13 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { Metadata } from "next";
 import { CragPageContent } from "@/components/crag/CragPageContent";
-import { fetchCragBySlug, fetchSectorsByCrag, findCragByCoordinates } from "@/lib/db/queries";
+import {
+  fetchCragBySlug,
+  fetchSectorBySlug,
+  fetchCragById,
+  fetchSectorsByCrag,
+  findCragByCoordinates,
+} from "@/lib/db/queries";
 import { parseCoordinatesFromSlug } from "@/lib/utils/slug";
 import { getCountryName } from "@/lib/utils/country-flags";
 
@@ -102,6 +108,19 @@ export default async function LocationPage({ params }: PageProps) {
 
   // Try direct slug lookup first (new system)
   crag = await fetchCragBySlug(slug);
+
+  // If not found as crag, try as sector slug
+  if (!crag) {
+    const sector = await fetchSectorBySlug(slug);
+    if (sector) {
+      console.log(`[LocationPage] Found sector: ${sector.name}, redirecting to parent crag`);
+      // Fetch parent crag and redirect to it
+      const parentCrag = await fetchCragById(sector.crag_id);
+      if (parentCrag && parentCrag.slug) {
+        redirect(`/location/${parentCrag.slug}`);
+      }
+    }
+  }
 
   // Fallback to old coordinate-based slug parsing for backward compatibility
   if (!crag) {

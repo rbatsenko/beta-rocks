@@ -50,7 +50,8 @@ export async function GET(request: NextRequest) {
     const results = (data || []).map((result: any) => ({
       id: result.id,
       name: result.name,
-      slug: result.slug || result.parent_crag_slug, // sectors use parent slug
+      // Both crags and sectors use their own slug for navigation
+      slug: result.slug,
       location: [result.village, result.municipality, result.state, result.country]
         .filter(Boolean)
         .join(", "),
