@@ -843,7 +843,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                 {sectors.map((sector) => (
                   <Card
                     key={sector.id}
-                    className="hover:shadow-md transition-shadow cursor-pointer"
+                    className="cursor-pointer transition-all hover:shadow-md hover:border-orange-500/50"
                     onClick={() => {
                       if (sector.slug) {
                         router.push(`/location/${sector.slug}`);
