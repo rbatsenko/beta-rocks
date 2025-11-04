@@ -406,6 +406,8 @@ export type Database = {
           name: string;
           osm_id: string | null;
           osm_type: string | null;
+          slug: string;
+          slug_id: number | null;
           source: string | null;
           updated_at: string | null;
         };
@@ -421,6 +423,8 @@ export type Database = {
           name: string;
           osm_id?: string | null;
           osm_type?: string | null;
+          slug: string;
+          slug_id?: number | null;
           source?: string | null;
           updated_at?: string | null;
         };
@@ -436,6 +440,8 @@ export type Database = {
           name?: string;
           osm_id?: string | null;
           osm_type?: string | null;
+          slug?: string;
+          slug_id?: number | null;
           source?: string | null;
           updated_at?: string | null;
         };
@@ -689,6 +695,31 @@ export type Database = {
           source: string;
           state: string;
           updated_at: string;
+          village: string;
+        }[];
+      };
+      search_locations_enhanced: {
+        Args: { search_query: string };
+        Returns: {
+          climbing_types: string[];
+          country: string;
+          description: string;
+          id: string;
+          lat: number;
+          lon: number;
+          match_score: number;
+          match_type: string;
+          municipality: string;
+          name: string;
+          parent_crag_id: string;
+          parent_crag_name: string;
+          parent_crag_slug: string;
+          report_count: number;
+          result_type: string;
+          rock_type: string;
+          slug: string;
+          source: string;
+          state: string;
           village: string;
         }[];
       };
