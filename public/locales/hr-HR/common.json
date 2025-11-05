@@ -707,6 +707,8 @@
     "askAI": "Pitaj AI",
     "currentConditions": "Trenutni uvjeti",
     "sectors": "Sektori",
+    "searchSectors": "Search sectors...",
+    "noSectorsFound": "No sectors found matching your search.",
     "disclaimer": "Vremenski uvjeti se mogu brzo promijeniti. Uvijek provjerite uvjete po dolasku i koristite svoje najbolje prosuđivanje.",
     "askAIAboutCrag": "Pitaj AI o ovoj stijeni",
     "viewOnSunCalc": "Prikaži vremena sunca/mjeseca",

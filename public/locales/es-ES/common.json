@@ -712,6 +712,8 @@
     "askAI": "Preguntar a la IA",
     "currentConditions": "Condiciones actuales",
     "sectors": "Sectores",
+    "searchSectors": "Search sectors...",
+    "noSectorsFound": "No sectors found matching your search.",
     "disclaimer": "Las condiciones meteorológicas pueden cambiar rápidamente. Verifica siempre las condiciones al llegar y usa tu mejor juicio.",
     "askAIAboutCrag": "Preguntar a la IA sobre esta escuela",
     "viewOnSunCalc": "Ver horas de sol/luna",

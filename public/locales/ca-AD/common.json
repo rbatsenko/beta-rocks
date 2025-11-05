@@ -596,6 +596,8 @@
     "askAI": "Pregunta a la IA",
     "currentConditions": "Condicions actuals",
     "sectors": "Sectors",
+    "searchSectors": "Search sectors...",
+    "noSectorsFound": "No sectors found matching your search.",
     "disclaimer": "Les condicions meteorològiques poden canviar ràpidament. Verifica sempre les condicions en arribar i utilitza el teu millor criteri.",
     "askAIAboutCrag": "Pregunta a la IA sobre aquesta paret",
     "viewOnSunCalc": "Veure horaris de sol/lluna",

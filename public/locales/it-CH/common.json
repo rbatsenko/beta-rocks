@@ -628,6 +628,8 @@
     "askAI": "Chiedi all'IA",
     "currentConditions": "Condizioni attuali",
     "sectors": "Settori",
+    "searchSectors": "Search sectors...",
+    "noSectorsFound": "No sectors found matching your search.",
     "disclaimer": "Le condizioni meteorologiche possono cambiare rapidamente. Verifica sempre le condizioni all'arrivo e usa il tuo miglior giudizio.",
     "askAIAboutCrag": "Chiedi all'IA su questa falesia",
     "viewOnSunCalc": "Vedi orari sole/luna",

@@ -707,6 +707,8 @@
     "askAI": "Vraag AI",
     "currentConditions": "Huidige omstandigheden",
     "sectors": "Sectoren",
+    "searchSectors": "Search sectors...",
+    "noSectorsFound": "No sectors found matching your search.",
     "disclaimer": "Weersomstandigheden kunnen snel veranderen. Controleer altijd de omstandigheden bij aankomst en gebruik je beste oordeel.",
     "askAIAboutCrag": "Vraag AI over deze rots",
     "viewOnSunCalc": "Bekijk zon/maan tijden",

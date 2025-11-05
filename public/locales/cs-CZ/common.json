@@ -707,6 +707,8 @@
     "askAI": "Zeptat se AI",
     "currentConditions": "Aktuální podmínky",
     "sectors": "Sektory",
+    "searchSectors": "Search sectors...",
+    "noSectorsFound": "No sectors found matching your search.",
     "disclaimer": "Povětrnostní podmínky se mohou rychle měnit. Vždy zkontrolujte podmínky na místě a používejte svůj nejlepší úsudek.",
     "askAIAboutCrag": "Zeptat se AI na tuto skálu",
     "viewOnSunCalc": "Zobrazit časy slunce/měsíce",

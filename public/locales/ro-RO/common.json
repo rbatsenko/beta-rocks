@@ -707,6 +707,8 @@
     "askAI": "Întreabă AI",
     "currentConditions": "Condiții actuale",
     "sectors": "Sectoare",
+    "searchSectors": "Search sectors...",
+    "noSectorsFound": "No sectors found matching your search.",
     "disclaimer": "Condițiile meteorologice se pot schimba rapid. Verificați întotdeauna condițiile la sosire și folosiți-vă cea mai bună judecată.",
     "askAIAboutCrag": "Întreabă AI despre această stâncă",
     "viewOnSunCalc": "Vezi orele soarelui/lunii",

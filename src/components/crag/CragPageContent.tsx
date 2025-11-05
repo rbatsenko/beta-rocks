@@ -890,7 +890,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
                     type="text"
-                    placeholder={t("cragPage.searchSectors") || "Search sectors..."}
+                    placeholder={t("cragPage.searchSectors")}
                     value={sectorSearchQuery}
                     onChange={(e) => setSectorSearchQuery(e.target.value)}
                     className="pl-9"
@@ -922,7 +922,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                 </div>
               ) : (
                 <div className="text-center py-8 text-muted-foreground">
-                  {t("cragPage.noSectorsFound") || "No sectors found matching your search."}
+                  {t("cragPage.noSectorsFound")}
                 </div>
               )}
             </div>

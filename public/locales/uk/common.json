@@ -707,6 +707,8 @@
     "askAI": "Запитати AI",
     "currentConditions": "Поточні умови",
     "sectors": "Сектори",
+    "searchSectors": "Search sectors...",
+    "noSectorsFound": "No sectors found matching your search.",
     "disclaimer": "Погодні умови можуть швидко змінюватися. Завжди перевіряйте умови по прибутті та використовуйте свою найкращу оцінку.",
     "askAIAboutCrag": "Запитати AI про цю скелю",
     "viewOnSunCalc": "Переглянути час сонця/місяця",

@@ -712,6 +712,8 @@
     "askAI": "KI fragen",
     "currentConditions": "Aktuelle Bedingungen",
     "sectors": "Sektoren",
+    "searchSectors": "Search sectors...",
+    "noSectorsFound": "No sectors found matching your search.",
     "disclaimer": "Wetterbedingungen können sich schnell ändern. Überprüfen Sie die Bedingungen immer vor Ort und nutzen Sie Ihr bestes Urteilsvermögen.",
     "askAIAboutCrag": "KI über diesen Fels fragen",
     "viewOnSunCalc": "Sonnen-/Mondzeiten ansehen",

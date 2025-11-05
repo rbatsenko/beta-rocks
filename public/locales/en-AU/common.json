@@ -622,6 +622,8 @@
     "askAI": "Ask AI",
     "currentConditions": "Current Conditions",
     "sectors": "Sectors",
+    "searchSectors": "Search sectors...",
+    "noSectorsFound": "No sectors found matching your search.",
     "disclaimer": "Weather conditions can change rapidly. Always verify conditions on arrival and use your best judgement.",
     "askAIAboutCrag": "Ask AI about this crag",
     "viewOnSunCalc": "View sun/moon times",
