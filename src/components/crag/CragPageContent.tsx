@@ -466,7 +466,20 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                   {currentSector ? (
                     <>
                       {currentSector.name}
-                      <span className="text-muted-foreground font-normal"> • {crag.name}</span>
+                      <span className="text-muted-foreground font-normal">
+                        {" "}
+                        •{" "}
+                        <button
+                          onClick={() => {
+                            if (crag.slug) {
+                              router.push(`/location/${crag.slug}`);
+                            }
+                          }}
+                          className="hover:text-orange-500 hover:underline transition-colors cursor-pointer"
+                        >
+                          {crag.name}
+                        </button>
+                      </span>
                     </>
                   ) : (
                     crag.name
