@@ -19,6 +19,37 @@ import { UserMenuContent } from "@/components/profile/UserMenuContent";
 import { UserReportsDialog } from "@/components/profile/UserReportsDialog";
 import type { UserProfile as UserProfileType } from "@/lib/auth/sync-key";
 
+// Map locale codes to flag emojis
+const localeFlagMap: Record<string, string> = {
+  en: "🇬🇧",
+  "bg-BG": "🇧🇬",
+  "ca-AD": "🇦🇩",
+  "cs-CZ": "🇨🇿",
+  "da-DK": "🇩🇰",
+  "de-AT": "🇦🇹",
+  "de-CH": "🇨🇭",
+  "de-DE": "🇩🇪",
+  "el-GR": "🇬🇷",
+  "es-ES": "🇪🇸",
+  "fi-FI": "🇫🇮",
+  "fr-BE": "🇧🇪",
+  "fr-CA": "🇨🇦",
+  "fr-CH": "🇨🇭",
+  "fr-FR": "🇫🇷",
+  "hr-HR": "🇭🇷",
+  "it-CH": "🇨🇭",
+  "it-IT": "🇮🇹",
+  "nb-NO": "🇳🇴",
+  "nl-BE": "🇧🇪",
+  pl: "🇵🇱",
+  "pt-PT": "🇵🇹",
+  "ro-RO": "🇷🇴",
+  "sk-SK": "🇸🇰",
+  "sl-SI": "🇸🇮",
+  "sv-SE": "🇸🇪",
+  uk: "🇺🇦",
+};
+
 interface UserMenuProps {
   onSettingsClick: () => void;
   onStatsClick: () => void;
@@ -36,12 +67,15 @@ export function UserMenu({
   onClearChatClick,
   isClearChatDisabled,
 }: UserMenuProps) {
-  const { t } = useClientTranslation("common");
+  const { t, i18n } = useClientTranslation("common");
   const { data: userProfile, isLoading } = useUserProfile();
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showProfileCreated, setShowProfileCreated] = useState(false);
   const [newSyncKey, setNewSyncKey] = useState<string>("");
   const [showReportsDialog, setShowReportsDialog] = useState(false);
+
+  // Get flag emoji for current language
+  const currentFlag = localeFlagMap[i18n.language] || "🌐";
 
   // Get initials for avatar
   const getInitials = () => {
@@ -84,12 +118,16 @@ export function UserMenu({
       <>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="rounded-full h-10 w-10 p-0">
+            <Button variant="ghost" className="rounded-full h-10 w-10 p-0 relative">
               <Avatar className="h-10 w-10">
                 <AvatarFallback className="bg-muted">
                   <User className="h-5 w-5 text-muted-foreground" />
                 </AvatarFallback>
               </Avatar>
+              {/* Language flag badge */}
+              <span className="absolute -bottom-0.5 -right-0.5 text-xs leading-none bg-background rounded-full border border-border shadow-sm w-4 h-4 flex items-center justify-center">
+                {currentFlag}
+              </span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56">
@@ -128,12 +166,16 @@ export function UserMenu({
 
   if (isLoading) {
     return (
-      <Button variant="ghost" className="rounded-full h-10 w-10 p-0" disabled>
+      <Button variant="ghost" className="rounded-full h-10 w-10 p-0 relative" disabled>
         <Avatar className="h-10 w-10">
           <AvatarFallback className="bg-muted">
             <User className="h-5 w-5 text-muted-foreground" />
           </AvatarFallback>
         </Avatar>
+        {/* Language flag badge */}
+        <span className="absolute -bottom-0.5 -right-0.5 text-xs leading-none bg-background rounded-full border border-border shadow-sm w-4 h-4 flex items-center justify-center">
+          {currentFlag}
+        </span>
       </Button>
     );
   }
@@ -141,10 +183,14 @@ export function UserMenu({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="rounded-full h-10 w-10 p-0">
+        <Button variant="ghost" className="rounded-full h-10 w-10 p-0 relative">
           <Avatar className="h-10 w-10">
             <AvatarFallback className="bg-orange-500 text-white">{getInitials()}</AvatarFallback>
           </Avatar>
+          {/* Language flag badge */}
+          <span className="absolute -bottom-0.5 -right-0.5 text-xs leading-none bg-background rounded-full border border-border shadow-sm w-4 h-4 flex items-center justify-center">
+            {currentFlag}
+          </span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
