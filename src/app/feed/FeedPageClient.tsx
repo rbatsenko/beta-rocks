@@ -1,35 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { ReportTimeline } from "@/components/feed/ReportTimeline";
 import { useReportRealtime } from "@/hooks/useReportRealtime";
 import { Tables } from "@/integrations/supabase/types";
 import { Loader2 } from "lucide-react";
-
-// Extended Report type to match ReportTimeline expectations
-type ReportWithDetails = Tables<"reports"> & {
-  author?: {
-    id: string;
-    display_name: string | null;
-  } | null;
-  confirmations?: { count: number }[] | null;
-  crag?: {
-    id: string;
-    name: string;
-    country: string | null;
-    state: string | null;
-    municipality: string | null;
-    village: string | null;
-    lat: number;
-    lon: number;
-    slug: string | null;
-  } | null;
-  sector?: {
-    id: string;
-    name: string;
-    slug: string | null;
-  } | null;
-};
+import { ReportWithDetails } from "@/hooks/queries/useReportQueries";
 
 interface FeedPageClientProps {
   initialReports: ReportWithDetails[];
@@ -52,28 +29,47 @@ export default function FeedPageClient({
 }: FeedPageClientProps) {
   const [reports, setReports] = useState<ReportWithDetails[]>(initialReports);
   const [isInitializing, setIsInitializing] = useState(true);
+  const queryClient = useQueryClient();
 
   // Handle new report from realtime subscription
-  const handleNewReport = (newReport: Tables<"reports">) => {
-    // Transform the raw report to match ReportWithDetails structure
-    // Note: The realtime subscription only gives us the raw report data
-    // We'll need to fetch additional details (author, confirmations, crag, sector) in a follow-up
-    const reportWithDetails: ReportWithDetails = {
-      ...newReport,
-      author: null, // Will be populated by ReportCard's internal fetch if needed
-      confirmations: null,
-      crag: null,
-      sector: null,
-    };
+  const handleNewReport = async (newReport: Tables<"reports">) => {
+    // Check for duplicates first
+    const isDuplicate = reports.some((r) => r.id === newReport.id);
+    if (isDuplicate) {
+      return;
+    }
 
-    setReports((prev) => {
-      // Avoid duplicates
-      if (prev.some((r) => r.id === newReport.id)) {
-        return prev;
-      }
-      // Add to top, maintain max 100 reports
-      return [reportWithDetails, ...prev].slice(0, 100);
-    });
+    try {
+      // Fetch complete report with all joins using React Query
+      // This provides automatic retries, caching, and error handling
+      const data = await queryClient.fetchQuery<ReportWithDetails>({
+        queryKey: ["report", newReport.id],
+        queryFn: async () => {
+          const response = await fetch(`/api/reports/${newReport.id}`);
+
+          if (!response.ok) {
+            throw new Error(`Failed to fetch report: ${response.statusText}`);
+          }
+
+          return response.json();
+        },
+        staleTime: 1000 * 60, // 1 minute
+        retry: 2,
+      });
+
+      // Add fully-populated report to timeline
+      setReports((prev) => {
+        // Double-check for duplicates
+        if (prev.some((r) => r.id === data.id)) {
+          return prev;
+        }
+        // Add to top, maintain max 100 reports
+        return [data, ...prev].slice(0, 100);
+      });
+    } catch (err) {
+      console.error("[FeedPageClient] Failed to fetch complete report:", err);
+      // React Query will handle retries automatically
+    }
   };
 
   // Subscribe to realtime reports

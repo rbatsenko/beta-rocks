@@ -702,7 +702,11 @@
     "editReport": "Uredi Poročilo",
     "editReportDescription": "Posodobite svoje poročilo",
     "updateReport": "Posodobi Poročilo",
-    "updating": "Posodabljanje..."
+    "updating": "Posodabljanje...",
+    "deleteSuccess": "Poročilo izbrisano",
+    "deleteSuccessDescription": "Vaše poročilo je bilo uspešno odstranjeno",
+    "deleteError": "Brisanje poročila ni uspelo",
+    "deleteErrorDescription": "Nekaj je šlo narobe. Prosimo, poskusite znova."
   },
   "cragPage": {
     "askAI": "Vprašaj AI",

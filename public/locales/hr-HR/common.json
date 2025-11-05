@@ -701,7 +701,11 @@
     "editReport": "Uredi Izvješće",
     "editReportDescription": "Ažurirajte svoje izvješće",
     "updateReport": "Ažuriraj Izvješće",
-    "updating": "Ažuriranje..."
+    "updating": "Ažuriranje...",
+    "deleteSuccess": "Izvješće izbrisano",
+    "deleteSuccessDescription": "Vaše izvješće je uspješno uklonjeno",
+    "deleteError": "Brisanje izvješća nije uspjelo",
+    "deleteErrorDescription": "Nešto je pošlo po zlu. Pokušajte ponovno."
   },
   "cragPage": {
     "askAI": "Pitaj AI",

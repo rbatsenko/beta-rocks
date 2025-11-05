@@ -706,7 +706,11 @@
     "editReport": "Editar Informe",
     "editReportDescription": "Actualiza tu informe",
     "updateReport": "Actualizar Informe",
-    "updating": "Actualizando..."
+    "updating": "Actualizando...",
+    "deleteSuccess": "Informe eliminado",
+    "deleteSuccessDescription": "Tu informe ha sido eliminado correctamente",
+    "deleteError": "Error al eliminar el informe",
+    "deleteErrorDescription": "Algo salió mal. Por favor, inténtalo de nuevo."
   },
   "cragPage": {
     "askAI": "Preguntar a la IA",

@@ -696,7 +696,11 @@
     "editReport": "Edytuj Raport",
     "editReportDescription": "Zaktualizuj swój raport",
     "updateReport": "Zaktualizuj Raport",
-    "updating": "Aktualizowanie..."
+    "updating": "Aktualizowanie...",
+    "deleteSuccess": "Raport usunięty",
+    "deleteSuccessDescription": "Twój raport został pomyślnie usunięty",
+    "deleteError": "Nie udało się usunąć raportu",
+    "deleteErrorDescription": "Coś poszło nie tak. Spróbuj ponownie."
   },
   "cragPage": {
     "askAI": "Zapytaj AI",

@@ -623,7 +623,11 @@
     "editReport": "Redigera Rapport",
     "editReportDescription": "Uppdatera din rapport",
     "updateReport": "Uppdatera Rapport",
-    "updating": "Uppdaterar..."
+    "updating": "Uppdaterar...",
+    "deleteSuccess": "Rapport raderad",
+    "deleteSuccessDescription": "Din rapport har tagits bort",
+    "deleteError": "Kunde inte radera rapporten",
+    "deleteErrorDescription": "Något gick fel. Vänligen försök igen."
   },
   "cragPage": {
     "askAI": "Fråga AI",

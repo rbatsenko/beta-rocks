@@ -1,5 +1,45 @@
 import { NextRequest, NextResponse } from "next/server";
 import { updateReport, deleteReport } from "@/lib/db/queries";
+import { getSupabaseClient } from "@/integrations/supabase/client";
+
+/**
+ * GET /api/reports/[id]
+ * Get a single report with all joins (author, confirmations, crag, sector)
+ */
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  try {
+    const { id: reportId } = await params;
+    const supabase = getSupabaseClient();
+
+    const { data, error } = await supabase
+      .from("reports")
+      .select(
+        `
+        *,
+        author:user_profiles!reports_author_id_fkey(id, display_name),
+        confirmations(count),
+        crag:crags!reports_crag_id_fkey(id, name, country, state, municipality, village, lat, lon, slug),
+        sector:sectors!reports_sector_id_fkey(id, name, slug)
+      `
+      )
+      .eq("id", reportId)
+      .single();
+
+    if (error) {
+      console.error("[GET /api/reports/[id]] Error fetching report:", error);
+      return NextResponse.json({ error: "Failed to fetch report" }, { status: 500 });
+    }
+
+    if (!data) {
+      return NextResponse.json({ error: "Report not found" }, { status: 404 });
+    }
+
+    return NextResponse.json(data);
+  } catch (error) {
+    console.error("[GET /api/reports/[id]] Error:", error);
+    return NextResponse.json({ error: "Failed to fetch report" }, { status: 500 });
+  }
+}
 
 /**
  * PATCH /api/reports/[id]

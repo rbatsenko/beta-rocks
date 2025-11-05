@@ -701,7 +701,11 @@
     "editReport": "Upraviť Správu",
     "editReportDescription": "Aktualizujte svoju správu",
     "updateReport": "Aktualizovať Správu",
-    "updating": "Aktualizujem..."
+    "updating": "Aktualizujem...",
+    "deleteSuccess": "Správa vymazaná",
+    "deleteSuccessDescription": "Vaša správa bola úspešne odstránená",
+    "deleteError": "Vymazanie správy zlyhalo",
+    "deleteErrorDescription": "Niečo sa pokazilo. Skúste to prosím znova."
   },
   "cragPage": {
     "askAI": "Opýtať sa AI",

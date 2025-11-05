@@ -38,6 +38,7 @@ import { ConfirmDialog } from "@/components/dialogs/ConfirmDialog";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
 import { useRouter } from "next/navigation";
+import { toast } from "@/hooks/use-toast";
 import {
   useFavorites,
   useIsFavorited,
@@ -399,10 +400,21 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
 
       // Refetch reports
       await refetchReports();
+
+      // Show success toast
+      toast({
+        title: t("reports.deleteSuccess"),
+        description: t("reports.deleteSuccessDescription"),
+      });
+
       setDeletingReportId(null);
     } catch (error) {
       console.error("Failed to delete report:", error);
-      alert("Failed to delete report. Please try again.");
+      toast({
+        title: t("reports.deleteError"),
+        description: t("reports.deleteErrorDescription"),
+        variant: "destructive",
+      });
     }
   };
 

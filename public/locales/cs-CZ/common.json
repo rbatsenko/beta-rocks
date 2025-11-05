@@ -701,7 +701,11 @@
     "editReport": "Upravit zprávu",
     "editReportDescription": "Aktualizujte svou zprávu",
     "updateReport": "Aktualizovat zprávu",
-    "updating": "Aktualizuji..."
+    "updating": "Aktualizuji...",
+    "deleteSuccess": "Zpráva smazána",
+    "deleteSuccessDescription": "Vaše zpráva byla úspěšně odstraněna",
+    "deleteError": "Smazání zprávy selhalo",
+    "deleteErrorDescription": "Něco se pokazilo. Zkuste to prosím znovu."
   },
   "cragPage": {
     "askAI": "Zeptat se AI",

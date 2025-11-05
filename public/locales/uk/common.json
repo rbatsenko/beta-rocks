@@ -701,7 +701,11 @@
     "editReport": "Редагувати Звіт",
     "editReportDescription": "Оновіть свій звіт",
     "updateReport": "Оновити Звіт",
-    "updating": "Оновлення..."
+    "updating": "Оновлення...",
+    "deleteSuccess": "Звіт видалено",
+    "deleteSuccessDescription": "Ваш звіт було успішно видалено",
+    "deleteError": "Не вдалося видалити звіт",
+    "deleteErrorDescription": "Щось пішло не так. Будь ласка, спробуйте ще раз."
   },
   "cragPage": {
     "askAI": "Запитати AI",

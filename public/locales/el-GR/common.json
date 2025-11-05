@@ -590,7 +590,11 @@
     "editReport": "Επεξεργασία Αναφοράς",
     "editReportDescription": "Ενημερώστε την αναφορά σας",
     "updateReport": "Ενημέρωση Αναφοράς",
-    "updating": "Ενημερώνεται..."
+    "updating": "Ενημερώνεται...",
+    "deleteSuccess": "Η αναφορά διαγράφηκε",
+    "deleteSuccessDescription": "Η αναφορά σας αφαιρέθηκε επιτυχώς",
+    "deleteError": "Αποτυχία διαγραφής αναφοράς",
+    "deleteErrorDescription": "Κάτι πήγε στραβά. Παρακαλώ δοκιμάστε ξανά."
   },
   "cragPage": {
     "askAI": "Ρωτήστε το AI",

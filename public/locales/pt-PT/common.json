@@ -701,7 +701,11 @@
     "editReport": "Editar Relatório",
     "editReportDescription": "Atualize o seu relatório",
     "updateReport": "Atualizar Relatório",
-    "updating": "A atualizar..."
+    "updating": "A atualizar...",
+    "deleteSuccess": "Relatório eliminado",
+    "deleteSuccessDescription": "O teu relatório foi removido com sucesso",
+    "deleteError": "Falha ao eliminar relatório",
+    "deleteErrorDescription": "Algo correu mal. Por favor, tenta novamente."
   },
   "cragPage": {
     "askAI": "Perguntar à IA",

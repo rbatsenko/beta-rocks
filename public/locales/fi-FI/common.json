@@ -622,7 +622,11 @@
     "editReport": "Muokkaa Raporttia",
     "editReportDescription": "Päivitä raporttisi",
     "updateReport": "Päivitä Raportti",
-    "updating": "Päivitetään..."
+    "updating": "Päivitetään...",
+    "deleteSuccess": "Raportti poistettu",
+    "deleteSuccessDescription": "Raporttisi on poistettu onnistuneesti",
+    "deleteError": "Raportin poistaminen epäonnistui",
+    "deleteErrorDescription": "Jokin meni pieleen. Yritä uudelleen."
   },
   "cragPage": {
     "askAI": "Kysy AI:lta",

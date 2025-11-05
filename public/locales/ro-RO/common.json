@@ -701,7 +701,11 @@
     "editReport": "Editează Raportul",
     "editReportDescription": "Actualizați-vă raportul",
     "updateReport": "Actualizează Raportul",
-    "updating": "Se actualizează..."
+    "updating": "Se actualizează...",
+    "deleteSuccess": "Raport șters",
+    "deleteSuccessDescription": "Raportul tău a fost eliminat cu succes",
+    "deleteError": "Ștergerea raportului a eșuat",
+    "deleteErrorDescription": "Ceva nu a mers bine. Te rugăm să încerci din nou."
   },
   "cragPage": {
     "askAI": "Întreabă AI",

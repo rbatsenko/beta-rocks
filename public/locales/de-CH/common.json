@@ -706,7 +706,11 @@
     "editReport": "Bericht bearbeiten",
     "editReportDescription": "Aktualisieren Sie Ihren Bericht",
     "updateReport": "Bericht aktualisieren",
-    "updating": "Wird aktualisiert..."
+    "updating": "Wird aktualisiert...",
+    "deleteSuccess": "Bericht gelöscht",
+    "deleteSuccessDescription": "Dein Bericht wurde erfolgreich entfernt",
+    "deleteError": "Löschen fehlgeschlagen",
+    "deleteErrorDescription": "Etwas ist schief gelaufen. Bitte versuche es erneut."
   },
   "cragPage": {
     "askAI": "KI fragen",

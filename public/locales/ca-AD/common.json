@@ -590,7 +590,11 @@
     "editReport": "Editar informe",
     "editReportDescription": "Actualitza el teu informe",
     "updateReport": "Actualitzar informe",
-    "updating": "Actualitzant..."
+    "updating": "Actualitzant...",
+    "deleteSuccess": "Informe esborrat",
+    "deleteSuccessDescription": "El vostre informe s'ha eliminat correctament",
+    "deleteError": "Error en esborrar l'informe",
+    "deleteErrorDescription": "Alguna cosa ha anat malament. Torneu-ho a provar."
   },
   "cragPage": {
     "askAI": "Pregunta a la IA",

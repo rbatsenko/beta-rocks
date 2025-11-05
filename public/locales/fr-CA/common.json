@@ -706,7 +706,11 @@
     "editReport": "Modifier le Rapport",
     "editReportDescription": "Mettez à jour votre rapport",
     "updateReport": "Mettre à jour le Rapport",
-    "updating": "Mise à jour..."
+    "updating": "Mise à jour...",
+    "deleteSuccess": "Rapport supprimé",
+    "deleteSuccessDescription": "Votre rapport a été supprimé avec succès",
+    "deleteError": "Échec de la suppression du rapport",
+    "deleteErrorDescription": "Une erreur s'est produite. Veuillez réessayer."
   },
   "cragPage": {
     "askAI": "Demander à l'IA",

@@ -701,7 +701,11 @@
     "editReport": "Rapport Bewerken",
     "editReportDescription": "Werk uw rapport bij",
     "updateReport": "Rapport Bijwerken",
-    "updating": "Bijwerken..."
+    "updating": "Bijwerken...",
+    "deleteSuccess": "Rapport verwijderd",
+    "deleteSuccessDescription": "Je rapport is succesvol verwijderd",
+    "deleteError": "Verwijderen mislukt",
+    "deleteErrorDescription": "Er is iets misgegaan. Probeer het opnieuw."
   },
   "cragPage": {
     "askAI": "Vraag AI",

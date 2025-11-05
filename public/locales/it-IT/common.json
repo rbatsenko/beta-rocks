@@ -706,7 +706,11 @@
     "editReport": "Modifica Rapporto",
     "editReportDescription": "Aggiorna il tuo rapporto",
     "updateReport": "Aggiorna Rapporto",
-    "updating": "Aggiornamento..."
+    "updating": "Aggiornamento...",
+    "deleteSuccess": "Rapporto eliminato",
+    "deleteSuccessDescription": "Il tuo rapporto è stato rimosso con successo",
+    "deleteError": "Eliminazione del rapporto non riuscita",
+    "deleteErrorDescription": "Qualcosa è andato storto. Riprova."
   },
   "cragPage": {
     "askAI": "Chiedi all'IA",

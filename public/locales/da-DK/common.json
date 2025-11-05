@@ -622,7 +622,11 @@
     "editReport": "Rediger rapport",
     "editReportDescription": "Opdater din rapport",
     "updateReport": "Opdater rapport",
-    "updating": "Opdaterer..."
+    "updating": "Opdaterer...",
+    "deleteSuccess": "Rapport slettet",
+    "deleteSuccessDescription": "Din rapport er blevet fjernet",
+    "deleteError": "Kunne ikke slette rapporten",
+    "deleteErrorDescription": "Noget gik galt. Prøv venligst igen."
   },
   "cragPage": {
     "askAI": "Spørg AI",

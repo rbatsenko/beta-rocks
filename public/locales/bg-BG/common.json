@@ -669,7 +669,11 @@
     "editReport": "Редактиране на доклад",
     "editReportDescription": "Актуализирайте вашия доклад",
     "updateReport": "Актуализиране на доклад",
-    "updating": "Актуализиране..."
+    "updating": "Актуализиране...",
+    "deleteSuccess": "Сигнал изтрит",
+    "deleteSuccessDescription": "Вашият сигнал беше успешно премахнат",
+    "deleteError": "Неуспешно изтриване на сигнал",
+    "deleteErrorDescription": "Нещо се обърка. Моля, опитайте отново."
   },
   "cragPage": {
     "askAI": "Попитай AI",
