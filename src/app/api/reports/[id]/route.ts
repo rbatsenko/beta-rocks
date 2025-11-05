@@ -6,7 +6,7 @@ import { getSupabaseClient } from "@/integrations/supabase/client";
  * GET /api/reports/[id]
  * Get a single report with all joins (author, confirmations, crag, sector)
  */
-export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function GET(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id: reportId } = await params;
     const supabase = getSupabaseClient();
