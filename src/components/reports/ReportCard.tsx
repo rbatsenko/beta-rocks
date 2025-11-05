@@ -83,7 +83,7 @@ export function ReportCard({
   const dateLocale = getDateFnsLocale(i18n.language);
   const [isConfirming, setIsConfirming] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
-  const [confirmationCount, setConfirmationCount] = useState(report.confirmations?.length || 0);
+  const [confirmationCount, setConfirmationCount] = useState(report.confirmations?.[0]?.count || 0);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showProfileCreated, setShowProfileCreated] = useState(false);
   const [newSyncKey, setNewSyncKey] = useState<string>("");

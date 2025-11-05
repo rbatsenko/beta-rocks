@@ -4,9 +4,20 @@ import { useState, useMemo, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useChat, type UIMessage } from "@ai-sdk/react";
 import type { TFunction } from "i18next";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send, Loader2, CloudSun, Sun, Info, RotateCcw, Star, Search } from "lucide-react";
+import {
+  Send,
+  Loader2,
+  CloudSun,
+  Sun,
+  Info,
+  RotateCcw,
+  Star,
+  Search,
+  Activity,
+} from "lucide-react";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
 import { useUnits } from "@/hooks/useUnits";
@@ -58,6 +69,7 @@ import { SyncExplainerDialog } from "@/components/profile/SyncExplainerDialog";
 import { StatsDialog } from "@/components/profile/StatsDialog";
 import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal";
 import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog";
+import { LiveIndicator } from "@/components/ui/live-indicator";
 import type { UserProfile } from "@/lib/auth/sync-key";
 
 interface ConditionsData {
@@ -509,7 +521,7 @@ const ChatUI = ({
             <ScrollToBottomOnSignal signal={scrollSignal} />
             <ConversationContent className="container max-w-3xl px-4 py-6">
               {messages.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-full text-center py-12">
+                <div className="flex flex-col items-center justify-center h-full text-center py-6">
                   <div className="w-20 h-20 rounded-full bg-linear-to-br from-orange-500/20 to-orange-600/20 flex items-center justify-center mb-6">
                     <CloudSun className="w-10 h-10 text-orange-500" />
                   </div>
@@ -521,7 +533,7 @@ const ChatUI = ({
                   {/* Search hint - clickable */}
                   <button
                     onClick={() => setSearchDialogOpen(true)}
-                    className="inline-flex items-center gap-2 mb-6 text-sm text-muted-foreground bg-orange-50/50 dark:bg-orange-950/20 border border-orange-200/50 dark:border-orange-800/30 rounded-lg px-3 py-2 hover:bg-orange-100/50 dark:hover:bg-orange-900/30 hover:border-orange-300/50 dark:hover:border-orange-700/50 transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-2 mb-3 text-sm text-muted-foreground bg-orange-50/50 dark:bg-orange-950/20 border border-orange-200/50 dark:border-orange-800/30 rounded-lg px-3 py-2 hover:bg-orange-100/50 dark:hover:bg-orange-900/30 hover:border-orange-300/50 dark:hover:border-orange-700/50 transition-colors cursor-pointer"
                   >
                     <Search className="h-4 w-4 text-orange-600 dark:text-orange-500 shrink-0" />
                     <span>{t("welcome.searchHint")}</span>
@@ -530,6 +542,20 @@ const ChatUI = ({
                       <span className="text-xs">{modifierKey === "Cmd" ? "⌘ + " : "Ctrl + "}K</span>
                     </kbd>
                   </button>
+
+                  {/* View Activity Feed button */}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    asChild
+                    className="mb-6 text-sm hover:scale-105 transition-transform"
+                  >
+                    <Link href="/feed" className="inline-flex items-center gap-2">
+                      <Activity className="h-4 w-4 text-green-600 dark:text-green-500" />
+                      <span>{t("feed.viewFeed")}</span>
+                      <LiveIndicator isLive={true} compact />
+                    </Link>
+                  </Button>
 
                   <div className="flex flex-wrap gap-2 justify-center max-w-lg">
                     {exampleQueries.map((example, idx) => (
@@ -932,6 +958,22 @@ const ChatUI = ({
         cancelText={t("dialog.cancel")}
         variant="destructive"
       />
+
+      {/* Pulse animation for feed icon */}
+      <style jsx global>{`
+        @keyframes pulse-subtle {
+          0%,
+          100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.1);
+          }
+        }
+        .pulse-icon {
+          animation: pulse-subtle 2s infinite;
+        }
+      `}</style>
     </>
   );
 };

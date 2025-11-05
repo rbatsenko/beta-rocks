@@ -1,8 +1,9 @@
 "use client";
 
 import { ReactNode } from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Search, Star } from "lucide-react";
+import { Search, Star, Activity } from "lucide-react";
 import { LanguageSelector } from "@/components/common/LanguageSelector";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
 import { UserMenu } from "@/components/profile/UserMenu";
@@ -49,6 +50,22 @@ export function HeaderActions({
       <Button
         variant="ghost"
         size="icon"
+        asChild
+        className="cursor-pointer hover:bg-muted/50 relative"
+        title={t("feed.title")}
+      >
+        <Link href="/feed" className="relative inline-flex">
+          <Activity className="h-[1.2rem] w-[1.2rem] text-green-600 dark:text-green-500 pulse-icon" />
+          {/* Pulsing green dot */}
+          <span className="absolute top-0 right-0 flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+          </span>
+        </Link>
+      </Button>
+      <Button
+        variant="ghost"
+        size="icon"
         onClick={onFavoritesClick}
         className="cursor-pointer hover:bg-muted/50"
         title={t("profile.favorites")}
@@ -68,6 +85,20 @@ export function HeaderActions({
         onClearChatClick={onClearChatClick}
         isClearChatDisabled={isClearChatDisabled}
       />
+      <style jsx>{`
+        @keyframes pulse-subtle {
+          0%,
+          100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.1);
+          }
+        }
+        :global(.pulse-icon) {
+          animation: pulse-subtle 2s infinite;
+        }
+      `}</style>
     </>
   );
 }

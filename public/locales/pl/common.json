@@ -731,8 +731,8 @@
     "distance": "{{distance}} od {{location}}"
   },
   "feed": {
-    "title": "Aktualności na żywo",
-    "viewFeed": "Zobacz kanał aktywności",
+    "title": "Aktualizacje na żywo",
+    "viewFeed": "Zobacz raporty na żywo",
     "live": "Na żywo",
     "justNow": "Przed chwilą",
     "filters": {

@@ -94,8 +94,9 @@ export function RootLayoutClient({ children }: { children: React.ReactNode }) {
     setSettingsDialogOpen(true);
   };
 
-  // Show header on location pages
-  const showHeader = pathname?.startsWith("/location");
+  // Show header on location pages and feed page
+  const showHeader = pathname?.startsWith("/location") || pathname === "/feed";
+  const isFeedPage = pathname === "/feed";
 
   return (
     <>
@@ -110,6 +111,7 @@ export function RootLayoutClient({ children }: { children: React.ReactNode }) {
               onAboutClick={() => setFeaturesDialogOpen(true)}
             />
           }
+          showLiveIndicator={isFeedPage}
         />
       )}
       {children}
