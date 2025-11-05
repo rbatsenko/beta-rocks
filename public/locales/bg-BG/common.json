@@ -700,5 +700,21 @@
   },
   "nearbyMatch": {
     "distance": "{{distance}} от {{location}}"
+  },
+  "feed": {
+    "title": "Емисия на живо",
+    "viewFeed": "Вижте емисията за активност",
+    "live": "На живо",
+    "justNow": "Току-що",
+    "filters": {
+      "all": "Всички",
+      "favorites": "Любими"
+    },
+    "emptyState": {
+      "noReportsTitle": "Все още няма доклади",
+      "noReportsDescription": "Бъдете първият, който споделя условия с катерачната общност",
+      "noFavoritesTitle": "Няма доклади от любими",
+      "noFavoritesDescription": "Добавете скали към любимите си, за да виждате техните доклади в тази емисия"
+    }
   }
 }

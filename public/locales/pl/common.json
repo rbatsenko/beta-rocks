@@ -729,5 +729,21 @@
   },
   "nearbyMatch": {
     "distance": "{{distance}} od {{location}}"
+  },
+  "feed": {
+    "title": "Aktualności na żywo",
+    "viewFeed": "Zobacz kanał aktywności",
+    "live": "Na żywo",
+    "justNow": "Przed chwilą",
+    "filters": {
+      "all": "Wszystkie",
+      "favorites": "Ulubione"
+    },
+    "emptyState": {
+      "noReportsTitle": "Jeszcze brak raportów",
+      "noReportsDescription": "Bądź pierwszą osobą, która podzieli się warunkami ze wspólnotą wspinaczkową",
+      "noFavoritesTitle": "Brak raportów z ulubionych",
+      "noFavoritesDescription": "Dodaj skały do ulubionych, aby zobaczyć ich raporty w tym kanale"
+    }
   }
 }

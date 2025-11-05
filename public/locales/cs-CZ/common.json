@@ -734,5 +734,21 @@
   },
   "nearbyMatch": {
     "distance": "{{distance}} od {{location}}"
+  },
+  "feed": {
+    "title": "Živý přehled",
+    "viewFeed": "Zobrazit přehled aktivit",
+    "live": "Živě",
+    "justNow": "Právě teď",
+    "filters": {
+      "all": "Všechny",
+      "favorites": "Oblíbené"
+    },
+    "emptyState": {
+      "noReportsTitle": "Zatím žádná hlášení",
+      "noReportsDescription": "Buďte první, kdo sdílí podmínky s lezeckou komunitou",
+      "noFavoritesTitle": "Žádná hlášení z oblíbených",
+      "noFavoritesDescription": "Přidejte skály do oblíbených, abyste viděli jejich hlášení v tomto přehledu"
+    }
   }
 }

@@ -737,5 +737,21 @@
   },
   "nearbyMatch": {
     "distance": "{{distance}} von {{location}}"
+  },
+  "feed": {
+    "title": "Live-Feed",
+    "viewFeed": "Aktivitäts-Feed ansehen",
+    "live": "Live",
+    "justNow": "Gerade eben",
+    "filters": {
+      "all": "Alle",
+      "favorites": "Favoriten"
+    },
+    "emptyState": {
+      "noReportsTitle": "Noch keine Berichte",
+      "noReportsDescription": "Sei der Erste, der Bedingungen mit der Klettergemeinschaft teilt",
+      "noFavoritesTitle": "Keine Berichte von Favoriten",
+      "noFavoritesDescription": "Füge Felsen zu deinen Favoriten hinzu, um ihre Berichte in diesem Feed zu sehen"
+    }
   }
 }

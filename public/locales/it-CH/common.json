@@ -648,5 +648,21 @@
   },
   "nearbyMatch": {
     "distance": "{{distance}} da {{location}}"
+  },
+  "feed": {
+    "title": "Feed in diretta",
+    "viewFeed": "Visualizza feed attività",
+    "live": "In diretta",
+    "justNow": "Proprio ora",
+    "filters": {
+      "all": "Tutti",
+      "favorites": "Preferiti"
+    },
+    "emptyState": {
+      "noReportsTitle": "Nessuna segnalazione ancora",
+      "noReportsDescription": "Sii il primo a condividere le condizioni con la comunità di arrampicata",
+      "noFavoritesTitle": "Nessuna segnalazione dai preferiti",
+      "noFavoritesDescription": "Aggiungi falesie ai tuoi preferiti per vedere le loro segnalazioni in questo feed"
+    }
   }
 }

@@ -734,5 +734,21 @@
   },
   "nearbyMatch": {
     "distance": "{{distance}} від {{location}}"
+  },
+  "feed": {
+    "title": "Жива стрічка",
+    "viewFeed": "Переглянути стрічку активності",
+    "live": "Наживо",
+    "justNow": "Щойно",
+    "filters": {
+      "all": "Всі",
+      "favorites": "Вибрані"
+    },
+    "emptyState": {
+      "noReportsTitle": "Поки немає звітів",
+      "noReportsDescription": "Будьте першим, хто поділиться умовами зі скелелазною спільнотою",
+      "noFavoritesTitle": "Немає звітів з вибраних",
+      "noFavoritesDescription": "Додайте скелі до вибраних, щоб бачити їхні звіти в цій стрічці"
+    }
   }
 }

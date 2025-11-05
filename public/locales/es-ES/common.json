@@ -737,5 +737,21 @@
   },
   "nearbyMatch": {
     "distance": "{{distance}} desde {{location}}"
+  },
+  "feed": {
+    "title": "Feed en Vivo",
+    "viewFeed": "Ver feed de actividad",
+    "live": "En vivo",
+    "justNow": "Justo ahora",
+    "filters": {
+      "all": "Todos",
+      "favorites": "Favoritos"
+    },
+    "emptyState": {
+      "noReportsTitle": "No hay reportes todavía",
+      "noReportsDescription": "Sé el primero en compartir condiciones con la comunidad de escalada",
+      "noFavoritesTitle": "No hay reportes de favoritos",
+      "noFavoritesDescription": "Añade sectores a tus favoritos para ver sus reportes en este feed"
+    }
   }
 }

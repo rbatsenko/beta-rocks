@@ -616,5 +616,21 @@
   },
   "nearbyMatch": {
     "distance": "{{distance}} des de {{location}}"
+  },
+  "feed": {
+    "title": "Flux en directe",
+    "viewFeed": "Veure flux d'activitat",
+    "live": "En directe",
+    "justNow": "Ara mateix",
+    "filters": {
+      "all": "Tots",
+      "favorites": "Favorits"
+    },
+    "emptyState": {
+      "noReportsTitle": "Encara no hi ha informes",
+      "noReportsDescription": "Sigues el primer a compartir condicions amb la comunitat d'escalada",
+      "noFavoritesTitle": "No hi ha informes dels favorits",
+      "noFavoritesDescription": "Afegiu roques als vostres favorits per veure els seus informes en aquest flux"
+    }
   }
 }

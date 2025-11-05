@@ -616,5 +616,21 @@
   },
   "nearbyMatch": {
     "distance": "{{distance}} από {{location}}"
+  },
+  "feed": {
+    "title": "Ζωντανή ροή",
+    "viewFeed": "Προβολή ροής δραστηριότητας",
+    "live": "Ζωντανά",
+    "justNow": "Μόλις τώρα",
+    "filters": {
+      "all": "Όλα",
+      "favorites": "Αγαπημένα"
+    },
+    "emptyState": {
+      "noReportsTitle": "Δεν υπάρχουν αναφορές ακόμα",
+      "noReportsDescription": "Γίνετε ο πρώτος που θα μοιραστεί συνθήκες με την κοινότητα αναρρίχησης",
+      "noFavoritesTitle": "Δεν υπάρχουν αναφορές από αγαπημένα",
+      "noFavoritesDescription": "Προσθέστε βράχους στα αγαπημένα σας για να δείτε τις αναφορές τους σε αυτή τη ροή"
+    }
   }
 }

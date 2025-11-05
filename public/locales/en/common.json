@@ -752,5 +752,21 @@
   },
   "nearbyMatch": {
     "distance": "{{distance}} from {{location}}"
+  },
+  "feed": {
+    "title": "Live Feed",
+    "viewFeed": "View Activity Feed",
+    "live": "Live",
+    "justNow": "Just now",
+    "filters": {
+      "all": "All",
+      "favorites": "Favorites"
+    },
+    "emptyState": {
+      "noReportsTitle": "No reports yet",
+      "noReportsDescription": "Be the first to share conditions with the climbing community",
+      "noFavoritesTitle": "No reports from favorites",
+      "noFavoritesDescription": "Add crags to your favorites to see their reports in this feed"
+    }
   }
 }

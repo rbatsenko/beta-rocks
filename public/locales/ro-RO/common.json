@@ -733,5 +733,21 @@
   },
   "nearbyMatch": {
     "distance": "{{distance}} de la {{location}}"
+  },
+  "feed": {
+    "title": "Flux live",
+    "viewFeed": "Vezi fluxul de activitate",
+    "live": "Live",
+    "justNow": "Chiar acum",
+    "filters": {
+      "all": "Toate",
+      "favorites": "Favorite"
+    },
+    "emptyState": {
+      "noReportsTitle": "Încă nu există rapoarte",
+      "noReportsDescription": "Fii primul care împărtășește condițiile cu comunitatea de alpinism",
+      "noFavoritesTitle": "Nu există rapoarte de la favorite",
+      "noFavoritesDescription": "Adaugă stânci la favorite pentru a vedea rapoartele lor în acest flux"
+    }
   }
 }

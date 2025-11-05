@@ -737,5 +737,21 @@
   },
   "nearbyMatch": {
     "distance": "{{distance}} depuis {{location}}"
+  },
+  "feed": {
+    "title": "Fil en direct",
+    "viewFeed": "Voir le fil d'activité",
+    "live": "En direct",
+    "justNow": "À l'instant",
+    "filters": {
+      "all": "Tous",
+      "favorites": "Favoris"
+    },
+    "emptyState": {
+      "noReportsTitle": "Pas encore de rapports",
+      "noReportsDescription": "Soyez le premier à partager les conditions avec la communauté d'escalade",
+      "noFavoritesTitle": "Aucun rapport des favoris",
+      "noFavoritesDescription": "Ajoutez des sites à vos favoris pour voir leurs rapports dans ce fil"
+    }
   }
 }

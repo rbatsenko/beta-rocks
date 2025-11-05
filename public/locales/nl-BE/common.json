@@ -732,5 +732,21 @@
   },
   "nearbyMatch": {
     "distance": "{{distance}} van {{location}}"
+  },
+  "feed": {
+    "title": "Live-feed",
+    "viewFeed": "Bekijk activiteitenfeed",
+    "live": "Live",
+    "justNow": "Zojuist",
+    "filters": {
+      "all": "Alle",
+      "favorites": "Favorieten"
+    },
+    "emptyState": {
+      "noReportsTitle": "Nog geen rapporten",
+      "noReportsDescription": "Wees de eerste om omstandigheden te delen met de klimgemeenschap",
+      "noFavoritesTitle": "Geen rapporten van favorieten",
+      "noFavoritesDescription": "Voeg rotsen toe aan je favorieten om hun rapporten in deze feed te zien"
+    }
   }
 }

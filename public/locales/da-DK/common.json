@@ -648,5 +648,21 @@
   },
   "nearbyMatch": {
     "distance": "{{distance}} fra {{location}}"
+  },
+  "feed": {
+    "title": "Live-feed",
+    "viewFeed": "Se aktivitetsfeed",
+    "live": "Live",
+    "justNow": "Lige nu",
+    "filters": {
+      "all": "Alle",
+      "favorites": "Favoritter"
+    },
+    "emptyState": {
+      "noReportsTitle": "Ingen rapporter endnu",
+      "noReportsDescription": "Vær den første til at dele forhold med klatrefællesskabet",
+      "noFavoritesTitle": "Ingen rapporter fra favoritter",
+      "noFavoritesDescription": "Tilføj klatresteder til dine favoritter for at se deres rapporter i dette feed"
+    }
   }
 }

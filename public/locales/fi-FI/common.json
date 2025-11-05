@@ -648,5 +648,21 @@
   },
   "nearbyMatch": {
     "distance": "{{distance}} kohteesta {{location}}"
+  },
+  "feed": {
+    "title": "Live-syöte",
+    "viewFeed": "Näytä aktiviteettisyöte",
+    "live": "Live",
+    "justNow": "Juuri nyt",
+    "filters": {
+      "all": "Kaikki",
+      "favorites": "Suosikit"
+    },
+    "emptyState": {
+      "noReportsTitle": "Ei vielä raportteja",
+      "noReportsDescription": "Ole ensimmäinen jakamassa olosuhteita kiipeilyyhteisölle",
+      "noFavoritesTitle": "Ei raportteja suosikeista",
+      "noFavoritesDescription": "Lisää kiipeilypaikkoja suosikkeihin nähdäksesi niiden raportit tässä syötteessä"
+    }
   }
 }

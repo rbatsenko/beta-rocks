@@ -733,5 +733,21 @@
   },
   "nearbyMatch": {
     "distance": "{{distance}} od {{location}}"
+  },
+  "feed": {
+    "title": "Uživo pregled",
+    "viewFeed": "Prikaži pregled aktivnosti",
+    "live": "Uživo",
+    "justNow": "Upravo sada",
+    "filters": {
+      "all": "Sve",
+      "favorites": "Favoriti"
+    },
+    "emptyState": {
+      "noReportsTitle": "Još nema izvještaja",
+      "noReportsDescription": "Budite prvi koji će podijeliti uvjete s penjačkom zajednicom",
+      "noFavoritesTitle": "Nema izvještaja iz favorita",
+      "noFavoritesDescription": "Dodajte stijene u favorite kako biste vidjeli njihove izvještaje u ovom pregledu"
+    }
   }
 }

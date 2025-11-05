@@ -732,5 +732,21 @@
   },
   "nearbyMatch": {
     "distance": "{{distance}} de {{location}}"
+  },
+  "feed": {
+    "title": "Feed ao vivo",
+    "viewFeed": "Ver feed de atividade",
+    "live": "Ao vivo",
+    "justNow": "Agora mesmo",
+    "filters": {
+      "all": "Todos",
+      "favorites": "Favoritos"
+    },
+    "emptyState": {
+      "noReportsTitle": "Ainda sem relatórios",
+      "noReportsDescription": "Seja o primeiro a partilhar condições com a comunidade de escalada",
+      "noFavoritesTitle": "Sem relatórios dos favoritos",
+      "noFavoritesDescription": "Adicione falésias aos seus favoritos para ver os seus relatórios neste feed"
+    }
   }
 }

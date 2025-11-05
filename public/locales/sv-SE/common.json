@@ -649,5 +649,21 @@
   },
   "nearbyMatch": {
     "distance": "{{distance}} från {{location}}"
+  },
+  "feed": {
+    "title": "Direktflöde",
+    "viewFeed": "Visa aktivitetsflöde",
+    "live": "Live",
+    "justNow": "Just nu",
+    "filters": {
+      "all": "Alla",
+      "favorites": "Favoriter"
+    },
+    "emptyState": {
+      "noReportsTitle": "Inga rapporter ännu",
+      "noReportsDescription": "Bli först att dela förhållanden med klättergemenskapen",
+      "noFavoritesTitle": "Inga rapporter från favoriter",
+      "noFavoritesDescription": "Lägg till klippor till dina favoriter för att se deras rapporter i detta flöde"
+    }
   }
 }
