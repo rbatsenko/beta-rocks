@@ -162,8 +162,8 @@
       "description": "Elke rots of sector ter wereld via OpenBeta database-integratie"
     },
     "crossDeviceSync": {
-      "title": "Werkt offline",
-      "description": "Lokaal-eerst ontwerp. Sla gegevens offline op en synchroniseer over apparaten met een synchronisatietoets"
+      "title": "Synchronisatie tussen apparaten",
+      "description": "Krijg toegang tot je favorieten en chatgeschiedenis vanaf elk apparaat met een beveiligde synchronisatiesleutel. Geen account vereist"
     },
     "privacyFirst": {
       "title": "Privacy eerst",

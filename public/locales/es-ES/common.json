@@ -162,8 +162,8 @@
       "description": "Cualquier escuela o sector del mundo gracias a la integración con la base de datos de OpenBeta"
     },
     "crossDeviceSync": {
-      "title": "Funciona sin conexión",
-      "description": "Diseño local-first. Guarda datos offline y sincronízalos entre dispositivos con una clave de sincronización"
+      "title": "Sincronización entre dispositivos",
+      "description": "Accede a tus favoritos e historial de chat desde cualquier dispositivo con una clave de sincronización segura. No se requiere cuenta"
     },
     "privacyFirst": {
       "title": "Privacidad ante todo",

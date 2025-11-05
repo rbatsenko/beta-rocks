@@ -162,8 +162,8 @@
       "description": "Qualsiasi falesia o settore nel mondo grazie all'integrazione con OpenBeta"
     },
     "crossDeviceSync": {
-      "title": "Funziona offline",
-      "description": "Design local-first. Salva dati offline e sincronizzali tra dispositivi con una chiave di sync"
+      "title": "Sincronizzazione tra dispositivi",
+      "description": "Accedi ai tuoi preferiti e alla cronologia chat da qualsiasi dispositivo con una chiave di sincronizzazione sicura. Nessun account necessario"
     },
     "privacyFirst": {
       "title": "Privacy prima di tutto",

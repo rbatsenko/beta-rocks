@@ -249,9 +249,10 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
       return sectors;
     }
     const query = sectorSearchQuery.toLowerCase();
-    return sectors.filter((sector) =>
-      sector.name.toLowerCase().includes(query) ||
-      (sector.description && sector.description.toLowerCase().includes(query))
+    return sectors.filter(
+      (sector) =>
+        sector.name.toLowerCase().includes(query) ||
+        (sector.description && sector.description.toLowerCase().includes(query))
     );
   }, [sectors, sectorSearchQuery]);
 
@@ -261,10 +262,8 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
   const countryFlag = getCountryFlag(crag.country);
 
   // Use sector coordinates if available and valid, otherwise use crag coordinates
-  const displayLat =
-    currentSector && currentSector.lat !== null ? currentSector.lat : crag.lat;
-  const displayLon =
-    currentSector && currentSector.lon !== null ? currentSector.lon : crag.lon;
+  const displayLat = currentSector && currentSector.lat !== null ? currentSector.lat : crag.lat;
+  const displayLon = currentSector && currentSector.lon !== null ? currentSector.lon : crag.lon;
 
   // Format conditions data for ConditionsDetailContent
   const conditionsData = conditions

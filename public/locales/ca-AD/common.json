@@ -162,8 +162,8 @@
       "description": "Qualsevol esparelló o sector mundial mitjançant la integració de la base de dades d'OpenBeta"
     },
     "crossDeviceSync": {
-      "title": "Funciona sense connexió",
-      "description": "Disseny local-first. Guarda dades sense connexió i sincronitza entre dispositius amb una clau de sincronització"
+      "title": "Sincronització entre dispositius",
+      "description": "Accedeix als teus preferits i historial de xat des de qualsevol dispositiu amb una clau de sincronització segura. No cal compte"
     },
     "privacyFirst": {
       "title": "Privacitat primer",

@@ -162,8 +162,8 @@
       "description": "Akákoľvek skala alebo sektor po celom svete prostredníctvom integrácie databázy OpenBeta"
     },
     "crossDeviceSync": {
-      "title": "Funguje offline",
-      "description": "Dizajn zameraný na lokálne dáta. Uložte dáta offline a synchronizujte naprieč zariadeniami so sync kľúčom"
+      "title": "Synchronizácia medzi zariadeniami",
+      "description": "Pristupujte k svojim obľúbeným a histórii chatu z akéhokoľvek zariadenia pomocou bezpečného synchronizačného kľúča. Nie je potrebný účet"
     },
     "privacyFirst": {
       "title": "Súkromie na prvom mieste",

@@ -162,8 +162,8 @@
       "description": "Orice prag sau sector din lume via integrarea bazei de date OpenBeta"
     },
     "crossDeviceSync": {
-      "title": "Funcționează Offline",
-      "description": "Design-ul local-first. Salvează date offline și sincronizează între dispozitive cu cheia de sincronizare"
+      "title": "Sincronizare între dispozitive",
+      "description": "Accesează-ți favoritele și istoricul conversațiilor de pe orice dispozitiv cu o cheie de sincronizare securizată. Nu este nevoie de cont"
     },
     "privacyFirst": {
       "title": "Confidențialitate în Prim Plan",

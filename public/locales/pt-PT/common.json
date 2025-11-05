@@ -162,8 +162,8 @@
       "description": "Qualquer crag ou sector em todo o mundo através da integração da base de dados OpenBeta"
     },
     "crossDeviceSync": {
-      "title": "Funciona Offline",
-      "description": "Design orientado para local. Guarde dados offline e sincronize entre dispositivos com chave de sincronização"
+      "title": "Sincronização entre dispositivos",
+      "description": "Aceda aos seus favoritos e histórico de chat a partir de qualquer dispositivo com uma chave de sincronização segura. Não é necessária conta"
     },
     "privacyFirst": {
       "title": "Privacidade em Primeiro Lugar",

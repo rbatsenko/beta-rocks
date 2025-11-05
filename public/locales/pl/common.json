@@ -155,15 +155,15 @@
     },
     "communityReports": {
       "title": "Raporty społeczności",
-      "description": "Dziel się warunem, informacjami o bezpieczeństwie, zmianami w dostępie, infami wspinaczkowymi i więcej. Pomóż wspinaczom aktualizacjami w czasie rzeczywistym w wielu kategoriach"
+      "description": "Dziel się warunem, informacjami o bezpieczeństwie, zmianami w dostępie, info wspinaczkowym i więcej. Pomóż wspinaczom aktualizacjami w czasie rzeczywistym w wielu kategoriach"
     },
     "globalCoverage": {
       "title": "Zasięg globalny",
       "description": "Każda skałka lub sektor na świecie dzięki integracji z bazą OpenBeta"
     },
     "crossDeviceSync": {
-      "title": "Działa offline",
-      "description": "Projekt local-first. Zapisuj dane offline i synchronizuj między urządzeniami za pomocą klucza sync"
+      "title": "Synchronizacja między urządzeniami",
+      "description": "Uzyskaj dostęp do swoich ulubionych i historii czatu z dowolnego urządzenia za pomocą bezpiecznego klucza synchronizacji. Nie wymaga konta"
     },
     "privacyFirst": {
       "title": "Prywatność na pierwszym miejscu",
@@ -358,7 +358,7 @@
       },
       "report": {
         "title": "Dziel się raportami ze społecznością",
-        "description": "Pomóż wspinaczom, dzieląc się warunem, alertami bezpieczeństwa i infami wspinaczkowymi"
+        "description": "Pomóż wspinaczom, dzieląc się warunem, alertami bezpieczeństwa i info wspinaczkowym"
       },
       "vote": {
         "title": "Głosuj na pomocne raporty",

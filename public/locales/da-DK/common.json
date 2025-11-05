@@ -162,8 +162,8 @@
       "description": "Enhver klatrepladser verden over via OpenBeta databaseintegration"
     },
     "crossDeviceSync": {
-      "title": "Fungerer offline",
-      "description": "Lokalt-første design. Gem data offline og synkroniser på tværs af enheder med en synknøgle"
+      "title": "Synkronisering på tværs af enheder",
+      "description": "Få adgang til dine favoritter og chathistorik fra enhver enhed med en sikker synkroniseringsnøgle. Ingen konto påkrævet"
     },
     "privacyFirst": {
       "title": "Privatlivsførste",

@@ -162,8 +162,8 @@
       "description": "Jeder Fels oder Sektor weltweit durch die OpenBeta-Integration"
     },
     "crossDeviceSync": {
-      "title": "Funktioniert offline",
-      "description": "Local-first-Design. Speichere Daten offline und synchronisiere sie per Schlüssel zwischen Geräten"
+      "title": "Geräteübergreifende Synchronisation",
+      "description": "Greifen Sie von jedem Gerät auf Ihre Favoriten und Chat-Verläufe zu – mit einem sicheren Sync-Schlüssel. Kein Konto erforderlich"
     },
     "privacyFirst": {
       "title": "Datenschutz zuerst",

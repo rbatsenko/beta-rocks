@@ -163,8 +163,8 @@
       "description": "Vsako plezališče ali sektor kjerkoli na svetu z integracijo baze OpenBeta"
     },
     "crossDeviceSync": {
-      "title": "Deluje brez povezave",
-      "description": "Local-first zasnova. Shranjuj podatke brez povezave in jih sinhroniziraj med napravami s ključem"
+      "title": "Sinhronizacija med napravami",
+      "description": "Dostopajte do svojih priljubljenih in zgodovine klepeta iz katerekoli naprave z varnim sinhronizacijskim ključem. Račun ni potreben"
     },
     "privacyFirst": {
       "title": "Zasebnost na prvem mestu",

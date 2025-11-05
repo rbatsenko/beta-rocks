@@ -163,8 +163,8 @@
       "description": "Varje klippa eller sektor i världen via OpenBeta-integrationen"
     },
     "crossDeviceSync": {
-      "title": "Fungerar offline",
-      "description": "Local-first-design. Spara data offline och synka mellan enheter med en nyckel"
+      "title": "Synkronisering mellan enheter",
+      "description": "Få tillgång till dina favoriter och chatthistorik från vilken enhet som helst med en säker synkroniseringsnyckel. Inget konto krävs"
     },
     "privacyFirst": {
       "title": "Integritet först",

@@ -162,8 +162,8 @@
       "description": "Bilo koji vrhunac ili sektor na svijetu preko integracije OpenBeta baze podataka"
     },
     "crossDeviceSync": {
-      "title": "Radi offline",
-      "description": "Lokalno-prvo rješenje. Spremi podatke offline i sinkroniziraj ga na različitim uređajima pomoću sync tipke"
+      "title": "Sinkronizacija između uređaja",
+      "description": "Pristupite svojim omiljenim lokacijama i povijesti chata s bilo kojeg uređaja pomoću sigurnog ključa za sinkronizaciju. Nije potreban račun"
     },
     "privacyFirst": {
       "title": "Privatnost na prvom mjestu",

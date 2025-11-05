@@ -162,8 +162,8 @@
       "description": "Mikä tahansa kalli tai sektori maailmanlaajuisesti OpenBeta-tietokantaintegroinnin kautta"
     },
     "crossDeviceSync": {
-      "title": "Toimii offline-tilassa",
-      "description": "Paikallinen ensimmäinen suunnittelu. Tallenna tiedot offline-tilassa ja synkronoi laitteiden välillä synkronointiavaimella"
+      "title": "Laitteiden välinen synkronointi",
+      "description": "Käytä suosikkejasi ja keskusteluhistoriaasi millä tahansa laitteella turvallisen synkronointiavaimen avulla. Tiliä ei tarvita"
     },
     "privacyFirst": {
       "title": "Yksityisyys ensin",

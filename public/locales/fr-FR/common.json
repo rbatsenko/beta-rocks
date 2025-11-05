@@ -162,8 +162,8 @@
       "description": "Toute falaise ou secteur grâce à l'intégration de la base de données OpenBeta"
     },
     "crossDeviceSync": {
-      "title": "Fonctionne hors ligne",
-      "description": "Conception orientée local. Enregistrez les données hors ligne et synchronisez-les entre vos appareils avec une clé"
+      "title": "Synchronisation multi-appareils",
+      "description": "Accédez à vos favoris et à l'historique de chat depuis n'importe quel appareil avec une clé de synchronisation sécurisée. Aucun compte requis"
     },
     "privacyFirst": {
       "title": "Confidentialité d'abord",
