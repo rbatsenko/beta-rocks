@@ -161,7 +161,7 @@
       "title": "Copertura globale",
       "description": "Qualsiasi falesia o settore nel mondo grazie all'integrazione con OpenBeta"
     },
-    "worksOffline": {
+    "crossDeviceSync": {
       "title": "Funziona offline",
       "description": "Design local-first. Salva dati offline e sincronizzali tra dispositivi con una chiave di sync"
     },

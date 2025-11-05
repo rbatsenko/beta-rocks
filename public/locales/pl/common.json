@@ -161,7 +161,7 @@
       "title": "Zasięg globalny",
       "description": "Każda skałka lub sektor na świecie dzięki integracji z bazą OpenBeta"
     },
-    "worksOffline": {
+    "crossDeviceSync": {
       "title": "Działa offline",
       "description": "Projekt local-first. Zapisuj dane offline i synchronizuj między urządzeniami za pomocą klucza sync"
     },

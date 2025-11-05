@@ -162,7 +162,7 @@
       "title": "Globalna pokritost",
       "description": "Vsako plezališče ali sektor kjerkoli na svetu z integracijo baze OpenBeta"
     },
-    "worksOffline": {
+    "crossDeviceSync": {
       "title": "Deluje brez povezave",
       "description": "Local-first zasnova. Shranjuj podatke brez povezave in jih sinhroniziraj med napravami s ključem"
     },

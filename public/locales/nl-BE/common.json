@@ -161,7 +161,7 @@
       "title": "Mondiale dekking",
       "description": "Elke rots of sector ter wereld via OpenBeta database-integratie"
     },
-    "worksOffline": {
+    "crossDeviceSync": {
       "title": "Werkt offline",
       "description": "Lokaal-eerst ontwerp. Sla gegevens offline op en synchroniseer over apparaten met een synchronisatietoets"
     },

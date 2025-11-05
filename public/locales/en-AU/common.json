@@ -161,7 +161,7 @@
       "title": "Global Coverage",
       "description": "Any crag or sector worldwide via OpenBeta database integration"
     },
-    "worksOffline": {
+    "crossDeviceSync": {
       "title": "Works Offline",
       "description": "Local-first design. Save data offline and sync across devices with a sync key"
     },

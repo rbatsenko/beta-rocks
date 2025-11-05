@@ -161,7 +161,7 @@
       "title": "Globální pokrytí",
       "description": "Jakákoli skála nebo sektor po celém světě prostřednictvím integrace databáze OpenBeta"
     },
-    "worksOffline": {
+    "crossDeviceSync": {
       "title": "Funguje offline",
       "description": "Design zaměřený na lokální data. Ulož data offline a synchronizuj napříč zařízeními s sync klíčem"
     },

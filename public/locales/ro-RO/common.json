@@ -161,7 +161,7 @@
       "title": "Acoperire Globală",
       "description": "Orice prag sau sector din lume via integrarea bazei de date OpenBeta"
     },
-    "worksOffline": {
+    "crossDeviceSync": {
       "title": "Funcționează Offline",
       "description": "Design-ul local-first. Salvează date offline și sincronizează între dispozitive cu cheia de sincronizare"
     },

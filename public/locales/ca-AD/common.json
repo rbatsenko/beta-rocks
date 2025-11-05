@@ -161,7 +161,7 @@
       "title": "Cobertura mundial",
       "description": "Qualsevol esparelló o sector mundial mitjançant la integració de la base de dades d'OpenBeta"
     },
-    "worksOffline": {
+    "crossDeviceSync": {
       "title": "Funciona sense connexió",
       "description": "Disseny local-first. Guarda dades sense connexió i sincronitza entre dispositius amb una clau de sincronització"
     },

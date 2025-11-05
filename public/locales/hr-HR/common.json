@@ -161,7 +161,7 @@
       "title": "Globalna pokrivenost",
       "description": "Bilo koji vrhunac ili sektor na svijetu preko integracije OpenBeta baze podataka"
     },
-    "worksOffline": {
+    "crossDeviceSync": {
       "title": "Radi offline",
       "description": "Lokalno-prvo rješenje. Spremi podatke offline i sinkroniziraj ga na različitim uređajima pomoću sync tipke"
     },

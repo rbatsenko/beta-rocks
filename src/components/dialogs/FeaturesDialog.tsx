@@ -9,7 +9,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Cloud, MessageSquare, Users, MapPin, Zap, Lock } from "lucide-react";
+import { Cloud, MessageSquare, Users, MapPin, RefreshCw, Lock } from "lucide-react";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Trans } from "react-i18next";
@@ -45,9 +45,9 @@ export function FeaturesDialog({ open, onOpenChange }: FeaturesDialogProps) {
       descriptionKey: "features.globalCoverage.description",
     },
     {
-      icon: Zap,
-      titleKey: "features.worksOffline.title",
-      descriptionKey: "features.worksOffline.description",
+      icon: RefreshCw,
+      titleKey: "features.crossDeviceSync.title",
+      descriptionKey: "features.crossDeviceSync.description",
     },
     {
       icon: Lock,

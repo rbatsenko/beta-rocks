@@ -162,7 +162,7 @@
       "title": "Global täckning",
       "description": "Varje klippa eller sektor i världen via OpenBeta-integrationen"
     },
-    "worksOffline": {
+    "crossDeviceSync": {
       "title": "Fungerar offline",
       "description": "Local-first-design. Spara data offline och synka mellan enheter med en nyckel"
     },

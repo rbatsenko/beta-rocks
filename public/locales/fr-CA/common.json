@@ -161,7 +161,7 @@
       "title": "Couverture mondiale",
       "description": "Toute falaise ou secteur grâce à l'intégration de la base de données OpenBeta"
     },
-    "worksOffline": {
+    "crossDeviceSync": {
       "title": "Fonctionne hors ligne",
       "description": "Conception orientée local. Enregistrez les données hors ligne et synchronisez-les entre vos appareils avec une clé"
     },

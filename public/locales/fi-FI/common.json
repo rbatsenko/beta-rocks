@@ -161,7 +161,7 @@
       "title": "Maailmanlaajuinen kattavuus",
       "description": "Mikä tahansa kalli tai sektori maailmanlaajuisesti OpenBeta-tietokantaintegroinnin kautta"
     },
-    "worksOffline": {
+    "crossDeviceSync": {
       "title": "Toimii offline-tilassa",
       "description": "Paikallinen ensimmäinen suunnittelu. Tallenna tiedot offline-tilassa ja synkronoi laitteiden välillä synkronointiavaimella"
     },

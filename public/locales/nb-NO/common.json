@@ -162,7 +162,7 @@
       "title": "Global dekning",
       "description": "Alle crag eller sektorer i verden gjennom OpenBeta-integrasjonen"
     },
-    "worksOffline": {
+    "crossDeviceSync": {
       "title": "Fungerer offline",
       "description": "Local-first-design. Lagre data uten nett og synkroniser mellom enheter med en nøkkel"
     },

@@ -161,7 +161,7 @@
       "title": "Global dækning",
       "description": "Enhver klatrepladser verden over via OpenBeta databaseintegration"
     },
-    "worksOffline": {
+    "crossDeviceSync": {
       "title": "Fungerer offline",
       "description": "Lokalt-første design. Gem data offline og synkroniser på tværs af enheder med en synknøgle"
     },
