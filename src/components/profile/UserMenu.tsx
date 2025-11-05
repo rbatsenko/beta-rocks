@@ -124,8 +124,8 @@ export function UserMenu({
                   <User className="h-5 w-5 text-muted-foreground" />
                 </AvatarFallback>
               </Avatar>
-              {/* Language flag badge */}
-              <span className="absolute -bottom-0.5 -right-0.5 text-xs leading-none bg-background rounded-full border border-border shadow-sm w-4 h-4 flex items-center justify-center">
+              {/* Language flag badge - only on mobile where language selector is hidden */}
+              <span className="md:hidden absolute -bottom-0.5 -right-0.5 text-xs leading-none bg-background rounded-full border border-border shadow-sm w-4 h-4 flex items-center justify-center">
                 {currentFlag}
               </span>
             </Button>
@@ -172,8 +172,8 @@ export function UserMenu({
             <User className="h-5 w-5 text-muted-foreground" />
           </AvatarFallback>
         </Avatar>
-        {/* Language flag badge */}
-        <span className="absolute -bottom-0.5 -right-0.5 text-xs leading-none bg-background rounded-full border border-border shadow-sm w-4 h-4 flex items-center justify-center">
+        {/* Language flag badge - only on mobile where language selector is hidden */}
+        <span className="md:hidden absolute -bottom-0.5 -right-0.5 text-xs leading-none bg-background rounded-full border border-border shadow-sm w-4 h-4 flex items-center justify-center">
           {currentFlag}
         </span>
       </Button>
@@ -187,8 +187,8 @@ export function UserMenu({
           <Avatar className="h-10 w-10">
             <AvatarFallback className="bg-orange-500 text-white">{getInitials()}</AvatarFallback>
           </Avatar>
-          {/* Language flag badge */}
-          <span className="absolute -bottom-0.5 -right-0.5 text-xs leading-none bg-background rounded-full border border-border shadow-sm w-4 h-4 flex items-center justify-center">
+          {/* Language flag badge - only on mobile where language selector is hidden */}
+          <span className="md:hidden absolute -bottom-0.5 -right-0.5 text-xs leading-none bg-background rounded-full border border-border shadow-sm w-4 h-4 flex items-center justify-center">
             {currentFlag}
           </span>
         </Button>
