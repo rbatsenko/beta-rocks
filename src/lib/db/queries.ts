@@ -24,7 +24,13 @@ export async function fetchCrags(limit = 50, offset = 0) {
 export async function fetchCragById(id: string) {
   const { data, error } = await supabase.from("crags").select("*").eq("id", id).single();
 
-  if (error) throw error;
+  if (error) {
+    // Don't throw on "not found" errors, return null instead
+    if (error.code === "PGRST116") {
+      return null;
+    }
+    throw error;
+  }
   return data;
 }
 
@@ -269,7 +275,13 @@ export async function fetchSectorsByCrag(cragId: string) {
 export async function fetchSectorById(id: string) {
   const { data, error } = await supabase.from("sectors").select("*").eq("id", id).single();
 
-  if (error) throw error;
+  if (error) {
+    // Don't throw on "not found" errors, return null instead
+    if (error.code === "PGRST116") {
+      return null;
+    }
+    throw error;
+  }
   return data;
 }
 
@@ -318,7 +330,13 @@ export async function fetchRoutesBySector(sectorId: string) {
 export async function fetchRouteById(id: string) {
   const { data, error } = await supabase.from("routes").select("*").eq("id", id).single();
 
-  if (error) throw error;
+  if (error) {
+    // Don't throw on "not found" errors, return null instead
+    if (error.code === "PGRST116") {
+      return null;
+    }
+    throw error;
+  }
   return data;
 }
 
