@@ -125,7 +125,7 @@ export function UserMenu({
                 </AvatarFallback>
               </Avatar>
               {/* Language flag badge - only on mobile where language selector is hidden */}
-              <span className="md:hidden absolute -bottom-0.5 -right-0.5 text-xs leading-none bg-background rounded-full border border-border shadow-sm w-4 h-4 flex items-center justify-center">
+              <span className="md:hidden absolute -bottom-0.5 -right-0.5 text-xs leading-none bg-background rounded-full shadow-sm w-4 h-4 flex items-center justify-center">
                 {currentFlag}
               </span>
             </Button>
@@ -173,7 +173,7 @@ export function UserMenu({
           </AvatarFallback>
         </Avatar>
         {/* Language flag badge - only on mobile where language selector is hidden */}
-        <span className="md:hidden absolute -bottom-0.5 -right-0.5 text-xs leading-none bg-background rounded-full border border-border shadow-sm w-4 h-4 flex items-center justify-center">
+        <span className="md:hidden absolute -bottom-0.5 -right-0.5 text-xs leading-none bg-background rounded-full shadow-sm w-4 h-4 flex items-center justify-center">
           {currentFlag}
         </span>
       </Button>
@@ -188,7 +188,7 @@ export function UserMenu({
             <AvatarFallback className="bg-orange-500 text-white">{getInitials()}</AvatarFallback>
           </Avatar>
           {/* Language flag badge - only on mobile where language selector is hidden */}
-          <span className="md:hidden absolute -bottom-0.5 -right-0.5 text-xs leading-none bg-background rounded-full border border-border shadow-sm w-4 h-4 flex items-center justify-center">
+          <span className="md:hidden absolute -bottom-0.5 -right-0.5 text-xs leading-none bg-background rounded-full shadow-sm w-4 h-4 flex items-center justify-center">
             {currentFlag}
           </span>
         </Button>
