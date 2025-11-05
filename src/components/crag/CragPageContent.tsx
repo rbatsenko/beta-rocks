@@ -22,11 +22,13 @@ import {
   CloudRain,
   Sunrise,
   Sunset,
+  Search,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
 import { ConditionsDetailContent } from "@/components/conditions/ConditionsDetailContent";
 import { ReportCard } from "@/components/reports/ReportCard";
 import { ReportDialog } from "@/components/reports/ReportDialog";
@@ -184,6 +186,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
   const [newSyncKey, setNewSyncKey] = useState<string>("");
   const [pendingAction, setPendingAction] = useState<"add" | "remove" | "report" | null>(null);
   const [currentUserProfileId, setCurrentUserProfileId] = useState<string | null>(null);
+  const [sectorSearchQuery, setSectorSearchQuery] = useState<string>("");
 
   // React Query for conditions (client-side)
   // Use sector ID if viewing a sector with valid coordinates, otherwise use crag ID
@@ -239,6 +242,18 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
       return aExpired ? 1 : -1; // Expired go to bottom
     });
   }, [reports, selectedCategory]);
+
+  // Filter sectors by search query
+  const filteredSectors = useMemo(() => {
+    if (!sectorSearchQuery.trim()) {
+      return sectors;
+    }
+    const query = sectorSearchQuery.toLowerCase();
+    return sectors.filter((sector) =>
+      sector.name.toLowerCase().includes(query) ||
+      (sector.description && sector.description.toLowerCase().includes(query))
+    );
+  }, [sectors, sectorSearchQuery]);
 
   // Format location details
   const locationParts = [crag.village, crag.municipality, crag.state, crag.country].filter(Boolean);
@@ -475,7 +490,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                               router.push(`/location/${crag.slug}`);
                             }
                           }}
-                          className="hover:text-orange-500 hover:underline transition-colors cursor-pointer"
+                          className="hover:text-orange-500 transition-colors cursor-pointer"
                         >
                           {crag.name}
                         </button>
@@ -862,29 +877,54 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
           <>
             <Separator className="my-8" />
             <div>
-              <h2 className="text-2xl font-semibold mb-4">{t("cragPage.sectors")}</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {sectors.map((sector) => (
-                  <Card
-                    key={sector.id}
-                    className="cursor-pointer transition-all hover:shadow-md hover:border-orange-500/50"
-                    onClick={() => {
-                      if (sector.slug) {
-                        router.push(`/location/${sector.slug}`);
-                      }
-                    }}
-                  >
-                    <CardContent className="p-4">
-                      <h3 className="font-semibold mb-1">{sector.name}</h3>
-                      {sector.description && (
-                        <p className="text-sm text-muted-foreground line-clamp-2">
-                          {sector.description}
-                        </p>
-                      )}
-                    </CardContent>
-                  </Card>
-                ))}
+              <div className="flex items-center justify-between gap-4 mb-4">
+                <h2 className="text-2xl font-semibold">
+                  {t("cragPage.sectors")}
+                  {filteredSectors.length !== sectors.length && (
+                    <span className="text-base text-muted-foreground font-normal ml-2">
+                      ({filteredSectors.length}/{sectors.length})
+                    </span>
+                  )}
+                </h2>
+                <div className="relative w-full max-w-xs">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    type="text"
+                    placeholder={t("cragPage.searchSectors") || "Search sectors..."}
+                    value={sectorSearchQuery}
+                    onChange={(e) => setSectorSearchQuery(e.target.value)}
+                    className="pl-9"
+                  />
+                </div>
               </div>
+              {filteredSectors.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {filteredSectors.map((sector) => (
+                    <Card
+                      key={sector.id}
+                      className="cursor-pointer transition-all hover:shadow-md hover:border-orange-500/50"
+                      onClick={() => {
+                        if (sector.slug) {
+                          router.push(`/location/${sector.slug}`);
+                        }
+                      }}
+                    >
+                      <CardContent className="p-4">
+                        <h3 className="font-semibold mb-1">{sector.name}</h3>
+                        {sector.description && (
+                          <p className="text-sm text-muted-foreground line-clamp-2">
+                            {sector.description}
+                          </p>
+                        )}
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-8 text-muted-foreground">
+                  {t("cragPage.noSectorsFound") || "No sectors found matching your search."}
+                </div>
+              )}
             </div>
           </>
         )}
