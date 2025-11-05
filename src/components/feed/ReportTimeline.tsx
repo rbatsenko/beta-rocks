@@ -73,55 +73,17 @@ export function ReportTimeline({
   const { t, i18n } = useClientTranslation("common");
   const dateLocale = getDateFnsLocale(i18n.language);
 
-  // State management
-  const [reports, setReports] = useState<ReportWithDetails[]>(initialReports);
+  // State management - use prop directly, parent manages the reports state
+  const reports = initialReports;
   const [filterMode, setFilterMode] = useState<FilterMode>("all");
   const [isLive, setIsLive] = useState(false);
-  const [newReportIds, setNewReportIds] = useState<Set<string>>(new Set());
-
-  /**
-   * Helper function to add a new report to the timeline
-   * This will be used when implementing realtime subscriptions
-   */
-  const addNewReportToTimeline = (report: ReportWithDetails) => {
-    setReports((prev) => {
-      // Add to beginning and maintain max 100 reports
-      const updated = [report, ...prev].slice(0, 100);
-
-      // Mark as new for animation
-      setNewReportIds((ids) => new Set(ids).add(report.id));
-
-      // Remove new marker after animation completes
-      setTimeout(() => {
-        setNewReportIds((ids) => {
-          const updated = new Set(ids);
-          updated.delete(report.id);
-          return updated;
-        });
-      }, 1000);
-
-      return updated;
-    });
-  };
 
   // Setup live indicator when onNewReport callback is provided
   useEffect(() => {
     if (onNewReport) {
       setIsLive(true);
-      // Parent can call onNewReport callback to add reports via addNewReportToTimeline
     }
   }, [onNewReport]);
-
-  // Placeholder for future realtime integration
-  // To implement realtime updates:
-  // 1. Subscribe to Supabase realtime in parent component
-  // 2. When new report arrives, call: onNewReport(report)
-  // 3. This component will handle the animation and state update via addNewReportToTimeline
-  useEffect(() => {
-    // When implemented, this would be called from parent like:
-    // <ReportTimeline onNewReport={(report) => addNewReportToTimeline(report)} />
-    // For now, addNewReportToTimeline is ready but unused until realtime is implemented
-  }, [addNewReportToTimeline]);
 
   // Filter reports based on selected mode
   const filteredReports = useMemo(() => {
@@ -282,12 +244,7 @@ export function ReportTimeline({
               {/* Reports in Group */}
               <div className="space-y-4">
                 {group.reports.map((report) => (
-                  <div
-                    key={report.id}
-                    className={`
-                      ${newReportIds.has(report.id) ? "animate-slide-in-top" : ""}
-                    `}
-                  >
+                  <div key={report.id}>
                     {/* Crag/Sector Header - More Prominent */}
                     {report.crag && report.crag.slug && (
                       <div className="mb-2">
