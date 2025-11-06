@@ -5,14 +5,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap } from "re
 import { LatLng, Icon } from "leaflet";
 import { Search, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
+import { Command, CommandGroup, CommandItem, CommandList } from "@/components/ui/command";
 import { searchLocation, type NominatimResponse } from "@/lib/external-apis/nominatim";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import "leaflet/dist/leaflet.css";

@@ -11,7 +11,7 @@ const ConvertSchema = z.object({
  * POST /api/crags/[id]/convert
  * Convert a crag to a sector or vice versa
  */
-export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     if (!isSupabaseConfigured) {
       console.error("Supabase environment variables are not configured.");
@@ -25,14 +25,14 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
       return NextResponse.json(
         {
           error: "Validation failed",
-          details: validationResult.error.errors,
+          details: validationResult.error.issues,
         },
         { status: 400 }
       );
     }
 
     const { action, parentCragId } = validationResult.data;
-    const cragId = params.id;
+    const { id: cragId } = await params;
     const supabase = getSupabaseClient();
 
     // Validate parentCragId if action requires it

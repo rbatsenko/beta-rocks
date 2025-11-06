@@ -88,7 +88,7 @@ export async function reverseGeocode(params: ReverseGeocodeParams): Promise<Nomi
  * Tries multiple fields in priority order
  */
 export function extractCragName(response: NominatimResponse): string {
-  const { address, type } = response;
+  const { address } = response;
 
   // Try climbing-specific fields first
   if (address.rock) return address.rock;

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Mountain, Loader2, X, Check, AlertTriangle, ExternalLink } from "lucide-react";
+import { Mountain, Loader2, Check, AlertTriangle, ExternalLink } from "lucide-react";
 import { LatLng } from "leaflet";
 import { Button } from "@/components/ui/button";
 import {
@@ -28,6 +28,8 @@ import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useToast } from "@/hooks/use-toast";
 import { CragLocationPicker } from "@/components/map/CragLocationPicker";
 import { getAllCountryCodes, getCountryName, getCountryFlag } from "@/lib/utils/countries-client";
+import { getUserProfile, type UserProfile } from "@/lib/auth/sync-key";
+import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal";
 
 interface AddCragModalProps {
   open: boolean;
@@ -92,7 +94,9 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
   const [nearbyCrags, setNearbyCrags] = useState<
     Array<{ id: string; name: string; lat: number; lon: number; slug: string; distance?: number }>
   >([]);
-  const [checkingNearby, setCheckingNearby] = useState(false);
+
+  // Profile creation
+  const [showProfileModal, setShowProfileModal] = useState(false);
 
   // Check for nearby crags when position changes
   useEffect(() => {
@@ -102,7 +106,6 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
     }
 
     const checkNearby = async () => {
-      setCheckingNearby(true);
       try {
         const response = await fetch(
           `/api/crags/check-nearby?lat=${position.lat}&lon=${position.lng}&radius=500`
@@ -112,8 +115,6 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
       } catch (error) {
         console.error("Failed to check nearby crags:", error);
         setNearbyCrags([]);
-      } finally {
-        setCheckingNearby(false);
       }
     };
 
@@ -182,7 +183,24 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
     );
   };
 
+  const handleProfileCreated = (_profile: UserProfile) => {
+    setShowProfileModal(false);
+    // After profile creation, retry the submission
+    handleSubmitWithProfile();
+  };
+
   const handleSubmit = async () => {
+    // Check for profile first
+    const profile = getUserProfile();
+    if (!profile) {
+      setShowProfileModal(true);
+      return;
+    }
+
+    await handleSubmitWithProfile();
+  };
+
+  const handleSubmitWithProfile = async () => {
     // Validation
     if (!name.trim()) {
       toast({
@@ -263,113 +281,169 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
   const canSubmit = name.trim() && position && country && !submitting && !geocoding;
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-4xl max-h-[90vh] p-0">
-        <ScrollArea className="max-h-[90vh]">
-          <div className="p-6">
-            <DialogHeader>
-              <DialogTitle className="flex items-center gap-2">
-                <Mountain className="h-5 w-5 text-orange-500" />
-                {t("addCragModal.title")}
-              </DialogTitle>
-              <DialogDescription>{t("addCragModal.subtitle")}</DialogDescription>
-            </DialogHeader>
+    <>
+      <Dialog open={open} onOpenChange={onOpenChange}>
+        <DialogContent className="max-w-4xl max-h-[90vh] p-0">
+          <ScrollArea className="max-h-[90vh]">
+            <div className="p-6">
+              <DialogHeader>
+                <DialogTitle className="flex items-center gap-2">
+                  <Mountain className="h-5 w-5 text-orange-500" />
+                  {t("addCragModal.title")}
+                </DialogTitle>
+                <DialogDescription>{t("addCragModal.subtitle")}</DialogDescription>
+              </DialogHeader>
 
-            <div className="mt-6 space-y-6">
-              {/* Map Section */}
-              <div>
-                <Label className="text-base font-semibold mb-2">
-                  {t("addCragModal.mapLabel")} *
-                </Label>
-                <p className="text-sm text-muted-foreground mb-3">{t("addCragModal.mapHelp")}</p>
-                <CragLocationPicker
-                  position={position}
-                  onPositionChange={setPosition}
-                  loading={geocoding}
-                  nearbyCrags={nearbyCrags}
-                />
-                {position && (
-                  <p className="text-xs text-muted-foreground mt-2">
-                    {t("addCragModal.coordinates")}: {position.lat.toFixed(6)},{" "}
-                    {position.lng.toFixed(6)}
-                  </p>
-                )}
+              <div className="mt-6 space-y-6">
+                {/* Map Section */}
+                <div>
+                  <Label className="text-base font-semibold mb-2">
+                    {t("addCragModal.mapLabel")} *
+                  </Label>
+                  <p className="text-sm text-muted-foreground mb-3">{t("addCragModal.mapHelp")}</p>
+                  <CragLocationPicker
+                    position={position}
+                    onPositionChange={setPosition}
+                    loading={geocoding}
+                    nearbyCrags={nearbyCrags}
+                  />
+                  {position && (
+                    <p className="text-xs text-muted-foreground mt-2">
+                      {t("addCragModal.coordinates")}: {position.lat.toFixed(6)},{" "}
+                      {position.lng.toFixed(6)}
+                    </p>
+                  )}
 
-                {/* Nearby Crags Warning */}
-                {nearbyCrags.length > 0 && (
-                  <div className="mt-4 p-4 bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
-                    <div className="flex items-start gap-3">
-                      <AlertTriangle className="h-5 w-5 text-yellow-600 dark:text-yellow-500 flex-shrink-0 mt-0.5" />
-                      <div className="flex-1 min-w-0">
-                        <h4 className="text-sm font-semibold text-yellow-900 dark:text-yellow-100 mb-1">
-                          {t("addCragModal.nearbyCragsWarning.title")}
-                        </h4>
-                        <p className="text-sm text-yellow-800 dark:text-yellow-200 mb-3">
-                          {t("addCragModal.nearbyCragsWarning.message", {
-                            count: nearbyCrags.length,
-                          })}
-                        </p>
-                        <div className="space-y-2">
-                          {nearbyCrags.map((crag) => (
-                            <div
-                              key={crag.id}
-                              className="flex items-center justify-between gap-2 p-2 bg-white dark:bg-gray-900 rounded border border-yellow-200 dark:border-yellow-800"
-                            >
-                              <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
-                                  {crag.name}
-                                </p>
-                                {crag.distance !== undefined && (
-                                  <p className="text-xs text-gray-500 dark:text-gray-400">
-                                    {crag.distance}m {t("addCragModal.nearbyCragsWarning.away")}
-                                  </p>
-                                )}
-                              </div>
-                              <a
-                                href={`/location/${crag.slug}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-1 text-xs font-medium text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 whitespace-nowrap"
+                  {/* Nearby Crags Warning */}
+                  {nearbyCrags.length > 0 && (
+                    <div className="mt-4 p-4 bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+                      <div className="flex items-start gap-3">
+                        <AlertTriangle className="h-5 w-5 text-yellow-600 dark:text-yellow-500 flex-shrink-0 mt-0.5" />
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-sm font-semibold text-yellow-900 dark:text-yellow-100 mb-1">
+                            {t("addCragModal.nearbyCragsWarning.title")}
+                          </h4>
+                          <p className="text-sm text-yellow-800 dark:text-yellow-200 mb-3">
+                            {t("addCragModal.nearbyCragsWarning.message", {
+                              count: nearbyCrags.length,
+                            })}
+                          </p>
+                          <div className="space-y-2">
+                            {nearbyCrags.map((crag) => (
+                              <div
+                                key={crag.id}
+                                className="flex items-center justify-between gap-2 p-2 bg-white dark:bg-gray-900 rounded border border-yellow-200 dark:border-yellow-800"
                               >
-                                {t("addCragModal.nearbyCragsWarning.view")}
-                                <ExternalLink className="h-3 w-3" />
-                              </a>
-                            </div>
-                          ))}
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
+                                    {crag.name}
+                                  </p>
+                                  {crag.distance !== undefined && (
+                                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                                      {crag.distance}m {t("addCragModal.nearbyCragsWarning.away")}
+                                    </p>
+                                  )}
+                                </div>
+                                <a
+                                  href={`/location/${crag.slug}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="flex items-center gap-1 text-xs font-medium text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 whitespace-nowrap"
+                                >
+                                  {t("addCragModal.nearbyCragsWarning.view")}
+                                  <ExternalLink className="h-3 w-3" />
+                                </a>
+                              </div>
+                            ))}
+                          </div>
+                          <p className="text-xs text-yellow-700 dark:text-yellow-300 mt-3">
+                            {t("addCragModal.nearbyCragsWarning.proceed")}
+                          </p>
                         </div>
-                        <p className="text-xs text-yellow-700 dark:text-yellow-300 mt-3">
-                          {t("addCragModal.nearbyCragsWarning.proceed")}
-                        </p>
                       </div>
                     </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Basic Info */}
-              <div className="space-y-4">
-                <div>
-                  <Label htmlFor="name">{t("addCragModal.form.name")} *</Label>
-                  <Input
-                    id="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder={t("addCragModal.form.namePlaceholder")}
-                    className="mt-1.5"
-                  />
+                  )}
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                {/* Basic Info */}
+                <div className="space-y-4">
                   <div>
-                    <Label htmlFor="country">{t("addCragModal.form.country")} *</Label>
-                    <Select value={country} onValueChange={setCountry}>
+                    <Label htmlFor="name">{t("addCragModal.form.name")} *</Label>
+                    <Input
+                      id="name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder={t("addCragModal.form.namePlaceholder")}
+                      className="mt-1.5"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="country">{t("addCragModal.form.country")} *</Label>
+                      <Select value={country} onValueChange={setCountry}>
+                        <SelectTrigger className="mt-1.5">
+                          <SelectValue placeholder={t("addCragModal.form.countryPlaceholder")} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {COUNTRIES.map((code) => (
+                            <SelectItem key={code} value={code}>
+                              {getCountryFlag(code)} {getCountryName(code)}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="state">{t("addCragModal.form.state")}</Label>
+                      <Input
+                        id="state"
+                        value={state}
+                        onChange={(e) => setState(e.target.value)}
+                        placeholder={t("addCragModal.form.statePlaceholder")}
+                        className="mt-1.5"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="municipality">{t("addCragModal.form.municipality")}</Label>
+                      <Input
+                        id="municipality"
+                        value={municipality}
+                        onChange={(e) => setMunicipality(e.target.value)}
+                        placeholder={t("addCragModal.form.municipalityPlaceholder")}
+                        className="mt-1.5"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="village">{t("addCragModal.form.village")}</Label>
+                      <Input
+                        id="village"
+                        value={village}
+                        onChange={(e) => setVillage(e.target.value)}
+                        placeholder={t("addCragModal.form.villagePlaceholder")}
+                        className="mt-1.5"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Climbing Details */}
+                <div className="space-y-4">
+                  <div>
+                    <Label htmlFor="rockType">{t("addCragModal.form.rockType")}</Label>
+                    <Select value={rockType} onValueChange={setRockType}>
                       <SelectTrigger className="mt-1.5">
-                        <SelectValue placeholder={t("addCragModal.form.countryPlaceholder")} />
+                        <SelectValue placeholder={t("addCragModal.form.rockTypePlaceholder")} />
                       </SelectTrigger>
                       <SelectContent>
-                        {COUNTRIES.map((code) => (
-                          <SelectItem key={code} value={code}>
-                            {getCountryFlag(code)} {getCountryName(code)}
+                        {ROCK_TYPES.map((type) => (
+                          <SelectItem key={type} value={type}>
+                            {t(`addCragModal.rockTypes.${type}`)}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -377,139 +451,101 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
                   </div>
 
                   <div>
-                    <Label htmlFor="state">{t("addCragModal.form.state")}</Label>
-                    <Input
-                      id="state"
-                      value={state}
-                      onChange={(e) => setState(e.target.value)}
-                      placeholder={t("addCragModal.form.statePlaceholder")}
-                      className="mt-1.5"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="municipality">{t("addCragModal.form.municipality")}</Label>
-                    <Input
-                      id="municipality"
-                      value={municipality}
-                      onChange={(e) => setMunicipality(e.target.value)}
-                      placeholder={t("addCragModal.form.municipalityPlaceholder")}
-                      className="mt-1.5"
-                    />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="village">{t("addCragModal.form.village")}</Label>
-                    <Input
-                      id="village"
-                      value={village}
-                      onChange={(e) => setVillage(e.target.value)}
-                      placeholder={t("addCragModal.form.villagePlaceholder")}
-                      className="mt-1.5"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Climbing Details */}
-              <div className="space-y-4">
-                <div>
-                  <Label htmlFor="rockType">{t("addCragModal.form.rockType")}</Label>
-                  <Select value={rockType} onValueChange={setRockType}>
-                    <SelectTrigger className="mt-1.5">
-                      <SelectValue placeholder={t("addCragModal.form.rockTypePlaceholder")} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {ROCK_TYPES.map((type) => (
-                        <SelectItem key={type} value={type}>
-                          {t(`addCragModal.rockTypes.${type}`)}
-                        </SelectItem>
+                    <Label>{t("addCragModal.form.aspects")}</Label>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      {t("addCragModal.form.aspectsHelp")}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {ASPECTS.map((aspect) => (
+                        <Badge
+                          key={aspect.value}
+                          variant={selectedAspects.includes(aspect.value) ? "default" : "outline"}
+                          className="cursor-pointer"
+                          onClick={() => toggleAspect(aspect.value)}
+                        >
+                          {selectedAspects.includes(aspect.value) && (
+                            <Check className="h-3 w-3 mr-1" />
+                          )}
+                          {aspect.label}
+                        </Badge>
                       ))}
-                    </SelectContent>
-                  </Select>
-                </div>
+                    </div>
+                  </div>
 
-                <div>
-                  <Label>{t("addCragModal.form.aspects")}</Label>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    {t("addCragModal.form.aspectsHelp")}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {ASPECTS.map((aspect) => (
-                      <Badge
-                        key={aspect.value}
-                        variant={selectedAspects.includes(aspect.value) ? "default" : "outline"}
-                        className="cursor-pointer"
-                        onClick={() => toggleAspect(aspect.value)}
-                      >
-                        {selectedAspects.includes(aspect.value) && (
-                          <Check className="h-3 w-3 mr-1" />
-                        )}
-                        {aspect.label}
-                      </Badge>
-                    ))}
+                  <div>
+                    <Label>{t("addCragModal.form.climbingTypes")}</Label>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      {t("addCragModal.form.climbingTypesHelp")}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {CLIMBING_TYPES.map((type) => (
+                        <Badge
+                          key={type}
+                          variant={selectedClimbingTypes.includes(type) ? "default" : "outline"}
+                          className="cursor-pointer"
+                          onClick={() => toggleClimbingType(type)}
+                        >
+                          {selectedClimbingTypes.includes(type) && (
+                            <Check className="h-3 w-3 mr-1" />
+                          )}
+                          {t(`addCragModal.climbingTypes.${type}`)}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="description">{t("addCragModal.form.description")}</Label>
+                    <Textarea
+                      id="description"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                      placeholder={t("addCragModal.form.descriptionPlaceholder")}
+                      className="mt-1.5 min-h-[100px]"
+                      maxLength={5000}
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {description.length} / 5000
+                    </p>
                   </div>
                 </div>
 
-                <div>
-                  <Label>{t("addCragModal.form.climbingTypes")}</Label>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    {t("addCragModal.form.climbingTypesHelp")}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {CLIMBING_TYPES.map((type) => (
-                      <Badge
-                        key={type}
-                        variant={selectedClimbingTypes.includes(type) ? "default" : "outline"}
-                        className="cursor-pointer"
-                        onClick={() => toggleClimbingType(type)}
-                      >
-                        {selectedClimbingTypes.includes(type) && <Check className="h-3 w-3 mr-1" />}
-                        {t(`addCragModal.climbingTypes.${type}`)}
-                      </Badge>
-                    ))}
-                  </div>
+                {/* Actions */}
+                <div className="flex justify-end gap-3 pt-4 border-t">
+                  <Button
+                    variant="outline"
+                    onClick={() => onOpenChange(false)}
+                    disabled={submitting}
+                  >
+                    {t("addCragModal.cancel")}
+                  </Button>
+                  <Button onClick={handleSubmit} disabled={!canSubmit}>
+                    {submitting ? (
+                      <>
+                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                        {t("addCragModal.submitting")}
+                      </>
+                    ) : (
+                      <>
+                        <Mountain className="h-4 w-4 mr-2" />
+                        {t("addCragModal.submit")}
+                      </>
+                    )}
+                  </Button>
                 </div>
-
-                <div>
-                  <Label htmlFor="description">{t("addCragModal.form.description")}</Label>
-                  <Textarea
-                    id="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    placeholder={t("addCragModal.form.descriptionPlaceholder")}
-                    className="mt-1.5 min-h-[100px]"
-                    maxLength={5000}
-                  />
-                  <p className="text-xs text-muted-foreground mt-1">{description.length} / 5000</p>
-                </div>
-              </div>
-
-              {/* Actions */}
-              <div className="flex justify-end gap-3 pt-4 border-t">
-                <Button variant="outline" onClick={() => onOpenChange(false)} disabled={submitting}>
-                  {t("addCragModal.cancel")}
-                </Button>
-                <Button onClick={handleSubmit} disabled={!canSubmit}>
-                  {submitting ? (
-                    <>
-                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                      {t("addCragModal.submitting")}
-                    </>
-                  ) : (
-                    <>
-                      <Mountain className="h-4 w-4 mr-2" />
-                      {t("addCragModal.submit")}
-                    </>
-                  )}
-                </Button>
               </div>
             </div>
-          </div>
-        </ScrollArea>
-      </DialogContent>
-    </Dialog>
+          </ScrollArea>
+        </DialogContent>
+      </Dialog>
+
+      {/* Profile Creation Modal */}
+      <ProfileCreationModal
+        open={showProfileModal}
+        onOpenChange={setShowProfileModal}
+        trigger="manual"
+        onCreated={handleProfileCreated}
+      />
+    </>
   );
 }

@@ -252,7 +252,15 @@ export type Database = {
           updated_at?: string | null;
           village?: string | null;
         };
-        Relationships: [];
+        Relationships: [
+          {
+            foreignKeyName: "crags_parent_crag_id_fkey";
+            columns: ["parent_crag_id"];
+            isOneToOne: false;
+            referencedRelation: "crags";
+            referencedColumns: ["id"];
+          },
+        ];
       };
       reports: {
         Row: {
@@ -331,13 +339,6 @@ export type Database = {
             referencedRelation: "routes";
             referencedColumns: ["id"];
           },
-          {
-            foreignKeyName: "reports_sector_id_fkey";
-            columns: ["sector_id"];
-            isOneToOne: false;
-            referencedRelation: "sectors";
-            referencedColumns: ["id"];
-          },
         ];
       };
       routes: {
@@ -386,77 +387,7 @@ export type Database = {
           source?: string | null;
           updated_at?: string | null;
         };
-        Relationships: [
-          {
-            foreignKeyName: "routes_sector_id_fkey";
-            columns: ["sector_id"];
-            isOneToOne: false;
-            referencedRelation: "sectors";
-            referencedColumns: ["id"];
-          },
-        ];
-      };
-      sectors: {
-        Row: {
-          aspect: number | null;
-          crag_id: string;
-          created_at: string | null;
-          description: string | null;
-          id: string;
-          last_synced_at: string | null;
-          lat: number | null;
-          lon: number | null;
-          name: string;
-          osm_id: string | null;
-          osm_type: string | null;
-          slug: string;
-          slug_id: number | null;
-          source: string | null;
-          updated_at: string | null;
-        };
-        Insert: {
-          aspect?: number | null;
-          crag_id: string;
-          created_at?: string | null;
-          description?: string | null;
-          id?: string;
-          last_synced_at?: string | null;
-          lat?: number | null;
-          lon?: number | null;
-          name: string;
-          osm_id?: string | null;
-          osm_type?: string | null;
-          slug: string;
-          slug_id?: number | null;
-          source?: string | null;
-          updated_at?: string | null;
-        };
-        Update: {
-          aspect?: number | null;
-          crag_id?: string;
-          created_at?: string | null;
-          description?: string | null;
-          id?: string;
-          last_synced_at?: string | null;
-          lat?: number | null;
-          lon?: number | null;
-          name?: string;
-          osm_id?: string | null;
-          osm_type?: string | null;
-          slug?: string;
-          slug_id?: number | null;
-          source?: string | null;
-          updated_at?: string | null;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "sectors_crag_id_fkey";
-            columns: ["crag_id"];
-            isOneToOne: false;
-            referencedRelation: "crags";
-            referencedColumns: ["id"];
-          },
-        ];
+        Relationships: [];
       };
       user_favorites: {
         Row: {
@@ -635,6 +566,17 @@ export type Database = {
           sector_id: string;
           text: string;
           updated_at: string;
+        }[];
+      };
+      find_nearby_crags: {
+        Args: { radius_meters?: number; search_lat: number; search_lon: number };
+        Returns: {
+          distance_meters: number;
+          id: string;
+          lat: number;
+          lon: number;
+          name: string;
+          slug: string;
         }[];
       };
       generate_unique_slug: {

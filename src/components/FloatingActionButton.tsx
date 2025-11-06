@@ -9,11 +9,9 @@ import { cn } from "@/lib/utils";
 
 interface FloatingActionButtonProps {
   onAddReport?: () => void;
-  cragId?: string;
-  cragName?: string;
 }
 
-export function FloatingActionButton({ onAddReport, cragId, cragName }: FloatingActionButtonProps) {
+export function FloatingActionButton({ onAddReport }: FloatingActionButtonProps) {
   const { t } = useClientTranslation("common");
   const [expanded, setExpanded] = useState(false);
   const [showAddCragModal, setShowAddCragModal] = useState(false);
