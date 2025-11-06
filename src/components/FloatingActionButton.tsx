@@ -30,7 +30,7 @@ export function FloatingActionButton({ onAddReport }: FloatingActionButtonProps)
 
   return (
     <>
-      <div className="fixed bottom-24 right-6 md:bottom-8 md:right-8 z-50 flex flex-col items-end gap-3">
+      <div className="fixed bottom-24 right-4 md:bottom-8 md:right-8 z-50 flex flex-col items-end gap-3">
         {/* Main FAB button */}
         <Button
           size="icon"
