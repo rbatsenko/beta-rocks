@@ -111,7 +111,7 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="p-0 gap-0 max-w-full sm:max-w-2xl h-[100dvh] sm:h-auto max-h-[100dvh] sm:max-h-[600px] m-0 sm:m-4 flex flex-col top-0 sm:top-[50%] translate-y-0 sm:translate-y-[-50%] rounded-b-lg sm:rounded-lg">
+      <DialogContent className="p-0 gap-0 max-w-full sm:max-w-2xl h-[calc(100dvh-1rem)] sm:h-auto max-h-[calc(100dvh-1rem)] sm:max-h-[600px] m-0 sm:m-4 flex flex-col top-2 sm:top-[50%] translate-y-0 sm:translate-y-[-50%] rounded-lg">
         <DialogHeader className="sr-only">
           <DialogTitle>{t("search.title")}</DialogTitle>
           <DialogDescription>{t("search.description")}</DialogDescription>
