@@ -17,6 +17,7 @@ import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal"
 import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog";
 import { UserMenuContent } from "@/components/profile/UserMenuContent";
 import { UserReportsDialog } from "@/components/profile/UserReportsDialog";
+import { AddCragModal } from "@/components/dialogs/AddCragModal";
 import type { UserProfile as UserProfileType } from "@/lib/auth/sync-key";
 
 // Map locale codes to flag emojis
@@ -76,6 +77,7 @@ export function UserMenu({
   const [showProfileCreated, setShowProfileCreated] = useState(false);
   const [newSyncKey, setNewSyncKey] = useState<string>("");
   const [showReportsDialog, setShowReportsDialog] = useState(false);
+  const [showAddCragModal, setShowAddCragModal] = useState(false);
 
   // Get flag emoji for current language
   const currentFlag = localeFlagMap[i18n.language] || "🌐";
@@ -146,6 +148,7 @@ export function UserMenu({
               onAboutClick={onAboutClick}
               onClearChatClick={onClearChatClick}
               isClearChatDisabled={isClearChatDisabled}
+              onAddCragClick={() => setShowAddCragModal(true)}
             />
           </DropdownMenuContent>
         </DropdownMenu>
@@ -163,6 +166,8 @@ export function UserMenu({
           syncKey={newSyncKey}
           completedAction=""
         />
+
+        <AddCragModal open={showAddCragModal} onOpenChange={setShowAddCragModal} />
       </>
     );
   }
@@ -214,9 +219,11 @@ export function UserMenu({
           onAboutClick={onAboutClick}
           onClearChatClick={onClearChatClick}
           isClearChatDisabled={isClearChatDisabled}
+          onAddCragClick={() => setShowAddCragModal(true)}
         />
       </DropdownMenuContent>
       <UserReportsDialog open={showReportsDialog} onOpenChange={setShowReportsDialog} />
+      <AddCragModal open={showAddCragModal} onOpenChange={setShowAddCragModal} />
     </DropdownMenu>
   );
 }
