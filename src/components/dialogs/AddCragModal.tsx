@@ -283,8 +283,8 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
   return (
     <>
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="max-w-4xl max-h-[90vh] p-0">
-          <ScrollArea className="max-h-[90vh]">
+        <DialogContent className="max-w-full sm:max-w-4xl h-[100dvh] sm:h-auto max-h-[100dvh] sm:max-h-[90vh] m-0 sm:m-4 p-0 rounded-none sm:rounded-lg">
+          <ScrollArea className="h-[100dvh] sm:h-auto max-h-[100dvh] sm:max-h-[90vh]">
             <div className="p-6">
               <DialogHeader>
                 <DialogTitle className="flex items-center gap-2">

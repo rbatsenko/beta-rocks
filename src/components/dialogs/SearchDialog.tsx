@@ -111,7 +111,7 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="p-0 gap-0 max-h-[80vh] sm:max-h-[600px] sm:max-w-2xl flex flex-col">
+      <DialogContent className="p-0 gap-0 max-w-full sm:max-w-2xl h-[100dvh] sm:h-auto max-h-[100dvh] sm:max-h-[600px] m-0 sm:m-4 flex flex-col top-0 sm:top-[50%] translate-y-0 sm:translate-y-[-50%] rounded-b-lg sm:rounded-lg">
         <DialogHeader className="sr-only">
           <DialogTitle>{t("search.title")}</DialogTitle>
           <DialogDescription>{t("search.description")}</DialogDescription>
@@ -127,7 +127,7 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
               <Loader2 className="h-4 w-4 animate-spin opacity-50" />
             </div>
           )}
-          <CommandList className="max-h-[calc(80vh-8rem)] sm:max-h-[450px] flex-1">
+          <CommandList className="max-h-[calc(100dvh-4rem)] sm:max-h-[450px] flex-1">
             {!query && (
               <CommandEmpty className="py-6 text-center text-sm text-muted-foreground">
                 {t("search.typeToSearch")}
