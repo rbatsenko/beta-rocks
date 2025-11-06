@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Pencil, Loader2, Search, Mountain, ArrowRight } from "lucide-react";
+import { Pencil, Loader2, Search, Mountain, ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -214,10 +214,14 @@ export function EditCragDialog({
                 {!currentlyIsSector && (
                   <Button
                     variant={action === "make-sector" ? "default" : "outline"}
-                    className={`w-full justify-start ${action === "make-sector" ? "bg-orange-500 hover:bg-orange-600" : ""}`}
+                    className={`w-full justify-start ${action === "make-sector" ? "bg-orange-500 hover:bg-orange-600 text-white ring-2 ring-orange-600" : ""}`}
                     onClick={() => setAction("make-sector")}
                   >
-                    <ArrowRight className="h-4 w-4 mr-2" />
+                    {action === "make-sector" ? (
+                      <Check className="h-4 w-4 mr-2" />
+                    ) : (
+                      <ArrowRight className="h-4 w-4 mr-2" />
+                    )}
                     {t("editCragDialog.convertToSector")}
                   </Button>
                 )}
@@ -225,18 +229,26 @@ export function EditCragDialog({
                   <>
                     <Button
                       variant={action === "change-parent" ? "default" : "outline"}
-                      className={`w-full justify-start ${action === "change-parent" ? "bg-orange-500 hover:bg-orange-600" : ""}`}
+                      className={`w-full justify-start ${action === "change-parent" ? "bg-orange-500 hover:bg-orange-600 text-white ring-2 ring-orange-600" : ""}`}
                       onClick={() => setAction("change-parent")}
                     >
-                      <ArrowRight className="h-4 w-4 mr-2" />
+                      {action === "change-parent" ? (
+                        <Check className="h-4 w-4 mr-2" />
+                      ) : (
+                        <ArrowRight className="h-4 w-4 mr-2" />
+                      )}
                       {t("editCragDialog.changeParent")}
                     </Button>
                     <Button
                       variant={action === "make-crag" ? "default" : "outline"}
-                      className={`w-full justify-start ${action === "make-crag" ? "bg-orange-500 hover:bg-orange-600" : ""}`}
+                      className={`w-full justify-start ${action === "make-crag" ? "bg-orange-500 hover:bg-orange-600 text-white ring-2 ring-orange-600" : ""}`}
                       onClick={() => setAction("make-crag")}
                     >
-                      <ArrowRight className="h-4 w-4 mr-2" />
+                      {action === "make-crag" ? (
+                        <Check className="h-4 w-4 mr-2" />
+                      ) : (
+                        <ArrowRight className="h-4 w-4 mr-2" />
+                      )}
                       {t("editCragDialog.convertToCrag")}
                     </Button>
                   </>
