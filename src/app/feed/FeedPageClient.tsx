@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ReportTimeline } from "@/components/feed/ReportTimeline";
 import { useReportRealtime } from "@/hooks/useReportRealtime";
@@ -32,6 +32,13 @@ export default function FeedPageClient({
   const [reports, setReports] = useState<ReportWithDetails[]>(initialReports);
   const [isInitializing, setIsInitializing] = useState(true);
   const queryClient = useQueryClient();
+
+  // Pre-populate React Query cache with initial reports
+  useEffect(() => {
+    initialReports.forEach((report) => {
+      queryClient.setQueryData(["report", report.id], report);
+    });
+  }, [initialReports, queryClient]);
 
   // Handle new report from realtime subscription
   const handleNewReport = async (newReport: Tables<"reports">) => {
