@@ -42,7 +42,20 @@
     "noCragsFound": "Neboli nájdené žiadne skaly. Skúste iný vyhľadávací výraz.",
     "heading": "Skaly",
     "toSelect": "pre výber",
-    "toClose": "pre zatvorenie"
+    "toClose": "pre zatvorenie",
+    "notSeeing": "Nevidíte svoju skalu?",
+    "addMissingHere": "Pridajte ju sem"
+  },
+  "cragLocationPicker": {
+    "loadingMap": "Načítava sa mapa...",
+    "searchPlaceholder": "Vyhľadať lokalitu (napr. 'Slovenský raj, Spišská Nová Ves')",
+    "noLocationsFound": "Nenašli sa žiadne lokality",
+    "loadingLocationData": "Načítavajú sa údaje o lokalite...",
+    "clickToSet": "Kliknite na mapu pre nastavenie polohy skaly",
+    "nearbyCragsFound": "Nájdená {{count}} blízka skala",
+    "nearbyCragsFound_other": "Nájdených {{count}} blízkych skál",
+    "clickMarkersToView": "Kliknite na značky pre zobrazenie existujúcich skál",
+    "coordinates": "Súradnice"
   },
   "conditions": {
     "rating": "Hodnotenie",
@@ -707,8 +720,39 @@
     "deleteError": "Vymazanie správy zlyhalo",
     "deleteErrorDescription": "Niečo sa pokazilo. Skúste to prosím znova."
   },
+  "editCragDialog": {
+    "title": "Upraviť Skalu",
+    "subtitle": "Previesť túto skalu na sektor alebo zmeniť nadradený prvok",
+    "currentStatus": "Aktuálny Stav",
+    "crag": "Skala",
+    "sector": "Sektor",
+    "currentParent": "Aktuálny nadradený prvok",
+    "chooseAction": "Vybrať Akciu",
+    "convertToSector": "Previesť na Sektor",
+    "convertToCrag": "Previesť na Skalu",
+    "changeParent": "Zmeniť Nadradenú Skalu",
+    "selectParentCrag": "Vyberte Nadradenú Skalu",
+    "selectNewParent": "Vyberte Novú Nadradenú Skalu",
+    "searchForParent": "Vyhľadajte nadradenú skalu, ku ktorej chcete priradiť tento sektor",
+    "searchPlaceholder": "Hľadať nadradenú skalu...",
+    "noCragsFound": "Neboli nájdené žiadne skaly",
+    "change": "Zmeniť",
+    "save": "Uložiť Zmeny",
+    "saving": "Ukladám...",
+    "success": "Skala bola úspešne aktualizovaná",
+    "convertedToCrag": "Úspešne prevedené na skalu",
+    "convertedToSector": "Úspešne prevedené na sektor",
+    "errors": {
+      "parentRequired": "Nadradená skala je vyžadovaná",
+      "parentRequiredDesc": "Vyberte prosím nadradenú skalu pre tento sektor",
+      "failed": "Aktualizácia zlyhala",
+      "failedDesc": "Skalu sa nepodarilo aktualizovať. Skúste to prosím znova."
+    }
+  },
   "cragPage": {
     "askAI": "Opýtať sa AI",
+    "edit": "Upraviť",
+    "editCrag": "Upraviť podrobnosti skaly",
     "currentConditions": "Aktuálne podmienky",
     "sectors": "Sektory",
     "searchSectors": "Hľadať sektory...",

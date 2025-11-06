@@ -22,6 +22,9 @@ import type { UserProfile as UserProfileType } from "@/lib/auth/sync-key";
 // Map locale codes to flag emojis
 const localeFlagMap: Record<string, string> = {
   en: "🇬🇧",
+  "en-AU": "🇦🇺",
+  "en-CA": "🇨🇦",
+  "en-GB": "🇬🇧",
   "bg-BG": "🇧🇬",
   "ca-AD": "🇦🇩",
   "cs-CZ": "🇨🇿",

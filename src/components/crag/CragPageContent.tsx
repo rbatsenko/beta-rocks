@@ -23,6 +23,7 @@ import {
   Sunrise,
   Sunset,
   Search,
+  Pencil,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -35,6 +36,7 @@ import { ReportDialog } from "@/components/reports/ReportDialog";
 import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal";
 import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog";
 import { ConfirmDialog } from "@/components/dialogs/ConfirmDialog";
+import { EditCragDialog } from "@/components/dialogs/EditCragDialog";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
 import { useRouter } from "next/navigation";
@@ -75,6 +77,10 @@ interface CragPageContentProps {
     municipality: string | null;
     village: string | null;
     description: string | null;
+    parent_crag_id?: string | null;
+    parent_crag?: {
+      name: string;
+    } | null;
   };
   sectors: any[];
   currentSector?: any | null;
@@ -188,6 +194,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
   const [pendingAction, setPendingAction] = useState<"add" | "remove" | "report" | null>(null);
   const [currentUserProfileId, setCurrentUserProfileId] = useState<string | null>(null);
   const [sectorSearchQuery, setSectorSearchQuery] = useState<string>("");
+  const [showEditDialog, setShowEditDialog] = useState(false);
 
   // React Query for conditions (client-side)
   // Use sector ID if viewing a sector with valid coordinates, otherwise use crag ID
@@ -528,6 +535,15 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                 )}
               </div>
               <div className="flex items-center gap-2 shrink-0">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowEditDialog(true)}
+                  title={t("cragPage.editCrag")}
+                >
+                  <Pencil className="h-4 w-4" />
+                  <span className="hidden sm:inline">{t("cragPage.edit")}</span>
+                </Button>
                 <Button
                   variant="outline"
                   size="sm"
@@ -998,6 +1014,20 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
         cancelText={t("dialog.cancel")}
         onConfirm={confirmDeleteReport}
         variant="destructive"
+      />
+
+      {/* Edit Crag Dialog */}
+      <EditCragDialog
+        open={showEditDialog}
+        onOpenChange={setShowEditDialog}
+        crag={{
+          id: crag.id,
+          name: crag.name,
+          slug: crag.slug,
+          parent_crag_id: crag.parent_crag_id,
+          parent_crag_name: crag.parent_crag?.name,
+        }}
+        currentlyIsSector={!!crag.parent_crag_id}
       />
     </div>
   );

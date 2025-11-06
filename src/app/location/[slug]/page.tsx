@@ -3,7 +3,6 @@ import { Metadata } from "next";
 import { CragPageContent } from "@/components/crag/CragPageContent";
 import {
   fetchCragBySlug,
-  fetchSectorBySlug,
   fetchCragById,
   fetchSectorsByCrag,
   findCragByCoordinates,
@@ -39,13 +38,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   // Try direct slug lookup first
   crag = await fetchCragBySlug(slug);
 
-  // If not found as crag, try as sector slug
-  if (!crag) {
-    sector = await fetchSectorBySlug(slug);
-    if (sector) {
-      // Fetch parent crag for sector context
-      crag = await fetchCragById(sector.crag_id);
-    }
+  // Check if the found crag is actually a sector (has parent_crag_id)
+  if (crag && crag.parent_crag_id) {
+    sector = crag;
+    // Fetch the parent crag
+    crag = await fetchCragById(crag.parent_crag_id);
   }
 
   // Fallback to coordinate-based lookup
@@ -118,20 +115,19 @@ export default async function LocationPage({ params }: PageProps) {
   let crag = null;
   let sector = null;
 
-  // Try direct slug lookup first (new system)
+  // Try direct slug lookup first
   crag = await fetchCragBySlug(slug);
 
-  // If not found as crag, try as sector slug
-  if (!crag) {
-    sector = await fetchSectorBySlug(slug);
-    if (sector) {
-      console.log(`[LocationPage] Found sector: ${sector.name}, fetching parent crag`);
-      // Fetch parent crag for sector context
-      crag = await fetchCragById(sector.crag_id);
-    }
+  // Check if the found crag is actually a sector (has parent_crag_id)
+  if (crag && crag.parent_crag_id) {
+    console.log(`[LocationPage] Found sector (crag with parent): ${crag.name}`);
+    sector = crag;
+    // Fetch the parent crag
+    crag = await fetchCragById(crag.parent_crag_id);
+    console.log(`[LocationPage] Parent crag: ${crag?.name}`);
   }
 
-  // Fallback to old coordinate-based slug parsing for backward compatibility
+  // Fallback to coordinate-based slug parsing
   if (!crag) {
     const coords = parseCoordinatesFromSlug(slug);
     if (coords) {

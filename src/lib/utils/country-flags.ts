@@ -1,83 +1,35 @@
 /**
  * Convert country name to emoji flag
  * Uses ISO 3166-1 alpha-2 codes and regional indicator symbols
+ * Now powered by i18n-iso-countries for complete coverage of all 249 countries
  */
 
-const COUNTRY_TO_ISO: Record<string, string> = {
-  // Europe
-  France: "FR",
-  Spain: "ES",
-  Italy: "IT",
-  Germany: "DE",
-  Switzerland: "CH",
-  Austria: "AT",
-  "United Kingdom": "GB",
-  Poland: "PL",
-  "Czech Republic": "CZ",
-  Slovenia: "SI",
-  Croatia: "HR",
-  Greece: "GR",
-  Norway: "NO",
-  Sweden: "SE",
-  Portugal: "PT",
-  Belgium: "BE",
-  Netherlands: "NL",
-  Denmark: "DK",
-  Finland: "FI",
-  Iceland: "IS",
-  Ireland: "IE",
-  Slovakia: "SK",
-  Romania: "RO",
-  Bulgaria: "BG",
-  Serbia: "RS",
-  Montenegro: "ME",
-  Albania: "AL",
-  "North Macedonia": "MK",
-  "Bosnia and Herzegovina": "BA",
+import countries from "i18n-iso-countries";
 
-  // Americas
-  "United States": "US",
+// Register English locale (we'll use English names as the source)
+// Note: In browser environments, this needs to be done client-side
+if (typeof window === "undefined") {
+  // Server-side: require the locale file
+  countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
+}
+
+/**
+ * Legacy mapping for backwards compatibility
+ * Used for common name variations and aliases
+ */
+const COUNTRY_NAME_ALIASES: Record<string, string> = {
   USA: "US",
-  Canada: "CA",
-  Mexico: "MX",
-  Brazil: "BR",
-  Argentina: "AR",
-  Chile: "CL",
-  Peru: "PE",
-  Colombia: "CO",
-  Venezuela: "VE",
-  Ecuador: "EC",
-  Bolivia: "BO",
-
-  // Asia
-  China: "CN",
-  Japan: "JP",
-  Thailand: "TH",
-  Vietnam: "VN",
-  India: "IN",
-  Nepal: "NP",
-  Pakistan: "PK",
-  Turkey: "TR",
-  Jordan: "JO",
-  Lebanon: "LB",
-  Israel: "IL",
+  UK: "GB",
+  "Great Britain": "GB",
+  England: "GB",
+  Scotland: "GB",
+  Wales: "GB",
+  "Northern Ireland": "GB",
   "South Korea": "KR",
-  Malaysia: "MY",
-  Indonesia: "ID",
-  Philippines: "PH",
-
-  // Oceania
-  Australia: "AU",
-  "New Zealand": "NZ",
-
-  // Africa
-  "South Africa": "ZA",
-  Morocco: "MA",
-  Egypt: "EG",
-  Tunisia: "TN",
-  Kenya: "KE",
-  Madagascar: "MG",
-  Namibia: "NA",
+  "North Korea": "KP",
+  Holland: "NL",
+  "Czech Republic": "CZ",
+  Czechia: "CZ",
 };
 
 /**
@@ -105,8 +57,14 @@ export function getCountryFlag(country: string | null | undefined): string {
     return isoToFlag(country);
   }
 
-  // Otherwise, look up the code from the country name
-  const isoCode = COUNTRY_TO_ISO[country];
+  // Check aliases first for common variations
+  const alias = COUNTRY_NAME_ALIASES[country];
+  if (alias) {
+    return isoToFlag(alias);
+  }
+
+  // Use i18n-iso-countries to convert name to code
+  const isoCode = countries.getAlpha2Code(country, "en");
   if (!isoCode) return "";
 
   return isoToFlag(isoCode);
@@ -123,23 +81,39 @@ export function getCountryFlagWithFallback(country: string | null | undefined): 
 }
 
 /**
- * Inverse mapping: ISO code to country name
- * Created once at module load time for performance
+ * Convert ISO 3166-1 alpha-2 code to country name
+ * @param isoCode - ISO country code (e.g., "US", "FR")
+ * @param language - Language code (default: "en")
+ * @returns Full country name or the original code if not found
  */
-const ISO_TO_COUNTRY: Record<string, string> = {};
-for (const [countryName, code] of Object.entries(COUNTRY_TO_ISO)) {
-  // Skip duplicate entries (like "USA" which maps to same code as "United States")
-  if (!ISO_TO_COUNTRY[code]) {
-    ISO_TO_COUNTRY[code] = countryName;
-  }
+export function getCountryName(
+  isoCode: string | null | undefined,
+  language: string = "en"
+): string {
+  if (!isoCode) return "";
+
+  // Use i18n-iso-countries to get the official country name
+  const name = countries.getName(isoCode.toUpperCase(), language, { select: "official" });
+  return name || isoCode;
 }
 
 /**
- * Convert ISO 3166-1 alpha-2 code to country name
- * @param isoCode - ISO country code (e.g., "US", "FR")
- * @returns Full country name or the original code if not found
+ * Get all country codes (ISO 3166-1 alpha-2)
+ * @returns Array of all country codes sorted alphabetically
  */
-export function getCountryName(isoCode: string | null | undefined): string {
-  if (!isoCode) return "";
-  return ISO_TO_COUNTRY[isoCode.toUpperCase()] || isoCode;
+export function getAllCountryCodes(): string[] {
+  const codes = countries.getAlpha2Codes();
+  return Object.keys(codes).sort();
+}
+
+/**
+ * Get all countries as { code, name } objects
+ * @param language - Language code for country names (default: "en")
+ * @returns Array of country objects with code and name
+ */
+export function getAllCountries(language: string = "en"): Array<{ code: string; name: string }> {
+  const names = countries.getNames(language, { select: "official" });
+  return Object.entries(names)
+    .map(([code, name]) => ({ code, name }))
+    .sort((a, b) => a.name.localeCompare(b.name));
 }

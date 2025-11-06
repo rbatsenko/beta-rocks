@@ -197,6 +197,7 @@ export type Database = {
           name: string;
           osm_id: string | null;
           osm_type: string | null;
+          parent_crag_id: string | null;
           rock_type: string | null;
           slug: string;
           slug_id: number;
@@ -219,6 +220,7 @@ export type Database = {
           name: string;
           osm_id?: string | null;
           osm_type?: string | null;
+          parent_crag_id?: string | null;
           rock_type?: string | null;
           slug: string;
           slug_id?: number;
@@ -241,6 +243,7 @@ export type Database = {
           name?: string;
           osm_id?: string | null;
           osm_type?: string | null;
+          parent_crag_id?: string | null;
           rock_type?: string | null;
           slug?: string;
           slug_id?: number;

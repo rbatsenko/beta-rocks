@@ -12,6 +12,7 @@ import { SearchDialog } from "@/components/dialogs/SearchDialog";
 import { FeaturesDialog } from "@/components/dialogs/FeaturesDialog";
 import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal";
 import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog";
+import { FloatingActionButton } from "@/components/FloatingActionButton";
 import { getUserProfile, type UserProfile } from "@/lib/auth/sync-key";
 
 export function RootLayoutClient({ children }: { children: React.ReactNode }) {
@@ -97,6 +98,9 @@ export function RootLayoutClient({ children }: { children: React.ReactNode }) {
   // Show header on location pages and feed page
   const showHeader = pathname?.startsWith("/location") || pathname === "/feed";
 
+  // Show FAB on most pages except sync page
+  const showFAB = pathname !== "/sync";
+
   return (
     <>
       {showHeader && (
@@ -113,6 +117,9 @@ export function RootLayoutClient({ children }: { children: React.ReactNode }) {
         />
       )}
       {children}
+
+      {/* Floating Action Button */}
+      {showFAB && <FloatingActionButton />}
 
       {/* Global dialogs - available everywhere */}
       <SearchDialog open={searchDialogOpen} onOpenChange={setSearchDialogOpen} />

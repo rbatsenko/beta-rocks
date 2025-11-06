@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { Mountain, Loader2 } from "lucide-react";
+import { Mountain, Loader2, Plus } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -19,8 +19,10 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { getCountryFlag } from "@/lib/utils/country-flags";
+import { AddCragModal } from "@/components/dialogs/AddCragModal";
 
 interface SearchResult {
   id: string;
@@ -56,6 +58,7 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(false);
+  const [showAddCragModal, setShowAddCragModal] = useState(false);
   const router = useRouter();
   const { t } = useClientTranslation();
 
@@ -101,6 +104,11 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
     router.push(`/location/${slug}`);
   };
 
+  const handleAddNewCrag = () => {
+    onOpenChange(false);
+    setShowAddCragModal(true);
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="p-0 gap-0 max-h-[80vh] sm:max-h-[600px] sm:max-w-2xl flex flex-col">
@@ -132,55 +140,72 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
               </div>
             )}
             {query && results.length === 0 && !loading && (
-              <CommandEmpty className="py-6 text-center text-sm">
-                {t("search.noCragsFound")}
-              </CommandEmpty>
+              <div className="py-6 text-center">
+                <CommandEmpty className="text-sm mb-4">{t("search.noCragsFound")}</CommandEmpty>
+                <Button variant="outline" size="sm" onClick={handleAddNewCrag} className="gap-2">
+                  <Plus className="h-4 w-4" />
+                  {t("search.addNewCrag")}
+                </Button>
+              </div>
             )}
             {results.length > 0 && !loading && (
-              <CommandGroup heading={t("search.heading")}>
-                {results.map((result) => (
-                  <CommandItem
-                    key={result.id}
-                    value={result.id}
-                    onSelect={() => handleSelect(result.slug)}
-                    className="cursor-pointer"
-                  >
-                    <Mountain className="mr-2 h-4 w-4 text-orange-500" />
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <span className="font-medium truncate">
-                          {result.name}
-                          {result.resultType === "sector" && result.parentCragName && (
-                            <span className="text-muted-foreground font-normal">
-                              {" "}
-                              • {result.parentCragName}
-                            </span>
+              <>
+                <CommandGroup heading={t("search.heading")}>
+                  {results.map((result) => (
+                    <CommandItem
+                      key={result.id}
+                      value={result.id}
+                      onSelect={() => handleSelect(result.slug)}
+                      className="cursor-pointer"
+                    >
+                      <Mountain className="mr-2 h-4 w-4 text-orange-500" />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <span className="font-medium truncate">
+                            {result.name}
+                            {result.resultType === "sector" && result.parentCragName && (
+                              <span className="text-muted-foreground font-normal">
+                                {" "}
+                                • {result.parentCragName}
+                              </span>
+                            )}
+                          </span>
+                          {result.rockType && (
+                            <Badge
+                              variant="outline"
+                              className="text-xs shrink-0 border-orange-500/30 text-orange-700 dark:text-orange-400"
+                            >
+                              {t(`rockTypes.${result.rockType.toLowerCase()}`)}
+                            </Badge>
                           )}
-                        </span>
-                        {result.rockType && (
-                          <Badge
-                            variant="outline"
-                            className="text-xs shrink-0 border-orange-500/30 text-orange-700 dark:text-orange-400"
-                          >
-                            {t(`rockTypes.${result.rockType.toLowerCase()}`)}
-                          </Badge>
-                        )}
-                        {result.reportCount > 0 && (
-                          <Badge variant="secondary" className="text-xs shrink-0">
-                            {result.reportCount} 💬
-                          </Badge>
-                        )}
+                          {result.reportCount > 0 && (
+                            <Badge variant="secondary" className="text-xs shrink-0">
+                              {result.reportCount} 💬
+                            </Badge>
+                          )}
+                        </div>
+                        <div className="text-xs text-muted-foreground truncate flex items-center gap-1.5">
+                          <span>{result.location}</span>
+                          {getCountryFlag(result.country) && (
+                            <span className="text-sm">{getCountryFlag(result.country)}</span>
+                          )}
+                        </div>
                       </div>
-                      <div className="text-xs text-muted-foreground truncate flex items-center gap-1.5">
-                        <span>{result.location}</span>
-                        {getCountryFlag(result.country) && (
-                          <span className="text-sm">{getCountryFlag(result.country)}</span>
-                        )}
-                      </div>
-                    </div>
-                  </CommandItem>
-                ))}
-              </CommandGroup>
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+                <div className="px-4 py-3 border-t">
+                  <button
+                    onClick={handleAddNewCrag}
+                    className="w-full text-sm text-muted-foreground hover:text-foreground transition-colors text-center"
+                  >
+                    {t("search.notSeeing")}{" "}
+                    <span className="text-orange-600 dark:text-orange-500 font-medium">
+                      {t("search.addMissingHere")}
+                    </span>
+                  </button>
+                </div>
+              </>
             )}
           </CommandList>
         </Command>
@@ -195,6 +220,11 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
           {t("search.toClose")}
         </div>
       </DialogContent>
+      <AddCragModal
+        open={showAddCragModal}
+        onOpenChange={setShowAddCragModal}
+        initialName={query}
+      />
     </Dialog>
   );
 }

@@ -431,13 +431,13 @@ const tools = {
           if (supabaseUrl && supabaseKey) {
             const supabase = createClient(supabaseUrl, supabaseKey);
 
-            // Check sectors first (more specific than crags)
-            const { data: sectors } = await supabase
-              .from("sectors")
+            // Query crags table (sectors are now stored with parent_crag_id)
+            const { data: crags } = await supabase
+              .from("crags")
               .select(
                 `
                 *,
-                parent_crag:crags!sectors_crag_id_fkey(
+                parent_crag:crags!parent_crag_id(
                   name,
                   description,
                   rock_type,
@@ -451,21 +451,22 @@ const tools = {
               .eq("lon", lon)
               .limit(1);
 
-            if (sectors && sectors.length > 0) {
-              const sector = sectors[0];
-              console.log("[get_conditions] Found exact sector match:", {
-                name: sector.name,
-                hasParent: !!sector.parent_crag,
-              });
+            if (crags && crags.length > 0) {
+              const cragOrSector = crags[0];
 
-              // Enrich with parent crag data
-              if (sector.parent_crag) {
-                const parent = Array.isArray(sector.parent_crag)
-                  ? sector.parent_crag[0]
-                  : sector.parent_crag;
+              // Check if this is a sector (has parent_crag_id)
+              if (cragOrSector.parent_crag_id && cragOrSector.parent_crag) {
+                console.log("[get_conditions] Found exact sector match:", {
+                  name: cragOrSector.name,
+                  hasParent: true,
+                });
+
+                const parent = Array.isArray(cragOrSector.parent_crag)
+                  ? cragOrSector.parent_crag[0]
+                  : cragOrSector.parent_crag;
 
                 // Combine sector + parent descriptions (parent has safety warnings)
-                const sectorDesc = sector.description || "";
+                const sectorDesc = cragOrSector.description || "";
                 const parentDesc = parent.description || "";
                 description =
                   sectorDesc && parentDesc
@@ -496,35 +497,28 @@ const tools = {
                   hasDescription: !!description,
                   hasAspects: !!aspects,
                 });
-              }
-            } else {
-              // Try crags table if no sector match
-              const { data: crags } = await supabase
-                .from("crags")
-                .select("*")
-                .eq("lat", lat)
-                .eq("lon", lon)
-                .limit(1);
-
-              if (crags && crags.length > 0) {
-                const crag = crags[0];
+              } else {
+                // It's a crag (no parent)
                 console.log("[get_conditions] Found exact crag match:", {
-                  name: crag.name,
+                  name: cragOrSector.name,
                 });
 
-                description = crag.description || undefined;
-                if ((!detectedRockType || detectedRockType === "unknown") && crag.rock_type) {
-                  detectedRockType = crag.rock_type as RockType;
+                description = cragOrSector.description || undefined;
+                if (
+                  (!detectedRockType || detectedRockType === "unknown") &&
+                  cragOrSector.rock_type
+                ) {
+                  detectedRockType = cragOrSector.rock_type as RockType;
                 }
-                if (crag.climbing_types && crag.climbing_types.length > 0) {
-                  climbingTypes = crag.climbing_types;
+                if (cragOrSector.climbing_types && cragOrSector.climbing_types.length > 0) {
+                  climbingTypes = cragOrSector.climbing_types;
                 }
-                if (crag.aspects && crag.aspects.length > 0) {
-                  aspects = crag.aspects;
+                if (cragOrSector.aspects && cragOrSector.aspects.length > 0) {
+                  aspects = cragOrSector.aspects;
                 }
                 // Capture crag slug for URL generation
-                if (crag.slug) {
-                  cragSlug = crag.slug;
+                if (cragOrSector.slug) {
+                  cragSlug = cragOrSector.slug;
                 }
               }
             }

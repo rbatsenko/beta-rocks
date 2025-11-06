@@ -22,7 +22,11 @@ export async function fetchCrags(limit = 50, offset = 0) {
 }
 
 export async function fetchCragById(id: string) {
-  const { data, error } = await supabase.from("crags").select("*").eq("id", id).single();
+  const { data, error } = await supabase
+    .from("crags")
+    .select("*, parent_crag:crags!parent_crag_id(name)")
+    .eq("id", id)
+    .single();
 
   if (error) {
     // Don't throw on "not found" errors, return null instead
@@ -35,7 +39,11 @@ export async function fetchCragById(id: string) {
 }
 
 export async function fetchCragBySlug(slug: string) {
-  const { data, error } = await supabase.from("crags").select("*").eq("slug", slug).single();
+  const { data, error } = await supabase
+    .from("crags")
+    .select("*, parent_crag:crags!parent_crag_id(name)")
+    .eq("slug", slug)
+    .single();
 
   if (error) {
     // Don't throw on "not found" errors, return null instead
@@ -262,56 +270,15 @@ export async function findOrCreateCrag(params: {
 // ==================== SECTORS ====================
 
 export async function fetchSectorsByCrag(cragId: string) {
+  // Fetch child crags (sectors) where parent_crag_id matches
   const { data, error } = await supabase
-    .from("sectors")
+    .from("crags")
     .select("*")
-    .eq("crag_id", cragId)
+    .eq("parent_crag_id", cragId)
     .order("name");
 
   if (error) throw error;
-  return data;
-}
-
-export async function fetchSectorById(id: string) {
-  const { data, error } = await supabase.from("sectors").select("*").eq("id", id).single();
-
-  if (error) {
-    // Don't throw on "not found" errors, return null instead
-    if (error.code === "PGRST116") {
-      return null;
-    }
-    throw error;
-  }
-  return data;
-}
-
-export async function fetchSectorBySlug(slug: string) {
-  const { data, error } = await supabase.from("sectors").select("*").eq("slug", slug).single();
-
-  if (error) {
-    // Don't throw on "not found" errors, return null instead
-    if (error.code === "PGRST116") {
-      return null;
-    }
-    throw error;
-  }
-  return data;
-}
-
-export async function createSector(sector: TablesInsert<"sectors">) {
-  const { data, error } = await supabase
-    .from("sectors")
-    .insert({
-      id: uuidv4(),
-      ...sector,
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
-    })
-    .select()
-    .single();
-
-  if (error) throw error;
-  return data;
+  return data || [];
 }
 
 // ==================== ROUTES ====================
@@ -710,18 +677,6 @@ export async function fetchCragWithDetails(cragId: string) {
   return {
     ...crag,
     sectors,
-    reports,
-  };
-}
-
-export async function fetchSectorWithDetails(sectorId: string) {
-  const sector = await fetchSectorById(sectorId);
-  const routes = await fetchRoutesBySector(sectorId);
-  const reports = await fetchReportsBySector(sectorId);
-
-  return {
-    ...sector,
-    routes,
     reports,
   };
 }

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { fetchCragById, fetchSectorById } from "@/lib/db/queries";
+import { fetchCragById } from "@/lib/db/queries";
 import { getWeatherForecast } from "@/lib/external-apis/open-meteo";
 import { computeConditions } from "@/lib/conditions/conditions.service";
 import type { RockType } from "@/lib/conditions/conditions.service";
@@ -16,39 +16,37 @@ export async function GET(
     const { cragId } = await params;
     console.log(`[API /conditions/${cragId}] Processing request`);
 
-    // Try to fetch as sector first, then fallback to crag
-    let sector = await fetchSectorById(cragId);
-    let crag = null;
+    // Fetch the crag/sector (sectors are now stored in crags table with parent_crag_id)
+    const cragOrSector = await fetchCragById(cragId);
+
+    if (!cragOrSector) {
+      return NextResponse.json({ error: "Crag or sector not found" }, { status: 404 });
+    }
+
     let lat: number;
     let lon: number;
     let rockType: string | null;
     let name: string;
 
-    if (sector && sector.lat !== null && sector.lon !== null) {
-      // It's a sector with valid coordinates - use sector coordinates
-      // But we need the parent crag for rock type
-      crag = await fetchCragById(sector.crag_id);
-      if (!crag) {
+    // Check if this is a sector (has parent_crag_id)
+    if (cragOrSector.parent_crag_id) {
+      // It's a sector - fetch parent crag for rock type
+      const parentCrag = await fetchCragById(cragOrSector.parent_crag_id);
+      if (!parentCrag) {
         return NextResponse.json({ error: "Parent crag not found" }, { status: 404 });
       }
 
-      lat = sector.lat;
-      lon = sector.lon;
-      rockType = crag.rock_type; // Use parent crag's rock type
-      name = sector.name;
+      lat = cragOrSector.lat;
+      lon = cragOrSector.lon;
+      rockType = parentCrag.rock_type; // Use parent crag's rock type
+      name = cragOrSector.name;
       console.log(`[API /conditions/${cragId}] Using sector coordinates: ${lat}, ${lon}`);
     } else {
-      // Not a sector or sector has no coordinates, try as crag
-      crag = await fetchCragById(cragId);
-
-      if (!crag) {
-        return NextResponse.json({ error: "Crag or sector not found" }, { status: 404 });
-      }
-
-      lat = crag.lat;
-      lon = crag.lon;
-      rockType = crag.rock_type;
-      name = crag.name;
+      // It's a crag
+      lat = cragOrSector.lat;
+      lon = cragOrSector.lon;
+      rockType = cragOrSector.rock_type;
+      name = cragOrSector.name;
       console.log(`[API /conditions/${cragId}] Using crag coordinates: ${lat}, ${lon}`);
     }
 

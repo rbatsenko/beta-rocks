@@ -42,7 +42,20 @@
     "noCragsFound": "Niciun perete găsit. Încercați un alt termen de căutare.",
     "heading": "Perete",
     "toSelect": "pentru a selecta",
-    "toClose": "pentru a închide"
+    "toClose": "pentru a închide",
+    "notSeeing": "Nu-ți vezi pereții?",
+    "addMissingHere": "Adaugă-l aici"
+  },
+  "cragLocationPicker": {
+    "loadingMap": "Se încarcă harta...",
+    "searchPlaceholder": "Caută o locație (ex. 'Cheile Turzii, Cluj')",
+    "noLocationsFound": "Nu s-au găsit locații",
+    "loadingLocationData": "Se încarcă datele locației...",
+    "clickToSet": "Faceți clic pe hartă pentru a seta locația peretelui",
+    "nearbyCragsFound": "{{count}} perete apropiat găsit",
+    "nearbyCragsFound_other": "{{count}} pereți apropiați găsiți",
+    "clickMarkersToView": "Faceți clic pe marcatori pentru a vizualiza pereții existenți",
+    "coordinates": "Coordonate"
   },
   "conditions": {
     "rating": "Evaluare",
@@ -707,8 +720,39 @@
     "deleteError": "Ștergerea raportului a eșuat",
     "deleteErrorDescription": "Ceva nu a mers bine. Te rugăm să încerci din nou."
   },
+  "editCragDialog": {
+    "title": "Editare Stâncă",
+    "subtitle": "Convertiți această stâncă într-un sector sau schimbați elementul părinte",
+    "currentStatus": "Stare Curentă",
+    "crag": "Stâncă",
+    "sector": "Sector",
+    "currentParent": "Element părinte curent",
+    "chooseAction": "Alegeți Acțiune",
+    "convertToSector": "Convertește în Sector",
+    "convertToCrag": "Convertește în Stâncă",
+    "changeParent": "Schimbă Stânca Părinte",
+    "selectParentCrag": "Selectați Stânca Părinte",
+    "selectNewParent": "Selectați Noua Stâncă Părinte",
+    "searchForParent": "Căutați stânca părinte la care să atribuiți acest sector",
+    "searchPlaceholder": "Căutare stâncă părinte...",
+    "noCragsFound": "Nu s-au găsit stânci",
+    "change": "Schimbă",
+    "save": "Salvează Modificările",
+    "saving": "Se salvează...",
+    "success": "Stânca a fost actualizată cu succes",
+    "convertedToCrag": "Convertită în stâncă cu succes",
+    "convertedToSector": "Convertită în sector cu succes",
+    "errors": {
+      "parentRequired": "Stânca părinte este necesară",
+      "parentRequiredDesc": "Te rugăm să selectezi o stâncă părinte pentru acest sector",
+      "failed": "Actualizare eșuată",
+      "failedDesc": "Nu s-a putut actualiza stânca. Te rugăm să încerci din nou."
+    }
+  },
   "cragPage": {
     "askAI": "Întreabă AI",
+    "edit": "Editează",
+    "editCrag": "Editează detaliile stâncii",
     "currentConditions": "Condiții actuale",
     "sectors": "Sectoare",
     "searchSectors": "Căutare sectoare...",

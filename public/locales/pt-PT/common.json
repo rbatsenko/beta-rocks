@@ -42,7 +42,20 @@
     "noCragsFound": "Nenhum setor encontrado. Tente outro termo de pesquisa.",
     "heading": "Setores",
     "toSelect": "para selecionar",
-    "toClose": "para fechar"
+    "toClose": "para fechar",
+    "notSeeing": "Não está vendo seu setor?",
+    "addMissingHere": "Adicione aqui"
+  },
+  "cragLocationPicker": {
+    "loadingMap": "A carregar mapa...",
+    "searchPlaceholder": "Pesquisar localização (ex. 'Peneda-Gerês, Braga')",
+    "noLocationsFound": "Nenhuma localização encontrada",
+    "loadingLocationData": "A carregar dados de localização...",
+    "clickToSet": "Clique no mapa para definir a localização do setor",
+    "nearbyCragsFound": "{{count}} setor próximo encontrado",
+    "nearbyCragsFound_other": "{{count}} setores próximos encontrados",
+    "clickMarkersToView": "Clique nos marcadores para ver setores existentes",
+    "coordinates": "Coordenadas"
   },
   "conditions": {
     "rating": "Classificação",
@@ -707,8 +720,39 @@
     "deleteError": "Falha ao eliminar relatório",
     "deleteErrorDescription": "Algo correu mal. Por favor, tenta novamente."
   },
+  "editCragDialog": {
+    "title": "Editar Falésia",
+    "subtitle": "Converter esta falésia num setor ou alterar o elemento principal",
+    "currentStatus": "Estado Atual",
+    "crag": "Falésia",
+    "sector": "Setor",
+    "currentParent": "Elemento principal atual",
+    "chooseAction": "Escolher Ação",
+    "convertToSector": "Converter em Setor",
+    "convertToCrag": "Converter em Falésia",
+    "changeParent": "Alterar Falésia Principal",
+    "selectParentCrag": "Selecionar Falésia Principal",
+    "selectNewParent": "Selecionar Nova Falésia Principal",
+    "searchForParent": "Procure a falésia principal à qual atribuir este setor",
+    "searchPlaceholder": "Procurar falésia principal...",
+    "noCragsFound": "Nenhuma falésia encontrada",
+    "change": "Alterar",
+    "save": "Guardar Alterações",
+    "saving": "A guardar...",
+    "success": "Falésia atualizada com sucesso",
+    "convertedToCrag": "Convertida em falésia com sucesso",
+    "convertedToSector": "Convertida em setor com sucesso",
+    "errors": {
+      "parentRequired": "Falésia principal necessária",
+      "parentRequiredDesc": "Por favor, selecione uma falésia principal para este setor",
+      "failed": "Atualização falhada",
+      "failedDesc": "Não foi possível atualizar a falésia. Por favor, tenta novamente."
+    }
+  },
   "cragPage": {
     "askAI": "Perguntar à IA",
+    "edit": "Editar",
+    "editCrag": "Editar detalhes da falésia",
     "currentConditions": "Condições atuais",
     "sectors": "Setores",
     "searchSectors": "Procurar setores...",

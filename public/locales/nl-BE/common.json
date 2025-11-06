@@ -42,7 +42,20 @@
     "noCragsFound": "Geen klimrotsen gevonden. Probeer een andere zoekterm.",
     "heading": "Klimrotsen",
     "toSelect": "om te selecteren",
-    "toClose": "om te sluiten"
+    "toClose": "om te sluiten",
+    "notSeeing": "Zie je je klimrots niet?",
+    "addMissingHere": "Voeg het hier toe"
+  },
+  "cragLocationPicker": {
+    "loadingMap": "Kaart laden...",
+    "searchPlaceholder": "Zoek naar een locatie (bijv. 'Freyr, Dinant')",
+    "noLocationsFound": "Geen locaties gevonden",
+    "loadingLocationData": "Locatiegegevens laden...",
+    "clickToSet": "Klik op de kaart om de locatie van de klimlocatie in te stellen",
+    "nearbyCragsFound": "{{count}} nabijgelegen klimlocatie gevonden",
+    "nearbyCragsFound_other": "{{count}} nabijgelegen klimlocaties gevonden",
+    "clickMarkersToView": "Klik op markeringen om bestaande klimlocaties te bekijken",
+    "coordinates": "Coördinaten"
   },
   "conditions": {
     "rating": "Beoordeling",
@@ -707,8 +720,39 @@
     "deleteError": "Verwijderen mislukt",
     "deleteErrorDescription": "Er is iets misgegaan. Probeer het opnieuw."
   },
+  "editCragDialog": {
+    "title": "Rots Bewerken",
+    "subtitle": "Converteer deze rots naar een sector of wijzig het bovenliggende element",
+    "currentStatus": "Huidige Status",
+    "crag": "Rots",
+    "sector": "Sector",
+    "currentParent": "Huidig bovenliggend element",
+    "chooseAction": "Kies Actie",
+    "convertToSector": "Converteer naar Sector",
+    "convertToCrag": "Converteer naar Rots",
+    "changeParent": "Wijzig Bovenliggende Rots",
+    "selectParentCrag": "Selecteer Bovenliggende Rots",
+    "selectNewParent": "Selecteer Nieuwe Bovenliggende Rots",
+    "searchForParent": "Zoek de bovenliggende rots waaraan deze sector toegewezen moet worden",
+    "searchPlaceholder": "Zoek bovenliggende rots...",
+    "noCragsFound": "Geen rotsen gevonden",
+    "change": "Wijzigen",
+    "save": "Wijzigingen Opslaan",
+    "saving": "Opslaan...",
+    "success": "Rots succesvol bijgewerkt",
+    "convertedToCrag": "Succesvol geconverteerd naar rots",
+    "convertedToSector": "Succesvol geconverteerd naar sector",
+    "errors": {
+      "parentRequired": "Bovenliggende rots vereist",
+      "parentRequiredDesc": "Selecteer een bovenliggende rots voor deze sector",
+      "failed": "Update mislukt",
+      "failedDesc": "Kan rots niet bijwerken. Probeer het opnieuw."
+    }
+  },
   "cragPage": {
     "askAI": "Vraag AI",
+    "edit": "Bewerken",
+    "editCrag": "Rots details bewerken",
     "currentConditions": "Huidige omstandigheden",
     "sectors": "Sectoren",
     "searchSectors": "Zoek sectoren...",

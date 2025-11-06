@@ -42,7 +42,20 @@
     "noCragsFound": "Inga klippor hittades. Prova en annan sökterm.",
     "heading": "Klippor",
     "toSelect": "för att välja",
-    "toClose": "för att stänga"
+    "toClose": "för att stänga",
+    "notSeeing": "Ser du inte din klippa?",
+    "addMissingHere": "Lägg till den här"
+  },
+  "cragLocationPicker": {
+    "loadingMap": "Laddar karta...",
+    "searchPlaceholder": "Sök efter plats (t.ex. 'Bohusläns klippor, Uddevalla')",
+    "noLocationsFound": "Inga platser hittades",
+    "loadingLocationData": "Laddar platsdata...",
+    "clickToSet": "Klicka på kartan för att ställa in klippans plats",
+    "nearbyCragsFound": "{{count}} närliggande klippa hittad",
+    "nearbyCragsFound_other": "{{count}} närliggande klippor hittade",
+    "clickMarkersToView": "Klicka på markörer för att visa befintliga klippor",
+    "coordinates": "Koordinater"
   },
   "conditions": {
     "rating": "Betyg",
@@ -629,8 +642,39 @@
     "deleteError": "Kunde inte radera rapporten",
     "deleteErrorDescription": "Något gick fel. Vänligen försök igen."
   },
+  "editCragDialog": {
+    "title": "Redigera Klippa",
+    "subtitle": "Konvertera denna klippa till en sektor eller ändra överordnat element",
+    "currentStatus": "Nuvarande Status",
+    "crag": "Klippa",
+    "sector": "Sektor",
+    "currentParent": "Nuvarande överordnat element",
+    "chooseAction": "Välj Åtgärd",
+    "convertToSector": "Konvertera till Sektor",
+    "convertToCrag": "Konvertera till Klippa",
+    "changeParent": "Ändra Överordnad Klippa",
+    "selectParentCrag": "Välj Överordnad Klippa",
+    "selectNewParent": "Välj Ny Överordnad Klippa",
+    "searchForParent": "Sök efter den överordnade klippan som denna sektor ska tilldelas",
+    "searchPlaceholder": "Sök efter överordnad klippa...",
+    "noCragsFound": "Inga klippor hittades",
+    "change": "Ändra",
+    "save": "Spara Ändringar",
+    "saving": "Sparar...",
+    "success": "Klippa uppdaterad",
+    "convertedToCrag": "Konverterad till klippa",
+    "convertedToSector": "Konverterad till sektor",
+    "errors": {
+      "parentRequired": "Överordnad klippa krävs",
+      "parentRequiredDesc": "Vänligen välj en överordnad klippa för denna sektor",
+      "failed": "Uppdateringen misslyckades",
+      "failedDesc": "Kunde inte uppdatera klippa. Vänligen försök igen."
+    }
+  },
   "cragPage": {
     "askAI": "Fråga AI",
+    "edit": "Redigera",
+    "editCrag": "Redigera klipp-detaljer",
     "currentConditions": "Nuvarande förhållanden",
     "sectors": "Sektorer",
     "searchSectors": "Sök sektorer...",

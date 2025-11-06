@@ -6,22 +6,22 @@
     "heading": "Get info on any crag",
     "description": "Real-time conditions, community reports, and route information for crags worldwide",
     "searchHint": "Search for any climbing area",
+    "yourFavorites": "Your Favorites",
+    "favoriteQuery": "What are conditions at {{crag}}?",
     "exampleQueries": {
       "query1": {
-        "display": "Squamish conditions today?",
-        "query": "Squamish conditions today?"
+        "display": "Little Cottonwood Canyon conditions tomorrow?",
+        "query": "Little Cottonwood Canyon conditions tomorrow?"
       },
       "query2": {
-        "display": "Is Skaha dry this afternoon?",
-        "query": "Is Skaha dry this afternoon?"
+        "display": "Is Rifle dry this afternoon?",
+        "query": "Is Rifle dry this afternoon?"
       },
       "query3": {
-        "display": "Niagara Glen conditions tomorrow?",
-        "query": "Niagara Glen conditions tomorrow?"
+        "display": "El Capitan conditions today?",
+        "query": "El Capitan conditions today?"
       }
-    },
-    "yourFavorites": "Your Favourites",
-    "favoriteQuery": "What are conditions at {{crag}}?"
+    }
   },
   "chat": {
     "analyzing": "Analyzing conditions...",
@@ -40,16 +40,109 @@
     "typeToSearch": "Type to search for crags...",
     "searching": "Searching...",
     "noCragsFound": "No crags found. Try a different search term.",
+    "addNewCrag": "Add New Crag",
     "heading": "Crags",
     "toSelect": "to select",
-    "toClose": "to close"
+    "toClose": "to close",
+    "notSeeing": "Not seeing your crag?",
+    "addMissingHere": "Add it here"
+  },
+  "fab": {
+    "addCrag": "Add New Crag",
+    "addReport": "Add Report",
+    "tooltip": "Quick actions"
+  },
+  "cragLocationPicker": {
+    "loadingMap": "Loading map...",
+    "searchPlaceholder": "Search for a location (e.g. 'Squamish, BC')",
+    "noLocationsFound": "No locations found",
+    "loadingLocationData": "Loading location data...",
+    "clickToSet": "Click on the map to set crag location",
+    "nearbyCragsFound": "{{count}} nearby crag found",
+    "nearbyCragsFound_other": "{{count}} nearby crags found",
+    "clickMarkersToView": "Click markers to view existing crags",
+    "coordinates": "Coordinates"
+  },
+  "addCragModal": {
+    "title": "Add New Crag",
+    "subtitle": "Help grow the climbing database",
+    "mapLabel": "Location",
+    "mapHelp": "Click on the map to set the crag location",
+    "coordinates": "Coordinates",
+    "nearbyCragsWarning": {
+      "title": "Existing Crags Nearby",
+      "message": "{{count}} crag found within 500m",
+      "message_other": "{{count}} crags found within 500m",
+      "away": "away",
+      "view": "View",
+      "proceed": "If none of these match, you can still proceed with adding a new crag."
+    },
+    "form": {
+      "name": "Crag Name",
+      "namePlaceholder": "e.g. Smith Rock, Fontainebleau",
+      "country": "Country",
+      "countryPlaceholder": "Select country",
+      "state": "State/Region",
+      "statePlaceholder": "e.g. Oregon, Île-de-France",
+      "municipality": "Municipality/City",
+      "municipalityPlaceholder": "e.g. Bend, Fontainebleau",
+      "village": "Village",
+      "villagePlaceholder": "e.g. Terrebonne",
+      "rockType": "Rock Type",
+      "rockTypePlaceholder": "Select rock type (optional)",
+      "aspects": "Aspects",
+      "aspectsHelp": "Select all directions the crag faces",
+      "climbingTypes": "Climbing Types",
+      "climbingTypesHelp": "Select all applicable climbing styles",
+      "description": "Description",
+      "descriptionPlaceholder": "Additional information about the crag (optional)..."
+    },
+    "rockTypes": {
+      "granite": "Granite",
+      "sandstone": "Sandstone",
+      "limestone": "Limestone",
+      "gneiss": "Gneiss",
+      "quartzite": "Quartzite",
+      "gritstone": "Gritstone",
+      "basalt": "Basalt",
+      "volcanic": "Volcanic",
+      "conglomerate": "Conglomerate",
+      "schist": "Schist",
+      "slate": "Slate",
+      "other": "Other"
+    },
+    "climbingTypes": {
+      "sport": "Sport",
+      "trad": "Trad",
+      "boulder": "Boulder",
+      "mixed": "Mixed",
+      "aid": "Aid",
+      "ice": "Ice"
+    },
+    "cancel": "Cancel",
+    "submit": "Submit Crag",
+    "submitting": "Submitting...",
+    "success": "Crag added successfully!",
+    "successDesc": "{{name}} has been added to the database",
+    "errors": {
+      "nameRequired": "Name is required",
+      "nameRequiredDesc": "Please enter a name for the crag",
+      "locationRequired": "Location is required",
+      "locationRequiredDesc": "Please click on the map to set the crag location",
+      "countryRequired": "Country is required",
+      "countryRequiredDesc": "Please select a country from the dropdown",
+      "duplicate": "Crag already exists nearby",
+      "duplicateDesc": "A crag with a similar name already exists at this location. Check the map for existing crags.",
+      "failed": "Failed to add crag",
+      "failedDesc": "An error occurred while adding the crag. Please try again."
+    }
   },
   "conditions": {
     "rating": "Rating",
     "details": "Details",
     "location": "Location",
-    "favorite": "Favourite",
-    "favorited": "Favourited",
+    "favorite": "Favorite",
+    "favorited": "Favorited",
     "addReport": "Add Report",
     "viewCragPage": "View Crag"
   },
@@ -64,18 +157,23 @@
     "perfectTemp": "Perfect temperature ({{temp}})",
     "tempTooHigh": "Temperature too high - fingers may slip",
     "coldGoodFriction": "Cold but good for {{rockType}} friction",
-    "idealHumidity": "Ideal humidity ({{humidity}}%)",
-    "lowHumidityGranite": "Low humidity aids friction on granite",
-    "readyInHours": "Will be ready to climb in ~{{hours}} hours",
-    "acceptable": "Conditions are acceptable",
     "goodHumidity": "Good humidity ({{humidity}}%)",
+    "idealHumidity": "Ideal humidity ({{humidity}}%)",
+    "lowHumidityFriction": "Low humidity aids friction",
+    "lowHumidityGranite": "Low humidity aids friction on granite",
     "lowCondensationRisk": "Low condensation risk (dew point spread {{dewPointSpread}})",
-    "lowHumidityFriction": "Low humidity aids friction"
+    "readyInHours": "Will be ready to climb in ~{{hours}} hours",
+    "acceptable": "Conditions are acceptable"
   },
   "warnings": {
     "tooWarm": "Too warm for {{rockType}} ({{temp}})",
     "coldSuboptimal": "Cold and suboptimal for {{rockType}}",
     "highHumidity": "High humidity ({{humidity}}%) - rock can be slippery",
+    "veryHighCondensationRisk": "Very high condensation risk (dew point spread {{dewPointSpread}}) - rock surface likely damp",
+    "highCondensationRisk": "High condensation risk (dew point spread {{dewPointSpread}})",
+    "highCondensationRiskSimple": "High condensation risk",
+    "moderateCondensationRisk": "Moderate condensation risk (dew point spread {{dewPointSpread}})",
+    "condensationRisk": "Condensation risk ({{dewPointSpread}})",
     "wetDangerousSandstone": "Rock is currently wet - dangerous to climb (sandstone becomes weak when wet)",
     "wetSlippery": "Rock is currently wet - slippery conditions",
     "veryHighWinds": "Very high winds ({{wind}}) - danger of blown off",
@@ -83,12 +181,7 @@
     "recentPrecip": "Recent precipitation ({{precip}}) - will dry in ~{{hours}}h",
     "currentlyWetDangerous": "Currently wet - dangerous",
     "currentlyWet": "Currently wet",
-    "cold": "Cold ({{temp}})",
-    "veryHighCondensationRisk": "Very high condensation risk (dew point spread {{dewPointSpread}}) - rock surface likely damp",
-    "highCondensationRisk": "High condensation risk (dew point spread {{dewPointSpread}})",
-    "highCondensationRiskSimple": "High condensation risk",
-    "moderateCondensationRisk": "Moderate condensation risk (dew point spread {{dewPointSpread}})",
-    "condensationRisk": "Condensation risk ({{dewPointSpread}})"
+    "cold": "Cold ({{temp}})"
   },
   "weather": {
     "clearSky": "Clear sky",
@@ -128,6 +221,13 @@
     "thisEvening": "this evening",
     "tonight": "tonight"
   },
+  "time": {
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "daysAgo_one": "{{count}} day ago",
+    "daysAgo_other": "{{count}} days ago",
+    "pickDate": "Pick a date"
+  },
   "disambiguation": {
     "foundMultipleAreas": "Found {{count}} climbing areas for \"{{location}}\". Please choose one:",
     "foundMultipleLocations": "Found multiple locations for \"{{location}}\". Please choose one:",
@@ -162,7 +262,7 @@
       "description": "Any crag or sector worldwide via OpenBeta database integration"
     },
     "crossDeviceSync": {
-      "title": "Works Offline",
+      "title": "Cross-Device Sync",
       "description": "Access your favorites and chat history from any device with a secure sync key. No account required"
     },
     "privacyFirst": {
@@ -209,9 +309,14 @@
     "language": "Language",
     "theme": "Theme"
   },
+  "tabs": {
+    "overview": "Overview",
+    "reports": "Reports"
+  },
   "dialog": {
     "close": "Close",
     "cancel": "Cancel",
+    "delete": "Delete",
     "detailedConditions": "Detailed Conditions",
     "fullAnalysis": "Full weather analysis and climbing conditions forecast",
     "showMap": "Map",
@@ -268,8 +373,7 @@
     "lessReliable": "Days 8-14: Less reliable forecast",
     "lessReliableHourly": "Next hours less predictable",
     "lessCertain": "LESS CERTAIN",
-    "todayBadge": "TODAY",
-    "delete": "Delete"
+    "todayBadge": "TODAY"
   },
   "timeContext": {
     "sunrise": "Sunrise",
@@ -286,39 +390,48 @@
     "expandHours": "Expand to see all hours"
   },
   "rockTypes": {
-    "limestone": "limestone",
-    "granite": "granite",
-    "sandstone": "sandstone",
-    "basalt": "basalt",
-    "gneiss": "gneiss",
-    "quartzite": "quartzite",
-    "conglomerate": "conglomerate",
-    "rhyolite": "rhyolite",
-    "porphyry": "porphyry",
-    "andesite": "andesite",
-    "slate": "slate",
-    "schist": "schist",
-    "dolomite": "dolomite",
-    "volcanic": "volcanic",
-    "phyllite": "phyllite"
+    "granite": "Granite",
+    "sandstone": "Sandstone",
+    "limestone": "Limestone",
+    "basalt": "Basalt",
+    "gneiss": "Gneiss",
+    "quartzite": "Quartzite",
+    "gritstone": "Gritstone",
+    "unknown": "Unknown"
   },
   "sync": {
     "notification": {
       "title": "Sync Key Created",
-      "description": "We've generated a unique key to sync your favourites and chat across devices.",
+      "description": "We've generated a unique key to sync your favorites and chat across devices.",
       "viewInSettings": "View in Settings",
       "viewMore": "What is sync key?"
     },
     "banner": {
       "title": "Your data syncs across devices",
-      "description": "Your favourites, reports, and chat history are saved locally and can sync to other devices using your sync key.",
+      "description": "Your favorites, reports, and chat history are saved locally and can sync to other devices using your sync key.",
       "learnMore": "Learn more",
       "dismiss": "Got it"
     },
     "status": {
       "synced": "Synced",
       "syncing": "Syncing...",
-      "offline": "Offline"
+      "offline": "Offline",
+      "clickToLearnMore": "Click to learn more about sync"
+    },
+    "page": {
+      "validating": "Validating sync key...",
+      "invalidTitle": "Invalid Sync Key",
+      "noKeyError": "No sync key found in URL",
+      "invalidKeyError": "Invalid sync key format",
+      "goHome": "Go to Home",
+      "restoreTitle": "Restore Your Data",
+      "restoreDescription": "This will restore your favorites, chat history, and settings from another device",
+      "syncKeyLabel": "Sync Key",
+      "restoreSuccess": "Sync key restored! Redirecting...",
+      "cancel": "Cancel",
+      "restore": "Restore",
+      "replaceWarning": "This will replace any existing data on this device with data from your sync key",
+      "restoreError": "Failed to restore sync key. Please try again."
     }
   },
   "syncExplainer": {
@@ -331,7 +444,7 @@
       },
       "multiDevice": {
         "title": "Multi-Device Access",
-        "description": "Access your favourites and chat history from any device by using your sync key."
+        "description": "Access your favorites and chat history from any device by using your sync key."
       },
       "privacy": {
         "title": "Privacy First",
@@ -340,23 +453,100 @@
     },
     "openSettings": "Open Settings"
   },
+  "profileCreation": {
+    "title": "Create Your Profile",
+    "subtitle": "Privacy-first registration - no personal data required",
+    "createProfile": "Create Profile",
+    "creating": "Creating...",
+    "maybeLater": "Maybe Later",
+    "tabs": {
+      "create": "Create Profile",
+      "signIn": "Sign In"
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Save Favorites Across Devices",
+        "description": "Bookmark your favorite crags and access them from any device"
+      },
+      "report": {
+        "title": "Share Reports with Community",
+        "description": "Help fellow climbers by sharing conditions, safety alerts, and route info"
+      },
+      "vote": {
+        "title": "Vote on Helpful Reports",
+        "description": "Support the community by confirming useful reports"
+      },
+      "manual": {
+        "title": "Save Your Data Across Devices",
+        "description": "Sync your favorites, reports, and chat history on all your devices"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "No Email or Password Required",
+        "description": "We respect your privacy. Just a sync key, no personal data needed"
+      },
+      "syncKey": {
+        "title": "Just Creates a Sync Key",
+        "description": "A unique identifier that syncs your data across devices"
+      },
+      "multiDevice": {
+        "title": "Save It, Screenshot the QR Code, or Email It",
+        "description": "Use your sync key to restore your profile on other devices"
+      }
+    },
+    "signIn": {
+      "title": "Already Have a Sync Key?",
+      "description": "Enter your sync key to restore your profile and data",
+      "syncKeyLabel": "Sync Key",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Sign In",
+      "signingIn": "Signing in...",
+      "invalidKey": "Invalid sync key format. Please check and try again."
+    }
+  },
+  "profileCreated": {
+    "title": "Profile Created!",
+    "description": "Your profile has been created successfully. Save your sync key to access your data on other devices.",
+    "actionCompleted": "{{action}} completed!",
+    "syncKeyLabel": "Your Sync Key",
+    "syncKeyDescription": "This is your unique key for syncing across devices",
+    "qrCodeLabel": "QR Code",
+    "qrCodeDescription": "Scan this QR code on another device to sync your data",
+    "privacyTitle": "Important: Save Your Sync Key",
+    "saveKeySafe": "Save this key somewhere safe",
+    "screenshotQR": "Or screenshot this QR code",
+    "needForSync": "You'll need it to sync other devices",
+    "gotIt": "Got it!",
+    "emailSection": {
+      "title": "Send to Email (Optional)",
+      "privacyNote1": "We DON'T store your email",
+      "privacyNote2": "This is a one-time send only",
+      "privacyNote3": "Never saved to our database",
+      "emailPlaceholder": "your@email.com",
+      "sendButton": "Send Email",
+      "sending": "Sending...",
+      "success": "Email sent! Check your inbox",
+      "error": "Failed to send email. Please try again."
+    }
+  },
   "profile": {
     "anonymous": "Anonymous",
     "member": "Member",
     "anonymousMember": "Anonymous member",
-    "favorites": "Favourites",
+    "favorites": "Favorites",
+    "yourReports": "Your Reports",
     "recent": "Recent Searches",
     "stats": "Your Stats",
     "settings": "Settings",
-    "clearData": "Clear All Data",
-    "yourReports": "Your Reports"
+    "clearData": "Clear All Data"
   },
   "stats": {
     "title": "Your Stats",
     "description": "Your activity and contributions to the beta.rocks community",
     "reportsPosted": "Reports Posted",
     "confirmationsGiven": "Confirmations Given",
-    "favoritesCount": "Favourites",
+    "favoritesCount": "Favorites",
     "memberSince": "Member since",
     "lastActive": "Last active",
     "unknown": "Unknown",
@@ -433,7 +623,7 @@
     },
     "syncKey": {
       "title": "Sync Key",
-      "description": "Use this key to sync your favourites and settings across devices",
+      "description": "Use this key to sync your favorites and settings across devices",
       "label": "Your Sync Key",
       "copy": "Copy sync key",
       "showFullKey": "Show full key",
@@ -446,7 +636,7 @@
       "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
       "restoreButton": "Restore Sync Key",
       "restoring": "Restoring...",
-      "restoreSuccess": "Sync key restored successfully! Reloading...",
+      "restoreSuccess": "Sync key restored successfully!",
       "restoreSuccessDescription": "Your data will be restored after reload",
       "restoreError": "Invalid sync key format. Please check and try again.",
       "saveNote": {
@@ -455,16 +645,16 @@
       },
       "warning": {
         "title": "Keep your sync key private",
-        "description": "Anyone with your sync key can access your favourites and settings. Don't share it publicly."
+        "description": "Anyone with your sync key can access your favorites and settings. Don't share it publicly."
       },
       "emailButton": "Email Sync Key to Yourself",
       "emailLabel": "Email Address",
-      "emailPlaceholder": "you@example.ca",
+      "emailPlaceholder": "you@example.com",
       "emailSend": "Send",
       "emailSending": "Sending...",
       "emailPrivacy": "We don't store your email - it's only used once to send your sync key.",
       "emailSent": "Email sent!",
-      "emailSentDescription": "Check your inbox at {{email}}",
+      "emailSentDescription": "Your sync key has been sent to {{email}}",
       "emailFailed": "Failed to send email",
       "emailFailedDescription": "Please try again or copy your sync key manually.",
       "emailInvalid": "Please enter a valid email address"
@@ -473,32 +663,34 @@
       "title": "Danger Zone",
       "description": "These actions are permanent and cannot be undone",
       "deleteProfile": "Delete Profile",
-      "deleteProfileConfirm": "Are you sure you want to delete your profile? This will permanently remove all your data including favourites, chat history, and settings. This action cannot be undone.",
+      "deleteProfileConfirm": "Are you sure you want to delete your profile? This will permanently remove all your data including favorites, chat history, and settings. This action cannot be undone.",
       "deleteFailed": "Failed to delete profile. Please try again."
     }
   },
   "favorites": {
-    "title": "Your Favourite Crags",
-    "description": "You have {{count}} favourite locations",
-    "empty": "No favourites yet",
-    "emptyMessage": "You haven't added any favourite crags yet",
-    "emptyHint": "Click the star button on any conditions card to add it to your favourites",
+    "title": "Your Favorite Crags",
+    "description": "You have {{count}} favorite locations",
+    "empty": "No favorites yet",
+    "emptyMessage": "You haven't added any favorite crags yet",
+    "emptyHint": "Click the star button on any conditions card to add it to your favorites",
     "lastChecked": "Last checked",
     "frictionScore": "Friction score",
     "viewConditions": "View Conditions",
     "remove": "Remove",
-    "confirmDelete": "Remove Favourite?",
-    "confirmDeleteDescription": "Are you sure you want to remove {{name}} from your favourites?",
-    "loginToFavorite": "Please set up your profile to favourite locations",
-    "errorToggling": "Failed to toggle favourite. Please try again.",
-    "added": "Crag added to favourites",
-    "removed": "Crag removed from favourites",
-    "loading": "Loading favourites..."
+    "confirmDelete": "Remove Favorite?",
+    "confirmDeleteDescription": "Are you sure you want to remove {{name}} from your favorites?",
+    "loginToFavorite": "Please set up your profile to favorite locations",
+    "errorToggling": "Failed to toggle favorite. Please try again.",
+    "added": "Crag added to favorites",
+    "removed": "Crag removed from favorites",
+    "loading": "Loading favorites..."
   },
   "reports": {
     "addReport": "Add Report",
     "addReportDescription": "Share information about {{cragName}}",
     "postingAs": "Posting as",
+    "observationDate": "When did you observe this?",
+    "observationDateHelp": "You can report conditions up to 7 days back",
     "category": "What would you like to report?",
     "categories": {
       "conditions": "Conditions",
@@ -506,8 +698,8 @@
       "access": "Access",
       "climbing_info": "Climbing Info",
       "facilities": "Facilities",
-      "other": "Other",
-      "lost_found": "Lost & Found"
+      "lost_found": "Lost & Found",
+      "other": "Other"
     },
     "categoryDescriptions": {
       "conditions": "Weather, friction, dryness, crowds",
@@ -515,8 +707,8 @@
       "access": "Closures, parking changes, seasonal restrictions, bird nests, insects",
       "climbing_info": "Rebolting, hardware updates, route changes, permadraws",
       "facilities": "Bathrooms, camping, water sources, amenities",
-      "other": "Anything else that doesn't fit above",
-      "lost_found": "Lost or found gear and equipment"
+      "lost_found": "Lost or found gear and equipment",
+      "other": "Anything else that doesn't fit above"
     },
     "categoryHelp": {
       "conditions": "Current weather, friction, dryness, crowds at the crag",
@@ -524,8 +716,8 @@
       "access": "Parking, closures, regulations, seasonal restrictions",
       "climbing_info": "Route-specific details, beta, holds, gear, grades",
       "facilities": "Restrooms, camping, water sources, amenities",
-      "other": "Anything else that doesn't fit the above categories",
-      "lost_found": "Report lost items you're looking for or found items you're holding"
+      "lost_found": "Report lost items you're looking for or found items you're holding",
+      "other": "Anything else that doesn't fit the above categories"
     },
     "dryness": "Dryness",
     "wind": "Wind",
@@ -537,17 +729,27 @@
       "conditions": "E.g., East sector still wet, trail muddy, crack sipping...",
       "safety": "E.g., Loose bolt on Route X, rockfall hazard near main wall...",
       "access": "E.g., Gate closed until May, new parking lot behind library...",
-      "climbing_info": "E.g., Route X rebolted with stainless steel bolts, new permadraws installed, anchor upgraded...",
+      "climbing_info": "E.g., Route X rebolted, new anchor at top, grade feels harder...",
       "facilities": "E.g., Toilet available at parking, no water source nearby...",
-      "other": "Describe what you'd like to report...",
-      "lost_found": "E.g., Found blue chalk bag at base of main wall, lost Black Diamond cam #2 near parking lot..."
+      "lost_found": "E.g., Found blue chalk bag at base of main wall, lost Black Diamond cam #2 near parking...",
+      "other": "Describe what you'd like to report..."
     },
+    "lostFoundType": "Type",
+    "lostFoundTypes": {
+      "lost": "Lost Item",
+      "found": "Found Item"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Please select whether this is a lost or found item",
+    "lostBadge": "LOST",
+    "foundBadge": "FOUND",
     "submit": "Submit Report",
     "submitting": "Submitting...",
     "readyToPost": "Profile created! You're ready to post your report.",
     "helpful": "Helpful",
     "loginToConfirm": "Please set up your profile to confirm reports",
     "confirmFailed": "Failed to confirm report. Please try again.",
+    "voteReady": "You can now vote on reports",
     "ratings": {
       "veryPoor": "Very Poor",
       "poor": "Poor",
@@ -592,17 +794,11 @@
     "filters": {
       "all": "All"
     },
-    "observationDate": "When did you observe this?",
-    "observationDateHelp": "You can report conditions up to 7 days back",
-    "lostFoundType": "Type",
-    "lostFoundTypes": {
-      "lost": "Lost Item",
-      "found": "Found Item"
+    "staleness": {
+      "outdated": "Outdated",
+      "older": "Older",
+      "veryOld": "Very Old"
     },
-    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
-    "lostFoundTypeRequired": "Please select whether this is a lost or found item",
-    "lostBadge": "LOST",
-    "foundBadge": "FOUND",
     "expiresAt": "Valid until (optional)",
     "expiresAtHelp": "Set when this report becomes outdated (useful for temporary closures or changing conditions)",
     "noExpiry": "Never expires",
@@ -613,32 +809,74 @@
     "deleteConfirmTitle": "Delete Report",
     "updated": "Report updated",
     "deleted": "Report deleted",
+    "deleteSuccess": "Report deleted",
+    "deleteSuccessDescription": "Your report has been removed successfully",
+    "deleteError": "Failed to delete report",
+    "deleteErrorDescription": "Something went wrong. Please try again.",
     "editReport": "Edit Report",
     "editReportDescription": "Update your report",
     "updateReport": "Update Report",
-    "updating": "Updating..."
+    "updating": "Updating...",
+    "reportCreated": "Report created",
+    "reportCreatedDescription": "Your report has been posted successfully",
+    "reportUpdated": "Report updated",
+    "reportUpdatedDescription": "Your changes have been saved",
+    "updateFailed": "Update failed",
+    "submitFailed": "Submit failed"
+  },
+  "editCragDialog": {
+    "title": "Edit Crag",
+    "subtitle": "Convert this crag to a sector or change its parent",
+    "currentStatus": "Current Status",
+    "crag": "Crag",
+    "sector": "Sector",
+    "currentParent": "Current parent",
+    "chooseAction": "Choose Action",
+    "convertToSector": "Convert to Sector",
+    "convertToCrag": "Convert to Crag",
+    "changeParent": "Change Parent Crag",
+    "selectParentCrag": "Select Parent Crag",
+    "selectNewParent": "Select New Parent Crag",
+    "searchForParent": "Search for the parent crag to assign this sector to",
+    "searchPlaceholder": "Search for parent crag...",
+    "noCragsFound": "No crags found",
+    "change": "Change",
+    "save": "Save Changes",
+    "saving": "Saving...",
+    "success": "Crag updated successfully",
+    "convertedToCrag": "Successfully converted to crag",
+    "convertedToSector": "Successfully converted to sector",
+    "errors": {
+      "parentRequired": "Parent crag required",
+      "parentRequiredDesc": "Please select a parent crag for this sector",
+      "failed": "Update failed",
+      "failedDesc": "Failed to update crag. Please try again."
+    }
   },
   "cragPage": {
     "askAI": "Ask AI",
+    "edit": "Edit",
+    "editCrag": "Edit crag details",
     "currentConditions": "Current Conditions",
     "sectors": "Sectors",
     "searchSectors": "Search sectors...",
     "noSectorsFound": "No sectors found matching your search.",
-    "disclaimer": "Weather conditions can change rapidly. Always verify conditions on arrival and use your best judgement.",
+    "disclaimer": "Weather conditions can change rapidly. Always verify conditions on arrival and use your best judgment.",
     "askAIAboutCrag": "Ask AI about this crag",
     "viewOnSunCalc": "View sun/moon times",
     "viewSunAngles": "View sun position and shadow angles",
     "viewOnMap": "View on map",
     "viewOnGoogleMaps": "View on Google Maps",
-    "addToFavorites": "Add to favourites",
-    "removeFromFavorites": "Remove from favourites"
+    "addToFavorites": "Add to favorites",
+    "removeFromFavorites": "Remove from favorites"
   },
-  "time": {
-    "today": "Today",
-    "yesterday": "Yesterday",
-    "daysAgo_one": "{{count}} day ago",
-    "daysAgo_other": "{{count}} days ago",
-    "pickDate": "Pick a date"
+  "loading": {
+    "conditions": "Loading conditions...",
+    "weatherData": "Fetching weather data...",
+    "reports": "Loading reports..."
+  },
+  "errors": {
+    "failedToLoadConditions": "Failed to load conditions. Please try again."
   },
   "nearbyMatch": {
     "distance": "{{distance}} from {{location}}"
@@ -652,13 +890,13 @@
     "reconnecting": "Reconnecting to live updates...",
     "filters": {
       "all": "All",
-      "favorites": "Favourites"
+      "favorites": "Favorites"
     },
     "emptyState": {
       "noReportsTitle": "No reports yet",
       "noReportsDescription": "Be the first to share conditions with the climbing community",
-      "noFavoritesTitle": "No reports from favourites",
-      "noFavoritesDescription": "Add crags to your favourites to see their reports in this feed"
+      "noFavoritesTitle": "No reports from favorites",
+      "noFavoritesDescription": "Add crags to your favorites to see their reports in this feed"
     }
   }
 }
