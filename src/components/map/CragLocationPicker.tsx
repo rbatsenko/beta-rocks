@@ -193,7 +193,7 @@ export function CragLocationPicker({
 
         {/* Search Results Dropdown */}
         {showResults && searchResults.length > 0 && (
-          <div className="absolute z-[1001] w-full mt-1 bg-background border rounded-lg shadow-lg">
+          <div className="absolute z-[9999] w-full mt-1 bg-background border rounded-lg shadow-lg">
             <Command>
               <CommandList>
                 <CommandGroup>
@@ -220,7 +220,7 @@ export function CragLocationPicker({
         )}
 
         {showResults && searchResults.length === 0 && searchQuery.length >= 2 && !searching && (
-          <div className="absolute z-[1001] w-full mt-1 bg-background border rounded-lg shadow-lg p-3">
+          <div className="absolute z-[9999] w-full mt-1 bg-background border rounded-lg shadow-lg p-3">
             <p className="text-sm text-muted-foreground">
               {t("cragLocationPicker.noLocationsFound")}
             </p>
