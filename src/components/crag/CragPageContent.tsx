@@ -527,12 +527,6 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                     </p>
                   </div>
                 )}
-                {/* Description with clickable links */}
-                {(currentSector?.description || crag.description) && (
-                  <p className="text-sm text-muted-foreground mt-2 max-w-2xl">
-                    {linkifyText(currentSector?.description || crag.description || "")}
-                  </p>
-                )}
               </div>
               <div className="flex items-center gap-2 shrink-0">
                 <Button
@@ -567,6 +561,13 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                 </Button>
               </div>
             </div>
+
+            {/* Description with clickable links */}
+            {(currentSector?.description || crag.description) && (
+              <p className="text-sm text-muted-foreground max-w-2xl">
+                {linkifyText(currentSector?.description || crag.description || "")}
+              </p>
+            )}
 
             {/* Rock Type & Coordinates */}
             <div className="flex flex-wrap items-center gap-2">
