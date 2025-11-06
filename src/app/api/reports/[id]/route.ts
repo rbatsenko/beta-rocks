@@ -18,8 +18,7 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
         *,
         author:user_profiles!reports_author_id_fkey(id, display_name),
         confirmations(count),
-        crag:crags!reports_crag_id_fkey(id, name, country, state, municipality, village, lat, lon, slug),
-        sector:sectors!reports_sector_id_fkey(id, name, slug)
+        crag:crags!reports_crag_id_fkey(id, name, country, state, municipality, village, lat, lon, slug)
       `
       )
       .eq("id", reportId)
