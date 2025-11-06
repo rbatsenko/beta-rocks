@@ -743,6 +743,8 @@
     "viewFeed": "Vezi fluxul de activitate",
     "live": "Live",
     "justNow": "Chiar acum",
+    "loadingFeed": "Se încarcă fluxul...",
+    "reconnecting": "Reconectare la actualizări live...",
     "filters": {
       "all": "Toate",
       "favorites": "Favorite"

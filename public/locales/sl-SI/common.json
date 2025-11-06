@@ -745,6 +745,8 @@
     "viewFeed": "Prikaži pretok aktivnosti",
     "live": "V živo",
     "justNow": "Pravkar",
+    "loadingFeed": "Nalaganje pretoka...",
+    "reconnecting": "Ponovno povezovanje s posodobitvami v živo...",
     "filters": {
       "all": "Vse",
       "favorites": "Priljubljene"

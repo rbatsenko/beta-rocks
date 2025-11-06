@@ -648,6 +648,8 @@
     "viewFeed": "View Activity Feed",
     "live": "Live",
     "justNow": "Just now",
+    "loadingFeed": "Loading feed...",
+    "reconnecting": "Reconnecting to live updates...",
     "filters": {
       "all": "All",
       "favorites": "Favourites"

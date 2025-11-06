@@ -747,6 +747,8 @@
     "viewFeed": "Aktivitäts-Feed ansehen",
     "live": "Live",
     "justNow": "Gerade eben",
+    "loadingFeed": "Feed wird geladen...",
+    "reconnecting": "Verbindung zu Live-Updates wird wiederhergestellt...",
     "filters": {
       "all": "Alle",
       "favorites": "Favoriten"

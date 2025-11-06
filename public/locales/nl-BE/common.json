@@ -742,6 +742,8 @@
     "viewFeed": "Bekijk activiteitenfeed",
     "live": "Live",
     "justNow": "Zojuist",
+    "loadingFeed": "Feed laden...",
+    "reconnecting": "Opnieuw verbinden met live-updates...",
     "filters": {
       "all": "Alle",
       "favorites": "Favorieten"

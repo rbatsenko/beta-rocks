@@ -747,6 +747,8 @@
     "viewFeed": "Voir le fil d'activité",
     "live": "En direct",
     "justNow": "À l'instant",
+    "loadingFeed": "Chargement du fil...",
+    "reconnecting": "Reconnexion aux mises à jour en direct...",
     "filters": {
       "all": "Tous",
       "favorites": "Favoris"

@@ -744,6 +744,8 @@
     "viewFeed": "Zobrazit přehled aktivit",
     "live": "Živě",
     "justNow": "Právě teď",
+    "loadingFeed": "Načítání přehledu...",
+    "reconnecting": "Opětovné připojení k živým aktualizacím...",
     "filters": {
       "all": "Všechny",
       "favorites": "Oblíbené"

@@ -626,6 +626,8 @@
     "viewFeed": "Veure flux d'activitat",
     "live": "En directe",
     "justNow": "Ara mateix",
+    "loadingFeed": "Carregant flux...",
+    "reconnecting": "Reconnectant a actualitzacions en directe...",
     "filters": {
       "all": "Tots",
       "favorites": "Favorits"

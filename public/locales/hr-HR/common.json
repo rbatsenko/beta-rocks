@@ -743,6 +743,8 @@
     "viewFeed": "Prikaži pregled aktivnosti",
     "live": "Uživo",
     "justNow": "Upravo sada",
+    "loadingFeed": "Učitavanje pregleda...",
+    "reconnecting": "Ponovno povezivanje s ažuriranjima uživo...",
     "filters": {
       "all": "Sve",
       "favorites": "Favoriti"

@@ -658,6 +658,8 @@
     "viewFeed": "Näytä aktiviteettisyöte",
     "live": "Live",
     "justNow": "Juuri nyt",
+    "loadingFeed": "Ladataan syötettä...",
+    "reconnecting": "Yhdistetään uudelleen live-päivityksiin...",
     "filters": {
       "all": "Kaikki",
       "favorites": "Suosikit"

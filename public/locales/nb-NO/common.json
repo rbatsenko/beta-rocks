@@ -659,6 +659,8 @@
     "viewFeed": "Se aktivitetsfeed",
     "live": "Direkte",
     "justNow": "Akkurat nå",
+    "loadingFeed": "Laster inn feed...",
+    "reconnecting": "Kobler til på nytt til direkteoppdateringer...",
     "filters": {
       "all": "Alle",
       "favorites": "Favoritter"

@@ -659,6 +659,8 @@
     "viewFeed": "Visa aktivitetsflöde",
     "live": "Live",
     "justNow": "Just nu",
+    "loadingFeed": "Laddar flöde...",
+    "reconnecting": "Återansluter till liveuppdateringar...",
     "filters": {
       "all": "Alla",
       "favorites": "Favoriter"

@@ -658,6 +658,8 @@
     "viewFeed": "Se aktivitetsfeed",
     "live": "Live",
     "justNow": "Lige nu",
+    "loadingFeed": "Indlæser feed...",
+    "reconnecting": "Genopretter forbindelse til live-opdateringer...",
     "filters": {
       "all": "Alle",
       "favorites": "Favoritter"

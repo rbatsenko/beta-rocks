@@ -7,6 +7,7 @@ import { useReportRealtime } from "@/hooks/useReportRealtime";
 import { Tables } from "@/integrations/supabase/types";
 import { Loader2 } from "lucide-react";
 import { ReportWithDetails } from "@/hooks/queries/useReportQueries";
+import { useClientTranslation } from "@/hooks/useClientTranslation";
 
 interface FeedPageClientProps {
   initialReports: ReportWithDetails[];
@@ -27,6 +28,7 @@ export default function FeedPageClient({
   favoriteCragIds,
   currentUserProfileId,
 }: FeedPageClientProps) {
+  const { t } = useClientTranslation("common");
   const [reports, setReports] = useState<ReportWithDetails[]>(initialReports);
   const [isInitializing, setIsInitializing] = useState(true);
   const queryClient = useQueryClient();
@@ -93,7 +95,7 @@ export default function FeedPageClient({
         <div className="container max-w-4xl mx-auto py-8 px-4">
           <div className="flex items-center justify-center py-16">
             <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
-            <span className="ml-3 text-muted-foreground">Loading feed...</span>
+            <span className="ml-3 text-muted-foreground">{t("feed.loadingFeed")}</span>
           </div>
         </div>
       </main>
@@ -113,7 +115,7 @@ export default function FeedPageClient({
         {/* Connection Status Indicator (subtle, bottom-right) */}
         {!isConnected && (
           <div className="fixed bottom-4 right-4 bg-yellow-500/10 text-yellow-700 dark:text-yellow-300 border border-yellow-200 dark:border-yellow-800 rounded-lg px-4 py-2 text-sm">
-            Reconnecting to live updates...
+            {t("feed.reconnecting")}
           </div>
         )}
       </div>

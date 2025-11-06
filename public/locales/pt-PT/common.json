@@ -742,6 +742,8 @@
     "viewFeed": "Ver feed de atividade",
     "live": "Ao vivo",
     "justNow": "Agora mesmo",
+    "loadingFeed": "A carregar feed...",
+    "reconnecting": "A reconectar às atualizações ao vivo...",
     "filters": {
       "all": "Todos",
       "favorites": "Favoritos"

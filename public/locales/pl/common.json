@@ -739,6 +739,8 @@
     "viewFeed": "Zobacz raporty na żywo",
     "live": "Na żywo",
     "justNow": "Przed chwilą",
+    "loadingFeed": "Ładowanie aktualności...",
+    "reconnecting": "Ponowne łączenie z aktualizacjami na żywo...",
     "filters": {
       "all": "Wszystkie",
       "favorites": "Ulubione"
