@@ -718,7 +718,12 @@
     "deleteSuccess": "Rapport verwijderd",
     "deleteSuccessDescription": "Je rapport is succesvol verwijderd",
     "deleteError": "Verwijderen mislukt",
-    "deleteErrorDescription": "Er is iets misgegaan. Probeer het opnieuw."
+    "deleteErrorDescription": "Er is iets misgegaan. Probeer het opnieuw.",
+    "photos": "Foto's",
+    "photoHint": "Voeg tot 3 foto's toe (max. 2MB elk). Foto's worden automatisch gecomprimeerd.",
+    "photoUploadFailed": "Foto uploaden mislukt",
+    "uploadingPhotos": "Foto's uploaden...",
+    "submitReport": "Rapport indienen"
   },
   "editCragDialog": {
     "title": "Rots Bewerken",

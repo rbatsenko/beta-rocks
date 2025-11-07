@@ -718,7 +718,12 @@
     "deleteSuccess": "Raport șters",
     "deleteSuccessDescription": "Raportul tău a fost eliminat cu succes",
     "deleteError": "Ștergerea raportului a eșuat",
-    "deleteErrorDescription": "Ceva nu a mers bine. Te rugăm să încerci din nou."
+    "deleteErrorDescription": "Ceva nu a mers bine. Te rugăm să încerci din nou.",
+    "photos": "Fotografii",
+    "photoHint": "Adăugați până la 3 fotografii (max. 2MB fiecare). Fotografiile vor fi comprimate automat.",
+    "photoUploadFailed": "Încărcarea fotografiei a eșuat",
+    "uploadingPhotos": "Se încarcă fotografiile...",
+    "submitReport": "Trimite raport"
   },
   "editCragDialog": {
     "title": "Editare Stâncă",

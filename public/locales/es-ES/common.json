@@ -803,7 +803,12 @@
     "deleteSuccess": "Informe eliminado",
     "deleteSuccessDescription": "Tu informe ha sido eliminado correctamente",
     "deleteError": "Error al eliminar el informe",
-    "deleteErrorDescription": "Algo salió mal. Por favor, inténtalo de nuevo."
+    "deleteErrorDescription": "Algo salió mal. Por favor, inténtalo de nuevo.",
+    "photos": "Fotos",
+    "photoHint": "Añade hasta 3 fotos (máx. 2MB cada una). Las fotos se comprimirán automáticamente.",
+    "photoUploadFailed": "Error al subir la foto",
+    "uploadingPhotos": "Subiendo fotos...",
+    "submitReport": "Enviar informe"
   },
   "editCragDialog": {
     "title": "Editar Escuela",

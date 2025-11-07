@@ -799,7 +799,12 @@
     "deleteSuccess": "Poročilo izbrisano",
     "deleteSuccessDescription": "Vaše poročilo je bilo uspešno odstranjeno",
     "deleteError": "Brisanje poročila ni uspelo",
-    "deleteErrorDescription": "Nekaj je šlo narobe. Prosimo, poskusite znova."
+    "deleteErrorDescription": "Nekaj je šlo narobe. Prosimo, poskusite znova.",
+    "photos": "Fotografije",
+    "photoHint": "Dodajte do 3 fotografije (maks. 2MB vsaka). Fotografije bodo samodejno stisnjene.",
+    "photoUploadFailed": "Nalaganje fotografije ni uspelo",
+    "uploadingPhotos": "Nalaganje fotografij...",
+    "submitReport": "Pošlji poročilo"
   },
   "editCragDialog": {
     "title": "Uredi Skalo",

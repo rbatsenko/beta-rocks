@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import imageCompression from "browser-image-compression";
 import {
   MessageSquare,
   Loader2,
@@ -12,6 +13,7 @@ import {
   Calendar as CalendarIcon,
   X,
   Search,
+  ImagePlus,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -106,6 +108,9 @@ export function ReportDialog({
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showProfileCreated, setShowProfileCreated] = useState(false);
   const [newSyncKey, setNewSyncKey] = useState<string>("");
+  const [selectedPhotos, setSelectedPhotos] = useState<File[]>([]);
+  const [photoPreviews, setPhotoPreviews] = useState<string[]>([]);
+  const [isUploadingPhotos, setIsUploadingPhotos] = useState(false);
 
   useEffect(() => {
     if (open) {
@@ -133,6 +138,8 @@ export function ReportDialog({
         setLostFoundType("");
         setObservedAt(new Date());
         setExpiresAt(undefined);
+        setSelectedPhotos([]);
+        setPhotoPreviews([]);
       }
     }
   }, [open, isEditMode, editReport]);
@@ -162,6 +169,86 @@ export function ReportDialog({
     setNewSyncKey(profile.syncKey);
     setShowProfileModal(false);
     setShowProfileCreated(true);
+  };
+
+  const compressPhoto = async (file: File): Promise<File> => {
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+      fileType: "image/webp",
+    };
+    try {
+      return await imageCompression(file, options);
+    } catch (error) {
+      console.error("Photo compression failed:", error);
+      return file; // Return original if compression fails
+    }
+  };
+
+  const handlePhotoSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    const newFiles = Array.from(files).slice(0, 3 - selectedPhotos.length); // Max 3 photos
+    setSelectedPhotos((prev) => [...prev, ...newFiles]);
+
+    // Create previews
+    newFiles.forEach((file) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPhotoPreviews((prev) => [...prev, reader.result as string]);
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const removePhoto = (index: number) => {
+    setSelectedPhotos((prev) => prev.filter((_, i) => i !== index));
+    setPhotoPreviews((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const uploadPhotos = async (profileId: string): Promise<string[]> => {
+    if (selectedPhotos.length === 0) return [];
+
+    setIsUploadingPhotos(true);
+    const uploadedPaths: string[] = [];
+
+    try {
+      for (const file of selectedPhotos) {
+        // Compress photo
+        const compressedFile = await compressPhoto(file);
+
+        // Generate unique filename
+        const fileExt = compressedFile.name.split(".").pop() || "webp";
+        const fileName = `${profileId}-${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+        const filePath = `reports/${fileName}`;
+
+        // Upload to Supabase Storage
+        const { createClient } = await import("@supabase/supabase-js");
+        const supabase = createClient(
+          process.env.NEXT_PUBLIC_SUPABASE_URL!,
+          process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
+        );
+
+        const { error } = await supabase.storage
+          .from("report-photos")
+          .upload(filePath, compressedFile, {
+            cacheControl: "3600",
+            upsert: false,
+          });
+
+        if (error) throw error;
+        uploadedPaths.push(filePath);
+      }
+
+      return uploadedPaths;
+    } catch (error) {
+      console.error("Photo upload failed:", error);
+      throw error;
+    } finally {
+      setIsUploadingPhotos(false);
+    }
   };
 
   const handleSubmit = async () => {
@@ -202,6 +289,21 @@ export function ReportDialog({
       const syncKeyHash = await hashSyncKeyAsync(localProfile.syncKey);
       const dbProfile = await fetchOrCreateUserProfile(syncKeyHash);
 
+      // Upload photos if any
+      let photoPaths: string[] = [];
+      if (selectedPhotos.length > 0) {
+        try {
+          photoPaths = await uploadPhotos(dbProfile.id);
+        } catch (error) {
+          toast({
+            title: t("reports.photoUploadFailed"),
+            description: "Your report will be saved without photos.",
+            variant: "destructive",
+          });
+          // Continue without photos
+        }
+      }
+
       if (isEditMode && editReport) {
         // Verify ownership before attempting update
         if (editReport.author_id && editReport.author_id !== dbProfile.id) {
@@ -231,6 +333,7 @@ export function ReportDialog({
             ...(category === "lost_found" && { lost_found_type: lostFoundType }),
             observed_at: observedAt.toISOString(),
             expires_at: expiresAt ? expiresAt.toISOString() : null,
+            photos: photoPaths,
           }),
         });
 
@@ -258,6 +361,7 @@ export function ReportDialog({
           ...(category === "lost_found" && { lost_found_type: lostFoundType }),
           observed_at: observedAt.toISOString(),
           expires_at: expiresAt ? expiresAt.toISOString() : null,
+          photos: photoPaths,
         });
 
         // Show success toast
@@ -566,6 +670,44 @@ export function ReportDialog({
               <p className="text-xs text-muted-foreground text-right">{text.length}/500</p>
             </div>
 
+            {/* Photo Upload */}
+            <div className="space-y-2">
+              <Label className="text-sm font-medium">
+                {t("reports.photos")} ({selectedPhotos.length}/3)
+              </Label>
+              <div className="flex flex-wrap gap-3">
+                {photoPreviews.map((preview, index) => (
+                  <div key={index} className="relative group">
+                    <img
+                      src={preview}
+                      alt={`Preview ${index + 1}`}
+                      className="h-24 w-24 object-cover rounded-lg border-2 border-border"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removePhoto(index)}
+                      className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  </div>
+                ))}
+                {selectedPhotos.length < 3 && (
+                  <label className="h-24 w-24 flex items-center justify-center border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-orange-500 hover:bg-orange-50 dark:hover:bg-orange-900/10 transition-colors">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      onChange={handlePhotoSelect}
+                      className="hidden"
+                    />
+                    <ImagePlus className="h-8 w-8 text-muted-foreground" />
+                  </label>
+                )}
+              </div>
+              <p className="text-xs text-muted-foreground">{t("reports.photoHint")}</p>
+            </div>
+
             {/* Expiry Date - Show for all categories except "conditions" */}
             {category !== "conditions" && (
               <div className="mb-6">
@@ -632,18 +774,18 @@ export function ReportDialog({
               </Button>
               <Button
                 onClick={handleSubmit}
-                disabled={isSubmitting}
+                disabled={isSubmitting || isUploadingPhotos}
                 className="flex-1 bg-orange-500 hover:bg-orange-600"
               >
-                {isSubmitting ? (
+                {isSubmitting || isUploadingPhotos ? (
                   <>
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                    {isEditMode ? t("reports.updating") : t("reports.submitting")}
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    {isUploadingPhotos ? t("reports.uploadingPhotos") : t("reports.submitting")}
                   </>
                 ) : isEditMode ? (
                   t("reports.updateReport")
                 ) : (
-                  t("reports.submit")
+                  t("reports.submitReport")
                 )}
               </Button>
             </div>

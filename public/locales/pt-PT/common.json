@@ -718,7 +718,12 @@
     "deleteSuccess": "Relatório eliminado",
     "deleteSuccessDescription": "O teu relatório foi removido com sucesso",
     "deleteError": "Falha ao eliminar relatório",
-    "deleteErrorDescription": "Algo correu mal. Por favor, tenta novamente."
+    "deleteErrorDescription": "Algo correu mal. Por favor, tenta novamente.",
+    "photos": "Fotos",
+    "photoHint": "Adicione até 3 fotos (máx. 2MB cada). As fotos serão comprimidas automaticamente.",
+    "photoUploadFailed": "Falha no upload da foto",
+    "uploadingPhotos": "A carregar fotos...",
+    "submitReport": "Enviar relatório"
   },
   "editCragDialog": {
     "title": "Editar Falésia",

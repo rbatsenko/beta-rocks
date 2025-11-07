@@ -54,6 +54,7 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
  *   rating_crowds?: number;
  *   expires_at?: string | null;
  *   observed_at?: string;
+ *   photos?: string[];
  * }
  */
 export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -70,6 +71,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
       expires_at,
       observed_at,
       lost_found_type,
+      photos,
     } = body;
 
     // Verify user profile ID is provided
@@ -87,6 +89,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     if (expires_at !== undefined) updates.expires_at = expires_at;
     if (observed_at !== undefined) updates.observed_at = observed_at;
     if (lost_found_type !== undefined) updates.lost_found_type = lost_found_type;
+    if (photos !== undefined) updates.photos = photos;
 
     // Validate ratings if provided
     if (rating_dry && (rating_dry < 1 || rating_dry > 5)) {

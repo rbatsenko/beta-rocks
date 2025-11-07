@@ -803,7 +803,12 @@
     "deleteSuccess": "Rapport supprimé",
     "deleteSuccessDescription": "Votre rapport a été supprimé avec succès",
     "deleteError": "Échec de la suppression du rapport",
-    "deleteErrorDescription": "Une erreur s'est produite. Veuillez réessayer."
+    "deleteErrorDescription": "Une erreur s'est produite. Veuillez réessayer.",
+    "photos": "Photos",
+    "photoHint": "Ajoutez jusqu'à 3 photos (max. 2 Mo chacune). Les photos seront automatiquement compressées.",
+    "photoUploadFailed": "Échec du téléchargement de la photo",
+    "uploadingPhotos": "Téléchargement des photos...",
+    "submitReport": "Soumettre le rapport"
   },
   "editCragDialog": {
     "title": "Modifier le Site",

@@ -793,7 +793,18 @@
     "deleteSuccess": "Raport usunięty",
     "deleteSuccessDescription": "Twój raport został pomyślnie usunięty",
     "deleteError": "Nie udało się usunąć raportu",
-    "deleteErrorDescription": "Coś poszło nie tak. Spróbuj ponownie."
+    "deleteErrorDescription": "Coś poszło nie tak. Spróbuj ponownie.",
+    "reportCreated": "Raport utworzony",
+    "reportCreatedDescription": "Twój raport został pomyślnie opublikowany",
+    "reportUpdated": "Raport zaktualizowany",
+    "reportUpdatedDescription": "Twoje zmiany zostały zapisane",
+    "updateFailed": "Aktualizacja nie powiodła się",
+    "submitFailed": "Wysyłanie nie powiodło się",
+    "photos": "Zdjęcia",
+    "photoHint": "Dodaj do 3 zdjęć (maks. 2MB każde). Zdjęcia będą automatycznie skompresowane.",
+    "photoUploadFailed": "Nie udało się przesłać zdjęć",
+    "uploadingPhotos": "Przesyłanie zdjęć...",
+    "submitReport": "Wyślij raport"
   },
   "editCragDialog": {
     "title": "Edytuj Skałę",

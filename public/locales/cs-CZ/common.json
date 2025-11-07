@@ -798,7 +798,12 @@
     "deleteSuccess": "Zpráva smazána",
     "deleteSuccessDescription": "Vaše zpráva byla úspěšně odstraněna",
     "deleteError": "Smazání zprávy selhalo",
-    "deleteErrorDescription": "Něco se pokazilo. Zkuste to prosím znovu."
+    "deleteErrorDescription": "Něco se pokazilo. Zkuste to prosím znovu.",
+    "photos": "Fotografie",
+    "photoHint": "Přidejte až 3 fotografie (max. 2MB každá). Fotografie budou automaticky komprimovány.",
+    "photoUploadFailed": "Nahrávání fotografie selhalo",
+    "uploadingPhotos": "Nahrávání fotografií...",
+    "submitReport": "Odeslat hlášení"
   },
   "editCragDialog": {
     "title": "Upravit Skálu",

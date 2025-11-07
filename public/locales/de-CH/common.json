@@ -803,7 +803,12 @@
     "deleteSuccess": "Bericht gelöscht",
     "deleteSuccessDescription": "Dein Bericht wurde erfolgreich entfernt",
     "deleteError": "Löschen fehlgeschlagen",
-    "deleteErrorDescription": "Etwas ist schief gelaufen. Bitte versuche es erneut."
+    "deleteErrorDescription": "Etwas ist schief gelaufen. Bitte versuche es erneut.",
+    "photos": "Fotos",
+    "photoHint": "Bis zu 3 Fotos hinzufügen (max. 2MB pro Bild). Fotos werden automatisch komprimiert.",
+    "photoUploadFailed": "Foto-Upload fehlgeschlagen",
+    "uploadingPhotos": "Fotos werden hochgeladen...",
+    "submitReport": "Bericht absenden"
   },
   "editCragDialog": {
     "title": "Felsen bearbeiten",

@@ -640,7 +640,12 @@
     "deleteSuccess": "Rapport raderad",
     "deleteSuccessDescription": "Din rapport har tagits bort",
     "deleteError": "Kunde inte radera rapporten",
-    "deleteErrorDescription": "Något gick fel. Vänligen försök igen."
+    "deleteErrorDescription": "Något gick fel. Vänligen försök igen.",
+    "photos": "Foton",
+    "photoHint": "Lägg till upp till 3 foton (max 2MB vardera). Foton kommer att komprimeras automatiskt.",
+    "photoUploadFailed": "Uppladdning av foto misslyckades",
+    "uploadingPhotos": "Laddar upp foton...",
+    "submitReport": "Skicka rapport"
   },
   "editCragDialog": {
     "title": "Redigera Klippa",

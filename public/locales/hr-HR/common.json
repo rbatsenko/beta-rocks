@@ -798,7 +798,12 @@
     "deleteSuccess": "Izvješće izbrisano",
     "deleteSuccessDescription": "Vaše izvješće je uspješno uklonjeno",
     "deleteError": "Brisanje izvješća nije uspjelo",
-    "deleteErrorDescription": "Nešto je pošlo po zlu. Pokušajte ponovno."
+    "deleteErrorDescription": "Nešto je pošlo po zlu. Pokušajte ponovno.",
+    "photos": "Fotografije",
+    "photoHint": "Dodajte do 3 fotografije (maks. 2MB svaka). Fotografije će biti automatski komprimirane.",
+    "photoUploadFailed": "Prijenos fotografije nije uspio",
+    "uploadingPhotos": "Prijenos fotografija...",
+    "submitReport": "Pošalji izvješće"
   },
   "editCragDialog": {
     "title": "Uredi Stijenu",

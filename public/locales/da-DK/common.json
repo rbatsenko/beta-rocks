@@ -719,7 +719,12 @@
     "deleteSuccess": "Rapport slettet",
     "deleteSuccessDescription": "Din rapport er blevet fjernet",
     "deleteError": "Kunne ikke slette rapporten",
-    "deleteErrorDescription": "Noget gik galt. Prøv venligst igen."
+    "deleteErrorDescription": "Noget gik galt. Prøv venligst igen.",
+    "photos": "Fotos",
+    "photoHint": "Tilføj op til 3 fotos (maks. 2MB hver). Fotos vil blive komprimeret automatisk.",
+    "photoUploadFailed": "Upload af foto mislykkedes",
+    "uploadingPhotos": "Uploader fotos...",
+    "submitReport": "Indsend rapport"
   },
   "editCragDialog": {
     "title": "Rediger Klippe",

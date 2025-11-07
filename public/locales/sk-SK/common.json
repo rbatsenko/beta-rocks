@@ -718,7 +718,12 @@
     "deleteSuccess": "Správa vymazaná",
     "deleteSuccessDescription": "Vaša správa bola úspešne odstránená",
     "deleteError": "Vymazanie správy zlyhalo",
-    "deleteErrorDescription": "Niečo sa pokazilo. Skúste to prosím znova."
+    "deleteErrorDescription": "Niečo sa pokazilo. Skúste to prosím znova.",
+    "photos": "Fotografie",
+    "photoHint": "Pridajte až 3 fotografie (max. 2MB každá). Fotografie budú automaticky komprimované.",
+    "photoUploadFailed": "Nahrávanie fotografie zlyhalo",
+    "uploadingPhotos": "Nahrávanie fotografií...",
+    "submitReport": "Odoslať hlásenie"
   },
   "editCragDialog": {
     "title": "Upraviť Skalu",

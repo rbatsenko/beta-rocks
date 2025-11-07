@@ -798,7 +798,12 @@
     "deleteSuccess": "Звіт видалено",
     "deleteSuccessDescription": "Ваш звіт було успішно видалено",
     "deleteError": "Не вдалося видалити звіт",
-    "deleteErrorDescription": "Щось пішло не так. Будь ласка, спробуйте ще раз."
+    "deleteErrorDescription": "Щось пішло не так. Будь ласка, спробуйте ще раз.",
+    "photos": "Фотографії",
+    "photoHint": "Додайте до 3 фотографій (макс. 2МБ кожна). Фотографії будуть автоматично стиснуті.",
+    "photoUploadFailed": "Завантаження фото не вдалося",
+    "uploadingPhotos": "Завантаження фотографій...",
+    "submitReport": "Надіслати звіт"
   },
   "editCragDialog": {
     "title": "Редагувати Скелю",

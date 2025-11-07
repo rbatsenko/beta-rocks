@@ -273,6 +273,7 @@ export type Database = {
           lost_found_type: string | null;
           observed_at: string;
           photo_url: string | null;
+          photos: string[] | null;
           rating_crowds: number | null;
           rating_dry: number | null;
           rating_wind: number | null;
@@ -291,6 +292,7 @@ export type Database = {
           lost_found_type?: string | null;
           observed_at?: string;
           photo_url?: string | null;
+          photos?: string[] | null;
           rating_crowds?: number | null;
           rating_dry?: number | null;
           rating_wind?: number | null;
@@ -309,6 +311,7 @@ export type Database = {
           lost_found_type?: string | null;
           observed_at?: string;
           photo_url?: string | null;
+          photos?: string[] | null;
           rating_crowds?: number | null;
           rating_dry?: number | null;
           rating_wind?: number | null;

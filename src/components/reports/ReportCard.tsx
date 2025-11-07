@@ -35,6 +35,8 @@ import { getUserProfile } from "@/lib/auth/sync-key";
 import { getDateFnsLocale } from "@/lib/i18n/date-locales";
 import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal";
 import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog";
+import { getSupabaseClient } from "@/integrations/supabase/client";
+import { cn } from "@/lib/utils";
 
 type ReportCategory =
   | "conditions"
@@ -56,6 +58,7 @@ interface Report {
   observed_at: string;
   expires_at?: string | null;
   lost_found_type?: string | null;
+  photos?: string[] | null;
   author?: {
     id: string;
     display_name: string | null;
@@ -87,6 +90,8 @@ export function ReportCard({
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showProfileCreated, setShowProfileCreated] = useState(false);
   const [newSyncKey, setNewSyncKey] = useState<string>("");
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   // Check if user has already confirmed this report
   useEffect(() => {
@@ -141,6 +146,29 @@ export function ReportCard({
       handleConfirm();
     }, 500);
   };
+
+  const getPhotoUrl = (path: string) => {
+    const supabase = getSupabaseClient();
+    return supabase.storage.from("report-photos").getPublicUrl(path).data.publicUrl;
+  };
+
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!lightboxOpen) return;
+
+      if (e.key === "Escape") {
+        setLightboxOpen(false);
+      } else if (e.key === "ArrowLeft" && report.photos && report.photos.length > 1) {
+        setLightboxIndex((prev) => (prev - 1 + report.photos!.length) % report.photos!.length);
+      } else if (e.key === "ArrowRight" && report.photos && report.photos.length > 1) {
+        setLightboxIndex((prev) => (prev + 1) % report.photos!.length);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [lightboxOpen, lightboxIndex, report.photos]);
 
   const getCategoryIcon = (category: ReportCategory) => {
     const iconClass = "h-3.5 w-3.5";
@@ -394,6 +422,29 @@ export function ReportCard({
           <p className="text-sm text-foreground mb-3 whitespace-pre-wrap">{report.text}</p>
         )}
 
+        {/* Photo Gallery */}
+        {report.photos && report.photos.length > 0 && (
+          <div className="mt-4 flex gap-2 flex-wrap">
+            {report.photos.map((photoPath, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setLightboxIndex(index);
+                  setLightboxOpen(true);
+                }}
+                className="relative group rounded-lg overflow-hidden border-2 border-border hover:border-orange-500 transition-colors"
+              >
+                <img
+                  src={getPhotoUrl(photoPath)}
+                  alt={`Photo ${index + 1}`}
+                  className="w-32 h-32 object-cover"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
+              </button>
+            ))}
+          </div>
+        )}
+
         {/* Confirmation Button */}
         <div className="flex items-center gap-2 pt-2 border-t">
           <Button
@@ -424,6 +475,91 @@ export function ReportCard({
         syncKey={newSyncKey}
         completedAction={t("reports.voteReady")}
       />
+
+      {/* Photo Lightbox */}
+      {lightboxOpen && report.photos && report.photos.length > 0 && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setLightboxOpen(false)}
+        >
+          <div className="relative max-w-4xl max-h-full">
+            <button
+              onClick={() => setLightboxOpen(false)}
+              className="absolute -top-12 right-0 text-white hover:text-orange-500 transition-colors"
+            >
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+            <img
+              src={getPhotoUrl(report.photos[lightboxIndex])}
+              alt={`Photo ${lightboxIndex + 1}`}
+              className="max-w-full max-h-[80vh] object-contain rounded-lg"
+              onClick={(e) => e.stopPropagation()}
+            />
+            {report.photos.length > 1 && (
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 bg-black/50 px-4 py-2 rounded-full">
+                {report.photos.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setLightboxIndex(index);
+                    }}
+                    className={cn(
+                      "w-2 h-2 rounded-full transition-all",
+                      index === lightboxIndex ? "bg-orange-500 w-8" : "bg-white/50 hover:bg-white"
+                    )}
+                  />
+                ))}
+              </div>
+            )}
+            {report.photos.length > 1 && (
+              <>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setLightboxIndex(
+                      (prev) => (prev - 1 + report.photos!.length) % report.photos!.length
+                    );
+                  }}
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-orange-500 bg-black/50 rounded-full p-3 transition-colors"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setLightboxIndex((prev) => (prev + 1) % report.photos!.length);
+                  }}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-orange-500 bg-black/50 rounded-full p-3 transition-colors"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </Card>
   );
 }

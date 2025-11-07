@@ -822,7 +822,12 @@
     "reportUpdated": "Report updated",
     "reportUpdatedDescription": "Your changes have been saved",
     "updateFailed": "Update failed",
-    "submitFailed": "Submit failed"
+    "submitFailed": "Submit failed",
+    "photos": "Photos",
+    "photoHint": "Add up to 3 photos (max 2MB each). Photos will be compressed automatically.",
+    "photoUploadFailed": "Photo upload failed",
+    "uploadingPhotos": "Uploading photos...",
+    "submitReport": "Submit Report"
   },
   "editCragDialog": {
     "title": "Edit Crag",

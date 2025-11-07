@@ -719,7 +719,12 @@
     "deleteSuccess": "Raportti poistettu",
     "deleteSuccessDescription": "Raporttisi on poistettu onnistuneesti",
     "deleteError": "Raportin poistaminen epäonnistui",
-    "deleteErrorDescription": "Jokin meni pieleen. Yritä uudelleen."
+    "deleteErrorDescription": "Jokin meni pieleen. Yritä uudelleen.",
+    "photos": "Kuvat",
+    "photoHint": "Lisää enintään 3 kuvaa (max 2Mt kukin). Kuvat pakataan automaattisesti.",
+    "photoUploadFailed": "Kuvan lataus epäonnistui",
+    "uploadingPhotos": "Ladataan kuvia...",
+    "submitReport": "Lähetä raportti"
   },
   "editCragDialog": {
     "title": "Muokkaa Kallioseinää",

@@ -687,7 +687,12 @@
     "deleteSuccess": "Informe esborrat",
     "deleteSuccessDescription": "El vostre informe s'ha eliminat correctament",
     "deleteError": "Error en esborrar l'informe",
-    "deleteErrorDescription": "Alguna cosa ha anat malament. Torneu-ho a provar."
+    "deleteErrorDescription": "Alguna cosa ha anat malament. Torneu-ho a provar.",
+    "photos": "Fotos",
+    "photoHint": "Afegeix fins a 3 fotos (màx. 2MB cadascuna). Les fotos es comprimiran automàticament.",
+    "photoUploadFailed": "Error en pujar la foto",
+    "uploadingPhotos": "Pujant fotos...",
+    "submitReport": "Enviar informe"
   },
   "editCragDialog": {
     "title": "Editar Paret",

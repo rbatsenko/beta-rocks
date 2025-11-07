@@ -766,7 +766,12 @@
     "deleteSuccess": "Сигнал изтрит",
     "deleteSuccessDescription": "Вашият сигнал беше успешно премахнат",
     "deleteError": "Неуспешно изтриване на сигнал",
-    "deleteErrorDescription": "Нещо се обърка. Моля, опитайте отново."
+    "deleteErrorDescription": "Нещо се обърка. Моля, опитайте отново.",
+    "photos": "Снимки",
+    "photoHint": "Добавете до 3 снимки (макс. 2MB всяка). Снимките ще бъдат автоматично компресирани.",
+    "photoUploadFailed": "Качването на снимка неуспешно",
+    "uploadingPhotos": "Качване на снимки...",
+    "submitReport": "Изпрати доклад"
   },
   "editCragDialog": {
     "title": "Редактиране на скала",

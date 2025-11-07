@@ -89,11 +89,11 @@ export default function FeedPageClient({
   });
 
   // Mark as initialized after first render
-  useState(() => {
+  useEffect(() => {
     // Use setTimeout to avoid hydration mismatch
     const timer = setTimeout(() => setIsInitializing(false), 100);
     return () => clearTimeout(timer);
-  });
+  }, []);
 
   // Show loading state during initial connection (first 2 seconds)
   if (isInitializing) {

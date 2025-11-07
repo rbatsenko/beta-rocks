@@ -19,7 +19,7 @@ import {
   extractMetadataFromToolResults,
   calculateGeminiCost,
 } from "@/lib/observability/chat-logger";
-import { createClient } from "@supabase/supabase-js";
+import { getSupabaseClient } from "@/integrations/supabase/client";
 import type { UnitsConfig } from "@/lib/units/types";
 import { getWindSpeedSymbol } from "@/lib/units/conversions";
 import { getDefaultUnitsForLocale } from "@/lib/units/types";
@@ -425,101 +425,93 @@ const tools = {
             lon,
           });
 
-          const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-          const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+          const supabase = getSupabaseClient();
 
-          if (supabaseUrl && supabaseKey) {
-            const supabase = createClient(supabaseUrl, supabaseKey);
-
-            // Query crags table (sectors are now stored with parent_crag_id)
-            const { data: crags } = await supabase
-              .from("crags")
-              .select(
-                `
-                *,
-                parent_crag:crags!parent_crag_id(
-                  name,
-                  description,
-                  rock_type,
-                  climbing_types,
-                  aspects,
-                  slug
-                )
+          // Query crags table (sectors are now stored with parent_crag_id)
+          const { data: crags } = await supabase
+            .from("crags")
+            .select(
               `
+              *,
+              parent_crag:crags!parent_crag_id(
+                name,
+                description,
+                rock_type,
+                climbing_types,
+                aspects,
+                slug
               )
-              .eq("lat", lat)
-              .eq("lon", lon)
-              .limit(1);
+            `
+            )
+            .eq("lat", lat)
+            .eq("lon", lon)
+            .limit(1);
 
-            if (crags && crags.length > 0) {
-              const cragOrSector = crags[0];
+          if (crags && crags.length > 0) {
+            const cragOrSector = crags[0];
 
-              // Check if this is a sector (has parent_crag_id)
-              if (cragOrSector.parent_crag_id && cragOrSector.parent_crag) {
-                console.log("[get_conditions] Found exact sector match:", {
-                  name: cragOrSector.name,
-                  hasParent: true,
-                });
+            // Check if this is a sector (has parent_crag_id)
+            if (cragOrSector.parent_crag_id && cragOrSector.parent_crag) {
+              console.log("[get_conditions] Found exact sector match:", {
+                name: cragOrSector.name,
+                hasParent: true,
+              });
 
-                const parent = Array.isArray(cragOrSector.parent_crag)
-                  ? cragOrSector.parent_crag[0]
-                  : cragOrSector.parent_crag;
+              const parent = Array.isArray(cragOrSector.parent_crag)
+                ? cragOrSector.parent_crag[0]
+                : cragOrSector.parent_crag;
 
-                // Combine sector + parent descriptions (parent has safety warnings)
-                const sectorDesc = cragOrSector.description || "";
-                const parentDesc = parent.description || "";
-                description =
-                  sectorDesc && parentDesc
-                    ? `${sectorDesc}\n\n${parentDesc}`
-                    : parentDesc || sectorDesc || undefined;
+              // Combine sector + parent descriptions (parent has safety warnings)
+              const sectorDesc = cragOrSector.description || "";
+              const parentDesc = parent.description || "";
+              description =
+                sectorDesc && parentDesc
+                  ? `${sectorDesc}\n\n${parentDesc}`
+                  : parentDesc || sectorDesc || undefined;
 
-                // Use parent's rock type if we don't have one
-                if ((!detectedRockType || detectedRockType === "unknown") && parent.rock_type) {
-                  detectedRockType = parent.rock_type as RockType;
-                }
+              // Use parent's rock type if we don't have one
+              if ((!detectedRockType || detectedRockType === "unknown") && parent.rock_type) {
+                detectedRockType = parent.rock_type as RockType;
+              }
 
-                // Use parent's climbing types and aspects
-                if (parent.climbing_types && parent.climbing_types.length > 0) {
-                  climbingTypes = parent.climbing_types;
-                }
-                if (parent.aspects && parent.aspects.length > 0) {
-                  aspects = parent.aspects;
-                }
+              // Use parent's climbing types and aspects
+              if (parent.climbing_types && parent.climbing_types.length > 0) {
+                climbingTypes = parent.climbing_types;
+              }
+              if (parent.aspects && parent.aspects.length > 0) {
+                aspects = parent.aspects;
+              }
 
-                // Capture parent crag slug for URL generation
-                if (parent.slug) {
-                  cragSlug = parent.slug;
-                }
+              // Capture parent crag slug for URL generation
+              if (parent.slug) {
+                cragSlug = parent.slug;
+              }
 
-                console.log("[get_conditions] Enriched with parent crag data:", {
-                  parentName: parent.name,
-                  rockType: detectedRockType,
-                  hasDescription: !!description,
-                  hasAspects: !!aspects,
-                });
-              } else {
-                // It's a crag (no parent)
-                console.log("[get_conditions] Found exact crag match:", {
-                  name: cragOrSector.name,
-                });
+              console.log("[get_conditions] Enriched with parent crag data:", {
+                parentName: parent.name,
+                rockType: detectedRockType,
+                hasDescription: !!description,
+                hasAspects: !!aspects,
+              });
+            } else {
+              // It's a crag (no parent)
+              console.log("[get_conditions] Found exact crag match:", {
+                name: cragOrSector.name,
+              });
 
-                description = cragOrSector.description || undefined;
-                if (
-                  (!detectedRockType || detectedRockType === "unknown") &&
-                  cragOrSector.rock_type
-                ) {
-                  detectedRockType = cragOrSector.rock_type as RockType;
-                }
-                if (cragOrSector.climbing_types && cragOrSector.climbing_types.length > 0) {
-                  climbingTypes = cragOrSector.climbing_types;
-                }
-                if (cragOrSector.aspects && cragOrSector.aspects.length > 0) {
-                  aspects = cragOrSector.aspects;
-                }
-                // Capture crag slug for URL generation
-                if (cragOrSector.slug) {
-                  cragSlug = cragOrSector.slug;
-                }
+              description = cragOrSector.description || undefined;
+              if ((!detectedRockType || detectedRockType === "unknown") && cragOrSector.rock_type) {
+                detectedRockType = cragOrSector.rock_type as RockType;
+              }
+              if (cragOrSector.climbing_types && cragOrSector.climbing_types.length > 0) {
+                climbingTypes = cragOrSector.climbing_types;
+              }
+              if (cragOrSector.aspects && cragOrSector.aspects.length > 0) {
+                aspects = cragOrSector.aspects;
+              }
+              // Capture crag slug for URL generation
+              if (cragOrSector.slug) {
+                cragSlug = cragOrSector.slug;
               }
             }
           }
@@ -540,47 +532,39 @@ const tools = {
           });
 
           // Create server-side Supabase client for coordinate-based search
-          const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-          const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+          const supabase = getSupabaseClient();
 
-          if (supabaseUrl && supabaseKey) {
-            const supabase = createClient(supabaseUrl, supabaseKey);
+          // Use PostGIS to find crags within 1km radius (0.01 degrees ≈ 1.1km)
+          const { data: nearbyCreags, error: geoError } = await supabase.rpc("find_nearby_crags", {
+            search_lat: lat,
+            search_lon: lon,
+            radius_degrees: 0.01,
+          });
 
-            // Use PostGIS to find crags within 1km radius (0.01 degrees ≈ 1.1km)
-            const { data: nearbyCreags, error: geoError } = await supabase.rpc(
-              "find_nearby_crags",
-              {
-                search_lat: lat,
-                search_lon: lon,
-                radius_degrees: 0.01,
-              }
-            );
+          if (geoError) {
+            console.log("[get_conditions] PostGIS function not available, using simple query");
+            // Fallback to simple bounding box query
+            const latRange = 0.01; // ~1km
+            const lonRange = 0.01;
+            const { data: fallbackCreags } = await supabase
+              .from("crags")
+              .select("*")
+              .gte("lat", (lat - latRange).toString())
+              .lte("lat", (lat + latRange).toString())
+              .gte("lon", (lon - lonRange).toString())
+              .lte("lon", (lon + lonRange).toString())
+              .limit(5);
 
-            if (geoError) {
-              console.log("[get_conditions] PostGIS function not available, using simple query");
-              // Fallback to simple bounding box query
-              const latRange = 0.01; // ~1km
-              const lonRange = 0.01;
-              const { data: fallbackCreags } = await supabase
-                .from("crags")
-                .select("*")
-                .gte("lat", (lat - latRange).toString())
-                .lte("lat", (lat + latRange).toString())
-                .gte("lon", (lon - lonRange).toString())
-                .lte("lon", (lon + lonRange).toString())
-                .limit(5);
-
-              if (fallbackCreags && fallbackCreags.length > 0) {
-                const closestCrag = fallbackCreags[0];
-                enrichMetadata(closestCrag);
-              }
-            } else if (nearbyCreags && nearbyCreags.length > 0) {
-              console.log("[get_conditions] Reverse lookup results:", {
-                count: nearbyCreags.length,
-              });
-              const closestCrag = nearbyCreags[0];
+            if (fallbackCreags && fallbackCreags.length > 0) {
+              const closestCrag = fallbackCreags[0];
               enrichMetadata(closestCrag);
             }
+          } else if (nearbyCreags && nearbyCreags.length > 0) {
+            console.log("[get_conditions] Reverse lookup results:", {
+              count: nearbyCreags.length,
+            });
+            const closestCrag = nearbyCreags[0];
+            enrichMetadata(closestCrag);
           }
 
           // Helper function to enrich metadata from a crag record
@@ -593,6 +577,7 @@ const tools = {
             description?: string | null;
             aspects?: number[] | null;
             climbing_types?: string[] | null;
+            [key: string]: any; // Allow additional fields from RPC functions
           }) {
             // Only update if we don't have these values yet
             if (!country && crag.country) country = crag.country;

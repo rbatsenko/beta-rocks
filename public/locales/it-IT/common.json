@@ -803,7 +803,12 @@
     "deleteSuccess": "Rapporto eliminato",
     "deleteSuccessDescription": "Il tuo rapporto è stato rimosso con successo",
     "deleteError": "Eliminazione del rapporto non riuscita",
-    "deleteErrorDescription": "Qualcosa è andato storto. Riprova."
+    "deleteErrorDescription": "Qualcosa è andato storto. Riprova.",
+    "photos": "Foto",
+    "photoHint": "Aggiungi fino a 3 foto (max 2MB ciascuna). Le foto verranno compresse automaticamente.",
+    "photoUploadFailed": "Caricamento foto fallito",
+    "uploadingPhotos": "Caricamento foto...",
+    "submitReport": "Invia segnalazione"
   },
   "editCragDialog": {
     "title": "Modifica Falesia",
