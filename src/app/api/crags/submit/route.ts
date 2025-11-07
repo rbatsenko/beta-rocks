@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
         source: "user_submitted",
         slug: "", // Empty string will be replaced by database trigger with unique slug
       })
-      .select("id, name, slug, slug_id, lat, lon")
+      .select("id")
       .single();
 
     if (insertError) {
@@ -87,11 +87,32 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Fetch the crag again to get the generated slug
+    // The AFTER INSERT trigger runs asynchronously, so we need a second query
+    const { data: cragWithSlug, error: fetchError } = await supabase
+      .from("crags")
+      .select("id, name, slug, slug_id, lat, lon")
+      .eq("id", newCrag.id)
+      .single();
+
+    if (fetchError || !cragWithSlug) {
+      console.error("Error fetching crag with slug:", fetchError);
+      // Return partial data if slug fetch fails
+      return NextResponse.json(
+        {
+          success: true,
+          message: "Crag added successfully",
+          crag: { ...newCrag, slug: "", slug_id: 0, lat: data.lat, lon: data.lon },
+        },
+        { status: 201 }
+      );
+    }
+
     return NextResponse.json(
       {
         success: true,
         message: "Crag added successfully",
-        crag: newCrag,
+        crag: cragWithSlug,
       },
       { status: 201 }
     );
