@@ -139,6 +139,45 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
       return NextResponse.json({ error: "expires_at must be a future date" }, { status: 400 });
     }
 
+    // If photos are being updated, cleanup removed photos from storage
+    if (photos !== undefined) {
+      const supabase = getSupabaseClient();
+
+      // Fetch current photos
+      const { data: currentReport } = await supabase
+        .from("reports")
+        .select("photos, author_id")
+        .eq("id", reportId)
+        .single();
+
+      if (currentReport) {
+        // Verify ownership
+        if (currentReport.author_id !== userProfileId) {
+          return NextResponse.json(
+            { error: "You are not the author of this report" },
+            { status: 403 }
+          );
+        }
+
+        // Find photos that are being removed (in old array but not in new array)
+        const oldPhotos = currentReport.photos || [];
+        const newPhotos = photos || [];
+        const photosToDelete = oldPhotos.filter((oldPhoto: string) => !newPhotos.includes(oldPhoto));
+
+        // Delete removed photos from storage
+        if (photosToDelete.length > 0) {
+          const { error: storageError } = await supabase.storage
+            .from("report-photos")
+            .remove(photosToDelete);
+
+          if (storageError) {
+            console.error("Failed to delete removed photos from storage:", storageError);
+            // Continue with update even if storage cleanup fails
+          }
+        }
+      }
+    }
+
     // Update the report (ownership verified inside the function)
     const updatedReport = await updateReport(reportId, userProfileId, updates);
 
@@ -160,6 +199,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
  * DELETE /api/reports/[id]?userProfileId=...
  * Delete a report (author only)
  * Confirmations are cascade-deleted automatically
+ * Photos in storage are also deleted
  *
  * Query params:
  * - userProfileId: string (required for ownership verification)
@@ -180,13 +220,49 @@ export async function DELETE(
       );
     }
 
-    // Delete the report (ownership verified inside the function)
+    const supabase = getSupabaseClient();
+
+    // First, fetch the report to get photos and verify ownership
+    const { data: report, error: fetchError } = await supabase
+      .from("reports")
+      .select("photos, author_id")
+      .eq("id", reportId)
+      .single();
+
+    if (fetchError || !report) {
+      return NextResponse.json(
+        { error: "Report not found" },
+        { status: 404 }
+      );
+    }
+
+    // Verify ownership
+    if (report.author_id !== userProfileId) {
+      return NextResponse.json(
+        { error: "You are not the author of this report" },
+        { status: 403 }
+      );
+    }
+
+    // Delete photos from storage if they exist
+    if (report.photos && report.photos.length > 0) {
+      const { error: storageError } = await supabase.storage
+        .from("report-photos")
+        .remove(report.photos);
+
+      if (storageError) {
+        console.error("Failed to delete photos from storage:", storageError);
+        // Continue with report deletion even if storage cleanup fails
+      }
+    }
+
+    // Delete the report (confirmations are cascade-deleted automatically)
     const deleted = await deleteReport(reportId, userProfileId);
 
     if (!deleted) {
       return NextResponse.json(
-        { error: "Report not found or you are not the author" },
-        { status: 404 }
+        { error: "Failed to delete report" },
+        { status: 500 }
       );
     }
 
