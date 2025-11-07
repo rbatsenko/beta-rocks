@@ -162,7 +162,9 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
         // Find photos that are being removed (in old array but not in new array)
         const oldPhotos = currentReport.photos || [];
         const newPhotos = photos || [];
-        const photosToDelete = oldPhotos.filter((oldPhoto: string) => !newPhotos.includes(oldPhoto));
+        const photosToDelete = oldPhotos.filter(
+          (oldPhoto: string) => !newPhotos.includes(oldPhoto)
+        );
 
         // Delete removed photos from storage
         if (photosToDelete.length > 0) {
@@ -230,18 +232,12 @@ export async function DELETE(
       .single();
 
     if (fetchError || !report) {
-      return NextResponse.json(
-        { error: "Report not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "Report not found" }, { status: 404 });
     }
 
     // Verify ownership
     if (report.author_id !== userProfileId) {
-      return NextResponse.json(
-        { error: "You are not the author of this report" },
-        { status: 403 }
-      );
+      return NextResponse.json({ error: "You are not the author of this report" }, { status: 403 });
     }
 
     // Delete photos from storage if they exist
@@ -260,10 +256,7 @@ export async function DELETE(
     const deleted = await deleteReport(reportId, userProfileId);
 
     if (!deleted) {
-      return NextResponse.json(
-        { error: "Failed to delete report" },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: "Failed to delete report" }, { status: 500 });
     }
 
     return NextResponse.json({ success: true });
