@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
         osm_id: data.osmId || null,
         osm_type: data.osmType || null,
         source: "user_submitted",
-        slug: "temp", // Temporary slug, will be replaced by database trigger
+        slug: "", // Empty string will be replaced by database trigger with unique slug
       })
       .select("id, name, slug, slug_id, lat, lon")
       .single();
