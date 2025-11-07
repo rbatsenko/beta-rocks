@@ -103,6 +103,12 @@
     "moderateCondensationRisk": "Risc moderat de condensare (diferența punctului de rouă {{dewPointSpread}})",
     "condensationRisk": "Risc de condensare ({{dewPointSpread}})"
   },
+  "sandstoneWarning": {
+    "general": "Gresul este fragil când este umed și necesită mult timp pentru a se usca după ploaie. Escaladarea pe gresie umedă deteriorează stânca și este periculoasă.",
+    "recentRain": "Precipitații recente detectate. Vă rugăm să vă asigurați că stânca este complet uscată înainte de escaladare.",
+    "inLast24h": "în ultimele 24 ore",
+    "inLast48h": "în ultimele 48 ore"
+  },
   "weather": {
     "clearSky": "Cer senin",
     "mainlyClear": "Predominant senin",

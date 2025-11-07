@@ -183,6 +183,12 @@
     "moderateCondensationRisk": "Risc moderat de condensació (diferència de punt de rosada {{dewPointSpread}})",
     "condensationRisk": "Risc de condensació ({{dewPointSpread}})"
   },
+  "sandstoneWarning": {
+    "general": "La gres és fràgil quan està mullada i requereix molt de temps per assecar-se després de la pluja. Escalar en gres mullada danya la roca i és perillós.",
+    "recentRain": "Precipitació recent detectada. Si us plau, assegureu-vos que la roca estigui completament seca abans d'escalar.",
+    "inLast24h": "en les últimes 24h",
+    "inLast48h": "en les últimes 48h"
+  },
   "weather": {
     "clearSky": "Cel clar",
     "mainlyClear": "Principalment clar",

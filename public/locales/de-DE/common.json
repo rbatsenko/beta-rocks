@@ -183,6 +183,12 @@
     "moderateCondensationRisk": "Mäßiges Kondensationsrisiko (Taupunktabstand {{dewPointSpread}})",
     "condensationRisk": "Kondensationsrisiko ({{dewPointSpread}})"
   },
+  "sandstoneWarning": {
+    "general": "Sandstein ist brüchig wenn nass und benötigt viel Zeit zum Trocknen nach Regen. Klettern auf nassem Sandstein beschädigt den Fels und ist gefährlich.",
+    "recentRain": "Kürzliche Niederschläge festgestellt. Bitte stellen Sie sicher, dass der Fels vollständig trocken ist, bevor Sie klettern.",
+    "inLast24h": "in den letzten 24 Stunden",
+    "inLast48h": "in den letzten 48 Stunden"
+  },
   "weather": {
     "clearSky": "Klarer Himmel",
     "mainlyClear": "Überwiegend klar",

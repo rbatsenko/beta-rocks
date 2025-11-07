@@ -183,6 +183,12 @@
     "currentlyWet": "Currently wet",
     "cold": "Cold ({{temp}})"
   },
+  "sandstoneWarning": {
+    "general": "Sandstone is fragile when wet and requires significant time to dry after rain. Climbing on wet sandstone damages the rock and is unsafe.",
+    "recentRain": "Recent precipitation detected. Please ensure the rock is completely dry before climbing.",
+    "inLast24h": "in last 24h",
+    "inLast48h": "in last 48h"
+  },
   "weather": {
     "clearSky": "Clear sky",
     "mainlyClear": "Mainly clear",

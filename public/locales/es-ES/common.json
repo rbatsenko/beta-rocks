@@ -183,6 +183,12 @@
     "moderateCondensationRisk": "Riesgo moderado de condensación (diferencia con el punto de rocío {{dewPointSpread}})",
     "condensationRisk": "Riesgo de condensación ({{dewPointSpread}})"
   },
+  "sandstoneWarning": {
+    "general": "La arenisca es frágil cuando está mojada y requiere mucho tiempo para secarse después de la lluvia. Escalar en arenisca mojada daña la roca y es peligroso.",
+    "recentRain": "Precipitación reciente detectada. Por favor asegúrese de que la roca esté completamente seca antes de escalar.",
+    "inLast24h": "en las últimas 24h",
+    "inLast48h": "en las últimas 48h"
+  },
   "weather": {
     "clearSky": "Despejado",
     "mainlyClear": "Mayormente despejado",

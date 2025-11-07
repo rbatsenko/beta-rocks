@@ -183,6 +183,12 @@
     "moderateCondensationRisk": "Umjeren rizik kondenzacije (razlika točke rosišta {{dewPointSpread}})",
     "condensationRisk": "Rizik kondenzacije ({{dewPointSpread}})"
   },
+  "sandstoneWarning": {
+    "general": "Pješčenjak je krhak kada je mokar i zahtijeva puno vremena da se osuši nakon kiše. Penjanje na mokrom pješčenjaku oštećuje stijenu i opasno je.",
+    "recentRain": "Otkrivene nedavne oborine. Molimo provjerite je li stijena potpuno suha prije penjanja.",
+    "inLast24h": "u zadnjih 24h",
+    "inLast48h": "u zadnjih 48h"
+  },
   "weather": {
     "clearSky": "Vedro nebo",
     "mainlyClear": "Uglavnom vedro",

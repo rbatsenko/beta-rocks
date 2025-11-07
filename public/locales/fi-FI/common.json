@@ -183,6 +183,12 @@
     "moderateCondensationRisk": "Kohtalainen tiivistymisriski (kastepisteväli {{dewPointSpread}})",
     "condensationRisk": "Tiivistymisriski ({{dewPointSpread}})"
   },
+  "sandstoneWarning": {
+    "general": "Hiekkakivi on hauras märkänä ja vaatii paljon aikaa kuivuakseen sateen jälkeen. Kiipeäminen märällä hiekkakivellä vahingoittaa kalliota ja on vaarallista.",
+    "recentRain": "Havaittu viimeaikaista sadetta. Varmista, että kallio on täysin kuiva ennen kiipeilyä.",
+    "inLast24h": "viimeisten 24 tunnin aikana",
+    "inLast48h": "viimeisten 48 tunnin aikana"
+  },
   "weather": {
     "clearSky": "Selkeä taivas",
     "mainlyClear": "Enimmäkseen selkeä",

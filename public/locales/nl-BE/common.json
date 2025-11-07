@@ -103,6 +103,12 @@
     "moderateCondensationRisk": "Matig risico op condensatie (dauwpuntverschil {{dewPointSpread}})",
     "condensationRisk": "Risico op condensatie ({{dewPointSpread}})"
   },
+  "sandstoneWarning": {
+    "general": "Zandsteen is kwetsbaar wanneer nat en vereist veel tijd om te drogen na regen. Klimmen op natte zandsteen beschadigt de rots en is gevaarlijk.",
+    "recentRain": "Recente neerslag gedetecteerd. Zorg ervoor dat de rots volledig droog is voordat u gaat klimmen.",
+    "inLast24h": "in de afgelopen 24 uur",
+    "inLast48h": "in de afgelopen 48 uur"
+  },
   "weather": {
     "clearSky": "Heldere lucht",
     "mainlyClear": "Grotendeels helder",

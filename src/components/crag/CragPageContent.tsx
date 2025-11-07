@@ -787,6 +787,28 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                     ))}
                   </div>
                 )}
+
+                {/* Sandstone Safety Warning */}
+                {crag.rock_type?.toLowerCase().includes("sandstone") && (
+                  <div className="mt-4 bg-destructive/10 border-l-4 border-destructive rounded-r-lg p-4 space-y-2">
+                    <div className="text-destructive font-semibold text-sm flex items-start gap-2">
+                      <span className="shrink-0 text-base">⚠️</span>
+                      <span>{t("sandstoneWarning.general")}</span>
+                    </div>
+                    {conditions.precipitationContext &&
+                      (conditions.precipitationContext.last24h > 0 ||
+                        conditions.precipitationContext.last48h > 0) && (
+                        <div className="text-destructive text-xs font-medium pl-7">
+                          {t("sandstoneWarning.recentRain")}
+                          {conditions.precipitationContext.last24h > 0 &&
+                            ` (${formatPrecipitation(convertPrecipitation(conditions.precipitationContext.last24h, "mm", units.precipitation), units.precipitation, 1)} ${t("sandstoneWarning.inLast24h")})`}
+                          {conditions.precipitationContext.last24h === 0 &&
+                            conditions.precipitationContext.last48h > 0 &&
+                            ` (${formatPrecipitation(convertPrecipitation(conditions.precipitationContext.last48h, "mm", units.precipitation), units.precipitation, 1)} ${t("sandstoneWarning.inLast48h")})`}
+                        </div>
+                      )}
+                  </div>
+                )}
               </>
             ) : null}
           </CardContent>

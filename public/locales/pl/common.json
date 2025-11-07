@@ -183,6 +183,12 @@
     "moderateCondensationRisk": "Umiarkowane ryzyko kondensacji (rozpiętość punktu rosy {{dewPointSpread}})",
     "condensationRisk": "Ryzyko kondensacji ({{dewPointSpread}})"
   },
+  "sandstoneWarning": {
+    "general": "Piaskowiec jest kruchy gdy mokry i wymaga dużo czasu aby wyschnąć po deszczu. Wspinanie się na mokrym piaskowcu niszczy skałę i jest niebezpieczne.",
+    "recentRain": "Wykryto niedawne opady. Upewnij się, że skała jest całkowicie sucha przed wspinaczką.",
+    "inLast24h": "w ciągu ostatnich 24h",
+    "inLast48h": "w ciągu ostatnich 48h"
+  },
   "weather": {
     "clearSky": "Bezchmurnie",
     "mainlyClear": "Przeważnie bezchmurnie",

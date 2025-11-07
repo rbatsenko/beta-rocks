@@ -440,6 +440,21 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
             </div>
           )}
 
+          {/* Sandstone Safety Warning */}
+          {data.rockType?.toLowerCase().includes("sandstone") && (
+            <div className="bg-destructive/10 border-l-4 border-destructive rounded-r-lg p-3 space-y-1.5 animate-in fade-in-0 slide-in-from-bottom-2 duration-500">
+              <div className="text-destructive font-semibold text-sm flex items-start gap-2">
+                <span className="shrink-0">⚠️</span>
+                <span>{t("sandstoneWarning.general")}</span>
+              </div>
+              {data.current && data.current.precipitation_mm > 0 && (
+                <div className="text-destructive text-xs font-medium pl-6">
+                  {t("sandstoneWarning.recentRain")}
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Reasons */}
           {data.reasons && data.reasons.length > 0 && (
             <div className="text-sm opacity-80 animate-in fade-in-0 slide-in-from-bottom-2 duration-500 delay-100">

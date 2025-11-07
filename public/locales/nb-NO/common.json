@@ -183,6 +183,12 @@
     "moderateCondensationRisk": "Moderat risiko for kondens (duggpunktsdifferanse {{dewPointSpread}})",
     "condensationRisk": "Risiko for kondens ({{dewPointSpread}})"
   },
+  "sandstoneWarning": {
+    "general": "Sandstein er skjør når den er våt og krever mye tid for å tørke etter regn. Klatring på våt sandstein skader fjellet og er farlig.",
+    "recentRain": "Nylig nedbør oppdaget. Vennligst sørg for at fjellet er helt tørt før klatring.",
+    "inLast24h": "i løpet av de siste 24 timene",
+    "inLast48h": "i løpet av de siste 48 timene"
+  },
   "weather": {
     "clearSky": "Klarvær",
     "mainlyClear": "For det meste klart",

@@ -183,6 +183,12 @@
     "moderateCondensationRisk": "Risque modéré de condensation (écart au point de rosée {{dewPointSpread}})",
     "condensationRisk": "Risque de condensation ({{dewPointSpread}})"
   },
+  "sandstoneWarning": {
+    "general": "Le grès est fragile lorsqu'il est mouillé et nécessite beaucoup de temps pour sécher après la pluie. Grimper sur du grès mouillé endommage la roche et est dangereux.",
+    "recentRain": "Précipitations récentes détectées. Veuillez vous assurer que la roche est complètement sèche avant de grimper.",
+    "inLast24h": "dans les dernières 24h",
+    "inLast48h": "dans les dernières 48h"
+  },
   "weather": {
     "clearSky": "Ciel dégagé",
     "mainlyClear": "Principalement dégagé",

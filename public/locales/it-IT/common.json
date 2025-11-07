@@ -183,6 +183,12 @@
     "moderateCondensationRisk": "Rischio moderato di condensazione (differenza dal punto di rugiada {{dewPointSpread}})",
     "condensationRisk": "Rischio di condensazione ({{dewPointSpread}})"
   },
+  "sandstoneWarning": {
+    "general": "L'arenaria è fragile quando è bagnata e richiede molto tempo per asciugarsi dopo la pioggia. Arrampicare su arenaria bagnata danneggia la roccia ed è pericoloso.",
+    "recentRain": "Rilevate precipitazioni recenti. Assicurarsi che la roccia sia completamente asciutta prima di arrampicare.",
+    "inLast24h": "nelle ultime 24h",
+    "inLast48h": "nelle ultime 48h"
+  },
   "weather": {
     "clearSky": "Cielo sereno",
     "mainlyClear": "Prevalentemente sereno",

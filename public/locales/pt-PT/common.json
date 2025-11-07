@@ -103,6 +103,12 @@
     "moderateCondensationRisk": "Risco moderado de condensação (diferença do ponto de orvalho {{dewPointSpread}})",
     "condensationRisk": "Risco de condensação ({{dewPointSpread}})"
   },
+  "sandstoneWarning": {
+    "general": "O arenito é frágil quando molhado e requer muito tempo para secar após a chuva. Escalar em arenito molhado danifica a rocha e é perigoso.",
+    "recentRain": "Precipitação recente detectada. Por favor, certifique-se de que a rocha está completamente seca antes de escalar.",
+    "inLast24h": "nas últimas 24h",
+    "inLast48h": "nas últimas 48h"
+  },
   "weather": {
     "clearSky": "Céu limpo",
     "mainlyClear": "Principalmente limpo",

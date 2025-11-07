@@ -103,6 +103,12 @@
     "moderateCondensationRisk": "Mierne riziko kondenzácie (rozpätie rosného bodu {{dewPointSpread}})",
     "condensationRisk": "Riziko kondenzácie ({{dewPointSpread}})"
   },
+  "sandstoneWarning": {
+    "general": "Pieskoviec je krehký, keď je mokrý a vyžaduje veľa času na vyschnutie po daždi. Lezenie na mokrom pieskovci poškodzuje skalu a je nebezpečné.",
+    "recentRain": "Zistené nedávne zrážky. Uistite sa, že skala je pred lezením úplne suchá.",
+    "inLast24h": "za posledných 24h",
+    "inLast48h": "za posledných 48h"
+  },
   "weather": {
     "clearSky": "Jasná obloha",
     "mainlyClear": "Prevažne jasno",

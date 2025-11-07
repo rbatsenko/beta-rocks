@@ -103,6 +103,12 @@
     "moderateCondensationRisk": "Måttlig risk för kondens (daggpunktsspread {{dewPointSpread}})",
     "condensationRisk": "Risk för kondens ({{dewPointSpread}})"
   },
+  "sandstoneWarning": {
+    "general": "Sandsten är ömtålig när den är våt och kräver mycket tid för att torka efter regn. Klättring på våt sandsten skadar klippan och är farligt.",
+    "recentRain": "Nylig nederbörd upptäckt. Vänligen säkerställ att klippan är helt torr innan klättring.",
+    "inLast24h": "under de senaste 24 timmarna",
+    "inLast48h": "under de senaste 48 timmarna"
+  },
   "weather": {
     "clearSky": "Klart",
     "mainlyClear": "Mestadels klart",

@@ -183,6 +183,12 @@
     "moderateCondensationRisk": "Moderat risiko for kondens (dugpunktsspredning {{dewPointSpread}})",
     "condensationRisk": "Risiko for kondens ({{dewPointSpread}})"
   },
+  "sandstoneWarning": {
+    "general": "Sandsten er skrøbelig, når den er våd, og kræver meget tid til at tørre efter regn. Klatring på våd sandsten beskadiger klippen og er farligt.",
+    "recentRain": "Nylig nedbør registreret. Sørg for, at klippen er helt tør, før du klatrer.",
+    "inLast24h": "i de sidste 24 timer",
+    "inLast48h": "i de sidste 48 timer"
+  },
   "weather": {
     "clearSky": "Klar himmel",
     "mainlyClear": "Hovedsageligt klart",

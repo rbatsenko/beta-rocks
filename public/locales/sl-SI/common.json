@@ -183,6 +183,12 @@
     "moderateCondensationRisk": "Zmerno tveganje za kondenzacijo (razlika rosišča {{dewPointSpread}})",
     "condensationRisk": "Tveganje za kondenzacijo ({{dewPointSpread}})"
   },
+  "sandstoneWarning": {
+    "general": "Peščenjak je krhek, ko je moker, in potrebuje veliko časa za sušenje po dežju. Plezanje na mokrem peščenjaku poškoduje skalo in je nevarno.",
+    "recentRain": "Zaznane nedavne padavine. Prosimo, prepričajte se, da je skala popolnoma suha pred plezanjem.",
+    "inLast24h": "v zadnjih 24h",
+    "inLast48h": "v zadnjih 48h"
+  },
   "weather": {
     "clearSky": "Jasno nebo",
     "mainlyClear": "Pretežno jasno",
