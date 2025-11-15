@@ -30,6 +30,12 @@ type ReportWithDetails = Tables<"reports"> & {
     lat: number;
     lon: number;
     slug: string | null;
+    parent_crag_id: string | null;
+    parent_crag?: {
+      id: string;
+      name: string;
+      slug: string | null;
+    } | null;
   } | null;
   sector?: {
     id: string;
@@ -254,8 +260,8 @@ export function ReportTimeline({
                         >
                           <Mountain className="h-4 w-4 text-primary group-hover:scale-110 transition-transform" />
                           <span className="font-semibold text-base text-foreground group-hover:text-primary transition-colors">
-                            {report.sector && report.sector.name
-                              ? `${report.sector.name}, ${report.crag.name}`
+                            {report.crag.parent_crag_id && report.crag.parent_crag
+                              ? `${report.crag.name} • ${report.crag.parent_crag.name}`
                               : report.crag.name}
                           </span>
                           {report.crag.country && (
