@@ -35,11 +35,39 @@ export default async function FeedPage() {
         *,
         author:user_profiles!reports_author_id_fkey(id, display_name),
         confirmations(count),
-        crag:crags!reports_crag_id_fkey(id, name, country, state, municipality, village, lat, lon, slug, parent_crag_id, parent_crag:crags!crags_parent_crag_id_fkey(id, name, slug))
+        crag:crags!reports_crag_id_fkey(id, name, country, state, municipality, village, lat, lon, slug, parent_crag_id)
       `
       )
       .order("created_at", { ascending: false })
       .limit(50);
+
+    // Fetch parent crags for sectors
+    if (data && data.length > 0) {
+      const parentCragIds = [...new Set(
+        data
+          .map(r => r.crag?.parent_crag_id)
+          .filter((id): id is string => !!id)
+      )];
+
+      if (parentCragIds.length > 0) {
+        const { data: parentCrags } = await supabase
+          .from("crags")
+          .select("id, name, slug")
+          .in("id", parentCragIds);
+
+        if (parentCrags) {
+          // Attach parent_crag data to each report
+          data.forEach(report => {
+            if (report.crag?.parent_crag_id) {
+              const parentCrag = parentCrags.find(pc => pc.id === report.crag.parent_crag_id);
+              if (parentCrag && report.crag) {
+                (report.crag as any).parent_crag = parentCrag;
+              }
+            }
+          });
+        }
+      }
+    }
 
     if (error) {
       console.error("[FeedPage] Error fetching reports:", error);

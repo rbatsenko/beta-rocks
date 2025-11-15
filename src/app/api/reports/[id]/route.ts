@@ -18,11 +18,24 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
         *,
         author:user_profiles!reports_author_id_fkey(id, display_name),
         confirmations(count),
-        crag:crags!reports_crag_id_fkey(id, name, country, state, municipality, village, lat, lon, slug, parent_crag_id, parent_crag:crags!crags_parent_crag_id_fkey(id, name, slug))
+        crag:crags!reports_crag_id_fkey(id, name, country, state, municipality, village, lat, lon, slug, parent_crag_id)
       `
       )
       .eq("id", reportId)
       .single();
+
+    // Fetch parent crag if this is a sector
+    if (data && data.crag?.parent_crag_id) {
+      const { data: parentCrag } = await supabase
+        .from("crags")
+        .select("id, name, slug")
+        .eq("id", data.crag.parent_crag_id)
+        .single();
+
+      if (parentCrag && data.crag) {
+        (data.crag as any).parent_crag = parentCrag;
+      }
+    }
 
     if (error) {
       console.error("[GET /api/reports/[id]] Error fetching report:", error);
