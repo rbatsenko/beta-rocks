@@ -560,8 +560,10 @@ export type Database = {
           created_at: string;
           expires_at: string;
           id: string;
+          location_info: Json;
           lost_found_type: string;
           observed_at: string;
+          photos: string[];
           rating_crowds: number;
           rating_dry: number;
           rating_wind: number;

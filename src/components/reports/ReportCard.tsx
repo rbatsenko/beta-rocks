@@ -65,6 +65,13 @@ interface Report {
   } | null;
   author_id?: string | null;
   confirmations?: { count: number }[] | null;
+  location_info?: {
+    crag_name: string | null;
+    crag_slug: string | null;
+    crag_is_sector: boolean;
+    sector_name: string | null;
+    sector_slug: string | null;
+  } | null;
 }
 
 interface ReportCardProps {
@@ -276,6 +283,13 @@ export function ReportCard({
             <span className="text-sm font-medium">
               {report.author?.display_name || t("profile.anonymous")}
             </span>
+            {/* Sector Badge (if report is from a child sector) */}
+            {report.location_info?.crag_is_sector && report.location_info?.crag_name && (
+              <Badge variant="outline" className="gap-1.5 text-xs">
+                <Mountain className="h-3 w-3" />
+                {report.location_info.crag_name}
+              </Badge>
+            )}
             {/* Category Badge */}
             <Badge variant="outline" className={`gap-1.5 ${getCategoryColor(category)}`}>
               {getCategoryIcon(category)}
