@@ -35,7 +35,7 @@ export default async function FeedPage() {
         *,
         author:user_profiles!reports_author_id_fkey(id, display_name),
         confirmations(count),
-        crag:crags!reports_crag_id_fkey(id, name, country, state, municipality, village, lat, lon, slug, parent_crag_id, parent_crag:crags!parent_crag_id(id, name, slug))
+        crag:crags!reports_crag_id_fkey(id, name, country, state, municipality, village, lat, lon, slug, parent_crag_id, parent_crag:crags!crags_parent_crag_id_fkey(id, name, slug))
       `
       )
       .order("created_at", { ascending: false })
