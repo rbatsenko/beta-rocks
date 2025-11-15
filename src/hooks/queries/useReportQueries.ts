@@ -18,6 +18,12 @@ export type ReportWithDetails = Tables<"reports"> & {
     lat: number;
     lon: number;
     slug: string | null;
+    parent_crag_id: string | null;
+    parent_crag?: {
+      id: string;
+      name: string;
+      slug: string | null;
+    } | null;
   } | null;
   sector?: {
     id: string;
