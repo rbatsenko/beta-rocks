@@ -260,7 +260,7 @@ export function ReportTimeline({
                         >
                           <Mountain className="h-4 w-4 text-primary group-hover:scale-110 transition-transform" />
                           <span className="font-semibold text-base text-foreground group-hover:text-primary transition-colors">
-                            {report.crag.parent_crag_id && report.crag.parent_crag
+                            {report.crag.parent_crag_id && report.crag.parent_crag?.name
                               ? `${report.crag.name} • ${report.crag.parent_crag.name}`
                               : report.crag.name}
                           </span>
