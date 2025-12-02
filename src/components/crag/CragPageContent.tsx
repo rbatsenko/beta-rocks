@@ -24,6 +24,7 @@ import {
   Sunset,
   Search,
   Pencil,
+  Layers,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -37,6 +38,7 @@ import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal"
 import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog";
 import { ConfirmDialog } from "@/components/dialogs/ConfirmDialog";
 import { EditCragDialog } from "@/components/dialogs/EditCragDialog";
+import { AddSectorModal } from "@/components/dialogs/AddSectorModal";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
 import { useRouter } from "next/navigation";
@@ -195,6 +197,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
   const [currentUserProfileId, setCurrentUserProfileId] = useState<string | null>(null);
   const [sectorSearchQuery, setSectorSearchQuery] = useState<string>("");
   const [showEditDialog, setShowEditDialog] = useState(false);
+  const [showAddSectorModal, setShowAddSectorModal] = useState(false);
 
   // React Query for conditions (client-side)
   // Use sector ID if viewing a sector with valid coordinates, otherwise use crag ID
@@ -922,32 +925,59 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
           </Card>
         )}
 
-        {/* Sectors Section */}
-        {sectors && sectors.length > 0 && (
+        {/* Sectors Section - Always show if not viewing a sector */}
+        {!currentSector && (
           <>
             <Separator className="my-8" />
             <div>
               <div className="flex items-center justify-between gap-4 mb-4">
                 <h2 className="text-2xl font-semibold">
                   {t("cragPage.sectors")}
-                  {filteredSectors.length !== sectors.length && (
+                  {sectors.length > 0 && filteredSectors.length !== sectors.length && (
                     <span className="text-base text-muted-foreground font-normal ml-2">
                       ({filteredSectors.length}/{sectors.length})
                     </span>
                   )}
                 </h2>
-                <div className="relative w-full max-w-xs">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    type="text"
-                    placeholder={t("cragPage.searchSectors")}
-                    value={sectorSearchQuery}
-                    onChange={(e) => setSectorSearchQuery(e.target.value)}
-                    className="pl-9"
-                  />
+                <div className="flex items-center gap-2">
+                  {sectors.length > 0 && (
+                    <div className="relative w-full max-w-xs">
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                      <Input
+                        type="text"
+                        placeholder={t("cragPage.searchSectors")}
+                        value={sectorSearchQuery}
+                        onChange={(e) => setSectorSearchQuery(e.target.value)}
+                        className="pl-9"
+                      />
+                    </div>
+                  )}
+                  <Button
+                    onClick={() => setShowAddSectorModal(true)}
+                    className="bg-orange-500 hover:bg-orange-600 whitespace-nowrap"
+                  >
+                    <Plus className="h-4 w-4" />
+                    {t("cragPage.addSector")}
+                  </Button>
                 </div>
               </div>
-              {filteredSectors.length > 0 ? (
+              {sectors.length === 0 ? (
+                <Card>
+                  <CardContent className="p-8 text-center">
+                    <Layers className="h-12 w-12 text-muted-foreground/50 mx-auto mb-4" />
+                    <p className="text-muted-foreground mb-4">
+                      {t("cragPage.noSectors") || "No sectors have been added to this crag yet."}
+                    </p>
+                    <Button
+                      onClick={() => setShowAddSectorModal(true)}
+                      variant="outline"
+                      className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20"
+                    >
+                      {t("cragPage.beFirstToAddSector") || "Be the first to add a sector"}
+                    </Button>
+                  </CardContent>
+                </Card>
+              ) : filteredSectors.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {filteredSectors.map((sector) => (
                     <Card
@@ -1051,6 +1081,23 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
           parent_crag_name: crag.parent_crag?.name,
         }}
         currentlyIsSector={!!crag.parent_crag_id}
+      />
+
+      {/* Add Sector Modal */}
+      <AddSectorModal
+        open={showAddSectorModal}
+        onOpenChange={setShowAddSectorModal}
+        parentCrag={{
+          id: crag.id,
+          name: crag.name,
+          lat: crag.lat,
+          lon: crag.lon,
+          country: crag.country,
+          state: crag.state,
+          municipality: crag.municipality,
+          village: crag.village,
+          rock_type: crag.rock_type,
+        }}
       />
     </div>
   );

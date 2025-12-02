@@ -137,6 +137,36 @@
       "failedDesc": "An error occurred while adding the crag. Please try again."
     }
   },
+  "addSectorModal": {
+    "title": "Add New Sector",
+    "subtitle": "Add a sector to {{cragName}}",
+    "mapLabel": "Sector Location",
+    "mapHelp": "Click on the map to set the sector location (starts at parent crag)",
+    "nearbySectorsWarning": {
+      "title": "Existing Sectors Nearby",
+      "message": "{{count}} sector/crag found within 200m",
+      "message_other": "{{count}} sectors/crags found within 200m"
+    },
+    "form": {
+      "name": "Sector Name",
+      "namePlaceholder": "e.g. Main Wall, North Face",
+      "description": "Description",
+      "descriptionPlaceholder": "Details about this sector (optional)..."
+    },
+    "cancel": "Cancel",
+    "submit": "Add Sector",
+    "submitting": "Adding...",
+    "success": "Sector added!",
+    "successDesc": "{{name}} has been added to the crag",
+    "errors": {
+      "nameRequired": "Name is required",
+      "nameRequiredDesc": "Please enter a name for the sector",
+      "locationRequired": "Location is required",
+      "locationRequiredDesc": "Please click on the map to set the sector location",
+      "failed": "Failed to add sector",
+      "failedDesc": "An error occurred while adding the sector. Please try again."
+    }
+  },
   "conditions": {
     "rating": "Rating",
     "details": "Details",
@@ -870,6 +900,9 @@
     "editCrag": "Edit crag details",
     "currentConditions": "Current Conditions",
     "sectors": "Sectors",
+    "addSector": "Add Sector",
+    "noSectors": "No sectors have been added to this crag yet.",
+    "beFirstToAddSector": "Be the first to add a sector",
     "searchSectors": "Search sectors...",
     "noSectorsFound": "No sectors found matching your search.",
     "disclaimer": "Weather conditions can change rapidly. Always verify conditions on arrival and use your best judgment.",
