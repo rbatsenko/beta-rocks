@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Mountain, Loader2, Check, AlertTriangle, ExternalLink } from "lucide-react";
+import { Mountain, Loader2, Check, AlertTriangle, ExternalLink, EyeOff } from "lucide-react";
 import { LatLng } from "leaflet";
 import { Button } from "@/components/ui/button";
 import {
@@ -85,6 +85,7 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
   const [selectedAspects, setSelectedAspects] = useState<number[]>([]);
   const [selectedClimbingTypes, setSelectedClimbingTypes] = useState<string[]>([]);
   const [description, setDescription] = useState("");
+  const [isSecret, setIsSecret] = useState(false);
 
   // Loading states
   const [geocoding, setGeocoding] = useState(false);
@@ -168,6 +169,7 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
       setSelectedClimbingTypes([]);
       setDescription("");
       setNearbyCrags([]);
+      setIsSecret(false);
     }
   }, [open, initialName]);
 
@@ -214,7 +216,9 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
     if (!position) {
       toast({
         title: t("addCragModal.errors.locationRequired"),
-        description: t("addCragModal.errors.locationRequiredDesc"),
+        description: isSecret
+          ? t("addCragModal.secretCrag.locationRequiredDesc")
+          : t("addCragModal.errors.locationRequiredDesc"),
         variant: "destructive",
       });
       return;
@@ -237,8 +241,8 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: name.trim(),
-          lat: position.lat,
-          lon: position.lng,
+          lat: position!.lat,
+          lon: position!.lng,
           country: country,
           state: state || undefined,
           municipality: municipality || undefined,
@@ -247,6 +251,7 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
           aspects: selectedAspects.length > 0 ? selectedAspects : undefined,
           climbingTypes: selectedClimbingTypes.length > 0 ? selectedClimbingTypes : undefined,
           description: description.trim() || undefined,
+          isSecret: isSecret || undefined,
         }),
       });
 
@@ -295,12 +300,60 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
               </DialogHeader>
 
               <div className="mt-6 space-y-6">
+                {/* Secret Crag Toggle */}
+                <button
+                  type="button"
+                  onClick={() => setIsSecret(!isSecret)}
+                  className={`w-full flex items-start gap-3 p-4 rounded-lg border-2 transition-all duration-200 text-left ${
+                    isSecret
+                      ? "bg-amber-50 dark:bg-amber-950/30 border-amber-300 dark:border-amber-700"
+                      : "bg-muted/30 border-transparent hover:border-muted-foreground/20 hover:bg-muted/50"
+                  }`}
+                >
+                  <div
+                    className={`flex items-center justify-center w-10 h-10 rounded-full shrink-0 transition-colors ${
+                      isSecret
+                        ? "bg-amber-200 dark:bg-amber-800"
+                        : "bg-muted"
+                    }`}
+                  >
+                    <EyeOff
+                      className={`h-5 w-5 transition-colors ${
+                        isSecret
+                          ? "text-amber-700 dark:text-amber-300"
+                          : "text-muted-foreground"
+                      }`}
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span
+                        className={`font-medium transition-colors ${
+                          isSecret ? "text-amber-900 dark:text-amber-100" : ""
+                        }`}
+                      >
+                        {t("addCragModal.secretCrag.label")}
+                      </span>
+                      {isSecret && (
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-amber-200 dark:bg-amber-800 text-amber-800 dark:text-amber-200 font-medium">
+                          ON
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {t("addCragModal.secretCrag.hint")}
+                    </p>
+                  </div>
+                </button>
+
                 {/* Map Section */}
                 <div>
                   <Label className="text-base font-semibold mb-2">
-                    {t("addCragModal.mapLabel")} *
+                    {isSecret ? t("addCragModal.secretCrag.mapLabel") : t("addCragModal.mapLabel")} *
                   </Label>
-                  <p className="text-sm text-muted-foreground mb-3">{t("addCragModal.mapHelp")}</p>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    {isSecret ? t("addCragModal.secretCrag.mapHelp") : t("addCragModal.mapHelp")}
+                  </p>
                   <CragLocationPicker
                     position={position}
                     onPositionChange={setPosition}

@@ -190,6 +190,7 @@ export type Database = {
           created_at: string | null;
           description: string | null;
           id: string;
+          is_secret: boolean;
           last_synced_at: string | null;
           lat: number;
           lon: number;
@@ -205,6 +206,7 @@ export type Database = {
           state: string | null;
           updated_at: string | null;
           village: string | null;
+          weather_city: string | null;
         };
         Insert: {
           aspects?: number[] | null;
@@ -213,6 +215,7 @@ export type Database = {
           created_at?: string | null;
           description?: string | null;
           id?: string;
+          is_secret?: boolean;
           last_synced_at?: string | null;
           lat: number;
           lon: number;
@@ -228,6 +231,7 @@ export type Database = {
           state?: string | null;
           updated_at?: string | null;
           village?: string | null;
+          weather_city?: string | null;
         };
         Update: {
           aspects?: number[] | null;
@@ -236,6 +240,7 @@ export type Database = {
           created_at?: string | null;
           description?: string | null;
           id?: string;
+          is_secret?: boolean;
           last_synced_at?: string | null;
           lat?: number;
           lon?: number;
@@ -251,6 +256,7 @@ export type Database = {
           state?: string | null;
           updated_at?: string | null;
           village?: string | null;
+          weather_city?: string | null;
         };
         Relationships: [
           {

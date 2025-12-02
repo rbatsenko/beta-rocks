@@ -25,6 +25,7 @@ import {
   Search,
   Pencil,
   Layers,
+  EyeOff,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -83,6 +84,7 @@ interface CragPageContentProps {
     parent_crag?: {
       name: string;
     } | null;
+    is_secret?: boolean;
   };
   sectors: any[];
   currentSector?: any | null;
@@ -199,8 +201,12 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [showAddSectorModal, setShowAddSectorModal] = useState(false);
 
+  // Check if this is a secret crag (no location data shown)
+  const isSecretCrag = crag.is_secret === true;
+
   // React Query for conditions (client-side)
   // Use sector ID if viewing a sector with valid coordinates, otherwise use crag ID
+  // For secret crags, coords point to a reference city for weather
   const locationId =
     currentSector && currentSector.lat !== null && currentSector.lon !== null
       ? currentSector.id
@@ -572,49 +578,63 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
               </p>
             )}
 
-            {/* Rock Type & Coordinates */}
+            {/* Secret Crag Badge */}
+            {isSecretCrag && (
+              <div className="flex items-center gap-2 p-3 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg">
+                <EyeOff className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0" />
+                <p className="text-sm text-amber-800 dark:text-amber-200">
+                  {t("cragPage.secretCrag.notice")}
+                </p>
+              </div>
+            )}
+
+            {/* Rock Type & Coordinates (hidden for secret crags) */}
             <div className="flex flex-wrap items-center gap-2">
               {crag.rock_type && (
                 <Badge variant="outline" className="capitalize">
                   {t(`rockTypes.${crag.rock_type}`) || crag.rock_type}
                 </Badge>
               )}
-              <Badge variant="secondary" className="font-mono text-xs">
-                {displayLat.toFixed(4)}, {displayLon.toFixed(4)}
-              </Badge>
-              {getSunCalcUrl(displayLat, displayLon) && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    const url = getSunCalcUrl(displayLat, displayLon);
-                    if (url) window.open(url, "_blank", "noopener,noreferrer");
-                  }}
-                  title={t("cragPage.viewSunAngles")}
-                >
-                  <Sun className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">SunCalc</span>
-                </Button>
-              )}
-              {getGoogleMapsUrl(displayLat, displayLon) && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    const url = getGoogleMapsUrl(displayLat, displayLon);
-                    if (url) window.open(url, "_blank", "noopener,noreferrer");
-                  }}
-                  title={t("cragPage.viewOnGoogleMaps")}
-                >
-                  <Map className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">{t("cragPage.viewOnMap")}</span>
-                </Button>
+              {!isSecretCrag && (
+                <>
+                  <Badge variant="secondary" className="font-mono text-xs">
+                    {displayLat.toFixed(4)}, {displayLon.toFixed(4)}
+                  </Badge>
+                  {getSunCalcUrl(displayLat, displayLon) && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        const url = getSunCalcUrl(displayLat, displayLon);
+                        if (url) window.open(url, "_blank", "noopener,noreferrer");
+                      }}
+                      title={t("cragPage.viewSunAngles")}
+                    >
+                      <Sun className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline">SunCalc</span>
+                    </Button>
+                  )}
+                  {getGoogleMapsUrl(displayLat, displayLon) && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        const url = getGoogleMapsUrl(displayLat, displayLon);
+                        if (url) window.open(url, "_blank", "noopener,noreferrer");
+                      }}
+                      title={t("cragPage.viewOnGoogleMaps")}
+                    >
+                      <Map className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline">{t("cragPage.viewOnMap")}</span>
+                    </Button>
+                  )}
+                </>
               )}
             </div>
           </div>
 
-          {/* Small inline map */}
-          {getOpenStreetMapEmbedUrl(displayLat, displayLon) && (
+          {/* Small inline map (hidden for secret crags) */}
+          {!isSecretCrag && getOpenStreetMapEmbedUrl(displayLat, displayLon) && (
             <div className="mt-4">
               <iframe
                 width="100%"
@@ -647,7 +667,14 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
             ) : conditions ? (
               <>
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-semibold">{t("cragPage.currentConditions")}</h2>
+                  <div>
+                    <h2 className="text-xl font-semibold">{t("cragPage.currentConditions")}</h2>
+                    {isSecretCrag && (
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {t("cragPage.secretCrag.weatherNote")}
+                      </p>
+                    )}
+                  </div>
                   <div className="flex items-center gap-2">
                     <Badge
                       variant="outline"

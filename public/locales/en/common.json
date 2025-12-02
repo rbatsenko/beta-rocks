@@ -135,6 +135,13 @@
       "duplicateDesc": "A crag with a similar name already exists at this location. Check the map for existing crags.",
       "failed": "Failed to add crag",
       "failedDesc": "An error occurred while adding the crag. Please try again."
+    },
+    "secretCrag": {
+      "label": "Secret Crag",
+      "hint": "Hide exact location. Useful for sensitive or closed crags. Coordinates won't be shown, but you can set a nearby city for weather reference.",
+      "mapLabel": "Reference Location for Weather",
+      "mapHelp": "Search for a nearby city or town. This location will be used for weather forecasts only - the exact coordinates won't be shown.",
+      "locationRequiredDesc": "Please select a nearby city on the map for weather reference"
     }
   },
   "addSectorModal": {
@@ -912,7 +919,11 @@
     "viewOnMap": "View on map",
     "viewOnGoogleMaps": "View on Google Maps",
     "addToFavorites": "Add to favorites",
-    "removeFromFavorites": "Remove from favorites"
+    "removeFromFavorites": "Remove from favorites",
+    "secretCrag": {
+      "notice": "This is a secret crag. Location is hidden to protect access.",
+      "weatherNote": "Weather for nearby reference location"
+    }
   },
   "loading": {
     "conditions": "Loading conditions...",
