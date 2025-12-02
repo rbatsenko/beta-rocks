@@ -78,6 +78,7 @@ export function UserMenu({
   const [newSyncKey, setNewSyncKey] = useState<string>("");
   const [showReportsDialog, setShowReportsDialog] = useState(false);
   const [showAddCragModal, setShowAddCragModal] = useState(false);
+  const [pendingAction, setPendingAction] = useState<"reports" | "addCrag" | null>(null);
 
   // Get flag emoji for current language
   const currentFlag = localeFlagMap[i18n.language] || "🌐";
@@ -111,10 +112,38 @@ export function UserMenu({
     setNewSyncKey(profile.syncKey);
     setShowProfileModal(false);
     setShowProfileCreated(true);
+
+    // Complete pending action after profile creation
+    if (pendingAction === "reports") {
+      setShowReportsDialog(true);
+    } else if (pendingAction === "addCrag") {
+      setShowAddCragModal(true);
+    }
+    setPendingAction(null);
+
     // Reload page to ensure proper initialization with new profile
     setTimeout(() => {
       window.location.reload();
     }, 2000);
+  };
+
+  // Handle clicks that require profile in no-profile state
+  const handleReportsClick = () => {
+    if (!userProfile) {
+      setPendingAction("reports");
+      setShowProfileModal(true);
+      return;
+    }
+    setShowReportsDialog(true);
+  };
+
+  const handleAddCragClick = () => {
+    if (!userProfile) {
+      setPendingAction("addCrag");
+      setShowProfileModal(true);
+      return;
+    }
+    setShowAddCragModal(true);
   };
 
   // No profile - show menu with basic options
@@ -142,13 +171,13 @@ export function UserMenu({
             <DropdownMenuSeparator />
             <UserMenuContent
               onFavoritesClick={onFavoritesClick}
-              onReportsClick={() => setShowReportsDialog(true)}
+              onReportsClick={handleReportsClick}
               onStatsClick={onStatsClick}
               onSettingsClick={onSettingsClick}
               onAboutClick={onAboutClick}
               onClearChatClick={onClearChatClick}
               isClearChatDisabled={isClearChatDisabled}
-              onAddCragClick={() => setShowAddCragModal(true)}
+              onAddCragClick={handleAddCragClick}
             />
           </DropdownMenuContent>
         </DropdownMenu>
@@ -213,13 +242,13 @@ export function UserMenu({
         <DropdownMenuSeparator />
         <UserMenuContent
           onFavoritesClick={onFavoritesClick}
-          onReportsClick={() => setShowReportsDialog(true)}
+          onReportsClick={handleReportsClick}
           onStatsClick={onStatsClick}
           onSettingsClick={onSettingsClick}
           onAboutClick={onAboutClick}
           onClearChatClick={onClearChatClick}
           isClearChatDisabled={isClearChatDisabled}
-          onAddCragClick={() => setShowAddCragModal(true)}
+          onAddCragClick={handleAddCragClick}
         />
       </DropdownMenuContent>
       <UserReportsDialog open={showReportsDialog} onOpenChange={setShowReportsDialog} />

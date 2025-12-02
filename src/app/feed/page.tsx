@@ -58,10 +58,11 @@ export default async function FeedPage() {
         if (parentCrags) {
           // Attach parent_crag data to each report
           data.forEach(report => {
-            if (report.crag?.parent_crag_id) {
-              const parentCrag = parentCrags.find(pc => pc.id === report.crag.parent_crag_id);
-              if (parentCrag && report.crag) {
-                (report.crag as any).parent_crag = parentCrag;
+            const crag = report.crag;
+            if (crag?.parent_crag_id) {
+              const parentCrag = parentCrags.find(pc => pc.id === crag.parent_crag_id);
+              if (parentCrag) {
+                (crag as any).parent_crag = parentCrag;
               }
             }
           });

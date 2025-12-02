@@ -13,6 +13,7 @@ import { FeaturesDialog } from "@/components/dialogs/FeaturesDialog";
 import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal";
 import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog";
 import { FloatingActionButton } from "@/components/FloatingActionButton";
+import { AddCragModal } from "@/components/dialogs/AddCragModal";
 import { getUserProfile, type UserProfile } from "@/lib/auth/sync-key";
 
 export function RootLayoutClient({ children }: { children: React.ReactNode }) {
@@ -23,12 +24,13 @@ export function RootLayoutClient({ children }: { children: React.ReactNode }) {
   const [syncExplainerDialogOpen, setSyncExplainerDialogOpen] = useState(false);
   const [searchDialogOpen, setSearchDialogOpen] = useState(false);
   const [featuresDialogOpen, setFeaturesDialogOpen] = useState(false);
+  const [addCragModalOpen, setAddCragModalOpen] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showProfileCreated, setShowProfileCreated] = useState(false);
   const [newSyncKey, setNewSyncKey] = useState<string>("");
-  const [pendingAction, setPendingAction] = useState<"favorites" | "stats" | "settings" | null>(
-    null
-  );
+  const [pendingAction, setPendingAction] = useState<
+    "favorites" | "stats" | "settings" | "addCrag" | null
+  >(null);
 
   // ⌘K keyboard shortcut for search
   useEffect(() => {
@@ -59,6 +61,8 @@ export function RootLayoutClient({ children }: { children: React.ReactNode }) {
       setStatsDialogOpen(true);
     } else if (pendingAction === "settings") {
       setSettingsDialogOpen(true);
+    } else if (pendingAction === "addCrag") {
+      setAddCragModalOpen(true);
     }
 
     setPendingAction(null);
@@ -95,6 +99,16 @@ export function RootLayoutClient({ children }: { children: React.ReactNode }) {
     setSettingsDialogOpen(true);
   };
 
+  const handleAddCragClick = () => {
+    const profile = getUserProfile();
+    if (!profile) {
+      setPendingAction("addCrag");
+      setShowProfileModal(true);
+      return;
+    }
+    setAddCragModalOpen(true);
+  };
+
   // Show header on location pages and feed page
   const showHeader = pathname?.startsWith("/location") || pathname === "/feed";
 
@@ -119,7 +133,7 @@ export function RootLayoutClient({ children }: { children: React.ReactNode }) {
       {children}
 
       {/* Floating Action Button */}
-      {showFAB && <FloatingActionButton />}
+      {showFAB && <FloatingActionButton onAddCrag={handleAddCragClick} />}
 
       {/* Global dialogs - available everywhere */}
       <SearchDialog open={searchDialogOpen} onOpenChange={setSearchDialogOpen} />
@@ -127,6 +141,7 @@ export function RootLayoutClient({ children }: { children: React.ReactNode }) {
       <FavoritesDialog open={favoritesDialogOpen} onOpenChange={setFavoritesDialogOpen} />
       <StatsDialog open={statsDialogOpen} onOpenChange={setStatsDialogOpen} />
       <FeaturesDialog open={featuresDialogOpen} onOpenChange={setFeaturesDialogOpen} />
+      <AddCragModal open={addCragModalOpen} onOpenChange={setAddCragModalOpen} />
       <SyncExplainerDialog
         open={syncExplainerDialogOpen}
         onOpenChange={setSyncExplainerDialogOpen}

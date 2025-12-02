@@ -6,20 +6,20 @@
     "heading": "Get info on any crag",
     "description": "Real-time conditions, community reports, and route information for crags worldwide",
     "searchHint": "Search for any climbing area",
-    "yourFavorites": "Your Favorites",
+    "yourFavorites": "Your Favourites",
     "favoriteQuery": "What are conditions at {{crag}}?",
     "exampleQueries": {
       "query1": {
-        "display": "Little Cottonwood Canyon conditions tomorrow?",
-        "query": "Little Cottonwood Canyon conditions tomorrow?"
+        "display": "Squamish conditions today?",
+        "query": "Squamish conditions today?"
       },
       "query2": {
-        "display": "Is Rifle dry this afternoon?",
-        "query": "Is Rifle dry this afternoon?"
+        "display": "Is Skaha dry this afternoon?",
+        "query": "Is Skaha dry this afternoon?"
       },
       "query3": {
-        "display": "El Capitan conditions today?",
-        "query": "El Capitan conditions today?"
+        "display": "Niagara Glen conditions tomorrow?",
+        "query": "Niagara Glen conditions tomorrow?"
       }
     }
   },

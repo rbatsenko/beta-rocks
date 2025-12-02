@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import {
   ThumbsUp,
   User,
@@ -438,7 +439,7 @@ export function ReportCard({
 
         {/* Photo Gallery */}
         {report.photos && report.photos.length > 0 && (
-          <div className="mt-4 flex gap-2 flex-wrap">
+          <div className="mt-4 mb-3 flex gap-2 flex-wrap">
             {report.photos.map((photoPath, index) => (
               <button
                 key={index}
@@ -490,12 +491,16 @@ export function ReportCard({
         completedAction={t("reports.voteReady")}
       />
 
-      {/* Photo Lightbox */}
-      {lightboxOpen && report.photos && report.photos.length > 0 && (
-        <div
-          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
-          onClick={() => setLightboxOpen(false)}
-        >
+      {/* Photo Lightbox - rendered via portal to escape stacking context */}
+      {lightboxOpen &&
+        report.photos &&
+        report.photos.length > 0 &&
+        createPortal(
+          <div
+            className="fixed inset-0 bg-black/90 flex items-center justify-center p-4"
+            style={{ zIndex: 99999 }}
+            onClick={() => setLightboxOpen(false)}
+          >
           <div className="relative max-w-4xl max-h-full">
             <button
               onClick={() => setLightboxOpen(false)}
@@ -572,8 +577,9 @@ export function ReportCard({
               </>
             )}
           </div>
-        </div>
-      )}
+          </div>,
+          document.body
+        )}
     </Card>
   );
 }

@@ -6,25 +6,25 @@
     "heading": "Get info on any crag",
     "description": "Real-time conditions, community reports, and route information for crags worldwide",
     "searchHint": "Search for any climbing area",
-    "yourFavorites": "Your Favorites",
+    "yourFavorites": "Your Favourites",
     "favoriteQuery": "What are conditions at {{crag}}?",
     "exampleQueries": {
       "query1": {
-        "display": "Little Cottonwood Canyon conditions tomorrow?",
-        "query": "Little Cottonwood Canyon conditions tomorrow?"
+        "display": "Stanage conditions tomorrow?",
+        "query": "Stanage conditions tomorrow?"
       },
       "query2": {
-        "display": "Is Rifle dry this afternoon?",
-        "query": "Is Rifle dry this afternoon?"
+        "display": "Is Dumbarton Rock dry this afternoon?",
+        "query": "Is Dumbarton Rock (55.936, -4.564) dry this afternoon?"
       },
       "query3": {
-        "display": "El Capitan conditions today?",
-        "query": "El Capitan conditions today?"
+        "display": "Raven Tor conditions today?",
+        "query": "Raven Tor conditions today?"
       }
     }
   },
   "chat": {
-    "analyzing": "Analyzing conditions...",
+    "analyzing": "Analysing conditions...",
     "thinking": "Thinking...",
     "inputPlaceholder": "Ask about any crag or sector...",
     "clearChat": "Clear Chat",
