@@ -805,5 +805,14 @@
       "noFavoritesTitle": "Ei raportteja suosikeista",
       "noFavoritesDescription": "Lisää kiipeilypaikkoja suosikkeihin nähdäksesi niiden raportit tässä syötteessä"
     }
+  },
+  "webcams": {
+    "title": "Lähellä olevat webkamerat",
+    "nearbyCount": "{{count}} webkamera löytyi",
+    "nearbyCount_other": "{{count}} webkameraa löytyi",
+    "daylight": "Päivänvalo",
+    "openOnWindy": "Avaa Windy.comissa",
+    "poweredBy": "Tarjoaa",
+    "noWebcams": "Lähistöltä ei löytynyt webkameroita"
   }
 }

@@ -806,5 +806,14 @@
       "noFavoritesTitle": "Ingen rapporter fra favoritter",
       "noFavoritesDescription": "Legg til klatresteder i favorittene dine for å se rapportene deres i denne feeden"
     }
+  },
+  "webcams": {
+    "title": "Webkameraer i nærheten",
+    "nearbyCount": "{{count}} webkamera funnet",
+    "nearbyCount_other": "{{count}} webkameraer funnet",
+    "daylight": "Dagslys",
+    "openOnWindy": "Åpne på Windy.com",
+    "poweredBy": "Drevet av",
+    "noWebcams": "Ingen webkameraer funnet i nærheten"
   }
 }

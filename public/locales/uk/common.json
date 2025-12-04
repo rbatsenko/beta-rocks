@@ -891,5 +891,14 @@
       "noFavoritesTitle": "Немає звітів з вибраних",
       "noFavoritesDescription": "Додайте скелі до вибраних, щоб бачити їхні звіти в цій стрічці"
     }
+  },
+  "webcams": {
+    "title": "Веб-камери поблизу",
+    "nearbyCount": "Знайдено {{count}} веб-камеру",
+    "nearbyCount_other": "Знайдено {{count}} веб-камер",
+    "daylight": "Денне світло",
+    "openOnWindy": "Відкрити на Windy.com",
+    "poweredBy": "За підтримки",
+    "noWebcams": "Веб-камери поблизу не знайдено"
   }
 }

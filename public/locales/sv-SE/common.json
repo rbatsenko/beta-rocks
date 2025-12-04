@@ -726,5 +726,14 @@
       "noFavoritesTitle": "Inga rapporter från favoriter",
       "noFavoritesDescription": "Lägg till klippor till dina favoriter för att se deras rapporter i detta flöde"
     }
+  },
+  "webcams": {
+    "title": "Webbkameror i närheten",
+    "nearbyCount": "{{count}} webbkamera hittades",
+    "nearbyCount_other": "{{count}} webbkameror hittades",
+    "daylight": "Dagsljus",
+    "openOnWindy": "Öppna på Windy.com",
+    "poweredBy": "Drivs av",
+    "noWebcams": "Inga webbkameror hittades i närheten"
   }
 }

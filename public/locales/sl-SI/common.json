@@ -892,5 +892,14 @@
       "noFavoritesTitle": "Ni poročil iz priljubljenih",
       "noFavoritesDescription": "Dodajte plezališča med priljubljene, da vidite njihova poročila v tem pretoku"
     }
+  },
+  "webcams": {
+    "title": "Spletne kamere v bližini",
+    "nearbyCount": "Najdena {{count}} spletna kamera",
+    "nearbyCount_other": "Najdenih {{count}} spletnih kamer",
+    "daylight": "Dnevna svetloba",
+    "openOnWindy": "Odpri na Windy.com",
+    "poweredBy": "Zagotavlja",
+    "noWebcams": "V bližini ni bilo najdenih spletnih kamer"
   }
 }

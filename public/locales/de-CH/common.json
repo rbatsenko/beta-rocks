@@ -894,5 +894,14 @@
       "noFavoritesTitle": "Keine Berichte von Favoriten",
       "noFavoritesDescription": "Füge Felsen zu deinen Favoriten hinzu, um ihre Berichte in diesem Feed zu sehen"
     }
+  },
+  "webcams": {
+    "title": "Webcams in der Nähe",
+    "nearbyCount": "{{count}} Webcam gefunden",
+    "nearbyCount_other": "{{count}} Webcams gefunden",
+    "daylight": "Tageslicht",
+    "openOnWindy": "Auf Windy.com öffnen",
+    "poweredBy": "Bereitgestellt von",
+    "noWebcams": "Keine Webcams in der Nähe gefunden"
   }
 }

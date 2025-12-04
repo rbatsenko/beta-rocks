@@ -890,5 +890,14 @@
       "noFavoritesTitle": "Nema izvještaja iz favorita",
       "noFavoritesDescription": "Dodajte stijene u favorite kako biste vidjeli njihove izvještaje u ovom pregledu"
     }
+  },
+  "webcams": {
+    "title": "Web kamere u blizini",
+    "nearbyCount": "Pronađena {{count}} web kamera",
+    "nearbyCount_other": "Pronađeno {{count}} web kamera",
+    "daylight": "Dnevno svjetlo",
+    "openOnWindy": "Otvori na Windy.com",
+    "poweredBy": "Pokreće",
+    "noWebcams": "Nisu pronađene web kamere u blizini"
   }
 }

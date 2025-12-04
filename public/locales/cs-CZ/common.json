@@ -891,5 +891,14 @@
       "noFavoritesTitle": "Žádná hlášení z oblíbených",
       "noFavoritesDescription": "Přidejte skály do oblíbených, abyste viděli jejich hlášení v tomto přehledu"
     }
+  },
+  "webcams": {
+    "title": "Webkamery v okolí",
+    "nearbyCount": "Nalezena {{count}} webkamera",
+    "nearbyCount_other": "Nalezeno {{count}} webkamer",
+    "daylight": "Denní světlo",
+    "openOnWindy": "Otevřít na Windy.com",
+    "poweredBy": "Poskytuje",
+    "noWebcams": "V okolí nebyly nalezeny žádné webkamery"
   }
 }

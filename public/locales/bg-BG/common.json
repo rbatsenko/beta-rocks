@@ -857,5 +857,14 @@
       "noFavoritesTitle": "Няма доклади от любими",
       "noFavoritesDescription": "Добавете скали към любимите си, за да виждате техните доклади в тази емисия"
     }
+  },
+  "webcams": {
+    "title": "Уеб камери наблизо",
+    "nearbyCount": "Намерена {{count}} уеб камера",
+    "nearbyCount_other": "Намерени {{count}} уеб камери",
+    "daylight": "Дневна светлина",
+    "openOnWindy": "Отвори в Windy.com",
+    "poweredBy": "Предоставено от",
+    "noWebcams": "Не са намерени уеб камери наблизо"
   }
 }

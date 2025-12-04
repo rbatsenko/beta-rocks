@@ -773,5 +773,14 @@
       "noFavoritesTitle": "Δεν υπάρχουν αναφορές από αγαπημένα",
       "noFavoritesDescription": "Προσθέστε βράχους στα αγαπημένα σας για να δείτε τις αναφορές τους σε αυτή τη ροή"
     }
+  },
+  "webcams": {
+    "title": "Κοντινές Webcam",
+    "nearbyCount": "Βρέθηκε {{count}} webcam",
+    "nearbyCount_other": "Βρέθηκαν {{count}} webcam",
+    "daylight": "Φως ημέρας",
+    "openOnWindy": "Άνοιγμα στο Windy.com",
+    "poweredBy": "Παρέχεται από",
+    "noWebcams": "Δεν βρέθηκαν webcam κοντά"
   }
 }

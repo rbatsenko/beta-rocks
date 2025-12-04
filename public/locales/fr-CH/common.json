@@ -894,5 +894,14 @@
       "noFavoritesTitle": "Aucun rapport des favoris",
       "noFavoritesDescription": "Ajoutez des sites à vos favoris pour voir leurs rapports dans ce fil"
     }
+  },
+  "webcams": {
+    "title": "Webcams à proximité",
+    "nearbyCount": "{{count}} webcam trouvée",
+    "nearbyCount_other": "{{count}} webcams trouvées",
+    "daylight": "Lumière du jour",
+    "openOnWindy": "Ouvrir sur Windy.com",
+    "poweredBy": "Propulsé par",
+    "noWebcams": "Aucune webcam trouvée à proximité"
   }
 }

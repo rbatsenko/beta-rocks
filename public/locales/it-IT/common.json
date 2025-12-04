@@ -894,5 +894,14 @@
       "noFavoritesTitle": "Nessuna segnalazione dai preferiti",
       "noFavoritesDescription": "Aggiungi falesie ai tuoi preferiti per vedere le loro segnalazioni in questo feed"
     }
+  },
+  "webcams": {
+    "title": "Webcam nelle vicinanze",
+    "nearbyCount": "{{count}} webcam trovata",
+    "nearbyCount_other": "{{count}} webcam trovate",
+    "daylight": "Luce diurna",
+    "openOnWindy": "Apri su Windy.com",
+    "poweredBy": "Offerto da",
+    "noWebcams": "Nessuna webcam trovata nelle vicinanze"
   }
 }

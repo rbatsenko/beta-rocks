@@ -909,5 +909,14 @@
       "noFavoritesTitle": "No reports from favorites",
       "noFavoritesDescription": "Add crags to your favorites to see their reports in this feed"
     }
+  },
+  "webcams": {
+    "title": "Nearby Webcams",
+    "nearbyCount": "{{count}} webcam found",
+    "nearbyCount_other": "{{count}} webcams found",
+    "daylight": "Daylight",
+    "openOnWindy": "Open on Windy.com",
+    "poweredBy": "Powered by",
+    "noWebcams": "No webcams found nearby"
   }
 }

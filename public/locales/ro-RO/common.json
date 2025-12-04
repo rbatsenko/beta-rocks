@@ -810,5 +810,14 @@
       "noFavoritesTitle": "Nu există rapoarte de la favorite",
       "noFavoritesDescription": "Adaugă stânci la favorite pentru a vedea rapoartele lor în acest flux"
     }
+  },
+  "webcams": {
+    "title": "Webcam-uri din apropiere",
+    "nearbyCount": "{{count}} webcam găsită",
+    "nearbyCount_other": "{{count}} webcam-uri găsite",
+    "daylight": "Lumina zilei",
+    "openOnWindy": "Deschide pe Windy.com",
+    "poweredBy": "Oferit de",
+    "noWebcams": "Nu s-au găsit webcam-uri în apropiere"
   }
 }

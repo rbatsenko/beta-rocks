@@ -809,5 +809,14 @@
       "noFavoritesTitle": "Sem relatórios dos favoritos",
       "noFavoritesDescription": "Adicione falésias aos seus favoritos para ver os seus relatórios neste feed"
     }
+  },
+  "webcams": {
+    "title": "Webcams próximas",
+    "nearbyCount": "{{count}} webcam encontrada",
+    "nearbyCount_other": "{{count}} webcams encontradas",
+    "daylight": "Luz do dia",
+    "openOnWindy": "Abrir no Windy.com",
+    "poweredBy": "Desenvolvido por",
+    "noWebcams": "Nenhuma webcam encontrada nas proximidades"
   }
 }

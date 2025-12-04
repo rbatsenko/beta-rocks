@@ -894,5 +894,14 @@
       "noFavoritesTitle": "No hay reportes de favoritos",
       "noFavoritesDescription": "Añade sectores a tus favoritos para ver sus reportes en este feed"
     }
+  },
+  "webcams": {
+    "title": "Webcams cercanas",
+    "nearbyCount": "{{count}} webcam encontrada",
+    "nearbyCount_other": "{{count}} webcams encontradas",
+    "daylight": "Luz del día",
+    "openOnWindy": "Abrir en Windy.com",
+    "poweredBy": "Desarrollado por",
+    "noWebcams": "No se encontraron webcams cercanas"
   }
 }

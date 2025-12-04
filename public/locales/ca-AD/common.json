@@ -773,5 +773,14 @@
       "noFavoritesTitle": "No hi ha informes dels favorits",
       "noFavoritesDescription": "Afegiu roques als vostres favorits per veure els seus informes en aquest flux"
     }
+  },
+  "webcams": {
+    "title": "Càmeres web properes",
+    "nearbyCount": "{{count}} càmera web trobada",
+    "nearbyCount_other": "{{count}} càmeres web trobades",
+    "daylight": "Llum del dia",
+    "openOnWindy": "Obre a Windy.com",
+    "poweredBy": "Proporcionat per",
+    "noWebcams": "No s'han trobat càmeres web properes"
   }
 }

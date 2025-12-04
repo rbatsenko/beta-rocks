@@ -809,5 +809,14 @@
       "noFavoritesTitle": "Geen rapporten van favorieten",
       "noFavoritesDescription": "Voeg rotsen toe aan je favorieten om hun rapporten in deze feed te zien"
     }
+  },
+  "webcams": {
+    "title": "Webcams in de buurt",
+    "nearbyCount": "{{count}} webcam gevonden",
+    "nearbyCount_other": "{{count}} webcams gevonden",
+    "daylight": "Daglicht",
+    "openOnWindy": "Openen op Windy.com",
+    "poweredBy": "Mogelijk gemaakt door",
+    "noWebcams": "Geen webcams gevonden in de buurt"
   }
 }

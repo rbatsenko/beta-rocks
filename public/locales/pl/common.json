@@ -892,5 +892,14 @@
       "noFavoritesTitle": "Brak raportów z ulubionych",
       "noFavoritesDescription": "Dodaj skały do ulubionych, aby zobaczyć ich raporty w tym kanale"
     }
+  },
+  "webcams": {
+    "title": "Kamery internetowe w pobliżu",
+    "nearbyCount": "Znaleziono {{count}} kamerę",
+    "nearbyCount_other": "Znaleziono {{count}} kamer",
+    "daylight": "Światło dzienne",
+    "openOnWindy": "Otwórz na Windy.com",
+    "poweredBy": "Obsługiwane przez",
+    "noWebcams": "Nie znaleziono kamer w pobliżu"
   }
 }
