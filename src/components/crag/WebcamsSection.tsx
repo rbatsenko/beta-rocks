@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Video, MapPin, Loader2, ChevronDown, ChevronUp } from "lucide-react";
+import { Video, MapPin, Loader2, ChevronDown, ChevronUp, Sun } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -34,10 +34,12 @@ async function fetchWebcams(lat: number, lon: number): Promise<WebcamsResponse> 
 }
 
 function WebcamCard({ webcam }: { webcam: WebcamWithDistance }) {
+  const { t } = useClientTranslation("common");
   const [imageError, setImageError] = useState(false);
 
-  // Use current (most recent) image, not daylight (which is a saved snapshot)
-  const imageUrl = webcam.images.current.preview;
+  // Prefer daylight image (shows conditions during climbing hours), fall back to current
+  const hasDaylight = !!webcam.images.daylight?.preview;
+  const imageUrl = webcam.images.daylight?.preview || webcam.images.current.preview;
 
   return (
     <a
@@ -61,8 +63,14 @@ function WebcamCard({ webcam }: { webcam: WebcamWithDistance }) {
               <Video className="h-12 w-12 text-muted-foreground/50" />
             </div>
           )}
-          <div className="absolute top-2 right-2">
-            <Badge variant="secondary" className="text-xs">
+          <div className="absolute top-2 left-2 right-2 flex justify-between items-start">
+            {hasDaylight && (
+              <Badge variant="secondary" className="text-xs gap-1">
+                <Sun className="h-3 w-3" />
+                {t("webcams.daylight")}
+              </Badge>
+            )}
+            <Badge variant="secondary" className="text-xs ml-auto">
               {webcam.distanceKm.toFixed(1)} km
             </Badge>
           </div>
