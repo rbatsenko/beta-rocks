@@ -104,8 +104,8 @@ export async function getNearbyWebcams(
         "x-windy-api-key": apiKey,
         "User-Agent": "beta.rocks",
       },
-      // Cache for 10 minutes (webcam images refresh periodically)
-      next: { revalidate: 600 },
+      // Cache for 3 minutes (Windy image tokens expire after 10 min on free tier)
+      next: { revalidate: 180 },
     });
 
     if (!response.ok) {

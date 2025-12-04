@@ -944,6 +944,11 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
           )}
         </div>
 
+        {/* Webcams Section */}
+        <div className="mb-6">
+          <WebcamsSection latitude={crag.lat} longitude={crag.lon} />
+        </div>
+
         {/* Detailed Conditions (Tabs) */}
         {conditionsData && (
           <Card className="mb-6">
@@ -952,11 +957,6 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
             </CardContent>
           </Card>
         )}
-
-        {/* Webcams Section */}
-        <div className="mb-6">
-          <WebcamsSection latitude={crag.lat} longitude={crag.lon} />
-        </div>
 
         {/* Sectors Section - Always show if not viewing a sector */}
         {!currentSector && (

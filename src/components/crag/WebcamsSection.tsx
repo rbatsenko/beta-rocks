@@ -144,8 +144,8 @@ export function WebcamsSection({ latitude, longitude }: WebcamsSectionProps) {
   } = useQuery({
     queryKey: ["webcams", latitude, longitude],
     queryFn: () => fetchWebcams(latitude, longitude),
-    staleTime: 10 * 60 * 1000, // 10 minutes
-    gcTime: 30 * 60 * 1000, // 30 minutes
+    staleTime: 3 * 60 * 1000, // 3 minutes (Windy tokens expire after 10 min)
+    gcTime: 10 * 60 * 1000, // 10 minutes
     retry: 1,
   });
 
