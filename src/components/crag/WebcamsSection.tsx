@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Video, MapPin, ExternalLink, Loader2, ChevronDown, ChevronUp } from "lucide-react";
+import { Video, MapPin, Loader2, ChevronDown, ChevronUp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -34,102 +34,52 @@ async function fetchWebcams(lat: number, lon: number): Promise<WebcamsResponse> 
 }
 
 function WebcamCard({ webcam }: { webcam: WebcamWithDistance }) {
-  const { t } = useClientTranslation("common");
-  const [showPlayer, setShowPlayer] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  // Use daylight image if available, fall back to current
-  const imageUrl = webcam.images.daylight?.preview || webcam.images.current.preview;
-
-  // Get the best available player embed URL
-  const getPlayerUrl = () => {
-    if (webcam.player.live?.available) return webcam.player.live.embed;
-    if (webcam.player.day?.available) return webcam.player.day.embed;
-    return null;
-  };
-
-  const playerUrl = getPlayerUrl();
+  // Use current (most recent) image, not daylight (which is a saved snapshot)
+  const imageUrl = webcam.images.current.preview;
 
   return (
-    <Card className="overflow-hidden group">
-      <div className="relative aspect-video bg-muted">
-        {showPlayer && playerUrl ? (
-          <iframe
-            src={playerUrl}
-            className="w-full h-full"
-            allow="autoplay; fullscreen"
-            allowFullScreen
-            title={webcam.title}
-          />
-        ) : (
-          <>
-            {!imageError ? (
-              <img
-                src={imageUrl}
-                alt={webcam.title}
-                className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                onError={() => setImageError(true)}
-                loading="lazy"
-              />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center">
-                <Video className="h-12 w-12 text-muted-foreground/50" />
-              </div>
-            )}
-            {playerUrl && (
-              <Button
-                variant="secondary"
-                size="sm"
-                className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
-                onClick={() => setShowPlayer(true)}
-              >
-                <Video className="h-4 w-4 mr-1" />
-                {t("webcams.playTimelapse")}
-              </Button>
-            )}
-          </>
-        )}
-        {showPlayer && (
-          <Button
-            variant="secondary"
-            size="sm"
-            className="absolute top-2 right-2"
-            onClick={() => setShowPlayer(false)}
-          >
-            {t("webcams.showImage")}
-          </Button>
-        )}
-      </div>
-      <CardContent className="p-3">
-        <div className="flex items-start justify-between gap-2">
-          <div className="min-w-0 flex-1">
-            <h4 className="font-medium text-sm truncate" title={webcam.title}>
+    <a
+      href={webcam.urls.detail}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block"
+    >
+      <Card className="overflow-hidden group cursor-pointer transition-all hover:shadow-md hover:border-orange-500/50">
+        <div className="relative aspect-video bg-muted">
+          {!imageError ? (
+            <img
+              src={imageUrl}
+              alt={webcam.title}
+              className="w-full h-full object-cover transition-transform group-hover:scale-105"
+              onError={() => setImageError(true)}
+              loading="lazy"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center">
+              <Video className="h-12 w-12 text-muted-foreground/50" />
+            </div>
+          )}
+          <div className="absolute top-2 right-2">
+            <Badge variant="secondary" className="text-xs">
+              {webcam.distanceKm.toFixed(1)} km
+            </Badge>
+          </div>
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 pt-8">
+            <h4 className="font-medium text-sm text-white truncate" title={webcam.title}>
               {webcam.title}
             </h4>
-            <div className="flex items-center gap-1 text-xs text-muted-foreground mt-1">
+            <div className="flex items-center gap-1 text-xs text-white/80 mt-0.5">
               <MapPin className="h-3 w-3 flex-shrink-0" />
               <span className="truncate">
                 {webcam.location.city || webcam.location.region}, {webcam.location.country}
               </span>
             </div>
           </div>
-          <div className="flex flex-col items-end gap-1">
-            <Badge variant="outline" className="text-xs whitespace-nowrap">
-              {webcam.distanceKm.toFixed(1)} km
-            </Badge>
-            <a
-              href={webcam.urls.detail}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              title={t("webcams.openOnWindy")}
-            >
-              <ExternalLink className="h-3.5 w-3.5" />
-            </a>
-          </div>
         </div>
-      </CardContent>
-    </Card>
+      </Card>
+    </a>
   );
 }
 
