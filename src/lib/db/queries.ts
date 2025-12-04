@@ -60,17 +60,23 @@ export async function searchCrags(query: string) {
   // This handles cases like:
   // - "Apremont Desert" matching "Apremont Désert" (sector in Fontainebleau)
   // - "Fontainebleau" matching the parent crag AND all its sectors
-  const { data, error } = await supabase.rpc("search_locations_unaccent", {
+  const { data, error } = await supabase.rpc("search_locations_enhanced", {
     search_query: query,
   });
 
   if (error) {
-    // Fallback to old crag-only search if RPC fails
+    // Fallback to multi-word search if RPC fails
     console.warn("[searchCrags] RPC failed, falling back to ILIKE:", error);
+
+    // Split query into words for better multi-word matching
+    const words = query.trim().split(/\s+/);
+    const nameConditions = words.map(word => `name.ilike.%${word}%`).join(',');
+    const countryConditions = words.map(word => `country.ilike.%${word}%`).join(',');
+
     const fallback = await supabase
       .from("crags")
       .select("*")
-      .or(`name.ilike.%${query}%,country.ilike.%${query}%`)
+      .or(`${nameConditions},${countryConditions}`)
       .limit(10);
     return fallback.data;
   }
