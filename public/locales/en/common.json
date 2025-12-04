@@ -925,6 +925,16 @@
       "weatherNote": "Weather for nearby reference location"
     }
   },
+  "webcams": {
+    "title": "Nearby Webcams",
+    "nearbyCount": "{{count}} webcam found",
+    "nearbyCount_other": "{{count}} webcams found",
+    "playTimelapse": "Play",
+    "showImage": "Image",
+    "openOnWindy": "Open on Windy.com",
+    "poweredBy": "Powered by",
+    "noWebcams": "No webcams found nearby"
+  },
   "loading": {
     "conditions": "Loading conditions...",
     "weatherData": "Fetching weather data...",

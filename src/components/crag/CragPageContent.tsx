@@ -40,6 +40,7 @@ import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog"
 import { ConfirmDialog } from "@/components/dialogs/ConfirmDialog";
 import { EditCragDialog } from "@/components/dialogs/EditCragDialog";
 import { AddSectorModal } from "@/components/dialogs/AddSectorModal";
+import { WebcamsSection } from "@/components/crag/WebcamsSection";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
 import { useRouter } from "next/navigation";
@@ -951,6 +952,11 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
             </CardContent>
           </Card>
         )}
+
+        {/* Webcams Section */}
+        <div className="mb-6">
+          <WebcamsSection latitude={crag.lat} longitude={crag.lon} />
+        </div>
 
         {/* Sectors Section - Always show if not viewing a sector */}
         {!currentSector && (
