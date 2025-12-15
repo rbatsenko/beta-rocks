@@ -173,10 +173,11 @@ export function ReportDialog({
 
   const compressPhoto = async (file: File): Promise<File> => {
     const options = {
-      maxSizeMB: 1,
+      maxSizeMB: 2,
       maxWidthOrHeight: 1920,
       useWebWorker: true,
-      fileType: "image/webp",
+      initialQuality: 0.85,
+      fileType: "image/webp" as const,
     };
     try {
       return await imageCompression(file, options);
