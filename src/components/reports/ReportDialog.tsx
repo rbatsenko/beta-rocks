@@ -176,7 +176,7 @@ export function ReportDialog({
       maxSizeMB: 2,
       maxWidthOrHeight: 1920,
       useWebWorker: true,
-      initialQuality: 0.85,
+      initialQuality: 0.95,
       fileType: "image/webp" as const,
     };
     try {
