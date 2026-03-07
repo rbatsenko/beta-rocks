@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseClient, isSupabaseConfigured } from "@/integrations/supabase/client";
 
-const PAGE_SIZE = 50;
+const PAGE_SIZE = 20;
 
 /**
  * GET /api/reports/feed

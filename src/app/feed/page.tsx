@@ -39,7 +39,7 @@ export default async function FeedPage() {
       `
       )
       .order("created_at", { ascending: false })
-      .limit(50);
+      .limit(20);
 
     // Fetch parent crags for sectors
     if (data && data.length > 0) {
@@ -95,7 +95,7 @@ export default async function FeedPage() {
 
   // Compute initial cursor for pagination
   const initialNextCursor =
-    initialReports.length === 50 ? initialReports[initialReports.length - 1].created_at : null;
+    initialReports.length === 20 ? initialReports[initialReports.length - 1].created_at : null;
 
   return (
     <FeedPageClient
