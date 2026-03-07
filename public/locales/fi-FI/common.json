@@ -799,6 +799,8 @@
     "loadingMore": "Ladataan...",
     "totalReports": "{{count}} yhteensä",
     "showingOf": "Näytetään {{showing}} / {{total}} raporttia",
+    "totalReportsHint": "Yhteison raporttien kokonaismaara, mukaan lukien vanhemmat joita ei nayteta syotteessa",
+    "olderHidden": "Vanhemmat raportit ovat edelleen nakyvissa yksittaisilla kalliosivuilla",
     "filters": {
       "all": "Kaikki",
       "favorites": "Suosikit"

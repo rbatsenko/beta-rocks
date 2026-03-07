@@ -888,6 +888,8 @@
     "loadingMore": "Cargando...",
     "totalReports": "{{count}} en total",
     "showingOf": "Mostrando {{showing}} de {{total}} informes",
+    "totalReportsHint": "Total de informes de la comunidad, incluyendo los antiguos no mostrados en el feed",
+    "olderHidden": "Los informes antiguos siguen visibles en las paginas individuales de los sectores",
     "filters": {
       "all": "Todos",
       "favorites": "Favoritos"

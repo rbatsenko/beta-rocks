@@ -885,6 +885,8 @@
     "loadingMore": "Завантаження...",
     "totalReports": "{{count}} загалом",
     "showingOf": "Показано {{showing}} з {{total}} звітів",
+    "totalReportsHint": "Zagalna kilkist zvitiv spilnoti, vkliuchaiuchy starishi, shcho ne vidobrazhuiutsia u strichci",
+    "olderHidden": "Starishi zviti vse shche dostupni na storinkakh okremikh skal",
     "filters": {
       "all": "Всі",
       "favorites": "Вибрані"

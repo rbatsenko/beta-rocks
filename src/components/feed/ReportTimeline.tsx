@@ -204,7 +204,10 @@ export function ReportTimeline({
           <h2 className="text-2xl font-bold">{t("feed.title")}</h2>
           <LiveIndicator isLive={isLive} label={t("feed.live")} />
           {totalReportCount > 0 && (
-            <span className="text-xs text-muted-foreground">
+            <span
+              className="text-xs text-muted-foreground cursor-help"
+              title={t("feed.totalReportsHint")}
+            >
               {t("feed.totalReports", { count: totalReportCount })}
             </span>
           )}
@@ -338,9 +341,14 @@ export function ReportTimeline({
 
         {/* Bottom total count */}
         {totalReportCount > 0 && filteredReports.length > 0 && (
-          <p className="text-center text-xs text-muted-foreground pt-4">
-            {t("feed.showingOf", { showing: filteredReports.length, total: totalReportCount })}
-          </p>
+          <div className="text-center pt-4 space-y-1">
+            <p className="text-xs text-muted-foreground">
+              {t("feed.showingOf", { showing: filteredReports.length, total: totalReportCount })}
+            </p>
+            {totalReportCount > filteredReports.length && !hasMore && (
+              <p className="text-xs text-muted-foreground/60">{t("feed.olderHidden")}</p>
+            )}
+          </div>
         )}
       </div>
 

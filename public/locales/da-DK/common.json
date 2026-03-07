@@ -799,6 +799,8 @@
     "loadingMore": "Indlæser...",
     "totalReports": "{{count}} i alt",
     "showingOf": "Viser {{showing}} af {{total}} rapporter",
+    "totalReportsHint": "Samlet antal rapporter fra faellesskabet, inklusive aeldre der ikke vises i feedet",
+    "olderHidden": "Aeldre rapporter er stadig synlige paa de enkelte klatresteds-sider",
     "filters": {
       "all": "Alle",
       "favorites": "Favoritter"

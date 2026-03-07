@@ -803,6 +803,8 @@
     "loadingMore": "Carregando...",
     "totalReports": "{{count}} no total",
     "showingOf": "A mostrar {{showing}} de {{total}} relatórios",
+    "totalReportsHint": "Total de relatorios da comunidade, incluindo os mais antigos nao mostrados no feed",
+    "olderHidden": "Relatorios mais antigos continuam visiveis nas paginas individuais das falesias",
     "filters": {
       "all": "Todos",
       "favorites": "Favoritos"

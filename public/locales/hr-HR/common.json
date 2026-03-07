@@ -884,6 +884,8 @@
     "loadingMore": "Učitavanje...",
     "totalReports": "{{count}} ukupno",
     "showingOf": "Prikazano {{showing}} od {{total}} izvještaja",
+    "totalReportsHint": "Ukupan broj izvjestaja zajednice, ukljucujuci starije koji nisu prikazani u feedu",
+    "olderHidden": "Stariji izvjestaji su i dalje vidljivi na stranicama pojedinih stijena",
     "filters": {
       "all": "Sve",
       "favorites": "Favoriti"

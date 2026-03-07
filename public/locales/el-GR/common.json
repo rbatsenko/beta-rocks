@@ -767,6 +767,8 @@
     "loadingMore": "Φόρτωση...",
     "totalReports": "{{count}} συνολικά",
     "showingOf": "Εμφάνιση {{showing}} από {{total}} αναφορές",
+    "totalReportsHint": "Synolo anaferon apo tin koinotita, symperilamvanomenon paliotereon pou den emfanizontai sto feed",
+    "olderHidden": "Oi palioterees anafores einai akoma orates stis selides ton epimerous vraxon",
     "filters": {
       "all": "Όλα",
       "favorites": "Αγαπημένα"

@@ -885,6 +885,8 @@
     "loadingMore": "Načítání...",
     "totalReports": "{{count}} celkem",
     "showingOf": "Zobrazeno {{showing}} z {{total}} hlášení",
+    "totalReportsHint": "Celkovy pocet hlaseni komunity, vcetne starsich nezobrazovanych ve zdroji",
+    "olderHidden": "Starsi hlaseni jsou stale viditelna na strankach jednotlivych skal",
     "filters": {
       "all": "Všechny",
       "favorites": "Oblíbené"

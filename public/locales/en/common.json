@@ -956,6 +956,8 @@
     "loadingMore": "Loading...",
     "totalReports": "{{count}} total",
     "showingOf": "Showing {{showing}} of {{total}} reports",
+    "totalReportsHint": "Total reports posted by the community, including older ones not shown in the feed",
+    "olderHidden": "Older reports are still visible on individual crag pages",
     "filters": {
       "all": "All",
       "favorites": "Favorites"

@@ -800,6 +800,8 @@
     "loadingMore": "Laster...",
     "totalReports": "{{count}} totalt",
     "showingOf": "Viser {{showing}} av {{total}} rapporter",
+    "totalReportsHint": "Totalt antall rapporter fra fellesskapet, inkludert eldre som ikke vises i feeden",
+    "olderHidden": "Eldre rapporter er fortsatt synlige paa individuelle feltsider",
     "filters": {
       "all": "Alle",
       "favorites": "Favoritter"

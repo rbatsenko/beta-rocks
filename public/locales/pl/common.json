@@ -886,6 +886,8 @@
     "loadingMore": "Ładowanie...",
     "totalReports": "{{count}} łącznie",
     "showingOf": "Wyświetlono {{showing}} z {{total}} raportów",
+    "totalReportsHint": "Laczna liczba raportow spolecznosci, w tym starszych niewyswietlanych w kanale",
+    "olderHidden": "Starsze raporty sa nadal widoczne na stronach poszczegolnych skal",
     "filters": {
       "all": "Wszystkie",
       "favorites": "Ulubione"

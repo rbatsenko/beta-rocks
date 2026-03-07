@@ -886,6 +886,8 @@
     "loadingMore": "Nalaganje...",
     "totalReports": "{{count}} skupaj",
     "showingOf": "Prikazanih {{showing}} od {{total}} poročil",
+    "totalReportsHint": "Skupno stevilo porocil skupnosti, vkljucno s starejsimi, ki niso prikazana v viru",
+    "olderHidden": "Starejsa porocila so se vedno vidna na posameznih straneh plezalisc",
     "filters": {
       "all": "Vse",
       "favorites": "Priljubljene"

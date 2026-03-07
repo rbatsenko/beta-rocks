@@ -804,6 +804,8 @@
     "loadingMore": "Se încarcă...",
     "totalReports": "{{count}} în total",
     "showingOf": "Se afișează {{showing}} din {{total}} rapoarte",
+    "totalReportsHint": "Numarul total de rapoarte ale comunitatii, inclusiv cele mai vechi neafisate in flux",
+    "olderHidden": "Rapoartele mai vechi sunt inca vizibile pe paginile individuale ale stancilor",
     "filters": {
       "all": "Toate",
       "favorites": "Favorite"

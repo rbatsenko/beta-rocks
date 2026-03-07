@@ -888,6 +888,8 @@
     "loadingMore": "Caricamento...",
     "totalReports": "{{count}} in totale",
     "showingOf": "{{showing}} di {{total}} rapporti mostrati",
+    "totalReportsHint": "Totale dei rapporti della community, inclusi quelli piu vecchi non mostrati nel feed",
+    "olderHidden": "I rapporti piu vecchi sono ancora visibili nelle singole pagine delle falesie",
     "filters": {
       "all": "Tutti",
       "favorites": "Preferiti"

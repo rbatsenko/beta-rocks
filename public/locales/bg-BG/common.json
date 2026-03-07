@@ -851,6 +851,8 @@
     "loadingMore": "Зареждане...",
     "totalReports": "{{count}} общо",
     "showingOf": "Показани {{showing}} от {{total}} доклади",
+    "totalReportsHint": "Obshchit broi dokladi ot obshtnostta, vkliuchitelno po-stari, koito ne sa pokazani v potoka",
+    "olderHidden": "Po-starite dokladi sa vse oshte vidimi na stranitsite na otdelnite skali",
     "filters": {
       "all": "Всички",
       "favorites": "Любими"

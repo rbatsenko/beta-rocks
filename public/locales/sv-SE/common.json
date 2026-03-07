@@ -720,6 +720,8 @@
     "loadingMore": "Laddar...",
     "totalReports": "{{count}} totalt",
     "showingOf": "Visar {{showing}} av {{total}} rapporter",
+    "totalReportsHint": "Totalt antal rapporter fran gemenskapen, inklusive aldre som inte visas i flodet",
+    "olderHidden": "Aldre rapporter ar fortfarande synliga pa enskilda klippsidor",
     "filters": {
       "all": "Alla",
       "favorites": "Favoriter"

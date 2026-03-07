@@ -888,6 +888,8 @@
     "loadingMore": "Chargement...",
     "totalReports": "{{count}} au total",
     "showingOf": "{{showing}} sur {{total}} rapports affichés",
+    "totalReportsHint": "Total des rapports de la communaute, y compris les anciens non affiches dans le flux",
+    "olderHidden": "Les anciens rapports restent visibles sur les pages individuelles des sites",
     "filters": {
       "all": "Tous",
       "favorites": "Favoris"

@@ -888,6 +888,8 @@
     "loadingMore": "Laden...",
     "totalReports": "{{count}} insgesamt",
     "showingOf": "{{showing}} von {{total}} Berichten angezeigt",
+    "totalReportsHint": "Gesamtzahl der Berichte der Community, einschliesslich alterer, die nicht im Feed angezeigt werden",
+    "olderHidden": "Altere Berichte sind weiterhin auf den einzelnen Felsseiten sichtbar",
     "filters": {
       "all": "Alle",
       "favorites": "Favoriten"

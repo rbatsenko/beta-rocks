@@ -805,6 +805,8 @@
     "loadingMore": "Načítavanie...",
     "totalReports": "{{count}} celkom",
     "showingOf": "Zobrazených {{showing}} z {{total}} hlásení",
+    "totalReportsHint": "Celkovy pocet hlaseni komunity, vratane starsich nezobrazovanych v kanali",
+    "olderHidden": "Starsie hlasenia su stale viditelne na strankach jednotlivych skal",
     "filters": {
       "all": "Všetky",
       "favorites": "Obľúbené"

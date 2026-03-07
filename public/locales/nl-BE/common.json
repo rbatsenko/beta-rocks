@@ -803,6 +803,8 @@
     "loadingMore": "Laden...",
     "totalReports": "{{count}} totaal",
     "showingOf": "{{showing}} van {{total}} rapporten weergegeven",
+    "totalReportsHint": "Totaal aantal rapporten van de community, inclusief oudere die niet in de feed worden getoond",
+    "olderHidden": "Oudere rapporten zijn nog steeds zichtbaar op individuele rotspaginas",
     "filters": {
       "all": "Alle",
       "favorites": "Favorieten"
