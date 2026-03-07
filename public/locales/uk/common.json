@@ -883,6 +883,8 @@
     "reconnecting": "Повторне підключення до оновлень...",
     "loadMore": "Завантажити більше звітів",
     "loadingMore": "Завантаження...",
+    "totalReports": "{{count}} загалом",
+    "showingOf": "Показано {{showing}} з {{total}} звітів",
     "filters": {
       "all": "Всі",
       "favorites": "Вибрані"

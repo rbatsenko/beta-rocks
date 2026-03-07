@@ -765,6 +765,8 @@
     "reconnecting": "Reconnectant a actualitzacions en directe...",
     "loadMore": "Carrega més informes",
     "loadingMore": "Carregant...",
+    "totalReports": "{{count}} en total",
+    "showingOf": "Mostrant {{showing}} de {{total}} informes",
     "filters": {
       "all": "Tots",
       "favorites": "Favorits"

@@ -12,6 +12,7 @@ import { useClientTranslation } from "@/hooks/useClientTranslation";
 interface FeedPageClientProps {
   initialReports: ReportWithDetails[];
   initialNextCursor: string | null;
+  totalReportCount: number;
   favoriteCragIds: string[];
   currentUserProfileId: string | null;
   initialDisplayName?: string; // Reserved for future use
@@ -27,6 +28,7 @@ interface FeedPageClientProps {
 export default function FeedPageClient({
   initialReports,
   initialNextCursor,
+  totalReportCount,
   favoriteCragIds,
   currentUserProfileId,
 }: FeedPageClientProps) {
@@ -149,6 +151,7 @@ export default function FeedPageClient({
           favoriteCragIds={favoriteCragIds}
           onNewReport={handleNewReport}
           currentUserProfileId={currentUserProfileId}
+          totalReportCount={totalReportCount}
           hasMore={!!nextCursor}
           isLoadingMore={isLoadingMore}
           onLoadMore={loadMore}

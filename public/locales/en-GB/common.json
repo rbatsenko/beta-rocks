@@ -901,6 +901,8 @@
     "reconnecting": "Reconnecting to live updates...",
     "loadMore": "Load more reports",
     "loadingMore": "Loading...",
+    "totalReports": "{{count}} total",
+    "showingOf": "Showing {{showing}} of {{total}} reports",
     "filters": {
       "all": "All",
       "favorites": "Favorites"

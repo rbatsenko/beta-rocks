@@ -803,6 +803,8 @@
     "reconnecting": "Opätovné pripájanie k živým aktualizáciám...",
     "loadMore": "Načítať viac hlásení",
     "loadingMore": "Načítavanie...",
+    "totalReports": "{{count}} celkom",
+    "showingOf": "Zobrazených {{showing}} z {{total}} hlásení",
     "filters": {
       "all": "Všetky",
       "favorites": "Obľúbené"

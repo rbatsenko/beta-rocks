@@ -884,6 +884,8 @@
     "reconnecting": "Ponowne łączenie z aktualizacjami na żywo...",
     "loadMore": "Załaduj więcej raportów",
     "loadingMore": "Ładowanie...",
+    "totalReports": "{{count}} łącznie",
+    "showingOf": "Wyświetlono {{showing}} z {{total}} raportów",
     "filters": {
       "all": "Wszystkie",
       "favorites": "Ulubione"

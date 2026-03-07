@@ -765,6 +765,8 @@
     "reconnecting": "Επανασύνδεση στις ζωντανές ενημερώσεις...",
     "loadMore": "Φόρτωση περισσότερων αναφορών",
     "loadingMore": "Φόρτωση...",
+    "totalReports": "{{count}} συνολικά",
+    "showingOf": "Εμφάνιση {{showing}} από {{total}} αναφορές",
     "filters": {
       "all": "Όλα",
       "favorites": "Αγαπημένα"

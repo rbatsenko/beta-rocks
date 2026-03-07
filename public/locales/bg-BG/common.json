@@ -849,6 +849,8 @@
     "reconnecting": "Повторно свързване към актуализациите на живо...",
     "loadMore": "Зареди още доклади",
     "loadingMore": "Зареждане...",
+    "totalReports": "{{count}} общо",
+    "showingOf": "Показани {{showing}} от {{total}} доклади",
     "filters": {
       "all": "Всички",
       "favorites": "Любими"

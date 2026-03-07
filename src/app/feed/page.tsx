@@ -24,10 +24,17 @@ export default async function FeedPage() {
   const syncKeyHash = cookieStore.get("temps_sync_key_hash")?.value;
   const displayName = cookieStore.get("temps_display_name")?.value;
 
-  // Fetch initial reports (last 50) with crag info
+  // Fetch initial reports with crag info
   let initialReports: any[] = [];
+  let totalReportCount = 0;
   try {
     const supabase = getSupabaseClient();
+
+    // Get total report count (all reports, including old/expired)
+    const { count: totalCount } = await supabase
+      .from("reports")
+      .select("*", { count: "exact", head: true });
+    totalReportCount = totalCount || 0;
     const { data, error } = await supabase
       .from("reports")
       .select(
@@ -103,6 +110,7 @@ export default async function FeedPage() {
     <FeedPageClient
       initialReports={initialReports}
       initialNextCursor={initialNextCursor}
+      totalReportCount={totalReportCount}
       favoriteCragIds={favoriteCragIds}
       currentUserProfileId={currentUserProfileId}
       initialDisplayName={displayName}

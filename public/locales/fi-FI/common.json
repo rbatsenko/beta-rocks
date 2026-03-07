@@ -797,6 +797,8 @@
     "reconnecting": "Yhdistetään uudelleen live-päivityksiin...",
     "loadMore": "Lataa lisää raportteja",
     "loadingMore": "Ladataan...",
+    "totalReports": "{{count}} yhteensä",
+    "showingOf": "Näytetään {{showing}} / {{total}} raporttia",
     "filters": {
       "all": "Kaikki",
       "favorites": "Suosikit"

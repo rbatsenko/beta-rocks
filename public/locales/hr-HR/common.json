@@ -882,6 +882,8 @@
     "reconnecting": "Ponovno povezivanje s ažuriranjima uživo...",
     "loadMore": "Učitaj više izvještaja",
     "loadingMore": "Učitavanje...",
+    "totalReports": "{{count}} ukupno",
+    "showingOf": "Prikazano {{showing}} od {{total}} izvještaja",
     "filters": {
       "all": "Sve",
       "favorites": "Favoriti"

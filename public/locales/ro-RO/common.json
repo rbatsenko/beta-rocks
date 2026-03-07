@@ -802,6 +802,8 @@
     "reconnecting": "Reconectare la actualizări live...",
     "loadMore": "Încarcă mai multe rapoarte",
     "loadingMore": "Se încarcă...",
+    "totalReports": "{{count}} în total",
+    "showingOf": "Se afișează {{showing}} din {{total}} rapoarte",
     "filters": {
       "all": "Toate",
       "favorites": "Favorite"

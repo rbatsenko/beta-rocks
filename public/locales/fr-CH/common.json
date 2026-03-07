@@ -886,6 +886,8 @@
     "reconnecting": "Reconnexion aux mises à jour en direct...",
     "loadMore": "Charger plus de rapports",
     "loadingMore": "Chargement...",
+    "totalReports": "{{count}} au total",
+    "showingOf": "{{showing}} sur {{total}} rapports affichés",
     "filters": {
       "all": "Tous",
       "favorites": "Favoris"

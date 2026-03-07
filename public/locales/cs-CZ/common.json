@@ -883,6 +883,8 @@
     "reconnecting": "Opětovné připojení k živým aktualizacím...",
     "loadMore": "Načíst další hlášení",
     "loadingMore": "Načítání...",
+    "totalReports": "{{count}} celkem",
+    "showingOf": "Zobrazeno {{showing}} z {{total}} hlášení",
     "filters": {
       "all": "Všechny",
       "favorites": "Oblíbené"

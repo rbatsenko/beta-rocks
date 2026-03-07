@@ -797,6 +797,8 @@
     "reconnecting": "Genopretter forbindelse til live-opdateringer...",
     "loadMore": "Indlæs flere rapporter",
     "loadingMore": "Indlæser...",
+    "totalReports": "{{count}} i alt",
+    "showingOf": "Viser {{showing}} af {{total}} rapporter",
     "filters": {
       "all": "Alle",
       "favorites": "Favoritter"

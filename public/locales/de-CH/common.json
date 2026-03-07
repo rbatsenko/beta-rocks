@@ -886,6 +886,8 @@
     "reconnecting": "Verbindung zu Live-Updates wird wiederhergestellt...",
     "loadMore": "Mehr Berichte laden",
     "loadingMore": "Laden...",
+    "totalReports": "{{count}} insgesamt",
+    "showingOf": "{{showing}} von {{total}} Berichten angezeigt",
     "filters": {
       "all": "Alle",
       "favorites": "Favoriten"

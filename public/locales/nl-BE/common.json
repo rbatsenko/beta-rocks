@@ -801,6 +801,8 @@
     "reconnecting": "Opnieuw verbinden met live-updates...",
     "loadMore": "Meer rapporten laden",
     "loadingMore": "Laden...",
+    "totalReports": "{{count}} totaal",
+    "showingOf": "{{showing}} van {{total}} rapporten weergegeven",
     "filters": {
       "all": "Alle",
       "favorites": "Favorieten"

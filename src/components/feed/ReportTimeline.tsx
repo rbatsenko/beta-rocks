@@ -50,6 +50,7 @@ interface ReportTimelineProps {
   favoriteCragIds?: string[];
   onNewReport?: (report: ReportWithDetails) => void;
   currentUserProfileId?: string | null;
+  totalReportCount?: number;
   hasMore?: boolean;
   isLoadingMore?: boolean;
   onLoadMore?: () => void;
@@ -79,6 +80,7 @@ export function ReportTimeline({
   favoriteCragIds = [],
   onNewReport,
   currentUserProfileId,
+  totalReportCount = 0,
   hasMore = false,
   isLoadingMore = false,
   onLoadMore,
@@ -201,6 +203,11 @@ export function ReportTimeline({
         <div className="flex items-center gap-2">
           <h2 className="text-2xl font-bold">{t("feed.title")}</h2>
           <LiveIndicator isLive={isLive} label={t("feed.live")} />
+          {totalReportCount > 0 && (
+            <span className="text-xs text-muted-foreground">
+              {t("feed.totalReports", { count: totalReportCount })}
+            </span>
+          )}
         </div>
 
         {/* Filter Tabs */}
@@ -327,6 +334,13 @@ export function ReportTimeline({
               )}
             </Button>
           </div>
+        )}
+
+        {/* Bottom total count */}
+        {totalReportCount > 0 && filteredReports.length > 0 && (
+          <p className="text-center text-xs text-muted-foreground pt-4">
+            {t("feed.showingOf", { showing: filteredReports.length, total: totalReportCount })}
+          </p>
         )}
       </div>
 

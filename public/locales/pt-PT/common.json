@@ -801,6 +801,8 @@
     "reconnecting": "A reconectar às atualizações ao vivo...",
     "loadMore": "Carregar mais relatórios",
     "loadingMore": "Carregando...",
+    "totalReports": "{{count}} no total",
+    "showingOf": "A mostrar {{showing}} de {{total}} relatórios",
     "filters": {
       "all": "Todos",
       "favorites": "Favoritos"

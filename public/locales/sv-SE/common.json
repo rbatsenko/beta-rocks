@@ -718,6 +718,8 @@
     "reconnecting": "Återansluter till liveuppdateringar...",
     "loadMore": "Ladda fler rapporter",
     "loadingMore": "Laddar...",
+    "totalReports": "{{count}} totalt",
+    "showingOf": "Visar {{showing}} av {{total}} rapporter",
     "filters": {
       "all": "Alla",
       "favorites": "Favoriter"

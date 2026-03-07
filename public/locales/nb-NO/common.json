@@ -798,6 +798,8 @@
     "reconnecting": "Kobler til på nytt til direkteoppdateringer...",
     "loadMore": "Last inn flere rapporter",
     "loadingMore": "Laster...",
+    "totalReports": "{{count}} totalt",
+    "showingOf": "Viser {{showing}} av {{total}} rapporter",
     "filters": {
       "all": "Alle",
       "favorites": "Favoritter"
