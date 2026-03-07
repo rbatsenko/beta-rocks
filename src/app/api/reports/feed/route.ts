@@ -33,6 +33,8 @@ export async function GET(request: NextRequest) {
         crag:crags!reports_crag_id_fkey(id, name, country, state, municipality, village, lat, lon, slug, parent_crag_id)
       `
       )
+      .or(`expires_at.is.null,expires_at.gt.${new Date().toISOString()}`)
+      .gte("observed_at", new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString())
       .order("created_at", { ascending: false })
       .limit(PAGE_SIZE);
 
