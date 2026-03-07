@@ -9,9 +9,10 @@ import { LiveIndicator } from "@/components/ui/live-indicator";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { differenceInMinutes, startOfDay, format } from "date-fns";
 import { getDateFnsLocale } from "@/lib/i18n/date-locales";
-import { Mountain } from "lucide-react";
+import { Mountain, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { getCountryFlagWithFallback } from "@/lib/utils/country-flags";
+import { Button } from "@/components/ui/button";
 
 // Extended Report type to match the structure returned by database queries
 type ReportWithDetails = Tables<"reports"> & {
@@ -49,6 +50,9 @@ interface ReportTimelineProps {
   favoriteCragIds?: string[];
   onNewReport?: (report: ReportWithDetails) => void;
   currentUserProfileId?: string | null;
+  hasMore?: boolean;
+  isLoadingMore?: boolean;
+  onLoadMore?: () => void;
 }
 
 type FilterMode = "all" | "favorites";
@@ -75,6 +79,9 @@ export function ReportTimeline({
   favoriteCragIds = [],
   onNewReport,
   currentUserProfileId,
+  hasMore = false,
+  isLoadingMore = false,
+  onLoadMore,
 }: ReportTimelineProps) {
   const { t, i18n } = useClientTranslation("common");
   const dateLocale = getDateFnsLocale(i18n.language);
@@ -299,6 +306,27 @@ export function ReportTimeline({
               </div>
             </div>
           ))
+        )}
+
+        {/* Load More Button */}
+        {hasMore && filterMode === "all" && (
+          <div className="flex justify-center pt-4 pb-2">
+            <Button
+              variant="outline"
+              onClick={onLoadMore}
+              disabled={isLoadingMore}
+              className="min-w-[200px]"
+            >
+              {isLoadingMore ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                  {t("feed.loadingMore")}
+                </>
+              ) : (
+                t("feed.loadMore")
+              )}
+            </Button>
+          </div>
         )}
       </div>
 

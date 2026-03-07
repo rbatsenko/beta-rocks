@@ -882,6 +882,8 @@
     "justNow": "Pravkar",
     "loadingFeed": "Nalaganje pretoka...",
     "reconnecting": "Ponovno povezovanje s posodobitvami v živo...",
+    "loadMore": "Naloži več poročil",
+    "loadingMore": "Nalaganje...",
     "filters": {
       "all": "Vse",
       "favorites": "Priljubljene"

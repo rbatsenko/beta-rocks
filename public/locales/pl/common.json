@@ -882,6 +882,8 @@
     "justNow": "Przed chwilą",
     "loadingFeed": "Ładowanie aktualności...",
     "reconnecting": "Ponowne łączenie z aktualizacjami na żywo...",
+    "loadMore": "Załaduj więcej raportów",
+    "loadingMore": "Ładowanie...",
     "filters": {
       "all": "Wszystkie",
       "favorites": "Ulubione"

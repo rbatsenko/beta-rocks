@@ -881,6 +881,8 @@
     "justNow": "Právě teď",
     "loadingFeed": "Načítání přehledu...",
     "reconnecting": "Opětovné připojení k živým aktualizacím...",
+    "loadMore": "Načíst další hlášení",
+    "loadingMore": "Načítání...",
     "filters": {
       "all": "Všechny",
       "favorites": "Oblíbené"

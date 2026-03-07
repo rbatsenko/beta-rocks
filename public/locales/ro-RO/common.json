@@ -800,6 +800,8 @@
     "justNow": "Chiar acum",
     "loadingFeed": "Se încarcă fluxul...",
     "reconnecting": "Reconectare la actualizări live...",
+    "loadMore": "Încarcă mai multe rapoarte",
+    "loadingMore": "Se încarcă...",
     "filters": {
       "all": "Toate",
       "favorites": "Favorite"

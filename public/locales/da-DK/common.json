@@ -795,6 +795,8 @@
     "justNow": "Lige nu",
     "loadingFeed": "Indlæser feed...",
     "reconnecting": "Genopretter forbindelse til live-opdateringer...",
+    "loadMore": "Indlæs flere rapporter",
+    "loadingMore": "Indlæser...",
     "filters": {
       "all": "Alle",
       "favorites": "Favoritter"

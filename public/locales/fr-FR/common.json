@@ -884,6 +884,8 @@
     "justNow": "À l'instant",
     "loadingFeed": "Chargement du fil...",
     "reconnecting": "Reconnexion aux mises à jour en direct...",
+    "loadMore": "Charger plus de rapports",
+    "loadingMore": "Chargement...",
     "filters": {
       "all": "Tous",
       "favorites": "Favoris"

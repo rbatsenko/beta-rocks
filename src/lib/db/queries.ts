@@ -70,8 +70,8 @@ export async function searchCrags(query: string) {
 
     // Split query into words for better multi-word matching
     const words = query.trim().split(/\s+/);
-    const nameConditions = words.map(word => `name.ilike.%${word}%`).join(',');
-    const countryConditions = words.map(word => `country.ilike.%${word}%`).join(',');
+    const nameConditions = words.map((word) => `name.ilike.%${word}%`).join(",");
+    const countryConditions = words.map((word) => `country.ilike.%${word}%`).join(",");
 
     const fallback = await supabase
       .from("crags")

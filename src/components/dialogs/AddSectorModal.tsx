@@ -320,7 +320,11 @@ export function AddSectorModal({
 
                 {/* Actions */}
                 <div className="flex justify-end gap-3 pt-4 border-t">
-                  <Button variant="outline" onClick={() => onOpenChange(false)} disabled={submitting}>
+                  <Button
+                    variant="outline"
+                    onClick={() => onOpenChange(false)}
+                    disabled={submitting}
+                  >
                     {t("addSectorModal.cancel")}
                   </Button>
                   <Button onClick={handleSubmit} disabled={!canSubmit}>

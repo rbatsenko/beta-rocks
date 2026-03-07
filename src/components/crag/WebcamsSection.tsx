@@ -42,12 +42,7 @@ function WebcamCard({ webcam }: { webcam: WebcamWithDistance }) {
   const imageUrl = webcam.images.daylight?.preview || webcam.images.current.preview;
 
   return (
-    <a
-      href={webcam.urls.detail}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block"
-    >
+    <a href={webcam.urls.detail} target="_blank" rel="noopener noreferrer" className="block">
       <Card className="overflow-hidden group cursor-pointer transition-all hover:shadow-md hover:border-orange-500/50">
         <div className="relative aspect-video bg-muted">
           {!imageError ? (
@@ -132,11 +127,7 @@ export function WebcamsSection({ latitude, longitude }: WebcamsSectionProps) {
               onClick={() => setIsExpanded(!isExpanded)}
               className="h-8 w-8 p-0"
             >
-              {isExpanded ? (
-                <ChevronUp className="h-4 w-4" />
-              ) : (
-                <ChevronDown className="h-4 w-4" />
-              )}
+              {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
             </Button>
           </div>
         </div>

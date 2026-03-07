@@ -43,11 +43,9 @@ export default async function FeedPage() {
 
     // Fetch parent crags for sectors
     if (data && data.length > 0) {
-      const parentCragIds = [...new Set(
-        data
-          .map(r => r.crag?.parent_crag_id)
-          .filter((id): id is string => !!id)
-      )];
+      const parentCragIds = [
+        ...new Set(data.map((r) => r.crag?.parent_crag_id).filter((id): id is string => !!id)),
+      ];
 
       if (parentCragIds.length > 0) {
         const { data: parentCrags } = await supabase
@@ -57,10 +55,10 @@ export default async function FeedPage() {
 
         if (parentCrags) {
           // Attach parent_crag data to each report
-          data.forEach(report => {
+          data.forEach((report) => {
             const crag = report.crag;
             if (crag?.parent_crag_id) {
-              const parentCrag = parentCrags.find(pc => pc.id === crag.parent_crag_id);
+              const parentCrag = parentCrags.find((pc) => pc.id === crag.parent_crag_id);
               if (parentCrag) {
                 (crag as any).parent_crag = parentCrag;
               }
@@ -95,9 +93,14 @@ export default async function FeedPage() {
     }
   }
 
+  // Compute initial cursor for pagination
+  const initialNextCursor =
+    initialReports.length === 50 ? initialReports[initialReports.length - 1].created_at : null;
+
   return (
     <FeedPageClient
       initialReports={initialReports}
+      initialNextCursor={initialNextCursor}
       favoriteCragIds={favoriteCragIds}
       currentUserProfileId={currentUserProfileId}
       initialDisplayName={displayName}

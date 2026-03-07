@@ -884,6 +884,8 @@
     "justNow": "Gerade eben",
     "loadingFeed": "Feed wird geladen...",
     "reconnecting": "Verbindung zu Live-Updates wird wiederhergestellt...",
+    "loadMore": "Mehr Berichte laden",
+    "loadingMore": "Laden...",
     "filters": {
       "all": "Alle",
       "favorites": "Favoriten"

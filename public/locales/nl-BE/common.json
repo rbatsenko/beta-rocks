@@ -799,6 +799,8 @@
     "justNow": "Zojuist",
     "loadingFeed": "Feed laden...",
     "reconnecting": "Opnieuw verbinden met live-updates...",
+    "loadMore": "Meer rapporten laden",
+    "loadingMore": "Laden...",
     "filters": {
       "all": "Alle",
       "favorites": "Favorieten"

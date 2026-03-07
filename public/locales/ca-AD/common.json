@@ -763,6 +763,8 @@
     "justNow": "Ara mateix",
     "loadingFeed": "Carregant flux...",
     "reconnecting": "Reconnectant a actualitzacions en directe...",
+    "loadMore": "Carrega més informes",
+    "loadingMore": "Carregant...",
     "filters": {
       "all": "Tots",
       "favorites": "Favorits"

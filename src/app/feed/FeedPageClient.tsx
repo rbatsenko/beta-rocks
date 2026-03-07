@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ReportTimeline } from "@/components/feed/ReportTimeline";
 import { useReportRealtime } from "@/hooks/useReportRealtime";
@@ -11,6 +11,7 @@ import { useClientTranslation } from "@/hooks/useClientTranslation";
 
 interface FeedPageClientProps {
   initialReports: ReportWithDetails[];
+  initialNextCursor: string | null;
   favoriteCragIds: string[];
   currentUserProfileId: string | null;
   initialDisplayName?: string; // Reserved for future use
@@ -25,12 +26,15 @@ interface FeedPageClientProps {
  */
 export default function FeedPageClient({
   initialReports,
+  initialNextCursor,
   favoriteCragIds,
   currentUserProfileId,
 }: FeedPageClientProps) {
   const { t } = useClientTranslation("common");
   const [reports, setReports] = useState<ReportWithDetails[]>(initialReports);
   const [isInitializing, setIsInitializing] = useState(true);
+  const [nextCursor, setNextCursor] = useState<string | null>(initialNextCursor);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const queryClient = useQueryClient();
 
   // Pre-populate React Query cache with initial reports
@@ -81,6 +85,34 @@ export default function FeedPageClient({
     }
   };
 
+  // Load more reports (cursor-based pagination)
+  const loadMore = useCallback(async () => {
+    if (!nextCursor || isLoadingMore) return;
+    setIsLoadingMore(true);
+    try {
+      const res = await fetch(`/api/reports/feed?cursor=${encodeURIComponent(nextCursor)}`);
+      if (!res.ok) throw new Error("Failed to fetch");
+      const data = await res.json();
+      const newReports: ReportWithDetails[] = data.reports || [];
+
+      // Cache in React Query
+      newReports.forEach((report) => {
+        queryClient.setQueryData(["report", report.id], report);
+      });
+
+      setReports((prev) => {
+        const existingIds = new Set(prev.map((r) => r.id));
+        const unique = newReports.filter((r) => !existingIds.has(r.id));
+        return [...prev, ...unique];
+      });
+      setNextCursor(data.nextCursor);
+    } catch (err) {
+      console.error("[FeedPageClient] Failed to load more reports:", err);
+    } finally {
+      setIsLoadingMore(false);
+    }
+  }, [nextCursor, isLoadingMore, queryClient]);
+
   // Subscribe to realtime reports
   const { isConnected } = useReportRealtime({
     onNewReport: handleNewReport,
@@ -117,6 +149,9 @@ export default function FeedPageClient({
           favoriteCragIds={favoriteCragIds}
           onNewReport={handleNewReport}
           currentUserProfileId={currentUserProfileId}
+          hasMore={!!nextCursor}
+          isLoadingMore={isLoadingMore}
+          onLoadMore={loadMore}
         />
 
         {/* Connection Status Indicator (subtle, bottom-right) */}

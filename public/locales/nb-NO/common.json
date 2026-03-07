@@ -796,6 +796,8 @@
     "justNow": "Akkurat nå",
     "loadingFeed": "Laster inn feed...",
     "reconnecting": "Kobler til på nytt til direkteoppdateringer...",
+    "loadMore": "Last inn flere rapporter",
+    "loadingMore": "Laster...",
     "filters": {
       "all": "Alle",
       "favorites": "Favoritter"

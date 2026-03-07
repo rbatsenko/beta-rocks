@@ -952,6 +952,8 @@
     "justNow": "Just now",
     "loadingFeed": "Loading feed...",
     "reconnecting": "Reconnecting to live updates...",
+    "loadMore": "Load more reports",
+    "loadingMore": "Loading...",
     "filters": {
       "all": "All",
       "favorites": "Favorites"

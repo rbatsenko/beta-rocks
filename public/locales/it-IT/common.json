@@ -884,6 +884,8 @@
     "justNow": "Proprio ora",
     "loadingFeed": "Caricamento feed...",
     "reconnecting": "Riconnessione agli aggiornamenti in tempo reale...",
+    "loadMore": "Carica altri rapporti",
+    "loadingMore": "Caricamento...",
     "filters": {
       "all": "Tutti",
       "favorites": "Preferiti"

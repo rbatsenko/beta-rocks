@@ -246,7 +246,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
 
   // Filter and sort reports by selected category (expired reports go to bottom)
   const filteredReports = useMemo(() => {
-    let filtered =
+    const filtered =
       selectedCategory === "all"
         ? reports
         : reports.filter((report) => report.category === selectedCategory);

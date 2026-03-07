@@ -880,6 +880,8 @@
     "justNow": "Upravo sada",
     "loadingFeed": "Učitavanje pregleda...",
     "reconnecting": "Ponovno povezivanje s ažuriranjima uživo...",
+    "loadMore": "Učitaj više izvještaja",
+    "loadingMore": "Učitavanje...",
     "filters": {
       "all": "Sve",
       "favorites": "Favoriti"

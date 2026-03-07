@@ -31,11 +31,7 @@ export function FloatingActionButton({ onAddCrag, onAddReport }: FloatingActionB
     <>
       {/* Click-outside overlay to close FAB */}
       {expanded && (
-        <div
-          className="fixed inset-0 z-40"
-          onClick={() => setExpanded(false)}
-          aria-hidden="true"
-        />
+        <div className="fixed inset-0 z-40" onClick={() => setExpanded(false)} aria-hidden="true" />
       )}
 
       <div className="hidden md:flex fixed bottom-8 right-8 z-50 flex-col items-end gap-3">

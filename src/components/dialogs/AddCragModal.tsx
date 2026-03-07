@@ -312,16 +312,12 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
                 >
                   <div
                     className={`flex items-center justify-center w-10 h-10 rounded-full shrink-0 transition-colors ${
-                      isSecret
-                        ? "bg-amber-200 dark:bg-amber-800"
-                        : "bg-muted"
+                      isSecret ? "bg-amber-200 dark:bg-amber-800" : "bg-muted"
                     }`}
                   >
                     <EyeOff
                       className={`h-5 w-5 transition-colors ${
-                        isSecret
-                          ? "text-amber-700 dark:text-amber-300"
-                          : "text-muted-foreground"
+                        isSecret ? "text-amber-700 dark:text-amber-300" : "text-muted-foreground"
                       }`}
                     />
                   </div>
@@ -349,7 +345,8 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
                 {/* Map Section */}
                 <div>
                   <Label className="text-base font-semibold mb-2">
-                    {isSecret ? t("addCragModal.secretCrag.mapLabel") : t("addCragModal.mapLabel")} *
+                    {isSecret ? t("addCragModal.secretCrag.mapLabel") : t("addCragModal.mapLabel")}{" "}
+                    *
                   </Label>
                   <p className="text-sm text-muted-foreground mb-3">
                     {isSecret ? t("addCragModal.secretCrag.mapHelp") : t("addCragModal.mapHelp")}

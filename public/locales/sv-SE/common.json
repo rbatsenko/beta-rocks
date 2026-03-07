@@ -716,6 +716,8 @@
     "justNow": "Just nu",
     "loadingFeed": "Laddar flöde...",
     "reconnecting": "Återansluter till liveuppdateringar...",
+    "loadMore": "Ladda fler rapporter",
+    "loadingMore": "Laddar...",
     "filters": {
       "all": "Alla",
       "favorites": "Favoriter"
