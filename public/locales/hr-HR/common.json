@@ -739,8 +739,8 @@
       "veryDry": "Savršeno",
       "calm": "Mirno",
       "veryWindy": "Vrlo vjetrovito",
-      "empty": "Vrlo gužva",
-      "veryCrowded": "Prazno"
+      "empty": "Prazno",
+      "veryCrowded": "Vrlo gužva"
     },
     "drynessLabels": {
       "1": "Vrlo mokro",

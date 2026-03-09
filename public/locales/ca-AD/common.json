@@ -628,8 +628,8 @@
       "veryDry": "Perfecte",
       "calm": "Calm",
       "veryWindy": "Molt ventós",
-      "empty": "Molt ple",
-      "veryCrowded": "Buit"
+      "empty": "Buit",
+      "veryCrowded": "Molt ple"
     },
     "drynessLabels": {
       "1": "Molt humit",

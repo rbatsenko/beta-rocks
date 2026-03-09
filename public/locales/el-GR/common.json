@@ -628,8 +628,8 @@
       "veryDry": "Τέλειο",
       "calm": "Ήρεμος",
       "veryWindy": "Πολύ ανεμώδης",
-      "empty": "Πολύ γεμάτο",
-      "veryCrowded": "Άδειο"
+      "empty": "Άδειο",
+      "veryCrowded": "Πολύ γεμάτο"
     },
     "drynessLabels": {
       "1": "Πολύ υγρό",

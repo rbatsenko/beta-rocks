@@ -739,8 +739,8 @@
       "veryDry": "Ідеально",
       "calm": "Спокійно",
       "veryWindy": "Дуже вітряно",
-      "empty": "Дуже людно",
-      "veryCrowded": "Пусто"
+      "empty": "Пусто",
+      "veryCrowded": "Дуже людно"
     },
     "drynessLabels": {
       "1": "Дуже мокро",

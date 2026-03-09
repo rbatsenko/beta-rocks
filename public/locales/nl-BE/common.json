@@ -659,8 +659,8 @@
       "veryDry": "Perfect",
       "calm": "Kalm",
       "veryWindy": "Zeer winderig",
-      "empty": "Zeer druk",
-      "veryCrowded": "Leeg"
+      "empty": "Leeg",
+      "veryCrowded": "Zeer druk"
     },
     "drynessLabels": {
       "1": "Zeer nat",

@@ -692,8 +692,8 @@
       "veryDry": "Idealnie",
       "calm": "Spokojnie",
       "veryWindy": "Bardzo wietrznie",
-      "empty": "Bardzo tłoczno",
-      "veryCrowded": "Pusto"
+      "empty": "Pusto",
+      "veryCrowded": "Bardzo tłoczno"
     },
     "drynessLabels": {
       "1": "Bardzo mokro",

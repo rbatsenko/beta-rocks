@@ -581,8 +581,8 @@
       "veryDry": "Perfekt",
       "calm": "Lugnt",
       "veryWindy": "Mycket blåsigt",
-      "empty": "Mycket fullt",
-      "veryCrowded": "Tomt"
+      "empty": "Tomt",
+      "veryCrowded": "Mycket fullt"
     },
     "drynessLabels": {
       "1": "Mycket vått",

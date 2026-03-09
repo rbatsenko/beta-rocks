@@ -659,8 +659,8 @@
       "veryDry": "Perfect",
       "calm": "Calm",
       "veryWindy": "Foarte vântos",
-      "empty": "Foarte aglomerat",
-      "veryCrowded": "Gol"
+      "empty": "Gol",
+      "veryCrowded": "Foarte aglomerat"
     },
     "drynessLabels": {
       "1": "Foarte umed",

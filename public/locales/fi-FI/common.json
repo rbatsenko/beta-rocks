@@ -660,8 +660,8 @@
       "veryDry": "Täydellinen",
       "calm": "Tyyni",
       "veryWindy": "Erittäin tuulinen",
-      "empty": "Erittäin täynnä",
-      "veryCrowded": "Tyhjä"
+      "empty": "Tyhjä",
+      "veryCrowded": "Erittäin täynnä"
     },
     "drynessLabels": {
       "1": "Erittäin märkä",

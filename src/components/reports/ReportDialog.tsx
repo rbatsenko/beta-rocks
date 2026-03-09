@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import imageCompression from "browser-image-compression";
+import { getCrowdColorClass } from "@/lib/utils/crowd-colors";
 import {
   MessageSquare,
   Loader2,
@@ -635,8 +636,8 @@ export function ReportDialog({
                 <div>
                   <Label className="block mb-2">{t("reports.crowds")}</Label>
                   <div className="flex items-center justify-between text-xs text-muted-foreground mb-2">
-                    <span>{t("reports.scales.veryCrowded")}</span>
                     <span>{t("reports.scales.empty")}</span>
+                    <span>{t("reports.scales.veryCrowded")}</span>
                   </div>
                   <Slider
                     value={crowdsRating}
@@ -647,7 +648,7 @@ export function ReportDialog({
                     className="cursor-pointer"
                   />
                   <div className="text-center pt-1">
-                    <span className={`text-xl font-bold ${crowdsRating[0] >= 4 ? "text-red-500" : crowdsRating[0] <= 2 ? "text-green-500" : "text-orange-500"}`}>{crowdsRating[0]}/5</span>
+                    <span className={`text-xl font-bold ${getCrowdColorClass(crowdsRating[0])}`}>{crowdsRating[0]}/5</span>
                   </div>
                 </div>
               </div>

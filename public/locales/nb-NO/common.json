@@ -661,8 +661,8 @@
       "veryDry": "Perfekt",
       "calm": "Rolig",
       "veryWindy": "Veldig blåsende",
-      "empty": "Veldig fullt",
-      "veryCrowded": "Tomt"
+      "empty": "Tomt",
+      "veryCrowded": "Veldig fullt"
     },
     "drynessLabels": {
       "1": "Veldig vått",

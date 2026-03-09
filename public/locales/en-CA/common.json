@@ -768,8 +768,8 @@
       "veryDry": "Perfect",
       "calm": "Calm",
       "veryWindy": "Very windy",
-      "empty": "Very crowded",
-      "veryCrowded": "Empty"
+      "empty": "Empty",
+      "veryCrowded": "Very crowded"
     },
     "drynessLabels": {
       "1": "Very wet",

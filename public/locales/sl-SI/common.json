@@ -740,8 +740,8 @@
       "veryDry": "Popolno",
       "calm": "Mirno",
       "veryWindy": "Zelo vetrovno",
-      "empty": "Zelo polno",
-      "veryCrowded": "Prazno"
+      "empty": "Prazno",
+      "veryCrowded": "Zelo polno"
     },
     "drynessLabels": {
       "1": "Zelo mokro",

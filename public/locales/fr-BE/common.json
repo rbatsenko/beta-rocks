@@ -743,8 +743,8 @@
       "veryDry": "Parfait",
       "calm": "Calme",
       "veryWindy": "Très venteux",
-      "empty": "Très bondé",
-      "veryCrowded": "Vide"
+      "empty": "Vide",
+      "veryCrowded": "Très bondé"
     },
     "drynessLabels": {
       "1": "Très humide",

@@ -660,8 +660,8 @@
       "veryDry": "Perfekt",
       "calm": "Roligt",
       "veryWindy": "Meget blæsende",
-      "empty": "Meget fyldt",
-      "veryCrowded": "Tomt"
+      "empty": "Tomt",
+      "veryCrowded": "Meget fyldt"
     },
     "drynessLabels": {
       "1": "Meget vådt",

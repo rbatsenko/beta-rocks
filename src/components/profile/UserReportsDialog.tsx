@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { MessageSquare, Edit, Trash2, MapPin, Loader2 } from "lucide-react";
+import { getCrowdColorClass } from "@/lib/utils/crowd-colors";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -207,7 +208,7 @@ export function UserReportsDialog({ open, onOpenChange }: UserReportsDialogProps
                           {report.rating_crowds && (
                             <div className="flex items-center gap-1">
                               <span>{t("reports.crowds")}:</span>
-                              <span className={`font-medium ${report.rating_crowds >= 4 ? "text-red-500" : report.rating_crowds <= 2 ? "text-green-500" : "text-orange-500"}`}>
+                              <span className={`font-medium ${getCrowdColorClass(report.rating_crowds)}`}>
                                 {report.rating_crowds}/5
                               </span>
                             </div>

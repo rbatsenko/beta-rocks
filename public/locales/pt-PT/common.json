@@ -659,8 +659,8 @@
       "veryDry": "Perfeito",
       "calm": "Calmo",
       "veryWindy": "Muito ventoso",
-      "empty": "Muito cheio",
-      "veryCrowded": "Vazio"
+      "empty": "Vazio",
+      "veryCrowded": "Muito cheio"
     },
     "drynessLabels": {
       "1": "Muito húmido",

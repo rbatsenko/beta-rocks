@@ -739,8 +739,8 @@
       "veryDry": "Perfektní",
       "calm": "Klidno",
       "veryWindy": "Velmi větrno",
-      "empty": "Velmi přeplněno",
-      "veryCrowded": "Prázdno"
+      "empty": "Prázdno",
+      "veryCrowded": "Velmi přeplněno"
     },
     "drynessLabels": {
       "1": "Velmi mokro",
