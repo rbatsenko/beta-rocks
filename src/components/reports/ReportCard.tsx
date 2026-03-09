@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
 import {
   getCrowdBorderClass, getCrowdIconClass, getCrowdTextClass,
@@ -104,6 +104,13 @@ export function ReportCard({
   const [newSyncKey, setNewSyncKey] = useState<string>("");
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [isPanning, setIsPanning] = useState(false);
+  const panStart = useRef({ x: 0, y: 0 });
+  const panOffset = useRef({ x: 0, y: 0 });
+  const lastPinchDist = useRef<number | null>(null);
+  const imgRef = useRef<HTMLDivElement>(null);
 
   // Check if user has already confirmed this report
   useEffect(() => {
@@ -164,6 +171,12 @@ export function ReportCard({
     return supabase.storage.from("report-photos").getPublicUrl(path).data.publicUrl;
   };
 
+  const resetZoom = useCallback(() => {
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
+    lastPinchDist.current = null;
+  }, []);
+
   // Keyboard navigation for lightbox
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -172,15 +185,108 @@ export function ReportCard({
       if (e.key === "Escape") {
         setLightboxOpen(false);
       } else if (e.key === "ArrowLeft" && report.photos && report.photos.length > 1) {
+        resetZoom();
         setLightboxIndex((prev) => (prev - 1 + report.photos!.length) % report.photos!.length);
       } else if (e.key === "ArrowRight" && report.photos && report.photos.length > 1) {
+        resetZoom();
         setLightboxIndex((prev) => (prev + 1) % report.photos!.length);
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [lightboxOpen, lightboxIndex, report.photos]);
+  }, [lightboxOpen, lightboxIndex, report.photos, resetZoom]);
+
+  // Scroll to zoom (desktop)
+  const handleWheel = useCallback((e: React.WheelEvent) => {
+    e.stopPropagation();
+    setZoom((prev) => {
+      const next = prev - e.deltaY * 0.002;
+      if (next <= 1) {
+        setPan({ x: 0, y: 0 });
+        return 1;
+      }
+      return Math.min(next, 5);
+    });
+  }, []);
+
+  // Pinch to zoom (mobile)
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      e.stopPropagation();
+      const dist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      if (lastPinchDist.current !== null) {
+        const delta = dist - lastPinchDist.current;
+        setZoom((prev) => {
+          const next = prev + delta * 0.005;
+          if (next <= 1) {
+            setPan({ x: 0, y: 0 });
+            return 1;
+          }
+          return Math.min(next, 5);
+        });
+      }
+      lastPinchDist.current = dist;
+    } else if (e.touches.length === 1 && zoom > 1) {
+      // Pan with one finger when zoomed
+      e.stopPropagation();
+      if (isPanning) {
+        setPan({
+          x: panOffset.current.x + (e.touches[0].clientX - panStart.current.x),
+          y: panOffset.current.y + (e.touches[0].clientY - panStart.current.y),
+        });
+      }
+    }
+  }, [zoom, isPanning]);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    if (e.touches.length === 1 && zoom > 1) {
+      setIsPanning(true);
+      panStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      panOffset.current = { ...pan };
+    }
+  }, [zoom, pan]);
+
+  const handleTouchEnd = useCallback(() => {
+    lastPinchDist.current = null;
+    setIsPanning(false);
+  }, []);
+
+  // Mouse drag to pan when zoomed (desktop)
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    if (zoom > 1) {
+      e.preventDefault();
+      setIsPanning(true);
+      panStart.current = { x: e.clientX, y: e.clientY };
+      panOffset.current = { ...pan };
+    }
+  }, [zoom, pan]);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (isPanning && zoom > 1) {
+      setPan({
+        x: panOffset.current.x + (e.clientX - panStart.current.x),
+        y: panOffset.current.y + (e.clientY - panStart.current.y),
+      });
+    }
+  }, [isPanning, zoom]);
+
+  const handleMouseUp = useCallback(() => {
+    setIsPanning(false);
+  }, []);
+
+  // Double-click/tap to toggle zoom
+  const handleDoubleClick = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (zoom > 1) {
+      resetZoom();
+    } else {
+      setZoom(2.5);
+    }
+  }, [zoom, resetZoom]);
 
   const getCategoryIcon = (category: ReportCategory) => {
     const iconClass = "h-3.5 w-3.5";
@@ -503,11 +609,14 @@ export function ReportCard({
           <div
             className="fixed inset-0 bg-black/90 flex items-center justify-center p-2 sm:p-4"
             style={{ zIndex: 99999 }}
-            onClick={() => setLightboxOpen(false)}
+            onClick={() => { resetZoom(); setLightboxOpen(false); }}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
           >
             <div className="relative max-w-full sm:max-w-4xl max-h-full">
               <button
-                onClick={(e) => { e.stopPropagation(); setLightboxOpen(false); }}
+                onClick={(e) => { e.stopPropagation(); resetZoom(); setLightboxOpen(false); }}
                 className="absolute -top-10 right-0 sm:-top-12 text-white hover:text-orange-500 transition-colors z-10"
               >
                 <svg className="w-7 h-7 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -519,12 +628,38 @@ export function ReportCard({
                   />
                 </svg>
               </button>
-              <img
-                src={getPhotoUrl(report.photos[lightboxIndex])}
-                alt={`Photo ${lightboxIndex + 1}`}
-                className="max-w-full max-h-[90vh] sm:max-h-[80vh] object-contain rounded-lg"
+              <div
+                ref={imgRef}
+                className="overflow-hidden rounded-lg"
+                style={{ cursor: zoom > 1 ? "grab" : "zoom-in" }}
                 onClick={(e) => e.stopPropagation()}
-              />
+                onWheel={handleWheel}
+                onDoubleClick={handleDoubleClick}
+                onMouseDown={handleMouseDown}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={getPhotoUrl(report.photos[lightboxIndex])}
+                  alt={`Photo ${lightboxIndex + 1}`}
+                  className="max-w-full max-h-[90vh] sm:max-h-[80vh] object-contain select-none"
+                  draggable={false}
+                  style={{
+                    transform: `scale(${zoom}) translate(${pan.x / zoom}px, ${pan.y / zoom}px)`,
+                    transition: isPanning ? "none" : "transform 0.2s ease-out",
+                  }}
+                />
+              </div>
+              {zoom > 1 && (
+                <button
+                  onClick={(e) => { e.stopPropagation(); resetZoom(); }}
+                  className="absolute top-2 left-2 text-white/80 hover:text-white bg-black/50 rounded-full px-3 py-1.5 text-xs transition-colors"
+                >
+                  Reset zoom
+                </button>
+              )}
               {report.photos.length > 1 && (
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 bg-black/50 px-4 py-2 rounded-full">
                   {report.photos.map((_, index) => (
@@ -532,6 +667,7 @@ export function ReportCard({
                       key={index}
                       onClick={(e) => {
                         e.stopPropagation();
+                        resetZoom();
                         setLightboxIndex(index);
                       }}
                       className={cn(
@@ -547,6 +683,7 @@ export function ReportCard({
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
+                      resetZoom();
                       setLightboxIndex(
                         (prev) => (prev - 1 + report.photos!.length) % report.photos!.length
                       );
@@ -565,6 +702,7 @@ export function ReportCard({
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
+                      resetZoom();
                       setLightboxIndex((prev) => (prev + 1) % report.photos!.length);
                     }}
                     className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-orange-500 bg-black/50 rounded-full p-3 transition-colors"
