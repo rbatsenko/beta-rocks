@@ -174,11 +174,11 @@ export function ReportDialog({
 
   const compressPhoto = async (file: File): Promise<File> => {
     const options = {
-      maxSizeMB: 2,
+      maxSizeMB: 1,
       maxWidthOrHeight: 1920,
       useWebWorker: true,
-      initialQuality: 0.95,
-      fileType: "image/webp" as const,
+      initialQuality: 0.85,
+      fileType: "image/jpeg" as const,
     };
     try {
       return await imageCompression(file, options);
@@ -221,9 +221,8 @@ export function ReportDialog({
         // Compress photo
         const compressedFile = await compressPhoto(file);
 
-        // Generate unique filename
-        const fileExt = compressedFile.name.split(".").pop() || "webp";
-        const fileName = `${profileId}-${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+        // Generate unique filename with correct extension
+        const fileName = `${profileId}-${Date.now()}-${Math.random().toString(36).substring(7)}.jpg`;
         const filePath = `reports/${fileName}`;
 
         // Upload to Supabase Storage
@@ -238,6 +237,7 @@ export function ReportDialog({
           .upload(filePath, compressedFile, {
             cacheControl: "3600",
             upsert: false,
+            contentType: "image/jpeg",
           });
 
         if (error) throw error;
