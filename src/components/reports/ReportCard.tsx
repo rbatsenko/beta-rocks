@@ -159,11 +159,8 @@ export function ReportCard({
     }, 500);
   };
 
-  const getPhotoUrl = (path: string, transform?: { width: number; height: number; resize?: "cover" | "contain" | "fill" }) => {
+  const getPhotoUrl = (path: string) => {
     const supabase = getSupabaseClient();
-    if (transform) {
-      return supabase.storage.from("report-photos").getPublicUrl(path, { transform }).data.publicUrl;
-    }
     return supabase.storage.from("report-photos").getPublicUrl(path).data.publicUrl;
   };
 
@@ -457,7 +454,7 @@ export function ReportCard({
                 className="relative group rounded-lg overflow-hidden border-2 border-border hover:border-orange-500 transition-colors"
               >
                 <img
-                  src={getPhotoUrl(photoPath, { width: 256, height: 256, resize: "cover" })}
+                  src={getPhotoUrl(photoPath)}
                   alt={`Photo ${index + 1}`}
                   className="w-32 h-32 object-cover"
                 />
