@@ -757,11 +757,11 @@
       "5": "Mirno"
     },
     "crowdsLabels": {
-      "1": "Vrlo gužva",
-      "2": "Gužva",
+      "1": "Prazno",
+      "2": "Malo ljudi",
       "3": "Umjereno",
-      "4": "Malo ljudi",
-      "5": "Prazno"
+      "4": "Gužva",
+      "5": "Vrlo gužva"
     },
     "recentReports": "Nedavni izvještaji",
     "communityReports": "Izvještaji zajednice",

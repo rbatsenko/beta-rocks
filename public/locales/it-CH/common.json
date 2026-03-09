@@ -764,11 +764,11 @@
       "5": "Calmo"
     },
     "crowdsLabels": {
-      "1": "Molto affollato",
-      "2": "Affollato",
+      "1": "Vuoto",
+      "2": "Poche persone",
       "3": "Moderato",
-      "4": "Poche persone",
-      "5": "Vuoto"
+      "4": "Affollato",
+      "5": "Molto affollato"
     },
     "recentReports": "Segnalazioni Recenti",
     "communityReports": "Segnalazioni della Community",

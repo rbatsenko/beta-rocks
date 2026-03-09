@@ -761,11 +761,11 @@
       "5": "Ruhig"
     },
     "crowdsLabels": {
-      "1": "Sehr voll",
-      "2": "Voll",
+      "1": "Leer",
+      "2": "Wenige Leute",
       "3": "Mäßig",
-      "4": "Wenige Leute",
-      "5": "Leer"
+      "4": "Voll",
+      "5": "Sehr voll"
     },
     "recentReports": "Aktuelle Berichte",
     "communityReports": "Community-Berichte",

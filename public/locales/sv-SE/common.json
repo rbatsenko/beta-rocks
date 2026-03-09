@@ -599,11 +599,11 @@
       "5": "Lugnt"
     },
     "crowdsLabels": {
-      "1": "Mycket fullt",
-      "2": "Fullt",
+      "1": "Tomt",
+      "2": "Få personer",
       "3": "Måttligt",
-      "4": "Få personer",
-      "5": "Tomt"
+      "4": "Fullt",
+      "5": "Mycket fullt"
     },
     "recentReports": "Senaste rapporter",
     "communityReports": "Gemenskapsrapporter",

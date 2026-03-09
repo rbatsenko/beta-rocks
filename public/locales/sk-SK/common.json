@@ -677,11 +677,11 @@
       "5": "Pokojne"
     },
     "crowdsLabels": {
-      "1": "Veľmi preplnené",
-      "2": "Preplnené",
+      "1": "Prázdno",
+      "2": "Málo ľudí",
       "3": "Mierne",
-      "4": "Málo ľudí",
-      "5": "Prázdno"
+      "4": "Preplnené",
+      "5": "Veľmi preplnené"
     },
     "recentReports": "Nedávne hlásenia",
     "communityReports": "Komunitné hlásenia",

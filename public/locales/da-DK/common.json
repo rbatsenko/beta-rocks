@@ -678,11 +678,11 @@
       "5": "Roligt"
     },
     "crowdsLabels": {
-      "1": "Meget fyldt",
-      "2": "Fyldt",
+      "1": "Tomt",
+      "2": "Få personer",
       "3": "Moderat",
-      "4": "Få personer",
-      "5": "Tomt"
+      "4": "Fyldt",
+      "5": "Meget fyldt"
     },
     "recentReports": "Seneste rapporter",
     "communityReports": "Fællesskabsrapporter",

@@ -823,11 +823,11 @@
       "5": "Calm"
     },
     "crowdsLabels": {
-      "1": "Very crowded",
-      "2": "Crowded",
+      "1": "Empty",
+      "2": "Few people",
       "3": "Moderate",
-      "4": "Few people",
-      "5": "Empty"
+      "4": "Crowded",
+      "5": "Very crowded"
     },
     "recentReports": "Recent Reports",
     "communityReports": "Community Reports",

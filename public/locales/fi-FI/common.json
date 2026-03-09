@@ -678,11 +678,11 @@
       "5": "Tyyni"
     },
     "crowdsLabels": {
-      "1": "Erittäin täynnä",
-      "2": "Täynnä",
+      "1": "Tyhjä",
+      "2": "Vähän ihmisiä",
       "3": "Kohtalainen",
-      "4": "Vähän ihmisiä",
-      "5": "Tyhjä"
+      "4": "Täynnä",
+      "5": "Erittäin täynnä"
     },
     "recentReports": "Viimeisimmät raportit",
     "communityReports": "Yhteisön raportit",

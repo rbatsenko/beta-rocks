@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
+import { getCrowdBorderClass, getCrowdIconClass, getCrowdTextClass } from "@/lib/utils/crowd-colors";
 import {
   ThumbsUp,
   User,
@@ -419,9 +420,9 @@ export function ReportCard({
                 </Badge>
               )}
               {report.rating_crowds !== null && (
-                <Badge variant="outline" className="gap-1.5">
-                  <Users className="h-3 w-3" />
-                  <span className="text-xs">
+                <Badge variant="outline" className={`gap-1.5 ${getCrowdBorderClass(report.rating_crowds)}`}>
+                  <Users className={`h-3 w-3 ${getCrowdIconClass(report.rating_crowds)}`} />
+                  <span className={`text-xs ${getCrowdTextClass(report.rating_crowds)}`}>
                     {t("reports.crowds")}: {report.rating_crowds}/5
                   </span>
                   <span className="text-xs text-muted-foreground">

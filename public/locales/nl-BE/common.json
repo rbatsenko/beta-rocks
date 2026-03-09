@@ -677,11 +677,11 @@
       "5": "Kalm"
     },
     "crowdsLabels": {
-      "1": "Zeer druk",
-      "2": "Druk",
+      "1": "Leeg",
+      "2": "Weinig mensen",
       "3": "Matig",
-      "4": "Weinig mensen",
-      "5": "Leeg"
+      "4": "Druk",
+      "5": "Zeer druk"
     },
     "recentReports": "Recente rapporten",
     "communityReports": "Gemeenschapsrapporten",

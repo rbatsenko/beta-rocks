@@ -710,11 +710,11 @@
       "5": "Spokojnie"
     },
     "crowdsLabels": {
-      "1": "Bardzo tłoczno",
-      "2": "Tłoczno",
+      "1": "Pusto",
+      "2": "Mało osób",
       "3": "Umiarkowanie",
-      "4": "Mało osób",
-      "5": "Pusto"
+      "4": "Tłoczno",
+      "5": "Bardzo tłoczno"
     },
     "recentReports": "Ostatnie raporty",
     "communityReports": "Raporty społeczności",

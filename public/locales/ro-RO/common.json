@@ -677,11 +677,11 @@
       "5": "Calm"
     },
     "crowdsLabels": {
-      "1": "Foarte aglomerat",
-      "2": "Aglomerat",
+      "1": "Gol",
+      "2": "Puțini oameni",
       "3": "Moderat",
-      "4": "Puțini oameni",
-      "5": "Gol"
+      "4": "Aglomerat",
+      "5": "Foarte aglomerat"
     },
     "recentReports": "Rapoarte recente",
     "communityReports": "Rapoarte comunitare",

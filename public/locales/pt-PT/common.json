@@ -677,11 +677,11 @@
       "5": "Calmo"
     },
     "crowdsLabels": {
-      "1": "Muito cheio",
-      "2": "Cheio",
+      "1": "Vazio",
+      "2": "Pouca gente",
       "3": "Moderado",
-      "4": "Pouca gente",
-      "5": "Vazio"
+      "4": "Cheio",
+      "5": "Muito cheio"
     },
     "recentReports": "Relatórios recentes",
     "communityReports": "Relatórios da comunidade",

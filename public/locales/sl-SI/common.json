@@ -758,11 +758,11 @@
       "5": "Mirno"
     },
     "crowdsLabels": {
-      "1": "Zelo polno",
-      "2": "Polno",
+      "1": "Prazno",
+      "2": "Malo ljudi",
       "3": "Zmerno",
-      "4": "Malo ljudi",
-      "5": "Prazno"
+      "4": "Polno",
+      "5": "Zelo polno"
     },
     "recentReports": "Nedavna poročila",
     "communityReports": "Poročila skupnosti",
