@@ -661,8 +661,8 @@
       "veryDry": "Perfekt",
       "calm": "Rolig",
       "veryWindy": "Veldig blåsende",
-      "empty": "Tomt",
-      "veryCrowded": "Veldig fullt"
+      "empty": "Veldig fullt",
+      "veryCrowded": "Tomt"
     },
     "drynessLabels": {
       "1": "Veldig vått",
@@ -679,11 +679,11 @@
       "5": "Rolig"
     },
     "crowdsLabels": {
-      "1": "Veldig fullt",
-      "2": "Fullt",
+      "1": "Tomt",
+      "2": "Få personer",
       "3": "Moderat",
-      "4": "Få personer",
-      "5": "Tomt"
+      "4": "Fullt",
+      "5": "Veldig fullt"
     },
     "recentReports": "Siste rapporter",
     "communityReports": "Samfunnsrapporter",

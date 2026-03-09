@@ -739,8 +739,8 @@
       "veryDry": "Perfektní",
       "calm": "Klidno",
       "veryWindy": "Velmi větrno",
-      "empty": "Prázdno",
-      "veryCrowded": "Velmi přeplněno"
+      "empty": "Velmi přeplněno",
+      "veryCrowded": "Prázdno"
     },
     "drynessLabels": {
       "1": "Velmi mokro",
@@ -757,11 +757,11 @@
       "5": "Klidno"
     },
     "crowdsLabels": {
-      "1": "Velmi přeplněno",
-      "2": "Přeplněno",
+      "1": "Prázdno",
+      "2": "Málo lidí",
       "3": "Mírně",
-      "4": "Málo lidí",
-      "5": "Prázdno"
+      "4": "Přeplněno",
+      "5": "Velmi přeplněno"
     },
     "recentReports": "Nedávná hlášení",
     "communityReports": "Komunitní hlášení",

@@ -743,8 +743,8 @@
       "veryDry": "Perfecto",
       "calm": "Calmado",
       "veryWindy": "Muy ventoso",
-      "empty": "Vacío",
-      "veryCrowded": "Muy lleno"
+      "empty": "Muy lleno",
+      "veryCrowded": "Vacío"
     },
     "drynessLabels": {
       "1": "Muy húmedo",
@@ -761,11 +761,11 @@
       "5": "Calmado"
     },
     "crowdsLabels": {
-      "1": "Muy lleno",
-      "2": "Lleno",
+      "1": "Vacío",
+      "2": "Poca gente",
       "3": "Moderado",
-      "4": "Poca gente",
-      "5": "Vacío"
+      "4": "Lleno",
+      "5": "Muy lleno"
     },
     "recentReports": "Informes recientes",
     "communityReports": "Informes de la comunidad",

@@ -628,8 +628,8 @@
       "veryDry": "Perfecte",
       "calm": "Calm",
       "veryWindy": "Molt ventós",
-      "empty": "Buit",
-      "veryCrowded": "Molt ple"
+      "empty": "Molt ple",
+      "veryCrowded": "Buit"
     },
     "drynessLabels": {
       "1": "Molt humit",
@@ -646,11 +646,11 @@
       "5": "Calm"
     },
     "crowdsLabels": {
-      "1": "Molt ple",
-      "2": "Ple",
+      "1": "Buit",
+      "2": "Poca gent",
       "3": "Moderat",
-      "4": "Poca gent",
-      "5": "Buit"
+      "4": "Ple",
+      "5": "Molt ple"
     },
     "recentReports": "Informes recents",
     "communityReports": "Informes de la comunitat",

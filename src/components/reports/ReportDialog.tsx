@@ -647,7 +647,7 @@ export function ReportDialog({
                     className="cursor-pointer"
                   />
                   <div className="text-center pt-1">
-                    <span className="text-xl font-bold text-orange-500">{crowdsRating[0]}/5</span>
+                    <span className={`text-xl font-bold ${crowdsRating[0] >= 4 ? "text-red-500" : crowdsRating[0] <= 2 ? "text-green-500" : "text-orange-500"}`}>{crowdsRating[0]}/5</span>
                   </div>
                 </div>
               </div>

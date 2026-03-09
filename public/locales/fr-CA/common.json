@@ -743,8 +743,8 @@
       "veryDry": "Parfait",
       "calm": "Calme",
       "veryWindy": "Très venteux",
-      "empty": "Vide",
-      "veryCrowded": "Très bondé"
+      "empty": "Très bondé",
+      "veryCrowded": "Vide"
     },
     "drynessLabels": {
       "1": "Très humide",
@@ -761,11 +761,11 @@
       "5": "Calme"
     },
     "crowdsLabels": {
-      "1": "Très bondé",
-      "2": "Bondé",
+      "1": "Vide",
+      "2": "Peu de monde",
       "3": "Modéré",
-      "4": "Peu de monde",
-      "5": "Vide"
+      "4": "Bondé",
+      "5": "Très bondé"
     },
     "recentReports": "Rapports récents",
     "communityReports": "Rapports communautaires",
