@@ -657,8 +657,8 @@
     "scales": {
       "veryWet": "Muito húmido",
       "veryDry": "Perfeito",
-      "calm": "Calmo",
-      "veryWindy": "Muito ventoso",
+      "calm": "Muito ventoso",
+      "veryWindy": "Calmo",
       "empty": "Vazio",
       "veryCrowded": "Muito cheio"
     },
@@ -670,11 +670,11 @@
       "5": "Muito seco"
     },
     "windLabels": {
-      "1": "Muito ventoso",
-      "2": "Ventoso",
+      "1": "Calmo",
+      "2": "Brisa leve",
       "3": "Moderado",
-      "4": "Brisa leve",
-      "5": "Calmo"
+      "4": "Ventoso",
+      "5": "Muito ventoso"
     },
     "crowdsLabels": {
       "1": "Vazio",

@@ -658,8 +658,8 @@
     "scales": {
       "veryWet": "Erittäin märkä",
       "veryDry": "Täydellinen",
-      "calm": "Tyyni",
-      "veryWindy": "Erittäin tuulinen",
+      "calm": "Erittäin tuulinen",
+      "veryWindy": "Tyyni",
       "empty": "Tyhjä",
       "veryCrowded": "Erittäin täynnä"
     },
@@ -671,11 +671,11 @@
       "5": "Erittäin kuiva"
     },
     "windLabels": {
-      "1": "Erittäin tuulinen",
-      "2": "Tuulinen",
+      "1": "Tyyni",
+      "2": "Kevyt tuulenvire",
       "3": "Kohtalainen",
-      "4": "Kevyt tuulenvire",
-      "5": "Tyyni"
+      "4": "Tuulinen",
+      "5": "Erittäin tuulinen"
     },
     "crowdsLabels": {
       "1": "Tyhjä",

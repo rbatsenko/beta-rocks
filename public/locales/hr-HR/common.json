@@ -737,8 +737,8 @@
     "scales": {
       "veryWet": "Vrlo mokro",
       "veryDry": "Savršeno",
-      "calm": "Mirno",
-      "veryWindy": "Vrlo vjetrovito",
+      "calm": "Vrlo vjetrovito",
+      "veryWindy": "Mirno",
       "empty": "Prazno",
       "veryCrowded": "Vrlo gužva"
     },
@@ -750,11 +750,11 @@
       "5": "Vrlo suho"
     },
     "windLabels": {
-      "1": "Vrlo vjetrovito",
-      "2": "Vjetrovito",
+      "1": "Mirno",
+      "2": "Lagani povjetarac",
       "3": "Umjereno",
-      "4": "Lagani povjetarac",
-      "5": "Mirno"
+      "4": "Vjetrovito",
+      "5": "Vrlo vjetrovito"
     },
     "crowdsLabels": {
       "1": "Prazno",

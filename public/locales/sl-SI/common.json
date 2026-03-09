@@ -738,8 +738,8 @@
     "scales": {
       "veryWet": "Zelo mokro",
       "veryDry": "Popolno",
-      "calm": "Mirno",
-      "veryWindy": "Zelo vetrovno",
+      "calm": "Zelo vetrovno",
+      "veryWindy": "Mirno",
       "empty": "Prazno",
       "veryCrowded": "Zelo polno"
     },
@@ -751,11 +751,11 @@
       "5": "Zelo suho"
     },
     "windLabels": {
-      "1": "Zelo vetrovno",
-      "2": "Vetrovno",
+      "1": "Mirno",
+      "2": "Lahek vetrič",
       "3": "Zmerno",
-      "4": "Lahek vetrič",
-      "5": "Mirno"
+      "4": "Vetrovno",
+      "5": "Zelo vetrovno"
     },
     "crowdsLabels": {
       "1": "Prazno",

@@ -658,8 +658,8 @@
     "scales": {
       "veryWet": "Meget vådt",
       "veryDry": "Perfekt",
-      "calm": "Roligt",
-      "veryWindy": "Meget blæsende",
+      "calm": "Meget blæsende",
+      "veryWindy": "Roligt",
       "empty": "Tomt",
       "veryCrowded": "Meget fyldt"
     },
@@ -671,11 +671,11 @@
       "5": "Meget tørt"
     },
     "windLabels": {
-      "1": "Meget blæsende",
-      "2": "Blæsende",
+      "1": "Roligt",
+      "2": "Let brise",
       "3": "Moderat",
-      "4": "Let brise",
-      "5": "Roligt"
+      "4": "Blæsende",
+      "5": "Meget blæsende"
     },
     "crowdsLabels": {
       "1": "Tomt",

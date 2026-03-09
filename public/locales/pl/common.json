@@ -690,8 +690,8 @@
     "scales": {
       "veryWet": "Bardzo mokro",
       "veryDry": "Idealnie",
-      "calm": "Spokojnie",
-      "veryWindy": "Bardzo wietrznie",
+      "calm": "Bardzo wietrznie",
+      "veryWindy": "Spokojnie",
       "empty": "Pusto",
       "veryCrowded": "Bardzo tłoczno"
     },
@@ -703,11 +703,11 @@
       "5": "Bardzo sucho"
     },
     "windLabels": {
-      "1": "Bardzo wietrznie",
-      "2": "Wietrznie",
+      "1": "Spokojnie",
+      "2": "Lekka bryza",
       "3": "Umiarkowanie",
-      "4": "Lekka bryza",
-      "5": "Spokojnie"
+      "4": "Wietrznie",
+      "5": "Bardzo wietrznie"
     },
     "crowdsLabels": {
       "1": "Pusto",

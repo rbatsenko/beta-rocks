@@ -741,8 +741,8 @@
     "scales": {
       "veryWet": "Très humide",
       "veryDry": "Parfait",
-      "calm": "Calme",
-      "veryWindy": "Très venteux",
+      "calm": "Très venteux",
+      "veryWindy": "Calme",
       "empty": "Vide",
       "veryCrowded": "Très bondé"
     },
@@ -754,11 +754,11 @@
       "5": "Très sec"
     },
     "windLabels": {
-      "1": "Très venteux",
-      "2": "Venteux",
+      "1": "Calme",
+      "2": "Légère brise",
       "3": "Modéré",
-      "4": "Légère brise",
-      "5": "Calme"
+      "4": "Venteux",
+      "5": "Très venteux"
     },
     "crowdsLabels": {
       "1": "Vide",

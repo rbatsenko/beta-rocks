@@ -2,7 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { getCrowdBorderClass, getCrowdIconClass, getCrowdTextClass } from "@/lib/utils/crowd-colors";
+import {
+  getCrowdBorderClass, getCrowdIconClass, getCrowdTextClass,
+  getWindBorderClass, getWindIconClass, getWindTextClass,
+  getDrynessBorderClass, getDrynessIconClass, getDrynessTextClass,
+} from "@/lib/utils/rating-colors";
 import {
   ThumbsUp,
   User,
@@ -398,9 +402,9 @@ export function ReportCard({
             report.rating_crowds !== null) && (
             <div className="flex flex-wrap gap-2 mb-3">
               {report.rating_dry !== null && (
-                <Badge variant="outline" className="gap-1.5">
-                  <Droplets className="h-3 w-3" />
-                  <span className="text-xs">
+                <Badge variant="outline" className={`gap-1.5 ${getDrynessBorderClass(report.rating_dry)}`}>
+                  <Droplets className={`h-3 w-3 ${getDrynessIconClass(report.rating_dry)}`} />
+                  <span className={`text-xs ${getDrynessTextClass(report.rating_dry)}`}>
                     {t("reports.dryness")}: {report.rating_dry}/5
                   </span>
                   <span className="text-xs text-muted-foreground">
@@ -409,9 +413,9 @@ export function ReportCard({
                 </Badge>
               )}
               {report.rating_wind !== null && (
-                <Badge variant="outline" className="gap-1.5">
-                  <Wind className="h-3 w-3" />
-                  <span className="text-xs">
+                <Badge variant="outline" className={`gap-1.5 ${getWindBorderClass(report.rating_wind)}`}>
+                  <Wind className={`h-3 w-3 ${getWindIconClass(report.rating_wind)}`} />
+                  <span className={`text-xs ${getWindTextClass(report.rating_wind)}`}>
                     {t("reports.wind")}: {report.rating_wind}/5
                   </span>
                   <span className="text-xs text-muted-foreground">

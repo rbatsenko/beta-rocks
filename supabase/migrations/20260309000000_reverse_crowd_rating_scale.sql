@@ -4,3 +4,10 @@
 UPDATE reports
 SET rating_crowds = 6 - rating_crowds
 WHERE rating_crowds IS NOT NULL;
+
+-- Reverse the wind rating scale so that 1=Calm, 5=Very windy
+-- Previously: 1=Very windy, 5=Calm
+-- Now: 1=Calm, 5=Very windy
+UPDATE reports
+SET rating_wind = 6 - rating_wind
+WHERE rating_wind IS NOT NULL;
