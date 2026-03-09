@@ -657,8 +657,8 @@
     "scales": {
       "veryWet": "Zeer nat",
       "veryDry": "Perfect",
-      "calm": "Kalm",
-      "veryWindy": "Zeer winderig",
+      "calm": "Zeer winderig",
+      "veryWindy": "Kalm",
       "empty": "Leeg",
       "veryCrowded": "Zeer druk"
     },
@@ -670,11 +670,11 @@
       "5": "Zeer droog"
     },
     "windLabels": {
-      "1": "Zeer winderig",
-      "2": "Winderig",
+      "1": "Kalm",
+      "2": "Lichte bries",
       "3": "Matig",
-      "4": "Lichte bries",
-      "5": "Kalm"
+      "4": "Winderig",
+      "5": "Zeer winderig"
     },
     "crowdsLabels": {
       "1": "Leeg",

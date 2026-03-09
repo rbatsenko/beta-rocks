@@ -737,8 +737,8 @@
     "scales": {
       "veryWet": "Velmi mokro",
       "veryDry": "Perfektní",
-      "calm": "Klidno",
-      "veryWindy": "Velmi větrno",
+      "calm": "Velmi větrno",
+      "veryWindy": "Klidno",
       "empty": "Prázdno",
       "veryCrowded": "Velmi přeplněno"
     },
@@ -750,11 +750,11 @@
       "5": "Velmi sucho"
     },
     "windLabels": {
-      "1": "Velmi větrno",
-      "2": "Větrno",
+      "1": "Klidno",
+      "2": "Lehký vítr",
       "3": "Mírně",
-      "4": "Lehký vítr",
-      "5": "Klidno"
+      "4": "Větrno",
+      "5": "Velmi větrno"
     },
     "crowdsLabels": {
       "1": "Prázdno",

@@ -657,8 +657,8 @@
     "scales": {
       "veryWet": "Foarte umed",
       "veryDry": "Perfect",
-      "calm": "Calm",
-      "veryWindy": "Foarte vântos",
+      "calm": "Foarte vântos",
+      "veryWindy": "Calm",
       "empty": "Gol",
       "veryCrowded": "Foarte aglomerat"
     },
@@ -670,11 +670,11 @@
       "5": "Foarte uscat"
     },
     "windLabels": {
-      "1": "Foarte vântos",
-      "2": "Vântos",
+      "1": "Calm",
+      "2": "Briză ușoară",
       "3": "Moderat",
-      "4": "Briză ușoară",
-      "5": "Calm"
+      "4": "Vântos",
+      "5": "Foarte vântos"
     },
     "crowdsLabels": {
       "1": "Gol",

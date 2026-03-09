@@ -626,8 +626,8 @@
     "scales": {
       "veryWet": "Molt humit",
       "veryDry": "Perfecte",
-      "calm": "Calm",
-      "veryWindy": "Molt ventós",
+      "calm": "Molt ventós",
+      "veryWindy": "Calm",
       "empty": "Buit",
       "veryCrowded": "Molt ple"
     },
@@ -639,11 +639,11 @@
       "5": "Molt sec"
     },
     "windLabels": {
-      "1": "Molt ventós",
-      "2": "Ventós",
+      "1": "Calm",
+      "2": "Brisa lleugera",
       "3": "Moderat",
-      "4": "Brisa lleugera",
-      "5": "Calm"
+      "4": "Ventós",
+      "5": "Molt ventós"
     },
     "crowdsLabels": {
       "1": "Buit",

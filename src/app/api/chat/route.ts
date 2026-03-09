@@ -890,7 +890,7 @@ const tools = {
     inputSchema: z.object({
       location: z.string().describe("Crag/sector/route name"),
       dryness: z.number().min(1).max(5).optional().describe("Dryness rating 1-5"),
-      wind: z.number().min(1).max(5).optional().describe("Wind rating 1-5"),
+      wind: z.number().min(1).max(5).optional().describe("Wind rating 1-5 (1=calm, 5=very windy)"),
       crowds: z.number().min(1).max(5).optional().describe("Crowds rating 1-5 (1=empty, 5=very crowded)"),
       text: z.string().optional().describe("Optional comment"),
     }),

@@ -803,8 +803,8 @@
     "scales": {
       "veryWet": "Very wet",
       "veryDry": "Perfect",
-      "calm": "Calm",
-      "veryWindy": "Very windy",
+      "calm": "Very windy",
+      "veryWindy": "Calm",
       "empty": "Empty",
       "veryCrowded": "Very crowded"
     },
@@ -816,11 +816,11 @@
       "5": "Very dry"
     },
     "windLabels": {
-      "1": "Very windy",
-      "2": "Windy",
+      "1": "Calm",
+      "2": "Light breeze",
       "3": "Moderate",
-      "4": "Light breeze",
-      "5": "Calm"
+      "4": "Windy",
+      "5": "Very windy"
     },
     "crowdsLabels": {
       "1": "Empty",

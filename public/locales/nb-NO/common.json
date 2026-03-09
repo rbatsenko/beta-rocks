@@ -659,8 +659,8 @@
     "scales": {
       "veryWet": "Veldig vått",
       "veryDry": "Perfekt",
-      "calm": "Rolig",
-      "veryWindy": "Veldig blåsende",
+      "calm": "Veldig blåsende",
+      "veryWindy": "Rolig",
       "empty": "Tomt",
       "veryCrowded": "Veldig fullt"
     },
@@ -672,11 +672,11 @@
       "5": "Veldig tørt"
     },
     "windLabels": {
-      "1": "Veldig blåsende",
-      "2": "Blåsende",
+      "1": "Rolig",
+      "2": "Lett bris",
       "3": "Moderat",
-      "4": "Lett bris",
-      "5": "Rolig"
+      "4": "Blåsende",
+      "5": "Veldig blåsende"
     },
     "crowdsLabels": {
       "1": "Tomt",
