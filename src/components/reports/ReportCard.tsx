@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import {
   getCrowdBorderClass, getCrowdIconClass, getCrowdTextClass,
-  getWindBorderClass, getWindIconClass, getWindTextClass,
   getDrynessBorderClass, getDrynessIconClass, getDrynessTextClass,
 } from "@/lib/utils/rating-colors";
 import {
@@ -413,9 +412,9 @@ export function ReportCard({
                 </Badge>
               )}
               {report.rating_wind !== null && (
-                <Badge variant="outline" className={`gap-1.5 ${getWindBorderClass(report.rating_wind)}`}>
-                  <Wind className={`h-3 w-3 ${getWindIconClass(report.rating_wind)}`} />
-                  <span className={`text-xs ${getWindTextClass(report.rating_wind)}`}>
+                <Badge variant="outline" className="gap-1.5">
+                  <Wind className="h-3 w-3" />
+                  <span className="text-xs">
                     {t("reports.wind")}: {report.rating_wind}/5
                   </span>
                   <span className="text-xs text-muted-foreground">

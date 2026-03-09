@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import imageCompression from "browser-image-compression";
-import { getCrowdColorClass, getWindColorClass, getDrynessColorClass } from "@/lib/utils/rating-colors";
+import { getCrowdColorClass, getDrynessColorClass } from "@/lib/utils/rating-colors";
 import {
   MessageSquare,
   Loader2,
@@ -628,7 +628,7 @@ export function ReportDialog({
                     className="cursor-pointer"
                   />
                   <div className="text-center pt-1">
-                    <span className={`text-xl font-bold ${getWindColorClass(windRating[0])}`}>{windRating[0]}/5</span>
+                    <span className="text-xl font-bold">{windRating[0]}/5</span>
                   </div>
                 </div>
 

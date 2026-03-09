@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { MessageSquare, Edit, Trash2, MapPin, Loader2 } from "lucide-react";
-import { getCrowdColorClass, getWindColorClass, getDrynessColorClass } from "@/lib/utils/rating-colors";
+import { getCrowdColorClass, getDrynessColorClass } from "@/lib/utils/rating-colors";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -200,7 +200,7 @@ export function UserReportsDialog({ open, onOpenChange }: UserReportsDialogProps
                           {report.rating_wind && (
                             <div className="flex items-center gap-1">
                               <span>{t("reports.wind")}:</span>
-                              <span className={`font-medium ${getWindColorClass(report.rating_wind)}`}>
+                              <span className="font-medium">
                                 {report.rating_wind}/5
                               </span>
                             </div>

@@ -26,30 +26,6 @@ export function getCrowdTextClass(rating: number): string {
   return "";
 }
 
-// ── Wind: 1=calm (green), 5=very windy (red) ──
-
-export function getWindColorClass(rating: number): string {
-  if (rating >= 4) return "text-red-500";
-  if (rating <= 2) return "text-green-500";
-  return "text-orange-500";
-}
-
-export function getWindBorderClass(rating: number): string {
-  if (rating >= 4) return "border-red-300 dark:border-red-800";
-  return "";
-}
-
-export function getWindIconClass(rating: number): string {
-  if (rating >= 4) return "text-red-500";
-  return "";
-}
-
-export function getWindTextClass(rating: number): string {
-  if (rating >= 4) return "text-red-500";
-  if (rating <= 2) return "text-green-600 dark:text-green-400";
-  return "";
-}
-
 // ── Dryness: 1=very wet (red), 5=very dry (green) ──
 
 export function getDrynessColorClass(rating: number): string {
