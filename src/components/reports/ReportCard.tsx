@@ -159,8 +159,11 @@ export function ReportCard({
     }, 500);
   };
 
-  const getPhotoUrl = (path: string) => {
+  const getPhotoUrl = (path: string, transform?: { width: number; height: number; resize?: "cover" | "contain" | "fill" }) => {
     const supabase = getSupabaseClient();
+    if (transform) {
+      return supabase.storage.from("report-photos").getPublicUrl(path, { transform }).data.publicUrl;
+    }
     return supabase.storage.from("report-photos").getPublicUrl(path).data.publicUrl;
   };
 
@@ -454,7 +457,7 @@ export function ReportCard({
                 className="relative group rounded-lg overflow-hidden border-2 border-border hover:border-orange-500 transition-colors"
               >
                 <img
-                  src={getPhotoUrl(photoPath)}
+                  src={getPhotoUrl(photoPath, { width: 256, height: 256, resize: "cover" })}
                   alt={`Photo ${index + 1}`}
                   className="w-32 h-32 object-cover"
                 />
@@ -501,16 +504,16 @@ export function ReportCard({
         report.photos.length > 0 &&
         createPortal(
           <div
-            className="fixed inset-0 bg-black/90 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/90 flex items-center justify-center p-2 sm:p-4"
             style={{ zIndex: 99999 }}
             onClick={() => setLightboxOpen(false)}
           >
-            <div className="relative max-w-4xl max-h-full">
+            <div className="relative max-w-full sm:max-w-4xl max-h-full">
               <button
-                onClick={() => setLightboxOpen(false)}
-                className="absolute -top-12 right-0 text-white hover:text-orange-500 transition-colors"
+                onClick={(e) => { e.stopPropagation(); setLightboxOpen(false); }}
+                className="absolute -top-10 right-0 sm:-top-12 text-white hover:text-orange-500 transition-colors z-10"
               >
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-7 h-7 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -522,7 +525,7 @@ export function ReportCard({
               <img
                 src={getPhotoUrl(report.photos[lightboxIndex])}
                 alt={`Photo ${lightboxIndex + 1}`}
-                className="max-w-full max-h-[80vh] object-contain rounded-lg"
+                className="max-w-full max-h-[90vh] sm:max-h-[80vh] object-contain rounded-lg"
                 onClick={(e) => e.stopPropagation()}
               />
               {report.photos.length > 1 && (
