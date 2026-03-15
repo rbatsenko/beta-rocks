@@ -46,3 +46,10 @@ coverage/
 .mcp.json
 .vercel
 supabase/.temp/
+
+# Expo / React Native
+mobile/.expo/
+mobile/dist/
+mobile/ios/
+mobile/android/
+mobile/web-build/
