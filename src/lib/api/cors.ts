@@ -33,7 +33,7 @@ export function withCorsHeaders(
   response: NextResponse,
   request?: NextRequest
 ): NextResponse {
-  const origin = request?.headers.get("origin");
+  const origin = request?.headers.get("origin") ?? null;
 
   if (isAllowedOrigin(origin)) {
     response.headers.set(
