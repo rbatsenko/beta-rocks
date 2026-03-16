@@ -15,7 +15,10 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "rocks.beta.app"
+      "bundleIdentifier": "rocks.beta.app",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -41,8 +44,10 @@
     },
     "extra": {
       "eas": {
-        "projectId": ""
-      }
-    }
+        "projectId": "5ebf1d1a-337b-460d-aeae-ff3395852783"
+      },
+      "router": {}
+    },
+    "owner": "rbatsenko"
   }
 }
