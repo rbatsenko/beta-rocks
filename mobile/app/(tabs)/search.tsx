@@ -90,6 +90,7 @@ export default function SearchScreen() {
           placeholderTextColor={colors.muted}
           autoCapitalize="none"
           autoCorrect={false}
+          autoFocus
           returnKeyType="search"
         />
         {query.length > 0 && (
