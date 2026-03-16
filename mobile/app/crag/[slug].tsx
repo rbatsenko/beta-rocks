@@ -560,7 +560,7 @@ function HelpfulButton({ report, profileId, hasProfile, syncKeyHash, colors, t }
   colors: (typeof Colors)["light"]; t: (key: string, fallback?: string) => string;
 }) {
   const isOwnReport = profileId != null && report.author_id === profileId;
-  const count = report.confirmations?.[0]?.count ?? 0;
+  const count = (report as any).confirmationCount ?? report.confirmations?.[0]?.count ?? 0;
 
   if (isOwnReport) {
     return (
