@@ -562,7 +562,8 @@ function HelpfulButton({ report, profileId, hasProfile, syncKeyHash, colors, t }
   const isOwnReport = profileId != null && report.author_id === profileId;
   const initialCount = (report as any).confirmationCount ?? report.confirmations?.[0]?.count ?? 0;
   const [confirmed, setConfirmed] = useState(false);
-  const [count, setCount] = useState(initialCount);
+  const [count, setCount] = useState<number>(initialCount);
+  const [loading, setLoading] = useState(false);
 
   if (isOwnReport) {
     return (
@@ -581,16 +582,24 @@ function HelpfulButton({ report, profileId, hasProfile, syncKeyHash, colors, t }
           Alert.alert(t("mobile.profileRequired", "Profile Required"), t("reports.loginToConfirm", "Please set up your profile to confirm reports"));
           return;
         }
-        if (confirmed) return;
+        if (loading) return;
+        setLoading(true);
         try {
-          await apiConfirmReport(report.id, syncKeyHash);
-          setConfirmed(true);
-          setCount(count + 1);
+          if (confirmed) {
+            await removeConfirmation(report.id, syncKeyHash);
+            setConfirmed(false);
+            setCount(c => Math.max(0, c - 1));
+          } else {
+            await apiConfirmReport(report.id, syncKeyHash);
+            setConfirmed(true);
+            setCount(c => c + 1);
+          }
         } catch (err) {
-          // 409 = already confirmed
           if (err && (err as any).status === 409) {
             setConfirmed(true);
           }
+        } finally {
+          setLoading(false);
         }
       }}
     >
