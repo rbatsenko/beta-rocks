@@ -3,6 +3,8 @@ import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useColorScheme } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
+import { UserProfileProvider } from "@/contexts/UserProfileContext";
+import { Colors } from "@/constants/theme";
 
 // Prevent the splash screen from auto-hiding
 SplashScreen.preventAutoHideAsync();
@@ -10,26 +12,26 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const isDark = colorScheme === "dark";
+  const colors = isDark ? Colors.dark : Colors.light;
 
   useEffect(() => {
-    // Hide splash screen after app is ready
     SplashScreen.hideAsync();
   }, []);
 
   return (
-    <>
+    <UserProfileProvider>
       <StatusBar style={isDark ? "light" : "dark"} />
       <Stack
         screenOptions={{
           headerStyle: {
-            backgroundColor: isDark ? "#0f172a" : "#ffffff",
+            backgroundColor: isDark ? colors.background : colors.surfaceElevated,
           },
-          headerTintColor: isDark ? "#f8fafc" : "#0f172a",
+          headerTintColor: colors.text,
           headerTitleStyle: {
             fontWeight: "600",
           },
           contentStyle: {
-            backgroundColor: isDark ? "#0f172a" : "#f8fafc",
+            backgroundColor: colors.background,
           },
         }}
       >
@@ -52,6 +54,6 @@ export default function RootLayout() {
           }}
         />
       </Stack>
-    </>
+    </UserProfileProvider>
   );
 }

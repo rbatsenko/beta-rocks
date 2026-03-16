@@ -182,41 +182,6 @@ export async function removeConfirmation(
 }
 
 /**
- * Chat API (streaming)
- * Returns a ReadableStream for streaming responses
- */
-export async function sendChatMessage(
-  messages: { role: "user" | "assistant"; content: string }[],
-  syncKeyHash?: string
-): Promise<Response> {
-  const url = `${API_URL}/api/chat`;
-
-  const headers: Record<string, string> = {
-    "Content-Type": "application/json",
-    "X-Client-Platform": "mobile",
-  };
-
-  if (syncKeyHash) {
-    headers["X-Sync-Key-Hash"] = syncKeyHash;
-  }
-
-  const response = await fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify({ messages }),
-  });
-
-  if (!response.ok) {
-    throw new ApiError(
-      response.status,
-      await response.text().catch(() => "Chat request failed")
-    );
-  }
-
-  return response;
-}
-
-/**
  * Sync API
  * GET /api/sync/[key] returns { profile, crags, reports, confirmations }
  */

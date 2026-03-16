@@ -1,24 +1,26 @@
 import { Tabs } from "expo-router";
 import { useColorScheme } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { Colors } from "@/constants/theme";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const isDark = colorScheme === "dark";
+  const colors = isDark ? Colors.dark : Colors.light;
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: isDark ? "#3b82f6" : "#2563eb",
-        tabBarInactiveTintColor: isDark ? "#64748b" : "#94a3b8",
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.muted,
         tabBarStyle: {
-          backgroundColor: isDark ? "#0f172a" : "#ffffff",
-          borderTopColor: isDark ? "#334155" : "#e2e8f0",
+          backgroundColor: isDark ? colors.background : colors.surfaceElevated,
+          borderTopColor: colors.border,
         },
         headerStyle: {
-          backgroundColor: isDark ? "#0f172a" : "#ffffff",
+          backgroundColor: isDark ? colors.background : colors.surfaceElevated,
         },
-        headerTintColor: isDark ? "#f8fafc" : "#0f172a",
+        headerTintColor: colors.text,
         headerTitleStyle: {
           fontWeight: "600",
         },
@@ -27,9 +29,9 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Chat",
+          title: "Home",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="chatbubble-outline" size={size} color={color} />
+            <Ionicons name="home-outline" size={size} color={color} />
           ),
         }}
       />

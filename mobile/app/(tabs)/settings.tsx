@@ -15,6 +15,7 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import * as Clipboard from "expo-clipboard";
 import { useUserProfile } from "@/hooks/useUserProfile";
 import { formatSyncKeyForDisplay } from "@/lib/sync-key";
 import { APP_VERSION } from "@/constants/config";
@@ -43,10 +44,10 @@ export default function SettingsScreen() {
     router.push("/sync");
   }
 
-  function handleCopySyncKey() {
+  async function handleCopySyncKey() {
     if (profile?.syncKey) {
-      // In a real app, use Clipboard API
-      Alert.alert("Sync Key", profile.syncKey, [{ text: "OK" }]);
+      await Clipboard.setStringAsync(profile.syncKey);
+      Alert.alert("Copied", "Sync key copied to clipboard.");
     }
   }
 
@@ -143,8 +144,9 @@ export default function SettingsScreen() {
             <Text style={[styles.value, { color: colors.textSecondary }]}>
               {profile?.syncKey
                 ? formatSyncKeyForDisplay(profile.syncKey)
-                : "—"}
+                : "\u2014"}
             </Text>
+            <Ionicons name="copy-outline" size={16} color={colors.muted} />
           </TouchableOpacity>
 
           <View style={[styles.divider, { backgroundColor: colors.border }]} />

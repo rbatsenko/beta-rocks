@@ -34,6 +34,7 @@
       "expo-router",
       "expo-font",
       "expo-secure-store",
+      "expo-clipboard",
       "expo-localization"
     ],
     "experiments": {
