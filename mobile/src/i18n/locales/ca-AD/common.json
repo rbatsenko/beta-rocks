@@ -416,7 +416,8 @@
     "stats": "Les teves estadístiques",
     "settings": "Configuració",
     "clearData": "Esborrar totes les dades",
-    "yourReports": "Els teus informes"
+    "yourReports": "Els teus informes",
+    "title": "Profile"
   },
   "stats": {
     "title": "Les teves estadístiques",
@@ -542,7 +543,12 @@
       "deleteProfile": "Eliminar perfil",
       "deleteProfileConfirm": "Estàs segur que vols eliminar el teu perfil? Això eliminarà permanentment totes les teves dades inclosos preferits, historial de xat i configuració. Aquesta acció no es pot desfer.",
       "deleteFailed": "Error en eliminar el perfil. Si us plau, torna-ho a intentar."
-    }
+    },
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "language": "Language",
+    "about": "About",
+    "version": "Version"
   },
   "favorites": {
     "title": "Els teus esparellós preferits",
@@ -781,7 +787,9 @@
       "noReportsDescription": "Sigues el primer a compartir condicions amb la comunitat d'escalada",
       "noFavoritesTitle": "No hi ha informes dels favorits",
       "noFavoritesDescription": "Afegiu roques als vostres favorits per veure els seus informes en aquest flux"
-    }
+    },
+    "reports": "Reports",
+    "votes": "Votes"
   },
   "webcams": {
     "title": "Càmeres web properes",

@@ -447,7 +447,8 @@
     "stats": "As Suas Estatísticas",
     "settings": "Definições",
     "clearData": "Limpar Todos os Dados",
-    "yourReports": "Os seus relatórios"
+    "yourReports": "Os seus relatórios",
+    "title": "Profile"
   },
   "stats": {
     "title": "Suas estatísticas",
@@ -573,7 +574,12 @@
       "deleteProfile": "Eliminar Perfil",
       "deleteProfileConfirm": "Tem a certeza que quer eliminar o seu perfil? Isto irá remover permanentemente todos os seus dados, incluindo favoritos, histórico de chat e definições. Esta ação não pode ser desfeita.",
       "deleteFailed": "Falha ao eliminar o perfil. Por favor tente novamente."
-    }
+    },
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "language": "Language",
+    "about": "About",
+    "version": "Version"
   },
   "favorites": {
     "title": "Os Seus Crags Favoritos",
@@ -817,7 +823,9 @@
       "noReportsDescription": "Seja o primeiro a partilhar condições com a comunidade de escalada",
       "noFavoritesTitle": "Sem relatórios dos favoritos",
       "noFavoritesDescription": "Adicione falésias aos seus favoritos para ver os seus relatórios neste feed"
-    }
+    },
+    "reports": "Reports",
+    "votes": "Votes"
   },
   "webcams": {
     "title": "Webcams próximas",

@@ -532,7 +532,8 @@
     "recent": "Ricerche recenti",
     "stats": "Le tue statistiche",
     "settings": "Impostazioni",
-    "clearData": "Cancella tutti i dati"
+    "clearData": "Cancella tutti i dati",
+    "title": "Profile"
   },
   "stats": {
     "title": "Le tue statistiche",
@@ -658,7 +659,12 @@
       "deleteProfile": "Elimina profilo",
       "deleteProfileConfirm": "Sei sicuro di voler eliminare il tuo profilo? Questo rimuoverà permanentemente tutti i tuoi dati inclusi preferiti, cronologia chat e impostazioni. Questa azione non può essere annullata.",
       "deleteFailed": "Impossibile eliminare il profilo. Riprova."
-    }
+    },
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "language": "Language",
+    "about": "About",
+    "version": "Version"
   },
   "favorites": {
     "title": "Le tue falesie preferite",
@@ -902,7 +908,9 @@
       "noReportsDescription": "Sii il primo a condividere le condizioni con la comunità di arrampicata",
       "noFavoritesTitle": "Nessuna segnalazione dai preferiti",
       "noFavoritesDescription": "Aggiungi falesie ai tuoi preferiti per vedere le loro segnalazioni in questo feed"
-    }
+    },
+    "reports": "Reports",
+    "votes": "Votes"
   },
   "webcams": {
     "title": "Webcam nelle vicinanze",

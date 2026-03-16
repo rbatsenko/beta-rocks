@@ -527,7 +527,8 @@
     "stats": "Ваша статистика",
     "settings": "Налаштування",
     "clearData": "Очистити всі дані",
-    "yourReports": "Ваші звіти"
+    "yourReports": "Ваші звіти",
+    "title": "Profile"
   },
   "stats": {
     "title": "Ваша статистика",
@@ -653,7 +654,12 @@
       "deleteProfile": "Видалити профіль",
       "deleteProfileConfirm": "Ви впевнені, що хочете видалити свій профіль? Це назавжди видалить усі ваші дані, включаючи обране, історію чату та налаштування. Цю дію неможливо скасувати.",
       "deleteFailed": "Не вдалося видалити профіль. Будь ласка, спробуйте ще раз."
-    }
+    },
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "language": "Language",
+    "about": "About",
+    "version": "Version"
   },
   "favorites": {
     "title": "Ваші улюблені скелі",
@@ -899,7 +905,9 @@
       "noReportsDescription": "Будьте першим, хто поділиться умовами зі скелелазною спільнотою",
       "noFavoritesTitle": "Немає звітів з вибраних",
       "noFavoritesDescription": "Додайте скелі до вибраних, щоб бачити їхні звіти в цій стрічці"
-    }
+    },
+    "reports": "Reports",
+    "votes": "Votes"
   },
   "webcams": {
     "title": "Веб-камери поблизу",

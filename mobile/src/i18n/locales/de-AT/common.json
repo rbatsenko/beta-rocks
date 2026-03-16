@@ -532,7 +532,8 @@
     "recent": "Letzte Suchen",
     "stats": "Deine Statistiken",
     "settings": "Einstellungen",
-    "clearData": "Alle Daten löschen"
+    "clearData": "Alle Daten löschen",
+    "title": "Profile"
   },
   "stats": {
     "title": "Deine Statistiken",
@@ -658,7 +659,12 @@
       "deleteProfile": "Profil löschen",
       "deleteProfileConfirm": "Möchten Sie Ihr Profil wirklich löschen? Dadurch werden alle Ihre Daten einschließlich Favoriten, Chat-Verlauf und Einstellungen dauerhaft entfernt. Diese Aktion kann nicht rückgängig gemacht werden.",
       "deleteFailed": "Profil konnte nicht gelöscht werden. Bitte versuchen Sie es erneut."
-    }
+    },
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "language": "Language",
+    "about": "About",
+    "version": "Version"
   },
   "favorites": {
     "title": "Deine Lieblingsfelsen",
@@ -902,7 +908,9 @@
       "noReportsDescription": "Sei der Erste, der Bedingungen mit der Klettergemeinschaft teilt",
       "noFavoritesTitle": "Keine Berichte von Favoriten",
       "noFavoritesDescription": "Füge Felsen zu deinen Favoriten hinzu, um ihre Berichte in diesem Feed zu sehen"
-    }
+    },
+    "reports": "Reports",
+    "votes": "Votes"
   },
   "webcams": {
     "title": "Webcams in der Nähe",

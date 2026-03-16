@@ -527,7 +527,8 @@
     "recent": "Nedavne pretrage",
     "stats": "Vaše statistike",
     "settings": "Postavke",
-    "clearData": "Obriši sve podatke"
+    "clearData": "Obriši sve podatke",
+    "title": "Profile"
   },
   "stats": {
     "title": "Vaše statistike",
@@ -653,7 +654,12 @@
       "deleteProfile": "Obriši profil",
       "deleteProfileConfirm": "Jesi li siguran/a da želiš obrisati svoj profil? Ovo će trajno ukloniti sve tvoje podatke uključujući omiljene lokacije, povijest razgovora i postavke. Ova akcija se ne može vratiti.",
       "deleteFailed": "Brisanje profila nije uspjelo. Molimo pokušaj ponovno."
-    }
+    },
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "language": "Language",
+    "about": "About",
+    "version": "Version"
   },
   "favorites": {
     "title": "Tvoji omiljeni vrhunci",
@@ -898,7 +904,9 @@
       "noReportsDescription": "Budite prvi koji će podijeliti uvjete s penjačkom zajednicom",
       "noFavoritesTitle": "Nema izvještaja iz favorita",
       "noFavoritesDescription": "Dodajte stijene u favorite kako biste vidjeli njihove izvještaje u ovom pregledu"
-    }
+    },
+    "reports": "Reports",
+    "votes": "Votes"
   },
   "webcams": {
     "title": "Web kamere u blizini",

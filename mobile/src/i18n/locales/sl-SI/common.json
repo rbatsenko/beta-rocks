@@ -528,7 +528,8 @@
     "recent": "Nedavna iskanja",
     "stats": "Tvoja statistika",
     "settings": "Nastavitve",
-    "clearData": "Izbriši vse podatke"
+    "clearData": "Izbriši vse podatke",
+    "title": "Profile"
   },
   "stats": {
     "title": "Tvoja statistika",
@@ -654,7 +655,12 @@
       "deleteProfile": "Izbriši profil",
       "deleteProfileConfirm": "Ali ste prepričani, da želite izbrisati svoj profil? To bo trajno odstranilo vse vaše podatke, vključno s priljubljenimi, zgodovino klepeta in nastavitvami. Tega dejanja ni mogoče razveljaviti.",
       "deleteFailed": "Profila ni bilo mogoče izbrisati. Poskusite znova."
-    }
+    },
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "language": "Language",
+    "about": "About",
+    "version": "Version"
   },
   "favorites": {
     "title": "Tvoja priljubljena plezališča",
@@ -900,7 +906,9 @@
       "noReportsDescription": "Bodite prvi, ki bo delil pogoje s plezalno skupnostjo",
       "noFavoritesTitle": "Ni poročil iz priljubljenih",
       "noFavoritesDescription": "Dodajte plezališča med priljubljene, da vidite njihova poročila v tem pretoku"
-    }
+    },
+    "reports": "Reports",
+    "votes": "Votes"
   },
   "webcams": {
     "title": "Spletne kamere v bližini",

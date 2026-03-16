@@ -519,7 +519,8 @@
     "recent": "Ostatnie wyszukiwania",
     "stats": "Twoje statystyki",
     "settings": "Ustawienia",
-    "clearData": "Wyczyść wszystkie dane"
+    "clearData": "Wyczyść wszystkie dane",
+    "title": "Profil"
   },
   "stats": {
     "title": "Twoje statystyki",
@@ -559,7 +560,7 @@
       "saveFailedDescription": "Nie można zapisać twojej nazwy użytkownika. Spróbuj ponownie"
     },
     "units": {
-      "title": "Jednostki i pomiary",
+      "title": "Jednostki",
       "description": "Wybierz preferowane jednostki dla danych pogodowych i wspinaczkowych",
       "systemLabel": "System jednostek",
       "systemDescription": "Szybkie ustawienia dla powszechnych systemów jednostek",
@@ -645,7 +646,12 @@
       "deleteProfile": "Usuń profil",
       "deleteProfileConfirm": "Czy na pewno chcesz usunąć swój profil? Spowoduje to trwałe usunięcie wszystkich twoich danych, w tym ulubionych skałek, historii czatu i ustawień. Tej czynności nie można cofnąć.",
       "deleteFailed": "Nie udało się usunąć profilu. Spróbuj ponownie."
-    }
+    },
+    "appearance": "Wygląd",
+    "theme": "Motyw",
+    "language": "Język",
+    "about": "O aplikacji",
+    "version": "Wersja"
   },
   "favorites": {
     "title": "Twoje ulubione skałki",
@@ -900,7 +906,9 @@
       "noReportsDescription": "Bądź pierwszą osobą, która podzieli się warunkami ze wspólnotą wspinaczkową",
       "noFavoritesTitle": "Brak raportów z ulubionych",
       "noFavoritesDescription": "Dodaj skały do ulubionych, aby zobaczyć ich raporty w tym kanale"
-    }
+    },
+    "reports": "Raporty",
+    "votes": "Głosy"
   },
   "webcams": {
     "title": "Kamery internetowe w pobliżu",

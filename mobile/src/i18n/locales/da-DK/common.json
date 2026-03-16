@@ -448,7 +448,8 @@
     "recent": "Seneste søgninger",
     "stats": "Dine statistikker",
     "settings": "Indstillinger",
-    "clearData": "Ryd alle data"
+    "clearData": "Ryd alle data",
+    "title": "Profile"
   },
   "stats": {
     "title": "Dine statistikker",
@@ -574,7 +575,12 @@
       "deleteProfile": "Slet profil",
       "deleteProfileConfirm": "Er du sikker på, at du vil slette din profil? Dette vil permanent fjerne alle dine data, herunder favoritter, chathistorik og indstillinger. Denne handling kan ikke fortrydes.",
       "deleteFailed": "Kunne ikke slette profil. Prøv igen."
-    }
+    },
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "language": "Language",
+    "about": "About",
+    "version": "Version"
   },
   "favorites": {
     "title": "Dine favoritklatrepladser",
@@ -813,7 +819,9 @@
       "noReportsDescription": "Vær den første til at dele forhold med klatrefællesskabet",
       "noFavoritesTitle": "Ingen rapporter fra favoritter",
       "noFavoritesDescription": "Tilføj klatresteder til dine favoritter for at se deres rapporter i dette feed"
-    }
+    },
+    "reports": "Reports",
+    "votes": "Votes"
   },
   "webcams": {
     "title": "Webcams i nærheden",

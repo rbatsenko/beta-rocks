@@ -527,7 +527,8 @@
     "recent": "Nedávná hledání",
     "stats": "Vaše statistiky",
     "settings": "Nastavení",
-    "clearData": "Vymazat všechna data"
+    "clearData": "Vymazat všechna data",
+    "title": "Profile"
   },
   "stats": {
     "title": "Vaše statistiky",
@@ -653,7 +654,12 @@
       "deleteProfile": "Smazat profil",
       "deleteProfileConfirm": "Opravdu chcete smazat svůj profil? Tímto trvale odstraníte všechna vaše data včetně oblíbených, historie chatu a nastavení. Tuto akci nelze vrátit zpět.",
       "deleteFailed": "Nepodařilo se smazat profil. Zkuste to prosím znovu."
-    }
+    },
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "language": "Language",
+    "about": "About",
+    "version": "Version"
   },
   "favorites": {
     "title": "Vaše oblíbené skály",
@@ -899,7 +905,9 @@
       "noReportsDescription": "Buďte první, kdo sdílí podmínky s lezeckou komunitou",
       "noFavoritesTitle": "Žádná hlášení z oblíbených",
       "noFavoritesDescription": "Přidejte skály do oblíbených, abyste viděli jejich hlášení v tomto přehledu"
-    }
+    },
+    "reports": "Reports",
+    "votes": "Votes"
   },
   "webcams": {
     "title": "Webkamery v okolí",

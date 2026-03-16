@@ -582,7 +582,8 @@
     "recent": "Recent Searches",
     "stats": "Your Stats",
     "settings": "Settings",
-    "clearData": "Clear All Data"
+    "clearData": "Clear All Data",
+    "title": "Profile"
   },
   "stats": {
     "title": "Your Stats",
@@ -708,7 +709,12 @@
       "deleteProfile": "Delete Profile",
       "deleteProfileConfirm": "Are you sure you want to delete your profile? This will permanently remove all your data including favorites, chat history, and settings. This action cannot be undone.",
       "deleteFailed": "Failed to delete profile. Please try again."
-    }
+    },
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "language": "Language",
+    "about": "About",
+    "version": "Version"
   },
   "favorites": {
     "title": "Your Favorite Crags",
@@ -967,6 +973,8 @@
       "noReportsDescription": "Be the first to share conditions with the climbing community",
       "noFavoritesTitle": "No reports from favorites",
       "noFavoritesDescription": "Add crags to your favorites to see their reports in this feed"
-    }
+    },
+    "reports": "Reports",
+    "votes": "Votes"
   }
 }

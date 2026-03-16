@@ -447,7 +447,8 @@
     "recent": "Nedávne vyhľadávania",
     "stats": "Vaše štatistiky",
     "settings": "Nastavenia",
-    "clearData": "Vymazať všetky dáta"
+    "clearData": "Vymazať všetky dáta",
+    "title": "Profile"
   },
   "stats": {
     "title": "Vaše štatistiky",
@@ -573,7 +574,12 @@
       "deleteProfile": "Odstrániť profil",
       "deleteProfileConfirm": "Naozaj chcete odstrániť svoj profil? Týmto natrvalo odstránite všetky vaše údaje vrátane obľúbených, histórie chatu a nastavení. Túto akciu nie je možné vrátiť späť.",
       "deleteFailed": "Nepodarilo sa odstrániť profil. Skúste to prosím znova."
-    }
+    },
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "language": "Language",
+    "about": "About",
+    "version": "Version"
   },
   "favorites": {
     "title": "Vaše obľúbené skaly",
@@ -819,7 +825,9 @@
       "noReportsDescription": "Buďte prvý, kto sa podelí o podmienky s lezeckou komunitou",
       "noFavoritesTitle": "Žiadne hlásenia z obľúbených",
       "noFavoritesDescription": "Pridajte skaly do obľúbených, aby ste videli ich hlásenia v tomto prehľade"
-    }
+    },
+    "reports": "Reports",
+    "votes": "Votes"
   },
   "webcams": {
     "title": "Webkamery v okolí",

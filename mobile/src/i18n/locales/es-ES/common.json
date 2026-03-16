@@ -532,7 +532,8 @@
     "recent": "Búsquedas recientes",
     "stats": "Tus estadísticas",
     "settings": "Ajustes",
-    "clearData": "Borrar todos los datos"
+    "clearData": "Borrar todos los datos",
+    "title": "Profile"
   },
   "stats": {
     "title": "Tus estadísticas",
@@ -658,7 +659,12 @@
       "deleteProfile": "Eliminar perfil",
       "deleteProfileConfirm": "¿Estás seguro de que quieres eliminar tu perfil? Esto eliminará permanentemente todos tus datos, incluyendo favoritos, historial de chat y configuración. Esta acción no se puede deshacer.",
       "deleteFailed": "Error al eliminar el perfil. Por favor, inténtalo de nuevo."
-    }
+    },
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "language": "Language",
+    "about": "About",
+    "version": "Version"
   },
   "favorites": {
     "title": "Sus escuelas favoritas",
@@ -902,7 +908,9 @@
       "noReportsDescription": "Sé el primero en compartir condiciones con la comunidad de escalada",
       "noFavoritesTitle": "No hay reportes de favoritos",
       "noFavoritesDescription": "Añade sectores a tus favoritos para ver sus reportes en este feed"
-    }
+    },
+    "reports": "Reports",
+    "votes": "Votes"
   },
   "webcams": {
     "title": "Webcams cercanas",

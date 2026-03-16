@@ -447,7 +447,8 @@
     "recent": "Căutări Recente",
     "stats": "Statisticile Tale",
     "settings": "Setări",
-    "clearData": "Șterge Toate Datele"
+    "clearData": "Șterge Toate Datele",
+    "title": "Profile"
   },
   "stats": {
     "title": "Statisticile tale",
@@ -573,7 +574,12 @@
       "deleteProfile": "Șterge Profil",
       "deleteProfileConfirm": "Ești sigur că vrei să ștergi profilul? Aceasta va elimina permanent toate datele, inclusiv favorite, istoricul chat și setări. Această acțiune nu poate fi anulată.",
       "deleteFailed": "Nu s-a putut șterge profilul. Te rog încearcă din nou."
-    }
+    },
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "language": "Language",
+    "about": "About",
+    "version": "Version"
   },
   "favorites": {
     "title": "Pragurile Tale Preferate",
@@ -818,7 +824,9 @@
       "noReportsDescription": "Fii primul care împărtășește condițiile cu comunitatea de alpinism",
       "noFavoritesTitle": "Nu există rapoarte de la favorite",
       "noFavoritesDescription": "Adaugă stânci la favorite pentru a vedea rapoartele lor în acest flux"
-    }
+    },
+    "reports": "Reports",
+    "votes": "Votes"
   },
   "webcams": {
     "title": "Webcam-uri din apropiere",

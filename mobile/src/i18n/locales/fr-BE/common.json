@@ -532,7 +532,8 @@
     "recent": "Recherches récentes",
     "stats": "Vos statistiques",
     "settings": "Paramètres",
-    "clearData": "Effacer toutes les données"
+    "clearData": "Effacer toutes les données",
+    "title": "Profile"
   },
   "stats": {
     "title": "Vos statistiques",
@@ -658,7 +659,12 @@
       "deleteProfile": "Supprimer le profil",
       "deleteProfileConfirm": "Voulez-vous vraiment supprimer votre profil ? Cela supprimera définitivement toutes vos données, y compris les favoris, l'historique des discussions et les paramètres. Cette action ne peut pas être annulée.",
       "deleteFailed": "Échec de la suppression du profil. Veuillez réessayer."
-    }
+    },
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "language": "Language",
+    "about": "About",
+    "version": "Version"
   },
   "favorites": {
     "title": "Vos falaises favorites",
@@ -902,7 +908,9 @@
       "noReportsDescription": "Soyez le premier à partager les conditions avec la communauté d'escalade",
       "noFavoritesTitle": "Aucun rapport des favoris",
       "noFavoritesDescription": "Ajoutez des sites à vos favoris pour voir leurs rapports dans ce fil"
-    }
+    },
+    "reports": "Reports",
+    "votes": "Votes"
   },
   "webcams": {
     "title": "Webcams à proximité",

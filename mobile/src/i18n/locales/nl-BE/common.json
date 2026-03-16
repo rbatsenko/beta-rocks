@@ -447,7 +447,8 @@
     "stats": "Je statistieken",
     "settings": "Instellingen",
     "clearData": "Alle gegevens wissen",
-    "yourReports": "Jouw rapporten"
+    "yourReports": "Jouw rapporten",
+    "title": "Profile"
   },
   "stats": {
     "title": "Jouw statistieken",
@@ -573,7 +574,12 @@
       "deleteProfile": "Profiel verwijderen",
       "deleteProfileConfirm": "Weet je zeker dat je je profiel wilt verwijderen? Dit verwijdert permanent al je gegevens, inclusief favorieten, chatgeschiedenis en instellingen. Deze actie kan niet ongedaan worden gemaakt.",
       "deleteFailed": "Kan profiel niet verwijderen. Probeer het opnieuw."
-    }
+    },
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "language": "Language",
+    "about": "About",
+    "version": "Version"
   },
   "favorites": {
     "title": "Je favoriete rotsen",
@@ -817,7 +823,9 @@
       "noReportsDescription": "Wees de eerste om omstandigheden te delen met de klimgemeenschap",
       "noFavoritesTitle": "Geen rapporten van favorieten",
       "noFavoritesDescription": "Voeg rotsen toe aan je favorieten om hun rapporten in deze feed te zien"
-    }
+    },
+    "reports": "Reports",
+    "votes": "Votes"
   },
   "webcams": {
     "title": "Webcams in de buurt",

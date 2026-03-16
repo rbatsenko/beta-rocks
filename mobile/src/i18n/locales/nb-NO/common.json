@@ -449,7 +449,8 @@
     "stats": "Din statistikk",
     "settings": "Innstillinger",
     "clearData": "Slett alle data",
-    "yourReports": "Dine rapporter"
+    "yourReports": "Dine rapporter",
+    "title": "Profile"
   },
   "stats": {
     "title": "Din statistikk",
@@ -575,7 +576,12 @@
       "deleteProfile": "Slett profil",
       "deleteProfileConfirm": "Er du sikker på at du vil slette profilen din? Dette vil permanent fjerne all dataen din inkludert favoritter, chattehistorikk og innstillinger. Denne handlingen kan ikke angres.",
       "deleteFailed": "Kunne ikke slette profilen. Vennligst prøv igjen."
-    }
+    },
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "language": "Language",
+    "about": "About",
+    "version": "Version"
   },
   "favorites": {
     "title": "Dine favoritt-crag",
@@ -814,7 +820,9 @@
       "noReportsDescription": "Vær den første til å dele forhold med klatremiljøet",
       "noFavoritesTitle": "Ingen rapporter fra favoritter",
       "noFavoritesDescription": "Legg til klatresteder i favorittene dine for å se rapportene deres i denne feeden"
-    }
+    },
+    "reports": "Reports",
+    "votes": "Votes"
   },
   "webcams": {
     "title": "Webkameraer i nærheten",

@@ -369,7 +369,8 @@
     "stats": "Din statistik",
     "settings": "Inställningar",
     "clearData": "Rensa all data",
-    "yourReports": "Dina rapporter"
+    "yourReports": "Dina rapporter",
+    "title": "Profile"
   },
   "stats": {
     "title": "Din statistik",
@@ -495,7 +496,12 @@
       "deleteProfile": "Ta bort profil",
       "deleteProfileConfirm": "Är du säker på att du vill ta bort din profil? Detta kommer permanent att ta bort all din data inklusive favoriter, chatthistorik och inställningar. Denna åtgärd kan inte ångras.",
       "deleteFailed": "Det gick inte att ta bort profilen. Försök igen."
-    }
+    },
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "language": "Language",
+    "about": "About",
+    "version": "Version"
   },
   "favorites": {
     "title": "Dina favoritklippor",
@@ -734,7 +740,9 @@
       "noReportsDescription": "Bli först att dela förhållanden med klättergemenskapen",
       "noFavoritesTitle": "Inga rapporter från favoriter",
       "noFavoritesDescription": "Lägg till klippor till dina favoriter för att se deras rapporter i detta flöde"
-    }
+    },
+    "reports": "Reports",
+    "votes": "Votes"
   },
   "webcams": {
     "title": "Webbkameror i närheten",
