@@ -12,7 +12,7 @@ export const SUPABASE_ANON_KEY =
   process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY || "";
 
 export const APP_NAME = "beta.rocks";
-export const APP_VERSION = "1.0.0";
+export const APP_VERSION = "0.1.0";
 
 /**
  * Rating colors matching web's getRatingColor()

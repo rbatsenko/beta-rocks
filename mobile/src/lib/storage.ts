@@ -55,7 +55,6 @@ export function getFavorites(): unknown[] {
   try {
     const data = mmkv.getString(FAVORITES_KEY);
     const parsed = data ? JSON.parse(data) : [];
-    console.log("[Storage] getFavorites: raw length", data?.length || 0, "parsed count", parsed.length);
     return parsed;
   } catch (e) {
     console.warn("[Storage] getFavorites parse error:", e);
@@ -65,9 +64,7 @@ export function getFavorites(): unknown[] {
 }
 
 export function saveFavorites(favorites: unknown[]): void {
-  const json = JSON.stringify(favorites);
-  console.log("[Storage] saveFavorites: saving", favorites.length, "items, bytes:", json.length);
-  mmkv.set(FAVORITES_KEY, json);
+  mmkv.set(FAVORITES_KEY, JSON.stringify(favorites));
 }
 
 /**
