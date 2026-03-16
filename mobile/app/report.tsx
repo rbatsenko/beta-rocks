@@ -139,9 +139,32 @@ export default function ReportScreen() {
         {/* Condition ratings */}
         {isConditions && (
           <View style={styles.ratingsSection}>
-            <RatingRow label={t("reports.dryness", "Dryness")} value={ratingDry} onChange={setRatingDry} colors={colors} />
-            <RatingRow label={t("reports.wind", "Wind")} value={ratingWind} onChange={setRatingWind} colors={colors} />
-            <RatingRow label={t("reports.crowds", "Crowds")} value={ratingCrowds} onChange={setRatingCrowds} colors={colors} />
+            <RatingRow
+              label={t("reports.dryness", "Dryness")}
+              lowHint={t("reports.scales.veryWet", "Very wet")}
+              highHint={t("reports.scales.veryDry", "Perfect")}
+              value={ratingDry}
+              onChange={setRatingDry}
+              colors={colors}
+              getColor={(n) => n >= 4 ? "#22c55e" : n <= 2 ? "#ef4444" : "#f97316"}
+            />
+            <RatingRow
+              label={t("reports.wind", "Wind")}
+              lowHint={t("reports.scales.veryWindy", "Calm")}
+              highHint={t("reports.scales.calm", "Very windy")}
+              value={ratingWind}
+              onChange={setRatingWind}
+              colors={colors}
+            />
+            <RatingRow
+              label={t("reports.crowds", "Crowds")}
+              lowHint={t("reports.scales.empty", "Empty")}
+              highHint={t("reports.scales.veryCrowded", "Very crowded")}
+              value={ratingCrowds}
+              onChange={setRatingCrowds}
+              colors={colors}
+              getColor={(n) => n <= 2 ? "#22c55e" : n >= 4 ? "#ef4444" : "#f97316"}
+            />
           </View>
         )}
 
@@ -227,36 +250,52 @@ export default function ReportScreen() {
 
 function RatingRow({
   label,
+  lowHint,
+  highHint,
   value,
   onChange,
   colors,
+  getColor,
 }: {
   label: string;
+  lowHint?: string;
+  highHint?: string;
   value: number;
   onChange: (v: number) => void;
   colors: (typeof Colors)["light"];
+  getColor?: (n: number) => string;
 }) {
   return (
-    <View style={styles.ratingRow}>
+    <View style={styles.ratingSection}>
       <Text style={[styles.ratingLabel, { color: colors.text }]}>{label}</Text>
+      {lowHint && highHint && (
+        <View style={styles.ratingHints}>
+          <Text style={[styles.ratingHint, { color: colors.muted }]}>{lowHint}</Text>
+          <Text style={[styles.ratingHint, { color: colors.muted }]}>{highHint}</Text>
+        </View>
+      )}
       <View style={styles.ratingButtons}>
-        {[1, 2, 3, 4, 5].map((n) => (
-          <TouchableOpacity
-            key={n}
-            style={[
-              styles.ratingButton,
-              {
-                backgroundColor: value === n ? colors.primary : colors.surface,
-                borderColor: value === n ? colors.primary : colors.border,
-              },
-            ]}
-            onPress={() => onChange(value === n ? 0 : n)}
-          >
-            <Text style={[styles.ratingButtonText, { color: value === n ? colors.primaryForeground : colors.text }]}>
-              {n}
-            </Text>
-          </TouchableOpacity>
-        ))}
+        {[1, 2, 3, 4, 5].map((n) => {
+          const isActive = value === n;
+          const activeColor = getColor ? getColor(n) : colors.primary;
+          return (
+            <TouchableOpacity
+              key={n}
+              style={[
+                styles.ratingButton,
+                {
+                  backgroundColor: isActive ? activeColor : colors.surface,
+                  borderColor: isActive ? activeColor : colors.border,
+                },
+              ]}
+              onPress={() => onChange(value === n ? 0 : n)}
+            >
+              <Text style={[styles.ratingButtonText, { color: isActive ? "#fff" : colors.text }]}>
+                {n}
+              </Text>
+            </TouchableOpacity>
+          );
+        })}
       </View>
     </View>
   );
@@ -279,7 +318,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   categoryChipText: { fontSize: FontSize.sm, fontWeight: "500" },
-  categoryHint: { fontSize: FontSize.xs, lineHeight: 18, marginTop: -Spacing.xs },
+  categoryHint: { fontSize: FontSize.xs, lineHeight: 18, marginTop: -Spacing.sm },
 
   lostFoundSection: { gap: Spacing.sm },
   lostFoundToggle: { flexDirection: "row", gap: Spacing.sm },
@@ -295,9 +334,11 @@ const styles = StyleSheet.create({
   },
   lostFoundButtonText: { fontSize: FontSize.md, fontWeight: "500" },
 
-  ratingsSection: { gap: Spacing.md },
-  ratingRow: { flexDirection: "row", alignItems: "center", justifyContent: "space-between" },
+  ratingsSection: { gap: Spacing.lg },
+  ratingSection: { gap: Spacing.xs },
   ratingLabel: { fontSize: FontSize.md, fontWeight: "500" },
+  ratingHints: { flexDirection: "row", justifyContent: "space-between" },
+  ratingHint: { fontSize: FontSize.xs },
   ratingButtons: { flexDirection: "row", gap: Spacing.xs },
   ratingButton: {
     width: 36,
