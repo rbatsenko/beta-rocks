@@ -22,7 +22,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#1e1714"
+        "backgroundColor": "#1e1613"
       },
       "package": "rocks.beta.app"
     },
