@@ -12,19 +12,25 @@ import {
   StyleSheet,
   ActivityIndicator,
   RefreshControl,
+  Image,
+  ScrollView,
+  Modal,
+  Dimensions,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { useFocusEffect } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-import { API_URL } from "@/constants/config";
-import { CATEGORY_COLORS } from "@/constants/config";
+import { API_URL, SUPABASE_URL, CATEGORY_COLORS } from "@/constants/config";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
+
+const PHOTO_BASE_URL = SUPABASE_URL ? `${SUPABASE_URL}/storage/v1/object/public/report-photos/` : "";
 
 interface FeedReport {
   id: string;
   category: string;
   text: string | null;
+  photos?: string[];
   created_at: string;
   author?: { display_name: string | null } | null;
   confirmations?: { count: number }[];
@@ -153,6 +159,15 @@ export default function FeedScreen() {
           <Text style={[styles.reportText, { color: colors.text }]} numberOfLines={4}>
             {item.text}
           </Text>
+        )}
+
+        {/* Photos */}
+        {item.photos && item.photos.length > 0 && (
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {item.photos.map((p, i) => (
+              <Image key={i} source={{ uri: `${PHOTO_BASE_URL}${p}` }} style={styles.feedPhoto} resizeMode="cover" />
+            ))}
+          </ScrollView>
         )}
 
         {/* Footer: author + confirmations */}
@@ -324,5 +339,11 @@ const styles = StyleSheet.create({
   },
   emptySubtitle: {
     fontSize: FontSize.md,
+  },
+  feedPhoto: {
+    width: 200,
+    height: 150,
+    borderRadius: BorderRadius.md,
+    marginRight: Spacing.sm,
   },
 });

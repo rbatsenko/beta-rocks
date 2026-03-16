@@ -146,6 +146,7 @@ export interface Report {
   rating_wind: number | null;
   rating_crowds: number | null;
   photo_url: string | null;
+  photos: string[];
   lost_found_type: "lost" | "found" | null;
   created_at: string;
   updated_at: string;

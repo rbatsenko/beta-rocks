@@ -18,7 +18,9 @@ import {
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { getCragBySlug, confirmReport as apiConfirmReport, removeConfirmation } from "@/api/client";
-import { API_URL } from "@/constants/config";
+import { API_URL, SUPABASE_URL } from "@/constants/config";
+
+const PHOTO_BASE_URL = SUPABASE_URL ? `${SUPABASE_URL}/storage/v1/object/public/report-photos/` : "";
 import { useUserProfile } from "@/hooks/useUserProfile";
 import { getFavorites, saveFavorites } from "@/lib/storage";
 import { supabase, isSupabaseConfigured } from "@/api/supabase";
@@ -26,6 +28,7 @@ import type { CragDetailResponse, CragData, SectorData, Report } from "@/types/a
 import { FRICTION_RATINGS, RATING_COLORS, CATEGORY_COLORS } from "@/constants/config";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
+import { PhotoLightbox } from "@/components/PhotoLightbox";
 
 function fmt(val: number | undefined | null, decimals = 1): string {
   return val != null ? val.toFixed(decimals) : "\u2014";
@@ -99,7 +102,16 @@ export default function CragDetailScreen() {
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"conditions" | "forecast">("conditions");
   const [isFavorited, setIsFavorited] = useState(false);
+  const [lightboxPhotos, setLightboxPhotos] = useState<string[]>([]);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [lightboxVisible, setLightboxVisible] = useState(false);
   const { hasProfile, syncKeyHash, profile } = useUserProfile();
+
+  function openLightbox(photos: string[], index: number) {
+    setLightboxPhotos(photos);
+    setLightboxIndex(index);
+    setLightboxVisible(true);
+  }
 
   useEffect(() => { if (slug) loadCragData(); }, [slug]);
 
@@ -224,7 +236,8 @@ export default function CragDetailScreen() {
   const locationParts = [crag.village, crag.municipality, crag.state].filter(Boolean);
   const locationStr = locationParts.join(", ");
 
-  const reportPhotos = reports.filter(r => r.photo_url).map(r => r.photo_url!);
+  const PHOTO_BASE_URL = SUPABASE_URL ? `${SUPABASE_URL}/storage/v1/object/public/report-photos/` : "";
+  const reportPhotos = reports.flatMap(r => (r.photos || []).map(p => `${PHOTO_BASE_URL}${p}`));
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -387,7 +400,9 @@ export default function CragDetailScreen() {
           <Text style={[styles.cardTitle, { color: colors.text }]}>Photos ({reportPhotos.length})</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.photoScroll}>
             {reportPhotos.map((url, i) => (
-              <Image key={i} source={{ uri: url }} style={styles.photo} resizeMode="cover" />
+              <TouchableOpacity key={i} onPress={() => openLightbox(reportPhotos, i)} activeOpacity={0.9}>
+                <Image source={{ uri: url }} style={styles.photo} resizeMode="cover" />
+              </TouchableOpacity>
             ))}
           </ScrollView>
         </View>
@@ -450,11 +465,20 @@ export default function CragDetailScreen() {
                   <Text style={[styles.metaText, { color: colors.muted }]}>{fmtRelative(report.created_at)}</Text>
                 </View>
                 {report.text && <Text style={[styles.reportText, { color: colors.text }]}>{report.text}</Text>}
-                {report.photo_url && (
-                  <Image source={{ uri: report.photo_url }} style={styles.reportPhoto} resizeMode="cover" />
+                {report.photos?.length > 0 && (
+                  <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginTop: Spacing.sm }}>
+                    {report.photos.map((p, pi) => {
+                      const urls = report.photos.map(ph => `${PHOTO_BASE_URL}${ph}`);
+                      return (
+                        <TouchableOpacity key={pi} onPress={() => openLightbox(urls, pi)} activeOpacity={0.9}>
+                          <Image source={{ uri: `${PHOTO_BASE_URL}${p}` }} style={styles.reportPhoto} resizeMode="cover" />
+                        </TouchableOpacity>
+                      );
+                    })}
+                  </ScrollView>
                 )}
                 <TouchableOpacity
-                  style={styles.reportFooter}
+                  style={[styles.reportFooter, { marginTop: Spacing.sm }]}
                   onPress={async () => {
                     if (!hasProfile || !syncKeyHash) {
                       Alert.alert("Profile Required", "Create a profile in Settings to vote.");
@@ -492,6 +516,13 @@ export default function CragDetailScreen() {
         <Text style={[styles.fabText, { color: colors.primaryForeground }]}>Report</Text>
       </TouchableOpacity>
     )}
+
+    <PhotoLightbox
+      visible={lightboxVisible}
+      photos={lightboxPhotos}
+      initialIndex={lightboxIndex}
+      onClose={() => setLightboxVisible(false)}
+    />
   </View>
   );
 }
@@ -601,10 +632,10 @@ const styles = StyleSheet.create({
   sectorRow: { flexDirection: "row", alignItems: "center", gap: Spacing.sm, paddingVertical: Spacing.xs },
   sectorName: { flex: 1, fontSize: FontSize.sm, fontWeight: "500" },
 
-  reportItem: { borderTopWidth: 1, paddingTop: Spacing.sm, gap: Spacing.xs },
+  reportItem: { borderTopWidth: 1, paddingTop: Spacing.sm, gap: Spacing.sm },
   reportHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
   reportText: { fontSize: FontSize.sm, lineHeight: 20 },
-  reportPhoto: { width: "100%", height: 200, borderRadius: BorderRadius.md, marginTop: Spacing.xs },
+  reportPhoto: { width: 250, height: 180, borderRadius: BorderRadius.md, marginRight: Spacing.sm },
   reportFooter: { flexDirection: "row", alignItems: "center", gap: 4 },
   metaText: { fontSize: FontSize.xs },
 });
