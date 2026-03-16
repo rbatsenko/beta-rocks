@@ -24,8 +24,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#1e1714"
       },
-      "package": "rocks.beta.app",
-      "edgeToEdgeEnabled": true
+      "package": "rocks.beta.app"
     },
     "web": {
       "output": "static",
