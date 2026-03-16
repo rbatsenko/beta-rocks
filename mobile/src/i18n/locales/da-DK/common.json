@@ -580,7 +580,8 @@
     "theme": "Theme",
     "language": "Language",
     "about": "About",
-    "version": "Version"
+    "version": "Version",
+    "signOut": "Sign Out"
   },
   "favorites": {
     "title": "Dine favoritklatrepladser",

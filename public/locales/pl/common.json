@@ -651,7 +651,8 @@
     "theme": "Motyw",
     "language": "Język",
     "about": "O aplikacji",
-    "version": "Wersja"
+    "version": "Wersja",
+    "signOut": "Wyloguj się"
   },
   "favorites": {
     "title": "Twoje ulubione skałki",
