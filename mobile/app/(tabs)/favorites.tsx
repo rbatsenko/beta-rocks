@@ -106,11 +106,6 @@ export default function FavoritesScreen() {
             <Text style={[styles.ratingText, { color: rColors.text }]}>
               {t(`ratings.${ratingInfo.label.toLowerCase()}`, ratingInfo.label)}
             </Text>
-            {item.lastFrictionScore != null && (
-              <Text style={[styles.ratingScore, { color: rColors.text }]}>
-                {" "}{Number(item.lastFrictionScore).toFixed(1)}
-              </Text>
-            )}
           </View>
         )}
         {item.rockType && item.rockType !== "unknown" && (
