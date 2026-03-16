@@ -1,64 +1,118 @@
 /**
- * Chat screen - placeholder until streaming is implemented
- * Shows the beta.rocks branding and directs users to web for chat
+ * Home screen - matches web's welcome state
+ * Logo, search hint, example queries, and favorites quick access
  */
 
+import { useState, useCallback } from "react";
 import {
   View,
   Text,
   StyleSheet,
+  ScrollView,
   TouchableOpacity,
 } from "react-native";
 import { useRouter } from "expo-router";
+import { useFocusEffect } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
+import { getFavorites } from "@/lib/storage";
+import type { Favorite } from "@/types/api";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
 
-export default function ChatScreen() {
+const EXAMPLE_QUERIES = [
+  "Fontainebleau",
+  "El Capitan",
+  "Kalymnos",
+  "Siurana",
+  "Magic Wood",
+  "Bishop",
+];
+
+export default function HomeScreen() {
   const { colorScheme } = useTheme();
   const isDark = colorScheme === "dark";
   const colors = isDark ? Colors.dark : Colors.light;
   const router = useRouter();
+  const [favorites, setFavorites] = useState<Favorite[]>([]);
+
+  useFocusEffect(
+    useCallback(() => {
+      const stored = getFavorites() as Favorite[];
+      setFavorites(stored);
+    }, [])
+  );
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <View style={styles.content}>
-        <Text style={[styles.title, { color: colors.text }]}>beta.rocks</Text>
-        <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
-          Climbing conditions for any crag worldwide
-        </Text>
+    <ScrollView
+      style={[styles.container, { backgroundColor: colors.background }]}
+      contentContainerStyle={styles.content}
+    >
+      {/* Logo */}
+      <View style={[styles.logoCircle, { backgroundColor: "rgba(249,115,22,0.12)" }]}>
+        <Ionicons name="partly-sunny" size={40} color="#f97316" />
+      </View>
 
-        <View style={styles.actions}>
+      {/* Heading */}
+      <Text style={[styles.title, { color: colors.text }]}>beta.rocks</Text>
+      <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
+        Get the beta on climbing conditions at any crag worldwide
+      </Text>
+
+      {/* Search hint */}
+      <TouchableOpacity
+        style={[styles.searchHint, { backgroundColor: "rgba(249,115,22,0.08)", borderColor: "rgba(249,115,22,0.2)" }]}
+        onPress={() => router.push("/(tabs)/search")}
+        activeOpacity={0.7}
+      >
+        <Ionicons name="search" size={16} color="#f97316" />
+        <Text style={[styles.searchHintText, { color: colors.textSecondary }]}>
+          Search for any crag or sector...
+        </Text>
+      </TouchableOpacity>
+
+      {/* Example queries */}
+      <View style={styles.exampleQueries}>
+        {EXAMPLE_QUERIES.map((query) => (
           <TouchableOpacity
-            style={[styles.actionCard, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}
+            key={query}
+            style={[styles.queryChip, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}
             onPress={() => router.push("/(tabs)/search")}
             activeOpacity={0.7}
           >
-            <Ionicons name="search-outline" size={24} color={colors.primary} />
-            <Text style={[styles.actionTitle, { color: colors.text }]}>
-              Search Crags
-            </Text>
-            <Text style={[styles.actionDesc, { color: colors.textSecondary }]}>
-              Find conditions at any climbing area
+            <Text style={[styles.queryChipText, { color: colors.text }]}>
+              {query}
             </Text>
           </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[styles.actionCard, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}
-            onPress={() => router.push("/(tabs)/favorites")}
-            activeOpacity={0.7}
-          >
-            <Ionicons name="heart-outline" size={24} color={colors.primary} />
-            <Text style={[styles.actionTitle, { color: colors.text }]}>
-              Favorites
-            </Text>
-            <Text style={[styles.actionDesc, { color: colors.textSecondary }]}>
-              Quick access to your saved crags
-            </Text>
-          </TouchableOpacity>
-        </View>
+        ))}
       </View>
-    </View>
+
+      {/* Favorites quick access */}
+      {favorites.length > 0 && (
+        <View style={styles.favoritesSection}>
+          <View style={styles.favoritesHeader}>
+            <Ionicons name="star" size={16} color="#f97316" />
+            <Text style={[styles.favoritesTitle, { color: colors.textSecondary }]}>
+              Your Favorites
+            </Text>
+          </View>
+          <View style={styles.favoritesGrid}>
+            {favorites.slice(0, 6).map((fav) => (
+              <TouchableOpacity
+                key={fav.id}
+                style={[styles.favoriteChip, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}
+                onPress={() => fav.areaSlug && router.push(`/crag/${fav.areaSlug}`)}
+                activeOpacity={0.7}
+              >
+                <Ionicons name="star" size={12} color="#f97316" />
+                <Text style={[styles.favoriteChipText, { color: colors.text }]} numberOfLines={1}>
+                  {fav.areaName}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+      )}
+    </ScrollView>
   );
 }
 
@@ -67,13 +121,22 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    flex: 1,
-    justifyContent: "center",
     paddingHorizontal: Spacing.xl,
-    gap: Spacing.lg,
+    paddingTop: Spacing.xxl + Spacing.xl,
+    paddingBottom: Spacing.xxl,
+    alignItems: "center",
+    gap: Spacing.md,
+  },
+  logoCircle: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: Spacing.sm,
   },
   title: {
-    fontSize: FontSize.xxl,
+    fontSize: 28,
     fontWeight: "700",
     textAlign: "center",
   },
@@ -81,22 +144,72 @@ const styles = StyleSheet.create({
     fontSize: FontSize.md,
     textAlign: "center",
     lineHeight: 22,
+    maxWidth: 300,
+    marginBottom: Spacing.sm,
   },
-  actions: {
+  searchHint: {
+    flexDirection: "row",
+    alignItems: "center",
     gap: Spacing.sm,
-    marginTop: Spacing.md,
-  },
-  actionCard: {
-    padding: Spacing.md,
+    paddingHorizontal: Spacing.md,
+    paddingVertical: Spacing.sm + 2,
     borderRadius: BorderRadius.lg,
     borderWidth: 1,
-    gap: Spacing.xs,
+    width: "100%",
+    marginBottom: Spacing.sm,
   },
-  actionTitle: {
-    fontSize: FontSize.md,
-    fontWeight: "600",
-  },
-  actionDesc: {
+  searchHintText: {
     fontSize: FontSize.sm,
+  },
+  exampleQueries: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    gap: Spacing.sm,
+    marginBottom: Spacing.md,
+  },
+  queryChip: {
+    paddingHorizontal: Spacing.md,
+    paddingVertical: Spacing.sm,
+    borderRadius: BorderRadius.lg,
+    borderWidth: 1,
+  },
+  queryChipText: {
+    fontSize: FontSize.sm,
+  },
+  favoritesSection: {
+    width: "100%",
+    gap: Spacing.md,
+    marginTop: Spacing.md,
+  },
+  favoritesHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: Spacing.sm,
+  },
+  favoritesTitle: {
+    fontSize: FontSize.sm,
+    fontWeight: "500",
+  },
+  favoritesGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    gap: Spacing.sm,
+  },
+  favoriteChip: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: Spacing.xs,
+    paddingHorizontal: Spacing.md,
+    paddingVertical: Spacing.sm,
+    borderRadius: BorderRadius.lg,
+    borderWidth: 1,
+    maxWidth: "48%",
+  },
+  favoriteChipText: {
+    fontSize: FontSize.sm,
+    flexShrink: 1,
   },
 });
