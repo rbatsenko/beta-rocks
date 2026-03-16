@@ -14,7 +14,7 @@ import {
   Image,
   FlatList,
 } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { getCragBySlug } from "@/api/client";
 import { API_URL } from "@/constants/config";
@@ -83,6 +83,7 @@ export default function CragDetailScreen() {
   const { colorScheme } = useTheme();
   const isDark = colorScheme === "dark";
   const colors = isDark ? Colors.dark : Colors.light;
+  const router = useRouter();
 
   const [crag, setCrag] = useState<CragData | null>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -152,8 +153,9 @@ export default function CragDetailScreen() {
   const reportPhotos = reports.filter(r => r.photo_url).map(r => r.photo_url!);
 
   return (
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
     <ScrollView
-      style={[styles.container, { backgroundColor: colors.background }]}
+      style={styles.scrollView}
       contentContainerStyle={styles.content}
     >
       {/* Header */}
@@ -322,6 +324,7 @@ export default function CragDetailScreen() {
               </View>
             ))}
           </ScrollView>
+          <Text style={[styles.poweredBy, { color: colors.muted }]}>Powered by Windy</Text>
         </View>
       )}
 
@@ -377,6 +380,19 @@ export default function CragDetailScreen() {
         </View>
       )}
     </ScrollView>
+
+    {/* Floating action button - Add Report */}
+    {crag && (
+      <TouchableOpacity
+        style={[styles.fab, { backgroundColor: colors.primary }]}
+        onPress={() => router.push({ pathname: "/report", params: { cragId: crag.id, cragName: crag.name } })}
+        activeOpacity={0.8}
+      >
+        <Ionicons name="add" size={24} color={colors.primaryForeground} />
+        <Text style={[styles.fabText, { color: colors.primaryForeground }]}>Report</Text>
+      </TouchableOpacity>
+    )}
+  </View>
   );
 }
 
@@ -402,9 +418,28 @@ function LinkRow({ icon, label, color, onPress }: { icon: keyof typeof Ionicons.
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  content: { padding: Spacing.md, gap: Spacing.md, paddingBottom: Spacing.xxl },
+  scrollView: { flex: 1 },
+  content: { padding: Spacing.md, gap: Spacing.md, paddingBottom: Spacing.xxl + 60 },
   centered: { flex: 1, justifyContent: "center", alignItems: "center", gap: Spacing.md },
   errorText: { fontSize: FontSize.md },
+  fab: {
+    position: "absolute",
+    bottom: Spacing.lg,
+    right: Spacing.md,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: Spacing.xs,
+    paddingHorizontal: Spacing.md + 4,
+    paddingVertical: Spacing.sm + 4,
+    borderRadius: BorderRadius.full,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  fabText: { fontSize: FontSize.sm, fontWeight: "600" },
+  poweredBy: { fontSize: FontSize.xs, marginTop: Spacing.xs },
 
   header: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", gap: Spacing.md },
   headerText: { flex: 1, gap: Spacing.xs },

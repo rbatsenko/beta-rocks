@@ -48,6 +48,14 @@ function RootNavigator() {
           }}
         />
         <Stack.Screen
+          name="report"
+          options={{
+            title: "Add Report",
+            presentation: "modal",
+            headerBackTitle: "Cancel",
+          }}
+        />
+        <Stack.Screen
           name="sync"
           options={{
             title: "Sync Profile",
