@@ -11,7 +11,6 @@ import {
   StyleSheet,
   ActivityIndicator,
   TouchableOpacity,
-  useColorScheme,
 } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -26,10 +25,11 @@ import type {
 } from "@/types/api";
 import { FRICTION_RATINGS } from "@/constants/config";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export default function CragDetailScreen() {
   const { slug } = useLocalSearchParams<{ slug: string }>();
-  const colorScheme = useColorScheme();
+  const { colorScheme } = useTheme();
   const isDark = colorScheme === "dark";
   const colors = isDark ? Colors.dark : Colors.light;
 

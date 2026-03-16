@@ -11,16 +11,16 @@ import {
   StyleSheet,
   Alert,
   ActivityIndicator,
-  useColorScheme,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useUserProfile } from "@/hooks/useUserProfile";
 import { isValidSyncKey } from "@/lib/sync-key";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export default function SyncScreen() {
-  const colorScheme = useColorScheme();
+  const { colorScheme } = useTheme();
   const isDark = colorScheme === "dark";
   const colors = isDark ? Colors.dark : Colors.light;
   const router = useRouter();

@@ -11,16 +11,16 @@ import {
   TouchableOpacity,
   StyleSheet,
   ActivityIndicator,
-  useColorScheme,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useSearch } from "@/hooks/useSearch";
 import type { SearchResult } from "@/types/api";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export default function SearchScreen() {
-  const colorScheme = useColorScheme();
+  const { colorScheme } = useTheme();
   const isDark = colorScheme === "dark";
   const colors = isDark ? Colors.dark : Colors.light;
   const router = useRouter();

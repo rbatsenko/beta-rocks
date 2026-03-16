@@ -1,5 +1,5 @@
 /**
- * Settings screen - user profile, sync, and preferences
+ * Settings screen - user profile, theme, language, sync, and preferences
  */
 
 import { useState } from "react";
@@ -11,24 +11,40 @@ import {
   ScrollView,
   StyleSheet,
   Alert,
-  useColorScheme,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import * as Clipboard from "expo-clipboard";
 import { useUserProfile } from "@/hooks/useUserProfile";
+import { useTheme, type ThemeMode } from "@/contexts/ThemeContext";
+import {
+  useLanguage,
+  SUPPORTED_LANGUAGES,
+  type LanguageCode,
+} from "@/contexts/LanguageContext";
 import { formatSyncKeyForDisplay } from "@/lib/sync-key";
 import { APP_VERSION } from "@/constants/config";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 
+const THEME_OPTIONS: { value: ThemeMode; label: string; icon: keyof typeof Ionicons.glyphMap }[] = [
+  { value: "system", label: "System", icon: "phone-portrait-outline" },
+  { value: "light", label: "Light", icon: "sunny-outline" },
+  { value: "dark", label: "Dark", icon: "moon-outline" },
+];
+
 export default function SettingsScreen() {
-  const colorScheme = useColorScheme();
+  const { colorScheme, themeMode, setThemeMode } = useTheme();
+  const { language, setLanguage } = useLanguage();
   const isDark = colorScheme === "dark";
   const colors = isDark ? Colors.dark : Colors.light;
   const router = useRouter();
   const { profile, isLoading, updateDisplayName } = useUserProfile();
   const [editingName, setEditingName] = useState(false);
   const [nameInput, setNameInput] = useState("");
+  const [showLanguagePicker, setShowLanguagePicker] = useState(false);
+
+  const currentLanguageLabel =
+    SUPPORTED_LANGUAGES.find((l) => l.code === language)?.label || "English";
 
   function handleEditName() {
     setNameInput(profile?.displayName || "");
@@ -125,6 +141,114 @@ export default function SettingsScreen() {
         </View>
       </View>
 
+      {/* Appearance Section */}
+      <View style={styles.section}>
+        <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>
+          APPEARANCE
+        </Text>
+        <View
+          style={[
+            styles.card,
+            { backgroundColor: colors.card, borderColor: colors.cardBorder },
+          ]}
+        >
+          {/* Theme selector */}
+          <View style={[styles.row, { paddingBottom: Spacing.sm }]}>
+            <Ionicons name="color-palette-outline" size={20} color={colors.primary} />
+            <Text style={[styles.label, { color: colors.text }]}>Theme</Text>
+          </View>
+          <View style={styles.segmentedControl}>
+            {THEME_OPTIONS.map((option) => {
+              const isActive = themeMode === option.value;
+              return (
+                <TouchableOpacity
+                  key={option.value}
+                  style={[
+                    styles.segment,
+                    {
+                      backgroundColor: isActive ? colors.primary : "transparent",
+                      borderColor: colors.border,
+                    },
+                  ]}
+                  onPress={() => setThemeMode(option.value)}
+                  activeOpacity={0.7}
+                >
+                  <Ionicons
+                    name={option.icon}
+                    size={16}
+                    color={isActive ? colors.primaryForeground : colors.textSecondary}
+                  />
+                  <Text
+                    style={[
+                      styles.segmentText,
+                      {
+                        color: isActive ? colors.primaryForeground : colors.textSecondary,
+                      },
+                    ]}
+                  >
+                    {option.label}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+
+          <View style={[styles.divider, { backgroundColor: colors.border, marginLeft: 0 }]} />
+
+          {/* Language selector */}
+          <TouchableOpacity
+            style={styles.row}
+            onPress={() => setShowLanguagePicker(!showLanguagePicker)}
+          >
+            <Ionicons name="language-outline" size={20} color={colors.primary} />
+            <Text style={[styles.label, { color: colors.text }]}>Language</Text>
+            <Text style={[styles.value, { color: colors.textSecondary }]}>
+              {currentLanguageLabel}
+            </Text>
+            <Ionicons
+              name={showLanguagePicker ? "chevron-up" : "chevron-down"}
+              size={16}
+              color={colors.muted}
+            />
+          </TouchableOpacity>
+
+          {showLanguagePicker && (
+            <View style={[styles.languageList, { borderTopColor: colors.border }]}>
+              {SUPPORTED_LANGUAGES.map((lang) => {
+                const isActive = language === lang.code;
+                return (
+                  <TouchableOpacity
+                    key={lang.code}
+                    style={[
+                      styles.languageItem,
+                      isActive && { backgroundColor: colors.surface },
+                    ]}
+                    onPress={() => {
+                      setLanguage(lang.code as LanguageCode);
+                      setShowLanguagePicker(false);
+                    }}
+                    activeOpacity={0.7}
+                  >
+                    <Text
+                      style={[
+                        styles.languageText,
+                        { color: isActive ? colors.primary : colors.text },
+                        isActive && { fontWeight: "600" },
+                      ]}
+                    >
+                      {lang.label}
+                    </Text>
+                    {isActive && (
+                      <Ionicons name="checkmark" size={18} color={colors.primary} />
+                    )}
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          )}
+        </View>
+      </View>
+
       {/* Sync Section */}
       <View style={styles.section}>
         <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>
@@ -209,6 +333,7 @@ const styles = StyleSheet.create({
   content: {
     padding: Spacing.md,
     gap: Spacing.lg,
+    paddingBottom: Spacing.xxl,
   },
   section: {
     gap: Spacing.sm,
@@ -263,5 +388,39 @@ const styles = StyleSheet.create({
     fontSize: FontSize.xs,
     marginHorizontal: Spacing.xs,
     lineHeight: 18,
+  },
+  segmentedControl: {
+    flexDirection: "row",
+    marginHorizontal: Spacing.md,
+    marginBottom: Spacing.md,
+    gap: Spacing.sm,
+  },
+  segment: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: Spacing.xs,
+    paddingVertical: Spacing.sm,
+    borderRadius: BorderRadius.md,
+    borderWidth: 1,
+  },
+  segmentText: {
+    fontSize: FontSize.sm,
+    fontWeight: "500",
+  },
+  languageList: {
+    borderTopWidth: 1,
+    maxHeight: 300,
+  },
+  languageItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: Spacing.md,
+    paddingVertical: Spacing.sm + 2,
+  },
+  languageText: {
+    fontSize: FontSize.md,
   },
 });
