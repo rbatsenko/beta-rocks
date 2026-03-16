@@ -1,5 +1,5 @@
 /**
- * Settings screen - user profile, theme, language, sync, and preferences
+ * Settings screen - profile, theme, language, units, sync
  */
 
 import { useState } from "react";
@@ -11,6 +11,7 @@ import {
   ScrollView,
   StyleSheet,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -25,6 +26,7 @@ import {
 import { formatSyncKeyForDisplay } from "@/lib/sync-key";
 import { APP_VERSION } from "@/constants/config";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
+import type { UnitsConfig } from "@/types/api";
 
 const THEME_OPTIONS: { value: ThemeMode; label: string; icon: keyof typeof Ionicons.glyphMap }[] = [
   { value: "system", label: "System", icon: "phone-portrait-outline" },
@@ -32,19 +34,51 @@ const THEME_OPTIONS: { value: ThemeMode; label: string; icon: keyof typeof Ionic
   { value: "dark", label: "Dark", icon: "moon-outline" },
 ];
 
+const UNIT_SYSTEMS = [
+  { key: "metric", label: "Metric (°C, km/h, mm)" },
+  { key: "imperial", label: "Imperial (°F, mph, in)" },
+] as const;
+
 export default function SettingsScreen() {
   const { colorScheme, themeMode, setThemeMode } = useTheme();
   const { language, setLanguage } = useLanguage();
   const isDark = colorScheme === "dark";
   const colors = isDark ? Colors.dark : Colors.light;
   const router = useRouter();
-  const { profile, isLoading, updateDisplayName } = useUserProfile();
+  const {
+    profile,
+    isLoading,
+    hasProfile,
+    createProfile,
+    updateDisplayName,
+    updateUnits,
+    signOut,
+  } = useUserProfile();
+
   const [editingName, setEditingName] = useState(false);
   const [nameInput, setNameInput] = useState("");
   const [showLanguagePicker, setShowLanguagePicker] = useState(false);
+  const [isCreating, setIsCreating] = useState(false);
+  const [createNameInput, setCreateNameInput] = useState("");
 
   const currentLanguageLabel =
     SUPPORTED_LANGUAGES.find((l) => l.code === language)?.label || "English";
+
+  const currentUnits = profile?.units?.temperature === "fahrenheit" ? "imperial" : "metric";
+
+  async function handleCreateProfile() {
+    setIsCreating(true);
+    const success = await createProfile(createNameInput.trim() || undefined);
+    setIsCreating(false);
+    if (success) {
+      Alert.alert(
+        "Profile Created",
+        "Your sync key has been generated. Copy it from settings to sync across devices.",
+      );
+    } else {
+      Alert.alert("Error", "Failed to create profile. Please try again.");
+    }
+  }
 
   function handleEditName() {
     setNameInput(profile?.displayName || "");
@@ -56,10 +90,6 @@ export default function SettingsScreen() {
     setEditingName(false);
   }
 
-  function handleSyncPress() {
-    router.push("/sync");
-  }
-
   async function handleCopySyncKey() {
     if (profile?.syncKey) {
       await Clipboard.setStringAsync(profile.syncKey);
@@ -67,10 +97,31 @@ export default function SettingsScreen() {
     }
   }
 
+  function handleUnitToggle() {
+    const newUnits: UnitsConfig =
+      currentUnits === "metric"
+        ? { temperature: "fahrenheit", windSpeed: "mph", precipitation: "inches", distance: "miles", elevation: "feet" }
+        : { temperature: "celsius", windSpeed: "kmh", precipitation: "mm", distance: "km", elevation: "meters" };
+    updateUnits(newUnits);
+  }
+
+  async function handleSignOut() {
+    Alert.alert("Sign Out", "This will remove your profile from this device. You can restore it later with your sync key.", [
+      { text: "Cancel", style: "cancel" },
+      {
+        text: "Sign Out",
+        style: "destructive",
+        onPress: async () => {
+          await signOut();
+        },
+      },
+    ]);
+  }
+
   if (isLoading) {
     return (
       <View style={[styles.container, { backgroundColor: colors.background }]}>
-        <Text style={{ color: colors.textSecondary }}>Loading...</Text>
+        <ActivityIndicator style={{ marginTop: Spacing.xxl }} color={colors.primary} />
       </View>
     );
   }
@@ -80,79 +131,133 @@ export default function SettingsScreen() {
       style={[styles.container, { backgroundColor: colors.background }]}
       contentContainerStyle={styles.content}
     >
-      {/* Profile Section */}
-      <View style={styles.section}>
-        <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>
-          PROFILE
-        </Text>
-        <View
-          style={[
-            styles.card,
-            { backgroundColor: colors.card, borderColor: colors.cardBorder },
-          ]}
-        >
-          <View style={styles.row}>
-            <Ionicons name="person-outline" size={20} color={colors.primary} />
-            <Text style={[styles.label, { color: colors.text }]}>
-              Display Name
+      {/* No profile — show create / restore */}
+      {!hasProfile && (
+        <View style={styles.section}>
+          <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>ACCOUNT</Text>
+          <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+            <Text style={[styles.createTitle, { color: colors.text }]}>
+              Create a profile to add reports, vote, and save favorites
             </Text>
-            {editingName ? (
-              <View style={styles.editNameContainer}>
-                <TextInput
-                  style={[
-                    styles.nameInput,
-                    {
-                      color: colors.text,
-                      borderColor: colors.border,
-                      backgroundColor: colors.surface,
-                    },
-                  ]}
-                  value={nameInput}
-                  onChangeText={setNameInput}
-                  autoFocus
-                  maxLength={30}
-                  returnKeyType="done"
-                  onSubmitEditing={handleSaveName}
-                />
-                <TouchableOpacity onPress={handleSaveName}>
-                  <Ionicons
-                    name="checkmark-circle"
-                    size={24}
-                    color={colors.success}
-                  />
-                </TouchableOpacity>
-              </View>
-            ) : (
-              <TouchableOpacity
-                style={styles.valueContainer}
-                onPress={handleEditName}
-              >
-                <Text style={[styles.value, { color: colors.textSecondary }]}>
-                  {profile?.displayName || "Anonymous Climber"}
-                </Text>
-                <Ionicons
-                  name="pencil-outline"
-                  size={16}
-                  color={colors.muted}
-                />
-              </TouchableOpacity>
-            )}
+            <TextInput
+              style={[styles.nameInput, { color: colors.text, borderColor: colors.border, backgroundColor: colors.surface }]}
+              value={createNameInput}
+              onChangeText={setCreateNameInput}
+              placeholder="Display name (optional)"
+              placeholderTextColor={colors.muted}
+              maxLength={30}
+            />
+            <TouchableOpacity
+              style={[styles.primaryButton, { backgroundColor: colors.primary }]}
+              onPress={handleCreateProfile}
+              disabled={isCreating}
+            >
+              {isCreating ? (
+                <ActivityIndicator color={colors.primaryForeground} />
+              ) : (
+                <Text style={[styles.primaryButtonText, { color: colors.primaryForeground }]}>Create Profile</Text>
+              )}
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.secondaryButton, { borderColor: colors.border }]}
+              onPress={() => router.push("/sync")}
+            >
+              <Ionicons name="sync-outline" size={18} color={colors.primary} />
+              <Text style={[styles.secondaryButtonText, { color: colors.primary }]}>Restore with Sync Key</Text>
+            </TouchableOpacity>
           </View>
         </View>
-      </View>
+      )}
 
-      {/* Appearance Section */}
+      {/* Profile info (when signed in) */}
+      {hasProfile && (
+        <View style={styles.section}>
+          <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>PROFILE</Text>
+          <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+            <View style={styles.row}>
+              <Ionicons name="person-outline" size={20} color={colors.primary} />
+              <Text style={[styles.label, { color: colors.text }]}>Display Name</Text>
+              {editingName ? (
+                <View style={styles.editRow}>
+                  <TextInput
+                    style={[styles.inlineInput, { color: colors.text, borderColor: colors.border, backgroundColor: colors.surface }]}
+                    value={nameInput}
+                    onChangeText={setNameInput}
+                    autoFocus
+                    maxLength={30}
+                    returnKeyType="done"
+                    onSubmitEditing={handleSaveName}
+                  />
+                  <TouchableOpacity onPress={handleSaveName}>
+                    <Ionicons name="checkmark-circle" size={24} color={colors.success} />
+                  </TouchableOpacity>
+                </View>
+              ) : (
+                <TouchableOpacity style={styles.valueRow} onPress={handleEditName}>
+                  <Text style={[styles.value, { color: colors.textSecondary }]}>
+                    {profile?.displayName || "Anonymous Climber"}
+                  </Text>
+                  <Ionicons name="pencil-outline" size={16} color={colors.muted} />
+                </TouchableOpacity>
+              )}
+            </View>
+
+            <View style={[styles.divider, { backgroundColor: colors.border }]} />
+
+            <TouchableOpacity style={styles.row} onPress={handleCopySyncKey}>
+              <Ionicons name="key-outline" size={20} color={colors.primary} />
+              <Text style={[styles.label, { color: colors.text }]}>Sync Key</Text>
+              <Text style={[styles.value, { color: colors.textSecondary }]}>
+                {profile?.syncKey ? formatSyncKeyForDisplay(profile.syncKey) : "\u2014"}
+              </Text>
+              <Ionicons name="copy-outline" size={16} color={colors.muted} />
+            </TouchableOpacity>
+
+            <View style={[styles.divider, { backgroundColor: colors.border }]} />
+
+            <TouchableOpacity style={styles.row} onPress={handleSignOut}>
+              <Ionicons name="log-out-outline" size={20} color={colors.destructive} />
+              <Text style={[styles.label, { color: colors.destructive }]}>Sign Out</Text>
+            </TouchableOpacity>
+          </View>
+          <Text style={[styles.hint, { color: colors.muted }]}>
+            Save your sync key to restore your profile on other devices.
+          </Text>
+        </View>
+      )}
+
+      {/* Units */}
+      {hasProfile && (
+        <View style={styles.section}>
+          <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>UNITS</Text>
+          <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+            <View style={styles.segmentedControl}>
+              {UNIT_SYSTEMS.map((sys) => {
+                const isActive = currentUnits === sys.key;
+                return (
+                  <TouchableOpacity
+                    key={sys.key}
+                    style={[styles.segment, {
+                      backgroundColor: isActive ? colors.primary : "transparent",
+                      borderColor: colors.border,
+                    }]}
+                    onPress={handleUnitToggle}
+                  >
+                    <Text style={[styles.segmentText, { color: isActive ? colors.primaryForeground : colors.textSecondary }]}>
+                      {sys.label}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          </View>
+        </View>
+      )}
+
+      {/* Appearance */}
       <View style={styles.section}>
-        <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>
-          APPEARANCE
-        </Text>
-        <View
-          style={[
-            styles.card,
-            { backgroundColor: colors.card, borderColor: colors.cardBorder },
-          ]}
-        >
-          {/* Theme selector */}
+        <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>APPEARANCE</Text>
+        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
           <View style={[styles.row, { paddingBottom: Spacing.sm }]}>
             <Ionicons name="color-palette-outline" size={20} color={colors.primary} />
             <Text style={[styles.label, { color: colors.text }]}>Theme</Text>
@@ -163,29 +268,14 @@ export default function SettingsScreen() {
               return (
                 <TouchableOpacity
                   key={option.value}
-                  style={[
-                    styles.segment,
-                    {
-                      backgroundColor: isActive ? colors.primary : "transparent",
-                      borderColor: colors.border,
-                    },
-                  ]}
+                  style={[styles.segment, {
+                    backgroundColor: isActive ? colors.primary : "transparent",
+                    borderColor: colors.border,
+                  }]}
                   onPress={() => setThemeMode(option.value)}
-                  activeOpacity={0.7}
                 >
-                  <Ionicons
-                    name={option.icon}
-                    size={16}
-                    color={isActive ? colors.primaryForeground : colors.textSecondary}
-                  />
-                  <Text
-                    style={[
-                      styles.segmentText,
-                      {
-                        color: isActive ? colors.primaryForeground : colors.textSecondary,
-                      },
-                    ]}
-                  >
+                  <Ionicons name={option.icon} size={16} color={isActive ? colors.primaryForeground : colors.textSecondary} />
+                  <Text style={[styles.segmentText, { color: isActive ? colors.primaryForeground : colors.textSecondary }]}>
                     {option.label}
                   </Text>
                 </TouchableOpacity>
@@ -195,55 +285,27 @@ export default function SettingsScreen() {
 
           <View style={[styles.divider, { backgroundColor: colors.border, marginLeft: 0 }]} />
 
-          {/* Language selector */}
-          <TouchableOpacity
-            style={styles.row}
-            onPress={() => setShowLanguagePicker(!showLanguagePicker)}
-          >
+          <TouchableOpacity style={styles.row} onPress={() => setShowLanguagePicker(!showLanguagePicker)}>
             <Ionicons name="language-outline" size={20} color={colors.primary} />
             <Text style={[styles.label, { color: colors.text }]}>Language</Text>
-            <Text style={[styles.value, { color: colors.textSecondary }]}>
-              {currentLanguageLabel}
-            </Text>
-            <Ionicons
-              name={showLanguagePicker ? "chevron-up" : "chevron-down"}
-              size={16}
-              color={colors.muted}
-            />
+            <Text style={[styles.value, { color: colors.textSecondary }]}>{currentLanguageLabel}</Text>
+            <Ionicons name={showLanguagePicker ? "chevron-up" : "chevron-down"} size={16} color={colors.muted} />
           </TouchableOpacity>
 
           {showLanguagePicker && (
-            <ScrollView
-              style={[styles.languageList, { borderTopColor: colors.border }]}
-              nestedScrollEnabled
-            >
+            <ScrollView style={[styles.languageList, { borderTopColor: colors.border }]} nestedScrollEnabled>
               {SUPPORTED_LANGUAGES.map((lang) => {
                 const isActive = language === lang.code;
                 return (
                   <TouchableOpacity
                     key={lang.code}
-                    style={[
-                      styles.languageItem,
-                      isActive && { backgroundColor: colors.surface },
-                    ]}
-                    onPress={() => {
-                      setLanguage(lang.code as LanguageCode);
-                      setShowLanguagePicker(false);
-                    }}
-                    activeOpacity={0.7}
+                    style={[styles.languageItem, isActive && { backgroundColor: colors.surface }]}
+                    onPress={() => { setLanguage(lang.code as LanguageCode); setShowLanguagePicker(false); }}
                   >
-                    <Text
-                      style={[
-                        styles.languageText,
-                        { color: isActive ? colors.primary : colors.text },
-                        isActive && { fontWeight: "600" },
-                      ]}
-                    >
+                    <Text style={[styles.languageText, { color: isActive ? colors.primary : colors.text }, isActive && { fontWeight: "600" }]}>
                       {lang.label}
                     </Text>
-                    {isActive && (
-                      <Ionicons name="checkmark" size={18} color={colors.primary} />
-                    )}
+                    {isActive && <Ionicons name="checkmark" size={18} color={colors.primary} />}
                   </TouchableOpacity>
                 );
               })}
@@ -252,76 +314,14 @@ export default function SettingsScreen() {
         </View>
       </View>
 
-      {/* Sync Section */}
+      {/* About */}
       <View style={styles.section}>
-        <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>
-          SYNC
-        </Text>
-        <View
-          style={[
-            styles.card,
-            { backgroundColor: colors.card, borderColor: colors.cardBorder },
-          ]}
-        >
-          <TouchableOpacity style={styles.row} onPress={handleCopySyncKey}>
-            <Ionicons name="key-outline" size={20} color={colors.primary} />
-            <Text style={[styles.label, { color: colors.text }]}>
-              Sync Key
-            </Text>
-            <Text style={[styles.value, { color: colors.textSecondary }]}>
-              {profile?.syncKey
-                ? formatSyncKeyForDisplay(profile.syncKey)
-                : "\u2014"}
-            </Text>
-            <Ionicons name="copy-outline" size={16} color={colors.muted} />
-          </TouchableOpacity>
-
-          <View style={[styles.divider, { backgroundColor: colors.border }]} />
-
-          <TouchableOpacity style={styles.row} onPress={handleSyncPress}>
-            <Ionicons
-              name="sync-outline"
-              size={20}
-              color={colors.primary}
-            />
-            <Text style={[styles.label, { color: colors.text }]}>
-              Restore from Sync Key
-            </Text>
-            <Ionicons
-              name="chevron-forward"
-              size={20}
-              color={colors.muted}
-            />
-          </TouchableOpacity>
-        </View>
-
-        <Text style={[styles.hint, { color: colors.muted }]}>
-          Use your sync key to restore your profile, favorites, and chat history
-          on this device. Find your key on beta.rocks web app under Settings.
-        </Text>
-      </View>
-
-      {/* About Section */}
-      <View style={styles.section}>
-        <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>
-          ABOUT
-        </Text>
-        <View
-          style={[
-            styles.card,
-            { backgroundColor: colors.card, borderColor: colors.cardBorder },
-          ]}
-        >
+        <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>ABOUT</Text>
+        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
           <View style={styles.row}>
-            <Ionicons
-              name="information-circle-outline"
-              size={20}
-              color={colors.primary}
-            />
+            <Ionicons name="information-circle-outline" size={20} color={colors.primary} />
             <Text style={[styles.label, { color: colors.text }]}>Version</Text>
-            <Text style={[styles.value, { color: colors.textSecondary }]}>
-              {APP_VERSION}
-            </Text>
+            <Text style={[styles.value, { color: colors.textSecondary }]}>{APP_VERSION}</Text>
           </View>
         </View>
       </View>
@@ -330,100 +330,34 @@ export default function SettingsScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  content: {
-    padding: Spacing.md,
-    gap: Spacing.lg,
-    paddingBottom: Spacing.xxl,
-  },
-  section: {
-    gap: Spacing.sm,
-  },
-  sectionTitle: {
-    fontSize: FontSize.xs,
-    fontWeight: "600",
-    letterSpacing: 1,
-    marginLeft: Spacing.xs,
-  },
-  card: {
-    borderRadius: BorderRadius.lg,
-    borderWidth: 1,
-    overflow: "hidden",
-  },
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: Spacing.md,
-    gap: Spacing.sm,
-  },
-  label: {
-    flex: 1,
-    fontSize: FontSize.md,
-  },
-  value: {
-    fontSize: FontSize.sm,
-  },
-  valueContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: Spacing.xs,
-  },
-  editNameContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: Spacing.sm,
-  },
-  nameInput: {
-    fontSize: FontSize.md,
-    borderWidth: 1,
-    borderRadius: BorderRadius.md,
-    paddingHorizontal: Spacing.sm,
-    paddingVertical: Spacing.xs,
-    minWidth: 150,
-  },
-  divider: {
-    height: 1,
-    marginLeft: Spacing.xl + Spacing.md,
-  },
-  hint: {
-    fontSize: FontSize.xs,
-    marginHorizontal: Spacing.xs,
-    lineHeight: 18,
-  },
-  segmentedControl: {
-    flexDirection: "row",
-    marginHorizontal: Spacing.md,
-    marginBottom: Spacing.md,
-    gap: Spacing.sm,
-  },
-  segment: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: Spacing.xs,
-    paddingVertical: Spacing.sm,
-    borderRadius: BorderRadius.md,
-    borderWidth: 1,
-  },
-  segmentText: {
-    fontSize: FontSize.sm,
-    fontWeight: "500",
-  },
-  languageList: {
-    borderTopWidth: 1,
-    maxHeight: 300,
-  },
-  languageItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: Spacing.md,
-    paddingVertical: Spacing.sm + 2,
-  },
-  languageText: {
-    fontSize: FontSize.md,
-  },
+  container: { flex: 1 },
+  content: { padding: Spacing.md, gap: Spacing.lg, paddingBottom: Spacing.xxl },
+
+  section: { gap: Spacing.sm },
+  sectionTitle: { fontSize: FontSize.xs, fontWeight: "600", letterSpacing: 1, marginLeft: Spacing.xs },
+  card: { borderRadius: BorderRadius.lg, borderWidth: 1, overflow: "hidden" },
+
+  createTitle: { fontSize: FontSize.md, fontWeight: "500", padding: Spacing.md, paddingBottom: Spacing.sm },
+  nameInput: { marginHorizontal: Spacing.md, borderWidth: 1, borderRadius: BorderRadius.md, paddingHorizontal: Spacing.sm, paddingVertical: Spacing.sm, fontSize: FontSize.md },
+  primaryButton: { margin: Spacing.md, marginTop: Spacing.sm, alignItems: "center", paddingVertical: Spacing.sm + 4, borderRadius: BorderRadius.lg, height: 48, justifyContent: "center" },
+  primaryButtonText: { fontSize: FontSize.md, fontWeight: "600" },
+  secondaryButton: { marginHorizontal: Spacing.md, marginBottom: Spacing.md, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: Spacing.sm, paddingVertical: Spacing.sm + 2, borderRadius: BorderRadius.lg, borderWidth: 1 },
+  secondaryButtonText: { fontSize: FontSize.sm, fontWeight: "500" },
+
+  row: { flexDirection: "row", alignItems: "center", padding: Spacing.md, gap: Spacing.sm },
+  label: { flex: 1, fontSize: FontSize.md },
+  value: { fontSize: FontSize.sm },
+  valueRow: { flexDirection: "row", alignItems: "center", gap: Spacing.xs },
+  editRow: { flexDirection: "row", alignItems: "center", gap: Spacing.sm },
+  inlineInput: { fontSize: FontSize.md, borderWidth: 1, borderRadius: BorderRadius.md, paddingHorizontal: Spacing.sm, paddingVertical: Spacing.xs, minWidth: 150 },
+  divider: { height: 1, marginLeft: Spacing.xl + Spacing.md },
+  hint: { fontSize: FontSize.xs, marginHorizontal: Spacing.xs, lineHeight: 18 },
+
+  segmentedControl: { flexDirection: "row", marginHorizontal: Spacing.md, marginBottom: Spacing.md, gap: Spacing.sm },
+  segment: { flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: Spacing.xs, paddingVertical: Spacing.sm, borderRadius: BorderRadius.md, borderWidth: 1 },
+  segmentText: { fontSize: FontSize.xs, fontWeight: "500" },
+
+  languageList: { borderTopWidth: 1, maxHeight: 300 },
+  languageItem: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: Spacing.md, paddingVertical: Spacing.sm + 2 },
+  languageText: { fontSize: FontSize.md },
 });
