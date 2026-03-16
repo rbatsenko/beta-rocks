@@ -18,7 +18,7 @@ import {
   saveUserProfile as storeProfile,
   setSyncKey,
 } from "../lib/storage";
-import { restoreProfile } from "../api/client";
+import { supabase, isSupabaseConfigured } from "../api/supabase";
 
 interface UserProfileContextValue {
   profile: UserProfile | null;
@@ -97,28 +97,39 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
 
   const restoreFromSyncKey = useCallback(async (key: string) => {
     try {
-      const result = await restoreProfile(key);
-      if (result.profile) {
-        await setSyncKey(key);
-        const hash = await hashSyncKeyAsync(key);
-        setSyncKeyHashState(hash);
+      // Hash the provided sync key and look up the profile in Supabase directly
+      const hash = await hashSyncKeyAsync(key);
 
-        const now = new Date().toISOString();
-        const restoredProfile: UserProfile = {
-          syncKey: key,
-          syncKeyHash: hash,
-          displayName:
-            (result.profile as Record<string, unknown>)?.display_name as
-              | string
-              | undefined,
-          createdAt: now,
-          updatedAt: now,
-        };
-        storeProfile(restoredProfile as unknown as Record<string, unknown>);
-        setProfile(restoredProfile);
-        return true;
+      if (!isSupabaseConfigured || !supabase) {
+        console.warn("Supabase not configured, cannot restore profile");
+        return false;
       }
-      return false;
+
+      const { data, error } = await supabase
+        .from("user_profiles")
+        .select("*")
+        .eq("sync_key_hash", hash)
+        .single();
+
+      if (error || !data) {
+        return false;
+      }
+
+      // Profile found — store the sync key and hydrate local state
+      await setSyncKey(key);
+      setSyncKeyHashState(hash);
+
+      const now = new Date().toISOString();
+      const restoredProfile: UserProfile = {
+        syncKey: key,
+        syncKeyHash: hash,
+        displayName: data.display_name || undefined,
+        createdAt: data.created_at || now,
+        updatedAt: now,
+      };
+      storeProfile(restoredProfile as unknown as Record<string, unknown>);
+      setProfile(restoredProfile);
+      return true;
     } catch {
       return false;
     }

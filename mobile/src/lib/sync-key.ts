@@ -1,22 +1,20 @@
 /**
  * Sync key utilities for mobile
- * Adapted from web app's sync-key.ts for React Native
+ * Uses expo-crypto for all crypto operations (UUID + SHA-256)
  */
 
 import * as Crypto from "expo-crypto";
-import { v4 as uuidv4 } from "uuid";
 import { getSyncKey, setSyncKey } from "./storage";
 
 /**
- * Generate a new sync key (UUID v4)
+ * Generate a new sync key (UUID v4) using expo-crypto
  */
 export function generateSyncKey(): string {
-  return uuidv4();
+  return Crypto.randomUUID();
 }
 
 /**
  * Hash a sync key using SHA-256
- * Uses expo-crypto for native hashing
  */
 export async function hashSyncKeyAsync(key: string): Promise<string> {
   return Crypto.digestStringAsync(
