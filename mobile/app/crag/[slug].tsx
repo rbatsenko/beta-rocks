@@ -17,8 +17,9 @@ import { Ionicons } from "@expo/vector-icons";
 import { getCragBySlug } from "@/api/client";
 
 function fmt(val: number | undefined | null, decimals = 1): string {
-  return val != null ? val.toFixed(decimals) : "—";
+  return val != null ? val.toFixed(decimals) : "\u2014";
 }
+
 import type {
   CragDetailResponse,
   CragData,
@@ -27,9 +28,20 @@ import type {
   CurrentWeather,
   Report,
 } from "@/types/api";
-import { FRICTION_RATINGS } from "@/constants/config";
+import { FRICTION_RATINGS, RATING_COLORS, CATEGORY_COLORS } from "@/constants/config";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
+
+function getRatingLabel(score: number | null | undefined): string | null {
+  if (score == null) return null;
+  const key = Math.round(score) as keyof typeof FRICTION_RATINGS;
+  return FRICTION_RATINGS[key]?.label ?? null;
+}
+
+function getRatingColors(label: string | null) {
+  if (!label) return null;
+  return RATING_COLORS[label as keyof typeof RATING_COLORS] ?? null;
+}
 
 export default function CragDetailScreen() {
   const { slug } = useLocalSearchParams<{ slug: string }>();
@@ -86,10 +98,8 @@ export default function CragDetailScreen() {
   }
 
   const frictionScore = conditions?.frictionScore ?? null;
-  const ratingKey = frictionScore
-    ? (Math.round(frictionScore) as keyof typeof FRICTION_RATINGS)
-    : null;
-  const ratingInfo = ratingKey ? FRICTION_RATINGS[ratingKey] : null;
+  const ratingLabel = getRatingLabel(frictionScore);
+  const ratingColors = getRatingColors(ratingLabel);
 
   const location = [crag.village, crag.municipality, crag.state, crag.country]
     .filter(Boolean)
@@ -110,20 +120,20 @@ export default function CragDetailScreen() {
             {location}
           </Text>
           {crag.rock_type && crag.rock_type !== "unknown" && (
-            <View style={[styles.rockTypeBadge, { backgroundColor: colors.accent }]}>
-              <Text style={[styles.rockTypeText, { color: colors.textSecondary }]}>
+            <View style={[styles.rockTypeBadge, { backgroundColor: colors.surface, borderColor: colors.border }]}>
+              <Text style={[styles.rockTypeText, { color: colors.text }]}>
                 {crag.rock_type.charAt(0).toUpperCase() + crag.rock_type.slice(1)}
               </Text>
             </View>
           )}
         </View>
-        {ratingInfo && frictionScore && (
-          <View style={[styles.ratingCard, { backgroundColor: ratingInfo.color }]}>
-            <Text style={styles.ratingLabel}>{ratingInfo.label}</Text>
-            <Text style={styles.ratingScore}>
+        {ratingColors && frictionScore && (
+          <View style={[styles.ratingCard, { backgroundColor: ratingColors.bg, borderColor: ratingColors.solid, borderWidth: 1 }]}>
+            <Text style={[styles.ratingLabel, { color: ratingColors.text }]}>{ratingLabel}</Text>
+            <Text style={[styles.ratingScore, { color: ratingColors.text }]}>
               {fmt(frictionScore)}
             </Text>
-            <Text style={styles.ratingSubtext}>/ 5</Text>
+            <Text style={[styles.ratingSubtext, { color: ratingColors.text, opacity: 0.7 }]}>/ 5</Text>
           </View>
         )}
       </View>
@@ -149,7 +159,7 @@ export default function CragDetailScreen() {
             <ConditionItem
               icon="water-outline"
               label="Humidity"
-              value={`${conditions.current.humidity}%`}
+              value={`${conditions.current.humidity ?? "\u2014"}%`}
               colors={colors}
             />
             <ConditionItem
@@ -180,24 +190,26 @@ export default function CragDetailScreen() {
             Best Times to Climb
           </Text>
           {conditions.optimalWindows.slice(0, 3).map((window, i) => {
-            const windowRatingKey = Math.round(
-              window.avgFrictionScore
-            ) as keyof typeof FRICTION_RATINGS;
-            const windowRating = FRICTION_RATINGS[windowRatingKey];
+            const wLabel = getRatingLabel(window.avgFrictionScore);
+            const wColors = getRatingColors(wLabel);
             return (
               <View key={i} style={styles.windowRow}>
                 <View
                   style={[
                     styles.windowDot,
-                    { backgroundColor: windowRating?.color || colors.muted },
+                    { backgroundColor: wColors?.solid || colors.muted },
                   ]}
                 />
                 <Text style={[styles.windowTime, { color: colors.text }]}>
                   {formatTimeRange(window.startTime, window.endTime)}
                 </Text>
-                <Text style={[styles.windowRating, { color: colors.textSecondary }]}>
-                  {fmt(window.avgFrictionScore)}
-                </Text>
+                {wColors && wLabel && (
+                  <View style={[styles.windowBadge, { backgroundColor: wColors.bg }]}>
+                    <Text style={[styles.windowBadgeText, { color: wColors.text }]}>
+                      {wLabel} {fmt(window.avgFrictionScore)}
+                    </Text>
+                  </View>
+                )}
               </View>
             );
           })}
@@ -237,41 +249,39 @@ export default function CragDetailScreen() {
           <Text style={[styles.cardTitle, { color: colors.text }]}>
             Community Reports ({reports.length})
           </Text>
-          {reports.slice(0, 5).map((report) => (
-            <View
-              key={report.id}
-              style={[styles.reportItem, { borderTopColor: colors.border }]}
-            >
-              <View style={styles.reportHeader}>
-                <View
-                  style={[
-                    styles.categoryBadge,
-                    { backgroundColor: colors.accent },
-                  ]}
-                >
-                  <Text style={[styles.categoryText, { color: colors.textSecondary }]}>
-                    {report.category}
+          {reports.slice(0, 5).map((report) => {
+            const catColors = CATEGORY_COLORS[report.category] || CATEGORY_COLORS.other;
+            return (
+              <View
+                key={report.id}
+                style={[styles.reportItem, { borderTopColor: colors.border }]}
+              >
+                <View style={styles.reportHeader}>
+                  <View style={[styles.categoryBadge, { backgroundColor: catColors.bg }]}>
+                    <Text style={[styles.categoryText, { color: catColors.text }]}>
+                      {report.category}
+                    </Text>
+                  </View>
+                  <Text style={[styles.reportDate, { color: colors.muted }]}>
+                    {formatDate(report.created_at)}
                   </Text>
                 </View>
-                <Text style={[styles.reportDate, { color: colors.muted }]}>
-                  {formatDate(report.created_at)}
-                </Text>
-              </View>
-              {report.text && (
-                <Text style={[styles.reportText, { color: colors.text }]}>
-                  {report.text}
-                </Text>
-              )}
-              <View style={styles.reportVotes}>
-                <TouchableOpacity style={styles.voteButton}>
-                  <Ionicons name="thumbs-up-outline" size={14} color={colors.muted} />
-                  <Text style={[styles.voteCount, { color: colors.muted }]}>
-                    {report.confirmations?.[0]?.count ?? 0}
+                {report.text && (
+                  <Text style={[styles.reportText, { color: colors.text }]}>
+                    {report.text}
                   </Text>
-                </TouchableOpacity>
+                )}
+                <View style={styles.reportVotes}>
+                  <TouchableOpacity style={styles.voteButton}>
+                    <Ionicons name="thumbs-up-outline" size={14} color={colors.muted} />
+                    <Text style={[styles.voteCount, { color: colors.muted }]}>
+                      {report.confirmations?.[0]?.count ?? 0}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
-            </View>
-          ))}
+            );
+          })}
         </View>
       )}
     </ScrollView>
@@ -303,10 +313,15 @@ function ConditionItem({
 }
 
 function formatTimeRange(start: string, end: string): string {
-  const startDate = new Date(start);
-  const endDate = new Date(end);
-  const opts: Intl.DateTimeFormatOptions = { hour: "numeric", minute: "2-digit" };
-  return `${startDate.toLocaleTimeString(undefined, opts)} – ${endDate.toLocaleTimeString(undefined, opts)}`;
+  try {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    const pad = (d: Date) =>
+      `${d.getHours().toString().padStart(2, "0")}:${d.getMinutes().toString().padStart(2, "0")}`;
+    return `${pad(startDate)} \u2013 ${pad(endDate)}`;
+  } catch {
+    return `${start} \u2013 ${end}`;
+  }
 }
 
 function formatDate(dateStr: string): string {
@@ -355,8 +370,9 @@ const styles = StyleSheet.create({
   rockTypeBadge: {
     alignSelf: "flex-start",
     paddingHorizontal: Spacing.sm,
-    paddingVertical: 2,
+    paddingVertical: 3,
     borderRadius: BorderRadius.sm,
+    borderWidth: 1,
     marginTop: Spacing.xs,
   },
   rockTypeText: {
@@ -371,17 +387,14 @@ const styles = StyleSheet.create({
     minWidth: 70,
   },
   ratingLabel: {
-    color: "#ffffff",
     fontSize: FontSize.sm,
     fontWeight: "700",
   },
   ratingScore: {
-    color: "#ffffff",
     fontSize: FontSize.xl,
     fontWeight: "800",
   },
   ratingSubtext: {
-    color: "rgba(255,255,255,0.8)",
     fontSize: FontSize.xs,
   },
   conditionsCard: {
@@ -432,8 +445,14 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     flex: 1,
   },
-  windowRating: {
-    fontSize: FontSize.sm,
+  windowBadge: {
+    paddingHorizontal: Spacing.sm,
+    paddingVertical: 2,
+    borderRadius: BorderRadius.sm,
+  },
+  windowBadgeText: {
+    fontSize: FontSize.xs,
+    fontWeight: "600",
   },
   sectorsCard: {
     borderRadius: BorderRadius.lg,
@@ -470,12 +489,12 @@ const styles = StyleSheet.create({
   },
   categoryBadge: {
     paddingHorizontal: Spacing.sm,
-    paddingVertical: 2,
+    paddingVertical: 3,
     borderRadius: BorderRadius.sm,
   },
   categoryText: {
     fontSize: FontSize.xs,
-    fontWeight: "500",
+    fontWeight: "600",
     textTransform: "capitalize",
   },
   reportDate: {

@@ -37,13 +37,14 @@ function RootNavigator() {
       >
         <Stack.Screen
           name="(tabs)"
-          options={{ headerShown: false }}
+          options={{ headerShown: false, headerBackTitle: "Back" }}
         />
         <Stack.Screen
           name="crag/[slug]"
           options={{
             title: "Crag Details",
             presentation: "card",
+            headerBackTitle: "Back",
           }}
         />
         <Stack.Screen
