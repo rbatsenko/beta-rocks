@@ -132,14 +132,17 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
 
       // Also fetch and store favorites for this profile
       try {
-        const { data: favorites } = await supabase
+        console.log("[Restore] Fetching favorites for profile id:", data.id);
+        const { data: favorites, error: favError2 } = await supabase
           .from("user_favorites")
           .select("*")
           .eq("user_profile_id", data.id)
           .order("display_order", { ascending: true })
           .order("added_at", { ascending: false });
 
+        console.log("[Restore] Favorites query result:", favorites?.length, "items, error:", favError2);
         if (favorites && favorites.length > 0) {
+          console.log("[Restore] First favorite raw:", JSON.stringify(favorites[0], null, 2));
           const { saveFavorites } = await import("../lib/storage");
           const mapped = favorites.map((f: Record<string, unknown>) => ({
             id: f.id,
@@ -159,6 +162,9 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
             addedAt: f.added_at,
           }));
           saveFavorites(mapped);
+          console.log("[Restore] Saved", mapped.length, "favorites to MMKV");
+        } else {
+          console.log("[Restore] No favorites found for this profile");
         }
       } catch (favError) {
         console.warn("Failed to fetch favorites:", favError);

@@ -38,6 +38,10 @@ export default function FavoritesScreen() {
 
   function loadFavorites(): Favorite[] {
     const stored = getFavorites() as Favorite[];
+    console.log("[Favorites] loadFavorites called, got", stored.length, "items");
+    if (stored.length > 0) {
+      console.log("[Favorites] first item:", JSON.stringify(stored[0], null, 2));
+    }
     setFavorites(stored);
     return stored;
   }

@@ -54,15 +54,20 @@ export function saveUserProfile(
 export function getFavorites(): unknown[] {
   try {
     const data = mmkv.getString(FAVORITES_KEY);
-    return data ? JSON.parse(data) : [];
-  } catch {
+    const parsed = data ? JSON.parse(data) : [];
+    console.log("[Storage] getFavorites: raw length", data?.length || 0, "parsed count", parsed.length);
+    return parsed;
+  } catch (e) {
+    console.warn("[Storage] getFavorites parse error:", e);
     mmkv.delete(FAVORITES_KEY);
     return [];
   }
 }
 
 export function saveFavorites(favorites: unknown[]): void {
-  mmkv.set(FAVORITES_KEY, JSON.stringify(favorites));
+  const json = JSON.stringify(favorites);
+  console.log("[Storage] saveFavorites: saving", favorites.length, "items, bytes:", json.length);
+  mmkv.set(FAVORITES_KEY, json);
 }
 
 /**
