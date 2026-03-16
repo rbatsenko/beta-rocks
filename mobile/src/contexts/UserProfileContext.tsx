@@ -17,6 +17,7 @@ import {
   getUserProfile as getStoredProfile,
   saveUserProfile as storeProfile,
   setSyncKey,
+  saveFavorites,
 } from "../lib/storage";
 import { supabase, isSupabaseConfigured } from "../api/supabase";
 
@@ -60,10 +61,58 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
         storeProfile(newProfile as unknown as Record<string, unknown>);
         setProfile(newProfile);
       }
+
+      // Always sync favorites from Supabase
+      await syncFavorites(hash);
     } catch (error) {
       console.warn("Failed to initialize profile:", error);
     } finally {
       setIsLoading(false);
+    }
+  }
+
+  async function syncFavorites(hash: string) {
+    if (!isSupabaseConfigured || !supabase) return;
+
+    try {
+      const { data: profile } = await supabase
+        .from("user_profiles")
+        .select("id")
+        .eq("sync_key_hash", hash)
+        .single();
+
+      if (!profile) return;
+
+      const { data: favorites } = await supabase
+        .from("user_favorites")
+        .select("*")
+        .eq("user_profile_id", profile.id)
+        .order("display_order", { ascending: true })
+        .order("added_at", { ascending: false });
+
+      if (favorites) {
+        const mapped = favorites.map((f: Record<string, unknown>) => ({
+          id: f.id,
+          userProfileId: f.user_profile_id,
+          areaId: f.area_id,
+          cragId: f.crag_id,
+          areaName: f.area_name,
+          areaSlug: f.area_slug,
+          location: f.location || "",
+          latitude: f.latitude,
+          longitude: f.longitude,
+          rockType: f.rock_type,
+          lastRating: f.last_rating,
+          lastFrictionScore: f.last_friction_score,
+          lastCheckedAt: f.last_checked_at,
+          displayOrder: f.display_order || 0,
+          addedAt: f.added_at,
+        }));
+        saveFavorites(mapped);
+        console.log("[Sync] Fetched", mapped.length, "favorites from Supabase");
+      }
+    } catch (error) {
+      console.warn("[Sync] Failed to fetch favorites:", error);
     }
   }
 
@@ -130,45 +179,8 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
       storeProfile(restoredProfile as unknown as Record<string, unknown>);
       setProfile(restoredProfile);
 
-      // Also fetch and store favorites for this profile
-      try {
-        console.log("[Restore] Fetching favorites for profile id:", data.id);
-        const { data: favorites, error: favError2 } = await supabase
-          .from("user_favorites")
-          .select("*")
-          .eq("user_profile_id", data.id)
-          .order("display_order", { ascending: true })
-          .order("added_at", { ascending: false });
-
-        console.log("[Restore] Favorites query result:", favorites?.length, "items, error:", favError2);
-        if (favorites && favorites.length > 0) {
-          console.log("[Restore] First favorite raw:", JSON.stringify(favorites[0], null, 2));
-          const { saveFavorites } = await import("../lib/storage");
-          const mapped = favorites.map((f: Record<string, unknown>) => ({
-            id: f.id,
-            userProfileId: f.user_profile_id,
-            areaId: f.area_id,
-            cragId: f.crag_id,
-            areaName: f.area_name,
-            areaSlug: f.area_slug,
-            location: f.location || "",
-            latitude: f.latitude,
-            longitude: f.longitude,
-            rockType: f.rock_type,
-            lastRating: f.last_rating,
-            lastFrictionScore: f.last_friction_score,
-            lastCheckedAt: f.last_checked_at,
-            displayOrder: f.display_order || 0,
-            addedAt: f.added_at,
-          }));
-          saveFavorites(mapped);
-          console.log("[Restore] Saved", mapped.length, "favorites to MMKV");
-        } else {
-          console.log("[Restore] No favorites found for this profile");
-        }
-      } catch (favError) {
-        console.warn("Failed to fetch favorites:", favError);
-      }
+      // Sync favorites from Supabase
+      await syncFavorites(hash);
 
       return true;
     } catch {
