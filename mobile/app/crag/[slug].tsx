@@ -12,12 +12,16 @@ import {
   TouchableOpacity,
   Linking,
   Image,
+  Alert,
   FlatList,
 } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { getCragBySlug } from "@/api/client";
+import { getCragBySlug, confirmReport as apiConfirmReport, removeConfirmation } from "@/api/client";
 import { API_URL } from "@/constants/config";
+import { useUserProfile } from "@/hooks/useUserProfile";
+import { getFavorites, saveFavorites } from "@/lib/storage";
+import { supabase, isSupabaseConfigured } from "@/api/supabase";
 import type { CragDetailResponse, CragData, SectorData, Report } from "@/types/api";
 import { FRICTION_RATINGS, RATING_COLORS, CATEGORY_COLORS } from "@/constants/config";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
@@ -94,8 +98,78 @@ export default function CragDetailScreen() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"conditions" | "forecast">("conditions");
+  const [isFavorited, setIsFavorited] = useState(false);
+  const { hasProfile, syncKeyHash, profile } = useUserProfile();
 
   useEffect(() => { if (slug) loadCragData(); }, [slug]);
+
+  // Check if this crag is favorited
+  useEffect(() => {
+    if (crag) {
+      const favs = getFavorites() as any[];
+      setIsFavorited(favs.some(f => f.cragId === crag.id || f.areaSlug === slug));
+    }
+  }, [crag, slug]);
+
+  async function toggleFavorite() {
+    if (!hasProfile || !crag) {
+      Alert.alert("Profile Required", "Create a profile in Settings to save favorites.");
+      return;
+    }
+    if (!isSupabaseConfigured || !supabase || !syncKeyHash) return;
+
+    try {
+      const { data: dbProfile } = await supabase
+        .from("user_profiles").select("id").eq("sync_key_hash", syncKeyHash).single();
+      if (!dbProfile) return;
+
+      if (isFavorited) {
+        // Remove
+        await supabase.from("user_favorites").delete()
+          .eq("user_profile_id", dbProfile.id).eq("crag_id", crag.id);
+        const favs = (getFavorites() as any[]).filter(f => f.cragId !== crag.id);
+        saveFavorites(favs);
+        setIsFavorited(false);
+      } else {
+        // Add
+        const location = [crag.village, crag.municipality, crag.state, crag.country].filter(Boolean).join(", ");
+        await supabase.from("user_favorites").insert({
+          user_profile_id: dbProfile.id,
+          crag_id: crag.id,
+          area_name: crag.name,
+          area_slug: crag.slug,
+          location,
+          latitude: crag.lat,
+          longitude: crag.lon,
+          rock_type: crag.rock_type,
+          last_friction_score: conditions?.frictionScore,
+          last_rating: conditions?.rating,
+          last_checked_at: new Date().toISOString(),
+        });
+        const favs = getFavorites() as any[];
+        favs.push({
+          id: crag.id,
+          userProfileId: dbProfile.id,
+          cragId: crag.id,
+          areaName: crag.name,
+          areaSlug: crag.slug,
+          location,
+          latitude: crag.lat,
+          longitude: crag.lon,
+          rockType: crag.rock_type,
+          lastFrictionScore: conditions?.frictionScore,
+          lastRating: conditions?.rating,
+          lastCheckedAt: new Date().toISOString(),
+          displayOrder: 0,
+          addedAt: new Date().toISOString(),
+        });
+        saveFavorites(favs);
+        setIsFavorited(true);
+      }
+    } catch (err) {
+      console.warn("Toggle favorite failed:", err);
+    }
+  }
 
   async function loadCragData() {
     setIsLoading(true);
@@ -184,13 +258,22 @@ export default function CragDetailScreen() {
             )}
           </View>
         </View>
-        {ratingColors && frictionScore && (
-          <View style={[styles.ratingCard, { backgroundColor: ratingColors.bg, borderColor: ratingColors.solid, borderWidth: 1 }]}>
-            <Text style={[styles.ratingLabel, { color: ratingColors.text }]}>{ratingLabel}</Text>
-            <Text style={[styles.ratingScore, { color: ratingColors.text }]}>{fmt(frictionScore)}</Text>
-            <Text style={[styles.ratingSubtext, { color: ratingColors.text, opacity: 0.7 }]}>/ 5</Text>
-          </View>
-        )}
+        <View style={styles.headerActions}>
+          <TouchableOpacity onPress={toggleFavorite} style={styles.heartButton}>
+            <Ionicons
+              name={isFavorited ? "heart" : "heart-outline"}
+              size={26}
+              color={isFavorited ? "#ef4444" : colors.muted}
+            />
+          </TouchableOpacity>
+          {ratingColors && frictionScore && (
+            <View style={[styles.ratingCard, { backgroundColor: ratingColors.bg, borderColor: ratingColors.solid, borderWidth: 1 }]}>
+              <Text style={[styles.ratingLabel, { color: ratingColors.text }]}>{ratingLabel}</Text>
+              <Text style={[styles.ratingScore, { color: ratingColors.text }]}>{fmt(frictionScore)}</Text>
+              <Text style={[styles.ratingSubtext, { color: ratingColors.text, opacity: 0.7 }]}>/ 5</Text>
+            </View>
+          )}
+        </View>
       </View>
 
       {/* Reasons */}
@@ -370,10 +453,21 @@ export default function CragDetailScreen() {
                 {report.photo_url && (
                   <Image source={{ uri: report.photo_url }} style={styles.reportPhoto} resizeMode="cover" />
                 )}
-                <View style={styles.reportFooter}>
-                  <Ionicons name="thumbs-up-outline" size={14} color={colors.muted} />
-                  <Text style={[styles.metaText, { color: colors.muted }]}>{report.confirmations?.[0]?.count ?? 0}</Text>
-                </View>
+                <TouchableOpacity
+                  style={styles.reportFooter}
+                  onPress={async () => {
+                    if (!hasProfile || !syncKeyHash) {
+                      Alert.alert("Profile Required", "Create a profile in Settings to vote.");
+                      return;
+                    }
+                    try {
+                      await apiConfirmReport(report.id, syncKeyHash);
+                    } catch {}
+                  }}
+                >
+                  <Ionicons name="thumbs-up-outline" size={14} color={colors.primary} />
+                  <Text style={[styles.metaText, { color: colors.primary }]}>Helpful ({report.confirmations?.[0]?.count ?? 0})</Text>
+                </TouchableOpacity>
               </View>
             );
           })}
@@ -385,7 +479,13 @@ export default function CragDetailScreen() {
     {crag && (
       <TouchableOpacity
         style={[styles.fab, { backgroundColor: colors.primary }]}
-        onPress={() => router.push({ pathname: "/report", params: { cragId: crag.id, cragName: crag.name } })}
+        onPress={() => {
+          if (!hasProfile) {
+            Alert.alert("Profile Required", "Create a profile in Settings to add reports.");
+            return;
+          }
+          router.push({ pathname: "/report", params: { cragId: crag.id, cragName: crag.name } });
+        }}
         activeOpacity={0.8}
       >
         <Ionicons name="add" size={24} color={colors.primaryForeground} />
@@ -448,6 +548,8 @@ const styles = StyleSheet.create({
   badgeRow: { flexDirection: "row", gap: Spacing.sm, marginTop: Spacing.xs, flexWrap: "wrap" },
   badge: { flexDirection: "row", alignItems: "center", gap: 4, paddingHorizontal: Spacing.sm, paddingVertical: 3, borderRadius: BorderRadius.sm, borderWidth: 1 },
   badgeText: { fontSize: FontSize.xs, fontWeight: "500" },
+  headerActions: { alignItems: "flex-end", gap: Spacing.sm },
+  heartButton: { padding: Spacing.xs },
   ratingCard: { alignItems: "center", paddingHorizontal: Spacing.md, paddingVertical: Spacing.sm, borderRadius: BorderRadius.lg, minWidth: 70 },
   ratingLabel: { fontSize: FontSize.sm, fontWeight: "700" },
   ratingScore: { fontSize: FontSize.xl, fontWeight: "800" },
