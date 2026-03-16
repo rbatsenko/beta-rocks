@@ -31,6 +31,7 @@ export function proxy(request: NextRequest) {
       "Content-Type, Authorization, X-Sync-Key-Hash, X-Client-Platform"
     );
     response.headers.set("Access-Control-Max-Age", "86400");
+    response.headers.set("Vary", "Origin");
     return response;
   }
 
@@ -47,6 +48,7 @@ export function proxy(request: NextRequest) {
       "Access-Control-Allow-Headers",
       "Content-Type, Authorization, X-Sync-Key-Hash, X-Client-Platform"
     );
+    response.headers.set("Vary", "Origin");
   }
 
   // Get the user's country from Vercel's geo-IP header

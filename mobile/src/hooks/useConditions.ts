@@ -4,10 +4,10 @@
 
 import { useState, useCallback } from "react";
 import { getConditions } from "../api/client";
-import type { ConditionsResult, RockType } from "../types/api";
+import type { ConditionsResponse, RockType } from "../types/api";
 
 interface UseConditionsReturn {
-  conditions: ConditionsResult | null;
+  data: ConditionsResponse | null;
   isLoading: boolean;
   error: string | null;
   fetchConditions: (
@@ -18,7 +18,7 @@ interface UseConditionsReturn {
 }
 
 export function useConditions(): UseConditionsReturn {
-  const [conditions, setConditions] = useState<ConditionsResult | null>(null);
+  const [data, setData] = useState<ConditionsResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -28,7 +28,7 @@ export function useConditions(): UseConditionsReturn {
       setError(null);
       try {
         const result = await getConditions(lat, lon, rockType);
-        setConditions(result);
+        setData(result);
       } catch (err) {
         setError(
           err instanceof Error ? err.message : "Failed to fetch conditions"
@@ -40,5 +40,5 @@ export function useConditions(): UseConditionsReturn {
     []
   );
 
-  return { conditions, isLoading, error, fetchConditions };
+  return { data, isLoading, error, fetchConditions };
 }

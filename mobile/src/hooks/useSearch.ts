@@ -2,7 +2,7 @@
  * Hook for searching climbing locations
  */
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { searchLocations } from "../api/client";
 import type { SearchResult } from "../types/api";
 
@@ -10,7 +10,7 @@ interface UseSearchReturn {
   results: SearchResult[];
   isSearching: boolean;
   error: string | null;
-  search: (query: string) => Promise<void>;
+  search: (query: string) => void;
   clearResults: () => void;
 }
 
@@ -19,8 +19,18 @@ export function useSearch(): UseSearchReturn {
   const [isSearching, setIsSearching] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout>>();
+  const mountedRef = useRef(true);
 
-  const search = useCallback(async (query: string) => {
+  useEffect(() => {
+    return () => {
+      mountedRef.current = false;
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current);
+      }
+    };
+  }, []);
+
+  const search = useCallback((query: string) => {
     if (debounceRef.current) {
       clearTimeout(debounceRef.current);
     }
@@ -31,17 +41,24 @@ export function useSearch(): UseSearchReturn {
     }
 
     debounceRef.current = setTimeout(async () => {
+      if (!mountedRef.current) return;
       setIsSearching(true);
       setError(null);
       try {
         const data = await searchLocations(query);
-        setResults(data);
+        if (mountedRef.current) {
+          setResults(data);
+        }
       } catch (err) {
-        setError(
-          err instanceof Error ? err.message : "Search failed"
-        );
+        if (mountedRef.current) {
+          setError(
+            err instanceof Error ? err.message : "Search failed"
+          );
+        }
       } finally {
-        setIsSearching(false);
+        if (mountedRef.current) {
+          setIsSearching(false);
+        }
       }
     }, 300);
   }, []);

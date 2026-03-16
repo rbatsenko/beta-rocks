@@ -5,10 +5,14 @@
 
 import { API_URL } from "../constants/config";
 import type {
-  ConditionsResult,
+  ConditionsResponse,
+  SearchResponse,
   SearchResult,
-  CragDetail,
+  CragDetailResponse,
   Report,
+  ReportsResponse,
+  Confirmation,
+  SyncResponse,
   RockType,
 } from "../types/api";
 
@@ -66,23 +70,25 @@ async function apiFetch<T>(
 
 /**
  * Conditions API
+ * Returns wrapped response: { location, rockType, current, conditions, astro, updatedAt }
  */
 export async function getConditions(
   lat: number,
   lon: number,
   rockType: RockType = "unknown"
-): Promise<ConditionsResult> {
+): Promise<ConditionsResponse> {
   const params = new URLSearchParams({
     lat: lat.toString(),
     lon: lon.toString(),
     rockType,
   });
 
-  return apiFetch<ConditionsResult>(`/api/conditions?${params}`);
+  return apiFetch<ConditionsResponse>(`/api/conditions?${params}`);
 }
 
 /**
  * Search API
+ * Returns { results: SearchResult[] } — we unwrap to return just the array
  */
 export async function searchLocations(
   query: string,
@@ -93,26 +99,30 @@ export async function searchLocations(
     limit: limit.toString(),
   });
 
-  return apiFetch<SearchResult[]>(`/api/search?${params}`);
+  const response = await apiFetch<SearchResponse>(`/api/search?${params}`);
+  return response.results;
 }
 
 /**
  * Crag detail API
+ * Returns { crag, conditions, reports, sectors }
  */
 export async function getCragBySlug(
   slug: string
-): Promise<CragDetail> {
-  return apiFetch<CragDetail>(`/api/location/${slug}`);
+): Promise<CragDetailResponse> {
+  return apiFetch<CragDetailResponse>(`/api/location/${slug}`);
 }
 
 /**
  * Reports API
+ * Returns { reports, total, limit, offset } — we unwrap to return just the array
  */
 export async function getReportsByCrag(
   cragId: string
 ): Promise<Report[]> {
   const params = new URLSearchParams({ cragId });
-  return apiFetch<Report[]>(`/api/reports?${params}`);
+  const response = await apiFetch<ReportsResponse>(`/api/reports?${params}`);
+  return response.reports;
 }
 
 export async function createReport(
@@ -120,30 +130,53 @@ export async function createReport(
     cragId: string;
     category: Report["category"];
     text: string;
-    drynessRating?: number;
-    windRating?: number;
-    crowdRating?: number;
+    rating_dry?: number;
+    rating_wind?: number;
+    rating_crowds?: number;
   },
   syncKeyHash: string
 ): Promise<Report> {
   return apiFetch<Report>("/api/reports", {
     method: "POST",
-    body: report,
+    body: {
+      cragId: report.cragId,
+      category: report.category,
+      text: report.text,
+      rating_dry: report.rating_dry,
+      rating_wind: report.rating_wind,
+      rating_crowds: report.rating_crowds,
+      authorId: syncKeyHash,
+    },
     syncKeyHash,
   });
 }
 
 /**
  * Confirmations API (report voting)
+ * POST /api/confirmations with { reportId, userKeyHash }
  */
 export async function confirmReport(
   reportId: string,
-  isHelpful: boolean,
+  syncKeyHash: string
+): Promise<Confirmation> {
+  return apiFetch<Confirmation>("/api/confirmations", {
+    method: "POST",
+    body: { reportId, userKeyHash: syncKeyHash },
+    syncKeyHash,
+  });
+}
+
+/**
+ * Remove confirmation (unvote)
+ * DELETE /api/confirmations with { reportId, userKeyHash }
+ */
+export async function removeConfirmation(
+  reportId: string,
   syncKeyHash: string
 ): Promise<void> {
-  await apiFetch(`/api/reports/${reportId}/confirm`, {
-    method: "POST",
-    body: { isHelpful },
+  await apiFetch("/api/confirmations", {
+    method: "DELETE",
+    body: { reportId, userKeyHash: syncKeyHash },
     syncKeyHash,
   });
 }
@@ -185,19 +218,10 @@ export async function sendChatMessage(
 
 /**
  * Sync API
+ * GET /api/sync/[key] returns { profile, crags, reports, confirmations }
  */
 export async function restoreProfile(
   syncKey: string
-): Promise<{ success: boolean; displayName?: string }> {
-  return apiFetch(`/api/sync/${syncKey}`);
-}
-
-/**
- * Recent reports feed
- */
-export async function getReportsFeed(
-  limit = 20
-): Promise<Report[]> {
-  const params = new URLSearchParams({ limit: limit.toString() });
-  return apiFetch<Report[]>(`/api/reports/feed?${params}`);
+): Promise<SyncResponse> {
+  return apiFetch<SyncResponse>(`/api/sync/${syncKey}`);
 }

@@ -16,9 +16,14 @@ import {
 import { useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { getCragBySlug } from "@/api/client";
-import { getConditions } from "@/api/client";
-import { getReportsByCrag } from "@/api/client";
-import type { CragDetail, ConditionsResult, Report, RockType } from "@/types/api";
+import type {
+  CragDetailResponse,
+  CragData,
+  SectorData,
+  ConditionsData,
+  CurrentWeather,
+  Report,
+} from "@/types/api";
 import { FRICTION_RATINGS } from "@/constants/config";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 
@@ -28,9 +33,12 @@ export default function CragDetailScreen() {
   const isDark = colorScheme === "dark";
   const colors = isDark ? Colors.dark : Colors.light;
 
-  const [crag, setCrag] = useState<CragDetail | null>(null);
-  const [conditions, setConditions] = useState<ConditionsResult | null>(null);
+  const [crag, setCrag] = useState<CragData | null>(null);
+  const [conditions, setConditions] = useState<
+    (ConditionsData & { current: CurrentWeather }) | null
+  >(null);
   const [reports, setReports] = useState<Report[]>([]);
+  const [sectors, setSectors] = useState<SectorData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -42,21 +50,11 @@ export default function CragDetailScreen() {
     setIsLoading(true);
     setError(null);
     try {
-      const cragData = await getCragBySlug(slug!);
-      setCrag(cragData);
-
-      // Fetch conditions and reports in parallel
-      const [conditionsData, reportsData] = await Promise.all([
-        getConditions(
-          cragData.latitude,
-          cragData.longitude,
-          (cragData.rockType || "unknown") as RockType
-        ).catch(() => null),
-        getReportsByCrag(cragData.id).catch(() => []),
-      ]);
-
-      if (conditionsData) setConditions(conditionsData);
-      setReports(reportsData);
+      const data: CragDetailResponse = await getCragBySlug(slug!);
+      setCrag(data.crag);
+      setConditions(data.conditions);
+      setReports(data.reports);
+      setSectors(data.sectors);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to load crag");
     } finally {
@@ -83,10 +81,15 @@ export default function CragDetailScreen() {
     );
   }
 
-  const ratingKey = conditions
-    ? (Math.round(conditions.frictionScore) as keyof typeof FRICTION_RATINGS)
+  const frictionScore = conditions?.frictionScore ?? null;
+  const ratingKey = frictionScore
+    ? (Math.round(frictionScore) as keyof typeof FRICTION_RATINGS)
     : null;
   const ratingInfo = ratingKey ? FRICTION_RATINGS[ratingKey] : null;
+
+  const location = [crag.village, crag.municipality, crag.state, crag.country]
+    .filter(Boolean)
+    .join(", ");
 
   return (
     <ScrollView
@@ -100,21 +103,21 @@ export default function CragDetailScreen() {
             {crag.name}
           </Text>
           <Text style={[styles.location, { color: colors.textSecondary }]}>
-            {crag.location}
+            {location}
           </Text>
-          {crag.rockType && crag.rockType !== "unknown" && (
+          {crag.rock_type && crag.rock_type !== "unknown" && (
             <View style={[styles.rockTypeBadge, { backgroundColor: colors.accent }]}>
               <Text style={[styles.rockTypeText, { color: colors.textSecondary }]}>
-                {crag.rockType.charAt(0).toUpperCase() + crag.rockType.slice(1)}
+                {crag.rock_type.charAt(0).toUpperCase() + crag.rock_type.slice(1)}
               </Text>
             </View>
           )}
         </View>
-        {ratingInfo && conditions && (
+        {ratingInfo && frictionScore && (
           <View style={[styles.ratingCard, { backgroundColor: ratingInfo.color }]}>
             <Text style={styles.ratingLabel}>{ratingInfo.label}</Text>
             <Text style={styles.ratingScore}>
-              {conditions.frictionScore.toFixed(1)}
+              {frictionScore.toFixed(1)}
             </Text>
             <Text style={styles.ratingSubtext}>/ 5</Text>
           </View>
@@ -122,7 +125,7 @@ export default function CragDetailScreen() {
       </View>
 
       {/* Current conditions */}
-      {conditions && (
+      {conditions?.current && (
         <View
           style={[
             styles.conditionsCard,
@@ -136,41 +139,28 @@ export default function CragDetailScreen() {
             <ConditionItem
               icon="thermometer-outline"
               label="Temperature"
-              value={`${conditions.temperature.toFixed(1)}°C`}
+              value={`${conditions.current.temperature_c.toFixed(1)}°C`}
               colors={colors}
             />
             <ConditionItem
               icon="water-outline"
               label="Humidity"
-              value={`${conditions.humidity}%`}
+              value={`${conditions.current.humidity}%`}
               colors={colors}
             />
             <ConditionItem
               icon="flag-outline"
               label="Wind"
-              value={`${conditions.windSpeed.toFixed(1)} km/h`}
+              value={`${conditions.current.windSpeed_kph.toFixed(1)} km/h`}
               colors={colors}
             />
             <ConditionItem
               icon="rainy-outline"
               label="Precipitation"
-              value={`${conditions.precipitation.toFixed(1)} mm`}
+              value={`${conditions.current.precipitation_mm.toFixed(1)} mm`}
               colors={colors}
             />
           </View>
-
-          {conditions.warnings.length > 0 && (
-            <View style={[styles.warningsSection, { borderTopColor: colors.border }]}>
-              {conditions.warnings.map((warning, i) => (
-                <View key={i} style={styles.warningRow}>
-                  <Ionicons name="warning-outline" size={16} color={colors.warning} />
-                  <Text style={[styles.warningText, { color: colors.textSecondary }]}>
-                    {warning}
-                  </Text>
-                </View>
-              ))}
-            </View>
-          )}
         </View>
       )}
 
@@ -187,7 +177,7 @@ export default function CragDetailScreen() {
           </Text>
           {conditions.optimalWindows.slice(0, 3).map((window, i) => {
             const windowRatingKey = Math.round(
-              window.avgFrictionScore
+              window.avgFriction
             ) as keyof typeof FRICTION_RATINGS;
             const windowRating = FRICTION_RATINGS[windowRatingKey];
             return (
@@ -202,7 +192,7 @@ export default function CragDetailScreen() {
                   {formatTimeRange(window.startTime, window.endTime)}
                 </Text>
                 <Text style={[styles.windowRating, { color: colors.textSecondary }]}>
-                  {window.rating} ({window.avgFrictionScore.toFixed(1)})
+                  {window.avgFriction.toFixed(1)}
                 </Text>
               </View>
             );
@@ -211,7 +201,7 @@ export default function CragDetailScreen() {
       )}
 
       {/* Sectors */}
-      {crag.sectors && crag.sectors.length > 0 && (
+      {sectors.length > 0 && (
         <View
           style={[
             styles.sectorsCard,
@@ -219,19 +209,14 @@ export default function CragDetailScreen() {
           ]}
         >
           <Text style={[styles.cardTitle, { color: colors.text }]}>
-            Sectors ({crag.sectors.length})
+            Sectors ({sectors.length})
           </Text>
-          {crag.sectors.map((sector) => (
+          {sectors.map((sector) => (
             <View key={sector.id} style={styles.sectorRow}>
               <Ionicons name="layers-outline" size={16} color={colors.primary} />
               <Text style={[styles.sectorName, { color: colors.text }]}>
                 {sector.name}
               </Text>
-              {sector.routeCount !== undefined && (
-                <Text style={[styles.routeCount, { color: colors.muted }]}>
-                  {sector.routeCount} routes
-                </Text>
-              )}
             </View>
           ))}
         </View>
@@ -268,14 +253,16 @@ export default function CragDetailScreen() {
                   {formatDate(report.created_at)}
                 </Text>
               </View>
-              <Text style={[styles.reportText, { color: colors.text }]}>
-                {report.text}
-              </Text>
+              {report.text && (
+                <Text style={[styles.reportText, { color: colors.text }]}>
+                  {report.text}
+                </Text>
+              )}
               <View style={styles.reportVotes}>
                 <TouchableOpacity style={styles.voteButton}>
                   <Ionicons name="thumbs-up-outline" size={14} color={colors.muted} />
                   <Text style={[styles.voteCount, { color: colors.muted }]}>
-                    {report.helpful_count}
+                    {report.confirmations?.[0]?.count ?? 0}
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -419,20 +406,6 @@ const styles = StyleSheet.create({
     fontSize: FontSize.md,
     fontWeight: "600",
   },
-  warningsSection: {
-    borderTopWidth: 1,
-    paddingTop: Spacing.sm,
-    gap: Spacing.xs,
-  },
-  warningRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: Spacing.sm,
-  },
-  warningText: {
-    flex: 1,
-    fontSize: FontSize.sm,
-  },
   windowsCard: {
     borderRadius: BorderRadius.lg,
     borderWidth: 1,
@@ -474,9 +447,6 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: FontSize.sm,
     fontWeight: "500",
-  },
-  routeCount: {
-    fontSize: FontSize.xs,
   },
   reportsCard: {
     borderRadius: BorderRadius.lg,

@@ -1,6 +1,6 @@
 /**
  * API response types
- * These mirror the web app's API response shapes
+ * These match the actual web app API response shapes
  */
 
 export type RockType =
@@ -14,86 +14,169 @@ export type RockType =
 
 export type FrictionRating = "Nope" | "Poor" | "Fair" | "Good" | "Great";
 
+// --- /api/conditions response ---
+
+export interface CurrentWeather {
+  temperature_c: number;
+  humidity: number;
+  windSpeed_kph: number;
+  precipitation_mm: number;
+  weatherCode: number;
+}
+
 export interface HourlyCondition {
   time: string;
-  temp_c: number;
+  friction: number;
+  temperature_c: number;
   humidity: number;
-  wind_kph: number;
-  precip_mm: number;
-  isOptimal: boolean;
-  frictionScore: number;
-  rating: FrictionRating;
-  isDry: boolean;
-  warnings: string[];
-  weatherCode?: number;
+  windSpeed_kph: number;
+  precipitation_mm: number;
+  weatherCode: number;
 }
 
 export interface OptimalWindow {
   startTime: string;
   endTime: string;
-  avgFrictionScore: number;
-  rating: FrictionRating;
-  hourCount: number;
+  duration: number;
+  avgFriction: number;
 }
 
-export interface ConditionsResult {
-  frictionScore: number;
-  rating: FrictionRating;
-  temperature: number;
-  humidity: number;
-  windSpeed: number;
+export interface DailyForecast {
+  date: string;
+  tempMax: number;
+  tempMin: number;
   precipitation: number;
-  dewPointSpread: number;
-  rockType: RockType;
-  hourlyConditions: HourlyCondition[];
-  optimalWindows: OptimalWindow[];
-  warnings: string[];
-  weatherCode?: number;
+  windSpeedMax: number;
+  sunrise: string;
+  sunset: string;
+  weatherCode: number;
 }
+
+export interface ConditionsData {
+  rating: number;
+  frictionRating: number;
+  frictionScore: number;
+  optimalWindows: OptimalWindow[];
+  hourlyConditions: HourlyCondition[];
+  dailyForecast: DailyForecast[];
+}
+
+export interface ConditionsResponse {
+  location: { lat: number; lon: number };
+  rockType: string;
+  current: CurrentWeather;
+  conditions: ConditionsData;
+  astro: { sunrise: string; sunset: string };
+  updatedAt: string;
+}
+
+// --- /api/search response ---
 
 export interface SearchResult {
   id: string;
   name: string;
+  slug: string;
   location: string;
+  country: string;
+  rockType: RockType | null;
+  climbingTypes: string | null;
   latitude: number;
   longitude: number;
-  rockType?: RockType;
-  type: "crag" | "sector";
-  parentName?: string;
-  slug?: string;
+  reportCount: number;
+  matchScore: number;
+  matchType: string;
+  resultType: "crag" | "sector";
+  parentCragName: string | null;
+  parentCragId: string | null;
+  parentCragSlug: string | null;
 }
 
-export interface CragDetail {
+export interface SearchResponse {
+  results: SearchResult[];
+}
+
+// --- /api/location/[slug] response ---
+
+export interface CragData {
   id: string;
   name: string;
   slug: string;
-  location: string;
-  latitude: number;
-  longitude: number;
-  rockType?: RockType;
-  description?: string;
-  countryCode?: string;
-  sectors?: {
-    id: string;
-    name: string;
-    routeCount?: number;
-  }[];
+  lat: number;
+  lon: number;
+  rock_type: string | null;
+  village: string | null;
+  municipality: string | null;
+  state: string | null;
+  country: string | null;
+  parent_crag_id: string | null;
 }
+
+export interface SectorData {
+  id: string;
+  name: string;
+  slug: string;
+  lat: number;
+  lon: number;
+  rock_type: string | null;
+  parent_crag_id: string;
+}
+
+export interface CragDetailResponse {
+  crag: CragData;
+  conditions: ConditionsData & {
+    current: CurrentWeather;
+    astro: { sunrise: string; sunset: string };
+  };
+  reports: Report[];
+  sectors: SectorData[];
+}
+
+// --- /api/reports response ---
 
 export interface Report {
   id: string;
   crag_id: string;
-  user_profile_id: string;
+  sector_id: string | null;
+  route_id: string | null;
+  author_id: string | null;
   category: "conditions" | "safety" | "access" | "beta" | "facilities" | "other";
-  text: string;
-  dryness_rating?: number;
-  wind_rating?: number;
-  crowd_rating?: number;
-  helpful_count: number;
-  unhelpful_count: number;
+  text: string | null;
+  rating_dry: number | null;
+  rating_wind: number | null;
+  rating_crowds: number | null;
+  photo_url: string | null;
+  lost_found_type: "lost" | "found" | null;
   created_at: string;
-  display_name?: string;
+  updated_at: string;
+  confirmations?: { count: number }[];
 }
+
+export interface ReportsResponse {
+  reports: Report[];
+  total: number | null;
+  limit: number;
+  offset: number;
+}
+
+// --- /api/confirmations ---
+
+export interface Confirmation {
+  id: string;
+  report_id: string;
+  user_key_hash: string;
+  created_at: string;
+}
+
+// --- /api/sync/[key] response ---
+
+export interface SyncResponse {
+  profile: unknown | null;
+  crags: unknown[];
+  reports: unknown[];
+  confirmations: unknown[];
+}
+
+// --- App-level types ---
 
 export interface UserProfile {
   syncKey: string;

@@ -13,6 +13,7 @@ import {
   getUserProfile as getStoredProfile,
   saveUserProfile as storeProfile,
 } from "../lib/storage";
+import { setSyncKey } from "../lib/storage";
 import { restoreProfile } from "../api/client";
 
 interface UseUserProfileReturn {
@@ -39,7 +40,7 @@ export function useUserProfile(): UseUserProfileReturn {
       const hash = await hashSyncKeyAsync(syncKey);
       setSyncKeyHash(hash);
 
-      const stored = await getStoredProfile();
+      const stored = getStoredProfile();
       if (stored) {
         setProfile(stored as unknown as UserProfile);
       } else {
@@ -50,7 +51,7 @@ export function useUserProfile(): UseUserProfileReturn {
           createdAt: now,
           updatedAt: now,
         };
-        await storeProfile(newProfile as unknown as Record<string, unknown>);
+        storeProfile(newProfile as unknown as Record<string, unknown>);
         setProfile(newProfile);
       }
     } catch (error) {
@@ -68,7 +69,7 @@ export function useUserProfile(): UseUserProfileReturn {
         displayName: name,
         updatedAt: new Date().toISOString(),
       };
-      await storeProfile(updated as unknown as Record<string, unknown>);
+      storeProfile(updated as unknown as Record<string, unknown>);
       setProfile(updated);
     },
     [profile]
@@ -82,7 +83,7 @@ export function useUserProfile(): UseUserProfileReturn {
         units,
         updatedAt: new Date().toISOString(),
       };
-      await storeProfile(updated as unknown as Record<string, unknown>);
+      storeProfile(updated as unknown as Record<string, unknown>);
       setProfile(updated);
     },
     [profile]
@@ -91,8 +92,29 @@ export function useUserProfile(): UseUserProfileReturn {
   const restoreFromSyncKey = useCallback(async (key: string) => {
     try {
       const result = await restoreProfile(key);
-      if (result.success) {
-        await initProfile();
+      // The sync API returns { profile, crags, reports, confirmations }
+      // A non-null profile means the key was found
+      if (result.profile) {
+        // Store the restored sync key locally
+        await setSyncKey(key);
+        const hash = await hashSyncKeyAsync(key);
+        setSyncKeyHash(hash);
+
+        const now = new Date().toISOString();
+        const restoredProfile: UserProfile = {
+          syncKey: key,
+          syncKeyHash: hash,
+          displayName:
+            (result.profile as Record<string, unknown>)?.display_name as
+              | string
+              | undefined,
+          createdAt: now,
+          updatedAt: now,
+        };
+        storeProfile(
+          restoredProfile as unknown as Record<string, unknown>
+        );
+        setProfile(restoredProfile);
         return true;
       }
       return false;

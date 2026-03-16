@@ -14,7 +14,7 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { getFavorites } from "@/lib/storage";
+import { getFavorites, saveFavorites } from "@/lib/storage";
 import { getConditions } from "@/api/client";
 import type { Favorite, RockType } from "@/types/api";
 import { FRICTION_RATINGS } from "@/constants/config";
@@ -32,28 +32,31 @@ export default function FavoritesScreen() {
     loadFavorites();
   }, []);
 
-  async function loadFavorites() {
-    const stored = await getFavorites();
-    setFavorites(stored as Favorite[]);
+  function loadFavorites(): Favorite[] {
+    const stored = getFavorites() as Favorite[];
+    setFavorites(stored);
+    return stored;
   }
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
-    await loadFavorites();
 
-    // Refresh conditions for each favorite
+    // Load fresh favorites from storage and use the returned value
+    // to avoid stale closure over `favorites` state
+    const currentFavorites = loadFavorites();
+
     const updated = await Promise.all(
-      favorites.map(async (fav) => {
+      currentFavorites.map(async (fav) => {
         try {
-          const conditions = await getConditions(
+          const response = await getConditions(
             fav.latitude,
             fav.longitude,
             (fav.rockType || "unknown") as RockType
           );
           return {
             ...fav,
-            lastFrictionScore: conditions.frictionScore,
-            lastRating: conditions.rating,
+            lastFrictionScore: response.conditions.frictionScore,
+            lastRating: String(response.conditions.rating),
             lastCheckedAt: new Date().toISOString(),
           };
         } catch {
@@ -63,8 +66,9 @@ export default function FavoritesScreen() {
     );
 
     setFavorites(updated);
+    saveFavorites(updated);
     setRefreshing(false);
-  }, [favorites]);
+  }, []);
 
   function handleFavoritePress(fav: Favorite) {
     if (fav.areaSlug) {

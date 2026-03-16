@@ -22,7 +22,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0f172a"
       },
-      "package": "rocks.beta.app"
+      "package": "rocks.beta.app",
+      "edgeToEdgeEnabled": true
     },
     "web": {
       "bundler": "metro",

@@ -48,7 +48,7 @@ export default function SearchScreen() {
         <View style={styles.resultContent}>
           <View style={styles.resultHeader}>
             <Ionicons
-              name={item.type === "sector" ? "layers-outline" : "location-outline"}
+              name={item.resultType === "sector" ? "layers-outline" : "location-outline"}
               size={18}
               color={colors.primary}
             />
@@ -57,8 +57,8 @@ export default function SearchScreen() {
             </Text>
           </View>
           <Text style={[styles.resultLocation, { color: colors.textSecondary }]}>
-            {item.type === "sector" && item.parentName
-              ? `${item.parentName} · `
+            {item.resultType === "sector" && item.parentCragName
+              ? `${item.parentCragName} · `
               : ""}
             {item.location}
           </Text>

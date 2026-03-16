@@ -1,10 +1,13 @@
 /**
- * Secure storage utilities for mobile
- * Uses expo-secure-store for sensitive data (sync key)
- * Uses AsyncStorage-like patterns for general data
+ * Storage utilities for mobile
+ * Uses expo-secure-store for sensitive data (sync key only)
+ * Uses MMKV for general app data (profile, favorites, units)
  */
 
 import * as SecureStore from "expo-secure-store";
+import { MMKV } from "react-native-mmkv";
+
+const mmkv = new MMKV();
 
 const SYNC_KEY = "beta_rocks_sync_key";
 const USER_PROFILE_KEY = "beta_rocks_user_profile";
@@ -12,7 +15,7 @@ const FAVORITES_KEY = "beta_rocks_favorites";
 const UNITS_KEY = "beta_rocks_units";
 
 /**
- * Sync key storage (secure)
+ * Sync key storage (SecureStore — Keychain/Keystore)
  */
 export async function getSyncKey(): Promise<string | null> {
   return SecureStore.getItemAsync(SYNC_KEY);
@@ -27,47 +30,56 @@ export async function clearSyncKey(): Promise<void> {
 }
 
 /**
- * User profile storage
+ * User profile storage (MMKV — fast, no size limits)
  */
-export async function getUserProfile(): Promise<Record<string, unknown> | null> {
-  const data = await SecureStore.getItemAsync(USER_PROFILE_KEY);
-  return data ? JSON.parse(data) : null;
+export function getUserProfile(): Record<string, unknown> | null {
+  try {
+    const data = mmkv.getString(USER_PROFILE_KEY);
+    return data ? JSON.parse(data) : null;
+  } catch {
+    mmkv.delete(USER_PROFILE_KEY);
+    return null;
+  }
 }
 
-export async function saveUserProfile(
+export function saveUserProfile(
   profile: Record<string, unknown>
-): Promise<void> {
-  await SecureStore.setItemAsync(
-    USER_PROFILE_KEY,
-    JSON.stringify(profile)
-  );
+): void {
+  mmkv.set(USER_PROFILE_KEY, JSON.stringify(profile));
 }
 
 /**
- * Favorites storage
+ * Favorites storage (MMKV — can handle large lists)
  */
-export async function getFavorites(): Promise<unknown[]> {
-  const data = await SecureStore.getItemAsync(FAVORITES_KEY);
-  return data ? JSON.parse(data) : [];
+export function getFavorites(): unknown[] {
+  try {
+    const data = mmkv.getString(FAVORITES_KEY);
+    return data ? JSON.parse(data) : [];
+  } catch {
+    mmkv.delete(FAVORITES_KEY);
+    return [];
+  }
 }
 
-export async function saveFavorites(favorites: unknown[]): Promise<void> {
-  await SecureStore.setItemAsync(
-    FAVORITES_KEY,
-    JSON.stringify(favorites)
-  );
+export function saveFavorites(favorites: unknown[]): void {
+  mmkv.set(FAVORITES_KEY, JSON.stringify(favorites));
 }
 
 /**
- * Units preferences storage
+ * Units preferences storage (MMKV)
  */
-export async function getUnitsPreference(): Promise<Record<string, string> | null> {
-  const data = await SecureStore.getItemAsync(UNITS_KEY);
-  return data ? JSON.parse(data) : null;
+export function getUnitsPreference(): Record<string, string> | null {
+  try {
+    const data = mmkv.getString(UNITS_KEY);
+    return data ? JSON.parse(data) : null;
+  } catch {
+    mmkv.delete(UNITS_KEY);
+    return null;
+  }
 }
 
-export async function saveUnitsPreference(
+export function saveUnitsPreference(
   units: Record<string, string>
-): Promise<void> {
-  await SecureStore.setItemAsync(UNITS_KEY, JSON.stringify(units));
+): void {
+  mmkv.set(UNITS_KEY, JSON.stringify(units));
 }
