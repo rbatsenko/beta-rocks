@@ -7,7 +7,6 @@
     "icon": "./assets/icon.png",
     "scheme": "betarocks",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
@@ -29,16 +28,12 @@
       "edgeToEdgeEnabled": true
     },
     "web": {
-      "bundler": "metro",
       "output": "static",
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-router",
-      "expo-font",
-      "expo-secure-store",
-      "expo-localization",
-      "./plugins/withDisableSwiftConcurrency"
+      "expo-secure-store"
     ],
     "experiments": {
       "typedRoutes": true
@@ -46,8 +41,7 @@
     "extra": {
       "eas": {
         "projectId": "5ebf1d1a-337b-460d-aeae-ff3395852783"
-      },
-      "router": {}
+      }
     },
     "owner": "rbatsenko"
   }
