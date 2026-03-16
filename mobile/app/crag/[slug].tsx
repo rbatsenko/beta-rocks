@@ -574,15 +574,24 @@ function HelpfulButton({ report, profileId, hasProfile, syncKeyHash, colors, t }
     );
   }
 
+  if (confirmed) {
+    return (
+      <View style={[styles.reportFooter, { marginTop: Spacing.sm }]}>
+        <Ionicons name="thumbs-up" size={14} color="#22c55e" />
+        <Text style={[styles.metaText, { color: "#22c55e" }]}>{t("cragPage.helpful")} ({count})</Text>
+      </View>
+    );
+  }
+
   return (
     <TouchableOpacity
       style={[styles.reportFooter, { marginTop: Spacing.sm }]}
+      disabled={loading}
       onPress={async () => {
         if (!hasProfile || !syncKeyHash) {
           Alert.alert(t("mobile.profileRequired", "Profile Required"), t("reports.loginToConfirm", "Please set up your profile to confirm reports"));
           return;
         }
-        if (loading || confirmed) return;
         setLoading(true);
         try {
           await apiConfirmReport(report.id, syncKeyHash);
@@ -597,8 +606,8 @@ function HelpfulButton({ report, profileId, hasProfile, syncKeyHash, colors, t }
         }
       }}
     >
-      <Ionicons name={confirmed ? "thumbs-up" : "thumbs-up-outline"} size={14} color={confirmed ? "#22c55e" : colors.primary} />
-      <Text style={[styles.metaText, { color: confirmed ? "#22c55e" : colors.primary }]}>{t("cragPage.helpful")} ({count})</Text>
+      <Ionicons name="thumbs-up-outline" size={14} color={colors.primary} />
+      <Text style={[styles.metaText, { color: colors.primary }]}>{t("cragPage.helpful")} ({count})</Text>
     </TouchableOpacity>
   );
 }
