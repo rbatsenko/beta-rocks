@@ -786,7 +786,16 @@
     "viewOnMap": "Vis på kart",
     "viewOnGoogleMaps": "Vis på Google Maps",
     "addToFavorites": "Legg til favoritter",
-    "removeFromFavorites": "Fjern fra favoritter"
+    "removeFromFavorites": "Fjern fra favoritter",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "I dag",

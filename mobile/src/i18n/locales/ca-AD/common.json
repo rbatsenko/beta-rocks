@@ -753,7 +753,16 @@
     "viewOnMap": "Veure al mapa",
     "viewOnGoogleMaps": "Veure a Google Maps",
     "addToFavorites": "Afegir a favorits",
-    "removeFromFavorites": "Eliminar de favorits"
+    "removeFromFavorites": "Eliminar de favorits",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "Avui",

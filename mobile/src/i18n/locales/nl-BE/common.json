@@ -784,7 +784,16 @@
     "viewOnMap": "Bekijk op kaart",
     "viewOnGoogleMaps": "Bekijk op Google Maps",
     "addToFavorites": "Toevoegen aan favorieten",
-    "removeFromFavorites": "Verwijderen uit favorieten"
+    "removeFromFavorites": "Verwijderen uit favorieten",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "Vandaag",

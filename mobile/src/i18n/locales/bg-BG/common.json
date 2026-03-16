@@ -832,7 +832,16 @@
     "viewOnMap": "Вижте на карта",
     "viewOnGoogleMaps": "Вижте в Google Maps",
     "addToFavorites": "Добавете към любими",
-    "removeFromFavorites": "Премахнете от любими"
+    "removeFromFavorites": "Премахнете от любими",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "Днес",

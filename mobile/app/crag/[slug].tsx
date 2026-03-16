@@ -29,6 +29,7 @@ import { FRICTION_RATINGS, RATING_COLORS, CATEGORY_COLORS } from "@/constants/co
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
 import { PhotoLightbox } from "@/components/PhotoLightbox";
+import { useTranslation } from "react-i18next";
 
 function fmt(val: number | undefined | null, decimals = 1): string {
   return val != null ? val.toFixed(decimals) : "\u2014";
@@ -101,6 +102,7 @@ export default function CragDetailScreen() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"conditions" | "forecast">("conditions");
+  const { t } = useTranslation("common");
   const [isFavorited, setIsFavorited] = useState(false);
   const [lightboxPhotos, setLightboxPhotos] = useState<string[]>([]);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -224,8 +226,9 @@ export default function CragDetailScreen() {
   }
 
   const frictionScore = conditions?.frictionScore ?? null;
-  const ratingLabel = getRatingLabel(frictionScore);
-  const ratingColors = getRatingColors(ratingLabel);
+  const ratingLabelKey = getRatingLabel(frictionScore);
+  const ratingLabel = ratingLabelKey ? t(`ratings.${ratingLabelKey.toLowerCase()}`, ratingLabelKey) : null;
+  const ratingColors = getRatingColors(ratingLabelKey);
   const reasons: string[] = conditions?.reasons || [];
   const warnings: string[] = conditions?.warnings || [];
   const isDry: boolean | null = conditions?.isDry ?? null;
@@ -266,7 +269,7 @@ export default function CragDetailScreen() {
                 borderColor: isDry ? "rgba(34,197,94,0.3)" : "rgba(239,68,68,0.3)",
               }]}>
                 <Ionicons name={isDry ? "checkmark-circle" : "water"} size={12} color={isDry ? "#22c55e" : "#ef4444"} />
-                <Text style={[styles.badgeText, { color: isDry ? "#22c55e" : "#ef4444" }]}>{isDry ? "Dry" : "Wet"}</Text>
+                <Text style={[styles.badgeText, { color: isDry ? "#22c55e" : "#ef4444" }]}>{isDry ? t("cragPage.dry") : t("cragPage.wet")}</Text>
               </View>
             )}
           </View>
@@ -322,7 +325,7 @@ export default function CragDetailScreen() {
             onPress={() => setActiveTab(tab)}
           >
             <Text style={[styles.tabText, { color: activeTab === tab ? colors.primary : colors.muted }]}>
-              {tab === "conditions" ? "Current" : "Forecast"}
+              {tab === "conditions" ? t("cragPage.currentConditions") : t("cragPage.forecast")}
             </Text>
           </TouchableOpacity>
         ))}
@@ -375,7 +378,7 @@ export default function CragDetailScreen() {
       {/* Optimal windows */}
       {conditions?.optimalWindows?.length > 0 && (
         <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-          <Text style={[styles.cardTitle, { color: colors.text }]}>Best Times to Climb</Text>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.bestTimes")}</Text>
           {conditions.optimalWindows.slice(0, 5).map((w: any, i: number) => {
             const wl = getRatingLabel(w.avgFrictionScore);
             const wc = getRatingColors(wl);
@@ -385,7 +388,7 @@ export default function CragDetailScreen() {
                 <Text style={[styles.windowTime, { color: colors.text }]}>{fmtTimeRange(w.startTime, w.endTime)}</Text>
                 {wc && wl && (
                   <View style={[styles.smallBadge, { backgroundColor: wc.bg }]}>
-                    <Text style={[styles.smallBadgeText, { color: wc.text }]}>{wl} {fmt(w.avgFrictionScore)}</Text>
+                    <Text style={[styles.smallBadgeText, { color: wc.text }]}>{t(`ratings.${wl!.toLowerCase()}`, wl)} {fmt(w.avgFrictionScore)}</Text>
                   </View>
                 )}
               </View>
@@ -397,7 +400,7 @@ export default function CragDetailScreen() {
       {/* Report photos */}
       {reportPhotos.length > 0 && (
         <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-          <Text style={[styles.cardTitle, { color: colors.text }]}>Photos ({reportPhotos.length})</Text>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.photos")} ({reportPhotos.length})</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.photoScroll}>
             {reportPhotos.map((url, i) => (
               <TouchableOpacity key={i} onPress={() => openLightbox(reportPhotos, i)} activeOpacity={0.9}>
@@ -411,7 +414,7 @@ export default function CragDetailScreen() {
       {/* Webcams */}
       {webcams.length > 0 && (
         <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-          <Text style={[styles.cardTitle, { color: colors.text }]}>Nearby Webcams</Text>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.webcams")}</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.photoScroll}>
             {webcams.map((cam) => (
               <View key={cam.webcamId} style={styles.webcamItem}>
@@ -428,7 +431,7 @@ export default function CragDetailScreen() {
 
       {/* External links */}
       <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-        <Text style={[styles.cardTitle, { color: colors.text }]}>Links</Text>
+        <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.links")}</Text>
         <LinkRow icon="map-outline" label="Google Maps" color={colors} onPress={() => Linking.openURL(`https://www.google.com/maps?q=${crag.lat},${crag.lon}&z=15`)} />
         <LinkRow icon="sunny-outline" label="SunCalc" color={colors} onPress={() => {
           const d = new Date().toISOString().split("T")[0].replace(/-/g, ".");
@@ -440,7 +443,7 @@ export default function CragDetailScreen() {
       {/* Sectors */}
       {sectors.length > 0 && (
         <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-          <Text style={[styles.cardTitle, { color: colors.text }]}>Sectors ({sectors.length})</Text>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.sectors")} ({sectors.length})</Text>
           {sectors.map((s) => (
             <View key={s.id} style={styles.sectorRow}>
               <Ionicons name="layers-outline" size={16} color={colors.primary} />
@@ -453,14 +456,14 @@ export default function CragDetailScreen() {
       {/* Reports */}
       {reports.length > 0 && (
         <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-          <Text style={[styles.cardTitle, { color: colors.text }]}>Community Reports ({reports.length})</Text>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.communityReports")} ({reports.length})</Text>
           {reports.slice(0, 10).map((report) => {
             const cc = CATEGORY_COLORS[report.category] || CATEGORY_COLORS.other;
             return (
               <View key={report.id} style={[styles.reportItem, { borderTopColor: colors.border }]}>
                 <View style={styles.reportHeader}>
                   <View style={[styles.smallBadge, { backgroundColor: cc.bg }]}>
-                    <Text style={[styles.smallBadgeText, { color: cc.text }]}>{report.category}</Text>
+                    <Text style={[styles.smallBadgeText, { color: cc.text }]}>{t(`reports.categories.${report.category}`, report.category)}</Text>
                   </View>
                   <Text style={[styles.metaText, { color: colors.muted }]}>{fmtRelative(report.created_at)}</Text>
                 </View>
@@ -490,7 +493,7 @@ export default function CragDetailScreen() {
                   }}
                 >
                   <Ionicons name="thumbs-up-outline" size={14} color={colors.primary} />
-                  <Text style={[styles.metaText, { color: colors.primary }]}>Helpful ({report.confirmations?.[0]?.count ?? 0})</Text>
+                  <Text style={[styles.metaText, { color: colors.primary }]}>{t("cragPage.helpful")} ({report.confirmations?.[0]?.count ?? 0})</Text>
                 </TouchableOpacity>
               </View>
             );

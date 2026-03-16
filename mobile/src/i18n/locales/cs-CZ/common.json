@@ -864,7 +864,16 @@
     "viewOnMap": "Zobrazit na mapě",
     "viewOnGoogleMaps": "Zobrazit na Google Maps",
     "addToFavorites": "Přidat do oblíbených",
-    "removeFromFavorites": "Odebrat z oblíbených"
+    "removeFromFavorites": "Odebrat z oblíbených",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "Dnes",

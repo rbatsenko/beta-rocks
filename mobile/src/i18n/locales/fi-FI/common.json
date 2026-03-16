@@ -785,7 +785,16 @@
     "viewOnMap": "Näytä kartalla",
     "viewOnGoogleMaps": "Näytä Google Mapsissa",
     "addToFavorites": "Lisää suosikkeihin",
-    "removeFromFavorites": "Poista suosikeista"
+    "removeFromFavorites": "Poista suosikeista",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "Tänään",

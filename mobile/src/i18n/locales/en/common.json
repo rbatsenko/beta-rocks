@@ -929,7 +929,16 @@
     "secretCrag": {
       "notice": "This is a secret crag. Location is hidden to protect access.",
       "weatherNote": "Weather for nearby reference location"
-    }
+    },
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "webcams": {
     "title": "Nearby Webcams",

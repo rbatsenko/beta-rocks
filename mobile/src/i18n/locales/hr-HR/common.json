@@ -864,7 +864,16 @@
     "viewOnMap": "Prikaži na karti",
     "viewOnGoogleMaps": "Prikaži na Google Maps",
     "addToFavorites": "Dodaj u favorite",
-    "removeFromFavorites": "Ukloni iz favorita"
+    "removeFromFavorites": "Ukloni iz favorita",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "Danas",

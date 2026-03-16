@@ -23,8 +23,16 @@ import { Ionicons } from "@expo/vector-icons";
 import { API_URL, SUPABASE_URL, CATEGORY_COLORS } from "@/constants/config";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 const PHOTO_BASE_URL = SUPABASE_URL ? `${SUPABASE_URL}/storage/v1/object/public/report-photos/` : "";
+
+function getCountryFlag(code: string | null | undefined): string {
+  if (!code || code.length !== 2) return "";
+  const upper = code.toUpperCase();
+  const OFFSET = 0x1f1e6 - 0x41;
+  return String.fromCodePoint(upper.charCodeAt(0) + OFFSET, upper.charCodeAt(1) + OFFSET);
+}
 
 interface FeedReport {
   id: string;
@@ -51,6 +59,7 @@ export default function FeedScreen() {
   const isDark = colorScheme === "dark";
   const colors = isDark ? Colors.dark : Colors.light;
   const router = useRouter();
+  const { t } = useTranslation("common");
 
   const [reports, setReports] = useState<FeedReport[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -110,9 +119,10 @@ export default function FeedScreen() {
 
   function renderReport({ item }: { item: FeedReport }) {
     const catColors = CATEGORY_COLORS[item.category] || CATEGORY_COLORS.other;
+    const flag = getCountryFlag(item.crag?.country);
     const cragName = item.crag?.parent_crag
-      ? `${item.crag.name} \u00B7 ${item.crag.parent_crag.name}`
-      : item.crag?.name || "Unknown crag";
+      ? `${flag ? flag + " " : ""}${item.crag.name} \u00B7 ${item.crag.parent_crag.name}`
+      : `${flag ? flag + " " : ""}${item.crag?.name || "Unknown crag"}`;
     const location = [
       item.crag?.village,
       item.crag?.municipality,
@@ -120,7 +130,7 @@ export default function FeedScreen() {
     ]
       .filter(Boolean)
       .join(", ");
-    const authorName = item.author?.display_name || "Anonymous";
+    const authorName = item.author?.display_name || t("profile.anonymous");
     const confirmCount = item.confirmations?.[0]?.count ?? 0;
 
     return (
@@ -133,7 +143,7 @@ export default function FeedScreen() {
         <View style={styles.reportHeader}>
           <View style={[styles.categoryBadge, { backgroundColor: catColors.bg }]}>
             <Text style={[styles.categoryText, { color: catColors.text }]}>
-              {item.category}
+              {t(`reports.categories.${item.category}`, item.category)}
             </Text>
           </View>
           <Text style={[styles.timeText, { color: colors.muted }]}>
@@ -221,10 +231,10 @@ export default function FeedScreen() {
           <View style={styles.emptyState}>
             <Ionicons name="chatbubbles-outline" size={48} color={colors.muted} />
             <Text style={[styles.emptyTitle, { color: colors.text }]}>
-              No reports yet
+              {t("reports.noReportsInCategory", "No reports yet")}
             </Text>
             <Text style={[styles.emptySubtitle, { color: colors.textSecondary }]}>
-              Community reports will appear here
+              {t("feed.viewFeed", "Community reports will appear here")}
             </Text>
           </View>
         }

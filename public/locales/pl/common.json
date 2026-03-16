@@ -865,7 +865,16 @@
     "viewOnMap": "Zobacz na mapie",
     "viewOnGoogleMaps": "Zobacz w Google Maps",
     "addToFavorites": "Dodaj do ulubionych",
-    "removeFromFavorites": "Usuń z ulubionych"
+    "removeFromFavorites": "Usuń z ulubionych",
+    "bestTimes": "Najlepszy czas na wspinanie",
+    "communityReports": "Raporty społeczności",
+    "photos": "Zdjęcia",
+    "webcams": "Kamery w pobliżu",
+    "links": "Linki",
+    "forecast": "Prognoza",
+    "dry": "Sucho",
+    "wet": "Mokro",
+    "helpful": "Pomocne"
   },
   "time": {
     "today": "Dzisiaj",

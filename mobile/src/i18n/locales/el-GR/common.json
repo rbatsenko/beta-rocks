@@ -753,7 +753,16 @@
     "viewOnMap": "Δείτε στο χάρτη",
     "viewOnGoogleMaps": "Δείτε στο Google Maps",
     "addToFavorites": "Προσθήκη στα αγαπημένα",
-    "removeFromFavorites": "Αφαίρεση από τα αγαπημένα"
+    "removeFromFavorites": "Αφαίρεση από τα αγαπημένα",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "Σήμερα",
