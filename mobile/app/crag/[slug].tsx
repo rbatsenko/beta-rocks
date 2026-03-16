@@ -109,6 +109,7 @@ export default function CragDetailScreen() {
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [lightboxVisible, setLightboxVisible] = useState(false);
   const [parentCrag, setParentCrag] = useState<{ name: string; slug: string } | null>(null);
+  const [confirmedReportIds, setConfirmedReportIds] = useState<Set<string>>(new Set());
   const { hasProfile, profileId, syncKeyHash, profile } = useUserProfile();
 
   function openLightbox(photos: string[], index: number) {
@@ -207,6 +208,19 @@ export default function CragDetailScreen() {
       if (data.crag.parent_crag_id && isSupabaseConfigured && supabase) {
         supabase.from("crags").select("name, slug").eq("id", data.crag.parent_crag_id).single()
           .then(({ data: parent }) => { if (parent) setParentCrag(parent); })
+          .catch(() => {});
+      }
+      // Fetch user's confirmations for these reports
+      if (syncKeyHash && isSupabaseConfigured && supabase && data.reports.length > 0) {
+        const reportIds = data.reports.map(r => r.id);
+        supabase.from("confirmations").select("report_id")
+          .eq("user_key_hash", syncKeyHash)
+          .in("report_id", reportIds)
+          .then(({ data: confirmations }) => {
+            if (confirmations) {
+              setConfirmedReportIds(new Set(confirmations.map(c => c.report_id)));
+            }
+          })
           .catch(() => {});
       }
       // Fetch webcams in parallel
@@ -507,6 +521,7 @@ export default function CragDetailScreen() {
                   profileId={profileId}
                   hasProfile={hasProfile}
                   syncKeyHash={syncKeyHash}
+                  initialConfirmed={confirmedReportIds.has(report.id)}
                   colors={colors}
                   t={t}
                 />
@@ -555,15 +570,19 @@ function ConditionItem({ icon, label, value, colors }: { icon: keyof typeof Ioni
   );
 }
 
-function HelpfulButton({ report, profileId, hasProfile, syncKeyHash, colors, t }: {
+function HelpfulButton({ report, profileId, hasProfile, syncKeyHash, initialConfirmed, colors, t }: {
   report: Report; profileId: string | null; hasProfile: boolean; syncKeyHash: string | null;
+  initialConfirmed: boolean;
   colors: (typeof Colors)["light"]; t: (key: string, fallback?: string) => string;
 }) {
   const isOwnReport = profileId != null && report.author_id === profileId;
   const initialCount = (report as any).confirmationCount ?? report.confirmations?.[0]?.count ?? 0;
-  const [confirmed, setConfirmed] = useState(false);
+  const [confirmed, setConfirmed] = useState(initialConfirmed);
   const [count, setCount] = useState<number>(initialCount);
   const [loading, setLoading] = useState(false);
+
+  // Sync when async confirmation check resolves
+  useEffect(() => { setConfirmed(initialConfirmed); }, [initialConfirmed]);
 
   if (isOwnReport) {
     return (
