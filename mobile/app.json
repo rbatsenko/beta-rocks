@@ -8,8 +8,8 @@
     "scheme": "betarocks",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
+      "image": "./assets/splash.jpg",
+      "resizeMode": "cover",
       "backgroundColor": "#1e1714"
     },
     "ios": {
