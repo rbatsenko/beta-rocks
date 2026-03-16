@@ -213,7 +213,10 @@ export default function SettingsScreen() {
           </TouchableOpacity>
 
           {showLanguagePicker && (
-            <View style={[styles.languageList, { borderTopColor: colors.border }]}>
+            <ScrollView
+              style={[styles.languageList, { borderTopColor: colors.border }]}
+              nestedScrollEnabled
+            >
               {SUPPORTED_LANGUAGES.map((lang) => {
                 const isActive = language === lang.code;
                 return (
@@ -244,7 +247,7 @@ export default function SettingsScreen() {
                   </TouchableOpacity>
                 );
               })}
-            </View>
+            </ScrollView>
           )}
         </View>
       </View>
