@@ -1,0 +1,831 @@
+{
+  "header": {
+    "title": "beta.rocks"
+  },
+  "welcome": {
+    "heading": "Krijg info over elke rots",
+    "description": "Realtime omstandigheden, gemeenschapsrapporten en route-informatie voor rotsen wereldwijd",
+    "exampleQueries": {
+      "query1": {
+        "display": "Freyr omstandigheden vandaag?",
+        "query": "Freyr omstandigheden vandaag?"
+      },
+      "query2": {
+        "display": "Is Marche-les-Dames droog vanmiddag?",
+        "query": "Is Marche-les-Dames droog vanmiddag?"
+      },
+      "query3": {
+        "display": "Dave omstandigheden morgen?",
+        "query": "Dave omstandigheden morgen?"
+      }
+    },
+    "searchHint": "Zoek naar elk klimgebied",
+    "yourFavorites": "Uw Favorieten",
+    "favoriteQuery": "Wat zijn de omstandigheden bij {{crag}}?"
+  },
+  "chat": {
+    "analyzing": "Condities analyseren...",
+    "thinking": "Aan het denken...",
+    "inputPlaceholder": "Vraag naar een rots of sector...",
+    "clearChat": "Chat wissen",
+    "clearChatTooltip": "Wis het huidige gesprek",
+    "clearChatConfirm": "Wis je chat? Dit verwijdert alle berichten uit het huidige gesprek.",
+    "clearHistory": "Geschiedenis wissen",
+    "clearHistoryConfirm": "Weet je zeker dat je alle chatgeschiedenis wilt wissen? Dit kan niet ongedaan worden gemaakt."
+  },
+  "search": {
+    "title": "Zoek klimrotsen",
+    "description": "Zoek klimgebieden op naam of locatie",
+    "placeholder": "Zoek klimrotsen... (bijv. 'Freÿr', 'Dinant')",
+    "typeToSearch": "Typ om klimrotsen te zoeken...",
+    "searching": "Zoeken...",
+    "noCragsFound": "Geen klimrotsen gevonden. Probeer een andere zoekterm.",
+    "heading": "Klimrotsen",
+    "toSelect": "om te selecteren",
+    "toClose": "om te sluiten",
+    "notSeeing": "Zie je je klimrots niet?",
+    "addMissingHere": "Voeg het hier toe"
+  },
+  "cragLocationPicker": {
+    "loadingMap": "Kaart laden...",
+    "searchPlaceholder": "Zoek naar een locatie (bijv. 'Freyr, Dinant')",
+    "noLocationsFound": "Geen locaties gevonden",
+    "loadingLocationData": "Locatiegegevens laden...",
+    "clickToSet": "Klik op de kaart om de locatie van de klimlocatie in te stellen",
+    "nearbyCragsFound": "{{count}} nabijgelegen klimlocatie gevonden",
+    "nearbyCragsFound_other": "{{count}} nabijgelegen klimlocaties gevonden",
+    "clickMarkersToView": "Klik op markeringen om bestaande klimlocaties te bekijken",
+    "coordinates": "Coördinaten"
+  },
+  "conditions": {
+    "rating": "Beoordeling",
+    "details": "Details",
+    "location": "Locatie",
+    "favorite": "Favoriet",
+    "favorited": "Gemarkeerd als favoriet",
+    "addReport": "Rapport toevoegen",
+    "viewCragPage": "Bekijk gebied"
+  },
+  "ratings": {
+    "great": "Geweldig",
+    "good": "Goed",
+    "fair": "Redelijk",
+    "poor": "Slecht",
+    "nope": "Nee"
+  },
+  "reasons": {
+    "perfectTemp": "Perfecte temperatuur ({{temp}})",
+    "tempTooHigh": "Temperatuur te hoog - vingers kunnen glippen",
+    "coldGoodFriction": "Koud maar goed voor {{rockType}} wrijving",
+    "idealHumidity": "Ideale vochtigheid ({{humidity}}%)",
+    "lowHumidityGranite": "Lage vochtigheid helpt wrijving op graniet",
+    "readyInHours": "Klaar om te klimmen over ~{{hours}} uur",
+    "acceptable": "Condities zijn aanvaardbaar",
+    "goodHumidity": "Goede luchtvochtigheid ({{humidity}}%)",
+    "lowCondensationRisk": "Laag risico op condensatie (dauwpuntverschil {{dewPointSpread}})",
+    "lowHumidityFriction": "Lage luchtvochtigheid verbetert wrijving"
+  },
+  "warnings": {
+    "tooWarm": "Te warm voor {{rockType}} ({{temp}})",
+    "coldSuboptimal": "Koud en niet optimaal voor {{rockType}}",
+    "highHumidity": "Hoge vochtigheid ({{humidity}}%) - rots kan glad zijn",
+    "wetDangerousSandstone": "Rots is momenteel nat - gevaarlijk om te klimmen (zandsteenbeweegt zwak wanneer nat)",
+    "wetSlippery": "Rots is momenteel nat - gladde condities",
+    "veryHighWinds": "Zeer sterke wind ({{wind}}) - gevaar om afgeblazen te worden",
+    "highWind": "Sterke wind ({{wind}})",
+    "recentPrecip": "Recent neerslag ({{precip}}) - zal drogen in ~{{hours}}h",
+    "currentlyWetDangerous": "Momenteel nat - gevaarlijk",
+    "currentlyWet": "Momenteel nat",
+    "cold": "Cold ({{temp}})",
+    "veryHighCondensationRisk": "Zeer hoog risico op condensatie (dauwpuntverschil {{dewPointSpread}}) - rotsoppervlak waarschijnlijk vochtig",
+    "highCondensationRisk": "Hoog risico op condensatie (dauwpuntverschil {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Hoog risico op condensatie",
+    "moderateCondensationRisk": "Matig risico op condensatie (dauwpuntverschil {{dewPointSpread}})",
+    "condensationRisk": "Risico op condensatie ({{dewPointSpread}})"
+  },
+  "sandstoneWarning": {
+    "general": "Zandsteen is kwetsbaar wanneer nat en vereist veel tijd om te drogen na regen. Klimmen op natte zandsteen beschadigt de rots en is gevaarlijk.",
+    "recentRain": "Recente neerslag gedetecteerd. Zorg ervoor dat de rots volledig droog is voordat u gaat klimmen.",
+    "inLast24h": "in de afgelopen 24 uur",
+    "inLast48h": "in de afgelopen 48 uur"
+  },
+  "weather": {
+    "clearSky": "Heldere lucht",
+    "mainlyClear": "Grotendeels helder",
+    "partlyCloudy": "Gedeeltelijk bewolkt",
+    "overcast": "Bewolkt",
+    "fog": "Mist",
+    "depositingRimeFog": "Rijpmist",
+    "lightDrizzle": "Lichte motregen",
+    "moderateDrizzle": "Matige motregen",
+    "denseDrizzle": "Dichte motregen",
+    "lightFreezingDrizzle": "Lichte bevriessende motregen",
+    "denseFreezingDrizzle": "Dichte bevriessende motregen",
+    "slightRain": "Lichte regen",
+    "moderateRain": "Matige regen",
+    "heavyRain": "Zware regen",
+    "lightFreezingRain": "Lichte bevriessende regen",
+    "heavyFreezingRain": "Zware bevriessende regen",
+    "slightSnowFall": "Lichte sneeuwval",
+    "moderateSnowFall": "Matige sneeuwval",
+    "heavySnowFall": "Zware sneeuwval",
+    "snowGrains": "Sneeuwkorrels",
+    "slightRainShowers": "Lichte regenbuien",
+    "moderateRainShowers": "Matige regenbuien",
+    "violentRainShowers": "Heftige regenbuien",
+    "slightSnowShowers": "Lichte sneeuwbuien",
+    "heavySnowShowers": "Zware sneeuwbuien",
+    "thunderstorm": "Onweer",
+    "thunderstormSlightHail": "Onweer met lichte hagel",
+    "thunderstormHeavyHail": "Onweer met zware hagel"
+  },
+  "timeframes": {
+    "now": "nu",
+    "today": "vandaag",
+    "tomorrow": "morgen",
+    "thisAfternoon": "vanmiddag",
+    "thisEvening": "vanavond",
+    "tonight": "vannacht"
+  },
+  "disambiguation": {
+    "foundMultipleAreas": "{{count}} klimgebieden gevonden voor \"{{location}}\". Kies er één:",
+    "foundMultipleLocations": "Meerdere locaties gevonden voor \"{{location}}\". Kies er één:",
+    "queryTemplate": "condities bij {{name}} ({{latitude}}, {{longitude}})"
+  },
+  "footer": {
+    "about": "Over",
+    "privacy": "Privacy",
+    "github": "GitHub",
+    "brand": "beta.rocks",
+    "description": "Gratis klimcondities voor iedereen. Gebouwd met ❤️ voor de klimgemeenschap.",
+    "attribution": "Gegevens van Open-Meteo, OpenBeta en <osmLink>OpenStreetMap bijdragers</osmLink>. Door de gemeenschap aangestuurde rapporten.",
+    "copyright": "© 2026 beta.rocks. Alle rechten voorbehouden."
+  },
+  "features": {
+    "heading": "Alles wat je nodig hebt",
+    "subheading": "Uitgebreide klimcondities aan je vingertoppen, volledig gratis",
+    "realTimeWeather": {
+      "title": "Real-time weer",
+      "description": "Nauwkeurige voorspellingen van Open-Meteo met zon/schaduwberekeningen voor specifieke sectoren"
+    },
+    "chatInterface": {
+      "title": "Chat-interface",
+      "description": "Natuurlijke taalvragen powered by AI. Vraag in elke taal, krijg direct antwoord"
+    },
+    "communityReports": {
+      "title": "Gemeenschapsrapporten",
+      "description": "Deel omstandigheden, veiligheidswaarschuwingen, toegangswijzigingen, kliminfo en meer. Help mede-klimmers met realtime updates in meerdere categorieën"
+    },
+    "globalCoverage": {
+      "title": "Mondiale dekking",
+      "description": "Elke rots of sector ter wereld via OpenBeta database-integratie"
+    },
+    "crossDeviceSync": {
+      "title": "Synchronisatie tussen apparaten",
+      "description": "Krijg toegang tot je favorieten en chatgeschiedenis vanaf elk apparaat met een beveiligde synchronisatiesleutel. Geen account vereist"
+    },
+    "privacyFirst": {
+      "title": "Privacy eerst",
+      "description": "We hebben je gegevens niet alleen niet nodig - we willen ze niet! Standaard anoniem. Geen accounts, geen tracking. Je gegevens blijven van jou."
+    }
+  },
+  "privacy": {
+    "heading": "Privacybeleid",
+    "subheading": "We hebben je gegevens niet alleen niet nodig - we willen ze niet!",
+    "whatWeDontCollect": {
+      "title": "Wat We Niet Verzamelen",
+      "description": "Geen e-mailadressen, geen namen, geen telefoonnummers, geen IP-adressen, geen analytics, geen trackingpixels, geen cookies (behalve essentiële), geen gebruikersgedragstracking. We kunnen je letterlijk niet identificeren."
+    },
+    "whatYouControl": {
+      "title": "Wat Jij Controleert",
+      "description": "Je favorieten, rapporten en chatgeschiedenis worden lokaal op je apparaat opgeslagen. Om er vanaf meerdere apparaten toegang toe te hebben, kun je een anoniem profiel aanmaken. Zodra je een profiel hebt, worden je gegevens automatisch gesynchroniseerd om toegang vanaf meerdere apparaten mogelijk te maken. Je kunt al je gegevens op elk moment verwijderen vanuit Instellingen."
+    },
+    "howSyncWorks": {
+      "title": "Hoe Synchronisatie Werkt",
+      "description": "Wanneer je een profiel aanmaakt, genereren we een anonieme synchronisatiesleutel en synchroniseren we je gegevens met onze database. Gegevens zijn gekoppeld aan een gehashte synchronisatiesleutel - niet aan je identiteit. De synchronisatiesleutel is een willekeurige identifier waar alleen jij toegang toe hebt. We kunnen het niet aan jou koppelen. Geen e-mail vereist, geen account nodig."
+    },
+    "openSource": {
+      "title": "Open Source",
+      "description": "Onze volledige codebase is open source op GitHub. Je kunt precies controleren wat we met je gegevens doen (spoiler: niets). Volledige transparantie, nul verborgen trackers."
+    },
+    "yourRights": {
+      "title": "Jouw Rechten",
+      "description": "Je kunt je profiel op elk moment verwijderen vanuit Instellingen. Dit verwijdert je favorieten, chatgeschiedenis en profiel uit onze database. Gemeenschapsrapporten die je hebt geplaatst blijven zichtbaar (anoniem) om andere klimmers te helpen. Volledige controle over je gegevens."
+    },
+    "dataSecurity": {
+      "title": "Gegevensbeveiliging",
+      "description": "Synchronisatiesleutels worden cryptografisch gehasht voor opslag. We gebruiken Supabase met Row Level Security-beleid. Zelfs als onze database lek zou zijn, kunnen synchronisatiesleutels niet worden teruggedraaid om gebruikers te identificeren."
+    },
+    "footer": {
+      "tldr": "TL;DR: We hebben deze app gebouwd voor klimmers, niet voor gegevensverzameling. Je privacy is geen functie - het is de fundering.",
+      "github": "Volledige broncode beschikbaar op <githubLink>GitHub</githubLink>"
+    }
+  },
+  "ui": {
+    "toggleTheme": "Thema in-/uitschakelen",
+    "selectLanguage": "Selecteer taal",
+    "aboutApp": "Over app",
+    "language": "Taal",
+    "theme": "Thema"
+  },
+  "dialog": {
+    "close": "Sluiten",
+    "cancel": "Annuleren",
+    "detailedConditions": "Gedetailleerde condities",
+    "fullAnalysis": "Volledige weeranalyse en klimcondities voorspelling",
+    "showMap": "Kaart",
+    "tabs": {
+      "overview": "Overzicht",
+      "hourly": "Per uur",
+      "daily": "14 dagen"
+    },
+    "currentRating": "Huidige beoordeling",
+    "currentConditions": "Huidige condities",
+    "currentWeather": "Huidige weersomstandigheden",
+    "temperature": "Temperatuur",
+    "humidity": "Vochtigheid",
+    "windSpeed": "Windsnelheid",
+    "precipitation": "Neerslag",
+    "sunrise": "Zonsopgang",
+    "sunset": "Zonsondergang",
+    "high": "Hoog",
+    "low": "Laag",
+    "rain": "Regen",
+    "wind": "Wind",
+    "dry": "Droog",
+    "wet": "Nat",
+    "precipitationContext": "Neerslagcontext",
+    "last24h": "Afgelopen 24h",
+    "last48h": "Afgelopen 48h",
+    "next24h": "Volgende 24h",
+    "dewPointSpread": "Dauwpuntverschil (condensatierisico)",
+    "lowRisk": "✅ Laag risico - rots zou droog moeten blijven",
+    "moderateRisk": "⚠️ Matig risico - let op voor vocht",
+    "highRisk": "❌ Hoog risico - condensatie waarschijnlijk",
+    "optimalWindows": "Optimale klimvensters",
+    "nextDays": "Volgende 5 dagen",
+    "bestTime": "🌟 Beste tijd",
+    "noOptimalConditions": "Geen optimale condities in de volgende 5 dagen",
+    "checkHourlyForecast": "Controleer uurlijkse voorspelling voor meer details",
+    "weatherDisclaimer": "⚠️ Weersomstandigheden kunnen snel veranderen. Controleer altijd voorspellingen voordat je vertrekt en check condities bij aankomst.",
+    "window": "venster",
+    "windows": "vensters",
+    "today": "Vandaag",
+    "tomorrow": "Morgen",
+    "showCompleteTimeline": "Toon volledige tijdlijn",
+    "hour": "uur",
+    "hours": "uren",
+    "period": "periode",
+    "periods": "perioden",
+    "noHourlyData": "Geen uurlijkse voorspellingsgegevens beschikbaar",
+    "noDailyData": "Geen dagelijkse voorspellingsgegevens beschikbaar",
+    "noOptimalHours": "Geen optimale condities op",
+    "forecastIndicators": "Voorspellingindicatoren:",
+    "goodClimbingWindows": "Goede klimvensters",
+    "fairConditions": "Redelijke condities",
+    "poorConditions": "Slechte condities",
+    "lessReliable": "Dagen 8-14: Minder betrouwbare voorspelling",
+    "lessReliableHourly": "Volgende uren minder voorspelbaar",
+    "lessCertain": "MINDER ZEKER",
+    "todayBadge": "VANDAAG",
+    "delete": "Verwijderen"
+  },
+  "timeContext": {
+    "sunrise": "Zonsopgang",
+    "sunset": "Zonsondergang",
+    "recommendedHours": "Aanbevolen klimuren",
+    "totalDaylight": "Totaal daglicht",
+    "hoursOfDaylight": "{{hours}} uren daglicht",
+    "earlyStartRecommended": "Vroeg starten aanbevolen om de hitte te vermijden",
+    "limitedDaylight": "Beperkt daglicht - plan overeenkomstig",
+    "morningConditionsBest": "Beste condities 's ochtends",
+    "eveningSession": "Avondsessie condities",
+    "showAllHours": "Toon alle 24 uur",
+    "showClimbingHoursOnly": "Toon alleen klimuren",
+    "expandHours": "Vouw uit om alle uren te zien"
+  },
+  "rockTypes": {
+    "limestone": "kalksteen",
+    "granite": "graniet",
+    "sandstone": "zandsteeen",
+    "basalt": "basalt",
+    "gneiss": "gneis",
+    "quartzite": "kwartsiet",
+    "conglomerate": "conglomeraat",
+    "rhyolite": "rhyoliet",
+    "porphyry": "porfier",
+    "andesite": "andeziet",
+    "slate": "leisteen",
+    "schist": "schist",
+    "dolomite": "dolomiet",
+    "volcanic": "vulkanisch",
+    "phyllite": "fyllit"
+  },
+  "sync": {
+    "notification": {
+      "title": "Synchronisatietoets aangemaakt",
+      "description": "We hebben een unieke toets gegenereerd om je favorieten en chat over apparaten heen te synchroniseren.",
+      "viewInSettings": "Bekijk in Instellingen",
+      "viewMore": "Wat is een synchronisatiesleutel?"
+    },
+    "banner": {
+      "title": "Je gegevens synchroniseren op apparaten",
+      "description": "Je favorieten, rapporten en chatgeschiedenis worden lokaal opgeslagen en kunnen synchroniseren naar andere apparaten met je synchronisatietoets.",
+      "learnMore": "Meer informatie",
+      "dismiss": "Begrepen"
+    },
+    "status": {
+      "synced": "Gesynchroniseerd",
+      "syncing": "Synchroniseren...",
+      "offline": "Offline"
+    }
+  },
+  "syncExplainer": {
+    "title": "Hoe synchronisatie werkt",
+    "description": "Houd uw gegevens naadloos en veilig gesynchroniseerd op al uw apparaten.",
+    "features": {
+      "syncKey": {
+        "title": "Unieke synchronisatiesleutel",
+        "description": "Elke gebruiker krijgt een veilige, unieke sleutel om hun gegevens te synchroniseren tussen apparaten."
+      },
+      "multiDevice": {
+        "title": "Multi-apparaat toegang",
+        "description": "Toegang tot uw favorieten en chatgeschiedenis vanaf elk apparaat met uw synchronisatiesleutel."
+      },
+      "privacy": {
+        "title": "Privacy eerst",
+        "description": "Uw gegevens zijn versleuteld en alleen toegankelijk met uw synchronisatiesleutel. Geen account vereist."
+      }
+    },
+    "openSettings": "Instellingen openen"
+  },
+  "profileCreation": {
+    "title": "Maak uw profiel aan",
+    "subtitle": "Privacy-first registratie - geen persoonlijke gegevens vereist",
+    "createProfile": "Profiel aanmaken",
+    "creating": "Aanmaken...",
+    "maybeLater": "Misschien later",
+    "tabs": {
+      "create": "Profiel aanmaken",
+      "signIn": "Inloggen"
+    },
+    "signIn": {
+      "title": "Heeft u al een synchronisatiesleutel?",
+      "description": "Voer uw synchronisatiesleutel in om uw profiel en gegevens te herstellen",
+      "syncKeyLabel": "Synchronisatiesleutel",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Inloggen",
+      "signingIn": "Inloggen...",
+      "invalidKey": "Ongeldig formaat synchronisatiesleutel. Controleer en probeer opnieuw."
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Favorieten opslaan op alle apparaten",
+        "description": "Markeer uw favoriete rotsen en toegang vanaf elk apparaat"
+      },
+      "report": {
+        "title": "Deel rapporten met de gemeenschap",
+        "description": "Help medeklimmers door voorwaarden, veiligheidswaarschuwingen en kliminfo te delen"
+      },
+      "vote": {
+        "title": "Stem op nuttige rapporten",
+        "description": "Steun de gemeenschap door nuttige rapporten te bevestigen"
+      },
+      "manual": {
+        "title": "Bewaar je gegevens op al je apparaten",
+        "description": "Synchroniseer je favorieten, rapporten en chatgeschiedenis op al je apparaten"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "Geen e-mail of wachtwoord vereist",
+        "description": "We respecteren uw privacy. Alleen een synchronisatiesleutel, geen persoonlijke gegevens"
+      },
+      "syncKey": {
+        "title": "Maakt alleen een synchronisatiesleutel aan",
+        "description": "Een unieke identificatie die uw gegevens synchroniseert tussen apparaten"
+      },
+      "multiDevice": {
+        "title": "Bewaar het, fotografeer de QR-code of stuur per e-mail",
+        "description": "Gebruik uw synchronisatiesleutel om uw profiel op andere apparaten te herstellen"
+      }
+    }
+  },
+  "profileCreated": {
+    "title": "Profiel aangemaakt!",
+    "description": "Uw profiel is succesvol aangemaakt. Bewaar uw synchronisatiesleutel om toegang te krijgen tot uw gegevens op andere apparaten.",
+    "actionCompleted": "{{action}} voltooid!",
+    "syncKeyLabel": "Uw synchronisatiesleutel",
+    "syncKeyDescription": "Dit is uw unieke sleutel voor synchronisatie tussen apparaten",
+    "qrCodeLabel": "QR-code",
+    "qrCodeDescription": "Scan deze QR-code op een ander apparaat om uw gegevens te synchroniseren",
+    "privacyTitle": "Belangrijk: Bewaar uw synchronisatiesleutel",
+    "saveKeySafe": "Bewaar deze sleutel op een veilige plaats",
+    "screenshotQR": "Of maak een screenshot van deze QR-code",
+    "needForSync": "U heeft het nodig om andere apparaten te synchroniseren",
+    "gotIt": "Begrepen!",
+    "copied": "Gekopieerd!",
+    "copy": "Kopiëren",
+    "emailSection": {
+      "title": "Verzenden via e-mail (optioneel)",
+      "privacyNote1": "We slaan uw e-mail NIET op",
+      "privacyNote2": "Dit is slechts een eenmalige verzending",
+      "privacyNote3": "Nooit opgeslagen in onze database",
+      "emailPlaceholder": "uw@email.be",
+      "sendButton": "E-mail versturen",
+      "sending": "Verzenden...",
+      "success": "E-mail verzonden! Controleer uw inbox",
+      "error": "Verzenden e-mail mislukt. Probeer het opnieuw."
+    }
+  },
+  "profile": {
+    "anonymous": "Anoniem",
+    "member": "Lid",
+    "anonymousMember": "Anoniem lid",
+    "favorites": "Favorieten",
+    "recent": "Recente zoekopdrachten",
+    "stats": "Je statistieken",
+    "settings": "Instellingen",
+    "clearData": "Alle gegevens wissen",
+    "yourReports": "Jouw rapporten"
+  },
+  "stats": {
+    "title": "Jouw statistieken",
+    "description": "Jouw activiteit en bijdragen aan de beta.rocks community",
+    "reportsPosted": "Rapporten geplaatst",
+    "confirmationsGiven": "Bevestigingen gegeven",
+    "favoritesCount": "Favorieten",
+    "memberSince": "Lid sinds",
+    "lastActive": "Laatst actief",
+    "unknown": "Onbekend",
+    "encourageReports": "Deel je lokale kennis door rapporten te plaatsen over rotsomstandigheden!",
+    "thankYou": "Bedankt voor je bijdrage aan de klimgemeenschap!"
+  },
+  "userReports": {
+    "title": "Jouw rapporten",
+    "description": "{{count}} rapporten",
+    "empty": "Nog geen rapporten",
+    "emptyMessage": "Je hebt nog geen rapporten geplaatst",
+    "emptyHint": "Deel voorwaarden en informatie over rotsen om de gemeenschap te helpen",
+    "loading": "Je rapporten laden...",
+    "loadFailed": "Kon rapporten niet laden",
+    "deleteSuccess": "Rapport verwijderd",
+    "deleteFailed": "Kon rapport niet verwijderen"
+  },
+  "settings": {
+    "title": "Instellingen",
+    "description": "Beheer je profiel, synchronisatietoets en voorkeuren",
+    "save": "Opslaan",
+    "saving": "Bezig met opslaan...",
+    "displayName": {
+      "label": "Weergavenaam",
+      "description": "Je naam die wordt weergegeven op rapporten en bevestigingen (optioneel)",
+      "placeholder": "Voer je naam in...",
+      "saved": "Weergavenaam opgeslagen",
+      "savedDescription": "Uw weergavenaam is succesvol bijgewerkt",
+      "saveFailed": "Opslaan mislukt",
+      "saveFailedDescription": "Kan uw weergavenaam niet opslaan. Probeer het opnieuw"
+    },
+    "units": {
+      "title": "Eenheden en metingen",
+      "description": "Kies je voorkeurseenheden voor weer- en klimgegevens",
+      "systemLabel": "Eenhedensysteem",
+      "systemDescription": "Snelle voorinstellingen voor veelgebruikte eenhedensystemen",
+      "systems": {
+        "metric": "Metrisch (°C, km/u, mm)",
+        "imperial": "Imperiaal (°F, mph, inches)",
+        "uk": "VK (°C, mph, mm)",
+        "custom": "Aangepast"
+      },
+      "temperature": "Temperatuur",
+      "temperatureUnits": {
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Windsnelheid",
+      "windSpeedUnits": {
+        "kmh": "Kilometer per uur (km/u)",
+        "mph": "Mijl per uur (mph)",
+        "ms": "Meter per seconde (m/s)",
+        "knots": "Knopen (kn)"
+      },
+      "precipitation": "Neerslag",
+      "precipitationUnits": {
+        "mm": "Millimeter (mm)",
+        "inches": "Inches (in)"
+      },
+      "distance": "Afstand",
+      "distanceUnits": {
+        "km": "Kilometer (km)",
+        "miles": "Mijl (mi)"
+      },
+      "elevation": "Hoogte",
+      "elevationUnits": {
+        "meters": "Meter (m)",
+        "feet": "Voet (ft)"
+      },
+      "saved": "Eenheden opgeslagen",
+      "savedDescription": "Uw eenheidsvoorkeuren zijn succesvol bijgewerkt",
+      "saveFailed": "Opslaan van eenheden mislukt",
+      "saveFailedDescription": "Kan uw eenheidsvoorkeuren niet opslaan. Probeer het opnieuw"
+    },
+    "syncKey": {
+      "title": "Synchronisatietoets",
+      "description": "Gebruik deze toets om je favorieten en instellingen over apparaten heen te synchroniseren",
+      "label": "Je synchronisatietoets",
+      "copy": "Synchronisatietoets kopiëren",
+      "showFullKey": "Volledige toets weergeven",
+      "hideKey": "Toets verbergen",
+      "qrCode": "QR-code",
+      "qrDescription": "Scan deze QR-code op een ander apparaat om je gegevens te synchroniseren",
+      "restoreTitle": "Herstel vanaf een ander apparaat",
+      "restoreDescription": "Heb je al een synchronisatietoets? Plak deze hier om je gegevens te herstellen",
+      "restoreLabel": "Plak je synchronisatietoets",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Synchronisatietoets herstellen",
+      "restoring": "Herstellen...",
+      "restoreSuccess": "Synchronisatietoets succesvol hersteld! Herladen...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
+      "restoreError": "Ongeldig synchronisatietoets formaat. Controleer en probeer opnieuw.",
+      "saveNote": {
+        "title": "Bewaar je synchronisatietoets",
+        "description": "We raden aan om je synchronisatietoets op te slaan op een veilige locatie zoals je Notities-app of wachtwoordbeheerder. Je hebt deze nodig om je gegevens op andere apparaten te herstellen."
+      },
+      "warning": {
+        "title": "Houd je synchronisatietoets privé",
+        "description": "Iedereen met je synchronisatietoets kan toegang krijgen tot je favorieten en instellingen. Deel deze niet openbaar."
+      },
+      "emailButton": "Stuur synchronisatietoets naar jezelf via e-mail",
+      "emailLabel": "E-mailadres",
+      "emailPlaceholder": "jij@example.be",
+      "emailSend": "Verzenden",
+      "emailSending": "Verzenden...",
+      "emailPrivacy": "We bewaren je e-mail niet - het wordt slechts één keer gebruikt om je synchronisatietoets te verzenden.",
+      "emailSent": "E-mail verzonden!",
+      "emailSentDescription": "Controleer je inbox op {{email}}",
+      "emailFailed": "Verzenden van e-mail mislukt",
+      "emailFailedDescription": "Probeer het opnieuw of kopieer je synchronisatietoets handmatig.",
+      "emailInvalid": "Voer een geldig e-mailadres in"
+    },
+    "dangerZone": {
+      "title": "Gevaarlijke zone",
+      "description": "Deze acties zijn permanent en kunnen niet ongedaan worden gemaakt",
+      "deleteProfile": "Profiel verwijderen",
+      "deleteProfileConfirm": "Weet je zeker dat je je profiel wilt verwijderen? Dit verwijdert permanent al je gegevens, inclusief favorieten, chatgeschiedenis en instellingen. Deze actie kan niet ongedaan worden gemaakt.",
+      "deleteFailed": "Kan profiel niet verwijderen. Probeer het opnieuw."
+    }
+  },
+  "favorites": {
+    "title": "Je favoriete rotsen",
+    "description": "Je hebt {{count}} favoriete locaties",
+    "empty": "Nog geen favorieten",
+    "emptyMessage": "Je hebt nog geen favoriete rotsen toegevoegd",
+    "emptyHint": "Klik op de sterknop op een willekeurige kaart met condities om deze aan je favorieten toe te voegen",
+    "lastChecked": "Laatst gecontroleerd",
+    "frictionScore": "Wrijvingsscore",
+    "viewConditions": "Bekijk condities",
+    "remove": "Verwijderen",
+    "confirmDelete": "Verwijderen uit favorieten?",
+    "confirmDeleteDescription": "Weet je zeker dat je {{name}} uit je favorieten wilt verwijderen?",
+    "loginToFavorite": "Stel uw profiel in om locaties aan favorieten toe te voegen",
+    "errorToggling": "Kan favoriet niet wijzigen. Probeer het opnieuw.",
+    "added": "Rots toegevoegd aan favorieten",
+    "removed": "Rots verwijderd uit favorieten",
+    "loading": "Favorieten laden..."
+  },
+  "reports": {
+    "addReport": "Rapport toevoegen",
+    "addReportDescription": "Deel informatie over {{cragName}}",
+    "postingAs": "Plaatsen als",
+    "category": "Wat wil je melden?",
+    "categories": {
+      "conditions": "Condities",
+      "safety": "Veiligheid",
+      "access": "Toegang",
+      "climbing_info": "Kliminfo",
+      "facilities": "Voorzieningen",
+      "other": "Overig",
+      "lost_found": "Verloren voorwerpen"
+    },
+    "categoryDescriptions": {
+      "conditions": "Weer, wrijving, droogte, drukte",
+      "safety": "Losse bouten, steenslag, gebroken grepen, gevaren",
+      "access": "Sluitingen, parkeerveranderingen, seizoensgebonden beperkingen, vogelnesten, insecten",
+      "climbing_info": "Herboulonnering, equipment updates, route wijzigingen, vaste quickdraws",
+      "facilities": "Toiletten, camping, waterbronnen, voorzieningen",
+      "other": "Alles anders dat hierboven niet past",
+      "lost_found": "Verloren of gevonden uitrusting"
+    },
+    "categoryHelp": {
+      "conditions": "Huidig weer, wrijving, droogte, drukte bij de klif",
+      "safety": "Gevaren in het hele gebied, gevaarlijke omstandigheden, dringende waarschuwingen",
+      "access": "Parkeren, sluitingen, regelgeving, seizoensgebonden beperkingen",
+      "climbing_info": "Routespecifieke details, beta, grepen, uitrusting, moeilijkheidsgraden",
+      "facilities": "Toiletten, camping, waterbronnen, voorzieningen",
+      "other": "Alles anders dat niet in de bovenstaande categorieën past",
+      "lost_found": "Meld verloren items die je zoekt of gevonden items die je bij je hebt"
+    },
+    "dryness": "Droogte",
+    "wind": "Wind",
+    "crowds": "Drukte",
+    "additionalComments": "Extra opmerkingen (optioneel)",
+    "details": "Details",
+    "detailsRequired": "Geef alstublieft details over dit rapport",
+    "placeholders": {
+      "conditions": "Bijv., Oostsector nog nat, pad modderig, scheur lekt...",
+      "safety": "Bijv., Losse bout op route X, steenslaggevaar bij hoofdwand...",
+      "access": "Bijv., Poort gesloten tot mei, nieuwe parkeerplaats achter bibliotheek...",
+      "climbing_info": "Bijv., Route X herboulonneerd met roestvrijstalen bouten, nieuwe vaste quickdraws geïnstalleerd, anker verbeterd...",
+      "facilities": "Bijv., Toilet beschikbaar bij parkeerplaats, geen waterbron in de buurt...",
+      "other": "Beschrijf wat je wilt melden...",
+      "lost_found": "Bijv., Blauwe krijtzak gevonden aan de basis, Black Diamond cam #2 verloren bij de parking..."
+    },
+    "submit": "Rapport indienen",
+    "submitting": "Indienen...",
+    "readyToPost": "Profiel aangemaakt! Je bent klaar om je rapport te plaatsen.",
+    "helpful": "Nuttig",
+    "loginToConfirm": "Stel je profiel in om rapporten te bevestigen",
+    "confirmFailed": "Kan rapport niet bevestigen. Probeer opnieuw.",
+    "voteReady": "Je kunt nu stemmen op rapporten",
+    "ratings": {
+      "veryPoor": "Zeer slecht",
+      "poor": "Slecht",
+      "okay": "Oké",
+      "good": "Goed",
+      "excellent": "Uitstekend"
+    },
+    "scales": {
+      "veryWet": "Zeer nat",
+      "veryDry": "Perfect",
+      "calm": "Zeer winderig",
+      "veryWindy": "Kalm",
+      "empty": "Leeg",
+      "veryCrowded": "Zeer druk"
+    },
+    "drynessLabels": {
+      "1": "Zeer nat",
+      "2": "Nat",
+      "3": "Licht vochtig",
+      "4": "Grotendeels droog",
+      "5": "Zeer droog"
+    },
+    "windLabels": {
+      "1": "Kalm",
+      "2": "Lichte bries",
+      "3": "Matig",
+      "4": "Winderig",
+      "5": "Zeer winderig"
+    },
+    "crowdsLabels": {
+      "1": "Leeg",
+      "2": "Weinig mensen",
+      "3": "Matig",
+      "4": "Druk",
+      "5": "Zeer druk"
+    },
+    "recentReports": "Recente rapporten",
+    "communityReports": "Gemeenschapsrapporten",
+    "noReports": "Nog geen rapporten",
+    "beTheFirst": "Wees de eerste om te rapporteren",
+    "noReportsInCategory": "Geen rapporten in deze categorie",
+    "filters": {
+      "all": "Alle"
+    },
+    "staleness": {
+      "outdated": "Verouderd",
+      "older": "Ouder",
+      "veryOld": "Zeer oud"
+    },
+    "observationDate": "Wanneer heb je dit waargenomen?",
+    "observationDateHelp": "Je kunt condities tot 7 dagen terug melden",
+    "lostFoundType": "Type",
+    "lostFoundTypes": {
+      "lost": "Verloren voorwerp",
+      "found": "Gevonden voorwerp"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Selecteer of dit een verloren of gevonden voorwerp is",
+    "lostBadge": "VERLOREN",
+    "foundBadge": "GEVONDEN",
+    "expiresAt": "Geldig tot (optioneel)",
+    "expiresAtHelp": "Stel in wanneer dit rapport verouderd wordt (nuttig voor tijdelijke sluitingen of veranderende omstandigheden)",
+    "noExpiry": "Verloopt nooit",
+    "expiredOn": "Verlopen op {{date}}",
+    "edit": "Bewerken",
+    "delete": "Verwijderen",
+    "deleteConfirm": "Weet u zeker dat u dit rapport wilt verwijderen?",
+    "deleteConfirmTitle": "Rapport Verwijderen",
+    "updated": "Rapport bijgewerkt",
+    "deleted": "Rapport verwijderd",
+    "editReport": "Rapport Bewerken",
+    "editReportDescription": "Werk uw rapport bij",
+    "updateReport": "Rapport Bijwerken",
+    "updating": "Bijwerken...",
+    "deleteSuccess": "Rapport verwijderd",
+    "deleteSuccessDescription": "Je rapport is succesvol verwijderd",
+    "deleteError": "Verwijderen mislukt",
+    "deleteErrorDescription": "Er is iets misgegaan. Probeer het opnieuw.",
+    "photos": "Foto's",
+    "photoHint": "Voeg tot 3 foto's toe (max. 2MB elk). Foto's worden automatisch gecomprimeerd.",
+    "photoUploadFailed": "Foto uploaden mislukt",
+    "uploadingPhotos": "Foto's uploaden...",
+    "submitReport": "Rapport indienen"
+  },
+  "editCragDialog": {
+    "title": "Rots Bewerken",
+    "subtitle": "Converteer deze rots naar een sector of wijzig het bovenliggende element",
+    "currentStatus": "Huidige Status",
+    "crag": "Rots",
+    "sector": "Sector",
+    "currentParent": "Huidig bovenliggend element",
+    "chooseAction": "Kies Actie",
+    "convertToSector": "Converteer naar Sector",
+    "convertToCrag": "Converteer naar Rots",
+    "changeParent": "Wijzig Bovenliggende Rots",
+    "selectParentCrag": "Selecteer Bovenliggende Rots",
+    "selectNewParent": "Selecteer Nieuwe Bovenliggende Rots",
+    "searchForParent": "Zoek de bovenliggende rots waaraan deze sector toegewezen moet worden",
+    "searchPlaceholder": "Zoek bovenliggende rots...",
+    "noCragsFound": "Geen rotsen gevonden",
+    "change": "Wijzigen",
+    "save": "Wijzigingen Opslaan",
+    "saving": "Opslaan...",
+    "success": "Rots succesvol bijgewerkt",
+    "convertedToCrag": "Succesvol geconverteerd naar rots",
+    "convertedToSector": "Succesvol geconverteerd naar sector",
+    "errors": {
+      "parentRequired": "Bovenliggende rots vereist",
+      "parentRequiredDesc": "Selecteer een bovenliggende rots voor deze sector",
+      "failed": "Update mislukt",
+      "failedDesc": "Kan rots niet bijwerken. Probeer het opnieuw."
+    }
+  },
+  "cragPage": {
+    "askAI": "Vraag AI",
+    "edit": "Bewerken",
+    "editCrag": "Rots details bewerken",
+    "currentConditions": "Huidige omstandigheden",
+    "sectors": "Sectoren",
+    "addSector": "Sector toevoegen",
+    "noSectors": "Er zijn nog geen sectoren toegevoegd aan deze rots.",
+    "beFirstToAddSector": "Wees de eerste die een sector toevoegt",
+    "searchSectors": "Zoek sectoren...",
+    "noSectorsFound": "Geen sectoren gevonden die overeenkomen met je zoekopdracht.",
+    "disclaimer": "Weersomstandigheden kunnen snel veranderen. Controleer altijd de omstandigheden bij aankomst en gebruik je beste oordeel.",
+    "askAIAboutCrag": "Vraag AI over deze rots",
+    "viewOnSunCalc": "Bekijk zon/maan tijden",
+    "viewSunAngles": "Bekijk zonpositie en schaduwhoeken",
+    "viewOnMap": "Bekijk op kaart",
+    "viewOnGoogleMaps": "Bekijk op Google Maps",
+    "addToFavorites": "Toevoegen aan favorieten",
+    "removeFromFavorites": "Verwijderen uit favorieten"
+  },
+  "time": {
+    "today": "Vandaag",
+    "yesterday": "Gisteren",
+    "daysAgo_one": "{{count}} dag geleden",
+    "daysAgo_other": "{{count}} dagen geleden",
+    "pickDate": "Kies een datum"
+  },
+  "loading": {
+    "conditions": "Omstandigheden laden...",
+    "weatherData": "Weergegevens ophalen...",
+    "reports": "Meldingen laden..."
+  },
+  "nearbyMatch": {
+    "distance": "{{distance}} van {{location}}"
+  },
+  "feed": {
+    "title": "Live-feed",
+    "viewFeed": "Bekijk activiteitenfeed",
+    "live": "Live",
+    "justNow": "Zojuist",
+    "loadingFeed": "Feed laden...",
+    "reconnecting": "Opnieuw verbinden met live-updates...",
+    "loadMore": "Meer rapporten laden",
+    "loadingMore": "Laden...",
+    "totalReports": "{{count}} totaal",
+    "showingOf": "{{showing}} van {{total}} rapporten weergegeven",
+    "totalReportsHint": "Totaal aantal rapporten van de community, inclusief oudere die niet in de feed worden getoond",
+    "olderHidden": "Oudere rapporten zijn nog steeds zichtbaar op individuele rotspaginas",
+    "filters": {
+      "all": "Alle",
+      "favorites": "Favorieten"
+    },
+    "emptyState": {
+      "noReportsTitle": "Nog geen rapporten",
+      "noReportsDescription": "Wees de eerste om omstandigheden te delen met de klimgemeenschap",
+      "noFavoritesTitle": "Geen rapporten van favorieten",
+      "noFavoritesDescription": "Voeg rotsen toe aan je favorieten om hun rapporten in deze feed te zien"
+    }
+  },
+  "webcams": {
+    "title": "Webcams in de buurt",
+    "nearbyCount": "{{count}} webcam gevonden",
+    "nearbyCount_other": "{{count}} webcams gevonden",
+    "daylight": "Daglicht",
+    "openOnWindy": "Openen op Windy.com",
+    "poweredBy": "Mogelijk gemaakt door",
+    "noWebcams": "Geen webcams gevonden in de buurt"
+  }
+}

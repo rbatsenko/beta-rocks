@@ -1,0 +1,916 @@
+{
+  "header": {
+    "title": "beta.rocks"
+  },
+  "welcome": {
+    "heading": "Ottieni info su ogni falesia",
+    "description": "Condizioni in tempo reale, report della community e informazioni sulle vie nelle falesie di tutto il mondo",
+    "exampleQueries": {
+      "query1": {
+        "display": "Com'è il grip ad Arco domani?",
+        "query": "Quali condizioni ci saranno ad Arco domani?"
+      },
+      "query2": {
+        "display": "Finale Ligure sarà asciutta questo pomeriggio?",
+        "query": "Finale Ligure sarà asciutta questo pomeriggio?"
+      },
+      "query3": {
+        "display": "Che meteo è previsto a Sperlonga nel weekend?",
+        "query": "Quali condizioni sono previste a Sperlonga questo weekend?"
+      }
+    },
+    "searchHint": "Cerca qualsiasi area di arrampicata",
+    "yourFavorites": "I Tuoi Preferiti",
+    "favoriteQuery": "Quali sono le condizioni a {{crag}}?"
+  },
+  "chat": {
+    "analyzing": "Analisi delle condizioni...",
+    "thinking": "Sto pensando...",
+    "inputPlaceholder": "Chiedi di una falesia o settore...",
+    "clearHistory": "Cancella cronologia",
+    "clearHistoryConfirm": "Sei sicuro di voler cancellare tutta la cronologia della chat? Questa azione non può essere annullata.",
+    "clearChat": "Cancella chat",
+    "clearChatTooltip": "Cancella la conversazione attuale",
+    "clearChatConfirm": "Cancellare la chat? Questo rimuoverà tutti i messaggi dalla conversazione attuale."
+  },
+  "search": {
+    "title": "Cerca falesie",
+    "description": "Cerca aree di arrampicata per nome o posizione",
+    "placeholder": "Cerca falesie... (ad es. 'Arco', 'Finale Ligure')",
+    "typeToSearch": "Digita per cercare falesie...",
+    "searching": "Ricerca in corso...",
+    "noCragsFound": "Nessuna falesia trovata. Prova un altro termine di ricerca.",
+    "addNewCrag": "Aggiungi nuova falesia",
+    "heading": "Falesie",
+    "toSelect": "per selezionare",
+    "toClose": "per chiudere",
+    "notSeeing": "Non vedi la tua falesia?",
+    "addMissingHere": "Aggiungila qui"
+  },
+  "fab": {
+    "addCrag": "Aggiungi nuova falesia",
+    "addReport": "Aggiungi report",
+    "tooltip": "Azioni rapide"
+  },
+  "cragLocationPicker": {
+    "loadingMap": "Caricamento mappa...",
+    "searchPlaceholder": "Cerca una località (es. 'Cresciano, Ticino')",
+    "noLocationsFound": "Nessuna località trovata",
+    "loadingLocationData": "Caricamento dati località...",
+    "clickToSet": "Clicca sulla mappa per impostare la posizione della falesia",
+    "nearbyCragsFound": "{{count}} falesia vicina trovata",
+    "nearbyCragsFound_other": "{{count}} falesie vicine trovate",
+    "clickMarkersToView": "Clicca sui marcatori per visualizzare le falesie esistenti",
+    "coordinates": "Coordinate"
+  },
+  "addCragModal": {
+    "title": "Aggiungi nuova falesia",
+    "subtitle": "Aiuta a far crescere il database di arrampicata",
+    "mapLabel": "Posizione",
+    "mapHelp": "Clicca sulla mappa per impostare la posizione della falesia",
+    "coordinates": "Coordinate",
+    "nearbyCragsWarning": {
+      "title": "Falesie esistenti nelle vicinanze",
+      "message": "{{count}} falesia trovata entro 500m",
+      "message_other": "{{count}} falesie trovate entro 500m",
+      "away": "di distanza",
+      "view": "Visualizza",
+      "proceed": "Se nessuna di queste corrisponde, puoi comunque procedere con l'aggiunta di una nuova falesia."
+    },
+    "form": {
+      "name": "Nome della falesia",
+      "namePlaceholder": "ad es. Arco, Finale Ligure",
+      "country": "Paese",
+      "countryPlaceholder": "Seleziona il paese",
+      "state": "Regione",
+      "statePlaceholder": "ad es. Trentino-Alto Adige, Liguria",
+      "municipality": "Comune/Città",
+      "municipalityPlaceholder": "ad es. Arco, Finale Ligure",
+      "village": "Frazione",
+      "villagePlaceholder": "ad es. Massone",
+      "rockType": "Tipo di roccia",
+      "rockTypePlaceholder": "Seleziona il tipo di roccia (facoltativo)",
+      "aspects": "Orientamenti",
+      "aspectsHelp": "Seleziona tutte le direzioni verso cui è orientata la falesia",
+      "climbingTypes": "Tipi di arrampicata",
+      "climbingTypesHelp": "Seleziona tutti gli stili di arrampicata applicabili",
+      "description": "Descrizione",
+      "descriptionPlaceholder": "Informazioni aggiuntive sulla falesia (facoltativo)..."
+    },
+    "rockTypes": {
+      "granite": "Granito",
+      "sandstone": "Arenaria",
+      "limestone": "Calcare",
+      "gneiss": "Gneiss",
+      "quartzite": "Quarzite",
+      "gritstone": "Arenaria compatta",
+      "basalt": "Basalto",
+      "volcanic": "Vulcanica",
+      "conglomerate": "Conglomerato",
+      "schist": "Scisto",
+      "slate": "Ardesia",
+      "other": "Altro"
+    },
+    "climbingTypes": {
+      "sport": "Sportiva",
+      "trad": "Tradizionale",
+      "boulder": "Boulder",
+      "mixed": "Mista",
+      "aid": "Artificiale",
+      "ice": "Ghiaccio"
+    },
+    "cancel": "Annulla",
+    "submit": "Invia falesia",
+    "submitting": "Invio in corso...",
+    "success": "Falesia aggiunta con successo!",
+    "successDesc": "{{name}} è stata aggiunta al database",
+    "errors": {
+      "nameRequired": "Il nome è obbligatorio",
+      "nameRequiredDesc": "Per favore, inserisci un nome per la falesia",
+      "locationRequired": "La posizione è obbligatoria",
+      "locationRequiredDesc": "Per favore, clicca sulla mappa per impostare la posizione della falesia",
+      "countryRequired": "Il paese è obbligatorio",
+      "countryRequiredDesc": "Per favore, seleziona un paese dal menu a tendina",
+      "duplicate": "La falesia esiste già nelle vicinanze",
+      "duplicateDesc": "Una falesia con un nome simile esiste già in questa posizione. Controlla la mappa per le falesie esistenti.",
+      "failed": "Aggiunta della falesia fallita",
+      "failedDesc": "Si è verificato un errore durante l'aggiunta della falesia. Per favore, riprova."
+    }
+  },
+  "conditions": {
+    "rating": "Valutazione",
+    "details": "Dettagli",
+    "location": "Località",
+    "favorite": "Preferito",
+    "favorited": "Nei preferiti",
+    "addReport": "Aggiungi rapporto",
+    "viewCragPage": "Vedi falesia"
+  },
+  "ratings": {
+    "great": "Ottime",
+    "good": "Buone",
+    "fair": "Discrete",
+    "poor": "Scarse",
+    "nope": "Da evitare"
+  },
+  "reasons": {
+    "perfectTemp": "Temperatura perfetta ({{temp}})",
+    "tempTooHigh": "Temperatura troppo alta - potresti scivolare",
+    "coldGoodFriction": "Freddo ma con buona aderenza per {{rockType}}",
+    "idealHumidity": "Umidità ideale ({{humidity}}%)",
+    "lowHumidityGranite": "Umidità bassa che favorisce l'aderenza sul granito",
+    "readyInHours": "Pronto per scalare tra ~{{hours}} ore",
+    "acceptable": "Condizioni accettabili",
+    "goodHumidity": "Buona umidità ({{humidity}}%)",
+    "lowCondensationRisk": "Basso rischio di condensazione (differenza dal punto di rugiada {{dewPointSpread}})",
+    "lowHumidityFriction": "Bassa umidità migliora l'attrito"
+  },
+  "warnings": {
+    "tooWarm": "Troppo caldo per {{rockType}} ({{temp}})",
+    "coldSuboptimal": "Freddo e poco ottimale per {{rockType}}",
+    "highHumidity": "Umidità elevata ({{humidity}}%) - la roccia può essere scivolosa",
+    "wetDangerousSandstone": "La roccia è bagnata - arrampicare sull'arenaria bagnata è pericoloso",
+    "wetSlippery": "La roccia è bagnata - condizioni scivolose",
+    "veryHighWinds": "Vento molto forte ({{wind}}) - rischio di sbilanciamento",
+    "highWind": "Vento forte ({{wind}})",
+    "recentPrecip": "Precipitazioni recenti ({{precip}}) - si asciugherà in ~{{hours}}h",
+    "currentlyWetDangerous": "Attualmente bagnato - pericoloso",
+    "currentlyWet": "Attualmente bagnato",
+    "cold": "Cold ({{temp}})",
+    "veryHighCondensationRisk": "Rischio di condensazione molto alto (differenza dal punto di rugiada {{dewPointSpread}}) - superficie rocciosa probabilmente umida",
+    "highCondensationRisk": "Alto rischio di condensazione (differenza dal punto di rugiada {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Alto rischio di condensazione",
+    "moderateCondensationRisk": "Rischio moderato di condensazione (differenza dal punto di rugiada {{dewPointSpread}})",
+    "condensationRisk": "Rischio di condensazione ({{dewPointSpread}})"
+  },
+  "sandstoneWarning": {
+    "general": "L'arenaria è fragile quando è bagnata e richiede molto tempo per asciugarsi dopo la pioggia. Arrampicare su arenaria bagnata danneggia la roccia ed è pericoloso.",
+    "recentRain": "Rilevate precipitazioni recenti. Assicurarsi che la roccia sia completamente asciutta prima di arrampicare.",
+    "inLast24h": "nelle ultime 24h",
+    "inLast48h": "nelle ultime 48h"
+  },
+  "weather": {
+    "clearSky": "Cielo sereno",
+    "mainlyClear": "Prevalentemente sereno",
+    "partlyCloudy": "Parzialmente nuvoloso",
+    "overcast": "Coperto",
+    "fog": "Nebbia",
+    "depositingRimeFog": "Nebbia brinosa",
+    "lightDrizzle": "Pioviggine leggera",
+    "moderateDrizzle": "Pioviggine moderata",
+    "denseDrizzle": "Pioviggine intensa",
+    "lightFreezingDrizzle": "Pioviggine gelata debole",
+    "denseFreezingDrizzle": "Pioviggine gelata forte",
+    "slightRain": "Pioggia debole",
+    "moderateRain": "Pioggia moderata",
+    "heavyRain": "Pioggia intensa",
+    "lightFreezingRain": "Pioggia gelata debole",
+    "heavyFreezingRain": "Pioggia gelata intensa",
+    "slightSnowFall": "Neve debole",
+    "moderateSnowFall": "Neve moderata",
+    "heavySnowFall": "Neve intensa",
+    "snowGrains": "Neve granulosa",
+    "slightRainShowers": "Rovesci deboli",
+    "moderateRainShowers": "Rovesci moderati",
+    "violentRainShowers": "Rovesci forti",
+    "slightSnowShowers": "Rovesci di neve deboli",
+    "heavySnowShowers": "Rovesci di neve forti",
+    "thunderstorm": "Temporale",
+    "thunderstormSlightHail": "Temporale con grandine debole",
+    "thunderstormHeavyHail": "Temporale con forte grandine"
+  },
+  "timeframes": {
+    "now": "ora",
+    "today": "oggi",
+    "tomorrow": "domani",
+    "thisAfternoon": "questo pomeriggio",
+    "thisEvening": "questa sera",
+    "tonight": "stanotte"
+  },
+  "disambiguation": {
+    "foundMultipleAreas": "Sono state trovate {{count}} aree di arrampicata per \"{{location}}\". Scegline una:",
+    "foundMultipleLocations": "Sono state trovate più località per \"{{location}}\". Scegline una:",
+    "queryTemplate": "condizioni a {{name}} ({{latitude}}, {{longitude}})"
+  },
+  "footer": {
+    "about": "Informazioni",
+    "privacy": "Privacy",
+    "github": "GitHub",
+    "brand": "beta.rocks",
+    "description": "Condizioni di arrampicata gratuite per tutti. Creato con ❤️ per la comunità dei climber.",
+    "attribution": "Dati da Open-Meteo, OpenBeta e <osmLink>contributori di OpenStreetMap</osmLink>. Report della community.",
+    "copyright": "© 2026 beta.rocks. Tutti i diritti riservati."
+  },
+  "features": {
+    "heading": "Tutto ciò che ti serve",
+    "subheading": "Condizioni di arrampicata complete sempre a portata di mano, gratis",
+    "realTimeWeather": {
+      "title": "Meteo in tempo reale",
+      "description": "Previsioni accurate di Open-Meteo con calcolo sole/ombra per ogni settore"
+    },
+    "chatInterface": {
+      "title": "Interfaccia chat",
+      "description": "Richieste in linguaggio naturale grazie all'IA. Chiedi in qualsiasi lingua e ricevi risposte istantanee"
+    },
+    "communityReports": {
+      "title": "Report della community",
+      "description": "Condividi condizioni, avvisi di sicurezza, modifiche di accesso, informazioni di arrampicata e altro. Aiuta gli scalatori con aggiornamenti in tempo reale in più categorie"
+    },
+    "globalCoverage": {
+      "title": "Copertura globale",
+      "description": "Qualsiasi falesia o settore nel mondo grazie all'integrazione con OpenBeta"
+    },
+    "crossDeviceSync": {
+      "title": "Sincronizzazione tra dispositivi",
+      "description": "Accedi ai tuoi preferiti e alla cronologia chat da qualsiasi dispositivo con una chiave di sincronizzazione sicura. Nessun account necessario"
+    },
+    "privacyFirst": {
+      "title": "Privacy prima di tutto",
+      "description": "Non solo non ci servono i tuoi dati - non li vogliamo! Anonimato di default. Nessun account, nessun tracciamento. I tuoi dati restano tuoi."
+    }
+  },
+  "privacy": {
+    "heading": "Informativa sulla Privacy",
+    "subheading": "Non solo non ci servono i tuoi dati - non li vogliamo!",
+    "whatWeDontCollect": {
+      "title": "Cosa Non Raccogliamo",
+      "description": "Nessun indirizzo email, nessun nome, nessun numero di telefono, nessun indirizzo IP, nessuna analytics, nessun pixel di tracciamento, nessun cookie (tranne quelli essenziali), nessun tracciamento del comportamento. Non possiamo letteralmente identificarti."
+    },
+    "whatYouControl": {
+      "title": "Cosa Controlli Tu",
+      "description": "I tuoi preferiti, rapporti e cronologia chat vengono archiviati localmente sul tuo dispositivo. Per accedervi da più dispositivi, puoi creare un profilo anonimo. Una volta che hai un profilo, i tuoi dati si sincronizzano automaticamente per consentire l'accesso da più dispositivi. Puoi eliminare tutti i tuoi dati in qualsiasi momento dalle Impostazioni."
+    },
+    "howSyncWorks": {
+      "title": "Come Funziona la Sincronizzazione",
+      "description": "Quando crei un profilo, generiamo una chiave di sincronizzazione anonima e sincronizziamo i tuoi dati con il nostro database. I dati sono collegati a una chiave di sincronizzazione con hash - non alla tua identità. La chiave di sincronizzazione è un identificatore casuale a cui solo tu hai accesso. Non possiamo collegarla a te. Nessuna email richiesta, nessun account necessario."
+    },
+    "openSource": {
+      "title": "Open Source",
+      "description": "L'intero nostro codice sorgente è open source su GitHub. Puoi verificare esattamente cosa facciamo con i tuoi dati (spoiler: niente). Trasparenza totale, zero tracker nascosti."
+    },
+    "yourRights": {
+      "title": "I Tuoi Diritti",
+      "description": "Puoi eliminare il tuo profilo in qualsiasi momento dalle Impostazioni. Questo rimuove i tuoi preferiti, la cronologia chat e il profilo dal nostro database. I rapporti della community che hai pubblicato rimangono visibili (in forma anonima) per aiutare altri scalatori. Pieno controllo sui tuoi dati."
+    },
+    "dataSecurity": {
+      "title": "Sicurezza dei Dati",
+      "description": "Le chiavi di sincronizzazione sono crittografate prima della memorizzazione. Usiamo Supabase con politiche Row Level Security. Anche se il nostro database trapelasse, le chiavi di sincronizzazione non potrebbero essere decodificate per identificare gli utenti."
+    },
+    "footer": {
+      "tldr": "TL;DR: Abbiamo costruito questa app per i climber, non per raccogliere dati. La tua privacy non è una funzionalità - è la base.",
+      "github": "Codice sorgente completo disponibile su <githubLink>GitHub</githubLink>"
+    }
+  },
+  "ui": {
+    "toggleTheme": "Cambia tema",
+    "selectLanguage": "Seleziona lingua",
+    "aboutApp": "Info sull'app",
+    "language": "Lingua",
+    "theme": "Tema"
+  },
+  "tabs": {
+    "overview": "Panoramica",
+    "reports": "Segnalazioni"
+  },
+  "dialog": {
+    "close": "Chiudi",
+    "cancel": "Annulla",
+    "detailedConditions": "Condizioni dettagliate",
+    "fullAnalysis": "Analisi completa del meteo e delle condizioni di arrampicata",
+    "showMap": "Mappa",
+    "tabs": {
+      "overview": "Panoramica",
+      "hourly": "Ogni ora",
+      "daily": "14 giorni"
+    },
+    "currentRating": "Valutazione attuale",
+    "currentConditions": "Condizioni attuali",
+    "currentWeather": "Meteo attuale",
+    "temperature": "Temperatura",
+    "humidity": "Umidità",
+    "windSpeed": "Velocità del vento",
+    "precipitation": "Precipitazioni",
+    "sunrise": "Alba",
+    "sunset": "Tramonto",
+    "high": "Massima",
+    "low": "Minima",
+    "rain": "Pioggia",
+    "wind": "Vento",
+    "dry": "Asciutto",
+    "wet": "Bagnato",
+    "precipitationContext": "Contesto delle precipitazioni",
+    "last24h": "Ultime 24 h",
+    "last48h": "Ultime 48 h",
+    "next24h": "Prossime 24 h",
+    "dewPointSpread": "Differenza dal punto di rugiada (rischio condensa)",
+    "lowRisk": "✅ Rischio basso - la roccia dovrebbe restare asciutta",
+    "moderateRisk": "⚠️ Rischio moderato - tieni d'occhio l'umidità",
+    "highRisk": "❌ Rischio alto - probabile condensa",
+    "optimalWindows": "Finestre di arrampicata ottimali",
+    "nextDays": "Prossimi 5 giorni",
+    "bestTime": "🌟 Momento migliore",
+    "noOptimalConditions": "Nessuna condizione ottimale nei prossimi 5 giorni",
+    "checkHourlyForecast": "Controlla le previsioni orarie per maggiori dettagli",
+    "weatherDisclaimer": "⚠️ Il meteo può cambiare rapidamente. Controlla le previsioni prima di partire e verifica le condizioni sul posto.",
+    "window": "finestra",
+    "windows": "finestre",
+    "today": "Oggi",
+    "tomorrow": "Domani",
+    "showCompleteTimeline": "Mostra la cronologia completa",
+    "hour": "ora",
+    "hours": "ore",
+    "period": "periodo",
+    "periods": "periodi",
+    "noHourlyData": "Nessun dato di previsione oraria disponibile",
+    "noDailyData": "Nessun dato di previsione giornaliera disponibile",
+    "noOptimalHours": "Nessuna finestra ottimale il",
+    "forecastIndicators": "Indicatori della previsione:",
+    "goodClimbingWindows": "Buone finestre di scalata",
+    "fairConditions": "Condizioni discrete",
+    "poorConditions": "Condizioni scarse",
+    "lessReliable": "Giorni 8-14: previsione meno affidabile",
+    "lessReliableHourly": "Prossime ore meno prevedibili",
+    "lessCertain": "MENO CERTO",
+    "todayBadge": "OGGI",
+    "delete": "Elimina"
+  },
+  "timeContext": {
+    "sunrise": "Alba",
+    "sunset": "Tramonto",
+    "recommendedHours": "Ore consigliate per arrampicare",
+    "totalDaylight": "Luce diurna totale",
+    "hoursOfDaylight": "{{hours}} ore di luce",
+    "earlyStartRecommended": "Si consiglia di partire presto per evitare il caldo",
+    "limitedDaylight": "Luce limitata - pianifica di conseguenza",
+    "morningConditionsBest": "Condizioni migliori al mattino",
+    "eveningSession": "Condizioni per sessione serale",
+    "showAllHours": "Mostra tutte le 24 ore",
+    "showClimbingHoursOnly": "Mostra solo ore di arrampicata",
+    "expandHours": "Espandi per vedere tutte le ore"
+  },
+  "rockTypes": {
+    "limestone": "calcare",
+    "granite": "granito",
+    "sandstone": "arenaria",
+    "basalt": "basalto",
+    "gneiss": "gneiss",
+    "quartzite": "quarzite",
+    "conglomerate": "conglomerato",
+    "rhyolite": "riolite",
+    "porphyry": "porfido",
+    "andesite": "andesite",
+    "slate": "ardesia",
+    "schist": "scisto",
+    "dolomite": "dolomia",
+    "volcanic": "vulcanico",
+    "phyllite": "fillite"
+  },
+  "sync": {
+    "banner": {
+      "title": "I tuoi dati si sincronizzano tra dispositivi",
+      "description": "I tuoi preferiti, rapporti e cronologia chat sono salvati localmente e possono sincronizzarsi su altri dispositivi usando la tua chiave di sincronizzazione.",
+      "learnMore": "Scopri di più",
+      "dismiss": "Ho capito"
+    },
+    "status": {
+      "synced": "Sincronizzato",
+      "syncing": "Sincronizzazione...",
+      "offline": "Offline",
+      "clickToLearnMore": "Fai clic per saperne di più sulla sincronizzazione"
+    },
+    "notification": {
+      "title": "Chiave di sincronizzazione creata",
+      "description": "Abbiamo generato una chiave univoca per sincronizzare i tuoi preferiti e chat su tutti i dispositivi.",
+      "viewInSettings": "Visualizza nelle impostazioni",
+      "viewMore": "Cos'è una chiave di sincronizzazione?"
+    }
+  },
+  "syncExplainer": {
+    "title": "Come funziona la sincronizzazione",
+    "description": "Mantieni i tuoi dati sincronizzati su tutti i tuoi dispositivi in modo sicuro e senza interruzioni.",
+    "features": {
+      "syncKey": {
+        "title": "Chiave di sincronizzazione univoca",
+        "description": "Ogni utente riceve una chiave sicura e univoca per sincronizzare i propri dati."
+      },
+      "multiDevice": {
+        "title": "Accesso multi-dispositivo",
+        "description": "Accedi ai tuoi preferiti e alla cronologia chat da qualsiasi dispositivo usando la tua chiave di sincronizzazione."
+      },
+      "privacy": {
+        "title": "Privacy prima di tutto",
+        "description": "I tuoi dati sono crittografati e accessibili solo con la tua chiave di sincronizzazione. Nessun account richiesto."
+      }
+    },
+    "openSettings": "Apri impostazioni"
+  },
+  "profileCreation": {
+    "title": "Crea il tuo profilo",
+    "subtitle": "Registrazione orientata alla privacy - nessun dato personale richiesto",
+    "createProfile": "Crea profilo",
+    "creating": "Creazione...",
+    "maybeLater": "Forse più tardi",
+    "tabs": {
+      "create": "Crea profilo",
+      "signIn": "Accedi"
+    },
+    "signIn": {
+      "title": "Hai già una chiave di sincronizzazione?",
+      "description": "Inserisci la tua chiave di sincronizzazione per ripristinare il tuo profilo e i tuoi dati",
+      "syncKeyLabel": "Chiave di sincronizzazione",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Accedi",
+      "signingIn": "Accesso in corso...",
+      "invalidKey": "Formato chiave di sincronizzazione non valido. Verifica e riprova."
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Salva i preferiti su tutti i dispositivi",
+        "description": "Segna le tue falesie preferite e accedi da qualsiasi dispositivo"
+      },
+      "report": {
+        "title": "Condividi report con la community",
+        "description": "Aiuta gli altri climbers condividendo condizioni, avvisi di sicurezza e informazioni di arrampicata"
+      },
+      "vote": {
+        "title": "Vota i report utili",
+        "description": "Supporta la community confermando i report utili"
+      },
+      "manual": {
+        "title": "Salva i tuoi dati su tutti i dispositivi",
+        "description": "Sincronizza i tuoi preferiti, report e cronologia chat su tutti i tuoi dispositivi"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "Nessuna email o password richiesta",
+        "description": "Rispettiamo la tua privacy. Solo una chiave di sincronizzazione, nessun dato personale"
+      },
+      "syncKey": {
+        "title": "Crea solo una chiave di sincronizzazione",
+        "description": "Un identificatore univoco che sincronizza i tuoi dati su tutti i dispositivi"
+      },
+      "multiDevice": {
+        "title": "Salvala, fotografa il QR o inviala via email",
+        "description": "Usa la tua chiave di sincronizzazione per ripristinare il profilo su altri dispositivi"
+      }
+    }
+  },
+  "profileCreated": {
+    "title": "Profilo creato!",
+    "description": "Il tuo profilo è stato creato con successo. Salva la tua chiave di sincronizzazione per accedere ai tuoi dati su altri dispositivi.",
+    "actionCompleted": "{{action}} completato!",
+    "syncKeyLabel": "La tua chiave di sincronizzazione",
+    "syncKeyDescription": "Questa è la tua chiave univoca per sincronizzare tra dispositivi",
+    "qrCodeLabel": "Codice QR",
+    "qrCodeDescription": "Scansiona questo codice QR su un altro dispositivo per sincronizzare i tuoi dati",
+    "privacyTitle": "Importante: Salva la tua chiave di sincronizzazione",
+    "saveKeySafe": "Salva questa chiave in un posto sicuro",
+    "screenshotQR": "Oppure fai uno screenshot di questo codice QR",
+    "needForSync": "Ti servirà per sincronizzare altri dispositivi",
+    "gotIt": "Ho capito!",
+    "copied": "Copiato!",
+    "copy": "Copia",
+    "emailSection": {
+      "title": "Invia via email (facoltativo)",
+      "privacyNote1": "NON memorizziamo la tua email",
+      "privacyNote2": "Questo è solo un invio una tantum",
+      "privacyNote3": "Mai salvata nel nostro database",
+      "emailPlaceholder": "tua@email.it",
+      "sendButton": "Invia email",
+      "sending": "Invio...",
+      "success": "Email inviata! Controlla la tua casella",
+      "error": "Impossibile inviare l'email. Riprova."
+    }
+  },
+  "profile": {
+    "anonymous": "Anonimo",
+    "member": "Membro",
+    "anonymousMember": "Membro anonimo",
+    "favorites": "Preferiti",
+    "yourReports": "I Tuoi Report",
+    "recent": "Ricerche recenti",
+    "stats": "Le tue statistiche",
+    "settings": "Impostazioni",
+    "clearData": "Cancella tutti i dati"
+  },
+  "stats": {
+    "title": "Le tue statistiche",
+    "description": "La tua attività e contributi alla community beta.rocks",
+    "reportsPosted": "Report pubblicati",
+    "confirmationsGiven": "Conferme date",
+    "favoritesCount": "Preferiti",
+    "memberSince": "Membro dal",
+    "lastActive": "Ultima attività",
+    "unknown": "Sconosciuto",
+    "encourageReports": "Condividi la tua conoscenza locale pubblicando report sulle condizioni delle falesie!",
+    "thankYou": "Grazie per aver contribuito alla community di arrampicata!"
+  },
+  "userReports": {
+    "title": "I Tuoi Report",
+    "description": "{{count}} report",
+    "empty": "Nessun report",
+    "emptyMessage": "Non hai ancora pubblicato report",
+    "emptyHint": "Condividi informazioni sulle condizioni e sulle falesie per aiutare la community",
+    "loading": "Caricamento dei tuoi report...",
+    "loadFailed": "Impossibile caricare i report",
+    "deleteSuccess": "Report eliminato con successo",
+    "deleteFailed": "Impossibile eliminare il report"
+  },
+  "settings": {
+    "title": "Impostazioni",
+    "description": "Gestisci il tuo profilo, la chiave di sincronizzazione e le preferenze",
+    "save": "Salva",
+    "saving": "Salvataggio in corso...",
+    "displayName": {
+      "label": "Nome visualizzato",
+      "description": "Il tuo nome mostrato nei report e nelle conferme (facoltativo)",
+      "placeholder": "Inserisci il tuo nome...",
+      "saved": "Nome salvato",
+      "savedDescription": "Il tuo nome visualizzato è stato aggiornato con successo",
+      "saveFailed": "Salvataggio non riuscito",
+      "saveFailedDescription": "Impossibile salvare il tuo nome visualizzato. Riprova"
+    },
+    "units": {
+      "title": "Unità e misure",
+      "description": "Scegli le unità preferite per i dati meteorologici e di arrampicata",
+      "systemLabel": "Sistema di unità",
+      "systemDescription": "Preimpostazioni rapide per i sistemi di unità più comuni",
+      "systems": {
+        "metric": "Metrico (°C, km/h, mm)",
+        "imperial": "Imperiale (°F, mph, pollici)",
+        "uk": "Regno Unito (°C, mph, mm)",
+        "custom": "Personalizzato"
+      },
+      "temperature": "Temperatura",
+      "temperatureUnits": {
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Velocità del vento",
+      "windSpeedUnits": {
+        "kmh": "Chilometri all'ora (km/h)",
+        "mph": "Miglia all'ora (mph)",
+        "ms": "Metri al secondo (m/s)",
+        "knots": "Nodi (kn)"
+      },
+      "precipitation": "Precipitazioni",
+      "precipitationUnits": {
+        "mm": "Millimetri (mm)",
+        "inches": "Pollici (in)"
+      },
+      "distance": "Distanza",
+      "distanceUnits": {
+        "km": "Chilometri (km)",
+        "miles": "Miglia (mi)"
+      },
+      "elevation": "Altitudine",
+      "elevationUnits": {
+        "meters": "Metri (m)",
+        "feet": "Piedi (ft)"
+      },
+      "saved": "Unità salvate",
+      "savedDescription": "Le tue preferenze delle unità sono state aggiornate con successo",
+      "saveFailed": "Salvataggio unità non riuscito",
+      "saveFailedDescription": "Impossibile salvare le tue preferenze delle unità. Riprova"
+    },
+    "syncKey": {
+      "title": "Chiave di sincronizzazione",
+      "description": "Usa questa chiave per sincronizzare i tuoi preferiti e le impostazioni tra dispositivi",
+      "label": "La tua chiave di sincronizzazione",
+      "copy": "Copia chiave di sincronizzazione",
+      "showFullKey": "Mostra chiave completa",
+      "hideKey": "Nascondi chiave",
+      "qrCode": "Codice QR",
+      "qrDescription": "Scansiona questo codice QR su un altro dispositivo per sincronizzare i tuoi dati",
+      "restoreTitle": "Ripristina da un altro dispositivo",
+      "restoreDescription": "Hai già una chiave di sincronizzazione? Incollala qui per ripristinare i tuoi dati",
+      "restoreLabel": "Incolla la tua chiave di sincronizzazione",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Ripristina chiave di sincronizzazione",
+      "restoring": "Ripristino in corso...",
+      "restoreSuccess": "Chiave di sincronizzazione ripristinata con successo! Ricaricamento...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
+      "restoreError": "Formato della chiave di sincronizzazione non valido. Controlla e riprova.",
+      "saveNote": {
+        "title": "Salva la tua chiave di sincronizzazione",
+        "description": "Ti consigliamo di salvare la tua chiave di sincronizzazione in un luogo sicuro come la tua app Note o un gestore di password. Ne avrai bisogno per ripristinare i tuoi dati su altri dispositivi."
+      },
+      "warning": {
+        "title": "Mantieni privata la tua chiave di sincronizzazione",
+        "description": "Chiunque abbia la tua chiave di sincronizzazione può accedere ai tuoi preferiti e alle impostazioni. Non condividerla pubblicamente."
+      },
+      "emailButton": "Invia la chiave di sincronizzazione via email",
+      "emailLabel": "Indirizzo email",
+      "emailPlaceholder": "tu@example.it",
+      "emailSend": "Invia",
+      "emailSending": "Invio in corso...",
+      "emailPrivacy": "Non memorizziamo la tua email - viene utilizzata solo una volta per inviare la tua chiave di sincronizzazione.",
+      "emailSent": "Email inviata!",
+      "emailSentDescription": "Controlla la tua casella di posta su {{email}}",
+      "emailFailed": "Invio email fallito",
+      "emailFailedDescription": "Riprova o copia manualmente la tua chiave di sincronizzazione.",
+      "emailInvalid": "Inserisci un indirizzo email valido"
+    },
+    "dangerZone": {
+      "title": "Zona pericolosa",
+      "description": "Queste azioni sono permanenti e non possono essere annullate",
+      "deleteProfile": "Elimina profilo",
+      "deleteProfileConfirm": "Sei sicuro di voler eliminare il tuo profilo? Questo rimuoverà permanentemente tutti i tuoi dati inclusi preferiti, cronologia chat e impostazioni. Questa azione non può essere annullata.",
+      "deleteFailed": "Impossibile eliminare il profilo. Riprova."
+    }
+  },
+  "favorites": {
+    "title": "Le tue falesie preferite",
+    "description": "Hai {{count}} località preferite",
+    "empty": "Nessun preferito",
+    "emptyMessage": "Non hai ancora aggiunto falesie preferite",
+    "emptyHint": "Clicca sull'icona della stella su qualsiasi scheda condizioni per aggiungerla ai tuoi preferiti",
+    "lastChecked": "Ultimo controllo",
+    "frictionScore": "Punteggio di aderenza",
+    "viewConditions": "Vedi condizioni",
+    "remove": "Rimuovi",
+    "confirmDelete": "Rimuovere dai preferiti?",
+    "confirmDeleteDescription": "Sei sicuro di voler rimuovere {{name}} dai tuoi preferiti?",
+    "loginToFavorite": "Si prega di configurare il profilo per aggiungere posizioni ai preferiti",
+    "errorToggling": "Impossibile cambiare il preferito. Riprova.",
+    "added": "Roccia aggiunta ai preferiti",
+    "removed": "Roccia rimossa dai preferiti",
+    "loading": "Caricamento preferiti..."
+  },
+  "reports": {
+    "addReport": "Aggiungi Segnalazione",
+    "addReportDescription": "Condividi informazioni su {{cragName}}",
+    "postingAs": "Pubblicando come",
+    "observationDate": "Quando hai osservato questo?",
+    "observationDateHelp": "Puoi segnalare condizioni fino a 7 giorni fa",
+    "category": "Cosa vuoi segnalare?",
+    "categories": {
+      "conditions": "Condizioni",
+      "safety": "Sicurezza",
+      "access": "Accesso",
+      "climbing_info": "Info arrampicata",
+      "facilities": "Servizi",
+      "other": "Altro",
+      "lost_found": "Oggetti smarriti"
+    },
+    "categoryDescriptions": {
+      "conditions": "Meteo, aderenza, asciutto, affollamento",
+      "safety": "Chiodi allentati, caduta sassi, prese rotte, pericoli",
+      "access": "Chiusure, modifiche parcheggio, restrizioni stagionali, nidi di uccelli, insetti",
+      "climbing_info": "Richiodatura, aggiornamenti attrezzatura, modifiche vie, rinvii fissi",
+      "facilities": "Bagni, campeggio, fonti d'acqua, servizi",
+      "other": "Qualsiasi altra cosa che non rientra sopra",
+      "lost_found": "Attrezzatura smarrita o trovata"
+    },
+    "categoryHelp": {
+      "conditions": "Meteo attuale, aderenza, asciutto, affollamento alla falesia",
+      "safety": "Pericoli in tutta l'area, condizioni pericolose, avvisi urgenti",
+      "access": "Parcheggio, chiusure, regolamenti, restrizioni stagionali",
+      "climbing_info": "Dettagli specifici delle vie, beta, prese, attrezzatura, gradi",
+      "facilities": "Bagni, campeggio, fonti d'acqua, servizi",
+      "other": "Qualsiasi altra cosa che non rientra nelle categorie precedenti",
+      "lost_found": "Segnala oggetti smarriti che stai cercando o oggetti trovati che hai con te"
+    },
+    "dryness": "Asciutto",
+    "wind": "Vento",
+    "crowds": "Affollamento",
+    "additionalComments": "Commenti aggiuntivi (opzionale)",
+    "details": "Dettagli",
+    "detailsRequired": "Fornisci dettagli su questa segnalazione",
+    "placeholders": {
+      "conditions": "Es., Settore est ancora bagnato, sentiero fangoso, fessura gocciolante...",
+      "safety": "Es., Chiodo allentato sulla via X, pericolo caduta sassi vicino alla parete principale...",
+      "access": "Es., Cancello chiuso fino a maggio, nuovo parcheggio dietro la biblioteca...",
+      "climbing_info": "Es., Via X richodata con chiodi inox, nuovi rinvii fissi installati, sosta migliorata...",
+      "facilities": "Es., Bagno disponibile al parcheggio, nessuna fonte d'acqua nelle vicinanze...",
+      "other": "Descrivi cosa vuoi segnalare...",
+      "lost_found": "Es., Trovato sacchetto di magnesite blu alla base, perso Black Diamond friend #2 vicino al parcheggio..."
+    },
+    "submit": "Invia Segnalazione",
+    "submitting": "Invio in corso...",
+    "readyToPost": "Profilo creato! Sei pronto a pubblicare la tua segnalazione.",
+    "helpful": "Utile",
+    "loginToConfirm": "Configura il tuo profilo per confermare le segnalazioni",
+    "confirmFailed": "Impossibile confermare la segnalazione. Riprova.",
+    "voteReady": "Ora puoi votare le segnalazioni",
+    "ratings": {
+      "veryPoor": "Pessimo",
+      "poor": "Scarso",
+      "okay": "Accettabile",
+      "good": "Buono",
+      "excellent": "Eccellente"
+    },
+    "scales": {
+      "veryWet": "Molto bagnato",
+      "veryDry": "Perfetto",
+      "calm": "Molto ventoso",
+      "veryWindy": "Calmo",
+      "empty": "Vuoto",
+      "veryCrowded": "Molto affollato"
+    },
+    "drynessLabels": {
+      "1": "Molto bagnato",
+      "2": "Bagnato",
+      "3": "Leggermente umido",
+      "4": "Per lo più asciutto",
+      "5": "Molto asciutto"
+    },
+    "windLabels": {
+      "1": "Calmo",
+      "2": "Brezza leggera",
+      "3": "Moderato",
+      "4": "Ventoso",
+      "5": "Molto ventoso"
+    },
+    "crowdsLabels": {
+      "1": "Vuoto",
+      "2": "Poche persone",
+      "3": "Moderato",
+      "4": "Affollato",
+      "5": "Molto affollato"
+    },
+    "recentReports": "Segnalazioni Recenti",
+    "communityReports": "Segnalazioni della Community",
+    "noReports": "Nessuna segnalazione ancora",
+    "beTheFirst": "Sii il primo a segnalare",
+    "noReportsInCategory": "Nessuna segnalazione in questa categoria",
+    "filters": {
+      "all": "Tutte"
+    },
+    "staleness": {
+      "outdated": "Obsoleto",
+      "older": "Più vecchio",
+      "veryOld": "Molto vecchio"
+    },
+    "lostFoundType": "Tipo",
+    "lostFoundTypes": {
+      "lost": "Oggetto smarrito",
+      "found": "Oggetto trovato"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Seleziona se si tratta di un oggetto smarrito o trovato",
+    "lostBadge": "SMARRITO",
+    "foundBadge": "TROVATO",
+    "expiresAt": "Valido fino a (opzionale)",
+    "expiresAtHelp": "Imposta quando questo rapporto diventa obsoleto (utile per chiusure temporanee o condizioni in evoluzione)",
+    "noExpiry": "Non scade mai",
+    "expiredOn": "Scaduto il {{date}}",
+    "edit": "Modifica",
+    "delete": "Elimina",
+    "deleteConfirm": "Sei sicuro di voler eliminare questo rapporto?",
+    "deleteConfirmTitle": "Elimina Rapporto",
+    "updated": "Rapporto aggiornato",
+    "deleted": "Rapporto eliminato",
+    "editReport": "Modifica Rapporto",
+    "editReportDescription": "Aggiorna il tuo rapporto",
+    "updateReport": "Aggiorna Rapporto",
+    "updating": "Aggiornamento...",
+    "deleteSuccess": "Rapporto eliminato",
+    "deleteSuccessDescription": "Il tuo rapporto è stato rimosso con successo",
+    "deleteError": "Eliminazione del rapporto non riuscita",
+    "deleteErrorDescription": "Qualcosa è andato storto. Riprova.",
+    "photos": "Foto",
+    "photoHint": "Aggiungi fino a 3 foto (max 2MB ciascuna). Le foto verranno compresse automaticamente.",
+    "photoUploadFailed": "Caricamento foto fallito",
+    "uploadingPhotos": "Caricamento foto...",
+    "submitReport": "Invia segnalazione"
+  },
+  "editCragDialog": {
+    "title": "Modifica Falesia",
+    "subtitle": "Converti questa falesia in un settore o cambia il suo elemento principale",
+    "currentStatus": "Stato Attuale",
+    "crag": "Falesia",
+    "sector": "Settore",
+    "currentParent": "Elemento principale attuale",
+    "chooseAction": "Scegli Azione",
+    "convertToSector": "Converti in Settore",
+    "convertToCrag": "Converti in Falesia",
+    "changeParent": "Cambia Falesia Principale",
+    "selectParentCrag": "Seleziona Falesia Principale",
+    "selectNewParent": "Seleziona Nuova Falesia Principale",
+    "searchForParent": "Cerca la falesia principale a cui assegnare questo settore",
+    "searchPlaceholder": "Cerca falesia principale...",
+    "noCragsFound": "Nessuna falesia trovata",
+    "change": "Cambia",
+    "save": "Salva Modifiche",
+    "saving": "Salvataggio...",
+    "success": "Falesia aggiornata con successo",
+    "convertedToCrag": "Convertita in falesia con successo",
+    "convertedToSector": "Convertita in settore con successo",
+    "errors": {
+      "parentRequired": "Falesia principale richiesta",
+      "parentRequiredDesc": "Seleziona una falesia principale per questo settore",
+      "failed": "Aggiornamento fallito",
+      "failedDesc": "Impossibile aggiornare la falesia. Riprova."
+    }
+  },
+  "cragPage": {
+    "askAI": "Chiedi all'IA",
+    "edit": "Modifica",
+    "editCrag": "Modifica dettagli falesia",
+    "currentConditions": "Condizioni attuali",
+    "sectors": "Settori",
+    "addSector": "Aggiungi settore",
+    "noSectors": "Nessun settore è stato ancora aggiunto a questa falesia.",
+    "beFirstToAddSector": "Sii il primo ad aggiungere un settore",
+    "searchSectors": "Cerca settori...",
+    "noSectorsFound": "Nessun settore trovato corrispondente alla tua ricerca.",
+    "disclaimer": "Le condizioni meteorologiche possono cambiare rapidamente. Verifica sempre le condizioni all'arrivo e usa il tuo miglior giudizio.",
+    "askAIAboutCrag": "Chiedi all'IA su questa falesia",
+    "viewOnSunCalc": "Vedi orari sole/luna",
+    "viewSunAngles": "Vedi posizione del sole e angoli d'ombra",
+    "viewOnMap": "Vedi sulla mappa",
+    "viewOnGoogleMaps": "Vedi su Google Maps",
+    "addToFavorites": "Aggiungi ai preferiti",
+    "removeFromFavorites": "Rimuovi dai preferiti"
+  },
+  "time": {
+    "today": "Oggi",
+    "yesterday": "Ieri",
+    "daysAgo_one": "{{count}} giorno fa",
+    "daysAgo_other": "{{count}} giorni fa",
+    "pickDate": "Scegli data"
+  },
+  "loading": {
+    "conditions": "Caricamento condizioni...",
+    "weatherData": "Recupero dati meteo...",
+    "reports": "Caricamento segnalazioni..."
+  },
+  "nearbyMatch": {
+    "distance": "{{distance}} da {{location}}"
+  },
+  "feed": {
+    "title": "Feed in diretta",
+    "viewFeed": "Visualizza feed attività",
+    "live": "In diretta",
+    "justNow": "Proprio ora",
+    "loadingFeed": "Caricamento feed...",
+    "reconnecting": "Riconnessione agli aggiornamenti in tempo reale...",
+    "loadMore": "Carica altri rapporti",
+    "loadingMore": "Caricamento...",
+    "totalReports": "{{count}} in totale",
+    "showingOf": "{{showing}} di {{total}} rapporti mostrati",
+    "totalReportsHint": "Totale dei rapporti della community, inclusi quelli piu vecchi non mostrati nel feed",
+    "olderHidden": "I rapporti piu vecchi sono ancora visibili nelle singole pagine delle falesie",
+    "filters": {
+      "all": "Tutti",
+      "favorites": "Preferiti"
+    },
+    "emptyState": {
+      "noReportsTitle": "Nessuna segnalazione ancora",
+      "noReportsDescription": "Sii il primo a condividere le condizioni con la comunità di arrampicata",
+      "noFavoritesTitle": "Nessuna segnalazione dai preferiti",
+      "noFavoritesDescription": "Aggiungi falesie ai tuoi preferiti per vedere le loro segnalazioni in questo feed"
+    }
+  },
+  "webcams": {
+    "title": "Webcam nelle vicinanze",
+    "nearbyCount": "{{count}} webcam trovata",
+    "nearbyCount_other": "{{count}} webcam trovate",
+    "daylight": "Luce diurna",
+    "openOnWindy": "Apri su Windy.com",
+    "poweredBy": "Offerto da",
+    "noWebcams": "Nessuna webcam trovata nelle vicinanze"
+  }
+}

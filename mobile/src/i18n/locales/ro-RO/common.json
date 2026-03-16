@@ -1,0 +1,832 @@
+{
+  "header": {
+    "title": "beta.rocks"
+  },
+  "welcome": {
+    "heading": "Obține informații despre orice stâncă",
+    "description": "Condiții în timp real, rapoarte ale comunității și informații despre rute pe stânci din întreaga lume",
+    "exampleQueries": {
+      "query1": {
+        "display": "Condiții în Cheile Turzii astăzi?",
+        "query": "Condiții în Cheile Turzii astăzi?"
+      },
+      "query2": {
+        "display": "E uscat la Vadu Crișului după-amiaza?",
+        "query": "E uscat la Vadu Crișului după-amiaza?"
+      },
+      "query3": {
+        "display": "Condiții în Piatra Craiului mâine?",
+        "query": "Condiții în Piatra Craiului mâine?"
+      }
+    },
+    "searchHint": "Căutați orice zonă de escaladă",
+    "yourFavorites": "Favoritele Tale",
+    "favoriteQuery": "Care sunt condițiile la {{crag}}?"
+  },
+  "chat": {
+    "analyzing": "Se analizează condițiile...",
+    "thinking": "Se gândesc...",
+    "inputPlaceholder": "Întreabă despre orice prag sau sector...",
+    "clearChat": "Șterge Chat",
+    "clearChatTooltip": "Șterge conversația curentă",
+    "clearChatConfirm": "Ștergi chat-ul? Aceasta va elimina toate mesajele din conversația curentă.",
+    "clearHistory": "Șterge Istoricul",
+    "clearHistoryConfirm": "Ești sigur că vrei să ștergi tot istoricul chat? Aceasta nu poate fi anulată."
+  },
+  "search": {
+    "title": "Caută perete",
+    "description": "Caută zone de escaladă după nume sau locație",
+    "placeholder": "Caută perete... (ex. 'Cheile Turzii', 'Vama Buzăului')",
+    "typeToSearch": "Tastați pentru a căuta perete...",
+    "searching": "Căutare...",
+    "noCragsFound": "Niciun perete găsit. Încercați un alt termen de căutare.",
+    "heading": "Perete",
+    "toSelect": "pentru a selecta",
+    "toClose": "pentru a închide",
+    "notSeeing": "Nu-ți vezi pereții?",
+    "addMissingHere": "Adaugă-l aici"
+  },
+  "cragLocationPicker": {
+    "loadingMap": "Se încarcă harta...",
+    "searchPlaceholder": "Caută o locație (ex. 'Cheile Turzii, Cluj')",
+    "noLocationsFound": "Nu s-au găsit locații",
+    "loadingLocationData": "Se încarcă datele locației...",
+    "clickToSet": "Faceți clic pe hartă pentru a seta locația peretelui",
+    "nearbyCragsFound": "{{count}} perete apropiat găsit",
+    "nearbyCragsFound_other": "{{count}} pereți apropiați găsiți",
+    "clickMarkersToView": "Faceți clic pe marcatori pentru a vizualiza pereții existenți",
+    "coordinates": "Coordonate"
+  },
+  "conditions": {
+    "rating": "Evaluare",
+    "details": "Detalii",
+    "location": "Locație",
+    "favorite": "Favorit",
+    "favorited": "Adăugat la favorite",
+    "addReport": "Adaugă Raport",
+    "viewCragPage": "Vezi zona"
+  },
+  "ratings": {
+    "great": "Excelent",
+    "good": "Bun",
+    "fair": "Acceptabil",
+    "poor": "Slab",
+    "nope": "Nu"
+  },
+  "reasons": {
+    "perfectTemp": "Temperatură perfectă ({{temp}})",
+    "tempTooHigh": "Temperatură prea ridicată - degetele pot aluneca",
+    "coldGoodFriction": "Rece, dar bun pentru fricțiunea pe {{rockType}}",
+    "idealHumidity": "Umiditate ideală ({{humidity}}%)",
+    "lowHumidityGranite": "Umiditate scăzută ajută fricțiunea pe granit",
+    "readyInHours": "Va fi gata de escaladă în aproximativ {{hours}} ore",
+    "acceptable": "Condițiile sunt acceptabile",
+    "goodHumidity": "Umiditate bună ({{humidity}}%)",
+    "lowCondensationRisk": "Risc scăzut de condensare (diferența punctului de rouă {{dewPointSpread}})",
+    "lowHumidityFriction": "Umiditatea scăzută îmbunătățește fricțiunea"
+  },
+  "warnings": {
+    "tooWarm": "Prea cald pentru {{rockType}} ({{temp}})",
+    "coldSuboptimal": "Rece și suboptimal pentru {{rockType}}",
+    "highHumidity": "Umiditate ridicată ({{humidity}}%) - stânca poate fi alunecoasă",
+    "wetDangerousSandstone": "Stânca este în prezent umedă - periculos de escaladă (nisipul devine slab când e ud)",
+    "wetSlippery": "Stânca este în prezent umedă - condiții alunecoase",
+    "veryHighWinds": "Vânturi foarte puternice ({{wind}}) - pericol de a fi suflat jos",
+    "highWind": "Vânt puternic ({{wind}})",
+    "recentPrecip": "Precipitații recente ({{precip}}) - va se usca în aproximativ {{hours}}h",
+    "currentlyWetDangerous": "În prezent umedă - periculos",
+    "currentlyWet": "În prezent umedă",
+    "cold": "Cold ({{temp}})",
+    "veryHighCondensationRisk": "Risc foarte ridicat de condensare (diferența punctului de rouă {{dewPointSpread}}) - suprafața stâncii probabil umedă",
+    "highCondensationRisk": "Risc ridicat de condensare (diferența punctului de rouă {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Risc ridicat de condensare",
+    "moderateCondensationRisk": "Risc moderat de condensare (diferența punctului de rouă {{dewPointSpread}})",
+    "condensationRisk": "Risc de condensare ({{dewPointSpread}})"
+  },
+  "sandstoneWarning": {
+    "general": "Gresul este fragil când este umed și necesită mult timp pentru a se usca după ploaie. Escaladarea pe gresie umedă deteriorează stânca și este periculoasă.",
+    "recentRain": "Precipitații recente detectate. Vă rugăm să vă asigurați că stânca este complet uscată înainte de escaladare.",
+    "inLast24h": "în ultimele 24 ore",
+    "inLast48h": "în ultimele 48 ore"
+  },
+  "weather": {
+    "clearSky": "Cer senin",
+    "mainlyClear": "Predominant senin",
+    "partlyCloudy": "Parțial noros",
+    "overcast": "Cer acoperit",
+    "fog": "Ceață",
+    "depositingRimeFog": "Ceață cu depunere de gheață",
+    "lightDrizzle": "Burnă ușoară",
+    "moderateDrizzle": "Burnă moderată",
+    "denseDrizzle": "Burnă densă",
+    "lightFreezingDrizzle": "Burnă congelatoare ușoară",
+    "denseFreezingDrizzle": "Burnă congelatoare densă",
+    "slightRain": "Ploaie ușoară",
+    "moderateRain": "Ploaie moderată",
+    "heavyRain": "Ploaie grea",
+    "lightFreezingRain": "Ploaie congelatoare ușoară",
+    "heavyFreezingRain": "Ploaie congelatoare grea",
+    "slightSnowFall": "Ninsoare ușoară",
+    "moderateSnowFall": "Ninsoare moderată",
+    "heavySnowFall": "Ninsoare grea",
+    "snowGrains": "Granule de zăpadă",
+    "slightRainShowers": "Averse ușoare",
+    "moderateRainShowers": "Averse moderate",
+    "violentRainShowers": "Averse violente",
+    "slightSnowShowers": "Averse de zăpadă ușoare",
+    "heavySnowShowers": "Averse de zăpadă grele",
+    "thunderstorm": "Furtună",
+    "thunderstormSlightHail": "Furtună cu grindină ușoară",
+    "thunderstormHeavyHail": "Furtună cu grindină grea"
+  },
+  "timeframes": {
+    "now": "acum",
+    "today": "astazi",
+    "tomorrow": "mâine",
+    "thisAfternoon": "astazi după-amiază",
+    "thisEvening": "astazi seara",
+    "tonight": "diseară"
+  },
+  "disambiguation": {
+    "foundMultipleAreas": "Am găsit {{count}} zone de escaladă pentru \"{{location}}\". Te rog alege una:",
+    "foundMultipleLocations": "Am găsit mai multe locații pentru \"{{location}}\". Te rog alege una:",
+    "queryTemplate": "condiții la {{name}} ({{latitude}}, {{longitude}})"
+  },
+  "footer": {
+    "about": "Despre",
+    "privacy": "Confidențialitate",
+    "github": "GitHub",
+    "brand": "beta.rocks",
+    "description": "Condiții gratuite de escaladă pentru toți. Construit cu ❤️ pentru comunitatea escaladei.",
+    "attribution": "Date de la Open-Meteo, OpenBeta și <osmLink>colaboratorii OpenStreetMap</osmLink>. Rapoarte alimentate de comunitate.",
+    "copyright": "© 2026 beta.rocks. Toate drepturile rezervate."
+  },
+  "features": {
+    "heading": "Tot ce ai nevoie",
+    "subheading": "Condiții de escaladă cuprinzătoare la îndemâna ta, complet gratuit",
+    "realTimeWeather": {
+      "title": "Vreme în Timp Real",
+      "description": "Prognoze precise de la Open-Meteo cu calcule soare/umbră pentru sectoare specifice"
+    },
+    "chatInterface": {
+      "title": "Interfață Chat",
+      "description": "Interogări în limbaj natural alimentate de AI. Întreabă în orice limbă, obține răspunsuri instantanee"
+    },
+    "communityReports": {
+      "title": "Rapoarte Comunității",
+      "description": "Împărtășește condiții, alerte de securitate, modificări de acces, informații despre căț și altele. Ajută colegii alpiniști cu actualizări în timp real în mai multe categorii"
+    },
+    "globalCoverage": {
+      "title": "Acoperire Globală",
+      "description": "Orice prag sau sector din lume via integrarea bazei de date OpenBeta"
+    },
+    "crossDeviceSync": {
+      "title": "Sincronizare între dispozitive",
+      "description": "Accesează-ți favoritele și istoricul conversațiilor de pe orice dispozitiv cu o cheie de sincronizare securizată. Nu este nevoie de cont"
+    },
+    "privacyFirst": {
+      "title": "Confidențialitate în Prim Plan",
+      "description": "Nu doar că nu avem nevoie de datele tale - nu le vrem! Anonim implicit. Fără conturi, fără urmărire. Datele tale rămân ale tale."
+    }
+  },
+  "privacy": {
+    "heading": "Politica de Confidențialitate",
+    "subheading": "Nu doar că nu avem nevoie de datele tale - nu le vrem!",
+    "whatWeDontCollect": {
+      "title": "Ce Nu Colectăm",
+      "description": "Nicio adresă de e-mail, niciun nume, niciun număr de telefon, nicio adresă IP, nicio analiză, niciun pixel de urmărire, niciun cookie (cu excepția celor esențiale), nicio urmărire a comportamentului utilizatorului. Literalmente nu te putem identifica."
+    },
+    "whatYouControl": {
+      "title": "Ce Controlezi Tu",
+      "description": "Favoritele, rapoartele și istoricul chat-ului tău sunt stocate local pe dispozitivul tău. Pentru a accesa de pe mai multe dispozitive, poți crea un profil anonim. Odată ce ai un profil, datele tale se sincronizează automat pentru a permite accesul de pe mai multe dispozitive. Poți șterge toate datele tale oricând din Setări."
+    },
+    "howSyncWorks": {
+      "title": "Cum Funcționează Sincronizarea",
+      "description": "Când creezi un profil, generăm o cheie de sincronizare anonimă și sincronizăm datele tale cu baza noastră de date. Datele sunt legate de o cheie de sincronizare hașurată - nu de identitatea ta. Cheia de sincronizare este un identificator aleatoriu la care doar tu ai acces. Nu o putem lega de tine. Fără email necesar, fără cont necesar."
+    },
+    "openSource": {
+      "title": "Sursă Deschisă",
+      "description": "Întreaga noastră bază de cod este open source pe GitHub. Poți audita exact ce facem cu datele tale (spoiler: nimic). Transparență totală, zero urmăritori ascunși."
+    },
+    "yourRights": {
+      "title": "Drepturile Tale",
+      "description": "Îți poți șterge profilul oricând din Setări. Aceasta elimină favoritele, istoricul chat-ului și profilul din baza noastră de date. Rapoartele comunității pe care le-ai postat rămân vizibile (anonim) pentru a ajuta alți alpiniști. Control complet asupra datelor tale."
+    },
+    "dataSecurity": {
+      "title": "Securitatea Datelor",
+      "description": "Cheile de sincronizare sunt criptate criptografic înainte de stocare. Folosim Supabase cu politici Row Level Security. Chiar dacă baza noastră de date ar scăpa, cheile de sincronizare nu ar putea fi decriptate pentru a identifica utilizatorii."
+    },
+    "footer": {
+      "tldr": "TL;DR: Am construit această aplicație pentru alpiniști, nu pentru colectarea datelor. Confidențialitatea ta nu este o funcționalitate - este fundația.",
+      "github": "Codul sursă complet disponibil pe <githubLink>GitHub</githubLink>"
+    }
+  },
+  "ui": {
+    "toggleTheme": "Comută tema",
+    "selectLanguage": "Alege limba",
+    "aboutApp": "Despre aplicație",
+    "language": "Limbă",
+    "theme": "Temă"
+  },
+  "dialog": {
+    "close": "Închide",
+    "cancel": "Anulează",
+    "detailedConditions": "Condiții Detaliate",
+    "fullAnalysis": "Analiză completă a vremii și prognoza condițiilor de escaladă",
+    "showMap": "Hartă",
+    "tabs": {
+      "overview": "Privire de Ansamblu",
+      "hourly": "Orar",
+      "daily": "14 Zile"
+    },
+    "currentRating": "Evaluare Curentă",
+    "currentConditions": "Condiții Curente",
+    "currentWeather": "Condițiile actuale ale vremii",
+    "temperature": "Temperatură",
+    "humidity": "Umiditate",
+    "windSpeed": "Viteza Vântului",
+    "precipitation": "Precipitații",
+    "sunrise": "Răsărit",
+    "sunset": "Apus",
+    "high": "Maxim",
+    "low": "Minim",
+    "rain": "Ploaie",
+    "wind": "Vânt",
+    "dry": "Uscat",
+    "wet": "Umed",
+    "precipitationContext": "Context Precipitații",
+    "last24h": "Ultimele 24h",
+    "last48h": "Ultimele 48h",
+    "next24h": "Următoarele 24h",
+    "dewPointSpread": "Diferența Punctului de Rouă (risc de condens)",
+    "lowRisk": "✅ Risc scăzut - stânca ar trebui să rămână uscată",
+    "moderateRisk": "⚠️ Risc moderat - ține seama de umiditate",
+    "highRisk": "❌ Risc ridicat - condens probabil",
+    "optimalWindows": "Ferestre Optime de Escaladă",
+    "nextDays": "Următoarele 5 zile",
+    "bestTime": "🌟 Cel mai bun moment",
+    "noOptimalConditions": "Nicio condiție optimă în următoarele 5 zile",
+    "checkHourlyForecast": "Verifică prognoza orară pentru mai multe detalii",
+    "weatherDisclaimer": "⚠️ Condițiile meteo se pot schimba rapid. Monitorizează întotdeauna prognozele înainte de a pleca și verifică condițiile la sosire.",
+    "window": "fereastră",
+    "windows": "ferestre",
+    "today": "Astazi",
+    "tomorrow": "Mâine",
+    "showCompleteTimeline": "Afișează cronologia completă",
+    "hour": "oră",
+    "hours": "ore",
+    "period": "perioadă",
+    "periods": "perioade",
+    "noHourlyData": "Nicio prognoză orară disponibilă",
+    "noDailyData": "Nicio prognoză zilnică disponibilă",
+    "noOptimalHours": "Nicio condiție optimă pe",
+    "forecastIndicators": "Indicatori de Prognoză:",
+    "goodClimbingWindows": "Ferestre bune de escaladă",
+    "fairConditions": "Condiții acceptabile",
+    "poorConditions": "Condiții slabe",
+    "lessReliable": "Zilele 8-14: Prognozele mai puțin fiabile",
+    "lessReliableHourly": "Orele următoare mai puțin previzibile",
+    "lessCertain": "MAI PUȚIN CERT",
+    "todayBadge": "ASTAZI",
+    "delete": "Șterge"
+  },
+  "timeContext": {
+    "sunrise": "Răsărit",
+    "sunset": "Apus",
+    "recommendedHours": "Ore recomandate de escaladă",
+    "totalDaylight": "Total lumina zilei",
+    "hoursOfDaylight": "{{hours}} ore de lumina zilei",
+    "earlyStartRecommended": "Se recomandă pornirea devreme pentru a evita căldura",
+    "limitedDaylight": "Lumina zilei limitată - planifică în consecință",
+    "morningConditionsBest": "Cele mai bune condiții în dimineață",
+    "eveningSession": "Condițiile sesiunii de seară",
+    "showAllHours": "Afișează toate 24 de ore",
+    "showClimbingHoursOnly": "Afișează numai orele de escaladă",
+    "expandHours": "Extinde pentru a vedea toate orele"
+  },
+  "rockTypes": {
+    "limestone": "calcar",
+    "granite": "granit",
+    "sandstone": "nisip",
+    "basalt": "bazalt",
+    "gneiss": "gnais",
+    "quartzite": "cuarțit",
+    "conglomerate": "conglomerat",
+    "rhyolite": "riolit",
+    "porphyry": "porfir",
+    "andesite": "andesit",
+    "slate": "ardezie",
+    "schist": "șist",
+    "dolomite": "dolomit",
+    "volcanic": "vulcanic",
+    "phyllite": "filit"
+  },
+  "sync": {
+    "notification": {
+      "title": "Cheie de Sincronizare Creată",
+      "description": "Am generat o cheie unică pentru a sincroniza favoritele și chat-ul între dispozitive.",
+      "viewInSettings": "Vizualizează în Setări",
+      "viewMore": "Ce este o cheie de sincronizare?"
+    },
+    "banner": {
+      "title": "Datele tale se sincronizează între dispozitive",
+      "description": "Favoritele, rapoartele și istoricul chat sunt salvate local și pot sincroniza cu alte dispozitive folosind cheia de sincronizare.",
+      "learnMore": "Află mai multe",
+      "dismiss": "Am înțeles"
+    },
+    "status": {
+      "synced": "Sincronizat",
+      "syncing": "Se sincronizează...",
+      "offline": "Offline"
+    }
+  },
+  "syncExplainer": {
+    "title": "Cum funcționează sincronizarea",
+    "description": "Păstrați datele sincronizate pe toate dispozitivele în mod sigur și fără întreruperi.",
+    "features": {
+      "syncKey": {
+        "title": "Cheie de sincronizare unică",
+        "description": "Fiecare utilizator primește o cheie unică și securizată pentru sincronizarea datelor între dispozitive."
+      },
+      "multiDevice": {
+        "title": "Acces multi-dispozitiv",
+        "description": "Accesați favoritele și istoricul chat-ului de pe orice dispozitiv folosind cheia de sincronizare."
+      },
+      "privacy": {
+        "title": "Confidențialitate pe primul loc",
+        "description": "Datele dvs. sunt criptate și accesibile doar cu cheia de sincronizare. Nu este nevoie de cont."
+      }
+    },
+    "openSettings": "Deschide setările"
+  },
+  "profileCreation": {
+    "title": "Creați-vă profilul",
+    "subtitle": "Înregistrare cu confidențialitate pe primul loc - fără date personale necesare",
+    "createProfile": "Creează profil",
+    "creating": "Se creează...",
+    "maybeLater": "Poate mai târziu",
+    "tabs": {
+      "create": "Creează profil",
+      "signIn": "Autentificare"
+    },
+    "signIn": {
+      "title": "Ai deja o cheie de sincronizare?",
+      "description": "Introdu cheia de sincronizare pentru a restabili profilul și datele",
+      "syncKeyLabel": "Cheie de sincronizare",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Autentificare",
+      "signingIn": "Autentificare în curs...",
+      "invalidKey": "Format cheie de sincronizare invalid. Te rog verifică și încearcă din nou."
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Salvați favoritele pe toate dispozitivele",
+        "description": "Marcați stâncile favorite și accesați de pe orice dispozitiv"
+      },
+      "report": {
+        "title": "Partajați rapoarte cu comunitatea",
+        "description": "Ajutați alți alpiniști partajând condiții, alerte de siguranță și informații despre căț"
+      },
+      "vote": {
+        "title": "Votați rapoartele utile",
+        "description": "Sprijiniți comunitatea confirmând rapoartele utile"
+      },
+      "manual": {
+        "title": "Salvează-ți datele pe toate dispozitivele",
+        "description": "Sincronizează-ți favoritele, rapoartele și istoricul conversațiilor pe toate dispozitivele tale"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "Fără email sau parolă",
+        "description": "Respectăm confidențialitatea dvs. Doar o cheie de sincronizare, fără date personale"
+      },
+      "syncKey": {
+        "title": "Creează doar o cheie de sincronizare",
+        "description": "Un identificator unic care sincronizează datele între dispozitive"
+      },
+      "multiDevice": {
+        "title": "Salvați-o, fotografiați codul QR sau trimiteți prin e-mail",
+        "description": "Folosiți cheia de sincronizare pentru a restaura profilul pe alte dispozitive"
+      }
+    }
+  },
+  "profileCreated": {
+    "title": "Profil creat!",
+    "description": "Profilul dvs. a fost creat cu succes. Salvați cheia de sincronizare pentru a accesa datele pe alte dispozitive.",
+    "actionCompleted": "{{action}} finalizat!",
+    "syncKeyLabel": "Cheia dvs. de sincronizare",
+    "syncKeyDescription": "Aceasta este cheia dvs. unică pentru sincronizare între dispozitive",
+    "qrCodeLabel": "Cod QR",
+    "qrCodeDescription": "Scanați acest cod QR pe alt dispozitiv pentru a sincroniza datele",
+    "privacyTitle": "Important: Salvați cheia de sincronizare",
+    "saveKeySafe": "Salvați această cheie într-un loc sigur",
+    "screenshotQR": "Sau faceți o captură de ecran a acestui cod QR",
+    "needForSync": "Veți avea nevoie de ea pentru sincronizarea altor dispozitive",
+    "gotIt": "Am înțeles!",
+    "copied": "Copiat!",
+    "copy": "Copiază",
+    "emailSection": {
+      "title": "Trimite la e-mail (opțional)",
+      "privacyNote1": "NU stocăm e-mailul tău",
+      "privacyNote2": "Aceasta este doar o trimitere unică",
+      "privacyNote3": "Niciodată salvat în baza noastră de date",
+      "emailPlaceholder": "tau@email.ro",
+      "sendButton": "Trimite e-mail",
+      "sending": "Se trimite...",
+      "success": "E-mail trimis! Verifică-ți inbox-ul",
+      "error": "Nu s-a putut trimite e-mailul. Te rog încearcă din nou."
+    }
+  },
+  "profile": {
+    "anonymous": "Anonim",
+    "member": "Membru",
+    "anonymousMember": "Membru anonim",
+    "favorites": "Favorite",
+    "yourReports": "Rapoartele Tale",
+    "recent": "Căutări Recente",
+    "stats": "Statisticile Tale",
+    "settings": "Setări",
+    "clearData": "Șterge Toate Datele"
+  },
+  "stats": {
+    "title": "Statisticile tale",
+    "description": "Activitatea ta și contribuțiile la comunitatea beta.rocks",
+    "reportsPosted": "Rapoarte postate",
+    "confirmationsGiven": "Confirmări date",
+    "favoritesCount": "Favorite",
+    "memberSince": "Membru din",
+    "lastActive": "Ultima activitate",
+    "unknown": "Necunoscut",
+    "encourageReports": "Împărtășește-ți cunoștințele locale postând rapoarte despre condițiile de la stânci!",
+    "thankYou": "Mulțumim pentru contribuția ta la comunitatea de escaladă!"
+  },
+  "userReports": {
+    "title": "Rapoartele Tale",
+    "description": "{{count}} rapoarte",
+    "empty": "Încă nu există rapoarte",
+    "emptyMessage": "Încă nu ai publicat rapoarte",
+    "emptyHint": "Împărtășește informații despre condiții și stânci pentru a ajuta comunitatea",
+    "loading": "Se încarcă rapoartele tale...",
+    "loadFailed": "Nu s-au putut încărca rapoartele",
+    "deleteSuccess": "Raportul a fost șters cu succes",
+    "deleteFailed": "Nu s-a putut șterge raportul"
+  },
+  "settings": {
+    "title": "Setări",
+    "description": "Gestionează profilul, cheia de sincronizare și preferințele",
+    "save": "Salvează",
+    "saving": "Se salvează...",
+    "displayName": {
+      "label": "Nume Afișat",
+      "description": "Numele tău afișat pe rapoarte și confirmări (opțional)",
+      "placeholder": "Introdu-ți numele...",
+      "saved": "Nume afișat salvat",
+      "savedDescription": "Numele tău afișat a fost actualizat cu succes",
+      "saveFailed": "Salvarea a eșuat",
+      "saveFailedDescription": "Nu s-a putut salva numele tău afișat. Te rugăm să încerci din nou"
+    },
+    "units": {
+      "title": "Unități și măsurători",
+      "description": "Alege unitățile preferate pentru datele meteo și de alpinism",
+      "systemLabel": "Sistem de unități",
+      "systemDescription": "Presetări rapide pentru sistemele de unități comune",
+      "systems": {
+        "metric": "Metric (°C, km/h, mm)",
+        "imperial": "Imperial (°F, mph, inchi)",
+        "uk": "Regatul Unit (°C, mph, mm)",
+        "custom": "Personalizat"
+      },
+      "temperature": "Temperatură",
+      "temperatureUnits": {
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Viteza vântului",
+      "windSpeedUnits": {
+        "kmh": "Kilometri pe oră (km/h)",
+        "mph": "Mile pe oră (mph)",
+        "ms": "Metri pe secundă (m/s)",
+        "knots": "Noduri (kn)"
+      },
+      "precipitation": "Precipitații",
+      "precipitationUnits": {
+        "mm": "Milimetri (mm)",
+        "inches": "Inchi (in)"
+      },
+      "distance": "Distanță",
+      "distanceUnits": {
+        "km": "Kilometri (km)",
+        "miles": "Mile (mi)"
+      },
+      "elevation": "Altitudine",
+      "elevationUnits": {
+        "meters": "Metri (m)",
+        "feet": "Picioare (ft)"
+      },
+      "saved": "Unități salvate",
+      "savedDescription": "Preferințele tale pentru unități au fost actualizate cu succes",
+      "saveFailed": "Salvarea unităților a eșuat",
+      "saveFailedDescription": "Nu s-au putut salva preferințele tale pentru unități. Te rugăm să încerci din nou"
+    },
+    "syncKey": {
+      "title": "Cheie de Sincronizare",
+      "description": "Utilizează această cheie pentru a sincroniza favoritele și setările între dispozitive",
+      "label": "Cheia de Sincronizare",
+      "copy": "Copiază cheia de sincronizare",
+      "showFullKey": "Afișează cheia completă",
+      "hideKey": "Ascunde cheia",
+      "qrCode": "Cod QR",
+      "qrDescription": "Scanează acest cod QR pe un alt dispozitiv pentru a sincroniza datele",
+      "restoreTitle": "Restaurare de pe alt dispozitiv",
+      "restoreDescription": "Ai deja o cheie de sincronizare? Lipește-o aici pentru a restaura datele",
+      "restoreLabel": "Lipește cheia de sincronizare",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Restaurează cheia de sincronizare",
+      "restoring": "Se restaurează...",
+      "restoreSuccess": "Cheie de sincronizare restaurată cu succes! Se reîncarcă...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
+      "restoreError": "Format cheie de sincronizare invalid. Te rog verifică și încearcă din nou.",
+      "saveNote": {
+        "title": "Salvează cheia de sincronizare",
+        "description": "Recomandăm să salvezi cheia de sincronizare într-o locație sigură precum aplicația ta de Note sau un manager de parole. Vei avea nevoie de ea pentru a restaura datele pe alte dispozitive."
+      },
+      "warning": {
+        "title": "Ține cheia de sincronizare privată",
+        "description": "Oricine are cheia de sincronizare poate accesa favoritele și setările. Nu o partaja public."
+      },
+      "emailButton": "Trimite cheia de sincronizare prin email",
+      "emailLabel": "Adresa de email",
+      "emailPlaceholder": "tu@example.ro",
+      "emailSend": "Trimite",
+      "emailSending": "Se trimite...",
+      "emailPrivacy": "Nu stocăm emailul tău - este folosit doar o dată pentru a trimite cheia de sincronizare.",
+      "emailSent": "Email trimis!",
+      "emailSentDescription": "Verifică căsuța ta de email la {{email}}",
+      "emailFailed": "Trimiterea emailului a eșuat",
+      "emailFailedDescription": "Te rog încearcă din nou sau copiază manual cheia de sincronizare.",
+      "emailInvalid": "Te rog introdu o adresă de email validă"
+    },
+    "dangerZone": {
+      "title": "Zona de Pericol",
+      "description": "Aceste acțiuni sunt permanente și nu pot fi anulate",
+      "deleteProfile": "Șterge Profil",
+      "deleteProfileConfirm": "Ești sigur că vrei să ștergi profilul? Aceasta va elimina permanent toate datele, inclusiv favorite, istoricul chat și setări. Această acțiune nu poate fi anulată.",
+      "deleteFailed": "Nu s-a putut șterge profilul. Te rog încearcă din nou."
+    }
+  },
+  "favorites": {
+    "title": "Pragurile Tale Preferate",
+    "description": "Ai {{count}} locații favorite",
+    "empty": "Nicio favorită încă",
+    "emptyMessage": "Nu ai adăugat încă nicio prag favorită",
+    "emptyHint": "Fă clic pe butonul stea pe orice card de condiții pentru a o adăuga la favorite",
+    "lastChecked": "Verificat ultima oară",
+    "frictionScore": "Scor de fricțiune",
+    "viewConditions": "Vizualizează Condiții",
+    "remove": "Elimină",
+    "confirmDelete": "Eliminați din favorite?",
+    "confirmDeleteDescription": "Sunteți sigur că doriți să eliminați {{name}} din favoritele dumneavoastră?",
+    "loginToFavorite": "Vă rugăm să vă configurați profilul pentru a adăuga locații la favorite",
+    "errorToggling": "Comutarea favoritului a eșuat. Vă rugăm să încercați din nou.",
+    "added": "Stâncă adăugată la favorite",
+    "removed": "Stâncă eliminată din favorite",
+    "loading": "Se încarcă favoritele..."
+  },
+  "reports": {
+    "addReport": "Adaugă raport",
+    "addReportDescription": "Împărtășește informații despre {{cragName}}",
+    "postingAs": "Postezi ca",
+    "category": "Ce ai vrea să raportezi?",
+    "categories": {
+      "conditions": "Condiții",
+      "safety": "Siguranță",
+      "access": "Acces",
+      "climbing_info": "Info escaladă",
+      "facilities": "Facilități",
+      "other": "Altele",
+      "lost_found": "Obiecte pierdute și găsite"
+    },
+    "categoryDescriptions": {
+      "conditions": "Vreme, fricțiune, uscare, aglomerație",
+      "safety": "Piulițe șubrede, prăbușiri de pietre, prize rupte, pericole",
+      "access": "Închideri, schimbări la parcare, restricții sezoniere, cuiburi de păsări, insecte",
+      "climbing_info": "Reechipare, actualizări echipament, schimbări rute, quickdraw-uri fixe",
+      "facilities": "Toalete, camping, surse de apă, facilități",
+      "other": "Orice altceva care nu se încadrează mai sus",
+      "lost_found": "Echipament pierdut sau găsit"
+    },
+    "categoryHelp": {
+      "conditions": "Vreme actuală, fricțiune, uscare, aglomerație la faleza",
+      "safety": "Pericole în întreaga zonă, condiții periculoase, avertismente urgente",
+      "access": "Parcare, închideri, reglementări, restricții sezoniere",
+      "climbing_info": "Detalii specifice rutelor, beta, prize, echipament, grade",
+      "facilities": "Toalete, camping, surse de apă, facilități",
+      "other": "Orice altceva care nu se încadrează în categoriile de mai sus",
+      "lost_found": "Raportează obiecte pierdute pe care le cauți sau obiecte găsite pe care le deții"
+    },
+    "dryness": "Uscare",
+    "wind": "Vânt",
+    "crowds": "Aglomerație",
+    "additionalComments": "Comentarii suplimentare (opțional)",
+    "details": "Detalii",
+    "detailsRequired": "Te rog furnizează detalii despre acest raport",
+    "placeholders": {
+      "conditions": "Ex., Sectorul est încă ud, poteca noroioasă, fisura picură...",
+      "safety": "Ex., Piuliță șubred pe Ruta X, pericol de prăbușire de pietre lângă peretele principal...",
+      "access": "Ex., Poartă închisă până în mai, parcare nouă în spatele bibliotecii...",
+      "climbing_info": "Ex., Ruta X reechipată cu piulițe din oțel inoxidabil, quickdraw-uri fixe noi instalate, ancoră îmbunătățită...",
+      "facilities": "Ex., Toaletă disponibilă la parcare, nicio sursă de apă în apropiere...",
+      "other": "Descrie ce ai vrea să raportezi...",
+      "lost_found": "De ex., Găsit săculeț de magneziu albastru la bază, pierdut Black Diamond cam #2 lângă parcare..."
+    },
+    "submit": "Trimite raportul",
+    "submitting": "Se trimite...",
+    "readyToPost": "Profil creat! Ești gata să postezi raportul.",
+    "helpful": "Util",
+    "loginToConfirm": "Te rog configurează-ți profilul pentru a confirma rapoarte",
+    "confirmFailed": "Nu s-a putut confirma raportul. Te rog încearcă din nou.",
+    "voteReady": "Acum poți vota rapoarte",
+    "ratings": {
+      "veryPoor": "Foarte slab",
+      "poor": "Slab",
+      "okay": "Acceptabil",
+      "good": "Bun",
+      "excellent": "Excelent"
+    },
+    "scales": {
+      "veryWet": "Foarte umed",
+      "veryDry": "Perfect",
+      "calm": "Foarte vântos",
+      "veryWindy": "Calm",
+      "empty": "Gol",
+      "veryCrowded": "Foarte aglomerat"
+    },
+    "drynessLabels": {
+      "1": "Foarte umed",
+      "2": "Umed",
+      "3": "Ușor umed",
+      "4": "Preponderent uscat",
+      "5": "Foarte uscat"
+    },
+    "windLabels": {
+      "1": "Calm",
+      "2": "Briză ușoară",
+      "3": "Moderat",
+      "4": "Vântos",
+      "5": "Foarte vântos"
+    },
+    "crowdsLabels": {
+      "1": "Gol",
+      "2": "Puțini oameni",
+      "3": "Moderat",
+      "4": "Aglomerat",
+      "5": "Foarte aglomerat"
+    },
+    "recentReports": "Rapoarte recente",
+    "communityReports": "Rapoarte comunitare",
+    "noReports": "Niciun raport încă",
+    "beTheFirst": "Fii primul care raportează",
+    "noReportsInCategory": "Niciun raport în această categorie",
+    "filters": {
+      "all": "Toate"
+    },
+    "staleness": {
+      "outdated": "Învechit",
+      "older": "Mai vechi",
+      "veryOld": "Foarte vechi"
+    },
+    "observationDate": "Când ai observat asta?",
+    "observationDateHelp": "Puteți raporta condiții până la 7 zile în urmă",
+    "lostFoundType": "Tip",
+    "lostFoundTypes": {
+      "lost": "Obiect pierdut",
+      "found": "Obiect găsit"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Selectează dacă este un obiect pierdut sau găsit",
+    "lostBadge": "PIERDUT",
+    "foundBadge": "GĂSIT",
+    "expiresAt": "Valabil până la (opțional)",
+    "expiresAtHelp": "Setați când acest raport devine învechit (util pentru închideri temporare sau condiții în schimbare)",
+    "noExpiry": "Nu expiră niciodată",
+    "expiredOn": "Expirat pe {{date}}",
+    "edit": "Editează",
+    "delete": "Șterge",
+    "deleteConfirm": "Sunteți sigur că doriți să ștergeți acest raport?",
+    "deleteConfirmTitle": "Șterge Raportul",
+    "updated": "Raport actualizat",
+    "deleted": "Raport șters",
+    "editReport": "Editează Raportul",
+    "editReportDescription": "Actualizați-vă raportul",
+    "updateReport": "Actualizează Raportul",
+    "updating": "Se actualizează...",
+    "deleteSuccess": "Raport șters",
+    "deleteSuccessDescription": "Raportul tău a fost eliminat cu succes",
+    "deleteError": "Ștergerea raportului a eșuat",
+    "deleteErrorDescription": "Ceva nu a mers bine. Te rugăm să încerci din nou.",
+    "photos": "Fotografii",
+    "photoHint": "Adăugați până la 3 fotografii (max. 2MB fiecare). Fotografiile vor fi comprimate automat.",
+    "photoUploadFailed": "Încărcarea fotografiei a eșuat",
+    "uploadingPhotos": "Se încarcă fotografiile...",
+    "submitReport": "Trimite raport"
+  },
+  "editCragDialog": {
+    "title": "Editare Stâncă",
+    "subtitle": "Convertiți această stâncă într-un sector sau schimbați elementul părinte",
+    "currentStatus": "Stare Curentă",
+    "crag": "Stâncă",
+    "sector": "Sector",
+    "currentParent": "Element părinte curent",
+    "chooseAction": "Alegeți Acțiune",
+    "convertToSector": "Convertește în Sector",
+    "convertToCrag": "Convertește în Stâncă",
+    "changeParent": "Schimbă Stânca Părinte",
+    "selectParentCrag": "Selectați Stânca Părinte",
+    "selectNewParent": "Selectați Noua Stâncă Părinte",
+    "searchForParent": "Căutați stânca părinte la care să atribuiți acest sector",
+    "searchPlaceholder": "Căutare stâncă părinte...",
+    "noCragsFound": "Nu s-au găsit stânci",
+    "change": "Schimbă",
+    "save": "Salvează Modificările",
+    "saving": "Se salvează...",
+    "success": "Stânca a fost actualizată cu succes",
+    "convertedToCrag": "Convertită în stâncă cu succes",
+    "convertedToSector": "Convertită în sector cu succes",
+    "errors": {
+      "parentRequired": "Stânca părinte este necesară",
+      "parentRequiredDesc": "Te rugăm să selectezi o stâncă părinte pentru acest sector",
+      "failed": "Actualizare eșuată",
+      "failedDesc": "Nu s-a putut actualiza stânca. Te rugăm să încerci din nou."
+    }
+  },
+  "cragPage": {
+    "askAI": "Întreabă AI",
+    "edit": "Editează",
+    "editCrag": "Editează detaliile stâncii",
+    "currentConditions": "Condiții actuale",
+    "sectors": "Sectoare",
+    "addSector": "Adaugă sector",
+    "noSectors": "Nu au fost adăugate încă sectoare la această stâncă.",
+    "beFirstToAddSector": "Fii primul care adaugă un sector",
+    "searchSectors": "Căutare sectoare...",
+    "noSectorsFound": "Nu s-au găsit sectoare care să corespundă căutării dvs.",
+    "disclaimer": "Condițiile meteorologice se pot schimba rapid. Verificați întotdeauna condițiile la sosire și folosiți-vă cea mai bună judecată.",
+    "askAIAboutCrag": "Întreabă AI despre această stâncă",
+    "viewOnSunCalc": "Vezi orele soarelui/lunii",
+    "viewSunAngles": "Vezi poziția soarelui și unghiurile umbrei",
+    "viewOnMap": "Vezi pe hartă",
+    "viewOnGoogleMaps": "Vezi pe Google Maps",
+    "addToFavorites": "Adaugă la favorite",
+    "removeFromFavorites": "Elimină din favorite"
+  },
+  "time": {
+    "today": "Astăzi",
+    "yesterday": "Ieri",
+    "daysAgo_one": "acum {{count}} zi",
+    "daysAgo_few": "acum {{count}} zile",
+    "daysAgo_other": "acum {{count}} de zile",
+    "pickDate": "Alegeți o dată"
+  },
+  "loading": {
+    "conditions": "Se încarcă condițiile...",
+    "weatherData": "Se obțin datele meteo...",
+    "reports": "Se încarcă rapoartele..."
+  },
+  "nearbyMatch": {
+    "distance": "{{distance}} de la {{location}}"
+  },
+  "feed": {
+    "title": "Flux live",
+    "viewFeed": "Vezi fluxul de activitate",
+    "live": "Live",
+    "justNow": "Chiar acum",
+    "loadingFeed": "Se încarcă fluxul...",
+    "reconnecting": "Reconectare la actualizări live...",
+    "loadMore": "Încarcă mai multe rapoarte",
+    "loadingMore": "Se încarcă...",
+    "totalReports": "{{count}} în total",
+    "showingOf": "Se afișează {{showing}} din {{total}} rapoarte",
+    "totalReportsHint": "Numarul total de rapoarte ale comunitatii, inclusiv cele mai vechi neafisate in flux",
+    "olderHidden": "Rapoartele mai vechi sunt inca vizibile pe paginile individuale ale stancilor",
+    "filters": {
+      "all": "Toate",
+      "favorites": "Favorite"
+    },
+    "emptyState": {
+      "noReportsTitle": "Încă nu există rapoarte",
+      "noReportsDescription": "Fii primul care împărtășește condițiile cu comunitatea de alpinism",
+      "noFavoritesTitle": "Nu există rapoarte de la favorite",
+      "noFavoritesDescription": "Adaugă stânci la favorite pentru a vedea rapoartele lor în acest flux"
+    }
+  },
+  "webcams": {
+    "title": "Webcam-uri din apropiere",
+    "nearbyCount": "{{count}} webcam găsită",
+    "nearbyCount_other": "{{count}} webcam-uri găsite",
+    "daylight": "Lumina zilei",
+    "openOnWindy": "Deschide pe Windy.com",
+    "poweredBy": "Oferit de",
+    "noWebcams": "Nu s-au găsit webcam-uri în apropiere"
+  }
+}

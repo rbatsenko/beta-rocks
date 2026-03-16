@@ -1,0 +1,833 @@
+{
+  "header": {
+    "title": "beta.rocks"
+  },
+  "welcome": {
+    "heading": "Získaj informácie o každej skale",
+    "description": "Získajte aktuálne počasie, analýzu trenia a optimálne okná na lezenie na ktorejkoľvek skale po celom svete",
+    "exampleQueries": {
+      "query1": {
+        "display": "Aké sú podmienky v Demänovskej doline zajtra?",
+        "query": "Aké sú podmienky v Demänovskej doline zajtra?"
+      },
+      "query2": {
+        "display": "Je Harmanec dnes popoludní suchý?",
+        "query": "Je Harmanec dnes popoludní suchý?"
+      },
+      "query3": {
+        "display": "Ako je na tom Višňové?",
+        "query": "Ako je na tom Višňové?"
+      }
+    },
+    "searchHint": "Vyhľadajte akúkoľvek lezeckú oblasť",
+    "yourFavorites": "Vaše Obľúbené",
+    "favoriteQuery": "Aké sú podmienky v {{crag}}?"
+  },
+  "chat": {
+    "analyzing": "Analyzujem podmienky...",
+    "thinking": "Premýšľam...",
+    "inputPlaceholder": "Opýtajte sa na ktorúkoľvek skalu alebo sektor...",
+    "clearHistory": "Vymazať históriu",
+    "clearHistoryConfirm": "Naozaj chcete vymazať celú históriu chatu? Túto akciu nie je možné vrátiť späť.",
+    "clearChat": "Vymazať chat",
+    "clearChatTooltip": "Vymazať aktuálnu konverzáciu",
+    "clearChatConfirm": "Vymazať váš chat? Týmto odstránite všetky správy z aktuálnej konverzácie."
+  },
+  "search": {
+    "title": "Vyhľadať skaly",
+    "description": "Vyhľadávanie lezeckých oblastí podľa názvu alebo polohy",
+    "placeholder": "Vyhľadať skaly... (napr. 'Súľov', 'Turzovka')",
+    "typeToSearch": "Začnite písať pre vyhľadávanie skál...",
+    "searching": "Vyhľadávanie...",
+    "noCragsFound": "Neboli nájdené žiadne skaly. Skúste iný vyhľadávací výraz.",
+    "heading": "Skaly",
+    "toSelect": "pre výber",
+    "toClose": "pre zatvorenie",
+    "notSeeing": "Nevidíte svoju skalu?",
+    "addMissingHere": "Pridajte ju sem"
+  },
+  "cragLocationPicker": {
+    "loadingMap": "Načítava sa mapa...",
+    "searchPlaceholder": "Vyhľadať lokalitu (napr. 'Slovenský raj, Spišská Nová Ves')",
+    "noLocationsFound": "Nenašli sa žiadne lokality",
+    "loadingLocationData": "Načítavajú sa údaje o lokalite...",
+    "clickToSet": "Kliknite na mapu pre nastavenie polohy skaly",
+    "nearbyCragsFound": "Nájdená {{count}} blízka skala",
+    "nearbyCragsFound_other": "Nájdených {{count}} blízkych skál",
+    "clickMarkersToView": "Kliknite na značky pre zobrazenie existujúcich skál",
+    "coordinates": "Súradnice"
+  },
+  "conditions": {
+    "rating": "Hodnotenie",
+    "details": "Detaily",
+    "location": "Miesto",
+    "favorite": "Obľúbené",
+    "favorited": "V obľúbených",
+    "addReport": "Pridať hlásenie",
+    "viewCragPage": "Zobraziť oblasť"
+  },
+  "ratings": {
+    "great": "Skvelé",
+    "good": "Dobré",
+    "fair": "Ujde",
+    "poor": "Zlé",
+    "nope": "Vôbec"
+  },
+  "reasons": {
+    "perfectTemp": "Perfektná teplota ({{temp}})",
+    "tempTooHigh": "Teplota príliš vysoká - prsty môžu kĺzať",
+    "coldGoodFriction": "Chladno, ale dobré pre trenie na {{rockType}}",
+    "idealHumidity": "Ideálna vlhkosť ({{humidity}}%)",
+    "lowHumidityGranite": "Nízka vlhkosť pomáha treniu na žule",
+    "readyInHours": "Bude pripravené na lezenie za ~{{hours}} hodín",
+    "acceptable": "Podmienky sú prijateľné",
+    "goodHumidity": "Dobrá vlhkosť ({{humidity}}%)",
+    "lowCondensationRisk": "Nízke riziko kondenzácie (rozpätie rosného bodu {{dewPointSpread}})",
+    "lowHumidityFriction": "Nízka vlhkosť zlepšuje trenie"
+  },
+  "warnings": {
+    "tooWarm": "Príliš teplo pre {{rockType}} ({{temp}})",
+    "coldSuboptimal": "Chladno a neoptimálne pre {{rockType}}",
+    "highHumidity": "Vysoká vlhkosť ({{humidity}}%) - skala môže byť klzká",
+    "wetDangerousSandstone": "Skala je momentálne mokrá - nebezpečné pre lezenie (pieskoviec je slabý keď je mokrý)",
+    "wetSlippery": "Skala je momentálne mokrá - klzké podmienky",
+    "veryHighWinds": "Veľmi silný vietor ({{wind}}) - nebezpečenstvo sfúknutia",
+    "highWind": "Silný vietor ({{wind}})",
+    "recentPrecip": "Nedávne zrážky ({{precip}}) - uschnú za ~{{hours}}h",
+    "currentlyWetDangerous": "Momentálne mokro - nebezpečné",
+    "currentlyWet": "Momentálne mokro",
+    "cold": "Cold ({{temp}})",
+    "veryHighCondensationRisk": "Veľmi vysoké riziko kondenzácie (rozpätie rosného bodu {{dewPointSpread}}) - povrch skaly pravdepodobne vlhký",
+    "highCondensationRisk": "Vysoké riziko kondenzácie (rozpätie rosného bodu {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Vysoké riziko kondenzácie",
+    "moderateCondensationRisk": "Mierne riziko kondenzácie (rozpätie rosného bodu {{dewPointSpread}})",
+    "condensationRisk": "Riziko kondenzácie ({{dewPointSpread}})"
+  },
+  "sandstoneWarning": {
+    "general": "Pieskoviec je krehký, keď je mokrý a vyžaduje veľa času na vyschnutie po daždi. Lezenie na mokrom pieskovci poškodzuje skalu a je nebezpečné.",
+    "recentRain": "Zistené nedávne zrážky. Uistite sa, že skala je pred lezením úplne suchá.",
+    "inLast24h": "za posledných 24h",
+    "inLast48h": "za posledných 48h"
+  },
+  "weather": {
+    "clearSky": "Jasná obloha",
+    "mainlyClear": "Prevažne jasno",
+    "partlyCloudy": "Polojasno",
+    "overcast": "Zamračené",
+    "fog": "Hmla",
+    "depositingRimeFog": "Námrazová hmla",
+    "lightDrizzle": "Ľahké mrholenie",
+    "moderateDrizzle": "Mierne mrholenie",
+    "denseDrizzle": "Husté mrholenie",
+    "lightFreezingDrizzle": "Ľahké mŕznuce mrholenie",
+    "denseFreezingDrizzle": "Husté mŕznuce mrholenie",
+    "slightRain": "Slabý dážď",
+    "moderateRain": "Mierny dážď",
+    "heavyRain": "Silný dážď",
+    "lightFreezingRain": "Ľahký mŕznuci dážď",
+    "heavyFreezingRain": "Silný mŕznuci dážď",
+    "slightSnowFall": "Slabé sneženie",
+    "moderateSnowFall": "Mierne sneženie",
+    "heavySnowFall": "Silné sneženie",
+    "snowGrains": "Snehové zrno",
+    "slightRainShowers": "Slabé prehánky",
+    "moderateRainShowers": "Mierne prehánky",
+    "violentRainShowers": "Silné prehánky",
+    "slightSnowShowers": "Slabé snehové prehánky",
+    "heavySnowShowers": "Silné snehové prehánky",
+    "thunderstorm": "Búrka",
+    "thunderstormSlightHail": "Búrka s ľahkým krupobitím",
+    "thunderstormHeavyHail": "Búrka so silným krupobitím"
+  },
+  "timeframes": {
+    "now": "teraz",
+    "today": "dnes",
+    "tomorrow": "zajtra",
+    "thisAfternoon": "dnes popoludní",
+    "thisEvening": "dnes večer",
+    "tonight": "dnes v noci"
+  },
+  "disambiguation": {
+    "foundMultipleAreas": "Našiel som {{count}} lezeckých oblastí pre \"{{location}}\". Prosím vyberte jednu:",
+    "foundMultipleLocations": "Našiel som viacero miest pre \"{{location}}\". Prosím vyberte jedno:",
+    "queryTemplate": "podmienky na {{name}} ({{latitude}}, {{longitude}})"
+  },
+  "footer": {
+    "about": "O aplikácii",
+    "privacy": "Súkromie",
+    "github": "GitHub",
+    "brand": "beta.rocks",
+    "description": "Bezplatné podmienky na lezenie pre všetkých. Vytvorené s ❤️ pre lezeckú komunitu.",
+    "attribution": "Dáta z Open-Meteo, OpenBeta a <osmLink>prispievateľov OpenStreetMap</osmLink>. Podporované komunitou.",
+    "copyright": "© 2026 beta.rocks. Všetky práva vyhradené."
+  },
+  "features": {
+    "heading": "Všetko čo potrebujete",
+    "subheading": "Kompletné podmienky na lezenie na dosah ruky, úplne zadarmo",
+    "realTimeWeather": {
+      "title": "Počasie v reálnom čase",
+      "description": "Presné predpovede z Open-Meteo s výpočtami slnka/tieňa pre konkrétne sektory"
+    },
+    "chatInterface": {
+      "title": "Chatové rozhraní",
+      "description": "Dotazy v prirodzenom jazyku poháňané AI. Pýtajte sa v akomkoľvek jazyku, dostanete okamžité odpovede"
+    },
+    "communityReports": {
+      "title": "Komunitné reporty",
+      "description": "Zdieľajte podmienky, bezpečnostné upozornenia, zmeny prístupu, info o lezení a ďalšie. Pomôžte spolulezcom s aktualizáciami v reálnom čase naprieč viacerými kategóriami"
+    },
+    "globalCoverage": {
+      "title": "Globálne pokrytie",
+      "description": "Akákoľvek skala alebo sektor po celom svete prostredníctvom integrácie databázy OpenBeta"
+    },
+    "crossDeviceSync": {
+      "title": "Synchronizácia medzi zariadeniami",
+      "description": "Pristupujte k svojim obľúbeným a histórii chatu z akéhokoľvek zariadenia pomocou bezpečného synchronizačného kľúča. Nie je potrebný účet"
+    },
+    "privacyFirst": {
+      "title": "Súkromie na prvom mieste",
+      "description": "Nielen že vaše dáta nepotrebujeme - nechceme ich! Anonymné v predvolenom nastavení. Žiadne účty, žiadne sledovanie. Vaše dáta zostávajú vaše."
+    }
+  },
+  "privacy": {
+    "heading": "Zásady ochrany osobných údajov",
+    "subheading": "Nielen že vaše dáta nepotrebujeme - nechceme ich!",
+    "whatWeDontCollect": {
+      "title": "Čo nezhromažďujeme",
+      "description": "Žiadne e-mailové adresy, žiadne mená, žiadne telefónne čísla, žiadne IP adresy, žiadna analytika, žiadne sledovacie pixely, žiadne cookies (okrem nevyhnutných), žiadne sledovanie správania používateľov. Doslova vás nemôžeme identifikovať."
+    },
+    "whatYouControl": {
+      "title": "Čo kontrolujete",
+      "description": "Vaše obľúbené, hlásenia a história chatu sú uložené lokálne vo vašom zariadení. Pre prístup k nim z viacerých zariadení si môžete vytvoriť anonymný profil. Keď máte profil, vaše dáta sa automaticky synchronizujú, aby bol umožnený prístup z viacerých zariadení. Všetky vaše dáta môžete kedykoľvek vymazať v Nastaveniach."
+    },
+    "howSyncWorks": {
+      "title": "Ako funguje synchronizácia",
+      "description": "Keď vytvoríte profil, vygenerujeme anonymný synchronizačný kľúč a synchronizujeme vaše dáta s našou databázou. Dáta sú spojené s hašovaným synchronizačným kľúčom - nie s vašou identitou. Synchronizačný kľúč je náhodný identifikátor, ku ktorému máte prístup iba vy. Nemôžeme ho s vami spojiť. Nie je vyžadovaný email, nie je potrebný účet."
+    },
+    "openSource": {
+      "title": "Open Source",
+      "description": "Celý náš zdrojový kód je open source na GitHube. Môžete presne skontrolovať, čo robíme s vašimi dátami (spoiler: nič). Plná transparentnosť, nula skrytých trackerov."
+    },
+    "yourRights": {
+      "title": "Vaše práva",
+      "description": "Svoj profil môžete kedykoľvek vymazať v Nastaveniach. Tým odstránite svoje obľúbené položky, históriu chatu a profil z našej databázy. Hlásenia komunity, ktoré ste zverejnili, zostávajú viditeľné (anonymne), aby pomohli ostatným lezcom. Plná kontrola nad vašimi údajmi."
+    },
+    "dataSecurity": {
+      "title": "Zabezpečenie dát",
+      "description": "Synchronizačné kľúče sú kryptograficky hashované pred uložením. Používame Supabase s politikami Row Level Security. Aj keby naša databáza unikla, synchronizačné kľúče by nemohli byť spätne dekódované na identifikáciu používateľov."
+    },
+    "footer": {
+      "tldr": "TL;DR: Postavili sme túto aplikáciu pre lezkov, nie pre zber dát. Vaše súkromie nie je funkcia - je to základ.",
+      "github": "Kompletný zdrojový kód dostupný na <githubLink>GitHub</githubLink>"
+    }
+  },
+  "ui": {
+    "toggleTheme": "Prepnúť motív",
+    "selectLanguage": "Vybrať jazyk",
+    "aboutApp": "O aplikácii",
+    "language": "Jazyk",
+    "theme": "Motív"
+  },
+  "dialog": {
+    "close": "Zavrieť",
+    "cancel": "Zrušiť",
+    "detailedConditions": "Podrobné podmienky",
+    "fullAnalysis": "Úplná analýza počasia a predpoveď podmienok na lezenie",
+    "showMap": "Mapa",
+    "tabs": {
+      "overview": "Prehľad",
+      "hourly": "Hodinovo",
+      "daily": "14-dňová"
+    },
+    "currentRating": "Aktuálne hodnotenie",
+    "currentConditions": "Aktuálne podmienky",
+    "currentWeather": "Aktuálne počasie",
+    "temperature": "Teplota",
+    "humidity": "Vlhkosť",
+    "windSpeed": "Rýchlosť vetra",
+    "precipitation": "Zrážky",
+    "sunrise": "Východ slnka",
+    "sunset": "Západ slnka",
+    "high": "Max",
+    "low": "Min",
+    "rain": "Dážď",
+    "wind": "Vietor",
+    "dry": "Sucho",
+    "wet": "Mokro",
+    "precipitationContext": "Kontext zrážok",
+    "last24h": "Posledných 24h",
+    "last48h": "Posledných 48h",
+    "next24h": "Nasledujúcich 24h",
+    "dewPointSpread": "Rozpätie rosného bodu (riziko kondenzácie)",
+    "lowRisk": "✅ Nízke riziko - skala by mala zostať suchá",
+    "moderateRisk": "⚠️ Mierne riziko - sledujte vlhkosť",
+    "highRisk": "❌ Vysoké riziko - pravdepodobná kondenzácia",
+    "optimalWindows": "Optimálne okná na lezenie",
+    "nextDays": "Nasledujúcich 5 dní",
+    "bestTime": "🌟 Najlepší čas",
+    "noOptimalConditions": "Žiadne optimálne podmienky v nasledujúcich 5 dňoch",
+    "checkHourlyForecast": "Skontrolujte hodinovú predpoveď pre viac detailov",
+    "weatherDisclaimer": "⚠️ Počasie sa môže rýchlo meniť. Vždy sledujte predpovede pred vyrazením a skontrolujte podmienky po príchode.",
+    "window": "okno",
+    "windows": "okná",
+    "today": "Dnes",
+    "tomorrow": "Zajtra",
+    "showCompleteTimeline": "Zobraziť kompletnú časovú os",
+    "hour": "hodina",
+    "hours": "hodiny",
+    "period": "obdobie",
+    "periods": "obdobia",
+    "noHourlyData": "Nie sú dostupné dáta hodinovej predpovede",
+    "noDailyData": "Nie sú dostupné dáta dennej predpovede",
+    "noOptimalHours": "Žiadne optimálne podmienky dňa",
+    "forecastIndicators": "Indikátory predpovede:",
+    "goodClimbingWindows": "Dobré okná na lezenie",
+    "fairConditions": "Prijateľné podmienky",
+    "poorConditions": "Zlé podmienky",
+    "lessReliable": "Dni 8-14: Menej spoľahlivá predpoveď",
+    "lessReliableHourly": "Ďalšie hodiny menej predvídateľné",
+    "lessCertain": "MENEJ ISTÉ",
+    "todayBadge": "DNES",
+    "delete": "Vymazať"
+  },
+  "timeContext": {
+    "sunrise": "Východ slnka",
+    "sunset": "Západ slnka",
+    "recommendedHours": "Odporúčané hodiny na lezenie",
+    "totalDaylight": "Celková denná doba",
+    "hoursOfDaylight": "{{hours}} hodín denného svetla",
+    "earlyStartRecommended": "Odporúčaný včasný štart kvôli horúčave",
+    "limitedDaylight": "Obmedzené denné svetlo - plánujte podľa toho",
+    "morningConditionsBest": "Najlepšie podmienky ráno",
+    "eveningSession": "Podmienky pre večerný session",
+    "showAllHours": "Zobraziť všetkých 24 hodín",
+    "showClimbingHoursOnly": "Zobraziť iba hodiny na lezenie",
+    "expandHours": "Rozbaliť pre zobrazenie všetkých hodín"
+  },
+  "rockTypes": {
+    "limestone": "vápenec",
+    "granite": "žula",
+    "sandstone": "pieskoviec",
+    "basalt": "čadič",
+    "gneiss": "rula",
+    "quartzite": "kremenec",
+    "conglomerate": "zlepienec",
+    "rhyolite": "ryolit",
+    "porphyry": "porfýr",
+    "andesite": "andezit",
+    "slate": "bridlica",
+    "schist": "svор",
+    "dolomite": "dolomit",
+    "volcanic": "sopečný",
+    "phyllite": "fylit"
+  },
+  "sync": {
+    "banner": {
+      "title": "Vaše dáta sa synchronizujú medzi zariadeniami",
+      "description": "Vaše obľúbené, správy a história chatu sú uložené lokálne a môžu sa synchronizovať na iné zariadenia pomocou vášho synchronizačného kľúča.",
+      "learnMore": "Zistiť viac",
+      "dismiss": "Rozumiem"
+    },
+    "status": {
+      "synced": "Synchronizované",
+      "syncing": "Synchronizácia...",
+      "offline": "Offline"
+    },
+    "notification": {
+      "title": "Synchronizačný kľúč vytvorený",
+      "description": "Vygenerovali sme jedinečný kľúč na synchronizáciu vašich obľúbených a chatov naprieč zariadeniami.",
+      "viewInSettings": "Zobraziť v nastavení",
+      "viewMore": "Čo je synchronizačný kľúč?"
+    }
+  },
+  "syncExplainer": {
+    "title": "Ako funguje synchronizácia",
+    "description": "Udržujte svoje dáta synchronizované na všetkých zariadeniach bezpečne a jednoducho.",
+    "features": {
+      "syncKey": {
+        "title": "Jedinečný synchronizačný kľúč",
+        "description": "Každý používateľ získa bezpečný, jedinečný kľúč na synchronizáciu dát naprieč zariadeniami."
+      },
+      "multiDevice": {
+        "title": "Prístup z viacerých zariadení",
+        "description": "Pristupujte k svojim obľúbeným a histórii chatu z akéhokoľvek zariadenia pomocou synchronizačného kľúča."
+      },
+      "privacy": {
+        "title": "Súkromie na prvom mieste",
+        "description": "Vaše dáta sú šifrované a prístupné len s vaším synchronizačným kľúčom. Nie je potrebný účet."
+      }
+    },
+    "openSettings": "Otvoriť nastavenia"
+  },
+  "profileCreation": {
+    "title": "Vytvoriť profil",
+    "subtitle": "Registrácia s dôrazom na súkromie - nie sú vyžadované žiadne osobné údaje",
+    "createProfile": "Vytvoriť profil",
+    "creating": "Vytváram...",
+    "maybeLater": "Možno neskôr",
+    "tabs": {
+      "create": "Vytvoriť profil",
+      "signIn": "Prihlásiť sa"
+    },
+    "signIn": {
+      "title": "Už máte synchronizačný kľúč?",
+      "description": "Zadajte svoj synchronizačný kľúč na obnovenie profilu a dát",
+      "syncKeyLabel": "Synchronizačný kľúč",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Prihlásiť sa",
+      "signingIn": "Prihlasujem sa...",
+      "invalidKey": "Neplatný formát synchronizačného kľúča. Skontrolujte a skúste to znova."
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Ukladajte obľúbené naprieč zariadeniami",
+        "description": "Označte svoje obľúbené skaly a pristupujte k nim z akéhokoľvek zariadenia"
+      },
+      "report": {
+        "title": "Zdieľajte hlásenia s komunitou",
+        "description": "Pomôžte spolulezcom zdieľaním podmienok, bezpečnostných upozornení a info o lezení"
+      },
+      "vote": {
+        "title": "Hlasujte o užitočných hláseniach",
+        "description": "Podporte komunitu potvrdzovaním užitočných hlásení"
+      },
+      "manual": {
+        "title": "Uložte si údaje na všetkých zariadeniach",
+        "description": "Synchronizujte svoje obľúbené, hlásenia a históriu chatov na všetkých svojich zariadeniach"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "Bez e-mailu alebo hesla",
+        "description": "Rešpektujeme vaše súkromie. Len synchronizačný kľúč, žiadne osobné údaje"
+      },
+      "syncKey": {
+        "title": "Vytvorí iba synchronizačný kľúč",
+        "description": "Jedinečný identifikátor, ktorý synchronizuje vaše dáta naprieč zariadeniami"
+      },
+      "multiDevice": {
+        "title": "Uložte si ho, odfotografujte QR kód alebo pošlite e-mailom",
+        "description": "Použite synchronizačný kľúč na obnovenie profilu na iných zariadeniach"
+      }
+    }
+  },
+  "profileCreated": {
+    "title": "Profil vytvorený!",
+    "description": "Váš profil bol úspešne vytvorený. Uložte si synchronizačný kľúč pre prístup k dátam na iných zariadeniach.",
+    "actionCompleted": "{{action}} dokončené!",
+    "syncKeyLabel": "Váš synchronizačný kľúč",
+    "syncKeyDescription": "Toto je váš jedinečný kľúč pre synchronizáciu naprieč zariadeniami",
+    "qrCodeLabel": "QR kód",
+    "qrCodeDescription": "Naskenujte tento QR kód na inom zariadení pre synchronizáciu dát",
+    "privacyTitle": "Dôležité: Uložte si synchronizačný kľúč",
+    "saveKeySafe": "Uložte tento kľúč na bezpečné miesto",
+    "screenshotQR": "Alebo odfotografujte tento QR kód",
+    "needForSync": "Budete ho potrebovať na synchronizáciu ďalších zariadení",
+    "gotIt": "Rozumiem!",
+    "copied": "Skopírované!",
+    "copy": "Kopírovať",
+    "emailSection": {
+      "title": "Poslať na e-mail (voliteľné)",
+      "privacyNote1": "Váš e-mail NEUKLADÁME",
+      "privacyNote2": "Toto je len jednorazové odoslanie",
+      "privacyNote3": "Nikdy neuložené do našej databázy",
+      "emailPlaceholder": "vas@email.sk",
+      "sendButton": "Poslať e-mail",
+      "sending": "Odosielam...",
+      "success": "E-mail odoslaný! Skontrolujte svoju schránku",
+      "error": "Nepodarilo sa odoslať e-mail. Skúste to prosím znova."
+    }
+  },
+  "profile": {
+    "anonymous": "Anonymný",
+    "member": "Člen",
+    "anonymousMember": "Anonymný člen",
+    "favorites": "Obľúbené",
+    "yourReports": "Vaše Hlásenia",
+    "recent": "Nedávne vyhľadávania",
+    "stats": "Vaše štatistiky",
+    "settings": "Nastavenia",
+    "clearData": "Vymazať všetky dáta"
+  },
+  "stats": {
+    "title": "Vaše štatistiky",
+    "description": "Vaša aktivita a príspevky do komunity beta.rocks",
+    "reportsPosted": "Odoslané hlásenia",
+    "confirmationsGiven": "Udelené potvrdenia",
+    "favoritesCount": "Obľúbené",
+    "memberSince": "Člen od",
+    "lastActive": "Naposledy aktívny",
+    "unknown": "Neznáme",
+    "encourageReports": "Zdieľajte svoje miestne znalosti zasielaním hlásení o podmienkach na skalách!",
+    "thankYou": "Ďakujeme za váš príspevok do lezeckej komunity!"
+  },
+  "userReports": {
+    "title": "Vaše Hlásenia",
+    "description": "{{count}} hlásení",
+    "empty": "Zatiaľ žiadne hlásenia",
+    "emptyMessage": "Zatiaľ ste neodoslali žiadne hlásenia",
+    "emptyHint": "Zdieľajte informácie o podmienkach a skalách, aby ste pomohli komunite",
+    "loading": "Načítavam vaše hlásenia...",
+    "loadFailed": "Nepodarilo sa načítať hlásenia",
+    "deleteSuccess": "Hlásenie úspešne odstránené",
+    "deleteFailed": "Nepodarilo sa odstrániť hlásenie"
+  },
+  "settings": {
+    "title": "Nastavenia",
+    "description": "Spravujte svoj profil, synchronizačný kľúč a predvoľby",
+    "save": "Uložiť",
+    "saving": "Ukladanie...",
+    "displayName": {
+      "label": "Zobrazované meno",
+      "description": "Vaše meno zobrazené pri reportoch a potvrdeniach (voliteľné)",
+      "placeholder": "Zadajte svoje meno...",
+      "saved": "Zobrazované meno uložené",
+      "savedDescription": "Vaše zobrazované meno bolo úspešne aktualizované",
+      "saveFailed": "Ukladanie zlyhalo",
+      "saveFailedDescription": "Vaše zobrazované meno sa nepodarilo uložiť. Skúste to prosím znova"
+    },
+    "units": {
+      "title": "Jednotky a merania",
+      "description": "Vyberte preferované jednotky pre údaje o počasí a lezení",
+      "systemLabel": "Systém jednotiek",
+      "systemDescription": "Rýchle nastavenia pre bežné systémy jednotiek",
+      "systems": {
+        "metric": "Metrický (°C, km/h, mm)",
+        "imperial": "Imperiálny (°F, mph, palce)",
+        "uk": "Veľká Británia (°C, mph, mm)",
+        "custom": "Vlastný"
+      },
+      "temperature": "Teplota",
+      "temperatureUnits": {
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Rýchlosť vetra",
+      "windSpeedUnits": {
+        "kmh": "Kilometre za hodinu (km/h)",
+        "mph": "Míle za hodinu (mph)",
+        "ms": "Metre za sekundu (m/s)",
+        "knots": "Uzly (kn)"
+      },
+      "precipitation": "Zrážky",
+      "precipitationUnits": {
+        "mm": "Milimetre (mm)",
+        "inches": "Palce (in)"
+      },
+      "distance": "Vzdialenosť",
+      "distanceUnits": {
+        "km": "Kilometre (km)",
+        "miles": "Míle (mi)"
+      },
+      "elevation": "Nadmorská výška",
+      "elevationUnits": {
+        "meters": "Metre (m)",
+        "feet": "Stopy (ft)"
+      },
+      "saved": "Jednotky uložené",
+      "savedDescription": "Vaše preferencie jednotiek boli úspešne aktualizované",
+      "saveFailed": "Ukladanie jednotiek zlyhalo",
+      "saveFailedDescription": "Vaše preferencie jednotiek sa nepodarilo uložiť. Skúste to prosím znova"
+    },
+    "syncKey": {
+      "title": "Synchronizačný kľúč",
+      "description": "Použite tento kľúč na synchronizáciu obľúbených a nastavení naprieč zariadeniami",
+      "label": "Váš synchronizačný kľúč",
+      "copy": "Skopírovať synchronizačný kľúč",
+      "showFullKey": "Zobraziť celý kľúč",
+      "hideKey": "Skryť kľúč",
+      "qrCode": "QR kód",
+      "qrDescription": "Naskenujte tento QR kód na inom zariadení pre synchronizáciu dát",
+      "restoreTitle": "Obnoviť z iného zariadenia",
+      "restoreDescription": "Už máte synchronizačný kľúč? Vložte ho tu pre obnovenie dát",
+      "restoreLabel": "Vložte svoj synchronizačný kľúč",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Obnoviť synchronizačný kľúč",
+      "restoring": "Obnovovanie...",
+      "restoreSuccess": "Synchronizačný kľúč bol úspešne obnovený! Obnovovanie stránky...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
+      "restoreError": "Neplatný formát synchronizačného kľúča. Skontrolujte a skúste to znova.",
+      "saveNote": {
+        "title": "Uložte si synchronizačný kľúč",
+        "description": "Odporúčame uložiť synchronizačný kľúč na bezpečnom mieste, napríklad v aplikácii Poznámky alebo správcovi hesiel. Budete ho potrebovať na obnovenie dát na iných zariadeniach."
+      },
+      "warning": {
+        "title": "Uchovávajte svoj synchronizačný kľúč v súkromí",
+        "description": "Ktokoľvek s vaším synchronizačným kľúčom môže pristupovať k vašim obľúbeným a nastaveniam. Nezdieľajte ho verejne."
+      },
+      "emailButton": "Poslať synchronizačný kľúč na e-mail",
+      "emailLabel": "E-mailová adresa",
+      "emailPlaceholder": "vas@example.sk",
+      "emailSend": "Poslať",
+      "emailSending": "Posielanie...",
+      "emailPrivacy": "Neukladáme váš e-mail - je použitý len raz na odoslanie synchronizačného kľúča.",
+      "emailSent": "E-mail odoslaný!",
+      "emailSentDescription": "Skontrolujte svoju doručenú poštu na {{email}}",
+      "emailFailed": "Odoslanie e-mailu zlyhalo",
+      "emailFailedDescription": "Skúste to znova alebo skopírujte synchronizačný kľúč ručne.",
+      "emailInvalid": "Zadajte prosím platnú e-mailovú adresu"
+    },
+    "dangerZone": {
+      "title": "Nebezpečná zóna",
+      "description": "Tieto akcie sú trvalé a nemožno ich vrátiť späť",
+      "deleteProfile": "Odstrániť profil",
+      "deleteProfileConfirm": "Naozaj chcete odstrániť svoj profil? Týmto natrvalo odstránite všetky vaše údaje vrátane obľúbených, histórie chatu a nastavení. Túto akciu nie je možné vrátiť späť.",
+      "deleteFailed": "Nepodarilo sa odstrániť profil. Skúste to prosím znova."
+    }
+  },
+  "favorites": {
+    "title": "Vaše obľúbené skaly",
+    "description": "Máte {{count}} obľúbených miest",
+    "empty": "Zatiaľ žiadne obľúbené",
+    "emptyMessage": "Zatiaľ ste nepridali žiadne obľúbené skaly",
+    "emptyHint": "Kliknite na tlačidlo hviezdičky na ktorejkoľvek karte podmienok pre pridanie do obľúbených",
+    "lastChecked": "Naposledy skontrolované",
+    "frictionScore": "Skóre trenia",
+    "viewConditions": "Zobraziť podmienky",
+    "remove": "Odstrániť",
+    "confirmDelete": "Odstrániť z obľúbených?",
+    "confirmDeleteDescription": "Ste si istí, že chcete odstrániť {{name}} z obľúbených?",
+    "loginToFavorite": "Prosím nastavte svoj profil na pridanie lokalít do obľúbených",
+    "errorToggling": "Nepodarilo sa prepnúť obľúbenú položku. Skúste to znova.",
+    "added": "Skala pridaná do obľúbených",
+    "removed": "Skala odstránená z obľúbených",
+    "loading": "Načítavanie obľúbených..."
+  },
+  "reports": {
+    "addReport": "Pridať hlásenie",
+    "addReportDescription": "Zdieľajte informácie o {{cragName}}",
+    "postingAs": "Prispievate ako",
+    "category": "Čo chcete nahlásiť?",
+    "categories": {
+      "conditions": "Podmienky",
+      "safety": "Bezpečnosť",
+      "access": "Prístup",
+      "climbing_info": "Lezecké informácie",
+      "facilities": "Zázemie",
+      "other": "Ostatné",
+      "lost_found": "Stratené a nájdené"
+    },
+    "categoryDescriptions": {
+      "conditions": "Počasie, trenie, suchosť, preplnenosť",
+      "safety": "Uvoľnené skrutky, pády kameňov, zlomené chyty, nebezpečenstvá",
+      "access": "Uzávery, zmeny parkovania, sezónne obmedzenia, vtáčie hniezda, hmyz",
+      "climbing_info": "Prebolcovanie, aktualizácie vybavenia, zmeny ciest, permanentné expresky",
+      "facilities": "Toalety, kempovanie, zdroje vody, vybavenie",
+      "other": "Čokoľvek iné, čo nezapadá vyššie",
+      "lost_found": "Stratené alebo nájdené vybavenie"
+    },
+    "categoryHelp": {
+      "conditions": "Aktuálne počasie, trenie, suchosť, preplnenosť na skalách",
+      "safety": "Nebezpečenstvá v celej oblasti, nebezpečné podmienky, naliehavé varovania",
+      "access": "Parkovanie, uzávery, predpisy, sezónne obmedzenia",
+      "climbing_info": "Špecifické detaily ciest, beta, chyty, vybavenie, obťažnosť",
+      "facilities": "Toalety, kempovanie, zdroje vody, vybavenie",
+      "other": "Čokoľvek iné, čo nezapadá do vyššie uvedených kategórií",
+      "lost_found": "Nahláste stratené predmety, ktoré hľadáte, alebo nájdené predmety, ktoré máte"
+    },
+    "dryness": "Suchosť",
+    "wind": "Vietor",
+    "crowds": "Preplnenosť",
+    "additionalComments": "Ďalšie komentáre (voliteľné)",
+    "details": "Podrobnosti",
+    "detailsRequired": "Uveďte prosím podrobnosti o tomto hlásení",
+    "placeholders": {
+      "conditions": "Napr., Východný sektor stále mokrý, chodník bahnitý, trhlina kvapká...",
+      "safety": "Napr., Uvoľnená skrutka na ceste X, nebezpečenstvo pádu kameňov pri hlavnej stene...",
+      "access": "Napr., Brána zatvorená do mája, nové parkovisko za knižnicou...",
+      "climbing_info": "Napr., Cesta X prebolcovaná nehrdzavejúcimi skrutkami, nainštalované nové permanentné expresky, vylepšené istenie...",
+      "facilities": "Napr., Toaleta k dispozícii na parkovisku, žiadny zdroj vody v blízkosti...",
+      "other": "Popíšte, čo chcete nahlásiť...",
+      "lost_found": "Napr., Nájdený modrý vrecko na magnézium pri základni, stratený Black Diamond friend #2 pri parkovisku..."
+    },
+    "submit": "Odoslať hlásenie",
+    "submitting": "Odosiela sa...",
+    "readyToPost": "Profil vytvorený! Môžete uverejniť svoje hlásenie.",
+    "helpful": "Užitočné",
+    "loginToConfirm": "Nastavte prosím svoj profil na potvrdenie hlásení",
+    "confirmFailed": "Potvrdenie hlásenia zlyhalo. Skúste to prosím znova.",
+    "voteReady": "Teraz môžete hlasovať o hláseniach",
+    "ratings": {
+      "veryPoor": "Veľmi zlé",
+      "poor": "Zlé",
+      "okay": "Prijateľné",
+      "good": "Dobré",
+      "excellent": "Výborné"
+    },
+    "scales": {
+      "veryWet": "Veľmi mokro",
+      "veryDry": "Perfektné",
+      "calm": "Veľmi veterno",
+      "veryWindy": "Pokojne",
+      "empty": "Prázdno",
+      "veryCrowded": "Veľmi preplnené"
+    },
+    "drynessLabels": {
+      "1": "Veľmi mokro",
+      "2": "Mokro",
+      "3": "Mierne vlhko",
+      "4": "Väčšinou sucho",
+      "5": "Veľmi sucho"
+    },
+    "windLabels": {
+      "1": "Pokojne",
+      "2": "Ľahký vánok",
+      "3": "Mierne",
+      "4": "Veterno",
+      "5": "Veľmi veterno"
+    },
+    "crowdsLabels": {
+      "1": "Prázdno",
+      "2": "Málo ľudí",
+      "3": "Mierne",
+      "4": "Preplnené",
+      "5": "Veľmi preplnené"
+    },
+    "recentReports": "Nedávne hlásenia",
+    "communityReports": "Komunitné hlásenia",
+    "noReports": "Zatiaľ žiadne hlásenia",
+    "beTheFirst": "Buďte prvý, kto nahlási",
+    "noReportsInCategory": "V tejto kategórii nie sú žiadne hlásenia",
+    "filters": {
+      "all": "Všetky"
+    },
+    "staleness": {
+      "outdated": "Neaktuálne",
+      "older": "Staršie",
+      "veryOld": "Veľmi staré"
+    },
+    "observationDate": "Kedy ste to pozorovali?",
+    "observationDateHelp": "Môžete hlásiť podmienky až 7 dní späť",
+    "lostFoundType": "Typ",
+    "lostFoundTypes": {
+      "lost": "Stratená vec",
+      "found": "Nájdená vec"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Vyberte, či ide o stratenú alebo nájdenú vec",
+    "lostBadge": "STRATENÉ",
+    "foundBadge": "NÁJDENÉ",
+    "expiresAt": "Platné do (voliteľné)",
+    "expiresAtHelp": "Nastavte, kedy táto správa zastaráva (užitočné pre dočasné uzávery alebo menené podmienky)",
+    "noExpiry": "Nikdy nevyprší",
+    "expiredOn": "Vypršalo {{date}}",
+    "edit": "Upraviť",
+    "delete": "Vymazať",
+    "deleteConfirm": "Naozaj chcete vymazať túto správu?",
+    "deleteConfirmTitle": "Vymazať Správu",
+    "updated": "Správa aktualizovaná",
+    "deleted": "Správa vymazaná",
+    "editReport": "Upraviť Správu",
+    "editReportDescription": "Aktualizujte svoju správu",
+    "updateReport": "Aktualizovať Správu",
+    "updating": "Aktualizujem...",
+    "deleteSuccess": "Správa vymazaná",
+    "deleteSuccessDescription": "Vaša správa bola úspešne odstránená",
+    "deleteError": "Vymazanie správy zlyhalo",
+    "deleteErrorDescription": "Niečo sa pokazilo. Skúste to prosím znova.",
+    "photos": "Fotografie",
+    "photoHint": "Pridajte až 3 fotografie (max. 2MB každá). Fotografie budú automaticky komprimované.",
+    "photoUploadFailed": "Nahrávanie fotografie zlyhalo",
+    "uploadingPhotos": "Nahrávanie fotografií...",
+    "submitReport": "Odoslať hlásenie"
+  },
+  "editCragDialog": {
+    "title": "Upraviť Skalu",
+    "subtitle": "Previesť túto skalu na sektor alebo zmeniť nadradený prvok",
+    "currentStatus": "Aktuálny Stav",
+    "crag": "Skala",
+    "sector": "Sektor",
+    "currentParent": "Aktuálny nadradený prvok",
+    "chooseAction": "Vybrať Akciu",
+    "convertToSector": "Previesť na Sektor",
+    "convertToCrag": "Previesť na Skalu",
+    "changeParent": "Zmeniť Nadradenú Skalu",
+    "selectParentCrag": "Vyberte Nadradenú Skalu",
+    "selectNewParent": "Vyberte Novú Nadradenú Skalu",
+    "searchForParent": "Vyhľadajte nadradenú skalu, ku ktorej chcete priradiť tento sektor",
+    "searchPlaceholder": "Hľadať nadradenú skalu...",
+    "noCragsFound": "Neboli nájdené žiadne skaly",
+    "change": "Zmeniť",
+    "save": "Uložiť Zmeny",
+    "saving": "Ukladám...",
+    "success": "Skala bola úspešne aktualizovaná",
+    "convertedToCrag": "Úspešne prevedené na skalu",
+    "convertedToSector": "Úspešne prevedené na sektor",
+    "errors": {
+      "parentRequired": "Nadradená skala je vyžadovaná",
+      "parentRequiredDesc": "Vyberte prosím nadradenú skalu pre tento sektor",
+      "failed": "Aktualizácia zlyhala",
+      "failedDesc": "Skalu sa nepodarilo aktualizovať. Skúste to prosím znova."
+    }
+  },
+  "cragPage": {
+    "askAI": "Opýtať sa AI",
+    "edit": "Upraviť",
+    "editCrag": "Upraviť podrobnosti skaly",
+    "currentConditions": "Aktuálne podmienky",
+    "sectors": "Sektory",
+    "addSector": "Pridať sektor",
+    "noSectors": "K tejto skale zatiaľ neboli pridané žiadne sektory.",
+    "beFirstToAddSector": "Buďte prvý, kto pridá sektor",
+    "searchSectors": "Hľadať sektory...",
+    "noSectorsFound": "Neboli nájdené žiadne sektory zodpovedajúce vášmu vyhľadávaniu.",
+    "disclaimer": "Poveternostné podmienky sa môžu rýchlo meniť. Vždy skontrolujte podmienky na mieste a použite svoj najlepší úsudok.",
+    "askAIAboutCrag": "Opýtať sa AI na túto skalu",
+    "viewOnSunCalc": "Zobraziť časy slnka/mesiaca",
+    "viewSunAngles": "Zobraziť polohu slnka a uhly tieňa",
+    "viewOnMap": "Zobraziť na mape",
+    "viewOnGoogleMaps": "Zobraziť na Google Maps",
+    "addToFavorites": "Pridať do obľúbených",
+    "removeFromFavorites": "Odstrániť z obľúbených"
+  },
+  "time": {
+    "today": "Dnes",
+    "yesterday": "Včera",
+    "daysAgo_one": "pred {{count}} dňom",
+    "daysAgo_few": "pred {{count}} dňami",
+    "daysAgo_many": "pred {{count}} dňami",
+    "daysAgo_other": "pred {{count}} dňami",
+    "pickDate": "Vyberte dátum"
+  },
+  "loading": {
+    "conditions": "Načítavam podmienky...",
+    "weatherData": "Získavam údaje o počasí...",
+    "reports": "Načítavam hlásenia..."
+  },
+  "nearbyMatch": {
+    "distance": "{{distance}} od {{location}}"
+  },
+  "feed": {
+    "title": "Živý prehľad",
+    "viewFeed": "Zobraziť prehľad aktivít",
+    "live": "Naživo",
+    "justNow": "Práve teraz",
+    "loadingFeed": "Načítavam prehľad...",
+    "reconnecting": "Opätovné pripájanie k živým aktualizáciám...",
+    "loadMore": "Načítať viac hlásení",
+    "loadingMore": "Načítavanie...",
+    "totalReports": "{{count}} celkom",
+    "showingOf": "Zobrazených {{showing}} z {{total}} hlásení",
+    "totalReportsHint": "Celkovy pocet hlaseni komunity, vratane starsich nezobrazovanych v kanali",
+    "olderHidden": "Starsie hlasenia su stale viditelne na strankach jednotlivych skal",
+    "filters": {
+      "all": "Všetky",
+      "favorites": "Obľúbené"
+    },
+    "emptyState": {
+      "noReportsTitle": "Zatiaľ žiadne hlásenia",
+      "noReportsDescription": "Buďte prvý, kto sa podelí o podmienky s lezeckou komunitou",
+      "noFavoritesTitle": "Žiadne hlásenia z obľúbených",
+      "noFavoritesDescription": "Pridajte skaly do obľúbených, aby ste videli ich hlásenia v tomto prehľade"
+    }
+  },
+  "webcams": {
+    "title": "Webkamery v okolí",
+    "nearbyCount": "Nájdená {{count}} webkamera",
+    "nearbyCount_other": "Nájdených {{count}} webkamier",
+    "daylight": "Denné svetlo",
+    "openOnWindy": "Otvoriť na Windy.com",
+    "poweredBy": "Poskytuje",
+    "noWebcams": "V okolí sa nenašli žiadne webkamery"
+  }
+}

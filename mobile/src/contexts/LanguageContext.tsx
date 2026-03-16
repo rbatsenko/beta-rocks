@@ -12,6 +12,7 @@ import {
 } from "react";
 import { MMKV } from "react-native-mmkv";
 import * as Localization from "expo-localization";
+import i18next from "i18next";
 
 const LANGUAGE_STORAGE_KEY = "beta_rocks_language";
 const storage = new MMKV();
@@ -75,16 +76,20 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const saved = storage.getString(LANGUAGE_STORAGE_KEY);
+    let lang: LanguageCode;
     if (saved && SUPPORTED_LANGUAGES.some((l) => l.code === saved)) {
-      setLanguageState(saved as LanguageCode);
+      lang = saved as LanguageCode;
     } else {
-      setLanguageState(detectDeviceLanguage());
+      lang = detectDeviceLanguage();
     }
+    setLanguageState(lang);
+    i18next.changeLanguage(lang);
   }, []);
 
   function setLanguage(code: LanguageCode) {
     storage.set(LANGUAGE_STORAGE_KEY, code);
     setLanguageState(code);
+    i18next.changeLanguage(code);
   }
 
   return (

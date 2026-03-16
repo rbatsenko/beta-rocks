@@ -1,0 +1,914 @@
+{
+  "header": {
+    "title": "beta.rocks"
+  },
+  "welcome": {
+    "heading": "Informacje o dowolnej skałce",
+    "description": "Warun na bieżąco, raporty społeczności i informacje o rejonach i drogach na całym świecie",
+    "searchHint": "Wyszukaj dowolny rejon wspinaczkowy",
+    "exampleQueries": {
+      "query1": {
+        "display": "Jaki warun w Sokolikach jutro?",
+        "query": "Jaki warun w Sokolikach jutro?"
+      },
+      "query2": {
+        "display": "Czy Podlesice są suche dzisiaj po południu?",
+        "query": "Czy Podlesice są suche dzisiaj po południu?"
+      },
+      "query3": {
+        "display": "Jak tam Dupa Słonia?",
+        "query": "Jak tam Dupa Słonia?"
+      }
+    },
+    "yourFavorites": "Twoje Ulubione",
+    "favoriteQuery": "Jakie są warunki w {{crag}}?"
+  },
+  "chat": {
+    "analyzing": "Analizuję warunki...",
+    "thinking": "Myślę...",
+    "inputPlaceholder": "Zapytaj o dowolną skałkę lub sektor...",
+    "clearHistory": "Wyczyść historię",
+    "clearHistoryConfirm": "Czy na pewno chcesz wyczyścić całą historię czatu? Tej operacji nie można cofnąć.",
+    "clearChat": "Wyczyść czat",
+    "clearChatTooltip": "Wyczyść bieżącą rozmowę",
+    "clearChatConfirm": "Wyczyścić twój czat? Spowoduje to usunięcie wszystkich wiadomości z bieżącej rozmowy."
+  },
+  "search": {
+    "title": "Szukaj skałek",
+    "description": "Wyszukaj rejony wspinaczkowe po nazwie lub lokalizacji",
+    "placeholder": "Szukaj skałek... (np. 'Sokoliki', 'Wampirek')",
+    "typeToSearch": "Zacznij pisać, aby wyszukać skałki...",
+    "searching": "Wyszukiwanie...",
+    "noCragsFound": "Nie znaleziono rejonów",
+    "addNewCrag": "Dodaj nowy rejon",
+    "heading": "Skałki",
+    "toSelect": "aby wybrać",
+    "toClose": "aby zamknąć",
+    "notSeeing": "Nie widzisz swojego rejonu?",
+    "addMissingHere": "Dodaj go tutaj"
+  },
+  "fab": {
+    "addCrag": "Dodaj nowy rejon",
+    "addReport": "Dodaj raport",
+    "tooltip": "Szybkie akcje"
+  },
+  "cragLocationPicker": {
+    "loadingMap": "Ładowanie mapy...",
+    "searchPlaceholder": "Wyszukaj lokalizację (np. 'Dolina Kościeliska, Tatry')",
+    "noLocationsFound": "Nie znaleziono lokalizacji",
+    "loadingLocationData": "Ładowanie danych lokalizacji...",
+    "clickToSet": "Kliknij na mapę, aby ustawić lokalizację rejonu",
+    "nearbyCragsFound": "Znaleziono {{count}} pobliski rejon",
+    "nearbyCragsFound_other": "Znaleziono {{count}} pobliskich rejonów",
+    "clickMarkersToView": "Kliknij znaczniki, aby wyświetlić istniejące rejony",
+    "coordinates": "Współrzędne"
+  },
+  "addCragModal": {
+    "title": "Dodaj nowy rejon",
+    "subtitle": "Pomóż rozwijać bazę danych wspinaczkowych",
+    "mapLabel": "Lokalizacja",
+    "mapHelp": "Kliknij na mapę, aby ustawić lokalizację rejonu",
+    "coordinates": "Współrzędne",
+    "nearbyCragsWarning": {
+      "title": "Istniejące skały w pobliżu",
+      "message": "Znaleziono {{count}} skałę w promieniu 500m",
+      "message_other": "Znaleziono {{count}} skały w promieniu 500m",
+      "away": "oddalone",
+      "view": "Zobacz",
+      "proceed": "Jeśli żadna z nich nie pasuje, możesz kontynuować dodawanie nowej skały."
+    },
+    "cancel": "Anuluj",
+    "submit": "Dodaj rejon",
+    "submitting": "Dodawanie...",
+    "success": "Rejon został pomyślnie dodany!",
+    "successDesc": "{{name}} został dodany do bazy danych",
+    "form": {
+      "name": "Nazwa rejonu",
+      "namePlaceholder": "np. Sokoliki, Wampirek",
+      "country": "Kraj",
+      "countryPlaceholder": "Wybierz kraj",
+      "state": "Województwo/Region",
+      "statePlaceholder": "np. Dolnośląskie, Małopolskie",
+      "municipality": "Gmina/Miasto",
+      "municipalityPlaceholder": "np. Jelenia Góra, Kraków",
+      "village": "Miejscowość",
+      "villagePlaceholder": "np. Podgórzyn",
+      "rockType": "Typ skały",
+      "rockTypePlaceholder": "Wybierz typ skały (opcjonalnie)",
+      "aspects": "Orientacje",
+      "aspectsHelp": "Wybierz wszystkie kierunki świata, w które skierowane są skały rejonu",
+      "climbingTypes": "Typy wspinania",
+      "climbingTypesHelp": "Wybierz wszystkie style wspinania dostępne w rejonie",
+      "description": "Opis",
+      "descriptionPlaceholder": "Dodatkowe informacje o rejonie (opcjonalnie)..."
+    },
+    "rockTypes": {
+      "granite": "Granit",
+      "sandstone": "Piaskowiec",
+      "limestone": "Wapień",
+      "gneiss": "Gnejs",
+      "quartzite": "Kwarcyt",
+      "gritstone": "Piaskowiec",
+      "basalt": "Bazalt",
+      "volcanic": "Wulkaniczny",
+      "conglomerate": "Zlepieniec",
+      "schist": "Łupek",
+      "slate": "Łupek",
+      "other": "Inny"
+    },
+    "climbingTypes": {
+      "sport": "Sportowa",
+      "trad": "Tradycyjna",
+      "boulder": "Buldering",
+      "mixed": "Mieszana",
+      "aid": "Sztuczna",
+      "ice": "Lodowa"
+    },
+    "errors": {
+      "nameRequired": "Nazwa jest wymagana",
+      "nameRequiredDesc": "Proszę podać nazwę rejonu",
+      "locationRequired": "Lokalizacja jest wymagana",
+      "locationRequiredDesc": "Proszę kliknąć na mapę, aby ustawić lokalizację rejonu",
+      "countryRequired": "Kraj jest wymagany",
+      "countryRequiredDesc": "Proszę wybrać kraj z listy rozwijanej",
+      "duplicate": "Rejon już istnieje w pobliżu",
+      "duplicateDesc": "Rejon o podobnej nazwie już istnieje w tej lokalizacji. Sprawdź mapę, aby zobaczyć istniejące rejony.",
+      "failed": "Nie udało się dodać rejonu",
+      "failedDesc": "Wystąpił błąd podczas dodawania rejonu. Spróbuj ponownie."
+    }
+  },
+  "conditions": {
+    "rating": "Ocena",
+    "details": "Szczegóły",
+    "location": "Lokalizacja",
+    "favorite": "Ulubione",
+    "favorited": "W ulubionych",
+    "addReport": "Dodaj raport",
+    "viewCragPage": "Zobacz skałkę"
+  },
+  "ratings": {
+    "great": "Super",
+    "good": "Dobrze",
+    "fair": "Średnio",
+    "poor": "Słabo",
+    "nope": "Bardzo słabo"
+  },
+  "reasons": {
+    "perfectTemp": "Idealna temperatura ({{temp}})",
+    "tempTooHigh": "Za ciepło - dla optymalnego tarcia może być potrzebny wiatr",
+    "coldGoodFriction": "Zimno ale dobre tarcie",
+    "idealHumidity": "Idealna wilgotność ({{humidity}}%)",
+    "lowHumidityGranite": "Niska wilgotność pomaga na granicie",
+    "readyInHours": "Gotowe do wspinania za ~{{hours}} godzin",
+    "acceptable": "Warunki akceptowalne",
+    "goodHumidity": "Dobra wilgotność ({{humidity}}%)",
+    "lowCondensationRisk": "Niskie ryzyko kondensacji (rozpiętość punktu rosy {{dewPointSpread}})",
+    "lowHumidityFriction": "Niska wilgotność poprawia tarcie"
+  },
+  "warnings": {
+    "tooWarm": "Za ciepło dla {{rockType}} ({{temp}})",
+    "coldSuboptimal": "Zimno - zabierz ciepłe ubrania i rozgrzej się porządnie",
+    "highHumidity": "Wysoka wilgotność ({{humidity}}%) - może być gorsze tarcie",
+    "wetDangerousSandstone": "Piaskowiec mokry - nie wspinaj się póki całkiem nie wyschnie!",
+    "wetSlippery": "Skała mokra - ślisko",
+    "veryHighWinds": "Bardzo mocny wiatr ({{wind}}) - może być nieprzyjemnie 😅",
+    "highWind": "Silny wiatr ({{wind}})",
+    "recentPrecip": "Niedawne opady ({{precip}}) - wyschnie za ~{{hours}}h",
+    "currentlyWetDangerous": "Mokro - poczekaj aż wyschnie",
+    "currentlyWet": "Mokro",
+    "cold": "Cold ({{temp}})",
+    "veryHighCondensationRisk": "Bardzo wysokie ryzyko kondensacji (rozpiętość punktu rosy {{dewPointSpread}}) - powierzchnia skały prawdopodobnie wilgotna",
+    "highCondensationRisk": "Wysokie ryzyko kondensacji (rozpiętość punktu rosy {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Wysokie ryzyko kondensacji",
+    "moderateCondensationRisk": "Umiarkowane ryzyko kondensacji (rozpiętość punktu rosy {{dewPointSpread}})",
+    "condensationRisk": "Ryzyko kondensacji ({{dewPointSpread}})"
+  },
+  "sandstoneWarning": {
+    "general": "Piaskowiec jest kruchy gdy mokry i wymaga dużo czasu aby wyschnąć po deszczu. Wspinanie się na mokrym piaskowcu niszczy skałę i jest niebezpieczne.",
+    "recentRain": "Wykryto niedawne opady. Upewnij się, że skała jest całkowicie sucha przed wspinaczką.",
+    "inLast24h": "w ciągu ostatnich 24h",
+    "inLast48h": "w ciągu ostatnich 48h"
+  },
+  "weather": {
+    "clearSky": "Bezchmurnie",
+    "mainlyClear": "Przeważnie bezchmurnie",
+    "partlyCloudy": "Częściowe zachmurzenie",
+    "overcast": "Pochmurno",
+    "fog": "Mgła",
+    "depositingRimeFog": "Mgła z szronem",
+    "lightDrizzle": "Lekka mżawka",
+    "moderateDrizzle": "Umiarkowana mżawka",
+    "denseDrizzle": "Gęsta mżawka",
+    "lightFreezingDrizzle": "Lekka marznąca mżawka",
+    "denseFreezingDrizzle": "Gęsta marznąca mżawka",
+    "slightRain": "Słaby deszcz",
+    "moderateRain": "Umiarkowany deszcz",
+    "heavyRain": "Silny deszcz",
+    "lightFreezingRain": "Słaba marznąca mżawka",
+    "heavyFreezingRain": "Silna marznąca mżawka",
+    "slightSnowFall": "Słaby śnieg",
+    "moderateSnowFall": "Umiarkowany śnieg",
+    "heavySnowFall": "Silny śnieg",
+    "snowGrains": "Krupy śnieżne",
+    "slightRainShowers": "Słabe przelotne opady",
+    "moderateRainShowers": "Umiarkowane przelotne opady",
+    "violentRainShowers": "Silne przelotne opady",
+    "slightSnowShowers": "Słabe opady śniegu",
+    "heavySnowShowers": "Silne opady śniegu",
+    "thunderstorm": "Burza",
+    "thunderstormSlightHail": "Burza z gradem",
+    "thunderstormHeavyHail": "Burza z silnym gradem"
+  },
+  "timeframes": {
+    "now": "teraz",
+    "today": "dzisiaj",
+    "tomorrow": "jutro",
+    "thisAfternoon": "dziś po południu",
+    "thisEvening": "dziś wieczorem",
+    "tonight": "dzisiaj w nocy"
+  },
+  "disambiguation": {
+    "foundMultipleAreas": "Znaleziono {{count}} rejonów wspinaczkowych dla \"{{location}}\". Wybierz jeden:",
+    "foundMultipleLocations": "Znaleziono wiele lokalizacji dla \"{{location}}\". Wybierz jedną:",
+    "queryTemplate": "warunki w {{name}} ({{latitude}}, {{longitude}})"
+  },
+  "footer": {
+    "about": "O nas",
+    "privacy": "Prywatność",
+    "github": "GitHub",
+    "brand": "beta.rocks",
+    "description": "Darmowe raporty wspinaczkowe dla każdego. Stworzone z ❤️ dla wspinaczkowej społeczności.",
+    "attribution": "Dane z Open-Meteo, OpenBeta i <osmLink>współtwórców OpenStreetMap</osmLink>. Raporty społecznościowe.",
+    "copyright": "© 2026 beta.rocks. Wszelkie prawa zastrzeżone."
+  },
+  "features": {
+    "heading": "Wszystko czego potrzebujesz",
+    "subheading": "Warunki pogodowe i raporty w zasięgu ręki, całkowicie za darmo",
+    "realTimeWeather": {
+      "title": "Pogoda na żywo",
+      "description": "Dokładne prognozy z Open-Meteo z linkiem do słońca/cienia dla konkretnych sektorów"
+    },
+    "chatInterface": {
+      "title": "Interfejs czatu",
+      "description": "Zapytania w języku naturalnym dzięki AI. Pytaj w dowolnym języku, otrzymuj natychmiastowe odpowiedzi"
+    },
+    "communityReports": {
+      "title": "Raporty społeczności",
+      "description": "Dziel się warunem, informacjami o bezpieczeństwie, zmianami w dostępie, info wspinaczkowym i więcej. Pomóż wspinaczom aktualizacjami w czasie rzeczywistym w wielu kategoriach"
+    },
+    "globalCoverage": {
+      "title": "Zasięg globalny",
+      "description": "Każda skałka lub sektor na świecie dzięki integracji z bazą OpenBeta"
+    },
+    "crossDeviceSync": {
+      "title": "Synchronizacja między urządzeniami",
+      "description": "Uzyskaj dostęp do swoich ulubionych i historii czatu z dowolnego urządzenia za pomocą bezpiecznego klucza synchronizacji. Nie wymaga konta"
+    },
+    "privacyFirst": {
+      "title": "Prywatność na pierwszym miejscu",
+      "description": "Nie tylko nie potrzebujemy Twoich danych - nie chcemy ich! Anonimowość domyślnie. Bez kont, bez śledzenia. Twoje dane pozostają Twoje."
+    }
+  },
+  "privacy": {
+    "heading": "Polityka Prywatności",
+    "subheading": "Nie tylko nie potrzebujemy Twoich danych - nie chcemy ich!",
+    "whatWeDontCollect": {
+      "title": "Czego nie zbieramy",
+      "description": "Żadnych adresów e-mail, imion, numerów telefonów, adresów IP, analityki, pikseli śledzących, ciasteczek (poza niezbędnymi), śledzenia zachowań użytkowników. Dosłownie nie możemy Cię zidentyfikować."
+    },
+    "whatYouControl": {
+      "title": "Co kontrolujesz",
+      "description": "Twoje ulubione, raporty i historia czatu są przechowywane lokalnie na Twoim urządzeniu. Aby uzyskać do nich dostęp z wielu urządzeń, możesz utworzyć anonimowy profil. Gdy masz profil, Twoje dane synchronizują się automatycznie, aby umożliwić dostęp z wielu urządzeń. Możesz usunąć wszystkie swoje dane w dowolnym momencie z Ustawień."
+    },
+    "howSyncWorks": {
+      "title": "Jak działa synchronizacja",
+      "description": "Kiedy tworzysz profil, generujemy anonimowy klucz synchronizacji i synchronizujemy Twoje dane z naszą bazą danych. Dane są powiązane z zahaszowanym kluczem synchronizacji - nie z Twoją tożsamością. Klucz synchronizacji to losowy identyfikator, do którego tylko Ty masz dostęp. Nie możemy go powiązać z Tobą. Nie wymaga e-maila, nie wymaga konta."
+    },
+    "openSource": {
+      "title": "Open Source",
+      "description": "Cały nasz kod źródłowy jest otwarty na GitHubie. Możesz sprawdzić dokładnie, co robimy z Twoimi danymi (spoiler: nic). Pełna przejrzystość, zero ukrytych trackerów."
+    },
+    "yourRights": {
+      "title": "Twoje prawa",
+      "description": "Możesz usunąć swój profil w dowolnym momencie z Ustawień. Spowoduje to usunięcie Twoich ulubionych, historii czatu i profilu z naszej bazy danych. Raporty społeczności, które opublikowałeś, pozostają widoczne (anonimowo), aby pomóc innym wspinaczom. Pełna kontrola nad swoimi danymi."
+    },
+    "dataSecurity": {
+      "title": "Bezpieczeństwo danych",
+      "description": "Klucze synchronizacji są kryptograficznie hashowane przed zapisem. Używamy Supabase z politykami Row Level Security. Nawet gdyby nasza baza danych wyciekła, kluczy synchronizacji nie da się odwrócić, aby zidentyfikować użytkowników."
+    },
+    "footer": {
+      "tldr": "TL;DR: Zbudowaliśmy tę aplikację dla wspinaczy, nie do zbierania danych. Twoja prywatność nie jest funkcją - to fundament.",
+      "github": "Pełny kod źródłowy dostępny na <githubLink>GitHub</githubLink>"
+    }
+  },
+  "ui": {
+    "toggleTheme": "Przełącz motyw",
+    "selectLanguage": "Wybierz język",
+    "aboutApp": "O aplikacji",
+    "language": "Język",
+    "theme": "Motyw"
+  },
+  "dialog": {
+    "close": "Zamknij",
+    "cancel": "Anuluj",
+    "delete": "Usuń",
+    "detailedConditions": "Szczegółowe warunki",
+    "fullAnalysis": "Pełna analiza pogody i prognoza warunków wspinaczkowych",
+    "showMap": "Mapa",
+    "tabs": {
+      "overview": "Przegląd",
+      "hourly": "Co godzinę",
+      "daily": "14-dniowa"
+    },
+    "currentRating": "Aktualna ocena",
+    "currentConditions": "Obecny warun",
+    "currentWeather": "Aktualna pogoda",
+    "temperature": "Temperatura",
+    "humidity": "Wilgotność",
+    "windSpeed": "Prędkość wiatru",
+    "precipitation": "Opady",
+    "sunrise": "Wschód słońca",
+    "sunset": "Zachód słońca",
+    "high": "Maksymalna",
+    "low": "Minimalna",
+    "rain": "Deszcz",
+    "wind": "Wiatr",
+    "dry": "Sucho",
+    "wet": "Mokro",
+    "precipitationContext": "Kontekst opadów",
+    "last24h": "Ostatnie 24h",
+    "last48h": "Ostatnie 48h",
+    "next24h": "Następne 24h",
+    "dewPointSpread": "Punkt rosy (ryzyko kondensacji)",
+    "lowRisk": "Niskie ryzyko - skała powinna być sucha",
+    "moderateRisk": "Umiarkowane ryzyko - obserwuj wilgoć",
+    "highRisk": "Wysokie ryzyko - prawdopodobna kondensacja",
+    "optimalWindows": "Optymalne okna wspinaczkowe",
+    "nextDays": "Następne 5 dni",
+    "bestTime": "Najlepszy czas",
+    "noOptimalConditions": "Brak optymalnych warunków w ciągu najbliższych 5 dni",
+    "checkHourlyForecast": "Sprawdź prognozę godzinową",
+    "weatherDisclaimer": "⚠️ Pogoda może się szybko zmieniać. Monitoruj prognozy na bieżąco przed wyjazdem.",
+    "window": "okno",
+    "windows": "okna",
+    "today": "Dzisiaj",
+    "tomorrow": "Jutro",
+    "showCompleteTimeline": "Pokaż pełną oś czasu",
+    "hour": "godzina",
+    "hours": "godziny",
+    "period": "okres",
+    "periods": "okresy",
+    "noHourlyData": "Brak danych prognozy godzinowej",
+    "noDailyData": "Brak danych prognozy dziennej",
+    "noOptimalHours": "Brak optymalnych warunków w dniu",
+    "forecastIndicators": "Wskaźniki prognozy:",
+    "goodClimbingWindows": "Dobre okna wspinaczkowe",
+    "fairConditions": "Przeciętne warunki",
+    "poorConditions": "Słabe warunki",
+    "lessReliable": "Dni 8-14: Mniej pewna prognoza",
+    "lessReliableHourly": "Następne godziny mniej przewidywalne",
+    "lessCertain": "MNIEJ PEWNE",
+    "todayBadge": "DZISIAJ"
+  },
+  "timeContext": {
+    "sunrise": "Wschód słońca",
+    "sunset": "Zachód słońca",
+    "recommendedHours": "Zalecane godziny wspinaczki",
+    "totalDaylight": "Całkowite światło dzienne",
+    "hoursOfDaylight": "{{hours}} godzin światła dziennego",
+    "earlyStartRecommended": "Zalecany wczesny start, aby uniknąć upału",
+    "limitedDaylight": "Ograniczone światło dzienne - zaplanuj odpowiednio",
+    "morningConditionsBest": "Najlepsze warunki rano",
+    "eveningSession": "Warunki wieczornej sesji",
+    "showAllHours": "Pokaż wszystkie 24 godziny",
+    "showClimbingHoursOnly": "Pokaż tylko godziny wspinaczki",
+    "expandHours": "Rozwiń, aby zobaczyć wszystkie godziny"
+  },
+  "rockTypes": {
+    "granite": "Granit",
+    "sandstone": "Piaskowiec",
+    "limestone": "Wapień",
+    "basalt": "Bazalt",
+    "gneiss": "Gnejs",
+    "quartzite": "Kwarcyt",
+    "unknown": "Nieznany"
+  },
+  "sync": {
+    "banner": {
+      "title": "Twoje dane synchronizują się między urządzeniami",
+      "description": "Twoje ulubione skałki, raporty i czat są zapisywane lokalnie i mogą synchronizować się z innymi urządzeniami za pomocą klucza synchronizacji.",
+      "learnMore": "Dowiedz się więcej",
+      "dismiss": "Rozumiem"
+    },
+    "status": {
+      "synced": "Zsynchronizowano",
+      "syncing": "Synchronizacja...",
+      "offline": "Offline"
+    },
+    "notification": {
+      "title": "Klucz synchronizacji utworzony",
+      "description": "Wygenerowaliśmy unikalny klucz do synchronizacji twoich ulubionych i czatów między urządzeniami.",
+      "viewInSettings": "Zobacz w ustawieniach",
+      "viewMore": "Co to jest klucz synchronizacji?"
+    }
+  },
+  "syncExplainer": {
+    "title": "Jak działa synchronizacja",
+    "description": "Synchronizuj swoje dane na wszystkich urządzeniach w bezpieczny i prosty sposób.",
+    "features": {
+      "syncKey": {
+        "title": "Unikalny klucz synchronizacji",
+        "description": "Każdy użytkownik otrzymuje bezpieczny, unikalny klucz do synchronizacji danych między urządzeniami."
+      },
+      "multiDevice": {
+        "title": "Dostęp z wielu urządzeń",
+        "description": "Uzyskaj dostęp do swoich ulubionych skałek i czatu z dowolnego urządzenia za pomocą klucza synchronizacji."
+      },
+      "privacy": {
+        "title": "Prywatność na pierwszym miejscu",
+        "description": "Twoje dane są zaszyfrowane i dostępne tylko za pomocą klucza synchronizacji. Rejestracja nie jest wymagana."
+      }
+    },
+    "openSettings": "Otwórz ustawienia"
+  },
+  "profileCreation": {
+    "title": "Utwórz swój profil",
+    "subtitle": "Rejestracja z prywatnością na pierwszym miejscu - bez danych osobowych",
+    "createProfile": "Utwórz profil",
+    "creating": "Tworzę...",
+    "maybeLater": "Może później",
+    "tabs": {
+      "create": "Utwórz profil",
+      "signIn": "Zaloguj się"
+    },
+    "signIn": {
+      "title": "Masz już klucz synchronizacji?",
+      "description": "Wprowadź klucz synchronizacji, aby przywrócić swój profil i dane",
+      "syncKeyLabel": "Klucz synchronizacji",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Zaloguj się",
+      "signingIn": "Logowanie...",
+      "invalidKey": "Nieprawidłowy format klucza synchronizacji. Sprawdź i spróbuj ponownie."
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Zapisz ulubione na wszystkich urządzeniach",
+        "description": "Dodaj do zakładek swoje ulubione skałki i uzyskaj do nich dostęp z dowolnego urządzenia"
+      },
+      "report": {
+        "title": "Dziel się raportami ze społecznością",
+        "description": "Pomóż wspinaczom, dzieląc się warunem, alertami bezpieczeństwa i info wspinaczkowym"
+      },
+      "vote": {
+        "title": "Głosuj na pomocne raporty",
+        "description": "Wspieraj społeczność, potwierdzając przydatne raporty"
+      },
+      "manual": {
+        "title": "Zapisz swoje dane na wszystkich urządzeniach",
+        "description": "Synchronizuj swoje ulubione, raporty i historię czatu na wszystkich swoich urządzeniach"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "Bez e-maila i hasła",
+        "description": "Szanujemy Twoją prywatność. Tylko klucz synchronizacji, bez danych osobowych"
+      },
+      "syncKey": {
+        "title": "Tworzy tylko klucz synchronizacji",
+        "description": "Unikalny identyfikator synchronizujący dane między urządzeniami"
+      },
+      "multiDevice": {
+        "title": "Zapisz, zrób zrzut ekranu QR lub wyślij mailem",
+        "description": "Użyj klucza synchronizacji, aby przywrócić profil na innych urządzeniach"
+      }
+    }
+  },
+  "profileCreated": {
+    "title": "Profil utworzony!",
+    "description": "Twój profil został pomyślnie utworzony. Zapisz klucz synchronizacji, aby uzyskać dostęp do danych na innych urządzeniach.",
+    "actionCompleted": "{{action}} ukończono!",
+    "syncKeyLabel": "Twój klucz synchronizacji",
+    "syncKeyDescription": "To jest Twój unikalny klucz do synchronizacji między urządzeniami",
+    "qrCodeLabel": "Kod QR",
+    "qrCodeDescription": "Zeskanuj ten kod QR na innym urządzeniu, aby zsynchronizować dane",
+    "privacyTitle": "Ważne: Zapisz swój klucz synchronizacji",
+    "saveKeySafe": "Zapisz ten klucz w bezpiecznym miejscu",
+    "screenshotQR": "Lub zrób zrzut ekranu tego kodu QR",
+    "needForSync": "Będzie potrzebny do synchronizacji innych urządzeń",
+    "gotIt": "Rozumiem!",
+    "copied": "Skopiowano!",
+    "copy": "Kopiuj",
+    "emailSection": {
+      "title": "Wyślij na e-mail (opcjonalnie)",
+      "privacyNote1": "NIE przechowujemy Twojego e-maila",
+      "privacyNote2": "To tylko jednorazowe wysłanie",
+      "privacyNote3": "Nigdy nie zapisywane w naszej bazie danych",
+      "emailPlaceholder": "twoj@email.pl",
+      "sendButton": "Wyślij e-mail",
+      "sending": "Wysyłanie...",
+      "success": "E-mail wysłany! Sprawdź swoją skrzynkę",
+      "error": "Nie udało się wysłać e-maila. Spróbuj ponownie."
+    }
+  },
+  "profile": {
+    "anonymous": "Anonimowy",
+    "member": "Użytkownik",
+    "anonymousMember": "Anonimowy użytkownik",
+    "favorites": "Ulubione",
+    "yourReports": "Twoje raporty",
+    "recent": "Ostatnie wyszukiwania",
+    "stats": "Twoje statystyki",
+    "settings": "Ustawienia",
+    "clearData": "Wyczyść wszystkie dane"
+  },
+  "stats": {
+    "title": "Twoje statystyki",
+    "description": "Twoja aktywność i wkład w społeczność beta.rocks",
+    "reportsPosted": "Opublikowane raporty",
+    "confirmationsGiven": "Udzielone potwierdzenia",
+    "favoritesCount": "Ulubione",
+    "memberSince": "Członek od",
+    "lastActive": "Ostatnia aktywność",
+    "unknown": "Nieznane",
+    "encourageReports": "Podziel się swoją lokalną wiedzą, publikując raporty o warunkach w skałach!",
+    "thankYou": "Dziękujemy za wkład w społeczność wspinaczkową!"
+  },
+  "userReports": {
+    "title": "Twoje Raporty",
+    "description": "{{count}} raportów",
+    "empty": "Brak raportów",
+    "emptyMessage": "Nie opublikowałeś jeszcze żadnych raportów",
+    "emptyHint": "Dziel się warunkami i informacjami o skałkach, aby pomóc społeczności",
+    "loading": "Ładowanie twoich raportów...",
+    "loadFailed": "Nie udało się załadować raportów",
+    "deleteSuccess": "Raport pomyślnie usunięty",
+    "deleteFailed": "Nie udało się usunąć raportu"
+  },
+  "settings": {
+    "title": "Ustawienia",
+    "description": "Zarządzaj swoim profilem, kluczem synchronizacji i preferencjami",
+    "save": "Zapisz",
+    "saving": "Zapisywanie...",
+    "displayName": {
+      "label": "Nazwa wyświetlana",
+      "description": "Twoja nazwa użytkownika wyświetlana w raportach i potwierdzeniach (opcjonalnie)",
+      "placeholder": "Wprowadź swoją nazwę użytkownika...",
+      "saved": "Nazwa użytkownika zapisana",
+      "savedDescription": "Twoja nazwa użytkownika została pomyślnie zaktualizowana",
+      "saveFailed": "Nie udało się zapisać",
+      "saveFailedDescription": "Nie można zapisać twojej nazwy użytkownika. Spróbuj ponownie"
+    },
+    "units": {
+      "title": "Jednostki i pomiary",
+      "description": "Wybierz preferowane jednostki dla danych pogodowych i wspinaczkowych",
+      "systemLabel": "System jednostek",
+      "systemDescription": "Szybkie ustawienia dla powszechnych systemów jednostek",
+      "systems": {
+        "metric": "Metryczny (°C, km/h, mm)",
+        "imperial": "Imperialny (°F, mph, cale)",
+        "uk": "UK (°C, mph, mm)",
+        "custom": "Niestandardowy"
+      },
+      "temperature": "Temperatura",
+      "temperatureUnits": {
+        "celsius": "Celsjusz (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Prędkość wiatru",
+      "windSpeedUnits": {
+        "kmh": "Kilometry na godzinę (km/h)",
+        "mph": "Mile na godzinę (mph)",
+        "ms": "Metry na sekundę (m/s)",
+        "knots": "Węzły (kn)"
+      },
+      "precipitation": "Opady",
+      "precipitationUnits": {
+        "mm": "Milimetry (mm)",
+        "inches": "Cale (in)"
+      },
+      "distance": "Odległość",
+      "distanceUnits": {
+        "km": "Kilometry (km)",
+        "miles": "Mile (mi)"
+      },
+      "elevation": "Wysokość",
+      "elevationUnits": {
+        "meters": "Metry (m)",
+        "feet": "Stopy (ft)"
+      },
+      "saved": "Jednostki zapisane",
+      "savedDescription": "Twoje preferencje jednostek zostały pomyślnie zaktualizowane",
+      "saveFailed": "Nie udało się zapisać jednostek",
+      "saveFailedDescription": "Nie można zapisać Twoich preferencji jednostek. Spróbuj ponownie"
+    },
+    "syncKey": {
+      "title": "Klucz synchronizacji",
+      "description": "Użyj tego klucza do synchronizacji ulubionych skałek i ustawień między urządzeniami",
+      "label": "Twój klucz synchronizacji",
+      "copy": "Kopiuj klucz synchronizacji",
+      "showFullKey": "Pokaż pełny klucz",
+      "hideKey": "Ukryj klucz",
+      "qrCode": "Kod QR",
+      "qrDescription": "Zeskanuj ten kod QR na innym urządzeniu, aby zsynchronizować dane",
+      "restoreTitle": "Przywróć z innego urządzenia",
+      "restoreDescription": "Masz już klucz synchronizacji? Wklej go tutaj, aby przywrócić dane",
+      "restoreLabel": "Wklej swój klucz synchronizacji",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Przywróć klucz synchronizacji",
+      "restoring": "Przywracanie...",
+      "restoreSuccess": "Klucz synchronizacji pomyślnie przywrócony! Przeładowywanie...",
+      "restoreSuccessDescription": "Twoje dane zostaną przywrócone po przeładowaniu",
+      "restoreError": "Nieprawidłowy format klucza synchronizacji. Sprawdź i spróbuj ponownie.",
+      "saveNote": {
+        "title": "Zapisz swój klucz synchronizacji",
+        "description": "Zalecamy zapisanie klucza synchronizacji w bezpiecznym miejscu, takim jak aplikacja Notatki lub menedżer haseł. Będzie potrzebny do przywrócenia danych na innych urządzeniach."
+      },
+      "warning": {
+        "title": "Zachowaj swój klucz synchronizacji w tajemnicy",
+        "description": "Każdy, kto ma Twój klucz synchronizacji, może uzyskać dostęp do Twoich ulubionych skałek i ustawień. Nie udostępniaj go publicznie."
+      },
+      "emailButton": "Wyślij klucz synchronizacji na e-mail",
+      "emailLabel": "Adres e-mail",
+      "emailPlaceholder": "ty@example.pl",
+      "emailSend": "Wyślij",
+      "emailSending": "Wysyłanie...",
+      "emailPrivacy": "Nie przechowujemy Twojego e-maila - jest używany tylko raz do wysłania klucza synchronizacji.",
+      "emailSent": "E-mail wysłany!",
+      "emailSentDescription": "Sprawdź swoją skrzynkę odbiorczą na {{email}}",
+      "emailFailed": "Nie udało się wysłać e-maila",
+      "emailFailedDescription": "Spróbuj ponownie lub skopiuj klucz synchronizacji ręcznie.",
+      "emailInvalid": "Wprowadź prawidłowy adres e-mail"
+    },
+    "dangerZone": {
+      "title": "Strefa niebezpieczna",
+      "description": "Te działania są trwałe i nie można ich cofnąć",
+      "deleteProfile": "Usuń profil",
+      "deleteProfileConfirm": "Czy na pewno chcesz usunąć swój profil? Spowoduje to trwałe usunięcie wszystkich twoich danych, w tym ulubionych skałek, historii czatu i ustawień. Tej czynności nie można cofnąć.",
+      "deleteFailed": "Nie udało się usunąć profilu. Spróbuj ponownie."
+    }
+  },
+  "favorites": {
+    "title": "Twoje ulubione skałki",
+    "description": "Masz {{count}} ulubionych lokalizacji",
+    "empty": "Brak ulubionych",
+    "emptyMessage": "Nie dodałeś jeszcze żadnych ulubionych skałek",
+    "emptyHint": "Kliknij gwiazdkę na karcie warunków, aby dodać ją do ulubionych",
+    "lastChecked": "Ostatnio sprawdzono",
+    "frictionScore": "Ocena tarcia",
+    "viewConditions": "Zobacz warunki",
+    "remove": "Usuń",
+    "confirmDelete": "Usunąć z ulubionych?",
+    "confirmDeleteDescription": "Czy na pewno chcesz usunąć {{name}} z ulubionych?",
+    "loginToFavorite": "Proszę skonfigurować swój profil, aby dodać lokalizacje do ulubionych",
+    "errorToggling": "Nie udało się przełączyć ulubionego. Spróbuj ponownie.",
+    "added": "Skała dodana do ulubionych",
+    "removed": "Skała usunięta z ulubionych",
+    "loading": "Ładowanie ulubionych..."
+  },
+  "reports": {
+    "addReport": "Dodaj zgłoszenie",
+    "addReportDescription": "Podziel się informacjami o {{cragName}}",
+    "postingAs": "Publikujesz jako",
+    "dryness": "Suchość",
+    "wind": "Wiatr",
+    "crowds": "Tłumy",
+    "additionalComments": "Dodatkowe uwagi (opcjonalne)",
+    "commentsPlaceholder": "Np: sektor wschodni wciąż wilgotny, ścieżka błotnista - uwaga, Droga X - woda sączy się ze szczeliny, chwyty śliskie...",
+    "submit": "Wyślij raport",
+    "submitting": "Wysyłanie...",
+    "readyToPost": "Profile created! You're ready to post your report.",
+    "helpful": "Pomocne",
+    "loginToConfirm": "Skonfiguruj swój profil, aby potwierdzać raporty",
+    "confirmFailed": "Nie udało się potwierdzić raportu. Spróbuj ponownie.",
+    "ratings": {
+      "veryPoor": "Bardzo słabo",
+      "poor": "Słabo",
+      "okay": "W porządku",
+      "good": "Dobrze",
+      "excellent": "Doskonale"
+    },
+    "scales": {
+      "veryWet": "Bardzo mokro",
+      "veryDry": "Idealnie",
+      "calm": "Bardzo wietrznie",
+      "veryWindy": "Spokojnie",
+      "empty": "Pusto",
+      "veryCrowded": "Bardzo tłoczno"
+    },
+    "drynessLabels": {
+      "1": "Bardzo mokro",
+      "2": "Mokro",
+      "3": "Lekko wilgotno",
+      "4": "Przeważnie sucho",
+      "5": "Bardzo sucho"
+    },
+    "windLabels": {
+      "1": "Spokojnie",
+      "2": "Lekka bryza",
+      "3": "Umiarkowanie",
+      "4": "Wietrznie",
+      "5": "Bardzo wietrznie"
+    },
+    "crowdsLabels": {
+      "1": "Pusto",
+      "2": "Mało osób",
+      "3": "Umiarkowanie",
+      "4": "Tłoczno",
+      "5": "Bardzo tłoczno"
+    },
+    "recentReports": "Ostatnie raporty",
+    "communityReports": "Raporty społeczności",
+    "noReports": "Brak raportów",
+    "beTheFirst": "Zgłoś warunki jako pierwszy/a",
+    "noReportsMessage": "Bądź pierwszym/ą, który/a podzieli się warunkami na tej skałce",
+    "reportCount": "{{count}} raportów",
+    "viewAllReports": "Zobacz wszystkie raporty",
+    "category": "Co chcesz zgłosić?",
+    "categories": {
+      "conditions": "Warun",
+      "safety": "Bezpieczeństwo",
+      "access": "Dostęp",
+      "climbing_info": "Info wspinaczkowe",
+      "facilities": "Udogodnienia",
+      "other": "Inne",
+      "lost_found": "Rzeczy znalezione"
+    },
+    "categoryDescriptions": {
+      "conditions": "Pogoda, tarcie, suchość, tłumy",
+      "safety": "Luźne ringi, ruszające się kamienie, uszkodzone chwyty, zagrożenia",
+      "access": "Zamknięcia, zmiany parkingów, ograniczenia sezonowe, gniazda ptaków, owady",
+      "climbing_info": "Wymiana ringów, ekspresów, zmiana przebiegu linii, asekuracja",
+      "facilities": "Parking, toalety, kemping, woda, udogodnienia",
+      "other": "Cokolwiek innego, co nie pasuje do kategorii powyżej",
+      "lost_found": "Zgubiony lub znaleziony sprzęt"
+    },
+    "categoryHelp": {
+      "conditions": "Aktualna pogoda, tarcie, suchość, tłumy na skałce",
+      "safety": "Zagrożenia w całym obszarze, niebezpieczne warunki, pilne ostrzeżenia",
+      "access": "Parking, zamknięcia, regulacje, ograniczenia sezonowe",
+      "climbing_info": "Szczegóły dotyczące dróg, beta, chwyty, sprzęt, trudności",
+      "facilities": "Toalety, kemping, źródła wody, udogodnienia",
+      "other": "Cokolwiek innego, co nie pasuje do powyższych kategorii",
+      "lost_found": "Zgłoś zgubione przedmioty, których szukasz, lub znalezione przedmioty, które masz"
+    },
+    "details": "Szczegóły",
+    "detailsRequired": "Podaj szczegóły tego zgłoszenia",
+    "placeholders": {
+      "conditions": "Np. Sektor wschodni wciąż mokry, ścieżka zabłocona, leje się z rysy...",
+      "safety": "Np. Luźny ring na Drodze X, niebezpieczeństwo odpadnięcia bloku skalnego przy głównej ścianie...",
+      "access": "Np. Brama zamknięta do maja, nowy parking za biblioteką...",
+      "climbing_info": "Np. Droga X przebita na nowo, nowe ringi ze stali nierdzewnej, dodane stałe ekspresy...",
+      "facilities": "Np. toaleta dostępna na parkingu, brak wody w pobliżu...",
+      "other": "Opisz, co chcesz zgłosić...",
+      "lost_found": "Np., Znaleziono niebieski worek na magnezję przy podstawie, zgubiono Black Diamond cam #2 przy parkingu..."
+    },
+    "noReportsInCategory": "Brak raportów w tej kategorii",
+    "filters": {
+      "all": "Wszystkie"
+    },
+    "staleness": {
+      "outdated": "Nieaktualne",
+      "older": "Starsze",
+      "veryOld": "Bardzo stare"
+    },
+    "observationDate": "Kiedy to zaobserwowałeś/aś?",
+    "observationDateHelp": "Możesz zgłaszać warunki do 7 dni wstecz",
+    "lostFoundType": "Typ",
+    "lostFoundTypes": {
+      "lost": "Zgubiony przedmiot",
+      "found": "Znaleziony przedmiot"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Wybierz, czy jest to zgubiony czy znaleziony przedmiot",
+    "lostBadge": "ZGUBIONY",
+    "foundBadge": "ZNALEZIONY",
+    "expiresAt": "Ważne do (opcjonalnie)",
+    "expiresAtHelp": "Ustaw, kiedy ten raport staje się nieaktualny (przydatne dla tymczasowych zamknięć lub zmieniających się warunków)",
+    "noExpiry": "Nigdy nie wygasa",
+    "expiredOn": "Wygasło {{date}}",
+    "edit": "Edytuj",
+    "delete": "Usuń",
+    "deleteConfirm": "Czy na pewno chcesz usunąć ten raport?",
+    "deleteConfirmTitle": "Usuń Raport",
+    "updated": "Raport zaktualizowany",
+    "deleted": "Raport usunięty",
+    "editReport": "Edytuj Raport",
+    "editReportDescription": "Zaktualizuj swój raport",
+    "updateReport": "Zaktualizuj Raport",
+    "updating": "Aktualizowanie...",
+    "deleteSuccess": "Raport usunięty",
+    "deleteSuccessDescription": "Twój raport został pomyślnie usunięty",
+    "deleteError": "Nie udało się usunąć raportu",
+    "deleteErrorDescription": "Coś poszło nie tak. Spróbuj ponownie.",
+    "reportCreated": "Raport utworzony",
+    "reportCreatedDescription": "Twój raport został pomyślnie opublikowany",
+    "reportUpdated": "Raport zaktualizowany",
+    "reportUpdatedDescription": "Twoje zmiany zostały zapisane",
+    "updateFailed": "Aktualizacja nie powiodła się",
+    "submitFailed": "Wysyłanie nie powiodło się",
+    "photos": "Zdjęcia",
+    "photoHint": "Dodaj do 3 zdjęć (maks. 2MB każde). Zdjęcia będą automatycznie skompresowane.",
+    "photoUploadFailed": "Nie udało się przesłać zdjęć",
+    "uploadingPhotos": "Przesyłanie zdjęć...",
+    "submitReport": "Wyślij raport"
+  },
+  "editCragDialog": {
+    "title": "Edytuj Skałę",
+    "subtitle": "Przekształć tę skałę w sektor lub zmień element nadrzędny",
+    "currentStatus": "Aktualny Stan",
+    "crag": "Skała",
+    "sector": "Sektor",
+    "currentParent": "Aktualny element nadrzędny",
+    "chooseAction": "Wybierz Działanie",
+    "convertToSector": "Przekształć w Sektor",
+    "convertToCrag": "Przekształć w Skałę",
+    "changeParent": "Zmień Skałę Nadrzędną",
+    "selectParentCrag": "Wybierz Skałę Nadrzędną",
+    "selectNewParent": "Wybierz Nową Skałę Nadrzędną",
+    "searchForParent": "Wyszukaj skałę nadrzędną, do której chcesz przypisać ten sektor",
+    "searchPlaceholder": "Szukaj skały nadrzędnej...",
+    "noCragsFound": "Nie znaleziono skał",
+    "change": "Zmień",
+    "save": "Zapisz Zmiany",
+    "saving": "Zapisywanie...",
+    "success": "Skała została pomyślnie zaktualizowana",
+    "convertedToCrag": "Pomyślnie przekształcono w skałę",
+    "convertedToSector": "Pomyślnie przekształcono w sektor",
+    "errors": {
+      "parentRequired": "Skała nadrzędna jest wymagana",
+      "parentRequiredDesc": "Proszę wybrać skałę nadrzędną dla tego sektora",
+      "failed": "Aktualizacja nie powiodła się",
+      "failedDesc": "Nie udało się zaktualizować skały. Spróbuj ponownie."
+    }
+  },
+  "cragPage": {
+    "askAI": "Zapytaj AI",
+    "edit": "Edytuj",
+    "editCrag": "Edytuj szczegóły skały",
+    "currentConditions": "Aktualne warunki",
+    "sectors": "Sektory",
+    "addSector": "Dodaj sektor",
+    "noSectors": "Do tej skały nie dodano jeszcze żadnych sektorów.",
+    "beFirstToAddSector": "Bądź pierwszy i dodaj sektor",
+    "searchSectors": "Szukaj sektorów...",
+    "noSectorsFound": "Nie znaleziono sektorów pasujących do Twojego wyszukiwania.",
+    "disclaimer": "Warunki pogodowe mogą się szybko zmieniać. Zawsze sprawdzaj warunki na miejscu i kieruj się własnym osądem.",
+    "askAIAboutCrag": "Zapytaj AI o tę skałkę",
+    "viewOnSunCalc": "Zobacz czasy słońca/księżyca",
+    "viewSunAngles": "Zobacz pozycję słońca i kąty cienia",
+    "viewOnMap": "Zobacz na mapie",
+    "viewOnGoogleMaps": "Zobacz w Google Maps",
+    "addToFavorites": "Dodaj do ulubionych",
+    "removeFromFavorites": "Usuń z ulubionych"
+  },
+  "time": {
+    "today": "Dzisiaj",
+    "yesterday": "Wczoraj",
+    "daysAgo_one": "{{count}} dzień temu",
+    "daysAgo_few": "{{count}} dni temu",
+    "daysAgo_many": "{{count}} dni temu",
+    "daysAgo_other": "{{count}} dni temu",
+    "pickDate": "Wybierz datę"
+  },
+  "loading": {
+    "conditions": "Ładowanie warunków...",
+    "weatherData": "Pobieranie danych pogodowych...",
+    "reports": "Ładowanie raportów..."
+  },
+  "nearbyMatch": {
+    "distance": "{{distance}} od {{location}}"
+  },
+  "feed": {
+    "title": "Aktualizacje na żywo",
+    "viewFeed": "Zobacz raporty na żywo",
+    "live": "Na żywo",
+    "justNow": "Przed chwilą",
+    "loadingFeed": "Ładowanie aktualności...",
+    "reconnecting": "Ponowne łączenie z aktualizacjami na żywo...",
+    "loadMore": "Załaduj więcej raportów",
+    "loadingMore": "Ładowanie...",
+    "totalReports": "{{count}} łącznie",
+    "showingOf": "Wyświetlono {{showing}} z {{total}} raportów",
+    "totalReportsHint": "Laczna liczba raportow spolecznosci, w tym starszych niewyswietlanych w kanale",
+    "olderHidden": "Starsze raporty sa nadal widoczne na stronach poszczegolnych skal",
+    "filters": {
+      "all": "Wszystkie",
+      "favorites": "Ulubione"
+    },
+    "emptyState": {
+      "noReportsTitle": "Jeszcze brak raportów",
+      "noReportsDescription": "Bądź pierwszą osobą, która podzieli się warunkami ze wspólnotą wspinaczkową",
+      "noFavoritesTitle": "Brak raportów z ulubionych",
+      "noFavoritesDescription": "Dodaj skały do ulubionych, aby zobaczyć ich raporty w tym kanale"
+    }
+  },
+  "webcams": {
+    "title": "Kamery internetowe w pobliżu",
+    "nearbyCount": "Znaleziono {{count}} kamerę",
+    "nearbyCount_other": "Znaleziono {{count}} kamer",
+    "daylight": "Światło dzienne",
+    "openOnWindy": "Otwórz na Windy.com",
+    "poweredBy": "Obsługiwane przez",
+    "noWebcams": "Nie znaleziono kamer w pobliżu"
+  }
+}

@@ -1,0 +1,828 @@
+{
+  "header": {
+    "title": "beta.rocks"
+  },
+  "welcome": {
+    "heading": "Få info om enhver klippe",
+    "description": "Sanntidsforhold, fellesskapsrapporter og ruteinformasjon for klipper verden over",
+    "exampleQueries": {
+      "query1": {
+        "display": "Hvordan er forholdene i Flatanger i morgen?",
+        "query": "Hvordan er klatreforholdene i Flatanger i morgen?"
+      },
+      "query2": {
+        "display": "Blir Hauktjern tørt til helga?",
+        "query": "Blir Hauktjern tørt til helga?"
+      },
+      "query3": {
+        "display": "Hvordan ser været ut for Uskedalen på lørdag?",
+        "query": "Hvordan er forholdene i Uskedalen på lørdag?"
+      }
+    },
+    "searchHint": "Søk etter ethvert klatreområde",
+    "yourFavorites": "Dine Favoritter",
+    "favoriteQuery": "Hva er forholdene ved {{crag}}?"
+  },
+  "chat": {
+    "analyzing": "Analyserer forhold...",
+    "thinking": "Tenker...",
+    "inputPlaceholder": "Spør om et hvilket som helst crag eller sektor...",
+    "clearHistory": "Tøm historikk",
+    "clearHistoryConfirm": "Er du sikker på at du vil tømme hele chattehistorikken? Dette kan ikke angres.",
+    "clearChat": "Tøm chat",
+    "clearChatTooltip": "Tøm den nåværende samtalen",
+    "clearChatConfirm": "Tømme chatten din? Dette vil fjerne alle meldinger fra den nåværende samtalen."
+  },
+  "search": {
+    "title": "Søk klatrevegger",
+    "description": "Søk etter klatreområder etter navn eller plassering",
+    "placeholder": "Søk klatrevegger... (f.eks. 'Flatanger', 'Lofoten')",
+    "typeToSearch": "Skriv for å søke etter klatrevegger...",
+    "searching": "Søker...",
+    "noCragsFound": "Ingen klatrevegger funnet. Prøv et annet søkeord.",
+    "addNewCrag": "Legg til ny klatrevegg",
+    "heading": "Klatrevegger",
+    "toSelect": "for å velge",
+    "toClose": "for å lukke",
+    "notSeeing": "Ser du ikke klatreveggen din?",
+    "addMissingHere": "Legg den til her"
+  },
+  "fab": {
+    "addCrag": "Legg til ny klatrevegg",
+    "addReport": "Legg til rapport",
+    "tooltip": "Hurtighandlinger"
+  },
+  "cragLocationPicker": {
+    "loadingMap": "Laster kart...",
+    "searchPlaceholder": "Søk etter plassering (f.eks. 'Kolsås, Bærum')",
+    "noLocationsFound": "Ingen plasseringer funnet",
+    "loadingLocationData": "Laster plasseringsdata...",
+    "clickToSet": "Klikk på kartet for å angi klatreveggens plassering",
+    "nearbyCragsFound": "{{count}} nærliggende klatrevegg funnet",
+    "nearbyCragsFound_other": "{{count}} nærliggende klatrevegger funnet",
+    "clickMarkersToView": "Klikk på markører for å vise eksisterende klatrevegger",
+    "coordinates": "Koordinater"
+  },
+  "addCragModal": {
+    "title": "Legg til ny klatrevegg",
+    "subtitle": "Hjelp til med å utvide klatredatabasen",
+    "mapLabel": "Plassering",
+    "mapHelp": "Klikk på kartet for å angi plasseringen til klatreveggen",
+    "coordinates": "Koordinater",
+    "nearbyCragsWarning": {
+      "title": "Eksisterende klatreområder i nærheten",
+      "message": "{{count}} klatreområde funnet innenfor 500m",
+      "message_other": "{{count}} klatreområder funnet innenfor 500m",
+      "away": "unna",
+      "view": "Vis",
+      "proceed": "Hvis ingen av disse samsvarer, kan du fortsatt legge til et nytt klatreområde."
+    },
+    "form": {
+      "name": "Navn på klatrevegg",
+      "namePlaceholder": "f.eks. Flatanger, Lofoten",
+      "country": "Land",
+      "countryPlaceholder": "Velg land",
+      "state": "Fylke/Region",
+      "statePlaceholder": "f.eks. Trøndelag, Nordland",
+      "municipality": "Kommune/By",
+      "municipalityPlaceholder": "f.eks. Flatanger, Vågan",
+      "village": "Bygd",
+      "villagePlaceholder": "f.eks. Vik",
+      "rockType": "Bergtype",
+      "rockTypePlaceholder": "Velg bergtype (valgfritt)",
+      "aspects": "Retninger",
+      "aspectsHelp": "Velg alle retningene klatreveggen vender mot",
+      "climbingTypes": "Klatretyper",
+      "climbingTypesHelp": "Velg alle aktuelle klatrestiler",
+      "description": "Beskrivelse",
+      "descriptionPlaceholder": "Tilleggsinformasjon om klatreveggen (valgfritt)..."
+    },
+    "rockTypes": {
+      "granite": "Granitt",
+      "sandstone": "Sandstein",
+      "limestone": "Kalkstein",
+      "gneiss": "Gneis",
+      "quartzite": "Kvartsitt",
+      "gritstone": "Gritstein",
+      "basalt": "Basalt",
+      "volcanic": "Vulkansk",
+      "conglomerate": "Konglomerat",
+      "schist": "Skifer",
+      "slate": "Skiferstø",
+      "other": "Annet"
+    },
+    "climbingTypes": {
+      "sport": "Sport",
+      "trad": "Tradisjonell",
+      "boulder": "Buldring",
+      "mixed": "Blandet",
+      "aid": "Teknisk",
+      "ice": "Is"
+    },
+    "cancel": "Avbryt",
+    "submit": "Send inn klatrevegg",
+    "submitting": "Sender inn...",
+    "success": "Klatrevegg lagt til!",
+    "successDesc": "{{name}} har blitt lagt til i databasen",
+    "errors": {
+      "nameRequired": "Navn er påkrevd",
+      "nameRequiredDesc": "Vennligst skriv inn et navn for klatreveggen",
+      "locationRequired": "Plassering er påkrevd",
+      "locationRequiredDesc": "Vennligst klikk på kartet for å angi plasseringen til klatreveggen",
+      "countryRequired": "Land er påkrevd",
+      "countryRequiredDesc": "Vennligst velg et land fra rullegardinmenyen",
+      "duplicate": "Klatrevegg finnes allerede i nærheten",
+      "duplicateDesc": "En klatrevegg med lignende navn finnes allerede på denne plasseringen. Sjekk kartet for eksisterende klatrevegger.",
+      "failed": "Kunne ikke legge til klatrevegg",
+      "failedDesc": "Det oppstod en feil ved tillegging av klatreveggen. Vennligst prøv igjen."
+    }
+  },
+  "conditions": {
+    "rating": "Vurdering",
+    "details": "Detaljer",
+    "location": "Sted",
+    "favorite": "Favoritt",
+    "favorited": "I favoritter",
+    "addReport": "Legg til rapport",
+    "viewCragPage": "Se område"
+  },
+  "ratings": {
+    "great": "Knall",
+    "good": "Bra",
+    "fair": "Helt greit",
+    "poor": "Dårlig",
+    "nope": "Nei"
+  },
+  "reasons": {
+    "perfectTemp": "Perfekt temperatur ({{temp}})",
+    "tempTooHigh": "For høy temperatur – fingrene kan gli",
+    "coldGoodFriction": "Kaldt, men god friksjon for {{rockType}}",
+    "idealHumidity": "Ideell luftfuktighet ({{humidity}}%)",
+    "lowHumidityGranite": "Lav luftfuktighet gir bedre friksjon på granitt",
+    "readyInHours": "Klar for klatring om ~{{hours}} timer",
+    "acceptable": "Forholdene er akseptable",
+    "goodHumidity": "God luftfuktighet ({{humidity}}%)",
+    "lowCondensationRisk": "Lav risiko for kondens (duggpunktsdifferanse {{dewPointSpread}})",
+    "lowHumidityFriction": "Lav luftfuktighet forbedrer friksjon"
+  },
+  "warnings": {
+    "tooWarm": "For varmt for {{rockType}} ({{temp}})",
+    "coldSuboptimal": "Kaldt og mindre optimalt for {{rockType}}",
+    "highHumidity": "Høy luftfuktighet ({{humidity}}%) – fjellet kan bli glatt",
+    "wetDangerousSandstone": "Fjellet er vått – farlig å klatre (sandstein svekkes når den er våt)",
+    "wetSlippery": "Fjellet er vått – glatte forhold",
+    "veryHighWinds": "Svært kraftig vind ({{wind}} km/t) – fare for å blåse av",
+    "highWind": "Kraftig vind ({{wind}} km/t)",
+    "recentPrecip": "Nylig nedbør ({{precip}}) - tørker om ~{{hours}}t",
+    "currentlyWetDangerous": "Akkurat nå vått – risikabelt",
+    "currentlyWet": "Akkurat nå vått",
+    "cold": "Cold ({{temp}})",
+    "veryHighCondensationRisk": "Svært høy risiko for kondens (duggpunktsdifferanse {{dewPointSpread}}) - klippeoverflate sannsynligvis fuktig",
+    "highCondensationRisk": "Høy risiko for kondens (duggpunktsdifferanse {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Høy risiko for kondens",
+    "moderateCondensationRisk": "Moderat risiko for kondens (duggpunktsdifferanse {{dewPointSpread}})",
+    "condensationRisk": "Risiko for kondens ({{dewPointSpread}})"
+  },
+  "sandstoneWarning": {
+    "general": "Sandstein er skjør når den er våt og krever mye tid for å tørke etter regn. Klatring på våt sandstein skader fjellet og er farlig.",
+    "recentRain": "Nylig nedbør oppdaget. Vennligst sørg for at fjellet er helt tørt før klatring.",
+    "inLast24h": "i løpet av de siste 24 timene",
+    "inLast48h": "i løpet av de siste 48 timene"
+  },
+  "weather": {
+    "clearSky": "Klarvær",
+    "mainlyClear": "For det meste klart",
+    "partlyCloudy": "Delvis skyet",
+    "overcast": "Overskyet",
+    "fog": "Tåke",
+    "depositingRimeFog": "Islagt tåke",
+    "lightDrizzle": "Lett yr",
+    "moderateDrizzle": "Moderat yr",
+    "denseDrizzle": "Tett yr",
+    "lightFreezingDrizzle": "Lett underkjølt yr",
+    "denseFreezingDrizzle": "Tett underkjølt yr",
+    "slightRain": "Lett regn",
+    "moderateRain": "Moderat regn",
+    "heavyRain": "Kraftig regn",
+    "lightFreezingRain": "Lett underkjølt regn",
+    "heavyFreezingRain": "Kraftig underkjølt regn",
+    "slightSnowFall": "Lett snø",
+    "moderateSnowFall": "Moderat snøfall",
+    "heavySnowFall": "Kraftig snøfall",
+    "snowGrains": "Snøkorn",
+    "slightRainShowers": "Lette regnbyger",
+    "moderateRainShowers": "Moderate regnbyger",
+    "violentRainShowers": "Kraftige regnbyger",
+    "slightSnowShowers": "Lette snøbyger",
+    "moderateSnowShowers": "Moderate snøbyger",
+    "heavySnowShowers": "Kraftige snøbyger",
+    "thunderstorm": "Tordenvær",
+    "thunderstormSlightHail": "Tordenvær med små hagl",
+    "thunderstormHeavyHail": "Tordenvær med kraftig hagl"
+  },
+  "timeframes": {
+    "now": "nå",
+    "today": "i dag",
+    "tomorrow": "i morgen",
+    "thisAfternoon": "i ettermiddag",
+    "thisEvening": "i kveld",
+    "tonight": "i natt"
+  },
+  "disambiguation": {
+    "foundMultipleAreas": "Fant {{count}} klatreområder for \"{{location}}\". Velg ett:",
+    "foundMultipleLocations": "Fant flere steder for \"{{location}}\". Velg ett:",
+    "queryTemplate": "forhold ved {{name}} ({{latitude}}, {{longitude}})"
+  },
+  "footer": {
+    "about": "Om",
+    "privacy": "Personvern",
+    "github": "GitHub",
+    "brand": "beta.rocks",
+    "description": "Gratis klatreforhold for alle. Bygget med kjærlighet til klatremiljøet.",
+    "attribution": "Data fra Open-Meteo, OpenBeta og <osmLink>OpenStreetMap-bidragsytere</osmLink>. Drevet av fellesskapet.",
+    "copyright": "© 2026 beta.rocks. Alle rettigheter forbeholdt."
+  },
+  "features": {
+    "heading": "Alt du trenger",
+    "subheading": "Komplette klatreforhold rett i lomma, helt gratis",
+    "realTimeWeather": {
+      "title": "Vær i sanntid",
+      "description": "Presise prognoser fra Open-Meteo med sol/skygge-beregning for hver sektor"
+    },
+    "chatInterface": {
+      "title": "Chat-grensesnitt",
+      "description": "Spørsmål i naturlig språk drevet av KI. Still dem på hvilket språk du vil"
+    },
+    "communityReports": {
+      "title": "Rapporter fra miljøet",
+      "description": "Del forhold, sikkerhetsvarsler, tilgangsendringer, klatreinfo og mer. Hjelp medklatrere med sanntidsoppdateringer på tvers av flere kategorier"
+    },
+    "globalCoverage": {
+      "title": "Global dekning",
+      "description": "Alle crag eller sektorer i verden gjennom OpenBeta-integrasjonen"
+    },
+    "crossDeviceSync": {
+      "title": "Synkronisering på tvers av enheter",
+      "description": "Få tilgang til favorittene og chattehistorikken din fra hvilken som helst enhet med en sikker synkroniseringsnøkkel. Ingen konto kreves"
+    },
+    "privacyFirst": {
+      "title": "Personvern først",
+      "description": "Vi trenger ikke bare ikke dataene dine - vi vil ikke ha dem! Anonymt som standard. Ingen kontoer, ingen sporing. Dataene dine forblir dine."
+    }
+  },
+  "privacy": {
+    "heading": "Personvernpolicy",
+    "subheading": "Vi trenger ikke bare ikke dataene dine - vi vil ikke ha dem!",
+    "whatWeDontCollect": {
+      "title": "Hva Vi Ikke Samler Inn",
+      "description": "Ingen e-postadresser, ingen navn, ingen telefonnumre, ingen IP-adresser, ingen analyse, ingen sporingspiksel, ingen informasjonskapsler (unntatt nødvendige), ingen sporing av brukeratferd. Vi kan bokstavelig talt ikke identifisere deg."
+    },
+    "whatYouControl": {
+      "title": "Hva Du Kontrollerer",
+      "description": "Favorittene dine, rapporter og chathistorikk lagres lokalt på enheten din. For å få tilgang til dem fra flere enheter kan du opprette en anonym profil. Når du har en profil, synkroniseres dataene dine automatisk for å muliggjøre tilgang fra flere enheter. Du kan slette alle dataene dine når som helst fra Innstillinger."
+    },
+    "howSyncWorks": {
+      "title": "Hvordan Synkronisering Fungerer",
+      "description": "Når du oppretter en profil, genererer vi en anonym synkroniseringsnøkkel og synkroniserer dataene dine til databasen vår. Data er koblet til en hashet synkroniseringsnøkkel - ikke identiteten din. Synkroniseringsnøkkelen er en tilfeldig identifikator som bare du har tilgang til. Vi kan ikke koble den til deg. Ingen e-post nødvendig, ingen konto nødvendig."
+    },
+    "openSource": {
+      "title": "Åpen Kildekode",
+      "description": "Hele kodebasen vår er åpen kildekode på GitHub. Du kan granske nøyaktig hva vi gjør med dataene dine (spoiler: ingenting). Full gjennomsiktighet, null skjulte sporere."
+    },
+    "yourRights": {
+      "title": "Dine Rettigheter",
+      "description": "Du kan slette profilen din når som helst fra Innstillinger. Dette fjerner favorittene dine, chathistorikk og profil fra databasen vår. Fellesskapsrapporter du har lagt ut forblir synlige (anonymt) for å hjelpe andre klatrere.Fullstendig kontroll over dataene dine."
+    },
+    "dataSecurity": {
+      "title": "Datasikkerhet",
+      "description": "Synkroniseringsnøkler hastes kryptografisk før lagring. Vi bruker Supabase med Row Level Security-policyer. Selv om databasen vår skulle lekke, kunne ikke synkroniseringsnøklene dekrypteres for å identifisere brukere."
+    },
+    "footer": {
+      "tldr": "TL;DR: Vi bygde denne appen for klatrere, ikke for datainnsamling. Personvernet ditt er ikke en funksjon - det er grunnlaget.",
+      "github": "Full kildekode tilgjengelig på <githubLink>GitHub</githubLink>"
+    }
+  },
+  "ui": {
+    "toggleTheme": "Bytt tema",
+    "selectLanguage": "Velg språk",
+    "aboutApp": "Om appen",
+    "language": "Språk",
+    "theme": "Tema"
+  },
+  "dialog": {
+    "close": "Lukk",
+    "cancel": "Avbryt",
+    "detailedConditions": "Detaljerte forhold",
+    "fullAnalysis": "Full væranalyse og klatreprognose",
+    "showMap": "Kart",
+    "tabs": {
+      "overview": "Oversikt",
+      "hourly": "Hver time",
+      "daily": "14 dager"
+    },
+    "currentRating": "Aktuell vurdering",
+    "currentConditions": "Aktuelle forhold",
+    "currentWeather": "Aktuelt vær",
+    "temperature": "Temperatur",
+    "humidity": "Luftfuktighet",
+    "windSpeed": "Vindhastighet",
+    "precipitation": "Nedbør",
+    "sunrise": "Soloppgang",
+    "sunset": "Solnedgang",
+    "high": "Maks",
+    "low": "Min",
+    "rain": "Regn",
+    "wind": "Vind",
+    "dry": "Tørt",
+    "wet": "Vått",
+    "precipitationContext": "Nedbørskontekst",
+    "last24h": "Siste 24 t",
+    "last48h": "Siste 48 t",
+    "next24h": "Neste 24 t",
+    "dewPointSpread": "Duggpunktsdifferanse (kondenserisiko)",
+    "lowRisk": "✅ Lav risiko – fjellet bør holde seg tørt",
+    "moderateRisk": "⚠️ Moderat risiko – følg med på fukten",
+    "highRisk": "❌ Høy risiko – kondens er sannsynlig",
+    "optimalWindows": "Optimale klatrevinduer",
+    "nextDays": "Neste 5 dager",
+    "bestTime": "🌟 Beste tid",
+    "noOptimalConditions": "Ingen optimale forhold de neste 5 dagene",
+    "checkHourlyForecast": "Sjekk timevarselet for flere detaljer",
+    "weatherDisclaimer": "⚠️ Været kan endre seg raskt. Følg prognosene før avreise og sjekk forholdene på stedet.",
+    "window": "vindu",
+    "windows": "vinduer",
+    "today": "I dag",
+    "tomorrow": "I morgen",
+    "showCompleteTimeline": "Vis hele tidslinjen",
+    "hour": "time",
+    "hours": "timer",
+    "period": "periode",
+    "periods": "perioder",
+    "noHourlyData": "Ingen timeprognose tilgjengelig",
+    "noDailyData": "Ingen dagsprognose tilgjengelig",
+    "noOptimalHours": "Ingen optimale forhold for",
+    "forecastIndicators": "Prognoseindikatorer:",
+    "goodClimbingWindows": "Gode klatretidspunkt",
+    "fairConditions": "Helt greie forhold",
+    "poorConditions": "Dårlige forhold",
+    "lessReliable": "Dag 8-14: mindre pålitelig prognose",
+    "lessReliableHourly": "Neste timer mindre forutsigbare",
+    "lessCertain": "MER USIKKERT",
+    "todayBadge": "I DAG",
+    "delete": "Slett"
+  },
+  "timeContext": {
+    "sunrise": "Soloppgang",
+    "sunset": "Solnedgang",
+    "recommendedHours": "Anbefalte klatretider",
+    "totalDaylight": "Totalt dagslys",
+    "hoursOfDaylight": "{{hours}} timer dagslys",
+    "earlyStartRecommended": "Tidlig start anbefales for å unngå varmen",
+    "limitedDaylight": "Begrenset dagslys - planlegg deretter",
+    "morningConditionsBest": "Beste forhold om morgenen",
+    "eveningSession": "Kveldsøktforhold",
+    "showAllHours": "Vis alle 24 timer",
+    "showClimbingHoursOnly": "Vis kun klatretimer",
+    "expandHours": "Utvid for å se alle timer"
+  },
+  "rockTypes": {
+    "limestone": "kalkstein",
+    "granite": "granitt",
+    "sandstone": "sandstein",
+    "basalt": "basalt",
+    "gneiss": "gneis",
+    "quartzite": "kvartsitt",
+    "conglomerate": "konglomerat",
+    "rhyolite": "ryolitt",
+    "porphyry": "porfyr",
+    "andesite": "andesitt",
+    "slate": "skifer",
+    "schist": "glimmerskifer",
+    "dolomite": "dolomitt",
+    "volcanic": "vulkansk",
+    "phyllite": "fyllitt"
+  },
+  "sync": {
+    "banner": {
+      "title": "Dataene dine synkroniseres mellom enheter",
+      "description": "Dine favoritter, rapporter og chattehistorikk lagres lokalt og kan synkroniseres til andre enheter med synkroniseringsnøkkelen din.",
+      "learnMore": "Lær mer",
+      "dismiss": "Jeg forstår"
+    },
+    "status": {
+      "synced": "Synkronisert",
+      "syncing": "Synkroniserer...",
+      "offline": "Frakoblet"
+    },
+    "notification": {
+      "title": "Synkroniseringsnøkkel opprettet",
+      "description": "Vi har generert en unik nøkkel for å synkronisere dine favoritter og chatter på tvers av enheter.",
+      "viewInSettings": "Vis i innstillinger",
+      "viewMore": "Hva er en synkroniseringsnøkkel?"
+    }
+  },
+  "syncExplainer": {
+    "title": "How Sync Works",
+    "description": "Keep your data in sync across all your devices seamlessly and securely.",
+    "features": {
+      "syncKey": {
+        "title": "Unique Sync Key",
+        "description": "Each user gets a secure, unique key to sync their data across devices."
+      },
+      "multiDevice": {
+        "title": "Multi-Device Access",
+        "description": "Access your favorites and chat history from any device by using your sync key."
+      },
+      "privacy": {
+        "title": "Privacy First",
+        "description": "Your data is encrypted and only accessible with your sync key. No account required."
+      }
+    },
+    "openSettings": "Open Settings"
+  },
+  "profile": {
+    "anonymous": "Anonym",
+    "member": "Medlem",
+    "anonymousMember": "Anonymt medlem",
+    "favorites": "Favoritter",
+    "recent": "Nylige søk",
+    "stats": "Din statistikk",
+    "settings": "Innstillinger",
+    "clearData": "Slett alle data",
+    "yourReports": "Dine rapporter"
+  },
+  "stats": {
+    "title": "Din statistikk",
+    "description": "Din aktivitet og bidrag til beta.rocks-fellesskapet",
+    "reportsPosted": "Rapporter postet",
+    "confirmationsGiven": "Bekreftelser gitt",
+    "favoritesCount": "Favoritter",
+    "memberSince": "Medlem siden",
+    "lastActive": "Sist aktiv",
+    "unknown": "Ukjent",
+    "encourageReports": "Del din lokale kunnskap ved å legge ut rapporter om klatreforhold!",
+    "thankYou": "Takk for ditt bidrag til klatremiljøet!"
+  },
+  "userReports": {
+    "title": "Dine rapporter",
+    "description": "{{count}} rapporter",
+    "empty": "Ingen rapporter ennå",
+    "emptyMessage": "Du har ikke lagt ut noen rapporter ennå",
+    "emptyHint": "Del forhold og informasjon om klatrevegger for å hjelpe fellesskapet",
+    "loading": "Laster dine rapporter...",
+    "loadFailed": "Kunne ikke laste inn rapporter",
+    "deleteSuccess": "Rapport slettet",
+    "deleteFailed": "Kunne ikke slette rapport"
+  },
+  "settings": {
+    "title": "Innstillinger",
+    "description": "Administrer profilen din, synkroniseringsnøkkel og preferanser",
+    "save": "Lagre",
+    "saving": "Lagrer...",
+    "displayName": {
+      "label": "Visningsnavn",
+      "description": "Navnet ditt vises på rapporter og bekreftelser (valgfritt)",
+      "placeholder": "Skriv inn navnet ditt...",
+      "saved": "Visningsnavn lagret",
+      "savedDescription": "Ditt visningsnavn har blitt oppdatert",
+      "saveFailed": "Lagring mislyktes",
+      "saveFailedDescription": "Kunne ikke lagre visningsnavnet ditt. Vennligst prøv igjen"
+    },
+    "units": {
+      "title": "Enheter og målinger",
+      "description": "Velg dine foretrukne enheter for vær- og klatredata",
+      "systemLabel": "Enhetssystem",
+      "systemDescription": "Raske forhåndsinnstillinger for vanlige enhetssystemer",
+      "systems": {
+        "metric": "Metrisk (°C, km/h, mm)",
+        "imperial": "Imperial (°F, mph, tommer)",
+        "uk": "Storbritannia (°C, mph, mm)",
+        "custom": "Tilpasset"
+      },
+      "temperature": "Temperatur",
+      "temperatureUnits": {
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Vindhastighet",
+      "windSpeedUnits": {
+        "kmh": "Kilometer per time (km/h)",
+        "mph": "Miles per time (mph)",
+        "ms": "Meter per sekund (m/s)",
+        "knots": "Knop (kn)"
+      },
+      "precipitation": "Nedbør",
+      "precipitationUnits": {
+        "mm": "Millimeter (mm)",
+        "inches": "Tommer (in)"
+      },
+      "distance": "Avstand",
+      "distanceUnits": {
+        "km": "Kilometer (km)",
+        "miles": "Miles (mi)"
+      },
+      "elevation": "Høyde",
+      "elevationUnits": {
+        "meters": "Meter (m)",
+        "feet": "Fot (ft)"
+      },
+      "saved": "Enheter lagret",
+      "savedDescription": "Dine enhetsinnstillinger har blitt oppdatert",
+      "saveFailed": "Lagring av enheter mislyktes",
+      "saveFailedDescription": "Kunne ikke lagre enhetsinnstillingene dine. Vennligst prøv igjen"
+    },
+    "syncKey": {
+      "title": "Synkroniseringsnøkkel",
+      "description": "Bruk denne nøkkelen for å synkronisere favorittene og innstillingene dine mellom enheter",
+      "label": "Din synkroniseringsnøkkel",
+      "copy": "Kopier synkroniseringsnøkkel",
+      "showFullKey": "Vis full nøkkel",
+      "hideKey": "Skjul nøkkel",
+      "qrCode": "QR-kode",
+      "qrDescription": "Skann denne QR-koden på en annen enhet for å synkronisere dataene dine",
+      "restoreTitle": "Gjenopprett fra en annen enhet",
+      "restoreDescription": "Har du allerede en synkroniseringsnøkkel? Lim den inn her for å gjenopprette dataene dine",
+      "restoreLabel": "Lim inn synkroniseringsnøkkelen din",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Gjenopprett synkroniseringsnøkkel",
+      "restoring": "Gjenoppretter...",
+      "restoreSuccess": "Synkroniseringsnøkkelen ble gjenopprettet! Laster inn på nytt...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
+      "restoreError": "Ugyldig format på synkroniseringsnøkkelen. Vennligst sjekk og prøv igjen.",
+      "saveNote": {
+        "title": "Lagre synkroniseringsnøkkelen din",
+        "description": "Vi anbefaler å lagre synkroniseringsnøkkelen din på et sikkert sted som Notater-appen din eller en passordbehandler. Du vil trenge den for å gjenopprette dataene dine på andre enheter."
+      },
+      "warning": {
+        "title": "Hold synkroniseringsnøkkelen din privat",
+        "description": "Alle med synkroniseringsnøkkelen din kan få tilgang til favorittene og innstillingene dine. Ikke del den offentlig."
+      },
+      "emailButton": "Send synkroniseringsnøkkel til deg selv på e-post",
+      "emailLabel": "E-postadresse",
+      "emailPlaceholder": "deg@example.no",
+      "emailSend": "Send",
+      "emailSending": "Sender...",
+      "emailPrivacy": "Vi lagrer ikke e-posten din - den brukes kun en gang for å sende synkroniseringsnøkkelen din.",
+      "emailSent": "E-post sendt!",
+      "emailSentDescription": "Sjekk innboksen din på {{email}}",
+      "emailFailed": "Klarte ikke å sende e-post",
+      "emailFailedDescription": "Vennligst prøv igjen eller kopier synkroniseringsnøkkelen din manuelt.",
+      "emailInvalid": "Vennligst oppgi en gyldig e-postadresse"
+    },
+    "dangerZone": {
+      "title": "Faresone",
+      "description": "Disse handlingene er permanente og kan ikke angres",
+      "deleteProfile": "Slett profil",
+      "deleteProfileConfirm": "Er du sikker på at du vil slette profilen din? Dette vil permanent fjerne all dataen din inkludert favoritter, chattehistorikk og innstillinger. Denne handlingen kan ikke angres.",
+      "deleteFailed": "Kunne ikke slette profilen. Vennligst prøv igjen."
+    }
+  },
+  "favorites": {
+    "title": "Dine favoritt-crag",
+    "description": "Du har {{count}} favorittplasser",
+    "empty": "Ingen favoritter ennå",
+    "emptyMessage": "Du har ikke lagt til noen favoritt-crag ennå",
+    "emptyHint": "Klikk på stjerneikonet på et hvilket som helst tilstandskort for å legge det til i favorittene dine",
+    "lastChecked": "Sist sjekket",
+    "frictionScore": "Friksjonspoeng",
+    "viewConditions": "Vis forhold",
+    "remove": "Fjern",
+    "confirmDelete": "Fjern fra favoritter?",
+    "confirmDeleteDescription": "Er du sikker på at du vil fjerne {{name}} fra favorittene dine?",
+    "loginToFavorite": "Vennligst sett opp profilen din for å legge til steder i favoritter",
+    "errorToggling": "Kunne ikke bytte favoritt. Vennligst prøv igjen.",
+    "added": "Klippe lagt til favoritter",
+    "removed": "Klippe fjernet fra favoritter",
+    "loading": "Laster favoritter..."
+  },
+  "reports": {
+    "addReport": "Legg til rapport",
+    "addReportDescription": "Del informasjon om {{cragName}}",
+    "postingAs": "Publiserer som",
+    "category": "Hva vil du rapportere?",
+    "categories": {
+      "conditions": "Forhold",
+      "safety": "Sikkerhet",
+      "access": "Tilgang",
+      "climbing_info": "Klatreinfo",
+      "facilities": "Fasiliteter",
+      "other": "Annet",
+      "lost_found": "Hittegods"
+    },
+    "categoryDescriptions": {
+      "conditions": "Vær, friksjon, tørrhet, folkemengde",
+      "safety": "Løse bolter, steinsprang, ødelagte grep, farer",
+      "access": "Stenging, parkeringsendringer, sesongbegrensninger, fuglereir, insekter",
+      "climbing_info": "Rebulting, utstyrsoppdateringer, ruteendringer, faste quickdraws",
+      "facilities": "Toalett, camping, vannkilder, fasiliteter",
+      "other": "Alt annet som ikke passer over",
+      "lost_found": "Tapt eller funnet utstyr"
+    },
+    "categoryHelp": {
+      "conditions": "Aktuelt vær, friksjon, tørrhet, folkemengde ved klatrestedet",
+      "safety": "Farer i hele området, farlige forhold, presserende advarsler",
+      "access": "Parkering, stenginger, regler, sesongbegrensninger",
+      "climbing_info": "Rutespesifikke detaljer, beta, grep, utstyr, vanskelighetsgrader",
+      "facilities": "Toaletter, camping, vannkilder, fasiliteter",
+      "other": "Alt annet som ikke passer ovennevnte kategorier",
+      "lost_found": "Rapporter tapte gjenstander du leter etter eller fundne gjenstander du har"
+    },
+    "dryness": "Tørrhet",
+    "wind": "Vind",
+    "crowds": "Folkemengde",
+    "additionalComments": "Flere kommentarer (valgfritt)",
+    "details": "Detaljer",
+    "detailsRequired": "Vennligst oppgi detaljer om denne rapporten",
+    "placeholders": {
+      "conditions": "F.eks., Østsektoren fortsatt våt, sti gjørmete, sprekk sipper...",
+      "safety": "F.eks., Løs bolt på rute X, steinsprang-fare nær hovedveggen...",
+      "access": "F.eks., Port stengt til mai, ny parkeringsplass bak biblioteket...",
+      "climbing_info": "F.eks., Rute X rebultet med rustfrie bolter, nye faste quickdraws installert, ankerfeste oppgradert...",
+      "facilities": "F.eks., Toalett tilgjengelig ved parkering, ingen vannkilde i nærheten...",
+      "other": "Beskriv hva du vil rapportere...",
+      "lost_found": "F.eks., Funnet blå kalkpose ved bunnen, mistet Black Diamond cam #2 ved parkeringen..."
+    },
+    "submit": "Send inn rapport",
+    "submitting": "Sender inn...",
+    "readyToPost": "Profil opprettet! Du er klar til å publisere rapporten din.",
+    "helpful": "Nyttig",
+    "loginToConfirm": "Vennligst sett opp profilen din for å bekrefte rapporter",
+    "confirmFailed": "Kunne ikke bekrefte rapport. Vennligst prøv igjen.",
+    "voteReady": "Du kan nå stemme på rapporter",
+    "ratings": {
+      "veryPoor": "Veldig dårlig",
+      "poor": "Dårlig",
+      "okay": "OK",
+      "good": "Bra",
+      "excellent": "Utmerket"
+    },
+    "scales": {
+      "veryWet": "Veldig vått",
+      "veryDry": "Perfekt",
+      "calm": "Veldig blåsende",
+      "veryWindy": "Rolig",
+      "empty": "Tomt",
+      "veryCrowded": "Veldig fullt"
+    },
+    "drynessLabels": {
+      "1": "Veldig vått",
+      "2": "Vått",
+      "3": "Litt fuktig",
+      "4": "Stort sett tørt",
+      "5": "Veldig tørt"
+    },
+    "windLabels": {
+      "1": "Rolig",
+      "2": "Lett bris",
+      "3": "Moderat",
+      "4": "Blåsende",
+      "5": "Veldig blåsende"
+    },
+    "crowdsLabels": {
+      "1": "Tomt",
+      "2": "Få personer",
+      "3": "Moderat",
+      "4": "Fullt",
+      "5": "Veldig fullt"
+    },
+    "recentReports": "Siste rapporter",
+    "communityReports": "Samfunnsrapporter",
+    "noReports": "Ingen rapporter ennå",
+    "beTheFirst": "Vær den første til å rapportere",
+    "noReportsInCategory": "Ingen rapporter i denne kategorien",
+    "filters": {
+      "all": "Alle"
+    },
+    "staleness": {
+      "outdated": "Utdatert",
+      "older": "Eldre",
+      "veryOld": "Veldig gammel"
+    },
+    "observationDate": "Når observerte du dette?",
+    "observationDateHelp": "Du kan rapportere forhold opptil 7 dager tilbake",
+    "lostFoundType": "Type",
+    "lostFoundTypes": {
+      "lost": "Tapt gjenstand",
+      "found": "Funnet gjenstand"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Velg om dette er en tapt eller funnet gjenstand",
+    "lostBadge": "TAPT",
+    "foundBadge": "FUNNET",
+    "expiresAt": "Gyldig til (valgfritt)",
+    "expiresAtHelp": "Angi når denne rapporten blir utdatert (nyttig for midlertidige stenginger eller skiftende forhold)",
+    "noExpiry": "Utløper aldri",
+    "expiredOn": "Utløpt {{date}}",
+    "edit": "Rediger",
+    "delete": "Slett",
+    "deleteConfirm": "Er du sikker på at du vil slette denne rapporten?",
+    "deleteConfirmTitle": "Slett Rapport",
+    "updated": "Rapport oppdatert",
+    "deleted": "Rapport slettet",
+    "editReport": "Rediger Rapport",
+    "editReportDescription": "Oppdater rapporten din",
+    "updateReport": "Oppdater Rapport",
+    "updating": "Oppdaterer...",
+    "deleteSuccess": "Rapport slettet",
+    "deleteSuccessDescription": "Rapporten din er fjernet",
+    "deleteError": "Kunne ikke slette rapporten",
+    "deleteErrorDescription": "Noe gikk galt. Vennligst prøv igjen.",
+    "photos": "Bilder",
+    "photoHint": "Legg til opptil 3 bilder (maks. 2MB hver). Bilder vil bli komprimert automatisk.",
+    "photoUploadFailed": "Opplasting av bilde mislyktes",
+    "uploadingPhotos": "Laster opp bilder...",
+    "submitReport": "Send inn rapport"
+  },
+  "editCragDialog": {
+    "title": "Rediger Klippe",
+    "subtitle": "Konverter denne klippen til en sektor eller endre overordnet element",
+    "currentStatus": "Nåværende Status",
+    "crag": "Klippe",
+    "sector": "Sektor",
+    "currentParent": "Nåværende overordnet element",
+    "chooseAction": "Velg Handling",
+    "convertToSector": "Konverter til Sektor",
+    "convertToCrag": "Konverter til Klippe",
+    "changeParent": "Endre Overordnet Klippe",
+    "selectParentCrag": "Velg Overordnet Klippe",
+    "selectNewParent": "Velg Ny Overordnet Klippe",
+    "searchForParent": "Søk etter den overordnede klippen som denne sektoren skal tildeles",
+    "searchPlaceholder": "Søk etter overordnet klippe...",
+    "noCragsFound": "Ingen klipper funnet",
+    "change": "Endre",
+    "save": "Lagre Endringer",
+    "saving": "Lagrer...",
+    "success": "Klippe oppdatert",
+    "convertedToCrag": "Konvertert til klippe",
+    "convertedToSector": "Konvertert til sektor",
+    "errors": {
+      "parentRequired": "Overordnet klippe påkrevd",
+      "parentRequiredDesc": "Vennligst velg en overordnet klippe for denne sektoren",
+      "failed": "Oppdatering mislyktes",
+      "failedDesc": "Kunne ikke oppdatere klippe. Vennligst prøv igjen."
+    }
+  },
+  "cragPage": {
+    "askAI": "Spør AI",
+    "edit": "Rediger",
+    "editCrag": "Rediger klippe-detaljer",
+    "currentConditions": "Nåværende forhold",
+    "sectors": "Sektorer",
+    "addSector": "Legg til sektor",
+    "noSectors": "Ingen sektorer er lagt til for dette feltet ennå.",
+    "beFirstToAddSector": "Vær den første til å legge til en sektor",
+    "searchSectors": "Søk sektorer...",
+    "noSectorsFound": "Ingen sektorer funnet som samsvarer med søket ditt.",
+    "disclaimer": "Værforholdene kan endre seg raskt. Alltid sjekk forholdene ved ankomst og bruk din beste vurdering.",
+    "askAIAboutCrag": "Spør AI om denne klippen",
+    "viewOnSunCalc": "Vis sol/måne-tider",
+    "viewSunAngles": "Vis solposisjon og skyggevinkler",
+    "viewOnMap": "Vis på kart",
+    "viewOnGoogleMaps": "Vis på Google Maps",
+    "addToFavorites": "Legg til favoritter",
+    "removeFromFavorites": "Fjern fra favoritter"
+  },
+  "time": {
+    "today": "I dag",
+    "yesterday": "I går",
+    "daysAgo_one": "{{count}} dag siden",
+    "daysAgo_other": "{{count}} dager siden",
+    "pickDate": "Velg en dato"
+  },
+  "nearbyMatch": {
+    "distance": "{{distance}} fra {{location}}"
+  },
+  "feed": {
+    "title": "Direktefeed",
+    "viewFeed": "Se aktivitetsfeed",
+    "live": "Direkte",
+    "justNow": "Akkurat nå",
+    "loadingFeed": "Laster inn feed...",
+    "reconnecting": "Kobler til på nytt til direkteoppdateringer...",
+    "loadMore": "Last inn flere rapporter",
+    "loadingMore": "Laster...",
+    "totalReports": "{{count}} totalt",
+    "showingOf": "Viser {{showing}} av {{total}} rapporter",
+    "totalReportsHint": "Totalt antall rapporter fra fellesskapet, inkludert eldre som ikke vises i feeden",
+    "olderHidden": "Eldre rapporter er fortsatt synlige paa individuelle feltsider",
+    "filters": {
+      "all": "Alle",
+      "favorites": "Favoritter"
+    },
+    "emptyState": {
+      "noReportsTitle": "Ingen rapporter ennå",
+      "noReportsDescription": "Vær den første til å dele forhold med klatremiljøet",
+      "noFavoritesTitle": "Ingen rapporter fra favoritter",
+      "noFavoritesDescription": "Legg til klatresteder i favorittene dine for å se rapportene deres i denne feeden"
+    }
+  },
+  "webcams": {
+    "title": "Webkameraer i nærheten",
+    "nearbyCount": "{{count}} webkamera funnet",
+    "nearbyCount_other": "{{count}} webkameraer funnet",
+    "daylight": "Dagslys",
+    "openOnWindy": "Åpne på Windy.com",
+    "poweredBy": "Drevet av",
+    "noWebcams": "Ingen webkameraer funnet i nærheten"
+  }
+}

@@ -1,0 +1,914 @@
+{
+  "header": {
+    "title": "beta.rocks"
+  },
+  "welcome": {
+    "heading": "Pridobi informacije za vsako plezališče",
+    "description": "Razmere v realnem času, poročila skupnosti in informacije o smereh na plezališčih po vsem svetu",
+    "exampleQueries": {
+      "query1": {
+        "display": "Kakšne bodo razmere v Ospu jutri?",
+        "query": "Kakšne bodo razmere v Ospu jutri?"
+      },
+      "query2": {
+        "display": "Ali bo Mišja Peč suha danes popoldne?",
+        "query": "Ali bo Mišja Peč suha danes popoldne?"
+      },
+      "query3": {
+        "display": "Kako bo v Kotečniku ta konec tedna?",
+        "query": "Kako bodo razmere v Kotečniku ta konec tedna?"
+      }
+    },
+    "searchHint": "Poiščite katero koli plezalno območje",
+    "yourFavorites": "Vaši Priljubljeni",
+    "favoriteQuery": "Kakšni so pogoji v {{crag}}?"
+  },
+  "chat": {
+    "analyzing": "Analiziram razmere...",
+    "thinking": "Razmišljam...",
+    "inputPlaceholder": "Vprašaj po kateremkoli plezališču ali sektorju...",
+    "clearHistory": "Počisti zgodovino",
+    "clearHistoryConfirm": "Ali ste prepričani, da želite izbrisati vso zgodovino klepeta? Tega dejanja ni mogoče razveljaviti.",
+    "clearChat": "Izbriši klepet",
+    "clearChatTooltip": "Izbriši trenutni pogovor",
+    "clearChatConfirm": "Izbrisati vaš klepet? To bo odstranilo vsa sporočila iz trenutnega pogovora."
+  },
+  "search": {
+    "title": "Išči plezališča",
+    "description": "Iskanje plezališč po imenu ali lokaciji",
+    "placeholder": "Išči plezališča... (npr. 'Osp', 'Kotečnik')",
+    "typeToSearch": "Vnesite za iskanje plezališč...",
+    "searching": "Iskanje...",
+    "noCragsFound": "Plezališča niso bila najdena. Poskusite z drugim iskalnim izrazom.",
+    "addNewCrag": "Dodaj novo plezališče",
+    "heading": "Plezališča",
+    "toSelect": "za izbiro",
+    "toClose": "za zapiranje",
+    "notSeeing": "Ne vidite svojega plezališča?",
+    "addMissingHere": "Dodajte ga tukaj"
+  },
+  "fab": {
+    "addCrag": "Dodaj novo plezališče",
+    "addReport": "Dodaj poročilo",
+    "tooltip": "Hitre akcije"
+  },
+  "cragLocationPicker": {
+    "loadingMap": "Nalaganje zemljevida...",
+    "searchPlaceholder": "Išči lokacijo (npr. 'Osp, Koper')",
+    "noLocationsFound": "Ni najdenih lokacij",
+    "loadingLocationData": "Nalaganje podatkov o lokaciji...",
+    "clickToSet": "Kliknite na zemljevid za nastavitev lokacije plezališča",
+    "nearbyCragsFound": "Najdeno {{count}} bližnje plezališče",
+    "nearbyCragsFound_other": "Najdenih {{count}} bližnjih plezališč",
+    "clickMarkersToView": "Kliknite označevalce za ogled obstoječih plezališč",
+    "coordinates": "Koordinate"
+  },
+  "addCragModal": {
+    "title": "Dodaj novo plezališče",
+    "subtitle": "Pomagaj razširiti bazo plezalnih podatkov",
+    "mapLabel": "Lokacija",
+    "mapHelp": "Kliknite na zemljevid za nastavitev lokacije plezališča",
+    "coordinates": "Koordinate",
+    "nearbyCragsWarning": {
+      "title": "Obstoječe skale v bližini",
+      "message": "{{count}} skala najdena v krogu 500m",
+      "message_other": "{{count}} skale najdene v krogu 500m",
+      "away": "oddaljenost",
+      "view": "Poglej",
+      "proceed": "Če nobena od teh ne ustreza, lahko še vedno nadaljujete z dodajanjem nove skale."
+    },
+    "form": {
+      "name": "Ime plezališča",
+      "namePlaceholder": "npr. Osp, Kotečnik",
+      "country": "Država",
+      "countryPlaceholder": "Izberite državo",
+      "state": "Regija/Pokrajina",
+      "statePlaceholder": "npr. Primorska, Gorenjska",
+      "municipality": "Občina/Mesto",
+      "municipalityPlaceholder": "npr. Koper, Kranj",
+      "village": "Vas",
+      "villagePlaceholder": "npr. Osp",
+      "rockType": "Vrsta kamna",
+      "rockTypePlaceholder": "Izberite vrsto kamna (neobvezno)",
+      "aspects": "Orientacije",
+      "aspectsHelp": "Izberite vse smeri, v katere gleda plezališče",
+      "climbingTypes": "Vrste plezanja",
+      "climbingTypesHelp": "Izberite vse primerne načine plezanja",
+      "description": "Opis",
+      "descriptionPlaceholder": "Dodatne informacije o plezališču (neobvezno)..."
+    },
+    "rockTypes": {
+      "granite": "Granit",
+      "sandstone": "Peščenjak",
+      "limestone": "Apnenec",
+      "gneiss": "Gnejs",
+      "quartzite": "Kremenčev peščenjak",
+      "gritstone": "Peščena kamnina",
+      "basalt": "Bazalt",
+      "volcanic": "Vulkanska kamnina",
+      "conglomerate": "Konglomerat",
+      "schist": "Skrilavec",
+      "slate": "Skriljavec",
+      "other": "Drugo"
+    },
+    "climbingTypes": {
+      "sport": "Športno",
+      "trad": "Tradicionalno",
+      "boulder": "Balvansko",
+      "mixed": "Mešano",
+      "aid": "Tehnično",
+      "ice": "Ledeno"
+    },
+    "cancel": "Prekliči",
+    "submit": "Pošlji plezališče",
+    "submitting": "Pošiljanje...",
+    "success": "Plezališče uspešno dodano!",
+    "successDesc": "{{name}} je bilo dodano v bazo podatkov",
+    "errors": {
+      "nameRequired": "Ime je obvezno",
+      "nameRequiredDesc": "Prosimo, vnesite ime plezališča",
+      "locationRequired": "Lokacija je obvezna",
+      "locationRequiredDesc": "Prosimo, kliknite na zemljevid za nastavitev lokacije plezališča",
+      "countryRequired": "Država je obvezna",
+      "countryRequiredDesc": "Prosimo, izberite državo iz spustnega seznama",
+      "duplicate": "Plezališče že obstaja v bližini",
+      "duplicateDesc": "Plezališče s podobnim imenom že obstaja na tej lokaciji. Preverite zemljevid za obstoječa plezališča.",
+      "failed": "Dodajanje plezališča ni uspelo",
+      "failedDesc": "Pri dodajanju plezališča je prišlo do napake. Prosimo, poskusite znova."
+    }
+  },
+  "conditions": {
+    "rating": "Ocena",
+    "details": "Podrobnosti",
+    "location": "Lokacija",
+    "favorite": "Priljubljeno",
+    "favorited": "V priljubljenih",
+    "addReport": "Dodaj poročilo",
+    "viewCragPage": "Pokaži območje"
+  },
+  "ratings": {
+    "great": "Odlično",
+    "good": "Dobro",
+    "fair": "Solidno",
+    "poor": "Slabo",
+    "nope": "Nikakor"
+  },
+  "reasons": {
+    "perfectTemp": "Popolna temperatura ({{temp}})",
+    "tempTooHigh": "Temperatura previsoka - prsti lahko zdrsnejo",
+    "coldGoodFriction": "Mrzlo, a dobro za trenje na {{rockType}}",
+    "idealHumidity": "Idealna vlaga ({{humidity}}%)",
+    "lowHumidityGranite": "Nizka vlaga izboljša trenje na granitu",
+    "readyInHours": "Za plezanje pripravljeno v ~{{hours}} urah",
+    "acceptable": "Razmere so sprejemljive",
+    "goodHumidity": "Dobra vlažnost ({{humidity}}%)",
+    "lowCondensationRisk": "Nizko tveganje za kondenzacijo (razlika rosišča {{dewPointSpread}})",
+    "lowHumidityFriction": "Nizka vlažnost izboljša oprijem"
+  },
+  "warnings": {
+    "tooWarm": "Prevroče za {{rockType}} ({{temp}})",
+    "coldSuboptimal": "Mrzlo in manj primerno za {{rockType}}",
+    "highHumidity": "Visoka vlaga ({{humidity}}%) - skala je lahko spolzka",
+    "wetDangerousSandstone": "Skala je mokra - nevarno za plezanje (peščenjak je občutljiv, ko je moker)",
+    "wetSlippery": "Skala je mokra - spolzke razmere",
+    "veryHighWinds": "Zelo močan veter ({{wind}}) - nevarnost sunkov",
+    "highWind": "Močan veter ({{wind}})",
+    "recentPrecip": "Nedavne padavine ({{precip}}) - bo suho čez ~{{hours}}h",
+    "currentlyWetDangerous": "Trenutno mokro - nevarno",
+    "currentlyWet": "Trenutno mokro",
+    "cold": "Cold ({{temp}})",
+    "veryHighCondensationRisk": "Zelo visoko tveganje za kondenzacijo (razlika rosišča {{dewPointSpread}}) - površina skale verjetno mokra",
+    "highCondensationRisk": "Visoko tveganje za kondenzacijo (razlika rosišča {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Visoko tveganje za kondenzacijo",
+    "moderateCondensationRisk": "Zmerno tveganje za kondenzacijo (razlika rosišča {{dewPointSpread}})",
+    "condensationRisk": "Tveganje za kondenzacijo ({{dewPointSpread}})"
+  },
+  "sandstoneWarning": {
+    "general": "Peščenjak je krhek, ko je moker, in potrebuje veliko časa za sušenje po dežju. Plezanje na mokrem peščenjaku poškoduje skalo in je nevarno.",
+    "recentRain": "Zaznane nedavne padavine. Prosimo, prepričajte se, da je skala popolnoma suha pred plezanjem.",
+    "inLast24h": "v zadnjih 24h",
+    "inLast48h": "v zadnjih 48h"
+  },
+  "weather": {
+    "clearSky": "Jasno nebo",
+    "mainlyClear": "Pretežno jasno",
+    "partlyCloudy": "Delno oblačno",
+    "overcast": "Oblačno",
+    "fog": "Megla",
+    "depositingRimeFog": "Megla s srežem",
+    "lightDrizzle": "Rahlo rosenje",
+    "moderateDrizzle": "Zmerno rosenje",
+    "denseDrizzle": "Močno rosenje",
+    "lightFreezingDrizzle": "Rahlo zmrzujoče rosenje",
+    "denseFreezingDrizzle": "Močno zmrzujoče rosenje",
+    "slightRain": "Rahlo deževje",
+    "moderateRain": "Zmerno deževje",
+    "heavyRain": "Močno deževje",
+    "lightFreezingRain": "Rahlo zmrznjeno deževje",
+    "heavyFreezingRain": "Močno zmrznjeno deževje",
+    "slightSnowFall": "Rahlo sneženje",
+    "moderateSnowFall": "Zmerno sneženje",
+    "heavySnowFall": "Močno sneženje",
+    "snowGrains": "Snežna zrnca",
+    "slightRainShowers": "Kratke plohe",
+    "moderateRainShowers": "Zmerne plohe",
+    "violentRainShowers": "Močne plohe",
+    "slightSnowShowers": "Kratke snežne plohe",
+    "moderateSnowShowers": "Zmerne snežne plohe",
+    "heavySnowShowers": "Močne snežne plohe",
+    "thunderstorm": "Nevihte",
+    "thunderstormSlightHail": "Nevihte z rahlo točo",
+    "thunderstormHeavyHail": "Nevihte z močno točo"
+  },
+  "timeframes": {
+    "now": "zdaj",
+    "today": "danes",
+    "tomorrow": "jutri",
+    "thisAfternoon": "danes popoldne",
+    "thisEvening": "danes zvečer",
+    "tonight": "nocoj"
+  },
+  "disambiguation": {
+    "foundMultipleAreas": "Našli smo {{count}} plezališč za \"{{location}}\". Izberi eno:",
+    "foundMultipleLocations": "Našli smo več lokacij za \"{{location}}\". Izberi eno:",
+    "queryTemplate": "razmere na {{name}} ({{latitude}}, {{longitude}})"
+  },
+  "footer": {
+    "about": "O nas",
+    "privacy": "Zasebnost",
+    "github": "GitHub",
+    "brand": "beta.rocks",
+    "description": "Brezplačne plezalne razmere za vse. Z ljubeznijo do plezalne skupnosti.",
+    "attribution": "Podatki Open-Meteo, OpenBeta in <osmLink>sodelavcev OpenStreetMap</osmLink>. Pognano s skupnostjo.",
+    "copyright": "© 2026 beta.rocks. Vse pravice pridržane."
+  },
+  "features": {
+    "heading": "Vse, kar potrebuješ",
+    "subheading": "Celovite plezalne razmere na dosegu roke, popolnoma brezplačno",
+    "realTimeWeather": {
+      "title": "Vreme v realnem času",
+      "description": "Natančne napovedi Open-Meteo z izračunom sonca/sence za posamezne sektorje"
+    },
+    "chatInterface": {
+      "title": "Pogovorni vmesnik",
+      "description": "Vprašanja v naravnem jeziku, ki jih poganja AI. Sprašuj v kateremkoli jeziku"
+    },
+    "communityReports": {
+      "title": "Poročila skupnosti",
+      "description": "Delite pogoje, varnostna opozorila, spremembe dostopa, plezalne informacije in več. Pomagajte soplezalcem s posodobitvami v realnem času v več kategorijah"
+    },
+    "globalCoverage": {
+      "title": "Globalna pokritost",
+      "description": "Vsako plezališče ali sektor kjerkoli na svetu z integracijo baze OpenBeta"
+    },
+    "crossDeviceSync": {
+      "title": "Sinhronizacija med napravami",
+      "description": "Dostopajte do svojih priljubljenih in zgodovine klepeta iz katerekoli naprave z varnim sinhronizacijskim ključem. Račun ni potreben"
+    },
+    "privacyFirst": {
+      "title": "Zasebnost na prvem mestu",
+      "description": "Ne samo da ne potrebujemo tvojih podatkov - ne želimo jih! Privzeto anonimno. Brez računov, brez sledenja. Tvoji podatki ostanejo tvoji."
+    }
+  },
+  "privacy": {
+    "heading": "Politika Zasebnosti",
+    "subheading": "Ne samo, da ne potrebujemo tvojih podatkov - ne želimo jih!",
+    "whatWeDontCollect": {
+      "title": "Kaj Ne Zbiramo",
+      "description": "Brez e-poštnih naslovov, brez imen, brez telefonskih številk, brez IP naslovov, brez analitike, brez sledilnih pikslov, brez piškotkov (razen nujnih), brez sledenja uporabniškega vedenja. Dobesedno te ne moremo identificirati."
+    },
+    "whatYouControl": {
+      "title": "Kaj Nadzoruješ",
+      "description": "Vaši priljubljeni, poročila in zgodovina klepeta se shranijo lokalno na vaši napravi. Za dostop z več naprav lahko ustvarite anonimni profil. Ko imate profil, se vaši podatki samodejno sinhronizirajo, da omogočijo dostop z več naprav. Vse svoje podatke lahko kadarkoli izbrišete v Nastavitvah."
+    },
+    "howSyncWorks": {
+      "title": "Kako Deluje Sinhronizacija",
+      "description": "Ko ustvarite profil, ustvarimo anonimni sinhronizacijski ključ in sinhroniziramo vaše podatke z našo podatkovno bazo. Podatki so povezani s heširanim sinhronizacijskim ključem - ne z vašo identiteto. Sinhronizacijski ključ je naključni identifikator, do katerega imate dostop le vi. Ne moremo ga povezati z vami. Ni potreben e-poštni naslov, ni potreben račun."
+    },
+    "openSource": {
+      "title": "Odprta Koda",
+      "description": "Celotna naša koda je odprta na GitHubu. Lahko preveriš, kaj točno počnemo s tvojimi podatki (spoiler: nič). Popolna preglednost, nič skritih sledilcev."
+    },
+    "yourRights": {
+      "title": "Tvoje Pravice",
+      "description": "Svoj profil lahko kadarkoli izbrišete v Nastavitvah. To odstrani vaše priljubljene, zgodovino klepeta in profil iz naše podatkovne baze. Poročila skupnosti, ki ste jih objavili, ostanejo vidna (anonimno), da pomagajo drugim plezalcem. Popoln nadzor nad vašimi podatki."
+    },
+    "dataSecurity": {
+      "title": "Varnost Podatkov",
+      "description": "Ključi so kriptografsko hashirani pred shranjevanjem. Uporabljamo Supabase z Row Level Security politikami. Tudi če bi naša baza podatkov uhajala, ključev ne bi bilo mogoče dešifrirati za identifikacijo uporabnikov."
+    },
+    "footer": {
+      "tldr": "TL;DR: To aplikacijo smo zgradili za plezalce, ne za zbiranje podatkov. Tvoja zasebnost ni funkcija - je temelj.",
+      "github": "Celotna izvorna koda na voljo na <githubLink>GitHubu</githubLink>"
+    }
+  },
+  "ui": {
+    "toggleTheme": "Zamenjaj temo",
+    "selectLanguage": "Izberi jezik",
+    "aboutApp": "O aplikaciji",
+    "language": "Jezik",
+    "theme": "Tema"
+  },
+  "dialog": {
+    "close": "Zapri",
+    "cancel": "Prekliči",
+    "detailedConditions": "Podrobne razmere",
+    "fullAnalysis": "Celotna vremenska analiza in napoved razmer za plezanje",
+    "showMap": "Zemljevid",
+    "tabs": {
+      "overview": "Pregled",
+      "hourly": "Urno",
+      "daily": "14 dni"
+    },
+    "currentRating": "Trenutna ocena",
+    "currentConditions": "Trenutne razmere",
+    "currentWeather": "Trenutno vreme",
+    "temperature": "Temperatura",
+    "humidity": "Vlaga",
+    "windSpeed": "Hitrost vetra",
+    "precipitation": "Padavine",
+    "sunrise": "Sončni vzhod",
+    "sunset": "Sončni zahod",
+    "high": "Najvišja",
+    "low": "Najnižja",
+    "rain": "Dež",
+    "wind": "Veter",
+    "dry": "Suho",
+    "wet": "Mokro",
+    "precipitationContext": "Kontekst padavin",
+    "last24h": "Zadnjih 24 h",
+    "last48h": "Zadnjih 48 h",
+    "next24h": "Naslednjih 24 h",
+    "dewPointSpread": "Razlika rosišča (tveganje kondenzacije)",
+    "lowRisk": "✅ Nizko tveganje - skala bi morala ostati suha",
+    "moderateRisk": "⚠️ Zmerno tveganje - spremljaj vlago",
+    "highRisk": "❌ Visoko tveganje - verjetna kondenzacija",
+    "optimalWindows": "Optimalna okna za plezanje",
+    "nextDays": "Naslednjih 5 dni",
+    "bestTime": "🌟 Najboljši čas",
+    "noOptimalConditions": "V naslednjih 5 dneh ni optimalnih razmer",
+    "checkHourlyForecast": "Preveri urno napoved za več podrobnosti",
+    "weatherDisclaimer": "⚠️ Vreme se lahko hitro spremeni. Pred odhodom spremljaj napovedi in preveri razmere na terenu.",
+    "window": "okno",
+    "windows": "okna",
+    "today": "Danes",
+    "tomorrow": "Jutri",
+    "showCompleteTimeline": "Prikaži celoten časovni potek",
+    "hour": "ura",
+    "hours": "ure",
+    "period": "obdobje",
+    "periods": "obdobja",
+    "noHourlyData": "Urni podatki niso na voljo",
+    "noDailyData": "Dnevni podatki niso na voljo",
+    "noOptimalHours": "Ni optimalnih razmer za",
+    "forecastIndicators": "Kazalniki napovedi:",
+    "goodClimbingWindows": "Dobra plezalna okna",
+    "fairConditions": "Solidne razmere",
+    "poorConditions": "Slabe razmere",
+    "lessReliable": "Dnevi 8-14: manj zanesljiva napoved",
+    "lessReliableHourly": "Naslednje ure manj predvidljive",
+    "lessCertain": "MANJ ZANESLJIVO",
+    "todayBadge": "DANES",
+    "delete": "Izbriši"
+  },
+  "timeContext": {
+    "sunrise": "Sončni vzhod",
+    "sunset": "Sončni zahod",
+    "recommendedHours": "Priporočene ure za plezanje",
+    "totalDaylight": "Skupna dnevna svetloba",
+    "hoursOfDaylight": "{{hours}} ur dnevne svetlobe",
+    "earlyStartRecommended": "Priporočen zgodnji začetek za izogib vročini",
+    "limitedDaylight": "Omejena dnevna svetloba - načrtujte ustrezno",
+    "morningConditionsBest": "Najboljše razmere zjutraj",
+    "eveningSession": "Večerne razmere",
+    "showAllHours": "Prikaži vseh 24 ur",
+    "showClimbingHoursOnly": "Prikaži samo plezalne ure",
+    "expandHours": "Razširi za prikaz vseh ur"
+  },
+  "rockTypes": {
+    "limestone": "apnenec",
+    "granite": "granit",
+    "sandstone": "peščenjak",
+    "basalt": "bazalt",
+    "gneiss": "gnejs",
+    "quartzite": "kremenčev peščenjak",
+    "conglomerate": "konglomerat",
+    "rhyolite": "riolit",
+    "porphyry": "porfir",
+    "andesite": "andezit",
+    "slate": "skriljavec",
+    "schist": "skrilavec",
+    "dolomite": "dolomit",
+    "volcanic": "vulkanski",
+    "phyllite": "filit"
+  },
+  "sync": {
+    "banner": {
+      "title": "Vaši podatki se sinhronizirajo med napravami",
+      "description": "Vaše priljubljene, poročila in zgodovina klepeta so shranjeni lokalno in se lahko sinhronizirajo na druge naprave z vašim sinhronizacijskim ključem.",
+      "learnMore": "Več",
+      "dismiss": "Razumem"
+    },
+    "status": {
+      "synced": "Sinhronizirano",
+      "syncing": "Sinhronizacija...",
+      "offline": "Brez povezave"
+    },
+    "notification": {
+      "title": "Sinhronizacijski ključ ustvarjen",
+      "description": "Ustvarili smo edinstven ključ za sinhronizacijo vaših priljubljenih in klepetov med napravami.",
+      "viewInSettings": "Pogled v nastavitvah",
+      "viewMore": "Kaj je ključ za sinhronizacijo?"
+    }
+  },
+  "syncExplainer": {
+    "title": "Kako deluje sinhronizacija",
+    "description": "Ohranite svoje podatke sinhronizirane na vseh napravah varno in brez prekinitev.",
+    "features": {
+      "syncKey": {
+        "title": "Edinstven sinhronizacijski ključ",
+        "description": "Vsak uporabnik dobi varen, edinstven ključ za sinhronizacijo podatkov med napravami."
+      },
+      "multiDevice": {
+        "title": "Dostop z več naprav",
+        "description": "Dostopajte do svojih priljubljenih in zgodovine klepeta z katere koli naprave s svojim sinhronizacijskim ključem."
+      },
+      "privacy": {
+        "title": "Zasebnost na prvem mestu",
+        "description": "Vaši podatki so šifrirani in dostopni samo z vašim sinhronizacijskim ključem. Račun ni potreben."
+      }
+    },
+    "openSettings": "Odpri nastavitve"
+  },
+  "profileCreation": {
+    "title": "Ustvarite svoj profil",
+    "subtitle": "Registracija z zasebnostjo na prvem mestu - osebni podatki niso potrebni",
+    "createProfile": "Ustvari profil",
+    "creating": "Ustvarjam...",
+    "maybeLater": "Morda kasneje",
+    "tabs": {
+      "create": "Ustvari profil",
+      "signIn": "Prijava"
+    },
+    "signIn": {
+      "title": "Že imaš ključ za sinhronizacijo?",
+      "description": "Vnesi svoj ključ za sinhronizacijo za obnovitev profila in podatkov",
+      "syncKeyLabel": "Ključ za sinhronizacijo",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Prijava",
+      "signingIn": "Prijavljam se...",
+      "invalidKey": "Neveljaven format ključa za sinhronizacijo. Preveri in poskusi znova."
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Shranite priljubljene na vseh napravah",
+        "description": "Označite svoje priljubljene skale in dostopajte z katere koli naprave"
+      },
+      "report": {
+        "title": "Delite poročila s skupnostjo",
+        "description": "Pomagajte drugim plezalcem s souporabo pogojev, varnostnih opozoril in plezalnih informacij"
+      },
+      "vote": {
+        "title": "Glasujte za uporabna poročila",
+        "description": "Podprite skupnost s potrjevanjem uporabnih poročil"
+      },
+      "manual": {
+        "title": "Shranite svoje podatke na vseh napravah",
+        "description": "Sinhronizirajte svoje priljubljene, poročila in zgodovino klepetov na vseh svojih napravah"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "Brez e-pošte ali gesla",
+        "description": "Spoštujemo vašo zasebnost. Samo sinhronizacijski ključ, brez osebnih podatkov"
+      },
+      "syncKey": {
+        "title": "Ustvari samo sinhronizacijski ključ",
+        "description": "Edinstven identifikator, ki sinhronizira vaše podatke med napravami"
+      },
+      "multiDevice": {
+        "title": "Shranite ga, fotografirajte QR kodo ali pošljite po e-pošti",
+        "description": "Uporabite sinhronizacijski ključ za obnovitev profila na drugih napravah"
+      }
+    }
+  },
+  "profileCreated": {
+    "title": "Profil ustvarjen!",
+    "description": "Vaš profil je bil uspešno ustvarjen. Shranite sinhronizacijski ključ za dostop do podatkov na drugih napravah.",
+    "actionCompleted": "{{action}} končano!",
+    "syncKeyLabel": "Vaš sinhronizacijski ključ",
+    "syncKeyDescription": "To je vaš edinstven ključ za sinhronizacijo med napravami",
+    "qrCodeLabel": "QR koda",
+    "qrCodeDescription": "Skenirajte to QR kodo na drugi napravi za sinhronizacijo podatkov",
+    "privacyTitle": "Pomembno: Shranite sinhronizacijski ključ",
+    "saveKeySafe": "Shranite ta ključ na varno mesto",
+    "screenshotQR": "Ali naredite posnetek zaslona te QR kode",
+    "needForSync": "Potrebovali ga boste za sinhronizacijo drugih naprav",
+    "gotIt": "Razumem!",
+    "copied": "Kopirano!",
+    "copy": "Kopiraj",
+    "emailSection": {
+      "title": "Pošlji na e-pošto (neobvezno)",
+      "privacyNote1": "NE shranjujemo tvojega e-naslova",
+      "privacyNote2": "To je samo enkratna pošiljka",
+      "privacyNote3": "Nikoli shranjeno v naši bazi podatkov",
+      "emailPlaceholder": "tvoj@email.si",
+      "sendButton": "Pošlji e-pošto",
+      "sending": "Pošiljam...",
+      "success": "E-pošta poslana! Preveri svojo mapo s prejeto pošto",
+      "error": "Pošiljanje e-pošte ni uspelo. Poskusi znova."
+    }
+  },
+  "profile": {
+    "anonymous": "Anonimen",
+    "member": "Član",
+    "anonymousMember": "Anonimen član",
+    "favorites": "Priljubljene",
+    "yourReports": "Vaša Poročila",
+    "recent": "Nedavna iskanja",
+    "stats": "Tvoja statistika",
+    "settings": "Nastavitve",
+    "clearData": "Izbriši vse podatke"
+  },
+  "stats": {
+    "title": "Tvoja statistika",
+    "description": "Tvoja aktivnost in prispevki k skupnosti beta.rocks",
+    "reportsPosted": "Objavljenih poročil",
+    "confirmationsGiven": "Danih potrditev",
+    "favoritesCount": "Priljubljene",
+    "memberSince": "Član od",
+    "lastActive": "Nazadnje aktiven",
+    "unknown": "Neznano",
+    "encourageReports": "Delite svoje lokalno znanje z objavljanjem poročil o razmerah na skalah!",
+    "thankYou": "Hvala za prispevek k plezalni skupnosti!"
+  },
+  "userReports": {
+    "title": "Vaša Poročila",
+    "description": "{{count}} poročil",
+    "empty": "Še ni poročil",
+    "emptyMessage": "Še niste objavili nobenih poročil",
+    "emptyHint": "Delite informacije o pogojih in skalah, da pomagate skupnosti",
+    "loading": "Nalagam vaša poročila...",
+    "loadFailed": "Poročil ni bilo mogoče naložiti",
+    "deleteSuccess": "Poročilo uspešno izbrisano",
+    "deleteFailed": "Poročila ni bilo mogoče izbrisati"
+  },
+  "settings": {
+    "title": "Nastavitve",
+    "description": "Upravljaj svoj profil, ključ za sinhronizacijo in nastavitve",
+    "save": "Shrani",
+    "saving": "Shranjujem...",
+    "displayName": {
+      "label": "Prikazno ime",
+      "description": "Tvoje ime, prikazano v poročilih in potrditvah (neobvezno)",
+      "placeholder": "Vnesi svoje ime...",
+      "saved": "Prikazno ime shranjeno",
+      "savedDescription": "Vaše prikazno ime je bilo uspešno posodobljeno",
+      "saveFailed": "Shranjevanje ni uspelo",
+      "saveFailedDescription": "Vašega prikaznega imena ni bilo mogoče shraniti. Prosimo, poskusite znova"
+    },
+    "units": {
+      "title": "Enote in meritve",
+      "description": "Izberite svoje preferenčne enote za vremenske in plezalne podatke",
+      "systemLabel": "Sistem enot",
+      "systemDescription": "Hitre prednastav for pogosto uporabljene sisteme enot",
+      "systems": {
+        "metric": "Metrični (°C, km/h, mm)",
+        "imperial": "Imperialni (°F, mph, palci)",
+        "uk": "Velika Britanija (°C, mph, mm)",
+        "custom": "Po meri"
+      },
+      "temperature": "Temperatura",
+      "temperatureUnits": {
+        "celsius": "Celzij (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Hitrost vetra",
+      "windSpeedUnits": {
+        "kmh": "Kilometri na uro (km/h)",
+        "mph": "Milje na uro (mph)",
+        "ms": "Metri na sekundo (m/s)",
+        "knots": "Vozli (kn)"
+      },
+      "precipitation": "Padavine",
+      "precipitationUnits": {
+        "mm": "Milimetri (mm)",
+        "inches": "Palci (in)"
+      },
+      "distance": "Razdalja",
+      "distanceUnits": {
+        "km": "Kilometri (km)",
+        "miles": "Milje (mi)"
+      },
+      "elevation": "Nadmorska višina",
+      "elevationUnits": {
+        "meters": "Metri (m)",
+        "feet": "Čevlji (ft)"
+      },
+      "saved": "Enote shranjene",
+      "savedDescription": "Vaše nastavitve enot so bile uspešno posodobljene",
+      "saveFailed": "Shranjevanje enot ni uspelo",
+      "saveFailedDescription": "Vaših nastavitev enot ni bilo mogoče shraniti. Prosimo, poskusite znova"
+    },
+    "syncKey": {
+      "title": "Ključ za sinhronizacijo",
+      "description": "Uporabi ta ključ za sinhronizacijo priljubljenih in nastavitev med napravami",
+      "label": "Tvoj ključ za sinhronizacijo",
+      "copy": "Kopiraj ključ za sinhronizacijo",
+      "showFullKey": "Prikaži celoten ključ",
+      "hideKey": "Skrij ključ",
+      "qrCode": "QR koda",
+      "qrDescription": "Skeniraj to QR kodo na drugi napravi za sinhronizacijo podatkov",
+      "restoreTitle": "Obnovi z druge naprave",
+      "restoreDescription": "Že imaš ključ za sinhronizacijo? Prilepi ga tukaj za obnovitev podatkov",
+      "restoreLabel": "Prilepi svoj ključ za sinhronizacijo",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Obnovi ključ za sinhronizacijo",
+      "restoring": "Obnavljam...",
+      "restoreSuccess": "Ključ za sinhronizacijo uspešno obnovljen! Ponovno nalaganje...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
+      "restoreError": "Neveljavna oblika ključa za sinhronizacijo. Preveri in poskusi znova.",
+      "saveNote": {
+        "title": "Shrani svoj ključ za sinhronizacijo",
+        "description": "Priporočamo, da shraniš ključ za sinhronizacijo na varnem mestu, kot je aplikacija Opombe ali upravitelj gesel. Potreboval ga boš za obnovitev podatkov na drugih napravah."
+      },
+      "warning": {
+        "title": "Ohrani ključ za sinhronizacijo zaseben",
+        "description": "Kdorkoli z tvojim ključem za sinhronizacijo lahko dostopa do tvojih priljubljenih in nastavitev. Ne deli ga javno."
+      },
+      "emailButton": "Pošlji ključ za sinhronizacijo na e-pošto",
+      "emailLabel": "E-poštni naslov",
+      "emailPlaceholder": "ti@example.si",
+      "emailSend": "Pošlji",
+      "emailSending": "Pošiljanje...",
+      "emailPrivacy": "Ne shranjujemo tvojega e-poštnega naslova - uporabljen je samo enkrat za pošiljanje tvojega ključa za sinhronizacijo.",
+      "emailSent": "E-pošta poslana!",
+      "emailSentDescription": "Preveri svojo e-pošto na {{email}}",
+      "emailFailed": "Pošiljanje e-pošte ni uspelo",
+      "emailFailedDescription": "Prosimo, poskusi znova ali ročno kopiraj ključ za sinhronizacijo.",
+      "emailInvalid": "Prosimo, vnesi veljaven e-poštni naslov"
+    },
+    "dangerZone": {
+      "title": "Nevarna cona",
+      "description": "Ta dejanja so trajna in jih ni mogoče razveljaviti",
+      "deleteProfile": "Izbriši profil",
+      "deleteProfileConfirm": "Ali ste prepričani, da želite izbrisati svoj profil? To bo trajno odstranilo vse vaše podatke, vključno s priljubljenimi, zgodovino klepeta in nastavitvami. Tega dejanja ni mogoče razveljaviti.",
+      "deleteFailed": "Profila ni bilo mogoče izbrisati. Poskusite znova."
+    }
+  },
+  "favorites": {
+    "title": "Tvoja priljubljena plezališča",
+    "description": "Imaš {{count}} priljubljenih lokacij",
+    "empty": "Še ni priljubljenih",
+    "emptyMessage": "Še nisi dodal nobenih priljubljenih plezališč",
+    "emptyHint": "Klikni na ikono zvezde na katerikoli kartici razmer, da jo dodaš med priljubljene",
+    "lastChecked": "Zadnjič preverjeno",
+    "frictionScore": "Ocena trenja",
+    "viewConditions": "Poglej razmere",
+    "remove": "Odstrani",
+    "confirmDelete": "Odstraniti iz priljubljenih?",
+    "confirmDeleteDescription": "Ste prepričani, da želite odstraniti {{name}} iz svojih priljubljenih?",
+    "loginToFavorite": "Prosimo, nastavite svoj profil za dodajanje lokacij med priljubljene",
+    "errorToggling": "Preklop priljubljenega ni uspel. Poskusite znova.",
+    "added": "Skala dodana med priljubljene",
+    "removed": "Skala odstranjena iz priljubljenih",
+    "loading": "Nalaganje priljubljenih..."
+  },
+  "reports": {
+    "addReport": "Dodaj poročilo",
+    "addReportDescription": "Deli informacije o {{cragName}}",
+    "postingAs": "Objavljaš kot",
+    "category": "Kaj bi rad prijavil?",
+    "categories": {
+      "conditions": "Razmere",
+      "safety": "Varnost",
+      "access": "Dostop",
+      "climbing_info": "Informacije o plezanju",
+      "facilities": "Objekti",
+      "other": "Drugo",
+      "lost_found": "Najdeno in izgubljeno"
+    },
+    "categoryDescriptions": {
+      "conditions": "Vreme, trenje, suhost, gneča",
+      "safety": "Rahla sidra, odpadajoče kamenje, zlomljeni prijemi, nevarnosti",
+      "access": "Zaprtja, spremembe parkirišč, sezonske omejitve, gnezda ptic, žuželke",
+      "climbing_info": "Ponovna namestitev sider, posodobitve opreme, spremembe poti, fiksne vponke",
+      "facilities": "Stranišča, kampiranje, viri vode, objekti",
+      "other": "Karkoli drugega, kar ne ustreza zgoraj",
+      "lost_found": "Izgubljena ali najdena oprema"
+    },
+    "categoryHelp": {
+      "conditions": "Trenutno vreme, trenje, suhost, gneča na plezališču",
+      "safety": "Nevarnosti na celotnem območju, nevarne razmere, nujna opozorila",
+      "access": "Parkiranje, zaprtja, predpisi, sezonske omejitve",
+      "climbing_info": "Specifične podrobnosti poti, beta, prijemi, oprema, težavnost",
+      "facilities": "Stranišča, kampiranje, viri vode, objekti",
+      "other": "Karkoli drugega, kar ne ustreza zgornjim kategorijam",
+      "lost_found": "Prijavite izgubljene predmete, ki jih iščete, ali najdene predmete, ki jih imate"
+    },
+    "dryness": "Suhost",
+    "wind": "Veter",
+    "crowds": "Gneča",
+    "additionalComments": "Dodatni komentarji (neobvezno)",
+    "details": "Podrobnosti",
+    "detailsRequired": "Prosimo, navedite podrobnosti o tem poročilu",
+    "placeholders": {
+      "conditions": "Npr., Vzhodni sektor še vedno moker, pot blatna, razpoka curi...",
+      "safety": "Npr., Rahlo sidro na poti X, nevarnost odpadajočega kamenja pri glavni steni...",
+      "access": "Npr., Vrata zaprta do maja, novo parkirišče za knjižnico...",
+      "climbing_info": "Npr., Pot X ponovno nameščena s sidri iz nerjavnega jekla, nameščene nove fiksne vponke, izboljšana fiksna točka...",
+      "facilities": "Npr., Stranišče na voljo na parkirišču, ni vira vode v bližini...",
+      "other": "Opiši, kaj bi rad prijavil...",
+      "lost_found": "Npr., Najdena modra vrečka za magnezij pri podnožju, izgubljen Black Diamond cam #2 pri parkirišču..."
+    },
+    "submit": "Pošlji poročilo",
+    "submitting": "Pošiljam...",
+    "readyToPost": "Profil ustvarjen! Pripravljen si za objavo poročila.",
+    "helpful": "Koristno",
+    "loginToConfirm": "Prosimo, nastavi svoj profil za potrditev poročil",
+    "confirmFailed": "Potrjevanje poročila ni uspelo. Prosimo, poskusi znova.",
+    "voteReady": "Zdaj lahko glasuješ o poročilih",
+    "ratings": {
+      "veryPoor": "Zelo slabo",
+      "poor": "Slabo",
+      "okay": "V redu",
+      "good": "Dobro",
+      "excellent": "Odlično"
+    },
+    "scales": {
+      "veryWet": "Zelo mokro",
+      "veryDry": "Popolno",
+      "calm": "Zelo vetrovno",
+      "veryWindy": "Mirno",
+      "empty": "Prazno",
+      "veryCrowded": "Zelo polno"
+    },
+    "drynessLabels": {
+      "1": "Zelo mokro",
+      "2": "Mokro",
+      "3": "Rahlo vlažno",
+      "4": "Večinoma suho",
+      "5": "Zelo suho"
+    },
+    "windLabels": {
+      "1": "Mirno",
+      "2": "Lahek vetrič",
+      "3": "Zmerno",
+      "4": "Vetrovno",
+      "5": "Zelo vetrovno"
+    },
+    "crowdsLabels": {
+      "1": "Prazno",
+      "2": "Malo ljudi",
+      "3": "Zmerno",
+      "4": "Polno",
+      "5": "Zelo polno"
+    },
+    "recentReports": "Nedavna poročila",
+    "communityReports": "Poročila skupnosti",
+    "noReports": "Še ni poročil",
+    "beTheFirst": "Bodi prvi, ki prijaviš",
+    "noReportsInCategory": "V tej kategoriji ni poročil",
+    "filters": {
+      "all": "Vsi"
+    },
+    "staleness": {
+      "outdated": "Zastarelo",
+      "older": "Starejše",
+      "veryOld": "Zelo staro"
+    },
+    "observationDate": "Kdaj ste to opazili?",
+    "observationDateHelp": "Poročate lahko o razmerah do 7 dni nazaj",
+    "lostFoundType": "Vrsta",
+    "lostFoundTypes": {
+      "lost": "Izgubljen predmet",
+      "found": "Najden predmet"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Izberite, ali je to izgubljen ali najden predmet",
+    "lostBadge": "IZGUBLJENO",
+    "foundBadge": "NAJDENO",
+    "expiresAt": "Veljavno do (neobvezno)",
+    "expiresAtHelp": "Nastavite, kdaj to poročilo zastara (uporabno za začasne zapore ali spreminjajoče se pogoje)",
+    "noExpiry": "Nikoli ne poteče",
+    "expiredOn": "Poteklo {{date}}",
+    "edit": "Uredi",
+    "delete": "Izbriši",
+    "deleteConfirm": "Ali ste prepričani, da želite izbrisati to poročilo?",
+    "deleteConfirmTitle": "Izbriši Poročilo",
+    "updated": "Poročilo posodobljeno",
+    "deleted": "Poročilo izbrisano",
+    "editReport": "Uredi Poročilo",
+    "editReportDescription": "Posodobite svoje poročilo",
+    "updateReport": "Posodobi Poročilo",
+    "updating": "Posodabljanje...",
+    "deleteSuccess": "Poročilo izbrisano",
+    "deleteSuccessDescription": "Vaše poročilo je bilo uspešno odstranjeno",
+    "deleteError": "Brisanje poročila ni uspelo",
+    "deleteErrorDescription": "Nekaj je šlo narobe. Prosimo, poskusite znova.",
+    "photos": "Fotografije",
+    "photoHint": "Dodajte do 3 fotografije (maks. 2MB vsaka). Fotografije bodo samodejno stisnjene.",
+    "photoUploadFailed": "Nalaganje fotografije ni uspelo",
+    "uploadingPhotos": "Nalaganje fotografij...",
+    "submitReport": "Pošlji poročilo"
+  },
+  "editCragDialog": {
+    "title": "Uredi Skalo",
+    "subtitle": "Pretvori to skalo v sektor ali spremeni nadrejeni element",
+    "currentStatus": "Trenutno Stanje",
+    "crag": "Skala",
+    "sector": "Sektor",
+    "currentParent": "Trenutni nadrejeni element",
+    "chooseAction": "Izberi Dejanje",
+    "convertToSector": "Pretvori v Sektor",
+    "convertToCrag": "Pretvori v Skalo",
+    "changeParent": "Spremeni Nadrejeno Skalo",
+    "selectParentCrag": "Izberi Nadrejeno Skalo",
+    "selectNewParent": "Izberi Novo Nadrejeno Skalo",
+    "searchForParent": "Poiščite nadrejeno skalo, ki ji želite dodeliti ta sektor",
+    "searchPlaceholder": "Iskanje nadrejene skale...",
+    "noCragsFound": "Ni najdenih skal",
+    "change": "Spremeni",
+    "save": "Shrani Spremembe",
+    "saving": "Shranjevanje...",
+    "success": "Skala uspešno posodobljena",
+    "convertedToCrag": "Uspešno pretvorjeno v skalo",
+    "convertedToSector": "Uspešno pretvorjeno v sektor",
+    "errors": {
+      "parentRequired": "Nadrejena skala je obvezna",
+      "parentRequiredDesc": "Prosimo, izberite nadrejeno skalo za ta sektor",
+      "failed": "Posodobitev ni uspela",
+      "failedDesc": "Skale ni bilo mogoče posodobiti. Poskusite znova."
+    }
+  },
+  "cragPage": {
+    "askAI": "Vprašaj AI",
+    "edit": "Uredi",
+    "editCrag": "Uredi podrobnosti skale",
+    "currentConditions": "Trenutne razmere",
+    "sectors": "Sektorji",
+    "addSector": "Dodaj sektor",
+    "noSectors": "Temu plezališču še niso bili dodani sektorji.",
+    "beFirstToAddSector": "Bodite prvi, ki dodate sektor",
+    "searchSectors": "Iskanje sektorjev...",
+    "noSectorsFound": "Ni najdenih sektorjev, ki bi ustrezali vašemu iskanju.",
+    "disclaimer": "Vremenske razmere se lahko hitro spremenijo. Vedno preverite razmere na kraju in uporabite svojo najboljšo presojo.",
+    "askAIAboutCrag": "Vprašaj AI o tej skali",
+    "viewOnSunCalc": "Prikaži čase sonca/lune",
+    "viewSunAngles": "Prikaži položaj sonca in kote sence",
+    "viewOnMap": "Prikaži na zemljevidu",
+    "viewOnGoogleMaps": "Prikaži na Google Maps",
+    "addToFavorites": "Dodaj med priljubljene",
+    "removeFromFavorites": "Odstrani iz priljubljenih"
+  },
+  "time": {
+    "today": "Danes",
+    "yesterday": "Včeraj",
+    "daysAgo_one": "pred {{count}} dnem",
+    "daysAgo_two": "pred {{count}} dnevoma",
+    "daysAgo_few": "pred {{count}} dnevi",
+    "daysAgo_other": "pred {{count}} dnevi",
+    "pickDate": "Izberite datum"
+  },
+  "loading": {
+    "conditions": "Nalaganje pogojev...",
+    "weatherData": "Pridobivanje vremenskih podatkov...",
+    "reports": "Nalaganje poročil..."
+  },
+  "nearbyMatch": {
+    "distance": "{{distance}} od {{location}}"
+  },
+  "feed": {
+    "title": "Pretok v živo",
+    "viewFeed": "Prikaži pretok aktivnosti",
+    "live": "V živo",
+    "justNow": "Pravkar",
+    "loadingFeed": "Nalaganje pretoka...",
+    "reconnecting": "Ponovno povezovanje s posodobitvami v živo...",
+    "loadMore": "Naloži več poročil",
+    "loadingMore": "Nalaganje...",
+    "totalReports": "{{count}} skupaj",
+    "showingOf": "Prikazanih {{showing}} od {{total}} poročil",
+    "totalReportsHint": "Skupno stevilo porocil skupnosti, vkljucno s starejsimi, ki niso prikazana v viru",
+    "olderHidden": "Starejsa porocila so se vedno vidna na posameznih straneh plezalisc",
+    "filters": {
+      "all": "Vse",
+      "favorites": "Priljubljene"
+    },
+    "emptyState": {
+      "noReportsTitle": "Še ni poročil",
+      "noReportsDescription": "Bodite prvi, ki bo delil pogoje s plezalno skupnostjo",
+      "noFavoritesTitle": "Ni poročil iz priljubljenih",
+      "noFavoritesDescription": "Dodajte plezališča med priljubljene, da vidite njihova poročila v tem pretoku"
+    }
+  },
+  "webcams": {
+    "title": "Spletne kamere v bližini",
+    "nearbyCount": "Najdena {{count}} spletna kamera",
+    "nearbyCount_other": "Najdenih {{count}} spletnih kamer",
+    "daylight": "Dnevna svetloba",
+    "openOnWindy": "Odpri na Windy.com",
+    "poweredBy": "Zagotavlja",
+    "noWebcams": "V bližini ni bilo najdenih spletnih kamer"
+  }
+}

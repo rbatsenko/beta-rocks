@@ -1,0 +1,795 @@
+{
+  "header": {
+    "title": "beta.rocks"
+  },
+  "welcome": {
+    "heading": "Aconsegueix la beta de qualsevol roca",
+    "description": "Condicions en temps real, informes de la comunitat i informació sobre vies a roques de tot el món",
+    "searchHint": "Cerca qualsevol zona d'escalada",
+    "exampleQueries": {
+      "query1": {
+        "display": "Condicions a les Agulles d'Engolasters avui?",
+        "query": "Condicions a les Agulles d'Engolasters avui?"
+      },
+      "query2": {
+        "display": "Montserrat està sec aquesta tarda?",
+        "query": "Montserrat està sec aquesta tarda?"
+      },
+      "query3": {
+        "display": "Condicions a Siurana demà?",
+        "query": "Condicions a Siurana demà?"
+      }
+    },
+    "yourFavorites": "Els teus favorits",
+    "favoriteQuery": "Quines són les condicions a {{crag}}?"
+  },
+  "chat": {
+    "analyzing": "Analizant condicions...",
+    "thinking": "Pensant...",
+    "inputPlaceholder": "Pregunta sobre qualsevol esparelló o sector...",
+    "clearChat": "Esborrar xat",
+    "clearChatTooltip": "Esborrar la conversa actual",
+    "clearChatConfirm": "Esborrar el teu xat? Això eliminarà tots els missatges de la conversa actual.",
+    "clearHistory": "Esborrar historial",
+    "clearHistoryConfirm": "Estàs segur que vols esborrar tot l'historial de xat? Això no es pot desfer."
+  },
+  "search": {
+    "title": "Cerca esparellons",
+    "description": "Cerca zones d'escalada per nom o ubicació",
+    "placeholder": "Cerca esparellons... (p. ex. 'Siurana', 'Montserrat')",
+    "typeToSearch": "Escriu per cercar esparellons...",
+    "searching": "Cercant...",
+    "noCragsFound": "No s'han trobat esparellons. Prova un altre terme de cerca.",
+    "addNewCrag": "Afegir nou esparelló",
+    "heading": "Esparellons",
+    "toSelect": "per seleccionar",
+    "toClose": "per tancar",
+    "notSeeing": "No veus el teu esparelló?",
+    "addMissingHere": "Afegeix-lo aquí"
+  },
+  "fab": {
+    "addCrag": "Afegir nou esparelló",
+    "addReport": "Afegir informe",
+    "tooltip": "Accions ràpides"
+  },
+  "cragLocationPicker": {
+    "loadingMap": "Carregant mapa...",
+    "searchPlaceholder": "Cercar ubicació (p. ex. 'Vallnord, Ordino')",
+    "noLocationsFound": "No s'han trobat ubicacions",
+    "loadingLocationData": "Carregant dades d'ubicació...",
+    "clickToSet": "Feu clic al mapa per establir la ubicació de l'esparelló",
+    "nearbyCragsFound": "S'ha trobat {{count}} esparelló proper",
+    "nearbyCragsFound_other": "S'han trobat {{count}} esparellons propers",
+    "clickMarkersToView": "Feu clic als marcadors per veure esparellons existents",
+    "coordinates": "Coordenades"
+  },
+  "addCragModal": {
+    "title": "Afegir nou esparelló",
+    "subtitle": "Ajuda a fer créixer la base de dades d'escalada",
+    "mapLabel": "Ubicació",
+    "mapHelp": "Fes clic al mapa per establir la ubicació de l'esparelló",
+    "coordinates": "Coordenades",
+    "nearbyCragsWarning": {
+      "title": "Parets existents a prop",
+      "message": "{{count}} paret trobada a menys de 500m",
+      "message_other": "{{count}} parets trobades a menys de 500m",
+      "away": "de distància",
+      "view": "Veure",
+      "proceed": "Si cap d'aquestes coincideix, encara podeu continuar afegint una nova paret."
+    },
+    "form": {
+      "name": "Nom de l'esparelló",
+      "namePlaceholder": "p. ex. Montserrat, Siurana",
+      "country": "País",
+      "countryPlaceholder": "Selecciona el país",
+      "state": "Comunitat/Regió",
+      "statePlaceholder": "p. ex. Catalunya",
+      "municipality": "Municipi/Ciutat",
+      "municipalityPlaceholder": "p. ex. Barcelona, Cornudella de Montsant",
+      "village": "Poble",
+      "villagePlaceholder": "p. ex. Siurana",
+      "rockType": "Tipus de roca",
+      "rockTypePlaceholder": "Selecciona el tipus de roca (opcional)",
+      "aspects": "Orientacions",
+      "aspectsHelp": "Selecciona totes les direccions on mira l'esparelló",
+      "climbingTypes": "Tipus d'escalada",
+      "climbingTypesHelp": "Selecciona tots els estils d'escalada aplicables",
+      "description": "Descripció",
+      "descriptionPlaceholder": "Informació addicional sobre l'esparelló (opcional)..."
+    },
+    "rockTypes": {
+      "granite": "Granit",
+      "sandstone": "Gres",
+      "limestone": "Calcària",
+      "gneiss": "Gneis",
+      "quartzite": "Quarsita",
+      "gritstone": "Pedra aspra",
+      "basalt": "Basalt",
+      "volcanic": "Volcànica",
+      "conglomerate": "Conglomerat",
+      "schist": "Esquist",
+      "slate": "Pissarra",
+      "other": "Altre"
+    },
+    "climbingTypes": {
+      "sport": "Esportiva",
+      "trad": "Tradicional",
+      "boulder": "Bloc",
+      "mixed": "Mixta",
+      "aid": "Artificial",
+      "ice": "Gel"
+    },
+    "cancel": "Cancel·lar",
+    "submit": "Enviar esparelló",
+    "submitting": "Enviant...",
+    "success": "Esparelló afegit correctament!",
+    "successDesc": "{{name}} s'ha afegit a la base de dades",
+    "errors": {
+      "nameRequired": "El nom és obligatori",
+      "nameRequiredDesc": "Si us plau, introdueix un nom per a l'esparelló",
+      "locationRequired": "La ubicació és obligatòria",
+      "locationRequiredDesc": "Si us plau, fes clic al mapa per establir la ubicació de l'esparelló",
+      "countryRequired": "El país és obligatori",
+      "countryRequiredDesc": "Si us plau, selecciona un país del menú desplegable",
+      "duplicate": "Ja existeix un esparelló a prop",
+      "duplicateDesc": "Ja existeix un esparelló amb un nom similar en aquesta ubicació. Comprova el mapa per veure els esparellons existents.",
+      "failed": "Error en afegir l'esparelló",
+      "failedDesc": "S'ha produït un error en afegir l'esparelló. Si us plau, torna-ho a intentar."
+    }
+  },
+  "conditions": {
+    "rating": "Valoració",
+    "details": "Detalls",
+    "location": "Ubicació",
+    "favorite": "Preferit",
+    "favorited": "Afegit als preferits",
+    "addReport": "Afegir informe",
+    "viewCragPage": "Veure zona"
+  },
+  "ratings": {
+    "great": "Excel·lent",
+    "good": "Bé",
+    "fair": "Acceptable",
+    "poor": "Dolent",
+    "nope": "No"
+  },
+  "reasons": {
+    "perfectTemp": "Temperatura perfecta ({{temp}})",
+    "tempTooHigh": "Temperatura massa alta - els dits poden relliscar",
+    "coldGoodFriction": "Fred però bona fricció per a {{rockType}}",
+    "idealHumidity": "Humitat ideal ({{humidity}}%)",
+    "lowHumidityGranite": "La baixa humitat ajuda la fricció al granit",
+    "readyInHours": "Estarà llest per escalada en ~{{hours}} hores",
+    "acceptable": "Les condicions són acceptables",
+    "goodHumidity": "Bona humitat ({{humidity}}%)",
+    "lowCondensationRisk": "Baix risc de condensació (diferència de punt de rosada {{dewPointSpread}})",
+    "lowHumidityFriction": "La baixa humitat millora la fricció"
+  },
+  "warnings": {
+    "tooWarm": "Massa calor per a {{rockType}} ({{temp}})",
+    "coldSuboptimal": "Fred i no òptim per a {{rockType}}",
+    "highHumidity": "Humitat alta ({{humidity}}%) - la roca pot ser lliscosa",
+    "wetDangerousSandstone": "La roca està actualment humida - perillos per escalada (l'arenisca es debilita quan està humida)",
+    "wetSlippery": "La roca està actualment humida - condicions lliscoses",
+    "veryHighWinds": "Vents molt forts ({{wind}}) - perill de ser arrossegat",
+    "highWind": "Vent fort ({{wind}})",
+    "recentPrecip": "Precipitació recent ({{precip}}) - s'assecarà en ~{{hours}}h",
+    "currentlyWetDangerous": "Actualment humit - perillos",
+    "currentlyWet": "Actualment humit",
+    "cold": "Cold ({{temp}})",
+    "veryHighCondensationRisk": "Risc molt alt de condensació (diferència de punt de rosada {{dewPointSpread}}) - superfície de la roca probablement humida",
+    "highCondensationRisk": "Alt risc de condensació (diferència de punt de rosada {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Alt risc de condensació",
+    "moderateCondensationRisk": "Risc moderat de condensació (diferència de punt de rosada {{dewPointSpread}})",
+    "condensationRisk": "Risc de condensació ({{dewPointSpread}})"
+  },
+  "sandstoneWarning": {
+    "general": "La gres és fràgil quan està mullada i requereix molt de temps per assecar-se després de la pluja. Escalar en gres mullada danya la roca i és perillós.",
+    "recentRain": "Precipitació recent detectada. Si us plau, assegureu-vos que la roca estigui completament seca abans d'escalar.",
+    "inLast24h": "en les últimes 24h",
+    "inLast48h": "en les últimes 48h"
+  },
+  "weather": {
+    "clearSky": "Cel clar",
+    "mainlyClear": "Principalment clar",
+    "partlyCloudy": "Parcialment nublat",
+    "overcast": "Ennuvolat",
+    "fog": "Boira",
+    "depositingRimeFog": "Boira de capa de gel",
+    "lightDrizzle": "Ruixada lleu",
+    "moderateDrizzle": "Ruixada moderada",
+    "denseDrizzle": "Ruixada densa",
+    "lightFreezingDrizzle": "Ruixada de gel lleugera",
+    "denseFreezingDrizzle": "Ruixada de gel densa",
+    "slightRain": "Pluja lleu",
+    "moderateRain": "Pluja moderada",
+    "heavyRain": "Pluja forta",
+    "lightFreezingRain": "Pluja congelada lleugera",
+    "heavyFreezingRain": "Pluja congelada forta",
+    "slightSnowFall": "Nit lleugera",
+    "moderateSnowFall": "Nit moderada",
+    "heavySnowFall": "Nit forta",
+    "snowGrains": "Grans de neu",
+    "slightRainShowers": "Ruixades lleugeres",
+    "moderateRainShowers": "Ruixades moderades",
+    "violentRainShowers": "Ruixades violentes",
+    "slightSnowShowers": "Ruixades de neu lleugeres",
+    "heavySnowShowers": "Ruixades de neu fortes",
+    "thunderstorm": "Tempesta",
+    "thunderstormSlightHail": "Tempesta amb granís lleu",
+    "thunderstormHeavyHail": "Tempesta amb granís fort"
+  },
+  "timeframes": {
+    "now": "ara",
+    "today": "avui",
+    "tomorrow": "demà",
+    "thisAfternoon": "aquesta tarda",
+    "thisEvening": "aquesta nit",
+    "tonight": "aquesta nit"
+  },
+  "disambiguation": {
+    "foundMultipleAreas": "He trobat {{count}} zones d'escalada per a \"{{location}}\". Si us plau, trieu una:",
+    "foundMultipleLocations": "He trobat múltiples ubicacions per a \"{{location}}\". Si us plau, trieu una:",
+    "queryTemplate": "condicions a {{name}} ({{latitude}}, {{longitude}})"
+  },
+  "footer": {
+    "about": "Sobre",
+    "privacy": "Privacitat",
+    "github": "GitHub",
+    "brand": "beta.rocks",
+    "description": "Condicions d'escalada gratuïtes per a tothom. Construït amb ❤️ per a la comunitat d'escalada.",
+    "attribution": "Dades de Open-Meteo, OpenBeta i <osmLink>col·laboradors d'OpenStreetMap</osmLink>. Informes impulsats per la comunitat.",
+    "copyright": "© 2026 beta.rocks. Tots els drets reservats."
+  },
+  "features": {
+    "heading": "Tot el que necessites",
+    "subheading": "Condicions d'escalada completes a l'abast de la teva mà, completament gratuit",
+    "realTimeWeather": {
+      "title": "Meteorologia en temps real",
+      "description": "Pronòstics precisos de Open-Meteo amb càlculs de sol/ombra per a sectors específics"
+    },
+    "chatInterface": {
+      "title": "Interfície de xat",
+      "description": "Consultes en llenguatge natural impulsades per IA. Pregunta en qualsevol idioma, obtén respostes instantànies"
+    },
+    "communityReports": {
+      "title": "Informes comunitaris",
+      "description": "Comparteix condicions, alertes de seguretat, canvis d'accés, info d'escalada i més. Ajuda escaladors companys amb actualitzacions en temps real en diverses categories"
+    },
+    "globalCoverage": {
+      "title": "Cobertura mundial",
+      "description": "Qualsevol esparelló o sector mundial mitjançant la integració de la base de dades d'OpenBeta"
+    },
+    "crossDeviceSync": {
+      "title": "Sincronització entre dispositius",
+      "description": "Accedeix als teus preferits i historial de xat des de qualsevol dispositiu amb una clau de sincronització segura. No cal compte"
+    },
+    "privacyFirst": {
+      "title": "Privacitat primer",
+      "description": "No només no necessitem les teves dades - no les volem! Anònim per defecte. Sense comptes, sense seguiment. Les teves dades són teves."
+    }
+  },
+  "ui": {
+    "toggleTheme": "Canviar tema",
+    "selectLanguage": "Selecciona idioma",
+    "aboutApp": "Sobre l'aplicació",
+    "language": "Idioma",
+    "theme": "Tema"
+  },
+  "dialog": {
+    "close": "Tancar",
+    "cancel": "Cancel·lar",
+    "detailedConditions": "Condicions detallades",
+    "fullAnalysis": "Análisi meteorològic complet i pronòstic de condicions d'escalada",
+    "showMap": "Mapa",
+    "tabs": {
+      "overview": "Resum",
+      "hourly": "Per hora",
+      "daily": "14 dies"
+    },
+    "currentRating": "Valoració actual",
+    "currentConditions": "Condicions actuals",
+    "currentWeather": "Condicions meteorològiques actuals",
+    "temperature": "Temperatura",
+    "humidity": "Humitat",
+    "windSpeed": "Velocitat del vent",
+    "precipitation": "Precipitació",
+    "sunrise": "Sortida del sol",
+    "sunset": "Posta del sol",
+    "high": "Màxima",
+    "low": "Mínima",
+    "rain": "Pluja",
+    "wind": "Vent",
+    "dry": "Sec",
+    "wet": "Humit",
+    "precipitationContext": "Context de precipitació",
+    "last24h": "Últimes 24h",
+    "last48h": "Últimes 48h",
+    "next24h": "Pròximes 24h",
+    "dewPointSpread": "Diferència de punt de rosada (risc de condensació)",
+    "lowRisk": "✅ Risc baix - la roca ha de romandre seca",
+    "moderateRisk": "⚠️ Risc moderat - vigilar la humitat",
+    "highRisk": "❌ Risc alt - condensació probable",
+    "optimalWindows": "Finestres d'escalada òptimes",
+    "nextDays": "Pròxims 5 dies",
+    "bestTime": "🌟 Millor moment",
+    "noOptimalConditions": "Cap condicions òptimes en els pròxims 5 dies",
+    "checkHourlyForecast": "Consulta el pronòstic per hores per a més detalls",
+    "weatherDisclaimer": "⚠️ Les condicions meteorològiques poden canviar ràpidament. Sempre monitoritza els pronòstics abans de partir i comprova les condicions a l'arrival.",
+    "window": "finestra",
+    "windows": "finestres",
+    "today": "Avui",
+    "tomorrow": "Demà",
+    "showCompleteTimeline": "Mostra la línia de temps completa",
+    "hour": "hora",
+    "hours": "hores",
+    "period": "període",
+    "periods": "períodes",
+    "noHourlyData": "No hi ha dades de pronòstic per hores disponibles",
+    "noDailyData": "No hi ha dades de pronòstic diari disponibles",
+    "noOptimalHours": "Cap hora òptima a",
+    "forecastIndicators": "Indicadors de pronòstic:",
+    "goodClimbingWindows": "Bones finestres d'escalada",
+    "fairConditions": "Condicions acceptables",
+    "poorConditions": "Males condicions",
+    "lessReliable": "Dies 8-14: Pronòstic menys fiable",
+    "lessReliableHourly": "Pròximes hores menys previsibles",
+    "lessCertain": "MENYS CERT",
+    "todayBadge": "AVUI",
+    "delete": "Elimina"
+  },
+  "timeContext": {
+    "sunrise": "Sortida del sol",
+    "sunset": "Posta del sol",
+    "recommendedHours": "Hores d'escalada recomanades",
+    "totalDaylight": "Llum diurna total",
+    "hoursOfDaylight": "{{hours}} hores de llum diurna",
+    "earlyStartRecommended": "Inici primerenc recomanat per vencer la calor",
+    "limitedDaylight": "Llum diurna limitada - planifica en conseqüència",
+    "morningConditionsBest": "Les millors condicions al matí",
+    "eveningSession": "Condicions de sessió vespertina",
+    "showAllHours": "Mostra totes les 24 hores",
+    "showClimbingHoursOnly": "Mostra només les hores d'escalada",
+    "expandHours": "Expandeix per veure totes les hores"
+  },
+  "rockTypes": {
+    "limestone": "calcari",
+    "granite": "granit",
+    "sandstone": "arenisca",
+    "basalt": "basalt",
+    "gneiss": "gneiss",
+    "quartzite": "quarsita",
+    "conglomerate": "conglomerat",
+    "rhyolite": "riolita",
+    "porphyry": "pòrfir",
+    "andesite": "andesita",
+    "slate": "pissarra",
+    "schist": "esquist",
+    "dolomite": "dolomita",
+    "volcanic": "volcànic",
+    "phyllite": "filita"
+  },
+  "sync": {
+    "notification": {
+      "title": "Clau de sincronització creada",
+      "description": "Hem generat una clau única per sincronitzar els teus preferits i xat entre dispositius.",
+      "viewInSettings": "Veure a configuració",
+      "viewMore": "Què és una clau de sincronització?"
+    },
+    "banner": {
+      "title": "Les teves dades se sincronitzen entre dispositius",
+      "description": "Els teus preferits, informes i historial de xat es guarden localment i es poden sincronitzar amb altres dispositius utilitzant la teva clau de sincronització.",
+      "learnMore": "Més informació",
+      "dismiss": "Entès"
+    },
+    "status": {
+      "synced": "Sincronitzat",
+      "syncing": "Sincronitzant...",
+      "offline": "Sense connexió"
+    }
+  },
+  "syncExplainer": {
+    "title": "How Sync Works",
+    "description": "Keep your data in sync across all your devices seamlessly and securely.",
+    "features": {
+      "syncKey": {
+        "title": "Unique Sync Key",
+        "description": "Each user gets a secure, unique key to sync their data across devices."
+      },
+      "multiDevice": {
+        "title": "Multi-Device Access",
+        "description": "Access your favorites and chat history from any device by using your sync key."
+      },
+      "privacy": {
+        "title": "Privacy First",
+        "description": "Your data is encrypted and only accessible with your sync key. No account required."
+      }
+    },
+    "openSettings": "Open Settings"
+  },
+  "profile": {
+    "anonymous": "Anònim",
+    "member": "Membre",
+    "anonymousMember": "Membre anònim",
+    "favorites": "Preferits",
+    "recent": "Búsquedes recents",
+    "stats": "Les teves estadístiques",
+    "settings": "Configuració",
+    "clearData": "Esborrar totes les dades",
+    "yourReports": "Els teus informes"
+  },
+  "stats": {
+    "title": "Les teves estadístiques",
+    "description": "La teva activitat i contribucions a la comunitat beta.rocks",
+    "reportsPosted": "Informes publicats",
+    "confirmationsGiven": "Confirmacions donades",
+    "favoritesCount": "Preferits",
+    "memberSince": "Membre des de",
+    "lastActive": "Última activitat",
+    "unknown": "Desconegut",
+    "encourageReports": "Comparteix el teu coneixement local publicant informes sobre les condicions de les vies!",
+    "thankYou": "Gràcies per contribuir a la comunitat d'escalada!"
+  },
+  "userReports": {
+    "title": "Els teus informes",
+    "description": "{{count}} informes",
+    "empty": "Cap informe encara",
+    "emptyMessage": "Encara no has publicat cap informe",
+    "emptyHint": "Comparteix condicions i informació sobre esparellons per ajudar la comunitat",
+    "loading": "Carregant els teus informes...",
+    "loadFailed": "Error en carregar els informes",
+    "deleteSuccess": "Informe eliminat",
+    "deleteFailed": "Error en eliminar l'informe"
+  },
+  "settings": {
+    "title": "Configuració",
+    "description": "Gestiona el teu perfil, clau de sincronització i preferències",
+    "save": "Guardar",
+    "saving": "Guardant...",
+    "displayName": {
+      "label": "Nom de visualització",
+      "description": "El teu nom mostrat en informes i confirmacions (opcional)",
+      "placeholder": "Introdueix el teu nom...",
+      "saved": "Nom de visualització desat",
+      "savedDescription": "El vostre nom de visualització s'ha actualitzat correctament",
+      "saveFailed": "Error en desar",
+      "saveFailedDescription": "No s'ha pogut desar el vostre nom de visualització. Torneu-ho a provar"
+    },
+    "units": {
+      "title": "Unitats i mesures",
+      "description": "Tria les unitats preferides per a dades meteorològiques i d'escalada",
+      "systemLabel": "Sistema d'unitats",
+      "systemDescription": "Configuracions ràpides per a sistemes d'unitats comuns",
+      "systems": {
+        "metric": "Mètric (°C, km/h, mm)",
+        "imperial": "Imperial (°F, mph, polzades)",
+        "uk": "Regne Unit (°C, mph, mm)",
+        "custom": "Personalitzat"
+      },
+      "temperature": "Temperatura",
+      "temperatureUnits": {
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Velocitat del vent",
+      "windSpeedUnits": {
+        "kmh": "Quilòmetres per hora (km/h)",
+        "mph": "Milles per hora (mph)",
+        "ms": "Metres per segon (m/s)",
+        "knots": "Nusos (kn)"
+      },
+      "precipitation": "Precipitació",
+      "precipitationUnits": {
+        "mm": "Mil·límetres (mm)",
+        "inches": "Polzades (in)"
+      },
+      "distance": "Distància",
+      "distanceUnits": {
+        "km": "Quilòmetres (km)",
+        "miles": "Milles (mi)"
+      },
+      "elevation": "Altitud",
+      "elevationUnits": {
+        "meters": "Metres (m)",
+        "feet": "Peus (ft)"
+      },
+      "saved": "Unitats desades",
+      "savedDescription": "Les vostres preferències d'unitats s'han actualitzat correctament",
+      "saveFailed": "Error en desar unitats",
+      "saveFailedDescription": "No s'han pogut desar les vostres preferències d'unitats. Torneu-ho a provar"
+    },
+    "syncKey": {
+      "title": "Clau de sincronització",
+      "description": "Utilitza aquesta clau per sincronitzar els teus preferits i configuració entre dispositius",
+      "label": "La teva clau de sincronització",
+      "copy": "Copiar clau de sincronització",
+      "showFullKey": "Mostra la clau completa",
+      "hideKey": "Amagar clau",
+      "qrCode": "Codi QR",
+      "qrDescription": "Escaneja aquest codi QR en un altre dispositiu per sincronitzar les teves dades",
+      "restoreTitle": "Restaurar des d'un altre dispositiu",
+      "restoreDescription": "Ja tens una clau de sincronització? Enganxa-la aquí per restaurar les teves dades",
+      "restoreLabel": "Enganxa la teva clau de sincronització",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Restaurar clau de sincronització",
+      "restoring": "Restaurant...",
+      "restoreSuccess": "Clau de sincronització restaurada correctament! Recarregant...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
+      "restoreError": "Format de clau de sincronització no vàlid. Si us plau, comprova i torna-ho a intentar.",
+      "saveNote": {
+        "title": "Desa la teva clau de sincronització",
+        "description": "Recomanem desar la teva clau de sincronització en un lloc segur com la teva aplicació de Notes o un gestor de contrasenyes. La necessitaràs per restaurar les teves dades en altres dispositius."
+      },
+      "warning": {
+        "title": "Mantén la teva clau de sincronització privada",
+        "description": "Qualsevol persona amb la teva clau de sincronització pot accedir als teus preferits i configuració. No la comparteixis públicament."
+      },
+      "emailButton": "Enviar clau de sincronització per correu electrònic",
+      "emailLabel": "Adreça de correu electrònic",
+      "emailPlaceholder": "tu@example.ad",
+      "emailSend": "Enviar",
+      "emailSending": "Enviant...",
+      "emailPrivacy": "No emmagatzemem el vostre correu electrònic - només s'utilitza una vegada per enviar la vostra clau de sincronització.",
+      "emailSent": "Correu electrònic enviat!",
+      "emailSentDescription": "Comproveu la vostra safata d'entrada a {{email}}",
+      "emailFailed": "Error en enviar el correu electrònic",
+      "emailFailedDescription": "Torneu-ho a provar o copieu la vostra clau de sincronització manualment.",
+      "emailInvalid": "Introduïu una adreça de correu electrònic vàlida"
+    },
+    "dangerZone": {
+      "title": "Zona de perill",
+      "description": "Aquestes accions son permanents i no es poden desfer",
+      "deleteProfile": "Eliminar perfil",
+      "deleteProfileConfirm": "Estàs segur que vols eliminar el teu perfil? Això eliminarà permanentment totes les teves dades inclosos preferits, historial de xat i configuració. Aquesta acció no es pot desfer.",
+      "deleteFailed": "Error en eliminar el perfil. Si us plau, torna-ho a intentar."
+    }
+  },
+  "favorites": {
+    "title": "Els teus esparellós preferits",
+    "description": "Tens {{count}} ubicacions preferides",
+    "empty": "Cap preferit encara",
+    "emptyMessage": "Encara no has afegit cap esparelló preferit",
+    "emptyHint": "Feu clic al botó de estrella en qualsevol targeta de condicions per afegir-la als vostres preferits",
+    "lastChecked": "Últim cop comprovat",
+    "frictionScore": "Puntuació de fricció",
+    "viewConditions": "Veure condicions",
+    "remove": "Eliminar",
+    "confirmDelete": "Eliminar dels preferits?",
+    "confirmDeleteDescription": "Esteu segur que voleu eliminar {{name}} dels vostres preferits?",
+    "loginToFavorite": "Si us plau, configura el teu perfil per afegir ubicacions als preferits",
+    "errorToggling": "Error en canviar el preferit. Si us plau, torna-ho a provar.",
+    "added": "Roca afegida als preferits",
+    "removed": "Roca eliminada dels preferits",
+    "loading": "Carregant preferits..."
+  },
+  "reports": {
+    "addReport": "Afegir informe",
+    "addReportDescription": "Compartir informació sobre {{cragName}}",
+    "postingAs": "Publicant com",
+    "category": "Què voldries informar?",
+    "categories": {
+      "conditions": "Condicions",
+      "safety": "Seguretat",
+      "access": "Accés",
+      "climbing_info": "Info escalada",
+      "facilities": "Instal·lacions",
+      "other": "Altre",
+      "lost_found": "Objectes perduts i trobats"
+    },
+    "categoryDescriptions": {
+      "conditions": "Temps, fricció, sequedat, gent",
+      "safety": "Plaques fluixes, despreniments, preses trencades, perills",
+      "access": "Tancaments, canvis d'aparcament, restriccions estacionals, nius d'ocells, insectes",
+      "climbing_info": "Reequipament, actualitzacions d'equipament, canvis de vies, cintes fixes",
+      "facilities": "Banys, càmping, fonts d'aigua, serveis",
+      "other": "Qualsevol altra cosa que no encaixi a dalt",
+      "lost_found": "Equipament i material perdut o trobat"
+    },
+    "categoryHelp": {
+      "conditions": "Temps actual, fricció, sequedat, gent al sector",
+      "safety": "Perills a tota l'àrea, condicions perilloses, advertències urgents",
+      "access": "Aparcament, tancaments, regulacions, restriccions estacionals",
+      "climbing_info": "Detalls específics de vies, beta, preses, equipament, graus",
+      "facilities": "Banys, càmping, fonts d'aigua, serveis",
+      "other": "Qualsevol altra cosa que no encaixi a les categories anteriors",
+      "lost_found": "Informeu d'articles perduts que esteu buscant o articles trobats que teniu"
+    },
+    "dryness": "Sequedat",
+    "wind": "Vent",
+    "crowds": "Gent",
+    "additionalComments": "Comentaris addicionals (opcional)",
+    "details": "Detalls",
+    "detailsRequired": "Si us plau, proporciona detalls sobre aquest informe",
+    "placeholders": {
+      "conditions": "P. ex., Sector est encara humit, sender fangós, esquerda degotant...",
+      "safety": "P. ex., Placa fluixa a la via X, perill de despreniment prop del mur principal...",
+      "access": "P. ex., Barrera tancada fins el maig, nou aparcament darrere la biblioteca...",
+      "climbing_info": "P. ex., Via X reequipada amb plaques d'acer inoxidable, noves cintes fixes instal·lades, reunió millorada...",
+      "facilities": "P. ex., Lavabo disponible a l'aparcament, no hi ha font d'aigua a prop...",
+      "other": "Descriu el que voldries informar...",
+      "lost_found": "Per exemple, Bossa de magnesi blava trobada a la base, perdut Black Diamond friend #2 a prop de l'aparcament..."
+    },
+    "submit": "Enviar informe",
+    "submitting": "Enviant...",
+    "readyToPost": "Perfil creat! Ja pots publicar el teu informe.",
+    "helpful": "Útil",
+    "loginToConfirm": "Si us plau, configura el teu perfil per confirmar informes",
+    "confirmFailed": "No s'ha pogut confirmar l'informe. Torna-ho a provar.",
+    "voteReady": "Ara pots votar els informes",
+    "ratings": {
+      "veryPoor": "Molt dolent",
+      "poor": "Dolent",
+      "okay": "Acceptable",
+      "good": "Bo",
+      "excellent": "Excel·lent"
+    },
+    "scales": {
+      "veryWet": "Molt humit",
+      "veryDry": "Perfecte",
+      "calm": "Molt ventós",
+      "veryWindy": "Calm",
+      "empty": "Buit",
+      "veryCrowded": "Molt ple"
+    },
+    "drynessLabels": {
+      "1": "Molt humit",
+      "2": "Humit",
+      "3": "Lleugerament humit",
+      "4": "Majoritàriament sec",
+      "5": "Molt sec"
+    },
+    "windLabels": {
+      "1": "Calm",
+      "2": "Brisa lleugera",
+      "3": "Moderat",
+      "4": "Ventós",
+      "5": "Molt ventós"
+    },
+    "crowdsLabels": {
+      "1": "Buit",
+      "2": "Poca gent",
+      "3": "Moderat",
+      "4": "Ple",
+      "5": "Molt ple"
+    },
+    "recentReports": "Informes recents",
+    "communityReports": "Informes de la comunitat",
+    "noReports": "Encara no hi ha informes",
+    "beTheFirst": "Sigues el primer en informar",
+    "noReportsInCategory": "No hi ha informes en aquesta categoria",
+    "filters": {
+      "all": "Tots"
+    },
+    "staleness": {
+      "outdated": "Desactualitzat",
+      "older": "Més antic",
+      "veryOld": "Molt antic"
+    },
+    "observationDate": "Quan vas observar això?",
+    "observationDateHelp": "Pots informar de condicions fins a 7 dies enrere",
+    "lostFoundType": "Tipus",
+    "lostFoundTypes": {
+      "lost": "Article perdut",
+      "found": "Article trobat"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Seleccioneu si és un article perdut o trobat",
+    "lostBadge": "PERDUT",
+    "foundBadge": "TROBAT",
+    "expiresAt": "Vàlid fins (opcional)",
+    "expiresAtHelp": "Estableix quan aquest informe quedarà obsolet (útil per a tancaments temporals o condicions canviants)",
+    "noExpiry": "No caduca mai",
+    "expiredOn": "Caducat el {{date}}",
+    "edit": "Edita",
+    "delete": "Elimina",
+    "deleteConfirm": "Esteu segur que voleu eliminar aquest informe?",
+    "deleteConfirmTitle": "Eliminar informe",
+    "updated": "Informe actualitzat",
+    "deleted": "Informe eliminat",
+    "editReport": "Editar informe",
+    "editReportDescription": "Actualitza el teu informe",
+    "updateReport": "Actualitzar informe",
+    "updating": "Actualitzant...",
+    "deleteSuccess": "Informe esborrat",
+    "deleteSuccessDescription": "El vostre informe s'ha eliminat correctament",
+    "deleteError": "Error en esborrar l'informe",
+    "deleteErrorDescription": "Alguna cosa ha anat malament. Torneu-ho a provar.",
+    "photos": "Fotos",
+    "photoHint": "Afegeix fins a 3 fotos (màx. 2MB cadascuna). Les fotos es comprimiran automàticament.",
+    "photoUploadFailed": "Error en pujar la foto",
+    "uploadingPhotos": "Pujant fotos...",
+    "submitReport": "Enviar informe"
+  },
+  "editCragDialog": {
+    "title": "Editar Paret",
+    "subtitle": "Convertir aquesta paret en un sector o canviar el seu element pare",
+    "currentStatus": "Estat Actual",
+    "crag": "Paret",
+    "sector": "Sector",
+    "currentParent": "Element pare actual",
+    "chooseAction": "Triar Acció",
+    "convertToSector": "Convertir en Sector",
+    "convertToCrag": "Convertir en Paret",
+    "changeParent": "Canviar Paret Pare",
+    "selectParentCrag": "Seleccionar Paret Pare",
+    "selectNewParent": "Seleccionar Nova Paret Pare",
+    "searchForParent": "Cerca la paret pare a la qual assignar aquest sector",
+    "searchPlaceholder": "Cerca paret pare...",
+    "noCragsFound": "No s'han trobat parets",
+    "change": "Canviar",
+    "save": "Desar Canvis",
+    "saving": "Desant...",
+    "success": "Paret actualitzada correctament",
+    "convertedToCrag": "Convertida en paret correctament",
+    "convertedToSector": "Convertida en sector correctament",
+    "errors": {
+      "parentRequired": "Paret pare requerida",
+      "parentRequiredDesc": "Si us plau, seleccioneu una paret pare per aquest sector",
+      "failed": "Actualització fallida",
+      "failedDesc": "No s'ha pogut actualitzar la paret. Torneu-ho a provar."
+    }
+  },
+  "cragPage": {
+    "askAI": "Pregunta a la IA",
+    "edit": "Editar",
+    "editCrag": "Editar detalls de la paret",
+    "currentConditions": "Condicions actuals",
+    "sectors": "Sectors",
+    "addSector": "Afegir sector",
+    "noSectors": "Encara no shan afegit sectors a aquest lloc.",
+    "beFirstToAddSector": "Sigues el primer en afegir un sector",
+    "searchSectors": "Cerca sectors...",
+    "noSectorsFound": "No s'han trobat sectors que coincideixin amb la teva cerca.",
+    "disclaimer": "Les condicions meteorològiques poden canviar ràpidament. Verifica sempre les condicions en arribar i utilitza el teu millor criteri.",
+    "askAIAboutCrag": "Pregunta a la IA sobre aquesta paret",
+    "viewOnSunCalc": "Veure horaris de sol/lluna",
+    "viewSunAngles": "Veure posició del sol i angles d'ombra",
+    "viewOnMap": "Veure al mapa",
+    "viewOnGoogleMaps": "Veure a Google Maps",
+    "addToFavorites": "Afegir a favorits",
+    "removeFromFavorites": "Eliminar de favorits"
+  },
+  "time": {
+    "today": "Avui",
+    "yesterday": "Ahir",
+    "daysAgo_one": "fa {{count}} dia",
+    "daysAgo_other": "fa {{count}} dies",
+    "pickDate": "Trieu una data"
+  },
+  "nearbyMatch": {
+    "distance": "{{distance}} des de {{location}}"
+  },
+  "feed": {
+    "title": "Flux en directe",
+    "viewFeed": "Veure flux d'activitat",
+    "live": "En directe",
+    "justNow": "Ara mateix",
+    "loadingFeed": "Carregant flux...",
+    "reconnecting": "Reconnectant a actualitzacions en directe...",
+    "loadMore": "Carrega més informes",
+    "loadingMore": "Carregant...",
+    "totalReports": "{{count}} en total",
+    "showingOf": "Mostrant {{showing}} de {{total}} informes",
+    "totalReportsHint": "Total dinformes de la comunitat, inclosos els antics no mostrats al flux",
+    "olderHidden": "Els informes antics encara son visibles a les pagines individuals dels llocs",
+    "filters": {
+      "all": "Tots",
+      "favorites": "Favorits"
+    },
+    "emptyState": {
+      "noReportsTitle": "Encara no hi ha informes",
+      "noReportsDescription": "Sigues el primer a compartir condicions amb la comunitat d'escalada",
+      "noFavoritesTitle": "No hi ha informes dels favorits",
+      "noFavoritesDescription": "Afegiu roques als vostres favorits per veure els seus informes en aquest flux"
+    }
+  },
+  "webcams": {
+    "title": "Càmeres web properes",
+    "nearbyCount": "{{count}} càmera web trobada",
+    "nearbyCount_other": "{{count}} càmeres web trobades",
+    "daylight": "Llum del dia",
+    "openOnWindy": "Obre a Windy.com",
+    "poweredBy": "Proporcionat per",
+    "noWebcams": "No s'han trobat càmeres web properes"
+  }
+}

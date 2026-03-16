@@ -1,0 +1,916 @@
+{
+  "header": {
+    "title": "beta.rocks"
+  },
+  "welcome": {
+    "heading": "Infos zu jedem Felsen",
+    "description": "Echtzeit-Bedingungen, Community-Berichte und Routeninformationen für Felsen weltweit",
+    "searchHint": "Suche nach jedem Klettergebiet",
+    "exampleQueries": {
+      "query1": {
+        "display": "Wie wird der Grip im Frankenjura morgen?",
+        "query": "Wie sind die Bedingungen im Frankenjura morgen?"
+      },
+      "query2": {
+        "display": "Ist die Sächsische Schweiz heute Nachmittag trocken?",
+        "query": "Ist die Sächsische Schweiz heute Nachmittag trocken?"
+      },
+      "query3": {
+        "display": "Wie wird das Wetter in Kochel am Wochenende?",
+        "query": "Wie sind die Bedingungen in Kochel dieses Wochenende?"
+      }
+    },
+    "yourFavorites": "Deine Favoriten",
+    "favoriteQuery": "Wie sind die Bedingungen in {{crag}}?"
+  },
+  "chat": {
+    "analyzing": "Analysiere Bedingungen...",
+    "thinking": "Denke nach...",
+    "inputPlaceholder": "Frag nach einem Fels oder Sektor...",
+    "clearHistory": "Verlauf löschen",
+    "clearHistoryConfirm": "Sind Sie sicher, dass Sie den gesamten Chat-Verlauf löschen möchten? Dies kann nicht rückgängig gemacht werden.",
+    "clearChat": "Chat löschen",
+    "clearChatTooltip": "Aktuelle Konversation löschen",
+    "clearChatConfirm": "Chat löschen? Dadurch werden alle Nachrichten aus der aktuellen Konversation entfernt."
+  },
+  "search": {
+    "title": "Felsen suchen",
+    "description": "Klettergebiete nach Name oder Standort suchen",
+    "placeholder": "Felsen suchen... (z.B. 'Wiener Hausberge', 'Dachstein')",
+    "typeToSearch": "Tippen Sie, um nach Felsen zu suchen...",
+    "searching": "Suchen...",
+    "noCragsFound": "Keine Felsen gefunden. Versuchen Sie einen anderen Suchbegriff.",
+    "addNewCrag": "Neuen Felsen hinzufügen",
+    "heading": "Felsen",
+    "toSelect": "zum Auswählen",
+    "toClose": "zum Schließen",
+    "notSeeing": "Siehst du deinen Felsen nicht?",
+    "addMissingHere": "Füge ihn hier hinzu"
+  },
+  "fab": {
+    "addCrag": "Neuen Felsen hinzufügen",
+    "addReport": "Bericht hinzufügen",
+    "tooltip": "Schnellaktionen"
+  },
+  "cragLocationPicker": {
+    "loadingMap": "Karte wird geladen...",
+    "searchPlaceholder": "Ort suchen (z.B. 'Wilder Kaiser, Ellmau')",
+    "noLocationsFound": "Keine Orte gefunden",
+    "loadingLocationData": "Ortsdaten werden geladen...",
+    "clickToSet": "Klicken Sie auf die Karte, um den Standort des Felsens festzulegen",
+    "nearbyCragsFound": "{{count}} naher Felsen gefunden",
+    "nearbyCragsFound_other": "{{count}} nahe Felsen gefunden",
+    "clickMarkersToView": "Klicken Sie auf Markierungen, um vorhandene Felsen anzuzeigen",
+    "coordinates": "Koordinaten"
+  },
+  "addCragModal": {
+    "title": "Neuen Felsen hinzufügen",
+    "subtitle": "Helfen Sie mit, die Kletterdatenbank zu erweitern",
+    "mapLabel": "Standort",
+    "mapHelp": "Klicken Sie auf die Karte, um den Standort des Felsens festzulegen",
+    "coordinates": "Koordinaten",
+    "nearbyCragsWarning": {
+      "title": "Bestehende Felsen in der Nähe",
+      "message": "{{count}} Felsen im Umkreis von 500m gefunden",
+      "message_other": "{{count}} Felsen im Umkreis von 500m gefunden",
+      "away": "entfernt",
+      "view": "Ansehen",
+      "proceed": "Wenn keiner dieser Felsen passt, können Sie trotzdem mit dem Hinzufügen eines neuen Felsens fortfahren."
+    },
+    "form": {
+      "name": "Name des Felsens",
+      "namePlaceholder": "z.B. Wiener Hausberge, Dachstein",
+      "country": "Land",
+      "countryPlaceholder": "Land auswählen",
+      "state": "Bundesland/Region",
+      "statePlaceholder": "z.B. Niederösterreich, Steiermark",
+      "municipality": "Gemeinde/Stadt",
+      "municipalityPlaceholder": "z.B. Wien, Graz",
+      "village": "Dorf",
+      "villagePlaceholder": "z.B. Mödling",
+      "rockType": "Gesteinsart",
+      "rockTypePlaceholder": "Gesteinsart auswählen (optional)",
+      "aspects": "Ausrichtungen",
+      "aspectsHelp": "Wählen Sie alle Himmelsrichtungen, in die der Felsen zeigt",
+      "climbingTypes": "Kletterarten",
+      "climbingTypesHelp": "Wählen Sie alle zutreffenden Kletterstile aus",
+      "description": "Beschreibung",
+      "descriptionPlaceholder": "Zusätzliche Informationen über den Felsen (optional)..."
+    },
+    "rockTypes": {
+      "granite": "Granit",
+      "sandstone": "Sandstein",
+      "limestone": "Kalkstein",
+      "gneiss": "Gneis",
+      "quartzite": "Quarzit",
+      "gritstone": "Gritstein",
+      "basalt": "Basalt",
+      "volcanic": "Vulkanisch",
+      "conglomerate": "Konglomerat",
+      "schist": "Schiefer",
+      "slate": "Schiefer",
+      "other": "Andere"
+    },
+    "climbingTypes": {
+      "sport": "Sportklettern",
+      "trad": "Traditionell",
+      "boulder": "Bouldern",
+      "mixed": "Gemischt",
+      "aid": "Technisches Klettern",
+      "ice": "Eisklettern"
+    },
+    "cancel": "Abbrechen",
+    "submit": "Felsen einreichen",
+    "submitting": "Wird eingereicht...",
+    "success": "Felsen erfolgreich hinzugefügt!",
+    "successDesc": "{{name}} wurde zur Datenbank hinzugefügt",
+    "errors": {
+      "nameRequired": "Name ist erforderlich",
+      "nameRequiredDesc": "Bitte geben Sie einen Namen für den Felsen ein",
+      "locationRequired": "Standort ist erforderlich",
+      "locationRequiredDesc": "Bitte klicken Sie auf die Karte, um den Standort des Felsens festzulegen",
+      "countryRequired": "Land ist erforderlich",
+      "countryRequiredDesc": "Bitte wählen Sie ein Land aus dem Dropdown-Menü",
+      "duplicate": "Felsen existiert bereits in der Nähe",
+      "duplicateDesc": "Ein Felsen mit ähnlichem Namen existiert bereits an diesem Standort. Überprüfen Sie die Karte auf vorhandene Felsen.",
+      "failed": "Felsen konnte nicht hinzugefügt werden",
+      "failedDesc": "Beim Hinzufügen des Felsens ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+    }
+  },
+  "conditions": {
+    "rating": "Bewertung",
+    "details": "Details",
+    "location": "Ort",
+    "favorite": "Favorit",
+    "favorited": "In Favoriten",
+    "addReport": "Bericht hinzufügen",
+    "viewCragPage": "Gebiet ansehen"
+  },
+  "ratings": {
+    "great": "Top",
+    "good": "Gut",
+    "fair": "Okay",
+    "poor": "Schlecht",
+    "nope": "Keine Chance"
+  },
+  "reasons": {
+    "perfectTemp": "Perfekte Temperatur ({{temp}})",
+    "tempTooHigh": "Temperatur zu hoch - Finger könnten rutschen",
+    "coldGoodFriction": "Kühl, aber gute Reibung für {{rockType}}",
+    "idealHumidity": "Ideale Luftfeuchtigkeit ({{humidity}}%)",
+    "lowHumidityGranite": "Niedrige Luftfeuchtigkeit verbessert die Reibung auf Granit",
+    "readyInHours": "In ~{{hours}} Stunden kletterbar",
+    "acceptable": "Akzeptable Bedingungen",
+    "goodHumidity": "Gute Luftfeuchtigkeit ({{humidity}}%)",
+    "lowCondensationRisk": "Geringes Kondensationsrisiko (Taupunktabstand {{dewPointSpread}})",
+    "lowHumidityFriction": "Niedrige Luftfeuchtigkeit verbessert Reibung"
+  },
+  "warnings": {
+    "tooWarm": "Zu warm für {{rockType}} ({{temp}})",
+    "coldSuboptimal": "Kalt und suboptimal für {{rockType}}",
+    "highHumidity": "Hohe Luftfeuchtigkeit ({{humidity}}%) - Fels kann rutschig sein",
+    "wetDangerousSandstone": "Fels ist nass - gefährlich zu klettern (Sandstein wird weich, wenn er nass ist)",
+    "wetSlippery": "Fels ist nass - rutschige Bedingungen",
+    "veryHighWinds": "Sehr starker Wind ({{wind}}) - Gefahr vom Fels geweht zu werden",
+    "highWind": "Starker Wind ({{wind}})",
+    "recentPrecip": "Kürzliche Niederschläge ({{precip}}) - trocknet in ~{{hours}}h",
+    "currentlyWetDangerous": "Derzeit nass - gefährlich",
+    "currentlyWet": "Derzeit nass",
+    "cold": "Cold ({{temp}})",
+    "veryHighCondensationRisk": "Sehr hohes Kondensationsrisiko (Taupunktabstand {{dewPointSpread}}) - Felsoberfläche wahrscheinlich feucht",
+    "highCondensationRisk": "Hohes Kondensationsrisiko (Taupunktabstand {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Hohes Kondensationsrisiko",
+    "moderateCondensationRisk": "Mäßiges Kondensationsrisiko (Taupunktabstand {{dewPointSpread}})",
+    "condensationRisk": "Kondensationsrisiko ({{dewPointSpread}})"
+  },
+  "sandstoneWarning": {
+    "general": "Sandstein ist brüchig wenn nass und benötigt viel Zeit zum Trocknen nach Regen. Klettern auf nassem Sandstein beschädigt den Fels und ist gefährlich.",
+    "recentRain": "Kürzliche Niederschläge festgestellt. Bitte stellen Sie sicher, dass der Fels vollständig trocken ist, bevor Sie klettern.",
+    "inLast24h": "in den letzten 24 Stunden",
+    "inLast48h": "in den letzten 48 Stunden"
+  },
+  "weather": {
+    "clearSky": "Klarer Himmel",
+    "mainlyClear": "Überwiegend klar",
+    "partlyCloudy": "Teilweise bewölkt",
+    "overcast": "Bedeckt",
+    "fog": "Nebel",
+    "depositingRimeFog": "Raureif-Nebel",
+    "lightDrizzle": "Leichter Nieselregen",
+    "moderateDrizzle": "Mäßiger Nieselregen",
+    "denseDrizzle": "Starker Nieselregen",
+    "lightFreezingDrizzle": "Leichter gefrierender Niesel",
+    "denseFreezingDrizzle": "Starker gefrierender Niesel",
+    "slightRain": "Leichter Regen",
+    "moderateRain": "Mäßiger Regen",
+    "heavyRain": "Starker Regen",
+    "lightFreezingRain": "Leichter gefrierender Regen",
+    "heavyFreezingRain": "Starker gefrierender Regen",
+    "slightSnowFall": "Leichter Schneefall",
+    "moderateSnowFall": "Mäßiger Schneefall",
+    "heavySnowFall": "Starker Schneefall",
+    "snowGrains": "Schneegriesel",
+    "slightRainShowers": "Leichte Schauer",
+    "moderateRainShowers": "Mäßige Schauer",
+    "violentRainShowers": "Heftige Schauer",
+    "slightSnowShowers": "Leichte Schneeschauer",
+    "heavySnowShowers": "Starke Schneeschauer",
+    "thunderstorm": "Gewitter",
+    "thunderstormSlightHail": "Gewitter mit kleinem Hagel",
+    "thunderstormHeavyHail": "Gewitter mit starkem Hagel"
+  },
+  "timeframes": {
+    "now": "jetzt",
+    "today": "heute",
+    "tomorrow": "morgen",
+    "thisAfternoon": "heute Nachmittag",
+    "thisEvening": "heute Abend",
+    "tonight": "heute Nacht"
+  },
+  "disambiguation": {
+    "foundMultipleAreas": "Es wurden {{count}} Klettergebiete für \"{{location}}\" gefunden. Bitte wähle eines:",
+    "foundMultipleLocations": "Es wurden mehrere Orte für \"{{location}}\" gefunden. Bitte wähle einen:",
+    "queryTemplate": "Bedingungen in {{name}} ({{latitude}}, {{longitude}})"
+  },
+  "footer": {
+    "about": "Über uns",
+    "privacy": "Datenschutz",
+    "github": "GitHub",
+    "brand": "beta.rocks",
+    "description": "Kostenlose Kletterbedingungen für alle. Mit ❤️ für die Kletterszene gebaut.",
+    "attribution": "Daten von Open-Meteo, OpenBeta und <osmLink>OpenStreetMap-Mitwirkenden</osmLink>. Community-getriebene Berichte.",
+    "copyright": "© 2026 beta.rocks. Alle Rechte vorbehalten."
+  },
+  "features": {
+    "heading": "Alles, was du brauchst",
+    "subheading": "Umfassende Kletterbedingungen direkt zur Hand, komplett kostenlos",
+    "realTimeWeather": {
+      "title": "Wetter in Echtzeit",
+      "description": "Präzise Open-Meteo-Vorhersagen mit Sonnen-/Schattenberechnung für einzelne Sektoren"
+    },
+    "chatInterface": {
+      "title": "Chat-Oberfläche",
+      "description": "Natürlichsprachliche Anfragen mit KI-Unterstützung. Frag in jeder Sprache und erhalte sofort Antworten"
+    },
+    "communityReports": {
+      "title": "Community-Berichte",
+      "description": "Teile Bedingungen, Sicherheitshinweise, Zugangsänderungen, Kletterinfos und mehr. Hilf Kletterern mit Echtzeit-Updates in verschiedenen Kategorien"
+    },
+    "globalCoverage": {
+      "title": "Globale Abdeckung",
+      "description": "Jeder Fels oder Sektor weltweit durch die OpenBeta-Integration"
+    },
+    "crossDeviceSync": {
+      "title": "Geräteübergreifende Synchronisation",
+      "description": "Greifen Sie von jedem Gerät auf Ihre Favoriten und Chat-Verläufe zu – mit einem sicheren Sync-Schlüssel. Kein Konto erforderlich"
+    },
+    "privacyFirst": {
+      "title": "Datenschutz zuerst",
+      "description": "Wir brauchen deine Daten nicht nur nicht - wir wollen sie gar nicht! Standardmäßig anonym. Keine Accounts, kein Tracking. Deine Daten gehören dir."
+    }
+  },
+  "privacy": {
+    "heading": "Datenschutzerklärung",
+    "subheading": "Wir brauchen deine Daten nicht nur nicht - wir wollen sie gar nicht!",
+    "whatWeDontCollect": {
+      "title": "Was wir nicht sammeln",
+      "description": "Keine E-Mail-Adressen, keine Namen, keine Telefonnummern, keine IP-Adressen, keine Analytics, keine Tracking-Pixel, keine Cookies (außer essentiellen), keine Verhaltensanalyse. Wir können dich buchstäblich nicht identifizieren."
+    },
+    "whatYouControl": {
+      "title": "Was du kontrollierst",
+      "description": "Deine Favoriten, Berichte und Chat-Verlauf werden lokal auf deinem Gerät gespeichert. Um von mehreren Geräten darauf zuzugreifen, kannst du ein anonymes Profil erstellen. Sobald du ein Profil hast, werden deine Daten automatisch synchronisiert, um den Zugriff von mehreren Geräten zu ermöglichen. Du kannst alle deine Daten jederzeit in den Einstellungen löschen."
+    },
+    "howSyncWorks": {
+      "title": "Wie Synchronisierung funktioniert",
+      "description": "Wenn du ein Profil erstellst, generieren wir einen anonymen Sync-Schlüssel und synchronisieren deine Daten mit unserer Datenbank. Die Daten werden mit einem gehashten Sync-Schlüssel verknüpft - nicht mit deiner Identität. Der Sync-Schlüssel ist eine zufällige Kennung, auf die nur du Zugriff hast. Wir können sie nicht mit dir verknüpfen. Keine E-Mail erforderlich, kein Konto nötig."
+    },
+    "openSource": {
+      "title": "Open Source",
+      "description": "Unsere gesamte Codebasis ist Open Source auf GitHub. Du kannst genau prüfen, was wir mit deinen Daten machen (Spoiler: nichts). Volle Transparenz, null versteckte Tracker."
+    },
+    "yourRights": {
+      "title": "Deine Rechte",
+      "description": "Du kannst dein Profil jederzeit in den Einstellungen löschen. Dadurch werden deine Favoriten, dein Chat-Verlauf und dein Profil aus unserer Datenbank entfernt. Von dir veröffentlichte Community-Berichte bleiben (anonym) sichtbar, um anderen Kletterern zu helfen. Volle Kontrolle über deine Daten."
+    },
+    "dataSecurity": {
+      "title": "Datensicherheit",
+      "description": "Sync-Schlüssel werden vor der Speicherung kryptographisch gehasht. Wir nutzen Supabase mit Row Level Security-Richtlinien. Selbst wenn unsere Datenbank geleakt würde, könnten Sync-Schlüssel nicht rückentwickelt werden, um Benutzer zu identifizieren."
+    },
+    "footer": {
+      "tldr": "TL;DR: Wir haben diese App für Kletterer gebaut, nicht für Datensammlung. Deine Privatsphäre ist kein Feature - sie ist das Fundament.",
+      "github": "Vollständiger Quellcode verfügbar auf <githubLink>GitHub</githubLink>"
+    }
+  },
+  "ui": {
+    "toggleTheme": "Theme wechseln",
+    "selectLanguage": "Sprache wählen",
+    "aboutApp": "Über die App",
+    "language": "Sprache",
+    "theme": "Theme"
+  },
+  "tabs": {
+    "overview": "Übersicht",
+    "reports": "Berichte"
+  },
+  "dialog": {
+    "close": "Schließen",
+    "cancel": "Abbrechen",
+    "detailedConditions": "Detaillierte Bedingungen",
+    "fullAnalysis": "Umfassende Wetter- und Kletteranalyse",
+    "showMap": "Karte",
+    "tabs": {
+      "overview": "Überblick",
+      "hourly": "Stündlich",
+      "daily": "14 Tage"
+    },
+    "currentRating": "Aktuelle Bewertung",
+    "currentConditions": "Aktuelle Bedingungen",
+    "currentWeather": "Aktuelles Wetter",
+    "temperature": "Temperatur",
+    "humidity": "Luftfeuchtigkeit",
+    "windSpeed": "Windgeschwindigkeit",
+    "precipitation": "Niederschlag",
+    "sunrise": "Sonnenaufgang",
+    "sunset": "Sonnenuntergang",
+    "high": "Hoch",
+    "low": "Tief",
+    "rain": "Regen",
+    "wind": "Wind",
+    "dry": "Trocken",
+    "wet": "Nass",
+    "precipitationContext": "Niederschlagskontext",
+    "last24h": "Letzte 24 h",
+    "last48h": "Letzte 48 h",
+    "next24h": "Nächste 24 h",
+    "dewPointSpread": "Differenz zum Taupunkt (Kondensationsrisiko)",
+    "lowRisk": "✅ Geringes Risiko - Fels sollte trocken bleiben",
+    "moderateRisk": "⚠️ Mittleres Risiko - Feuchte im Blick behalten",
+    "highRisk": "❌ Hohes Risiko - Kondensation wahrscheinlich",
+    "optimalWindows": "Optimale Kletterfenster",
+    "nextDays": "Nächste 5 Tage",
+    "bestTime": "🌟 Beste Zeit",
+    "noOptimalConditions": "Keine optimalen Bedingungen in den nächsten 5 Tagen",
+    "checkHourlyForecast": "Sieh dir die stündliche Vorhersage für Details an",
+    "weatherDisclaimer": "⚠️ Wetter kann sich schnell ändern. Prüfe die Vorhersage vor der Abfahrt und kontrolliere die Bedingungen vor Ort.",
+    "window": "Fenster",
+    "windows": "Fenster",
+    "today": "Heute",
+    "tomorrow": "Morgen",
+    "showCompleteTimeline": "Kompletten Verlauf anzeigen",
+    "hour": "Stunde",
+    "hours": "Stunden",
+    "period": "Zeitraum",
+    "periods": "Zeiträume",
+    "noHourlyData": "Keine stündlichen Vorhersagedaten verfügbar",
+    "noDailyData": "Keine täglichen Vorhersagedaten verfügbar",
+    "noOptimalHours": "Keine optimalen Bedingungen am",
+    "forecastIndicators": "Vorhersageindikatoren:",
+    "goodClimbingWindows": "Gute Kletterfenster",
+    "fairConditions": "Ordentliche Bedingungen",
+    "poorConditions": "Schlechte Bedingungen",
+    "lessReliable": "Tage 8-14: Weniger verlässliche Vorhersage",
+    "lessReliableHourly": "Nächste Stunden weniger vorhersehbar",
+    "lessCertain": "UNSICHERER",
+    "todayBadge": "HEUTE",
+    "delete": "Löschen"
+  },
+  "timeContext": {
+    "sunrise": "Sonnenaufgang",
+    "sunset": "Sonnenuntergang",
+    "recommendedHours": "Empfohlene Kletterzeiten",
+    "totalDaylight": "Gesamte Tageslichtstunden",
+    "hoursOfDaylight": "{{hours}} Stunden Tageslicht",
+    "earlyStartRecommended": "Früher Start empfohlen, um die Hitze zu vermeiden",
+    "limitedDaylight": "Begrenztes Tageslicht - entsprechend planen",
+    "morningConditionsBest": "Beste Bedingungen am Morgen",
+    "eveningSession": "Abendsession-Bedingungen",
+    "showAllHours": "Alle 24 Stunden anzeigen",
+    "showClimbingHoursOnly": "Nur Kletterstunden anzeigen",
+    "expandHours": "Erweitern, um alle Stunden zu sehen"
+  },
+  "rockTypes": {
+    "limestone": "Kalkstein",
+    "granite": "Granit",
+    "sandstone": "Sandstein",
+    "basalt": "Basalt",
+    "gneiss": "Gneis",
+    "quartzite": "Quarzit",
+    "conglomerate": "Konglomerat",
+    "rhyolite": "Rhyolith",
+    "porphyry": "Porphyr",
+    "andesite": "Andesit",
+    "slate": "Schiefer",
+    "schist": "Schist",
+    "dolomite": "Dolomit",
+    "volcanic": "Vulkanisch",
+    "phyllite": "Phyllit"
+  },
+  "sync": {
+    "banner": {
+      "title": "Ihre Daten werden geräteübergreifend synchronisiert",
+      "description": "Ihre Favoriten, Berichte und Chat-Verlauf werden lokal gespeichert und können mit Ihrem Sync-Schlüssel auf andere Geräte synchronisiert werden.",
+      "learnMore": "Mehr erfahren",
+      "dismiss": "Verstanden"
+    },
+    "status": {
+      "synced": "Synchronisiert",
+      "syncing": "Synchronisiere...",
+      "offline": "Offline",
+      "clickToLearnMore": "Klicken Sie, um mehr über die Synchronisierung zu erfahren"
+    },
+    "notification": {
+      "title": "Sync-Schlüssel erstellt",
+      "description": "Wir haben einen eindeutigen Schlüssel erstellt, um Ihre Favoriten und Chats geräteübergreifend zu synchronisieren.",
+      "viewInSettings": "In Einstellungen ansehen",
+      "viewMore": "Was ist der Sync-Schlüssel?"
+    }
+  },
+  "syncExplainer": {
+    "title": "So funktioniert die Synchronisierung",
+    "description": "Halten Sie Ihre Daten nahtlos und sicher auf allen Geräten synchron.",
+    "features": {
+      "syncKey": {
+        "title": "Eindeutiger Sync-Schlüssel",
+        "description": "Jeder Benutzer erhält einen sicheren, eindeutigen Schlüssel zur Synchronisierung seiner Daten."
+      },
+      "multiDevice": {
+        "title": "Zugriff von mehreren Geräten",
+        "description": "Greifen Sie mit Ihrem Sync-Schlüssel von jedem Gerät auf Ihre Favoriten und Ihren Chat-Verlauf zu."
+      },
+      "privacy": {
+        "title": "Datenschutz zuerst",
+        "description": "Ihre Daten sind verschlüsselt und nur mit Ihrem Sync-Schlüssel zugänglich. Kein Konto erforderlich."
+      }
+    },
+    "openSettings": "Einstellungen öffnen"
+  },
+  "profileCreation": {
+    "title": "Profil erstellen",
+    "subtitle": "Datenschutzfreundliche Registrierung - keine persönlichen Daten erforderlich",
+    "createProfile": "Profil erstellen",
+    "creating": "Wird erstellt...",
+    "maybeLater": "Vielleicht später",
+    "tabs": {
+      "create": "Profil erstellen",
+      "signIn": "Anmelden"
+    },
+    "signIn": {
+      "title": "Haben Sie bereits einen Sync-Schlüssel?",
+      "description": "Geben Sie Ihren Sync-Schlüssel ein, um Ihr Profil und Ihre Daten wiederherzustellen",
+      "syncKeyLabel": "Sync-Schlüssel",
+      "syncKeyPlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "signInButton": "Anmelden",
+      "signingIn": "Anmeldung läuft...",
+      "invalidKey": "Ungültiges Sync-Schlüssel-Format. Bitte prüfen und erneut versuchen."
+    },
+    "benefits": {
+      "favorite": {
+        "title": "Favoriten geräteübergreifend speichern",
+        "description": "Markieren Sie Ihre Lieblingsfelsen und greifen Sie von jedem Gerät darauf zu"
+      },
+      "report": {
+        "title": "Meldungen mit der Community teilen",
+        "description": "Helfen Sie anderen Kletterern, indem Sie Bedingungen, Sicherheitshinweise und Kletterinfos teilen"
+      },
+      "vote": {
+        "title": "Über hilfreiche Meldungen abstimmen",
+        "description": "Unterstützen Sie die Community, indem Sie nützliche Meldungen bestätigen"
+      },
+      "manual": {
+        "title": "Speichern Sie Ihre Daten auf allen Geräten",
+        "description": "Synchronisieren Sie Ihre Favoriten, Meldungen und Chatverlauf auf allen Ihren Geräten"
+      }
+    },
+    "features": {
+      "privacy": {
+        "title": "Keine E-Mail oder Passwort erforderlich",
+        "description": "Wir respektieren Ihre Privatsphäre. Nur ein Sync-Schlüssel, keine persönlichen Daten"
+      },
+      "syncKey": {
+        "title": "Erstellt nur einen Sync-Schlüssel",
+        "description": "Eine eindeutige Kennung, die Ihre Daten geräteübergreifend synchronisiert"
+      },
+      "multiDevice": {
+        "title": "Speichern, QR-Code fotografieren oder per E-Mail senden",
+        "description": "Verwenden Sie Ihren Sync-Schlüssel, um Ihr Profil auf anderen Geräten wiederherzustellen"
+      }
+    }
+  },
+  "profileCreated": {
+    "title": "Profil erstellt!",
+    "description": "Ihr Profil wurde erfolgreich erstellt. Speichern Sie Ihren Sync-Schlüssel, um auf anderen Geräten auf Ihre Daten zuzugreifen.",
+    "actionCompleted": "{{action}} abgeschlossen!",
+    "syncKeyLabel": "Ihr Sync-Schlüssel",
+    "syncKeyDescription": "Dies ist Ihr eindeutiger Schlüssel zur geräteübergreifenden Synchronisierung",
+    "qrCodeLabel": "QR-Code",
+    "qrCodeDescription": "Scannen Sie diesen QR-Code auf einem anderen Gerät, um Ihre Daten zu synchronisieren",
+    "privacyTitle": "Wichtig: Speichern Sie Ihren Sync-Schlüssel",
+    "saveKeySafe": "Bewahren Sie diesen Schlüssel an einem sicheren Ort auf",
+    "screenshotQR": "Oder machen Sie einen Screenshot dieses QR-Codes",
+    "needForSync": "Sie benötigen ihn für die Synchronisierung anderer Geräte",
+    "gotIt": "Verstanden!",
+    "copied": "Kopiert!",
+    "copy": "Kopieren",
+    "emailSection": {
+      "title": "Per E-Mail senden (optional)",
+      "privacyNote1": "Wir speichern Ihre E-Mail NICHT",
+      "privacyNote2": "Dies ist nur ein einmaliger Versand",
+      "privacyNote3": "Wird niemals in unserer Datenbank gespeichert",
+      "emailPlaceholder": "ihre@email.de",
+      "sendButton": "E-Mail senden",
+      "sending": "Wird gesendet...",
+      "success": "E-Mail gesendet! Überprüfen Sie Ihr Postfach",
+      "error": "E-Mail konnte nicht gesendet werden. Bitte versuchen Sie es erneut."
+    }
+  },
+  "profile": {
+    "anonymous": "Anonym",
+    "member": "Mitglied",
+    "anonymousMember": "Anonymes Mitglied",
+    "favorites": "Favoriten",
+    "yourReports": "Deine Berichte",
+    "recent": "Letzte Suchen",
+    "stats": "Deine Statistiken",
+    "settings": "Einstellungen",
+    "clearData": "Alle Daten löschen"
+  },
+  "stats": {
+    "title": "Deine Statistiken",
+    "description": "Deine Aktivität und Beiträge zur beta.rocks Community",
+    "reportsPosted": "Berichte erstellt",
+    "confirmationsGiven": "Bestätigungen gegeben",
+    "favoritesCount": "Favoriten",
+    "memberSince": "Mitglied seit",
+    "lastActive": "Zuletzt aktiv",
+    "unknown": "Unbekannt",
+    "encourageReports": "Teile dein lokales Wissen, indem du Berichte über Felsbedingungen veröffentlichst!",
+    "thankYou": "Danke für deinen Beitrag zur Klettergemeinschaft!"
+  },
+  "userReports": {
+    "title": "Deine Berichte",
+    "description": "{{count}} Berichte",
+    "empty": "Noch keine Berichte",
+    "emptyMessage": "Du hast noch keine Berichte veröffentlicht",
+    "emptyHint": "Teile Bedingungen und Informationen über Felsen, um der Community zu helfen",
+    "loading": "Deine Berichte werden geladen...",
+    "loadFailed": "Berichte konnten nicht geladen werden",
+    "deleteSuccess": "Bericht erfolgreich gelöscht",
+    "deleteFailed": "Bericht konnte nicht gelöscht werden"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "description": "Verwalte dein Profil, deinen Sync-Schlüssel und deine Einstellungen",
+    "save": "Speichern",
+    "saving": "Speichere...",
+    "displayName": {
+      "label": "Anzeigename",
+      "description": "Dein Name, der bei Berichten und Bestätigungen angezeigt wird (optional)",
+      "placeholder": "Gib deinen Namen ein...",
+      "saved": "Anzeigename gespeichert",
+      "savedDescription": "Dein Anzeigename wurde erfolgreich aktualisiert",
+      "saveFailed": "Speichern fehlgeschlagen",
+      "saveFailedDescription": "Dein Anzeigename konnte nicht gespeichert werden. Bitte versuche es erneut"
+    },
+    "units": {
+      "title": "Einheiten und Maße",
+      "description": "Wähle deine bevorzugten Einheiten für Wetter- und Kletterdaten",
+      "systemLabel": "Einheitensystem",
+      "systemDescription": "Schnelleinstellungen für gängige Einheitensysteme",
+      "systems": {
+        "metric": "Metrisch (°C, km/h, mm)",
+        "imperial": "Imperial (°F, mph, Zoll)",
+        "uk": "UK (°C, mph, mm)",
+        "custom": "Benutzerdefiniert"
+      },
+      "temperature": "Temperatur",
+      "temperatureUnits": {
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Windgeschwindigkeit",
+      "windSpeedUnits": {
+        "kmh": "Kilometer pro Stunde (km/h)",
+        "mph": "Meilen pro Stunde (mph)",
+        "ms": "Meter pro Sekunde (m/s)",
+        "knots": "Knoten (kn)"
+      },
+      "precipitation": "Niederschlag",
+      "precipitationUnits": {
+        "mm": "Millimeter (mm)",
+        "inches": "Zoll (in)"
+      },
+      "distance": "Entfernung",
+      "distanceUnits": {
+        "km": "Kilometer (km)",
+        "miles": "Meilen (mi)"
+      },
+      "elevation": "Höhe",
+      "elevationUnits": {
+        "meters": "Meter (m)",
+        "feet": "Fuß (ft)"
+      },
+      "saved": "Einheiten gespeichert",
+      "savedDescription": "Deine Einheiteneinstellungen wurden erfolgreich aktualisiert",
+      "saveFailed": "Einheiten speichern fehlgeschlagen",
+      "saveFailedDescription": "Deine Einheiteneinstellungen konnten nicht gespeichert werden. Bitte versuche es erneut"
+    },
+    "syncKey": {
+      "title": "Sync-Schlüssel",
+      "description": "Verwende diesen Schlüssel, um deine Favoriten und Einstellungen über Geräte hinweg zu synchronisieren",
+      "label": "Dein Sync-Schlüssel",
+      "copy": "Sync-Schlüssel kopieren",
+      "showFullKey": "Vollständigen Schlüssel anzeigen",
+      "hideKey": "Schlüssel verbergen",
+      "qrCode": "QR-Code",
+      "qrDescription": "Scanne diesen QR-Code auf einem anderen Gerät, um deine Daten zu synchronisieren",
+      "restoreTitle": "Von einem anderen Gerät wiederherstellen",
+      "restoreDescription": "Hast du bereits einen Sync-Schlüssel? Füge ihn hier ein, um deine Daten wiederherzustellen",
+      "restoreLabel": "Sync-Schlüssel einfügen",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Sync-Schlüssel wiederherstellen",
+      "restoring": "Wiederherstellung läuft...",
+      "restoreSuccess": "Sync-Schlüssel erfolgreich wiederhergestellt! Wird neu geladen...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
+      "restoreError": "Ungültiges Sync-Schlüssel-Format. Bitte überprüfen und erneut versuchen.",
+      "saveNote": {
+        "title": "Sync-Schlüssel speichern",
+        "description": "Wir empfehlen, deinen Sync-Schlüssel an einem sicheren Ort wie deiner Notizen-App oder einem Passwort-Manager zu speichern. Du benötigst ihn, um deine Daten auf anderen Geräten wiederherzustellen."
+      },
+      "warning": {
+        "title": "Halte deinen Sync-Schlüssel geheim",
+        "description": "Jeder mit deinem Sync-Schlüssel kann auf deine Favoriten und Einstellungen zugreifen. Teile ihn nicht öffentlich."
+      },
+      "emailButton": "Sync-Schlüssel per E-Mail an dich senden",
+      "emailLabel": "E-Mail-Adresse",
+      "emailPlaceholder": "du@example.de",
+      "emailSend": "Senden",
+      "emailSending": "Wird gesendet...",
+      "emailPrivacy": "Wir speichern deine E-Mail nicht - sie wird nur einmal zum Senden deines Sync-Schlüssels verwendet.",
+      "emailSent": "E-Mail gesendet!",
+      "emailSentDescription": "Überprüfe deinen Posteingang unter {{email}}",
+      "emailFailed": "E-Mail senden fehlgeschlagen",
+      "emailFailedDescription": "Bitte versuche es erneut oder kopiere deinen Sync-Schlüssel manuell.",
+      "emailInvalid": "Bitte gib eine gültige E-Mail-Adresse ein"
+    },
+    "dangerZone": {
+      "title": "Gefahrenzone",
+      "description": "Diese Aktionen sind dauerhaft und können nicht rückgängig gemacht werden",
+      "deleteProfile": "Profil löschen",
+      "deleteProfileConfirm": "Möchten Sie Ihr Profil wirklich löschen? Dadurch werden alle Ihre Daten einschließlich Favoriten, Chat-Verlauf und Einstellungen dauerhaft entfernt. Diese Aktion kann nicht rückgängig gemacht werden.",
+      "deleteFailed": "Profil konnte nicht gelöscht werden. Bitte versuchen Sie es erneut."
+    }
+  },
+  "favorites": {
+    "title": "Deine Lieblingsfelsen",
+    "description": "Du hast {{count}} Lieblingsorte",
+    "empty": "Noch keine Favoriten",
+    "emptyMessage": "Du hast noch keine Lieblingsfelsen hinzugefügt",
+    "emptyHint": "Klicke auf den Stern auf einer Bedingungskarte, um sie zu deinen Favoriten hinzuzufügen",
+    "lastChecked": "Zuletzt überprüft",
+    "frictionScore": "Reibungswert",
+    "viewConditions": "Bedingungen ansehen",
+    "remove": "Entfernen",
+    "confirmDelete": "Aus Favoriten entfernen?",
+    "confirmDeleteDescription": "Bist du sicher, dass du {{name}} aus den Favoriten entfernen möchtest?",
+    "loginToFavorite": "Bitte richte dein Profil ein, um Standorte zu favorisieren",
+    "errorToggling": "Fehler beim Umschalten des Favoriten. Bitte versuche es erneut.",
+    "added": "Fels zu Favoriten hinzugefügt",
+    "removed": "Fels aus Favoriten entfernt",
+    "loading": "Lade Favoriten..."
+  },
+  "reports": {
+    "addReport": "Bericht hinzufügen",
+    "addReportDescription": "Informationen über {{cragName}} teilen",
+    "postingAs": "Posten als",
+    "category": "Was möchtest du melden?",
+    "categories": {
+      "conditions": "Bedingungen",
+      "safety": "Sicherheit",
+      "access": "Zugang",
+      "climbing_info": "Kletterinfos",
+      "facilities": "Einrichtungen",
+      "other": "Sonstiges",
+      "lost_found": "Fundsachen"
+    },
+    "categoryDescriptions": {
+      "conditions": "Wetter, Reibung, Trockenheit, Andrang",
+      "safety": "Lockere Haken, Steinschlag, gebrochene Griffe, Gefahren",
+      "access": "Sperrungen, Parkplatzänderungen, saisonale Beschränkungen, Vogelnester, Insekten",
+      "climbing_info": "Neuverschraubungen, Ausrüstungsaktualisierungen, Routenänderungen, Fixexpresschlingen",
+      "facilities": "Toiletten, Camping, Wasserquellen, Annehmlichkeiten",
+      "other": "Alles andere, das nicht in die obigen Kategorien passt",
+      "lost_found": "Verlorene oder gefundene Ausrüstung und Equipment"
+    },
+    "categoryHelp": {
+      "conditions": "Aktuelles Wetter, Reibung, Trockenheit, Andrang am Fels",
+      "safety": "Gefahren im gesamten Gebiet, gefährliche Bedingungen, dringende Warnungen",
+      "access": "Parken, Sperrungen, Regelungen, saisonale Beschränkungen",
+      "climbing_info": "Routenspezifische Details, Beta, Griffe, Ausrüstung, Schwierigkeitsgrade",
+      "facilities": "Toiletten, Camping, Wasserquellen, Annehmlichkeiten",
+      "other": "Alles andere, das nicht in die obigen Kategorien passt",
+      "lost_found": "Melde verlorene Gegenstände, die du suchst, oder gefundene Gegenstände, die du hast"
+    },
+    "dryness": "Trockenheit",
+    "wind": "Wind",
+    "crowds": "Andrang",
+    "additionalComments": "Zusätzliche Kommentare (optional)",
+    "details": "Details",
+    "detailsRequired": "Bitte gib Details zu diesem Bericht an",
+    "placeholders": {
+      "conditions": "Z.B. Ostsektor noch nass, Weg matschig, Riss tropft...",
+      "safety": "Z.B. Lockerer Haken an Route X, Steinschlaggefahr nahe der Hauptwand...",
+      "access": "Z.B. Tor bis Mai geschlossen, neuer Parkplatz hinter der Bibliothek...",
+      "climbing_info": "Z.B. Route X neu verschraubt mit Edelstahlhaken, neue Fixexpresschlingen installiert, Stand aufgerüstet...",
+      "facilities": "Z.B. Toilette am Parkplatz verfügbar, keine Wasserquelle in der Nähe...",
+      "other": "Beschreibe, was du melden möchtest...",
+      "lost_found": "Z.B., Blauen Chalkbag am Wandfuß gefunden, Black Diamond Cam #2 am Parkplatz verloren..."
+    },
+    "submit": "Bericht absenden",
+    "submitting": "Wird gesendet...",
+    "readyToPost": "Profil erstellt! Du kannst jetzt deinen Bericht posten.",
+    "helpful": "Hilfreich",
+    "loginToConfirm": "Bitte richte dein Profil ein, um Berichte zu bestätigen",
+    "confirmFailed": "Bestätigung des Berichts fehlgeschlagen. Bitte versuche es erneut.",
+    "ratings": {
+      "veryPoor": "Sehr schlecht",
+      "poor": "Schlecht",
+      "okay": "Okay",
+      "good": "Gut",
+      "excellent": "Ausgezeichnet"
+    },
+    "scales": {
+      "veryWet": "Sehr nass",
+      "veryDry": "Perfekt",
+      "calm": "Sehr windig",
+      "veryWindy": "Ruhig",
+      "empty": "Leer",
+      "veryCrowded": "Sehr voll"
+    },
+    "drynessLabels": {
+      "1": "Sehr nass",
+      "2": "Nass",
+      "3": "Leicht feucht",
+      "4": "Meist trocken",
+      "5": "Sehr trocken"
+    },
+    "windLabels": {
+      "1": "Ruhig",
+      "2": "Leichte Brise",
+      "3": "Mäßig",
+      "4": "Windig",
+      "5": "Sehr windig"
+    },
+    "crowdsLabels": {
+      "1": "Leer",
+      "2": "Wenige Leute",
+      "3": "Mäßig",
+      "4": "Voll",
+      "5": "Sehr voll"
+    },
+    "recentReports": "Aktuelle Berichte",
+    "communityReports": "Community-Berichte",
+    "noReports": "Noch keine Berichte",
+    "beTheFirst": "Sei der Erste, der berichtet",
+    "noReportsInCategory": "Keine Berichte in dieser Kategorie",
+    "filters": {
+      "all": "Alle"
+    },
+    "staleness": {
+      "outdated": "Veraltet",
+      "older": "Älter",
+      "veryOld": "Sehr alt"
+    },
+    "observationDate": "Wann haben Sie das beobachtet?",
+    "observationDateHelp": "Sie können Bedingungen bis zu 7 Tage zurück melden",
+    "voteReady": "Du kannst jetzt über Berichte abstimmen",
+    "lostFoundType": "Typ",
+    "lostFoundTypes": {
+      "lost": "Verlorener Gegenstand",
+      "found": "Gefundener Gegenstand"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Bitte wähle, ob dies ein verlorener oder gefundener Gegenstand ist",
+    "lostBadge": "VERLOREN",
+    "foundBadge": "GEFUNDEN",
+    "expiresAt": "Gültig bis (optional)",
+    "expiresAtHelp": "Legen Sie fest, wann dieser Bericht veraltet ist (nützlich für vorübergehende Schließungen oder sich ändernde Bedingungen)",
+    "noExpiry": "Läuft nie ab",
+    "expiredOn": "Abgelaufen am {{date}}",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "deleteConfirm": "Möchten Sie diesen Bericht wirklich löschen?",
+    "deleteConfirmTitle": "Bericht löschen",
+    "updated": "Bericht aktualisiert",
+    "deleted": "Bericht gelöscht",
+    "editReport": "Bericht bearbeiten",
+    "editReportDescription": "Aktualisieren Sie Ihren Bericht",
+    "updateReport": "Bericht aktualisieren",
+    "updating": "Wird aktualisiert...",
+    "deleteSuccess": "Bericht gelöscht",
+    "deleteSuccessDescription": "Dein Bericht wurde erfolgreich entfernt",
+    "deleteError": "Löschen fehlgeschlagen",
+    "deleteErrorDescription": "Etwas ist schief gelaufen. Bitte versuche es erneut.",
+    "photos": "Fotos",
+    "photoHint": "Bis zu 3 Fotos hinzufügen (max. 2MB pro Bild). Fotos werden automatisch komprimiert.",
+    "photoUploadFailed": "Foto-Upload fehlgeschlagen",
+    "uploadingPhotos": "Fotos werden hochgeladen...",
+    "submitReport": "Bericht absenden"
+  },
+  "editCragDialog": {
+    "title": "Felsen bearbeiten",
+    "subtitle": "Diesen Felsen in einen Sektor umwandeln oder das übergeordnete Element ändern",
+    "currentStatus": "Aktueller Status",
+    "crag": "Felsen",
+    "sector": "Sektor",
+    "currentParent": "Aktuelles übergeordnetes Element",
+    "chooseAction": "Aktion wählen",
+    "convertToSector": "In Sektor umwandeln",
+    "convertToCrag": "In Felsen umwandeln",
+    "changeParent": "Übergeordneten Felsen ändern",
+    "selectParentCrag": "Übergeordneten Felsen auswählen",
+    "selectNewParent": "Neuen übergeordneten Felsen auswählen",
+    "searchForParent": "Suchen Sie nach dem übergeordneten Felsen, dem dieser Sektor zugeordnet werden soll",
+    "searchPlaceholder": "Übergeordneten Felsen suchen...",
+    "noCragsFound": "Keine Felsen gefunden",
+    "change": "Ändern",
+    "save": "Änderungen speichern",
+    "saving": "Speichern...",
+    "success": "Felsen erfolgreich aktualisiert",
+    "convertedToCrag": "Erfolgreich in Felsen umgewandelt",
+    "convertedToSector": "Erfolgreich in Sektor umgewandelt",
+    "errors": {
+      "parentRequired": "Übergeordneter Felsen erforderlich",
+      "parentRequiredDesc": "Bitte wählen Sie einen übergeordneten Felsen für diesen Sektor aus",
+      "failed": "Aktualisierung fehlgeschlagen",
+      "failedDesc": "Felsen konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut."
+    }
+  },
+  "cragPage": {
+    "askAI": "KI fragen",
+    "edit": "Bearbeiten",
+    "editCrag": "Felsen-Details bearbeiten",
+    "currentConditions": "Aktuelle Bedingungen",
+    "sectors": "Sektoren",
+    "addSector": "Sektor hinzufügen",
+    "noSectors": "Zu diesem Fels wurden noch keine Sektoren hinzugefügt.",
+    "beFirstToAddSector": "Sei der Erste, der einen Sektor hinzufügt",
+    "searchSectors": "Sektoren suchen...",
+    "noSectorsFound": "Keine Sektoren gefunden, die Ihrer Suche entsprechen.",
+    "disclaimer": "Wetterbedingungen können sich schnell ändern. Überprüfen Sie die Bedingungen immer vor Ort und nutzen Sie Ihr bestes Urteilsvermögen.",
+    "askAIAboutCrag": "KI über diesen Fels fragen",
+    "viewOnSunCalc": "Sonnen-/Mondzeiten ansehen",
+    "viewSunAngles": "Sonnenposition und Schattenwinkel ansehen",
+    "viewOnMap": "Auf Karte ansehen",
+    "viewOnGoogleMaps": "In Google Maps ansehen",
+    "addToFavorites": "Zu Favoriten hinzufügen",
+    "removeFromFavorites": "Aus Favoriten entfernen"
+  },
+  "time": {
+    "today": "Heute",
+    "yesterday": "Gestern",
+    "daysAgo_one": "vor {{count}} Tag",
+    "daysAgo_other": "vor {{count}} Tagen",
+    "pickDate": "Datum wählen"
+  },
+  "loading": {
+    "conditions": "Bedingungen werden geladen...",
+    "weatherData": "Wetterdaten werden abgerufen...",
+    "reports": "Meldungen werden geladen..."
+  },
+  "nearbyMatch": {
+    "distance": "{{distance}} von {{location}}"
+  },
+  "feed": {
+    "title": "Live-Feed",
+    "viewFeed": "Aktivitäts-Feed ansehen",
+    "live": "Live",
+    "justNow": "Gerade eben",
+    "loadingFeed": "Feed wird geladen...",
+    "reconnecting": "Verbindung zu Live-Updates wird wiederhergestellt...",
+    "loadMore": "Mehr Berichte laden",
+    "loadingMore": "Laden...",
+    "totalReports": "{{count}} insgesamt",
+    "showingOf": "{{showing}} von {{total}} Berichten angezeigt",
+    "totalReportsHint": "Gesamtzahl der Berichte der Community, einschliesslich alterer, die nicht im Feed angezeigt werden",
+    "olderHidden": "Altere Berichte sind weiterhin auf den einzelnen Felsseiten sichtbar",
+    "filters": {
+      "all": "Alle",
+      "favorites": "Favoriten"
+    },
+    "emptyState": {
+      "noReportsTitle": "Noch keine Berichte",
+      "noReportsDescription": "Sei der Erste, der Bedingungen mit der Klettergemeinschaft teilt",
+      "noFavoritesTitle": "Keine Berichte von Favoriten",
+      "noFavoritesDescription": "Füge Felsen zu deinen Favoriten hinzu, um ihre Berichte in diesem Feed zu sehen"
+    }
+  },
+  "webcams": {
+    "title": "Webcams in der Nähe",
+    "nearbyCount": "{{count}} Webcam gefunden",
+    "nearbyCount_other": "{{count}} Webcams gefunden",
+    "daylight": "Tageslicht",
+    "openOnWindy": "Auf Windy.com öffnen",
+    "poweredBy": "Bereitgestellt von",
+    "noWebcams": "Keine Webcams in der Nähe gefunden"
+  }
+}

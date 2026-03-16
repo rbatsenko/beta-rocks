@@ -1,0 +1,748 @@
+{
+  "header": {
+    "title": "beta.rocks"
+  },
+  "welcome": {
+    "heading": "Få information om vilken klippa som helst",
+    "description": "Realtidsförhållanden, communityrapporter och ruttinformation för klippor världen över",
+    "exampleQueries": {
+      "query1": {
+        "display": "Hur blir det i Bohuslän i helgen?",
+        "query": "Hur är klätterförhållandena i Bohuslän i helgen?"
+      },
+      "query2": {
+        "display": "Är Ågelsjön torr i morgon kväll?",
+        "query": "Är Ågelsjön torr i morgon kväll?"
+      },
+      "query3": {
+        "display": "Vilket väder väntar i Häggsta på fredag?",
+        "query": "Vilka förhållanden får vi i Häggsta på fredag?"
+      }
+    },
+    "searchHint": "Sök efter vilket klätterområde som helst",
+    "yourFavorites": "Dina Favoriter",
+    "favoriteQuery": "Vilka är förhållandena vid {{crag}}?"
+  },
+  "chat": {
+    "analyzing": "Analyserar förhållanden...",
+    "thinking": "Tänker...",
+    "inputPlaceholder": "Fråga om valfri klippa eller sektor...",
+    "clearHistory": "Rensa historik",
+    "clearHistoryConfirm": "Är du säker på att du vill rensa all chatthistorik? Detta kan inte ångras.",
+    "clearChat": "Rensa chatt",
+    "clearChatTooltip": "Rensa den aktuella konversationen",
+    "clearChatConfirm": "Rensa din chatt? Detta tar bort alla meddelanden från den aktuella konversationen."
+  },
+  "search": {
+    "title": "Sök klippor",
+    "description": "Sök klätterområden efter namn eller plats",
+    "placeholder": "Sök klippor... (t.ex. 'Bohuslän', 'Kullaberg')",
+    "typeToSearch": "Skriv för att söka klippor...",
+    "searching": "Söker...",
+    "noCragsFound": "Inga klippor hittades. Prova en annan sökterm.",
+    "heading": "Klippor",
+    "toSelect": "för att välja",
+    "toClose": "för att stänga",
+    "notSeeing": "Ser du inte din klippa?",
+    "addMissingHere": "Lägg till den här"
+  },
+  "cragLocationPicker": {
+    "loadingMap": "Laddar karta...",
+    "searchPlaceholder": "Sök efter plats (t.ex. 'Bohusläns klippor, Uddevalla')",
+    "noLocationsFound": "Inga platser hittades",
+    "loadingLocationData": "Laddar platsdata...",
+    "clickToSet": "Klicka på kartan för att ställa in klippans plats",
+    "nearbyCragsFound": "{{count}} närliggande klippa hittad",
+    "nearbyCragsFound_other": "{{count}} närliggande klippor hittade",
+    "clickMarkersToView": "Klicka på markörer för att visa befintliga klippor",
+    "coordinates": "Koordinater"
+  },
+  "conditions": {
+    "rating": "Betyg",
+    "details": "Detaljer",
+    "location": "Plats",
+    "favorite": "Favorit",
+    "favorited": "I favoriter",
+    "addReport": "Lägg till rapport",
+    "viewCragPage": "Visa område"
+  },
+  "ratings": {
+    "great": "Toppen",
+    "good": "Bra",
+    "fair": "Okej",
+    "poor": "Dåligt",
+    "nope": "Nej"
+  },
+  "reasons": {
+    "perfectTemp": "Perfekt temperatur ({{temp}})",
+    "tempTooHigh": "Temperaturen är för hög - fingrarna kan halka",
+    "coldGoodFriction": "Kallt men bra friktion för {{rockType}}",
+    "idealHumidity": "Idealisk luftfuktighet ({{humidity}}%)",
+    "lowHumidityGranite": "Låg fuktighet ger bättre friktion på granit",
+    "readyInHours": "Klättring möjlig om ~{{hours}} timmar",
+    "acceptable": "Förhållandena är acceptabla",
+    "goodHumidity": "Bra luftfuktighet ({{humidity}}%)",
+    "lowCondensationRisk": "Låg risk för kondens (daggpunktsspread {{dewPointSpread}})",
+    "lowHumidityFriction": "Låg luftfuktighet förbättrar friktion"
+  },
+  "warnings": {
+    "tooWarm": "För varmt för {{rockType}} ({{temp}})",
+    "coldSuboptimal": "Kallt och inte optimalt för {{rockType}}",
+    "highHumidity": "Hög luftfuktighet ({{humidity}}%) - stenen kan bli hal",
+    "wetDangerousSandstone": "Stenen är blöt - farligt att klättra (sandsten blir svag när den är blöt)",
+    "wetSlippery": "Stenen är blöt - hala förhållanden",
+    "veryHighWinds": "Mycket hård vind ({{wind}}) - risk för att blåsa av",
+    "highWind": "Hård vind ({{wind}})",
+    "recentPrecip": "Senaste nederbörd ({{precip}}) - torkar på ~{{hours}}h",
+    "currentlyWetDangerous": "För närvarande blött - riskabelt",
+    "currentlyWet": "För närvarande blött",
+    "cold": "Cold ({{temp}})",
+    "veryHighCondensationRisk": "Mycket hög risk för kondens (daggpunktsspread {{dewPointSpread}}) - klippyta troligen fuktig",
+    "highCondensationRisk": "Hög risk för kondens (daggpunktsspread {{dewPointSpread}})",
+    "highCondensationRiskSimple": "Hög risk för kondens",
+    "moderateCondensationRisk": "Måttlig risk för kondens (daggpunktsspread {{dewPointSpread}})",
+    "condensationRisk": "Risk för kondens ({{dewPointSpread}})"
+  },
+  "sandstoneWarning": {
+    "general": "Sandsten är ömtålig när den är våt och kräver mycket tid för att torka efter regn. Klättring på våt sandsten skadar klippan och är farligt.",
+    "recentRain": "Nylig nederbörd upptäckt. Vänligen säkerställ att klippan är helt torr innan klättring.",
+    "inLast24h": "under de senaste 24 timmarna",
+    "inLast48h": "under de senaste 48 timmarna"
+  },
+  "weather": {
+    "clearSky": "Klart",
+    "mainlyClear": "Mestadels klart",
+    "partlyCloudy": "Halvklart",
+    "overcast": "Mulet",
+    "fog": "Dimma",
+    "depositingRimeFog": "Dimfrost",
+    "lightDrizzle": "Lätt duggregn",
+    "moderateDrizzle": "Måttligt duggregn",
+    "denseDrizzle": "Tätt duggregn",
+    "lightFreezingDrizzle": "Lätt underkylt duggregn",
+    "denseFreezingDrizzle": "Tätt underkylt duggregn",
+    "slightRain": "Lätt regn",
+    "moderateRain": "Måttligt regn",
+    "heavyRain": "Kraftigt regn",
+    "lightFreezingRain": "Lätt underkylt regn",
+    "heavyFreezingRain": "Kraftigt underkylt regn",
+    "slightSnowFall": "Lätt snöfall",
+    "moderateSnowFall": "Måttligt snöfall",
+    "heavySnowFall": "Kraftigt snöfall",
+    "snowGrains": "Iskorn",
+    "slightRainShowers": "Lätta regnskurar",
+    "moderateRainShowers": "Måttliga regnskurar",
+    "violentRainShowers": "Kraftiga regnskurar",
+    "slightSnowShowers": "Lätta snöbyar",
+    "moderateSnowShowers": "Måttliga snöbyar",
+    "heavySnowShowers": "Kraftiga snöbyar",
+    "thunderstorm": "Åska",
+    "thunderstormSlightHail": "Åska med små hagel",
+    "thunderstormHeavyHail": "Åska med kraftig hagel"
+  },
+  "timeframes": {
+    "now": "nu",
+    "today": "i dag",
+    "tomorrow": "i morgon",
+    "thisAfternoon": "i eftermiddag",
+    "thisEvening": "i kväll",
+    "tonight": "i natt"
+  },
+  "disambiguation": {
+    "foundMultipleAreas": "Hittade {{count}} klätterområden för \"{{location}}\". Välj ett:",
+    "foundMultipleLocations": "Hittade flera platser för \"{{location}}\". Välj en:",
+    "queryTemplate": "förhållanden vid {{name}} ({{latitude}}, {{longitude}})"
+  },
+  "footer": {
+    "about": "Om",
+    "privacy": "Sekretess",
+    "github": "GitHub",
+    "brand": "beta.rocks",
+    "description": "Gratis klätterförhållanden för alla. Byggt med kärlek till communityt.",
+    "attribution": "Data från Open-Meteo, OpenBeta och <osmLink>OpenStreetMap-bidragsgivare</osmLink>. Drivs av communityt.",
+    "copyright": "© 2026 beta.rocks. Alla rättigheter förbehållna."
+  },
+  "features": {
+    "heading": "Allt du behöver",
+    "subheading": "Fullständiga klätterförhållanden direkt i handen, helt gratis",
+    "realTimeWeather": {
+      "title": "Väder i realtid",
+      "description": "Exakta prognoser från Open-Meteo med sol/skugga-beräkning per sektor"
+    },
+    "chatInterface": {
+      "title": "Chattgränssnitt",
+      "description": "Frågor på naturligt språk med hjälp av AI. Ställ dem på vilket språk du vill"
+    },
+    "communityReports": {
+      "title": "Communityrapporter",
+      "description": "Dela förhållanden, säkerhetsvarningar, tillgänglighetsändringar, klätterinfo och mer. Hjälp medklättrare med realtidsuppdateringar i flera kategorier"
+    },
+    "globalCoverage": {
+      "title": "Global täckning",
+      "description": "Varje klippa eller sektor i världen via OpenBeta-integrationen"
+    },
+    "crossDeviceSync": {
+      "title": "Synkronisering mellan enheter",
+      "description": "Få tillgång till dina favoriter och chatthistorik från vilken enhet som helst med en säker synkroniseringsnyckel. Inget konto krävs"
+    },
+    "privacyFirst": {
+      "title": "Integritet först",
+      "description": "Vi behöver inte bara inte din data - vi vill inte ha den! Anonymt som standard. Inga konton, ingen spårning. Dina data förblir dina."
+    }
+  },
+  "privacy": {
+    "heading": "Integritetspolicy",
+    "subheading": "Vi behöver inte bara inte din data - vi vill inte ha den!",
+    "whatWeDontCollect": {
+      "title": "Vad vi inte samlar in",
+      "description": "Inga e-postadresser, inga namn, inga telefonnummer, inga IP-adresser, ingen analys, inga spårningspixlar, inga cookies (förutom nödvändiga), ingen beteendespårning. Vi kan bokstavligt talat inte identifiera dig."
+    },
+    "whatYouControl": {
+      "title": "Vad du kontrollerar",
+      "description": "Dina favoriter, rapporter och chatthistorik lagras lokalt på din enhet. För att komma åt dem från flera enheter kan du skapa en anonym profil. När du har en profil synkroniseras dina data automatiskt för att möjliggöra åtkomst från flera enheter. Du kan radera alla dina data när som helst från Inställningar."
+    },
+    "howSyncWorks": {
+      "title": "Hur synkronisering fungerar",
+      "description": "När du skapar en profil genererar vi en anonym synkroniseringsnyckel och synkroniserar dina data med vår databas. Data är kopplad till en hashad synkroniseringsnyckel - inte din identitet. Synkroniseringsnyckeln är en slumpmässig identifierare som endast du har tillgång till. Vi kan inte koppla den till dig. Ingen e-post krävs, inget konto behövs."
+    },
+    "openSource": {
+      "title": "Öppen källkod",
+      "description": "Hela vår kodbas är öppen källkod på GitHub. Du kan granska exakt vad vi gör med din data (spoiler: ingenting). Full transparens, noll dolda spårare."
+    },
+    "yourRights": {
+      "title": "Dina rättigheter",
+      "description": "Du kan radera din profil när som helst från Inställningar. Detta tar bort dina favoriter, chatthistorik och profil från vår databas. Gemenskapsrapporter du har postat förblir synliga (anonymt) för att hjälpa andra klättrare. Full kontroll över dina data."
+    },
+    "dataSecurity": {
+      "title": "Datasäkerhet",
+      "description": "Synkroniseringsnycklar är kryptografiskt hashade före lagring. Vi använder Supabase med Row Level Security-policyer. Även om vår databas läckte skulle synkroniseringsnycklar inte kunna reverse-engineeras för att identifiera användare."
+    },
+    "footer": {
+      "tldr": "TL;DR: Vi byggde denna app för klättrare, inte för datainsamling. Din integritet är inte en funktion - det är grunden.",
+      "github": "Fullständig källkod tillgänglig på <githubLink>GitHub</githubLink>"
+    }
+  },
+  "ui": {
+    "toggleTheme": "Byt tema",
+    "selectLanguage": "Välj språk",
+    "aboutApp": "Om appen",
+    "language": "Språk",
+    "theme": "Tema"
+  },
+  "dialog": {
+    "close": "Stäng",
+    "cancel": "Avbryt",
+    "detailedConditions": "Detaljerade förhållanden",
+    "fullAnalysis": "Fullständig väderanalys och prognos för klättring",
+    "showMap": "Karta",
+    "tabs": {
+      "overview": "Översikt",
+      "hourly": "Timvis",
+      "daily": "14 dagar"
+    },
+    "currentRating": "Aktuellt betyg",
+    "currentConditions": "Aktuella förhållanden",
+    "currentWeather": "Aktuellt väder",
+    "temperature": "Temperatur",
+    "humidity": "Luftfuktighet",
+    "windSpeed": "Vindhastighet",
+    "precipitation": "Nederbörd",
+    "sunrise": "Soluppgång",
+    "sunset": "Solnedgång",
+    "high": "Max",
+    "low": "Min",
+    "rain": "Regn",
+    "wind": "Vind",
+    "dry": "Torrt",
+    "wet": "Blött",
+    "precipitationContext": "Nederbördsöversikt",
+    "last24h": "Senaste 24 h",
+    "last48h": "Senaste 48 h",
+    "next24h": "Nästa 24 h",
+    "dewPointSpread": "Daggpunktsspread (risk för kondens)",
+    "lowRisk": "✅ Låg risk – stenen bör hålla sig torr",
+    "moderateRisk": "⚠️ Måttlig risk – håll koll på fukten",
+    "highRisk": "❌ Hög risk – kondens är trolig",
+    "optimalWindows": "Optimala klätterfönster",
+    "nextDays": "Kommande 5 dagar",
+    "bestTime": "🌟 Bästa tid",
+    "noOptimalConditions": "Inga optimala förhållanden de kommande 5 dagarna",
+    "checkHourlyForecast": "Se timprognosen för fler detaljer",
+    "weatherDisclaimer": "⚠️ Vädret kan ändras snabbt. Följ prognoser innan du åker och kontrollera läget på plats.",
+    "window": "fönster",
+    "windows": "fönster",
+    "today": "I dag",
+    "tomorrow": "I morgon",
+    "showCompleteTimeline": "Visa hela tidslinjen",
+    "hour": "timme",
+    "hours": "timmar",
+    "period": "period",
+    "periods": "perioder",
+    "noHourlyData": "Ingen timprognos tillgänglig",
+    "noDailyData": "Ingen dagsprognos tillgänglig",
+    "noOptimalHours": "Inga optimala förhållanden för",
+    "forecastIndicators": "Prognosindikatorer:",
+    "goodClimbingWindows": "Bra klätterfönster",
+    "fairConditions": "Okej förhållanden",
+    "poorConditions": "Dåliga förhållanden",
+    "lessReliable": "Dag 8-14: mindre tillförlitlig prognos",
+    "lessReliableHourly": "Nästa timmar mindre förutsägbara",
+    "lessCertain": "OSÄKRARE",
+    "todayBadge": "I DAG",
+    "delete": "Radera"
+  },
+  "timeContext": {
+    "sunrise": "Soluppgång",
+    "sunset": "Solnedgång",
+    "recommendedHours": "Rekommenderade klättertider",
+    "totalDaylight": "Total dagsljus",
+    "hoursOfDaylight": "{{hours}} timmar dagsljus",
+    "earlyStartRecommended": "Tidig start rekommenderas för att undvika värmen",
+    "limitedDaylight": "Begränsat dagsljus - planera därefter",
+    "morningConditionsBest": "Bästa förhållandena på morgonen",
+    "eveningSession": "Kvällspassförhållanden",
+    "showAllHours": "Visa alla 24 timmar",
+    "showClimbingHoursOnly": "Visa endast klättertimmar",
+    "expandHours": "Expandera för att se alla timmar"
+  },
+  "rockTypes": {
+    "limestone": "kalksten",
+    "granite": "granit",
+    "sandstone": "sandsten",
+    "basalt": "basalt",
+    "gneiss": "gnejs",
+    "quartzite": "kvartsit",
+    "conglomerate": "konglomerat",
+    "rhyolite": "ryolit",
+    "porphyry": "porfyr",
+    "andesite": "andesit",
+    "slate": "skiffer",
+    "schist": "glimmerskiffer",
+    "dolomite": "dolomit",
+    "volcanic": "vulkanisk",
+    "phyllite": "fyllit"
+  },
+  "sync": {
+    "banner": {
+      "title": "Din data synkroniseras mellan enheter",
+      "description": "Dina favoriter, rapporter och chatthistorik sparas lokalt och kan synkroniseras till andra enheter med din synkroniseringsnyckel.",
+      "learnMore": "Läs mer",
+      "dismiss": "Jag förstår"
+    },
+    "status": {
+      "synced": "Synkroniserad",
+      "syncing": "Synkroniserar...",
+      "offline": "Offline"
+    },
+    "notification": {
+      "title": "Synkroniseringsnyckel skapad",
+      "description": "Vi har skapat en unik nyckel för att synkronisera dina favoriter och chattar mellan enheter.",
+      "viewInSettings": "Visa i inställningar",
+      "viewMore": "Vad är en synkroniseringsnyckel?"
+    }
+  },
+  "syncExplainer": {
+    "title": "How Sync Works",
+    "description": "Keep your data in sync across all your devices seamlessly and securely.",
+    "features": {
+      "syncKey": {
+        "title": "Unique Sync Key",
+        "description": "Each user gets a secure, unique key to sync their data across devices."
+      },
+      "multiDevice": {
+        "title": "Multi-Device Access",
+        "description": "Access your favorites and chat history from any device by using your sync key."
+      },
+      "privacy": {
+        "title": "Privacy First",
+        "description": "Your data is encrypted and only accessible with your sync key. No account required."
+      }
+    },
+    "openSettings": "Open Settings"
+  },
+  "profile": {
+    "anonymous": "Anonym",
+    "member": "Medlem",
+    "anonymousMember": "Anonym medlem",
+    "favorites": "Favoriter",
+    "recent": "Senaste sökningar",
+    "stats": "Din statistik",
+    "settings": "Inställningar",
+    "clearData": "Rensa all data",
+    "yourReports": "Dina rapporter"
+  },
+  "stats": {
+    "title": "Din statistik",
+    "description": "Din aktivitet och bidrag till beta.rocks-gemenskapen",
+    "reportsPosted": "Rapporter publicerade",
+    "confirmationsGiven": "Bekräftelser givna",
+    "favoritesCount": "Favoriter",
+    "memberSince": "Medlem sedan",
+    "lastActive": "Senast aktiv",
+    "unknown": "Okänd",
+    "encourageReports": "Dela med dig av din lokala kunskap genom att publicera rapporter om klippförhållanden!",
+    "thankYou": "Tack för ditt bidrag till klättergemenskapen!"
+  },
+  "userReports": {
+    "title": "Dina rapporter",
+    "description": "{{count}} rapporter",
+    "empty": "Inga rapporter ännu",
+    "emptyMessage": "Du har inte publicerat några rapporter ännu",
+    "emptyHint": "Dela förhållanden och information om klippor för att hjälpa gemenskapen",
+    "loading": "Laddar dina rapporter...",
+    "loadFailed": "Det gick inte att ladda rapporter",
+    "deleteSuccess": "Rapport raderad",
+    "deleteFailed": "Det gick inte att radera rapport"
+  },
+  "settings": {
+    "title": "Inställningar",
+    "description": "Hantera din profil, synkroniseringsnyckel och preferenser",
+    "save": "Spara",
+    "saving": "Sparar...",
+    "displayName": {
+      "label": "Visningsnamn",
+      "description": "Ditt namn visas på rapporter och bekräftelser (valfritt)",
+      "placeholder": "Ange ditt namn...",
+      "saved": "Visningsnamn sparat",
+      "savedDescription": "Ditt visningsnamn har uppdaterats",
+      "saveFailed": "Sparandet misslyckades",
+      "saveFailedDescription": "Det gick inte att spara ditt visningsnamn. Försök igen"
+    },
+    "units": {
+      "title": "Enheter och mätningar",
+      "description": "Välj dina föredragna enheter för väder- och klätterdata",
+      "systemLabel": "Enhetssystem",
+      "systemDescription": "Snabba förinställningar för vanliga enhetssystem",
+      "systems": {
+        "metric": "Metriskt (°C, km/h, mm)",
+        "imperial": "Imperial (°F, mph, tum)",
+        "uk": "Storbritannien (°C, mph, mm)",
+        "custom": "Anpassad"
+      },
+      "temperature": "Temperatur",
+      "temperatureUnits": {
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "windSpeed": "Vindhastighet",
+      "windSpeedUnits": {
+        "kmh": "Kilometer per timme (km/h)",
+        "mph": "Miles per timme (mph)",
+        "ms": "Meter per sekund (m/s)",
+        "knots": "Knop (kn)"
+      },
+      "precipitation": "Nederbörd",
+      "precipitationUnits": {
+        "mm": "Millimeter (mm)",
+        "inches": "Tum (in)"
+      },
+      "distance": "Avstånd",
+      "distanceUnits": {
+        "km": "Kilometer (km)",
+        "miles": "Miles (mi)"
+      },
+      "elevation": "Höjd",
+      "elevationUnits": {
+        "meters": "Meter (m)",
+        "feet": "Fot (ft)"
+      },
+      "saved": "Enheter sparade",
+      "savedDescription": "Dina enhetsinställningar har uppdaterats",
+      "saveFailed": "Sparandet av enheter misslyckades",
+      "saveFailedDescription": "Det gick inte att spara dina enhetsinställningar. Försök igen"
+    },
+    "syncKey": {
+      "title": "Synkroniseringsnyckel",
+      "description": "Använd denna nyckel för att synka dina favoriter och inställningar mellan enheter",
+      "label": "Din synkroniseringsnyckel",
+      "copy": "Kopiera synkroniseringsnyckel",
+      "showFullKey": "Visa hela nyckeln",
+      "hideKey": "Dölj nyckel",
+      "qrCode": "QR-kod",
+      "qrDescription": "Skanna denna QR-kod på en annan enhet för att synka dina data",
+      "restoreTitle": "Återställ från en annan enhet",
+      "restoreDescription": "Har du redan en synkroniseringsnyckel? Klistra in den här för att återställa dina data",
+      "restoreLabel": "Klistra in din synkroniseringsnyckel",
+      "restorePlaceholder": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "restoreButton": "Återställ synkroniseringsnyckel",
+      "restoring": "Återställer...",
+      "restoreSuccess": "Synkroniseringsnyckeln återställdes! Laddar om...",
+      "restoreSuccessDescription": "Your data will be restored after reload",
+      "restoreError": "Ogiltigt format på synkroniseringsnyckeln. Kontrollera och försök igen.",
+      "saveNote": {
+        "title": "Spara din synkroniseringsnyckel",
+        "description": "Vi rekommenderar att du sparar din synkroniseringsnyckel på en säker plats som din Anteckningar-app eller lösenordshanterare. Du kommer att behöva den för att återställa dina data på andra enheter."
+      },
+      "warning": {
+        "title": "Håll din synkroniseringsnyckel privat",
+        "description": "Alla med din synkroniseringsnyckel kan komma åt dina favoriter och inställningar. Dela den inte offentligt."
+      },
+      "emailButton": "E-posta synkroniseringsnyckel till dig själv",
+      "emailLabel": "E-postadress",
+      "emailPlaceholder": "dig@example.se",
+      "emailSend": "Skicka",
+      "emailSending": "Skickar...",
+      "emailPrivacy": "Vi lagrar inte din e-post - den används endast en gång för att skicka din synkroniseringsnyckel.",
+      "emailSent": "E-post skickad!",
+      "emailSentDescription": "Kontrollera din inkorg på {{email}}",
+      "emailFailed": "Misslyckades att skicka e-post",
+      "emailFailedDescription": "Försök igen eller kopiera din synkroniseringsnyckel manuellt.",
+      "emailInvalid": "Ange en giltig e-postadress"
+    },
+    "dangerZone": {
+      "title": "Farozon",
+      "description": "Dessa åtgärder är permanenta och kan inte ångras",
+      "deleteProfile": "Ta bort profil",
+      "deleteProfileConfirm": "Är du säker på att du vill ta bort din profil? Detta kommer permanent att ta bort all din data inklusive favoriter, chatthistorik och inställningar. Denna åtgärd kan inte ångras.",
+      "deleteFailed": "Det gick inte att ta bort profilen. Försök igen."
+    }
+  },
+  "favorites": {
+    "title": "Dina favoritklippor",
+    "description": "Du har {{count}} favoritplatser",
+    "empty": "Inga favoriter än",
+    "emptyMessage": "Du har inte lagt till några favoritklippor än",
+    "emptyHint": "Klicka på stjärnikonen på valfritt konditionskort för att lägga till den i dina favoriter",
+    "lastChecked": "Senast kontrollerad",
+    "frictionScore": "Friktionspoäng",
+    "viewConditions": "Visa förhållanden",
+    "remove": "Ta bort",
+    "confirmDelete": "Ta bort från favoriter?",
+    "confirmDeleteDescription": "Är du säker på att du vill ta bort {{name}} från dina favoriter?",
+    "loginToFavorite": "Vänligen konfigurera din profil för att lägga till platser i favoriter",
+    "errorToggling": "Kunde inte växla favorit. Försök igen.",
+    "added": "Klippa tillagd i favoriter",
+    "removed": "Klippa borttagen från favoriter",
+    "loading": "Laddar favoriter..."
+  },
+  "reports": {
+    "addReport": "Lägg till rapport",
+    "addReportDescription": "Dela information om {{cragName}}",
+    "postingAs": "Publicerar som",
+    "category": "Vad vill du rapportera?",
+    "categories": {
+      "conditions": "Förhållanden",
+      "safety": "Säkerhet",
+      "access": "Tillgång",
+      "climbing_info": "Klätterinfo",
+      "facilities": "Faciliteter",
+      "other": "Annat",
+      "lost_found": "Hittegodsförvarning"
+    },
+    "categoryDescriptions": {
+      "conditions": "Väder, friktion, torrhet, trängsel",
+      "safety": "Lösa bultar, stenras, trasiga grepp, faror",
+      "access": "Stängningar, parkeringsändringar, säsongsbegränsningar, fågelbon, insekter",
+      "climbing_info": "Ombultning, uppdateringar av utrustning, ruttändringar, fasta quickdraws",
+      "facilities": "Toaletter, camping, vattenkällor, bekvämligheter",
+      "other": "Allt annat som inte passar ovan",
+      "lost_found": "Förlorat eller hittat utrustning"
+    },
+    "categoryHelp": {
+      "conditions": "Aktuellt väder, friktion, torrhet, trängsel vid klippan",
+      "safety": "Faror i hela området, farliga förhållanden, brådskande varningar",
+      "access": "Parkering, stängningar, regler, säsongsbegränsningar",
+      "climbing_info": "Ruttspecifika detaljer, beta, grepp, utrustning, svårighetsgrader",
+      "facilities": "Toaletter, camping, vattenkällor, bekvämligheter",
+      "other": "Allt annat som inte passar ovanstående kategorier",
+      "lost_found": "Rapportera förlorade föremål du letar efter eller hittade föremål du har"
+    },
+    "dryness": "Torrhet",
+    "wind": "Vind",
+    "crowds": "Trängsel",
+    "additionalComments": "Ytterligare kommentarer (valfritt)",
+    "details": "Detaljer",
+    "detailsRequired": "Vänligen ange detaljer om denna rapport",
+    "placeholders": {
+      "conditions": "T.ex., Ostsektorn fortfarande våt, leden lerig, sprickan droppar...",
+      "safety": "T.ex., Lös bult på rutt X, stenrasfara vid huvudväggen...",
+      "access": "T.ex., Grind stängd till maj, ny parkering bakom biblioteket...",
+      "climbing_info": "T.ex., Rutt X ombultad med rostfria bultar, nya fasta quickdraws installerade, fäste uppgraderat...",
+      "facilities": "T.ex., Toalett tillgänglig vid parkeringen, ingen vattenkälla i närheten...",
+      "other": "Beskriv vad du vill rapportera...",
+      "lost_found": "T.ex., Hittad blå kritpåse vid basen, förlorad Black Diamond cam #2 vid parkeringen..."
+    },
+    "submit": "Skicka rapport",
+    "submitting": "Skickar...",
+    "readyToPost": "Profil skapad! Du är redo att posta din rapport.",
+    "helpful": "Hjälpsam",
+    "loginToConfirm": "Vänligen konfigurera din profil för att bekräfta rapporter",
+    "confirmFailed": "Misslyckades att bekräfta rapport. Vänligen försök igen.",
+    "voteReady": "Du kan nu rösta på rapporter",
+    "ratings": {
+      "veryPoor": "Mycket dåligt",
+      "poor": "Dåligt",
+      "okay": "Okej",
+      "good": "Bra",
+      "excellent": "Utmärkt"
+    },
+    "scales": {
+      "veryWet": "Mycket vått",
+      "veryDry": "Perfekt",
+      "calm": "Mycket blåsigt",
+      "veryWindy": "Lugnt",
+      "empty": "Tomt",
+      "veryCrowded": "Mycket fullt"
+    },
+    "drynessLabels": {
+      "1": "Mycket vått",
+      "2": "Vått",
+      "3": "Lite fuktigt",
+      "4": "Mestadels torrt",
+      "5": "Mycket torrt"
+    },
+    "windLabels": {
+      "1": "Lugnt",
+      "2": "Lätt bris",
+      "3": "Måttligt",
+      "4": "Blåsigt",
+      "5": "Mycket blåsigt"
+    },
+    "crowdsLabels": {
+      "1": "Tomt",
+      "2": "Få personer",
+      "3": "Måttligt",
+      "4": "Fullt",
+      "5": "Mycket fullt"
+    },
+    "recentReports": "Senaste rapporter",
+    "communityReports": "Gemenskapsrapporter",
+    "noReports": "Inga rapporter ännu",
+    "beTheFirst": "Var först med att rapportera",
+    "noReportsInCategory": "Inga rapporter i denna kategori",
+    "filters": {
+      "all": "Alla"
+    },
+    "staleness": {
+      "outdated": "Föråldrad",
+      "older": "Äldre",
+      "veryOld": "Mycket gammal"
+    },
+    "observationDate": "När observerade du detta?",
+    "observationDateHelp": "Du kan rapportera förhållanden upp till 7 dagar tillbaka",
+    "lostFoundType": "Typ",
+    "lostFoundTypes": {
+      "lost": "Förlorat föremål",
+      "found": "Hittat föremål"
+    },
+    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypeRequired": "Välj om detta är ett förlorat eller hittat föremål",
+    "lostBadge": "FÖRLORAT",
+    "foundBadge": "HITTAT",
+    "expiresAt": "Giltigt till (valfritt)",
+    "expiresAtHelp": "Ange när denna rapport blir inaktuell (användbart för tillfälliga stängningar eller förändrade förhållanden)",
+    "noExpiry": "Går aldrig ut",
+    "expiredOn": "Utgick {{date}}",
+    "edit": "Redigera",
+    "delete": "Radera",
+    "deleteConfirm": "Är du säker på att du vill radera denna rapport?",
+    "deleteConfirmTitle": "Radera Rapport",
+    "updated": "Rapport uppdaterad",
+    "deleted": "Rapport raderad",
+    "editReport": "Redigera Rapport",
+    "editReportDescription": "Uppdatera din rapport",
+    "updateReport": "Uppdatera Rapport",
+    "updating": "Uppdaterar...",
+    "deleteSuccess": "Rapport raderad",
+    "deleteSuccessDescription": "Din rapport har tagits bort",
+    "deleteError": "Kunde inte radera rapporten",
+    "deleteErrorDescription": "Något gick fel. Vänligen försök igen.",
+    "photos": "Foton",
+    "photoHint": "Lägg till upp till 3 foton (max 2MB vardera). Foton kommer att komprimeras automatiskt.",
+    "photoUploadFailed": "Uppladdning av foto misslyckades",
+    "uploadingPhotos": "Laddar upp foton...",
+    "submitReport": "Skicka rapport"
+  },
+  "editCragDialog": {
+    "title": "Redigera Klippa",
+    "subtitle": "Konvertera denna klippa till en sektor eller ändra överordnat element",
+    "currentStatus": "Nuvarande Status",
+    "crag": "Klippa",
+    "sector": "Sektor",
+    "currentParent": "Nuvarande överordnat element",
+    "chooseAction": "Välj Åtgärd",
+    "convertToSector": "Konvertera till Sektor",
+    "convertToCrag": "Konvertera till Klippa",
+    "changeParent": "Ändra Överordnad Klippa",
+    "selectParentCrag": "Välj Överordnad Klippa",
+    "selectNewParent": "Välj Ny Överordnad Klippa",
+    "searchForParent": "Sök efter den överordnade klippan som denna sektor ska tilldelas",
+    "searchPlaceholder": "Sök efter överordnad klippa...",
+    "noCragsFound": "Inga klippor hittades",
+    "change": "Ändra",
+    "save": "Spara Ändringar",
+    "saving": "Sparar...",
+    "success": "Klippa uppdaterad",
+    "convertedToCrag": "Konverterad till klippa",
+    "convertedToSector": "Konverterad till sektor",
+    "errors": {
+      "parentRequired": "Överordnad klippa krävs",
+      "parentRequiredDesc": "Vänligen välj en överordnad klippa för denna sektor",
+      "failed": "Uppdateringen misslyckades",
+      "failedDesc": "Kunde inte uppdatera klippa. Vänligen försök igen."
+    }
+  },
+  "cragPage": {
+    "askAI": "Fråga AI",
+    "edit": "Redigera",
+    "editCrag": "Redigera klipp-detaljer",
+    "currentConditions": "Nuvarande förhållanden",
+    "sectors": "Sektorer",
+    "addSector": "Lägg till sektor",
+    "noSectors": "Inga sektorer har lagts till för denna klippa ännu.",
+    "beFirstToAddSector": "Var den första att lägga till en sektor",
+    "searchSectors": "Sök sektorer...",
+    "noSectorsFound": "Inga sektorer hittades som matchar din sökning.",
+    "disclaimer": "Väderförhållandena kan ändras snabbt. Kontrollera alltid förhållandena vid ankomst och använd ditt bästa omdöme.",
+    "askAIAboutCrag": "Fråga AI om denna klippa",
+    "viewOnSunCalc": "Visa sol/måntider",
+    "viewSunAngles": "Visa solposition och skuggvinklar",
+    "viewOnMap": "Visa på karta",
+    "viewOnGoogleMaps": "Visa på Google Maps",
+    "addToFavorites": "Lägg till favoriter",
+    "removeFromFavorites": "Ta bort från favoriter"
+  },
+  "time": {
+    "today": "Idag",
+    "yesterday": "Igår",
+    "daysAgo_one": "{{count}} dag sedan",
+    "daysAgo_other": "{{count}} dagar sedan",
+    "pickDate": "Välj ett datum"
+  },
+  "nearbyMatch": {
+    "distance": "{{distance}} från {{location}}"
+  },
+  "feed": {
+    "title": "Direktflöde",
+    "viewFeed": "Visa aktivitetsflöde",
+    "live": "Live",
+    "justNow": "Just nu",
+    "loadingFeed": "Laddar flöde...",
+    "reconnecting": "Återansluter till liveuppdateringar...",
+    "loadMore": "Ladda fler rapporter",
+    "loadingMore": "Laddar...",
+    "totalReports": "{{count}} totalt",
+    "showingOf": "Visar {{showing}} av {{total}} rapporter",
+    "totalReportsHint": "Totalt antal rapporter fran gemenskapen, inklusive aldre som inte visas i flodet",
+    "olderHidden": "Aldre rapporter ar fortfarande synliga pa enskilda klippsidor",
+    "filters": {
+      "all": "Alla",
+      "favorites": "Favoriter"
+    },
+    "emptyState": {
+      "noReportsTitle": "Inga rapporter ännu",
+      "noReportsDescription": "Bli först att dela förhållanden med klättergemenskapen",
+      "noFavoritesTitle": "Inga rapporter från favoriter",
+      "noFavoritesDescription": "Lägg till klippor till dina favoriter för att se deras rapporter i detta flöde"
+    }
+  },
+  "webcams": {
+    "title": "Webbkameror i närheten",
+    "nearbyCount": "{{count}} webbkamera hittades",
+    "nearbyCount_other": "{{count}} webbkameror hittades",
+    "daylight": "Dagsljus",
+    "openOnWindy": "Öppna på Windy.com",
+    "poweredBy": "Drivs av",
+    "noWebcams": "Inga webbkameror hittades i närheten"
+  }
+}
