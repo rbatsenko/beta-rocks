@@ -410,7 +410,28 @@
       "description": "Wygenerowaliśmy unikalny klucz do synchronizacji twoich ulubionych i czatów między urządzeniami.",
       "viewInSettings": "Zobacz w ustawieniach",
       "viewMore": "Co to jest klucz synchronizacji?"
+    },
+    "page": {
+      "validating": "Weryfikacja klucza synchronizacji...",
+      "invalidTitle": "Nieprawidłowy klucz synchronizacji",
+      "noKeyError": "Nie znaleziono klucza synchronizacji",
+      "invalidKeyError": "Nieprawidłowy format klucza synchronizacji",
+      "goHome": "Przejdź do strony głównej",
+      "restoreTitle": "Przywróć swoje dane",
+      "restoreDescription": "Spowoduje to przywrócenie ulubionych, historii czatu i ustawień z innego urządzenia",
+      "syncKeyLabel": "Klucz synchronizacji",
+      "restoreSuccess": "Klucz synchronizacji przywrócony! Przekierowanie...",
+      "cancel": "Anuluj",
+      "restore": "Przywróć",
+      "replaceWarning": "Spowoduje to zastąpienie istniejących danych na tym urządzeniu danymi z klucza synchronizacji",
+      "restoreError": "Nie udało się przywrócić klucza synchronizacji. Spróbuj ponownie.",
+      "hint": "Znajdź swój klucz synchronizacji w aplikacji webowej: Ustawienia → Klucz synchronizacji"
     }
+  },
+  "mobile": {
+    "profileRequired": "Wymagany profil",
+    "cragDetails": "Szczegóły skałki",
+    "syncProfile": "Synchronizacja profilu"
   },
   "syncExplainer": {
     "title": "Jak działa synchronizacja",

@@ -127,7 +127,7 @@ export default function CragDetailScreen() {
 
   async function toggleFavorite() {
     if (!hasProfile || !crag) {
-      Alert.alert("Profile Required", "Create a profile in Settings to save favorites.");
+      Alert.alert(t("mobile.profileRequired", "Profile Required"), t("favorites.loginToFavorite", "Please set up your profile to favorite locations"));
       return;
     }
     if (!isSupabaseConfigured || !supabase || !syncKeyHash) return;
@@ -220,7 +220,7 @@ export default function CragDetailScreen() {
     return (
       <View style={[styles.centered, { backgroundColor: colors.background }]}>
         <Ionicons name="alert-circle-outline" size={48} color={colors.destructive} />
-        <Text style={[styles.errorText, { color: colors.text }]}>{error || "Crag not found"}</Text>
+        <Text style={[styles.errorText, { color: colors.text }]}>{error || t("errors.failedToLoadConditions", "Failed to load conditions. Please try again.")}</Text>
       </View>
     );
   }
@@ -334,10 +334,10 @@ export default function CragDetailScreen() {
       {activeTab === "conditions" && conditions?.current && (
         <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
           <View style={styles.conditionsGrid}>
-            <ConditionItem icon="thermometer-outline" label="Temp" value={`${fmt(conditions.current.temperature_c)}°C`} colors={colors} />
-            <ConditionItem icon="water-outline" label="Humidity" value={`${conditions.current.humidity ?? "\u2014"}%`} colors={colors} />
-            <ConditionItem icon="flag-outline" label="Wind" value={`${fmt(conditions.current.windSpeed_kph)} km/h`} colors={colors} />
-            <ConditionItem icon="rainy-outline" label="Precip" value={`${fmt(conditions.current.precipitation_mm)} mm`} colors={colors} />
+            <ConditionItem icon="thermometer-outline" label={t("dialog.temperature", "Temperature")} value={`${fmt(conditions.current.temperature_c)}°C`} colors={colors} />
+            <ConditionItem icon="water-outline" label={t("dialog.humidity", "Humidity")} value={`${conditions.current.humidity ?? "\u2014"}%`} colors={colors} />
+            <ConditionItem icon="flag-outline" label={t("dialog.wind", "Wind")} value={`${fmt(conditions.current.windSpeed_kph)} km/h`} colors={colors} />
+            <ConditionItem icon="rainy-outline" label={t("dialog.precipitation", "Precipitation")} value={`${fmt(conditions.current.precipitation_mm)} mm`} colors={colors} />
           </View>
           {astro && (
             <View style={[styles.astroRow, { borderTopColor: colors.border }]}>
@@ -425,19 +425,19 @@ export default function CragDetailScreen() {
               </View>
             ))}
           </ScrollView>
-          <Text style={[styles.poweredBy, { color: colors.muted }]}>Powered by Windy</Text>
+          <Text style={[styles.poweredBy, { color: colors.muted }]}>{t("webcams.poweredBy", "Powered by")} Windy</Text>
         </View>
       )}
 
       {/* External links */}
       <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
         <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.links")}</Text>
-        <LinkRow icon="map-outline" label="Google Maps" color={colors} onPress={() => Linking.openURL(`https://www.google.com/maps?q=${crag.lat},${crag.lon}&z=15`)} />
-        <LinkRow icon="sunny-outline" label="SunCalc" color={colors} onPress={() => {
+        <LinkRow icon="map-outline" label={t("cragPage.viewOnGoogleMaps", "View on Google Maps")} color={colors} onPress={() => Linking.openURL(`https://www.google.com/maps?q=${crag.lat},${crag.lon}&z=15`)} />
+        <LinkRow icon="sunny-outline" label={t("cragPage.viewOnSunCalc", "View sun/moon times")} color={colors} onPress={() => {
           const d = new Date().toISOString().split("T")[0].replace(/-/g, ".");
           Linking.openURL(`https://www.suncalc.org/#/${crag.lat},${crag.lon},17/${d}/12:00/1/1`);
         }} />
-        <LinkRow icon="navigate-outline" label="OpenStreetMap" color={colors} onPress={() => Linking.openURL(`https://www.openstreetmap.org/?mlat=${crag.lat}&mlon=${crag.lon}#map=15/${crag.lat}/${crag.lon}`)} />
+        <LinkRow icon="navigate-outline" label={t("cragPage.viewOnMap", "View on map")} color={colors} onPress={() => Linking.openURL(`https://www.openstreetmap.org/?mlat=${crag.lat}&mlon=${crag.lon}#map=15/${crag.lat}/${crag.lon}`)} />
       </View>
 
       {/* Sectors */}
@@ -484,7 +484,7 @@ export default function CragDetailScreen() {
                   style={[styles.reportFooter, { marginTop: Spacing.sm }]}
                   onPress={async () => {
                     if (!hasProfile || !syncKeyHash) {
-                      Alert.alert("Profile Required", "Create a profile in Settings to vote.");
+                      Alert.alert(t("mobile.profileRequired", "Profile Required"), t("reports.loginToConfirm", "Please set up your profile to confirm reports"));
                       return;
                     }
                     try {
@@ -508,7 +508,7 @@ export default function CragDetailScreen() {
         style={[styles.fab, { backgroundColor: colors.primary }]}
         onPress={() => {
           if (!hasProfile) {
-            Alert.alert("Profile Required", "Create a profile in Settings to add reports.");
+            Alert.alert(t("mobile.profileRequired", "Profile Required"), t("reports.loginToConfirm", "Please set up your profile to confirm reports"));
             return;
           }
           router.push({ pathname: "/report", params: { cragId: crag.id, cragName: crag.name } });
@@ -516,7 +516,7 @@ export default function CragDetailScreen() {
         activeOpacity={0.8}
       >
         <Ionicons name="add" size={24} color={colors.primaryForeground} />
-        <Text style={[styles.fabText, { color: colors.primaryForeground }]}>Report</Text>
+        <Text style={[styles.fabText, { color: colors.primaryForeground }]}>{t("fab.addReport", "Add Report")}</Text>
       </TouchableOpacity>
     )}
 

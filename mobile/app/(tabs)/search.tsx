@@ -21,12 +21,14 @@ import { useSearch } from "@/hooks/useSearch";
 import type { SearchResult } from "@/types/api";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 export default function SearchScreen() {
   const { colorScheme } = useTheme();
   const isDark = colorScheme === "dark";
   const colors = isDark ? Colors.dark : Colors.light;
   const router = useRouter();
+  const { t } = useTranslation("common");
   const { results, isSearching, error, search, clearResults } = useSearch();
   const [query, setQuery] = useState("");
   const inputRef = useRef<TextInput>(null);
@@ -103,7 +105,7 @@ export default function SearchScreen() {
           style={[styles.searchInput, { color: colors.text }]}
           value={query}
           onChangeText={handleQueryChange}
-          placeholder="Search crags, sectors..."
+          placeholder={t("search.placeholder", "Search crags, sectors...")}
           placeholderTextColor={colors.muted}
           autoCapitalize="none"
           autoCorrect={false}
@@ -146,7 +148,7 @@ export default function SearchScreen() {
           <View style={styles.emptyState}>
             <Ionicons name="search" size={48} color={colors.muted} />
             <Text style={[styles.emptyText, { color: colors.textSecondary }]}>
-              Search for any climbing area worldwide
+              {t("search.description", "Search for climbing areas by name or location")}
             </Text>
           </View>
         )

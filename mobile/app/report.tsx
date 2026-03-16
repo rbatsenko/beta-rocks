@@ -23,16 +23,17 @@ import { useUserProfile } from "@/hooks/useUserProfile";
 import { CATEGORY_COLORS } from "@/constants/config";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 const CATEGORIES = [
-  { key: "conditions", label: "Conditions", icon: "partly-sunny-outline" as const },
-  { key: "safety", label: "Safety", icon: "warning-outline" as const },
-  { key: "access", label: "Access", icon: "lock-closed-outline" as const },
-  { key: "beta", label: "Beta", icon: "bulb-outline" as const },
-  { key: "facilities", label: "Facilities", icon: "home-outline" as const },
-  { key: "climbing_info", label: "Climbing Info", icon: "trail-sign-outline" as const },
-  { key: "lost_found", label: "Lost & Found", icon: "search-outline" as const },
-  { key: "other", label: "Other", icon: "chatbubble-outline" as const },
+  { key: "conditions", labelKey: "reports.categories.conditions", icon: "partly-sunny-outline" as const },
+  { key: "safety", labelKey: "reports.categories.safety", icon: "warning-outline" as const },
+  { key: "access", labelKey: "reports.categories.access", icon: "lock-closed-outline" as const },
+  { key: "beta", labelKey: "reports.categories.climbing_info", icon: "bulb-outline" as const },
+  { key: "facilities", labelKey: "reports.categories.facilities", icon: "home-outline" as const },
+  { key: "climbing_info", labelKey: "reports.categories.climbing_info", icon: "trail-sign-outline" as const },
+  { key: "lost_found", labelKey: "reports.categories.lost_found", icon: "search-outline" as const },
+  { key: "other", labelKey: "reports.categories.other", icon: "chatbubble-outline" as const },
 ];
 
 export default function ReportScreen() {
@@ -41,6 +42,7 @@ export default function ReportScreen() {
   const isDark = colorScheme === "dark";
   const colors = isDark ? Colors.dark : Colors.light;
   const router = useRouter();
+  const { t } = useTranslation("common");
   const { syncKeyHash } = useUserProfile();
 
   const [category, setCategory] = useState("conditions");
@@ -56,11 +58,11 @@ export default function ReportScreen() {
 
   async function handleSubmit() {
     if (!text.trim() && !isConditions) {
-      Alert.alert("Required", "Please enter some text for your report.");
+      Alert.alert(t("reports.detailsRequired", "Please provide details about this report"));
       return;
     }
     if (!cragId || !syncKeyHash) {
-      Alert.alert("Error", "Missing crag or profile information.");
+      Alert.alert(t("errors.failedToLoadConditions", "Failed to load conditions. Please try again."));
       return;
     }
 
@@ -78,11 +80,11 @@ export default function ReportScreen() {
         },
         syncKeyHash
       );
-      Alert.alert("Success", "Report submitted!", [
+      Alert.alert(t("reports.reportCreated", "Report created"), t("reports.reportCreatedDescription", "Your report has been posted successfully"), [
         { text: "OK", onPress: () => router.back() },
       ]);
     } catch (err) {
-      Alert.alert("Error", err instanceof Error ? err.message : "Failed to submit report.");
+      Alert.alert(t("reports.submitFailed", "Submit failed"), err instanceof Error ? err.message : t("reports.submitFailed", "Submit failed"));
     } finally {
       setIsSubmitting(false);
     }
@@ -97,12 +99,12 @@ export default function ReportScreen() {
       <ScrollView contentContainerStyle={styles.content}>
         {cragName && (
           <Text style={[styles.cragLabel, { color: colors.textSecondary }]}>
-            Report for <Text style={{ color: colors.text, fontWeight: "600" }}>{cragName}</Text>
+            {t("reports.addReportDescription", "Share information about {{cragName}}", { cragName: "" })} <Text style={{ color: colors.text, fontWeight: "600" }}>{cragName}</Text>
           </Text>
         )}
 
         {/* Category picker */}
-        <Text style={[styles.sectionLabel, { color: colors.textSecondary }]}>Category</Text>
+        <Text style={[styles.sectionLabel, { color: colors.textSecondary }]}>{t("reports.category", "What would you like to report?")}</Text>
         <View style={styles.categoryGrid}>
           {CATEGORIES.map((cat) => {
             const isActive = category === cat.key;
@@ -122,7 +124,7 @@ export default function ReportScreen() {
               >
                 <Ionicons name={cat.icon} size={16} color={isActive ? catColor.text : colors.muted} />
                 <Text style={[styles.categoryChipText, { color: isActive ? catColor.text : colors.text }]}>
-                  {cat.label}
+                  {t(cat.labelKey)}
                 </Text>
               </TouchableOpacity>
             );
@@ -132,16 +134,16 @@ export default function ReportScreen() {
         {/* Condition ratings */}
         {isConditions && (
           <View style={styles.ratingsSection}>
-            <RatingRow label="Dryness" value={ratingDry} onChange={setRatingDry} colors={colors} />
-            <RatingRow label="Wind" value={ratingWind} onChange={setRatingWind} colors={colors} />
-            <RatingRow label="Crowds" value={ratingCrowds} onChange={setRatingCrowds} colors={colors} />
+            <RatingRow label={t("reports.dryness", "Dryness")} value={ratingDry} onChange={setRatingDry} colors={colors} />
+            <RatingRow label={t("reports.wind", "Wind")} value={ratingWind} onChange={setRatingWind} colors={colors} />
+            <RatingRow label={t("reports.crowds", "Crowds")} value={ratingCrowds} onChange={setRatingCrowds} colors={colors} />
           </View>
         )}
 
         {/* Lost / Found toggle */}
         {isLostFound && (
           <View style={styles.lostFoundSection}>
-            <Text style={[styles.sectionLabel, { color: colors.textSecondary }]}>Type</Text>
+            <Text style={[styles.sectionLabel, { color: colors.textSecondary }]}>{t("reports.lostFoundType", "Type")}</Text>
             <View style={styles.lostFoundToggle}>
               {(["lost", "found"] as const).map((type) => {
                 const isActive = lostFoundType === type;
@@ -169,7 +171,7 @@ export default function ReportScreen() {
                         { color: isActive ? colors.primaryForeground : colors.text },
                       ]}
                     >
-                      {type === "lost" ? "Lost" : "Found"}
+                      {type === "lost" ? t("reports.lostFoundTypes.lost", "Lost Item") : t("reports.lostFoundTypes.found", "Found Item")}
                     </Text>
                   </TouchableOpacity>
                 );
@@ -180,7 +182,7 @@ export default function ReportScreen() {
 
         {/* Text input */}
         <Text style={[styles.sectionLabel, { color: colors.textSecondary }]}>
-          {isConditions ? "Details (optional)" : isLostFound ? "Description" : "Report"}
+          {isConditions ? t("reports.additionalComments", "Additional comments (optional)") : isLostFound ? t("reports.details", "Details") : t("reports.details", "Details")}
         </Text>
         <TextInput
           style={[styles.textInput, { color: colors.text, backgroundColor: colors.surface, borderColor: colors.border }]}
@@ -188,8 +190,8 @@ export default function ReportScreen() {
           onChangeText={setText}
           placeholder={
             isLostFound
-              ? `Describe the ${lostFoundType} item, location, and contact info...`
-              : "Describe the conditions, situation, or beta..."
+              ? t("reports.placeholders.lost_found", "E.g., Found blue chalk bag at base of main wall, lost Black Diamond cam #2 near parking...")
+              : t(`reports.placeholders.${category}`, "Describe the conditions, situation, or beta...")
           }
           placeholderTextColor={colors.muted}
           multiline
@@ -209,7 +211,7 @@ export default function ReportScreen() {
           ) : (
             <>
               <Ionicons name="send" size={18} color={colors.primaryForeground} />
-              <Text style={[styles.submitText, { color: colors.primaryForeground }]}>Submit Report</Text>
+              <Text style={[styles.submitText, { color: colors.primaryForeground }]}>{t("reports.submitReport", "Submit Report")}</Text>
             </>
           )}
         </TouchableOpacity>

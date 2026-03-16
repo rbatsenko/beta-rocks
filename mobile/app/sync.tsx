@@ -18,12 +18,14 @@ import { useUserProfile } from "@/hooks/useUserProfile";
 import { isValidSyncKey } from "@/lib/sync-key";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 export default function SyncScreen() {
   const { colorScheme } = useTheme();
   const isDark = colorScheme === "dark";
   const colors = isDark ? Colors.dark : Colors.light;
   const router = useRouter();
+  const { t } = useTranslation("common");
   const { restoreFromSyncKey } = useUserProfile();
   const [syncKey, setSyncKey] = useState("");
   const [isRestoring, setIsRestoring] = useState(false);
@@ -31,7 +33,7 @@ export default function SyncScreen() {
   async function handleRestore() {
     const key = syncKey.trim();
     if (!isValidSyncKey(key)) {
-      Alert.alert("Invalid Sync Key", "Please enter a valid sync key (UUID format).");
+      Alert.alert(t("sync.page.invalidTitle", "Invalid Sync Key"), t("profileCreation.signIn.invalidKey", "Invalid sync key format. Please check and try again."));
       return;
     }
 
@@ -39,14 +41,14 @@ export default function SyncScreen() {
     try {
       const success = await restoreFromSyncKey(key);
       if (success) {
-        Alert.alert("Success", "Profile restored successfully!", [
+        Alert.alert(t("sync.page.restoreSuccess", "Sync key restored! Redirecting..."), "", [
           { text: "OK", onPress: () => router.back() },
         ]);
       } else {
-        Alert.alert("Not Found", "No profile found for this sync key.");
+        Alert.alert(t("sync.page.invalidTitle", "Invalid Sync Key"), t("sync.page.noKeyError", "No sync key found in URL"));
       }
     } catch {
-      Alert.alert("Error", "Failed to restore profile. Please try again.");
+      Alert.alert(t("sync.page.restoreError", "Failed to restore sync key. Please try again."));
     } finally {
       setIsRestoring(false);
     }
@@ -60,11 +62,10 @@ export default function SyncScreen() {
         </View>
 
         <Text style={[styles.title, { color: colors.text }]}>
-          Restore Your Profile
+          {t("sync.page.restoreTitle", "Restore Your Data")}
         </Text>
         <Text style={[styles.description, { color: colors.textSecondary }]}>
-          Enter your sync key from the beta.rocks web app to restore your
-          profile, favorites, and chat history on this device.
+          {t("sync.page.restoreDescription", "This will restore your favorites, chat history, and settings from another device")}
         </Text>
 
         <TextInput
@@ -100,13 +101,13 @@ export default function SyncScreen() {
             <ActivityIndicator color={colors.primaryForeground} />
           ) : (
             <Text style={[styles.restoreButtonText, { color: colors.primaryForeground }]}>
-              Restore Profile
+              {t("sync.page.restore", "Restore")}
             </Text>
           )}
         </TouchableOpacity>
 
         <Text style={[styles.hint, { color: colors.muted }]}>
-          Find your sync key in the web app: Settings → Sync Key
+          {t("sync.page.hint", "Find your sync key in the web app: Settings → Sync Key")}
         </Text>
       </View>
     </View>

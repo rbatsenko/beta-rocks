@@ -20,12 +20,14 @@ import type { Favorite, RockType } from "@/types/api";
 import { FRICTION_RATINGS, RATING_COLORS } from "@/constants/config";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 export default function FavoritesScreen() {
   const { colorScheme } = useTheme();
   const isDark = colorScheme === "dark";
   const colors = isDark ? Colors.dark : Colors.light;
   const router = useRouter();
+  const { t } = useTranslation("common");
   const [favorites, setFavorites] = useState<Favorite[]>([]);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -138,10 +140,10 @@ export default function FavoritesScreen() {
         <View style={styles.emptyState}>
           <Ionicons name="heart-outline" size={48} color={colors.muted} />
           <Text style={[styles.emptyTitle, { color: colors.text }]}>
-            No favorites yet
+            {t("favorites.empty", "No favorites yet")}
           </Text>
           <Text style={[styles.emptySubtitle, { color: colors.textSecondary }]}>
-            Search for a crag and tap the heart icon to add it here
+            {t("favorites.emptyHint", "Click the star button on any conditions card to add it to your favorites")}
           </Text>
         </View>
       )}

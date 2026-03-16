@@ -7,6 +7,7 @@ import { ThemeProvider, useTheme } from "@/contexts/ThemeContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { UserProfileProvider } from "@/contexts/UserProfileContext";
 import { Colors } from "@/constants/theme";
+import { useTranslation } from "react-i18next";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -14,6 +15,7 @@ function RootNavigator() {
   const { colorScheme } = useTheme();
   const isDark = colorScheme === "dark";
   const colors = isDark ? Colors.dark : Colors.light;
+  const { t } = useTranslation("common");
 
   useEffect(() => {
     SplashScreen.hideAsync();
@@ -38,28 +40,28 @@ function RootNavigator() {
       >
         <Stack.Screen
           name="(tabs)"
-          options={{ headerShown: false, headerBackTitle: "Back" }}
+          options={{ headerShown: false, headerBackTitle: t("dialog.close", "Close") }}
         />
         <Stack.Screen
           name="crag/[slug]"
           options={{
-            title: "Crag Details",
+            title: t("mobile.cragDetails", "Crag Details"),
             presentation: "card",
-            headerBackTitle: "Back",
+            headerBackTitle: t("dialog.close", "Close"),
           }}
         />
         <Stack.Screen
           name="report"
           options={{
-            title: "Add Report",
+            title: t("fab.addReport", "Add Report"),
             presentation: "modal",
-            headerBackTitle: "Cancel",
+            headerBackTitle: t("dialog.cancel", "Cancel"),
           }}
         />
         <Stack.Screen
           name="sync"
           options={{
-            title: "Sync Profile",
+            title: t("mobile.syncProfile", "Sync Profile"),
             presentation: "modal",
           }}
         />

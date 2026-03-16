@@ -474,8 +474,14 @@
       "cancel": "Cancel",
       "restore": "Restore",
       "replaceWarning": "This will replace any existing data on this device with data from your sync key",
-      "restoreError": "Failed to restore sync key. Please try again."
+      "restoreError": "Failed to restore sync key. Please try again.",
+      "hint": "Find your sync key in the web app: Settings → Sync Key"
     }
+  },
+  "mobile": {
+    "profileRequired": "Profile Required",
+    "cragDetails": "Crag Details",
+    "syncProfile": "Sync Profile"
   },
   "syncExplainer": {
     "title": "How Sync Works",
