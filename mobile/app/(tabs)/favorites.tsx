@@ -119,7 +119,7 @@ export default function FavoritesScreen() {
             <Text style={styles.ratingText}>{ratingInfo.label}</Text>
             {item.lastFrictionScore && (
               <Text style={styles.ratingScore}>
-                {item.lastFrictionScore.toFixed(1)}
+                {Number(item.lastFrictionScore).toFixed(1)}
               </Text>
             )}
           </View>

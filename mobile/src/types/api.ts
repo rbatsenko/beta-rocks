@@ -37,8 +37,9 @@ export interface HourlyCondition {
 export interface OptimalWindow {
   startTime: string;
   endTime: string;
-  duration: number;
-  avgFriction: number;
+  avgFrictionScore: number;
+  rating: string;
+  hourCount: number;
 }
 
 export interface DailyForecast {

@@ -15,6 +15,10 @@ import {
 import { useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { getCragBySlug } from "@/api/client";
+
+function fmt(val: number | undefined | null, decimals = 1): string {
+  return val != null ? val.toFixed(decimals) : "—";
+}
 import type {
   CragDetailResponse,
   CragData,
@@ -117,7 +121,7 @@ export default function CragDetailScreen() {
           <View style={[styles.ratingCard, { backgroundColor: ratingInfo.color }]}>
             <Text style={styles.ratingLabel}>{ratingInfo.label}</Text>
             <Text style={styles.ratingScore}>
-              {frictionScore.toFixed(1)}
+              {fmt(frictionScore)}
             </Text>
             <Text style={styles.ratingSubtext}>/ 5</Text>
           </View>
@@ -139,7 +143,7 @@ export default function CragDetailScreen() {
             <ConditionItem
               icon="thermometer-outline"
               label="Temperature"
-              value={`${conditions.current.temperature_c.toFixed(1)}°C`}
+              value={`${fmt(conditions.current.temperature_c)}°C`}
               colors={colors}
             />
             <ConditionItem
@@ -151,13 +155,13 @@ export default function CragDetailScreen() {
             <ConditionItem
               icon="flag-outline"
               label="Wind"
-              value={`${conditions.current.windSpeed_kph.toFixed(1)} km/h`}
+              value={`${fmt(conditions.current.windSpeed_kph)} km/h`}
               colors={colors}
             />
             <ConditionItem
               icon="rainy-outline"
               label="Precipitation"
-              value={`${conditions.current.precipitation_mm.toFixed(1)} mm`}
+              value={`${fmt(conditions.current.precipitation_mm)} mm`}
               colors={colors}
             />
           </View>
@@ -177,7 +181,7 @@ export default function CragDetailScreen() {
           </Text>
           {conditions.optimalWindows.slice(0, 3).map((window, i) => {
             const windowRatingKey = Math.round(
-              window.avgFriction
+              window.avgFrictionScore
             ) as keyof typeof FRICTION_RATINGS;
             const windowRating = FRICTION_RATINGS[windowRatingKey];
             return (
@@ -192,7 +196,7 @@ export default function CragDetailScreen() {
                   {formatTimeRange(window.startTime, window.endTime)}
                 </Text>
                 <Text style={[styles.windowRating, { color: colors.textSecondary }]}>
-                  {window.avgFriction.toFixed(1)}
+                  {fmt(window.avgFrictionScore)}
                 </Text>
               </View>
             );
