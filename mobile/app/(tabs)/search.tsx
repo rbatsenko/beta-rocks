@@ -14,7 +14,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
 } from "react-native";
-import { useRouter } from "expo-router";
+import { useRouter, useLocalSearchParams } from "expo-router";
 import { useFocusEffect } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { useSearch } from "@/hooks/useSearch";
@@ -30,11 +30,14 @@ export default function SearchScreen() {
   const { results, isSearching, error, search, clearResults } = useSearch();
   const [query, setQuery] = useState("");
   const inputRef = useRef<TextInput>(null);
+  const params = useLocalSearchParams<{ focus?: string }>();
 
   useFocusEffect(
     useCallback(() => {
-      setTimeout(() => inputRef.current?.focus(), 100);
-    }, [])
+      if (params.focus === "1") {
+        setTimeout(() => inputRef.current?.focus(), 100);
+      }
+    }, [params.focus])
   );
 
   function handleQueryChange(text: string) {

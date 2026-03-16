@@ -61,7 +61,7 @@ export default function HomeScreen() {
       {/* Search hint */}
       <TouchableOpacity
         style={[styles.searchHint, { backgroundColor: "rgba(249,115,22,0.08)", borderColor: "rgba(249,115,22,0.2)" }]}
-        onPress={() => router.push("/(tabs)/search")}
+        onPress={() => router.push({ pathname: "/(tabs)/search", params: { focus: "1" } })}
         activeOpacity={0.7}
       >
         <Ionicons name="search" size={16} color="#f97316" />
@@ -96,7 +96,7 @@ export default function HomeScreen() {
             </Text>
           </View>
           <View style={styles.favoritesGrid}>
-            {favorites.slice(0, 6).map((fav) => (
+            {favorites.map((fav) => (
               <TouchableOpacity
                 key={fav.id}
                 style={[styles.favoriteChip, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}
