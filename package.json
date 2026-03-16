@@ -2,6 +2,9 @@
   "name": "beta-rocks",
   "private": true,
   "version": "0.1.0",
+  "workspaces": [
+    "mobile"
+  ],
   "scripts": {
     "dev": "next dev",
     "dev:webpack": "next dev --webpack",
