@@ -658,7 +658,8 @@
       "deleteProfile": "Profil löschen",
       "deleteProfileConfirm": "Möchten Sie Ihr Profil wirklich löschen? Dadurch werden alle Ihre Daten einschließlich Favoriten, Chat-Verlauf und Einstellungen dauerhaft entfernt. Diese Aktion kann nicht rückgängig gemacht werden.",
       "deleteFailed": "Profil konnte nicht gelöscht werden. Bitte versuchen Sie es erneut."
-    }
+    },
+    "signOut": "Sign Out"
   },
   "favorites": {
     "title": "Deine Lieblingsfelsen",
@@ -690,7 +691,8 @@
       "climbing_info": "Kletterinfos",
       "facilities": "Einrichtungen",
       "other": "Sonstiges",
-      "lost_found": "Fundsachen"
+      "lost_found": "Fundsachen",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Wetter, Reibung, Trockenheit, Andrang",
@@ -863,7 +865,16 @@
     "viewOnMap": "Auf Karte ansehen",
     "viewOnGoogleMaps": "In Google Maps ansehen",
     "addToFavorites": "Zu Favoriten hinzufügen",
-    "removeFromFavorites": "Aus Favoriten entfernen"
+    "removeFromFavorites": "Aus Favoriten entfernen",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "Heute",

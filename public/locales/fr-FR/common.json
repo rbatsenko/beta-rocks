@@ -658,7 +658,8 @@
       "deleteProfile": "Supprimer le profil",
       "deleteProfileConfirm": "Voulez-vous vraiment supprimer votre profil ? Cela supprimera définitivement toutes vos données, y compris les favoris, l'historique des discussions et les paramètres. Cette action ne peut pas être annulée.",
       "deleteFailed": "Échec de la suppression du profil. Veuillez réessayer."
-    }
+    },
+    "signOut": "Sign Out"
   },
   "favorites": {
     "title": "Vos falaises favorites",
@@ -690,7 +691,8 @@
       "climbing_info": "Infos escalade",
       "facilities": "Installations",
       "other": "Autre",
-      "lost_found": "Objets trouvés"
+      "lost_found": "Objets trouvés",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Météo, adhérence, sécheresse, affluence",
@@ -863,7 +865,16 @@
     "viewOnMap": "Voir sur la carte",
     "viewOnGoogleMaps": "Voir sur Google Maps",
     "addToFavorites": "Ajouter aux favoris",
-    "removeFromFavorites": "Retirer des favoris"
+    "removeFromFavorites": "Retirer des favoris",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "Aujourd'hui",

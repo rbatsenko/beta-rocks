@@ -573,7 +573,8 @@
       "deleteProfile": "Odstrániť profil",
       "deleteProfileConfirm": "Naozaj chcete odstrániť svoj profil? Týmto natrvalo odstránite všetky vaše údaje vrátane obľúbených, histórie chatu a nastavení. Túto akciu nie je možné vrátiť späť.",
       "deleteFailed": "Nepodarilo sa odstrániť profil. Skúste to prosím znova."
-    }
+    },
+    "signOut": "Sign Out"
   },
   "favorites": {
     "title": "Vaše obľúbené skaly",
@@ -605,7 +606,8 @@
       "climbing_info": "Lezecké informácie",
       "facilities": "Zázemie",
       "other": "Ostatné",
-      "lost_found": "Stratené a nájdené"
+      "lost_found": "Stratené a nájdené",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Počasie, trenie, suchosť, preplnenosť",
@@ -778,7 +780,16 @@
     "viewOnMap": "Zobraziť na mape",
     "viewOnGoogleMaps": "Zobraziť na Google Maps",
     "addToFavorites": "Pridať do obľúbených",
-    "removeFromFavorites": "Odstrániť z obľúbených"
+    "removeFromFavorites": "Odstrániť z obľúbených",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "Dnes",

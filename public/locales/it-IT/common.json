@@ -658,7 +658,8 @@
       "deleteProfile": "Elimina profilo",
       "deleteProfileConfirm": "Sei sicuro di voler eliminare il tuo profilo? Questo rimuoverà permanentemente tutti i tuoi dati inclusi preferiti, cronologia chat e impostazioni. Questa azione non può essere annullata.",
       "deleteFailed": "Impossibile eliminare il profilo. Riprova."
-    }
+    },
+    "signOut": "Sign Out"
   },
   "favorites": {
     "title": "Le tue falesie preferite",
@@ -692,7 +693,8 @@
       "climbing_info": "Info arrampicata",
       "facilities": "Servizi",
       "other": "Altro",
-      "lost_found": "Oggetti smarriti"
+      "lost_found": "Oggetti smarriti",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Meteo, aderenza, asciutto, affollamento",
@@ -863,7 +865,16 @@
     "viewOnMap": "Vedi sulla mappa",
     "viewOnGoogleMaps": "Vedi su Google Maps",
     "addToFavorites": "Aggiungi ai preferiti",
-    "removeFromFavorites": "Rimuovi dai preferiti"
+    "removeFromFavorites": "Rimuovi dai preferiti",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "Oggi",

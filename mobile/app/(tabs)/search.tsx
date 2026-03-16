@@ -18,6 +18,7 @@ import { useRouter, useLocalSearchParams } from "expo-router";
 import { useFocusEffect } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { useSearch } from "@/hooks/useSearch";
+import { useUserProfile } from "@/hooks/useUserProfile";
 import type { SearchResult } from "@/types/api";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -30,6 +31,7 @@ export default function SearchScreen() {
   const router = useRouter();
   const { t } = useTranslation("common");
   const { results, isSearching, error, search, clearResults } = useSearch();
+  const { hasProfile } = useUserProfile();
   const [query, setQuery] = useState("");
   const inputRef = useRef<TextInput>(null);
   const params = useLocalSearchParams<{ focus?: string }>();
@@ -141,7 +143,40 @@ export default function SearchScreen() {
           renderItem={renderResult}
           keyExtractor={(item) => item.id}
           contentContainerStyle={styles.resultsList}
+          ListFooterComponent={
+            hasProfile ? (
+              <TouchableOpacity
+                style={[styles.addCragCard, { borderColor: colors.border }]}
+                onPress={() => router.push("/add-crag")}
+                activeOpacity={0.7}
+              >
+                <Ionicons name="add-circle-outline" size={20} color={colors.primary} />
+                <Text style={[styles.addCragText, { color: colors.primary }]}>
+                  {t("mobile.cantFindCrag", "Can't find your crag? Add it")}
+                </Text>
+              </TouchableOpacity>
+            ) : null
+          }
         />
+      ) : !isSearching && query.length > 0 ? (
+        <View style={styles.emptyState}>
+          <Ionicons name="alert-circle-outline" size={48} color={colors.muted} />
+          <Text style={[styles.emptyText, { color: colors.textSecondary }]}>
+            {t("search.noResults", "No results found")}
+          </Text>
+          {hasProfile && (
+            <TouchableOpacity
+              style={[styles.addCragButton, { backgroundColor: colors.primary }]}
+              onPress={() => router.push("/add-crag")}
+              activeOpacity={0.7}
+            >
+              <Ionicons name="add-circle-outline" size={18} color={colors.primaryForeground} />
+              <Text style={[styles.addCragButtonText, { color: colors.primaryForeground }]}>
+                {t("mobile.addCrag", "Add Crag")}
+              </Text>
+            </TouchableOpacity>
+          )}
+        </View>
       ) : (
         !isSearching &&
         query.length === 0 && (
@@ -150,6 +185,18 @@ export default function SearchScreen() {
             <Text style={[styles.emptyText, { color: colors.textSecondary }]}>
               {t("search.description", "Search for climbing areas by name or location")}
             </Text>
+            {hasProfile && (
+              <TouchableOpacity
+                style={[styles.addCragButton, { backgroundColor: colors.primary }]}
+                onPress={() => router.push("/add-crag")}
+                activeOpacity={0.7}
+              >
+                <Ionicons name="add-circle-outline" size={18} color={colors.primaryForeground} />
+                <Text style={[styles.addCragButtonText, { color: colors.primaryForeground }]}>
+                  {t("mobile.addCrag", "Add Crag")}
+                </Text>
+              </TouchableOpacity>
+            )}
           </View>
         )
       )}
@@ -231,5 +278,33 @@ const styles = StyleSheet.create({
     fontSize: FontSize.md,
     textAlign: "center",
     paddingHorizontal: Spacing.xl,
+  },
+  addCragButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: Spacing.sm,
+    paddingHorizontal: Spacing.md + 4,
+    paddingVertical: Spacing.sm + 2,
+    borderRadius: BorderRadius.lg,
+    marginTop: Spacing.sm,
+  },
+  addCragButtonText: {
+    fontSize: FontSize.md,
+    fontWeight: "600",
+  },
+  addCragCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: Spacing.sm,
+    padding: Spacing.md,
+    borderRadius: BorderRadius.lg,
+    borderWidth: 1,
+    borderStyle: "dashed",
+    marginBottom: Spacing.md,
+    justifyContent: "center",
+  },
+  addCragText: {
+    fontSize: FontSize.sm,
+    fontWeight: "500",
   },
 });

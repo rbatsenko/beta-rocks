@@ -32,7 +32,14 @@
     },
     "plugins": [
       "expo-router",
-      "expo-secure-store"
+      "expo-secure-store",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow beta.rocks to access your photos to attach to reports.",
+          "cameraPermission": "Allow beta.rocks to use the camera to take photos for reports."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

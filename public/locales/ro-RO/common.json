@@ -573,7 +573,8 @@
       "deleteProfile": "Șterge Profil",
       "deleteProfileConfirm": "Ești sigur că vrei să ștergi profilul? Aceasta va elimina permanent toate datele, inclusiv favorite, istoricul chat și setări. Această acțiune nu poate fi anulată.",
       "deleteFailed": "Nu s-a putut șterge profilul. Te rog încearcă din nou."
-    }
+    },
+    "signOut": "Sign Out"
   },
   "favorites": {
     "title": "Pragurile Tale Preferate",
@@ -605,7 +606,8 @@
       "climbing_info": "Info escaladă",
       "facilities": "Facilități",
       "other": "Altele",
-      "lost_found": "Obiecte pierdute și găsite"
+      "lost_found": "Obiecte pierdute și găsite",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Vreme, fricțiune, uscare, aglomerație",
@@ -778,7 +780,16 @@
     "viewOnMap": "Vezi pe hartă",
     "viewOnGoogleMaps": "Vezi pe Google Maps",
     "addToFavorites": "Adaugă la favorite",
-    "removeFromFavorites": "Elimină din favorite"
+    "removeFromFavorites": "Elimină din favorite",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "Astăzi",

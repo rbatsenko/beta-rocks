@@ -653,7 +653,8 @@
       "deleteProfile": "Obriši profil",
       "deleteProfileConfirm": "Jesi li siguran/a da želiš obrisati svoj profil? Ovo će trajno ukloniti sve tvoje podatke uključujući omiljene lokacije, povijest razgovora i postavke. Ova akcija se ne može vratiti.",
       "deleteFailed": "Brisanje profila nije uspjelo. Molimo pokušaj ponovno."
-    }
+    },
+    "signOut": "Sign Out"
   },
   "favorites": {
     "title": "Tvoji omiljeni vrhunci",
@@ -685,7 +686,8 @@
       "climbing_info": "Informacije o penjanju",
       "facilities": "Sadržaji",
       "other": "Ostalo",
-      "lost_found": "Izgubljeno i nađeno"
+      "lost_found": "Izgubljeno i nađeno",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Vrijeme, trenje, suhoća, gužve",
@@ -858,7 +860,16 @@
     "viewOnMap": "Prikaži na karti",
     "viewOnGoogleMaps": "Prikaži na Google Maps",
     "addToFavorites": "Dodaj u favorite",
-    "removeFromFavorites": "Ukloni iz favorita"
+    "removeFromFavorites": "Ukloni iz favorita",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "Danas",

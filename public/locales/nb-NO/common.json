@@ -575,7 +575,8 @@
       "deleteProfile": "Slett profil",
       "deleteProfileConfirm": "Er du sikker på at du vil slette profilen din? Dette vil permanent fjerne all dataen din inkludert favoritter, chattehistorikk og innstillinger. Denne handlingen kan ikke angres.",
       "deleteFailed": "Kunne ikke slette profilen. Vennligst prøv igjen."
-    }
+    },
+    "signOut": "Sign Out"
   },
   "favorites": {
     "title": "Dine favoritt-crag",
@@ -607,7 +608,8 @@
       "climbing_info": "Klatreinfo",
       "facilities": "Fasiliteter",
       "other": "Annet",
-      "lost_found": "Hittegods"
+      "lost_found": "Hittegods",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Vær, friksjon, tørrhet, folkemengde",
@@ -780,7 +782,16 @@
     "viewOnMap": "Vis på kart",
     "viewOnGoogleMaps": "Vis på Google Maps",
     "addToFavorites": "Legg til favoritter",
-    "removeFromFavorites": "Fjern fra favoritter"
+    "removeFromFavorites": "Fjern fra favoritter",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "I dag",

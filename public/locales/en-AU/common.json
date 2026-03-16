@@ -671,7 +671,8 @@
       "deleteProfile": "Delete Profile",
       "deleteProfileConfirm": "Are you sure you want to delete your profile? This will permanently remove all your data including favorites, chat history, and settings. This action cannot be undone.",
       "deleteFailed": "Failed to delete profile. Please try again."
-    }
+    },
+    "signOut": "Sign Out"
   },
   "favorites": {
     "title": "Your Favorite Crags",
@@ -705,7 +706,8 @@
       "climbing_info": "Climbing Info",
       "facilities": "Facilities",
       "lost_found": "Lost & Found",
-      "other": "Other"
+      "other": "Other",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Weather, friction, dryness, crowds",
@@ -882,7 +884,16 @@
     "viewOnMap": "View on map",
     "viewOnGoogleMaps": "View on Google Maps",
     "addToFavorites": "Add to favorites",
-    "removeFromFavorites": "Remove from favorites"
+    "removeFromFavorites": "Remove from favorites",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "loading": {
     "conditions": "Loading conditions...",

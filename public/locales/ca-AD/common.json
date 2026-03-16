@@ -542,7 +542,8 @@
       "deleteProfile": "Eliminar perfil",
       "deleteProfileConfirm": "Estàs segur que vols eliminar el teu perfil? Això eliminarà permanentment totes les teves dades inclosos preferits, historial de xat i configuració. Aquesta acció no es pot desfer.",
       "deleteFailed": "Error en eliminar el perfil. Si us plau, torna-ho a intentar."
-    }
+    },
+    "signOut": "Sign Out"
   },
   "favorites": {
     "title": "Els teus esparellós preferits",
@@ -574,7 +575,8 @@
       "climbing_info": "Info escalada",
       "facilities": "Instal·lacions",
       "other": "Altre",
-      "lost_found": "Objectes perduts i trobats"
+      "lost_found": "Objectes perduts i trobats",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Temps, fricció, sequedat, gent",
@@ -747,7 +749,16 @@
     "viewOnMap": "Veure al mapa",
     "viewOnGoogleMaps": "Veure a Google Maps",
     "addToFavorites": "Afegir a favorits",
-    "removeFromFavorites": "Eliminar de favorits"
+    "removeFromFavorites": "Eliminar de favorits",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "Avui",

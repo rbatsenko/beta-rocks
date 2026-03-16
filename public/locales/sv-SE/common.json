@@ -495,7 +495,8 @@
       "deleteProfile": "Ta bort profil",
       "deleteProfileConfirm": "Är du säker på att du vill ta bort din profil? Detta kommer permanent att ta bort all din data inklusive favoriter, chatthistorik och inställningar. Denna åtgärd kan inte ångras.",
       "deleteFailed": "Det gick inte att ta bort profilen. Försök igen."
-    }
+    },
+    "signOut": "Sign Out"
   },
   "favorites": {
     "title": "Dina favoritklippor",
@@ -527,7 +528,8 @@
       "climbing_info": "Klätterinfo",
       "facilities": "Faciliteter",
       "other": "Annat",
-      "lost_found": "Hittegodsförvarning"
+      "lost_found": "Hittegodsförvarning",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Väder, friktion, torrhet, trängsel",
@@ -700,7 +702,16 @@
     "viewOnMap": "Visa på karta",
     "viewOnGoogleMaps": "Visa på Google Maps",
     "addToFavorites": "Lägg till favoriter",
-    "removeFromFavorites": "Ta bort från favoriter"
+    "removeFromFavorites": "Ta bort från favoriter",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "Idag",

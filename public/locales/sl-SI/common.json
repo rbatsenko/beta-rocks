@@ -654,7 +654,8 @@
       "deleteProfile": "Izbriši profil",
       "deleteProfileConfirm": "Ali ste prepričani, da želite izbrisati svoj profil? To bo trajno odstranilo vse vaše podatke, vključno s priljubljenimi, zgodovino klepeta in nastavitvami. Tega dejanja ni mogoče razveljaviti.",
       "deleteFailed": "Profila ni bilo mogoče izbrisati. Poskusite znova."
-    }
+    },
+    "signOut": "Sign Out"
   },
   "favorites": {
     "title": "Tvoja priljubljena plezališča",
@@ -686,7 +687,8 @@
       "climbing_info": "Informacije o plezanju",
       "facilities": "Objekti",
       "other": "Drugo",
-      "lost_found": "Najdeno in izgubljeno"
+      "lost_found": "Najdeno in izgubljeno",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Vreme, trenje, suhost, gneča",
@@ -859,7 +861,16 @@
     "viewOnMap": "Prikaži na zemljevidu",
     "viewOnGoogleMaps": "Prikaži na Google Maps",
     "addToFavorites": "Dodaj med priljubljene",
-    "removeFromFavorites": "Odstrani iz priljubljenih"
+    "removeFromFavorites": "Odstrani iz priljubljenih",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "Danes",

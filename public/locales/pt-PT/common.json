@@ -573,7 +573,8 @@
       "deleteProfile": "Eliminar Perfil",
       "deleteProfileConfirm": "Tem a certeza que quer eliminar o seu perfil? Isto irá remover permanentemente todos os seus dados, incluindo favoritos, histórico de chat e definições. Esta ação não pode ser desfeita.",
       "deleteFailed": "Falha ao eliminar o perfil. Por favor tente novamente."
-    }
+    },
+    "signOut": "Sign Out"
   },
   "favorites": {
     "title": "Os Seus Crags Favoritos",
@@ -605,7 +606,8 @@
       "climbing_info": "Info de escalada",
       "facilities": "Instalações",
       "other": "Outro",
-      "lost_found": "Perdidos e achados"
+      "lost_found": "Perdidos e achados",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Tempo, fricção, secura, multidões",
@@ -778,7 +780,16 @@
     "viewOnMap": "Ver no mapa",
     "viewOnGoogleMaps": "Ver no Google Maps",
     "addToFavorites": "Adicionar aos favoritos",
-    "removeFromFavorites": "Remover dos favoritos"
+    "removeFromFavorites": "Remover dos favoritos",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "Hoje",

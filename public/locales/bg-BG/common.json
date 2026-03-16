@@ -621,7 +621,8 @@
       "deleteProfile": "Изтриване на профила",
       "deleteProfileConfirm": "Сигурни ли сте, че искате да изтриете вашия профил? Това ще премахне трайно всички ваши данни, включително любимци, история на чата и настройки. Това действие не може да бъде отменено.",
       "deleteFailed": "Неудаче при изтриване на профила. Моля, опитайте отново."
-    }
+    },
+    "signOut": "Sign Out"
   },
   "favorites": {
     "title": "Вашите любими крегове",
@@ -653,7 +654,8 @@
       "climbing_info": "Информация за катерене",
       "facilities": "Съоръжения",
       "other": "Друго",
-      "lost_found": "Изгубени и намерени"
+      "lost_found": "Изгубени и намерени",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Време, триене, сухота, претрупаност",
@@ -826,7 +828,16 @@
     "viewOnMap": "Вижте на карта",
     "viewOnGoogleMaps": "Вижте в Google Maps",
     "addToFavorites": "Добавете към любими",
-    "removeFromFavorites": "Премахнете от любими"
+    "removeFromFavorites": "Премахнете от любими",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "Днес",

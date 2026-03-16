@@ -574,7 +574,8 @@
       "deleteProfile": "Poista profiili",
       "deleteProfileConfirm": "Oletko varma, että haluat poistaa profiilisi? Tämä poistaa pysyvästi kaikki tietosi, mukaan lukien suosikit, keskusteluhistoria ja asetukset. Tätä toimintoa ei voi peruuttaa.",
       "deleteFailed": "Profiilin poisto epäonnistui. Yritä uudelleen."
-    }
+    },
+    "signOut": "Sign Out"
   },
   "favorites": {
     "title": "Suosikkikalliosi",
@@ -606,7 +607,8 @@
       "climbing_info": "Kiipeilytiedot",
       "facilities": "Tilat",
       "other": "Muu",
-      "lost_found": "Löytötavarat"
+      "lost_found": "Löytötavarat",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Sää, kitka, kuivuus, ruuhkaisuus",
@@ -779,7 +781,16 @@
     "viewOnMap": "Näytä kartalla",
     "viewOnGoogleMaps": "Näytä Google Mapsissa",
     "addToFavorites": "Lisää suosikkeihin",
-    "removeFromFavorites": "Poista suosikeista"
+    "removeFromFavorites": "Poista suosikeista",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "Tänään",

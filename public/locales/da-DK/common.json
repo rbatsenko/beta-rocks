@@ -574,7 +574,8 @@
       "deleteProfile": "Slet profil",
       "deleteProfileConfirm": "Er du sikker på, at du vil slette din profil? Dette vil permanent fjerne alle dine data, herunder favoritter, chathistorik og indstillinger. Denne handling kan ikke fortrydes.",
       "deleteFailed": "Kunne ikke slette profil. Prøv igen."
-    }
+    },
+    "signOut": "Sign Out"
   },
   "favorites": {
     "title": "Dine favoritklatrepladser",
@@ -606,7 +607,8 @@
       "climbing_info": "Klatreinfo",
       "facilities": "Faciliteter",
       "other": "Andet",
-      "lost_found": "Hittegods"
+      "lost_found": "Hittegods",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Vejr, friktion, tørhed, trængsel",
@@ -779,7 +781,16 @@
     "viewOnMap": "Vis på kort",
     "viewOnGoogleMaps": "Vis på Google Maps",
     "addToFavorites": "Tilføj til favoritter",
-    "removeFromFavorites": "Fjern fra favoritter"
+    "removeFromFavorites": "Fjern fra favoritter",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "I dag",

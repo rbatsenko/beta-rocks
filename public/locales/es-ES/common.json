@@ -658,7 +658,8 @@
       "deleteProfile": "Eliminar perfil",
       "deleteProfileConfirm": "¿Estás seguro de que quieres eliminar tu perfil? Esto eliminará permanentemente todos tus datos, incluyendo favoritos, historial de chat y configuración. Esta acción no se puede deshacer.",
       "deleteFailed": "Error al eliminar el perfil. Por favor, inténtalo de nuevo."
-    }
+    },
+    "signOut": "Sign Out"
   },
   "favorites": {
     "title": "Sus escuelas favoritas",
@@ -690,7 +691,8 @@
       "climbing_info": "Información de escalada",
       "facilities": "Instalaciones",
       "other": "Otro",
-      "lost_found": "Objetos perdidos"
+      "lost_found": "Objetos perdidos",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Clima, fricción, sequedad, afluencia",
@@ -863,7 +865,16 @@
     "viewOnMap": "Ver en el mapa",
     "viewOnGoogleMaps": "Ver en Google Maps",
     "addToFavorites": "Añadir a favoritos",
-    "removeFromFavorites": "Quitar de favoritos"
+    "removeFromFavorites": "Quitar de favoritos",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "Hoy",

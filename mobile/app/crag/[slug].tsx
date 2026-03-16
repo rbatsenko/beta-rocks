@@ -476,18 +476,34 @@ export default function CragDetailScreen() {
       </View>
 
       {/* Sectors */}
-      {sectors.length > 0 && (
-        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.sectors")} ({sectors.length})</Text>
-          {sectors.map((s) => (
-            <TouchableOpacity key={s.id} style={styles.sectorRow} onPress={() => s.slug && router.push(`/crag/${s.slug}`)} activeOpacity={0.7}>
-              <Ionicons name="layers-outline" size={16} color={colors.primary} />
-              <Text style={[styles.sectorName, { color: colors.text }]}>{s.name}</Text>
-              <Ionicons name="chevron-forward" size={16} color={colors.muted} />
+      {/* Sectors */}
+      <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+        <View style={styles.sectorHeader}>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>
+            {t("cragPage.sectors")} {sectors.length > 0 ? `(${sectors.length})` : ""}
+          </Text>
+          {hasProfile && !crag.parent_crag_id && (
+            <TouchableOpacity
+              style={[styles.addSectorButton, { backgroundColor: colors.primary }]}
+              onPress={() => router.push({ pathname: "/add-sector", params: { cragId: crag.id, cragName: crag.name, parentRockType: crag.rock_type || "" } })}
+              activeOpacity={0.7}
+            >
+              <Ionicons name="add" size={16} color={colors.primaryForeground} />
+              <Text style={[styles.addSectorText, { color: colors.primaryForeground }]}>{t("mobile.addSector", "Add Sector")}</Text>
             </TouchableOpacity>
-          ))}
+          )}
         </View>
-      )}
+        {sectors.map((s) => (
+          <TouchableOpacity key={s.id} style={styles.sectorRow} onPress={() => s.slug && router.push(`/crag/${s.slug}`)} activeOpacity={0.7}>
+            <Ionicons name="layers-outline" size={16} color={colors.primary} />
+            <Text style={[styles.sectorName, { color: colors.text }]}>{s.name}</Text>
+            <Ionicons name="chevron-forward" size={16} color={colors.muted} />
+          </TouchableOpacity>
+        ))}
+        {sectors.length === 0 && (
+          <Text style={[styles.emptyText, { color: colors.muted }]}>{t("mobile.noSectors", "No sectors yet")}</Text>
+        )}
+      </View>
 
       {/* Reports */}
       {reports.length > 0 && (
@@ -516,15 +532,43 @@ export default function CragDetailScreen() {
                     })}
                   </ScrollView>
                 )}
-                <HelpfulButton
-                  report={report}
-                  profileId={profileId}
-                  hasProfile={hasProfile}
-                  syncKeyHash={syncKeyHash}
-                  initialConfirmed={confirmedReportIds.has(report.id)}
-                  colors={colors}
-                  t={t}
-                />
+                <View style={styles.reportActions}>
+                  <HelpfulButton
+                    report={report}
+                    profileId={profileId}
+                    hasProfile={hasProfile}
+                    syncKeyHash={syncKeyHash}
+                    initialConfirmed={confirmedReportIds.has(report.id)}
+                    colors={colors}
+                    t={t}
+                  />
+                  {profileId && report.author_id === profileId && (
+                    <TouchableOpacity
+                      style={styles.editButton}
+                      onPress={() => {
+                        router.push({
+                          pathname: "/report",
+                          params: {
+                            cragId: crag!.id,
+                            cragName: crag!.name,
+                            reportId: report.id,
+                            editCategory: report.category,
+                            editText: report.text || "",
+                            editRatingDry: report.rating_dry?.toString() || "0",
+                            editRatingWind: report.rating_wind?.toString() || "0",
+                            editRatingCrowds: report.rating_crowds?.toString() || "0",
+                            editPhotos: JSON.stringify(report.photos || []),
+                            editLostFoundType: report.lost_found_type || "",
+                          },
+                        });
+                      }}
+                      activeOpacity={0.7}
+                    >
+                      <Ionicons name="pencil-outline" size={14} color={colors.primary} />
+                      <Text style={[styles.metaText, { color: colors.primary }]}>{t("common.edit", "Edit")}</Text>
+                    </TouchableOpacity>
+                  )}
+                </View>
               </View>
             );
           })}
@@ -725,6 +769,18 @@ const styles = StyleSheet.create({
   linkRow: { flexDirection: "row", alignItems: "center", gap: Spacing.sm, paddingVertical: Spacing.xs },
   linkText: { flex: 1, fontSize: FontSize.sm, fontWeight: "500" },
 
+  sectorHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
+  addSectorButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    paddingHorizontal: Spacing.sm + 2,
+    paddingVertical: Spacing.xs + 2,
+    borderRadius: BorderRadius.md,
+  },
+  addSectorText: { fontSize: FontSize.xs, fontWeight: "600" },
+  emptyText: { fontSize: FontSize.sm, fontStyle: "italic" },
+
   sectorRow: { flexDirection: "row", alignItems: "center", gap: Spacing.sm, paddingVertical: Spacing.xs },
   sectorName: { flex: 1, fontSize: FontSize.sm, fontWeight: "500" },
 
@@ -732,6 +788,8 @@ const styles = StyleSheet.create({
   reportHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
   reportText: { fontSize: FontSize.sm, lineHeight: 20 },
   reportPhoto: { width: 250, height: 180, borderRadius: BorderRadius.md, marginRight: Spacing.sm },
+  reportActions: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
+  editButton: { flexDirection: "row", alignItems: "center", gap: 4 },
   reportFooter: { flexDirection: "row", alignItems: "center", gap: 4 },
   metaText: { fontSize: FontSize.xs },
 });

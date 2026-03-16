@@ -59,6 +59,22 @@ function RootNavigator() {
           }}
         />
         <Stack.Screen
+          name="add-crag"
+          options={{
+            title: t("mobile.addCrag", "Add Crag"),
+            presentation: "modal",
+            headerBackTitle: " ",
+          }}
+        />
+        <Stack.Screen
+          name="add-sector"
+          options={{
+            title: t("mobile.addSector", "Add Sector"),
+            presentation: "modal",
+            headerBackTitle: " ",
+          }}
+        />
+        <Stack.Screen
           name="sync"
           options={{
             title: t("mobile.syncProfile", "Sync Profile"),

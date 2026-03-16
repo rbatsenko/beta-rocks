@@ -542,7 +542,8 @@
       "deleteProfile": "Διaγραφή προφίλ",
       "deleteProfileConfirm": "Είστε σίγουρος ότι θέλετε να διαγράψετε το προφίλ σας; Αυτό θα αφαιρέσει οριστικά όλα τα δεδομένα σας συμπεριλαμβανομένων των αγαπημένων, του ιστορικού συνομιλίας και των ρυθμίσεων. Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.",
       "deleteFailed": "Αποτυχία διaγραφής προφίλ. Παρακαλώ δοκιμάστε ξανά."
-    }
+    },
+    "signOut": "Sign Out"
   },
   "favorites": {
     "title": "Τα αγαπημένα σας τοιχώματα",
@@ -574,7 +575,8 @@
       "climbing_info": "Πληροφορίες αναρρίχησης",
       "facilities": "Εγκαταστάσεις",
       "other": "Άλλο",
-      "lost_found": "Απολεσθέντα και ευρεθέντα"
+      "lost_found": "Απολεσθέντα και ευρεθέντα",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Καιρός, τριβή, ξηρότητα, συνωστισμός",
@@ -747,7 +749,16 @@
     "viewOnMap": "Δείτε στο χάρτη",
     "viewOnGoogleMaps": "Δείτε στο Google Maps",
     "addToFavorites": "Προσθήκη στα αγαπημένα",
-    "removeFromFavorites": "Αφαίρεση από τα αγαπημένα"
+    "removeFromFavorites": "Αφαίρεση από τα αγαπημένα",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "Σήμερα",

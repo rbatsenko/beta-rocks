@@ -573,7 +573,8 @@
       "deleteProfile": "Profiel verwijderen",
       "deleteProfileConfirm": "Weet je zeker dat je je profiel wilt verwijderen? Dit verwijdert permanent al je gegevens, inclusief favorieten, chatgeschiedenis en instellingen. Deze actie kan niet ongedaan worden gemaakt.",
       "deleteFailed": "Kan profiel niet verwijderen. Probeer het opnieuw."
-    }
+    },
+    "signOut": "Sign Out"
   },
   "favorites": {
     "title": "Je favoriete rotsen",
@@ -605,7 +606,8 @@
       "climbing_info": "Kliminfo",
       "facilities": "Voorzieningen",
       "other": "Overig",
-      "lost_found": "Verloren voorwerpen"
+      "lost_found": "Verloren voorwerpen",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Weer, wrijving, droogte, drukte",
@@ -778,7 +780,16 @@
     "viewOnMap": "Bekijk op kaart",
     "viewOnGoogleMaps": "Bekijk op Google Maps",
     "addToFavorites": "Toevoegen aan favorieten",
-    "removeFromFavorites": "Verwijderen uit favorieten"
+    "removeFromFavorites": "Verwijderen uit favorieten",
+    "bestTimes": "Best Times to Climb",
+    "communityReports": "Community Reports",
+    "photos": "Photos",
+    "webcams": "Nearby Webcams",
+    "links": "Links",
+    "forecast": "Forecast",
+    "dry": "Dry",
+    "wet": "Wet",
+    "helpful": "Helpful"
   },
   "time": {
     "today": "Vandaag",
