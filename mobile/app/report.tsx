@@ -444,24 +444,38 @@ export default function ReportScreen() {
         >
           <Ionicons name="calendar-outline" size={18} color={colors.primary} />
           <Text style={[styles.dateText, { color: colors.text }]}>
-            {observedAt.toLocaleDateString(undefined, { weekday: "short", year: "numeric", month: "short", day: "numeric" })}
+            {observedAt.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" })}
+            {"  "}
+            {observedAt.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" })}
           </Text>
           <Text style={[styles.dateHint, { color: colors.muted }]}>
             {observedAt.toDateString() === new Date().toDateString() ? t("dialog.today", "Today") : ""}
           </Text>
         </TouchableOpacity>
         {showDatePicker && (
-          <DateTimePicker
-            value={observedAt}
-            mode="date"
-            display={Platform.OS === "ios" ? "inline" : "default"}
-            maximumDate={new Date()}
-            minimumDate={new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)}
-            onChange={(_, date) => {
-              setShowDatePicker(Platform.OS === "ios");
-              if (date) setObservedAt(date);
-            }}
-          />
+          <>
+            <DateTimePicker
+              value={observedAt}
+              mode="datetime"
+              display={Platform.OS === "ios" ? "spinner" : "default"}
+              maximumDate={new Date()}
+              minimumDate={new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)}
+              onChange={(_, date) => {
+                if (Platform.OS !== "ios") setShowDatePicker(false);
+                if (date) setObservedAt(date);
+              }}
+            />
+            {Platform.OS === "ios" && (
+              <TouchableOpacity
+                style={[styles.datePickerDone, { backgroundColor: colors.primary }]}
+                onPress={() => setShowDatePicker(false)}
+              >
+                <Text style={{ color: colors.primaryForeground, fontWeight: "600" }}>
+                  {t("common.done", "Done")}
+                </Text>
+              </TouchableOpacity>
+            )}
+          </>
         )}
 
         {/* Text input */}
@@ -634,6 +648,7 @@ const styles = StyleSheet.create({
   dateButton: { flexDirection: "row", alignItems: "center", gap: Spacing.sm, paddingHorizontal: Spacing.md, paddingVertical: Spacing.sm + 2, borderRadius: BorderRadius.lg, borderWidth: 1 },
   dateText: { fontSize: FontSize.md, flex: 1 },
   dateHint: { fontSize: FontSize.sm },
+  datePickerDone: { alignSelf: "flex-end", paddingHorizontal: Spacing.md, paddingVertical: Spacing.sm, borderRadius: BorderRadius.md },
 
   lostFoundSection: { gap: Spacing.sm },
   lostFoundToggle: { flexDirection: "row", gap: Spacing.sm },
