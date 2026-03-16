@@ -28,6 +28,7 @@ import {
 import { useLocalSearchParams, useRouter, useNavigation } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import { createReport } from "@/api/client";
 import { supabase, isSupabaseConfigured } from "@/api/supabase";
 import { useUserProfile } from "@/hooks/useUserProfile";
@@ -99,6 +100,8 @@ export default function ReportScreen() {
     (editLostFoundType as "lost" | "found") || "lost"
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [observedAt, setObservedAt] = useState(new Date());
+  const [showDatePicker, setShowDatePicker] = useState(false);
 
   // Photo state: existing paths (from edit) and new local URIs
   const [existingPhotoPaths, setExistingPhotoPaths] = useState<string[]>([]);
@@ -246,6 +249,7 @@ export default function ReportScreen() {
           rating_wind: isConditions && ratingWind > 0 ? ratingWind : null,
           rating_crowds: isConditions && ratingCrowds > 0 ? ratingCrowds : null,
           lost_found_type: isLostFound ? lostFoundType : null,
+          observed_at: observedAt.toISOString(),
           updated_at: new Date().toISOString(),
         };
 
@@ -278,6 +282,7 @@ export default function ReportScreen() {
             ...(isConditions && ratingWind > 0 && { rating_wind: ratingWind }),
             ...(isConditions && ratingCrowds > 0 && { rating_crowds: ratingCrowds }),
             ...(isLostFound && { lost_found_type: lostFoundType }),
+            observed_at: observedAt.toISOString(),
           },
           syncKeyHash
         );
@@ -426,6 +431,37 @@ export default function ReportScreen() {
               })}
             </View>
           </View>
+        )}
+
+        {/* Observation date */}
+        <Text style={[styles.sectionLabel, { color: colors.textSecondary }]}>
+          {t("reports.observedAt", "When did you observe this?")}
+        </Text>
+        <TouchableOpacity
+          style={[styles.dateButton, { backgroundColor: colors.surface, borderColor: colors.border }]}
+          onPress={() => setShowDatePicker(true)}
+          activeOpacity={0.7}
+        >
+          <Ionicons name="calendar-outline" size={18} color={colors.primary} />
+          <Text style={[styles.dateText, { color: colors.text }]}>
+            {observedAt.toLocaleDateString(undefined, { weekday: "short", year: "numeric", month: "short", day: "numeric" })}
+          </Text>
+          <Text style={[styles.dateHint, { color: colors.muted }]}>
+            {observedAt.toDateString() === new Date().toDateString() ? t("dialog.today", "Today") : ""}
+          </Text>
+        </TouchableOpacity>
+        {showDatePicker && (
+          <DateTimePicker
+            value={observedAt}
+            mode="date"
+            display={Platform.OS === "ios" ? "inline" : "default"}
+            maximumDate={new Date()}
+            minimumDate={new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)}
+            onChange={(_, date) => {
+              setShowDatePicker(Platform.OS === "ios");
+              if (date) setObservedAt(date);
+            }}
+          />
         )}
 
         {/* Text input */}
@@ -595,6 +631,9 @@ const styles = StyleSheet.create({
   },
   categoryChipText: { fontSize: FontSize.sm, fontWeight: "500" },
   categoryHint: { fontSize: FontSize.xs, lineHeight: 18, marginTop: -Spacing.md },
+  dateButton: { flexDirection: "row", alignItems: "center", gap: Spacing.sm, paddingHorizontal: Spacing.md, paddingVertical: Spacing.sm + 2, borderRadius: BorderRadius.lg, borderWidth: 1 },
+  dateText: { fontSize: FontSize.md, flex: 1 },
+  dateHint: { fontSize: FontSize.sm },
 
   lostFoundSection: { gap: Spacing.sm },
   lostFoundToggle: { flexDirection: "row", gap: Spacing.sm },

@@ -39,7 +39,8 @@
           "photosPermission": "Allow beta.rocks to access your photos to attach to reports.",
           "cameraPermission": "Allow beta.rocks to use the camera to take photos for reports."
         }
-      ]
+      ],
+      "@react-native-community/datetimepicker"
     ],
     "experiments": {
       "typedRoutes": true

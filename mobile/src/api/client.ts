@@ -134,6 +134,7 @@ export async function createReport(
     rating_wind?: number;
     rating_crowds?: number;
     lost_found_type?: "lost" | "found";
+    observed_at?: string;
   },
   syncKeyHash: string
 ): Promise<Report> {
@@ -147,6 +148,7 @@ export async function createReport(
       rating_wind: report.rating_wind,
       rating_crowds: report.rating_crowds,
       lost_found_type: report.lost_found_type,
+      observed_at: report.observed_at,
       authorId: syncKeyHash,
     },
     syncKeyHash,
