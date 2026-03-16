@@ -706,7 +706,21 @@
     "photoHint": "Προσθέστε έως 3 φωτογραφίες (μέγ. 2MB η καθεμία). Οι φωτογραφίες θα συμπιεστούν αυτόματα.",
     "photoUploadFailed": "Η μεταφόρτωση φωτογραφίας απέτυχε",
     "uploadingPhotos": "Μεταφόρτωση φωτογραφιών...",
-    "submitReport": "Υποβολή αναφοράς"
+    "submitReport": "Υποβολή αναφοράς",
+    "observedAt": "When did you observe this?",
+    "maxPhotos": "Maximum photos",
+    "maxPhotosDescription": "You can add up to 3 photos per report.",
+    "permissionRequired": "Permission required",
+    "cameraPermission": "Camera permission is needed to take photos.",
+    "galleryPermission": "Photo library access is needed to select photos.",
+    "takePhoto": "Take Photo",
+    "chooseFromGallery": "Choose from Gallery",
+    "addPhotos": "Add Photos",
+    "reportUpdated": "Report updated",
+    "reportUpdatedDescription": "Your report has been updated successfully",
+    "reportCreated": "Report created",
+    "reportCreatedDescription": "Your report has been posted successfully",
+    "submitFailed": "Submit failed"
   },
   "editCragDialog": {
     "title": "Επεξεργασία Βράχου",
@@ -810,5 +824,25 @@
     "openOnWindy": "Άνοιγμα στο Windy.com",
     "poweredBy": "Παρέχεται από",
     "noWebcams": "Δεν βρέθηκαν webcam κοντά"
+  },
+  "mobile": {
+    "addCrag": "Add Crag",
+    "addSector": "Add Sector",
+    "noSectors": "No sectors yet",
+    "cantFindCrag": "Can't find your crag? Add it",
+    "cragName": "Crag Name",
+    "country": "Country",
+    "state": "State / Region",
+    "municipality": "Municipality",
+    "village": "Village / Area",
+    "rockType": "Rock Type",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "sectorName": "Sector Name"
+  },
+  "common": {
+    "done": "Done",
+    "cancel": "Cancel",
+    "edit": "Edit"
   }
 }

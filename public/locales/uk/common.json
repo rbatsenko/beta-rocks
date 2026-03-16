@@ -811,7 +811,21 @@
     "photoHint": "Додайте до 3 фотографій (макс. 2МБ кожна). Фотографії будуть автоматично стиснуті.",
     "photoUploadFailed": "Завантаження фото не вдалося",
     "uploadingPhotos": "Завантаження фотографій...",
-    "submitReport": "Надіслати звіт"
+    "submitReport": "Надіслати звіт",
+    "observedAt": "When did you observe this?",
+    "maxPhotos": "Maximum photos",
+    "maxPhotosDescription": "You can add up to 3 photos per report.",
+    "permissionRequired": "Permission required",
+    "cameraPermission": "Camera permission is needed to take photos.",
+    "galleryPermission": "Photo library access is needed to select photos.",
+    "takePhoto": "Take Photo",
+    "chooseFromGallery": "Choose from Gallery",
+    "addPhotos": "Add Photos",
+    "reportUpdated": "Report updated",
+    "reportUpdatedDescription": "Your report has been updated successfully",
+    "reportCreated": "Report created",
+    "reportCreatedDescription": "Your report has been posted successfully",
+    "submitFailed": "Submit failed"
   },
   "editCragDialog": {
     "title": "Редагувати Скелю",
@@ -920,5 +934,25 @@
     "openOnWindy": "Відкрити на Windy.com",
     "poweredBy": "За підтримки",
     "noWebcams": "Веб-камери поблизу не знайдено"
+  },
+  "mobile": {
+    "addCrag": "Add Crag",
+    "addSector": "Add Sector",
+    "noSectors": "No sectors yet",
+    "cantFindCrag": "Can't find your crag? Add it",
+    "cragName": "Crag Name",
+    "country": "Country",
+    "state": "State / Region",
+    "municipality": "Municipality",
+    "village": "Village / Area",
+    "rockType": "Rock Type",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "sectorName": "Sector Name"
+  },
+  "common": {
+    "done": "Done",
+    "cancel": "Cancel",
+    "edit": "Edit"
   }
 }

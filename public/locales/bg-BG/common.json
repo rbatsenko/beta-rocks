@@ -779,7 +779,21 @@
     "photoHint": "Добавете до 3 снимки (макс. 2MB всяка). Снимките ще бъдат автоматично компресирани.",
     "photoUploadFailed": "Качването на снимка неуспешно",
     "uploadingPhotos": "Качване на снимки...",
-    "submitReport": "Изпрати доклад"
+    "submitReport": "Изпрати доклад",
+    "observedAt": "When did you observe this?",
+    "maxPhotos": "Maximum photos",
+    "maxPhotosDescription": "You can add up to 3 photos per report.",
+    "permissionRequired": "Permission required",
+    "cameraPermission": "Camera permission is needed to take photos.",
+    "galleryPermission": "Photo library access is needed to select photos.",
+    "takePhoto": "Take Photo",
+    "chooseFromGallery": "Choose from Gallery",
+    "addPhotos": "Add Photos",
+    "reportUpdated": "Report updated",
+    "reportUpdatedDescription": "Your report has been updated successfully",
+    "reportCreated": "Report created",
+    "reportCreatedDescription": "Your report has been posted successfully",
+    "submitFailed": "Submit failed"
   },
   "editCragDialog": {
     "title": "Редактиране на скала",
@@ -886,5 +900,25 @@
     "openOnWindy": "Отвори в Windy.com",
     "poweredBy": "Предоставено от",
     "noWebcams": "Не са намерени уеб камери наблизо"
+  },
+  "mobile": {
+    "addCrag": "Add Crag",
+    "addSector": "Add Sector",
+    "noSectors": "No sectors yet",
+    "cantFindCrag": "Can't find your crag? Add it",
+    "cragName": "Crag Name",
+    "country": "Country",
+    "state": "State / Region",
+    "municipality": "Municipality",
+    "village": "Village / Area",
+    "rockType": "Rock Type",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "sectorName": "Sector Name"
+  },
+  "common": {
+    "done": "Done",
+    "cancel": "Cancel",
+    "edit": "Edit"
   }
 }

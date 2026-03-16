@@ -431,7 +431,20 @@
   "mobile": {
     "profileRequired": "Wymagany profil",
     "cragDetails": "Szczegóły skałki",
-    "syncProfile": "Synchronizacja profilu"
+    "syncProfile": "Synchronizacja profilu",
+    "addCrag": "Dodaj skałę",
+    "addSector": "Dodaj sektor",
+    "noSectors": "Brak sektorów",
+    "cantFindCrag": "Nie możesz znaleźć skały? Dodaj ją",
+    "cragName": "Nazwa skały",
+    "country": "Kraj",
+    "state": "Województwo / Region",
+    "municipality": "Gmina",
+    "village": "Miejscowość",
+    "rockType": "Typ skały",
+    "latitude": "Szerokość geogr.",
+    "longitude": "Długość geogr.",
+    "sectorName": "Nazwa sektora"
   },
   "syncExplainer": {
     "title": "Jak działa synchronizacja",
@@ -839,7 +852,16 @@
     "photoHint": "Dodaj do 3 zdjęć (maks. 2MB każde). Zdjęcia będą automatycznie skompresowane.",
     "photoUploadFailed": "Nie udało się przesłać zdjęć",
     "uploadingPhotos": "Przesyłanie zdjęć...",
-    "submitReport": "Wyślij raport"
+    "submitReport": "Wyślij raport",
+    "observedAt": "Kiedy to zaobserwowałeś?",
+    "maxPhotos": "Maksymalna liczba zdjęć",
+    "maxPhotosDescription": "Możesz dodać do 3 zdjęć na raport.",
+    "permissionRequired": "Wymagane uprawnienie",
+    "cameraPermission": "Wymagane uprawnienie do aparatu.",
+    "galleryPermission": "Wymagany dostęp do galerii zdjęć.",
+    "takePhoto": "Zrób zdjęcie",
+    "chooseFromGallery": "Wybierz z galerii",
+    "addPhotos": "Dodaj zdjęcia"
   },
   "editCragDialog": {
     "title": "Edytuj Skałę",
@@ -950,5 +972,10 @@
     "openOnWindy": "Otwórz na Windy.com",
     "poweredBy": "Obsługiwane przez",
     "noWebcams": "Nie znaleziono kamer w pobliżu"
+  },
+  "common": {
+    "done": "Gotowe",
+    "cancel": "Anuluj",
+    "edit": "Edytuj"
   }
 }

@@ -822,7 +822,21 @@
     "photoHint": "Añade hasta 3 fotos (máx. 2MB cada una). Las fotos se comprimirán automáticamente.",
     "photoUploadFailed": "Error al subir la foto",
     "uploadingPhotos": "Subiendo fotos...",
-    "submitReport": "Enviar informe"
+    "submitReport": "Enviar informe",
+    "observedAt": "When did you observe this?",
+    "maxPhotos": "Maximum photos",
+    "maxPhotosDescription": "You can add up to 3 photos per report.",
+    "permissionRequired": "Permission required",
+    "cameraPermission": "Camera permission is needed to take photos.",
+    "galleryPermission": "Photo library access is needed to select photos.",
+    "takePhoto": "Take Photo",
+    "chooseFromGallery": "Choose from Gallery",
+    "addPhotos": "Add Photos",
+    "reportUpdated": "Report updated",
+    "reportUpdatedDescription": "Your report has been updated successfully",
+    "reportCreated": "Report created",
+    "reportCreatedDescription": "Your report has been posted successfully",
+    "submitFailed": "Submit failed"
   },
   "editCragDialog": {
     "title": "Editar Escuela",
@@ -931,5 +945,25 @@
     "openOnWindy": "Abrir en Windy.com",
     "poweredBy": "Desarrollado por",
     "noWebcams": "No se encontraron webcams cercanas"
+  },
+  "mobile": {
+    "addCrag": "Add Crag",
+    "addSector": "Add Sector",
+    "noSectors": "No sectors yet",
+    "cantFindCrag": "Can't find your crag? Add it",
+    "cragName": "Crag Name",
+    "country": "Country",
+    "state": "State / Region",
+    "municipality": "Municipality",
+    "village": "Village / Area",
+    "rockType": "Rock Type",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "sectorName": "Sector Name"
+  },
+  "common": {
+    "done": "Done",
+    "cancel": "Cancel",
+    "edit": "Edit"
   }
 }

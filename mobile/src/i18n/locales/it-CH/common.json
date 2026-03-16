@@ -822,7 +822,21 @@
     "photoHint": "Aggiungi fino a 3 foto (max 2MB ciascuna). Le foto verranno compresse automaticamente.",
     "photoUploadFailed": "Caricamento foto fallito",
     "uploadingPhotos": "Caricamento foto...",
-    "submitReport": "Invia segnalazione"
+    "submitReport": "Invia segnalazione",
+    "observedAt": "When did you observe this?",
+    "maxPhotos": "Maximum photos",
+    "maxPhotosDescription": "You can add up to 3 photos per report.",
+    "permissionRequired": "Permission required",
+    "cameraPermission": "Camera permission is needed to take photos.",
+    "galleryPermission": "Photo library access is needed to select photos.",
+    "takePhoto": "Take Photo",
+    "chooseFromGallery": "Choose from Gallery",
+    "addPhotos": "Add Photos",
+    "reportUpdated": "Report updated",
+    "reportUpdatedDescription": "Your report has been updated successfully",
+    "reportCreated": "Report created",
+    "reportCreatedDescription": "Your report has been posted successfully",
+    "submitFailed": "Submit failed"
   },
   "editCragDialog": {
     "title": "Modifica Falesia",
@@ -931,5 +945,25 @@
     "openOnWindy": "Apri su Windy.com",
     "poweredBy": "Offerto da",
     "noWebcams": "Nessuna webcam trovata nelle vicinanze"
+  },
+  "mobile": {
+    "addCrag": "Add Crag",
+    "addSector": "Add Sector",
+    "noSectors": "No sectors yet",
+    "cantFindCrag": "Can't find your crag? Add it",
+    "cragName": "Crag Name",
+    "country": "Country",
+    "state": "State / Region",
+    "municipality": "Municipality",
+    "village": "Village / Area",
+    "rockType": "Rock Type",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "sectorName": "Sector Name"
+  },
+  "common": {
+    "done": "Done",
+    "cancel": "Cancel",
+    "edit": "Edit"
   }
 }

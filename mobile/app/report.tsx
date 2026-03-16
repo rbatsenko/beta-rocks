@@ -444,7 +444,7 @@ export default function ReportScreen() {
         >
           <Ionicons name="calendar-outline" size={18} color={colors.primary} />
           <Text style={[styles.dateText, { color: colors.text }]}>
-            {observedAt.toLocaleString(undefined, { weekday: "short", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}
+            {observedAt.toLocaleString(undefined, { weekday: "short", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false })}
           </Text>
           <Text style={[styles.dateHint, { color: colors.muted }]}>
             {observedAt.toDateString() === new Date().toDateString() ? t("dialog.today", "Today") : ""}

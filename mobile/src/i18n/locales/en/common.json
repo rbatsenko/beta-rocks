@@ -481,7 +481,20 @@
   "mobile": {
     "profileRequired": "Profile Required",
     "cragDetails": "Crag Details",
-    "syncProfile": "Sync Profile"
+    "syncProfile": "Sync Profile",
+    "addCrag": "Add Crag",
+    "addSector": "Add Sector",
+    "noSectors": "No sectors yet",
+    "cantFindCrag": "Can't find your crag? Add it",
+    "cragName": "Crag Name",
+    "country": "Country",
+    "state": "State / Region",
+    "municipality": "Municipality",
+    "village": "Village / Area",
+    "rockType": "Rock Type",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "sectorName": "Sector Name"
   },
   "syncExplainer": {
     "title": "How Sync Works",
@@ -884,7 +897,16 @@
     "photoHint": "Add up to 3 photos (max 2MB each). Photos will be compressed automatically.",
     "photoUploadFailed": "Photo upload failed",
     "uploadingPhotos": "Uploading photos...",
-    "submitReport": "Submit Report"
+    "submitReport": "Submit Report",
+    "observedAt": "When did you observe this?",
+    "maxPhotos": "Maximum photos",
+    "maxPhotosDescription": "You can add up to 3 photos per report.",
+    "permissionRequired": "Permission required",
+    "cameraPermission": "Camera permission is needed to take photos.",
+    "galleryPermission": "Photo library access is needed to select photos.",
+    "takePhoto": "Take Photo",
+    "chooseFromGallery": "Choose from Gallery",
+    "addPhotos": "Add Photos"
   },
   "editCragDialog": {
     "title": "Edit Crag",
@@ -993,5 +1015,10 @@
     },
     "reports": "Reports",
     "votes": "Votes"
+  },
+  "common": {
+    "done": "Done",
+    "cancel": "Cancel",
+    "edit": "Edit"
   }
 }
