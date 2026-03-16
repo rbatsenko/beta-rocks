@@ -107,6 +107,7 @@ export default function CragDetailScreen() {
   const [lightboxPhotos, setLightboxPhotos] = useState<string[]>([]);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [lightboxVisible, setLightboxVisible] = useState(false);
+  const [parentCrag, setParentCrag] = useState<{ name: string; slug: string } | null>(null);
   const { hasProfile, profileId, syncKeyHash, profile } = useUserProfile();
 
   function openLightbox(photos: string[], index: number) {
@@ -194,6 +195,12 @@ export default function CragDetailScreen() {
       setConditions(data.conditions);
       setReports(data.reports);
       setSectors(data.sectors);
+      // Fetch parent crag if this is a sector
+      if (data.crag.parent_crag_id && isSupabaseConfigured && supabase) {
+        supabase.from("crags").select("name, slug").eq("id", data.crag.parent_crag_id).single()
+          .then(({ data: parent }) => { if (parent) setParentCrag(parent); })
+          .catch(() => {});
+      }
       // Fetch webcams in parallel
       if (data.crag.lat && data.crag.lon) {
         fetch(`${API_URL}/api/webcams?lat=${data.crag.lat}&lon=${data.crag.lon}`)
@@ -255,6 +262,12 @@ export default function CragDetailScreen() {
             {flag ? `${flag} ` : ""}{crag.name}
           </Text>
           <Text style={[styles.location, { color: colors.textSecondary }]}>{locationStr}</Text>
+          {parentCrag && (
+            <TouchableOpacity onPress={() => router.push(`/crag/${parentCrag.slug}`)} style={styles.parentLink}>
+              <Ionicons name="arrow-up-outline" size={14} color={colors.primary} />
+              <Text style={[styles.parentLinkText, { color: colors.primary }]}>{parentCrag.name}</Text>
+            </TouchableOpacity>
+          )}
           <View style={styles.badgeRow}>
             {crag.rock_type && crag.rock_type !== "unknown" && (
               <View style={[styles.badge, { backgroundColor: colors.surface, borderColor: colors.border }]}>
@@ -606,6 +619,8 @@ const styles = StyleSheet.create({
   headerText: { flex: 1, gap: Spacing.xs },
   cragName: { fontSize: FontSize.xl, fontWeight: "700" },
   location: { fontSize: FontSize.sm },
+  parentLink: { flexDirection: "row", alignItems: "center", gap: Spacing.xs, marginTop: 2 },
+  parentLinkText: { fontSize: FontSize.sm, fontWeight: "500" },
   badgeRow: { flexDirection: "row", gap: Spacing.sm, marginTop: Spacing.xs, flexWrap: "wrap" },
   badge: { flexDirection: "row", alignItems: "center", gap: 4, paddingHorizontal: Spacing.sm, paddingVertical: 3, borderRadius: BorderRadius.sm, borderWidth: 1 },
   badgeText: { fontSize: FontSize.xs, fontWeight: "500" },
