@@ -96,7 +96,7 @@ export default function HomeScreen() {
             </Text>
           </View>
           <View style={styles.favoritesGrid}>
-            {favorites.map((fav) => (
+            {favorites.slice(0, 8).map((fav) => (
               <TouchableOpacity
                 key={fav.id}
                 style={[styles.favoriteChip, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}
