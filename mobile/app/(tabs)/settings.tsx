@@ -382,7 +382,7 @@ const styles = StyleSheet.create({
   divider: { height: 1, marginLeft: Spacing.xl + Spacing.md },
   hint: { fontSize: FontSize.xs, marginHorizontal: Spacing.xs, lineHeight: 18 },
 
-  segmentedControl: { flexDirection: "row", marginHorizontal: Spacing.md, marginBottom: Spacing.md, gap: Spacing.sm },
+  segmentedControl: { flexDirection: "row", marginHorizontal: Spacing.md, marginTop: Spacing.sm, marginBottom: Spacing.md, gap: Spacing.sm },
   segment: { flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: Spacing.xs, paddingVertical: Spacing.sm, borderRadius: BorderRadius.md, borderWidth: 1 },
   segmentText: { fontSize: FontSize.xs, fontWeight: "500" },
 
