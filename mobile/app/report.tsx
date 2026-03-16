@@ -131,6 +131,11 @@ export default function ReportScreen() {
           })}
         </View>
 
+        {/* Category hint */}
+        <Text style={[styles.categoryHint, { color: colors.muted }]}>
+          {t(`reports.categoryHelp.${category}`, t(`reports.categoryDescriptions.${category}`, ""))}
+        </Text>
+
         {/* Condition ratings */}
         {isConditions && (
           <View style={styles.ratingsSection}>
@@ -274,6 +279,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   categoryChipText: { fontSize: FontSize.sm, fontWeight: "500" },
+  categoryHint: { fontSize: FontSize.xs, lineHeight: 18, marginTop: -Spacing.xs },
 
   lostFoundSection: { gap: Spacing.sm },
   lostFoundToggle: { flexDirection: "row", gap: Spacing.sm },

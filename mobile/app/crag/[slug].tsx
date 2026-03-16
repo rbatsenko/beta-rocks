@@ -15,7 +15,7 @@ import {
   Alert,
   FlatList,
 } from "react-native";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter, useNavigation } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { getCragBySlug, confirmReport as apiConfirmReport, removeConfirmation } from "@/api/client";
 import { API_URL, SUPABASE_URL } from "@/constants/config";
@@ -92,6 +92,7 @@ export default function CragDetailScreen() {
   const isDark = colorScheme === "dark";
   const colors = isDark ? Colors.dark : Colors.light;
   const router = useRouter();
+  const navigation = useNavigation();
 
   const [crag, setCrag] = useState<CragData | null>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -117,6 +118,13 @@ export default function CragDetailScreen() {
   }
 
   useEffect(() => { if (slug) loadCragData(); }, [slug]);
+
+  // Update header title to crag name, hide back label
+  useEffect(() => {
+    if (crag) {
+      navigation.setOptions({ title: crag.name, headerBackTitle: " " });
+    }
+  }, [crag, navigation]);
 
   // Check if this crag is favorited
   useEffect(() => {
