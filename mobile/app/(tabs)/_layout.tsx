@@ -78,7 +78,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="feed"
         options={{
-          title: t("feed.title", "Feed"),
+          title: t("feed.live", "Feed"),
           tabBarIcon: ({ color, size }) => (
             <View>
               <Ionicons name="flash-outline" size={size} color={color} />

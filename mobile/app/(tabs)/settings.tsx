@@ -75,8 +75,8 @@ export default function SettingsScreen() {
     setIsCreating(false);
     if (success) {
       Alert.alert(
-        "Profile Created",
-        "Your sync key has been generated. Copy it from settings to sync across devices.",
+        t("profileCreated.title"),
+        t("profileCreated.description"),
       );
     } else {
       Alert.alert("Error", "Failed to create profile. Please try again.");
@@ -96,7 +96,7 @@ export default function SettingsScreen() {
   async function handleCopySyncKey() {
     if (profile?.syncKey) {
       await Clipboard.setStringAsync(profile.syncKey);
-      Alert.alert("Copied", "Sync key copied to clipboard.");
+      Alert.alert(t("settings.syncKey.copy"), t("settings.syncKey.description"));
     }
   }
 
@@ -146,7 +146,7 @@ export default function SettingsScreen() {
               style={[styles.nameInput, { color: colors.text, borderColor: colors.border, backgroundColor: colors.surface }]}
               value={createNameInput}
               onChangeText={setCreateNameInput}
-              placeholder="Display name (optional)"
+              placeholder={t("settings.displayName.placeholder")}
               placeholderTextColor={colors.muted}
               maxLength={30}
             />
@@ -158,7 +158,7 @@ export default function SettingsScreen() {
               {isCreating ? (
                 <ActivityIndicator color={colors.primaryForeground} />
               ) : (
-                <Text style={[styles.primaryButtonText, { color: colors.primaryForeground }]}>Create Profile</Text>
+                <Text style={[styles.primaryButtonText, { color: colors.primaryForeground }]}>{t("profileCreation.title")}</Text>
               )}
             </TouchableOpacity>
             <TouchableOpacity
@@ -166,7 +166,7 @@ export default function SettingsScreen() {
               onPress={() => router.push("/sync")}
             >
               <Ionicons name="sync-outline" size={18} color={colors.primary} />
-              <Text style={[styles.secondaryButtonText, { color: colors.primary }]}>Restore with Sync Key</Text>
+              <Text style={[styles.secondaryButtonText, { color: colors.primary }]}>{t("settings.syncKey.restoreTitle")}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -198,7 +198,7 @@ export default function SettingsScreen() {
               ) : (
                 <TouchableOpacity style={styles.valueRow} onPress={handleEditName}>
                   <Text style={[styles.value, { color: colors.textSecondary }]}>
-                    {profile?.displayName || "Anonymous Climber"}
+                    {profile?.displayName || t("profile.anonymous", "Anonymous")}
                   </Text>
                   <Ionicons name="pencil-outline" size={16} color={colors.muted} />
                 </TouchableOpacity>
@@ -224,7 +224,7 @@ export default function SettingsScreen() {
             </TouchableOpacity>
           </View>
           <Text style={[styles.hint, { color: colors.muted }]}>
-            Save your sync key to restore your profile on other devices.
+            {t("settings.syncKey.description")}
           </Text>
         </View>
       )}
@@ -238,19 +238,19 @@ export default function SettingsScreen() {
               <View style={styles.statItem}>
                 <Ionicons name="document-text-outline" size={20} color={colors.primary} />
                 <Text style={[styles.statValue, { color: colors.text }]}>{stats.reportsPosted}</Text>
-                <Text style={[styles.statLabel, { color: colors.textSecondary }]}>Reports</Text>
+                <Text style={[styles.statLabel, { color: colors.textSecondary }]}>{t("feed.reports", "Reports")}</Text>
               </View>
               <View style={[styles.statDivider, { backgroundColor: colors.border }]} />
               <View style={styles.statItem}>
                 <Ionicons name="thumbs-up-outline" size={20} color={colors.primary} />
                 <Text style={[styles.statValue, { color: colors.text }]}>{stats.confirmationsGiven}</Text>
-                <Text style={[styles.statLabel, { color: colors.textSecondary }]}>Votes</Text>
+                <Text style={[styles.statLabel, { color: colors.textSecondary }]}>{t("feed.votes", "Votes")}</Text>
               </View>
               <View style={[styles.statDivider, { backgroundColor: colors.border }]} />
               <View style={styles.statItem}>
                 <Ionicons name="heart-outline" size={20} color={colors.primary} />
                 <Text style={[styles.statValue, { color: colors.text }]}>{stats.favoritesCount}</Text>
-                <Text style={[styles.statLabel, { color: colors.textSecondary }]}>Favorites</Text>
+                <Text style={[styles.statLabel, { color: colors.textSecondary }]}>{t("profile.favorites")}</Text>
               </View>
             </View>
           </View>
@@ -291,7 +291,7 @@ export default function SettingsScreen() {
         <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
           <View style={[styles.row, { paddingBottom: Spacing.sm }]}>
             <Ionicons name="color-palette-outline" size={20} color={colors.primary} />
-            <Text style={[styles.label, { color: colors.text }]}>Theme</Text>
+            <Text style={[styles.label, { color: colors.text }]}>{t("settings.theme", "Theme")}</Text>
           </View>
           <View style={styles.segmentedControl}>
             {THEME_OPTIONS.map((option) => {
@@ -318,7 +318,7 @@ export default function SettingsScreen() {
 
           <TouchableOpacity style={styles.row} onPress={() => setShowLanguagePicker(!showLanguagePicker)}>
             <Ionicons name="language-outline" size={20} color={colors.primary} />
-            <Text style={[styles.label, { color: colors.text }]}>Language</Text>
+            <Text style={[styles.label, { color: colors.text }]}>{t("settings.language", "Language")}</Text>
             <Text style={[styles.value, { color: colors.textSecondary }]}>{currentLanguageLabel}</Text>
             <Ionicons name={showLanguagePicker ? "chevron-up" : "chevron-down"} size={16} color={colors.muted} />
           </TouchableOpacity>
@@ -347,11 +347,11 @@ export default function SettingsScreen() {
 
       {/* About */}
       <View style={styles.section}>
-        <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>ABOUT</Text>
+        <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>{t("settings.about", "ABOUT").toUpperCase()}</Text>
         <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
           <View style={styles.row}>
             <Ionicons name="information-circle-outline" size={20} color={colors.primary} />
-            <Text style={[styles.label, { color: colors.text }]}>Version</Text>
+            <Text style={[styles.label, { color: colors.text }]}>{t("settings.version", "Version")}</Text>
             <Text style={[styles.value, { color: colors.textSecondary }]}>{APP_VERSION}</Text>
           </View>
         </View>
