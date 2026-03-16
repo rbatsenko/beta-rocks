@@ -2,7 +2,7 @@
  * Favorites screen - bookmarked crags with cached conditions
  */
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import {
   View,
   Text,
@@ -12,6 +12,7 @@ import {
   RefreshControl,
 } from "react-native";
 import { useRouter } from "expo-router";
+import { useFocusEffect } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { getFavorites, saveFavorites } from "@/lib/storage";
 import { getConditions } from "@/api/client";
@@ -28,9 +29,12 @@ export default function FavoritesScreen() {
   const [favorites, setFavorites] = useState<Favorite[]>([]);
   const [refreshing, setRefreshing] = useState(false);
 
-  useEffect(() => {
-    loadFavorites();
-  }, []);
+  // Reload favorites every time the tab is focused
+  useFocusEffect(
+    useCallback(() => {
+      loadFavorites();
+    }, [])
+  );
 
   function loadFavorites(): Favorite[] {
     const stored = getFavorites() as Favorite[];
