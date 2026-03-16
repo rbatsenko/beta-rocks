@@ -1,6 +1,5 @@
 /**
  * Theme context - system/light/dark mode with MMKV persistence
- * Pattern from HangsFree app
  */
 
 import {
@@ -8,13 +7,10 @@ import {
   useContext,
   useState,
   useEffect,
-  useRef,
+  useCallback,
   type ReactNode,
 } from "react";
-import {
-  useColorScheme as useSystemColorScheme,
-  Appearance,
-} from "react-native";
+import { Appearance } from "react-native";
 import { MMKV } from "react-native-mmkv";
 
 export type ThemeMode = "system" | "light" | "dark";
@@ -31,43 +27,45 @@ const ThemeContext = createContext<ThemeContextValue | null>(null);
 const THEME_STORAGE_KEY = "beta_rocks_theme_mode";
 const storage = new MMKV();
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
-  const systemColorScheme = useSystemColorScheme();
-  const [themeMode, setThemeModeState] = useState<ThemeMode>("system");
-  const isMounted = useRef(false);
+function getSystemColorScheme(): ColorScheme {
+  return Appearance.getColorScheme() === "dark" ? "dark" : "light";
+}
 
-  useEffect(() => {
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  const [themeMode, setThemeModeState] = useState<ThemeMode>(() => {
     const saved = storage.getString(THEME_STORAGE_KEY);
     if (saved === "light" || saved === "dark" || saved === "system") {
-      setThemeModeState(saved);
+      return saved;
+    }
+    return "system";
+  });
+
+  const [systemScheme, setSystemScheme] = useState<ColorScheme>(
+    getSystemColorScheme
+  );
+
+  // Listen for system appearance changes
+  useEffect(() => {
+    const subscription = Appearance.addChangeListener(({ colorScheme }) => {
+      setSystemScheme(colorScheme === "dark" ? "dark" : "light");
+    });
+    return () => subscription.remove();
+  }, []);
+
+  // When user changes theme mode, persist and sync with system
+  const setThemeMode = useCallback((mode: ThemeMode) => {
+    storage.set(THEME_STORAGE_KEY, mode);
+    setThemeModeState(mode);
+
+    if (mode === "system") {
+      Appearance.setColorScheme(null);
+    } else {
+      Appearance.setColorScheme(mode);
     }
   }, []);
 
-  useEffect(() => {
-    if (isMounted.current) {
-      storage.set(THEME_STORAGE_KEY, themeMode);
-    } else {
-      isMounted.current = true;
-    }
-
-    // Sync with system appearance API
-    if (themeMode === "system") {
-      Appearance.setColorScheme(null);
-    } else {
-      Appearance.setColorScheme(themeMode);
-    }
-  }, [themeMode]);
-
   const colorScheme: ColorScheme =
-    themeMode === "system"
-      ? systemColorScheme === "dark"
-        ? "dark"
-        : "light"
-      : themeMode;
-
-  function setThemeMode(mode: ThemeMode) {
-    setThemeModeState(mode);
-  }
+    themeMode === "system" ? systemScheme : themeMode;
 
   return (
     <ThemeContext.Provider value={{ themeMode, colorScheme, setThemeMode }}>
