@@ -6,10 +6,10 @@ export const API_URL =
   process.env.EXPO_PUBLIC_API_URL || "https://beta.rocks";
 
 export const SUPABASE_URL =
-  process.env.EXPO_PUBLIC_SUPABASE_URL || "";
+  process.env.EXPO_PUBLIC_SUPABASE_URL || "https://tgvcjhzjdyfloppunnna.supabase.co";
 
 export const SUPABASE_ANON_KEY =
-  process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY || "";
+  process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY || "sb_publishable_l3JH7lREcNNPqL6lHBxjuQ_KuX6jhEK";
 
 export const APP_NAME = "beta.rocks";
 export const APP_VERSION = "0.1.0";
