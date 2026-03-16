@@ -1,5 +1,5 @@
 /**
- * Favorites screen - bookmarked crags with cached conditions
+ * Favorites screen - bookmarked crags in a 2-column grid
  */
 
 import { useState, useCallback } from "react";
@@ -17,7 +17,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { getFavorites, saveFavorites } from "@/lib/storage";
 import { getConditions } from "@/api/client";
 import type { Favorite, RockType } from "@/types/api";
-import { FRICTION_RATINGS } from "@/constants/config";
+import { FRICTION_RATINGS, RATING_COLORS } from "@/constants/config";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
 
@@ -29,7 +29,6 @@ export default function FavoritesScreen() {
   const [favorites, setFavorites] = useState<Favorite[]>([]);
   const [refreshing, setRefreshing] = useState(false);
 
-  // Reload favorites every time the tab is focused
   useFocusEffect(
     useCallback(() => {
       loadFavorites();
@@ -38,19 +37,12 @@ export default function FavoritesScreen() {
 
   function loadFavorites(): Favorite[] {
     const stored = getFavorites() as Favorite[];
-    console.log("[Favorites] loadFavorites called, got", stored.length, "items");
-    if (stored.length > 0) {
-      console.log("[Favorites] first item:", JSON.stringify(stored[0], null, 2));
-    }
     setFavorites(stored);
     return stored;
   }
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
-
-    // Load fresh favorites from storage and use the returned value
-    // to avoid stale closure over `favorites` state
     const currentFavorites = loadFavorites();
 
     const updated = await Promise.all(
@@ -92,6 +84,8 @@ export default function FavoritesScreen() {
 
   function renderFavorite({ item }: { item: Favorite }) {
     const ratingInfo = getRatingInfo(item.lastFrictionScore);
+    const ratingColorKey = ratingInfo?.label as keyof typeof RATING_COLORS | undefined;
+    const rColors = ratingColorKey ? RATING_COLORS[ratingColorKey] : null;
 
     return (
       <TouchableOpacity
@@ -99,32 +93,29 @@ export default function FavoritesScreen() {
         onPress={() => handleFavoritePress(item)}
         activeOpacity={0.7}
       >
-        <View style={styles.cardContent}>
-          <Text style={[styles.cragName, { color: colors.text }]}>
-            {item.areaName}
-          </Text>
-          <Text style={[styles.location, { color: colors.textSecondary }]}>
-            {item.location}
-          </Text>
-          {item.rockType && item.rockType !== "unknown" && (
-            <Text style={[styles.rockType, { color: colors.muted }]}>
-              {item.rockType.charAt(0).toUpperCase() + item.rockType.slice(1)}
+        <Text style={[styles.cragName, { color: colors.text }]} numberOfLines={2}>
+          {item.areaName}
+        </Text>
+        <Text style={[styles.location, { color: colors.textSecondary }]} numberOfLines={1}>
+          {item.location}
+        </Text>
+        {rColors && ratingInfo && (
+          <View style={[styles.ratingBadge, { backgroundColor: rColors.bg }]}>
+            <Text style={[styles.ratingText, { color: rColors.text }]}>
+              {ratingInfo.label}
             </Text>
-          )}
-        </View>
-        {ratingInfo && (
-          <View
-            style={[styles.ratingBadge, { backgroundColor: ratingInfo.color }]}
-          >
-            <Text style={styles.ratingText}>{ratingInfo.label}</Text>
-            {item.lastFrictionScore && (
-              <Text style={styles.ratingScore}>
-                {Number(item.lastFrictionScore).toFixed(1)}
+            {item.lastFrictionScore != null && (
+              <Text style={[styles.ratingScore, { color: rColors.text }]}>
+                {" "}{Number(item.lastFrictionScore).toFixed(1)}
               </Text>
             )}
           </View>
         )}
-        <Ionicons name="chevron-forward" size={20} color={colors.muted} />
+        {item.rockType && item.rockType !== "unknown" && (
+          <Text style={[styles.rockType, { color: colors.muted }]}>
+            {item.rockType.charAt(0).toUpperCase() + item.rockType.slice(1)}
+          </Text>
+        )}
       </TouchableOpacity>
     );
   }
@@ -136,6 +127,8 @@ export default function FavoritesScreen() {
           data={favorites}
           renderItem={renderFavorite}
           keyExtractor={(item) => item.id}
+          numColumns={2}
+          columnWrapperStyle={styles.row}
           contentContainerStyle={styles.list}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -161,49 +154,46 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   list: {
-    padding: Spacing.md,
+    padding: Spacing.sm,
+  },
+  row: {
     gap: Spacing.sm,
+    marginBottom: Spacing.sm,
   },
   card: {
-    flexDirection: "row",
-    alignItems: "center",
+    flex: 1,
     padding: Spacing.md,
     borderRadius: BorderRadius.lg,
     borderWidth: 1,
-    marginBottom: Spacing.sm,
-    gap: Spacing.sm,
-  },
-  cardContent: {
-    flex: 1,
-    gap: 2,
+    gap: Spacing.xs,
   },
   cragName: {
     fontSize: FontSize.md,
     fontWeight: "600",
   },
   location: {
-    fontSize: FontSize.sm,
+    fontSize: FontSize.xs,
   },
   rockType: {
     fontSize: FontSize.xs,
     textTransform: "capitalize",
   },
   ratingBadge: {
-    paddingHorizontal: Spacing.sm + 2,
-    paddingVertical: Spacing.xs,
-    borderRadius: BorderRadius.md,
+    flexDirection: "row",
+    alignSelf: "flex-start",
+    paddingHorizontal: Spacing.sm,
+    paddingVertical: 3,
+    borderRadius: BorderRadius.sm,
     alignItems: "center",
-    minWidth: 50,
+    marginTop: 2,
   },
   ratingText: {
-    color: "#ffffff",
     fontSize: FontSize.xs,
     fontWeight: "700",
   },
   ratingScore: {
-    color: "#ffffff",
     fontSize: FontSize.xs,
-    opacity: 0.9,
+    fontWeight: "600",
   },
   emptyState: {
     flex: 1,
