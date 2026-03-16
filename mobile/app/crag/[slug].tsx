@@ -560,7 +560,9 @@ function HelpfulButton({ report, profileId, hasProfile, syncKeyHash, colors, t }
   colors: (typeof Colors)["light"]; t: (key: string, fallback?: string) => string;
 }) {
   const isOwnReport = profileId != null && report.author_id === profileId;
-  const count = (report as any).confirmationCount ?? report.confirmations?.[0]?.count ?? 0;
+  const initialCount = (report as any).confirmationCount ?? report.confirmations?.[0]?.count ?? 0;
+  const [confirmed, setConfirmed] = useState(false);
+  const [count, setCount] = useState(initialCount);
 
   if (isOwnReport) {
     return (
@@ -579,11 +581,21 @@ function HelpfulButton({ report, profileId, hasProfile, syncKeyHash, colors, t }
           Alert.alert(t("mobile.profileRequired", "Profile Required"), t("reports.loginToConfirm", "Please set up your profile to confirm reports"));
           return;
         }
-        try { await apiConfirmReport(report.id, syncKeyHash); } catch {}
+        if (confirmed) return;
+        try {
+          await apiConfirmReport(report.id, syncKeyHash);
+          setConfirmed(true);
+          setCount(count + 1);
+        } catch (err) {
+          // 409 = already confirmed
+          if (err && (err as any).status === 409) {
+            setConfirmed(true);
+          }
+        }
       }}
     >
-      <Ionicons name="thumbs-up-outline" size={14} color={colors.primary} />
-      <Text style={[styles.metaText, { color: colors.primary }]}>{t("cragPage.helpful")} ({count})</Text>
+      <Ionicons name={confirmed ? "thumbs-up" : "thumbs-up-outline"} size={14} color={confirmed ? "#22c55e" : colors.primary} />
+      <Text style={[styles.metaText, { color: confirmed ? "#22c55e" : colors.primary }]}>{t("cragPage.helpful")} ({count})</Text>
     </TouchableOpacity>
   );
 }
