@@ -582,18 +582,12 @@ function HelpfulButton({ report, profileId, hasProfile, syncKeyHash, colors, t }
           Alert.alert(t("mobile.profileRequired", "Profile Required"), t("reports.loginToConfirm", "Please set up your profile to confirm reports"));
           return;
         }
-        if (loading) return;
+        if (loading || confirmed) return;
         setLoading(true);
         try {
-          if (confirmed) {
-            await removeConfirmation(report.id, syncKeyHash);
-            setConfirmed(false);
-            setCount(c => Math.max(0, c - 1));
-          } else {
-            await apiConfirmReport(report.id, syncKeyHash);
-            setConfirmed(true);
-            setCount(c => c + 1);
-          }
+          await apiConfirmReport(report.id, syncKeyHash);
+          setConfirmed(true);
+          setCount(c => c + 1);
         } catch (err) {
           if (err && (err as any).status === 409) {
             setConfirmed(true);
