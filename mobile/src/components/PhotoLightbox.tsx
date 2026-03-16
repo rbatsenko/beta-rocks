@@ -1,8 +1,8 @@
 /**
- * Full-screen photo lightbox with swipe between images
+ * Full-screen photo lightbox with swipe + pinch-to-zoom
  */
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import {
   Modal,
   View,
@@ -13,9 +13,15 @@ import {
   Text,
   FlatList,
 } from "react-native";
+import { GestureDetector, Gesture, GestureHandlerRootView } from "react-native-gesture-handler";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+} from "react-native-reanimated";
 import { Ionicons } from "@expo/vector-icons";
 
-const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("window");
+const { width: SW, height: SH } = Dimensions.get("window");
 
 interface PhotoLightboxProps {
   visible: boolean;
@@ -24,18 +30,93 @@ interface PhotoLightboxProps {
   onClose: () => void;
 }
 
+function ZoomableImage({ uri }: { uri: string }) {
+  const scale = useSharedValue(1);
+  const savedScale = useSharedValue(1);
+  const translateX = useSharedValue(0);
+  const translateY = useSharedValue(0);
+  const savedTranslateX = useSharedValue(0);
+  const savedTranslateY = useSharedValue(0);
+
+  const pinch = Gesture.Pinch()
+    .onUpdate((e) => {
+      scale.value = savedScale.value * e.scale;
+    })
+    .onEnd(() => {
+      if (scale.value < 1) {
+        scale.value = withTiming(1);
+        savedScale.value = 1;
+        translateX.value = withTiming(0);
+        translateY.value = withTiming(0);
+        savedTranslateX.value = 0;
+        savedTranslateY.value = 0;
+      } else {
+        savedScale.value = scale.value;
+      }
+    });
+
+  const pan = Gesture.Pan()
+    .minPointers(2)
+    .onUpdate((e) => {
+      translateX.value = savedTranslateX.value + e.translationX;
+      translateY.value = savedTranslateY.value + e.translationY;
+    })
+    .onEnd(() => {
+      savedTranslateX.value = translateX.value;
+      savedTranslateY.value = translateY.value;
+    });
+
+  const doubleTap = Gesture.Tap()
+    .numberOfTaps(2)
+    .onEnd(() => {
+      if (scale.value > 1) {
+        scale.value = withTiming(1);
+        savedScale.value = 1;
+        translateX.value = withTiming(0);
+        translateY.value = withTiming(0);
+        savedTranslateX.value = 0;
+        savedTranslateY.value = 0;
+      } else {
+        scale.value = withTiming(2.5);
+        savedScale.value = 2.5;
+      }
+    });
+
+  const composed = Gesture.Simultaneous(pinch, pan, doubleTap);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateX: translateX.value },
+      { translateY: translateY.value },
+      { scale: scale.value },
+    ],
+  }));
+
+  return (
+    <GestureDetector gesture={composed}>
+      <Animated.View style={[styles.imageContainer, animatedStyle]}>
+        <Image source={{ uri }} style={styles.image} resizeMode="contain" />
+      </Animated.View>
+    </GestureDetector>
+  );
+}
+
 export function PhotoLightbox({ visible, photos, initialIndex = 0, onClose }: PhotoLightboxProps) {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
 
+  const onScrollEnd = useCallback((e: any) => {
+    setCurrentIndex(Math.round(e.nativeEvent.contentOffset.x / SW));
+  }, []);
+
+  if (!visible) return null;
+
   return (
     <Modal visible={visible} transparent animationType="fade" statusBarTranslucent>
-      <View style={styles.container}>
-        {/* Close button */}
+      <GestureHandlerRootView style={styles.container}>
         <TouchableOpacity style={styles.closeButton} onPress={onClose}>
           <Ionicons name="close" size={28} color="white" />
         </TouchableOpacity>
 
-        {/* Counter */}
         {photos.length > 1 && (
           <View style={styles.counter}>
             <Text style={styles.counterText}>
@@ -44,29 +125,22 @@ export function PhotoLightbox({ visible, photos, initialIndex = 0, onClose }: Ph
           </View>
         )}
 
-        {/* Photo carousel */}
         <FlatList
           data={photos}
           horizontal
           pagingEnabled
           showsHorizontalScrollIndicator={false}
           initialScrollIndex={initialIndex}
-          getItemLayout={(_, index) => ({ length: SCREEN_WIDTH, offset: SCREEN_WIDTH * index, index })}
-          onMomentumScrollEnd={(e) => {
-            setCurrentIndex(Math.round(e.nativeEvent.contentOffset.x / SCREEN_WIDTH));
-          }}
+          getItemLayout={(_, index) => ({ length: SW, offset: SW * index, index })}
+          onMomentumScrollEnd={onScrollEnd}
           renderItem={({ item }) => (
-            <View style={styles.imageContainer}>
-              <Image
-                source={{ uri: item }}
-                style={styles.image}
-                resizeMode="contain"
-              />
+            <View style={{ width: SW, height: SH, justifyContent: "center" }}>
+              <ZoomableImage uri={item} />
             </View>
           )}
           keyExtractor={(_, i) => i.toString()}
         />
-      </View>
+      </GestureHandlerRootView>
     </Modal>
   );
 }
@@ -75,7 +149,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "rgba(0,0,0,0.95)",
-    justifyContent: "center",
   },
   closeButton: {
     position: "absolute",
@@ -98,13 +171,13 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   imageContainer: {
-    width: SCREEN_WIDTH,
-    height: SCREEN_HEIGHT,
+    width: SW,
+    height: SH * 0.7,
     justifyContent: "center",
     alignItems: "center",
   },
   image: {
-    width: SCREEN_WIDTH,
-    height: SCREEN_HEIGHT * 0.7,
+    width: SW,
+    height: SH * 0.7,
   },
 });
