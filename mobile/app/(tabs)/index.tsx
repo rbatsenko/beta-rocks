@@ -7,7 +7,6 @@ import {
   View,
   Text,
   StyleSheet,
-  Linking,
   TouchableOpacity,
 } from "react-native";
 import { useRouter } from "expo-router";
@@ -26,7 +25,7 @@ export default function ChatScreen() {
       <View style={styles.content}>
         <Text style={[styles.title, { color: colors.text }]}>beta.rocks</Text>
         <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
-          AI-powered climbing conditions for any crag worldwide
+          Climbing conditions for any crag worldwide
         </Text>
 
         <View style={styles.actions}>
@@ -56,18 +55,6 @@ export default function ChatScreen() {
             <Text style={[styles.actionDesc, { color: colors.textSecondary }]}>
               Quick access to your saved crags
             </Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={[styles.chatNotice, { backgroundColor: colors.surface, borderColor: colors.border }]}>
-          <Ionicons name="chatbubble-outline" size={20} color={colors.muted} />
-          <Text style={[styles.chatNoticeText, { color: colors.textSecondary }]}>
-            AI chat is available on the web at beta.rocks
-          </Text>
-          <TouchableOpacity
-            onPress={() => Linking.openURL("https://beta.rocks")}
-          >
-            <Ionicons name="open-outline" size={18} color={colors.primary} />
           </TouchableOpacity>
         </View>
       </View>
@@ -110,19 +97,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   actionDesc: {
-    fontSize: FontSize.sm,
-  },
-  chatNotice: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: Spacing.sm,
-    padding: Spacing.md,
-    borderRadius: BorderRadius.lg,
-    borderWidth: 1,
-    marginTop: Spacing.md,
-  },
-  chatNoticeText: {
-    flex: 1,
     fontSize: FontSize.sm,
   },
 });
