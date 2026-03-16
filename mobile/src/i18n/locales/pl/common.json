@@ -803,8 +803,8 @@
     "observationDateHelp": "Możesz zgłaszać warunki do 7 dni wstecz",
     "lostFoundType": "Typ",
     "lostFoundTypes": {
-      "lost": "Zgubiony przedmiot",
-      "found": "Znaleziony przedmiot"
+      "lost": "Zgubione",
+      "found": "Znalezione"
     },
     "lostFoundTypePlaceholder": "Select if this is a lost or found item",
     "lostFoundTypeRequired": "Wybierz, czy jest to zgubiony czy znaleziony przedmiot",

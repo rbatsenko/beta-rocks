@@ -176,7 +176,7 @@ export default function ReportScreen() {
                         { color: isActive ? colors.primaryForeground : colors.text },
                       ]}
                     >
-                      {type === "lost" ? t("reports.lostFoundTypes.lost", "Lost Item") : t("reports.lostFoundTypes.found", "Found Item")}
+                      {t(`reports.lostFoundTypes.${type}`, type === "lost" ? "Lost" : "Found")}
                     </Text>
                   </TouchableOpacity>
                 );
