@@ -1,6 +1,6 @@
 /**
  * Home screen - matches web's welcome state
- * Logo, search hint, example queries, and favorites quick access
+ * Logo, search hint, and favorites quick access
  */
 
 import { useState, useCallback } from "react";
@@ -19,15 +19,6 @@ import type { Favorite } from "@/types/api";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useTranslation } from "react-i18next";
-
-const EXAMPLE_QUERIES = [
-  "Fontainebleau",
-  "El Capitan",
-  "Kalymnos",
-  "Siurana",
-  "Magic Wood",
-  "Bishop",
-];
 
 export default function HomeScreen() {
   const { colorScheme } = useTheme();
@@ -71,22 +62,6 @@ export default function HomeScreen() {
           {t("welcome.searchHint")}
         </Text>
       </TouchableOpacity>
-
-      {/* Example queries */}
-      <View style={styles.exampleQueries}>
-        {EXAMPLE_QUERIES.map((query) => (
-          <TouchableOpacity
-            key={query}
-            style={[styles.queryChip, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}
-            onPress={() => router.push("/(tabs)/search")}
-            activeOpacity={0.7}
-          >
-            <Text style={[styles.queryChipText, { color: colors.text }]}>
-              {query}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
 
       {/* Favorites quick access */}
       {favorites.length > 0 && (
@@ -161,22 +136,6 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.sm,
   },
   searchHintText: {
-    fontSize: FontSize.sm,
-  },
-  exampleQueries: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    gap: Spacing.sm,
-    marginBottom: Spacing.md,
-  },
-  queryChip: {
-    paddingHorizontal: Spacing.md,
-    paddingVertical: Spacing.sm,
-    borderRadius: BorderRadius.lg,
-    borderWidth: 1,
-  },
-  queryChipText: {
     fontSize: FontSize.sm,
   },
   favoritesSection: {
