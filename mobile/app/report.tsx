@@ -29,9 +29,8 @@ const CATEGORIES = [
   { key: "conditions", labelKey: "reports.categories.conditions", icon: "partly-sunny-outline" as const },
   { key: "safety", labelKey: "reports.categories.safety", icon: "warning-outline" as const },
   { key: "access", labelKey: "reports.categories.access", icon: "lock-closed-outline" as const },
-  { key: "beta", labelKey: "reports.categories.beta", icon: "bulb-outline" as const },
-  { key: "facilities", labelKey: "reports.categories.facilities", icon: "home-outline" as const },
   { key: "climbing_info", labelKey: "reports.categories.climbing_info", icon: "trail-sign-outline" as const },
+  { key: "facilities", labelKey: "reports.categories.facilities", icon: "home-outline" as const },
   { key: "lost_found", labelKey: "reports.categories.lost_found", icon: "search-outline" as const },
   { key: "other", labelKey: "reports.categories.other", icon: "chatbubble-outline" as const },
 ];
