@@ -36,6 +36,8 @@ export default function SearchScreen() {
     useCallback(() => {
       if (params.focus === "1") {
         setTimeout(() => inputRef.current?.focus(), 100);
+        // Clear the param so it doesn't re-trigger on tab switches
+        router.setParams({ focus: undefined });
       }
     }, [params.focus])
   );
