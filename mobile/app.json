@@ -37,7 +37,8 @@
       "expo-router",
       "expo-font",
       "expo-secure-store",
-      "expo-localization"
+      "expo-localization",
+      "./plugins/withDisableSwiftConcurrency"
     ],
     "experiments": {
       "typedRoutes": true
