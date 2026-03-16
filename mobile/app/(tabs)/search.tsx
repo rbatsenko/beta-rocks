@@ -2,7 +2,7 @@
  * Search screen - find crags and sectors
  */
 
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import {
   View,
   Text,
@@ -13,6 +13,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { useRouter } from "expo-router";
+import { useFocusEffect } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { useSearch } from "@/hooks/useSearch";
 import type { SearchResult } from "@/types/api";
@@ -26,6 +27,13 @@ export default function SearchScreen() {
   const router = useRouter();
   const { results, isSearching, error, search, clearResults } = useSearch();
   const [query, setQuery] = useState("");
+  const inputRef = useRef<TextInput>(null);
+
+  useFocusEffect(
+    useCallback(() => {
+      setTimeout(() => inputRef.current?.focus(), 100);
+    }, [])
+  );
 
   function handleQueryChange(text: string) {
     setQuery(text);
@@ -83,6 +91,7 @@ export default function SearchScreen() {
       >
         <Ionicons name="search" size={20} color={colors.muted} />
         <TextInput
+          ref={inputRef}
           style={[styles.searchInput, { color: colors.text }]}
           value={query}
           onChangeText={handleQueryChange}
@@ -90,7 +99,6 @@ export default function SearchScreen() {
           placeholderTextColor={colors.muted}
           autoCapitalize="none"
           autoCorrect={false}
-          autoFocus
           returnKeyType="search"
         />
         {query.length > 0 && (
