@@ -318,7 +318,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   categoryChipText: { fontSize: FontSize.sm, fontWeight: "500" },
-  categoryHint: { fontSize: FontSize.xs, lineHeight: 18, marginTop: -Spacing.sm },
+  categoryHint: { fontSize: FontSize.xs, lineHeight: 18, marginTop: -Spacing.md },
 
   lostFoundSection: { gap: Spacing.sm },
   lostFoundToggle: { flexDirection: "row", gap: Spacing.sm },
@@ -339,10 +339,10 @@ const styles = StyleSheet.create({
   ratingLabel: { fontSize: FontSize.md, fontWeight: "500" },
   ratingHints: { flexDirection: "row", justifyContent: "space-between" },
   ratingHint: { fontSize: FontSize.xs },
-  ratingButtons: { flexDirection: "row", gap: Spacing.xs },
+  ratingButtons: { flexDirection: "row", gap: Spacing.sm },
   ratingButton: {
-    width: 36,
-    height: 36,
+    flex: 1,
+    height: 42,
     borderRadius: BorderRadius.md,
     borderWidth: 1,
     alignItems: "center",

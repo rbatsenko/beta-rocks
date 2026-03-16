@@ -612,7 +612,8 @@
       "climbing_info": "Kliminfo",
       "facilities": "Voorzieningen",
       "other": "Overig",
-      "lost_found": "Verloren voorwerpen"
+      "lost_found": "Verloren voorwerpen",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Weer, wrijving, droogte, drukte",

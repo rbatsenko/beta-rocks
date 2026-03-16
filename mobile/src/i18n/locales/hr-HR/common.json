@@ -692,7 +692,8 @@
       "climbing_info": "Informacije o penjanju",
       "facilities": "Sadržaji",
       "other": "Ostalo",
-      "lost_found": "Izgubljeno i nađeno"
+      "lost_found": "Izgubljeno i nađeno",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Vrijeme, trenje, suhoća, gužve",

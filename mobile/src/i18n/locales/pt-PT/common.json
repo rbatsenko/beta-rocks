@@ -612,7 +612,8 @@
       "climbing_info": "Info de escalada",
       "facilities": "Instalações",
       "other": "Outro",
-      "lost_found": "Perdidos e achados"
+      "lost_found": "Perdidos e achados",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Tempo, fricção, secura, multidões",

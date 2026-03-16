@@ -613,7 +613,8 @@
       "climbing_info": "Klatreinfo",
       "facilities": "Faciliteter",
       "other": "Andet",
-      "lost_found": "Hittegods"
+      "lost_found": "Hittegods",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Vejr, friktion, tørhed, trængsel",

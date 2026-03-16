@@ -755,7 +755,8 @@
       "climbing_info": "Climbing Info",
       "facilities": "Facilities",
       "lost_found": "Lost & Found",
-      "other": "Other"
+      "other": "Other",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Weather, friction, dryness, crowds",

@@ -581,7 +581,8 @@
       "climbing_info": "Πληροφορίες αναρρίχησης",
       "facilities": "Εγκαταστάσεις",
       "other": "Άλλο",
-      "lost_found": "Απολεσθέντα και ευρεθέντα"
+      "lost_found": "Απολεσθέντα και ευρεθέντα",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Καιρός, τριβή, ξηρότητα, συνωστισμός",

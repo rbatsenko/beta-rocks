@@ -692,7 +692,8 @@
       "climbing_info": "Lezecké informace",
       "facilities": "Zázemí",
       "other": "Ostatní",
-      "lost_found": "Ztráty a nálezy"
+      "lost_found": "Ztráty a nálezy",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Počasí, tření, suchost, přeplněnost",

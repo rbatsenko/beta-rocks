@@ -613,7 +613,8 @@
       "climbing_info": "Kiipeilytiedot",
       "facilities": "Tilat",
       "other": "Muu",
-      "lost_found": "Löytötavarat"
+      "lost_found": "Löytötavarat",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Sää, kitka, kuivuus, ruuhkaisuus",

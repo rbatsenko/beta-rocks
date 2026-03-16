@@ -612,7 +612,8 @@
       "climbing_info": "Lezecké informácie",
       "facilities": "Zázemie",
       "other": "Ostatné",
-      "lost_found": "Stratené a nájdené"
+      "lost_found": "Stratené a nájdené",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Počasie, trenie, suchosť, preplnenosť",

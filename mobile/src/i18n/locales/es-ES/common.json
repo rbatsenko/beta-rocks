@@ -697,7 +697,8 @@
       "climbing_info": "Información de escalada",
       "facilities": "Instalaciones",
       "other": "Otro",
-      "lost_found": "Objetos perdidos"
+      "lost_found": "Objetos perdidos",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Clima, fricción, sequedad, afluencia",

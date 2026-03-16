@@ -732,13 +732,14 @@
     "viewAllReports": "Zobacz wszystkie raporty",
     "category": "Co chcesz zgłosić?",
     "categories": {
-      "conditions": "Warun",
+      "conditions": "Warunki",
       "safety": "Bezpieczeństwo",
       "access": "Dostęp",
       "climbing_info": "Info wspinaczkowe",
       "facilities": "Udogodnienia",
       "other": "Inne",
-      "lost_found": "Rzeczy znalezione"
+      "lost_found": "Rzeczy znalezione",
+      "beta": "Beta / Wskazówki"
     },
     "categoryDescriptions": {
       "conditions": "Pogoda, tarcie, suchość, tłumy",

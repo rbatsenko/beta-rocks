@@ -692,7 +692,8 @@
       "climbing_info": "Інформація про лазіння",
       "facilities": "Зручності",
       "other": "Інше",
-      "lost_found": "Загублені речі"
+      "lost_found": "Загублені речі",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Погода, зчеплення, сухість, натовп",

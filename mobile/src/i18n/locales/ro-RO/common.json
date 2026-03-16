@@ -612,7 +612,8 @@
       "climbing_info": "Info escaladă",
       "facilities": "Facilități",
       "other": "Altele",
-      "lost_found": "Obiecte pierdute și găsite"
+      "lost_found": "Obiecte pierdute și găsite",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Vreme, fricțiune, uscare, aglomerație",

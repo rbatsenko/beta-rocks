@@ -534,7 +534,8 @@
       "climbing_info": "Klätterinfo",
       "facilities": "Faciliteter",
       "other": "Annat",
-      "lost_found": "Hittegodsförvarning"
+      "lost_found": "Hittegodsförvarning",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Väder, friktion, torrhet, trängsel",

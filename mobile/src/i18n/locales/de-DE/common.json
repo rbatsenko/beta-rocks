@@ -697,7 +697,8 @@
       "climbing_info": "Kletterinfos",
       "facilities": "Einrichtungen",
       "other": "Sonstiges",
-      "lost_found": "Fundsachen"
+      "lost_found": "Fundsachen",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Wetter, Reibung, Trockenheit, Andrang",

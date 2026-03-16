@@ -581,7 +581,8 @@
       "climbing_info": "Info escalada",
       "facilities": "Instal·lacions",
       "other": "Altre",
-      "lost_found": "Objectes perduts i trobats"
+      "lost_found": "Objectes perduts i trobats",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Temps, fricció, sequedat, gent",

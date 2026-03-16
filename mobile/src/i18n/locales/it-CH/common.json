@@ -699,7 +699,8 @@
       "climbing_info": "Info arrampicata",
       "facilities": "Servizi",
       "other": "Altro",
-      "lost_found": "Oggetti smarriti"
+      "lost_found": "Oggetti smarriti",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Meteo, aderenza, asciutto, affollamento",

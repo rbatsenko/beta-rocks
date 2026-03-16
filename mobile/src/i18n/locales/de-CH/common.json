@@ -697,7 +697,8 @@
       "climbing_info": "Kletterinfos",
       "facilities": "Einrichtungen",
       "other": "Sonstiges",
-      "lost_found": "Fundbüro"
+      "lost_found": "Fundbüro",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Wetter, Reibung, Trockenheit, Andrang",

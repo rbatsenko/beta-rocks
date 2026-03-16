@@ -660,7 +660,8 @@
       "climbing_info": "Информация за катерене",
       "facilities": "Съоръжения",
       "other": "Друго",
-      "lost_found": "Изгубени и намерени"
+      "lost_found": "Изгубени и намерени",
+      "beta": "Beta"
     },
     "categoryDescriptions": {
       "conditions": "Време, триене, сухота, претрупаност",
