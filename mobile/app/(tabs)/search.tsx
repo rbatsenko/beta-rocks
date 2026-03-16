@@ -11,6 +11,8 @@ import {
   TouchableOpacity,
   StyleSheet,
   ActivityIndicator,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { useFocusEffect } from "@react-navigation/native";
@@ -82,6 +84,7 @@ export default function SearchScreen() {
   }
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View
         style={[
@@ -144,6 +147,7 @@ export default function SearchScreen() {
         )
       )}
     </View>
+    </TouchableWithoutFeedback>
   );
 }
 
