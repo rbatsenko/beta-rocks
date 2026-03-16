@@ -129,6 +129,41 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
       };
       storeProfile(restoredProfile as unknown as Record<string, unknown>);
       setProfile(restoredProfile);
+
+      // Also fetch and store favorites for this profile
+      try {
+        const { data: favorites } = await supabase
+          .from("user_favorites")
+          .select("*")
+          .eq("user_profile_id", data.id)
+          .order("display_order", { ascending: true })
+          .order("added_at", { ascending: false });
+
+        if (favorites && favorites.length > 0) {
+          const { saveFavorites } = await import("../lib/storage");
+          const mapped = favorites.map((f: Record<string, unknown>) => ({
+            id: f.id,
+            userProfileId: f.user_profile_id,
+            areaId: f.area_id,
+            cragId: f.crag_id,
+            areaName: f.area_name,
+            areaSlug: f.area_slug,
+            location: f.location || "",
+            latitude: f.latitude,
+            longitude: f.longitude,
+            rockType: f.rock_type,
+            lastRating: f.last_rating,
+            lastFrictionScore: f.last_friction_score,
+            lastCheckedAt: f.last_checked_at,
+            displayOrder: f.display_order || 0,
+            addedAt: f.added_at,
+          }));
+          saveFavorites(mapped);
+        }
+      } catch (favError) {
+        console.warn("Failed to fetch favorites:", favError);
+      }
+
       return true;
     } catch {
       return false;
