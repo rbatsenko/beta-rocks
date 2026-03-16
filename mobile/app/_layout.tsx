@@ -40,7 +40,7 @@ function RootNavigator() {
       >
         <Stack.Screen
           name="(tabs)"
-          options={{ headerShown: false }}
+          options={{ headerShown: false, title: "" }}
         />
         <Stack.Screen
           name="crag/[slug]"
