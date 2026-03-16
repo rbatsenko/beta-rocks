@@ -18,6 +18,7 @@ import { getFavorites } from "@/lib/storage";
 import type { Favorite } from "@/types/api";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 const EXAMPLE_QUERIES = [
   "Fontainebleau",
@@ -33,6 +34,7 @@ export default function HomeScreen() {
   const isDark = colorScheme === "dark";
   const colors = isDark ? Colors.dark : Colors.light;
   const router = useRouter();
+  const { t } = useTranslation("common");
   const [favorites, setFavorites] = useState<Favorite[]>([]);
 
   useFocusEffect(
@@ -55,7 +57,7 @@ export default function HomeScreen() {
       {/* Heading */}
       <Text style={[styles.title, { color: colors.text }]}>beta.rocks</Text>
       <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
-        Get the beta on climbing conditions at any crag worldwide
+        {t("welcome.description")}
       </Text>
 
       {/* Search hint */}
@@ -66,7 +68,7 @@ export default function HomeScreen() {
       >
         <Ionicons name="search" size={16} color="#f97316" />
         <Text style={[styles.searchHintText, { color: colors.textSecondary }]}>
-          Search for any crag or sector...
+          {t("welcome.searchHint")}
         </Text>
       </TouchableOpacity>
 
@@ -92,7 +94,7 @@ export default function HomeScreen() {
           <View style={styles.favoritesHeader}>
             <Ionicons name="star" size={16} color="#f97316" />
             <Text style={[styles.favoritesTitle, { color: colors.textSecondary }]}>
-              Your Favorites
+              {t("welcome.yourFavorites")}
             </Text>
           </View>
           <View style={styles.favoritesGrid}>

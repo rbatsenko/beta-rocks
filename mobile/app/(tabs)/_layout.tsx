@@ -4,6 +4,7 @@ import { useRef, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "@/contexts/ThemeContext";
 import { Colors } from "@/constants/theme";
+import { useTranslation } from "react-i18next";
 
 function LiveDot() {
   const pulse = useRef(new Animated.Value(1)).current;
@@ -35,6 +36,7 @@ export default function TabLayout() {
   const { colorScheme } = useTheme();
   const isDark = colorScheme === "dark";
   const colors = isDark ? Colors.dark : Colors.light;
+  const { t } = useTranslation("common");
 
   return (
     <Tabs
@@ -57,7 +59,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          title: t("header.title", "Home"),
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home-outline" size={size} color={color} />
@@ -67,7 +69,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="search"
         options={{
-          title: "Search",
+          title: t("search.title", "Search"),
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="search-outline" size={size} color={color} />
           ),
@@ -76,7 +78,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="feed"
         options={{
-          title: "Feed",
+          title: t("feed.title", "Feed"),
           tabBarIcon: ({ color, size }) => (
             <View>
               <Ionicons name="flash-outline" size={size} color={color} />
@@ -88,7 +90,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="favorites"
         options={{
-          title: "Favorites",
+          title: t("profile.favorites", "Favorites"),
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="heart-outline" size={size} color={color} />
           ),
@@ -97,7 +99,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="settings"
         options={{
-          title: "Settings",
+          title: t("settings.title", "Settings"),
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="settings-outline" size={size} color={color} />
           ),

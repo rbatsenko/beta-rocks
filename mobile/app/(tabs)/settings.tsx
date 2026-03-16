@@ -26,6 +26,7 @@ import {
 import { formatSyncKeyForDisplay } from "@/lib/sync-key";
 import { APP_VERSION } from "@/constants/config";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
+import { useTranslation } from "react-i18next";
 import type { UnitsConfig } from "@/types/api";
 
 const THEME_OPTIONS: { value: ThemeMode; label: string; icon: keyof typeof Ionicons.glyphMap }[] = [
@@ -45,6 +46,7 @@ export default function SettingsScreen() {
   const isDark = colorScheme === "dark";
   const colors = isDark ? Colors.dark : Colors.light;
   const router = useRouter();
+  const { t } = useTranslation("common");
   const {
     profile,
     isLoading,
@@ -135,10 +137,10 @@ export default function SettingsScreen() {
       {/* No profile — show create / restore */}
       {!hasProfile && (
         <View style={styles.section}>
-          <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>ACCOUNT</Text>
+          <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>{t("profileCreation.title").toUpperCase()}</Text>
           <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
             <Text style={[styles.createTitle, { color: colors.text }]}>
-              Create a profile to add reports, vote, and save favorites
+              {t("profileCreation.subtitle")}
             </Text>
             <TextInput
               style={[styles.nameInput, { color: colors.text, borderColor: colors.border, backgroundColor: colors.surface }]}
@@ -173,11 +175,11 @@ export default function SettingsScreen() {
       {/* Profile info (when signed in) */}
       {hasProfile && (
         <View style={styles.section}>
-          <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>PROFILE</Text>
+          <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>{t("profile.title", "PROFILE").toUpperCase()}</Text>
           <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
             <View style={styles.row}>
               <Ionicons name="person-outline" size={20} color={colors.primary} />
-              <Text style={[styles.label, { color: colors.text }]}>Display Name</Text>
+              <Text style={[styles.label, { color: colors.text }]}>{t("settings.displayName.label")}</Text>
               {editingName ? (
                 <View style={styles.editRow}>
                   <TextInput
@@ -207,7 +209,7 @@ export default function SettingsScreen() {
 
             <TouchableOpacity style={styles.row} onPress={handleCopySyncKey}>
               <Ionicons name="key-outline" size={20} color={colors.primary} />
-              <Text style={[styles.label, { color: colors.text }]}>Sync Key</Text>
+              <Text style={[styles.label, { color: colors.text }]}>{t("settings.syncKey.title")}</Text>
               <Text style={[styles.value, { color: colors.textSecondary }]}>
                 {profile?.syncKey ? formatSyncKeyForDisplay(profile.syncKey) : "\u2014"}
               </Text>
@@ -218,7 +220,7 @@ export default function SettingsScreen() {
 
             <TouchableOpacity style={styles.row} onPress={handleSignOut}>
               <Ionicons name="log-out-outline" size={20} color={colors.destructive} />
-              <Text style={[styles.label, { color: colors.destructive }]}>Sign Out</Text>
+              <Text style={[styles.label, { color: colors.destructive }]}>{t("settings.dangerZone.deleteProfile", "Sign Out")}</Text>
             </TouchableOpacity>
           </View>
           <Text style={[styles.hint, { color: colors.muted }]}>
@@ -230,7 +232,7 @@ export default function SettingsScreen() {
       {/* Stats */}
       {hasProfile && stats && (
         <View style={styles.section}>
-          <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>STATS</Text>
+          <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>{t("profile.stats", "STATS").toUpperCase()}</Text>
           <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
             <View style={styles.statsGrid}>
               <View style={styles.statItem}>
@@ -258,7 +260,7 @@ export default function SettingsScreen() {
       {/* Units */}
       {hasProfile && (
         <View style={styles.section}>
-          <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>UNITS</Text>
+          <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>{t("settings.units.title").toUpperCase()}</Text>
           <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
             <View style={styles.segmentedControl}>
               {UNIT_SYSTEMS.map((sys) => {
@@ -285,7 +287,7 @@ export default function SettingsScreen() {
 
       {/* Appearance */}
       <View style={styles.section}>
-        <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>APPEARANCE</Text>
+        <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>{t("settings.appearance", "APPEARANCE").toUpperCase()}</Text>
         <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
           <View style={[styles.row, { paddingBottom: Spacing.sm }]}>
             <Ionicons name="color-palette-outline" size={20} color={colors.primary} />

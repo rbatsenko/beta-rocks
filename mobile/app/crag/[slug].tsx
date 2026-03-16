@@ -632,7 +632,7 @@ const styles = StyleSheet.create({
   sectorRow: { flexDirection: "row", alignItems: "center", gap: Spacing.sm, paddingVertical: Spacing.xs },
   sectorName: { flex: 1, fontSize: FontSize.sm, fontWeight: "500" },
 
-  reportItem: { borderTopWidth: 1, paddingTop: Spacing.sm, gap: Spacing.sm },
+  reportItem: { borderTopWidth: 1, paddingTop: Spacing.md, paddingBottom: Spacing.sm, gap: Spacing.sm },
   reportHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
   reportText: { fontSize: FontSize.sm, lineHeight: 20 },
   reportPhoto: { width: 250, height: 180, borderRadius: BorderRadius.md, marginRight: Spacing.sm },
