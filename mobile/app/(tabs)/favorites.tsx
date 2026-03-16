@@ -104,7 +104,7 @@ export default function FavoritesScreen() {
         {rColors && ratingInfo && (
           <View style={[styles.ratingBadge, { backgroundColor: rColors.bg }]}>
             <Text style={[styles.ratingText, { color: rColors.text }]}>
-              {ratingInfo.label}
+              {t(`ratings.${ratingInfo.label.toLowerCase()}`, ratingInfo.label)}
             </Text>
             {item.lastFrictionScore != null && (
               <Text style={[styles.ratingScore, { color: rColors.text }]}>
