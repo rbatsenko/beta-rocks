@@ -152,10 +152,11 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     position: "absolute",
-    top: 60,
-    right: 20,
+    top: 50,
+    right: 10,
     zIndex: 10,
-    padding: 8,
+    padding: 20,
+    hitSlop: { top: 20, bottom: 20, left: 20, right: 20 },
   },
   counter: {
     position: "absolute",
