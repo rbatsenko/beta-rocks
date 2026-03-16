@@ -11,6 +11,8 @@ import {
   StyleSheet,
   ActivityIndicator,
   TouchableOpacity,
+  Linking,
+  Image,
 } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -24,8 +26,6 @@ import type {
   CragDetailResponse,
   CragData,
   SectorData,
-  ConditionsData,
-  CurrentWeather,
   Report,
 } from "@/types/api";
 import { FRICTION_RATINGS, RATING_COLORS, CATEGORY_COLORS } from "@/constants/config";
@@ -50,9 +50,8 @@ export default function CragDetailScreen() {
   const colors = isDark ? Colors.dark : Colors.light;
 
   const [crag, setCrag] = useState<CragData | null>(null);
-  const [conditions, setConditions] = useState<
-    (ConditionsData & { current: CurrentWeather }) | null
-  >(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [conditions, setConditions] = useState<any | null>(null);
   const [reports, setReports] = useState<Report[]>([]);
   const [sectors, setSectors] = useState<SectorData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -100,6 +99,10 @@ export default function CragDetailScreen() {
   const frictionScore = conditions?.frictionScore ?? null;
   const ratingLabel = getRatingLabel(frictionScore);
   const ratingColors = getRatingColors(ratingLabel);
+  const reasons: string[] = conditions?.reasons || [];
+  const warnings: string[] = conditions?.warnings || [];
+  const isDry: boolean | null = conditions?.isDry ?? null;
+  const astro = conditions?.astro;
 
   const location = [crag.village, crag.municipality, crag.state, crag.country]
     .filter(Boolean)
@@ -110,7 +113,7 @@ export default function CragDetailScreen() {
       style={[styles.container, { backgroundColor: colors.background }]}
       contentContainerStyle={styles.content}
     >
-      {/* Header with crag name and rating */}
+      {/* Header */}
       <View style={styles.header}>
         <View style={styles.headerText}>
           <Text style={[styles.cragName, { color: colors.text }]}>
@@ -119,13 +122,26 @@ export default function CragDetailScreen() {
           <Text style={[styles.location, { color: colors.textSecondary }]}>
             {location}
           </Text>
-          {crag.rock_type && crag.rock_type !== "unknown" && (
-            <View style={[styles.rockTypeBadge, { backgroundColor: colors.surface, borderColor: colors.border }]}>
-              <Text style={[styles.rockTypeText, { color: colors.text }]}>
-                {crag.rock_type.charAt(0).toUpperCase() + crag.rock_type.slice(1)}
-              </Text>
-            </View>
-          )}
+          <View style={styles.badgeRow}>
+            {crag.rock_type && crag.rock_type !== "unknown" && (
+              <View style={[styles.badge, { backgroundColor: colors.surface, borderColor: colors.border }]}>
+                <Text style={[styles.badgeText, { color: colors.text }]}>
+                  {crag.rock_type.charAt(0).toUpperCase() + crag.rock_type.slice(1)}
+                </Text>
+              </View>
+            )}
+            {isDry !== null && (
+              <View style={[styles.badge, {
+                backgroundColor: isDry ? "rgba(34,197,94,0.12)" : "rgba(239,68,68,0.12)",
+                borderColor: isDry ? "rgba(34,197,94,0.3)" : "rgba(239,68,68,0.3)",
+              }]}>
+                <Ionicons name={isDry ? "checkmark-circle" : "water"} size={12} color={isDry ? "#22c55e" : "#ef4444"} />
+                <Text style={[styles.badgeText, { color: isDry ? "#22c55e" : "#ef4444" }]}>
+                  {isDry ? "Dry" : "Wet"}
+                </Text>
+              </View>
+            )}
+          </View>
         </View>
         {ratingColors && frictionScore && (
           <View style={[styles.ratingCard, { backgroundColor: ratingColors.bg, borderColor: ratingColors.solid, borderWidth: 1 }]}>
@@ -138,68 +154,75 @@ export default function CragDetailScreen() {
         )}
       </View>
 
+      {/* Reasons (why this rating) */}
+      {reasons.length > 0 && (
+        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+          {reasons.map((reason, i) => (
+            <View key={i} style={styles.reasonRow}>
+              <Ionicons name="checkmark" size={16} color="#22c55e" />
+              <Text style={[styles.reasonText, { color: colors.text }]}>{reason}</Text>
+            </View>
+          ))}
+        </View>
+      )}
+
+      {/* Warnings */}
+      {warnings.length > 0 && (
+        <View style={[styles.card, { backgroundColor: "rgba(239,68,68,0.06)", borderColor: "rgba(239,68,68,0.2)" }]}>
+          {warnings.map((warning, i) => (
+            <View key={i} style={styles.reasonRow}>
+              <Ionicons name="warning" size={16} color="#ef4444" />
+              <Text style={[styles.reasonText, { color: colors.text }]}>{warning}</Text>
+            </View>
+          ))}
+        </View>
+      )}
+
       {/* Current conditions */}
       {conditions?.current && (
-        <View
-          style={[
-            styles.conditionsCard,
-            { backgroundColor: colors.card, borderColor: colors.cardBorder },
-          ]}
-        >
+        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
           <Text style={[styles.cardTitle, { color: colors.text }]}>
             Current Conditions
           </Text>
           <View style={styles.conditionsGrid}>
-            <ConditionItem
-              icon="thermometer-outline"
-              label="Temperature"
-              value={`${fmt(conditions.current.temperature_c)}°C`}
-              colors={colors}
-            />
-            <ConditionItem
-              icon="water-outline"
-              label="Humidity"
-              value={`${conditions.current.humidity ?? "\u2014"}%`}
-              colors={colors}
-            />
-            <ConditionItem
-              icon="flag-outline"
-              label="Wind"
-              value={`${fmt(conditions.current.windSpeed_kph)} km/h`}
-              colors={colors}
-            />
-            <ConditionItem
-              icon="rainy-outline"
-              label="Precipitation"
-              value={`${fmt(conditions.current.precipitation_mm)} mm`}
-              colors={colors}
-            />
+            <ConditionItem icon="thermometer-outline" label="Temperature" value={`${fmt(conditions.current.temperature_c)}°C`} colors={colors} />
+            <ConditionItem icon="water-outline" label="Humidity" value={`${conditions.current.humidity ?? "\u2014"}%`} colors={colors} />
+            <ConditionItem icon="flag-outline" label="Wind" value={`${fmt(conditions.current.windSpeed_kph)} km/h`} colors={colors} />
+            <ConditionItem icon="rainy-outline" label="Precipitation" value={`${fmt(conditions.current.precipitation_mm)} mm`} colors={colors} />
           </View>
+
+          {/* Sunrise/Sunset */}
+          {astro && (
+            <View style={[styles.astroRow, { borderTopColor: colors.border }]}>
+              <View style={styles.astroItem}>
+                <Ionicons name="sunny-outline" size={16} color="#f97316" />
+                <Text style={[styles.astroText, { color: colors.textSecondary }]}>
+                  {extractTime(astro.sunrise)}
+                </Text>
+              </View>
+              <View style={styles.astroItem}>
+                <Ionicons name="moon-outline" size={16} color="#6366f1" />
+                <Text style={[styles.astroText, { color: colors.textSecondary }]}>
+                  {extractTime(astro.sunset)}
+                </Text>
+              </View>
+            </View>
+          )}
         </View>
       )}
 
       {/* Optimal windows */}
-      {conditions?.optimalWindows && conditions.optimalWindows.length > 0 && (
-        <View
-          style={[
-            styles.windowsCard,
-            { backgroundColor: colors.card, borderColor: colors.cardBorder },
-          ]}
-        >
+      {conditions?.optimalWindows?.length > 0 && (
+        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
           <Text style={[styles.cardTitle, { color: colors.text }]}>
             Best Times to Climb
           </Text>
-          {conditions.optimalWindows.slice(0, 3).map((window, i) => {
+          {conditions.optimalWindows.slice(0, 5).map((window: any, i: number) => {
             const wLabel = getRatingLabel(window.avgFrictionScore);
             const wColors = getRatingColors(wLabel);
             return (
               <View key={i} style={styles.windowRow}>
-                <View
-                  style={[
-                    styles.windowDot,
-                    { backgroundColor: wColors?.solid || colors.muted },
-                  ]}
-                />
+                <View style={[styles.windowDot, { backgroundColor: wColors?.solid || colors.muted }]} />
                 <Text style={[styles.windowTime, { color: colors.text }]}>
                   {formatTimeRange(window.startTime, window.endTime)}
                 </Text>
@@ -216,14 +239,22 @@ export default function CragDetailScreen() {
         </View>
       )}
 
+      {/* Map link */}
+      <TouchableOpacity
+        style={[styles.card, styles.mapLink, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}
+        onPress={() => Linking.openURL(`https://www.google.com/maps?q=${crag.lat},${crag.lon}`)}
+        activeOpacity={0.7}
+      >
+        <Ionicons name="map-outline" size={20} color={colors.primary} />
+        <Text style={[styles.mapLinkText, { color: colors.primary }]}>
+          Open in Maps
+        </Text>
+        <Ionicons name="open-outline" size={16} color={colors.primary} />
+      </TouchableOpacity>
+
       {/* Sectors */}
       {sectors.length > 0 && (
-        <View
-          style={[
-            styles.sectorsCard,
-            { backgroundColor: colors.card, borderColor: colors.cardBorder },
-          ]}
-        >
+        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
           <Text style={[styles.cardTitle, { color: colors.text }]}>
             Sectors ({sectors.length})
           </Text>
@@ -240,16 +271,11 @@ export default function CragDetailScreen() {
 
       {/* Reports */}
       {reports.length > 0 && (
-        <View
-          style={[
-            styles.reportsCard,
-            { backgroundColor: colors.card, borderColor: colors.cardBorder },
-          ]}
-        >
+        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
           <Text style={[styles.cardTitle, { color: colors.text }]}>
             Community Reports ({reports.length})
           </Text>
-          {reports.slice(0, 5).map((report) => {
+          {reports.slice(0, 10).map((report) => {
             const catColors = CATEGORY_COLORS[report.category] || CATEGORY_COLORS.other;
             return (
               <View
@@ -270,6 +296,13 @@ export default function CragDetailScreen() {
                   <Text style={[styles.reportText, { color: colors.text }]}>
                     {report.text}
                   </Text>
+                )}
+                {report.photo_url && (
+                  <Image
+                    source={{ uri: report.photo_url }}
+                    style={styles.reportPhoto}
+                    resizeMode="cover"
+                  />
                 )}
                 <View style={styles.reportVotes}>
                   <TouchableOpacity style={styles.voteButton}>
@@ -312,208 +345,90 @@ function ConditionItem({
   );
 }
 
+function extractTime(isoString: string): string {
+  const match = isoString.match(/T(\d{2}):(\d{2})/);
+  return match ? `${match[1]}:${match[2]}` : isoString;
+}
+
 function formatTimeRange(start: string, end: string): string {
   try {
-    const startDate = new Date(start);
-    const endDate = new Date(end);
     const pad = (d: Date) =>
       `${d.getHours().toString().padStart(2, "0")}:${d.getMinutes().toString().padStart(2, "0")}`;
-    return `${pad(startDate)} \u2013 ${pad(endDate)}`;
+    return `${pad(new Date(start))} \u2013 ${pad(new Date(end))}`;
   } catch {
     return `${start} \u2013 ${end}`;
   }
 }
 
 function formatDate(dateStr: string): string {
-  const date = new Date(dateStr);
-  return date.toLocaleDateString(undefined, {
+  return new Date(dateStr).toLocaleDateString(undefined, {
     month: "short",
     day: "numeric",
   });
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  content: {
-    padding: Spacing.md,
-    gap: Spacing.md,
-    paddingBottom: Spacing.xxl,
-  },
-  centered: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    gap: Spacing.md,
-  },
-  errorText: {
-    fontSize: FontSize.md,
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    gap: Spacing.md,
-  },
-  headerText: {
-    flex: 1,
-    gap: Spacing.xs,
-  },
-  cragName: {
-    fontSize: FontSize.xl,
-    fontWeight: "700",
-  },
-  location: {
-    fontSize: FontSize.sm,
-  },
-  rockTypeBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: Spacing.sm,
-    paddingVertical: 3,
-    borderRadius: BorderRadius.sm,
-    borderWidth: 1,
-    marginTop: Spacing.xs,
-  },
-  rockTypeText: {
-    fontSize: FontSize.xs,
-    fontWeight: "500",
-  },
-  ratingCard: {
-    alignItems: "center",
-    paddingHorizontal: Spacing.md,
-    paddingVertical: Spacing.sm,
-    borderRadius: BorderRadius.lg,
-    minWidth: 70,
-  },
-  ratingLabel: {
-    fontSize: FontSize.sm,
-    fontWeight: "700",
-  },
-  ratingScore: {
-    fontSize: FontSize.xl,
-    fontWeight: "800",
-  },
-  ratingSubtext: {
-    fontSize: FontSize.xs,
-  },
-  conditionsCard: {
-    borderRadius: BorderRadius.lg,
-    borderWidth: 1,
-    padding: Spacing.md,
-    gap: Spacing.md,
-  },
-  cardTitle: {
-    fontSize: FontSize.lg,
-    fontWeight: "600",
-  },
-  conditionsGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: Spacing.md,
-  },
-  conditionItem: {
-    width: "45%",
-    gap: 2,
-  },
-  conditionLabel: {
-    fontSize: FontSize.xs,
-  },
-  conditionValue: {
-    fontSize: FontSize.md,
-    fontWeight: "600",
-  },
-  windowsCard: {
-    borderRadius: BorderRadius.lg,
-    borderWidth: 1,
-    padding: Spacing.md,
-    gap: Spacing.sm,
-  },
-  windowRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: Spacing.sm,
-    paddingVertical: Spacing.xs,
-  },
-  windowDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-  },
-  windowTime: {
-    fontSize: FontSize.sm,
-    fontWeight: "500",
-    flex: 1,
-  },
-  windowBadge: {
-    paddingHorizontal: Spacing.sm,
-    paddingVertical: 2,
-    borderRadius: BorderRadius.sm,
-  },
-  windowBadgeText: {
-    fontSize: FontSize.xs,
-    fontWeight: "600",
-  },
-  sectorsCard: {
-    borderRadius: BorderRadius.lg,
-    borderWidth: 1,
-    padding: Spacing.md,
-    gap: Spacing.sm,
-  },
-  sectorRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: Spacing.sm,
-    paddingVertical: Spacing.xs,
-  },
-  sectorName: {
-    flex: 1,
-    fontSize: FontSize.sm,
-    fontWeight: "500",
-  },
-  reportsCard: {
-    borderRadius: BorderRadius.lg,
-    borderWidth: 1,
-    padding: Spacing.md,
-    gap: Spacing.sm,
-  },
-  reportItem: {
-    borderTopWidth: 1,
-    paddingTop: Spacing.sm,
-    gap: Spacing.xs,
-  },
-  reportHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  categoryBadge: {
-    paddingHorizontal: Spacing.sm,
-    paddingVertical: 3,
-    borderRadius: BorderRadius.sm,
-  },
-  categoryText: {
-    fontSize: FontSize.xs,
-    fontWeight: "600",
-    textTransform: "capitalize",
-  },
-  reportDate: {
-    fontSize: FontSize.xs,
-  },
-  reportText: {
-    fontSize: FontSize.sm,
-    lineHeight: 20,
-  },
-  reportVotes: {
-    flexDirection: "row",
-    gap: Spacing.md,
-  },
-  voteButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 4,
-  },
-  voteCount: {
-    fontSize: FontSize.xs,
-  },
+  container: { flex: 1 },
+  content: { padding: Spacing.md, gap: Spacing.md, paddingBottom: Spacing.xxl },
+  centered: { flex: 1, justifyContent: "center", alignItems: "center", gap: Spacing.md },
+  errorText: { fontSize: FontSize.md },
+
+  // Header
+  header: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", gap: Spacing.md },
+  headerText: { flex: 1, gap: Spacing.xs },
+  cragName: { fontSize: FontSize.xl, fontWeight: "700" },
+  location: { fontSize: FontSize.sm },
+  badgeRow: { flexDirection: "row", gap: Spacing.sm, marginTop: Spacing.xs, flexWrap: "wrap" },
+  badge: { flexDirection: "row", alignItems: "center", gap: 4, paddingHorizontal: Spacing.sm, paddingVertical: 3, borderRadius: BorderRadius.sm, borderWidth: 1 },
+  badgeText: { fontSize: FontSize.xs, fontWeight: "500" },
+  ratingCard: { alignItems: "center", paddingHorizontal: Spacing.md, paddingVertical: Spacing.sm, borderRadius: BorderRadius.lg, minWidth: 70 },
+  ratingLabel: { fontSize: FontSize.sm, fontWeight: "700" },
+  ratingScore: { fontSize: FontSize.xl, fontWeight: "800" },
+  ratingSubtext: { fontSize: FontSize.xs },
+
+  // Cards
+  card: { borderRadius: BorderRadius.lg, borderWidth: 1, padding: Spacing.md, gap: Spacing.sm },
+  cardTitle: { fontSize: FontSize.lg, fontWeight: "600" },
+
+  // Reasons / Warnings
+  reasonRow: { flexDirection: "row", alignItems: "flex-start", gap: Spacing.sm },
+  reasonText: { flex: 1, fontSize: FontSize.sm, lineHeight: 20 },
+
+  // Conditions grid
+  conditionsGrid: { flexDirection: "row", flexWrap: "wrap", gap: Spacing.md },
+  conditionItem: { width: "45%", gap: 2 },
+  conditionLabel: { fontSize: FontSize.xs },
+  conditionValue: { fontSize: FontSize.md, fontWeight: "600" },
+
+  // Astro
+  astroRow: { flexDirection: "row", gap: Spacing.xl, borderTopWidth: 1, paddingTop: Spacing.sm, marginTop: Spacing.xs },
+  astroItem: { flexDirection: "row", alignItems: "center", gap: Spacing.xs },
+  astroText: { fontSize: FontSize.sm },
+
+  // Optimal windows
+  windowRow: { flexDirection: "row", alignItems: "center", gap: Spacing.sm, paddingVertical: Spacing.xs },
+  windowDot: { width: 8, height: 8, borderRadius: 4 },
+  windowTime: { fontSize: FontSize.sm, fontWeight: "500", flex: 1 },
+  windowBadge: { paddingHorizontal: Spacing.sm, paddingVertical: 2, borderRadius: BorderRadius.sm },
+  windowBadgeText: { fontSize: FontSize.xs, fontWeight: "600" },
+
+  // Map link
+  mapLink: { flexDirection: "row", alignItems: "center", gap: Spacing.sm },
+  mapLinkText: { flex: 1, fontSize: FontSize.md, fontWeight: "500" },
+
+  // Sectors
+  sectorRow: { flexDirection: "row", alignItems: "center", gap: Spacing.sm, paddingVertical: Spacing.xs },
+  sectorName: { flex: 1, fontSize: FontSize.sm, fontWeight: "500" },
+
+  // Reports
+  reportItem: { borderTopWidth: 1, paddingTop: Spacing.sm, gap: Spacing.xs },
+  reportHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
+  categoryBadge: { paddingHorizontal: Spacing.sm, paddingVertical: 3, borderRadius: BorderRadius.sm },
+  categoryText: { fontSize: FontSize.xs, fontWeight: "600", textTransform: "capitalize" },
+  reportDate: { fontSize: FontSize.xs },
+  reportText: { fontSize: FontSize.sm, lineHeight: 20 },
+  reportPhoto: { width: "100%", height: 200, borderRadius: BorderRadius.md, marginTop: Spacing.xs },
+  reportVotes: { flexDirection: "row", gap: Spacing.md },
+  voteButton: { flexDirection: "row", alignItems: "center", gap: 4 },
+  voteCount: { fontSize: FontSize.xs },
 });
