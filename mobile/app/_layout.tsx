@@ -40,14 +40,14 @@ function RootNavigator() {
       >
         <Stack.Screen
           name="(tabs)"
-          options={{ headerShown: false, headerBackTitle: t("dialog.close", "Close") }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="crag/[slug]"
           options={{
             title: t("mobile.cragDetails", "Crag Details"),
             presentation: "card",
-            headerBackTitle: t("dialog.close", "Close"),
+            headerBackTitle: "",
           }}
         />
         <Stack.Screen
@@ -55,7 +55,7 @@ function RootNavigator() {
           options={{
             title: t("fab.addReport", "Add Report"),
             presentation: "modal",
-            headerBackTitle: t("dialog.cancel", "Cancel"),
+            headerBackTitle: "",
           }}
         />
         <Stack.Screen
