@@ -47,7 +47,7 @@ function RootNavigator() {
           options={{
             title: t("mobile.cragDetails", "Crag Details"),
             presentation: "card",
-            headerBackTitle: "",
+            headerBackTitle: " ",
           }}
         />
         <Stack.Screen
@@ -55,7 +55,7 @@ function RootNavigator() {
           options={{
             title: t("fab.addReport", "Add Report"),
             presentation: "modal",
-            headerBackTitle: "",
+            headerBackTitle: " ",
           }}
         />
         <Stack.Screen
