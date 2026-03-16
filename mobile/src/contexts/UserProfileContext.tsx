@@ -34,6 +34,7 @@ export interface UserStats {
 
 interface UserProfileContextValue {
   profile: UserProfile | null;
+  profileId: string | null;
   syncKeyHash: string | null;
   isLoading: boolean;
   hasProfile: boolean;
@@ -49,6 +50,7 @@ const UserProfileContext = createContext<UserProfileContextValue | null>(null);
 
 export function UserProfileProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [profileId, setProfileId] = useState<string | null>(null);
   const [syncKeyHash, setSyncKeyHashState] = useState<string | null>(null);
   const [stats, setStats] = useState<UserStats | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -91,6 +93,7 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
         .single();
 
       if (!dbProfile) return;
+      setProfileId(dbProfile.id);
 
       // Sync favorites
       const { data: favorites } = await supabase
@@ -183,6 +186,7 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
       // Store locally
       await setSyncKey(newKey);
       setSyncKeyHashState(hash);
+      setProfileId(data.id);
 
       const newProfile: UserProfile = {
         syncKey: newKey,
@@ -297,12 +301,14 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
     setProfile(null);
     setSyncKeyHashState(null);
     setStats(null);
+    setProfileId(null);
   }, []);
 
   return (
     <UserProfileContext.Provider
       value={{
         profile,
+        profileId,
         syncKeyHash,
         isLoading,
         hasProfile,

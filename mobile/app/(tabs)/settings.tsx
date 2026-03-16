@@ -220,7 +220,7 @@ export default function SettingsScreen() {
 
             <TouchableOpacity style={styles.row} onPress={handleSignOut}>
               <Ionicons name="log-out-outline" size={20} color={colors.destructive} />
-              <Text style={[styles.label, { color: colors.destructive }]}>{t("settings.dangerZone.deleteProfile", "Sign Out")}</Text>
+              <Text style={[styles.label, { color: colors.destructive }]}>{t("settings.signOut", "Sign Out")}</Text>
             </TouchableOpacity>
           </View>
           <Text style={[styles.hint, { color: colors.muted }]}>

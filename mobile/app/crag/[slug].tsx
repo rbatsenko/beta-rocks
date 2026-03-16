@@ -107,7 +107,7 @@ export default function CragDetailScreen() {
   const [lightboxPhotos, setLightboxPhotos] = useState<string[]>([]);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [lightboxVisible, setLightboxVisible] = useState(false);
-  const { hasProfile, syncKeyHash, profile } = useUserProfile();
+  const { hasProfile, profileId, syncKeyHash, profile } = useUserProfile();
 
   function openLightbox(photos: string[], index: number) {
     setLightboxPhotos(photos);
@@ -480,21 +480,14 @@ export default function CragDetailScreen() {
                     })}
                   </ScrollView>
                 )}
-                <TouchableOpacity
-                  style={[styles.reportFooter, { marginTop: Spacing.sm }]}
-                  onPress={async () => {
-                    if (!hasProfile || !syncKeyHash) {
-                      Alert.alert(t("mobile.profileRequired", "Profile Required"), t("reports.loginToConfirm", "Please set up your profile to confirm reports"));
-                      return;
-                    }
-                    try {
-                      await apiConfirmReport(report.id, syncKeyHash);
-                    } catch {}
-                  }}
-                >
-                  <Ionicons name="thumbs-up-outline" size={14} color={colors.primary} />
-                  <Text style={[styles.metaText, { color: colors.primary }]}>{t("cragPage.helpful")} ({report.confirmations?.[0]?.count ?? 0})</Text>
-                </TouchableOpacity>
+                <HelpfulButton
+                  report={report}
+                  profileId={profileId}
+                  hasProfile={hasProfile}
+                  syncKeyHash={syncKeyHash}
+                  colors={colors}
+                  t={t}
+                />
               </View>
             );
           })}
@@ -537,6 +530,39 @@ function ConditionItem({ icon, label, value, colors }: { icon: keyof typeof Ioni
       <Text style={[styles.conditionLabel, { color: colors.textSecondary }]}>{label}</Text>
       <Text style={[styles.conditionValue, { color: colors.text }]}>{value}</Text>
     </View>
+  );
+}
+
+function HelpfulButton({ report, profileId, hasProfile, syncKeyHash, colors, t }: {
+  report: Report; profileId: string | null; hasProfile: boolean; syncKeyHash: string | null;
+  colors: (typeof Colors)["light"]; t: (key: string, fallback?: string) => string;
+}) {
+  const isOwnReport = profileId != null && report.author_id === profileId;
+  const count = report.confirmations?.[0]?.count ?? 0;
+
+  if (isOwnReport) {
+    return (
+      <View style={[styles.reportFooter, { marginTop: Spacing.sm }]}>
+        <Ionicons name="thumbs-up-outline" size={14} color={colors.muted} />
+        <Text style={[styles.metaText, { color: colors.muted }]}>{t("cragPage.helpful")} ({count})</Text>
+      </View>
+    );
+  }
+
+  return (
+    <TouchableOpacity
+      style={[styles.reportFooter, { marginTop: Spacing.sm }]}
+      onPress={async () => {
+        if (!hasProfile || !syncKeyHash) {
+          Alert.alert(t("mobile.profileRequired", "Profile Required"), t("reports.loginToConfirm", "Please set up your profile to confirm reports"));
+          return;
+        }
+        try { await apiConfirmReport(report.id, syncKeyHash); } catch {}
+      }}
+    >
+      <Ionicons name="thumbs-up-outline" size={14} color={colors.primary} />
+      <Text style={[styles.metaText, { color: colors.primary }]}>{t("cragPage.helpful")} ({count})</Text>
+    </TouchableOpacity>
   );
 }
 

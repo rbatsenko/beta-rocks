@@ -229,5 +229,7 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: FontSize.md,
+    textAlign: "center",
+    paddingHorizontal: Spacing.xl,
   },
 });
