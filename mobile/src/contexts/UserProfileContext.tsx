@@ -26,11 +26,18 @@ import {
 } from "../lib/storage";
 import { supabase, isSupabaseConfigured } from "../api/supabase";
 
+export interface UserStats {
+  reportsPosted: number;
+  confirmationsGiven: number;
+  favoritesCount: number;
+}
+
 interface UserProfileContextValue {
   profile: UserProfile | null;
   syncKeyHash: string | null;
   isLoading: boolean;
   hasProfile: boolean;
+  stats: UserStats | null;
   createProfile: (displayName?: string) => Promise<boolean>;
   restoreFromSyncKey: (key: string) => Promise<boolean>;
   updateDisplayName: (name: string) => Promise<void>;
@@ -43,6 +50,7 @@ const UserProfileContext = createContext<UserProfileContextValue | null>(null);
 export function UserProfileProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [syncKeyHash, setSyncKeyHashState] = useState<string | null>(null);
+  const [stats, setStats] = useState<UserStats | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const hasProfile = profile !== null && profile.syncKey !== undefined;
@@ -111,6 +119,21 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
           addedAt: f.added_at,
         }));
         saveFavorites(mapped);
+      }
+
+      // Sync user stats
+      const { data: statsData } = await supabase
+        .from("user_stats")
+        .select("reports_posted, confirmations_given, favorites_count")
+        .eq("user_profile_id", dbProfile.id)
+        .single();
+
+      if (statsData) {
+        setStats({
+          reportsPosted: statsData.reports_posted ?? 0,
+          confirmationsGiven: statsData.confirmations_given ?? 0,
+          favoritesCount: statsData.favorites_count ?? 0,
+        });
       }
 
       // Sync display name and units from DB if available
@@ -273,6 +296,7 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
     saveFavorites([]);
     setProfile(null);
     setSyncKeyHashState(null);
+    setStats(null);
   }, []);
 
   return (
@@ -282,6 +306,7 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
         syncKeyHash,
         isLoading,
         hasProfile,
+        stats,
         createProfile,
         restoreFromSyncKey,
         updateDisplayName,

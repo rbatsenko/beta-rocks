@@ -49,6 +49,7 @@ export default function SettingsScreen() {
     profile,
     isLoading,
     hasProfile,
+    stats,
     createProfile,
     updateDisplayName,
     updateUnits,
@@ -226,6 +227,34 @@ export default function SettingsScreen() {
         </View>
       )}
 
+      {/* Stats */}
+      {hasProfile && stats && (
+        <View style={styles.section}>
+          <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>STATS</Text>
+          <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+            <View style={styles.statsGrid}>
+              <View style={styles.statItem}>
+                <Ionicons name="document-text-outline" size={20} color={colors.primary} />
+                <Text style={[styles.statValue, { color: colors.text }]}>{stats.reportsPosted}</Text>
+                <Text style={[styles.statLabel, { color: colors.textSecondary }]}>Reports</Text>
+              </View>
+              <View style={[styles.statDivider, { backgroundColor: colors.border }]} />
+              <View style={styles.statItem}>
+                <Ionicons name="thumbs-up-outline" size={20} color={colors.primary} />
+                <Text style={[styles.statValue, { color: colors.text }]}>{stats.confirmationsGiven}</Text>
+                <Text style={[styles.statLabel, { color: colors.textSecondary }]}>Votes</Text>
+              </View>
+              <View style={[styles.statDivider, { backgroundColor: colors.border }]} />
+              <View style={styles.statItem}>
+                <Ionicons name="heart-outline" size={20} color={colors.primary} />
+                <Text style={[styles.statValue, { color: colors.text }]}>{stats.favoritesCount}</Text>
+                <Text style={[styles.statLabel, { color: colors.textSecondary }]}>Favorites</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      )}
+
       {/* Units */}
       {hasProfile && (
         <View style={styles.section}>
@@ -356,6 +385,12 @@ const styles = StyleSheet.create({
   segmentedControl: { flexDirection: "row", marginHorizontal: Spacing.md, marginBottom: Spacing.md, gap: Spacing.sm },
   segment: { flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: Spacing.xs, paddingVertical: Spacing.sm, borderRadius: BorderRadius.md, borderWidth: 1 },
   segmentText: { fontSize: FontSize.xs, fontWeight: "500" },
+
+  statsGrid: { flexDirection: "row", alignItems: "center", padding: Spacing.md },
+  statItem: { flex: 1, alignItems: "center", gap: Spacing.xs },
+  statValue: { fontSize: FontSize.xl, fontWeight: "700" },
+  statLabel: { fontSize: FontSize.xs, fontWeight: "500" },
+  statDivider: { width: 1, height: 48 },
 
   languageList: { borderTopWidth: 1, maxHeight: 300 },
   languageItem: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: Spacing.md, paddingVertical: Spacing.sm + 2 },

@@ -46,6 +46,8 @@ export const CATEGORY_COLORS: Record<string, { bg: string; text: string }> = {
   access: { bg: "rgba(234,179,8,0.12)", text: "#eab308" },
   beta: { bg: "rgba(34,197,94,0.12)", text: "#22c55e" },
   facilities: { bg: "rgba(168,85,247,0.12)", text: "#a855f7" },
+  climbing_info: { bg: "rgba(14,165,233,0.12)", text: "#0ea5e9" },
+  lost_found: { bg: "rgba(244,63,94,0.12)", text: "#f43f5e" },
   other: { bg: "rgba(107,114,128,0.12)", text: "#6b7280" },
 };
 

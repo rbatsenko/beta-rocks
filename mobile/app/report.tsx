@@ -30,6 +30,8 @@ const CATEGORIES = [
   { key: "access", label: "Access", icon: "lock-closed-outline" as const },
   { key: "beta", label: "Beta", icon: "bulb-outline" as const },
   { key: "facilities", label: "Facilities", icon: "home-outline" as const },
+  { key: "climbing_info", label: "Climbing Info", icon: "trail-sign-outline" as const },
+  { key: "lost_found", label: "Lost & Found", icon: "search-outline" as const },
   { key: "other", label: "Other", icon: "chatbubble-outline" as const },
 ];
 
@@ -46,9 +48,11 @@ export default function ReportScreen() {
   const [ratingDry, setRatingDry] = useState(0);
   const [ratingWind, setRatingWind] = useState(0);
   const [ratingCrowds, setRatingCrowds] = useState(0);
+  const [lostFoundType, setLostFoundType] = useState<"lost" | "found">("lost");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const isConditions = category === "conditions";
+  const isLostFound = category === "lost_found";
 
   async function handleSubmit() {
     if (!text.trim() && !isConditions) {
@@ -70,6 +74,7 @@ export default function ReportScreen() {
           ...(isConditions && ratingDry > 0 && { rating_dry: ratingDry }),
           ...(isConditions && ratingWind > 0 && { rating_wind: ratingWind }),
           ...(isConditions && ratingCrowds > 0 && { rating_crowds: ratingCrowds }),
+          ...(isLostFound && { lost_found_type: lostFoundType }),
         },
         syncKeyHash
       );
@@ -133,15 +138,59 @@ export default function ReportScreen() {
           </View>
         )}
 
+        {/* Lost / Found toggle */}
+        {isLostFound && (
+          <View style={styles.lostFoundSection}>
+            <Text style={[styles.sectionLabel, { color: colors.textSecondary }]}>Type</Text>
+            <View style={styles.lostFoundToggle}>
+              {(["lost", "found"] as const).map((type) => {
+                const isActive = lostFoundType === type;
+                return (
+                  <TouchableOpacity
+                    key={type}
+                    style={[
+                      styles.lostFoundButton,
+                      {
+                        backgroundColor: isActive ? colors.primary : colors.surface,
+                        borderColor: isActive ? colors.primary : colors.border,
+                      },
+                    ]}
+                    onPress={() => setLostFoundType(type)}
+                    activeOpacity={0.7}
+                  >
+                    <Ionicons
+                      name={type === "lost" ? "help-circle-outline" : "checkmark-circle-outline"}
+                      size={18}
+                      color={isActive ? colors.primaryForeground : colors.text}
+                    />
+                    <Text
+                      style={[
+                        styles.lostFoundButtonText,
+                        { color: isActive ? colors.primaryForeground : colors.text },
+                      ]}
+                    >
+                      {type === "lost" ? "Lost" : "Found"}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          </View>
+        )}
+
         {/* Text input */}
         <Text style={[styles.sectionLabel, { color: colors.textSecondary }]}>
-          {isConditions ? "Details (optional)" : "Report"}
+          {isConditions ? "Details (optional)" : isLostFound ? "Description" : "Report"}
         </Text>
         <TextInput
           style={[styles.textInput, { color: colors.text, backgroundColor: colors.surface, borderColor: colors.border }]}
           value={text}
           onChangeText={setText}
-          placeholder="Describe the conditions, situation, or beta..."
+          placeholder={
+            isLostFound
+              ? `Describe the ${lostFoundType} item, location, and contact info...`
+              : "Describe the conditions, situation, or beta..."
+          }
           placeholderTextColor={colors.muted}
           multiline
           numberOfLines={5}
@@ -223,6 +272,20 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   categoryChipText: { fontSize: FontSize.sm, fontWeight: "500" },
+
+  lostFoundSection: { gap: Spacing.sm },
+  lostFoundToggle: { flexDirection: "row", gap: Spacing.sm },
+  lostFoundButton: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: Spacing.xs,
+    paddingVertical: Spacing.sm + 2,
+    borderRadius: BorderRadius.lg,
+    borderWidth: 1,
+  },
+  lostFoundButtonText: { fontSize: FontSize.md, fontWeight: "500" },
 
   ratingsSection: { gap: Spacing.md },
   ratingRow: { flexDirection: "row", alignItems: "center", justifyContent: "space-between" },

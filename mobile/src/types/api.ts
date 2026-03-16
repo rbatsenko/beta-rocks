@@ -140,7 +140,7 @@ export interface Report {
   sector_id: string | null;
   route_id: string | null;
   author_id: string | null;
-  category: "conditions" | "safety" | "access" | "beta" | "facilities" | "other";
+  category: "conditions" | "safety" | "access" | "beta" | "facilities" | "climbing_info" | "lost_found" | "other";
   text: string | null;
   rating_dry: number | null;
   rating_wind: number | null;
