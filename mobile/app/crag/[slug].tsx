@@ -445,10 +445,11 @@ export default function CragDetailScreen() {
         <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
           <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.sectors")} ({sectors.length})</Text>
           {sectors.map((s) => (
-            <View key={s.id} style={styles.sectorRow}>
+            <TouchableOpacity key={s.id} style={styles.sectorRow} onPress={() => s.slug && router.push(`/crag/${s.slug}`)} activeOpacity={0.7}>
               <Ionicons name="layers-outline" size={16} color={colors.primary} />
               <Text style={[styles.sectorName, { color: colors.text }]}>{s.name}</Text>
-            </View>
+              <Ionicons name="chevron-forward" size={16} color={colors.muted} />
+            </TouchableOpacity>
           ))}
         </View>
       )}
