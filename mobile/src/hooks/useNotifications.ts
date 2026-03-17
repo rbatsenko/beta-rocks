@@ -41,7 +41,10 @@ export function useNotifications({
     setIsLoading(true);
     try {
       const res = await fetch(
-        `${API_URL}/api/notifications?syncKeyHash=${encodeURIComponent(syncKeyHash)}&limit=50`
+        `${API_URL}/api/notifications?limit=50`,
+        {
+          headers: { "X-Sync-Key-Hash": syncKeyHash },
+        }
       );
       if (res.ok) {
         const data = await res.json();
@@ -104,8 +107,11 @@ export function useNotifications({
       try {
         await fetch(`${API_URL}/api/notifications`, {
           method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ syncKeyHash, ids }),
+          headers: {
+            "Content-Type": "application/json",
+            "X-Sync-Key-Hash": syncKeyHash,
+          },
+          body: JSON.stringify({ ids }),
         });
       } catch {
         // Revert on failure
@@ -124,8 +130,11 @@ export function useNotifications({
     try {
       await fetch(`${API_URL}/api/notifications`, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ syncKeyHash, markAllRead: true }),
+        headers: {
+          "Content-Type": "application/json",
+          "X-Sync-Key-Hash": syncKeyHash,
+        },
+        body: JSON.stringify({ markAllRead: true }),
       });
     } catch {
       fetchNotifications();
@@ -141,8 +150,7 @@ export function useNotifications({
     try {
       await fetch(`${API_URL}/api/notifications`, {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ syncKeyHash }),
+        headers: { "X-Sync-Key-Hash": syncKeyHash },
       });
     } catch {
       fetchNotifications();

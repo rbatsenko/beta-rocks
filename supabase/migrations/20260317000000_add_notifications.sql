@@ -14,6 +14,8 @@ CREATE TABLE public.notifications (
 
 CREATE INDEX idx_notifications_user ON public.notifications(user_profile_id);
 CREATE INDEX idx_notifications_unread ON public.notifications(user_profile_id, read) WHERE read = false;
+-- Index on created_at to support efficient future cleanup of old notifications
+CREATE INDEX idx_notifications_created ON public.notifications(created_at);
 
 ALTER TABLE public.notifications ENABLE ROW LEVEL SECURITY;
 
@@ -53,7 +55,7 @@ BEGIN
     FROM public.user_favorites uf
     WHERE (uf.crag_id = NEW.crag_id OR uf.area_id = NEW.crag_id)
       AND uf.user_profile_id IS NOT NULL
-      AND uf.user_profile_id != COALESCE(NEW.author_id::uuid, '00000000-0000-0000-0000-000000000000')
+      AND uf.user_profile_id::text != COALESCE(NEW.author_id, '')
   LOOP
     INSERT INTO public.notifications (user_profile_id, type, title, body, data)
     VALUES (

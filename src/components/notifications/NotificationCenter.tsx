@@ -13,14 +13,13 @@ import { NotificationDropdown } from "./NotificationDropdown";
 export function NotificationCenter() {
   const { data: profile } = useUserProfile();
   const syncKeyHash = profile?.syncKeyHash ?? null;
-  const userProfileId = profile?.syncKeyHash ?? null; // profile ID is resolved server-side from syncKeyHash
   const {
     notifications,
     unreadCount,
     markAsRead,
     markAllRead,
     clearAll,
-  } = useNotifications(syncKeyHash, userProfileId);
+  } = useNotifications(syncKeyHash);
   const [open, setOpen] = useState(false);
   const router = useRouter();
 

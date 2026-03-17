@@ -5,8 +5,10 @@ import { getSupabaseClient, isSupabaseConfigured } from "@/integrations/supabase
  * GET /api/notifications
  * Fetch notifications for a user
  *
+ * Headers:
+ * - X-Sync-Key-Hash: string (required)
+ *
  * Query params:
- * - syncKeyHash: string (required)
  * - limit: number (default 50)
  * - offset: number (default 0)
  * - unreadOnly: boolean (default false)
@@ -20,7 +22,7 @@ export async function GET(request: NextRequest) {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const supabase = getSupabaseClient() as any;
-    const syncKeyHash = request.nextUrl.searchParams.get("syncKeyHash");
+    const syncKeyHash = request.headers.get("X-Sync-Key-Hash");
     const limit = parseInt(request.nextUrl.searchParams.get("limit") || "50");
     const offset = parseInt(request.nextUrl.searchParams.get("offset") || "0");
     const unreadOnly = request.nextUrl.searchParams.get("unreadOnly") === "true";
@@ -74,6 +76,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       notifications: data || [],
       unreadCount: unreadCount || 0,
+      userProfileId: profile.id,
     });
   } catch (error) {
     console.error("Notifications GET error:", error);
@@ -85,8 +88,10 @@ export async function GET(request: NextRequest) {
  * PATCH /api/notifications
  * Mark notifications as read
  *
+ * Headers:
+ * - X-Sync-Key-Hash: string (required)
+ *
  * Body:
- * - syncKeyHash: string (required)
  * - ids?: string[] (specific notification IDs to mark as read)
  * - markAllRead?: boolean (mark all notifications as read)
  */
@@ -99,8 +104,9 @@ export async function PATCH(request: NextRequest) {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const supabase = getSupabaseClient() as any;
+    const syncKeyHash = request.headers.get("X-Sync-Key-Hash");
     const body = await request.json();
-    const { syncKeyHash, ids, markAllRead } = body;
+    const { ids, markAllRead } = body;
 
     if (!syncKeyHash) {
       return NextResponse.json({ error: "syncKeyHash is required" }, { status: 400 });
@@ -144,8 +150,8 @@ export async function PATCH(request: NextRequest) {
  * DELETE /api/notifications
  * Delete all notifications for a user
  *
- * Body:
- * - syncKeyHash: string (required)
+ * Headers:
+ * - X-Sync-Key-Hash: string (required)
  */
 export async function DELETE(request: NextRequest) {
   try {
@@ -156,8 +162,7 @@ export async function DELETE(request: NextRequest) {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const supabase = getSupabaseClient() as any;
-    const body = await request.json();
-    const { syncKeyHash } = body;
+    const syncKeyHash = request.headers.get("X-Sync-Key-Hash");
 
     if (!syncKeyHash) {
       return NextResponse.json({ error: "syncKeyHash is required" }, { status: 400 });

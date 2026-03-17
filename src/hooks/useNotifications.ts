@@ -32,12 +32,12 @@ interface UseNotificationsReturn {
 }
 
 export function useNotifications(
-  syncKeyHash: string | null,
-  userProfileId: string | null
+  syncKeyHash: string | null
 ): UseNotificationsReturn {
   const [notifications, setNotifications] = useState<AppNotification[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [userProfileId, setUserProfileId] = useState<string | null>(null);
   const channelRef = useRef<ReturnType<ReturnType<typeof getSupabaseClient>["channel"]> | null>(
     null
   );
@@ -47,11 +47,16 @@ export function useNotifications(
 
     setIsLoading(true);
     try {
-      const res = await fetch(`/api/notifications?syncKeyHash=${encodeURIComponent(syncKeyHash)}`);
+      const res = await fetch("/api/notifications", {
+        headers: { "X-Sync-Key-Hash": syncKeyHash },
+      });
       if (res.ok) {
         const data = await res.json();
         setNotifications(data.notifications);
         setUnreadCount(data.unreadCount);
+        if (data.userProfileId) {
+          setUserProfileId(data.userProfileId);
+        }
       }
     } catch (error) {
       console.error("Failed to fetch notifications:", error);
@@ -114,8 +119,11 @@ export function useNotifications(
       try {
         const res = await fetch("/api/notifications", {
           method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ syncKeyHash, ids }),
+          headers: {
+            "Content-Type": "application/json",
+            "X-Sync-Key-Hash": syncKeyHash,
+          },
+          body: JSON.stringify({ ids }),
         });
 
         if (res.ok) {
@@ -137,8 +145,11 @@ export function useNotifications(
     try {
       const res = await fetch("/api/notifications", {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ syncKeyHash, markAllRead: true }),
+        headers: {
+          "Content-Type": "application/json",
+          "X-Sync-Key-Hash": syncKeyHash,
+        },
+        body: JSON.stringify({ markAllRead: true }),
       });
 
       if (res.ok) {
@@ -156,8 +167,7 @@ export function useNotifications(
     try {
       const res = await fetch("/api/notifications", {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ syncKeyHash }),
+        headers: { "X-Sync-Key-Hash": syncKeyHash },
       });
 
       if (res.ok) {
