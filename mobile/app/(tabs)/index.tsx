@@ -15,6 +15,8 @@ import { useRouter } from "expo-router";
 import { useFocusEffect } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { getFavorites } from "@/lib/storage";
+import { useUserProfile } from "@/hooks/useUserProfile";
+import { useNotifications } from "@/hooks/useNotifications";
 import type { Favorite } from "@/types/api";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -27,6 +29,8 @@ export default function HomeScreen() {
   const router = useRouter();
   const { t } = useTranslation("common");
   const [favorites, setFavorites] = useState<Favorite[]>([]);
+  const { syncKeyHash, profileId } = useUserProfile();
+  const { unreadCount } = useNotifications({ syncKeyHash, userProfileId: profileId });
 
   useFocusEffect(
     useCallback(() => {
@@ -40,10 +44,19 @@ export default function HomeScreen() {
       style={[styles.container, { backgroundColor: colors.background }]}
       contentContainerStyle={styles.content}
     >
-      {/* Logo */}
-      <View style={[styles.logoCircle, { backgroundColor: "rgba(249,115,22,0.12)" }]}>
+      {/* Logo — tappable, opens notifications */}
+      <TouchableOpacity
+        style={[styles.logoCircle, { backgroundColor: "rgba(249,115,22,0.12)" }]}
+        onPress={() => router.push("/(tabs)/notifications" as any)}
+        activeOpacity={0.8}
+      >
         <Ionicons name="partly-sunny" size={40} color="#f97316" />
-      </View>
+        {unreadCount > 0 && (
+          <View style={styles.notifBadge}>
+            <Text style={styles.notifBadgeText}>{unreadCount > 9 ? "9+" : unreadCount}</Text>
+          </View>
+        )}
+      </TouchableOpacity>
 
       {/* Heading */}
       <Text style={[styles.title, { color: colors.text }]}>beta.rocks</Text>
@@ -111,6 +124,23 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: Spacing.sm,
+  },
+  notifBadge: {
+    position: "absolute",
+    top: -2,
+    right: -2,
+    backgroundColor: "#ef4444",
+    borderRadius: 10,
+    minWidth: 20,
+    height: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 5,
+  },
+  notifBadgeText: {
+    color: "#fff",
+    fontSize: 11,
+    fontWeight: "700",
   },
   title: {
     fontSize: 28,

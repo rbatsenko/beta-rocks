@@ -5,6 +5,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "@/contexts/ThemeContext";
 import { Colors } from "@/constants/theme";
 import { useTranslation } from "react-i18next";
+import { useUserProfile } from "@/hooks/useUserProfile";
+import { useNotifications } from "@/hooks/useNotifications";
 
 function LiveDot() {
   const pulse = useRef(new Animated.Value(1)).current;
@@ -37,6 +39,8 @@ export default function TabLayout() {
   const isDark = colorScheme === "dark";
   const colors = isDark ? Colors.dark : Colors.light;
   const { t } = useTranslation("common");
+  const { syncKeyHash, profileId } = useUserProfile();
+  const { unreadCount } = useNotifications({ syncKeyHash, userProfileId: profileId });
 
   return (
     <Tabs
@@ -64,6 +68,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home-outline" size={size} color={color} />
           ),
+          tabBarBadge: unreadCount > 0 ? unreadCount : undefined,
         }}
       />
       <Tabs.Screen
@@ -85,6 +90,12 @@ export default function TabLayout() {
               <LiveDot />
             </View>
           ),
+        }}
+      />
+      <Tabs.Screen
+        name="notifications"
+        options={{
+          href: null,
         }}
       />
       <Tabs.Screen

@@ -7,6 +7,7 @@ import { Search, Star, Activity } from "lucide-react";
 import { LanguageSelector } from "@/components/common/LanguageSelector";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
 import { UserMenu } from "@/components/profile/UserMenu";
+import { NotificationCenter } from "@/components/notifications/NotificationCenter";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 
 interface HeaderActionsProps {
@@ -72,6 +73,7 @@ export function HeaderActions({
       >
         <Star className="h-[1.2rem] w-[1.2rem]" />
       </Button>
+      <NotificationCenter />
       {extraActions}
       <div className="hidden md:flex items-center gap-2">
         <LanguageSelector />

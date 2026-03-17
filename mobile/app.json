@@ -2,7 +2,7 @@
   "expo": {
     "name": "beta.rocks",
     "slug": "beta-rocks",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "scheme": "betarocks",
@@ -45,7 +45,14 @@
           "cameraPermission": "Allow beta.rocks to use the camera to take photos for reports."
         }
       ],
-      "@react-native-community/datetimepicker"
+      "@react-native-community/datetimepicker",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#f97316"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

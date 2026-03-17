@@ -6,10 +6,18 @@ import "@/i18n"; // Initialize i18n
 import { ThemeProvider, useTheme } from "@/contexts/ThemeContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { UserProfileProvider } from "@/contexts/UserProfileContext";
+import { useUserProfile } from "@/hooks/useUserProfile";
+import { usePushNotifications } from "@/hooks/usePushNotifications";
 import { Colors } from "@/constants/theme";
 import { useTranslation } from "react-i18next";
 
 SplashScreen.preventAutoHideAsync();
+
+function PushNotificationRegistrar() {
+  const { syncKeyHash } = useUserProfile();
+  usePushNotifications(syncKeyHash);
+  return null;
+}
 
 function RootNavigator() {
   const { colorScheme } = useTheme();
@@ -91,6 +99,7 @@ export default function RootLayout() {
     <ThemeProvider>
       <LanguageProvider>
         <UserProfileProvider>
+          <PushNotificationRegistrar />
           <RootNavigator />
         </UserProfileProvider>
       </LanguageProvider>
