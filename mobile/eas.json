@@ -25,9 +25,7 @@
   "submit": {
     "production": {
       "ios": {
-        "app-store-connect-api-key": {
-          "ascAppId": "6760671893"
-        }
+        "ascAppId": "6760671893"
       },
       "android": {
         "serviceAccountKeyPath": "./serviceAccountKey.json",
