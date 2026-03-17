@@ -452,12 +452,17 @@ export default function CragDetailScreen() {
           <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.webcams")}</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.photoScroll}>
             {webcams.map((cam) => (
-              <View key={cam.webcamId} style={styles.webcamItem}>
+              <TouchableOpacity
+                key={cam.webcamId}
+                style={styles.webcamItem}
+                onPress={() => Linking.openURL(`https://www.windy.com/webcams/${cam.webcamId}`)}
+                activeOpacity={0.7}
+              >
                 {cam.images?.current?.preview && (
                   <Image source={{ uri: cam.images.current.preview }} style={styles.webcamImage} resizeMode="cover" />
                 )}
                 <Text style={[styles.webcamTitle, { color: colors.textSecondary }]} numberOfLines={2}>{cam.title}</Text>
-              </View>
+              </TouchableOpacity>
             ))}
           </ScrollView>
           <Text style={[styles.poweredBy, { color: colors.muted }]}>{t("webcams.poweredBy", "Powered by")} Windy</Text>
