@@ -113,7 +113,7 @@ export function PhotoLightbox({ visible, photos, initialIndex = 0, onClose }: Ph
   return (
     <Modal visible={visible} transparent animationType="fade" statusBarTranslucent>
       <GestureHandlerRootView style={styles.container}>
-        <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+        <TouchableOpacity style={styles.closeButton} onPress={onClose} hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}>
           <Ionicons name="close" size={28} color="white" />
         </TouchableOpacity>
 
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     right: 10,
     zIndex: 10,
     padding: 20,
-    hitSlop: { top: 20, bottom: 20, left: 20, right: 20 },
+    // hitSlop applied via component prop, not style
   },
   counter: {
     position: "absolute",

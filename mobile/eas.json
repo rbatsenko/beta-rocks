@@ -29,7 +29,8 @@
       },
       "android": {
         "serviceAccountKeyPath": "./serviceAccountKey.json",
-        "track": "internal"
+        "track": "internal",
+        "releaseStatus": "draft"
       }
     }
   }

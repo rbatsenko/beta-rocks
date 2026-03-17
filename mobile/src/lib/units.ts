@@ -97,6 +97,29 @@ export function formatWindSpeed(
   return `${value.toFixed(decimals)} ${symbols[unit]}`;
 }
 
+export function convertPrecipitation(
+  value: number,
+  from: UnitsConfig["precipitation"],
+  to: UnitsConfig["precipitation"]
+): number {
+  if (from === to) return value;
+  if (from === "mm" && to === "inches") return value / 25.4;
+  if (from === "inches" && to === "mm") return value * 25.4;
+  return value;
+}
+
+export function formatPrecipitation(
+  value: number,
+  unit: UnitsConfig["precipitation"],
+  decimals = 1
+): string {
+  const symbols: Record<UnitsConfig["precipitation"], string> = {
+    mm: "mm",
+    inches: "in",
+  };
+  return `${value.toFixed(decimals)} ${symbols[unit]}`;
+}
+
 /**
  * Get default units based on device locale
  */

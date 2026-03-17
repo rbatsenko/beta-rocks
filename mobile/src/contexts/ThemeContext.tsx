@@ -58,7 +58,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setThemeModeState(mode);
 
     if (mode === "system") {
-      Appearance.setColorScheme(null);
+      Appearance.setColorScheme(null as any);
     } else {
       Appearance.setColorScheme(mode);
     }

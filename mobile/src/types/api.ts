@@ -27,11 +27,24 @@ export interface CurrentWeather {
 export interface HourlyCondition {
   time: string;
   friction: number;
+  frictionScore: number;
+  rating: string;
   temperature_c: number;
+  temp_c: number;
   humidity: number;
   windSpeed_kph: number;
+  wind_kph: number;
   precipitation_mm: number;
+  precip_mm: number;
   weatherCode: number;
+  isDry: boolean;
+  warnings: string[];
+}
+
+export interface PrecipitationContext {
+  last24h: number;
+  last48h: number;
+  next24h: number;
 }
 
 export interface OptimalWindow {
@@ -102,6 +115,7 @@ export interface CragData {
   id: string;
   name: string;
   slug: string;
+  description: string | null;
   lat: number;
   lon: number;
   rock_type: string | null;
@@ -127,6 +141,14 @@ export interface CragDetailResponse {
   conditions: ConditionsData & {
     current: CurrentWeather;
     astro: { sunrise: string; sunset: string };
+    precipitationContext?: PrecipitationContext;
+    dewPointSpread?: number;
+    frictionScore: number;
+    rating: string;
+    reasons: string[];
+    warnings: string[];
+    isDry: boolean;
+    dryingTimeHours?: number;
   };
   reports: Report[];
   sectors: SectorData[];
@@ -140,6 +162,7 @@ export interface Report {
   sector_id: string | null;
   route_id: string | null;
   author_id: string | null;
+  author?: { id: string; display_name: string | null } | null;
   category: "conditions" | "safety" | "access" | "beta" | "facilities" | "climbing_info" | "lost_found" | "other";
   text: string | null;
   rating_dry: number | null;
@@ -150,6 +173,7 @@ export interface Report {
   lost_found_type: "lost" | "found" | null;
   created_at: string;
   updated_at: string;
+  confirmationCount?: number;
   confirmations?: { count: number }[];
 }
 
