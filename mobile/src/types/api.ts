@@ -239,6 +239,23 @@ export interface Favorite {
   addedAt: string;
 }
 
+export interface AppNotification {
+  id: string;
+  user_profile_id: string;
+  type: "new_report" | "conditions_alert";
+  title: string;
+  body: string;
+  data: {
+    cragId: string;
+    cragSlug: string;
+    cragName: string;
+    reportId: string;
+    category: string;
+  };
+  read: boolean;
+  created_at: string;
+}
+
 export interface ChatMessage {
   id: string;
   role: "user" | "assistant";
