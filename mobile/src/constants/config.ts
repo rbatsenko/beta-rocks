@@ -58,10 +58,35 @@ export const ROCK_TYPES = [
   "granite",
   "sandstone",
   "limestone",
-  "basalt",
   "gneiss",
   "quartzite",
-  "unknown",
+  "gritstone",
+  "basalt",
+  "volcanic",
+  "conglomerate",
+  "schist",
+  "slate",
+  "other",
+] as const;
+
+export const CLIMBING_TYPES = [
+  "sport",
+  "trad",
+  "boulder",
+  "mixed",
+  "aid",
+  "ice",
+] as const;
+
+export const ASPECTS = [
+  { value: 0, label: "N" },
+  { value: 45, label: "NE" },
+  { value: 90, label: "E" },
+  { value: 135, label: "SE" },
+  { value: 180, label: "S" },
+  { value: 225, label: "SW" },
+  { value: 270, label: "W" },
+  { value: 315, label: "NW" },
 ] as const;
 
 export type RockType = (typeof ROCK_TYPES)[number];
