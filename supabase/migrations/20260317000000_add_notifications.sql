@@ -55,7 +55,7 @@ BEGIN
     FROM public.user_favorites uf
     WHERE (uf.crag_id = NEW.crag_id OR uf.area_id = NEW.crag_id)
       AND uf.user_profile_id IS NOT NULL
-      AND uf.user_profile_id::text != COALESCE(NEW.author_id, '')
+      AND uf.user_profile_id::text != COALESCE(NEW.author_id::text, '')
   LOOP
     INSERT INTO public.notifications (user_profile_id, type, title, body, data)
     VALUES (
