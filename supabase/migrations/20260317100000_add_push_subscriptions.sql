@@ -16,10 +16,5 @@ CREATE INDEX idx_push_sub_active ON public.push_subscriptions(is_active) WHERE i
 
 ALTER TABLE public.push_subscriptions ENABLE ROW LEVEL SECURITY;
 
--- Service role bypasses RLS for Edge Function access
--- Users can manage their own subscriptions via API
-CREATE POLICY "users_manage_own_push_subs" ON public.push_subscriptions FOR ALL
-  USING (user_profile_id IN (
-    SELECT id FROM public.user_profiles
-    WHERE sync_key_hash = current_setting('request.headers', true)::json->>'x-sync-key-hash'
-  ));
+-- Open RLS — API route handles auth by looking up user_profile_id from syncKeyHash
+CREATE POLICY "allow_all_push_subs" ON public.push_subscriptions FOR ALL USING (true) WITH CHECK (true);
