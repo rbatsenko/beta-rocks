@@ -19,23 +19,11 @@ CREATE INDEX idx_notifications_created ON public.notifications(created_at);
 
 ALTER TABLE public.notifications ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "users_read_own_notifications" ON public.notifications FOR SELECT
-  USING (user_profile_id IN (
-    SELECT id FROM public.user_profiles
-    WHERE sync_key_hash = current_setting('request.headers', true)::json->>'x-sync-key-hash'
-  ));
-
-CREATE POLICY "users_update_own_notifications" ON public.notifications FOR UPDATE
-  USING (user_profile_id IN (
-    SELECT id FROM public.user_profiles
-    WHERE sync_key_hash = current_setting('request.headers', true)::json->>'x-sync-key-hash'
-  ));
-
-CREATE POLICY "users_delete_own_notifications" ON public.notifications FOR DELETE
-  USING (user_profile_id IN (
-    SELECT id FROM public.user_profiles
-    WHERE sync_key_hash = current_setting('request.headers', true)::json->>'x-sync-key-hash'
-  ));
+-- Open RLS policies — API route handles auth by looking up user_profile_id from sync_key_hash
+-- This matches the pattern used by other tables (reports, crags, etc.)
+CREATE POLICY "allow_read_notifications" ON public.notifications FOR SELECT USING (true);
+CREATE POLICY "allow_update_notifications" ON public.notifications FOR UPDATE USING (true);
+CREATE POLICY "allow_delete_notifications" ON public.notifications FOR DELETE USING (true);
 
 -- Enable Realtime for live in-app updates
 ALTER PUBLICATION supabase_realtime ADD TABLE public.notifications;
