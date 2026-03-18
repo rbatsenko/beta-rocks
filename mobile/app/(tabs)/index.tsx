@@ -3,20 +3,20 @@
  * Logo, search hint, and favorites quick access
  */
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import {
   View,
   Text,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Animated,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { useFocusEffect } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { getFavorites } from "@/lib/storage";
-import { useUserProfile } from "@/hooks/useUserProfile";
-import { useNotifications } from "@/hooks/useNotifications";
+import { useNotificationsContext } from "@/contexts/NotificationsContext";
 import type { Favorite } from "@/types/api";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -29,8 +29,24 @@ export default function HomeScreen() {
   const router = useRouter();
   const { t } = useTranslation("common");
   const [favorites, setFavorites] = useState<Favorite[]>([]);
-  const { syncKeyHash, profileId } = useUserProfile();
-  const { unreadCount } = useNotifications({ syncKeyHash, userProfileId: profileId });
+  const { unreadCount } = useNotificationsContext();
+  const pulseAnim = useRef(new Animated.Value(1)).current;
+
+  // Pulse animation when there are unread notifications
+  useEffect(() => {
+    if (unreadCount > 0) {
+      const animation = Animated.loop(
+        Animated.sequence([
+          Animated.timing(pulseAnim, { toValue: 1.08, duration: 1200, useNativeDriver: true }),
+          Animated.timing(pulseAnim, { toValue: 1, duration: 1200, useNativeDriver: true }),
+        ])
+      );
+      animation.start();
+      return () => animation.stop();
+    } else {
+      pulseAnim.setValue(1);
+    }
+  }, [unreadCount, pulseAnim]);
 
   useFocusEffect(
     useCallback(() => {
@@ -44,19 +60,25 @@ export default function HomeScreen() {
       style={[styles.container, { backgroundColor: colors.background }]}
       contentContainerStyle={styles.content}
     >
-      {/* Logo — tappable, opens notifications */}
-      <TouchableOpacity
-        style={[styles.logoCircle, { backgroundColor: "rgba(249,115,22,0.12)" }]}
-        onPress={() => router.push("/(tabs)/notifications" as any)}
-        activeOpacity={0.8}
-      >
-        <Ionicons name="partly-sunny" size={40} color="#f97316" />
-        {unreadCount > 0 && (
-          <View style={styles.notifBadge}>
-            <Text style={styles.notifBadgeText}>{unreadCount > 9 ? "9+" : unreadCount}</Text>
-          </View>
-        )}
-      </TouchableOpacity>
+      {/* Logo — tappable, opens notifications. Pulses when unread. */}
+      <Animated.View style={{ transform: [{ scale: pulseAnim }] }}>
+        <TouchableOpacity
+          style={[styles.logoCircle, {
+            backgroundColor: "rgba(249,115,22,0.12)",
+            borderWidth: unreadCount > 0 ? 2 : 0,
+            borderColor: unreadCount > 0 ? "rgba(249,115,22,0.4)" : "transparent",
+          }]}
+          onPress={() => router.push("/(tabs)/notifications" as any)}
+          activeOpacity={0.8}
+        >
+          <Ionicons name="partly-sunny" size={40} color="#f97316" />
+          {unreadCount > 0 && (
+            <View style={styles.notifBadge}>
+              <Text style={styles.notifBadgeText}>{unreadCount > 9 ? "9+" : unreadCount}</Text>
+            </View>
+          )}
+        </TouchableOpacity>
+      </Animated.View>
 
       {/* Heading */}
       <Text style={[styles.title, { color: colors.text }]}>beta.rocks</Text>

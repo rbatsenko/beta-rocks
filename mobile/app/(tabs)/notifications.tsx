@@ -17,7 +17,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "@/contexts/ThemeContext";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { CATEGORY_COLORS } from "@/constants/config";
-import { useNotifications } from "@/hooks/useNotifications";
+import { useNotificationsContext } from "@/contexts/NotificationsContext";
 import { useUserProfile } from "@/hooks/useUserProfile";
 import { useTranslation } from "react-i18next";
 import type { AppNotification } from "@/types/api";
@@ -43,8 +43,7 @@ export default function NotificationsScreen() {
   const colors = isDark ? Colors.dark : Colors.light;
   const { t } = useTranslation("common");
   const router = useRouter();
-  const { syncKeyHash, profileId, hasProfile } = useUserProfile();
-
+  const { hasProfile } = useUserProfile();
   const {
     notifications,
     unreadCount,
@@ -52,10 +51,7 @@ export default function NotificationsScreen() {
     markAsRead,
     markAllRead,
     refetch,
-  } = useNotifications({
-    syncKeyHash,
-    userProfileId: profileId,
-  });
+  } = useNotificationsContext();
 
   const handleNotificationPress = (notification: AppNotification) => {
     if (!notification.read) {

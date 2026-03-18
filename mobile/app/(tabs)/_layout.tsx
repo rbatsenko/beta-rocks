@@ -5,8 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "@/contexts/ThemeContext";
 import { Colors } from "@/constants/theme";
 import { useTranslation } from "react-i18next";
-import { useUserProfile } from "@/hooks/useUserProfile";
-import { useNotifications } from "@/hooks/useNotifications";
+import { useNotificationsContext } from "@/contexts/NotificationsContext";
 
 function LiveDot() {
   const pulse = useRef(new Animated.Value(1)).current;
@@ -39,8 +38,7 @@ export default function TabLayout() {
   const isDark = colorScheme === "dark";
   const colors = isDark ? Colors.dark : Colors.light;
   const { t } = useTranslation("common");
-  const { syncKeyHash, profileId } = useUserProfile();
-  const { unreadCount } = useNotifications({ syncKeyHash, userProfileId: profileId });
+  const { unreadCount } = useNotificationsContext();
 
   return (
     <Tabs
