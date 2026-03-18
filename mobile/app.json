@@ -29,6 +29,7 @@
         "resizeMode": "contain",
         "backgroundColor": "#1e1714"
       },
+      "googleServicesFile": "./google-services.json",
       "package": "rocks.beta.app"
     },
     "web": {
