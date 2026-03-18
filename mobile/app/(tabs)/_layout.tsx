@@ -95,6 +95,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="notifications"
         options={{
+          title: t("mobile.notifications", "Notifications"),
           href: null,
         }}
       />
