@@ -1,8 +1,9 @@
 /**
  * Add Crag screen - create a new crag via the API
  * Presented as a modal, matching the web AddCragModal features:
+ * - Interactive map picker with location search
  * - Secret crag toggle
- * - Manual coordinate entry with reverse geocoding
+ * - Reverse geocoding auto-fill
  * - Country selector, state, municipality, village
  * - Rock type, aspects, climbing types selection
  * - Description field
@@ -10,7 +11,7 @@
  * - Submits via /api/crags/submit (same as web)
  */
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   View,
   Text,
@@ -27,6 +28,7 @@ import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { submitCrag, checkNearbyCrags, reverseGeocode } from "@/api/client";
 import { useUserProfile } from "@/hooks/useUserProfile";
+import { CragLocationPicker } from "@/components/CragLocationPicker";
 import { ROCK_TYPES, CLIMBING_TYPES, ASPECTS } from "@/constants/config";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -41,6 +43,7 @@ export default function AddCragScreen() {
   const { hasProfile, syncKeyHash } = useUserProfile();
 
   // Form state
+  const [position, setPosition] = useState<{ latitude: number; longitude: number } | null>(null);
   const [name, setName] = useState("");
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
@@ -51,8 +54,6 @@ export default function AddCragScreen() {
   const [selectedClimbingTypes, setSelectedClimbingTypes] = useState<string[]>([]);
   const [description, setDescription] = useState("");
   const [isSecret, setIsSecret] = useState(false);
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
 
   // Loading states
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -63,51 +64,43 @@ export default function AddCragScreen() {
     Array<{ id: string; name: string; lat: number; lon: number; slug: string; distance?: number }>
   >([]);
 
-  const lat = parseFloat(latitude);
-  const lon = parseFloat(longitude);
-  const hasValidCoords =
-    !isNaN(lat) && !isNaN(lon) && lat >= -90 && lat <= 90 && lon >= -180 && lon <= 180;
+  // Track previous position to avoid duplicate geocoding
+  const prevPositionRef = useRef<string>("");
 
-  // Reverse geocode and check nearby crags when coordinates change
-  const handleCoordsBlur = useCallback(async () => {
-    if (!hasValidCoords) {
+  // Reverse geocode and check nearby crags when position changes (from map)
+  useEffect(() => {
+    if (!position) {
       setNearbyCrags([]);
       return;
     }
 
+    const posKey = `${position.latitude.toFixed(6)},${position.longitude.toFixed(6)}`;
+    if (posKey === prevPositionRef.current) return;
+    prevPositionRef.current = posKey;
+
+    const { latitude: lat, longitude: lon } = position;
+
     // Check nearby crags
-    try {
-      const result = await checkNearbyCrags(lat, lon, 500);
-      setNearbyCrags(result.nearbyCrags || []);
-    } catch {
-      setNearbyCrags([]);
-    }
+    checkNearbyCrags(lat, lon, 500)
+      .then((result) => setNearbyCrags(result.nearbyCrags || []))
+      .catch(() => setNearbyCrags([]));
 
     // Reverse geocode to auto-fill location fields
     setIsGeocoding(true);
-    try {
-      const result = await reverseGeocode(lat, lon);
-      if (result.success && result.data.formatted) {
-        const { formatted } = result.data;
-        if (!name && formatted.suggestedName) setName(formatted.suggestedName);
-        if (!country && formatted.country) setCountry(formatted.country);
-        if (!state && formatted.state) setState(formatted.state);
-        if (!municipality && formatted.municipality) setMunicipality(formatted.municipality);
-        if (!village && formatted.village) setVillage(formatted.village);
-      }
-    } catch {
-      // Geocoding is optional, don't block the form
-    } finally {
-      setIsGeocoding(false);
-    }
-  }, [latitude, longitude, hasValidCoords, lat, lon, name, country, state, municipality, village]);
-
-  // Clear nearby crags when coordinates are cleared
-  useEffect(() => {
-    if (!latitude && !longitude) {
-      setNearbyCrags([]);
-    }
-  }, [latitude, longitude]);
+    reverseGeocode(lat, lon)
+      .then((result) => {
+        if (result.success && result.data.formatted) {
+          const { formatted } = result.data;
+          setName((prev) => prev || formatted.suggestedName || "");
+          setCountry((prev) => prev || formatted.country || "");
+          setState((prev) => prev || formatted.state || "");
+          setMunicipality((prev) => prev || formatted.municipality || "");
+          setVillage((prev) => prev || formatted.village || "");
+        }
+      })
+      .catch(() => {})
+      .finally(() => setIsGeocoding(false));
+  }, [position?.latitude, position?.longitude]);
 
   const toggleAspect = (aspect: number) => {
     setSelectedAspects((prev) =>
@@ -126,12 +119,12 @@ export default function AddCragScreen() {
       Alert.alert(t("addCragModal.errors.nameRequired", "Name is required"));
       return;
     }
-    if (!hasValidCoords) {
+    if (!position) {
       Alert.alert(
         t("addCragModal.errors.locationRequired", "Location is required"),
         isSecret
-          ? t("addCragModal.secretCrag.locationRequiredDesc", "Please enter the coordinates of a nearby reference city for weather data.")
-          : t("addCragModal.errors.locationRequiredDesc", "Please enter valid coordinates.")
+          ? t("addCragModal.secretCrag.locationRequiredDesc", "Please select a nearby reference city on the map.")
+          : t("addCragModal.errors.locationRequiredDesc", "Please tap the map to set the crag location.")
       );
       return;
     }
@@ -152,8 +145,8 @@ export default function AddCragScreen() {
       const result = await submitCrag(
         {
           name: name.trim(),
-          lat,
-          lon,
+          lat: position.latitude,
+          lon: position.longitude,
           country: country.trim().substring(0, 2).toUpperCase(),
           state: state.trim() || undefined,
           municipality: municipality.trim() || undefined,
@@ -195,7 +188,7 @@ export default function AddCragScreen() {
     }
   }
 
-  const canSubmit = name.trim() && hasValidCoords && country.trim().length >= 2 && !isSubmitting && !isGeocoding;
+  const canSubmit = name.trim() && position && country.trim().length >= 2 && !isSubmitting && !isGeocoding;
 
   return (
     <KeyboardAvoidingView
@@ -253,7 +246,7 @@ export default function AddCragScreen() {
           </View>
         </TouchableOpacity>
 
-        {/* Coordinates */}
+        {/* Map Location Picker */}
         <View style={styles.fieldGroup}>
           <Text style={[styles.sectionLabel, { color: colors.textSecondary }]}>
             {isSecret
@@ -261,47 +254,13 @@ export default function AddCragScreen() {
               : t("addCragModal.mapLabel", "Crag Location")}{" "}
             *
           </Text>
-          <Text style={[styles.hint, { color: colors.muted, marginBottom: Spacing.sm }]}>
-            {isSecret
-              ? t("addCragModal.secretCrag.mapHelp", "Enter the coordinates of a nearby city (not the actual crag).")
-              : t("addCragModal.mapHelp", "Enter the crag's coordinates. You can find them from Google Maps by long-pressing a location.")}
-          </Text>
-          <View style={styles.rowFields}>
-            <View style={[styles.fieldGroup, { flex: 1 }]}>
-              <Text style={[styles.label, { color: colors.textSecondary }]}>
-                {t("mobile.latitude", "Latitude")} *
-              </Text>
-              <TextInput
-                style={[styles.input, { color: colors.text, backgroundColor: colors.surface, borderColor: colors.border }]}
-                value={latitude}
-                onChangeText={setLatitude}
-                onBlur={handleCoordsBlur}
-                placeholder="46.3522"
-                placeholderTextColor={colors.muted}
-                keyboardType="decimal-pad"
-              />
-            </View>
-            <View style={[styles.fieldGroup, { flex: 1 }]}>
-              <Text style={[styles.label, { color: colors.textSecondary }]}>
-                {t("mobile.longitude", "Longitude")} *
-              </Text>
-              <TextInput
-                style={[styles.input, { color: colors.text, backgroundColor: colors.surface, borderColor: colors.border }]}
-                value={longitude}
-                onChangeText={setLongitude}
-                onBlur={handleCoordsBlur}
-                placeholder="9.2649"
-                placeholderTextColor={colors.muted}
-                keyboardType="decimal-pad"
-              />
-            </View>
-          </View>
-          {hasValidCoords && (
-            <Text style={[styles.coordsDisplay, { color: colors.muted }]}>
-              {t("addCragModal.coordinates", "Coordinates")}: {lat.toFixed(6)}, {lon.toFixed(6)}
-              {isGeocoding && "  " + t("addCragModal.submitting", "Loading...")}
-            </Text>
-          )}
+          <CragLocationPicker
+            position={position}
+            onPositionChange={setPosition}
+            loading={isGeocoding}
+            nearbyCrags={nearbyCrags}
+            isSecret={isSecret}
+          />
         </View>
 
         {/* Nearby Crags Warning */}
@@ -632,7 +591,6 @@ const styles = StyleSheet.create({
   rowFields: { flexDirection: "row", gap: Spacing.md },
 
   hint: { fontSize: FontSize.xs, lineHeight: 18 },
-  coordsDisplay: { fontSize: FontSize.xs, marginTop: Spacing.xs },
   charCount: { fontSize: FontSize.xs, textAlign: "right" },
 
   chipGrid: { flexDirection: "row", flexWrap: "wrap", gap: Spacing.sm },
