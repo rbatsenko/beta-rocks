@@ -875,7 +875,10 @@
     "rockType": "Rock Type",
     "latitude": "Latitude",
     "longitude": "Longitude",
-    "sectorName": "Sector Name"
+    "sectorName": "Sector Name",
+    "notifications": "Notificări",
+    "markAllRead": "Marchează tot ca citit",
+    "noNotifications": "Încă nu sunt notificări"
   },
   "common": {
     "done": "Done",

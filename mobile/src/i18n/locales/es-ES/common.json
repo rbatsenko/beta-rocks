@@ -959,7 +959,10 @@
     "rockType": "Rock Type",
     "latitude": "Latitude",
     "longitude": "Longitude",
-    "sectorName": "Sector Name"
+    "sectorName": "Sector Name",
+    "notifications": "Notificaciones",
+    "markAllRead": "Marcar todo como leído",
+    "noNotifications": "Aún no hay notificaciones"
   },
   "common": {
     "done": "Done",

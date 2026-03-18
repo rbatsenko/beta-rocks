@@ -956,7 +956,10 @@
     "rockType": "Rock Type",
     "latitude": "Latitude",
     "longitude": "Longitude",
-    "sectorName": "Sector Name"
+    "sectorName": "Sector Name",
+    "notifications": "Oznámení",
+    "markAllRead": "Označit vše jako přečtené",
+    "noNotifications": "Zatím žádná oznámení"
   },
   "common": {
     "done": "Done",

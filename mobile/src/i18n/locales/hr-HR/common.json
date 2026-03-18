@@ -955,7 +955,10 @@
     "rockType": "Rock Type",
     "latitude": "Latitude",
     "longitude": "Longitude",
-    "sectorName": "Sector Name"
+    "sectorName": "Sector Name",
+    "notifications": "Obavijesti",
+    "markAllRead": "Označi sve kao pročitano",
+    "noNotifications": "Još nema obavijesti"
   },
   "common": {
     "done": "Done",

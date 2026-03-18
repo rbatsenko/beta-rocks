@@ -444,7 +444,10 @@
     "rockType": "Typ skały",
     "latitude": "Szerokość geogr.",
     "longitude": "Długość geogr.",
-    "sectorName": "Nazwa sektora"
+    "sectorName": "Nazwa sektora",
+    "notifications": "Powiadomienia",
+    "markAllRead": "Oznacz wszystkie jako przeczytane",
+    "noNotifications": "Brak powiadomień"
   },
   "syncExplainer": {
     "title": "Jak działa synchronizacja",

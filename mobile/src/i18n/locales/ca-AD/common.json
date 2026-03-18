@@ -838,7 +838,10 @@
     "rockType": "Rock Type",
     "latitude": "Latitude",
     "longitude": "Longitude",
-    "sectorName": "Sector Name"
+    "sectorName": "Sector Name",
+    "notifications": "Notificacions",
+    "markAllRead": "Marca-ho tot com a llegit",
+    "noNotifications": "Encara no hi ha notificacions"
   },
   "common": {
     "done": "Done",

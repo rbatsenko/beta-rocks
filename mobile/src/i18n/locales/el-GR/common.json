@@ -838,7 +838,10 @@
     "rockType": "Rock Type",
     "latitude": "Latitude",
     "longitude": "Longitude",
-    "sectorName": "Sector Name"
+    "sectorName": "Sector Name",
+    "notifications": "Ειδοποιήσεις",
+    "markAllRead": "Σήμανση όλων ως αναγνωσμένα",
+    "noNotifications": "Δεν υπάρχουν ειδοποιήσεις ακόμα"
   },
   "common": {
     "done": "Done",
