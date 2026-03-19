@@ -2,7 +2,7 @@
  * Crag detail screen - full-featured, matching web's CragPageContent
  */
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import {
   View,
   Text,
@@ -17,7 +17,8 @@ import {
 } from "react-native";
 import { useLocalSearchParams, useRouter, useNavigation } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { getCragBySlug, confirmReport as apiConfirmReport } from "@/api/client";
+import { getCragBySlug, getReportsByCrag, confirmReport as apiConfirmReport } from "@/api/client";
+import { useFocusEffect } from "@react-navigation/native";
 import { API_URL, SUPABASE_URL } from "@/constants/config";
 import { useUserProfile } from "@/hooks/useUserProfile";
 import { useConditionsTranslations, getWeatherDescription } from "@/hooks/useConditionsTranslations";
@@ -181,6 +182,20 @@ export default function CragDetailScreen() {
   }
 
   useEffect(() => { if (slug) loadCragData(); }, [slug]);
+
+  // Refetch reports when screen regains focus (e.g. after submitting a report)
+  const hasMounted = useRef(false);
+  useFocusEffect(
+    useCallback(() => {
+      if (!hasMounted.current) {
+        hasMounted.current = true;
+        return; // skip initial focus — loadCragData already fetched reports
+      }
+      if (crag?.id) {
+        getReportsByCrag(crag.id).then(setReports).catch(() => {});
+      }
+    }, [crag?.id])
+  );
 
   useEffect(() => {
     if (crag) {
