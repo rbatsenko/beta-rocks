@@ -67,13 +67,18 @@ Deno.serve(async (req) => {
     }
 
     // Batch send to Expo Push API
-    const messages = expoPushTokens.map((token) => ({
-      to: token,
-      sound: "default",
-      title: payload.record.title,
-      body: payload.record.body,
-      data: payload.record.data,
-    }));
+    const messages = expoPushTokens.map((token) => {
+      const platform = subscriptions.find((s) => s.token === token)?.platform;
+      return {
+        to: token,
+        sound: "default",
+        title: payload.record.title,
+        body: payload.record.body,
+        data: payload.record.data,
+        priority: "high",
+        ...(platform === "android" && { channelId: "default" }),
+      };
+    });
 
     const res = await fetch("https://exp.host/--/api/v2/push/send", {
       method: "POST",
