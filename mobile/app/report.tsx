@@ -225,7 +225,7 @@ export default function ReportScreen() {
       Alert.alert(t("reports.detailsRequired", "Please provide details about this report"));
       return;
     }
-    if (!cragId || !syncKeyHash) {
+    if (!cragId || !syncKeyHash || !profileId) {
       Alert.alert(t("errors.failedToLoadConditions", "Failed to load conditions. Please try again."));
       return;
     }
@@ -284,6 +284,7 @@ export default function ReportScreen() {
             ...(isLostFound && { lost_found_type: lostFoundType }),
             observed_at: observedAt.toISOString(),
           },
+          profileId,
           syncKeyHash
         );
 

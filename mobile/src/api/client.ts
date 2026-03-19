@@ -136,6 +136,7 @@ export async function createReport(
     lost_found_type?: "lost" | "found";
     observed_at?: string;
   },
+  profileId: string,
   syncKeyHash: string
 ): Promise<Report> {
   return apiFetch<Report>("/api/reports", {
@@ -149,7 +150,7 @@ export async function createReport(
       rating_crowds: report.rating_crowds,
       lost_found_type: report.lost_found_type,
       observed_at: report.observed_at,
-      authorId: syncKeyHash,
+      authorId: profileId,
     },
     syncKeyHash,
   });
