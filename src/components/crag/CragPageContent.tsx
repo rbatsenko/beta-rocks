@@ -865,6 +865,15 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
           </Card>
         )}
 
+        {/* Detailed Conditions (Tabs) - Moved up for better mobile UX */}
+        {conditionsData && (
+          <Card className="mb-6">
+            <CardContent className="p-6">
+              <ConditionsDetailContent variant="sheet" data={conditionsData} />
+            </CardContent>
+          </Card>
+        )}
+
         {/* Community Reports Section */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-4">
@@ -963,15 +972,6 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
             </>
           )}
         </div>
-
-        {/* Detailed Conditions (Tabs) */}
-        {conditionsData && (
-          <Card className="mb-6">
-            <CardContent className="p-6">
-              <ConditionsDetailContent variant="sheet" data={conditionsData} />
-            </CardContent>
-          </Card>
-        )}
 
         {/* Webcams Section */}
         <div className="mb-6">
