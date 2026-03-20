@@ -3,6 +3,7 @@ import { Platform } from "react-native";
 import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 import { API_URL } from "@/constants/config";
 import type { EventSubscription } from "expo-modules-core";
 
@@ -20,6 +21,7 @@ export function usePushNotifications(syncKeyHash: string | null) {
   const notificationListener = useRef<EventSubscription | null>(null);
   const responseListener = useRef<EventSubscription | null>(null);
   const router = useRouter();
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     if (!syncKeyHash) return;
@@ -27,7 +29,7 @@ export function usePushNotifications(syncKeyHash: string | null) {
     registerForPushNotifications().then((token) => {
       if (token) {
         setExpoPushToken(token);
-        registerTokenWithBackend(token, syncKeyHash);
+        registerTokenWithBackend(token, syncKeyHash, i18n.language);
       }
     });
 
@@ -90,7 +92,8 @@ async function registerForPushNotifications(): Promise<string | null> {
 
 async function registerTokenWithBackend(
   token: string,
-  syncKeyHash: string
+  syncKeyHash: string,
+  locale?: string
 ) {
   try {
     await fetch(`${API_URL}/api/push-subscriptions`, {
@@ -101,6 +104,7 @@ async function registerTokenWithBackend(
         token,
         platform: Platform.OS,
         deviceName: Device.modelName || undefined,
+        locale: locale || "en",
       }),
     });
   } catch (error) {

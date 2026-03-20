@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const supabase = getSupabaseClient() as any;
-    const { syncKeyHash, token, platform, deviceName } = await request.json();
+    const { syncKeyHash, token, platform, deviceName, locale } = await request.json();
 
     if (!syncKeyHash || !token || !platform) {
       return NextResponse.json(
@@ -36,6 +36,14 @@ export async function POST(request: NextRequest) {
         { error: "User profile not found" },
         { status: 404 }
       );
+    }
+
+    // Update locale on user profile if provided
+    if (locale) {
+      await supabase
+        .from("user_profiles")
+        .update({ locale })
+        .eq("id", profile.id);
     }
 
     // Upsert the push subscription (update if token already exists)
