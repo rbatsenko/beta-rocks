@@ -558,7 +558,7 @@ export default function CragDetailScreen() {
           {dewPointSpread != null && (
             <View style={[styles.dewPointRow, { borderTopColor: colors.border }]}>
               <Ionicons name="water" size={14} color={dewPointSpread > 5 ? "#22c55e" : dewPointSpread > 2 ? "#eab308" : "#ef4444"} />
-              <Text style={[styles.precipLabel, { color: colors.text }]}>
+              <Text style={[styles.precipLabel, { color: colors.text, flexShrink: 1 }]}>
                 {t("dialog.dewPointSpread", "Dew point spread")}:{" "}
                 {formatTemperature(convertTemperature(dewPointSpread, "celsius", units.temperature), units.temperature, 1)}
               </Text>
@@ -1204,7 +1204,7 @@ const styles = StyleSheet.create({
   precipColumn: { flex: 1, alignItems: "center", gap: 2 },
   precipLabel: { fontSize: FontSize.xs },
   precipValue: { fontSize: FontSize.md, fontWeight: "600" },
-  dewPointRow: { flexDirection: "row", alignItems: "center", gap: Spacing.sm, borderTopWidth: 1, paddingTop: Spacing.sm, marginTop: Spacing.xs },
+  dewPointRow: { flexDirection: "row", alignItems: "center", gap: Spacing.sm, borderTopWidth: 1, paddingTop: Spacing.sm, marginTop: Spacing.xs, flexWrap: "wrap" },
   riskBadge: { paddingHorizontal: Spacing.sm, paddingVertical: 2, borderRadius: BorderRadius.sm },
 
   // Hourly
