@@ -578,41 +578,92 @@ export default function CragDetailScreen() {
         </View>
       )}
 
-      {/* B. Hourly 48h Forecast Tab */}
-      {activeTab === "hourly" && hourlyConditions.length > 0 && (
+      {/* J. Optimal Climbing Windows — foldable accordion, inside conditions tab */}
+      {activeTab === "conditions" && groupedWindows.length > 0 && (
         <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("dialog.tabs.hourly", "Hourly")} (48h)</Text>
-          {hourlyConditions.slice(0, 48).map((h: any, i: number) => {
-            const score = h.frictionScore ?? h.friction;
-            const rl = getRatingLabel(score);
-            const rc = getRatingColors(rl);
-            const rowBg = rl === "Great" ? "rgba(34,197,94,0.06)" : rl === "Good" ? "rgba(59,130,246,0.04)" : "transparent";
-            const temp = h.temp_c ?? h.temperature_c;
-            const wind = h.wind_kph ?? h.windSpeed_kph;
-            const precip = h.precip_mm ?? h.precipitation_mm;
+          <View style={styles.windowsHeader}>
+            <Text style={[styles.cardTitle, { color: colors.text }]}>{t("dialog.optimalWindows", "Optimal Climbing Windows")}</Text>
+            <Text style={[styles.precipLabel, { color: colors.muted }]}>{t("dialog.nextDays", "Next 5 days")}</Text>
+          </View>
+          {groupedWindows.map((group, gi) => {
+            const isToday = group.label === t("dialog.today", "Today");
+            const isTomorrow = group.label === t("dialog.tomorrow", "Tomorrow");
+            const isHighlighted = isToday || isTomorrow;
             return (
-              <View key={i} style={[styles.hourlyRow, { backgroundColor: rowBg }, i > 0 && { borderTopWidth: 1, borderTopColor: colors.border }]}>
-                <Text style={[styles.hourlyTime, { color: colors.text }]}>{fmtHour(h.time)}</Text>
-                <WeatherIcon code={h.weatherCode} size="small" />
-                <Text style={[styles.hourlyValue, { color: colors.text }]}>
-                  {formatTemperature(convertTemperature(temp, "celsius", units.temperature), units.temperature, 0)}
-                </Text>
-                <Text style={[styles.hourlyValue, { color: colors.muted }]}>
-                  {h.humidity}%
-                </Text>
-                <Text style={[styles.hourlyValue, { color: colors.muted }]}>
-                  {formatWindSpeed(convertWindSpeed(wind, "kmh", units.windSpeed), units.windSpeed, 0)}
-                </Text>
-                {rc && rl && (
-                  <View style={[styles.smallBadge, { backgroundColor: rc.bg }]}>
-                    <Text style={[styles.smallBadgeText, { color: rc.text }]}>{fmt(score)}</Text>
-                  </View>
-                )}
-              </View>
+              <FoldableWindowDay
+                key={gi}
+                label={group.label}
+                windows={group.windows}
+                isHighlighted={isHighlighted}
+                isToday={isToday}
+                colors={colors}
+                units={units}
+                t={t}
+              />
             );
           })}
         </View>
       )}
+
+      {/* B. Hourly 48h Forecast Tab — filtered to current hour onwards */}
+      {activeTab === "hourly" && hourlyConditions.length > 0 && (() => {
+        const now = new Date();
+        const futureHours = hourlyConditions.filter((h: any) => new Date(h.time) >= now).slice(0, 48);
+        // Group by day
+        const grouped: { label: string; hours: any[] }[] = [];
+        const dayMap = new Map<string, any[]>();
+        for (const h of futureHours) {
+          const key = getDateKey(h.time);
+          if (!dayMap.has(key)) dayMap.set(key, []);
+          dayMap.get(key)!.push(h);
+        }
+        dayMap.forEach((hours) => {
+          const label = getDayLabel(hours[0].time, t);
+          grouped.push({ label, hours });
+        });
+
+        return grouped.map((group, gi) => (
+          <View key={gi} style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+            <Text style={[styles.cardTitle, { color: colors.text }]}>{group.label}</Text>
+            {/* Show good/great hours prominently */}
+            {group.hours.filter((h: any) => {
+              const rl = getRatingLabel(h.frictionScore ?? h.friction);
+              return rl === "Great" || rl === "Good";
+            }).map((h: any, i: number) => {
+              const score = h.frictionScore ?? h.friction;
+              const rl = getRatingLabel(score);
+              const rc = getRatingColors(rl);
+              const temp = h.temp_c ?? h.temperature_c;
+              const wind = h.wind_kph ?? h.windSpeed_kph;
+              return (
+                <View key={`good-${i}`} style={[styles.hourlyRow, {
+                  backgroundColor: rl === "Great" ? "rgba(34,197,94,0.08)" : "rgba(59,130,246,0.06)",
+                  borderRadius: BorderRadius.md,
+                  paddingHorizontal: Spacing.sm,
+                  marginVertical: 2,
+                }]}>
+                  <Text style={[styles.hourlyTime, { color: colors.text }]}>{fmtHour(h.time)}</Text>
+                  <WeatherIcon code={h.weatherCode} size="small" />
+                  <Text style={[styles.hourlyValue, { color: colors.text }]}>
+                    {formatTemperature(convertTemperature(temp, "celsius", units.temperature), units.temperature, 0)}
+                  </Text>
+                  <Text style={[styles.hourlyValue, { color: colors.muted }]}>{h.humidity}%</Text>
+                  <Text style={[styles.hourlyValue, { color: colors.muted }]}>
+                    {formatWindSpeed(convertWindSpeed(wind, "kmh", units.windSpeed), units.windSpeed, 0)}
+                  </Text>
+                  {rc && rl && (
+                    <View style={[styles.smallBadge, { backgroundColor: rc.bg }]}>
+                      <Text style={[styles.smallBadgeText, { color: rc.text }]}>{t(`ratings.${rl!.toLowerCase()}`, rl)} {fmt(score)}</Text>
+                    </View>
+                  )}
+                </View>
+              );
+            })}
+            {/* Collapsible full timeline */}
+            <HourlyTimeline hours={group.hours} colors={colors} units={units} t={t} />
+          </View>
+        ));
+      })()}
 
       {/* Forecast tab — G. with unit conversion */}
       {activeTab === "forecast" && dailyForecast.length > 0 && (
@@ -645,32 +696,7 @@ export default function CragDetailScreen() {
         </View>
       )}
 
-      {/* J. Optimal windows grouped by day */}
-      {groupedWindows.length > 0 && (
-        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.bestTimes")}</Text>
-          {groupedWindows.map((group, gi) => (
-            <View key={gi}>
-              <Text style={[styles.dayHeader, { color: colors.textSecondary }]}>{group.label}</Text>
-              {group.windows.map((w: any, i: number) => {
-                const wl = getRatingLabel(w.avgFrictionScore);
-                const wc = getRatingColors(wl);
-                return (
-                  <View key={i} style={styles.windowRow}>
-                    <View style={[styles.windowDot, { backgroundColor: wc?.solid || colors.muted }]} />
-                    <Text style={[styles.windowTime, { color: colors.text }]}>{fmtTimeRange(w.startTime, w.endTime)}</Text>
-                    {wc && wl && (
-                      <View style={[styles.smallBadge, { backgroundColor: wc.bg }]}>
-                        <Text style={[styles.smallBadgeText, { color: wc.text }]}>{t(`ratings.${wl!.toLowerCase()}`, wl)} {fmt(w.avgFrictionScore)}</Text>
-                      </View>
-                    )}
-                  </View>
-                );
-              })}
-            </View>
-          ))}
-        </View>
-      )}
+      {/* J. Optimal windows - now foldable, inside conditions tab only */}
 
       {/* Report photos */}
       {reportPhotos.length > 0 && (
@@ -915,6 +941,117 @@ export default function CragDetailScreen() {
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function FoldableWindowDay({ label, windows, isHighlighted, isToday, colors, units, t }: {
+  label: string; windows: any[]; isHighlighted: boolean; isToday: boolean;
+  colors: (typeof Colors)["light"]; units: any; t: any;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  const bgColor = isHighlighted
+    ? "rgba(34,197,94,0.08)"
+    : colors.surface;
+  const borderColor = isHighlighted
+    ? "rgba(34,197,94,0.25)"
+    : colors.border;
+
+  return (
+    <View style={[styles.foldableDay, { backgroundColor: bgColor, borderColor }]}>
+      <TouchableOpacity
+        style={styles.foldableDayHeader}
+        onPress={() => setExpanded(!expanded)}
+        activeOpacity={0.7}
+      >
+        <View style={styles.foldableDayLeft}>
+          <View style={[styles.windowDot, { backgroundColor: isHighlighted ? "#22c55e" : "#4ade80" }]} />
+          <Text style={[styles.foldableDayLabel, {
+            color: isHighlighted ? "#166534" : colors.text,
+          }]}>{label}</Text>
+          {isToday && (
+            <View style={[styles.todayBadge, { backgroundColor: "rgba(34,197,94,0.12)", borderColor: "rgba(34,197,94,0.3)" }]}>
+              <Text style={{ fontSize: 10, fontWeight: "600", color: "#166534" }}>
+                {t("dialog.todayBadge", "TODAY")}
+              </Text>
+            </View>
+          )}
+          <Text style={[styles.precipLabel, { color: colors.muted, marginLeft: "auto" }]}>
+            {windows.length} {windows.length > 1 ? t("dialog.windows", "windows") : t("dialog.window", "window")}
+          </Text>
+        </View>
+        <Ionicons
+          name={expanded ? "chevron-up" : "chevron-down"}
+          size={16}
+          color={colors.muted}
+        />
+      </TouchableOpacity>
+      {expanded && (
+        <View style={styles.foldableDayContent}>
+          {windows.map((w: any, i: number) => {
+            const wl = getRatingLabel(w.avgFrictionScore);
+            const wc = getRatingColors(wl);
+            return (
+              <View key={i} style={styles.windowRow}>
+                <View style={[styles.windowDot, { backgroundColor: wc?.solid || colors.muted }]} />
+                <Text style={[styles.windowTime, { color: colors.text }]}>{fmtTimeRange(w.startTime, w.endTime)}</Text>
+                {wc && wl && (
+                  <View style={[styles.smallBadge, { backgroundColor: wc.bg }]}>
+                    <Text style={[styles.smallBadgeText, { color: wc.text }]}>{t(`ratings.${wl!.toLowerCase()}`, wl)} {fmt(w.avgFrictionScore)}</Text>
+                  </View>
+                )}
+              </View>
+            );
+          })}
+        </View>
+      )}
+    </View>
+  );
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function HourlyTimeline({ hours, colors, units, t }: { hours: any[]; colors: (typeof Colors)["light"]; units: any; t: any }) {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <View>
+      <TouchableOpacity
+        style={[styles.timelineToggle, { borderColor: colors.border }]}
+        onPress={() => setExpanded(!expanded)}
+        activeOpacity={0.7}
+      >
+        <Text style={[styles.precipLabel, { color: colors.muted }]}>
+          {t("dialog.showCompleteTimeline", "Show complete timeline")} ({hours.length})
+        </Text>
+        <Ionicons name={expanded ? "chevron-up" : "chevron-down"} size={14} color={colors.muted} />
+      </TouchableOpacity>
+      {expanded && hours.map((h: any, i: number) => {
+        const score = h.frictionScore ?? h.friction;
+        const rl = getRatingLabel(score);
+        const rc = getRatingColors(rl);
+        const rowBg = rl === "Great" ? "rgba(34,197,94,0.06)" : rl === "Good" ? "rgba(59,130,246,0.04)" : "transparent";
+        const temp = h.temp_c ?? h.temperature_c;
+        const wind = h.wind_kph ?? h.windSpeed_kph;
+        return (
+          <View key={i} style={[styles.hourlyRow, { backgroundColor: rowBg }, i > 0 && { borderTopWidth: 1, borderTopColor: colors.border }]}>
+            <Text style={[styles.hourlyTime, { color: colors.text }]}>{fmtHour(h.time)}</Text>
+            <WeatherIcon code={h.weatherCode} size="small" />
+            <Text style={[styles.hourlyValue, { color: colors.text }]}>
+              {formatTemperature(convertTemperature(temp, "celsius", units.temperature), units.temperature, 0)}
+            </Text>
+            <Text style={[styles.hourlyValue, { color: colors.muted }]}>{h.humidity}%</Text>
+            <Text style={[styles.hourlyValue, { color: colors.muted }]}>
+              {formatWindSpeed(convertWindSpeed(wind, "kmh", units.windSpeed), units.windSpeed, 0)}
+            </Text>
+            {rc && rl && (
+              <View style={[styles.smallBadge, { backgroundColor: rc.bg }]}>
+                <Text style={[styles.smallBadgeText, { color: rc.text }]}>{fmt(score)}</Text>
+              </View>
+            )}
+          </View>
+        );
+      })}
+    </View>
+  );
+}
+
 function ConditionItem({ icon, label, value, colors }: { icon: keyof typeof Ionicons.glyphMap; label: string; value: string; colors: (typeof Colors)["light"] }) {
   return (
     <View style={styles.conditionItem}>
@@ -1090,6 +1227,14 @@ const styles = StyleSheet.create({
   windowTime: { fontSize: FontSize.sm, fontWeight: "500", flex: 1 },
   smallBadge: { paddingHorizontal: Spacing.sm, paddingVertical: 3, borderRadius: BorderRadius.sm },
   smallBadgeText: { fontSize: FontSize.xs, fontWeight: "600", textTransform: "capitalize" },
+  windowsHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
+  foldableDay: { borderRadius: BorderRadius.md, borderWidth: 1, marginTop: Spacing.xs, overflow: "hidden" },
+  foldableDayHeader: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: Spacing.sm, paddingVertical: Spacing.sm },
+  foldableDayLeft: { flexDirection: "row", alignItems: "center", gap: Spacing.sm, flex: 1 },
+  foldableDayLabel: { fontSize: FontSize.sm, fontWeight: "600" },
+  foldableDayContent: { paddingHorizontal: Spacing.sm, paddingBottom: Spacing.sm },
+  todayBadge: { paddingHorizontal: Spacing.xs + 2, paddingVertical: 2, borderRadius: BorderRadius.full, borderWidth: 1 },
+  timelineToggle: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: Spacing.xs, paddingVertical: Spacing.sm, borderTopWidth: 1, marginTop: Spacing.xs },
 
   // Photos & webcams
   photoScroll: { marginHorizontal: -Spacing.xs },
