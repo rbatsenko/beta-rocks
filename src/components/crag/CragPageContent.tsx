@@ -651,8 +651,8 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
           )}
         </div>
 
-        {/* Current Conditions Summary Card - hidden on mobile to avoid duplication with ConditionsDetailContent */}
-        <Card className="mb-6 hidden md:block">
+        {/* Current Conditions Summary Card */}
+        <Card className="mb-6">
           <CardContent className="p-6">
             {isLoadingConditions ? (
               <div className="flex items-center justify-center py-8">
@@ -845,35 +845,6 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
           </CardContent>
         </Card>
 
-        {/* Mobile loading/error state for conditions (since summary card is hidden on mobile) */}
-        {!conditionsData && (
-          <Card className="mb-6 md:hidden">
-            <CardContent className="p-6">
-              {isLoadingConditions ? (
-                <div className="flex items-center justify-center py-8">
-                  <div className="flex flex-col items-center gap-3">
-                    <Loader2 className="h-8 w-8 text-orange-500 animate-spin" />
-                    <p className="text-sm text-muted-foreground">{t("loading.weatherData")}</p>
-                  </div>
-                </div>
-              ) : conditionsError ? (
-                <div className="text-center py-8">
-                  <p className="text-destructive">{t("errors.failedToLoadConditions")}</p>
-                </div>
-              ) : null}
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Detailed Conditions (Tabs) - Moved up for better mobile UX */}
-        {conditionsData && (
-          <Card className="mb-6">
-            <CardContent className="p-6">
-              <ConditionsDetailContent variant="sheet" data={conditionsData} />
-            </CardContent>
-          </Card>
-        )}
-
         {/* Community Reports Section */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-4">
@@ -977,6 +948,15 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
         <div className="mb-6">
           <WebcamsSection latitude={crag.lat} longitude={crag.lon} />
         </div>
+
+        {/* Detailed Conditions (Tabs) */}
+        {conditionsData && (
+          <Card className="mb-6">
+            <CardContent className="p-6">
+              <ConditionsDetailContent variant="sheet" data={conditionsData} />
+            </CardContent>
+          </Card>
+        )}
 
         {/* Sectors Section - Always show if not viewing a sector */}
         {!currentSector && (
