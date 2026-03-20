@@ -1,6 +1,7 @@
 "use client";
 
 import { useClientTranslation } from "@/hooks/useClientTranslation";
+import { useUserProfile } from "@/hooks/useUserProfile";
 import { i18nConfig, resolveLocale, type Locale } from "@/lib/i18n/config";
 import { Button } from "@/components/ui/button";
 import {
@@ -46,6 +47,7 @@ const languageConfig: Record<Locale, { name: string; flag: string }> = {
 
 export function LanguageSelector() {
   const { i18n, language, rawLanguage, t } = useClientTranslation("common");
+  const { data: profile } = useUserProfile();
   const currentLocale: Locale = resolveLocale(rawLanguage ?? language);
   const currentFlag = languageConfig[currentLocale]?.flag || languageConfig.en.flag;
   const sortedLocales = [...i18nConfig.locales].sort((a, b) =>
@@ -57,6 +59,14 @@ export function LanguageSelector() {
   const changeLanguage = (locale: Locale) => {
     void i18n.changeLanguage(locale);
     localStorage.setItem("preferredLanguage", locale);
+    // Sync locale to user profile for translated push notifications
+    if (profile?.syncKeyHash) {
+      fetch("/api/push-subscriptions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ syncKeyHash: profile.syncKeyHash, locale }),
+      }).catch(() => {});
+    }
   };
 
   return (

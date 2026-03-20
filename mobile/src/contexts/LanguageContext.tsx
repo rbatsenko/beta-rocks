@@ -13,6 +13,7 @@ import {
 import { MMKV } from "react-native-mmkv";
 import * as Localization from "expo-localization";
 import i18next from "i18next";
+import { API_URL } from "@/constants/config";
 
 const LANGUAGE_STORAGE_KEY = "beta_rocks_language";
 const storage = new MMKV();
@@ -90,6 +91,16 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     storage.set(LANGUAGE_STORAGE_KEY, code);
     setLanguageState(code);
     i18next.changeLanguage(code);
+    // Sync locale to user profile for translated push notifications
+    const profileJson = storage.getString("beta_rocks_user_profile");
+    const syncKeyHash = profileJson ? JSON.parse(profileJson)?.syncKeyHash : null;
+    if (syncKeyHash) {
+      fetch(`${API_URL}/api/push-subscriptions`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ syncKeyHash, locale: code }),
+      }).catch(() => {});
+    }
   }
 
   return (
