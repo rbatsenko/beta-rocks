@@ -145,7 +145,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
   });
 
   // Get memoized translation functions
-  const { translateRating, translateWeather, translateReason, translateWarning } =
+  const { translateRating, translateWeather } =
     useConditionsTranslations(t);
 
   // Helper to detect if it's night time (7pm-7am)
@@ -239,22 +239,6 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                   </Badge>
                 )}
               </div>
-              {data.reasons && data.reasons.length > 0 && (
-                <ul className="text-sm space-y-1 text-muted-foreground">
-                  {data.reasons.map((reason, i) => (
-                    <li key={i}>• {translateReason(reason)}</li>
-                  ))}
-                </ul>
-              )}
-              {data.warnings && data.warnings.length > 0 && (
-                <div className="space-y-1">
-                  {data.warnings.map((warning, i) => (
-                    <p key={i} className="text-sm text-destructive">
-                      ⚠️ {translateWarning(warning)}
-                    </p>
-                  ))}
-                </div>
-              )}
             </div>
 
             <Separator />
@@ -807,11 +791,6 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                     </span>
                                   </div>
                                 </div>
-                                {hour.warnings.length > 0 && (
-                                  <p className="text-xs text-muted-foreground mt-1">
-                                    {hour.warnings.map((w) => translateWarning(w)).join(", ")}
-                                  </p>
-                                )}
                               </div>
                             </Fragment>
                           );
@@ -945,11 +924,6 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                         </span>
                                       </div>
                                     </div>
-                                    {hour.warnings.length > 0 && (
-                                      <p className="text-xs text-muted-foreground mt-1">
-                                        {hour.warnings.map((w) => translateWarning(w)).join(", ")}
-                                      </p>
-                                    )}
                                   </div>
                                 </Fragment>
                               );

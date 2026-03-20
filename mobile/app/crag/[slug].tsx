@@ -161,7 +161,7 @@ export default function CragDetailScreen() {
   const [parentCrag, setParentCrag] = useState<{ name: string; slug: string } | null>(null);
   const [confirmedReportIds, setConfirmedReportIds] = useState<Set<string>>(new Set());
   const { hasProfile, profileId, syncKeyHash, profile } = useUserProfile();
-  const { translateReason, translateWarning, translateWeather } = useConditionsTranslations(t);
+  const { translateWeather } = useConditionsTranslations(t);
   const units = profile?.units || getDefaultUnits("en");
 
   // Report category filter
@@ -348,8 +348,6 @@ export default function CragDetailScreen() {
   const ratingLabelKey = getRatingLabel(frictionScore);
   const ratingLabel = ratingLabelKey ? t(`ratings.${ratingLabelKey.toLowerCase()}`, ratingLabelKey) : null;
   const ratingColors = getRatingColors(ratingLabelKey);
-  const reasons: string[] = conditions?.reasons || [];
-  const warnings: string[] = conditions?.warnings || [];
   const isDry: boolean | null = conditions?.isDry ?? null;
   const astro = conditions?.astro;
   const dailyForecast: any[] = conditions?.dailyForecast || [];
@@ -358,8 +356,6 @@ export default function CragDetailScreen() {
   const dewPointSpread = conditions?.dewPointSpread;
   const weatherCode = conditions?.current?.weatherCode;
   const flag = getCountryFlag(crag.country);
-  const isSandstone = crag.rock_type?.toLowerCase().includes("sandstone");
-
   const locationParts = [crag.village, crag.municipality, crag.state].filter(Boolean);
   const locationStr = locationParts.join(", ");
 
@@ -436,49 +432,6 @@ export default function CragDetailScreen() {
           )}
         </View>
       </View>
-
-      {/* H. Translated Reasons */}
-      {reasons.length > 0 && (
-        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-          {reasons.map((r, i) => (
-            <View key={i} style={styles.infoRow}>
-              <Ionicons name="checkmark" size={16} color="#22c55e" />
-              <Text style={[styles.infoText, { color: colors.text }]}>{translateReason(r)}</Text>
-            </View>
-          ))}
-        </View>
-      )}
-
-      {/* H. Translated Warnings */}
-      {warnings.length > 0 && (
-        <View style={[styles.card, { backgroundColor: "rgba(239,68,68,0.06)", borderColor: "rgba(239,68,68,0.2)" }]}>
-          {warnings.map((w, i) => (
-            <View key={i} style={styles.infoRow}>
-              <Ionicons name="warning" size={16} color="#ef4444" />
-              <Text style={[styles.infoText, { color: colors.text }]}>{translateWarning(w)}</Text>
-            </View>
-          ))}
-        </View>
-      )}
-
-      {/* F. Sandstone Wet Warning */}
-      {isSandstone && (isDry === false || (precipCtx && precipCtx.last48h > 0)) && (
-        <View style={[styles.card, { backgroundColor: "rgba(239,68,68,0.08)", borderColor: "rgba(239,68,68,0.3)" }]}>
-          <View style={styles.infoRow}>
-            <Ionicons name="warning" size={18} color="#ef4444" />
-            <Text style={[styles.infoText, { color: "#ef4444", fontWeight: "600" }]}>
-              {t("sandstoneWarning.general", "Sandstone is dangerous when wet - it becomes structurally weak and can break.")}
-            </Text>
-          </View>
-          {precipCtx && (precipCtx.last24h > 0 || precipCtx.last48h > 0) && (
-            <Text style={[styles.sandstoneSubtext, { color: "#ef4444" }]}>
-              {t("sandstoneWarning.recentRain", "Recent rain detected")}
-              {precipCtx.last24h > 0 && ` (${formatPrecipitation(convertPrecipitation(precipCtx.last24h, "mm", units.precipitation), units.precipitation, 1)} ${t("sandstoneWarning.inLast24h", "in last 24h")})`}
-              {precipCtx.last24h === 0 && precipCtx.last48h > 0 && ` (${formatPrecipitation(convertPrecipitation(precipCtx.last48h, "mm", units.precipitation), units.precipitation, 1)} ${t("sandstoneWarning.inLast48h", "in last 48h")})`}
-            </Text>
-          )}
-        </View>
-      )}
 
       {/* Reports — C. category filter chips, I. empty state, K. author names */}
       <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>

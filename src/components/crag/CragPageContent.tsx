@@ -186,7 +186,7 @@ function extractLocalTime(isoString: string): string {
 
 export function CragPageContent({ crag, sectors, currentSector }: CragPageContentProps) {
   const { t } = useClientTranslation("common");
-  const { translateReason, translateWarning, translateWeather } = useConditionsTranslations(t);
+  const { translateWeather } = useConditionsTranslations(t);
   const router = useRouter();
   const { units } = useUnits();
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
@@ -802,44 +802,6 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                   </div>
                 )}
 
-                {conditions.reasons && conditions.reasons.length > 0 && (
-                  <ul className="text-sm space-y-1 text-muted-foreground mb-3">
-                    {conditions.reasons.map((reason, i) => (
-                      <li key={i}>• {translateReason(reason)}</li>
-                    ))}
-                  </ul>
-                )}
-                {conditions.warnings && conditions.warnings.length > 0 && (
-                  <div className="space-y-1">
-                    {conditions.warnings.map((warning, i) => (
-                      <p key={i} className="text-sm text-destructive">
-                        ⚠️ {translateWarning(warning)}
-                      </p>
-                    ))}
-                  </div>
-                )}
-
-                {/* Sandstone Safety Warning */}
-                {crag.rock_type?.toLowerCase().includes("sandstone") && (
-                  <div className="mt-4 bg-destructive/10 border-l-4 border-destructive rounded-r-lg p-4 space-y-2">
-                    <div className="text-destructive font-semibold text-sm flex items-start gap-2">
-                      <span className="shrink-0 text-base">⚠️</span>
-                      <span>{t("sandstoneWarning.general")}</span>
-                    </div>
-                    {conditions.precipitationContext &&
-                      (conditions.precipitationContext.last24h > 0 ||
-                        conditions.precipitationContext.last48h > 0) && (
-                        <div className="text-destructive text-xs font-medium pl-7">
-                          {t("sandstoneWarning.recentRain")}
-                          {conditions.precipitationContext.last24h > 0 &&
-                            ` (${formatPrecipitation(convertPrecipitation(conditions.precipitationContext.last24h, "mm", units.precipitation), units.precipitation, 1)} ${t("sandstoneWarning.inLast24h")})`}
-                          {conditions.precipitationContext.last24h === 0 &&
-                            conditions.precipitationContext.last48h > 0 &&
-                            ` (${formatPrecipitation(convertPrecipitation(conditions.precipitationContext.last48h, "mm", units.precipitation), units.precipitation, 1)} ${t("sandstoneWarning.inLast48h")})`}
-                        </div>
-                      )}
-                  </div>
-                )}
               </>
             ) : null}
           </CardContent>

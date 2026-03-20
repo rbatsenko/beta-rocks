@@ -285,15 +285,10 @@ export async function computeConditions(
 
   if (inOptimalTemp) {
     frictionScore += 1.5;
-    reasons.push(`Perfect temperature (${Math.round(current.temp_c)}°C)`);
   } else if (tooHot) {
     frictionScore -= 1.5;
-    warnings.push(`Too warm for ${rockType} (${Math.round(current.temp_c)}°C)`);
-    reasons.push("Temperature too high - fingers may slip");
   } else if (tooCold) {
-    // Cold is generally good for friction on all rock types
     frictionScore += 1;
-    reasons.push(`Cold but good for ${rockType} friction`);
   }
 
   // === DEW POINT SPREAD ASSESSMENT (condensation risk) ===
@@ -303,7 +298,7 @@ export async function computeConditions(
     // Very high risk of condensation - rock surface will be damp
     frictionScore -= 2;
     warnings.push(
-      `Very high condensation risk (dew point spread ${dewPointSpread}°C) - rock surface likely damp`
+      `Very high condensation risk (dew point spread ${dewPointSpread}°C)`
     );
   } else if (dewPointSpread <= 2) {
     // High risk of condensation
@@ -316,7 +311,7 @@ export async function computeConditions(
   } else if (dewPointSpread > 5) {
     // Good conditions - no condensation risk
     frictionScore += 0.5;
-    reasons.push(`Low condensation risk (dew point spread ${dewPointSpread}°C)`);
+    // Low condensation risk - good conditions, no warning needed
   }
 
   // === HUMIDITY ASSESSMENT ===
@@ -327,15 +322,12 @@ export async function computeConditions(
   const lowHumidity = current.humidity < optimalHumidity.min;
 
   if (inOptimalHumidity) {
-    frictionScore += 0.5; // Reduced from 1.0 since dew point is more important
-    reasons.push(`Good humidity (${Math.round(current.humidity)}%)`);
+    frictionScore += 0.5;
   } else if (highHumidity && dewPointSpread > 3) {
-    // Only penalize high humidity if there's no condensation risk (already penalized above)
-    frictionScore -= 0.5; // Reduced from 1.5 since dew point handles condensation
+    frictionScore -= 0.5;
     warnings.push(`High humidity (${Math.round(current.humidity)}%)`);
   } else if (lowHumidity && (rockType === "granite" || rockType === "gneiss")) {
     frictionScore += 0.3;
-    reasons.push("Low humidity aids friction");
   }
 
   // === WETNESS & DRYING ===
@@ -347,9 +339,9 @@ export async function computeConditions(
     frictionScore = Math.min(frictionScore, 1.5);
     dryingTimeHours = baseDryingHours;
     if (rockType === "sandstone") {
-      warnings.push("Rock is currently wet - dangerous to climb (sandstone becomes weak when wet)");
+      warnings.push("Sandstone is wet - please let it dry to preserve the rock");
     } else {
-      warnings.push("Rock is currently wet - slippery conditions");
+      warnings.push("Currently wet");
     }
   } else if (hasRecentPrecip) {
     const penalty = calculateWeatherAwareDryingPenalty(
@@ -372,7 +364,7 @@ export async function computeConditions(
   // === WIND ASSESSMENT ===
   if (current.wind_kph > 40) {
     frictionScore -= 0.5;
-    warnings.push(`Very high winds (${Math.round(current.wind_kph)} km/h) - danger of blown off`);
+    warnings.push(`Very high winds (${Math.round(current.wind_kph)} km/h)`);
   } else if (current.wind_kph > 25) {
     frictionScore -= 0.3;
     warnings.push(`High wind (${Math.round(current.wind_kph)} km/h)`);
@@ -398,9 +390,7 @@ export async function computeConditions(
   // === BUILD RESPONSE ===
   const isDry = !isCurrentlyWet && !hasRecentPrecip;
 
-  if (!isDry && dryingTimeHours) {
-    reasons.push(`Will be ready to climb in ~${Math.round(dryingTimeHours)} hours`);
-  }
+  // Drying time estimate kept in dryingTimeHours field for UI display
 
   // Don't add a generic fallback - let warnings speak for themselves
   // The UI will show the rating and friction score
@@ -469,7 +459,7 @@ function computeHourlyFrictionScore(
     score += 1.5;
   } else if (hour.temp_c > optimalTemp.max) {
     score -= 1.5;
-    warnings.push(`Too warm (${Math.round(hour.temp_c)}°C)`);
+    // Too warm — score penalized but no warning text
   } else if (hour.temp_c < optimalTemp.min) {
     // Cold is generally good for friction on all rock types
     score += 1;
@@ -511,7 +501,7 @@ function computeHourlyFrictionScore(
   if (isCurrentlyWet) {
     score = Math.min(score, 1.5);
     if (rockType === "sandstone") {
-      warnings.push("Currently wet - dangerous");
+      warnings.push("Sandstone is wet - please let it dry");
     } else {
       warnings.push("Currently wet");
     }
