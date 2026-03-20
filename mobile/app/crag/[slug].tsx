@@ -480,6 +480,180 @@ export default function CragDetailScreen() {
         </View>
       )}
 
+      {/* Reports — C. category filter chips, I. empty state, K. author names */}
+      <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+        <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.communityReports")} ({reports.length})</Text>
+
+        {/* C. Report Category Filter Chips */}
+        {reports.length > 0 && (
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.filterChipsScroll}>
+            <TouchableOpacity
+              style={[styles.filterChip, selectedCategory === "all"
+                ? { backgroundColor: colors.primary, borderColor: colors.primary }
+                : { borderColor: colors.border }
+              ]}
+              onPress={() => setSelectedCategory("all")}
+            >
+              <Text style={[styles.filterChipText, { color: selectedCategory === "all" ? colors.primaryForeground : colors.text }]}>
+                {t("reports.filters.all", "All")} ({reports.length})
+              </Text>
+            </TouchableOpacity>
+            {allCategories.map(cat => {
+              const count = categoryCounts[cat] || 0;
+              if (count === 0) return null;
+              const cc = CATEGORY_COLORS[cat] || CATEGORY_COLORS.other;
+              return (
+                <TouchableOpacity
+                  key={cat}
+                  style={[styles.filterChip, selectedCategory === cat
+                    ? { backgroundColor: cc.bg, borderColor: cc.text }
+                    : { borderColor: colors.border }
+                  ]}
+                  onPress={() => setSelectedCategory(cat)}
+                >
+                  <Text style={[styles.filterChipText, { color: selectedCategory === cat ? cc.text : colors.text }]}>
+                    {t(`reports.categories.${cat}`, cat)} ({count})
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </ScrollView>
+        )}
+
+        {/* I. Empty report state */}
+        {reports.length === 0 ? (
+          <View style={styles.emptyState}>
+            <Ionicons name="clipboard-outline" size={36} color={colors.muted} />
+            <Text style={[styles.emptyStateText, { color: colors.muted }]}>{t("reports.noReports", "No reports yet")}</Text>
+            <TouchableOpacity
+              style={[styles.emptyStateButton, { borderColor: colors.primary }]}
+              onPress={() => {
+                if (!hasProfile) {
+                  Alert.alert(t("mobile.profileRequired", "Profile Required"), t("reports.loginToConfirm", "Please set up your profile to confirm reports"));
+                  return;
+                }
+                router.push({ pathname: "/report", params: { cragId: crag.id, cragName: crag.name } });
+              }}
+            >
+              <Text style={{ color: colors.primary, fontWeight: "600", fontSize: FontSize.sm }}>
+                {t("reports.beTheFirst", "Be the first to report")}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        ) : filteredReports.length === 0 ? (
+          <View style={styles.emptyState}>
+            <Text style={[styles.emptyStateText, { color: colors.muted }]}>{t("reports.noReportsInCategory", "No reports in this category")}</Text>
+          </View>
+        ) : (
+          filteredReports.map((report) => {
+            const cc = CATEGORY_COLORS[report.category] || CATEGORY_COLORS.other;
+            return (
+              <View key={report.id} style={[styles.reportItem, { borderTopColor: colors.border }]}>
+                <View style={styles.reportHeader}>
+                  <View style={styles.reportHeaderLeft}>
+                    <View style={[styles.smallBadge, { backgroundColor: cc.bg }]}>
+                      <Text style={[styles.smallBadgeText, { color: cc.text }]}>{t(`reports.categories.${report.category}`, report.category)}</Text>
+                    </View>
+                    {/* K. Report Author Name */}
+                    {report.author?.display_name && (
+                      <Text style={[styles.metaText, { color: colors.muted }]}>{report.author.display_name}</Text>
+                    )}
+                  </View>
+                  <Text style={[styles.metaText, { color: colors.muted }]}>{fmtRelative(report.created_at)}</Text>
+                </View>
+                {report.text && <Text style={[styles.reportText, { color: colors.text }]}>{report.text}</Text>}
+                {report.photos?.length > 0 && (
+                  <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginTop: Spacing.sm }}>
+                    {report.photos.map((p, pi) => {
+                      const urls = report.photos.map(ph => `${PHOTO_BASE}${ph}`);
+                      return (
+                        <TouchableOpacity key={pi} onPress={() => openLightbox(urls, pi)} activeOpacity={0.9}>
+                          <Image source={{ uri: `${PHOTO_BASE}${p}` }} style={styles.reportPhoto} resizeMode="cover" />
+                        </TouchableOpacity>
+                      );
+                    })}
+                  </ScrollView>
+                )}
+                <View style={styles.reportActions}>
+                  <HelpfulButton
+                    report={report}
+                    profileId={profileId}
+                    hasProfile={hasProfile}
+                    syncKeyHash={syncKeyHash}
+                    initialConfirmed={confirmedReportIds.has(report.id)}
+                    colors={colors}
+                    t={t}
+                  />
+                  {profileId && report.author_id === profileId && (
+                    <TouchableOpacity
+                      style={styles.editButton}
+                      onPress={() => {
+                        router.push({
+                          pathname: "/report",
+                          params: {
+                            cragId: crag!.id,
+                            cragName: crag!.name,
+                            reportId: report.id,
+                            editCategory: report.category,
+                            editText: report.text || "",
+                            editRatingDry: report.rating_dry?.toString() || "0",
+                            editRatingWind: report.rating_wind?.toString() || "0",
+                            editRatingCrowds: report.rating_crowds?.toString() || "0",
+                            editPhotos: JSON.stringify(report.photos || []),
+                            editLostFoundType: report.lost_found_type || "",
+                          },
+                        });
+                      }}
+                      activeOpacity={0.7}
+                    >
+                      <Ionicons name="pencil-outline" size={14} color={colors.primary} />
+                      <Text style={[styles.metaText, { color: colors.primary }]}>{t("common.edit", "Edit")}</Text>
+                    </TouchableOpacity>
+                  )}
+                </View>
+              </View>
+            );
+          })
+        )}
+      </View>
+
+      {/* Report photos */}
+      {reportPhotos.length > 0 && (
+        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.photos")} ({reportPhotos.length})</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.photoScroll}>
+            {reportPhotos.map((url, i) => (
+              <TouchableOpacity key={i} onPress={() => openLightbox(reportPhotos, i)} activeOpacity={0.9}>
+                <Image source={{ uri: url }} style={styles.photo} resizeMode="cover" />
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </View>
+      )}
+
+      {/* Webcams */}
+      {webcams.length > 0 && (
+        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.webcams")}</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.photoScroll}>
+            {webcams.map((cam) => (
+              <TouchableOpacity
+                key={cam.webcamId}
+                style={styles.webcamItem}
+                onPress={() => Linking.openURL(`https://www.windy.com/webcams/${cam.webcamId}`)}
+                activeOpacity={0.7}
+              >
+                {cam.images?.current?.preview && (
+                  <Image source={{ uri: cam.images.current.preview }} style={styles.webcamImage} resizeMode="cover" />
+                )}
+                <Text style={[styles.webcamTitle, { color: colors.textSecondary }]} numberOfLines={2}>{cam.title}</Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+          <Text style={[styles.poweredBy, { color: colors.muted }]}>{t("webcams.poweredBy", "Powered by")} Windy</Text>
+        </View>
+      )}
+
       {/* Weather tabs — B. Added "hourly" tab */}
       <View style={[styles.tabRow, { borderColor: colors.border }]}>
         {(["conditions", "hourly", "forecast"] as const).map(tab => (
@@ -716,54 +890,6 @@ export default function CragDetailScreen() {
 
       {/* J. Optimal windows - now foldable, inside conditions tab only */}
 
-      {/* Report photos */}
-      {reportPhotos.length > 0 && (
-        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.photos")} ({reportPhotos.length})</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.photoScroll}>
-            {reportPhotos.map((url, i) => (
-              <TouchableOpacity key={i} onPress={() => openLightbox(reportPhotos, i)} activeOpacity={0.9}>
-                <Image source={{ uri: url }} style={styles.photo} resizeMode="cover" />
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </View>
-      )}
-
-      {/* Webcams */}
-      {webcams.length > 0 && (
-        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.webcams")}</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.photoScroll}>
-            {webcams.map((cam) => (
-              <TouchableOpacity
-                key={cam.webcamId}
-                style={styles.webcamItem}
-                onPress={() => Linking.openURL(`https://www.windy.com/webcams/${cam.webcamId}`)}
-                activeOpacity={0.7}
-              >
-                {cam.images?.current?.preview && (
-                  <Image source={{ uri: cam.images.current.preview }} style={styles.webcamImage} resizeMode="cover" />
-                )}
-                <Text style={[styles.webcamTitle, { color: colors.textSecondary }]} numberOfLines={2}>{cam.title}</Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-          <Text style={[styles.poweredBy, { color: colors.muted }]}>{t("webcams.poweredBy", "Powered by")} Windy</Text>
-        </View>
-      )}
-
-      {/* External links */}
-      <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-        <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.links")}</Text>
-        <LinkRow icon="map-outline" label={t("cragPage.viewOnGoogleMaps", "View on Google Maps")} color={colors} onPress={() => Linking.openURL(`https://www.google.com/maps?q=${crag.lat},${crag.lon}&z=15`)} />
-        <LinkRow icon="sunny-outline" label={t("cragPage.viewOnSunCalc", "View sun/moon times")} color={colors} onPress={() => {
-          const d = new Date().toISOString().split("T")[0].replace(/-/g, ".");
-          Linking.openURL(`https://www.suncalc.org/#/${crag.lat},${crag.lon},17/${d}/12:00/1/1`);
-        }} />
-        <LinkRow icon="navigate-outline" label={t("cragPage.viewOnMap", "View on map")} color={colors} onPress={() => Linking.openURL(`https://www.openstreetmap.org/?mlat=${crag.lat}&mlon=${crag.lon}#map=15/${crag.lat}/${crag.lon}`)} />
-      </View>
-
       {/* Sectors */}
       <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
         <View style={styles.sectorHeader}>
@@ -793,142 +919,17 @@ export default function CragDetailScreen() {
         )}
       </View>
 
-      {/* Reports — C. category filter chips, I. empty state, K. author names */}
+      {/* External links */}
       <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-        <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.communityReports")} ({reports.length})</Text>
-
-        {/* C. Report Category Filter Chips */}
-        {reports.length > 0 && (
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.filterChipsScroll}>
-            <TouchableOpacity
-              style={[styles.filterChip, selectedCategory === "all"
-                ? { backgroundColor: colors.primary, borderColor: colors.primary }
-                : { borderColor: colors.border }
-              ]}
-              onPress={() => setSelectedCategory("all")}
-            >
-              <Text style={[styles.filterChipText, { color: selectedCategory === "all" ? colors.primaryForeground : colors.text }]}>
-                {t("reports.filters.all", "All")} ({reports.length})
-              </Text>
-            </TouchableOpacity>
-            {allCategories.map(cat => {
-              const count = categoryCounts[cat] || 0;
-              if (count === 0) return null;
-              const cc = CATEGORY_COLORS[cat] || CATEGORY_COLORS.other;
-              return (
-                <TouchableOpacity
-                  key={cat}
-                  style={[styles.filterChip, selectedCategory === cat
-                    ? { backgroundColor: cc.bg, borderColor: cc.text }
-                    : { borderColor: colors.border }
-                  ]}
-                  onPress={() => setSelectedCategory(cat)}
-                >
-                  <Text style={[styles.filterChipText, { color: selectedCategory === cat ? cc.text : colors.text }]}>
-                    {t(`reports.categories.${cat}`, cat)} ({count})
-                  </Text>
-                </TouchableOpacity>
-              );
-            })}
-          </ScrollView>
-        )}
-
-        {/* I. Empty report state */}
-        {reports.length === 0 ? (
-          <View style={styles.emptyState}>
-            <Ionicons name="clipboard-outline" size={36} color={colors.muted} />
-            <Text style={[styles.emptyStateText, { color: colors.muted }]}>{t("reports.noReports", "No reports yet")}</Text>
-            <TouchableOpacity
-              style={[styles.emptyStateButton, { borderColor: colors.primary }]}
-              onPress={() => {
-                if (!hasProfile) {
-                  Alert.alert(t("mobile.profileRequired", "Profile Required"), t("reports.loginToConfirm", "Please set up your profile to confirm reports"));
-                  return;
-                }
-                router.push({ pathname: "/report", params: { cragId: crag.id, cragName: crag.name } });
-              }}
-            >
-              <Text style={{ color: colors.primary, fontWeight: "600", fontSize: FontSize.sm }}>
-                {t("reports.beTheFirst", "Be the first to report")}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        ) : filteredReports.length === 0 ? (
-          <View style={styles.emptyState}>
-            <Text style={[styles.emptyStateText, { color: colors.muted }]}>{t("reports.noReportsInCategory", "No reports in this category")}</Text>
-          </View>
-        ) : (
-          filteredReports.map((report) => {
-            const cc = CATEGORY_COLORS[report.category] || CATEGORY_COLORS.other;
-            return (
-              <View key={report.id} style={[styles.reportItem, { borderTopColor: colors.border }]}>
-                <View style={styles.reportHeader}>
-                  <View style={styles.reportHeaderLeft}>
-                    <View style={[styles.smallBadge, { backgroundColor: cc.bg }]}>
-                      <Text style={[styles.smallBadgeText, { color: cc.text }]}>{t(`reports.categories.${report.category}`, report.category)}</Text>
-                    </View>
-                    {/* K. Report Author Name */}
-                    {report.author?.display_name && (
-                      <Text style={[styles.metaText, { color: colors.muted }]}>{report.author.display_name}</Text>
-                    )}
-                  </View>
-                  <Text style={[styles.metaText, { color: colors.muted }]}>{fmtRelative(report.created_at)}</Text>
-                </View>
-                {report.text && <Text style={[styles.reportText, { color: colors.text }]}>{report.text}</Text>}
-                {report.photos?.length > 0 && (
-                  <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginTop: Spacing.sm }}>
-                    {report.photos.map((p, pi) => {
-                      const urls = report.photos.map(ph => `${PHOTO_BASE}${ph}`);
-                      return (
-                        <TouchableOpacity key={pi} onPress={() => openLightbox(urls, pi)} activeOpacity={0.9}>
-                          <Image source={{ uri: `${PHOTO_BASE}${p}` }} style={styles.reportPhoto} resizeMode="cover" />
-                        </TouchableOpacity>
-                      );
-                    })}
-                  </ScrollView>
-                )}
-                <View style={styles.reportActions}>
-                  <HelpfulButton
-                    report={report}
-                    profileId={profileId}
-                    hasProfile={hasProfile}
-                    syncKeyHash={syncKeyHash}
-                    initialConfirmed={confirmedReportIds.has(report.id)}
-                    colors={colors}
-                    t={t}
-                  />
-                  {profileId && report.author_id === profileId && (
-                    <TouchableOpacity
-                      style={styles.editButton}
-                      onPress={() => {
-                        router.push({
-                          pathname: "/report",
-                          params: {
-                            cragId: crag!.id,
-                            cragName: crag!.name,
-                            reportId: report.id,
-                            editCategory: report.category,
-                            editText: report.text || "",
-                            editRatingDry: report.rating_dry?.toString() || "0",
-                            editRatingWind: report.rating_wind?.toString() || "0",
-                            editRatingCrowds: report.rating_crowds?.toString() || "0",
-                            editPhotos: JSON.stringify(report.photos || []),
-                            editLostFoundType: report.lost_found_type || "",
-                          },
-                        });
-                      }}
-                      activeOpacity={0.7}
-                    >
-                      <Ionicons name="pencil-outline" size={14} color={colors.primary} />
-                      <Text style={[styles.metaText, { color: colors.primary }]}>{t("common.edit", "Edit")}</Text>
-                    </TouchableOpacity>
-                  )}
-                </View>
-              </View>
-            );
-          })
-        )}
+        <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.links")}</Text>
+        <LinkRow icon="map-outline" label={t("cragPage.viewOnGoogleMaps", "View on Google Maps")} color={colors} onPress={() => Linking.openURL(`https://www.google.com/maps?q=${crag.lat},${crag.lon}&z=15`)} />
+        <LinkRow icon="sunny-outline" label={t("cragPage.viewOnSunCalc", "View sun/moon times")} color={colors} onPress={() => {
+          const d = new Date().toISOString().split("T")[0].replace(/-/g, ".");
+          Linking.openURL(`https://www.suncalc.org/#/${crag.lat},${crag.lon},17/${d}/12:00/1/1`);
+        }} />
+        <LinkRow icon="navigate-outline" label={t("cragPage.viewOnMap", "View on map")} color={colors} onPress={() => Linking.openURL(`https://www.openstreetmap.org/?mlat=${crag.lat}&mlon=${crag.lon}#map=15/${crag.lat}/${crag.lon}`)} />
       </View>
+
     </ScrollView>
 
     {/* Floating action button - Add Report */}
