@@ -111,6 +111,24 @@ function getDateKey(iso: string): string {
   return new Date(iso).toDateString();
 }
 
+function linkifyDescription(text: string, colors: (typeof Colors)["light"]) {
+  const parts = text.split(/(https?:\/\/[^\s]+)/g);
+  return parts.map((part, i) => {
+    if (/^https?:\/\//.test(part)) {
+      return (
+        <Text
+          key={i}
+          style={{ color: colors.primary, textDecorationLine: "underline" }}
+          onPress={() => Linking.openURL(part)}
+        >
+          {part}
+        </Text>
+      );
+    }
+    return part;
+  });
+}
+
 interface Webcam {
   title: string;
   webcamId: number;
@@ -161,7 +179,7 @@ export default function CragDetailScreen() {
   // Group optimal windows by day
   const groupedWindows = useMemo(() => {
     const windows = conditions?.optimalWindows || [];
-    const groups: { label: string; windows: typeof windows }[] = [];
+    const groups: { label: string; dateKey: string; windows: typeof windows }[] = [];
     const seen = new Map<string, typeof windows>();
     for (const w of windows) {
       const key = getDateKey(w.startTime);
@@ -170,7 +188,7 @@ export default function CragDetailScreen() {
     }
     seen.forEach((wins, key) => {
       const label = getDayLabel(wins[0].startTime, t);
-      groups.push({ label, windows: wins });
+      groups.push({ label, dateKey: key, windows: wins });
     });
     return groups;
   }, [conditions?.optimalWindows, t]);
@@ -371,8 +389,8 @@ export default function CragDetailScreen() {
           )}
           {/* E. Crag Description */}
           {crag.description && (
-            <Text style={[styles.description, { color: colors.textSecondary }]} numberOfLines={3}>
-              {crag.description}
+            <Text style={[styles.description, { color: colors.textSecondary }]}>
+              {linkifyDescription(crag.description, colors)}
             </Text>
           )}
           <View style={styles.badgeRow}>
@@ -461,293 +479,6 @@ export default function CragDetailScreen() {
           )}
         </View>
       )}
-
-      {/* Weather tabs — B. Added "hourly" tab */}
-      <View style={[styles.tabRow, { borderColor: colors.border }]}>
-        {(["conditions", "hourly", "forecast"] as const).map(tab => (
-          <TouchableOpacity
-            key={tab}
-            style={[styles.tab, activeTab === tab && { borderBottomColor: colors.primary, borderBottomWidth: 2 }]}
-            onPress={() => setActiveTab(tab)}
-          >
-            <Text style={[styles.tabText, { color: activeTab === tab ? colors.primary : colors.muted }]}>
-              {tab === "conditions" ? t("cragPage.currentConditions") : tab === "hourly" ? t("dialog.tabs.hourly", "Hourly") : t("cragPage.forecast")}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-
-      {/* Conditions tab — G. with unit conversion, A. weather summary */}
-      {activeTab === "conditions" && conditions?.current && (
-        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-          {/* A. Weather Summary */}
-          {weatherCode != null && (
-            <View style={styles.weatherSummary}>
-              <WeatherIcon code={weatherCode} size="large" />
-              <Text style={[styles.weatherDescription, { color: colors.text }]}>
-                {translateWeather(getWeatherDescription(weatherCode))}
-              </Text>
-            </View>
-          )}
-          {/* G. Unit-converted conditions grid */}
-          <View style={styles.conditionsGrid}>
-            <ConditionItem
-              icon="thermometer-outline"
-              label={t("dialog.temperature", "Temperature")}
-              value={formatTemperature(convertTemperature(conditions.current.temperature_c, "celsius", units.temperature), units.temperature)}
-              colors={colors}
-            />
-            <ConditionItem
-              icon="water-outline"
-              label={t("dialog.humidity", "Humidity")}
-              value={`${conditions.current.humidity ?? "\u2014"}%`}
-              colors={colors}
-            />
-            <ConditionItem
-              icon="flag-outline"
-              label={t("dialog.wind", "Wind")}
-              value={formatWindSpeed(convertWindSpeed(conditions.current.windSpeed_kph, "kmh", units.windSpeed), units.windSpeed)}
-              colors={colors}
-            />
-            <ConditionItem
-              icon="rainy-outline"
-              label={t("dialog.precipitation", "Precipitation")}
-              value={formatPrecipitation(convertPrecipitation(conditions.current.precipitation_mm, "mm", units.precipitation), units.precipitation)}
-              colors={colors}
-            />
-          </View>
-          {astro && (
-            <View style={[styles.astroRow, { borderTopColor: colors.border }]}>
-              <View style={styles.astroItem}>
-                <Ionicons name="sunny-outline" size={16} color="#f97316" />
-                <Text style={[styles.astroText, { color: colors.textSecondary }]}>{extractTime(astro.sunrise)}</Text>
-              </View>
-              <View style={styles.astroItem}>
-                <Ionicons name="moon-outline" size={16} color="#6366f1" />
-                <Text style={[styles.astroText, { color: colors.textSecondary }]}>{extractTime(astro.sunset)}</Text>
-              </View>
-            </View>
-          )}
-        </View>
-      )}
-
-      {/* D. Precipitation Context + Dew Point */}
-      {activeTab === "conditions" && precipCtx && (
-        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("dialog.precipitation", "Precipitation")}</Text>
-          <View style={styles.precipContext}>
-            <View style={styles.precipColumn}>
-              <Text style={[styles.precipLabel, { color: colors.muted }]}>{t("dialog.last24h", "Last 24h")}</Text>
-              <Text style={[styles.precipValue, { color: colors.text }]}>
-                {formatPrecipitation(convertPrecipitation(precipCtx.last24h, "mm", units.precipitation), units.precipitation)}
-              </Text>
-            </View>
-            <View style={styles.precipColumn}>
-              <Text style={[styles.precipLabel, { color: colors.muted }]}>{t("dialog.last48h", "Last 48h")}</Text>
-              <Text style={[styles.precipValue, { color: colors.text }]}>
-                {formatPrecipitation(convertPrecipitation(precipCtx.last48h, "mm", units.precipitation), units.precipitation)}
-              </Text>
-            </View>
-            <View style={styles.precipColumn}>
-              <Text style={[styles.precipLabel, { color: colors.muted }]}>{t("dialog.next24h", "Next 24h")}</Text>
-              <Text style={[styles.precipValue, { color: colors.text }]}>
-                {formatPrecipitation(convertPrecipitation(precipCtx.next24h, "mm", units.precipitation), units.precipitation)}
-              </Text>
-            </View>
-          </View>
-          {dewPointSpread != null && (
-            <View style={[styles.dewPointRow, { borderTopColor: colors.border }]}>
-              <Ionicons name="water" size={14} color={dewPointSpread > 5 ? "#22c55e" : dewPointSpread > 2 ? "#eab308" : "#ef4444"} />
-              <Text style={[styles.precipLabel, { color: colors.text }]}>
-                {t("dialog.dewPointSpread", "Dew point spread")}:{" "}
-                {formatTemperature(convertTemperature(dewPointSpread, "celsius", units.temperature), units.temperature, 1)}
-              </Text>
-              <View style={[styles.riskBadge, {
-                backgroundColor: dewPointSpread > 5 ? "rgba(34,197,94,0.12)" : dewPointSpread > 2 ? "rgba(234,179,8,0.12)" : "rgba(239,68,68,0.12)",
-              }]}>
-                <Text style={{
-                  fontSize: FontSize.xs,
-                  fontWeight: "600",
-                  color: dewPointSpread > 5 ? "#22c55e" : dewPointSpread > 2 ? "#eab308" : "#ef4444",
-                }}>
-                  {dewPointSpread > 5 ? t("dialog.lowRisk", "Low risk") : dewPointSpread > 2 ? t("dialog.moderateRisk", "Moderate risk") : t("dialog.highRisk", "High risk")}
-                </Text>
-              </View>
-            </View>
-          )}
-        </View>
-      )}
-
-      {/* B. Hourly 48h Forecast Tab */}
-      {activeTab === "hourly" && hourlyConditions.length > 0 && (
-        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("dialog.tabs.hourly", "Hourly")} (48h)</Text>
-          {hourlyConditions.slice(0, 48).map((h: any, i: number) => {
-            const score = h.frictionScore ?? h.friction;
-            const rl = getRatingLabel(score);
-            const rc = getRatingColors(rl);
-            const rowBg = rl === "Great" ? "rgba(34,197,94,0.06)" : rl === "Good" ? "rgba(59,130,246,0.04)" : "transparent";
-            const temp = h.temp_c ?? h.temperature_c;
-            const wind = h.wind_kph ?? h.windSpeed_kph;
-            const precip = h.precip_mm ?? h.precipitation_mm;
-            return (
-              <View key={i} style={[styles.hourlyRow, { backgroundColor: rowBg }, i > 0 && { borderTopWidth: 1, borderTopColor: colors.border }]}>
-                <Text style={[styles.hourlyTime, { color: colors.text }]}>{fmtHour(h.time)}</Text>
-                <WeatherIcon code={h.weatherCode} size="small" />
-                <Text style={[styles.hourlyValue, { color: colors.text }]}>
-                  {formatTemperature(convertTemperature(temp, "celsius", units.temperature), units.temperature, 0)}
-                </Text>
-                <Text style={[styles.hourlyValue, { color: colors.muted }]}>
-                  {h.humidity}%
-                </Text>
-                <Text style={[styles.hourlyValue, { color: colors.muted }]}>
-                  {formatWindSpeed(convertWindSpeed(wind, "kmh", units.windSpeed), units.windSpeed, 0)}
-                </Text>
-                {rc && rl && (
-                  <View style={[styles.smallBadge, { backgroundColor: rc.bg }]}>
-                    <Text style={[styles.smallBadgeText, { color: rc.text }]}>{fmt(score)}</Text>
-                  </View>
-                )}
-              </View>
-            );
-          })}
-        </View>
-      )}
-
-      {/* Forecast tab — G. with unit conversion */}
-      {activeTab === "forecast" && dailyForecast.length > 0 && (
-        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-          {dailyForecast.slice(0, 7).map((day: any, i: number) => {
-            const tMin = convertTemperature(day.tempMin, "celsius", units.temperature);
-            const tMax = convertTemperature(day.tempMax, "celsius", units.temperature);
-            const precip = convertPrecipitation(day.precipitation, "mm", units.precipitation);
-            const wind = convertWindSpeed(day.windSpeedMax, "kmh", units.windSpeed);
-            const tempUnit = units.temperature === "celsius" ? "°" : "°";
-            return (
-              <View key={i} style={[styles.forecastRow, i > 0 && { borderTopWidth: 1, borderTopColor: colors.border }]}>
-                <Text style={[styles.forecastDay, { color: colors.text }]}>
-                  {new Date(day.date).toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" })}
-                </Text>
-                <View style={styles.forecastDetails}>
-                  <Text style={[styles.forecastTemp, { color: colors.text }]}>
-                    {Math.round(tMin)}{tempUnit} / {Math.round(tMax)}{tempUnit}
-                  </Text>
-                  <Ionicons name="rainy-outline" size={12} color={colors.muted} />
-                  <Text style={[styles.forecastPrecip, { color: colors.muted }]}>
-                    {formatPrecipitation(precip, units.precipitation, 0)}
-                  </Text>
-                  <Ionicons name="flag-outline" size={12} color={colors.muted} />
-                  <Text style={[styles.forecastWind, { color: colors.muted }]}>{Math.round(wind)}</Text>
-                </View>
-              </View>
-            );
-          })}
-        </View>
-      )}
-
-      {/* J. Optimal windows grouped by day */}
-      {groupedWindows.length > 0 && (
-        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.bestTimes")}</Text>
-          {groupedWindows.map((group, gi) => (
-            <View key={gi}>
-              <Text style={[styles.dayHeader, { color: colors.textSecondary }]}>{group.label}</Text>
-              {group.windows.map((w: any, i: number) => {
-                const wl = getRatingLabel(w.avgFrictionScore);
-                const wc = getRatingColors(wl);
-                return (
-                  <View key={i} style={styles.windowRow}>
-                    <View style={[styles.windowDot, { backgroundColor: wc?.solid || colors.muted }]} />
-                    <Text style={[styles.windowTime, { color: colors.text }]}>{fmtTimeRange(w.startTime, w.endTime)}</Text>
-                    {wc && wl && (
-                      <View style={[styles.smallBadge, { backgroundColor: wc.bg }]}>
-                        <Text style={[styles.smallBadgeText, { color: wc.text }]}>{t(`ratings.${wl!.toLowerCase()}`, wl)} {fmt(w.avgFrictionScore)}</Text>
-                      </View>
-                    )}
-                  </View>
-                );
-              })}
-            </View>
-          ))}
-        </View>
-      )}
-
-      {/* Report photos */}
-      {reportPhotos.length > 0 && (
-        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.photos")} ({reportPhotos.length})</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.photoScroll}>
-            {reportPhotos.map((url, i) => (
-              <TouchableOpacity key={i} onPress={() => openLightbox(reportPhotos, i)} activeOpacity={0.9}>
-                <Image source={{ uri: url }} style={styles.photo} resizeMode="cover" />
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </View>
-      )}
-
-      {/* Webcams */}
-      {webcams.length > 0 && (
-        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.webcams")}</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.photoScroll}>
-            {webcams.map((cam) => (
-              <TouchableOpacity
-                key={cam.webcamId}
-                style={styles.webcamItem}
-                onPress={() => Linking.openURL(`https://www.windy.com/webcams/${cam.webcamId}`)}
-                activeOpacity={0.7}
-              >
-                {cam.images?.current?.preview && (
-                  <Image source={{ uri: cam.images.current.preview }} style={styles.webcamImage} resizeMode="cover" />
-                )}
-                <Text style={[styles.webcamTitle, { color: colors.textSecondary }]} numberOfLines={2}>{cam.title}</Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-          <Text style={[styles.poweredBy, { color: colors.muted }]}>{t("webcams.poweredBy", "Powered by")} Windy</Text>
-        </View>
-      )}
-
-      {/* External links */}
-      <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-        <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.links")}</Text>
-        <LinkRow icon="map-outline" label={t("cragPage.viewOnGoogleMaps", "View on Google Maps")} color={colors} onPress={() => Linking.openURL(`https://www.google.com/maps?q=${crag.lat},${crag.lon}&z=15`)} />
-        <LinkRow icon="sunny-outline" label={t("cragPage.viewOnSunCalc", "View sun/moon times")} color={colors} onPress={() => {
-          const d = new Date().toISOString().split("T")[0].replace(/-/g, ".");
-          Linking.openURL(`https://www.suncalc.org/#/${crag.lat},${crag.lon},17/${d}/12:00/1/1`);
-        }} />
-        <LinkRow icon="navigate-outline" label={t("cragPage.viewOnMap", "View on map")} color={colors} onPress={() => Linking.openURL(`https://www.openstreetmap.org/?mlat=${crag.lat}&mlon=${crag.lon}#map=15/${crag.lat}/${crag.lon}`)} />
-      </View>
-
-      {/* Sectors */}
-      <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-        <View style={styles.sectorHeader}>
-          <Text style={[styles.cardTitle, { color: colors.text }]}>
-            {t("cragPage.sectors")} {sectors.length > 0 ? `(${sectors.length})` : ""}
-          </Text>
-          {hasProfile && !crag.parent_crag_id && (
-            <TouchableOpacity
-              style={[styles.addSectorButton, { backgroundColor: colors.primary }]}
-              onPress={() => router.push({ pathname: "/add-sector", params: { cragId: crag.id, cragName: crag.name, parentRockType: crag.rock_type || "" } })}
-              activeOpacity={0.7}
-            >
-              <Ionicons name="add" size={16} color={colors.primaryForeground} />
-              <Text style={[styles.addSectorText, { color: colors.primaryForeground }]}>{t("mobile.addSector", "Add Sector")}</Text>
-            </TouchableOpacity>
-          )}
-        </View>
-        {sectors.map((s) => (
-          <TouchableOpacity key={s.id} style={styles.sectorRow} onPress={() => s.slug && router.push(`/crag/${s.slug}`)} activeOpacity={0.7}>
-            <Ionicons name="layers-outline" size={16} color={colors.primary} />
-            <Text style={[styles.sectorName, { color: colors.text }]}>{s.name}</Text>
-            <Ionicons name="chevron-forward" size={16} color={colors.muted} />
-          </TouchableOpacity>
-        ))}
-        {sectors.length === 0 && (
-          <Text style={[styles.emptyText, { color: colors.muted }]}>{t("mobile.noSectors", "No sectors yet")}</Text>
-        )}
-      </View>
 
       {/* Reports — C. category filter chips, I. empty state, K. author names */}
       <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
@@ -885,6 +616,322 @@ export default function CragDetailScreen() {
           })
         )}
       </View>
+
+      {/* Report photos */}
+      {reportPhotos.length > 0 && (
+        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.photos")} ({reportPhotos.length})</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.photoScroll}>
+            {reportPhotos.map((url, i) => (
+              <TouchableOpacity key={i} onPress={() => openLightbox(reportPhotos, i)} activeOpacity={0.9}>
+                <Image source={{ uri: url }} style={styles.photo} resizeMode="cover" />
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </View>
+      )}
+
+      {/* Webcams */}
+      {webcams.length > 0 && (
+        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.webcams")}</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.photoScroll}>
+            {webcams.map((cam) => (
+              <TouchableOpacity
+                key={cam.webcamId}
+                style={styles.webcamItem}
+                onPress={() => Linking.openURL(`https://www.windy.com/webcams/${cam.webcamId}`)}
+                activeOpacity={0.7}
+              >
+                {cam.images?.current?.preview && (
+                  <Image source={{ uri: cam.images.current.preview }} style={styles.webcamImage} resizeMode="cover" />
+                )}
+                <Text style={[styles.webcamTitle, { color: colors.textSecondary }]} numberOfLines={2}>{cam.title}</Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+          <Text style={[styles.poweredBy, { color: colors.muted }]}>{t("webcams.poweredBy", "Powered by")} Windy</Text>
+        </View>
+      )}
+
+      {/* Weather tabs — B. Added "hourly" tab */}
+      <View style={[styles.tabRow, { borderColor: colors.border }]}>
+        {(["conditions", "hourly", "forecast"] as const).map(tab => (
+          <TouchableOpacity
+            key={tab}
+            style={[styles.tab, activeTab === tab && { borderBottomColor: colors.primary, borderBottomWidth: 2 }]}
+            onPress={() => setActiveTab(tab)}
+          >
+            <Text style={[styles.tabText, { color: activeTab === tab ? colors.primary : colors.muted }]}>
+              {tab === "conditions" ? t("cragPage.currentConditions") : tab === "hourly" ? t("dialog.tabs.hourly", "Hourly") : t("cragPage.forecast")}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      {/* Conditions tab — G. with unit conversion, A. weather summary */}
+      {activeTab === "conditions" && conditions?.current && (
+        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+          {/* A. Weather Summary */}
+          {weatherCode != null && (
+            <View style={styles.weatherSummary}>
+              <WeatherIcon code={weatherCode} size="large" />
+              <Text style={[styles.weatherDescription, { color: colors.text }]}>
+                {translateWeather(getWeatherDescription(weatherCode))}
+              </Text>
+            </View>
+          )}
+          {/* G. Unit-converted conditions grid */}
+          <View style={styles.conditionsGrid}>
+            <ConditionItem
+              icon="thermometer-outline"
+              label={t("dialog.temperature", "Temperature")}
+              value={formatTemperature(convertTemperature(conditions.current.temperature_c, "celsius", units.temperature), units.temperature)}
+              colors={colors}
+            />
+            <ConditionItem
+              icon="water-outline"
+              label={t("dialog.humidity", "Humidity")}
+              value={`${conditions.current.humidity ?? "\u2014"}%`}
+              colors={colors}
+            />
+            <ConditionItem
+              icon="flag-outline"
+              label={t("dialog.wind", "Wind")}
+              value={formatWindSpeed(convertWindSpeed(conditions.current.windSpeed_kph, "kmh", units.windSpeed), units.windSpeed)}
+              colors={colors}
+            />
+            <ConditionItem
+              icon="rainy-outline"
+              label={t("dialog.precipitation", "Precipitation")}
+              value={formatPrecipitation(convertPrecipitation(conditions.current.precipitation_mm, "mm", units.precipitation), units.precipitation)}
+              colors={colors}
+            />
+          </View>
+          {astro && (
+            <View style={[styles.astroRow, { borderTopColor: colors.border }]}>
+              <View style={styles.astroItem}>
+                <Ionicons name="sunny-outline" size={16} color="#f97316" />
+                <Text style={[styles.astroText, { color: colors.textSecondary }]}>{extractTime(astro.sunrise)}</Text>
+              </View>
+              <View style={styles.astroItem}>
+                <Ionicons name="moon-outline" size={16} color="#6366f1" />
+                <Text style={[styles.astroText, { color: colors.textSecondary }]}>{extractTime(astro.sunset)}</Text>
+              </View>
+            </View>
+          )}
+        </View>
+      )}
+
+      {/* D. Precipitation Context + Dew Point */}
+      {activeTab === "conditions" && precipCtx && (
+        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("dialog.precipitation", "Precipitation")}</Text>
+          <View style={styles.precipContext}>
+            <View style={styles.precipColumn}>
+              <Text style={[styles.precipLabel, { color: colors.muted }]}>{t("dialog.last24h", "Last 24h")}</Text>
+              <Text style={[styles.precipValue, { color: colors.text }]}>
+                {formatPrecipitation(convertPrecipitation(precipCtx.last24h, "mm", units.precipitation), units.precipitation)}
+              </Text>
+            </View>
+            <View style={styles.precipColumn}>
+              <Text style={[styles.precipLabel, { color: colors.muted }]}>{t("dialog.last48h", "Last 48h")}</Text>
+              <Text style={[styles.precipValue, { color: colors.text }]}>
+                {formatPrecipitation(convertPrecipitation(precipCtx.last48h, "mm", units.precipitation), units.precipitation)}
+              </Text>
+            </View>
+            <View style={styles.precipColumn}>
+              <Text style={[styles.precipLabel, { color: colors.muted }]}>{t("dialog.next24h", "Next 24h")}</Text>
+              <Text style={[styles.precipValue, { color: colors.text }]}>
+                {formatPrecipitation(convertPrecipitation(precipCtx.next24h, "mm", units.precipitation), units.precipitation)}
+              </Text>
+            </View>
+          </View>
+          {dewPointSpread != null && (
+            <View style={[styles.dewPointRow, { borderTopColor: colors.border }]}>
+              <Ionicons name="water" size={14} color={dewPointSpread > 5 ? "#22c55e" : dewPointSpread > 2 ? "#eab308" : "#ef4444"} />
+              <Text style={[styles.precipLabel, { color: colors.text, flexShrink: 1 }]}>
+                {t("dialog.dewPointSpread", "Dew point spread")}:{" "}
+                {formatTemperature(convertTemperature(dewPointSpread, "celsius", units.temperature), units.temperature, 1)}
+              </Text>
+              <View style={[styles.riskBadge, {
+                backgroundColor: dewPointSpread > 5 ? "rgba(34,197,94,0.12)" : dewPointSpread > 2 ? "rgba(234,179,8,0.12)" : "rgba(239,68,68,0.12)",
+              }]}>
+                <Text style={{
+                  fontSize: FontSize.xs,
+                  fontWeight: "600",
+                  color: dewPointSpread > 5 ? "#22c55e" : dewPointSpread > 2 ? "#eab308" : "#ef4444",
+                }}>
+                  {dewPointSpread > 5 ? t("dialog.lowRisk", "Low risk") : dewPointSpread > 2 ? t("dialog.moderateRisk", "Moderate risk") : t("dialog.highRisk", "High risk")}
+                </Text>
+              </View>
+            </View>
+          )}
+        </View>
+      )}
+
+      {/* J. Optimal Climbing Windows — foldable accordion, inside conditions tab */}
+      {activeTab === "conditions" && groupedWindows.length > 0 && (
+        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+          <View style={styles.windowsHeader}>
+            <Text style={[styles.cardTitle, { color: colors.text }]}>{t("dialog.optimalWindows", "Optimal Climbing Windows")}</Text>
+            <Text style={[styles.precipLabel, { color: colors.muted }]}>{t("dialog.nextDays", "Next 5 days")}</Text>
+          </View>
+          {groupedWindows.map((group, gi) => {
+            const todayKey = new Date().toDateString();
+            const tomorrowKey = new Date(Date.now() + 86400000).toDateString();
+            const isToday = group.dateKey === todayKey;
+            const isTomorrow = group.dateKey === tomorrowKey;
+            const isHighlighted = isToday || isTomorrow;
+            return (
+              <FoldableWindowDay
+                key={gi}
+                label={group.label}
+                windows={group.windows}
+                isHighlighted={isHighlighted}
+                isToday={isToday}
+                colors={colors}
+                units={units}
+                t={t}
+              />
+            );
+          })}
+        </View>
+      )}
+
+      {/* B. Hourly 48h Forecast Tab — filtered to current hour onwards */}
+      {activeTab === "hourly" && hourlyConditions.length > 0 && (() => {
+        const now = new Date();
+        const futureHours = hourlyConditions.filter((h: any) => new Date(h.time) >= now).slice(0, 48);
+        // Group by day
+        const grouped: { label: string; hours: any[] }[] = [];
+        const dayMap = new Map<string, any[]>();
+        for (const h of futureHours) {
+          const key = getDateKey(h.time);
+          if (!dayMap.has(key)) dayMap.set(key, []);
+          dayMap.get(key)!.push(h);
+        }
+        dayMap.forEach((hours) => {
+          const label = getDayLabel(hours[0].time, t);
+          grouped.push({ label, hours });
+        });
+
+        return grouped.map((group, gi) => (
+          <View key={gi} style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+            <Text style={[styles.cardTitle, { color: colors.text }]}>{group.label}</Text>
+            {/* Show good/great hours prominently */}
+            {group.hours.filter((h: any) => {
+              const rl = getRatingLabel(h.frictionScore ?? h.friction);
+              return rl === "Great" || rl === "Good";
+            }).map((h: any, i: number) => {
+              const score = h.frictionScore ?? h.friction;
+              const rl = getRatingLabel(score);
+              const rc = getRatingColors(rl);
+              const temp = h.temp_c ?? h.temperature_c;
+              const wind = h.wind_kph ?? h.windSpeed_kph;
+              return (
+                <View key={`good-${i}`} style={[styles.hourlyRow, {
+                  backgroundColor: rl === "Great" ? "rgba(34,197,94,0.08)" : "rgba(59,130,246,0.06)",
+                  borderRadius: BorderRadius.md,
+                  paddingHorizontal: Spacing.sm,
+                  marginVertical: 2,
+                }]}>
+                  <Text style={[styles.hourlyTime, { color: colors.text }]}>{fmtHour(h.time)}</Text>
+                  <WeatherIcon code={h.weatherCode} size="small" />
+                  <Text style={[styles.hourlyValue, { color: colors.text }]}>
+                    {formatTemperature(convertTemperature(temp, "celsius", units.temperature), units.temperature, 0)}
+                  </Text>
+                  <Text style={[styles.hourlyValue, { color: colors.muted }]}>{h.humidity}%</Text>
+                  <Text style={[styles.hourlyValue, { color: colors.muted }]}>
+                    {formatWindSpeed(convertWindSpeed(wind, "kmh", units.windSpeed), units.windSpeed, 0)}
+                  </Text>
+                  {rc && rl && (
+                    <View style={[styles.smallBadge, { backgroundColor: rc.bg }]}>
+                      <Text style={[styles.smallBadgeText, { color: rc.text }]}>{t(`ratings.${rl!.toLowerCase()}`, rl)} {fmt(score)}</Text>
+                    </View>
+                  )}
+                </View>
+              );
+            })}
+            {/* Collapsible full timeline */}
+            <HourlyTimeline hours={group.hours} colors={colors} units={units} t={t} />
+          </View>
+        ));
+      })()}
+
+      {/* Forecast tab — G. with unit conversion */}
+      {activeTab === "forecast" && dailyForecast.length > 0 && (
+        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+          {dailyForecast.slice(0, 7).map((day: any, i: number) => {
+            const tMin = convertTemperature(day.tempMin, "celsius", units.temperature);
+            const tMax = convertTemperature(day.tempMax, "celsius", units.temperature);
+            const precip = convertPrecipitation(day.precipitation, "mm", units.precipitation);
+            const wind = convertWindSpeed(day.windSpeedMax, "kmh", units.windSpeed);
+            const tempUnit = units.temperature === "celsius" ? "°" : "°";
+            return (
+              <View key={i} style={[styles.forecastRow, i > 0 && { borderTopWidth: 1, borderTopColor: colors.border }]}>
+                <Text style={[styles.forecastDay, { color: colors.text }]}>
+                  {new Date(day.date).toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" })}
+                </Text>
+                <View style={styles.forecastDetails}>
+                  <Text style={[styles.forecastTemp, { color: colors.text }]}>
+                    {Math.round(tMin)}{tempUnit} / {Math.round(tMax)}{tempUnit}
+                  </Text>
+                  <Ionicons name="rainy-outline" size={12} color={colors.muted} />
+                  <Text style={[styles.forecastPrecip, { color: colors.muted }]}>
+                    {formatPrecipitation(precip, units.precipitation, 0)}
+                  </Text>
+                  <Ionicons name="flag-outline" size={12} color={colors.muted} />
+                  <Text style={[styles.forecastWind, { color: colors.muted }]}>{Math.round(wind)}</Text>
+                </View>
+              </View>
+            );
+          })}
+        </View>
+      )}
+
+      {/* J. Optimal windows - now foldable, inside conditions tab only */}
+
+      {/* Sectors */}
+      <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+        <View style={styles.sectorHeader}>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>
+            {t("cragPage.sectors")} {sectors.length > 0 ? `(${sectors.length})` : ""}
+          </Text>
+          {hasProfile && !crag.parent_crag_id && (
+            <TouchableOpacity
+              style={[styles.addSectorButton, { backgroundColor: colors.primary }]}
+              onPress={() => router.push({ pathname: "/add-sector", params: { cragId: crag.id, cragName: crag.name, parentRockType: crag.rock_type || "" } })}
+              activeOpacity={0.7}
+            >
+              <Ionicons name="add" size={16} color={colors.primaryForeground} />
+              <Text style={[styles.addSectorText, { color: colors.primaryForeground }]}>{t("mobile.addSector", "Add Sector")}</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+        {sectors.map((s) => (
+          <TouchableOpacity key={s.id} style={styles.sectorRow} onPress={() => s.slug && router.push(`/crag/${s.slug}`)} activeOpacity={0.7}>
+            <Ionicons name="layers-outline" size={16} color={colors.primary} />
+            <Text style={[styles.sectorName, { color: colors.text }]}>{s.name}</Text>
+            <Ionicons name="chevron-forward" size={16} color={colors.muted} />
+          </TouchableOpacity>
+        ))}
+        {sectors.length === 0 && (
+          <Text style={[styles.emptyText, { color: colors.muted }]}>{t("mobile.noSectors", "No sectors yet")}</Text>
+        )}
+      </View>
+
+      {/* External links */}
+      <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+        <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.links")}</Text>
+        <LinkRow icon="map-outline" label={t("cragPage.viewOnGoogleMaps", "View on Google Maps")} color={colors} onPress={() => Linking.openURL(`https://www.google.com/maps?q=${crag.lat},${crag.lon}&z=15`)} />
+        <LinkRow icon="sunny-outline" label={t("cragPage.viewOnSunCalc", "View sun/moon times")} color={colors} onPress={() => {
+          const d = new Date().toISOString().split("T")[0].replace(/-/g, ".");
+          Linking.openURL(`https://www.suncalc.org/#/${crag.lat},${crag.lon},17/${d}/12:00/1/1`);
+        }} />
+        <LinkRow icon="navigate-outline" label={t("cragPage.viewOnMap", "View on map")} color={colors} onPress={() => Linking.openURL(`https://www.openstreetmap.org/?mlat=${crag.lat}&mlon=${crag.lon}#map=15/${crag.lat}/${crag.lon}`)} />
+      </View>
+
     </ScrollView>
 
     {/* Floating action button - Add Report */}
@@ -912,6 +959,117 @@ export default function CragDetailScreen() {
       onClose={() => setLightboxVisible(false)}
     />
   </View>
+  );
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function FoldableWindowDay({ label, windows, isHighlighted, isToday, colors, units, t }: {
+  label: string; windows: any[]; isHighlighted: boolean; isToday: boolean;
+  colors: (typeof Colors)["light"]; units: any; t: any;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  const bgColor = isHighlighted
+    ? "rgba(34,197,94,0.08)"
+    : colors.surface;
+  const borderColor = isHighlighted
+    ? "rgba(34,197,94,0.25)"
+    : colors.border;
+
+  return (
+    <View style={[styles.foldableDay, { backgroundColor: bgColor, borderColor }]}>
+      <TouchableOpacity
+        style={styles.foldableDayHeader}
+        onPress={() => setExpanded(!expanded)}
+        activeOpacity={0.7}
+      >
+        <View style={styles.foldableDayLeft}>
+          <View style={[styles.windowDot, { backgroundColor: isHighlighted ? "#22c55e" : "#4ade80" }]} />
+          <Text style={[styles.foldableDayLabel, {
+            color: isHighlighted ? "#22c55e" : colors.text,
+          }]}>{label}</Text>
+          {isToday && (
+            <View style={[styles.todayBadge, { backgroundColor: "rgba(34,197,94,0.12)", borderColor: "rgba(34,197,94,0.3)" }]}>
+              <Text style={{ fontSize: 10, fontWeight: "600", color: "#22c55e" }}>
+                {t("dialog.todayBadge", "TODAY")}
+              </Text>
+            </View>
+          )}
+          <Text style={[styles.precipLabel, { color: colors.muted, marginLeft: "auto" }]}>
+            {windows.length} {windows.length > 1 ? t("dialog.windows", "windows") : t("dialog.window", "window")}
+          </Text>
+        </View>
+        <Ionicons
+          name={expanded ? "chevron-up" : "chevron-down"}
+          size={16}
+          color={colors.muted}
+        />
+      </TouchableOpacity>
+      {expanded && (
+        <View style={styles.foldableDayContent}>
+          {windows.map((w: any, i: number) => {
+            const wl = getRatingLabel(w.avgFrictionScore);
+            const wc = getRatingColors(wl);
+            return (
+              <View key={i} style={styles.windowRow}>
+                <View style={[styles.windowDot, { backgroundColor: wc?.solid || colors.muted }]} />
+                <Text style={[styles.windowTime, { color: colors.text }]}>{fmtTimeRange(w.startTime, w.endTime)}</Text>
+                {wc && wl && (
+                  <View style={[styles.smallBadge, { backgroundColor: wc.bg }]}>
+                    <Text style={[styles.smallBadgeText, { color: wc.text }]}>{t(`ratings.${wl!.toLowerCase()}`, wl)} {fmt(w.avgFrictionScore)}</Text>
+                  </View>
+                )}
+              </View>
+            );
+          })}
+        </View>
+      )}
+    </View>
+  );
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function HourlyTimeline({ hours, colors, units, t }: { hours: any[]; colors: (typeof Colors)["light"]; units: any; t: any }) {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <View>
+      <TouchableOpacity
+        style={[styles.timelineToggle, { borderColor: colors.border }]}
+        onPress={() => setExpanded(!expanded)}
+        activeOpacity={0.7}
+      >
+        <Text style={[styles.precipLabel, { color: colors.muted }]}>
+          {t("dialog.showCompleteTimeline", "Show complete timeline")} ({hours.length})
+        </Text>
+        <Ionicons name={expanded ? "chevron-up" : "chevron-down"} size={14} color={colors.muted} />
+      </TouchableOpacity>
+      {expanded && hours.map((h: any, i: number) => {
+        const score = h.frictionScore ?? h.friction;
+        const rl = getRatingLabel(score);
+        const rc = getRatingColors(rl);
+        const rowBg = rl === "Great" ? "rgba(34,197,94,0.06)" : rl === "Good" ? "rgba(59,130,246,0.04)" : "transparent";
+        const temp = h.temp_c ?? h.temperature_c;
+        const wind = h.wind_kph ?? h.windSpeed_kph;
+        return (
+          <View key={i} style={[styles.hourlyRow, { backgroundColor: rowBg }, i > 0 && { borderTopWidth: 1, borderTopColor: colors.border }]}>
+            <Text style={[styles.hourlyTime, { color: colors.text }]}>{fmtHour(h.time)}</Text>
+            <WeatherIcon code={h.weatherCode} size="small" />
+            <Text style={[styles.hourlyValue, { color: colors.text }]}>
+              {formatTemperature(convertTemperature(temp, "celsius", units.temperature), units.temperature, 0)}
+            </Text>
+            <Text style={[styles.hourlyValue, { color: colors.muted }]}>{h.humidity}%</Text>
+            <Text style={[styles.hourlyValue, { color: colors.muted }]}>
+              {formatWindSpeed(convertWindSpeed(wind, "kmh", units.windSpeed), units.windSpeed, 0)}
+            </Text>
+            {rc && rl && (
+              <View style={[styles.smallBadge, { backgroundColor: rc.bg }]}>
+                <Text style={[styles.smallBadgeText, { color: rc.text }]}>{fmt(score)}</Text>
+              </View>
+            )}
+          </View>
+        );
+      })}
+    </View>
   );
 }
 
@@ -1067,7 +1225,7 @@ const styles = StyleSheet.create({
   precipColumn: { flex: 1, alignItems: "center", gap: 2 },
   precipLabel: { fontSize: FontSize.xs },
   precipValue: { fontSize: FontSize.md, fontWeight: "600" },
-  dewPointRow: { flexDirection: "row", alignItems: "center", gap: Spacing.sm, borderTopWidth: 1, paddingTop: Spacing.sm, marginTop: Spacing.xs },
+  dewPointRow: { flexDirection: "row", alignItems: "center", gap: Spacing.sm, borderTopWidth: 1, paddingTop: Spacing.sm, marginTop: Spacing.xs, flexWrap: "wrap" },
   riskBadge: { paddingHorizontal: Spacing.sm, paddingVertical: 2, borderRadius: BorderRadius.sm },
 
   // Hourly
@@ -1090,6 +1248,14 @@ const styles = StyleSheet.create({
   windowTime: { fontSize: FontSize.sm, fontWeight: "500", flex: 1 },
   smallBadge: { paddingHorizontal: Spacing.sm, paddingVertical: 3, borderRadius: BorderRadius.sm },
   smallBadgeText: { fontSize: FontSize.xs, fontWeight: "600", textTransform: "capitalize" },
+  windowsHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
+  foldableDay: { borderRadius: BorderRadius.md, borderWidth: 1, marginTop: Spacing.xs, overflow: "hidden" },
+  foldableDayHeader: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: Spacing.sm, paddingVertical: Spacing.sm },
+  foldableDayLeft: { flexDirection: "row", alignItems: "center", gap: Spacing.sm, flex: 1 },
+  foldableDayLabel: { fontSize: FontSize.sm, fontWeight: "600" },
+  foldableDayContent: { paddingHorizontal: Spacing.sm, paddingBottom: Spacing.sm },
+  todayBadge: { paddingHorizontal: Spacing.xs + 2, paddingVertical: 2, borderRadius: BorderRadius.full, borderWidth: 1 },
+  timelineToggle: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: Spacing.xs, paddingVertical: Spacing.sm, borderTopWidth: 1, marginTop: Spacing.xs },
 
   // Photos & webcams
   photoScroll: { marginHorizontal: -Spacing.xs },
