@@ -607,22 +607,7 @@ const ChatUI = ({
                     </div>
                   )}
 
-                  {/* Google Play Badge */}
-                  <div className="mt-6">
-                    <a
-                      href="https://play.google.com/store/apps/details?id=rocks.beta.app"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="opacity-60 hover:opacity-100 transition-opacity"
-                    >
-                      <img
-                        src="/google-play-badge.png"
-                        alt="Get it on Google Play"
-                        className="h-10"
-                      />
-                    </a>
-                  </div>
-                </div>
+</div>
               ) : (
                 messages.map((message) => {
                   // Check if any tool is currently executing
@@ -881,8 +866,22 @@ const ChatUI = ({
                 )}
               </Button>
             </form>
-            {/* Footer Links */}
-            <div className="flex items-center justify-center gap-4 mt-3 text-xs text-muted-foreground">
+            {/* Footer */}
+            <div className="flex items-center justify-center gap-3 mt-3">
+              <a
+                href="https://play.google.com/store/apps/details?id=rocks.beta.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="opacity-60 hover:opacity-100 transition-opacity"
+              >
+                <img
+                  src="/google-play-badge.png"
+                  alt="Get it on Google Play"
+                  className="h-8"
+                />
+              </a>
+            </div>
+            <div className="flex items-center justify-center gap-4 mt-2 text-xs text-muted-foreground">
               <button
                 onClick={() => setFeaturesDialogOpen(true)}
                 className="hover:text-foreground transition-colors cursor-pointer"
@@ -1097,8 +1096,22 @@ const ChatInterface = ({
                 <Send className="w-4 h-4" />
               </Button>
             </form>
-            {/* Footer Links */}
-            <div className="flex items-center justify-center gap-4 mt-3 text-xs text-muted-foreground">
+            {/* Footer */}
+            <div className="flex items-center justify-center gap-3 mt-3">
+              <a
+                href="https://play.google.com/store/apps/details?id=rocks.beta.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="opacity-60 hover:opacity-100 transition-opacity"
+              >
+                <img
+                  src="/google-play-badge.png"
+                  alt="Get it on Google Play"
+                  className="h-8"
+                />
+              </a>
+            </div>
+            <div className="flex items-center justify-center gap-4 mt-2 text-xs text-muted-foreground">
               <button
                 onClick={() => setFeaturesDialogOpen(true)}
                 className="hover:text-foreground transition-colors cursor-pointer"
