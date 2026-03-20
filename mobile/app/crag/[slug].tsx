@@ -179,7 +179,7 @@ export default function CragDetailScreen() {
   // Group optimal windows by day
   const groupedWindows = useMemo(() => {
     const windows = conditions?.optimalWindows || [];
-    const groups: { label: string; windows: typeof windows }[] = [];
+    const groups: { label: string; dateKey: string; windows: typeof windows }[] = [];
     const seen = new Map<string, typeof windows>();
     for (const w of windows) {
       const key = getDateKey(w.startTime);
@@ -188,7 +188,7 @@ export default function CragDetailScreen() {
     }
     seen.forEach((wins, key) => {
       const label = getDayLabel(wins[0].startTime, t);
-      groups.push({ label, windows: wins });
+      groups.push({ label, dateKey: key, windows: wins });
     });
     return groups;
   }, [conditions?.optimalWindows, t]);
@@ -778,8 +778,10 @@ export default function CragDetailScreen() {
             <Text style={[styles.precipLabel, { color: colors.muted }]}>{t("dialog.nextDays", "Next 5 days")}</Text>
           </View>
           {groupedWindows.map((group, gi) => {
-            const isToday = group.label === t("dialog.today", "Today");
-            const isTomorrow = group.label === t("dialog.tomorrow", "Tomorrow");
+            const todayKey = new Date().toDateString();
+            const tomorrowKey = new Date(Date.now() + 86400000).toDateString();
+            const isToday = group.dateKey === todayKey;
+            const isTomorrow = group.dateKey === tomorrowKey;
             const isHighlighted = isToday || isTomorrow;
             return (
               <FoldableWindowDay
@@ -983,11 +985,11 @@ function FoldableWindowDay({ label, windows, isHighlighted, isToday, colors, uni
         <View style={styles.foldableDayLeft}>
           <View style={[styles.windowDot, { backgroundColor: isHighlighted ? "#22c55e" : "#4ade80" }]} />
           <Text style={[styles.foldableDayLabel, {
-            color: isHighlighted ? "#166534" : colors.text,
+            color: isHighlighted ? "#22c55e" : colors.text,
           }]}>{label}</Text>
           {isToday && (
             <View style={[styles.todayBadge, { backgroundColor: "rgba(34,197,94,0.12)", borderColor: "rgba(34,197,94,0.3)" }]}>
-              <Text style={{ fontSize: 10, fontWeight: "600", color: "#166534" }}>
+              <Text style={{ fontSize: 10, fontWeight: "600", color: "#22c55e" }}>
                 {t("dialog.todayBadge", "TODAY")}
               </Text>
             </View>
