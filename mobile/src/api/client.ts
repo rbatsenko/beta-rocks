@@ -195,3 +195,74 @@ export async function restoreProfile(
 ): Promise<SyncResponse> {
   return apiFetch<SyncResponse>(`/api/sync/${syncKey}`);
 }
+
+/**
+ * Submit a new crag via the API
+ * POST /api/crags/submit
+ */
+export async function submitCrag(
+  crag: {
+    name: string;
+    lat: number;
+    lon: number;
+    country: string;
+    state?: string;
+    municipality?: string;
+    village?: string;
+    rockType?: string;
+    aspects?: number[];
+    climbingTypes?: string[];
+    description?: string;
+    isSecret?: boolean;
+  },
+  syncKeyHash: string
+): Promise<{ success: boolean; crag: { id: string; name: string; slug: string } }> {
+  return apiFetch("/api/crags/submit", {
+    method: "POST",
+    body: crag,
+    syncKeyHash,
+  });
+}
+
+/**
+ * Check for nearby crags at a given location
+ * GET /api/crags/check-nearby?lat=X&lon=Y&radius=500
+ */
+export async function checkNearbyCrags(
+  lat: number,
+  lon: number,
+  radius = 500
+): Promise<{ nearbyCrags: Array<{ id: string; name: string; lat: number; lon: number; slug: string; distance?: number }> }> {
+  const params = new URLSearchParams({
+    lat: lat.toString(),
+    lon: lon.toString(),
+    radius: radius.toString(),
+  });
+  return apiFetch(`/api/crags/check-nearby?${params}`);
+}
+
+/**
+ * Reverse geocode coordinates to get location details
+ * GET /api/geocode/reverse?lat=X&lon=Y
+ */
+export async function reverseGeocode(
+  lat: number,
+  lon: number
+): Promise<{
+  success: boolean;
+  data: {
+    formatted: {
+      suggestedName?: string;
+      country: string;
+      state: string;
+      municipality: string;
+      village: string;
+    };
+  };
+}> {
+  const params = new URLSearchParams({
+    lat: lat.toString(),
+    lon: lon.toString(),
+  });
+  return apiFetch(`/api/geocode/reverse?${params}`);
+}

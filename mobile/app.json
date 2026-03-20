@@ -46,6 +46,12 @@
           "cameraPermission": "Allow beta.rocks to use the camera to take photos for reports."
         }
       ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Allow beta.rocks to use your location to set crag coordinates."
+        }
+      ],
       "@react-native-community/datetimepicker",
       [
         "expo-notifications",
