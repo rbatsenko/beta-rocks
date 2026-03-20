@@ -1,7 +1,8 @@
 name: Create Production Builds
 
 on:
-  manual: true
+  push:
+    branches: ['main']
 
 jobs:
   build_android:
