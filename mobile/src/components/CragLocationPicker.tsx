@@ -99,7 +99,7 @@ export function CragLocationPicker({
       try {
         const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(searchQuery.trim())}&format=jsonv2&limit=5`;
         const response = await fetch(url, {
-          headers: { "User-Agent": "beta-rocks-mobile/1.0" },
+          headers: { "User-Agent": "beta-rocks-mobile/0.2.0 (https://beta.rocks)" },
         });
         if (response.ok) {
           const data: NominatimResult[] = await response.json();

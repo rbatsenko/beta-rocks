@@ -83,7 +83,7 @@ export default function AddCragScreen() {
     // Check nearby crags
     checkNearbyCrags(lat, lon, 500)
       .then((result) => setNearbyCrags(result.nearbyCrags || []))
-      .catch(() => setNearbyCrags([]));
+      .catch((err) => console.warn("checkNearbyCrags failed:", err));
 
     // Reverse geocode to auto-fill location fields
     setIsGeocoding(true);
@@ -98,7 +98,7 @@ export default function AddCragScreen() {
           setVillage((prev) => prev || formatted.village || "");
         }
       })
-      .catch(() => {})
+      .catch((err) => console.warn("reverseGeocode failed:", err))
       .finally(() => setIsGeocoding(false));
   }, [position?.latitude, position?.longitude]);
 
@@ -147,7 +147,11 @@ export default function AddCragScreen() {
           name: name.trim(),
           lat: position.latitude,
           lon: position.longitude,
-          country: country.trim().substring(0, 2).toUpperCase(),
+          country: (() => {
+            const code = country.trim().substring(0, 2).toUpperCase();
+            if (/^[A-Z]{2}$/.test(code)) return code;
+            return "";
+          })(),
           state: state.trim() || undefined,
           municipality: municipality.trim() || undefined,
           village: village.trim() || undefined,

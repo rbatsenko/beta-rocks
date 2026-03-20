@@ -60,6 +60,7 @@
     "clickToSet": "Click on the map to set crag location",
     "nearbyCragsFound": "{{count}} nearby crag found",
     "nearbyCragsFound_other": "{{count}} nearby crags found",
+    "useMyLocation": "Use my location",
     "clickMarkersToView": "Click markers to view existing crags",
     "coordinates": "Coordinates"
   },
