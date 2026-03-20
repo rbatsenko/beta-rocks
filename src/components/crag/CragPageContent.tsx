@@ -691,7 +691,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                     >
                       {t(`ratings.${conditions.rating.toLowerCase()}`) || conditions.rating}
                     </Badge>
-                    <span className="text-2xl font-bold">{conditions.frictionScore}/5</span>
+                    <span className="text-xs text-muted-foreground italic">{t("cragPage.estimateBased", "based on weather")}</span>
                   </div>
                 </div>
 

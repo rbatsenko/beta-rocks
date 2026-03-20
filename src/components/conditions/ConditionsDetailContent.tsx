@@ -228,7 +228,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                 <Badge className={`text-lg px-4 py-2 ${getRatingColor(data.rating)}`}>
                   {translateRating(data.rating)}
                 </Badge>
-                <span className="text-2xl font-bold">{data.frictionScore}/5</span>
+                <span className="text-xs text-muted-foreground italic">{t("cragPage.estimateBased", "based on weather")}</span>
                 {data.isDry ? (
                   <Badge variant="outline" className="text-green-600 border-green-600">
                     {t("dialog.dry")}
@@ -592,7 +592,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                             </div>
                                           </div>
                                           <span className="font-medium">
-                                            {hour.frictionScore}/5
+                                            {translateRating(hour.rating)}
                                           </span>
                                         </div>
                                       ))}
@@ -787,7 +787,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                       {translateRating(hour.rating)}
                                     </Badge>
                                     <span className="text-sm font-semibold w-8 text-right">
-                                      {hour.frictionScore}/5
+                                      {translateRating(hour.rating)}
                                     </span>
                                   </div>
                                 </div>
@@ -920,7 +920,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                           {translateRating(hour.rating)}
                                         </Badge>
                                         <span className="font-semibold">
-                                          {hour.frictionScore}/5
+                                          {translateRating(hour.rating)}
                                         </span>
                                       </div>
                                     </div>

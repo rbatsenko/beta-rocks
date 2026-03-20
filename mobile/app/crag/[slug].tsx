@@ -360,7 +360,6 @@ export default function CragDetailScreen() {
   const locationStr = locationParts.join(", ");
 
   const PHOTO_BASE = SUPABASE_URL ? `${SUPABASE_URL}/storage/v1/object/public/report-photos/` : "";
-  const reportPhotos = reports.flatMap(r => (r.photos || []).map(p => `${PHOTO_BASE}${p}`));
 
   const allCategories = ["conditions", "safety", "access", "climbing_info", "facilities", "other"] as const;
 
@@ -424,10 +423,11 @@ export default function CragDetailScreen() {
             />
           </TouchableOpacity>
           {ratingColors && frictionScore && (
-            <View style={[styles.ratingCard, { backgroundColor: ratingColors.bg, borderColor: ratingColors.solid, borderWidth: 1 }]}>
-              <Text style={[styles.ratingLabel, { color: ratingColors.text }]}>{ratingLabel}</Text>
-              <Text style={[styles.ratingScore, { color: ratingColors.text }]}>{fmt(frictionScore)}</Text>
-              <Text style={[styles.ratingSubtext, { color: ratingColors.text, opacity: 0.7 }]}>/ 5</Text>
+            <View style={{ alignItems: "center", gap: 2 }}>
+              <View style={[styles.ratingCard, { backgroundColor: ratingColors.bg, borderColor: ratingColors.solid, borderWidth: 1 }]}>
+                <Text style={[styles.ratingLabel, { color: ratingColors.text }]}>{ratingLabel}</Text>
+              </View>
+              <Text style={[styles.ratingHint, { color: colors.muted }]}>{t("cragPage.estimateBased", "based on weather")}</Text>
             </View>
           )}
         </View>
@@ -569,20 +569,6 @@ export default function CragDetailScreen() {
           })
         )}
       </View>
-
-      {/* Report photos */}
-      {reportPhotos.length > 0 && (
-        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.photos")} ({reportPhotos.length})</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.photoScroll}>
-            {reportPhotos.map((url, i) => (
-              <TouchableOpacity key={i} onPress={() => openLightbox(reportPhotos, i)} activeOpacity={0.9}>
-                <Image source={{ uri: url }} style={styles.photo} resizeMode="cover" />
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </View>
-      )}
 
       {/* Webcams */}
       {webcams.length > 0 && (
@@ -800,7 +786,7 @@ export default function CragDetailScreen() {
                   </Text>
                   {rc && rl && (
                     <View style={[styles.smallBadge, { backgroundColor: rc.bg }]}>
-                      <Text style={[styles.smallBadgeText, { color: rc.text }]}>{t(`ratings.${rl!.toLowerCase()}`, rl)} {fmt(score)}</Text>
+                      <Text style={[styles.smallBadgeText, { color: rc.text }]}>{t(`ratings.${rl!.toLowerCase()}`, rl)}</Text>
                     </View>
                   )}
                 </View>
@@ -1016,7 +1002,7 @@ function HourlyTimeline({ hours, colors, units, t }: { hours: any[]; colors: (ty
             </Text>
             {rc && rl && (
               <View style={[styles.smallBadge, { backgroundColor: rc.bg }]}>
-                <Text style={[styles.smallBadgeText, { color: rc.text }]}>{fmt(score)}</Text>
+                <Text style={[styles.smallBadgeText, { color: rc.text }]}>{t(`ratings.${rl!.toLowerCase()}`, rl)}</Text>
               </View>
             )}
           </View>
@@ -1147,8 +1133,7 @@ const styles = StyleSheet.create({
   heartButton: { padding: Spacing.xs },
   ratingCard: { alignItems: "center", paddingHorizontal: Spacing.md, paddingVertical: Spacing.sm, borderRadius: BorderRadius.lg, minWidth: 70 },
   ratingLabel: { fontSize: FontSize.sm, fontWeight: "700" },
-  ratingScore: { fontSize: FontSize.xl, fontWeight: "800" },
-  ratingSubtext: { fontSize: FontSize.xs },
+  ratingHint: { fontSize: 9, fontStyle: "italic" },
 
   card: { borderRadius: BorderRadius.lg, borderWidth: 1, padding: Spacing.md, gap: Spacing.sm },
   cardTitle: { fontSize: FontSize.lg, fontWeight: "600" },
