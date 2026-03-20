@@ -2,6 +2,7 @@
 
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useUserProfile } from "@/hooks/useUserProfile";
+import { getSupabaseClient, isSupabaseConfigured } from "@/integrations/supabase/client";
 import { i18nConfig, resolveLocale, type Locale } from "@/lib/i18n/config";
 import { Button } from "@/components/ui/button";
 import {
@@ -60,12 +61,14 @@ export function LanguageSelector() {
     void i18n.changeLanguage(locale);
     localStorage.setItem("preferredLanguage", locale);
     // Sync locale to user profile for translated push notifications
-    if (profile?.syncKeyHash) {
-      fetch("/api/push-subscriptions", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ syncKeyHash: profile.syncKeyHash, locale }),
-      }).catch(() => {});
+    if (profile?.syncKeyHash && isSupabaseConfigured) {
+      const supabase = getSupabaseClient() as any;
+      supabase
+        .from("user_profiles")
+        .update({ locale })
+        .eq("sync_key_hash", profile.syncKeyHash)
+        .then(() => {})
+        .catch(() => {});
     }
   };
 
