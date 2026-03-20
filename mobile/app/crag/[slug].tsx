@@ -111,6 +111,24 @@ function getDateKey(iso: string): string {
   return new Date(iso).toDateString();
 }
 
+function linkifyDescription(text: string, colors: (typeof Colors)["light"]) {
+  const parts = text.split(/(https?:\/\/[^\s]+)/g);
+  return parts.map((part, i) => {
+    if (/^https?:\/\//.test(part)) {
+      return (
+        <Text
+          key={i}
+          style={{ color: colors.primary, textDecorationLine: "underline" }}
+          onPress={() => Linking.openURL(part)}
+        >
+          {part}
+        </Text>
+      );
+    }
+    return part;
+  });
+}
+
 interface Webcam {
   title: string;
   webcamId: number;
@@ -371,8 +389,8 @@ export default function CragDetailScreen() {
           )}
           {/* E. Crag Description */}
           {crag.description && (
-            <Text style={[styles.description, { color: colors.textSecondary }]} numberOfLines={3}>
-              {crag.description}
+            <Text style={[styles.description, { color: colors.textSecondary }]}>
+              {linkifyDescription(crag.description, colors)}
             </Text>
           )}
           <View style={styles.badgeRow}>
