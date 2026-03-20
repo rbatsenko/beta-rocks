@@ -17,9 +17,9 @@ export async function POST(request: NextRequest) {
     const supabase = getSupabaseClient() as any;
     const { syncKeyHash, token, platform, deviceName, locale } = await request.json();
 
-    if (!syncKeyHash || !token || !platform) {
+    if (!syncKeyHash) {
       return NextResponse.json(
-        { error: "syncKeyHash, token, and platform required" },
+        { error: "syncKeyHash is required" },
         { status: 400 }
       );
     }
@@ -46,24 +46,26 @@ export async function POST(request: NextRequest) {
         .eq("id", profile.id);
     }
 
-    // Upsert the push subscription (update if token already exists)
-    const { error } = await supabase
-      .from("push_subscriptions")
-      .upsert(
-        {
-          user_profile_id: profile.id,
-          platform,
-          token,
-          device_name: deviceName || null,
-          is_active: true,
-          updated_at: new Date().toISOString(),
-        },
-        { onConflict: "user_profile_id,token" }
-      );
+    // If token and platform provided, upsert the push subscription
+    if (token && platform) {
+      const { error } = await supabase
+        .from("push_subscriptions")
+        .upsert(
+          {
+            user_profile_id: profile.id,
+            platform,
+            token,
+            device_name: deviceName || null,
+            is_active: true,
+            updated_at: new Date().toISOString(),
+          },
+          { onConflict: "user_profile_id,token" }
+        );
 
-    if (error) {
-      console.error("Push subscription upsert error:", error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      if (error) {
+        console.error("Push subscription upsert error:", error);
+        return NextResponse.json({ error: error.message }, { status: 500 });
+      }
     }
 
     return NextResponse.json({ success: true }, { status: 201 });
