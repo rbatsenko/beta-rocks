@@ -554,9 +554,9 @@ export default function CragDetailScreen() {
                       </View>
                     )}
                     {report.rating_wind != null && (
-                      <View style={[styles.ratingBadge, { borderColor: colors.border }]}>
-                        <Ionicons name="flag-outline" size={12} color={colors.muted} />
-                        <Text style={[styles.ratingText, { color: colors.text }]}>
+                      <View style={[styles.ratingBadge, { borderColor: report.rating_wind >= 4 ? "#fca5a5" : colors.border }]}>
+                        <Ionicons name="flag-outline" size={12} color={report.rating_wind >= 4 ? "#ef4444" : report.rating_wind <= 2 ? "#22c55e" : colors.muted} />
+                        <Text style={[styles.ratingText, { color: report.rating_wind >= 4 ? "#ef4444" : report.rating_wind <= 2 ? "#16a34a" : colors.text }]}>
                           {t("reports.wind", "Wind")}: {report.rating_wind}/5
                         </Text>
                         <Text style={[styles.ratingLabel, { color: colors.muted }]}>

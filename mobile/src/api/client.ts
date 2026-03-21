@@ -165,10 +165,14 @@ export async function deleteReport(
   userProfileId: string,
   syncKeyHash: string
 ): Promise<void> {
-  await apiFetch(`/api/reports/${reportId}?userProfileId=${userProfileId}`, {
-    method: "DELETE",
-    syncKeyHash,
-  });
+  const params = new URLSearchParams({ userProfileId });
+  await apiFetch(
+    `/api/reports/${encodeURIComponent(reportId)}?${params.toString()}`,
+    {
+      method: "DELETE",
+      syncKeyHash,
+    }
+  );
 }
 
 /**
