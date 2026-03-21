@@ -17,7 +17,7 @@ import {
 } from "react-native";
 import { useLocalSearchParams, useRouter, useNavigation } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { getCragBySlug, getReportsByCrag, confirmReport as apiConfirmReport } from "@/api/client";
+import { getCragBySlug, getReportsByCrag, confirmReport as apiConfirmReport, deleteReport as apiDeleteReport } from "@/api/client";
 import { useFocusEffect } from "@react-navigation/native";
 import { API_URL, SUPABASE_URL } from "@/constants/config";
 import { useUserProfile } from "@/hooks/useUserProfile";
@@ -601,30 +601,60 @@ export default function CragDetailScreen() {
                     t={t}
                   />
                   {profileId && report.author_id === profileId && (
-                    <TouchableOpacity
-                      style={styles.editButton}
-                      onPress={() => {
-                        router.push({
-                          pathname: "/report",
-                          params: {
-                            cragId: crag!.id,
-                            cragName: crag!.name,
-                            reportId: report.id,
-                            editCategory: report.category,
-                            editText: report.text || "",
-                            editRatingDry: report.rating_dry?.toString() || "0",
-                            editRatingWind: report.rating_wind?.toString() || "0",
-                            editRatingCrowds: report.rating_crowds?.toString() || "0",
-                            editPhotos: JSON.stringify(report.photos || []),
-                            editLostFoundType: report.lost_found_type || "",
-                          },
-                        });
-                      }}
-                      activeOpacity={0.7}
-                    >
-                      <Ionicons name="pencil-outline" size={14} color={colors.primary} />
-                      <Text style={[styles.metaText, { color: colors.primary }]}>{t("common.edit", "Edit")}</Text>
-                    </TouchableOpacity>
+                    <View style={styles.authorActions}>
+                      <TouchableOpacity
+                        style={styles.editButton}
+                        onPress={() => {
+                          router.push({
+                            pathname: "/report",
+                            params: {
+                              cragId: crag!.id,
+                              cragName: crag!.name,
+                              reportId: report.id,
+                              editCategory: report.category,
+                              editText: report.text || "",
+                              editRatingDry: report.rating_dry?.toString() || "0",
+                              editRatingWind: report.rating_wind?.toString() || "0",
+                              editRatingCrowds: report.rating_crowds?.toString() || "0",
+                              editPhotos: JSON.stringify(report.photos || []),
+                              editLostFoundType: report.lost_found_type || "",
+                            },
+                          });
+                        }}
+                        activeOpacity={0.7}
+                      >
+                        <Ionicons name="pencil-outline" size={14} color={colors.primary} />
+                        <Text style={[styles.metaText, { color: colors.primary }]}>{t("common.edit", "Edit")}</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={styles.editButton}
+                        onPress={() => {
+                          Alert.alert(
+                            t("reports.deleteConfirmTitle", "Delete Report"),
+                            t("reports.deleteConfirmMessage", "Are you sure you want to delete this report? This cannot be undone."),
+                            [
+                              { text: t("common.cancel", "Cancel"), style: "cancel" },
+                              {
+                                text: t("reports.delete", "Delete"),
+                                style: "destructive",
+                                onPress: async () => {
+                                  try {
+                                    await apiDeleteReport(report.id, profileId, syncKeyHash!);
+                                    setReports(prev => prev.filter(r => r.id !== report.id));
+                                  } catch {
+                                    Alert.alert(t("common.error", "Error"), t("reports.deleteFailed", "Failed to delete report"));
+                                  }
+                                },
+                              },
+                            ]
+                          );
+                        }}
+                        activeOpacity={0.7}
+                      >
+                        <Ionicons name="trash-outline" size={14} color="#ef4444" />
+                        <Text style={[styles.metaText, { color: "#ef4444" }]}>{t("reports.delete", "Delete")}</Text>
+                      </TouchableOpacity>
+                    </View>
                   )}
                 </View>
               </View>
@@ -1314,6 +1344,7 @@ const styles = StyleSheet.create({
   reportText: { fontSize: FontSize.sm, lineHeight: 20 },
   reportPhoto: { width: 250, height: 180, borderRadius: BorderRadius.md, marginRight: Spacing.sm },
   reportActions: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
+  authorActions: { flexDirection: "row", alignItems: "center", gap: Spacing.md },
   editButton: { flexDirection: "row", alignItems: "center", gap: 4 },
   reportFooter: { flexDirection: "row", alignItems: "center", gap: 4 },
   metaText: { fontSize: FontSize.xs },
