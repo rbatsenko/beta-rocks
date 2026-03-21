@@ -4,9 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-beta.rocks is a free, chat-first web app that helps climbers get the beta on any crag worldwide. It uses AI (Google Gemini 2.5 Flash via Vercel AI SDK) to provide real-time conditions, community reports, and route information based on weather data, rock type, and climbing-specific factors. Features include user profiles with multi-device sync, chat history persistence, favorites bookmarking, and community reports with categories.
+beta.rocks is a free, chat-first web and mobile app that helps climbers get the beta on any crag worldwide. It uses AI (Google Gemini 2.5 Flash via Vercel AI SDK) to provide real-time conditions, community reports, and route information based on weather data, rock type, and climbing-specific factors. Features include user profiles with multi-device sync, chat history persistence, favorites bookmarking, community reports with categories, notifications, and webcams.
 
-**Key Technologies:**
+This is a **monorepo** with two apps:
+
+- **Web app** (`src/`): Next.js 16 web application with AI chat
+- **Mobile app** (`mobile/`): Expo/React Native app for iOS and Android
+
+**Key Technologies (Web):**
 
 - Next.js 16 (App Router with Turbopack)
 - TypeScript with strict mode
@@ -16,11 +21,25 @@ beta.rocks is a free, chat-first web app that helps climbers get the beta on any
 - i18next for internationalization (17 locales)
 - OpenBeta GraphQL API (climbing database)
 - Open-Meteo API (weather data)
-- QR code generation for sync keys
+- Windy API (webcams)
+- Resend (email for sync key delivery)
+
+**Key Technologies (Mobile):**
+
+- Expo 55 / React Native 0.83
+- Expo Router (file-based routing)
+- TypeScript with strict mode
+- react-native-maps (interactive maps)
+- react-native-mmkv (fast local storage)
+- expo-secure-store (encrypted sync key storage)
+- expo-notifications (push notifications)
+- expo-image-picker (photo uploads)
+- i18next (27 locales, shared translations with web)
+- Same Supabase backend as web
 
 ## Development Commands
 
-### Running the App
+### Web App
 
 ```bash
 # Start dev server (uses Turbopack by default)
@@ -34,6 +53,24 @@ npm run build
 
 # Start production server
 npm start
+```
+
+### Mobile App
+
+```bash
+cd mobile
+
+# Start Expo dev server
+npm run start
+
+# Run on Android device/emulator
+npm run android
+
+# Run on iOS simulator
+npm run ios
+
+# Run on web (React Native Web)
+npm run web
 ```
 
 ### Code Quality
@@ -53,16 +90,29 @@ npm run format
 
 # Type-check without emitting files
 npm run type-check
+
+# Generate Supabase TypeScript types
+npm run db:types
 ```
 
 ### Environment Setup
 
-Copy `.env.example` to `.env.local` and add:
+**Web** — Copy `.env.example` to `.env.local` and add:
 
 - `NEXT_PUBLIC_SUPABASE_URL` - Supabase project URL
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` - Supabase anon key
 - `GOOGLE_GENERATIVE_AI_API_KEY` - Google AI API key (server-side only)
-- `SUPABASE_SECRET_KEY` - Supabase service_role secret (optional, only for admin scripts like `enrich-countries.ts`)
+- `SUPABASE_SECRET_KEY` - Supabase service_role secret (optional, for admin scripts)
+- `AI_PROVIDER` - AI provider selection
+- `RESEND_API_KEY` - Resend API key for email sync key delivery
+- `WINDY_API_KEY` - Windy API key for webcam integration
+- `NEXT_PUBLIC_DEBUG_RENDERS` - Enable render debugging (optional)
+
+**Mobile** — Copy `mobile/.env.example` to `mobile/.env` and add:
+
+- `EXPO_PUBLIC_API_URL` - Web app URL (e.g., `https://beta.rocks`)
+- `EXPO_PUBLIC_SUPABASE_URL` - Supabase project URL
+- `EXPO_PUBLIC_SUPABASE_ANON_KEY` - Supabase anon key
 
 ## Code Architecture
 
@@ -125,7 +175,8 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
 
 - Anonymous user profiles created on first visit with unique sync keys
 - Sync key = 16-character identifier for restoring profile on other devices
-- LocalStorage for immediate persistence, Supabase for cross-device sync
+- Web: LocalStorage for persistence, Supabase for cross-device sync
+- Mobile: SecureStore (Keychain/Keystore) for sync key, MMKV for profile data
 - No account/email required - privacy-focused approach
 - Sync status indicator in header (synced/syncing/offline)
 
@@ -135,12 +186,12 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
 - `src/lib/auth/cookie-actions.ts`: Cookie management for user profile
 - `src/hooks/useSyncStatus.ts`: React hook for sync state management
 - `src/app/sync/page.tsx`: Sync restoration page for secondary devices
-- `src/components/SyncNotification.tsx`: Dismissible banner alerting users to sync
-- `src/components/SyncExplainerDialog.tsx`: Educational dialog about sync
+- `mobile/src/lib/sync-key.ts`: Mobile sync key logic
+- `mobile/src/contexts/UserProfileContext.tsx`: Mobile auth state
 
 ### Chat History Persistence
 
-**Feature**: Save and restore chat conversations across sessions
+**Feature**: Save and restore chat conversations across sessions (web only)
 
 - Chat sessions stored in `chat_sessions` table with titles
 - Individual messages stored in `chat_messages` table
@@ -166,8 +217,9 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
 
 **Key Files**:
 
-- `src/lib/storage/favorites.ts`: Favorites CRUD operations
-- `src/components/FavoritesDialog.tsx`: Favorites list modal
+- `src/lib/storage/favorites.ts`: Favorites CRUD operations (web)
+- `src/components/FavoritesDialog.tsx`: Favorites list modal (web)
+- `mobile/app/(tabs)/favorites.tsx`: Favorites grid screen (mobile)
 - Migration: `supabase/migrations/20251028054257_add_user_favorites.sql`
 
 ### Enhanced Search with Sectors
@@ -184,7 +236,8 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
 **Key Files**:
 
 - `src/app/api/search/route.ts`: Search API endpoint
-- `src/components/dialogs/SearchDialog.tsx`: ⌘K search interface
+- `src/components/dialogs/SearchDialog.tsx`: ⌘K search interface (web)
+- `mobile/app/(tabs)/search.tsx`: Search screen (mobile)
 - Migration: `supabase/migrations/20251104101753_add_enhanced_search_with_sectors.sql`
 
 ### Reports System
@@ -196,31 +249,116 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
 - Category-specific placeholders and validation
 - Helpful/unhelpful voting with user profile integration
 - Filter tabs on crag pages to view reports by category
+- Photo uploads (mobile: camera + gallery, web: file picker)
 
 **Key Files**:
 
-- `src/components/ReportDialog.tsx`: Multi-category report submission
-- `src/components/ReportCard.tsx`: Report display with category badges
+- `src/components/reports/ReportDialog.tsx`: Multi-category report submission (web)
+- `src/components/reports/ReportCard.tsx`: Report display with category badges (web)
+- `mobile/app/report.tsx`: Report submission modal (mobile)
 - Migration: `supabase/migrations/20251028135542_add_report_categories.sql`
 
-### Component Structure
+### Notifications System
 
-**Main Components** (src/components/):
+**Feature**: Real-time notifications for report activity
 
-- `ChatInterface.tsx`: Primary chat UI with Vercel AI SDK's `useChat` hook, integrated with chat history and sync
-- `CragPageContent.tsx`: Rich detail view for crag pages with conditions, reports, sectors, maps
-- `ConditionsDetailSheet.tsx`: Sheet-based detail view with weather analysis, charts, hourly forecasts
-- `DisambiguationOptions.tsx`: Renders location options when multiple matches found
-- `WeatherConditionCard.tsx`: Compact card showing current conditions with friction rating and favorite toggle
-- `ReportCard.tsx`: Display community reports with category badges and voting
-- `ReportDialog.tsx`: Multi-category report submission form
-- `FavoritesDialog.tsx`: User's favorited crags with cached conditions
-- `SettingsDialog.tsx`: User profile, sync key management, display name editor
-- `Header.tsx`: App header with sync status and user menu
-- `LanguageSelector.tsx`: I18n language switcher
-- `ConfirmDialog.tsx`: Generic confirmation dialog for destructive actions
+- Web: NotificationCenter dropdown with bell icon
+- Mobile: Push notifications via Expo + in-app notification screen
+- Supabase Realtime subscriptions for live updates
 
-**shadcn/ui Components** (src/components/ui/): Pre-built, customizable components from shadcn/ui library
+**Key Files**:
+
+- `src/components/notifications/`: NotificationCenter, NotificationDropdown, NotificationBell (web)
+- `src/hooks/useNotifications.ts`: Notification hook (web)
+- `mobile/app/(tabs)/notifications.tsx`: Notification history screen (mobile)
+- `mobile/src/hooks/useNotifications.ts`: Notification hook with Supabase Realtime (mobile)
+- `mobile/src/hooks/usePushNotifications.ts`: Expo push notification registration (mobile)
+
+### Webcams Feature
+
+**Feature**: Live webcam feeds near crags via Windy API
+
+- Webcam preview images with links to Windy
+- Displayed on crag detail pages when available
+
+**Key Files**:
+
+- `src/components/crag/WebcamsSection.tsx`: Webcam display (web)
+- `src/app/api/webcams/route.ts`: Webcams API endpoint
+
+### Crag Submission System
+
+**Feature**: User-submitted crags with location picking
+
+- Interactive map-based location selection
+- Nearby crag detection to prevent duplicates
+- Reverse geocoding for address/country info
+
+**Key Files**:
+
+- `mobile/app/add-crag.tsx`: Add new crag modal (mobile)
+- `mobile/app/add-sector.tsx`: Add sector to existing crag (mobile)
+- `mobile/src/components/CragLocationPicker.tsx`: Interactive map picker (mobile)
+- `src/app/api/crags/submit/route.ts`: Crag submission API
+- `src/app/api/crags/check-nearby/route.ts`: Nearby crag check API
+- `src/app/api/geocode/reverse/route.ts`: Reverse geocoding API
+
+### Component Structure (Web)
+
+Components are organized into subdirectories under `src/components/`:
+
+- `chat/`: ChatInterface, DisambiguationOptions
+- `conditions/`: ConditionsDetailSheet, WeatherConditionCard
+- `crag/`: CragPageContent, LeafletMap, WebcamsSection
+- `dialogs/`: SearchDialog, ConfirmDialog
+- `layout/`: Header, HeaderActions, RootLayoutClient
+- `notifications/`: NotificationCenter, NotificationDropdown, NotificationBell
+- `feed/`: ReportTimeline
+- `profile/`: UserMenu, SettingsDialog, SyncExplainerDialog
+- `reports/`: ReportCard, ReportDialog
+- `map/`: CragLocationPicker
+- `ai-elements/`: Custom AI element renderers
+- `ui/`: shadcn/ui components
+
+### Mobile App Structure
+
+```
+mobile/
+├── app/                          # Expo Router routes (file-based)
+│   ├── _layout.tsx               # Root layout with providers
+│   ├── (tabs)/                   # Tab navigation (5 bottom tabs)
+│   │   ├── index.tsx             # Home screen (favorites, search hint)
+│   │   ├── search.tsx            # Search crags/sectors
+│   │   ├── feed.tsx              # Live community feed
+│   │   ├── favorites.tsx         # Bookmarked crags grid
+│   │   └── settings.tsx          # Profile, theme, language, units, sync
+│   ├── crag/[slug].tsx           # Crag detail page
+│   ├── report.tsx                # Report submission modal
+│   ├── add-crag.tsx              # Add new crag modal
+│   ├── add-sector.tsx            # Add sector modal
+│   └── sync.tsx                  # Restore profile from sync key
+├── src/
+│   ├── api/                      # API client + Supabase client
+│   ├── components/               # CragMapView, CragLocationPicker, etc.
+│   ├── contexts/                 # Theme, Language, UserProfile, Notifications
+│   ├── hooks/                    # useConditions, useSearch, useNotifications, etc.
+│   ├── i18n/                     # i18next setup + 27 locale folders
+│   ├── lib/                      # storage, sync-key, units
+│   ├── types/                    # API response types
+│   └── constants/                # config, theme tokens
+├── app.json                      # Expo config
+├── eas.json                      # EAS Build config
+└── package.json
+```
+
+**Mobile vs Web differences**:
+
+- Mobile has **no AI chat** — uses direct API calls for conditions
+- Mobile uses **tab navigation** (Home, Search, Feed, Favorites, Settings)
+- Mobile has **push notifications** (web does not)
+- Mobile has **camera/gallery photo uploads** for reports
+- Mobile uses **MMKV** for local storage (web uses LocalStorage)
+- Mobile sends `X-Client-Platform: mobile` header in API requests
 
 ### Data Layer
 
@@ -235,6 +373,12 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
 - `open-meteo.ts`: Fetches 14-day weather forecast with hourly data
 - `geocoding.ts`: Fallback location search when OpenBeta doesn't find a crag
 
+**Units System** (src/lib/units/):
+
+- `conversions.ts`: Temperature, wind speed, precipitation unit conversions
+- `storage.ts`: User unit preferences persistence
+- `types.ts`: Unit types (metric/imperial)
+
 **Country Utilities** (src/lib/utils/country-flags.ts):
 
 - `getCountryFlag()`: Converts country name or ISO code to flag emoji
@@ -242,6 +386,10 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
 - `getCountryName()`: Converts ISO 3166-1 alpha-2 code to full country name
 - Centralized mapping of 80+ countries with their ISO codes
 - Used for metadata generation and location display
+
+**Observability** (src/lib/observability/chat-logger.ts):
+
+- Chat interaction logging with Gemini cost calculation
 
 **Database** (src/lib/db/queries.ts):
 
@@ -263,11 +411,12 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
 
 ### Internationalization (i18n)
 
-- 17 supported locales defined in `src/lib/i18n/config.ts`
+- 17 supported locales on web defined in `src/lib/i18n/config.ts`
+- 27 locales on mobile in `mobile/src/i18n/locales/`
 - Translation files in `public/locales/{locale}/common.json`
 - Client-side: `useClientTranslation` hook for React components
 - Server-side: `resolveLocale()` for API routes
-- Locale detection via browser headers, stored in cookies via middleware
+- Locale detection via browser headers, stored in cookies
 - Special multilingual handling for Switzerland (de-CH, fr-CH, it-CH) based on browser language preference
 
 **Adding Translations**:
@@ -280,8 +429,21 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
 
 - `chat/route.ts`: Main streaming chat endpoint with tool calling
 - `conditions/route.ts`: Direct conditions API (bypasses chat)
-- `reports/route.ts`: Community condition reports with category support
+- `search/route.ts`: Crag/sector search with fuzzy matching
+- `reports/route.ts`: Community condition reports CRUD
+- `reports/feed/route.ts`: Paginated reports feed
+- `reports/recent/route.ts`: Recent reports
+- `reports/[id]/confirm/route.ts`: Report confirmation/voting
 - `confirmations/route.ts`: Report confirmations/voting
+- `crags/submit/route.ts`: User crag submission
+- `crags/check-nearby/route.ts`: Nearby crag detection
+- `geocode/reverse/route.ts`: Reverse geocoding
+- `location/[slug]/route.ts`: Crag detail by slug
+- `notifications/route.ts`: Notification list
+- `push-subscriptions/route.ts`: Push notification subscriptions
+- `send-sync-key/route.ts`: Email sync key via Resend
+- `sync/[key]/route.ts`: Sync key restoration
+- `webcams/route.ts`: Webcam data via Windy API
 
 ### Dynamic Routes (src/app/)
 
@@ -291,6 +453,8 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
   - Reports list with category filtering
   - Sector information display
   - Map embeds and external links
+  - Webcam feeds
+- `feed/page.tsx`: Community reports feed page
 - `sync/page.tsx`: Sync key restoration page for secondary devices
 
 ## Important Patterns
@@ -308,15 +472,17 @@ The chat uses the single-step tool pattern (default behavior for fast responses)
 
 ### Path Aliases
 
-Use `@/*` to import from `src/`:
+Web uses `@/*` to import from `src/`:
 
 ```typescript
 import { computeConditions } from "@/lib/conditions/conditions.service";
 ```
 
-### Middleware (src/middleware.ts)
+Mobile uses `@/*` to import from `mobile/src/`:
 
-Detects user's country via Vercel geo headers, sets cookie for i18n auto-detection.
+```typescript
+import { useConditions } from "@/hooks/useConditions";
+```
 
 ### Git Conventions
 
@@ -325,6 +491,8 @@ First letter after type is lowercase: `fix: correct friction calculation` (not `
 
 ## Testing the App Locally
 
+### Web
+
 1. Install dependencies: `npm install`
 2. Set up `.env.local` with Supabase credentials and Google AI API key
 3. Run dev server: `npm run dev`
@@ -332,20 +500,33 @@ First letter after type is lowercase: `fix: correct friction calculation` (not `
 5. Check that disambiguation works by searching ambiguous names like "Smith Rock"
 6. Verify i18n by changing language in UI
 
+### Mobile
+
+1. Install dependencies: `cd mobile && npm install`
+2. Set up `mobile/.env` with API URL and Supabase credentials
+3. Run Expo: `npm run start`
+4. Open on device via Expo Go or development build
+
 ## Known Limitations
 
 - No automated tests yet (consider adding Jest + React Testing Library)
 - Weather data limited to 14 days (Open-Meteo free tier)
 - No email/password authentication - relies on sync keys only
-- QR code sync requires manual key entry on device (no camera scanning yet)
+- AI chat is web-only (not available in mobile app)
 
 ## Deployment
 
-Deployed on Vercel. On push to main:
+**Web**: Deployed on Vercel. On push to main:
 
 1. Vercel auto-builds with Turbopack
 2. Environment variables set in Vercel dashboard
 3. Edge functions for API routes
 4. Automatic HTTPS, caching, geo-distribution
 
-See [Vercel docs](https://vercel.com/docs) for advanced configuration.
+**Mobile**: Built with EAS (Expo Application Services):
+
+- Development, preview, and production build profiles
+- iOS: Submitted to App Store
+- Android: Internal track builds
+
+See [Vercel docs](https://vercel.com/docs) for web configuration.
