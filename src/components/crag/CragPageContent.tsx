@@ -572,59 +572,6 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
               </div>
             </div>
 
-            {/* Small inline map (hidden for secret crags) */}
-            {!isSecretCrag && getOpenStreetMapEmbedUrl(displayLat, displayLon) && (
-              <div className="mt-1">
-                <iframe
-                  width="100%"
-                  height="200"
-                  frameBorder="0"
-                  scrolling="no"
-                  marginHeight={0}
-                  marginWidth={0}
-                  src={getOpenStreetMapEmbedUrl(displayLat, displayLon)!}
-                  className="rounded-lg border"
-                />
-              </div>
-            )}
-
-            {/* Map links & coordinates (hidden for secret crags) */}
-            {!isSecretCrag && (
-              <div className="flex flex-wrap items-center gap-2">
-                <Badge variant="secondary" className="font-mono text-xs">
-                  {displayLat.toFixed(4)}, {displayLon.toFixed(4)}
-                </Badge>
-                {getSunCalcUrl(displayLat, displayLon) && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => {
-                      const url = getSunCalcUrl(displayLat, displayLon);
-                      if (url) window.open(url, "_blank", "noopener,noreferrer");
-                    }}
-                    title={t("cragPage.viewSunAngles")}
-                  >
-                    <Sun className="w-3.5 h-3.5" />
-                    <span className="hidden sm:inline">SunCalc</span>
-                  </Button>
-                )}
-                {getGoogleMapsUrl(displayLat, displayLon) && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => {
-                      const url = getGoogleMapsUrl(displayLat, displayLon);
-                      if (url) window.open(url, "_blank", "noopener,noreferrer");
-                    }}
-                    title={t("cragPage.viewOnGoogleMaps")}
-                  >
-                    <Map className="w-3.5 h-3.5" />
-                    <span className="hidden sm:inline">{t("cragPage.viewOnMap")}</span>
-                  </Button>
-                )}
-              </div>
-            )}
-
             {/* Description with clickable links */}
             {(currentSector?.description || crag.description) && (
               <p className="text-sm text-muted-foreground max-w-2xl">
@@ -642,15 +589,66 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
               </div>
             )}
 
-            {/* Rock Type Badge */}
-            {crag.rock_type && (
-              <div className="flex flex-wrap items-center gap-2">
+            {/* Rock Type & Coordinates (hidden for secret crags) */}
+            <div className="flex flex-wrap items-center gap-2">
+              {crag.rock_type && (
                 <Badge variant="outline" className="capitalize">
                   {t(`rockTypes.${crag.rock_type}`) || crag.rock_type}
                 </Badge>
-              </div>
-            )}
+              )}
+              {!isSecretCrag && (
+                <>
+                  <Badge variant="secondary" className="font-mono text-xs">
+                    {displayLat.toFixed(4)}, {displayLon.toFixed(4)}
+                  </Badge>
+                  {getSunCalcUrl(displayLat, displayLon) && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        const url = getSunCalcUrl(displayLat, displayLon);
+                        if (url) window.open(url, "_blank", "noopener,noreferrer");
+                      }}
+                      title={t("cragPage.viewSunAngles")}
+                    >
+                      <Sun className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline">SunCalc</span>
+                    </Button>
+                  )}
+                  {getGoogleMapsUrl(displayLat, displayLon) && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        const url = getGoogleMapsUrl(displayLat, displayLon);
+                        if (url) window.open(url, "_blank", "noopener,noreferrer");
+                      }}
+                      title={t("cragPage.viewOnGoogleMaps")}
+                    >
+                      <Map className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline">{t("cragPage.viewOnMap")}</span>
+                    </Button>
+                  )}
+                </>
+              )}
+            </div>
           </div>
+
+          {/* Small inline map (hidden for secret crags) */}
+          {!isSecretCrag && getOpenStreetMapEmbedUrl(displayLat, displayLon) && (
+            <div className="mt-4">
+              <iframe
+                width="100%"
+                height="200"
+                frameBorder="0"
+                scrolling="no"
+                marginHeight={0}
+                marginWidth={0}
+                src={getOpenStreetMapEmbedUrl(displayLat, displayLon)!}
+                className="rounded-lg border"
+              />
+            </div>
+          )}
         </div>
 
         {/* Current Conditions Summary Card */}
