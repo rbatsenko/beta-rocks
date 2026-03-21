@@ -39,6 +39,7 @@ import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
 import { PhotoLightbox } from "@/components/PhotoLightbox";
 import { WeatherIcon } from "@/components/WeatherIcon";
+import { CragMapView } from "@/components/CragMapView";
 import { useTranslation } from "react-i18next";
 
 function fmt(val: number | undefined | null, decimals = 1): string {
@@ -859,6 +860,18 @@ export default function CragDetailScreen() {
           <Text style={[styles.emptyText, { color: colors.muted }]}>{t("mobile.noSectors", "No sectors yet")}</Text>
         )}
       </View>
+
+      {/* Map */}
+      {crag.lat != null && crag.lon != null && (
+        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.location", "Location")}</Text>
+          <CragMapView
+            latitude={crag.lat}
+            longitude={crag.lon}
+            locationName={crag.name}
+          />
+        </View>
+      )}
 
       {/* External links */}
       <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
