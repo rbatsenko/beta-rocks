@@ -434,6 +434,29 @@ export default function CragDetailScreen() {
         </View>
       </View>
 
+      {/* Map */}
+      {crag.lat != null && crag.lon != null && (
+        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.location", "Location")}</Text>
+          <CragMapView
+            latitude={crag.lat}
+            longitude={crag.lon}
+            locationName={crag.name}
+          />
+        </View>
+      )}
+
+      {/* External links */}
+      <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+        <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.links")}</Text>
+        <LinkRow icon="map-outline" label={t("cragPage.viewOnGoogleMaps", "View on Google Maps")} color={colors} onPress={() => Linking.openURL(`https://www.google.com/maps?q=${crag.lat},${crag.lon}&z=15`)} />
+        <LinkRow icon="sunny-outline" label={t("cragPage.viewOnSunCalc", "View sun/moon times")} color={colors} onPress={() => {
+          const d = new Date().toISOString().split("T")[0].replace(/-/g, ".");
+          Linking.openURL(`https://www.suncalc.org/#/${crag.lat},${crag.lon},17/${d}/12:00/1/1`);
+        }} />
+        <LinkRow icon="navigate-outline" label={t("cragPage.viewOnMap", "View on map")} color={colors} onPress={() => Linking.openURL(`https://www.openstreetmap.org/?mlat=${crag.lat}&mlon=${crag.lon}#map=15/${crag.lat}/${crag.lon}`)} />
+      </View>
+
       {/* Reports — C. category filter chips, I. empty state, K. author names */}
       <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
         <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.communityReports")} ({reports.length})</Text>
@@ -859,29 +882,6 @@ export default function CragDetailScreen() {
         {sectors.length === 0 && (
           <Text style={[styles.emptyText, { color: colors.muted }]}>{t("mobile.noSectors", "No sectors yet")}</Text>
         )}
-      </View>
-
-      {/* Map */}
-      {crag.lat != null && crag.lon != null && (
-        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-          <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.location", "Location")}</Text>
-          <CragMapView
-            latitude={crag.lat}
-            longitude={crag.lon}
-            locationName={crag.name}
-          />
-        </View>
-      )}
-
-      {/* External links */}
-      <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-        <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.links")}</Text>
-        <LinkRow icon="map-outline" label={t("cragPage.viewOnGoogleMaps", "View on Google Maps")} color={colors} onPress={() => Linking.openURL(`https://www.google.com/maps?q=${crag.lat},${crag.lon}&z=15`)} />
-        <LinkRow icon="sunny-outline" label={t("cragPage.viewOnSunCalc", "View sun/moon times")} color={colors} onPress={() => {
-          const d = new Date().toISOString().split("T")[0].replace(/-/g, ".");
-          Linking.openURL(`https://www.suncalc.org/#/${crag.lat},${crag.lon},17/${d}/12:00/1/1`);
-        }} />
-        <LinkRow icon="navigate-outline" label={t("cragPage.viewOnMap", "View on map")} color={colors} onPress={() => Linking.openURL(`https://www.openstreetmap.org/?mlat=${crag.lat}&mlon=${crag.lon}#map=15/${crag.lat}/${crag.lon}`)} />
       </View>
 
     </ScrollView>
