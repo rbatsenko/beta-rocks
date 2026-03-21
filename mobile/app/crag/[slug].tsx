@@ -17,7 +17,7 @@ import {
 } from "react-native";
 import { useLocalSearchParams, useRouter, useNavigation } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { getCragBySlug, getReportsByCrag, confirmReport as apiConfirmReport } from "@/api/client";
+import { getCragBySlug, getReportsByCrag, confirmReport as apiConfirmReport, deleteReport as apiDeleteReport } from "@/api/client";
 import { useFocusEffect } from "@react-navigation/native";
 import { API_URL, SUPABASE_URL } from "@/constants/config";
 import { useUserProfile } from "@/hooks/useUserProfile";
@@ -538,6 +538,45 @@ export default function CragDetailScreen() {
                   </View>
                   <Text style={[styles.metaText, { color: colors.muted }]}>{fmtRelative(report.created_at)}</Text>
                 </View>
+                {/* Condition ratings - only for conditions category */}
+                {report.category === "conditions" &&
+                  (report.rating_dry != null || report.rating_wind != null || report.rating_crowds != null) && (
+                  <View style={styles.ratingsRow}>
+                    {report.rating_dry != null && (
+                      <View style={[styles.ratingBadge, { borderColor: report.rating_dry <= 2 ? "#fca5a5" : colors.border }]}>
+                        <Ionicons name="water-outline" size={12} color={report.rating_dry <= 2 ? "#ef4444" : report.rating_dry >= 4 ? "#22c55e" : colors.muted} />
+                        <Text style={[styles.ratingText, { color: report.rating_dry <= 2 ? "#ef4444" : report.rating_dry >= 4 ? "#16a34a" : colors.text }]}>
+                          {t("reports.dryness", "Dryness")}: {report.rating_dry}/5
+                        </Text>
+                        <Text style={[styles.ratingLabel, { color: colors.muted }]}>
+                          ({t(`reports.drynessLabels.${report.rating_dry}`, "")})
+                        </Text>
+                      </View>
+                    )}
+                    {report.rating_wind != null && (
+                      <View style={[styles.ratingBadge, { borderColor: report.rating_wind >= 4 ? "#fca5a5" : colors.border }]}>
+                        <Ionicons name="flag-outline" size={12} color={report.rating_wind >= 4 ? "#ef4444" : report.rating_wind <= 2 ? "#22c55e" : colors.muted} />
+                        <Text style={[styles.ratingText, { color: report.rating_wind >= 4 ? "#ef4444" : report.rating_wind <= 2 ? "#16a34a" : colors.text }]}>
+                          {t("reports.wind", "Wind")}: {report.rating_wind}/5
+                        </Text>
+                        <Text style={[styles.ratingLabel, { color: colors.muted }]}>
+                          ({t(`reports.windLabels.${report.rating_wind}`, "")})
+                        </Text>
+                      </View>
+                    )}
+                    {report.rating_crowds != null && (
+                      <View style={[styles.ratingBadge, { borderColor: report.rating_crowds >= 4 ? "#fca5a5" : colors.border }]}>
+                        <Ionicons name="people-outline" size={12} color={report.rating_crowds >= 4 ? "#ef4444" : report.rating_crowds <= 2 ? "#22c55e" : colors.muted} />
+                        <Text style={[styles.ratingText, { color: report.rating_crowds >= 4 ? "#ef4444" : report.rating_crowds <= 2 ? "#16a34a" : colors.text }]}>
+                          {t("reports.crowds", "Crowds")}: {report.rating_crowds}/5
+                        </Text>
+                        <Text style={[styles.ratingLabel, { color: colors.muted }]}>
+                          ({t(`reports.crowdsLabels.${report.rating_crowds}`, "")})
+                        </Text>
+                      </View>
+                    )}
+                  </View>
+                )}
                 {report.text && <Text style={[styles.reportText, { color: colors.text }]}>{report.text}</Text>}
                 {report.photos?.length > 0 && (
                   <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginTop: Spacing.sm }}>
@@ -562,30 +601,60 @@ export default function CragDetailScreen() {
                     t={t}
                   />
                   {profileId && report.author_id === profileId && (
-                    <TouchableOpacity
-                      style={styles.editButton}
-                      onPress={() => {
-                        router.push({
-                          pathname: "/report",
-                          params: {
-                            cragId: crag!.id,
-                            cragName: crag!.name,
-                            reportId: report.id,
-                            editCategory: report.category,
-                            editText: report.text || "",
-                            editRatingDry: report.rating_dry?.toString() || "0",
-                            editRatingWind: report.rating_wind?.toString() || "0",
-                            editRatingCrowds: report.rating_crowds?.toString() || "0",
-                            editPhotos: JSON.stringify(report.photos || []),
-                            editLostFoundType: report.lost_found_type || "",
-                          },
-                        });
-                      }}
-                      activeOpacity={0.7}
-                    >
-                      <Ionicons name="pencil-outline" size={14} color={colors.primary} />
-                      <Text style={[styles.metaText, { color: colors.primary }]}>{t("common.edit", "Edit")}</Text>
-                    </TouchableOpacity>
+                    <View style={styles.authorActions}>
+                      <TouchableOpacity
+                        style={styles.editButton}
+                        onPress={() => {
+                          router.push({
+                            pathname: "/report",
+                            params: {
+                              cragId: crag!.id,
+                              cragName: crag!.name,
+                              reportId: report.id,
+                              editCategory: report.category,
+                              editText: report.text || "",
+                              editRatingDry: report.rating_dry?.toString() || "0",
+                              editRatingWind: report.rating_wind?.toString() || "0",
+                              editRatingCrowds: report.rating_crowds?.toString() || "0",
+                              editPhotos: JSON.stringify(report.photos || []),
+                              editLostFoundType: report.lost_found_type || "",
+                            },
+                          });
+                        }}
+                        activeOpacity={0.7}
+                      >
+                        <Ionicons name="pencil-outline" size={14} color={colors.primary} />
+                        <Text style={[styles.metaText, { color: colors.primary }]}>{t("common.edit", "Edit")}</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={styles.editButton}
+                        onPress={() => {
+                          Alert.alert(
+                            t("reports.deleteConfirmTitle", "Delete Report"),
+                            t("reports.deleteConfirmMessage", "Are you sure you want to delete this report? This cannot be undone."),
+                            [
+                              { text: t("common.cancel", "Cancel"), style: "cancel" },
+                              {
+                                text: t("reports.delete", "Delete"),
+                                style: "destructive",
+                                onPress: async () => {
+                                  try {
+                                    await apiDeleteReport(report.id, profileId, syncKeyHash!);
+                                    setReports(prev => prev.filter(r => r.id !== report.id));
+                                  } catch {
+                                    Alert.alert(t("common.error", "Error"), t("reports.deleteFailed", "Failed to delete report"));
+                                  }
+                                },
+                              },
+                            ]
+                          );
+                        }}
+                        activeOpacity={0.7}
+                      >
+                        <Ionicons name="trash-outline" size={14} color="#ef4444" />
+                        <Text style={[styles.metaText, { color: "#ef4444" }]}>{t("reports.delete", "Delete")}</Text>
+                      </TouchableOpacity>
+                    </View>
                   )}
                 </View>
               </View>
@@ -1256,12 +1325,26 @@ const styles = StyleSheet.create({
     marginTop: Spacing.xs,
   },
 
+  ratingsRow: { flexDirection: "row", flexWrap: "wrap", gap: Spacing.xs },
+  ratingBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    paddingHorizontal: Spacing.sm,
+    paddingVertical: 4,
+    borderRadius: BorderRadius.full,
+    borderWidth: 1,
+  },
+  ratingText: { fontSize: FontSize.xs, fontWeight: "500" },
+  ratingLabel: { fontSize: FontSize.xs },
+
   reportItem: { borderTopWidth: 1, paddingTop: Spacing.md, paddingBottom: Spacing.sm, gap: Spacing.sm },
   reportHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
   reportHeaderLeft: { flexDirection: "row", alignItems: "center", gap: Spacing.sm },
   reportText: { fontSize: FontSize.sm, lineHeight: 20 },
   reportPhoto: { width: 250, height: 180, borderRadius: BorderRadius.md, marginRight: Spacing.sm },
   reportActions: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
+  authorActions: { flexDirection: "row", alignItems: "center", gap: Spacing.md },
   editButton: { flexDirection: "row", alignItems: "center", gap: 4 },
   reportFooter: { flexDirection: "row", alignItems: "center", gap: 4 },
   metaText: { fontSize: FontSize.xs },

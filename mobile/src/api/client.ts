@@ -157,6 +157,25 @@ export async function createReport(
 }
 
 /**
+ * Delete a report (author only)
+ * DELETE /api/reports/[id]?userProfileId=...
+ */
+export async function deleteReport(
+  reportId: string,
+  userProfileId: string,
+  syncKeyHash: string
+): Promise<void> {
+  const params = new URLSearchParams({ userProfileId });
+  await apiFetch(
+    `/api/reports/${encodeURIComponent(reportId)}?${params.toString()}`,
+    {
+      method: "DELETE",
+      syncKeyHash,
+    }
+  );
+}
+
+/**
  * Confirmations API (report voting)
  * POST /api/confirmations with { reportId, userKeyHash }
  */
