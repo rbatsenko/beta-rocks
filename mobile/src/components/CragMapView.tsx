@@ -42,6 +42,11 @@ export function CragMapView({ latitude, longitude, locationName }: CragMapViewPr
             initialRegion={region}
             toolbarEnabled={false}
             mapType="standard"
+            liteMode={Platform.OS === "android"}
+            scrollEnabled={false}
+            zoomEnabled={false}
+            rotateEnabled={false}
+            pitchEnabled={false}
           >
             <Marker
               coordinate={{ latitude, longitude }}
