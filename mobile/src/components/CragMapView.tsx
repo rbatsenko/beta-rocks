@@ -35,7 +35,11 @@ export function CragMapView({ latitude, longitude, locationName }: CragMapViewPr
   return (
     <>
       <View style={[styles.container, { borderColor: colors.cardBorder, backgroundColor: colors.card }]}>
-        <View style={styles.mapWrapper}>
+        <View
+          style={styles.mapWrapper}
+          onStartShouldSetResponder={() => true}
+          onMoveShouldSetResponder={() => true}
+        >
           <MapView
             ref={mapRef}
             style={styles.map}

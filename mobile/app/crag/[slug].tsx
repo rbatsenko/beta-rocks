@@ -548,7 +548,7 @@ export default function CragDetailScreen() {
                         <Text style={[styles.ratingText, { color: report.rating_dry <= 2 ? "#ef4444" : report.rating_dry >= 4 ? "#16a34a" : colors.text }]}>
                           {t("reports.dryness", "Dryness")}: {report.rating_dry}/5
                         </Text>
-                        <Text style={[styles.ratingLabel, { color: colors.muted }]}>
+                        <Text style={[styles.ratingLabelSmall, { color: colors.muted }]}>
                           ({t(`reports.drynessLabels.${report.rating_dry}`, "")})
                         </Text>
                       </View>
@@ -559,7 +559,7 @@ export default function CragDetailScreen() {
                         <Text style={[styles.ratingText, { color: report.rating_wind >= 4 ? "#ef4444" : report.rating_wind <= 2 ? "#16a34a" : colors.text }]}>
                           {t("reports.wind", "Wind")}: {report.rating_wind}/5
                         </Text>
-                        <Text style={[styles.ratingLabel, { color: colors.muted }]}>
+                        <Text style={[styles.ratingLabelSmall, { color: colors.muted }]}>
                           ({t(`reports.windLabels.${report.rating_wind}`, "")})
                         </Text>
                       </View>
@@ -570,7 +570,7 @@ export default function CragDetailScreen() {
                         <Text style={[styles.ratingText, { color: report.rating_crowds >= 4 ? "#ef4444" : report.rating_crowds <= 2 ? "#16a34a" : colors.text }]}>
                           {t("reports.crowds", "Crowds")}: {report.rating_crowds}/5
                         </Text>
-                        <Text style={[styles.ratingLabel, { color: colors.muted }]}>
+                        <Text style={[styles.ratingLabelSmall, { color: colors.muted }]}>
                           ({t(`reports.crowdsLabels.${report.rating_crowds}`, "")})
                         </Text>
                       </View>
@@ -1336,7 +1336,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   ratingText: { fontSize: FontSize.xs, fontWeight: "500" },
-  ratingLabel: { fontSize: FontSize.xs },
+  ratingLabelSmall: { fontSize: FontSize.xs },
 
   reportItem: { borderTopWidth: 1, paddingTop: Spacing.md, paddingBottom: Spacing.sm, gap: Spacing.sm },
   reportHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
