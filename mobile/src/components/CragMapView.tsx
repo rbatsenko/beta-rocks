@@ -54,7 +54,7 @@ export function CragMapView({ latitude, longitude, locationName }: CragMapViewPr
             onPress={() => setFullscreen(true)}
             hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
           >
-            <Ionicons name="expand-outline" size={20} color={colors.foreground} />
+            <Ionicons name="expand-outline" size={20} color={colors.text} />
           </TouchableOpacity>
         </View>
         <View style={[styles.footer, { borderTopColor: colors.cardBorder }]}>
@@ -64,7 +64,12 @@ export function CragMapView({ latitude, longitude, locationName }: CragMapViewPr
         </View>
       </View>
 
-      <Modal visible={fullscreen} animationType="slide" statusBarTranslucent>
+      <Modal
+        visible={fullscreen}
+        animationType="slide"
+        statusBarTranslucent
+        onRequestClose={() => setFullscreen(false)}
+      >
         <View style={styles.fullscreenContainer}>
           <MapView
             style={styles.fullscreenMap}
@@ -85,10 +90,10 @@ export function CragMapView({ latitude, longitude, locationName }: CragMapViewPr
             onPress={() => setFullscreen(false)}
             hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
           >
-            <Ionicons name="close" size={24} color={colors.foreground} />
+            <Ionicons name="close" size={24} color={colors.text} />
           </TouchableOpacity>
           <View style={[styles.fullscreenFooter, { bottom: insets.bottom + Spacing.sm, backgroundColor: colors.card }]}>
-            <Text style={[styles.fullscreenLabel, { color: colors.foreground }]}>{locationName}</Text>
+            <Text style={[styles.fullscreenLabel, { color: colors.text }]}>{locationName}</Text>
             <Text style={[styles.coords, { color: colors.muted }]}>
               {latitude.toFixed(6)}, {longitude.toFixed(6)}
             </Text>
