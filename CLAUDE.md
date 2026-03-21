@@ -18,7 +18,7 @@ This is a **monorepo** with two apps:
 - Tailwind CSS 4 + shadcn/ui components
 - Supabase (PostgreSQL database with RLS)
 - Vercel AI SDK (streaming chat with tools)
-- i18next for internationalization (17 locales)
+- i18next for internationalization (30 locales)
 - OpenBeta GraphQL API (climbing database)
 - Open-Meteo API (weather data)
 - Windy API (webcams)
@@ -34,7 +34,7 @@ This is a **monorepo** with two apps:
 - expo-secure-store (encrypted sync key storage)
 - expo-notifications (push notifications)
 - expo-image-picker (photo uploads)
-- i18next (27 locales, shared translations with web)
+- i18next (30 locales, shared translations with web)
 - Same Supabase backend as web
 
 ## Development Commands
@@ -279,12 +279,13 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
 **Feature**: Live webcam feeds near crags via Windy API
 
 - Webcam preview images with links to Windy
-- Displayed on crag detail pages when available
+- Displayed on web and mobile crag detail pages when available
 
 **Key Files**:
 
 - `src/components/crag/WebcamsSection.tsx`: Webcam display (web)
-- `src/app/api/webcams/route.ts`: Webcams API endpoint
+- `src/app/api/webcams/route.ts`: Webcams API endpoint (web)
+- `mobile/app/crag/[slug].tsx`: Crag detail screen with webcams (mobile)
 
 ### Crag Submission System
 
@@ -326,10 +327,11 @@ Components are organized into subdirectories under `src/components/`:
 mobile/
 ├── app/                          # Expo Router routes (file-based)
 │   ├── _layout.tsx               # Root layout with providers
-│   ├── (tabs)/                   # Tab navigation (5 bottom tabs)
+│   ├── (tabs)/                   # Tab navigation (6 bottom tabs)
 │   │   ├── index.tsx             # Home screen (favorites, search hint)
 │   │   ├── search.tsx            # Search crags/sectors
 │   │   ├── feed.tsx              # Live community feed
+│   │   ├── notifications.tsx     # Notifications inbox & settings
 │   │   ├── favorites.tsx         # Bookmarked crags grid
 │   │   └── settings.tsx          # Profile, theme, language, units, sync
 │   ├── crag/[slug].tsx           # Crag detail page
@@ -355,7 +357,7 @@ mobile/
 
 - Mobile has **no AI chat** — uses direct API calls for conditions
 - Mobile uses **tab navigation** (Home, Search, Feed, Favorites, Settings)
-- Mobile has **push notifications** (web does not)
+- Mobile has **push notifications**; web has **in-app notifications only (no push)**
 - Mobile has **camera/gallery photo uploads** for reports
 - Mobile uses **MMKV** for local storage (web uses LocalStorage)
 - Mobile sends `X-Client-Platform: mobile` header in API requests
@@ -411,8 +413,8 @@ mobile/
 
 ### Internationalization (i18n)
 
-- 17 supported locales on web defined in `src/lib/i18n/config.ts`
-- 27 locales on mobile in `mobile/src/i18n/locales/`
+- 30 supported locales on both web and mobile (same set)
+- Web config in `src/lib/i18n/config.ts`, mobile in `mobile/src/i18n/locales/`
 - Translation files in `public/locales/{locale}/common.json`
 - Client-side: `useClientTranslation` hook for React components
 - Server-side: `resolveLocale()` for API routes
