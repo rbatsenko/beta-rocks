@@ -538,6 +538,45 @@ export default function CragDetailScreen() {
                   </View>
                   <Text style={[styles.metaText, { color: colors.muted }]}>{fmtRelative(report.created_at)}</Text>
                 </View>
+                {/* Condition ratings - only for conditions category */}
+                {report.category === "conditions" &&
+                  (report.rating_dry != null || report.rating_wind != null || report.rating_crowds != null) && (
+                  <View style={styles.ratingsRow}>
+                    {report.rating_dry != null && (
+                      <View style={[styles.ratingBadge, { borderColor: report.rating_dry <= 2 ? "#fca5a5" : colors.border }]}>
+                        <Ionicons name="water-outline" size={12} color={report.rating_dry <= 2 ? "#ef4444" : report.rating_dry >= 4 ? "#22c55e" : colors.muted} />
+                        <Text style={[styles.ratingText, { color: report.rating_dry <= 2 ? "#ef4444" : report.rating_dry >= 4 ? "#16a34a" : colors.text }]}>
+                          {t("reports.dryness", "Dryness")}: {report.rating_dry}/5
+                        </Text>
+                        <Text style={[styles.ratingLabel, { color: colors.muted }]}>
+                          ({t(`reports.drynessLabels.${report.rating_dry}`, "")})
+                        </Text>
+                      </View>
+                    )}
+                    {report.rating_wind != null && (
+                      <View style={[styles.ratingBadge, { borderColor: colors.border }]}>
+                        <Ionicons name="flag-outline" size={12} color={colors.muted} />
+                        <Text style={[styles.ratingText, { color: colors.text }]}>
+                          {t("reports.wind", "Wind")}: {report.rating_wind}/5
+                        </Text>
+                        <Text style={[styles.ratingLabel, { color: colors.muted }]}>
+                          ({t(`reports.windLabels.${report.rating_wind}`, "")})
+                        </Text>
+                      </View>
+                    )}
+                    {report.rating_crowds != null && (
+                      <View style={[styles.ratingBadge, { borderColor: report.rating_crowds >= 4 ? "#fca5a5" : colors.border }]}>
+                        <Ionicons name="people-outline" size={12} color={report.rating_crowds >= 4 ? "#ef4444" : report.rating_crowds <= 2 ? "#22c55e" : colors.muted} />
+                        <Text style={[styles.ratingText, { color: report.rating_crowds >= 4 ? "#ef4444" : report.rating_crowds <= 2 ? "#16a34a" : colors.text }]}>
+                          {t("reports.crowds", "Crowds")}: {report.rating_crowds}/5
+                        </Text>
+                        <Text style={[styles.ratingLabel, { color: colors.muted }]}>
+                          ({t(`reports.crowdsLabels.${report.rating_crowds}`, "")})
+                        </Text>
+                      </View>
+                    )}
+                  </View>
+                )}
                 {report.text && <Text style={[styles.reportText, { color: colors.text }]}>{report.text}</Text>}
                 {report.photos?.length > 0 && (
                   <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginTop: Spacing.sm }}>
@@ -1255,6 +1294,19 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: Spacing.xs,
   },
+
+  ratingsRow: { flexDirection: "row", flexWrap: "wrap", gap: Spacing.xs },
+  ratingBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    paddingHorizontal: Spacing.sm,
+    paddingVertical: 4,
+    borderRadius: BorderRadius.full,
+    borderWidth: 1,
+  },
+  ratingText: { fontSize: FontSize.xs, fontWeight: "500" },
+  ratingLabel: { fontSize: FontSize.xs },
 
   reportItem: { borderTopWidth: 1, paddingTop: Spacing.md, paddingBottom: Spacing.sm, gap: Spacing.sm },
   reportHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
