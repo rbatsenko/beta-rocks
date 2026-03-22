@@ -311,7 +311,6 @@ const styles = StyleSheet.create({
   },
   locationText: {
     fontSize: FontSize.xs,
-    marginLeft: 18,
   },
   reportText: {
     fontSize: FontSize.sm,
