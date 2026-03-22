@@ -199,14 +199,13 @@ export default function ReportScreen() {
       const random = Math.random().toString(36).substring(2, 8);
       const storagePath = `reports/${profileId}-${Date.now()}-${random}.jpg`;
 
-      // Read the file and upload
+      // Read the file and upload as blob (ArrayBuffer breaks on React Native)
       const response = await fetch(uri);
       const blob = await response.blob();
-      const arrayBuffer = await new Response(blob).arrayBuffer();
 
       const { error } = await supabase.storage
         .from("report-photos")
-        .upload(storagePath, arrayBuffer, {
+        .upload(storagePath, blob, {
           contentType: "image/jpeg",
           upsert: false,
         });
