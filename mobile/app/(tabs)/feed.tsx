@@ -3,7 +3,7 @@
  * Matches web's /feed page
  */
 
-import { useState, useCallback } from "react";
+import { useMemo } from "react";
 import {
   View,
   Text,
@@ -18,9 +18,9 @@ import {
   Dimensions,
 } from "react-native";
 import { useRouter } from "expo-router";
-import { useFocusEffect } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-import { API_URL, SUPABASE_URL, CATEGORY_COLORS } from "@/constants/config";
+import { useFeedQuery } from "@/hooks/queries";
+import { SUPABASE_URL, CATEGORY_COLORS } from "@/constants/config";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useTranslation } from "react-i18next";
@@ -61,52 +61,28 @@ export default function FeedScreen() {
   const router = useRouter();
   const { t } = useTranslation("common");
 
-  const [reports, setReports] = useState<FeedReport[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
-  const [nextCursor, setNextCursor] = useState<string | null>(null);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const {
+    data,
+    isLoading,
+    isFetchingNextPage,
+    isRefetching,
+    hasNextPage,
+    fetchNextPage,
+    refetch,
+  } = useFeedQuery();
 
-  useFocusEffect(
-    useCallback(() => {
-      loadReports();
-    }, [])
+  const reports = useMemo(
+    () => (data?.pages.flatMap((p) => p.reports) as unknown as FeedReport[]) ?? [],
+    [data]
   );
 
-  async function loadReports(cursor?: string) {
-    try {
-      const url = cursor
-        ? `${API_URL}/api/reports/feed?cursor=${cursor}`
-        : `${API_URL}/api/reports/feed`;
-      const res = await fetch(url, {
-        headers: { "X-Client-Platform": "mobile" },
-      });
-      const data = await res.json();
-
-      if (cursor) {
-        setReports((prev) => [...prev, ...(data.reports || [])]);
-      } else {
-        setReports(data.reports || []);
-      }
-      setNextCursor(data.nextCursor || null);
-    } catch (err) {
-      console.warn("[Feed] Failed to load:", err);
-    } finally {
-      setIsLoading(false);
-      setRefreshing(false);
-      setIsLoadingMore(false);
-    }
-  }
-
   function onRefresh() {
-    setRefreshing(true);
-    loadReports();
+    refetch();
   }
 
   function onEndReached() {
-    if (nextCursor && !isLoadingMore) {
-      setIsLoadingMore(true);
-      loadReports(nextCursor);
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
     }
   }
 
@@ -214,12 +190,12 @@ export default function FeedScreen() {
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.list}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          <RefreshControl refreshing={isRefetching} onRefresh={onRefresh} />
         }
         onEndReached={onEndReached}
         onEndReachedThreshold={0.3}
         ListFooterComponent={
-          isLoadingMore ? (
+          isFetchingNextPage ? (
             <ActivityIndicator
               style={styles.loadingMore}
               size="small"

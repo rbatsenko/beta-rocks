@@ -1,9 +1,10 @@
 /**
  * Hook for searching climbing locations
+ * Uses React Query for caching + manual debounce for input
  */
 
 import { useState, useCallback, useRef, useEffect } from "react";
-import { searchLocations } from "../api/client";
+import { useSearchQuery } from "./queries";
 import type { SearchResult } from "../types/api";
 
 interface UseSearchReturn {
@@ -15,58 +16,39 @@ interface UseSearchReturn {
 }
 
 export function useSearch(): UseSearchReturn {
-  const [results, setResults] = useState<SearchResult[]>([]);
-  const [isSearching, setIsSearching] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [debouncedQuery, setDebouncedQuery] = useState("");
   const debounceRef = useRef<ReturnType<typeof setTimeout>>(undefined);
-  const mountedRef = useRef(true);
+
+  const { data, isFetching, error } = useSearchQuery(debouncedQuery);
 
   useEffect(() => {
     return () => {
-      mountedRef.current = false;
-      if (debounceRef.current) {
-        clearTimeout(debounceRef.current);
-      }
+      if (debounceRef.current) clearTimeout(debounceRef.current);
     };
   }, []);
 
   const search = useCallback((query: string) => {
-    if (debounceRef.current) {
-      clearTimeout(debounceRef.current);
-    }
+    if (debounceRef.current) clearTimeout(debounceRef.current);
 
     if (!query.trim() || query.length < 2) {
-      setResults([]);
+      setDebouncedQuery("");
       return;
     }
 
-    debounceRef.current = setTimeout(async () => {
-      if (!mountedRef.current) return;
-      setIsSearching(true);
-      setError(null);
-      try {
-        const data = await searchLocations(query);
-        if (mountedRef.current) {
-          setResults(data);
-        }
-      } catch (err) {
-        if (mountedRef.current) {
-          setError(
-            err instanceof Error ? err.message : "Search failed"
-          );
-        }
-      } finally {
-        if (mountedRef.current) {
-          setIsSearching(false);
-        }
-      }
+    debounceRef.current = setTimeout(() => {
+      setDebouncedQuery(query);
     }, 300);
   }, []);
 
   const clearResults = useCallback(() => {
-    setResults([]);
-    setError(null);
+    setDebouncedQuery("");
   }, []);
 
-  return { results, isSearching, error, search, clearResults };
+  return {
+    results: data ?? [],
+    isSearching: isFetching,
+    error: error ? (error instanceof Error ? error.message : "Search failed") : null,
+    search,
+    clearResults,
+  };
 }
