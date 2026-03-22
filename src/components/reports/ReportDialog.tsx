@@ -41,6 +41,7 @@ import { getDateFnsLocale, getLocalizedDateFormat } from "@/lib/i18n/date-locale
 import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal";
 import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog";
 import { useToast } from "@/hooks/use-toast";
+import { getSupabaseClient } from "@/integrations/supabase/client";
 
 type ReportCategory =
   | "conditions"
@@ -72,6 +73,7 @@ interface Report {
   expires_at: string | null;
   lost_found_type: string | null;
   author_id: string | null;
+  photos?: string[] | null;
 }
 
 interface ReportDialogProps {
@@ -109,6 +111,7 @@ export function ReportDialog({
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showProfileCreated, setShowProfileCreated] = useState(false);
   const [newSyncKey, setNewSyncKey] = useState<string>("");
+  const [existingPhotos, setExistingPhotos] = useState<string[]>([]); // paths from DB
   const [selectedPhotos, setSelectedPhotos] = useState<File[]>([]);
   const [photoPreviews, setPhotoPreviews] = useState<string[]>([]);
   const [isUploadingPhotos, setIsUploadingPhotos] = useState(false);
@@ -129,6 +132,9 @@ export function ReportDialog({
         setLostFoundType((editReport.lost_found_type as "lost" | "found") || "");
         setObservedAt(new Date(editReport.observed_at));
         setExpiresAt(editReport.expires_at ? new Date(editReport.expires_at) : undefined);
+        setExistingPhotos(editReport.photos || []);
+        setSelectedPhotos([]);
+        setPhotoPreviews([]);
       } else {
         // Reset form for new report
         setCategory("conditions");
@@ -139,6 +145,7 @@ export function ReportDialog({
         setLostFoundType("");
         setObservedAt(new Date());
         setExpiresAt(undefined);
+        setExistingPhotos([]);
         setSelectedPhotos([]);
         setPhotoPreviews([]);
       }
@@ -192,7 +199,8 @@ export function ReportDialog({
     const files = e.target.files;
     if (!files || files.length === 0) return;
 
-    const newFiles = Array.from(files).slice(0, 3 - selectedPhotos.length); // Max 3 photos
+    const totalCurrent = existingPhotos.length + selectedPhotos.length;
+    const newFiles = Array.from(files).slice(0, 3 - totalCurrent); // Max 3 photos total
     setSelectedPhotos((prev) => [...prev, ...newFiles]);
 
     // Create previews
@@ -208,6 +216,15 @@ export function ReportDialog({
   const removePhoto = (index: number) => {
     setSelectedPhotos((prev) => prev.filter((_, i) => i !== index));
     setPhotoPreviews((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const removeExistingPhoto = (index: number) => {
+    setExistingPhotos((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const getPhotoUrl = (path: string) => {
+    const supabase = getSupabaseClient();
+    return supabase.storage.from("report-photos").getPublicUrl(path).data.publicUrl;
   };
 
   const uploadPhotos = async (profileId: string): Promise<string[]> => {
@@ -291,20 +308,22 @@ export function ReportDialog({
       const syncKeyHash = await hashSyncKeyAsync(localProfile.syncKey);
       const dbProfile = await fetchOrCreateUserProfile(syncKeyHash);
 
-      // Upload photos if any
-      let photoPaths: string[] = [];
+      // Upload new photos if any
+      let newPhotoPaths: string[] = [];
       if (selectedPhotos.length > 0) {
         try {
-          photoPaths = await uploadPhotos(dbProfile.id);
+          newPhotoPaths = await uploadPhotos(dbProfile.id);
         } catch (error) {
           toast({
             title: t("reports.photoUploadFailed"),
             description: "Your report will be saved without photos.",
             variant: "destructive",
           });
-          // Continue without photos
+          // Continue without new photos
         }
       }
+      // Combine existing photos (that weren't removed) with newly uploaded ones
+      const photoPaths = [...existingPhotos, ...newPhotoPaths];
 
       if (isEditMode && editReport) {
         // Verify ownership before attempting update
@@ -675,11 +694,29 @@ export function ReportDialog({
             {/* Photo Upload */}
             <div className="space-y-2">
               <Label className="text-sm font-medium">
-                {t("reports.photos")} ({selectedPhotos.length}/3)
+                {t("reports.photos")} ({existingPhotos.length + selectedPhotos.length}/3)
               </Label>
               <div className="flex flex-wrap gap-3">
+                {/* Existing photos (from previous save) */}
+                {existingPhotos.map((path, index) => (
+                  <div key={`existing-${index}`} className="relative group">
+                    <img
+                      src={getPhotoUrl(path)}
+                      alt={`Photo ${index + 1}`}
+                      className="h-24 w-24 object-cover rounded-lg border-2 border-border"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeExistingPhoto(index)}
+                      className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  </div>
+                ))}
+                {/* Newly selected photos */}
                 {photoPreviews.map((preview, index) => (
-                  <div key={index} className="relative group">
+                  <div key={`new-${index}`} className="relative group">
                     <img
                       src={preview}
                       alt={`Preview ${index + 1}`}
@@ -694,7 +731,7 @@ export function ReportDialog({
                     </button>
                   </div>
                 ))}
-                {selectedPhotos.length < 3 && (
+                {existingPhotos.length + selectedPhotos.length < 3 && (
                   <label className="h-24 w-24 flex items-center justify-center border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-orange-500 hover:bg-orange-50 dark:hover:bg-orange-900/10 transition-colors">
                     <input
                       type="file"

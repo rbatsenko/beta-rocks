@@ -14,6 +14,7 @@ import {
   Image,
   Alert,
   Platform,
+  RefreshControl,
 } from "react-native";
 import { useLocalSearchParams, useRouter, useNavigation } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -151,6 +152,7 @@ export default function CragDetailScreen() {
   const [sectors, setSectors] = useState<SectorData[]>([]);
   const [webcams, setWebcams] = useState<Webcam[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"conditions" | "hourly" | "forecast">("conditions");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
@@ -287,6 +289,15 @@ export default function CragDetailScreen() {
     }
   }
 
+  async function handleRefresh() {
+    setIsRefreshing(true);
+    try {
+      await loadCragData();
+    } finally {
+      setIsRefreshing(false);
+    }
+  }
+
   async function loadCragData() {
     setIsLoading(true);
     setError(null);
@@ -369,6 +380,9 @@ export default function CragDetailScreen() {
     <ScrollView
       style={styles.scrollView}
       contentContainerStyle={styles.content}
+      refreshControl={
+        <RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} tintColor={colors.text} />
+      }
     >
       {/* Header */}
       <View style={styles.header}>
@@ -543,7 +557,7 @@ export default function CragDetailScreen() {
                   (report.rating_dry != null || report.rating_wind != null || report.rating_crowds != null) && (
                   <View style={styles.ratingsRow}>
                     {report.rating_dry != null && (
-                      <View style={[styles.ratingBadge, { borderColor: report.rating_dry <= 2 ? "#fca5a5" : colors.border }]}>
+                      <View style={[styles.ratingBadge, { borderColor: report.rating_dry <= 2 ? "#b91c1c" : colors.border }]}>
                         <Ionicons name="water-outline" size={12} color={report.rating_dry <= 2 ? "#ef4444" : report.rating_dry >= 4 ? "#22c55e" : colors.muted} />
                         <Text style={[styles.ratingText, { color: report.rating_dry <= 2 ? "#ef4444" : report.rating_dry >= 4 ? "#16a34a" : colors.text }]}>
                           {t("reports.dryness", "Dryness")}: {report.rating_dry}/5
@@ -554,7 +568,7 @@ export default function CragDetailScreen() {
                       </View>
                     )}
                     {report.rating_wind != null && (
-                      <View style={[styles.ratingBadge, { borderColor: report.rating_wind >= 4 ? "#fca5a5" : colors.border }]}>
+                      <View style={[styles.ratingBadge, { borderColor: report.rating_wind >= 4 ? "#b91c1c" : colors.border }]}>
                         <Ionicons name="flag-outline" size={12} color={report.rating_wind >= 4 ? "#ef4444" : report.rating_wind <= 2 ? "#22c55e" : colors.muted} />
                         <Text style={[styles.ratingText, { color: report.rating_wind >= 4 ? "#ef4444" : report.rating_wind <= 2 ? "#16a34a" : colors.text }]}>
                           {t("reports.wind", "Wind")}: {report.rating_wind}/5
@@ -565,7 +579,7 @@ export default function CragDetailScreen() {
                       </View>
                     )}
                     {report.rating_crowds != null && (
-                      <View style={[styles.ratingBadge, { borderColor: report.rating_crowds >= 4 ? "#fca5a5" : colors.border }]}>
+                      <View style={[styles.ratingBadge, { borderColor: report.rating_crowds >= 4 ? "#b91c1c" : colors.border }]}>
                         <Ionicons name="people-outline" size={12} color={report.rating_crowds >= 4 ? "#ef4444" : report.rating_crowds <= 2 ? "#22c55e" : colors.muted} />
                         <Text style={[styles.ratingText, { color: report.rating_crowds >= 4 ? "#ef4444" : report.rating_crowds <= 2 ? "#16a34a" : colors.text }]}>
                           {t("reports.crowds", "Crowds")}: {report.rating_crowds}/5
