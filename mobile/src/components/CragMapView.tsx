@@ -35,17 +35,18 @@ export function CragMapView({ latitude, longitude, locationName }: CragMapViewPr
   return (
     <>
       <View style={[styles.container, { borderColor: colors.cardBorder, backgroundColor: colors.card }]}>
-        <View
-          style={styles.mapWrapper}
-          onStartShouldSetResponder={() => true}
-          onMoveShouldSetResponder={() => true}
-        >
+        <View style={styles.mapWrapper}>
           <MapView
             ref={mapRef}
             style={styles.map}
             initialRegion={region}
             toolbarEnabled={false}
             mapType="standard"
+            scrollEnabled={false}
+            zoomEnabled={false}
+            rotateEnabled={false}
+            pitchEnabled={false}
+            liteMode={Platform.OS === "android"}
           >
             <Marker
               coordinate={{ latitude, longitude }}
@@ -112,10 +113,20 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: BorderRadius.lg,
     borderWidth: 1,
-    overflow: "hidden",
+    ...Platform.select({
+      ios: { overflow: "hidden" as const },
+      android: {},
+    }),
   },
   mapWrapper: {
     position: "relative",
+    ...Platform.select({
+      android: {
+        borderTopLeftRadius: BorderRadius.lg,
+        borderTopRightRadius: BorderRadius.lg,
+        overflow: "hidden" as const,
+      },
+    }),
   },
   map: {
     height: 200,
