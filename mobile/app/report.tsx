@@ -197,16 +197,21 @@ export default function ReportScreen() {
     const paths: string[] = [];
     for (const uri of newPhotoUris) {
       const random = Math.random().toString(36).substring(2, 8);
-      const storagePath = `reports/${profileId}-${Date.now()}-${random}.jpg`;
+      const fileName = `${profileId}-${Date.now()}-${random}.jpg`;
+      const storagePath = `reports/${fileName}`;
 
-      // Read the file and upload as blob (ArrayBuffer breaks on React Native)
-      const response = await fetch(uri);
-      const blob = await response.blob();
+      // Use FormData for reliable React Native file uploads
+      const formData = new FormData();
+      formData.append("", {
+        uri: Platform.OS === "ios" ? uri.replace("file://", "") : uri,
+        name: fileName,
+        type: "image/jpeg",
+      } as unknown as Blob);
 
       const { error } = await supabase.storage
         .from("report-photos")
-        .upload(storagePath, blob, {
-          contentType: "image/jpeg",
+        .upload(storagePath, formData, {
+          contentType: "multipart/form-data",
           upsert: false,
         });
 

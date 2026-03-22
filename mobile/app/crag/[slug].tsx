@@ -20,6 +20,7 @@ import { useLocalSearchParams, useRouter, useNavigation } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { getCragBySlug, getReportsByCrag, confirmReport as apiConfirmReport, deleteReport as apiDeleteReport } from "@/api/client";
 import { useFocusEffect } from "@react-navigation/native";
+import { useQuery } from "@tanstack/react-query";
 import { API_URL, SUPABASE_URL } from "@/constants/config";
 import { useUserProfile } from "@/hooks/useUserProfile";
 import { useConditionsTranslations, getWeatherDescription } from "@/hooks/useConditionsTranslations";
@@ -34,7 +35,7 @@ import {
   formatPrecipitation,
   getDefaultUnits,
 } from "@/lib/units";
-import type { CragDetailResponse, CragData, SectorData, Report } from "@/types/api";
+import type { Report } from "@/types/api";
 import { FRICTION_RATINGS, RATING_COLORS, CATEGORY_COLORS } from "@/constants/config";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -146,14 +147,8 @@ export default function CragDetailScreen() {
   const router = useRouter();
   const navigation = useNavigation();
 
-  const [crag, setCrag] = useState<CragData | null>(null);
-  const [conditions, setConditions] = useState<CragDetailResponse["conditions"] | null>(null);
-  const [reports, setReports] = useState<Report[]>([]);
-  const [sectors, setSectors] = useState<SectorData[]>([]);
   const [webcams, setWebcams] = useState<Webcam[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"conditions" | "hourly" | "forecast">("conditions");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const { t } = useTranslation("common");
@@ -166,6 +161,35 @@ export default function CragDetailScreen() {
   const { hasProfile, profileId, syncKeyHash, profile } = useUserProfile();
   const { translateWeather } = useConditionsTranslations(t);
   const units = profile?.units || getDefaultUnits("en");
+
+  // React Query for crag data — cached across navigations
+  const {
+    data: cragData,
+    isLoading: isCragLoading,
+    error: cragError,
+    refetch: refetchCrag,
+  } = useQuery({
+    queryKey: ["crag", slug],
+    queryFn: () => getCragBySlug(slug!),
+    enabled: !!slug,
+    staleTime: 60_000, // 1 minute before considered stale
+  });
+
+  const crag = cragData?.crag ?? null;
+  const conditions = cragData?.conditions ?? null;
+  const [reports, setReports] = useState<Report[]>([]);
+  const sectors = cragData?.sectors ?? [];
+
+  // Sync reports from query data
+  useEffect(() => {
+    if (cragData?.reports) {
+      setReports(cragData.reports);
+    }
+  }, [cragData?.reports]);
+
+  // Show loader only on first load (no cached data)
+  const isLoading = isCragLoading && !cragData;
+  const error = cragError ? (cragError instanceof Error ? cragError.message : "Failed to load crag") : null;
 
   // Report category filter
   const categoryCounts = useMemo(() => {
@@ -202,15 +226,13 @@ export default function CragDetailScreen() {
     setLightboxVisible(true);
   }
 
-  useEffect(() => { if (slug) loadCragData(); }, [slug]);
-
   // Refetch reports when screen regains focus (e.g. after submitting a report)
   const hasMounted = useRef(false);
   useFocusEffect(
     useCallback(() => {
       if (!hasMounted.current) {
         hasMounted.current = true;
-        return; // skip initial focus — loadCragData already fetched reports
+        return; // skip initial focus — query already fetched reports
       }
       if (crag?.id) {
         getReportsByCrag(crag.id).then(setReports).catch(() => {});
@@ -289,53 +311,43 @@ export default function CragDetailScreen() {
     }
   }
 
+  // Fetch supplementary data when crag data loads
+  useEffect(() => {
+    if (!cragData) return;
+    const data = cragData;
+    if (data.crag.parent_crag_id && isSupabaseConfigured && supabase) {
+      Promise.resolve(
+        supabase.from("crags").select("name, slug").eq("id", data.crag.parent_crag_id).single()
+          .then(({ data: parent }) => { if (parent) setParentCrag(parent); })
+      ).catch(() => {});
+    }
+    if (syncKeyHash && isSupabaseConfigured && supabase && data.reports.length > 0) {
+      const reportIds = data.reports.map(r => r.id);
+      Promise.resolve(
+        supabase.from("confirmations").select("report_id")
+          .eq("user_key_hash", syncKeyHash)
+          .in("report_id", reportIds)
+          .then(({ data: confirmations }) => {
+            if (confirmations) {
+              setConfirmedReportIds(new Set(confirmations.map(c => c.report_id)));
+            }
+          })
+      ).catch(() => {});
+    }
+    if (data.crag.lat && data.crag.lon) {
+      fetch(`${API_URL}/api/webcams?lat=${data.crag.lat}&lon=${data.crag.lon}`)
+        .then(r => r.json())
+        .then(d => setWebcams(d.webcams?.slice(0, 4) || []))
+        .catch(() => {});
+    }
+  }, [cragData, syncKeyHash]);
+
   async function handleRefresh() {
     setIsRefreshing(true);
     try {
-      await loadCragData();
+      await refetchCrag();
     } finally {
       setIsRefreshing(false);
-    }
-  }
-
-  async function loadCragData() {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const data: CragDetailResponse = await getCragBySlug(slug!);
-      setCrag(data.crag);
-      setConditions(data.conditions);
-      setReports(data.reports);
-      setSectors(data.sectors);
-      if (data.crag.parent_crag_id && isSupabaseConfigured && supabase) {
-        Promise.resolve(
-          supabase.from("crags").select("name, slug").eq("id", data.crag.parent_crag_id).single()
-            .then(({ data: parent }) => { if (parent) setParentCrag(parent); })
-        ).catch(() => {});
-      }
-      if (syncKeyHash && isSupabaseConfigured && supabase && data.reports.length > 0) {
-        const reportIds = data.reports.map(r => r.id);
-        Promise.resolve(
-          supabase.from("confirmations").select("report_id")
-            .eq("user_key_hash", syncKeyHash)
-            .in("report_id", reportIds)
-            .then(({ data: confirmations }) => {
-              if (confirmations) {
-                setConfirmedReportIds(new Set(confirmations.map(c => c.report_id)));
-              }
-            })
-        ).catch(() => {});
-      }
-      if (data.crag.lat && data.crag.lon) {
-        fetch(`${API_URL}/api/webcams?lat=${data.crag.lat}&lon=${data.crag.lon}`)
-          .then(r => r.json())
-          .then(d => setWebcams(d.webcams?.slice(0, 4) || []))
-          .catch(() => {});
-      }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load crag");
-    } finally {
-      setIsLoading(false);
     }
   }
 

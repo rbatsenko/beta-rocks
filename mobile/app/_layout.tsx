@@ -7,6 +7,7 @@ import { ThemeProvider, useTheme } from "@/contexts/ThemeContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { UserProfileProvider } from "@/contexts/UserProfileContext";
 import { NotificationsProvider } from "@/contexts/NotificationsContext";
+import { QueryProvider } from "@/contexts/QueryProvider";
 import { useUserProfile } from "@/hooks/useUserProfile";
 import { usePushNotifications } from "@/hooks/usePushNotifications";
 import { Colors } from "@/constants/theme";
@@ -97,15 +98,17 @@ function RootNavigator() {
 
 export default function RootLayout() {
   return (
-    <ThemeProvider>
-      <LanguageProvider>
-        <UserProfileProvider>
-          <NotificationsProvider>
-            <PushNotificationRegistrar />
-            <RootNavigator />
-          </NotificationsProvider>
-        </UserProfileProvider>
-      </LanguageProvider>
-    </ThemeProvider>
+    <QueryProvider>
+      <ThemeProvider>
+        <LanguageProvider>
+          <UserProfileProvider>
+            <NotificationsProvider>
+              <PushNotificationRegistrar />
+              <RootNavigator />
+            </NotificationsProvider>
+          </UserProfileProvider>
+        </LanguageProvider>
+      </ThemeProvider>
+    </QueryProvider>
   );
 }
