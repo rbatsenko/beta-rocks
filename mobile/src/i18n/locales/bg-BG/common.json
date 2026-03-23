@@ -910,6 +910,7 @@
     "noWebcams": "Не са намерени уеб камери наблизо"
   },
   "mobile": {
+    "setupProfileInSettings": "Моля, настройте профила си в Настройки, за да продължите",
     "addCrag": "Add Crag",
     "addSector": "Add Sector",
     "noSectors": "No sectors yet",

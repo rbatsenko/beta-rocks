@@ -858,6 +858,7 @@
     "noWebcams": "Ingen webcams fundet i nærheden"
   },
   "mobile": {
+    "setupProfileInSettings": "Opret din profil i Indstillinger for at fortsætte",
     "addCrag": "Add Crag",
     "addSector": "Add Sector",
     "noSectors": "No sectors yet",

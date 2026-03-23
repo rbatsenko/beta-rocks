@@ -826,6 +826,7 @@
     "noWebcams": "No s'han trobat càmeres web properes"
   },
   "mobile": {
+    "setupProfileInSettings": "Configureu el vostre perfil a Configuració per continuar",
     "addCrag": "Add Crag",
     "addSector": "Add Sector",
     "noSectors": "No sectors yet",

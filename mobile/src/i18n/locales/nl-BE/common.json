@@ -862,6 +862,7 @@
     "noWebcams": "Geen webcams gevonden in de buurt"
   },
   "mobile": {
+    "setupProfileInSettings": "Stel je profiel in via Instellingen om verder te gaan",
     "addCrag": "Add Crag",
     "addSector": "Add Sector",
     "noSectors": "No sectors yet",

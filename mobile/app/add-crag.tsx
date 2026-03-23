@@ -136,7 +136,7 @@ export default function AddCragScreen() {
       return;
     }
     if (!hasProfile || !syncKeyHash) {
-      Alert.alert(t("mobile.profileRequired", "Profile Required"));
+      Alert.alert(t("mobile.profileRequired", "Profile Required"), t("mobile.setupProfileInSettings", "Please set up your profile in Settings to continue"));
       return;
     }
 

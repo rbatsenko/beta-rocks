@@ -481,6 +481,7 @@
   },
   "mobile": {
     "profileRequired": "Profile Required",
+    "setupProfileInSettings": "Please set up your profile in Settings to continue",
     "cragDetails": "Crag Details",
     "syncProfile": "Sync Profile",
     "addCrag": "Add Crag",

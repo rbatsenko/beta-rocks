@@ -826,6 +826,7 @@
     "noWebcams": "Δεν βρέθηκαν webcam κοντά"
   },
   "mobile": {
+    "setupProfileInSettings": "Ρυθμίστε το προφίλ σας στις Ρυθμίσεις για να συνεχίσετε",
     "addCrag": "Add Crag",
     "addSector": "Add Sector",
     "noSectors": "No sectors yet",

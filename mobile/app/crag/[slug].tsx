@@ -257,7 +257,7 @@ export default function CragDetailScreen() {
 
   async function toggleFavorite() {
     if (!hasProfile || !crag) {
-      Alert.alert(t("mobile.profileRequired", "Profile Required"), t("favorites.loginToFavorite", "Please set up your profile to favorite locations"));
+      Alert.alert(t("mobile.profileRequired", "Profile Required"), t("mobile.setupProfileInSettings", "Please set up your profile in Settings to continue"));
       return;
     }
     if (!isSupabaseConfigured || !supabase || !syncKeyHash) return;
@@ -534,7 +534,7 @@ export default function CragDetailScreen() {
               style={[styles.emptyStateButton, { borderColor: colors.primary }]}
               onPress={() => {
                 if (!hasProfile) {
-                  Alert.alert(t("mobile.profileRequired", "Profile Required"), t("reports.loginToConfirm", "Please set up your profile to confirm reports"));
+                  Alert.alert(t("mobile.profileRequired", "Profile Required"), t("mobile.setupProfileInSettings", "Please set up your profile in Settings to continue"));
                   return;
                 }
                 router.push({ pathname: "/report", params: { cragId: crag.id, cragName: crag.name } });
@@ -989,7 +989,7 @@ export default function CragDetailScreen() {
         style={[styles.fab, { backgroundColor: colors.primary, bottom: Spacing.lg + insets.bottom }]}
         onPress={() => {
           if (!hasProfile) {
-            Alert.alert(t("mobile.profileRequired", "Profile Required"), t("reports.loginToConfirm", "Please set up your profile to confirm reports"));
+            Alert.alert(t("mobile.profileRequired", "Profile Required"), t("mobile.setupProfileInSettings", "Please set up your profile in Settings to continue"));
             return;
           }
           router.push({ pathname: "/report", params: { cragId: crag.id, cragName: crag.name } });
@@ -1170,7 +1170,7 @@ function HelpfulButton({ report, profileId, hasProfile, syncKeyHash, initialConf
       disabled={loading}
       onPress={async () => {
         if (!hasProfile || !syncKeyHash) {
-          Alert.alert(t("mobile.profileRequired", "Profile Required"), t("reports.loginToConfirm", "Please set up your profile to confirm reports"));
+          Alert.alert(t("mobile.profileRequired", "Profile Required"), t("mobile.setupProfileInSettings", "Please set up your profile in Settings to continue"));
           return;
         }
         setLoading(true);

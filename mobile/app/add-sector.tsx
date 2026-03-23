@@ -61,7 +61,7 @@ export default function AddSectorScreen() {
       return;
     }
     if (!hasProfile || !syncKeyHash) {
-      Alert.alert(t("mobile.profileRequired", "Profile Required"));
+      Alert.alert(t("mobile.profileRequired", "Profile Required"), t("mobile.setupProfileInSettings", "Please set up your profile in Settings to continue"));
       return;
     }
     if (!isSupabaseConfigured || !supabase) {

@@ -944,6 +944,7 @@
     "noWebcams": "V okolí nebyly nalezeny žádné webkamery"
   },
   "mobile": {
+    "setupProfileInSettings": "Nastavte si prosím profil v Nastavení, abyste mohli pokračovat",
     "addCrag": "Add Crag",
     "addSector": "Add Sector",
     "noSectors": "No sectors yet",

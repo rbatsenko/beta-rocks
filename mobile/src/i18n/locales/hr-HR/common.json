@@ -943,6 +943,7 @@
     "noWebcams": "Nisu pronađene web kamere u blizini"
   },
   "mobile": {
+    "setupProfileInSettings": "Molimo postavite svoj profil u Postavkama za nastavak",
     "addCrag": "Add Crag",
     "addSector": "Add Sector",
     "noSectors": "No sectors yet",

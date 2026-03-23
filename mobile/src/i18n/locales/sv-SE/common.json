@@ -779,6 +779,7 @@
     "noWebcams": "Inga webbkameror hittades i närheten"
   },
   "mobile": {
+    "setupProfileInSettings": "Ställ in din profil i Inställningar för att fortsätta",
     "addCrag": "Add Crag",
     "addSector": "Add Sector",
     "noSectors": "No sectors yet",

@@ -859,6 +859,7 @@
     "noWebcams": "Ingen webkameraer funnet i nærheten"
   },
   "mobile": {
+    "setupProfileInSettings": "Sett opp profilen din i Innstillinger for å fortsette",
     "addCrag": "Add Crag",
     "addSector": "Add Sector",
     "noSectors": "No sectors yet",

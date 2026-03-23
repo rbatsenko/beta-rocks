@@ -863,6 +863,7 @@
     "noWebcams": "Nu s-au găsit webcam-uri în apropiere"
   },
   "mobile": {
+    "setupProfileInSettings": "Vă rugăm să vă configurați profilul în Setări pentru a continua",
     "addCrag": "Add Crag",
     "addSector": "Add Sector",
     "noSectors": "No sectors yet",

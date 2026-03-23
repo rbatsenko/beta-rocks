@@ -430,6 +430,7 @@
   },
   "mobile": {
     "profileRequired": "Wymagany profil",
+    "setupProfileInSettings": "Skonfiguruj swój profil w Ustawieniach, aby kontynuować",
     "cragDetails": "Szczegóły skałki",
     "syncProfile": "Synchronizacja profilu",
     "addCrag": "Dodaj skałę",

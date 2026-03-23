@@ -947,6 +947,7 @@
     "noWebcams": "No se encontraron webcams cercanas"
   },
   "mobile": {
+    "setupProfileInSettings": "Configura tu perfil en Ajustes para continuar",
     "addCrag": "Add Crag",
     "addSector": "Add Sector",
     "noSectors": "No sectors yet",

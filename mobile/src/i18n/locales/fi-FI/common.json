@@ -858,6 +858,7 @@
     "noWebcams": "Lähistöltä ei löytynyt webkameroita"
   },
   "mobile": {
+    "setupProfileInSettings": "Määritä profiilisi Asetuksissa jatkaaksesi",
     "addCrag": "Add Crag",
     "addSector": "Add Sector",
     "noSectors": "No sectors yet",

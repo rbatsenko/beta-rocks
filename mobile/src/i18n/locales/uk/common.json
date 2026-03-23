@@ -944,6 +944,7 @@
     "noWebcams": "Веб-камери поблизу не знайдено"
   },
   "mobile": {
+    "setupProfileInSettings": "Будь ласка, налаштуйте свій профіль у Налаштуваннях, щоб продовжити",
     "addCrag": "Add Crag",
     "addSector": "Add Sector",
     "noSectors": "No sectors yet",
