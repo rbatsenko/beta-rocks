@@ -1,0 +1,85 @@
+import { ExpoConfig, ConfigContext } from "expo/config";
+
+export default ({ config }: ConfigContext): ExpoConfig => ({
+  ...config,
+  name: "beta.rocks",
+  slug: "beta-rocks",
+  version: "0.3.0",
+  orientation: "portrait",
+  icon: "./assets/icon.png",
+  scheme: "betarocks",
+  userInterfaceStyle: "automatic",
+  splash: {
+    image: "./assets/splash.png",
+    resizeMode: "cover",
+    backgroundColor: "#1e1714",
+  },
+  ios: {
+    supportsTablet: true,
+    bundleIdentifier: "rocks.beta.app",
+    infoPlist: {
+      ITSAppUsesNonExemptEncryption: false,
+    },
+  },
+  android: {
+    adaptiveIcon: {
+      foregroundImage: "./assets/adaptive-icon.png",
+      backgroundColor: "#1e1613",
+    },
+    splash: {
+      image: "./assets/splash-icon.png",
+      resizeMode: "contain",
+      backgroundColor: "#1e1714",
+    },
+    googleServicesFile: "./google-services.json",
+    package: "rocks.beta.app",
+  },
+  web: {
+    output: "static",
+    favicon: "./assets/favicon.png",
+  },
+  plugins: [
+    "expo-router",
+    "expo-secure-store",
+    [
+      "react-native-maps",
+      {
+        androidGoogleMapsApiKey:
+          process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY ?? "",
+      },
+    ],
+    [
+      "expo-image-picker",
+      {
+        photosPermission:
+          "Allow beta.rocks to access your photos to attach to reports.",
+        cameraPermission:
+          "Allow beta.rocks to use the camera to take photos for reports.",
+      },
+    ],
+    [
+      "expo-location",
+      {
+        locationWhenInUsePermission:
+          "Allow beta.rocks to use your location to set crag coordinates.",
+      },
+    ],
+    "@react-native-community/datetimepicker",
+    [
+      "expo-notifications",
+      {
+        icon: "./assets/icon.png",
+        color: "#f97316",
+      },
+    ],
+  ],
+  experiments: {
+    typedRoutes: true,
+  },
+  extra: {
+    eas: {
+      projectId: "5ebf1d1a-337b-460d-aeae-ff3395852783",
+    },
+  },
+  owner: "rbatsenko",
+});

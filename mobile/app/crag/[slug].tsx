@@ -17,6 +17,7 @@ import {
   RefreshControl,
 } from "react-native";
 import { useLocalSearchParams, useRouter, useNavigation } from "expo-router";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { getCragBySlug, getReportsByCrag, confirmReport as apiConfirmReport, deleteReport as apiDeleteReport } from "@/api/client";
 import { useFocusEffect } from "@react-navigation/native";
@@ -146,6 +147,7 @@ export default function CragDetailScreen() {
   const colors = isDark ? Colors.dark : Colors.light;
   const router = useRouter();
   const navigation = useNavigation();
+  const insets = useSafeAreaInsets();
 
   const [webcams, setWebcams] = useState<Webcam[]>([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -984,7 +986,7 @@ export default function CragDetailScreen() {
     {/* Floating action button - Add Report */}
     {crag && (
       <TouchableOpacity
-        style={[styles.fab, { backgroundColor: colors.primary }]}
+        style={[styles.fab, { backgroundColor: colors.primary, bottom: Spacing.lg + insets.bottom }]}
         onPress={() => {
           if (!hasProfile) {
             Alert.alert(t("mobile.profileRequired", "Profile Required"), t("reports.loginToConfirm", "Please set up your profile to confirm reports"));
