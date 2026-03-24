@@ -44,6 +44,7 @@ interface UserProfileContextValue {
   updateDisplayName: (name: string) => Promise<void>;
   updateUnits: (units: UnitsConfig) => Promise<void>;
   signOut: () => Promise<void>;
+  deleteAccount: () => Promise<boolean>;
 }
 
 const UserProfileContext = createContext<UserProfileContextValue | null>(null);
@@ -304,6 +305,63 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
     setProfileId(null);
   }, []);
 
+  const deleteAccount = useCallback(async (): Promise<boolean> => {
+    try {
+      if (!isSupabaseConfigured || !supabase || !syncKeyHash) {
+        console.warn("[deleteAccount] Supabase not configured or no sync key");
+        return false;
+      }
+
+      // Find user profile in database
+      const { data: dbProfile } = await supabase
+        .from("user_profiles")
+        .select("id")
+        .eq("sync_key_hash", syncKeyHash)
+        .maybeSingle();
+
+      if (dbProfile) {
+        // Delete favorites (explicit delete before profile for clean ordering)
+        await supabase
+          .from("user_favorites")
+          .delete()
+          .eq("user_profile_id", dbProfile.id);
+
+        // Delete chat sessions (messages cascade via foreign key)
+        await supabase
+          .from("chat_sessions")
+          .delete()
+          .eq("user_profile_id", dbProfile.id);
+
+        // Delete user profile — remaining related data (user_stats, notifications,
+        // push_subscriptions) is removed via ON DELETE CASCADE in the database
+        const { error: profileError } = await supabase
+          .from("user_profiles")
+          .delete()
+          .eq("id", dbProfile.id);
+
+        if (profileError) {
+          console.error("[deleteAccount] Failed to delete profile:", profileError);
+          return false;
+        }
+      }
+
+      // Clear all local data
+      await clearSyncKey();
+      storeProfile({} as Record<string, unknown>);
+      saveFavorites([]);
+      setProfile(null);
+      setSyncKeyHashState(null);
+      setStats(null);
+      setProfileId(null);
+
+      console.log("[deleteAccount] Account deleted successfully");
+      return true;
+    } catch (error) {
+      console.error("[deleteAccount] Failed:", error);
+      return false;
+    }
+  }, [syncKeyHash]);
+
   return (
     <UserProfileContext.Provider
       value={{
@@ -318,6 +376,7 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
         updateDisplayName,
         updateUnits,
         signOut,
+        deleteAccount,
       }}
     >
       {children}

@@ -261,6 +261,19 @@ export async function checkNearbyCrags(
 }
 
 /**
+ * Delete user account and all associated data
+ * DELETE /api/user/delete
+ */
+export async function deleteUserAccount(
+  syncKeyHash: string
+): Promise<{ success: boolean }> {
+  return apiFetch("/api/user/delete", {
+    method: "DELETE",
+    syncKeyHash,
+  });
+}
+
+/**
  * Reverse geocode coordinates to get location details
  * GET /api/geocode/reverse?lat=X&lon=Y
  */
