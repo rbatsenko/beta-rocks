@@ -320,31 +320,20 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
         .maybeSingle();
 
       if (dbProfile) {
-        // Delete favorites
+        // Delete favorites (explicit delete before profile for clean ordering)
         await supabase
           .from("user_favorites")
           .delete()
           .eq("user_profile_id", dbProfile.id);
 
-        // Delete notifications
-        await supabase
-          .from("notifications")
-          .delete()
-          .eq("user_profile_id", dbProfile.id);
-
-        // Delete push subscriptions
-        await supabase
-          .from("push_subscriptions")
-          .delete()
-          .eq("user_profile_id", dbProfile.id);
-
-        // Delete chat sessions (messages cascade)
+        // Delete chat sessions (messages cascade via foreign key)
         await supabase
           .from("chat_sessions")
           .delete()
           .eq("user_profile_id", dbProfile.id);
 
-        // Delete user profile (user_stats cascades)
+        // Delete user profile — remaining related data (user_stats, notifications,
+        // push_subscriptions) is removed via ON DELETE CASCADE in the database
         const { error: profileError } = await supabase
           .from("user_profiles")
           .delete()
