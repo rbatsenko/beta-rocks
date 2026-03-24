@@ -56,6 +56,7 @@ export default function SettingsScreen() {
     updateDisplayName,
     updateUnits,
     signOut,
+    deleteAccount,
   } = useUserProfile();
 
   const [editingName, setEditingName] = useState(false);
@@ -63,6 +64,7 @@ export default function SettingsScreen() {
   const [showLanguagePicker, setShowLanguagePicker] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
   const [createNameInput, setCreateNameInput] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const currentLanguageLabel =
     SUPPORTED_LANGUAGES.find((l) => l.code === language)?.label || "English";
@@ -119,6 +121,28 @@ export default function SettingsScreen() {
         },
       },
     ]);
+  }
+
+  async function handleDeleteAccount() {
+    Alert.alert(
+      t("settings.dangerZone.deleteProfile"),
+      t("settings.dangerZone.deleteProfileConfirm"),
+      [
+        { text: t("dialog.cancel", "Cancel"), style: "cancel" },
+        {
+          text: t("settings.dangerZone.deleteProfile"),
+          style: "destructive",
+          onPress: async () => {
+            setIsDeleting(true);
+            const success = await deleteAccount();
+            setIsDeleting(false);
+            if (!success) {
+              Alert.alert("Error", t("settings.dangerZone.deleteFailed"));
+            }
+          },
+        },
+      ]
+    );
   }
 
   if (isLoading) {
@@ -226,6 +250,34 @@ export default function SettingsScreen() {
           <Text style={[styles.hint, { color: colors.muted }]}>
             {t("settings.syncKey.description")}
           </Text>
+        </View>
+      )}
+
+      {/* Danger Zone — Delete Account */}
+      {hasProfile && (
+        <View style={styles.section}>
+          <Text style={[styles.sectionTitle, { color: colors.destructive }]}>{t("settings.dangerZone.title", "DANGER ZONE").toUpperCase()}</Text>
+          <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.destructive + "40" }]}>
+            <Text style={[styles.dangerDescription, { color: colors.textSecondary }]}>
+              {t("settings.dangerZone.description", "These actions are permanent and cannot be undone")}
+            </Text>
+            <TouchableOpacity
+              style={[styles.deleteButton, { borderColor: colors.destructive }]}
+              onPress={handleDeleteAccount}
+              disabled={isDeleting}
+            >
+              {isDeleting ? (
+                <ActivityIndicator color={colors.destructive} />
+              ) : (
+                <>
+                  <Ionicons name="trash-outline" size={18} color={colors.destructive} />
+                  <Text style={[styles.deleteButtonText, { color: colors.destructive }]}>
+                    {t("settings.dangerZone.deleteProfile", "Delete Profile")}
+                  </Text>
+                </>
+              )}
+            </TouchableOpacity>
+          </View>
         </View>
       )}
 
@@ -397,4 +449,8 @@ const styles = StyleSheet.create({
   languageList: { borderTopWidth: 1, maxHeight: 300 },
   languageItem: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: Spacing.md, paddingVertical: Spacing.sm + 2 },
   languageText: { fontSize: FontSize.md },
+
+  dangerDescription: { fontSize: FontSize.sm, paddingHorizontal: Spacing.md, paddingTop: Spacing.md, paddingBottom: Spacing.sm },
+  deleteButton: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: Spacing.sm, marginHorizontal: Spacing.md, marginBottom: Spacing.md, paddingVertical: Spacing.sm + 2, borderRadius: BorderRadius.lg, borderWidth: 1 },
+  deleteButtonText: { fontSize: FontSize.md, fontWeight: "600" },
 });
