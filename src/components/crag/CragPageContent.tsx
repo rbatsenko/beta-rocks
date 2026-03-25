@@ -26,6 +26,7 @@ import {
   Pencil,
   Layers,
   EyeOff,
+  Share2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -454,6 +455,36 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
     router.push(`/?crag=${encodeURIComponent(crag.name)}`);
   };
 
+  const handleShare = async () => {
+    const url = crag.slug
+      ? `${window.location.origin}/location/${crag.slug}`
+      : window.location.href;
+    const shareData = { title: crag.name, url };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+        return;
+      } catch (error: unknown) {
+        const isAbort =
+          typeof error === "object" &&
+          error !== null &&
+          "name" in error &&
+          (error as { name: string }).name === "AbortError";
+        if (isAbort) return;
+        // Fall through to clipboard fallback for non-cancel errors
+      }
+    }
+
+    try {
+      await navigator.clipboard.writeText(url);
+      toast({ description: t("cragPage.linkCopied") });
+    } catch {
+      // Clipboard API unavailable — prompt-based fallback
+      window.prompt(t("cragPage.linkCopied"), url);
+    }
+  };
+
   // Helper to get category icon
   const getCategoryIcon = (category: ReportCategory) => {
     const iconClass = "h-4 w-4";
@@ -556,6 +587,16 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                 >
                   <MessageCircle className="h-4 w-4" />
                   <span className="hidden sm:inline">{t("cragPage.askAI")}</span>
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleShare}
+                  title={t("cragPage.shareCrag")}
+                  aria-label={t("cragPage.shareCrag")}
+                >
+                  <Share2 className="h-4 w-4" />
+                  <span className="hidden sm:inline">{t("cragPage.share")}</span>
                 </Button>
                 <Button
                   variant={isFavorited ? "default" : "outline"}
