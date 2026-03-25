@@ -869,6 +869,18 @@ const ChatUI = ({
             {/* Footer */}
             <div className="flex items-center justify-center gap-3 mt-3">
               <a
+                href="https://apps.apple.com/us/app/beta-rocks/id6760671893"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="opacity-60 hover:opacity-100 transition-opacity"
+              >
+                <img
+                  src="/download-on-app-store.svg"
+                  alt="Download on the App Store"
+                  className="h-8"
+                />
+              </a>
+              <a
                 href="https://play.google.com/store/apps/details?id=rocks.beta.app"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -1098,6 +1110,18 @@ const ChatInterface = ({
             </form>
             {/* Footer */}
             <div className="flex items-center justify-center gap-3 mt-3">
+              <a
+                href="https://apps.apple.com/us/app/beta-rocks/id6760671893"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="opacity-60 hover:opacity-100 transition-opacity"
+              >
+                <img
+                  src="/download-on-app-store.svg"
+                  alt="Download on the App Store"
+                  className="h-8"
+                />
+              </a>
               <a
                 href="https://play.google.com/store/apps/details?id=rocks.beta.app"
                 target="_blank"
