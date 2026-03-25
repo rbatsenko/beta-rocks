@@ -449,11 +449,10 @@ export default function CragDetailScreen() {
             onPress={async () => {
               const url = `${API_URL}/location/${crag.slug}`;
               try {
-                await Share.share(
-                  Platform.OS === "ios"
-                    ? { url, message: crag.name }
-                    : { message: `${crag.name} — ${url}` }
-                );
+                await Share.share({
+                  message: `${crag.name} — ${url}`,
+                  ...(Platform.OS === "ios" && { url }),
+                });
               } catch {
                 // User cancelled or share failed — no action needed
               }
