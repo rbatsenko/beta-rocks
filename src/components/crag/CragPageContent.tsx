@@ -33,6 +33,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
+import { OpenInAppBanner } from "@/components/crag/OpenInAppBanner";
 import { ConditionsDetailContent } from "@/components/conditions/ConditionsDetailContent";
 import { ReportCard } from "@/components/reports/ReportCard";
 import { ReportDialog } from "@/components/reports/ReportDialog";
@@ -530,6 +531,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
 
   return (
     <div className="min-h-screen bg-background">
+      <OpenInAppBanner slug={crag.slug} />
       <main className="container mx-auto px-4 py-6 max-w-5xl">
         {/* Hero Section */}
         <div className="mb-8">
