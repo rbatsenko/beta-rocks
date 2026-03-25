@@ -15,6 +15,7 @@ import {
   Alert,
   Platform,
   RefreshControl,
+  Share,
 } from "react-native";
 import { useLocalSearchParams, useRouter, useNavigation } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -444,6 +445,19 @@ export default function CragDetailScreen() {
           </View>
         </View>
         <View style={styles.headerActions}>
+          <TouchableOpacity
+            onPress={() => {
+              const url = `${API_URL}/location/${crag.slug}`;
+              Share.share(
+                Platform.OS === "ios"
+                  ? { url, message: crag.name }
+                  : { message: `${crag.name} — ${url}` }
+              );
+            }}
+            style={styles.heartButton}
+          >
+            <Ionicons name="share-social-outline" size={24} color={colors.muted} />
+          </TouchableOpacity>
           <TouchableOpacity onPress={toggleFavorite} style={styles.heartButton}>
             <Ionicons
               name={isFavorited ? "heart" : "heart-outline"}

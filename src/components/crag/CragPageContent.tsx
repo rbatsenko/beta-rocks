@@ -26,6 +26,7 @@ import {
   Pencil,
   Layers,
   EyeOff,
+  Share2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -454,6 +455,22 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
     router.push(`/?crag=${encodeURIComponent(crag.name)}`);
   };
 
+  const handleShare = async () => {
+    const url = `${window.location.origin}/location/${crag.slug}`;
+    const shareData = { title: crag.name, url };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch {
+        // User cancelled or share failed silently
+      }
+    } else {
+      await navigator.clipboard.writeText(url);
+      toast({ description: t("cragPage.linkCopied") });
+    }
+  };
+
   // Helper to get category icon
   const getCategoryIcon = (category: ReportCategory) => {
     const iconClass = "h-4 w-4";
@@ -556,6 +573,15 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                 >
                   <MessageCircle className="h-4 w-4" />
                   <span className="hidden sm:inline">{t("cragPage.askAI")}</span>
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleShare}
+                  title={t("cragPage.shareCrag")}
+                >
+                  <Share2 className="h-4 w-4" />
+                  <span className="hidden sm:inline">{t("cragPage.share")}</span>
                 </Button>
                 <Button
                   variant={isFavorited ? "default" : "outline"}
