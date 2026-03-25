@@ -446,15 +446,21 @@ export default function CragDetailScreen() {
         </View>
         <View style={styles.headerActions}>
           <TouchableOpacity
-            onPress={() => {
+            onPress={async () => {
               const url = `${API_URL}/location/${crag.slug}`;
-              Share.share(
-                Platform.OS === "ios"
-                  ? { url, message: crag.name }
-                  : { message: `${crag.name} — ${url}` }
-              );
+              try {
+                await Share.share(
+                  Platform.OS === "ios"
+                    ? { url, message: crag.name }
+                    : { message: `${crag.name} — ${url}` }
+                );
+              } catch {
+                // User cancelled or share failed — no action needed
+              }
             }}
             style={styles.heartButton}
+            accessibilityRole="button"
+            accessibilityLabel={t("cragPage.shareCrag", "Share this crag")}
           >
             <Ionicons name="share-social-outline" size={24} color={colors.muted} />
           </TouchableOpacity>

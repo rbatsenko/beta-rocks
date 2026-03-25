@@ -456,18 +456,32 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
   };
 
   const handleShare = async () => {
-    const url = `${window.location.origin}/location/${crag.slug}`;
+    const url = crag.slug
+      ? `${window.location.origin}/location/${crag.slug}`
+      : window.location.href;
     const shareData = { title: crag.name, url };
 
     if (navigator.share) {
       try {
         await navigator.share(shareData);
-      } catch {
-        // User cancelled or share failed silently
+        return;
+      } catch (error: unknown) {
+        const isAbort =
+          typeof error === "object" &&
+          error !== null &&
+          "name" in error &&
+          (error as { name: string }).name === "AbortError";
+        if (isAbort) return;
+        // Fall through to clipboard fallback for non-cancel errors
       }
-    } else {
+    }
+
+    try {
       await navigator.clipboard.writeText(url);
       toast({ description: t("cragPage.linkCopied") });
+    } catch {
+      // Clipboard API unavailable — prompt-based fallback
+      window.prompt(t("cragPage.linkCopied"), url);
     }
   };
 
@@ -579,6 +593,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                   size="sm"
                   onClick={handleShare}
                   title={t("cragPage.shareCrag")}
+                  aria-label={t("cragPage.shareCrag")}
                 >
                   <Share2 className="h-4 w-4" />
                   <span className="hidden sm:inline">{t("cragPage.share")}</span>
