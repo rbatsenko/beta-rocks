@@ -111,11 +111,9 @@ export default function SettingsScreen() {
     updateUnits(newUnits);
   }
 
-  function handleTimeFormatToggle() {
-    const currentTimeFormat = profile?.units?.timeFormat || "24h";
-    const newTimeFormat = currentTimeFormat === "24h" ? "12h" : "24h";
+  function handleTimeFormatChange(format: "12h" | "24h") {
     const currentConfig = profile?.units || { temperature: "celsius" as const, windSpeed: "kmh" as const, precipitation: "mm" as const, distance: "km" as const, elevation: "meters" as const };
-    updateUnits({ ...currentConfig, timeFormat: newTimeFormat });
+    updateUnits({ ...currentConfig, timeFormat: format });
   }
 
   async function handleSignOut() {
@@ -358,7 +356,7 @@ export default function SettingsScreen() {
                       backgroundColor: isActive ? colors.primary : "transparent",
                       borderColor: colors.border,
                     }]}
-                    onPress={handleTimeFormatToggle}
+                    onPress={() => handleTimeFormatChange(opt.key as "12h" | "24h")}
                   >
                     <Text style={[styles.segmentText, { color: isActive ? colors.primaryForeground : colors.textSecondary }]}>
                       {opt.label}

@@ -162,10 +162,9 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
     const match = isoString.match(/T(\d{2}):(\d{2})/);
     if (match) {
       if (timeFormat === "12h") {
-        const h = parseInt(match[1]);
-        const period = h >= 12 ? "PM" : "AM";
-        const h12 = h % 12 || 12;
-        return `${h12}:${match[2]} ${period}`;
+        // Create a date with the extracted hours/minutes to use locale-aware formatting
+        const d = new Date(2000, 0, 1, parseInt(match[1]), parseInt(match[2]));
+        return d.toLocaleTimeString(locale, { hour: "numeric", minute: "2-digit", hour12: true });
       }
       return `${match[1]}:${match[2]}`;
     }
@@ -185,7 +184,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
       timeRange: formatTimeRange(window.startTime, window.endTime, locale, timeFormat),
     }));
     return groupWindowsByDay(windowsWithTimeRange, data.hourlyConditions, t, locale);
-  }, [data.optimalWindows, data.hourlyConditions, t, locale]);
+  }, [data.optimalWindows, data.hourlyConditions, t, locale, timeFormat]);
 
   // Memoize expensive grouping functions to prevent recalculation on every render
   const windowsByDay = useMemo(() => groupWindowsByDayWithParams(), [groupWindowsByDayWithParams]);

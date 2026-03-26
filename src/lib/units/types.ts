@@ -134,7 +134,7 @@ export function detectUnitSystem(config: UnitsConfig): UnitSystem {
       config.precipitation === preset.precipitation &&
       config.distance === preset.distance &&
       config.elevation === preset.elevation &&
-      (config.timeFormat || "24h") === preset.timeFormat
+      (!config.timeFormat || config.timeFormat === preset.timeFormat)
     ) {
       return system as UnitSystem;
     }
