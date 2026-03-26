@@ -592,9 +592,9 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                               </div>
                                             </div>
                                           </div>
-                                          <span className="font-medium">
+                                          <Badge className={`text-[10px] px-1.5 py-0 ${getRatingColor(hour.rating)}`}>
                                             {translateRating(hour.rating)}
-                                          </span>
+                                          </Badge>
                                         </div>
                                       ))}
                                     </div>
