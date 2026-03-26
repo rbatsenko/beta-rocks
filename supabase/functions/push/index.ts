@@ -106,7 +106,8 @@ function getBaseLocale(locale: string): string {
 function translateTitle(cragName: string, locale: string, type?: string): string {
   const base = getBaseLocale(locale);
   if (type === "report_helpful") {
-    return HELPFUL_TITLE_TRANSLATIONS[base] || HELPFUL_TITLE_TRANSLATIONS["en"];
+    const title = HELPFUL_TITLE_TRANSLATIONS[base] || HELPFUL_TITLE_TRANSLATIONS["en"];
+    return cragName ? `${title} — ${cragName}` : title;
   }
   const prefix = TITLE_TRANSLATIONS[base] || TITLE_TRANSLATIONS["en"];
   return `${prefix} ${cragName}`;
