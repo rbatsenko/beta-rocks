@@ -518,10 +518,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                       <span className="text-sm font-medium">
                                         {window.timeRange}
                                       </span>
-                                      <Badge
-                                        className={getRatingColor(window.rating)}
-                                        variant="outline"
-                                      >
+                                      <Badge className={getRatingColor(window.rating)}>
                                         {translateRating(window.rating)}
                                       </Badge>
                                     </div>
