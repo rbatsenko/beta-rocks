@@ -31,6 +31,7 @@ export function dbUnitsToConfig(profile: Tables<"user_profiles">): UnitsConfig |
     precipitation: profile.units_precipitation as UnitsConfig["precipitation"],
     distance: profile.units_distance as UnitsConfig["distance"],
     elevation: profile.units_elevation as UnitsConfig["elevation"],
+    timeFormat: ((profile as Record<string, unknown>).units_time_format as UnitsConfig["timeFormat"]) || "24h",
   };
 }
 
@@ -44,6 +45,7 @@ export function configToDbUnits(config: UnitsConfig) {
     units_precipitation: config.precipitation,
     units_distance: config.distance,
     units_elevation: config.elevation,
+    units_time_format: config.timeFormat || "24h",
   };
 }
 

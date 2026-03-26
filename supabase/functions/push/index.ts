@@ -48,6 +48,31 @@ const TITLE_TRANSLATIONS: Record<string, string> = {
   ca: "Nou informe a",
 };
 
+// Translations for "Someone found your report helpful"
+const HELPFUL_TITLE_TRANSLATIONS: Record<string, string> = {
+  en: "Someone found your report helpful",
+  de: "Jemand fand deinen Bericht hilfreich",
+  fr: "Quelqu'un a trouvé votre rapport utile",
+  es: "Alguien encontró útil tu reporte",
+  it: "Qualcuno ha trovato utile il tuo report",
+  pl: "Ktoś uznał twój raport za pomocny",
+  pt: "Alguém achou o seu relatório útil",
+  nl: "Iemand vond je rapport nuttig",
+  cs: "Někdo označil vaši zprávu jako užitečnou",
+  sk: "Niekto označil vašu správu ako užitočnú",
+  sl: "Nekdo je označil vaše poročilo kot koristno",
+  hr: "Netko je označio vaše izvješće korisnim",
+  bg: "Някой намери доклада ви за полезен",
+  ro: "Cineva a considerat raportul tău util",
+  uk: "Хтось вважає ваш звіт корисним",
+  el: "Κάποιος βρήκε χρήσιμη την αναφορά σας",
+  da: "Nogen fandt din rapport nyttig",
+  sv: "Någon tyckte din rapport var användbar",
+  nb: "Noen fant rapporten din nyttig",
+  fi: "Joku piti raporttiasi hyödyllisenä",
+  ca: "Algú ha trobat el teu informe útil",
+};
+
 // Translations for category names
 const CATEGORY_TRANSLATIONS: Record<string, Record<string, string>> = {
   en: { conditions: "conditions", safety: "safety", access: "access", climbing_info: "climbing info", facilities: "facilities", other: "other" },
@@ -78,8 +103,12 @@ function getBaseLocale(locale: string): string {
   return locale.split("-")[0].toLowerCase();
 }
 
-function translateTitle(cragName: string, locale: string): string {
+function translateTitle(cragName: string, locale: string, type?: string): string {
   const base = getBaseLocale(locale);
+  if (type === "report_helpful") {
+    const title = HELPFUL_TITLE_TRANSLATIONS[base] || HELPFUL_TITLE_TRANSLATIONS["en"];
+    return cragName ? `${title} — ${cragName}` : title;
+  }
   const prefix = TITLE_TRANSLATIONS[base] || TITLE_TRANSLATIONS["en"];
   return `${prefix} ${cragName}`;
 }
@@ -164,7 +193,7 @@ Deno.serve(async (req) => {
     // Translate title and body based on user's locale
     const cragName = payload.record.data?.cragName || "";
     const category = payload.record.data?.category || "other";
-    const title = translateTitle(cragName, locale);
+    const title = translateTitle(cragName, locale, payload.record.type);
     const body = translateBody(payload.record.body, category, locale);
 
     const messages = expoPushTokens.map((token) => {

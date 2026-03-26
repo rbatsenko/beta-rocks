@@ -14,6 +14,7 @@ export const UNIT_PRESETS: Record<UnitSystem, UnitsConfig> = {
     precipitation: "mm",
     distance: "km",
     elevation: "meters",
+    timeFormat: "24h",
   },
   imperial: {
     temperature: "fahrenheit",
@@ -21,6 +22,7 @@ export const UNIT_PRESETS: Record<UnitSystem, UnitsConfig> = {
     precipitation: "inches",
     distance: "miles",
     elevation: "feet",
+    timeFormat: "12h",
   },
   uk: {
     temperature: "celsius",
@@ -28,6 +30,7 @@ export const UNIT_PRESETS: Record<UnitSystem, UnitsConfig> = {
     precipitation: "mm",
     distance: "miles",
     elevation: "feet",
+    timeFormat: "24h",
   },
   custom: {
     temperature: "celsius",
@@ -35,6 +38,7 @@ export const UNIT_PRESETS: Record<UnitSystem, UnitsConfig> = {
     precipitation: "mm",
     distance: "km",
     elevation: "meters",
+    timeFormat: "24h",
   },
 };
 

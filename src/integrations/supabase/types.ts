@@ -268,6 +268,88 @@ export type Database = {
           },
         ];
       };
+      notifications: {
+        Row: {
+          body: string;
+          created_at: string | null;
+          data: Json | null;
+          id: string;
+          read: boolean | null;
+          title: string;
+          type: string;
+          user_profile_id: string;
+        };
+        Insert: {
+          body: string;
+          created_at?: string | null;
+          data?: Json | null;
+          id?: string;
+          read?: boolean | null;
+          title: string;
+          type?: string;
+          user_profile_id: string;
+        };
+        Update: {
+          body?: string;
+          created_at?: string | null;
+          data?: Json | null;
+          id?: string;
+          read?: boolean | null;
+          title?: string;
+          type?: string;
+          user_profile_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "notifications_user_profile_id_fkey";
+            columns: ["user_profile_id"];
+            isOneToOne: false;
+            referencedRelation: "user_profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      push_subscriptions: {
+        Row: {
+          created_at: string | null;
+          device_name: string | null;
+          id: string;
+          is_active: boolean | null;
+          platform: string;
+          token: string;
+          updated_at: string | null;
+          user_profile_id: string;
+        };
+        Insert: {
+          created_at?: string | null;
+          device_name?: string | null;
+          id?: string;
+          is_active?: boolean | null;
+          platform: string;
+          token: string;
+          updated_at?: string | null;
+          user_profile_id: string;
+        };
+        Update: {
+          created_at?: string | null;
+          device_name?: string | null;
+          id?: string;
+          is_active?: boolean | null;
+          platform?: string;
+          token?: string;
+          updated_at?: string | null;
+          user_profile_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "push_subscriptions_user_profile_id_fkey";
+            columns: ["user_profile_id"];
+            isOneToOne: false;
+            referencedRelation: "user_profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       reports: {
         Row: {
           author_id: string | null;
@@ -478,6 +560,7 @@ export type Database = {
           created_at: string | null;
           display_name: string | null;
           id: string;
+          locale: string | null;
           sync_key_hash: string;
           units_distance: string | null;
           units_elevation: string | null;
@@ -490,6 +573,7 @@ export type Database = {
           created_at?: string | null;
           display_name?: string | null;
           id?: string;
+          locale?: string | null;
           sync_key_hash: string;
           units_distance?: string | null;
           units_elevation?: string | null;
@@ -502,6 +586,7 @@ export type Database = {
           created_at?: string | null;
           display_name?: string | null;
           id?: string;
+          locale?: string | null;
           sync_key_hash?: string;
           units_distance?: string | null;
           units_elevation?: string | null;
@@ -671,28 +756,6 @@ export type Database = {
           parent_crag_name: string;
           parent_crag_slug: string;
           report_count: number;
-          result_type: string;
-          rock_type: string;
-          slug: string;
-          source: string;
-          state: string;
-          village: string;
-        }[];
-      };
-      search_locations_unaccent: {
-        Args: { search_query: string };
-        Returns: {
-          climbing_types: string[];
-          country: string;
-          description: string;
-          id: string;
-          lat: number;
-          lon: number;
-          municipality: string;
-          name: string;
-          parent_crag_id: string;
-          parent_crag_name: string;
-          parent_crag_slug: string;
           result_type: string;
           rock_type: string;
           slug: string;

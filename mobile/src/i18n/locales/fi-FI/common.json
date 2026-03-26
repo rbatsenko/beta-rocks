@@ -526,6 +526,11 @@
         "meters": "Metriä (m)",
         "feet": "Jalkaa (ft)"
       },
+      "timeFormat": "Aikamuoto",
+      "timeFormatOptions": {
+        "24h": "24 tuntia (14:00)",
+        "12h": "12 tuntia (2:00 PM)"
+      },
       "saved": "Yksiköt tallennettu",
       "savedDescription": "Yksikköasetuksesi on päivitetty onnistuneesti",
       "saveFailed": "Yksiköiden tallennus epäonnistui",

@@ -605,6 +605,11 @@
         "meters": "Metri (m)",
         "feet": "Stope (ft)"
       },
+      "timeFormat": "Format vremena",
+      "timeFormatOptions": {
+        "24h": "24-satni (14:00)",
+        "12h": "12-satni (2:00 PM)"
+      },
       "saved": "Jedinice spremljene",
       "savedDescription": "Vaše postavke jedinica uspješno su ažurirane",
       "saveFailed": "Spremanje jedinica nije uspjelo",

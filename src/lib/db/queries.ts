@@ -590,6 +590,7 @@ export async function updateUserProfile(
     units_precipitation?: string;
     units_distance?: string;
     units_elevation?: string;
+    units_time_format?: string;
   }
 ) {
   // Use secure RPC function that verifies ownership via sync_key_hash
@@ -601,7 +602,8 @@ export async function updateUserProfile(
     p_units_precipitation: updates.units_precipitation || undefined,
     p_units_distance: updates.units_distance || undefined,
     p_units_elevation: updates.units_elevation || undefined,
-  });
+    p_units_time_format: updates.units_time_format || undefined,
+  } as any);
 
   if (error) throw error;
 

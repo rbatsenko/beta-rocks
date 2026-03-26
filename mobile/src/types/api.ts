@@ -219,6 +219,7 @@ export interface UnitsConfig {
   precipitation: "mm" | "inches";
   distance: "km" | "miles";
   elevation: "meters" | "feet";
+  timeFormat?: "12h" | "24h";
 }
 
 export interface Favorite {
@@ -242,7 +243,7 @@ export interface Favorite {
 export interface AppNotification {
   id: string;
   user_profile_id: string;
-  type: "new_report" | "conditions_alert";
+  type: "new_report" | "conditions_alert" | "report_helpful";
   title: string;
   body: string;
   data: {
