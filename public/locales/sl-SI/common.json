@@ -605,6 +605,11 @@
         "meters": "Metri (m)",
         "feet": "Čevlji (ft)"
       },
+      "timeFormat": "Časovni format",
+      "timeFormatOptions": {
+        "24h": "24-urni (14:00)",
+        "12h": "12-urni (2:00 PM)"
+      },
       "saved": "Enote shranjene",
       "savedDescription": "Vaše nastavitve enot so bile uspešno posodobljene",
       "saveFailed": "Shranjevanje enot ni uspelo",

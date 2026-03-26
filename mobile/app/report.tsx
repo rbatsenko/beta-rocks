@@ -200,18 +200,13 @@ export default function ReportScreen() {
       const fileName = `${profileId}-${Date.now()}-${random}.jpg`;
       const storagePath = `reports/${fileName}`;
 
-      // Use FormData for reliable React Native file uploads
-      const formData = new FormData();
-      formData.append("", {
-        uri: Platform.OS === "ios" ? uri.replace("file://", "") : uri,
-        name: fileName,
-        type: "image/jpeg",
-      } as unknown as Blob);
+      // Read the file as ArrayBuffer via fetch — official Supabase React Native pattern
+      const arraybuffer = await fetch(uri).then((res) => res.arrayBuffer());
 
       const { error } = await supabase.storage
         .from("report-photos")
-        .upload(storagePath, formData, {
-          contentType: "multipart/form-data",
+        .upload(storagePath, arraybuffer, {
+          contentType: "image/jpeg",
           upsert: false,
         });
 

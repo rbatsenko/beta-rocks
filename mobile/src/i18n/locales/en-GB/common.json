@@ -623,6 +623,11 @@
         "meters": "Meters (m)",
         "feet": "Feet (ft)"
       },
+      "timeFormat": "Time Format",
+      "timeFormatOptions": {
+        "24h": "24-hour (14:00)",
+        "12h": "12-hour (2:00 PM)"
+      },
       "saved": "Units saved",
       "savedDescription": "Your unit preferences have been updated successfully",
       "saveFailed": "Failed to save units",

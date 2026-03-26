@@ -154,11 +154,19 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
     return hour >= 19 || hour < 7;
   };
 
+  const timeFormat = units.timeFormat || "24h";
+
   // Helper to extract local time from ISO string without timezone conversion
   const extractLocalTime = (isoString: string): string => {
     // Extract time portion from ISO string (format: "2024-11-03T06:45:00+01:00" or "2024-11-03T06:45:00")
     const match = isoString.match(/T(\d{2}):(\d{2})/);
     if (match) {
+      if (timeFormat === "12h") {
+        const h = parseInt(match[1]);
+        const period = h >= 12 ? "PM" : "AM";
+        const h12 = h % 12 || 12;
+        return `${h12}:${match[2]} ${period}`;
+      }
       return `${match[1]}:${match[2]}`;
     }
     return isoString;
@@ -174,7 +182,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
     // Need to transform windows to include formatted timeRange
     const windowsWithTimeRange = data.optimalWindows?.map((window) => ({
       ...window,
-      timeRange: formatTimeRange(window.startTime, window.endTime, locale),
+      timeRange: formatTimeRange(window.startTime, window.endTime, locale, timeFormat),
     }));
     return groupWindowsByDay(windowsWithTimeRange, data.hourlyConditions, t, locale);
   }, [data.optimalWindows, data.hourlyConditions, t, locale]);
@@ -518,9 +526,6 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                         {translateRating(window.rating)}
                                       </Badge>
                                     </div>
-                                    <span className="text-xs text-muted-foreground">
-                                      {window.avgFrictionScore}/5
-                                    </span>
                                   </div>
 
                                   {/* Hourly breakdown */}
@@ -549,7 +554,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                               {new Date(hour.time).toLocaleTimeString(locale, {
                                                 hour: "2-digit",
                                                 minute: "2-digit",
-                                                hour12: false,
+                                                hour12: timeFormat === "12h",
                                               })}
                                             </span>
                                             <div className="flex items-center gap-2">
@@ -610,7 +615,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                     <p className="text-sm text-muted-foreground">
                       {t("dialog.bestTime")}:{" "}
                       <span className="font-semibold">
-                        {formatHourlyTime(data.optimalTime, locale, t)}
+                        {formatHourlyTime(data.optimalTime, locale, t, timeFormat)}
                       </span>
                     </p>
                   )}

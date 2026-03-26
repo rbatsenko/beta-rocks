@@ -68,15 +68,29 @@ function getCountryFlag(code: string | null | undefined): string {
   return String.fromCodePoint(upper.charCodeAt(0) + OFFSET, upper.charCodeAt(1) + OFFSET);
 }
 
-function extractTime(iso: string): string {
+function extractTime(iso: string, tf: "12h" | "24h" = "24h"): string {
   const m = iso.match(/T(\d{2}):(\d{2})/);
-  return m ? `${m[1]}:${m[2]}` : iso;
+  if (!m) return iso;
+  if (tf === "12h") {
+    const h = parseInt(m[1]);
+    const period = h >= 12 ? "PM" : "AM";
+    return `${h % 12 || 12}:${m[2]} ${period}`;
+  }
+  return `${m[1]}:${m[2]}`;
 }
 
-function fmtTimeRange(start: string, end: string): string {
+function fmtTimeRange(start: string, end: string, tf: "12h" | "24h" = "24h"): string {
   try {
-    const pad = (d: Date) => `${d.getHours().toString().padStart(2, "0")}:${d.getMinutes().toString().padStart(2, "0")}`;
-    return `${pad(new Date(start))} \u2013 ${pad(new Date(end))}`;
+    const fmtT = (d: Date) => {
+      if (tf === "12h") {
+        const h = d.getHours();
+        const m = d.getMinutes().toString().padStart(2, "0");
+        const period = h >= 12 ? "PM" : "AM";
+        return `${h % 12 || 12}:${m} ${period}`;
+      }
+      return `${d.getHours().toString().padStart(2, "0")}:${d.getMinutes().toString().padStart(2, "0")}`;
+    };
+    return `${fmtT(new Date(start))} \u2013 ${fmtT(new Date(end))}`;
   } catch { return `${start} \u2013 ${end}`; }
 }
 
@@ -94,9 +108,14 @@ function fmtRelative(s: string): string {
   return fmtDate(s);
 }
 
-function fmtHour(iso: string): string {
+function fmtHour(iso: string, tf: "12h" | "24h" = "24h"): string {
   try {
     const d = new Date(iso);
+    if (tf === "12h") {
+      const h = d.getHours();
+      const period = h >= 12 ? "PM" : "AM";
+      return `${h % 12 || 12}:00 ${period}`;
+    }
     return `${d.getHours().toString().padStart(2, "0")}:00`;
   } catch { return iso; }
 }
@@ -164,6 +183,7 @@ export default function CragDetailScreen() {
   const { hasProfile, profileId, syncKeyHash, profile } = useUserProfile();
   const { translateWeather } = useConditionsTranslations(t);
   const units = profile?.units || getDefaultUnits("en");
+  const tf = units.timeFormat || "24h";
 
   // React Query for crag data — cached across navigations
   const {
@@ -791,11 +811,11 @@ export default function CragDetailScreen() {
             <View style={[styles.astroRow, { borderTopColor: colors.border }]}>
               <View style={styles.astroItem}>
                 <Ionicons name="sunny-outline" size={16} color="#f97316" />
-                <Text style={[styles.astroText, { color: colors.textSecondary }]}>{extractTime(astro.sunrise)}</Text>
+                <Text style={[styles.astroText, { color: colors.textSecondary }]}>{extractTime(astro.sunrise, tf)}</Text>
               </View>
               <View style={styles.astroItem}>
                 <Ionicons name="moon-outline" size={16} color="#6366f1" />
-                <Text style={[styles.astroText, { color: colors.textSecondary }]}>{extractTime(astro.sunset)}</Text>
+                <Text style={[styles.astroText, { color: colors.textSecondary }]}>{extractTime(astro.sunset, tf)}</Text>
               </View>
             </View>
           )}
@@ -915,7 +935,7 @@ export default function CragDetailScreen() {
                   paddingHorizontal: Spacing.sm,
                   marginVertical: 2,
                 }]}>
-                  <Text style={[styles.hourlyTime, { color: colors.text }]}>{fmtHour(h.time)}</Text>
+                  <Text style={[styles.hourlyTime, { color: colors.text }]}>{fmtHour(h.time, tf)}</Text>
                   <WeatherIcon code={h.weatherCode} size="small" />
                   <Text style={[styles.hourlyValue, { color: colors.text }]}>
                     {formatTemperature(convertTemperature(temp, "celsius", units.temperature), units.temperature, 0)}
@@ -1080,10 +1100,10 @@ function FoldableWindowDay({ label, windows, isHighlighted, isToday, colors, uni
             return (
               <View key={i} style={styles.windowRow}>
                 <View style={[styles.windowDot, { backgroundColor: wc?.solid || colors.muted }]} />
-                <Text style={[styles.windowTime, { color: colors.text }]}>{fmtTimeRange(w.startTime, w.endTime)}</Text>
+                <Text style={[styles.windowTime, { color: colors.text }]}>{fmtTimeRange(w.startTime, w.endTime, units?.timeFormat || "24h")}</Text>
                 {wc && wl && (
                   <View style={[styles.smallBadge, { backgroundColor: wc.bg }]}>
-                    <Text style={[styles.smallBadgeText, { color: wc.text }]}>{t(`ratings.${wl!.toLowerCase()}`, wl)} {fmt(w.avgFrictionScore)}</Text>
+                    <Text style={[styles.smallBadgeText, { color: wc.text }]}>{t(`ratings.${wl!.toLowerCase()}`, wl)}</Text>
                   </View>
                 )}
               </View>
@@ -1120,7 +1140,7 @@ function HourlyTimeline({ hours, colors, units, t }: { hours: any[]; colors: (ty
         const wind = h.wind_kph ?? h.windSpeed_kph;
         return (
           <View key={i} style={[styles.hourlyRow, { backgroundColor: rowBg }, i > 0 && { borderTopWidth: 1, borderTopColor: colors.border }]}>
-            <Text style={[styles.hourlyTime, { color: colors.text }]}>{fmtHour(h.time)}</Text>
+            <Text style={[styles.hourlyTime, { color: colors.text }]}>{fmtHour(h.time, units?.timeFormat || "24h")}</Text>
             <WeatherIcon code={h.weatherCode} size="small" />
             <Text style={[styles.hourlyValue, { color: colors.text }]}>
               {formatTemperature(convertTemperature(temp, "celsius", units.temperature), units.temperature, 0)}

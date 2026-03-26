@@ -609,6 +609,11 @@
         "meters": "Mètres (m)",
         "feet": "Pieds (ft)"
       },
+      "timeFormat": "Format horaire",
+      "timeFormatOptions": {
+        "24h": "24 heures (14:00)",
+        "12h": "12 heures (2:00 PM)"
+      },
       "saved": "Unités enregistrées",
       "savedDescription": "Vos préférences d'unités ont été mises à jour avec succès",
       "saveFailed": "Échec de l'enregistrement des unités",

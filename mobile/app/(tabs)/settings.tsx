@@ -103,11 +103,19 @@ export default function SettingsScreen() {
   }
 
   function handleUnitToggle() {
+    const currentTimeFormat = profile?.units?.timeFormat || "24h";
     const newUnits: UnitsConfig =
       currentUnits === "metric"
-        ? { temperature: "fahrenheit", windSpeed: "mph", precipitation: "inches", distance: "miles", elevation: "feet" }
-        : { temperature: "celsius", windSpeed: "kmh", precipitation: "mm", distance: "km", elevation: "meters" };
+        ? { temperature: "fahrenheit", windSpeed: "mph", precipitation: "inches", distance: "miles", elevation: "feet", timeFormat: currentTimeFormat }
+        : { temperature: "celsius", windSpeed: "kmh", precipitation: "mm", distance: "km", elevation: "meters", timeFormat: currentTimeFormat };
     updateUnits(newUnits);
+  }
+
+  function handleTimeFormatToggle() {
+    const currentTimeFormat = profile?.units?.timeFormat || "24h";
+    const newTimeFormat = currentTimeFormat === "24h" ? "12h" : "24h";
+    const currentConfig = profile?.units || { temperature: "celsius" as const, windSpeed: "kmh" as const, precipitation: "mm" as const, distance: "km" as const, elevation: "meters" as const };
+    updateUnits({ ...currentConfig, timeFormat: newTimeFormat });
   }
 
   async function handleSignOut() {
@@ -328,6 +336,32 @@ export default function SettingsScreen() {
                   >
                     <Text style={[styles.segmentText, { color: isActive ? colors.primaryForeground : colors.textSecondary }]}>
                       {sys.label}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+
+            <View style={[styles.divider, { backgroundColor: colors.border, marginLeft: 0 }]} />
+
+            <View style={[styles.row, { paddingBottom: Spacing.sm }]}>
+              <Ionicons name="time-outline" size={20} color={colors.primary} />
+              <Text style={[styles.label, { color: colors.text }]}>{t("settings.units.timeFormat", "Time Format")}</Text>
+            </View>
+            <View style={styles.segmentedControl}>
+              {([{ key: "24h", label: "24h (14:00)" }, { key: "12h", label: "12h (2:00 PM)" }] as const).map((opt) => {
+                const isActive = (profile?.units?.timeFormat || "24h") === opt.key;
+                return (
+                  <TouchableOpacity
+                    key={opt.key}
+                    style={[styles.segment, {
+                      backgroundColor: isActive ? colors.primary : "transparent",
+                      borderColor: colors.border,
+                    }]}
+                    onPress={handleTimeFormatToggle}
+                  >
+                    <Text style={[styles.segmentText, { color: isActive ? colors.primaryForeground : colors.textSecondary }]}>
+                      {opt.label}
                     </Text>
                   </TouchableOpacity>
                 );

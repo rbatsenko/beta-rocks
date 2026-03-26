@@ -597,6 +597,11 @@
         "meters": "Metry (m)",
         "feet": "Stopy (ft)"
       },
+      "timeFormat": "Format czasu",
+      "timeFormatOptions": {
+        "24h": "24-godzinny (14:00)",
+        "12h": "12-godzinny (2:00 PM)"
+      },
       "saved": "Jednostki zapisane",
       "savedDescription": "Twoje preferencje jednostek zostały pomyślnie zaktualizowane",
       "saveFailed": "Nie udało się zapisać jednostek",

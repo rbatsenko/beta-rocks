@@ -525,6 +525,11 @@
         "meters": "Meter (m)",
         "feet": "Voet (ft)"
       },
+      "timeFormat": "Tijdnotatie",
+      "timeFormatOptions": {
+        "24h": "24-uurs (14:00)",
+        "12h": "12-uurs (2:00 PM)"
+      },
       "saved": "Eenheden opgeslagen",
       "savedDescription": "Uw eenheidsvoorkeuren zijn succesvol bijgewerkt",
       "saveFailed": "Opslaan van eenheden mislukt",

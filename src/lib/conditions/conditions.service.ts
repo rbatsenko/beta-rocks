@@ -675,12 +675,20 @@ export function findOptimalWindowsEnhanced(hourlyConditions: HourlyCondition[]):
         window.hours.reduce((sum, h) => sum + h.frictionScore, 0) / window.hours.length;
 
       // Calculate end time by adding 1 hour to the last hour's time
+      // Use getTime() + ms to avoid DST issues, then format in local time
+      // to match the input format (Open-Meteo returns local time without Z)
       const lastHourTime = new Date(window.hours[window.hours.length - 1].time);
-      lastHourTime.setHours(lastHourTime.getHours() + 1);
+      const endDate = new Date(lastHourTime.getTime() + 3600000);
+      const endYear = endDate.getFullYear();
+      const endMonth = String(endDate.getMonth() + 1).padStart(2, "0");
+      const endDay = String(endDate.getDate()).padStart(2, "0");
+      const endHours = String(endDate.getHours()).padStart(2, "0");
+      const endMinutes = String(endDate.getMinutes()).padStart(2, "0");
+      const endTimeStr = `${endYear}-${endMonth}-${endDay}T${endHours}:${endMinutes}:00`;
 
       windows.push({
         startTime: window.hours[0].time,
-        endTime: lastHourTime.toISOString(),
+        endTime: endTimeStr,
         avgFrictionScore: Math.round(avgScore * 10) / 10,
         rating: scoreToRating(avgScore),
         hourCount: window.hours.length,

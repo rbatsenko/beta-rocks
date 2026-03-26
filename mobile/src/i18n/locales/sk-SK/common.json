@@ -525,6 +525,11 @@
         "meters": "Metre (m)",
         "feet": "Stopy (ft)"
       },
+      "timeFormat": "Formát času",
+      "timeFormatOptions": {
+        "24h": "24-hodinový (14:00)",
+        "12h": "12-hodinový (2:00 PM)"
+      },
       "saved": "Jednotky uložené",
       "savedDescription": "Vaše preferencie jednotiek boli úspešne aktualizované",
       "saveFailed": "Ukladanie jednotiek zlyhalo",

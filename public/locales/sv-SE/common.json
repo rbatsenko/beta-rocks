@@ -446,6 +446,11 @@
         "meters": "Meter (m)",
         "feet": "Fot (ft)"
       },
+      "timeFormat": "Tidsformat",
+      "timeFormatOptions": {
+        "24h": "24-timmar (14:00)",
+        "12h": "12-timmar (2:00 PM)"
+      },
       "saved": "Enheter sparade",
       "savedDescription": "Dina enhetsinställningar har uppdaterats",
       "saveFailed": "Sparandet av enheter misslyckades",

@@ -8,6 +8,7 @@ export type WindSpeedUnit = "kmh" | "mph" | "ms" | "knots";
 export type PrecipitationUnit = "mm" | "inches";
 export type DistanceUnit = "km" | "miles";
 export type ElevationUnit = "meters" | "feet";
+export type TimeFormat = "12h" | "24h";
 
 /**
  * Complete units configuration for a user
@@ -18,6 +19,7 @@ export interface UnitsConfig {
   precipitation: PrecipitationUnit;
   distance: DistanceUnit;
   elevation: ElevationUnit;
+  timeFormat?: TimeFormat;
 }
 
 /**
@@ -35,6 +37,7 @@ export const UNIT_PRESETS: Record<UnitSystem, UnitsConfig> = {
     precipitation: "mm",
     distance: "km",
     elevation: "meters",
+    timeFormat: "24h",
   },
   imperial: {
     temperature: "fahrenheit",
@@ -42,6 +45,7 @@ export const UNIT_PRESETS: Record<UnitSystem, UnitsConfig> = {
     precipitation: "inches",
     distance: "miles",
     elevation: "feet",
+    timeFormat: "12h",
   },
   uk: {
     // UK uses mixed system: Celsius but mph
@@ -50,6 +54,7 @@ export const UNIT_PRESETS: Record<UnitSystem, UnitsConfig> = {
     precipitation: "mm",
     distance: "miles",
     elevation: "feet",
+    timeFormat: "24h",
   },
   custom: {
     // Placeholder - user will set custom values
@@ -58,6 +63,7 @@ export const UNIT_PRESETS: Record<UnitSystem, UnitsConfig> = {
     precipitation: "mm",
     distance: "km",
     elevation: "meters",
+    timeFormat: "24h",
   },
 };
 
@@ -127,7 +133,8 @@ export function detectUnitSystem(config: UnitsConfig): UnitSystem {
       config.windSpeed === preset.windSpeed &&
       config.precipitation === preset.precipitation &&
       config.distance === preset.distance &&
-      config.elevation === preset.elevation
+      config.elevation === preset.elevation &&
+      (config.timeFormat || "24h") === preset.timeFormat
     ) {
       return system as UnitSystem;
     }

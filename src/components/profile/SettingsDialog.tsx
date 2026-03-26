@@ -47,6 +47,7 @@ import type {
   PrecipitationUnit,
   DistanceUnit,
   ElevationUnit,
+  TimeFormat,
 } from "@/lib/units/types";
 import { configToDbUnits } from "@/lib/units/storage";
 
@@ -72,6 +73,7 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
   const [precipitation, setPrecipitation] = useState<PrecipitationUnit>("mm");
   const [distance, setDistance] = useState<DistanceUnit>("km");
   const [elevation, setElevation] = useState<ElevationUnit>("meters");
+  const [timeFormat, setTimeFormat] = useState<TimeFormat>("24h");
   const [isCopied, setIsCopied] = useState(false);
   const [showFullKey, setShowFullKey] = useState(false);
   const [deleteProfileConfirmOpen, setDeleteProfileConfirmOpen] = useState(false);
@@ -107,6 +109,7 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
                       precipitation: dbProfile.units_precipitation as any,
                       distance: dbProfile.units_distance as any,
                       elevation: dbProfile.units_elevation as any,
+                      timeFormat: ((dbProfile as Record<string, unknown>).units_time_format as any) || "24h",
                     }
                   : undefined,
               });
@@ -128,6 +131,7 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
       setPrecipitation(units.precipitation);
       setDistance(units.distance);
       setElevation(units.elevation);
+      setTimeFormat(units.timeFormat || "24h");
       setUnitSystem(detectUnitSystem(units));
     }
   }, [open, units]);
@@ -287,6 +291,7 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
       setPrecipitation(preset.precipitation);
       setDistance(preset.distance);
       setElevation(preset.elevation);
+      setTimeFormat(preset.timeFormat || "24h");
     }
   };
 
@@ -299,6 +304,7 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
         precipitation,
         distance,
         elevation,
+        timeFormat,
       };
 
       // Update local storage via hook
@@ -516,6 +522,30 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
                       </SelectItem>
                       <SelectItem value="feet">
                         {t("settings.units.elevationUnits.feet")}
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Time Format */}
+                <div>
+                  <Label htmlFor="timeFormat">{t("settings.units.timeFormat")}</Label>
+                  <Select
+                    value={timeFormat}
+                    onValueChange={(v) => {
+                      setTimeFormat(v as TimeFormat);
+                      setUnitSystem("custom");
+                    }}
+                  >
+                    <SelectTrigger id="timeFormat">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="24h">
+                        {t("settings.units.timeFormatOptions.24h")}
+                      </SelectItem>
+                      <SelectItem value="12h">
+                        {t("settings.units.timeFormatOptions.12h")}
                       </SelectItem>
                     </SelectContent>
                   </Select>

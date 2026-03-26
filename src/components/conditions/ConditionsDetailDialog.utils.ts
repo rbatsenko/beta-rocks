@@ -22,7 +22,8 @@ export const getRatingColor = (rating: string): string => {
 export const formatHourlyTime = (
   isoString: string,
   locale: string,
-  t: (key: string) => string
+  t: (key: string) => string,
+  timeFormat: "12h" | "24h" = "24h"
 ): string => {
   const date = new Date(isoString);
   const now = new Date();
@@ -32,10 +33,11 @@ export const formatHourlyTime = (
   const isToday = date.toDateString() === now.toDateString();
   const isTomorrow = date.toDateString() === tomorrow.toDateString();
 
+  const hour12 = timeFormat === "12h";
   const timeStr = date.toLocaleTimeString(locale, {
     hour: "2-digit",
     minute: "2-digit",
-    hour12: false,
+    hour12,
   });
 
   if (isToday) return `${t("dialog.today")} ${timeStr}`;
@@ -45,17 +47,19 @@ export const formatHourlyTime = (
     weekday: "short",
     hour: "2-digit",
     minute: "2-digit",
-    hour12: false,
+    hour12,
   });
 };
 
-export const formatTimeRange = (start: string, end: string, locale: string): string => {
+export const formatTimeRange = (start: string, end: string, locale: string, timeFormat: "12h" | "24h" = "24h"): string => {
   try {
     const startDate = new Date(start);
     const endDate = new Date(end);
 
-    // Format hours and minutes separately to avoid locale issues
     const formatTime = (date: Date) => {
+      if (timeFormat === "12h") {
+        return date.toLocaleTimeString(locale, { hour: "numeric", minute: "2-digit", hour12: true });
+      }
       const hours = date.getHours().toString().padStart(2, "0");
       const minutes = date.getMinutes().toString().padStart(2, "0");
       return `${hours}:${minutes}`;

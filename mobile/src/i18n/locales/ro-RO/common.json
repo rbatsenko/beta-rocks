@@ -525,6 +525,11 @@
         "meters": "Metri (m)",
         "feet": "Picioare (ft)"
       },
+      "timeFormat": "Format oră",
+      "timeFormatOptions": {
+        "24h": "24 de ore (14:00)",
+        "12h": "12 ore (2:00 PM)"
+      },
       "saved": "Unități salvate",
       "savedDescription": "Preferințele tale pentru unități au fost actualizate cu succes",
       "saveFailed": "Salvarea unităților a eșuat",
