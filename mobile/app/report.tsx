@@ -28,6 +28,8 @@ import {
 import { useLocalSearchParams, useRouter, useNavigation } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import * as FileSystem from "expo-file-system";
+import { decode } from "base64-arraybuffer";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { createReport } from "@/api/client";
 import { supabase, isSupabaseConfigured } from "@/api/supabase";
@@ -200,12 +202,15 @@ export default function ReportScreen() {
       const fileName = `${profileId}-${Date.now()}-${random}.jpg`;
       const storagePath = `reports/${fileName}`;
 
-      // Read the file as ArrayBuffer via fetch — official Supabase React Native pattern
-      const arraybuffer = await fetch(uri).then((res) => res.arrayBuffer());
+      // Read the file as base64 via expo-file-system, then decode to ArrayBuffer
+      // fetch().arrayBuffer() is unreliable in React Native
+      const base64 = await FileSystem.readAsStringAsync(uri, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
 
       const { error } = await supabase.storage
         .from("report-photos")
-        .upload(storagePath, arraybuffer, {
+        .upload(storagePath, decode(base64), {
           contentType: "image/jpeg",
           upsert: false,
         });
