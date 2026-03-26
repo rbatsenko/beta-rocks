@@ -12,6 +12,7 @@ RETURNS TRIGGER AS $$
 DECLARE
   report_record RECORD;
   crag_record RECORD;
+  confirmer_profile_id uuid;
 BEGIN
   -- Get the report and its author
   SELECT id, crag_id, author_id, category, text
@@ -23,14 +24,17 @@ BEGIN
     RETURN NEW;
   END IF;
 
+  -- Look up the confirmer's profile ID from their sync_key_hash
+  SELECT id INTO confirmer_profile_id
+  FROM public.user_profiles
+  WHERE sync_key_hash = NEW.user_key_hash;
+
   -- Don't notify if the user is marking their own report
-  IF report_record.author_id::text = NEW.user_key_hash THEN
+  IF confirmer_profile_id IS NOT NULL AND confirmer_profile_id = report_record.author_id THEN
     RETURN NEW;
   END IF;
 
-  -- Look up the author's user_profile by matching sync_key_hash
-  -- author_id in reports stores the user_profile.id directly
-  -- Verify the profile exists
+  -- Verify the author's profile exists
   IF NOT EXISTS (SELECT 1 FROM public.user_profiles WHERE id = report_record.author_id) THEN
     RETURN NEW;
   END IF;

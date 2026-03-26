@@ -349,7 +349,7 @@ export default function SettingsScreen() {
               <Text style={[styles.label, { color: colors.text }]}>{t("settings.units.timeFormat", "Time Format")}</Text>
             </View>
             <View style={styles.segmentedControl}>
-              {([{ key: "24h", label: "24h (14:00)" }, { key: "12h", label: "12h (2:00 PM)" }] as const).map((opt) => {
+              {([{ key: "24h", label: t("settings.units.timeFormatOptions.24h", "24-hour (14:00)") }, { key: "12h", label: t("settings.units.timeFormatOptions.12h", "12-hour (2:00 PM)") }] as const).map((opt) => {
                 const isActive = (profile?.units?.timeFormat || "24h") === opt.key;
                 return (
                   <TouchableOpacity
