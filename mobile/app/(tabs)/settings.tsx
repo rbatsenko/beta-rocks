@@ -69,7 +69,7 @@ export default function SettingsScreen() {
   const currentLanguageLabel =
     SUPPORTED_LANGUAGES.find((l) => l.code === language)?.label || "English";
 
-  const currentUnits = profile?.units?.temperature === "fahrenheit" ? "imperial" : "metric";
+  const currentUnits = (profile?.units?.temperature ?? "celsius") === "fahrenheit" ? "imperial" : "metric";
 
   async function handleCreateProfile() {
     setIsCreating(true);
@@ -316,58 +316,63 @@ export default function SettingsScreen() {
       )}
 
       {/* Units */}
-      {hasProfile && (
-        <View style={styles.section}>
-          <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>{t("settings.units.title").toUpperCase()}</Text>
-          <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-            <View style={styles.segmentedControl}>
-              {UNIT_SYSTEMS.map((sys) => {
-                const isActive = currentUnits === sys.key;
-                return (
-                  <TouchableOpacity
-                    key={sys.key}
-                    style={[styles.segment, {
-                      backgroundColor: isActive ? colors.primary : "transparent",
-                      borderColor: colors.border,
-                    }]}
-                    onPress={handleUnitToggle}
-                  >
-                    <Text style={[styles.segmentText, { color: isActive ? colors.primaryForeground : colors.textSecondary }]}>
-                      {sys.label}
-                    </Text>
-                  </TouchableOpacity>
-                );
-              })}
-            </View>
+      <View style={styles.section}>
+        <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>{t("settings.units.title").toUpperCase()}</Text>
+        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }, !hasProfile && { opacity: 0.5 }]}>
+          <View style={styles.segmentedControl}>
+            {UNIT_SYSTEMS.map((sys) => {
+              const isActive = currentUnits === sys.key;
+              return (
+                <TouchableOpacity
+                  key={sys.key}
+                  style={[styles.segment, {
+                    backgroundColor: isActive ? colors.primary : "transparent",
+                    borderColor: colors.border,
+                  }]}
+                  onPress={handleUnitToggle}
+                  disabled={!hasProfile}
+                >
+                  <Text style={[styles.segmentText, { color: isActive ? colors.primaryForeground : colors.textSecondary }]}>
+                    {sys.label}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
 
-            <View style={[styles.divider, { backgroundColor: colors.border, marginLeft: 0 }]} />
+          <View style={[styles.divider, { backgroundColor: colors.border, marginLeft: 0 }]} />
 
-            <View style={[styles.row, { paddingBottom: Spacing.sm }]}>
-              <Ionicons name="time-outline" size={20} color={colors.primary} />
-              <Text style={[styles.label, { color: colors.text }]}>{t("settings.units.timeFormat", "Time Format")}</Text>
-            </View>
-            <View style={styles.segmentedControl}>
-              {([{ key: "24h", label: t("settings.units.timeFormatOptions.24h", "24-hour (14:00)") }, { key: "12h", label: t("settings.units.timeFormatOptions.12h", "12-hour (2:00 PM)") }] as const).map((opt) => {
-                const isActive = (profile?.units?.timeFormat || "24h") === opt.key;
-                return (
-                  <TouchableOpacity
-                    key={opt.key}
-                    style={[styles.segment, {
-                      backgroundColor: isActive ? colors.primary : "transparent",
-                      borderColor: colors.border,
-                    }]}
-                    onPress={() => handleTimeFormatChange(opt.key as "12h" | "24h")}
-                  >
-                    <Text style={[styles.segmentText, { color: isActive ? colors.primaryForeground : colors.textSecondary }]}>
-                      {opt.label}
-                    </Text>
-                  </TouchableOpacity>
-                );
-              })}
-            </View>
+          <View style={[styles.row, { paddingBottom: Spacing.sm }]}>
+            <Ionicons name="time-outline" size={20} color={colors.primary} />
+            <Text style={[styles.label, { color: colors.text }]}>{t("settings.units.timeFormat", "Time Format")}</Text>
+          </View>
+          <View style={styles.segmentedControl}>
+            {([{ key: "24h", label: t("settings.units.timeFormatOptions.24h", "24-hour (14:00)") }, { key: "12h", label: t("settings.units.timeFormatOptions.12h", "12-hour (2:00 PM)") }] as const).map((opt) => {
+              const isActive = (profile?.units?.timeFormat || "24h") === opt.key;
+              return (
+                <TouchableOpacity
+                  key={opt.key}
+                  style={[styles.segment, {
+                    backgroundColor: isActive ? colors.primary : "transparent",
+                    borderColor: colors.border,
+                  }]}
+                  onPress={() => handleTimeFormatChange(opt.key as "12h" | "24h")}
+                  disabled={!hasProfile}
+                >
+                  <Text style={[styles.segmentText, { color: isActive ? colors.primaryForeground : colors.textSecondary }]}>
+                    {opt.label}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
           </View>
         </View>
-      )}
+        {!hasProfile && (
+          <Text style={[styles.hint, { color: colors.muted }]}>
+            {t("settings.units.profileRequired", "Create a profile to customize units and time format")}
+          </Text>
+        )}
+      </View>
 
       {/* Appearance */}
       <View style={styles.section}>

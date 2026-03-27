@@ -53,7 +53,7 @@ export function getWeatherDescription(code: number): string {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function useConditionsTranslations(t: any) {
   const { profile } = useUserProfile();
-  const units = profile?.units || getDefaultUnits("en");
+  const units = profile?.units || getDefaultUnits();
 
   return useMemo(() => {
     const translateRating = (rating: string): string => {

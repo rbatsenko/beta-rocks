@@ -182,7 +182,7 @@ export default function CragDetailScreen() {
   const [confirmedReportIds, setConfirmedReportIds] = useState<Set<string>>(new Set());
   const { hasProfile, profileId, syncKeyHash, profile } = useUserProfile();
   const { translateWeather } = useConditionsTranslations(t);
-  const units = profile?.units || getDefaultUnits("en");
+  const units = profile?.units || getDefaultUnits();
   const tf = units.timeFormat || "24h";
 
   // React Query for crag data — cached across navigations
