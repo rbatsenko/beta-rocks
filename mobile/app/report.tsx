@@ -100,6 +100,7 @@ export default function ReportScreen() {
     (editLostFoundType as "lost" | "found") || "lost"
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState<{ current: number; total: number; percent: number } | null>(null);
   const [observedAt, setObservedAt] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
 
@@ -195,15 +196,15 @@ export default function ReportScreen() {
     }
 
     const paths: string[] = [];
-    for (const uri of newPhotoUris) {
+    for (let i = 0; i < newPhotoUris.length; i++) {
+      const uri = newPhotoUris[i];
       const random = Math.random().toString(36).substring(2, 8);
       const fileName = `${profileId}-${Date.now()}-${random}.jpg`;
       const storagePath = `reports/${fileName}`;
 
-      // Upload directly to Supabase Storage REST API using FormData
-      // The JS client's upload() has issues in RN — bypass it entirely
-      // Read file as blob via XHR (most reliable in RN), then upload
-      // as raw binary to Supabase Storage REST API
+      setUploadProgress({ current: i + 1, total: newPhotoUris.length, percent: 0 });
+
+      // Read file as blob via XHR
       const blob: Blob = await new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
         xhr.onload = () => resolve(xhr.response as Blob);
@@ -213,23 +214,31 @@ export default function ReportScreen() {
         xhr.send(null);
       });
 
+      // Upload via XHR to get progress events
       const uploadUrl = `${SUPABASE_URL}/storage/v1/object/report-photos/${storagePath}`;
-      const res = await fetch(uploadUrl, {
-        method: "POST",
-        headers: {
-          apikey: SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-          "Content-Type": "image/jpeg",
-          "cache-control": "3600",
-        },
-        body: blob,
+      await new Promise<void>((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.upload.onprogress = (e) => {
+          if (e.lengthComputable) {
+            setUploadProgress({ current: i + 1, total: newPhotoUris.length, percent: Math.round((e.loaded / e.total) * 100) });
+          }
+        };
+        xhr.onload = () => {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            resolve();
+          } else {
+            console.warn("Photo upload failed:", xhr.status, xhr.responseText);
+            reject(new Error(`Upload failed (${xhr.status}): ${xhr.responseText}`));
+          }
+        };
+        xhr.onerror = () => reject(new Error("Network error during upload"));
+        xhr.open("POST", uploadUrl, true);
+        xhr.setRequestHeader("apikey", SUPABASE_ANON_KEY);
+        xhr.setRequestHeader("Authorization", `Bearer ${SUPABASE_ANON_KEY}`);
+        xhr.setRequestHeader("Content-Type", "image/jpeg");
+        xhr.setRequestHeader("cache-control", "3600");
+        xhr.send(blob);
       });
-
-      if (!res.ok) {
-        const errBody = await res.text();
-        console.warn("Photo upload failed:", res.status, errBody);
-        throw new Error(`Upload failed (${res.status}): ${errBody}`);
-      }
 
       paths.push(storagePath);
     }
@@ -325,6 +334,7 @@ export default function ReportScreen() {
       );
     } finally {
       setIsSubmitting(false);
+      setUploadProgress(null);
     }
   }
 
@@ -563,6 +573,18 @@ export default function ReportScreen() {
             </TouchableOpacity>
           )}
         </View>
+
+        {/* Upload progress */}
+        {uploadProgress && (
+          <View style={{ gap: 6 }}>
+            <Text style={[styles.addPhotoText, { color: colors.text, textAlign: "center" }]}>
+              {t("reports.uploadingPhoto", "Uploading photo {{current}} of {{total}}...", { current: uploadProgress.current, total: uploadProgress.total })}
+            </Text>
+            <View style={{ height: 4, borderRadius: 2, backgroundColor: colors.border, overflow: "hidden" }}>
+              <View style={{ height: "100%", width: `${uploadProgress.percent}%`, backgroundColor: colors.primary, borderRadius: 2 }} />
+            </View>
+          </View>
+        )}
 
         {/* Submit */}
         <TouchableOpacity
