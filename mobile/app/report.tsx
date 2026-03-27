@@ -203,8 +203,8 @@ export default function ReportScreen() {
       // Upload directly to Supabase Storage REST API using FormData
       // The JS client's upload() has issues in RN — bypass it entirely
       const formData = new FormData();
-      formData.append("", {
-        uri,
+      formData.append("file", {
+        uri: Platform.OS === "ios" ? uri.replace("file://", "") : uri,
         name: fileName,
         type: "image/jpeg",
       } as unknown as Blob);
@@ -213,8 +213,8 @@ export default function ReportScreen() {
       const res = await fetch(uploadUrl, {
         method: "POST",
         headers: {
+          apikey: SUPABASE_ANON_KEY,
           Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-          "x-upsert": "false",
         },
         body: formData,
       });
@@ -222,7 +222,7 @@ export default function ReportScreen() {
       if (!res.ok) {
         const errBody = await res.text();
         console.warn("Photo upload failed:", res.status, errBody);
-        throw new Error(t("reports.photoUploadFailed", "Failed to upload photo. Please try again."));
+        throw new Error(`Upload failed (${res.status}): ${errBody}`);
       }
 
       paths.push(storagePath);
