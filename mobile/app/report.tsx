@@ -202,12 +202,16 @@ export default function ReportScreen() {
 
       // Upload directly to Supabase Storage REST API using FormData
       // The JS client's upload() has issues in RN — bypass it entirely
-      const formData = new FormData();
-      formData.append("file", {
-        uri: Platform.OS === "ios" ? uri.replace("file://", "") : uri,
-        name: fileName,
-        type: "image/jpeg",
-      } as unknown as Blob);
+      // Read file as blob via XHR (most reliable in RN), then upload
+      // as raw binary to Supabase Storage REST API
+      const blob: Blob = await new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.onload = () => resolve(xhr.response as Blob);
+        xhr.onerror = () => reject(new Error("Failed to read photo"));
+        xhr.responseType = "blob";
+        xhr.open("GET", uri, true);
+        xhr.send(null);
+      });
 
       const uploadUrl = `${SUPABASE_URL}/storage/v1/object/report-photos/${storagePath}`;
       const res = await fetch(uploadUrl, {
@@ -215,8 +219,10 @@ export default function ReportScreen() {
         headers: {
           apikey: SUPABASE_ANON_KEY,
           Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          "Content-Type": "image/jpeg",
+          "cache-control": "3600",
         },
-        body: formData,
+        body: blob,
       });
 
       if (!res.ok) {
