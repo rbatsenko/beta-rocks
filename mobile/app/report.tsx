@@ -200,19 +200,13 @@ export default function ReportScreen() {
       const fileName = `${profileId}-${Date.now()}-${random}.jpg`;
       const storagePath = `reports/${fileName}`;
 
-      // Use XMLHttpRequest blob approach — works reliably in all RN builds
-      const blob = await new Promise<Blob>((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.onload = () => resolve(xhr.response);
-        xhr.onerror = () => reject(new Error("Failed to read photo"));
-        xhr.responseType = "blob";
-        xhr.open("GET", uri, true);
-        xhr.send(null);
-      });
+      // Official Supabase React Native pattern — fetch URI as ArrayBuffer
+      // See: github.com/supabase/supabase/tree/master/examples/user-management/expo-user-management
+      const arraybuffer = await fetch(uri).then((res) => res.arrayBuffer());
 
       const { error } = await supabase.storage
         .from("report-photos")
-        .upload(storagePath, blob, {
+        .upload(storagePath, arraybuffer, {
           contentType: "image/jpeg",
           upsert: false,
         });
