@@ -14,6 +14,7 @@ import {
 } from "react";
 import type { UserProfile, UnitsConfig } from "../types/api";
 import { generateSyncKey, hashSyncKeyAsync } from "../lib/sync-key";
+import { UNIT_PRESETS } from "../lib/units";
 import {
   getUserProfile as getStoredProfile,
   saveUserProfile as storeProfile,
@@ -39,6 +40,7 @@ interface UserProfileContextValue {
   isLoading: boolean;
   hasProfile: boolean;
   stats: UserStats | null;
+  units: UnitsConfig;
   createProfile: (displayName?: string) => Promise<boolean>;
   restoreFromSyncKey: (key: string) => Promise<boolean>;
   updateDisplayName: (name: string) => Promise<void>;
@@ -55,6 +57,7 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
   const [syncKeyHash, setSyncKeyHashState] = useState<string | null>(null);
   const [stats, setStats] = useState<UserStats | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [units, setUnits] = useState<UnitsConfig>(UNIT_PRESETS.metric);
 
   const hasProfile = profile !== null && profile.syncKey !== undefined;
 
@@ -64,6 +67,12 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
 
   async function loadStoredProfile() {
     try {
+      // Load saved units regardless of profile
+      const savedUnits = getUnitsPreference();
+      if (savedUnits) {
+        setUnits(savedUnits as unknown as UnitsConfig);
+      }
+
       const existingKey = await getSyncKey();
       if (existingKey) {
         const hash = await hashSyncKeyAsync(existingKey);
@@ -71,7 +80,12 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
 
         const stored = getStoredProfile();
         if (stored) {
-          setProfile(stored as unknown as UserProfile);
+          const storedProfile = stored as unknown as UserProfile;
+          setProfile(storedProfile);
+          // Profile units take precedence over standalone units
+          if (storedProfile.units) {
+            setUnits(storedProfile.units);
+          }
           // Sync data from Supabase in background
           syncFromSupabase(hash);
         }
@@ -151,6 +165,10 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
         };
         storeProfile(updated);
         setProfile(updated as unknown as UserProfile);
+        if (dbProfile.units) {
+          setUnits(dbProfile.units as unknown as UnitsConfig);
+          saveUnitsPreference(dbProfile.units as unknown as Record<string, string>);
+        }
       }
     } catch (error) {
       console.warn("[Sync] Background sync failed:", error);
@@ -273,25 +291,30 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
     }
   }, [profile, syncKeyHash]);
 
-  const updateUnits = useCallback(async (units: UnitsConfig) => {
-    if (!profile) return;
-    const updated = { ...profile, units, updatedAt: new Date().toISOString() };
-    storeProfile(updated as unknown as Record<string, unknown>);
-    saveUnitsPreference(units as unknown as Record<string, string>);
-    setProfile(updated);
+  const updateUnits = useCallback(async (newUnits: UnitsConfig) => {
+    // Always save to local storage and update state
+    saveUnitsPreference(newUnits as unknown as Record<string, string>);
+    setUnits(newUnits);
 
-    // Also update in Supabase
-    if (isSupabaseConfigured && supabase && syncKeyHash) {
-      try {
-        const { data: dbProfile } = await supabase
-          .from("user_profiles")
-          .select("id")
-          .eq("sync_key_hash", syncKeyHash)
-          .single();
-        if (dbProfile) {
-          await supabase.from("user_profiles").update({ units }).eq("id", dbProfile.id);
-        }
-      } catch {}
+    // If user has a profile, also update the profile
+    if (profile) {
+      const updated = { ...profile, units: newUnits, updatedAt: new Date().toISOString() };
+      storeProfile(updated as unknown as Record<string, unknown>);
+      setProfile(updated);
+
+      // Also update in Supabase
+      if (isSupabaseConfigured && supabase && syncKeyHash) {
+        try {
+          const { data: dbProfile } = await supabase
+            .from("user_profiles")
+            .select("id")
+            .eq("sync_key_hash", syncKeyHash)
+            .single();
+          if (dbProfile) {
+            await supabase.from("user_profiles").update({ units: newUnits }).eq("id", dbProfile.id);
+          }
+        } catch {}
+      }
     }
   }, [profile, syncKeyHash]);
 
@@ -371,6 +394,7 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
         isLoading,
         hasProfile,
         stats,
+        units,
         createProfile,
         restoreFromSyncKey,
         updateDisplayName,

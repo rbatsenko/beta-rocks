@@ -52,6 +52,7 @@ export default function SettingsScreen() {
     isLoading,
     hasProfile,
     stats,
+    units: contextUnits,
     createProfile,
     updateDisplayName,
     updateUnits,
@@ -69,7 +70,7 @@ export default function SettingsScreen() {
   const currentLanguageLabel =
     SUPPORTED_LANGUAGES.find((l) => l.code === language)?.label || "English";
 
-  const currentUnits = (profile?.units?.temperature ?? "celsius") === "fahrenheit" ? "imperial" : "metric";
+  const currentUnits = contextUnits.temperature === "fahrenheit" ? "imperial" : "metric";
 
   async function handleCreateProfile() {
     setIsCreating(true);
@@ -103,17 +104,15 @@ export default function SettingsScreen() {
   }
 
   function handleUnitToggle() {
-    const currentTimeFormat = profile?.units?.timeFormat || "24h";
     const newUnits: UnitsConfig =
       currentUnits === "metric"
-        ? { temperature: "fahrenheit", windSpeed: "mph", precipitation: "inches", distance: "miles", elevation: "feet", timeFormat: currentTimeFormat }
-        : { temperature: "celsius", windSpeed: "kmh", precipitation: "mm", distance: "km", elevation: "meters", timeFormat: currentTimeFormat };
+        ? { temperature: "fahrenheit", windSpeed: "mph", precipitation: "inches", distance: "miles", elevation: "feet", timeFormat: contextUnits.timeFormat }
+        : { temperature: "celsius", windSpeed: "kmh", precipitation: "mm", distance: "km", elevation: "meters", timeFormat: contextUnits.timeFormat };
     updateUnits(newUnits);
   }
 
   function handleTimeFormatChange(format: "12h" | "24h") {
-    const currentConfig = profile?.units || { temperature: "celsius" as const, windSpeed: "kmh" as const, precipitation: "mm" as const, distance: "km" as const, elevation: "meters" as const };
-    updateUnits({ ...currentConfig, timeFormat: format });
+    updateUnits({ ...contextUnits, timeFormat: format });
   }
 
   async function handleSignOut() {
@@ -318,7 +317,7 @@ export default function SettingsScreen() {
       {/* Units */}
       <View style={styles.section}>
         <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>{t("settings.units.title").toUpperCase()}</Text>
-        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }, !hasProfile && { opacity: 0.5 }]}>
+        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
           <View style={styles.segmentedControl}>
             {UNIT_SYSTEMS.map((sys) => {
               const isActive = currentUnits === sys.key;
@@ -330,7 +329,6 @@ export default function SettingsScreen() {
                     borderColor: colors.border,
                   }]}
                   onPress={handleUnitToggle}
-                  disabled={!hasProfile}
                 >
                   <Text style={[styles.segmentText, { color: isActive ? colors.primaryForeground : colors.textSecondary }]}>
                     {sys.label}
@@ -348,7 +346,7 @@ export default function SettingsScreen() {
           </View>
           <View style={styles.segmentedControl}>
             {([{ key: "24h", label: t("settings.units.timeFormatOptions.24h", "24-hour (14:00)") }, { key: "12h", label: t("settings.units.timeFormatOptions.12h", "12-hour (2:00 PM)") }] as const).map((opt) => {
-              const isActive = (profile?.units?.timeFormat || "24h") === opt.key;
+              const isActive = contextUnits.timeFormat === opt.key;
               return (
                 <TouchableOpacity
                   key={opt.key}
@@ -357,7 +355,6 @@ export default function SettingsScreen() {
                     borderColor: colors.border,
                   }]}
                   onPress={() => handleTimeFormatChange(opt.key as "12h" | "24h")}
-                  disabled={!hasProfile}
                 >
                   <Text style={[styles.segmentText, { color: isActive ? colors.primaryForeground : colors.textSecondary }]}>
                     {opt.label}
@@ -367,11 +364,6 @@ export default function SettingsScreen() {
             })}
           </View>
         </View>
-        {!hasProfile && (
-          <Text style={[styles.hint, { color: colors.muted }]}>
-            {t("settings.units.profileRequired", "Create a profile to customize units and time format")}
-          </Text>
-        )}
       </View>
 
       {/* Appearance */}

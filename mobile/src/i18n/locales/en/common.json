@@ -692,8 +692,7 @@
       "saved": "Units saved",
       "savedDescription": "Your unit preferences have been updated successfully",
       "saveFailed": "Failed to save units",
-      "saveFailedDescription": "Could not save your unit preferences. Please try again",
-      "profileRequired": "Create a profile to customize units and time format"
+      "saveFailedDescription": "Could not save your unit preferences. Please try again"
     },
     "syncKey": {
       "title": "Sync Key",

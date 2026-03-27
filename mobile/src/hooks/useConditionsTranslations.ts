@@ -12,7 +12,6 @@ import {
   formatTemperature,
   formatWindSpeed,
   formatPrecipitation,
-  getDefaultUnits,
 } from "../lib/units";
 
 const WMO_DESCRIPTIONS: Record<number, string> = {
@@ -52,8 +51,7 @@ export function getWeatherDescription(code: number): string {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function useConditionsTranslations(t: any) {
-  const { profile } = useUserProfile();
-  const units = profile?.units || getDefaultUnits();
+  const { units } = useUserProfile();
 
   return useMemo(() => {
     const translateRating = (rating: string): string => {
