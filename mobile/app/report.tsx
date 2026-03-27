@@ -32,7 +32,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { createReport } from "@/api/client";
 import { supabase, isSupabaseConfigured } from "@/api/supabase";
 import { useUserProfile } from "@/hooks/useUserProfile";
-import { SUPABASE_URL, CATEGORY_COLORS } from "@/constants/config";
+import { SUPABASE_URL, SUPABASE_ANON_KEY, CATEGORY_COLORS } from "@/constants/config";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useTranslation } from "react-i18next";
@@ -200,21 +200,31 @@ export default function ReportScreen() {
       const fileName = `${profileId}-${Date.now()}-${random}.jpg`;
       const storagePath = `reports/${fileName}`;
 
-      // Official Supabase React Native pattern — fetch URI as ArrayBuffer
-      // See: github.com/supabase/supabase/tree/master/examples/user-management/expo-user-management
-      const arraybuffer = await fetch(uri).then((res) => res.arrayBuffer());
+      // Upload directly to Supabase Storage REST API using FormData
+      // The JS client's upload() has issues in RN — bypass it entirely
+      const formData = new FormData();
+      formData.append("", {
+        uri,
+        name: fileName,
+        type: "image/jpeg",
+      } as unknown as Blob);
 
-      const { error } = await supabase.storage
-        .from("report-photos")
-        .upload(storagePath, arraybuffer, {
-          contentType: "image/jpeg",
-          upsert: false,
-        });
+      const uploadUrl = `${SUPABASE_URL}/storage/v1/object/report-photos/${storagePath}`;
+      const res = await fetch(uploadUrl, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          "x-upsert": "false",
+        },
+        body: formData,
+      });
 
-      if (error) {
-        console.warn("Photo upload failed:", error.message);
+      if (!res.ok) {
+        const errBody = await res.text();
+        console.warn("Photo upload failed:", res.status, errBody);
         throw new Error(t("reports.photoUploadFailed", "Failed to upload photo. Please try again."));
       }
+
       paths.push(storagePath);
     }
     return paths;
