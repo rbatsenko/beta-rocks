@@ -35,7 +35,6 @@ import {
   formatWindSpeed,
   convertPrecipitation,
   formatPrecipitation,
-  getDefaultUnits,
 } from "@/lib/units";
 import type { Report } from "@/types/api";
 import { FRICTION_RATINGS, RATING_COLORS, CATEGORY_COLORS } from "@/constants/config";
@@ -180,9 +179,8 @@ export default function CragDetailScreen() {
   const [lightboxVisible, setLightboxVisible] = useState(false);
   const [parentCrag, setParentCrag] = useState<{ name: string; slug: string } | null>(null);
   const [confirmedReportIds, setConfirmedReportIds] = useState<Set<string>>(new Set());
-  const { hasProfile, profileId, syncKeyHash, profile } = useUserProfile();
+  const { hasProfile, profileId, syncKeyHash, profile, units } = useUserProfile();
   const { translateWeather } = useConditionsTranslations(t);
-  const units = profile?.units || getDefaultUnits("en");
   const tf = units.timeFormat || "24h";
 
   // React Query for crag data — cached across navigations
@@ -945,7 +943,7 @@ export default function CragDetailScreen() {
                     {formatWindSpeed(convertWindSpeed(wind, "kmh", units.windSpeed), units.windSpeed, 0)}
                   </Text>
                   {rc && rl && (
-                    <View style={[styles.smallBadge, { backgroundColor: rc.bg }]}>
+                    <View style={[styles.smallBadge, { backgroundColor: rc.bg, marginLeft: "auto" }]}>
                       <Text style={[styles.smallBadgeText, { color: rc.text }]}>{t(`ratings.${rl!.toLowerCase()}`, rl)}</Text>
                     </View>
                   )}
@@ -1150,7 +1148,7 @@ function HourlyTimeline({ hours, colors, units, t }: { hours: any[]; colors: (ty
               {formatWindSpeed(convertWindSpeed(wind, "kmh", units.windSpeed), units.windSpeed, 0)}
             </Text>
             {rc && rl && (
-              <View style={[styles.smallBadge, { backgroundColor: rc.bg }]}>
+              <View style={[styles.smallBadge, { backgroundColor: rc.bg, marginLeft: "auto" }]}>
                 <Text style={[styles.smallBadgeText, { color: rc.text }]}>{t(`ratings.${rl!.toLowerCase()}`, rl)}</Text>
               </View>
             )}

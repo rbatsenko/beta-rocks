@@ -125,14 +125,8 @@ export function formatPrecipitation(
 }
 
 /**
- * Get default units based on device locale
+ * Get default units — always metric for mobile users
  */
-export function getDefaultUnits(locale: string): UnitsConfig {
-  if (locale.startsWith("en-US") || locale === "en") {
-    return UNIT_PRESETS.imperial;
-  }
-  if (locale.startsWith("en-GB")) {
-    return UNIT_PRESETS.uk;
-  }
+export function getDefaultUnits(_locale?: string): UnitsConfig {
   return UNIT_PRESETS.metric;
 }
