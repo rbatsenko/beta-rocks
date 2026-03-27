@@ -943,7 +943,7 @@ export default function CragDetailScreen() {
                     {formatWindSpeed(convertWindSpeed(wind, "kmh", units.windSpeed), units.windSpeed, 0)}
                   </Text>
                   {rc && rl && (
-                    <View style={[styles.smallBadge, { backgroundColor: rc.bg }]}>
+                    <View style={[styles.smallBadge, { backgroundColor: rc.bg, marginLeft: "auto" }]}>
                       <Text style={[styles.smallBadgeText, { color: rc.text }]}>{t(`ratings.${rl!.toLowerCase()}`, rl)}</Text>
                     </View>
                   )}
@@ -1148,7 +1148,7 @@ function HourlyTimeline({ hours, colors, units, t }: { hours: any[]; colors: (ty
               {formatWindSpeed(convertWindSpeed(wind, "kmh", units.windSpeed), units.windSpeed, 0)}
             </Text>
             {rc && rl && (
-              <View style={[styles.smallBadge, { backgroundColor: rc.bg }]}>
+              <View style={[styles.smallBadge, { backgroundColor: rc.bg, marginLeft: "auto" }]}>
                 <Text style={[styles.smallBadgeText, { color: rc.text }]}>{t(`ratings.${rl!.toLowerCase()}`, rl)}</Text>
               </View>
             )}
