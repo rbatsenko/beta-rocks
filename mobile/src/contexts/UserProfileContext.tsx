@@ -70,7 +70,7 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
       // Load saved units regardless of profile
       const savedUnits = getUnitsPreference();
       if (savedUnits) {
-        setUnits(savedUnits as unknown as UnitsConfig);
+        setUnits({ ...UNIT_PRESETS.metric, ...savedUnits } as unknown as UnitsConfig);
       }
 
       const existingKey = await getSyncKey();
@@ -84,7 +84,7 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
           setProfile(storedProfile);
           // Profile units take precedence over standalone units
           if (storedProfile.units) {
-            setUnits(storedProfile.units);
+            setUnits({ ...UNIT_PRESETS.metric, ...storedProfile.units });
           }
           // Sync data from Supabase in background
           syncFromSupabase(hash);
@@ -166,8 +166,9 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
         storeProfile(updated);
         setProfile(updated as unknown as UserProfile);
         if (dbProfile.units) {
-          setUnits(dbProfile.units as unknown as UnitsConfig);
-          saveUnitsPreference(dbProfile.units as unknown as Record<string, string>);
+          const normalized = { ...UNIT_PRESETS.metric, ...(dbProfile.units as unknown as UnitsConfig) };
+          setUnits(normalized);
+          saveUnitsPreference(normalized as unknown as Record<string, string>);
         }
       }
     } catch (error) {

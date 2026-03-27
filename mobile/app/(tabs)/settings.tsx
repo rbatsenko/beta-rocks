@@ -106,8 +106,8 @@ export default function SettingsScreen() {
   function handleUnitToggle() {
     const newUnits: UnitsConfig =
       currentUnits === "metric"
-        ? { temperature: "fahrenheit", windSpeed: "mph", precipitation: "inches", distance: "miles", elevation: "feet", timeFormat: contextUnits.timeFormat }
-        : { temperature: "celsius", windSpeed: "kmh", precipitation: "mm", distance: "km", elevation: "meters", timeFormat: contextUnits.timeFormat };
+        ? { temperature: "fahrenheit", windSpeed: "mph", precipitation: "inches", distance: "miles", elevation: "feet", timeFormat: contextUnits.timeFormat ?? "24h" }
+        : { temperature: "celsius", windSpeed: "kmh", precipitation: "mm", distance: "km", elevation: "meters", timeFormat: contextUnits.timeFormat ?? "24h" };
     updateUnits(newUnits);
   }
 
