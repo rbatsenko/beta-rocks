@@ -28,6 +28,7 @@ import {
 import { useLocalSearchParams, useRouter, useNavigation } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import { manipulateAsync, SaveFormat } from "expo-image-manipulator";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { createReport } from "@/api/client";
 import { supabase, isSupabaseConfigured } from "@/api/supabase";
@@ -144,21 +145,35 @@ export default function ReportScreen() {
     const result = source === "camera"
       ? await ImagePicker.launchCameraAsync({
           mediaTypes: ["images"],
-          quality: 0.7,
+          quality: 1,
           allowsEditing: true,
           aspect: [4, 3],
         })
       : await ImagePicker.launchImageLibraryAsync({
           mediaTypes: ["images"],
-          quality: 0.7,
+          quality: 1,
           allowsMultipleSelection: true,
           selectionLimit: MAX_PHOTOS - totalPhotos,
         });
 
     if (result.canceled) return;
 
-    const uris = result.assets.map((a) => a.uri).slice(0, MAX_PHOTOS - totalPhotos);
-    setNewPhotoUris((prev) => [...prev, ...uris]);
+    // Resize to max 1920px (matching web compression) while preserving quality
+    const rawUris = result.assets.map((a) => a.uri).slice(0, MAX_PHOTOS - totalPhotos);
+    const compressed: string[] = [];
+    for (const rawUri of rawUris) {
+      try {
+        const manipulated = await manipulateAsync(
+          rawUri,
+          [{ resize: { width: 1920 } }],
+          { compress: 0.85, format: SaveFormat.JPEG }
+        );
+        compressed.push(manipulated.uri);
+      } catch {
+        compressed.push(rawUri); // fallback to original if compression fails
+      }
+    }
+    setNewPhotoUris((prev) => [...prev, ...compressed]);
   }
 
   function showPhotoOptions() {
