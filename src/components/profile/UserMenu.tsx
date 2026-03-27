@@ -59,8 +59,6 @@ interface UserMenuProps {
   onStatsClick: () => void;
   onFavoritesClick: () => void;
   onAboutClick?: () => void;
-  onClearChatClick?: () => void;
-  isClearChatDisabled?: boolean;
 }
 
 export function UserMenu({
@@ -68,8 +66,6 @@ export function UserMenu({
   onStatsClick,
   onFavoritesClick,
   onAboutClick,
-  onClearChatClick,
-  isClearChatDisabled,
 }: UserMenuProps) {
   const { t, i18n } = useClientTranslation("common");
   const { data: userProfile, isLoading } = useUserProfile();
@@ -175,8 +171,6 @@ export function UserMenu({
               onStatsClick={onStatsClick}
               onSettingsClick={onSettingsClick}
               onAboutClick={onAboutClick}
-              onClearChatClick={onClearChatClick}
-              isClearChatDisabled={isClearChatDisabled}
               onAddCragClick={handleAddCragClick}
             />
           </DropdownMenuContent>
@@ -246,8 +240,6 @@ export function UserMenu({
           onStatsClick={onStatsClick}
           onSettingsClick={onSettingsClick}
           onAboutClick={onAboutClick}
-          onClearChatClick={onClearChatClick}
-          isClearChatDisabled={isClearChatDisabled}
           onAddCragClick={handleAddCragClick}
         />
       </DropdownMenuContent>

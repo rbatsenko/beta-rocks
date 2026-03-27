@@ -1,6 +1,6 @@
 "use client";
 
-import { Star, BarChart3, Info, RotateCcw, Settings, MessageSquare, Mountain } from "lucide-react";
+import { Star, BarChart3, Info, Settings, MessageSquare, Mountain } from "lucide-react";
 import { DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { LanguageSelector } from "@/components/common/LanguageSelector";
@@ -12,8 +12,6 @@ interface UserMenuContentProps {
   onStatsClick: () => void;
   onSettingsClick: () => void;
   onAboutClick?: () => void;
-  onClearChatClick?: () => void;
-  isClearChatDisabled?: boolean;
   onAddCragClick?: () => void;
 }
 
@@ -27,8 +25,6 @@ export function UserMenuContent({
   onStatsClick,
   onSettingsClick,
   onAboutClick,
-  onClearChatClick,
-  isClearChatDisabled,
   onAddCragClick,
 }: UserMenuContentProps) {
   const { t } = useClientTranslation("common");
@@ -68,16 +64,6 @@ export function UserMenuContent({
         <DropdownMenuItem onClick={onAboutClick} className="cursor-pointer md:hidden">
           <Info className="mr-2 h-4 w-4" />
           <span>{t("ui.aboutApp")}</span>
-        </DropdownMenuItem>
-      )}
-      {onClearChatClick && (
-        <DropdownMenuItem
-          onClick={onClearChatClick}
-          className="cursor-pointer md:hidden"
-          disabled={isClearChatDisabled}
-        >
-          <RotateCcw className="mr-2 h-4 w-4" />
-          <span>{t("chat.clearChat")}</span>
         </DropdownMenuItem>
       )}
       <DropdownMenuItem onClick={onSettingsClick} className="cursor-pointer">

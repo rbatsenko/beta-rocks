@@ -19,10 +19,6 @@ interface HeaderActionsProps {
   extraActions?: ReactNode;
   /** Optional callback for about/info action (shown in menu on mobile) */
   onAboutClick?: () => void;
-  /** Optional callback for clear chat action (shown in menu on mobile) */
-  onClearChatClick?: () => void;
-  /** Whether clear chat is disabled */
-  isClearChatDisabled?: boolean;
 }
 
 export function HeaderActions({
@@ -32,8 +28,6 @@ export function HeaderActions({
   onSearchClick,
   extraActions,
   onAboutClick,
-  onClearChatClick,
-  isClearChatDisabled,
 }: HeaderActionsProps) {
   const { t } = useClientTranslation("common");
 
@@ -84,8 +78,6 @@ export function HeaderActions({
         onStatsClick={onStatsClick}
         onFavoritesClick={onFavoritesClick}
         onAboutClick={onAboutClick}
-        onClearChatClick={onClearChatClick}
-        isClearChatDisabled={isClearChatDisabled}
       />
       <style jsx>{`
         @keyframes pulse-subtle {
