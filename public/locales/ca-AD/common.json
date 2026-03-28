@@ -23,16 +23,6 @@
     "yourFavorites": "Els teus favorits",
     "favoriteQuery": "Quines són les condicions a {{crag}}?"
   },
-  "chat": {
-    "analyzing": "Analizant condicions...",
-    "thinking": "Pensant...",
-    "inputPlaceholder": "Pregunta sobre qualsevol esparelló o sector...",
-    "clearChat": "Esborrar xat",
-    "clearChatTooltip": "Esborrar la conversa actual",
-    "clearChatConfirm": "Esborrar el teu xat? Això eliminarà tots els missatges de la conversa actual.",
-    "clearHistory": "Esborrar historial",
-    "clearHistoryConfirm": "Estàs segur que vols esborrar tot l'historial de xat? Això no es pot desfer."
-  },
   "search": {
     "title": "Cerca esparellons",
     "description": "Cerca zones d'escalada per nom o ubicació",
@@ -248,10 +238,6 @@
       "title": "Meteorologia en temps real",
       "description": "Pronòstics precisos de Open-Meteo amb càlculs de sol/ombra per a sectors específics"
     },
-    "chatInterface": {
-      "title": "Interfície de xat",
-      "description": "Consultes en llenguatge natural impulsades per IA. Pregunta en qualsevol idioma, obtén respostes instantànies"
-    },
     "communityReports": {
       "title": "Informes comunitaris",
       "description": "Comparteix condicions, alertes de seguretat, canvis d'accés, info d'escalada i més. Ajuda escaladors companys amb actualitzacions en temps real en diverses categories"
@@ -262,7 +248,7 @@
     },
     "crossDeviceSync": {
       "title": "Sincronització entre dispositius",
-      "description": "Accedeix als teus preferits i historial de xat des de qualsevol dispositiu amb una clau de sincronització segura. No cal compte"
+      "description": "Accedeix als teus preferits des de qualsevol dispositiu amb una clau de sincronització segura. No cal compte"
     },
     "privacyFirst": {
       "title": "Privacitat primer",
@@ -378,7 +364,7 @@
     },
     "banner": {
       "title": "Les teves dades se sincronitzen entre dispositius",
-      "description": "Els teus preferits, informes i historial de xat es guarden localment i es poden sincronitzar amb altres dispositius utilitzant la teva clau de sincronització.",
+      "description": "Els teus preferits, informes es guarden localment i es poden sincronitzar amb altres dispositius utilitzant la teva clau de sincronització.",
       "learnMore": "Més informació",
       "dismiss": "Entès"
     },
@@ -398,7 +384,7 @@
       },
       "multiDevice": {
         "title": "Multi-Device Access",
-        "description": "Access your favorites and chat history from any device by using your sync key."
+        "description": "Access your favorites from any device by using your sync key."
       },
       "privacy": {
         "title": "Privacy First",
@@ -545,7 +531,7 @@
       "title": "Zona de perill",
       "description": "Aquestes accions son permanents i no es poden desfer",
       "deleteProfile": "Eliminar perfil",
-      "deleteProfileConfirm": "Estàs segur que vols eliminar el teu perfil? Això eliminarà permanentment totes les teves dades inclosos preferits, historial de xat i configuració. Aquesta acció no es pot desfer.",
+      "deleteProfileConfirm": "Estàs segur que vols eliminar el teu perfil? Això eliminarà permanentment totes les teves dades inclosos preferits i configuració. Aquesta acció no es pot desfer.",
       "deleteFailed": "Error en eliminar el perfil. Si us plau, torna-ho a intentar."
     },
     "signOut": "Sign Out"
@@ -751,7 +737,6 @@
     }
   },
   "cragPage": {
-    "askAI": "Pregunta a la IA",
     "edit": "Editar",
     "editCrag": "Editar detalls de la paret",
     "currentConditions": "Condicions actuals",
@@ -762,7 +747,6 @@
     "searchSectors": "Cerca sectors...",
     "noSectorsFound": "No s'han trobat sectors que coincideixin amb la teva cerca.",
     "disclaimer": "Les condicions meteorològiques poden canviar ràpidament. Verifica sempre les condicions en arribar i utilitza el teu millor criteri.",
-    "askAIAboutCrag": "Pregunta a la IA sobre aquesta paret",
     "viewOnSunCalc": "Veure horaris de sol/lluna",
     "viewSunAngles": "Veure posició del sol i angles d'ombra",
     "viewOnMap": "Veure al mapa",

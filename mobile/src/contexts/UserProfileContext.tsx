@@ -350,12 +350,6 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
           .delete()
           .eq("user_profile_id", dbProfile.id);
 
-        // Delete chat sessions (messages cascade via foreign key)
-        await supabase
-          .from("chat_sessions")
-          .delete()
-          .eq("user_profile_id", dbProfile.id);
-
         // Delete user profile — remaining related data (user_stats, notifications,
         // push_subscriptions) is removed via ON DELETE CASCADE in the database
         const { error: profileError } = await supabase

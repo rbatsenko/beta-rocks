@@ -23,16 +23,6 @@
     "yourFavorites": "Deine Favoriten",
     "favoriteQuery": "Wie sind die Bedingungen in {{crag}}?"
   },
-  "chat": {
-    "analyzing": "Analysiere Bedingungen...",
-    "thinking": "Denke nach...",
-    "inputPlaceholder": "Frag nach einem Fels oder Sektor...",
-    "clearHistory": "Verlauf löschen",
-    "clearHistoryConfirm": "Sind Sie sicher, dass Sie den gesamten Chat-Verlauf löschen möchten? Dies kann nicht rückgängig gemacht werden.",
-    "clearChat": "Chat löschen",
-    "clearChatTooltip": "Aktuelle Konversation löschen",
-    "clearChatConfirm": "Chat löschen? Dadurch werden alle Nachrichten aus der aktuellen Konversation entfernt."
-  },
   "search": {
     "title": "Felsen suchen",
     "description": "Klettergebiete nach Name oder Standort suchen",
@@ -91,7 +81,7 @@
       "rockType": "Gesteinsart",
       "rockTypePlaceholder": "Gesteinsart auswählen (optional)",
       "aspects": "Ausrichtungen",
-      "aspectsHelp": "Wählen Sie alle Himmelsrichtungen, in die der Felsen zeigt",
+      "aspectsHelp": "Wählen Sie alle Himmelsrichtungen in die der Felsen zeigt",
       "climbingTypes": "Kletterarten",
       "climbingTypesHelp": "Wählen Sie alle zutreffenden Kletterstile aus",
       "description": "Beschreibung",
@@ -248,10 +238,6 @@
       "title": "Wetter in Echtzeit",
       "description": "Präzise Open-Meteo-Vorhersagen mit Sonnen-/Schattenberechnung für einzelne Sektoren"
     },
-    "chatInterface": {
-      "title": "Chat-Oberfläche",
-      "description": "Natürlichsprachliche Anfragen mit KI-Unterstützung. Frag in jeder Sprache und erhalte sofort Antworten"
-    },
     "communityReports": {
       "title": "Community-Berichte",
       "description": "Teile Bedingungen, Sicherheitshinweise, Zugangsänderungen, Kletterinfos und mehr. Hilf Kletterern mit Echtzeit-Updates in verschiedenen Kategorien"
@@ -262,7 +248,7 @@
     },
     "crossDeviceSync": {
       "title": "Geräteübergreifende Synchronisation",
-      "description": "Greifen Sie von jedem Gerät auf Ihre Favoriten und Chat-Verläufe zu – mit einem sicheren Sync-Schlüssel. Kein Konto erforderlich"
+      "description": "Greifen Sie von jedem Gerät auf Ihre Favoriten-Verläufe zu – mit einem sicheren Sync-Schlüssel. Kein Konto erforderlich"
     },
     "privacyFirst": {
       "title": "Datenschutz zuerst",
@@ -278,7 +264,7 @@
     },
     "whatYouControl": {
       "title": "Was du kontrollierst",
-      "description": "Deine Favoriten, Berichte und Chat-Verlauf werden lokal auf deinem Gerät gespeichert. Um von mehreren Geräten darauf zuzugreifen, kannst du ein anonymes Profil erstellen. Sobald du ein Profil hast, werden deine Daten automatisch synchronisiert, um den Zugriff von mehreren Geräten zu ermöglichen. Du kannst alle deine Daten jederzeit in den Einstellungen löschen."
+      "description": "Deine Favoriten, Berichte werden lokal auf deinem Gerät gespeichert. Um von mehreren Geräten darauf zuzugreifen, kannst du ein anonymes Profil erstellen. Sobald du ein Profil hast, werden deine Daten automatisch synchronisiert, um den Zugriff von mehreren Geräten zu ermöglichen. Du kannst alle deine Daten jederzeit in den Einstellungen löschen."
     },
     "howSyncWorks": {
       "title": "Wie Synchronisierung funktioniert",
@@ -290,7 +276,7 @@
     },
     "yourRights": {
       "title": "Deine Rechte",
-      "description": "Du kannst dein Profil jederzeit in den Einstellungen löschen. Dadurch werden deine Favoriten, dein Chat-Verlauf und dein Profil aus unserer Datenbank entfernt. Von dir veröffentlichte Community-Berichte bleiben (anonym) sichtbar, um anderen Kletterern zu helfen. Volle Kontrolle über deine Daten."
+      "description": "Du kannst dein Profil jederzeit in den Einstellungen löschen. Dadurch werden deine Favoriten, dein und dein Profil aus unserer Datenbank entfernt. Von dir veröffentlichte Community-Berichte bleiben (anonym) sichtbar, um anderen Kletterern zu helfen. Volle Kontrolle über deine Daten."
     },
     "dataSecurity": {
       "title": "Datensicherheit",
@@ -408,7 +394,7 @@
   "sync": {
     "banner": {
       "title": "Ihre Daten werden geräteübergreifend synchronisiert",
-      "description": "Ihre Favoriten, Berichte und Chat-Verlauf werden lokal gespeichert und können mit Ihrem Sync-Schlüssel auf andere Geräte synchronisiert werden.",
+      "description": "Ihre Favoriten, Berichte werden lokal gespeichert und können mit Ihrem Sync-Schlüssel auf andere Geräte synchronisiert werden.",
       "learnMore": "Mehr erfahren",
       "dismiss": "Verstanden"
     },
@@ -420,7 +406,7 @@
     },
     "notification": {
       "title": "Sync-Schlüssel erstellt",
-      "description": "Wir haben einen eindeutigen Schlüssel erstellt, um Ihre Favoriten und Chats geräteübergreifend zu synchronisieren.",
+      "description": "Wir haben einen eindeutigen Schlüssel erstellt, um Ihre Favoriten geräteübergreifend zu synchronisieren.",
       "viewInSettings": "In Einstellungen ansehen",
       "viewMore": "Was ist der Sync-Schlüssel?"
     }
@@ -435,7 +421,7 @@
       },
       "multiDevice": {
         "title": "Zugriff von mehreren Geräten",
-        "description": "Greifen Sie mit Ihrem Sync-Schlüssel von jedem Gerät auf Ihre Favoriten und Ihren Chat-Verlauf zu."
+        "description": "Greifen Sie mit Ihrem Sync-Schlüssel von jedem Gerät auf Ihre Favoriten und Ihren zu."
       },
       "privacy": {
         "title": "Datenschutz zuerst",
@@ -478,7 +464,7 @@
       },
       "manual": {
         "title": "Speichern Sie Ihre Daten auf allen Geräten",
-        "description": "Synchronisieren Sie Ihre Favoriten, Meldungen und Chatverlauf auf allen Ihren Geräten"
+        "description": "Synchronisieren Sie Ihre Favoriten, Meldungen verlauf auf allen Ihren Geräten"
       }
     },
     "features": {
@@ -661,7 +647,7 @@
       "title": "Gefahrenzone",
       "description": "Diese Aktionen sind dauerhaft und können nicht rückgängig gemacht werden",
       "deleteProfile": "Profil löschen",
-      "deleteProfileConfirm": "Möchten Sie Ihr Profil wirklich löschen? Dadurch werden alle Ihre Daten einschließlich Favoriten, Chat-Verlauf und Einstellungen dauerhaft entfernt. Diese Aktion kann nicht rückgängig gemacht werden.",
+      "deleteProfileConfirm": "Möchten Sie Ihr Profil wirklich löschen? Dadurch werden alle Ihre Daten einschließlich Favoriten und Einstellungen dauerhaft entfernt. Diese Aktion kann nicht rückgängig gemacht werden.",
       "deleteFailed": "Profil konnte nicht gelöscht werden. Bitte versuchen Sie es erneut."
     },
     "signOut": "Sign Out"
@@ -867,7 +853,6 @@
     }
   },
   "cragPage": {
-    "askAI": "KI fragen",
     "edit": "Bearbeiten",
     "editCrag": "Felsen-Details bearbeiten",
     "currentConditions": "Aktuelle Bedingungen",
@@ -878,7 +863,6 @@
     "searchSectors": "Sektoren suchen...",
     "noSectorsFound": "Keine Sektoren gefunden, die Ihrer Suche entsprechen.",
     "disclaimer": "Wetterbedingungen können sich schnell ändern. Überprüfen Sie die Bedingungen immer vor Ort und nutzen Sie Ihr bestes Urteilsvermögen.",
-    "askAIAboutCrag": "KI über diesen Fels fragen",
     "viewOnSunCalc": "Sonnen-/Mondzeiten ansehen",
     "viewSunAngles": "Sonnenposition und Schattenwinkel ansehen",
     "viewOnMap": "Auf Karte ansehen",

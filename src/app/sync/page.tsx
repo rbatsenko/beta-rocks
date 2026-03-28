@@ -42,7 +42,7 @@ export default function SyncPage() {
 
     setIsRestoring(true);
     try {
-      // First, clear ALL local storage (sync key, user profile, favorites, chat history, etc.)
+      // First, clear ALL local storage (sync key, user profile, favorites, etc.)
       // This ensures we start fresh with the restored key and prevents data conflicts
       localStorage.clear();
 

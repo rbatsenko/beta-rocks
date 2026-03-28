@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 /**
  * GET /api/sync/:key
- * Retrieves user data (crags, chats, reports) for the given sync key
+ * Retrieves user data (crags, reports) for the given sync key
  *
  * TODO: Query Supabase for user data with matching sync_key_hash
  */

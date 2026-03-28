@@ -23,16 +23,6 @@
     "yourFavorites": "Vaši Favoriti",
     "favoriteQuery": "Kakvi su uvjeti u {{crag}}?"
   },
-  "chat": {
-    "analyzing": "Analiziram uvjete...",
-    "thinking": "Razmišljam...",
-    "inputPlaceholder": "Pitaj o bilo kojem vrhuncu ili sektoru...",
-    "clearChat": "Obriši razgovor",
-    "clearChatTooltip": "Obriši trenutni razgovor",
-    "clearChatConfirm": "Obriši svoj razgovor? Ovo će ukloniti sve poruke iz trenutnog razgovora.",
-    "clearHistory": "Obriši povijest",
-    "clearHistoryConfirm": "Jesi li siguran/a da želiš obrisati svu povijest razgovora? Ovo se ne može vratiti."
-  },
   "search": {
     "title": "Pretražite stijene",
     "description": "Pretražite penjališta po imenu ili lokaciji",
@@ -248,10 +238,6 @@
       "title": "Vremenske prognoze u realnom vremenu",
       "description": "Točne prognoze iz Open-Meteo-a sa izračunima sunca/sjene za određene sektore"
     },
-    "chatInterface": {
-      "title": "Chat sučelje",
-      "description": "Upiti u prirodnom jeziku vođeni AI-om. Pitaj na bilo kojem jeziku, dobij trenutne odgovore"
-    },
     "communityReports": {
       "title": "Izvještaji zajednice",
       "description": "Dijelite uvjete, sigurnosna upozorenja, promjene pristupa, informacije o penjanju i više. Pomozite kolegama penjačima s ažuriranjima u stvarnom vremenu kroz više kategorija"
@@ -262,7 +248,7 @@
     },
     "crossDeviceSync": {
       "title": "Sinkronizacija između uređaja",
-      "description": "Pristupite svojim omiljenim lokacijama i povijesti chata s bilo kojeg uređaja pomoću sigurnog ključa za sinkronizaciju. Nije potreban račun"
+      "description": "Pristupite svojim omiljenim lokacijama s bilo kojeg uređaja pomoću sigurnog ključa za sinkronizaciju. Nije potreban račun"
     },
     "privacyFirst": {
       "title": "Privatnost na prvom mjestu",
@@ -278,7 +264,7 @@
     },
     "whatYouControl": {
       "title": "Što Ti Kontroliraš",
-      "description": "Vaši favoriti, izvješća i povijest chata pohranjuju se lokalno na vašem uređaju. Za pristup s više uređaja možete stvoriti anoniman profil. Nakon što imate profil, vaši se podaci automatski sinkroniziraju kako bi omogućili pristup s više uređaja. Možete izbrisati sve svoje podatke u bilo kojem trenutku iz Postavki."
+      "description": "Vaši favoriti, izvješća pohranjuju se lokalno na vašem uređaju. Za pristup s više uređaja možete stvoriti anoniman profil. Nakon što imate profil, vaši se podaci automatski sinkroniziraju kako bi omogućili pristup s više uređaja. Možete izbrisati sve svoje podatke u bilo kojem trenutku iz Postavki."
     },
     "howSyncWorks": {
       "title": "Kako Funkcionira Sinkronizacija",
@@ -290,7 +276,7 @@
     },
     "yourRights": {
       "title": "Tvoja Prava",
-      "description": "Svoj profil možete izbrisati bilo kada iz Postavki. Time se uklanjaju vaši favoriti, povijest chata i profil iz naše baze podataka. Izvješća zajednice koja ste objavili ostaju vidljiva (anonimno) kako bi pomogla drugim penjačima. Potpuna kontrola nad vašim podacima."
+      "description": "Svoj profil možete izbrisati bilo kada iz Postavki. Time se uklanjaju vaši favoriti i profil iz naše baze podataka. Izvješća zajednice koja ste objavili ostaju vidljiva (anonimno) kako bi pomogla drugim penjačima. Potpuna kontrola nad vašim podacima."
     },
     "dataSecurity": {
       "title": "Sigurnost Podataka",
@@ -430,7 +416,7 @@
       },
       "multiDevice": {
         "title": "Pristup s više uređaja",
-        "description": "Pristupite svojim omiljenim i povijesti chata s bilo kojeg uređaja pomoću ključa za sinkronizaciju."
+        "description": "Pristupite svojim omiljenim s bilo kojeg uređaja pomoću ključa za sinkronizaciju."
       },
       "privacy": {
         "title": "Privatnost na prvom mjestu",
@@ -862,7 +848,6 @@
     }
   },
   "cragPage": {
-    "askAI": "Pitaj AI",
     "edit": "Uredi",
     "editCrag": "Uredi detalje stijene",
     "currentConditions": "Trenutni uvjeti",
@@ -873,7 +858,6 @@
     "searchSectors": "Pretraži sektore...",
     "noSectorsFound": "Nisu pronađeni sektori koji odgovaraju vašoj pretrazi.",
     "disclaimer": "Vremenski uvjeti se mogu brzo promijeniti. Uvijek provjerite uvjete po dolasku i koristite svoje najbolje prosuđivanje.",
-    "askAIAboutCrag": "Pitaj AI o ovoj stijeni",
     "viewOnSunCalc": "Prikaži vremena sunca/mjeseca",
     "viewSunAngles": "Prikaži položaj sunca i kutove sjene",
     "viewOnMap": "Prikaži na karti",

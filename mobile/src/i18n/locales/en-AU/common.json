@@ -4,7 +4,7 @@
   },
   "welcome": {
     "heading": "Get info on any crag",
-    "description": "Real-time conditions, community reports, and route information for crags worldwide",
+    "description": "Real-time conditions, community reports and route information for crags worldwide",
     "searchHint": "Search for any climbing area",
     "yourFavorites": "Your Favourites",
     "favoriteQuery": "What are conditions at {{crag}}?",
@@ -22,16 +22,6 @@
         "query": "Blue Mountains conditions tomorrow?"
       }
     }
-  },
-  "chat": {
-    "analyzing": "Analysing conditions...",
-    "thinking": "Thinking...",
-    "inputPlaceholder": "Ask about any crag or sector...",
-    "clearChat": "Clear Chat",
-    "clearChatTooltip": "Clear the current conversation",
-    "clearChatConfirm": "Clear your chat? This will remove all messages from the current conversation.",
-    "clearHistory": "Clear History",
-    "clearHistoryConfirm": "Are you sure you want to clear all chat history? This cannot be undone."
   },
   "search": {
     "title": "Search Crags",
@@ -245,7 +235,7 @@
     "github": "GitHub",
     "brand": "beta.rocks",
     "description": "Free climbing conditions for everyone. Built with ❤️ for the climbing community.",
-    "attribution": "Data from Open-Meteo, OpenBeta, and <osmLink>OpenStreetMap contributors</osmLink>. Community-powered reports.",
+    "attribution": "Data from Open-Meteo, OpenBeta and <osmLink>OpenStreetMap contributors</osmLink>. Community-powered reports.",
     "copyright": "© 2026 beta.rocks. All rights reserved."
   },
   "features": {
@@ -255,13 +245,9 @@
       "title": "Real-time Weather",
       "description": "Accurate forecasts from Open-Meteo with sun/shade calculations for specific sectors"
     },
-    "chatInterface": {
-      "title": "Chat Interface",
-      "description": "Natural language queries powered by AI. Ask in any language, get instant answers"
-    },
     "communityReports": {
       "title": "Community Reports",
-      "description": "Share conditions, safety alerts, access changes, route info, and more. Help fellow climbers with real-time updates across multiple categories"
+      "description": "Share conditions, safety alerts, access changes, route info and more. Help fellow climbers with real-time updates across multiple categories"
     },
     "globalCoverage": {
       "title": "Global Coverage",
@@ -269,7 +255,7 @@
     },
     "crossDeviceSync": {
       "title": "Cross-Device Sync",
-      "description": "Access your favorites and chat history from any device with a secure sync key. No account required"
+      "description": "Access your favorites from any device with a secure sync key. No account required"
     },
     "privacyFirst": {
       "title": "Privacy First",
@@ -285,7 +271,7 @@
     },
     "whatYouControl": {
       "title": "What You Control",
-      "description": "Your favorites, reports, and chat history are stored locally on your device. To access them across devices, you can create an anonymous profile. Once you have a profile, your data syncs automatically to enable multi-device access. You can delete all your data anytime from Settings."
+      "description": "Your favorites, reports, are stored locally on your device. To access them across devices, you can create an anonymous profile. Once you have a profile, your data syncs automatically to enable multi-device access. You can delete all your data anytime from Settings."
     },
     "howSyncWorks": {
       "title": "How Sync Works",
@@ -297,7 +283,7 @@
     },
     "yourRights": {
       "title": "Your Rights",
-      "description": "You can delete your profile anytime from Settings. This removes your favorites, chat history, and profile from our database. Community reports you posted remain visible (anonymously) to help other climbers. Full control over your data."
+      "description": "You can delete your profile anytime from Settings. This removes your favorites and profile from our database. Community reports you posted remain visible (anonymously) to help other climbers. Full control over your data."
     },
     "dataSecurity": {
       "title": "Data Security",
@@ -408,13 +394,13 @@
   "sync": {
     "notification": {
       "title": "Sync Key Created",
-      "description": "We've generated a unique key to sync your favorites and chat across devices.",
+      "description": "We've generated a unique key to sync your favorites across devices.",
       "viewInSettings": "View in Settings",
       "viewMore": "What is sync key?"
     },
     "banner": {
       "title": "Your data syncs across devices",
-      "description": "Your favorites, reports, and chat history are saved locally and can sync to other devices using your sync key.",
+      "description": "Your favorites, reports, are saved locally and can sync to other devices using your sync key.",
       "learnMore": "Learn more",
       "dismiss": "Got it"
     },
@@ -431,7 +417,7 @@
       "invalidKeyError": "Invalid sync key format",
       "goHome": "Go to Home",
       "restoreTitle": "Restore Your Data",
-      "restoreDescription": "This will restore your favorites, chat history, and settings from another device",
+      "restoreDescription": "This will restore your favorites and settings from another device",
       "syncKeyLabel": "Sync Key",
       "restoreSuccess": "Sync key restored! Redirecting...",
       "cancel": "Cancel",
@@ -450,7 +436,7 @@
       },
       "multiDevice": {
         "title": "Multi-Device Access",
-        "description": "Access your favorites and chat history from any device by using your sync key."
+        "description": "Access your favorites from any device by using your sync key."
       },
       "privacy": {
         "title": "Privacy First",
@@ -476,7 +462,7 @@
       },
       "report": {
         "title": "Share Reports with Community",
-        "description": "Help fellow climbers by sharing conditions, safety alerts, and route info"
+        "description": "Help fellow climbers by sharing conditions, safety alerts and route info"
       },
       "vote": {
         "title": "Vote on Helpful Reports",
@@ -484,7 +470,7 @@
       },
       "manual": {
         "title": "Save Your Data Across Devices",
-        "description": "Sync your favorites, reports, and chat history on all your devices"
+        "description": "Sync your favorites, reports, on all your devices"
       }
     },
     "features": {
@@ -573,7 +559,7 @@
   },
   "settings": {
     "title": "Settings",
-    "description": "Manage your profile, sync key, and preferences",
+    "description": "Manage your profile, sync key and preferences",
     "save": "Save",
     "saving": "Saving...",
     "displayName": {
@@ -675,7 +661,7 @@
       "title": "Danger Zone",
       "description": "These actions are permanent and cannot be undone",
       "deleteProfile": "Delete Profile",
-      "deleteProfileConfirm": "Are you sure you want to delete your profile? This will permanently remove all your data including favorites, chat history, and settings. This action cannot be undone.",
+      "deleteProfileConfirm": "Are you sure you want to delete your profile? This will permanently remove all your data including favorites and settings. This action cannot be undone.",
       "deleteFailed": "Failed to delete profile. Please try again."
     },
     "appearance": "Appearance",
@@ -887,7 +873,6 @@
     }
   },
   "cragPage": {
-    "askAI": "Ask AI",
     "edit": "Edit",
     "editCrag": "Edit crag details",
     "currentConditions": "Current Conditions",
@@ -898,7 +883,6 @@
     "searchSectors": "Search sectors...",
     "noSectorsFound": "No sectors found matching your search.",
     "disclaimer": "Weather conditions can change rapidly. Always verify conditions on arrival and use your best judgment.",
-    "askAIAboutCrag": "Ask AI about this crag",
     "viewOnSunCalc": "View sun/moon times",
     "viewSunAngles": "View sun position and shadow angles",
     "viewOnMap": "View on map",

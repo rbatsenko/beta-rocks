@@ -23,16 +23,6 @@
     "yourFavorites": "Dine Favoritter",
     "favoriteQuery": "Hva er forholdene ved {{crag}}?"
   },
-  "chat": {
-    "analyzing": "Analyserer forhold...",
-    "thinking": "Tenker...",
-    "inputPlaceholder": "Spør om et hvilket som helst crag eller sektor...",
-    "clearHistory": "Tøm historikk",
-    "clearHistoryConfirm": "Er du sikker på at du vil tømme hele chattehistorikken? Dette kan ikke angres.",
-    "clearChat": "Tøm chat",
-    "clearChatTooltip": "Tøm den nåværende samtalen",
-    "clearChatConfirm": "Tømme chatten din? Dette vil fjerne alle meldinger fra den nåværende samtalen."
-  },
   "search": {
     "title": "Søk klatrevegger",
     "description": "Søk etter klatreområder etter navn eller plassering",
@@ -249,10 +239,6 @@
       "title": "Vær i sanntid",
       "description": "Presise prognoser fra Open-Meteo med sol/skygge-beregning for hver sektor"
     },
-    "chatInterface": {
-      "title": "Chat-grensesnitt",
-      "description": "Spørsmål i naturlig språk drevet av KI. Still dem på hvilket språk du vil"
-    },
     "communityReports": {
       "title": "Rapporter fra miljøet",
       "description": "Del forhold, sikkerhetsvarsler, tilgangsendringer, klatreinfo og mer. Hjelp medklatrere med sanntidsoppdateringer på tvers av flere kategorier"
@@ -263,7 +249,7 @@
     },
     "crossDeviceSync": {
       "title": "Synkronisering på tvers av enheter",
-      "description": "Få tilgang til favorittene og chattehistorikken din fra hvilken som helst enhet med en sikker synkroniseringsnøkkel. Ingen konto kreves"
+      "description": "Få tilgang til favorittene en din fra hvilken som helst enhet med en sikker synkroniseringsnøkkel. Ingen konto kreves"
     },
     "privacyFirst": {
       "title": "Personvern først",
@@ -279,7 +265,7 @@
     },
     "whatYouControl": {
       "title": "Hva Du Kontrollerer",
-      "description": "Favorittene dine, rapporter og chathistorikk lagres lokalt på enheten din. For å få tilgang til dem fra flere enheter kan du opprette en anonym profil. Når du har en profil, synkroniseres dataene dine automatisk for å muliggjøre tilgang fra flere enheter. Du kan slette alle dataene dine når som helst fra Innstillinger."
+      "description": "Favorittene dine, rapporter lagres lokalt på enheten din. For å få tilgang til dem fra flere enheter kan du opprette en anonym profil. Når du har en profil, synkroniseres dataene dine automatisk for å muliggjøre tilgang fra flere enheter. Du kan slette alle dataene dine når som helst fra Innstillinger."
     },
     "howSyncWorks": {
       "title": "Hvordan Synkronisering Fungerer",
@@ -291,7 +277,7 @@
     },
     "yourRights": {
       "title": "Dine Rettigheter",
-      "description": "Du kan slette profilen din når som helst fra Innstillinger. Dette fjerner favorittene dine, chathistorikk og profil fra databasen vår. Fellesskapsrapporter du har lagt ut forblir synlige (anonymt) for å hjelpe andre klatrere.Fullstendig kontroll over dataene dine."
+      "description": "Du kan slette profilen din når som helst fra Innstillinger. Dette fjerner favorittene dine og profil fra databasen vår. Fellesskapsrapporter du har lagt ut forblir synlige (anonymt) for å hjelpe andre klatrere.Fullstendig kontroll over dataene dine."
     },
     "dataSecurity": {
       "title": "Datasikkerhet",
@@ -405,7 +391,7 @@
   "sync": {
     "banner": {
       "title": "Dataene dine synkroniseres mellom enheter",
-      "description": "Dine favoritter, rapporter og chattehistorikk lagres lokalt og kan synkroniseres til andre enheter med synkroniseringsnøkkelen din.",
+      "description": "Dine favoritter, rapporter lagres lokalt og kan synkroniseres til andre enheter med synkroniseringsnøkkelen din.",
       "learnMore": "Lær mer",
       "dismiss": "Jeg forstår"
     },
@@ -416,7 +402,7 @@
     },
     "notification": {
       "title": "Synkroniseringsnøkkel opprettet",
-      "description": "Vi har generert en unik nøkkel for å synkronisere dine favoritter og chatter på tvers av enheter.",
+      "description": "Vi har generert en unik nøkkel for å synkronisere dine favoritter ter på tvers av enheter.",
       "viewInSettings": "Vis i innstillinger",
       "viewMore": "Hva er en synkroniseringsnøkkel?"
     }
@@ -431,7 +417,7 @@
       },
       "multiDevice": {
         "title": "Multi-Device Access",
-        "description": "Access your favorites and chat history from any device by using your sync key."
+        "description": "Access your favorites from any device by using your sync key."
       },
       "privacy": {
         "title": "Privacy First",
@@ -579,7 +565,7 @@
       "title": "Faresone",
       "description": "Disse handlingene er permanente og kan ikke angres",
       "deleteProfile": "Slett profil",
-      "deleteProfileConfirm": "Er du sikker på at du vil slette profilen din? Dette vil permanent fjerne all dataen din inkludert favoritter, chattehistorikk og innstillinger. Denne handlingen kan ikke angres.",
+      "deleteProfileConfirm": "Er du sikker på at du vil slette profilen din? Dette vil permanent fjerne all dataen din inkludert favoritter og innstillinger. Denne handlingen kan ikke angres.",
       "deleteFailed": "Kunne ikke slette profilen. Vennligst prøv igjen."
     },
     "appearance": "Appearance",
@@ -790,7 +776,6 @@
     }
   },
   "cragPage": {
-    "askAI": "Spør AI",
     "edit": "Rediger",
     "editCrag": "Rediger klippe-detaljer",
     "currentConditions": "Nåværende forhold",
@@ -801,7 +786,6 @@
     "searchSectors": "Søk sektorer...",
     "noSectorsFound": "Ingen sektorer funnet som samsvarer med søket ditt.",
     "disclaimer": "Værforholdene kan endre seg raskt. Alltid sjekk forholdene ved ankomst og bruk din beste vurdering.",
-    "askAIAboutCrag": "Spør AI om denne klippen",
     "viewOnSunCalc": "Vis sol/måne-tider",
     "viewSunAngles": "Vis solposisjon og skyggevinkler",
     "viewOnMap": "Vis på kart",
