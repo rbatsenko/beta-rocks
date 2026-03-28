@@ -24,13 +24,14 @@ export function WelcomeScreen({ onSearchClick, onAboutClick, onPrivacyClick }: W
 
   return (
     <div className="flex flex-col h-[calc(100dvh-4rem)]">
-      {/* Main content - centered */}
-      <div className="flex-1 overflow-auto flex flex-col items-center justify-center text-center py-6 px-4">
-        <div className="w-20 h-20 rounded-full bg-linear-to-br from-orange-500/20 to-orange-600/20 flex items-center justify-center mb-6">
+      {/* Main content - centered, scrollable when content overflows */}
+      <div className="flex-1 overflow-auto flex flex-col items-center text-center py-6 px-4 min-h-0">
+        <div className="flex flex-col items-center justify-center flex-1 min-h-fit">
+        <div className="w-20 h-20 shrink-0 rounded-full bg-linear-to-br from-orange-500/20 to-orange-600/20 flex items-center justify-center mb-6">
           <CloudSun className="w-10 h-10 text-orange-500" />
         </div>
-        <h2 className="text-3xl font-bold mb-3">{t("welcome.heading")}</h2>
-        <p className="text-muted-foreground mb-8 max-w-md text-base">
+        <h2 className="text-3xl font-bold mb-3 shrink-0">{t("welcome.heading")}</h2>
+        <p className="text-muted-foreground mb-8 max-w-md text-base shrink-0">
           {t("welcome.description")}
         </p>
 
@@ -62,7 +63,7 @@ export function WelcomeScreen({ onSearchClick, onAboutClick, onPrivacyClick }: W
 
         {/* Favorites Quick Actions */}
         {favorites.length > 0 && (
-          <div className="mt-8 w-full max-w-lg">
+          <div className="mt-8 w-full max-w-lg shrink-0">
             <div className="flex items-center gap-2 justify-center mb-4">
               <Star className="h-4 w-4 text-orange-500" />
               <h3 className="text-sm font-medium text-muted-foreground">
@@ -94,10 +95,11 @@ export function WelcomeScreen({ onSearchClick, onAboutClick, onPrivacyClick }: W
             </div>
           </div>
         )}
+        </div>
       </div>
 
       {/* Footer */}
-      <div className="border-t bg-background">
+      <div className="border-t bg-background shrink-0">
         <div className="container max-w-3xl px-4 py-4">
           <div className="flex items-center justify-center gap-3">
             <a
