@@ -168,7 +168,7 @@
     },
     "crossDeviceSync": {
       "title": "Sincronização entre dispositivos",
-      "description": "Aceda aos seus favoritos e histórico d a partir de qualquer dispositivo com uma chave de sincronização segura. Não é necessária conta"
+      "description": "Aceda aos seus favoritos a partir de qualquer dispositivo com uma chave de sincronização segura. Não é necessária conta"
     },
     "privacyFirst": {
       "title": "Privacidade em Primeiro Lugar",
@@ -184,7 +184,7 @@
     },
     "whatYouControl": {
       "title": "O Que Controla",
-      "description": "Os teus favoritos, relatórios e histórico d são armazenados localmente no teu dispositivo. Para aceder aos mesmos a partir de vários dispositivos, podes criar um perfil anónimo. Assim que tiveres um perfil, os teus dados sincronizam automaticamente para permitir acesso a partir de vários dispositivos. Podes eliminar todos os teus dados a qualquer momento nas Definições."
+      "description": "Os teus favoritos, relatórios são armazenados localmente no teu dispositivo. Para aceder aos mesmos a partir de vários dispositivos, podes criar um perfil anónimo. Assim que tiveres um perfil, os teus dados sincronizam automaticamente para permitir acesso a partir de vários dispositivos. Podes eliminar todos os teus dados a qualquer momento nas Definições."
     },
     "howSyncWorks": {
       "title": "Como Funciona a Sincronização",
@@ -196,7 +196,7 @@
     },
     "yourRights": {
       "title": "Os Seus Direitos",
-      "description": "Podes eliminar o teu perfil a qualquer momento nas Definições. Isto remove os teus favoritos, histórico d e perfil da nossa base de dados. Os relatórios da comunidade que publicaste permanecem visíveis (anonimamente) para ajudar outros escaladores. Controlo total sobre os teus dados."
+      "description": "Podes eliminar o teu perfil a qualquer momento nas Definições. Isto remove os teus favoritos e perfil da nossa base de dados. Os relatórios da comunidade que publicaste permanecem visíveis (anonimamente) para ajudar outros escaladores. Controlo total sobre os teus dados."
     },
     "dataSecurity": {
       "title": "Segurança de Dados",
@@ -316,7 +316,7 @@
     },
     "banner": {
       "title": "Os seus dados sincronizam entre dispositivos",
-      "description": "Os seus favoritos, relatórios e histórico d são guardados localmente e podem ser sincronizados com outros dispositivos usando a sua chave de sincronização.",
+      "description": "Os seus favoritos, relatórios são guardados localmente e podem ser sincronizados com outros dispositivos usando a sua chave de sincronização.",
       "learnMore": "Saber mais",
       "dismiss": "Compreendido"
     },
@@ -336,7 +336,7 @@
       },
       "multiDevice": {
         "title": "Acesso multi-dispositivo",
-        "description": "Aceda aos seus favoritos e histórico d a partir de qualquer dispositivo usando a sua chave de sincronização."
+        "description": "Aceda aos seus favoritos a partir de qualquer dispositivo usando a sua chave de sincronização."
       },
       "privacy": {
         "title": "Privacidade em primeiro lugar",
@@ -563,7 +563,7 @@
       "title": "Zona de Perigo",
       "description": "Estas ações são permanentes e não podem ser desfeitas",
       "deleteProfile": "Eliminar Perfil",
-      "deleteProfileConfirm": "Tem a certeza que quer eliminar o seu perfil? Isto irá remover permanentemente todos os seus dados, incluindo favoritos, histórico d e definições. Esta ação não pode ser desfeita.",
+      "deleteProfileConfirm": "Tem a certeza que quer eliminar o seu perfil? Isto irá remover permanentemente todos os seus dados, incluindo favoritos e definições. Esta ação não pode ser desfeita.",
       "deleteFailed": "Falha ao eliminar o perfil. Por favor tente novamente."
     },
     "appearance": "Appearance",

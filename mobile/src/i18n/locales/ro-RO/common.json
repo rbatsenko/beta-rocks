@@ -184,7 +184,7 @@
     },
     "whatYouControl": {
       "title": "Ce Controlezi Tu",
-      "description": "Favoritele, rapoartele-ului tău sunt stocate local pe dispozitivul tău. Pentru a accesa de pe mai multe dispozitive, poți crea un profil anonim. Odată ce ai un profil, datele tale se sincronizează automat pentru a permite accesul de pe mai multe dispozitive. Poți șterge toate datele tale oricând din Setări."
+      "description": "Favoritele și rapoartele tale sunt stocate local pe dispozitivul tău. Pentru a accesa de pe mai multe dispozitive, poți crea un profil anonim. Odată ce ai un profil, datele tale se sincronizează automat pentru a permite accesul de pe mai multe dispozitive. Poți șterge toate datele tale oricând din Setări."
     },
     "howSyncWorks": {
       "title": "Cum Funcționează Sincronizarea",
@@ -196,7 +196,7 @@
     },
     "yourRights": {
       "title": "Drepturile Tale",
-      "description": "Îți poți șterge profilul oricând din Setări. Aceasta elimină favoritele-ului și profilul din baza noastră de date. Rapoartele comunității pe care le-ai postat rămân vizibile (anonim) pentru a ajuta alți alpiniști. Control complet asupra datelor tale."
+      "description": "Îți poți șterge profilul oricând din Setări. Aceasta elimină favoritele tale și profilul din baza noastră de date. Rapoartele comunității pe care le-ai postat rămân vizibile (anonim) pentru a ajuta alți alpiniști. Control complet asupra datelor tale."
     },
     "dataSecurity": {
       "title": "Securitatea Datelor",
@@ -310,7 +310,7 @@
   "sync": {
     "notification": {
       "title": "Cheie de Sincronizare Creată",
-      "description": "Am generat o cheie unică pentru a sincroniza favoriteleîntre dispozitive.",
+      "description": "Am generat o cheie unică pentru a sincroniza favoritele între dispozitive.",
       "viewInSettings": "Vizualizează în Setări",
       "viewMore": "Ce este o cheie de sincronizare?"
     },
@@ -336,7 +336,7 @@
       },
       "multiDevice": {
         "title": "Acces multi-dispozitiv",
-        "description": "Accesați favoritele-ului de pe orice dispozitiv folosind cheia de sincronizare."
+        "description": "Accesați favoritele tale de pe orice dispozitiv folosind cheia de sincronizare."
       },
       "privacy": {
         "title": "Confidențialitate pe primul loc",

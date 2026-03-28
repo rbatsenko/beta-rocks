@@ -249,7 +249,7 @@
     },
     "crossDeviceSync": {
       "title": "Synkronisering på tvers av enheter",
-      "description": "Få tilgang til favorittene en din fra hvilken som helst enhet med en sikker synkroniseringsnøkkel. Ingen konto kreves"
+      "description": "Få tilgang til favorittene dine fra hvilken som helst enhet med en sikker synkroniseringsnøkkel. Ingen konto kreves"
     },
     "privacyFirst": {
       "title": "Personvern først",
@@ -402,7 +402,7 @@
     },
     "notification": {
       "title": "Synkroniseringsnøkkel opprettet",
-      "description": "Vi har generert en unik nøkkel for å synkronisere dine favoritter ter på tvers av enheter.",
+      "description": "Vi har generert en unik nøkkel for å synkronisere favorittene dine på tvers av enheter.",
       "viewInSettings": "Vis i innstillinger",
       "viewMore": "Hva er en synkroniseringsnøkkel?"
     }

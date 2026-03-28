@@ -248,7 +248,7 @@
     },
     "crossDeviceSync": {
       "title": "Laitteiden välinen synkronointi",
-      "description": "Käytä suosikkejasi asi millä tahansa laitteella turvallisen synkronointiavaimen avulla. Tiliä ei tarvita"
+      "description": "Käytä suosikkejasi millä tahansa laitteella turvallisen synkronointiavaimen avulla. Tiliä ei tarvita"
     },
     "privacyFirst": {
       "title": "Yksityisyys ensin",
@@ -264,7 +264,7 @@
     },
     "whatYouControl": {
       "title": "Mitä hallitset",
-      "description": "Suosikkisi, raportit ja tallennetaan paikallisesti laitteellesi. Päästäksesi niihin usealta laitteelta voit luoda nimettömän profiilin. Kun sinulla on profiili, tietosi synkronoidaan automaattisesti usean laitteen käytön mahdollistamiseksi. Voit poistaa kaikki tietosi milloin tahansa Asetuksista."
+      "description": "Suosikkisi ja raportit tallennetaan paikallisesti laitteellesi. Päästäksesi niihin usealta laitteelta voit luoda nimettömän profiilin. Kun sinulla on profiili, tietosi synkronoidaan automaattisesti usean laitteen käytön mahdollistamiseksi. Voit poistaa kaikki tietosi milloin tahansa Asetuksista."
     },
     "howSyncWorks": {
       "title": "Kuinka synkronointi toimii",
@@ -276,7 +276,7 @@
     },
     "yourRights": {
       "title": "Oikeutesi",
-      "description": "Voit poistaa profiilisi milloin tahansa Asetuksista. Tämä poistaa suosikkisi i ja profiilisi tietokannastamme. Julkaisemasi yhteisöraportit pysyvät näkyvinä (nimettömänä) auttaakseen muita kiipeilijöitä. Täysi hallinta tiedoistasi."
+      "description": "Voit poistaa profiilisi milloin tahansa Asetuksista. Tämä poistaa suosikkisi ja profiilisi tietokannastamme. Julkaisemasi yhteisöraportit pysyvät näkyvinä (nimettömänä) auttaakseen muita kiipeilijöitä. Täysi hallinta tiedoistasi."
     },
     "dataSecurity": {
       "title": "Tietoturva",

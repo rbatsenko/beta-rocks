@@ -308,7 +308,7 @@
     },
     "whatYouControl": {
       "title": "What You Control",
-      "description": "Your favorites, reports, are stored locally on your device. To access them across devices, you can create an anonymous profile. Once you have a profile, your data syncs automatically to enable multi-device access. You can delete all your data anytime from Settings."
+      "description": "Your favorites and reports are stored locally on your device. To access them across devices, you can create an anonymous profile. Once you have a profile, your data syncs automatically to enable multi-device access. You can delete all your data anytime from Settings."
     },
     "howSyncWorks": {
       "title": "How Sync Works",
@@ -437,7 +437,7 @@
     },
     "banner": {
       "title": "Your data syncs across devices",
-      "description": "Your favorites, reports, are saved locally and can sync to other devices using your sync key.",
+      "description": "Your favorites and reports are saved locally and can sync to other devices using your sync key.",
       "learnMore": "Learn more",
       "dismiss": "Got it"
     },
@@ -507,7 +507,7 @@
       },
       "manual": {
         "title": "Save Your Data Across Devices",
-        "description": "Sync your favorites, reports, on all your devices"
+        "description": "Sync your favorites and reports on all your devices"
       }
     },
     "features": {

@@ -648,7 +648,7 @@
       "title": "Zone dangereuse",
       "description": "Ces actions sont permanentes et ne peuvent pas être annulées",
       "deleteProfile": "Supprimer le profil",
-      "deleteProfileConfirm": "Voulez-vous vraiment supprimer votre profil ? Cela supprimera définitivement toutes vos données y compris les favoris, l'historique des discussions et les paramètres. Cette action ne peut pas être annulée.",
+      "deleteProfileConfirm": "Voulez-vous vraiment supprimer votre profil ? Cela supprimera définitivement toutes vos données y compris les favoris et les paramètres. Cette action ne peut pas être annulée.",
       "deleteFailed": "Échec de la suppression du profil. Veuillez réessayer."
     },
     "appearance": "Appearance",
