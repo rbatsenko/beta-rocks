@@ -8,8 +8,7 @@ import { getSupabaseClient, isSupabaseConfigured } from "@/integrations/supabase
  * Requires X-Sync-Key-Hash header for authentication.
  *
  * Deletes: user_profiles, user_stats (cascade), user_favorites,
- *          chat_sessions, chat_messages (cascade), notifications (cascade),
- *          push_subscriptions (cascade)
+ *          notifications (cascade), push_subscriptions (cascade)
  * Preserves: reports (community contributions, author_id set to NULL)
  */
 export async function DELETE(request: NextRequest) {
@@ -56,12 +55,6 @@ export async function DELETE(request: NextRequest) {
     // Delete favorites (explicit delete before profile for clean ordering)
     await supabase
       .from("user_favorites")
-      .delete()
-      .eq("user_profile_id", dbProfile.id);
-
-    // Delete chat sessions (messages cascade via foreign key)
-    await supabase
-      .from("chat_sessions")
       .delete()
       .eq("user_profile_id", dbProfile.id);
 

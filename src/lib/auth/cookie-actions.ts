@@ -39,14 +39,6 @@ export async function setUserProfileCookies(syncKeyHash: string, displayName?: s
 }
 
 /**
- * Set current session ID cookie
- */
-export async function setSessionCookie(sessionId: string) {
-  const cookieStore = await cookies();
-  cookieStore.set("temps_current_session_id", sessionId, COOKIE_OPTIONS);
-}
-
-/**
  * Clear all user-related cookies
  */
 export async function clearUserCookies() {
@@ -56,7 +48,6 @@ export async function clearUserCookies() {
   // Also delete old cookie name for backward compatibility
   cookieStore.delete("temps_sync_key");
   cookieStore.delete("temps_display_name");
-  cookieStore.delete("temps_current_session_id");
 }
 
 /**

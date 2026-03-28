@@ -1,9 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* Required for Response component - Streamdown styles */
-@source "../node_modules/streamdown/dist/index.js";
-
 @custom-variant dark (&:is(.dark *));
 
 @utility container {

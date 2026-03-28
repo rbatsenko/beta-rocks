@@ -11,7 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 /**
  * Delete user profile and all associated data
- * Removes: user_profile, chat_sessions, chat_messages, user_favorites
+ * Removes: user_profile, user_favorites
  * Keeps: reports (community contributions)
  */
 export function useDeleteProfile() {
@@ -47,16 +47,6 @@ export function useDeleteProfile() {
 
         if (favError) {
           console.error("Failed to delete favorites:", favError);
-        }
-
-        // Delete all sessions (messages cascade delete via foreign key)
-        const { error: sessionsError } = await supabase
-          .from("chat_sessions")
-          .delete()
-          .eq("user_profile_id", dbProfile.id);
-
-        if (sessionsError) {
-          console.error("Failed to delete sessions:", sessionsError);
         }
 
         // Delete user profile
