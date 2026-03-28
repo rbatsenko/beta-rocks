@@ -23,16 +23,6 @@
     "yourFavorites": "Vos Favoris",
     "favoriteQuery": "Quelles sont les conditions à {{crag}} ?"
   },
-  "chat": {
-    "analyzing": "Analyse des conditions...",
-    "thinking": "Réflexion...",
-    "inputPlaceholder": "Demandez pour une falaise ou un secteur...",
-    "clearHistory": "Effacer l'historique",
-    "clearHistoryConfirm": "Êtes-vous sûr de vouloir effacer tout l'historique de chat ? Cette action est irréversible.",
-    "clearChat": "Effacer le chat",
-    "clearChatTooltip": "Effacer la conversation actuelle",
-    "clearChatConfirm": "Effacer votre chat ? Cela supprimera tous les messages de la conversation actuelle."
-  },
   "search": {
     "title": "Rechercher des sites",
     "description": "Rechercher des sites d'escalade par nom ou localisation",
@@ -248,10 +238,6 @@
       "title": "Météo en temps réel",
       "description": "Prévisions précises d'Open-Meteo avec calcul soleil/ombre par secteur"
     },
-    "chatInterface": {
-      "title": "Interface de chat",
-      "description": "Questions en langage naturel grâce à l'IA. Demandez dans n'importe quelle langue, obtenez des réponses instantanées"
-    },
     "communityReports": {
       "title": "Rapports communautaires",
       "description": "Partagez conditions, alertes de sécurité, changements d'accès, infos d'escalade et plus. Aidez les grimpeurs avec des mises à jour en temps réel dans plusieurs catégories"
@@ -262,7 +248,7 @@
     },
     "crossDeviceSync": {
       "title": "Synchronisation multi-appareils",
-      "description": "Accédez à vos favoris et à l'historique de chat depuis n'importe quel appareil avec une clé de synchronisation sécurisée. Aucun compte requis"
+      "description": "Accédez à vos favoris et à l'depuis n'importe quel appareil avec une clé de synchronisation sécurisée. Aucun compte requis"
     },
     "privacyFirst": {
       "title": "Confidentialité d'abord",
@@ -278,7 +264,7 @@
     },
     "whatYouControl": {
       "title": "Ce que vous contrôlez",
-      "description": "Vos favoris, rapports et historique de chat sont stockés localement sur votre appareil. Pour y accéder depuis plusieurs appareils, vous pouvez créer un profil anonyme. Une fois que vous avez un profil, vos données se synchronisent automatiquement pour permettre l'accès depuis plusieurs appareils. Vous pouvez supprimer toutes vos données à tout moment depuis les Paramètres."
+      "description": "Vos favoris, rapports sont stockés localement sur votre appareil. Pour y accéder depuis plusieurs appareils, vous pouvez créer un profil anonyme. Une fois que vous avez un profil, vos données se synchronisent automatiquement pour permettre l'accès depuis plusieurs appareils. Vous pouvez supprimer toutes vos données à tout moment depuis les Paramètres."
     },
     "howSyncWorks": {
       "title": "Comment fonctionne la synchronisation",
@@ -290,7 +276,7 @@
     },
     "yourRights": {
       "title": "Vos droits",
-      "description": "Vous pouvez supprimer votre profil à tout moment depuis les Paramètres. Cela supprime vos favoris, votre historique de chat et votre profil de notre base de données. Les rapports communautaires que vous avez publiés restent visibles (anonymement) pour aider les autres grimpeurs. Contrôle total sur vos données."
+      "description": "Vous pouvez supprimer votre profil à tout moment depuis les Paramètres. Cela supprime vos favoris et votre profil de notre base de données. Les rapports communautaires que vous avez publiés restent visibles (anonymement) pour aider les autres grimpeurs. Contrôle total sur vos données."
     },
     "dataSecurity": {
       "title": "Sécurité des données",
@@ -408,7 +394,7 @@
   "sync": {
     "banner": {
       "title": "Vos données se synchronisent entre appareils",
-      "description": "Vos favoris, rapports et historique de chat sont enregistrés localement et peuvent se synchroniser sur d'autres appareils avec votre clé de synchronisation.",
+      "description": "Vos favoris, rapports sont enregistrés localement et peuvent se synchroniser sur d'autres appareils avec votre clé de synchronisation.",
       "learnMore": "En savoir plus",
       "dismiss": "Compris"
     },
@@ -420,7 +406,7 @@
     },
     "notification": {
       "title": "Clé de synchronisation créée",
-      "description": "Nous avons généré une clé unique pour synchroniser vos favoris et chats sur tous vos appareils.",
+      "description": "Nous avons généré une clé unique pour synchroniser vos favoris sur tous vos appareils.",
       "viewInSettings": "Voir dans les paramètres",
       "viewMore": "Qu'est-ce qu'une clé de synchronisation ?"
     }
@@ -435,7 +421,7 @@
       },
       "multiDevice": {
         "title": "Accès multi-appareils",
-        "description": "Accédez à vos favoris et à votre historique de chat depuis n'importe quel appareil avec votre clé de synchronisation."
+        "description": "Accédez à vos favoris et àdepuis n'importe quel appareil avec votre clé de synchronisation."
       },
       "privacy": {
         "title": "Confidentialité d'abord",
@@ -662,7 +648,7 @@
       "title": "Zone dangereuse",
       "description": "Ces actions sont permanentes et ne peuvent pas être annulées",
       "deleteProfile": "Supprimer le profil",
-      "deleteProfileConfirm": "Voulez-vous vraiment supprimer votre profil ? Cela supprimera définitivement toutes vos données, y compris les favoris, l'historique des discussions et les paramètres. Cette action ne peut pas être annulée.",
+      "deleteProfileConfirm": "Voulez-vous vraiment supprimer votre profil ? Cela supprimera définitivement toutes vos données y compris les favoris et les paramètres. Cette action ne peut pas être annulée.",
       "deleteFailed": "Échec de la suppression du profil. Veuillez réessayer."
     },
     "appearance": "Appearance",
@@ -873,7 +859,6 @@
     }
   },
   "cragPage": {
-    "askAI": "Demander à l'IA",
     "edit": "Modifier",
     "editCrag": "Modifier les détails du site",
     "currentConditions": "Conditions actuelles",
@@ -884,7 +869,6 @@
     "searchSectors": "Rechercher des secteurs...",
     "noSectorsFound": "Aucun secteur trouvé correspondant à votre recherche.",
     "disclaimer": "Les conditions météorologiques peuvent changer rapidement. Vérifiez toujours les conditions sur place et faites preuve de jugement.",
-    "askAIAboutCrag": "Demander à l'IA à propos de ce site",
     "viewOnSunCalc": "Voir les heures de soleil/lune",
     "viewSunAngles": "Voir la position du soleil et les angles d'ombre",
     "viewOnMap": "Voir sur la carte",
@@ -927,7 +911,7 @@
     "loadingMore": "Chargement...",
     "totalReports": "{{count}} au total",
     "showingOf": "{{showing}} sur {{total}} rapports affichés",
-    "totalReportsHint": "Total des rapports de la communaute, y compris les anciens non affiches dans le flux",
+    "totalReportsHint": "Total des rapports de la communaute y compris les anciens non affiches dans le flux",
     "olderHidden": "Les anciens rapports restent visibles sur les pages individuelles des sites",
     "filters": {
       "all": "Tous",

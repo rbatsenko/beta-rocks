@@ -23,16 +23,6 @@
     "yourFavorites": "I Tuoi Preferiti",
     "favoriteQuery": "Quali sono le condizioni a {{crag}}?"
   },
-  "chat": {
-    "analyzing": "Analisi delle condizioni...",
-    "thinking": "Sto pensando...",
-    "inputPlaceholder": "Chiedi di una falesia o settore...",
-    "clearHistory": "Cancella cronologia",
-    "clearHistoryConfirm": "Sei sicuro di voler cancellare tutta la cronologia della chat? Questa azione non può essere annullata.",
-    "clearChat": "Cancella chat",
-    "clearChatTooltip": "Cancella la conversazione attuale",
-    "clearChatConfirm": "Cancellare la chat? Questo rimuoverà tutti i messaggi dalla conversazione attuale."
-  },
   "search": {
     "title": "Cerca falesie",
     "description": "Cerca aree di arrampicata per nome o posizione",
@@ -248,10 +238,6 @@
       "title": "Meteo in tempo reale",
       "description": "Previsioni accurate di Open-Meteo con calcolo sole/ombra per ogni settore"
     },
-    "chatInterface": {
-      "title": "Interfaccia chat",
-      "description": "Richieste in linguaggio naturale grazie all'IA. Chiedi in qualsiasi lingua e ricevi risposte istantanee"
-    },
     "communityReports": {
       "title": "Report della community",
       "description": "Condividi condizioni, avvisi di sicurezza, modifiche di accesso, informazioni di arrampicata e altro. Aiuta gli scalatori con aggiornamenti in tempo reale in più categorie"
@@ -262,7 +248,7 @@
     },
     "crossDeviceSync": {
       "title": "Sincronizzazione tra dispositivi",
-      "description": "Accedi ai tuoi preferiti e alla cronologia chat da qualsiasi dispositivo con una chiave di sincronizzazione sicura. Nessun account necessario"
+      "description": "Accedi ai tuoi preferiti e alla da qualsiasi dispositivo con una chiave di sincronizzazione sicura. Nessun account necessario"
     },
     "privacyFirst": {
       "title": "Privacy prima di tutto",
@@ -278,7 +264,7 @@
     },
     "whatYouControl": {
       "title": "Cosa Controlli Tu",
-      "description": "I tuoi preferiti, rapporti e cronologia chat vengono archiviati localmente sul tuo dispositivo. Per accedervi da più dispositivi, puoi creare un profilo anonimo. Una volta che hai un profilo, i tuoi dati si sincronizzano automaticamente per consentire l'accesso da più dispositivi. Puoi eliminare tutti i tuoi dati in qualsiasi momento dalle Impostazioni."
+      "description": "I tuoi preferiti, rapporti vengono archiviati localmente sul tuo dispositivo. Per accedervi da più dispositivi, puoi creare un profilo anonimo. Una volta che hai un profilo i tuoi dati si sincronizzano automaticamente per consentire l'accesso da più dispositivi. Puoi eliminare tutti i tuoi dati in qualsiasi momento dalle Impostazioni."
     },
     "howSyncWorks": {
       "title": "Come Funziona la Sincronizzazione",
@@ -290,7 +276,7 @@
     },
     "yourRights": {
       "title": "I Tuoi Diritti",
-      "description": "Puoi eliminare il tuo profilo in qualsiasi momento dalle Impostazioni. Questo rimuove i tuoi preferiti, la cronologia chat e il profilo dal nostro database. I rapporti della community che hai pubblicato rimangono visibili (in forma anonima) per aiutare altri scalatori. Pieno controllo sui tuoi dati."
+      "description": "Puoi eliminare il tuo profilo in qualsiasi momento dalle Impostazioni. Questo rimuove i tuoi preferiti, la e il profilo dal nostro database. I rapporti della community che hai pubblicato rimangono visibili (in forma anonima) per aiutare altri scalatori. Pieno controllo sui tuoi dati."
     },
     "dataSecurity": {
       "title": "Sicurezza dei Dati",
@@ -408,7 +394,7 @@
   "sync": {
     "banner": {
       "title": "I tuoi dati si sincronizzano tra dispositivi",
-      "description": "I tuoi preferiti, rapporti e cronologia chat sono salvati localmente e possono sincronizzarsi su altri dispositivi usando la tua chiave di sincronizzazione.",
+      "description": "I tuoi preferiti, rapporti sono salvati localmente e possono sincronizzarsi su altri dispositivi usando la tua chiave di sincronizzazione.",
       "learnMore": "Scopri di più",
       "dismiss": "Ho capito"
     },
@@ -420,7 +406,7 @@
     },
     "notification": {
       "title": "Chiave di sincronizzazione creata",
-      "description": "Abbiamo generato una chiave univoca per sincronizzare i tuoi preferiti e chat su tutti i dispositivi.",
+      "description": "Abbiamo generato una chiave univoca per sincronizzare i tuoi preferiti su tutti i dispositivi.",
       "viewInSettings": "Visualizza nelle impostazioni",
       "viewMore": "Cos'è una chiave di sincronizzazione?"
     }
@@ -435,7 +421,7 @@
       },
       "multiDevice": {
         "title": "Accesso multi-dispositivo",
-        "description": "Accedi ai tuoi preferiti e alla cronologia chat da qualsiasi dispositivo usando la tua chiave di sincronizzazione."
+        "description": "Accedi ai tuoi preferiti e alla da qualsiasi dispositivo usando la tua chiave di sincronizzazione."
       },
       "privacy": {
         "title": "Privacy prima di tutto",
@@ -478,7 +464,7 @@
       },
       "manual": {
         "title": "Salva i tuoi dati su tutti i dispositivi",
-        "description": "Sincronizza i tuoi preferiti, report e cronologia chat su tutti i tuoi dispositivi"
+        "description": "Sincronizza i tuoi preferiti, report su tutti i tuoi dispositivi"
       }
     },
     "features": {
@@ -661,7 +647,7 @@
       "title": "Zona pericolosa",
       "description": "Queste azioni sono permanenti e non possono essere annullate",
       "deleteProfile": "Elimina profilo",
-      "deleteProfileConfirm": "Sei sicuro di voler eliminare il tuo profilo? Questo rimuoverà permanentemente tutti i tuoi dati inclusi preferiti, cronologia chat e impostazioni. Questa azione non può essere annullata.",
+      "deleteProfileConfirm": "Sei sicuro di voler eliminare il tuo profilo? Questo rimuoverà permanentemente tutti i tuoi dati inclusi preferiti e impostazioni. Questa azione non può essere annullata.",
       "deleteFailed": "Impossibile eliminare il profilo. Riprova."
     },
     "signOut": "Sign Out"
@@ -867,7 +853,6 @@
     }
   },
   "cragPage": {
-    "askAI": "Chiedi all'IA",
     "edit": "Modifica",
     "editCrag": "Modifica dettagli falesia",
     "currentConditions": "Condizioni attuali",
@@ -878,7 +863,6 @@
     "searchSectors": "Cerca settori...",
     "noSectorsFound": "Nessun settore trovato corrispondente alla tua ricerca.",
     "disclaimer": "Le condizioni meteorologiche possono cambiare rapidamente. Verifica sempre le condizioni all'arrivo e usa il tuo miglior giudizio.",
-    "askAIAboutCrag": "Chiedi all'IA su questa falesia",
     "viewOnSunCalc": "Vedi orari sole/luna",
     "viewSunAngles": "Vedi posizione del sole e angoli d'ombra",
     "viewOnMap": "Vedi sulla mappa",

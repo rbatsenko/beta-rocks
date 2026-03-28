@@ -23,16 +23,6 @@
     "yourFavorites": "Dine favoritter",
     "favoriteQuery": "Hvad er forholdene ved {{crag}}?"
   },
-  "chat": {
-    "analyzing": "Analyserer betingelser...",
-    "thinking": "Tænker...",
-    "inputPlaceholder": "Spørg om en hvilken som helst klatrepladser eller sektor...",
-    "clearChat": "Ryd chat",
-    "clearChatTooltip": "Ryd den aktuelle samtale",
-    "clearChatConfirm": "Vil du rydde din chat? Dette vil fjerne alle beskeder fra den aktuelle samtale.",
-    "clearHistory": "Ryd historik",
-    "clearHistoryConfirm": "Er du sikker på, at du vil rydde hele chathistorikken? Dette kan ikke fortrydes."
-  },
   "search": {
     "title": "Søg klipper",
     "description": "Søg efter klatreområder efter navn eller placering",
@@ -184,7 +174,7 @@
     "condensationRisk": "Risiko for kondens ({{dewPointSpread}})"
   },
   "sandstoneWarning": {
-    "general": "Sandsten er skrøbelig, når den er våd, og kræver meget tid til at tørre efter regn. Klatring på våd sandsten beskadiger klippen og er farligt.",
+    "general": "Sandsten er skrøbelig, når den er våd og kræver meget tid til at tørre efter regn. Klatring på våd sandsten beskadiger klippen og er farligt.",
     "recentRain": "Nylig nedbør registreret. Sørg for, at klippen er helt tør, før du klatrer.",
     "inLast24h": "i de sidste 24 timer",
     "inLast48h": "i de sidste 48 timer"
@@ -248,10 +238,6 @@
       "title": "Realtidsvejr",
       "description": "Præcise prognoser fra Open-Meteo med sol-/skyggeberegninger for specifikke sektorer"
     },
-    "chatInterface": {
-      "title": "Chat-grænseflade",
-      "description": "Naturlige spørgsmål drevet af AI. Spørg på ethvert sprog, få øjeblikkelige svar"
-    },
     "communityReports": {
       "title": "Samfundsrapporter",
       "description": "Del forhold, sikkerhedsadvarsler, adgangsændringer, klatreinfo og mere. Hjælp medklatrere med realtidsopdateringer på tværs af flere kategorier"
@@ -262,7 +248,7 @@
     },
     "crossDeviceSync": {
       "title": "Synkronisering på tværs af enheder",
-      "description": "Få adgang til dine favoritter og chathistorik fra enhver enhed med en sikker synkroniseringsnøgle. Ingen konto påkrævet"
+      "description": "Få adgang til dine favoritter fra enhver enhed med en sikker synkroniseringsnøgle. Ingen konto påkrævet"
     },
     "privacyFirst": {
       "title": "Privatlivsførste",
@@ -278,7 +264,7 @@
     },
     "whatYouControl": {
       "title": "Hvad du kontrollerer",
-      "description": "Dine favoritter, rapporter og chathistorik gemmes lokalt på din enhed. For at få adgang til dem fra flere enheder kan du oprette en anonym profil. Når du har en profil, synkroniseres dine data automatisk for at muliggøre adgang fra flere enheder. Du kan slette alle dine data når som helst fra Indstillinger."
+      "description": "Dine favoritter, rapporter gemmes lokalt på din enhed. For at få adgang til dem fra flere enheder kan du oprette en anonym profil. Når du har en profil, synkroniseres dine data automatisk for at muliggøre adgang fra flere enheder. Du kan slette alle dine data når som helst fra Indstillinger."
     },
     "howSyncWorks": {
       "title": "Sådan fungerer synkronisering",
@@ -290,7 +276,7 @@
     },
     "yourRights": {
       "title": "Dine rettigheder",
-      "description": "Du kan slette din profil når som helst fra Indstillinger. Dette fjerner dine favoritter, chathistorik og profil fra vores database. Fællesskabsrapporter du har postet forbliver synlige (anonymt) for at hjælpe andre klatrere. Fuld kontrol over dine data."
+      "description": "Du kan slette din profil når som helst fra Indstillinger. Dette fjerner dine favoritter og profil fra vores database. Fællesskabsrapporter du har postet forbliver synlige (anonymt) for at hjælpe andre klatrere. Fuld kontrol over dine data."
     },
     "dataSecurity": {
       "title": "Datasikkerhed",
@@ -404,13 +390,13 @@
   "sync": {
     "notification": {
       "title": "Synknøgle oprettet",
-      "description": "Vi har genereret en unik nøgle for at synkronisere dine favoritter og chat på tværs af enheder.",
+      "description": "Vi har genereret en unik nøgle for at synkronisere dine favoritter på tværs af enheder.",
       "viewInSettings": "Vis i indstillinger",
       "viewMore": "Hvad er en synkroniseringsnøgle?"
     },
     "banner": {
       "title": "Dine data synkroniseres på tværs af enheder",
-      "description": "Dine favoritter, rapporter og chathistorik gemmes lokalt og kan synkroniseres til andre enheder ved hjælp af din synknøgle.",
+      "description": "Dine favoritter, rapporter gemmes lokalt og kan synkroniseres til andre enheder ved hjælp af din synknøgle.",
       "learnMore": "Lær mere",
       "dismiss": "Okay"
     },
@@ -430,7 +416,7 @@
       },
       "multiDevice": {
         "title": "Multi-Device Access",
-        "description": "Access your favorites and chat history from any device by using your sync key."
+        "description": "Access your favorites from any device by using your sync key."
       },
       "privacy": {
         "title": "Privacy First",
@@ -577,7 +563,7 @@
       "title": "Farlig zone",
       "description": "Disse handlinger er permanente og kan ikke fortrydes",
       "deleteProfile": "Slet profil",
-      "deleteProfileConfirm": "Er du sikker på, at du vil slette din profil? Dette vil permanent fjerne alle dine data, herunder favoritter, chathistorik og indstillinger. Denne handling kan ikke fortrydes.",
+      "deleteProfileConfirm": "Er du sikker på, at du vil slette din profil? Dette vil permanent fjerne alle dine data, herunder favoritter og indstillinger. Denne handling kan ikke fortrydes.",
       "deleteFailed": "Kunne ikke slette profil. Prøv igen."
     },
     "signOut": "Sign Out"
@@ -783,7 +769,6 @@
     }
   },
   "cragPage": {
-    "askAI": "Spørg AI",
     "edit": "Rediger",
     "editCrag": "Rediger klippe-detaljer",
     "currentConditions": "Nuværende forhold",
@@ -794,7 +779,6 @@
     "searchSectors": "Søg sektorer...",
     "noSectorsFound": "Ingen sektorer fundet, der matcher din søgning.",
     "disclaimer": "Vejrforholdene kan ændre sig hurtigt. Kontroller altid forholdene ved ankomst og brug din bedste vurdering.",
-    "askAIAboutCrag": "Spørg AI om denne klippe",
     "viewOnSunCalc": "Vis sol/måne-tider",
     "viewSunAngles": "Vis solposition og skyggevinkler",
     "viewOnMap": "Vis på kort",

@@ -23,16 +23,6 @@
     "yourFavorites": "Vaši Priljubljeni",
     "favoriteQuery": "Kakšni so pogoji v {{crag}}?"
   },
-  "chat": {
-    "analyzing": "Analiziram razmere...",
-    "thinking": "Razmišljam...",
-    "inputPlaceholder": "Vprašaj po kateremkoli plezališču ali sektorju...",
-    "clearHistory": "Počisti zgodovino",
-    "clearHistoryConfirm": "Ali ste prepričani, da želite izbrisati vso zgodovino klepeta? Tega dejanja ni mogoče razveljaviti.",
-    "clearChat": "Izbriši klepet",
-    "clearChatTooltip": "Izbriši trenutni pogovor",
-    "clearChatConfirm": "Izbrisati vaš klepet? To bo odstranilo vsa sporočila iz trenutnega pogovora."
-  },
   "search": {
     "title": "Išči plezališča",
     "description": "Iskanje plezališč po imenu ali lokaciji",
@@ -156,7 +146,7 @@
   "reasons": {
     "perfectTemp": "Popolna temperatura ({{temp}})",
     "tempTooHigh": "Temperatura previsoka - prsti lahko zdrsnejo",
-    "coldGoodFriction": "Mrzlo, a dobro za trenje na {{rockType}}",
+    "coldGoodFriction": "Mrzlo a dobro za trenje na {{rockType}}",
     "idealHumidity": "Idealna vlaga ({{humidity}}%)",
     "lowHumidityGranite": "Nizka vlaga izboljša trenje na granitu",
     "readyInHours": "Za plezanje pripravljeno v ~{{hours}} urah",
@@ -184,7 +174,7 @@
     "condensationRisk": "Tveganje za kondenzacijo ({{dewPointSpread}})"
   },
   "sandstoneWarning": {
-    "general": "Peščenjak je krhek, ko je moker, in potrebuje veliko časa za sušenje po dežju. Plezanje na mokrem peščenjaku poškoduje skalo in je nevarno.",
+    "general": "Peščenjak je krhek, ko je moker in potrebuje veliko časa za sušenje po dežju. Plezanje na mokrem peščenjaku poškoduje skalo in je nevarno.",
     "recentRain": "Zaznane nedavne padavine. Prosimo, prepričajte se, da je skala popolnoma suha pred plezanjem.",
     "inLast24h": "v zadnjih 24h",
     "inLast48h": "v zadnjih 48h"
@@ -249,10 +239,6 @@
       "title": "Vreme v realnem času",
       "description": "Natančne napovedi Open-Meteo z izračunom sonca/sence za posamezne sektorje"
     },
-    "chatInterface": {
-      "title": "Pogovorni vmesnik",
-      "description": "Vprašanja v naravnem jeziku, ki jih poganja AI. Sprašuj v kateremkoli jeziku"
-    },
     "communityReports": {
       "title": "Poročila skupnosti",
       "description": "Delite pogoje, varnostna opozorila, spremembe dostopa, plezalne informacije in več. Pomagajte soplezalcem s posodobitvami v realnem času v več kategorijah"
@@ -263,7 +249,7 @@
     },
     "crossDeviceSync": {
       "title": "Sinhronizacija med napravami",
-      "description": "Dostopajte do svojih priljubljenih in zgodovine klepeta iz katerekoli naprave z varnim sinhronizacijskim ključem. Račun ni potreben"
+      "description": "Dostopajte do svojih priljubljenih iz katerekoli naprave z varnim sinhronizacijskim ključem. Račun ni potreben"
     },
     "privacyFirst": {
       "title": "Zasebnost na prvem mestu",
@@ -279,7 +265,7 @@
     },
     "whatYouControl": {
       "title": "Kaj Nadzoruješ",
-      "description": "Vaši priljubljeni, poročila in zgodovina klepeta se shranijo lokalno na vaši napravi. Za dostop z več naprav lahko ustvarite anonimni profil. Ko imate profil, se vaši podatki samodejno sinhronizirajo, da omogočijo dostop z več naprav. Vse svoje podatke lahko kadarkoli izbrišete v Nastavitvah."
+      "description": "Vaši priljubljeni, poročila se shranijo lokalno na vaši napravi. Za dostop z več naprav lahko ustvarite anonimni profil. Ko imate profil, se vaši podatki samodejno sinhronizirajo, da omogočijo dostop z več naprav. Vse svoje podatke lahko kadarkoli izbrišete v Nastavitvah."
     },
     "howSyncWorks": {
       "title": "Kako Deluje Sinhronizacija",
@@ -291,7 +277,7 @@
     },
     "yourRights": {
       "title": "Tvoje Pravice",
-      "description": "Svoj profil lahko kadarkoli izbrišete v Nastavitvah. To odstrani vaše priljubljene, zgodovino klepeta in profil iz naše podatkovne baze. Poročila skupnosti, ki ste jih objavili, ostanejo vidna (anonimno), da pomagajo drugim plezalcem. Popoln nadzor nad vašimi podatki."
+      "description": "Svoj profil lahko kadarkoli izbrišete v Nastavitvah. To odstrani vaše priljubljene in profil iz naše podatkovne baze. Poročila skupnosti, ki ste jih objavili, ostanejo vidna (anonimno), da pomagajo drugim plezalcem. Popoln nadzor nad vašimi podatki."
     },
     "dataSecurity": {
       "title": "Varnost Podatkov",
@@ -405,7 +391,7 @@
   "sync": {
     "banner": {
       "title": "Vaši podatki se sinhronizirajo med napravami",
-      "description": "Vaše priljubljene, poročila in zgodovina klepeta so shranjeni lokalno in se lahko sinhronizirajo na druge naprave z vašim sinhronizacijskim ključem.",
+      "description": "Vaše priljubljene, poročila so shranjeni lokalno in se lahko sinhronizirajo na druge naprave z vašim sinhronizacijskim ključem.",
       "learnMore": "Več",
       "dismiss": "Razumem"
     },
@@ -431,7 +417,7 @@
       },
       "multiDevice": {
         "title": "Dostop z več naprav",
-        "description": "Dostopajte do svojih priljubljenih in zgodovine klepeta z katere koli naprave s svojim sinhronizacijskim ključem."
+        "description": "Dostopajte do svojih priljubljenih z katere koli naprave s svojim sinhronizacijskim ključem."
       },
       "privacy": {
         "title": "Zasebnost na prvem mestu",
@@ -474,7 +460,7 @@
       },
       "manual": {
         "title": "Shranite svoje podatke na vseh napravah",
-        "description": "Sinhronizirajte svoje priljubljene, poročila in zgodovino klepetov na vseh svojih napravah"
+        "description": "Sinhronizirajte svoje priljubljene, poročila na vseh svojih napravah"
       }
     },
     "features": {
@@ -658,7 +644,7 @@
       "title": "Nevarna cona",
       "description": "Ta dejanja so trajna in jih ni mogoče razveljaviti",
       "deleteProfile": "Izbriši profil",
-      "deleteProfileConfirm": "Ali ste prepričani, da želite izbrisati svoj profil? To bo trajno odstranilo vse vaše podatke, vključno s priljubljenimi, zgodovino klepeta in nastavitvami. Tega dejanja ni mogoče razveljaviti.",
+      "deleteProfileConfirm": "Ali ste prepričani, da želite izbrisati svoj profil? To bo trajno odstranilo vse vaše podatke, vključno s priljubljenimi in nastavitvami. Tega dejanja ni mogoče razveljaviti.",
       "deleteFailed": "Profila ni bilo mogoče izbrisati. Poskusite znova."
     },
     "appearance": "Appearance",
@@ -869,7 +855,6 @@
     }
   },
   "cragPage": {
-    "askAI": "Vprašaj AI",
     "edit": "Uredi",
     "editCrag": "Uredi podrobnosti skale",
     "currentConditions": "Trenutne razmere",
@@ -880,7 +865,6 @@
     "searchSectors": "Iskanje sektorjev...",
     "noSectorsFound": "Ni najdenih sektorjev, ki bi ustrezali vašemu iskanju.",
     "disclaimer": "Vremenske razmere se lahko hitro spremenijo. Vedno preverite razmere na kraju in uporabite svojo najboljšo presojo.",
-    "askAIAboutCrag": "Vprašaj AI o tej skali",
     "viewOnSunCalc": "Prikaži čase sonca/lune",
     "viewSunAngles": "Prikaži položaj sonca in kote sence",
     "viewOnMap": "Prikaži na zemljevidu",

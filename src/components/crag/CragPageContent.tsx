@@ -4,7 +4,7 @@ import { useState, useCallback, useMemo, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import {
   MapPin,
-  MessageCircle,
+
   Heart,
   Plus,
   Sun,
@@ -451,11 +451,6 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
     setReportDialogOpen(true);
   };
 
-  const handleAskAI = () => {
-    // Navigate to home page with crag pre-filled in chat
-    router.push(`/?crag=${encodeURIComponent(crag.name)}`);
-  };
-
   const handleShare = async () => {
     const url = crag.slug
       ? `${window.location.origin}/location/${crag.slug}`
@@ -580,15 +575,6 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                 >
                   <Pencil className="h-4 w-4" />
                   <span className="hidden sm:inline">{t("cragPage.edit")}</span>
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handleAskAI}
-                  title={t("cragPage.askAI")}
-                >
-                  <MessageCircle className="h-4 w-4" />
-                  <span className="hidden sm:inline">{t("cragPage.askAI")}</span>
                 </Button>
                 <Button
                   variant="outline"
@@ -1050,9 +1036,6 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
         {/* Footer */}
         <div className="mt-12 pt-8 border-t text-center text-sm text-muted-foreground">
           <p>{t("cragPage.disclaimer")}</p>
-          <Button variant="link" onClick={handleAskAI} className="text-orange-500">
-            {t("cragPage.askAIAboutCrag")}
-          </Button>
         </div>
       </main>
 

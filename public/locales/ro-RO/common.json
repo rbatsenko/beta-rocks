@@ -23,16 +23,6 @@
     "yourFavorites": "Favoritele Tale",
     "favoriteQuery": "Care sunt condițiile la {{crag}}?"
   },
-  "chat": {
-    "analyzing": "Se analizează condițiile...",
-    "thinking": "Se gândesc...",
-    "inputPlaceholder": "Întreabă despre orice prag sau sector...",
-    "clearChat": "Șterge Chat",
-    "clearChatTooltip": "Șterge conversația curentă",
-    "clearChatConfirm": "Ștergi chat-ul? Aceasta va elimina toate mesajele din conversația curentă.",
-    "clearHistory": "Șterge Istoricul",
-    "clearHistoryConfirm": "Ești sigur că vrei să ștergi tot istoricul chat? Aceasta nu poate fi anulată."
-  },
   "search": {
     "title": "Caută perete",
     "description": "Caută zone de escaladă după nume sau locație",
@@ -168,10 +158,6 @@
       "title": "Vreme în Timp Real",
       "description": "Prognoze precise de la Open-Meteo cu calcule soare/umbră pentru sectoare specifice"
     },
-    "chatInterface": {
-      "title": "Interfață Chat",
-      "description": "Interogări în limbaj natural alimentate de AI. Întreabă în orice limbă, obține răspunsuri instantanee"
-    },
     "communityReports": {
       "title": "Rapoarte Comunității",
       "description": "Împărtășește condiții, alerte de securitate, modificări de acces, informații despre căț și altele. Ajută colegii alpiniști cu actualizări în timp real în mai multe categorii"
@@ -198,7 +184,7 @@
     },
     "whatYouControl": {
       "title": "Ce Controlezi Tu",
-      "description": "Favoritele, rapoartele și istoricul chat-ului tău sunt stocate local pe dispozitivul tău. Pentru a accesa de pe mai multe dispozitive, poți crea un profil anonim. Odată ce ai un profil, datele tale se sincronizează automat pentru a permite accesul de pe mai multe dispozitive. Poți șterge toate datele tale oricând din Setări."
+      "description": "Favoritele și rapoartele tale sunt stocate local pe dispozitivul tău. Pentru a accesa de pe mai multe dispozitive, poți crea un profil anonim. Odată ce ai un profil, datele tale se sincronizează automat pentru a permite accesul de pe mai multe dispozitive. Poți șterge toate datele tale oricând din Setări."
     },
     "howSyncWorks": {
       "title": "Cum Funcționează Sincronizarea",
@@ -210,7 +196,7 @@
     },
     "yourRights": {
       "title": "Drepturile Tale",
-      "description": "Îți poți șterge profilul oricând din Setări. Aceasta elimină favoritele, istoricul chat-ului și profilul din baza noastră de date. Rapoartele comunității pe care le-ai postat rămân vizibile (anonim) pentru a ajuta alți alpiniști. Control complet asupra datelor tale."
+      "description": "Îți poți șterge profilul oricând din Setări. Aceasta elimină favoritele tale și profilul din baza noastră de date. Rapoartele comunității pe care le-ai postat rămân vizibile (anonim) pentru a ajuta alți alpiniști. Control complet asupra datelor tale."
     },
     "dataSecurity": {
       "title": "Securitatea Datelor",
@@ -324,13 +310,13 @@
   "sync": {
     "notification": {
       "title": "Cheie de Sincronizare Creată",
-      "description": "Am generat o cheie unică pentru a sincroniza favoritele și chat-ul între dispozitive.",
+      "description": "Am generat o cheie unică pentru a sincroniza favoritele între dispozitive.",
       "viewInSettings": "Vizualizează în Setări",
       "viewMore": "Ce este o cheie de sincronizare?"
     },
     "banner": {
       "title": "Datele tale se sincronizează între dispozitive",
-      "description": "Favoritele, rapoartele și istoricul chat sunt salvate local și pot sincroniza cu alte dispozitive folosind cheia de sincronizare.",
+      "description": "Favoritele, rapoartele sunt salvate local și pot sincroniza cu alte dispozitive folosind cheia de sincronizare.",
       "learnMore": "Află mai multe",
       "dismiss": "Am înțeles"
     },
@@ -350,7 +336,7 @@
       },
       "multiDevice": {
         "title": "Acces multi-dispozitiv",
-        "description": "Accesați favoritele și istoricul chat-ului de pe orice dispozitiv folosind cheia de sincronizare."
+        "description": "Accesați favoritele tale de pe orice dispozitiv folosind cheia de sincronizare."
       },
       "privacy": {
         "title": "Confidențialitate pe primul loc",
@@ -576,7 +562,7 @@
       "title": "Zona de Pericol",
       "description": "Aceste acțiuni sunt permanente și nu pot fi anulate",
       "deleteProfile": "Șterge Profil",
-      "deleteProfileConfirm": "Ești sigur că vrei să ștergi profilul? Aceasta va elimina permanent toate datele, inclusiv favorite, istoricul chat și setări. Această acțiune nu poate fi anulată.",
+      "deleteProfileConfirm": "Ești sigur că vrei să ștergi profilul? Aceasta va elimina permanent toate datele, inclusiv favoriteși setări. Această acțiune nu poate fi anulată.",
       "deleteFailed": "Nu s-a putut șterge profilul. Te rog încearcă din nou."
     },
     "signOut": "Sign Out"
@@ -782,7 +768,6 @@
     }
   },
   "cragPage": {
-    "askAI": "Întreabă AI",
     "edit": "Editează",
     "editCrag": "Editează detaliile stâncii",
     "currentConditions": "Condiții actuale",
@@ -793,7 +778,6 @@
     "searchSectors": "Căutare sectoare...",
     "noSectorsFound": "Nu s-au găsit sectoare care să corespundă căutării dvs.",
     "disclaimer": "Condițiile meteorologice se pot schimba rapid. Verificați întotdeauna condițiile la sosire și folosiți-vă cea mai bună judecată.",
-    "askAIAboutCrag": "Întreabă AI despre această stâncă",
     "viewOnSunCalc": "Vezi orele soarelui/lunii",
     "viewSunAngles": "Vezi poziția soarelui și unghiurile umbrei",
     "viewOnMap": "Vezi pe hartă",

@@ -23,16 +23,6 @@
     "yourFavorites": "Vaše oblíbené",
     "favoriteQuery": "Jaké jsou podmínky v {{crag}}?"
   },
-  "chat": {
-    "analyzing": "Analyzuji podmínky...",
-    "thinking": "Přemýšlím...",
-    "inputPlaceholder": "Zeptej se na jakoukoli skálu nebo sektor...",
-    "clearHistory": "Vymazat historii",
-    "clearHistoryConfirm": "Opravdu chcete vymazat celou historii chatu? Tuto akci nelze vrátit zpět.",
-    "clearChat": "Vymazat chat",
-    "clearChatTooltip": "Vymazat aktuální konverzaci",
-    "clearChatConfirm": "Vymazat váš chat? Tímto odstraníte všechny zprávy z aktuální konverzace."
-  },
   "search": {
     "title": "Vyhledat skály",
     "description": "Vyhledávání lezeckých oblastí podle názvu nebo polohy",
@@ -184,7 +174,7 @@
     "condensationRisk": "Riziko kondenzace ({{dewPointSpread}})"
   },
   "sandstoneWarning": {
-    "general": "Pískovec je křehký, když je mokrý, a vyžaduje hodně času k vyschnutí po dešti. Lezení na mokrém pískovci poškozuje skálu a je nebezpečné.",
+    "general": "Pískovec je křehký, když je mokrý a vyžaduje hodně času k vyschnutí po dešti. Lezení na mokrém pískovci poškozuje skálu a je nebezpečné.",
     "recentRain": "Zjištěny nedávné srážky. Ujistěte se, že skála je před lezením zcela suchá.",
     "inLast24h": "za posledních 24h",
     "inLast48h": "za posledních 48h"
@@ -248,10 +238,6 @@
       "title": "Počasí v reálném čase",
       "description": "Přesné předpovědi z Open-Meteo s výpočty slunce/stínu pro konkrétní sektory"
     },
-    "chatInterface": {
-      "title": "Chatové rozhraní",
-      "description": "Dotazy v přirozeném jazyce poháněné AI. Ptej se v jakémkoli jazyce, dostaneš okamžité odpovědi"
-    },
     "communityReports": {
       "title": "Komunitní reporty",
       "description": "Sdílejte podmínky, bezpečnostní upozornění, změny přístupu, info o lezení a další. Pomozte spolulezců s aktualizacemi v reálném čase napříč více kategoriemi"
@@ -262,7 +248,7 @@
     },
     "crossDeviceSync": {
       "title": "Synchronizace mezi zařízeními",
-      "description": "Přistupujte ke svým oblíbeným a historii chatu z jakéhokoli zařízení pomocí bezpečného synchronizačního klíče. Není potřeba účet"
+      "description": "Přistupujte ke svým oblíbeným z jakéhokoli zařízení pomocí bezpečného synchronizačního klíče. Není potřeba účet"
     },
     "privacyFirst": {
       "title": "Soukromí na prvním místě",
@@ -278,7 +264,7 @@
     },
     "whatYouControl": {
       "title": "Co kontroluješ",
-      "description": "Vaše oblíbené, hlášení a historie chatu jsou uloženy lokálně ve vašem zařízení. Pro přístup k nim z více zařízení si můžete vytvořit anonymní profil. Jakmile máte profil, vaše data se automaticky synchronizují, aby byl umožněn přístup z více zařízení. Všechna vaše data můžete kdykoli smazat v Nastavení."
+      "description": "Vaše oblíbené, hlášení a histori u jsou uloženy lokálně ve vašem zařízení. Pro přístup k nim z více zařízení si můžete vytvořit anonymní profil. Jakmile máte profil, vaše data se automaticky synchronizují, aby byl umožněn přístup z více zařízení. Všechna vaše data můžete kdykoli smazat v Nastavení."
     },
     "howSyncWorks": {
       "title": "Jak funguje synchronizace",
@@ -290,7 +276,7 @@
     },
     "yourRights": {
       "title": "Tvá práva",
-      "description": "Svůj profil můžete kdykoli smazat v Nastavení. Tím odstraníte své oblíbené položky, historii chatu a profil z naší databáze. Hlášení komunity, která jste zveřejnili, zůstanou viditelná (anonymně), aby pomohla ostatním lezců. Plná kontrola nad vašimi daty."
+      "description": "Svůj profil můžete kdykoli smazat v Nastavení. Tím odstraníte své oblíbené položky a profil z naší databáze. Hlášení komunity, která jste zveřejnili, zůstanou viditelná (anonymně), aby pomohla ostatním lezců. Plná kontrola nad vašimi daty."
     },
     "dataSecurity": {
       "title": "Zabezpečení dat",
@@ -404,7 +390,7 @@
   "sync": {
     "banner": {
       "title": "Vaše data se synchronizují mezi zařízeními",
-      "description": "Vaše oblíbené, reporty a historie chatu jsou uloženy lokálně a mohou se synchronizovat na jiná zařízení pomocí vašeho synchronizačního klíče.",
+      "description": "Vaše oblíbené, reporty a histori u jsou uloženy lokálně a mohou se synchronizovat na jiná zařízení pomocí vašeho synchronizačního klíče.",
       "learnMore": "Zjistit více",
       "dismiss": "Rozumím"
     },
@@ -415,7 +401,7 @@
     },
     "notification": {
       "title": "Synchronizační klíč vytvořen",
-      "description": "Vygenerovali jsme jedinečný klíč pro synchronizaci vašich oblíbených a chatů napříč zařízeními.",
+      "description": "Vygenerovali jsme jedinečný klíč pro synchronizaci vašich oblíbených napříč zařízeními.",
       "viewInSettings": "Zobrazit v nastavení",
       "viewMore": "Co je synchronizační klíč?"
     }
@@ -430,7 +416,7 @@
       },
       "multiDevice": {
         "title": "Přístup z více zařízení",
-        "description": "Přistupujte ke svým oblíbeným a historii chatu z jakéhokoli zařízení pomocí synchronizačního klíče."
+        "description": "Přistupujte ke svým oblíbeným z jakéhokoli zařízení pomocí synchronizačního klíče."
       },
       "privacy": {
         "title": "Soukromí na prvním místě",
@@ -473,7 +459,7 @@
       },
       "manual": {
         "title": "Uložte si data na všech zařízeních",
-        "description": "Synchronizujte své oblíbené, hlášení a historii chatů na všech svých zařízeních"
+        "description": "Synchronizujte své oblíbené, hlášenína všech svých zařízeních"
       }
     },
     "features": {
@@ -657,7 +643,7 @@
       "title": "Nebezpečná zóna",
       "description": "Tyto akce jsou trvalé a nelze je vrátit zpět",
       "deleteProfile": "Smazat profil",
-      "deleteProfileConfirm": "Opravdu chcete smazat svůj profil? Tímto trvale odstraníte všechna vaše data včetně oblíbených, historie chatu a nastavení. Tuto akci nelze vrátit zpět.",
+      "deleteProfileConfirm": "Opravdu chcete smazat svůj profil? Tímto trvale odstraníte všechna vaše data včetně oblíbených, histori u a nastavení. Tuto akci nelze vrátit zpět.",
       "deleteFailed": "Nepodařilo se smazat profil. Zkuste to prosím znovu."
     },
     "appearance": "Appearance",
@@ -868,7 +854,6 @@
     }
   },
   "cragPage": {
-    "askAI": "Zeptat se AI",
     "edit": "Upravit",
     "editCrag": "Upravit podrobnosti skály",
     "currentConditions": "Aktuální podmínky",
@@ -879,7 +864,6 @@
     "searchSectors": "Hledat sektory...",
     "noSectorsFound": "Nebyly nalezeny žádné sektory odpovídající vašemu vyhledávání.",
     "disclaimer": "Povětrnostní podmínky se mohou rychle měnit. Vždy zkontrolujte podmínky na místě a používejte svůj nejlepší úsudek.",
-    "askAIAboutCrag": "Zeptat se AI na tuto skálu",
     "viewOnSunCalc": "Zobrazit časy slunce/měsíce",
     "viewSunAngles": "Zobrazit polohu slunce a úhly stínu",
     "viewOnMap": "Zobrazit na mapě",

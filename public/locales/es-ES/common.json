@@ -23,16 +23,6 @@
     "yourFavorites": "Tus Favoritos",
     "favoriteQuery": "¿Cuáles son las condiciones en {{crag}}?"
   },
-  "chat": {
-    "analyzing": "Analizando condiciones...",
-    "thinking": "Pensando...",
-    "inputPlaceholder": "Pregunta por cualquier escuela o sector...",
-    "clearHistory": "Borrar historial",
-    "clearHistoryConfirm": "¿Estás seguro de que quieres borrar todo el historial del chat? Esta acción no se puede deshacer.",
-    "clearChat": "Borrar chat",
-    "clearChatTooltip": "Borrar la conversación actual",
-    "clearChatConfirm": "¿Borrar tu chat? Esto eliminará todos los mensajes de la conversación actual."
-  },
   "search": {
     "title": "Buscar escuelas",
     "description": "Buscar zonas de escalada por nombre o ubicación",
@@ -248,10 +238,6 @@
       "title": "Meteorología en tiempo real",
       "description": "Pronósticos precisos de Open-Meteo con cálculo de sol y sombra para sectores específicos"
     },
-    "chatInterface": {
-      "title": "Interfaz de chat",
-      "description": "Consultas en lenguaje natural impulsadas por IA. Pregunta en cualquier idioma y recibe respuestas al instante"
-    },
     "communityReports": {
       "title": "Informes de la comunidad",
       "description": "Comparte condiciones, alertas de seguridad, cambios de acceso, información de escalada y más. Ayuda a escaladores con actualizaciones en tiempo real en múltiples categorías"
@@ -262,7 +248,7 @@
     },
     "crossDeviceSync": {
       "title": "Sincronización entre dispositivos",
-      "description": "Accede a tus favoritos e historial de chat desde cualquier dispositivo con una clave de sincronización segura. No se requiere cuenta"
+      "description": "Accede a tus favoritos desde cualquier dispositivo con una clave de sincronización segura. No se requiere cuenta"
     },
     "privacyFirst": {
       "title": "Privacidad ante todo",
@@ -278,7 +264,7 @@
     },
     "whatYouControl": {
       "title": "Lo que controlas",
-      "description": "Tus favoritos, reportes e historial de chat se almacenan localmente en tu dispositivo. Para acceder a ellos desde múltiples dispositivos, puedes crear un perfil anónimo. Una vez que tienes un perfil, tus datos se sincronizan automáticamente para permitir el acceso desde múltiples dispositivos. Puedes eliminar todos tus datos en cualquier momento desde Configuración."
+      "description": "Tus favoritos, reportes se almacenan localmente en tu dispositivo. Para acceder a ellos desde múltiples dispositivos, puedes crear un perfil anónimo. Una vez que tienes un perfil, tus datos se sincronizan automáticamente para permitir el acceso desde múltiples dispositivos. Puedes eliminar todos tus datos en cualquier momento desde Configuración."
     },
     "howSyncWorks": {
       "title": "Cómo funciona la sincronización",
@@ -290,7 +276,7 @@
     },
     "yourRights": {
       "title": "Tus derechos",
-      "description": "Puedes eliminar tu perfil en cualquier momento desde Configuración. Esto elimina tus favoritos, historial de chat y perfil de nuestra base de datos. Los reportes de la comunidad que publicaste permanecen visibles (anónimamente) para ayudar a otros escaladores. Control total sobre tus datos."
+      "description": "Puedes eliminar tu perfil en cualquier momento desde Configuración. Esto elimina tus favoritos y perfil de nuestra base de datos. Los reportes de la comunidad que publicaste permanecen visibles (anónimamente) para ayudar a otros escaladores. Control total sobre tus datos."
     },
     "dataSecurity": {
       "title": "Seguridad de datos",
@@ -408,7 +394,7 @@
   "sync": {
     "banner": {
       "title": "Tus datos se sincronizan entre dispositivos",
-      "description": "Tus favoritos, informes e historial de chat se guardan localmente y pueden sincronizarse en otros dispositivos con tu clave de sincronización.",
+      "description": "Tus favoritos, informes se guardan localmente y pueden sincronizarse en otros dispositivos con tu clave de sincronización.",
       "learnMore": "Más información",
       "dismiss": "Entendido"
     },
@@ -420,7 +406,7 @@
     },
     "notification": {
       "title": "Clave de sincronización creada",
-      "description": "Hemos generado una clave única para sincronizar tus favoritos y chats en todos tus dispositivos.",
+      "description": "Hemos generado una clave única para sincronizar tus favoritos en todos tus dispositivos.",
       "viewInSettings": "Ver en ajustes",
       "viewMore": "¿Qué es una clave de sincronización?"
     }
@@ -435,7 +421,7 @@
       },
       "multiDevice": {
         "title": "Acceso multidispositivo",
-        "description": "Accede a tus favoritos e historial de chat desde cualquier dispositivo con tu clave de sincronización."
+        "description": "Accede a tus favoritos desde cualquier dispositivo con tu clave de sincronización."
       },
       "privacy": {
         "title": "Privacidad ante todo",
@@ -478,7 +464,7 @@
       },
       "manual": {
         "title": "Guarda tus datos en todos los dispositivos",
-        "description": "Sincroniza tus favoritos, informes e historial de chat en todos tus dispositivos"
+        "description": "Sincroniza tus favoritos, informes en todos tus dispositivos"
       }
     },
     "features": {
@@ -661,7 +647,7 @@
       "title": "Zona de peligro",
       "description": "Estas acciones son permanentes y no se pueden deshacer",
       "deleteProfile": "Eliminar perfil",
-      "deleteProfileConfirm": "¿Estás seguro de que quieres eliminar tu perfil? Esto eliminará permanentemente todos tus datos, incluyendo favoritos, historial de chat y configuración. Esta acción no se puede deshacer.",
+      "deleteProfileConfirm": "¿Estás seguro de que quieres eliminar tu perfil? Esto eliminará permanentemente todos tus datos, incluyendo favoritos y configuración. Esta acción no se puede deshacer.",
       "deleteFailed": "Error al eliminar el perfil. Por favor, inténtalo de nuevo."
     },
     "signOut": "Sign Out"
@@ -867,7 +853,6 @@
     }
   },
   "cragPage": {
-    "askAI": "Preguntar a la IA",
     "edit": "Editar",
     "editCrag": "Editar detalles de la escuela",
     "currentConditions": "Condiciones actuales",
@@ -878,7 +863,6 @@
     "searchSectors": "Buscar sectores...",
     "noSectorsFound": "No se encontraron sectores que coincidan con tu búsqueda.",
     "disclaimer": "Las condiciones meteorológicas pueden cambiar rápidamente. Verifica siempre las condiciones al llegar y usa tu mejor juicio.",
-    "askAIAboutCrag": "Preguntar a la IA sobre esta escuela",
     "viewOnSunCalc": "Ver horas de sol/luna",
     "viewSunAngles": "Ver posición del sol y ángulos de sombra",
     "viewOnMap": "Ver en el mapa",

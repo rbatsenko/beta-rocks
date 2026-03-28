@@ -23,16 +23,6 @@
     "yourFavorites": "Uw Favorieten",
     "favoriteQuery": "Wat zijn de omstandigheden bij {{crag}}?"
   },
-  "chat": {
-    "analyzing": "Condities analyseren...",
-    "thinking": "Aan het denken...",
-    "inputPlaceholder": "Vraag naar een rots of sector...",
-    "clearChat": "Chat wissen",
-    "clearChatTooltip": "Wis het huidige gesprek",
-    "clearChatConfirm": "Wis je chat? Dit verwijdert alle berichten uit het huidige gesprek.",
-    "clearHistory": "Geschiedenis wissen",
-    "clearHistoryConfirm": "Weet je zeker dat je alle chatgeschiedenis wilt wissen? Dit kan niet ongedaan worden gemaakt."
-  },
   "search": {
     "title": "Zoek klimrotsen",
     "description": "Zoek klimgebieden op naam of locatie",
@@ -168,10 +158,6 @@
       "title": "Real-time weer",
       "description": "Nauwkeurige voorspellingen van Open-Meteo met zon/schaduwberekeningen voor specifieke sectoren"
     },
-    "chatInterface": {
-      "title": "Chat-interface",
-      "description": "Natuurlijke taalvragen powered by AI. Vraag in elke taal, krijg direct antwoord"
-    },
     "communityReports": {
       "title": "Gemeenschapsrapporten",
       "description": "Deel omstandigheden, veiligheidswaarschuwingen, toegangswijzigingen, kliminfo en meer. Help mede-klimmers met realtime updates in meerdere categorieën"
@@ -182,7 +168,7 @@
     },
     "crossDeviceSync": {
       "title": "Synchronisatie tussen apparaten",
-      "description": "Krijg toegang tot je favorieten en chatgeschiedenis vanaf elk apparaat met een beveiligde synchronisatiesleutel. Geen account vereist"
+      "description": "Krijg toegang tot je favorieten vanaf elk apparaat met een beveiligde synchronisatiesleutel. Geen account vereist"
     },
     "privacyFirst": {
       "title": "Privacy eerst",
@@ -198,7 +184,7 @@
     },
     "whatYouControl": {
       "title": "Wat Jij Controleert",
-      "description": "Je favorieten, rapporten en chatgeschiedenis worden lokaal op je apparaat opgeslagen. Om er vanaf meerdere apparaten toegang toe te hebben, kun je een anoniem profiel aanmaken. Zodra je een profiel hebt, worden je gegevens automatisch gesynchroniseerd om toegang vanaf meerdere apparaten mogelijk te maken. Je kunt al je gegevens op elk moment verwijderen vanuit Instellingen."
+      "description": "Je favorieten, rapporten worden lokaal op je apparaat opgeslagen. Om er vanaf meerdere apparaten toegang toe te hebben, kun je een anoniem profiel aanmaken. Zodra je een profiel hebt, worden je gegevens automatisch gesynchroniseerd om toegang vanaf meerdere apparaten mogelijk te maken. Je kunt al je gegevens op elk moment verwijderen vanuit Instellingen."
     },
     "howSyncWorks": {
       "title": "Hoe Synchronisatie Werkt",
@@ -210,7 +196,7 @@
     },
     "yourRights": {
       "title": "Jouw Rechten",
-      "description": "Je kunt je profiel op elk moment verwijderen vanuit Instellingen. Dit verwijdert je favorieten, chatgeschiedenis en profiel uit onze database. Gemeenschapsrapporten die je hebt geplaatst blijven zichtbaar (anoniem) om andere klimmers te helpen. Volledige controle over je gegevens."
+      "description": "Je kunt je profiel op elk moment verwijderen vanuit Instellingen. Dit verwijdert je favorieten en profiel uit onze database. Gemeenschapsrapporten die je hebt geplaatst blijven zichtbaar (anoniem) om andere klimmers te helpen. Volledige controle over je gegevens."
     },
     "dataSecurity": {
       "title": "Gegevensbeveiliging",
@@ -324,13 +310,13 @@
   "sync": {
     "notification": {
       "title": "Synchronisatietoets aangemaakt",
-      "description": "We hebben een unieke toets gegenereerd om je favorieten en chat over apparaten heen te synchroniseren.",
+      "description": "We hebben een unieke toets gegenereerd om je favorieten over apparaten heen te synchroniseren.",
       "viewInSettings": "Bekijk in Instellingen",
       "viewMore": "Wat is een synchronisatiesleutel?"
     },
     "banner": {
       "title": "Je gegevens synchroniseren op apparaten",
-      "description": "Je favorieten, rapporten en chatgeschiedenis worden lokaal opgeslagen en kunnen synchroniseren naar andere apparaten met je synchronisatietoets.",
+      "description": "Je favorieten, rapporten worden lokaal opgeslagen en kunnen synchroniseren naar andere apparaten met je synchronisatietoets.",
       "learnMore": "Meer informatie",
       "dismiss": "Begrepen"
     },
@@ -350,7 +336,7 @@
       },
       "multiDevice": {
         "title": "Multi-apparaat toegang",
-        "description": "Toegang tot uw favorieten en chatgeschiedenis vanaf elk apparaat met uw synchronisatiesleutel."
+        "description": "Toegang tot uw favorieten vanaf elk apparaat met uw synchronisatiesleutel."
       },
       "privacy": {
         "title": "Privacy eerst",
@@ -393,7 +379,7 @@
       },
       "manual": {
         "title": "Bewaar je gegevens op al je apparaten",
-        "description": "Synchroniseer je favorieten, rapporten en chatgeschiedenis op al je apparaten"
+        "description": "Synchroniseer je favorieten, rapporten op al je apparaten"
       }
     },
     "features": {
@@ -577,7 +563,7 @@
       "title": "Gevaarlijke zone",
       "description": "Deze acties zijn permanent en kunnen niet ongedaan worden gemaakt",
       "deleteProfile": "Profiel verwijderen",
-      "deleteProfileConfirm": "Weet je zeker dat je je profiel wilt verwijderen? Dit verwijdert permanent al je gegevens, inclusief favorieten, chatgeschiedenis en instellingen. Deze actie kan niet ongedaan worden gemaakt.",
+      "deleteProfileConfirm": "Weet je zeker dat je je profiel wilt verwijderen? Dit verwijdert permanent al je gegevens, inclusief favorieten en instellingen. Deze actie kan niet ongedaan worden gemaakt.",
       "deleteFailed": "Kan profiel niet verwijderen. Probeer het opnieuw."
     },
     "appearance": "Appearance",
@@ -788,7 +774,6 @@
     }
   },
   "cragPage": {
-    "askAI": "Vraag AI",
     "edit": "Bewerken",
     "editCrag": "Rots details bewerken",
     "currentConditions": "Huidige omstandigheden",
@@ -799,7 +784,6 @@
     "searchSectors": "Zoek sectoren...",
     "noSectorsFound": "Geen sectoren gevonden die overeenkomen met je zoekopdracht.",
     "disclaimer": "Weersomstandigheden kunnen snel veranderen. Controleer altijd de omstandigheden bij aankomst en gebruik je beste oordeel.",
-    "askAIAboutCrag": "Vraag AI over deze rots",
     "viewOnSunCalc": "Bekijk zon/maan tijden",
     "viewSunAngles": "Bekijk zonpositie en schaduwhoeken",
     "viewOnMap": "Bekijk op kaart",

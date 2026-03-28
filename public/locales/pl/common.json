@@ -23,16 +23,6 @@
     "yourFavorites": "Twoje Ulubione",
     "favoriteQuery": "Jakie są warunki w {{crag}}?"
   },
-  "chat": {
-    "analyzing": "Analizuję warunki...",
-    "thinking": "Myślę...",
-    "inputPlaceholder": "Zapytaj o dowolną skałkę lub sektor...",
-    "clearHistory": "Wyczyść historię",
-    "clearHistoryConfirm": "Czy na pewno chcesz wyczyścić całą historię czatu? Tej operacji nie można cofnąć.",
-    "clearChat": "Wyczyść czat",
-    "clearChatTooltip": "Wyczyść bieżącą rozmowę",
-    "clearChatConfirm": "Wyczyścić twój czat? Spowoduje to usunięcie wszystkich wiadomości z bieżącej rozmowy."
-  },
   "search": {
     "title": "Szukaj skałek",
     "description": "Wyszukaj rejony wspinaczkowe po nazwie lub lokalizacji",
@@ -248,10 +238,6 @@
       "title": "Pogoda na żywo",
       "description": "Dokładne prognozy z Open-Meteo z linkiem do słońca/cienia dla konkretnych sektorów"
     },
-    "chatInterface": {
-      "title": "Interfejs czatu",
-      "description": "Zapytania w języku naturalnym dzięki AI. Pytaj w dowolnym języku, otrzymuj natychmiastowe odpowiedzi"
-    },
     "communityReports": {
       "title": "Raporty społeczności",
       "description": "Dziel się warunem, informacjami o bezpieczeństwie, zmianami w dostępie, info wspinaczkowym i więcej. Pomóż wspinaczom aktualizacjami w czasie rzeczywistym w wielu kategoriach"
@@ -262,7 +248,7 @@
     },
     "crossDeviceSync": {
       "title": "Synchronizacja między urządzeniami",
-      "description": "Uzyskaj dostęp do swoich ulubionych i historii czatu z dowolnego urządzenia za pomocą bezpiecznego klucza synchronizacji. Nie wymaga konta"
+      "description": "Uzyskaj dostęp do swoich ulubionych z dowolnego urządzenia za pomocą bezpiecznego klucza synchronizacji. Nie wymaga konta"
     },
     "privacyFirst": {
       "title": "Prywatność na pierwszym miejscu",
@@ -290,7 +276,7 @@
     },
     "yourRights": {
       "title": "Twoje prawa",
-      "description": "Możesz usunąć swój profil w dowolnym momencie z Ustawień. Spowoduje to usunięcie Twoich ulubionych, historii czatu i profilu z naszej bazy danych. Raporty społeczności, które opublikowałeś, pozostają widoczne (anonimowo), aby pomóc innym wspinaczom. Pełna kontrola nad swoimi danymi."
+      "description": "Możesz usunąć swój profil w dowolnym momencie z Ustawień. Spowoduje to usunięcie Twoich ulubionych i profilu z naszej bazy danych. Raporty społeczności, które opublikowałeś, pozostają widoczne (anonimowo), aby pomóc innym wspinaczom. Pełna kontrola nad swoimi danymi."
     },
     "dataSecurity": {
       "title": "Bezpieczeństwo danych",
@@ -465,7 +451,7 @@
       },
       "manual": {
         "title": "Zapisz swoje dane na wszystkich urządzeniach",
-        "description": "Synchronizuj swoje ulubione, raporty i historię czatu na wszystkich swoich urządzeniach"
+        "description": "Synchronizuj swoje ulubione, raporty na wszystkich swoich urządzeniach"
       }
     },
     "features": {
@@ -649,7 +635,7 @@
       "title": "Strefa niebezpieczna",
       "description": "Te działania są trwałe i nie można ich cofnąć",
       "deleteProfile": "Usuń profil",
-      "deleteProfileConfirm": "Czy na pewno chcesz usunąć swój profil? Spowoduje to trwałe usunięcie wszystkich twoich danych, w tym ulubionych skałek, historii czatu i ustawień. Tej czynności nie można cofnąć.",
+      "deleteProfileConfirm": "Czy na pewno chcesz usunąć swój profil? Spowoduje to trwałe usunięcie wszystkich twoich danych, w tym ulubionych skałek i ustawień. Tej czynności nie można cofnąć.",
       "deleteFailed": "Nie udało się usunąć profilu. Spróbuj ponownie."
     },
     "appearance": "Wygląd",
@@ -864,7 +850,6 @@
     }
   },
   "cragPage": {
-    "askAI": "Zapytaj AI",
     "edit": "Edytuj",
     "editCrag": "Edytuj szczegóły skały",
     "currentConditions": "Aktualne warunki",
@@ -875,7 +860,6 @@
     "searchSectors": "Szukaj sektorów...",
     "noSectorsFound": "Nie znaleziono sektorów pasujących do Twojego wyszukiwania.",
     "disclaimer": "Warunki pogodowe mogą się szybko zmieniać. Zawsze sprawdzaj warunki na miejscu i kieruj się własnym osądem.",
-    "askAIAboutCrag": "Zapytaj AI o tę skałkę",
     "viewOnSunCalc": "Zobacz czasy słońca/księżyca",
     "viewSunAngles": "Zobacz pozycję słońca i kąty cienia",
     "viewOnMap": "Zobacz na mapie",

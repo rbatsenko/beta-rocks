@@ -23,16 +23,6 @@
     "yourFavorites": "Vaše Obľúbené",
     "favoriteQuery": "Aké sú podmienky v {{crag}}?"
   },
-  "chat": {
-    "analyzing": "Analyzujem podmienky...",
-    "thinking": "Premýšľam...",
-    "inputPlaceholder": "Opýtajte sa na ktorúkoľvek skalu alebo sektor...",
-    "clearHistory": "Vymazať históriu",
-    "clearHistoryConfirm": "Naozaj chcete vymazať celú históriu chatu? Túto akciu nie je možné vrátiť späť.",
-    "clearChat": "Vymazať chat",
-    "clearChatTooltip": "Vymazať aktuálnu konverzáciu",
-    "clearChatConfirm": "Vymazať váš chat? Týmto odstránite všetky správy z aktuálnej konverzácie."
-  },
   "search": {
     "title": "Vyhľadať skaly",
     "description": "Vyhľadávanie lezeckých oblastí podľa názvu alebo polohy",
@@ -168,10 +158,6 @@
       "title": "Počasie v reálnom čase",
       "description": "Presné predpovede z Open-Meteo s výpočtami slnka/tieňa pre konkrétne sektory"
     },
-    "chatInterface": {
-      "title": "Chatové rozhraní",
-      "description": "Dotazy v prirodzenom jazyku poháňané AI. Pýtajte sa v akomkoľvek jazyku, dostanete okamžité odpovede"
-    },
     "communityReports": {
       "title": "Komunitné reporty",
       "description": "Zdieľajte podmienky, bezpečnostné upozornenia, zmeny prístupu, info o lezení a ďalšie. Pomôžte spolulezcom s aktualizáciami v reálnom čase naprieč viacerými kategóriami"
@@ -182,7 +168,7 @@
     },
     "crossDeviceSync": {
       "title": "Synchronizácia medzi zariadeniami",
-      "description": "Pristupujte k svojim obľúbeným a histórii chatu z akéhokoľvek zariadenia pomocou bezpečného synchronizačného kľúča. Nie je potrebný účet"
+      "description": "Pristupujte k svojim obľúbeným z akéhokoľvek zariadenia pomocou bezpečného synchronizačného kľúča. Nie je potrebný účet"
     },
     "privacyFirst": {
       "title": "Súkromie na prvom mieste",
@@ -198,7 +184,7 @@
     },
     "whatYouControl": {
       "title": "Čo kontrolujete",
-      "description": "Vaše obľúbené, hlásenia a história chatu sú uložené lokálne vo vašom zariadení. Pre prístup k nim z viacerých zariadení si môžete vytvoriť anonymný profil. Keď máte profil, vaše dáta sa automaticky synchronizujú, aby bol umožnený prístup z viacerých zariadení. Všetky vaše dáta môžete kedykoľvek vymazať v Nastaveniach."
+      "description": "Vaše obľúbené, hlásenia a sú uložené lokálne vo vašom zariadení. Pre prístup k nim z viacerých zariadení si môžete vytvoriť anonymný profil. Keď máte profil, vaše dáta sa automaticky synchronizujú, aby bol umožnený prístup z viacerých zariadení. Všetky vaše dáta môžete kedykoľvek vymazať v Nastaveniach."
     },
     "howSyncWorks": {
       "title": "Ako funguje synchronizácia",
@@ -210,7 +196,7 @@
     },
     "yourRights": {
       "title": "Vaše práva",
-      "description": "Svoj profil môžete kedykoľvek vymazať v Nastaveniach. Tým odstránite svoje obľúbené položky, históriu chatu a profil z našej databázy. Hlásenia komunity, ktoré ste zverejnili, zostávajú viditeľné (anonymne), aby pomohli ostatným lezcom. Plná kontrola nad vašimi údajmi."
+      "description": "Svoj profil môžete kedykoľvek vymazať v Nastaveniach. Tým odstránite svoje obľúbené položky a profil z našej databázy. Hlásenia komunity, ktoré ste zverejnili, zostávajú viditeľné (anonymne), aby pomohli ostatným lezcom. Plná kontrola nad vašimi údajmi."
     },
     "dataSecurity": {
       "title": "Zabezpečenie dát",
@@ -324,7 +310,7 @@
   "sync": {
     "banner": {
       "title": "Vaše dáta sa synchronizujú medzi zariadeniami",
-      "description": "Vaše obľúbené, správy a história chatu sú uložené lokálne a môžu sa synchronizovať na iné zariadenia pomocou vášho synchronizačného kľúča.",
+      "description": "Vaše obľúbené, správy a sú uložené lokálne a môžu sa synchronizovať na iné zariadenia pomocou vášho synchronizačného kľúča.",
       "learnMore": "Zistiť viac",
       "dismiss": "Rozumiem"
     },
@@ -335,7 +321,7 @@
     },
     "notification": {
       "title": "Synchronizačný kľúč vytvorený",
-      "description": "Vygenerovali sme jedinečný kľúč na synchronizáciu vašich obľúbených a chatov naprieč zariadeniami.",
+      "description": "Vygenerovali sme jedinečný kľúč na synchronizáciu vašich obľúbených naprieč zariadeniami.",
       "viewInSettings": "Zobraziť v nastavení",
       "viewMore": "Čo je synchronizačný kľúč?"
     }
@@ -350,7 +336,7 @@
       },
       "multiDevice": {
         "title": "Prístup z viacerých zariadení",
-        "description": "Pristupujte k svojim obľúbeným a histórii chatu z akéhokoľvek zariadenia pomocou synchronizačného kľúča."
+        "description": "Pristupujte k svojim obľúbeným z akéhokoľvek zariadenia pomocou synchronizačného kľúča."
       },
       "privacy": {
         "title": "Súkromie na prvom mieste",
@@ -393,7 +379,7 @@
       },
       "manual": {
         "title": "Uložte si údaje na všetkých zariadeniach",
-        "description": "Synchronizujte svoje obľúbené, hlásenia a históriu chatov na všetkých svojich zariadeniach"
+        "description": "Synchronizujte svoje obľúbené, hlásenia na všetkých svojich zariadeniach"
       }
     },
     "features": {
@@ -577,7 +563,7 @@
       "title": "Nebezpečná zóna",
       "description": "Tieto akcie sú trvalé a nemožno ich vrátiť späť",
       "deleteProfile": "Odstrániť profil",
-      "deleteProfileConfirm": "Naozaj chcete odstrániť svoj profil? Týmto natrvalo odstránite všetky vaše údaje vrátane obľúbených, histórie chatu a nastavení. Túto akciu nie je možné vrátiť späť.",
+      "deleteProfileConfirm": "Naozaj chcete odstrániť svoj profil? Týmto natrvalo odstránite všetky vaše údaje vrátane obľúbených, históri u a nastavení. Túto akciu nie je možné vrátiť späť.",
       "deleteFailed": "Nepodarilo sa odstrániť profil. Skúste to prosím znova."
     },
     "appearance": "Appearance",
@@ -788,7 +774,6 @@
     }
   },
   "cragPage": {
-    "askAI": "Opýtať sa AI",
     "edit": "Upraviť",
     "editCrag": "Upraviť podrobnosti skaly",
     "currentConditions": "Aktuálne podmienky",
@@ -799,7 +784,6 @@
     "searchSectors": "Hľadať sektory...",
     "noSectorsFound": "Neboli nájdené žiadne sektory zodpovedajúce vášmu vyhľadávaniu.",
     "disclaimer": "Poveternostné podmienky sa môžu rýchlo meniť. Vždy skontrolujte podmienky na mieste a použite svoj najlepší úsudok.",
-    "askAIAboutCrag": "Opýtať sa AI na túto skalu",
     "viewOnSunCalc": "Zobraziť časy slnka/mesiaca",
     "viewSunAngles": "Zobraziť polohu slnka a uhly tieňa",
     "viewOnMap": "Zobraziť na mape",

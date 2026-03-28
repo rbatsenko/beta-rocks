@@ -23,16 +23,6 @@
     "yourFavorites": "Os Seus Favoritos",
     "favoriteQuery": "Quais são as condições em {{crag}}?"
   },
-  "chat": {
-    "analyzing": "A analisar condições...",
-    "thinking": "A pensar...",
-    "inputPlaceholder": "Pergunte sobre qualquer crag ou sector...",
-    "clearChat": "Limpar Chat",
-    "clearChatTooltip": "Limpar a conversa atual",
-    "clearChatConfirm": "Limpar o seu chat? Isto irá remover todas as mensagens da conversa atual.",
-    "clearHistory": "Limpar Histórico",
-    "clearHistoryConfirm": "Tem a certeza que quer limpar todo o histórico de chat? Isto não pode ser desfeito."
-  },
   "search": {
     "title": "Pesquisar setores",
     "description": "Pesquisar áreas de escalada por nome ou localização",
@@ -168,10 +158,6 @@
       "title": "Clima em Tempo Real",
       "description": "Previsões precisas de Open-Meteo com cálculos de sol/sombra para sectores específicos"
     },
-    "chatInterface": {
-      "title": "Interface de Chat",
-      "description": "Consultas em linguagem natural com IA. Pergunte em qualquer idioma, obtenha respostas instantâneas"
-    },
     "communityReports": {
       "title": "Relatórios da Comunidade",
       "description": "Partilhe condições, alertas de segurança, mudanças de acesso, informações de escalada e mais. Ajude os escaladores com atualizações em tempo real em várias categorias"
@@ -182,7 +168,7 @@
     },
     "crossDeviceSync": {
       "title": "Sincronização entre dispositivos",
-      "description": "Aceda aos seus favoritos e histórico de chat a partir de qualquer dispositivo com uma chave de sincronização segura. Não é necessária conta"
+      "description": "Aceda aos seus favoritos a partir de qualquer dispositivo com uma chave de sincronização segura. Não é necessária conta"
     },
     "privacyFirst": {
       "title": "Privacidade em Primeiro Lugar",
@@ -198,7 +184,7 @@
     },
     "whatYouControl": {
       "title": "O Que Controla",
-      "description": "Os teus favoritos, relatórios e histórico de chat são armazenados localmente no teu dispositivo. Para aceder aos mesmos a partir de vários dispositivos, podes criar um perfil anónimo. Assim que tiveres um perfil, os teus dados sincronizam automaticamente para permitir acesso a partir de vários dispositivos. Podes eliminar todos os teus dados a qualquer momento nas Definições."
+      "description": "Os teus favoritos, relatórios são armazenados localmente no teu dispositivo. Para aceder aos mesmos a partir de vários dispositivos, podes criar um perfil anónimo. Assim que tiveres um perfil, os teus dados sincronizam automaticamente para permitir acesso a partir de vários dispositivos. Podes eliminar todos os teus dados a qualquer momento nas Definições."
     },
     "howSyncWorks": {
       "title": "Como Funciona a Sincronização",
@@ -210,7 +196,7 @@
     },
     "yourRights": {
       "title": "Os Seus Direitos",
-      "description": "Podes eliminar o teu perfil a qualquer momento nas Definições. Isto remove os teus favoritos, histórico de chat e perfil da nossa base de dados. Os relatórios da comunidade que publicaste permanecem visíveis (anonimamente) para ajudar outros escaladores. Controlo total sobre os teus dados."
+      "description": "Podes eliminar o teu perfil a qualquer momento nas Definições. Isto remove os teus favoritos e perfil da nossa base de dados. Os relatórios da comunidade que publicaste permanecem visíveis (anonimamente) para ajudar outros escaladores. Controlo total sobre os teus dados."
     },
     "dataSecurity": {
       "title": "Segurança de Dados",
@@ -324,13 +310,13 @@
   "sync": {
     "notification": {
       "title": "Chave de Sincronização Criada",
-      "description": "Gerámos uma chave única para sincronizar os seus favoritos e chat entre dispositivos.",
+      "description": "Gerámos uma chave única para sincronizar os seus favoritos entre dispositivos.",
       "viewInSettings": "Ver nas Definições",
       "viewMore": "O que é uma chave de sincronização?"
     },
     "banner": {
       "title": "Os seus dados sincronizam entre dispositivos",
-      "description": "Os seus favoritos, relatórios e histórico de chat são guardados localmente e podem ser sincronizados com outros dispositivos usando a sua chave de sincronização.",
+      "description": "Os seus favoritos, relatórios são guardados localmente e podem ser sincronizados com outros dispositivos usando a sua chave de sincronização.",
       "learnMore": "Saber mais",
       "dismiss": "Compreendido"
     },
@@ -350,7 +336,7 @@
       },
       "multiDevice": {
         "title": "Acesso multi-dispositivo",
-        "description": "Aceda aos seus favoritos e histórico de chat a partir de qualquer dispositivo usando a sua chave de sincronização."
+        "description": "Aceda aos seus favoritos a partir de qualquer dispositivo usando a sua chave de sincronização."
       },
       "privacy": {
         "title": "Privacidade em primeiro lugar",
@@ -393,7 +379,7 @@
       },
       "manual": {
         "title": "Guarde os seus dados em todos os dispositivos",
-        "description": "Sincronize os seus favoritos, relatórios e histórico de conversas em todos os seus dispositivos"
+        "description": "Sincronize os seus favoritos, relatórios em todos os seus dispositivos"
       }
     },
     "features": {
@@ -576,7 +562,7 @@
       "title": "Zona de Perigo",
       "description": "Estas ações são permanentes e não podem ser desfeitas",
       "deleteProfile": "Eliminar Perfil",
-      "deleteProfileConfirm": "Tem a certeza que quer eliminar o seu perfil? Isto irá remover permanentemente todos os seus dados, incluindo favoritos, histórico de chat e definições. Esta ação não pode ser desfeita.",
+      "deleteProfileConfirm": "Tem a certeza que quer eliminar o seu perfil? Isto irá remover permanentemente todos os seus dados, incluindo favoritos e definições. Esta ação não pode ser desfeita.",
       "deleteFailed": "Falha ao eliminar o perfil. Por favor tente novamente."
     },
     "signOut": "Sign Out"
@@ -782,7 +768,6 @@
     }
   },
   "cragPage": {
-    "askAI": "Perguntar à IA",
     "edit": "Editar",
     "editCrag": "Editar detalhes da falésia",
     "currentConditions": "Condições atuais",
@@ -793,7 +778,6 @@
     "searchSectors": "Procurar setores...",
     "noSectorsFound": "Nenhum setor encontrado correspondente à sua pesquisa.",
     "disclaimer": "As condições meteorológicas podem mudar rapidamente. Verifique sempre as condições à chegada e use o seu melhor julgamento.",
-    "askAIAboutCrag": "Perguntar à IA sobre esta falésia",
     "viewOnSunCalc": "Ver horários do sol/lua",
     "viewSunAngles": "Ver posição do sol e ângulos de sombra",
     "viewOnMap": "Ver no mapa",

@@ -23,16 +23,6 @@
     "yourFavorites": "Suosikkisi",
     "favoriteQuery": "Mitkä ovat olosuhteet kohteessa {{crag}}?"
   },
-  "chat": {
-    "analyzing": "Analysoidaan olosuhteita...",
-    "thinking": "Mietitään...",
-    "inputPlaceholder": "Kysy kalliosta tai sektorista...",
-    "clearChat": "Tyhjennä keskustelu",
-    "clearChatTooltip": "Tyhjennä nykyinen keskustelu",
-    "clearChatConfirm": "Tyhjennetäänkö keskustelu? Tämä poistaa kaikki viestit nykyisestä keskustelusta.",
-    "clearHistory": "Tyhjennä historia",
-    "clearHistoryConfirm": "Oletko varma, että haluat poistaa kaikki keskusteluhistorian? Tätä ei voi peruuttaa."
-  },
   "search": {
     "title": "Etsi kalliota",
     "description": "Etsi kiipeilypaikkoja nimen tai sijainnin perusteella",
@@ -248,10 +238,6 @@
       "title": "Reaaliaikainen sää",
       "description": "Tarkat ennusteet Open-Meteosta auringon-varjo laskelmilla tietyille sektoreille"
     },
-    "chatInterface": {
-      "title": "Chat-rajapinta",
-      "description": "Luonnollisen kielen kyselyt tekoälyllä. Kysy missä tahansa kielessä, saa välittömiä vastauksia"
-    },
     "communityReports": {
       "title": "Yhteisön raportit",
       "description": "Jaa olosuhteita, turvallisuusvaroituksia, pääsymuutoksia, kiipeilytietoja ja muuta. Auta kanssakiipeilijöitä reaaliaikaisilla päivityksillä useissa kategorioissa"
@@ -262,7 +248,7 @@
     },
     "crossDeviceSync": {
       "title": "Laitteiden välinen synkronointi",
-      "description": "Käytä suosikkejasi ja keskusteluhistoriaasi millä tahansa laitteella turvallisen synkronointiavaimen avulla. Tiliä ei tarvita"
+      "description": "Käytä suosikkejasi millä tahansa laitteella turvallisen synkronointiavaimen avulla. Tiliä ei tarvita"
     },
     "privacyFirst": {
       "title": "Yksityisyys ensin",
@@ -278,7 +264,7 @@
     },
     "whatYouControl": {
       "title": "Mitä hallitset",
-      "description": "Suosikkisi, raportit ja chat-historia tallennetaan paikallisesti laitteellesi. Päästäksesi niihin usealta laitteelta voit luoda nimettömän profiilin. Kun sinulla on profiili, tietosi synkronoidaan automaattisesti usean laitteen käytön mahdollistamiseksi. Voit poistaa kaikki tietosi milloin tahansa Asetuksista."
+      "description": "Suosikkisi ja raportit tallennetaan paikallisesti laitteellesi. Päästäksesi niihin usealta laitteelta voit luoda nimettömän profiilin. Kun sinulla on profiili, tietosi synkronoidaan automaattisesti usean laitteen käytön mahdollistamiseksi. Voit poistaa kaikki tietosi milloin tahansa Asetuksista."
     },
     "howSyncWorks": {
       "title": "Kuinka synkronointi toimii",
@@ -290,7 +276,7 @@
     },
     "yourRights": {
       "title": "Oikeutesi",
-      "description": "Voit poistaa profiilisi milloin tahansa Asetuksista. Tämä poistaa suosikkisi, chat-historiasi ja profiilisi tietokannastamme. Julkaisemasi yhteisöraportit pysyvät näkyvinä (nimettömänä) auttaakseen muita kiipeilijöitä. Täysi hallinta tiedoistasi."
+      "description": "Voit poistaa profiilisi milloin tahansa Asetuksista. Tämä poistaa suosikkisi ja profiilisi tietokannastamme. Julkaisemasi yhteisöraportit pysyvät näkyvinä (nimettömänä) auttaakseen muita kiipeilijöitä. Täysi hallinta tiedoistasi."
     },
     "dataSecurity": {
       "title": "Tietoturva",
@@ -404,13 +390,13 @@
   "sync": {
     "notification": {
       "title": "Synkronointiavain luotu",
-      "description": "Olemme luoneet ainutlaatuisen avaimen synkronoidaksemme suosikkejasi ja chatisi laitteiden välillä.",
+      "description": "Olemme luoneet ainutlaatuisen avaimen synkronoidaksemme suosikkejasi laitteiden välillä.",
       "viewInSettings": "Näytä asetuksissa",
       "viewMore": "Mikä on synkronointiavain?"
     },
     "banner": {
       "title": "Tietosi synkronoidaan laitteiden välillä",
-      "description": "Suosikkisi, raportit ja keskusteluhistoria tallennetaan paikallisesti ja voidaan synkronoida muihin laitteisiin synkronointiavaimella.",
+      "description": "Suosikkisi, raportit tallennetaan paikallisesti ja voidaan synkronoida muihin laitteisiin synkronointiavaimella.",
       "learnMore": "Lisätietoja",
       "dismiss": "Ymmärrän"
     },
@@ -430,7 +416,7 @@
       },
       "multiDevice": {
         "title": "Multi-Device Access",
-        "description": "Access your favorites and chat history from any device by using your sync key."
+        "description": "Access your favorites from any device by using your sync key."
       },
       "privacy": {
         "title": "Privacy First",
@@ -578,7 +564,7 @@
       "title": "Vaarallinen vyöhyke",
       "description": "Nämä toiminnot ovat pysyviä ja niitä ei voi peruuttaa",
       "deleteProfile": "Poista profiili",
-      "deleteProfileConfirm": "Oletko varma, että haluat poistaa profiilisi? Tämä poistaa pysyvästi kaikki tietosi, mukaan lukien suosikit, keskusteluhistoria ja asetukset. Tätä toimintoa ei voi peruuttaa.",
+      "deleteProfileConfirm": "Oletko varma, että haluat poistaa profiilisi? Tämä poistaa pysyvästi kaikki tietosi, mukaan lukien suosikit ja asetukset. Tätä toimintoa ei voi peruuttaa.",
       "deleteFailed": "Profiilin poisto epäonnistui. Yritä uudelleen."
     },
     "appearance": "Appearance",
@@ -789,7 +775,6 @@
     }
   },
   "cragPage": {
-    "askAI": "Kysy AI:lta",
     "edit": "Muokkaa",
     "editCrag": "Muokkaa kallioseinän tietoja",
     "currentConditions": "Nykyiset olosuhteet",
@@ -800,7 +785,6 @@
     "searchSectors": "Hae sektoreita...",
     "noSectorsFound": "Hakuasi vastaavia sektoreita ei löytynyt.",
     "disclaimer": "Sääolosuhteet voivat muuttua nopeasti. Tarkista aina olosuhteet saapuessasi ja käytä parasta harkintaasi.",
-    "askAIAboutCrag": "Kysy AI:lta tästä kalliosta",
     "viewOnSunCalc": "Näytä auringon/kuun ajat",
     "viewSunAngles": "Näytä auringon sijainti ja varjokulmat",
     "viewOnMap": "Näytä kartalla",

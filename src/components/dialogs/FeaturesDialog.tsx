@@ -9,7 +9,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Cloud, MessageSquare, Users, MapPin, RefreshCw, Lock } from "lucide-react";
+import { Cloud, Users, MapPin, RefreshCw, Lock } from "lucide-react";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Trans } from "react-i18next";
@@ -28,11 +28,6 @@ export function FeaturesDialog({ open, onOpenChange }: FeaturesDialogProps) {
       icon: Cloud,
       titleKey: "features.realTimeWeather.title",
       descriptionKey: "features.realTimeWeather.description",
-    },
-    {
-      icon: MessageSquare,
-      titleKey: "features.chatInterface.title",
-      descriptionKey: "features.chatInterface.description",
     },
     {
       icon: Users,
