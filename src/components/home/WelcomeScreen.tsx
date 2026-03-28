@@ -126,7 +126,7 @@ export function WelcomeScreen({ onSearchClick, onAboutClick, onPrivacyClick }: W
               href="https://apps.apple.com/us/app/beta-rocks/id6760671893"
               target="_blank"
               rel="noopener noreferrer"
-              className="opacity-60 hover:opacity-100 transition-opacity"
+              className="hover:opacity-80 transition-opacity"
             >
               <img
                 src="/download-on-app-store.svg"
@@ -138,7 +138,7 @@ export function WelcomeScreen({ onSearchClick, onAboutClick, onPrivacyClick }: W
               href="https://play.google.com/store/apps/details?id=rocks.beta.app"
               target="_blank"
               rel="noopener noreferrer"
-              className="opacity-60 hover:opacity-100 transition-opacity"
+              className="hover:opacity-80 transition-opacity"
             >
               <img
                 src="/google-play-badge.png"
