@@ -10,13 +10,6 @@ import { generateUniqueSlug } from "@/lib/utils/slug";
 import { useModifierKey } from "@/hooks/usePlatform";
 import { LiveIndicator } from "@/components/ui/live-indicator";
 
-const EXAMPLE_CRAGS = [
-  { name: "Fontainebleau", slug: "fontainebleau-2-67--48-41" },
-  { name: "El Capitan", slug: "el-capitan--119-64--37-73" },
-  { name: "Siurana", slug: "siurana-0-93--41-26" },
-  { name: "Kalymnos", slug: "kalymnos-26-98--36-95" },
-];
-
 interface WelcomeScreenProps {
   onSearchClick: () => void;
   onAboutClick: () => void;
@@ -66,21 +59,6 @@ export function WelcomeScreen({ onSearchClick, onAboutClick, onPrivacyClick }: W
             <LiveIndicator isLive={true} compact />
           </Link>
         </Button>
-
-        {/* Example crags */}
-        <div className="flex flex-wrap gap-2 justify-center max-w-lg">
-          {EXAMPLE_CRAGS.map((crag) => (
-            <Button
-              key={crag.slug}
-              variant="outline"
-              size="sm"
-              onClick={() => router.push(`/location/${crag.slug}`)}
-              className="transition-smooth hover:scale-105"
-            >
-              {crag.name}
-            </Button>
-          ))}
-        </div>
 
         {/* Favorites Quick Actions */}
         {favorites.length > 0 && (
