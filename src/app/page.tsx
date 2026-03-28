@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import { HomePageClient } from "@/components/home/HomePageClient";
 
 export default function Home() {
-  redirect("/feed");
+  return <HomePageClient />;
 }
