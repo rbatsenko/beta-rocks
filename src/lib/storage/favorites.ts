@@ -14,14 +14,17 @@ export interface Favorite {
   areaName: string;
   areaSlug?: string;
   location: string;
-  latitude: number;
-  longitude: number;
+  latitude: number | null;
+  longitude: number | null;
   rockType?: string;
 
   // Cached conditions
   lastRating?: string;
   lastFrictionScore?: number;
   lastCheckedAt?: string;
+
+  // Locationless crags (no coordinates, reports only)
+  isLocationless?: boolean;
 
   // Metadata
   displayOrder: number;

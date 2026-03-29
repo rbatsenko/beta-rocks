@@ -39,6 +39,20 @@ export async function GET(
       return NextResponse.json({ error: "Crag not found" }, { status: 404 });
     }
 
+    // Locationless crags cannot provide weather/conditions
+    if (crag.lat == null || crag.lon == null) {
+      const reports = await fetchReportsByCrag(crag.id, 20).catch(() => []);
+      const sectors = await fetchSectorsByCrag(crag.id).catch(() => []);
+      return NextResponse.json({
+        crag,
+        reports,
+        sectors,
+        conditions: null,
+        weather: null,
+        locationless: true,
+      });
+    }
+
     // Fetch all data in parallel
     const [weather, reports, sectors] = await Promise.all([
       getWeatherForecast(crag.lat, crag.lon, 14),

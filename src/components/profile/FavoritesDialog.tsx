@@ -80,7 +80,7 @@ export function FavoritesDialog({ open, onOpenChange }: FavoritesDialogProps) {
     // Use stored slug if available, otherwise generate one for backward compatibility
     const slug =
       favorite.areaSlug ||
-      generateUniqueSlug(favorite.areaName, favorite.latitude, favorite.longitude);
+      generateUniqueSlug(favorite.areaName, favorite.latitude ?? 0, favorite.longitude ?? 0);
 
     // Navigate to the crag page
     router.push(`/location/${slug}`);
@@ -148,11 +148,18 @@ export function FavoritesDialog({ open, onOpenChange }: FavoritesDialogProps) {
                       </Button>
                     </div>
                   </CardHeader>
-                  {favorite.rockType && (
-                    <CardContent className="pt-0">
-                      <Badge variant="secondary" className="text-xs">
-                        {t(`rockTypes.${favorite.rockType}`) || favorite.rockType}
-                      </Badge>
+                  {(favorite.rockType || favorite.isLocationless) && (
+                    <CardContent className="pt-0 flex gap-2">
+                      {favorite.isLocationless && (
+                        <Badge variant="outline" className="text-xs text-purple-600 border-purple-300">
+                          {t("favorites.reportsOnly")}
+                        </Badge>
+                      )}
+                      {favorite.rockType && (
+                        <Badge variant="secondary" className="text-xs">
+                          {t(`rockTypes.${favorite.rockType}`) || favorite.rockType}
+                        </Badge>
+                      )}
                     </CardContent>
                   )}
                 </Card>

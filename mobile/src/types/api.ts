@@ -239,6 +239,7 @@ export interface Favorite {
   lastRating?: string;
   lastFrictionScore?: number;
   lastCheckedAt?: string;
+  isLocationless?: boolean;
   displayOrder: number;
   addedAt: string;
 }

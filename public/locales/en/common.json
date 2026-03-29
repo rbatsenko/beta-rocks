@@ -132,6 +132,10 @@
       "mapLabel": "Reference Location for Weather",
       "mapHelp": "Search for a nearby city or town. This location will be used for weather forecasts only - the exact coordinates won't be shown.",
       "locationRequiredDesc": "Please select a nearby city on the map for weather reference"
+    },
+    "locationless": {
+      "label": "No Location",
+      "hint": "For crags with sensitive access. No weather data will be available — only community reports."
     }
   },
   "addSectorModal": {
@@ -395,6 +399,7 @@
     "noHourlyData": "No hourly forecast data available",
     "noDailyData": "No daily forecast data available",
     "noOptimalHours": "No optimal conditions on",
+    "noOptimalHoursDay": "No good climbing windows on this day. Check the hourly tab for details.",
     "forecastIndicators": "Forecast Indicators:",
     "goodClimbingWindows": "Good climbing windows",
     "fairConditions": "Fair conditions",
@@ -717,6 +722,7 @@
     "loginToFavorite": "Please set up your profile to favorite locations",
     "errorToggling": "Failed to toggle favorite. Please try again.",
     "added": "Crag added to favorites",
+    "reportsOnly": "Reports only",
     "removed": "Crag removed from favorites",
     "loading": "Loading favorites..."
   },
@@ -928,6 +934,9 @@
     "secretCrag": {
       "notice": "This is a secret crag. Location is hidden to protect access.",
       "weatherNote": "Weather for nearby reference location"
+    },
+    "locationless": {
+      "notice": "This crag has no published location. Weather and conditions data are not available — check community reports below."
     },
     "bestTimes": "Best Times to Climb",
     "communityReports": "Community Reports",
