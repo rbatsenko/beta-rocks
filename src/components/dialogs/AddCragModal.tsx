@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Mountain, Loader2, Check, AlertTriangle, ExternalLink, EyeOff } from "lucide-react";
+import { Mountain, Loader2, Check, AlertTriangle, ExternalLink, EyeOff, MapPinOff } from "lucide-react";
 import { LatLng } from "leaflet";
 import { Button } from "@/components/ui/button";
 import {
@@ -86,6 +86,7 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
   const [selectedClimbingTypes, setSelectedClimbingTypes] = useState<string[]>([]);
   const [description, setDescription] = useState("");
   const [isSecret, setIsSecret] = useState(false);
+  const [isLocationless, setIsLocationless] = useState(false);
 
   // Loading states
   const [geocoding, setGeocoding] = useState(false);
@@ -170,6 +171,7 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
       setDescription("");
       setNearbyCrags([]);
       setIsSecret(false);
+      setIsLocationless(false);
     }
   }, [open, initialName]);
 
@@ -213,24 +215,26 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
       return;
     }
 
-    if (!position) {
-      toast({
-        title: t("addCragModal.errors.locationRequired"),
-        description: isSecret
-          ? t("addCragModal.secretCrag.locationRequiredDesc")
-          : t("addCragModal.errors.locationRequiredDesc"),
-        variant: "destructive",
-      });
-      return;
-    }
+    if (!isLocationless) {
+      if (!position) {
+        toast({
+          title: t("addCragModal.errors.locationRequired"),
+          description: isSecret
+            ? t("addCragModal.secretCrag.locationRequiredDesc")
+            : t("addCragModal.errors.locationRequiredDesc"),
+          variant: "destructive",
+        });
+        return;
+      }
 
-    if (!country) {
-      toast({
-        title: t("addCragModal.errors.countryRequired"),
-        description: t("addCragModal.errors.countryRequiredDesc"),
-        variant: "destructive",
-      });
-      return;
+      if (!country) {
+        toast({
+          title: t("addCragModal.errors.countryRequired"),
+          description: t("addCragModal.errors.countryRequiredDesc"),
+          variant: "destructive",
+        });
+        return;
+      }
     }
 
     setSubmitting(true);
@@ -241,9 +245,9 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: name.trim(),
-          lat: position!.lat,
-          lon: position!.lng,
-          country: country,
+          lat: isLocationless ? null : position!.lat,
+          lon: isLocationless ? null : position!.lng,
+          country: country || undefined,
           state: state || undefined,
           municipality: municipality || undefined,
           village: village || undefined,
@@ -252,6 +256,7 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
           climbingTypes: selectedClimbingTypes.length > 0 ? selectedClimbingTypes : undefined,
           description: description.trim() || undefined,
           isSecret: isSecret || undefined,
+          isLocationless: isLocationless || undefined,
         }),
       });
 
@@ -283,7 +288,7 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
     }
   };
 
-  const canSubmit = name.trim() && position && country && !submitting && !geocoding;
+  const canSubmit = name.trim() && (isLocationless || (position && country)) && !submitting && !geocoding;
 
   return (
     <>
@@ -342,7 +347,56 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
                   </div>
                 </button>
 
+                {/* Locationless Toggle */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsLocationless(!isLocationless);
+                    if (!isLocationless) {
+                      setPosition(null);
+                      setNearbyCrags([]);
+                    }
+                  }}
+                  className={`w-full flex items-start gap-3 p-4 rounded-lg border-2 transition-all duration-200 text-left ${
+                    isLocationless
+                      ? "bg-purple-50 dark:bg-purple-950/30 border-purple-300 dark:border-purple-700"
+                      : "bg-muted/30 border-transparent hover:border-muted-foreground/20 hover:bg-muted/50"
+                  }`}
+                >
+                  <div
+                    className={`flex items-center justify-center w-10 h-10 rounded-full shrink-0 transition-colors ${
+                      isLocationless ? "bg-purple-200 dark:bg-purple-800" : "bg-muted"
+                    }`}
+                  >
+                    <MapPinOff
+                      className={`h-5 w-5 transition-colors ${
+                        isLocationless ? "text-purple-700 dark:text-purple-300" : "text-muted-foreground"
+                      }`}
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span
+                        className={`font-medium transition-colors ${
+                          isLocationless ? "text-purple-900 dark:text-purple-100" : ""
+                        }`}
+                      >
+                        {t("addCragModal.locationless.label", "No Location")}
+                      </span>
+                      {isLocationless && (
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 font-medium">
+                          ON
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {t("addCragModal.locationless.hint", "For crags with sensitive access. No weather data will be shown, only community reports.")}
+                    </p>
+                  </div>
+                </button>
+
                 {/* Map Section */}
+                {!isLocationless && (
                 <div>
                   <Label className="text-base font-semibold mb-2">
                     {isSecret ? t("addCragModal.secretCrag.mapLabel") : t("addCragModal.mapLabel")}{" "}
@@ -414,6 +468,7 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
                     </div>
                   )}
                 </div>
+                )}
 
                 {/* Basic Info */}
                 <div className="space-y-4">
@@ -430,7 +485,7 @@ export function AddCragModal({ open, onOpenChange, initialName }: AddCragModalPr
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="country">{t("addCragModal.form.country")} *</Label>
+                      <Label htmlFor="country">{t("addCragModal.form.country")}{!isLocationless && " *"}</Label>
                       <Select value={country} onValueChange={setCountry}>
                         <SelectTrigger className="mt-1.5">
                           <SelectValue placeholder={t("addCragModal.form.countryPlaceholder")} />
