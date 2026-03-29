@@ -230,6 +230,7 @@ export default function CragDetailScreen() {
   const groupedWindows = useMemo(() => {
     const windows = conditions?.optimalWindows || [];
     const daily = conditions?.dailyForecast || [];
+    const hourly = conditions?.hourlyConditions || [];
     const groups: { label: string; dateKey: string; windows: typeof windows; bestRating?: string; weatherCode?: number }[] = [];
     const seen = new Map<string, typeof windows>();
 
@@ -249,7 +250,6 @@ export default function CragDetailScreen() {
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const fiveDaysFromNow = new Date(today);
     fiveDaysFromNow.setDate(fiveDaysFromNow.getDate() + 5);
-    const hourly = conditions?.hourlyConditions || [];
 
     if (daily.length > 0) {
       for (const day of daily) {
