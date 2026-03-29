@@ -241,7 +241,7 @@ export default function AddCragScreen() {
           </View>
           <View style={styles.secretTextContainer}>
             <View style={styles.secretLabelRow}>
-              <Text style={[styles.secretLabel, isSecret && { color: isDark ? "#fef3c7" : "#78350f" }]}>
+              <Text style={[styles.secretLabel, { color: isSecret ? (isDark ? "#fef3c7" : "#78350f") : colors.text }]}>
                 {t("addCragModal.secretCrag.label", "Secret Crag")}
               </Text>
               {isSecret && (
@@ -296,7 +296,7 @@ export default function AddCragScreen() {
           </View>
           <View style={styles.secretTextContainer}>
             <View style={styles.secretLabelRow}>
-              <Text style={[styles.secretLabel, isLocationless && { color: isDark ? "#f3e8ff" : "#581c87" }]}>
+              <Text style={[styles.secretLabel, { color: isLocationless ? (isDark ? "#f3e8ff" : "#581c87") : colors.text }]}>
                 {t("addCragModal.locationless.label", "No Location")}
               </Text>
               {isLocationless && (
