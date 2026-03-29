@@ -124,6 +124,10 @@ export function getWindCardinal(degrees: number): CardinalDirection {
   return CARDINAL_DIRECTIONS[index];
 }
 
+export function getWindArrowRotation(degrees: number): number {
+  return (degrees + 180) % 360;
+}
+
 export function formatWindWithDirection(
   speed: number,
   unit: UnitsConfig["windSpeed"],

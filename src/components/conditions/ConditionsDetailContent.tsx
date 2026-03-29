@@ -46,6 +46,7 @@ import {
   formatWindSpeed,
   formatPrecipitation,
   getWindCardinal,
+  getWindArrowRotation,
 } from "@/lib/units/conversions";
 
 // This is the same interface as ConditionsDetailDialog uses
@@ -119,6 +120,7 @@ interface ConditionsDetailContentProps {
       tempMin: number;
       precipitation: number;
       windSpeedMax: number;
+      windDirectionDominant?: number;
       sunrise: string;
       sunset: string;
       weatherCode: number;
@@ -313,7 +315,13 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                         )}
                         {data.current.windDirection != null && (
                           <span className="text-sm font-normal text-muted-foreground ml-1">
-                            {getWindCardinal(data.current.windDirection)}
+                            <span
+                              className="inline-block"
+                              style={{ transform: `rotate(${getWindArrowRotation(data.current.windDirection)}deg)` }}
+                            >
+                              ↑
+                            </span>
+                            {" "}{getWindCardinal(data.current.windDirection)}
                           </span>
                         )}
                       </p>
@@ -596,7 +604,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                                       : units.windSpeed === "ms"
                                                         ? "m/s"
                                                         : "kn"}
-                                                  {hour.wind_direction != null && ` ${getWindCardinal(hour.wind_direction)}`}
+                                                  {hour.wind_direction != null && <>{" "}<span className="inline-block" style={{ transform: `rotate(${getWindArrowRotation(hour.wind_direction)}deg)` }}>↑</span>{getWindCardinal(hour.wind_direction)}</>}
                                                 </span>
                                               </div>
                                             </div>
@@ -772,7 +780,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                               : units.windSpeed === "ms"
                                                 ? "m/s"
                                                 : "kn"}
-                                          {hour.wind_direction != null && ` ${getWindCardinal(hour.wind_direction)}`}
+                                          {hour.wind_direction != null && <>{" "}<span className="inline-block" style={{ transform: `rotate(${getWindArrowRotation(hour.wind_direction)}deg)` }}>↑</span>{getWindCardinal(hour.wind_direction)}</>}
                                         </span>
                                       </div>
                                       <div
@@ -906,7 +914,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                                   : units.windSpeed === "ms"
                                                     ? "m/s"
                                                     : "kn"}
-                                              {hour.wind_direction != null && ` ${getWindCardinal(hour.wind_direction)}`}
+                                              {hour.wind_direction != null && <>{" "}<span className="inline-block" style={{ transform: `rotate(${getWindArrowRotation(hour.wind_direction)}deg)` }}>↑</span>{getWindCardinal(hour.wind_direction)}</>}
                                             </span>
                                           </div>
                                           <div
@@ -1153,6 +1161,17 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                               convertWindSpeed(day.windSpeedMax, "kmh", units.windSpeed),
                               units.windSpeed,
                               0
+                            )}
+                            {day.windDirectionDominant != null && (
+                              <span className="text-sm font-normal text-muted-foreground ml-1">
+                                <span
+                                  className="inline-block"
+                                  style={{ transform: `rotate(${getWindArrowRotation(day.windDirectionDominant)}deg)` }}
+                                >
+                                  ↑
+                                </span>
+                                {" "}{getWindCardinal(day.windDirectionDominant)}
+                              </span>
                             )}
                           </p>
                         </div>

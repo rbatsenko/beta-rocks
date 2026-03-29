@@ -101,6 +101,7 @@ interface PrefetchedFullData {
       tempMin: number;
       precipitation: number;
       windSpeedMax: number;
+      windDirectionDominant?: number;
       sunrise: string;
       sunset: string;
       weatherCode: number;

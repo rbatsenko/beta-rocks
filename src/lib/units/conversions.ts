@@ -113,6 +113,15 @@ export function getWindCardinal(degrees: number): CardinalDirection {
 }
 
 /**
+ * Get CSS rotation for a wind direction arrow.
+ * Takes an up-arrow (↑) and rotates it to point in the direction the wind blows TO.
+ * Wind "from" 0° (north) → arrow points south → 180° rotation.
+ */
+export function getWindArrowRotation(degrees: number): number {
+  return (degrees + 180) % 360;
+}
+
+/**
  * Format wind with speed and direction
  */
 export function formatWindWithDirection(

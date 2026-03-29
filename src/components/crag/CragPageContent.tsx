@@ -67,6 +67,7 @@ import {
   formatWindSpeed,
   formatPrecipitation,
   getWindCardinal,
+  getWindArrowRotation,
 } from "@/lib/units/conversions";
 
 type ReportCategory = "conditions" | "safety" | "access" | "climbing_info" | "facilities" | "other";
@@ -154,6 +155,7 @@ interface ConditionsData {
     tempMin: number;
     precipitation: number;
     windSpeedMax: number;
+    windDirectionDominant?: number;
     sunrise: string;
     sunset: string;
     weatherCode: number;
@@ -786,7 +788,13 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                         )}
                         {conditions.current.windDirection != null && (
                           <span className="text-sm font-normal text-muted-foreground ml-1">
-                            {getWindCardinal(conditions.current.windDirection)}
+                            <span
+                              className="inline-block"
+                              style={{ transform: `rotate(${getWindArrowRotation(conditions.current.windDirection)}deg)` }}
+                            >
+                              ↑
+                            </span>
+                            {" "}{getWindCardinal(conditions.current.windDirection)}
                           </span>
                         )}
                       </p>

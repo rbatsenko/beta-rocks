@@ -120,6 +120,7 @@ export async function GET(request: NextRequest) {
           tempMin: day.tempMin,
           precipitation: day.precipitation,
           windSpeedMax: day.windSpeedMax,
+          windDirectionDominant: day.windDirectionDominant,
           sunrise: day.sunrise,
           sunset: day.sunset,
           weatherCode: day.weatherCode,
