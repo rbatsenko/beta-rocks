@@ -1522,7 +1522,7 @@ const styles = StyleSheet.create({
 
   // Hourly
   hourlyRow: { flexDirection: "row", alignItems: "center", gap: Spacing.xs, paddingVertical: Spacing.xs + 2 },
-  hourlyTime: { fontSize: FontSize.xs, fontWeight: "600", width: 36 },
+  hourlyTime: { fontSize: FontSize.xs, fontWeight: "600", minWidth: 36 },
   hourlyValue: { fontSize: FontSize.xs },
 
   // Forecast
