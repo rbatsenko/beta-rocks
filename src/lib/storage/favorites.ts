@@ -14,8 +14,8 @@ export interface Favorite {
   areaName: string;
   areaSlug?: string;
   location: string;
-  latitude: number;
-  longitude: number;
+  latitude: number | null;
+  longitude: number | null;
   rockType?: string;
 
   // Cached conditions

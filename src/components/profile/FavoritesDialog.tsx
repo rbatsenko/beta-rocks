@@ -80,7 +80,7 @@ export function FavoritesDialog({ open, onOpenChange }: FavoritesDialogProps) {
     // Use stored slug if available, otherwise generate one for backward compatibility
     const slug =
       favorite.areaSlug ||
-      generateUniqueSlug(favorite.areaName, favorite.latitude, favorite.longitude);
+      generateUniqueSlug(favorite.areaName, favorite.latitude ?? 0, favorite.longitude ?? 0);
 
     // Navigate to the crag page
     router.push(`/location/${slug}`);
