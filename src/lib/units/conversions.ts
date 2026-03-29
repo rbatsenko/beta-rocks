@@ -100,6 +100,33 @@ export function formatWindSpeed(value: number, unit: WindSpeedUnit, decimals = 1
 }
 
 /**
+ * Convert wind direction in degrees to cardinal direction string
+ * Degrees follow meteorological convention: 0°=N, 90°=E, 180°=S, 270°=W
+ */
+const CARDINAL_DIRECTIONS = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"] as const;
+export type CardinalDirection = (typeof CARDINAL_DIRECTIONS)[number];
+
+export function getWindCardinal(degrees: number): CardinalDirection {
+  const normalized = ((degrees % 360) + 360) % 360;
+  const index = Math.round(normalized / 45) % 8;
+  return CARDINAL_DIRECTIONS[index];
+}
+
+/**
+ * Format wind with speed and direction
+ */
+export function formatWindWithDirection(
+  speed: number,
+  unit: WindSpeedUnit,
+  direction?: number,
+  decimals = 0
+): string {
+  const speedStr = formatWindSpeed(speed, unit, decimals);
+  if (direction == null) return speedStr;
+  return `${speedStr} ${getWindCardinal(direction)}`;
+}
+
+/**
  * Precipitation conversions
  */
 export function convertPrecipitation(

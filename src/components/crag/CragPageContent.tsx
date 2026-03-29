@@ -66,6 +66,7 @@ import {
   formatTemperature,
   formatWindSpeed,
   formatPrecipitation,
+  getWindCardinal,
 } from "@/lib/units/conversions";
 
 type ReportCategory = "conditions" | "safety" | "access" | "climbing_info" | "facilities" | "other";
@@ -104,6 +105,7 @@ interface ConditionsData {
     temperature_c: number;
     humidity: number;
     windSpeed_kph: number;
+    windDirection?: number;
     precipitation_mm: number;
     weatherCode: number;
   };
@@ -112,6 +114,7 @@ interface ConditionsData {
     temp_c: number;
     humidity: number;
     wind_kph: number;
+    wind_direction?: number;
     precip_mm: number;
     frictionScore: number;
     rating: string;
@@ -780,6 +783,11 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                           ),
                           units.windSpeed,
                           0
+                        )}
+                        {conditions.current.windDirection != null && (
+                          <span className="text-sm font-normal text-muted-foreground ml-1">
+                            {getWindCardinal(conditions.current.windDirection)}
+                          </span>
                         )}
                       </p>
                     </div>

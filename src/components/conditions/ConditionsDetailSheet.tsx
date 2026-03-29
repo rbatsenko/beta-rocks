@@ -41,6 +41,7 @@ interface ConditionsDetailSheetProps {
       temperature_c: number;
       humidity: number;
       windSpeed_kph: number;
+      windDirection?: number;
       precipitation_mm: number;
       weatherCode: number;
     };
@@ -49,6 +50,7 @@ interface ConditionsDetailSheetProps {
       temp_c: number;
       humidity: number;
       wind_kph: number;
+      wind_direction?: number;
       precip_mm: number;
       frictionScore: number;
       rating: string;

@@ -92,6 +92,7 @@ export async function GET(
         temperature_c: weather.current.temperature,
         humidity: weather.current.humidity,
         windSpeed_kph: weather.current.windSpeed,
+        windDirection: weather.current.windDirection,
         precipitation_mm: weather.current.precipitation,
         weatherCode: weather.current.weatherCode,
       },

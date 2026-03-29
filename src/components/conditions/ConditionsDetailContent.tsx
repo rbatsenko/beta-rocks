@@ -45,6 +45,7 @@ import {
   formatTemperature,
   formatWindSpeed,
   formatPrecipitation,
+  getWindCardinal,
 } from "@/lib/units/conversions";
 
 // This is the same interface as ConditionsDetailDialog uses
@@ -69,6 +70,7 @@ interface ConditionsDetailContentProps {
       temperature_c: number;
       humidity: number;
       windSpeed_kph: number;
+      windDirection?: number;
       precipitation_mm: number;
       weatherCode: number;
     };
@@ -77,6 +79,7 @@ interface ConditionsDetailContentProps {
       temp_c: number;
       humidity: number;
       wind_kph: number;
+      wind_direction?: number;
       precip_mm: number;
       frictionScore: number;
       rating: string;
@@ -307,6 +310,11 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                           convertWindSpeed(data.current.windSpeed_kph, "kmh", units.windSpeed),
                           units.windSpeed,
                           0
+                        )}
+                        {data.current.windDirection != null && (
+                          <span className="text-sm font-normal text-muted-foreground ml-1">
+                            {getWindCardinal(data.current.windDirection)}
+                          </span>
                         )}
                       </p>
                     </div>
@@ -588,6 +596,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                                       : units.windSpeed === "ms"
                                                         ? "m/s"
                                                         : "kn"}
+                                                  {hour.wind_direction != null && ` ${getWindCardinal(hour.wind_direction)}`}
                                                 </span>
                                               </div>
                                             </div>
@@ -763,6 +772,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                               : units.windSpeed === "ms"
                                                 ? "m/s"
                                                 : "kn"}
+                                          {hour.wind_direction != null && ` ${getWindCardinal(hour.wind_direction)}`}
                                         </span>
                                       </div>
                                       <div
@@ -896,6 +906,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                                   : units.windSpeed === "ms"
                                                     ? "m/s"
                                                     : "kn"}
+                                              {hour.wind_direction != null && ` ${getWindCardinal(hour.wind_direction)}`}
                                             </span>
                                           </div>
                                           <div

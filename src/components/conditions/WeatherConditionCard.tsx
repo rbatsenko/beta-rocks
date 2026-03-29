@@ -45,6 +45,7 @@ interface ConditionsData {
     temperature_c: number;
     humidity: number;
     windSpeed_kph: number;
+    windDirection?: number;
     precipitation_mm: number;
     weatherCode: number;
   };
@@ -59,6 +60,7 @@ interface PrefetchedFullData {
     temperature_c: number;
     humidity: number;
     windSpeed_kph: number;
+    windDirection?: number;
     precipitation_mm: number;
     weatherCode: number;
   };

@@ -54,7 +54,7 @@ export async function getWeatherForecast(
     );
     url.searchParams.append(
       "hourly",
-      "temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code,precipitation"
+      "temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,weather_code,precipitation"
     );
     url.searchParams.append(
       "daily",
@@ -112,7 +112,7 @@ export async function getWeatherForecast(
         temperature: data.hourly.temperature_2m[idx],
         humidity: data.hourly.relative_humidity_2m[idx],
         windSpeed: data.hourly.wind_speed_10m[idx],
-        windDirection: 0, // Not provided in hourly
+        windDirection: data.hourly.wind_direction_10m[idx],
         precipitation: data.hourly.precipitation[idx],
         weatherCode: data.hourly.weather_code[idx],
         time,

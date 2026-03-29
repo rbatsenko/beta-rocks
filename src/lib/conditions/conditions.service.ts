@@ -32,6 +32,7 @@ export interface HourlyCondition {
   temp_c: number;
   humidity: number;
   wind_kph: number;
+  wind_direction?: number;
   precip_mm: number;
   isOptimal: boolean;
   frictionScore: number;
@@ -84,6 +85,7 @@ export interface WeatherForecast {
     temp_c: number;
     humidity: number;
     wind_kph: number;
+    wind_direction?: number;
     precip_mm: number;
   };
   hourly?: Array<{
@@ -91,6 +93,7 @@ export interface WeatherForecast {
     temp_c: number;
     humidity: number;
     wind_kph: number;
+    wind_direction?: number;
     precip_mm: number;
     weatherCode?: number;
   }>;
@@ -551,6 +554,7 @@ export function computeHourlyConditions(
     temp_c: number;
     humidity: number;
     wind_kph: number;
+    wind_direction?: number;
     precip_mm: number;
     weatherCode?: number;
   }>,
@@ -571,6 +575,7 @@ export function computeHourlyConditions(
       temp_c: hour.temp_c,
       humidity: hour.humidity,
       wind_kph: hour.wind_kph,
+      wind_direction: hour.wind_direction,
       precip_mm: hour.precip_mm,
       frictionScore: Math.round(score),
       rating: scoreToRating(score),

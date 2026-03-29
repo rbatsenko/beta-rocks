@@ -35,6 +35,7 @@ import {
   formatWindSpeed,
   convertPrecipitation,
   formatPrecipitation,
+  getWindCardinal,
 } from "@/lib/units";
 import type { Report } from "@/types/api";
 import { FRICTION_RATINGS, RATING_COLORS, CATEGORY_COLORS } from "@/constants/config";
@@ -795,7 +796,7 @@ export default function CragDetailScreen() {
             <ConditionItem
               icon="flag-outline"
               label={t("dialog.wind", "Wind")}
-              value={formatWindSpeed(convertWindSpeed(conditions.current.windSpeed_kph, "kmh", units.windSpeed), units.windSpeed)}
+              value={`${formatWindSpeed(convertWindSpeed(conditions.current.windSpeed_kph, "kmh", units.windSpeed), units.windSpeed)}${conditions.current.windDirection != null ? ` ${getWindCardinal(conditions.current.windDirection)}` : ""}`}
               colors={colors}
             />
             <ConditionItem
@@ -926,6 +927,7 @@ export default function CragDetailScreen() {
               const rc = getRatingColors(rl);
               const temp = h.temp_c ?? h.temperature_c;
               const wind = h.wind_kph ?? h.windSpeed_kph;
+              const windDir = h.wind_direction;
               return (
                 <View key={`good-${i}`} style={[styles.hourlyRow, {
                   backgroundColor: rl === "Great" ? "rgba(34,197,94,0.08)" : "rgba(59,130,246,0.06)",
@@ -940,7 +942,7 @@ export default function CragDetailScreen() {
                   </Text>
                   <Text style={[styles.hourlyValue, { color: colors.muted }]}>{h.humidity}%</Text>
                   <Text style={[styles.hourlyValue, { color: colors.muted }]}>
-                    {formatWindSpeed(convertWindSpeed(wind, "kmh", units.windSpeed), units.windSpeed, 0)}
+                    {formatWindSpeed(convertWindSpeed(wind, "kmh", units.windSpeed), units.windSpeed, 0)}{windDir != null ? ` ${getWindCardinal(windDir)}` : ""}
                   </Text>
                   {rc && rl && (
                     <View style={[styles.smallBadge, { backgroundColor: rc.bg, marginLeft: "auto" }]}>
@@ -1136,6 +1138,7 @@ function HourlyTimeline({ hours, colors, units, t }: { hours: any[]; colors: (ty
         const rowBg = rl === "Great" ? "rgba(34,197,94,0.06)" : rl === "Good" ? "rgba(59,130,246,0.04)" : "transparent";
         const temp = h.temp_c ?? h.temperature_c;
         const wind = h.wind_kph ?? h.windSpeed_kph;
+        const windDir = h.wind_direction;
         return (
           <View key={i} style={[styles.hourlyRow, { backgroundColor: rowBg }, i > 0 && { borderTopWidth: 1, borderTopColor: colors.border }]}>
             <Text style={[styles.hourlyTime, { color: colors.text }]}>{fmtHour(h.time, units?.timeFormat || "24h")}</Text>
@@ -1145,7 +1148,7 @@ function HourlyTimeline({ hours, colors, units, t }: { hours: any[]; colors: (ty
             </Text>
             <Text style={[styles.hourlyValue, { color: colors.muted }]}>{h.humidity}%</Text>
             <Text style={[styles.hourlyValue, { color: colors.muted }]}>
-              {formatWindSpeed(convertWindSpeed(wind, "kmh", units.windSpeed), units.windSpeed, 0)}
+              {formatWindSpeed(convertWindSpeed(wind, "kmh", units.windSpeed), units.windSpeed, 0)}{windDir != null ? ` ${getWindCardinal(windDir)}` : ""}
             </Text>
             {rc && rl && (
               <View style={[styles.smallBadge, { backgroundColor: rc.bg, marginLeft: "auto" }]}>
