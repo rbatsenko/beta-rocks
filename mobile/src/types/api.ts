@@ -20,6 +20,7 @@ export interface CurrentWeather {
   temperature_c: number;
   humidity: number;
   windSpeed_kph: number;
+  windDirection?: number;
   precipitation_mm: number;
   weatherCode: number;
 }
@@ -34,6 +35,7 @@ export interface HourlyCondition {
   humidity: number;
   windSpeed_kph: number;
   wind_kph: number;
+  wind_direction?: number;
   precipitation_mm: number;
   precip_mm: number;
   weatherCode: number;
@@ -61,6 +63,7 @@ export interface DailyForecast {
   tempMin: number;
   precipitation: number;
   windSpeedMax: number;
+  windDirectionDominant?: number;
   sunrise: string;
   sunset: string;
   weatherCode: number;

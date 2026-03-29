@@ -85,6 +85,7 @@ export type HourlyCondition = {
   temp_c: number;
   humidity: number;
   wind_kph: number;
+  wind_direction?: number;
   precip_mm: number;
   frictionScore: number;
   rating: string;

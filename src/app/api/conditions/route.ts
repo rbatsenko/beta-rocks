@@ -70,6 +70,7 @@ export async function GET(request: NextRequest) {
       temp_c: h.temperature,
       humidity: h.humidity,
       wind_kph: h.windSpeed,
+      wind_direction: h.windDirection,
       precip_mm: h.precipitation,
       weatherCode: h.weatherCode,
     }));
@@ -105,6 +106,7 @@ export async function GET(request: NextRequest) {
         temperature_c: forecast.current.temperature,
         humidity: forecast.current.humidity,
         windSpeed_kph: forecast.current.windSpeed,
+        windDirection: forecast.current.windDirection,
         precipitation_mm: forecast.current.precipitation,
         weatherCode: forecast.current.weatherCode,
       },
@@ -118,6 +120,7 @@ export async function GET(request: NextRequest) {
           tempMin: day.tempMin,
           precipitation: day.precipitation,
           windSpeedMax: day.windSpeedMax,
+          windDirectionDominant: day.windDirectionDominant,
           sunrise: day.sunrise,
           sunset: day.sunset,
           weatherCode: day.weatherCode,

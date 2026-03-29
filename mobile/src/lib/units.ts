@@ -112,6 +112,33 @@ export function convertPrecipitation(
   return value;
 }
 
+/**
+ * Convert wind direction in degrees to cardinal direction string
+ */
+const CARDINAL_DIRECTIONS = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"] as const;
+export type CardinalDirection = (typeof CARDINAL_DIRECTIONS)[number];
+
+export function getWindCardinal(degrees: number): CardinalDirection {
+  const normalized = ((degrees % 360) + 360) % 360;
+  const index = Math.round(normalized / 45) % 8;
+  return CARDINAL_DIRECTIONS[index];
+}
+
+export function getWindArrowRotation(degrees: number): number {
+  return (degrees + 180) % 360;
+}
+
+export function formatWindWithDirection(
+  speed: number,
+  unit: UnitsConfig["windSpeed"],
+  direction?: number,
+  decimals = 0
+): string {
+  const speedStr = formatWindSpeed(speed, unit, decimals);
+  if (direction == null) return speedStr;
+  return `${speedStr} ${getWindCardinal(direction)}`;
+}
+
 export function formatPrecipitation(
   value: number,
   unit: UnitsConfig["precipitation"],

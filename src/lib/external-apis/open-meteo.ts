@@ -23,6 +23,7 @@ export interface ForecastData {
     tempMin: number;
     precipitation: number;
     windSpeedMax: number;
+    windDirectionDominant?: number;
     sunrise: string;
     sunset: string;
     weatherCode: number;
@@ -54,11 +55,11 @@ export async function getWeatherForecast(
     );
     url.searchParams.append(
       "hourly",
-      "temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code,precipitation"
+      "temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,weather_code,precipitation"
     );
     url.searchParams.append(
       "daily",
-      "temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max,sunrise,sunset,weather_code"
+      "temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max,wind_direction_10m_dominant,sunrise,sunset,weather_code"
     );
     url.searchParams.append("timezone", "auto");
     url.searchParams.append("forecast_days", days.toString());
@@ -112,7 +113,7 @@ export async function getWeatherForecast(
         temperature: data.hourly.temperature_2m[idx],
         humidity: data.hourly.relative_humidity_2m[idx],
         windSpeed: data.hourly.wind_speed_10m[idx],
-        windDirection: 0, // Not provided in hourly
+        windDirection: data.hourly.wind_direction_10m[idx],
         precipitation: data.hourly.precipitation[idx],
         weatherCode: data.hourly.weather_code[idx],
         time,
@@ -123,6 +124,7 @@ export async function getWeatherForecast(
         tempMin: data.daily.temperature_2m_min[idx],
         precipitation: data.daily.precipitation_sum[idx],
         windSpeedMax: data.daily.wind_speed_10m_max[idx],
+        windDirectionDominant: data.daily.wind_direction_10m_dominant?.[idx],
         sunrise: data.daily.sunrise[idx],
         sunset: data.daily.sunset[idx],
         weatherCode: data.daily.weather_code[idx],

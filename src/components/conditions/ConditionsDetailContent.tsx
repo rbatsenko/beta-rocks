@@ -45,6 +45,8 @@ import {
   formatTemperature,
   formatWindSpeed,
   formatPrecipitation,
+  getWindCardinal,
+  getWindArrowRotation,
 } from "@/lib/units/conversions";
 
 // This is the same interface as ConditionsDetailDialog uses
@@ -69,6 +71,7 @@ interface ConditionsDetailContentProps {
       temperature_c: number;
       humidity: number;
       windSpeed_kph: number;
+      windDirection?: number;
       precipitation_mm: number;
       weatherCode: number;
     };
@@ -77,6 +80,7 @@ interface ConditionsDetailContentProps {
       temp_c: number;
       humidity: number;
       wind_kph: number;
+      wind_direction?: number;
       precip_mm: number;
       frictionScore: number;
       rating: string;
@@ -116,6 +120,7 @@ interface ConditionsDetailContentProps {
       tempMin: number;
       precipitation: number;
       windSpeedMax: number;
+      windDirectionDominant?: number;
       sunrise: string;
       sunset: string;
       weatherCode: number;
@@ -307,6 +312,17 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                           convertWindSpeed(data.current.windSpeed_kph, "kmh", units.windSpeed),
                           units.windSpeed,
                           0
+                        )}
+                        {data.current.windDirection != null && (
+                          <span className="text-sm font-normal text-muted-foreground ml-1">
+                            <span
+                              className="inline-block"
+                              style={{ transform: `rotate(${getWindArrowRotation(data.current.windDirection)}deg)` }}
+                            >
+                              ↑
+                            </span>
+                            {" "}{getWindCardinal(data.current.windDirection)}
+                          </span>
                         )}
                       </p>
                     </div>
@@ -526,13 +542,13 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
 
                                   {/* Hourly breakdown */}
                                   {window.hours && window.hours.length > 0 && (
-                                    <div className="space-y-1 pl-5">
+                                    <div className="space-y-1 pl-2 sm:pl-5">
                                       {window.hours?.map((hour, hourIdx) => (
                                         <div
                                           key={hourIdx}
-                                          className="flex items-center justify-between text-xs py-1"
+                                          className="flex items-center justify-between text-xs py-1 gap-1"
                                         >
-                                          <div className="flex items-center gap-2 text-muted-foreground">
+                                          <div className="flex items-center gap-1.5 sm:gap-2 text-muted-foreground min-w-0 flex-wrap">
                                             {hour.weatherCode !== undefined && (
                                               <span
                                                 className="text-base"
@@ -546,16 +562,16 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                                 )}
                                               </span>
                                             )}
-                                            <span className="font-mono min-w-[45px]">
+                                            <span className="font-mono min-w-[40px] sm:min-w-[45px]">
                                               {new Date(hour.time).toLocaleTimeString(locale, {
                                                 hour: "2-digit",
                                                 minute: "2-digit",
                                                 hour12: timeFormat === "12h",
                                               })}
                                             </span>
-                                            <div className="flex items-center gap-2">
+                                            <div className="flex items-center gap-1.5 sm:gap-2">
                                               <div className="flex items-center gap-0.5">
-                                                <ThermometerSun className="h-2.5 w-2.5" />
+                                                <ThermometerSun className="h-2.5 w-2.5 shrink-0" />
                                                 <span>
                                                   {Math.round(
                                                     convertTemperature(
@@ -568,12 +584,12 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                                 </span>
                                               </div>
                                               <div className="flex items-center gap-0.5">
-                                                <Droplets className="h-2.5 w-2.5" />
+                                                <Droplets className="h-2.5 w-2.5 shrink-0" />
                                                 <span>{hour.humidity}%</span>
                                               </div>
                                               <div className="flex items-center gap-0.5">
-                                                <Wind className="h-2.5 w-2.5" />
-                                                <span>
+                                                <Wind className="h-2.5 w-2.5 shrink-0" />
+                                                <span className="whitespace-nowrap">
                                                   {Math.round(
                                                     convertWindSpeed(
                                                       hour.wind_kph,
@@ -588,11 +604,12 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                                       : units.windSpeed === "ms"
                                                         ? "m/s"
                                                         : "kn"}
+                                                  {hour.wind_direction != null && <>{" "}<span className="inline-block" style={{ transform: `rotate(${getWindArrowRotation(hour.wind_direction)}deg)` }}>↑</span>{getWindCardinal(hour.wind_direction)}</>}
                                                 </span>
                                               </div>
                                             </div>
                                           </div>
-                                          <Badge className={`text-[10px] px-1.5 py-0 ${getRatingColor(hour.rating)}`}>
+                                          <Badge className={`text-[10px] px-1.5 py-0 shrink-0 ${getRatingColor(hour.rating)}`}>
                                             {translateRating(hour.rating)}
                                           </Badge>
                                         </div>
@@ -763,6 +780,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                               : units.windSpeed === "ms"
                                                 ? "m/s"
                                                 : "kn"}
+                                          {hour.wind_direction != null && <>{" "}<span className="inline-block" style={{ transform: `rotate(${getWindArrowRotation(hour.wind_direction)}deg)` }}>↑</span>{getWindCardinal(hour.wind_direction)}</>}
                                         </span>
                                       </div>
                                       <div
@@ -896,6 +914,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                                   : units.windSpeed === "ms"
                                                     ? "m/s"
                                                     : "kn"}
+                                              {hour.wind_direction != null && <>{" "}<span className="inline-block" style={{ transform: `rotate(${getWindArrowRotation(hour.wind_direction)}deg)` }}>↑</span>{getWindCardinal(hour.wind_direction)}</>}
                                             </span>
                                           </div>
                                           <div
@@ -1142,6 +1161,17 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                               convertWindSpeed(day.windSpeedMax, "kmh", units.windSpeed),
                               units.windSpeed,
                               0
+                            )}
+                            {day.windDirectionDominant != null && (
+                              <span className="text-sm font-normal text-muted-foreground ml-1">
+                                <span
+                                  className="inline-block"
+                                  style={{ transform: `rotate(${getWindArrowRotation(day.windDirectionDominant)}deg)` }}
+                                >
+                                  ↑
+                                </span>
+                                {" "}{getWindCardinal(day.windDirectionDominant)}
+                              </span>
                             )}
                           </p>
                         </div>
