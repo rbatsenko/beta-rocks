@@ -49,6 +49,8 @@ export default function FavoritesScreen() {
 
     const updated = await Promise.all(
       currentFavorites.map(async (fav) => {
+        // Skip conditions fetch for locationless crags
+        if (fav.isLocationless) return fav;
         try {
           const response = await getConditions(
             fav.latitude,
@@ -101,13 +103,19 @@ export default function FavoritesScreen() {
         <Text style={[styles.location, { color: colors.textSecondary }]} numberOfLines={1}>
           {item.location}
         </Text>
-        {rColors && ratingInfo && (
+        {item.isLocationless ? (
+          <View style={[styles.ratingBadge, { backgroundColor: isDark ? "rgba(147,51,234,0.12)" : "#faf5ff" }]}>
+            <Text style={[styles.ratingText, { color: isDark ? "#d8b4fe" : "#7c3aed" }]}>
+              {t("favorites.reportsOnly", "Reports only")}
+            </Text>
+          </View>
+        ) : rColors && ratingInfo ? (
           <View style={[styles.ratingBadge, { backgroundColor: rColors.bg }]}>
             <Text style={[styles.ratingText, { color: rColors.text }]}>
               {t(`ratings.${ratingInfo.label.toLowerCase()}`, ratingInfo.label)}
             </Text>
           </View>
-        )}
+        ) : null}
         {item.rockType && item.rockType !== "unknown" && (
           <Text style={[styles.rockType, { color: colors.muted }]}>
             {item.rockType.charAt(0).toUpperCase() + item.rockType.slice(1)}

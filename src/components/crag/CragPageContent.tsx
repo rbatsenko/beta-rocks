@@ -77,8 +77,8 @@ interface CragPageContentProps {
     id: string;
     name: string;
     slug: string | null;
-    lat: number;
-    lon: number;
+    lat: number | null;
+    lon: number | null;
     rock_type: string | null;
     country: string | null;
     state: string | null;
@@ -212,9 +212,13 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
   // Check if this is a secret crag (no location data shown)
   const isSecretCrag = crag.is_secret === true;
 
+  // Check if this is a locationless crag (no coordinates at all)
+  const isLocationless = crag.lat == null || crag.lon == null;
+
   // React Query for conditions (client-side)
   // Use sector ID if viewing a sector with valid coordinates, otherwise use crag ID
   // For secret crags, coords point to a reference city for weather
+  // For locationless crags, skip conditions fetch entirely
   const locationId =
     currentSector && currentSector.lat !== null && currentSector.lon !== null
       ? currentSector.id
@@ -228,6 +232,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
     queryFn: () => fetchConditionsByCragId(locationId),
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes
+    enabled: !isLocationless, // Don't fetch conditions for locationless crags
   });
 
   // React Query for reports (client-side)
@@ -244,10 +249,10 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
 
   // React Query hooks for favorites
   const { data: favorites = [] } = useFavorites();
-  const { isFavorited, favorite } = useIsFavorited(crag.id, undefined, {
+  const { isFavorited, favorite } = useIsFavorited(crag.id, undefined, crag.lat != null && crag.lon != null ? {
     lat: crag.lat,
     lon: crag.lon,
-  });
+  } : undefined);
   const addFavorite = useAddFavorite();
   const removeFavorite = useRemoveFavorite();
 
@@ -289,14 +294,15 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
   // Use sector coordinates if available and valid, otherwise use crag coordinates
   const displayLat = currentSector && currentSector.lat !== null ? currentSector.lat : crag.lat;
   const displayLon = currentSector && currentSector.lon !== null ? currentSector.lon : crag.lon;
+  const hasCoordinates = displayLat != null && displayLon != null;
 
   // Format conditions data for ConditionsDetailContent
   const conditionsData = conditions
     ? {
         location: currentSector ? `${currentSector.name} • ${crag.name}` : crag.name,
         locationDetails: locationString,
-        latitude: displayLat,
-        longitude: displayLon,
+        latitude: displayLat ?? undefined,
+        longitude: displayLon ?? undefined,
         country: crag.country ?? undefined,
         state: crag.state ?? undefined,
         municipality: crag.municipality ?? undefined,
@@ -317,13 +323,14 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
           areaName: crag.name,
           areaSlug: crag.slug || undefined,
           location: locationString,
-          latitude: crag.lat,
-          longitude: crag.lon,
+          latitude: crag.lat ?? 0,
+          longitude: crag.lon ?? 0,
           cragId: crag.id,
           rockType: crag.rock_type || undefined,
-          lastRating: conditions?.rating || "unknown",
-          lastFrictionScore: conditions?.frictionScore || 0,
-          lastCheckedAt: new Date().toISOString(),
+          lastRating: isLocationless ? undefined : (conditions?.rating || "unknown"),
+          lastFrictionScore: isLocationless ? undefined : (conditions?.frictionScore || 0),
+          lastCheckedAt: isLocationless ? undefined : new Date().toISOString(),
+          isLocationless: isLocationless || undefined,
         },
         previousFavorites: favorites,
       });
@@ -356,13 +363,14 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
           areaName: crag.name,
           areaSlug: crag.slug || undefined,
           location: locationString,
-          latitude: crag.lat,
-          longitude: crag.lon,
+          latitude: crag.lat ?? 0,
+          longitude: crag.lon ?? 0,
           cragId: crag.id,
           rockType: crag.rock_type || undefined,
-          lastRating: conditions?.rating || "unknown",
-          lastFrictionScore: conditions?.frictionScore || 0,
-          lastCheckedAt: new Date().toISOString(),
+          lastRating: isLocationless ? undefined : (conditions?.rating || "unknown"),
+          lastFrictionScore: isLocationless ? undefined : (conditions?.frictionScore || 0),
+          lastCheckedAt: isLocationless ? undefined : new Date().toISOString(),
+          isLocationless: isLocationless || undefined,
         },
         previousFavorites: favorites,
       });
@@ -623,24 +631,34 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
               </div>
             )}
 
-            {/* Rock Type & Coordinates (hidden for secret crags) */}
+            {/* Locationless Crag Badge */}
+            {isLocationless && (
+              <div className="flex items-center gap-2 p-3 bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-800 rounded-lg">
+                <EyeOff className="h-4 w-4 text-purple-600 dark:text-purple-400 shrink-0" />
+                <p className="text-sm text-purple-800 dark:text-purple-200">
+                  {t("cragPage.locationless.notice", "This crag has no published location. Weather and conditions data are not available — check community reports below.")}
+                </p>
+              </div>
+            )}
+
+            {/* Rock Type & Coordinates (hidden for secret/locationless crags) */}
             <div className="flex flex-wrap items-center gap-2">
               {crag.rock_type && (
                 <Badge variant="outline" className="capitalize">
                   {t(`rockTypes.${crag.rock_type}`) || crag.rock_type}
                 </Badge>
               )}
-              {!isSecretCrag && (
+              {!isSecretCrag && hasCoordinates && (
                 <>
                   <Badge variant="secondary" className="font-mono text-xs">
-                    {displayLat.toFixed(4)}, {displayLon.toFixed(4)}
+                    {displayLat!.toFixed(4)}, {displayLon!.toFixed(4)}
                   </Badge>
-                  {getSunCalcUrl(displayLat, displayLon) && (
+                  {getSunCalcUrl(displayLat!, displayLon!) && (
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={() => {
-                        const url = getSunCalcUrl(displayLat, displayLon);
+                        const url = getSunCalcUrl(displayLat!, displayLon!);
                         if (url) window.open(url, "_blank", "noopener,noreferrer");
                       }}
                       title={t("cragPage.viewSunAngles")}
@@ -649,12 +667,12 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                       <span className="hidden sm:inline">SunCalc</span>
                     </Button>
                   )}
-                  {getGoogleMapsUrl(displayLat, displayLon) && (
+                  {getGoogleMapsUrl(displayLat!, displayLon!) && (
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={() => {
-                        const url = getGoogleMapsUrl(displayLat, displayLon);
+                        const url = getGoogleMapsUrl(displayLat!, displayLon!);
                         if (url) window.open(url, "_blank", "noopener,noreferrer");
                       }}
                       title={t("cragPage.viewOnGoogleMaps")}
@@ -668,8 +686,8 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
             </div>
           </div>
 
-          {/* Small inline map (hidden for secret crags) */}
-          {!isSecretCrag && getOpenStreetMapEmbedUrl(displayLat, displayLon) && (
+          {/* Small inline map (hidden for secret/locationless crags) */}
+          {!isSecretCrag && hasCoordinates && getOpenStreetMapEmbedUrl(displayLat!, displayLon!) && (
             <div className="mt-4">
               <iframe
                 width="100%"
@@ -678,14 +696,15 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                 scrolling="no"
                 marginHeight={0}
                 marginWidth={0}
-                src={getOpenStreetMapEmbedUrl(displayLat, displayLon)!}
+                src={getOpenStreetMapEmbedUrl(displayLat!, displayLon!)!}
                 className="rounded-lg border"
               />
             </div>
           )}
         </div>
 
-        {/* Current Conditions Summary Card */}
+        {/* Current Conditions Summary Card (hidden for locationless crags) */}
+        {!isLocationless && (
         <Card className="mb-6">
           <CardContent className="p-6">
             {isLoadingConditions ? (
@@ -851,6 +870,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
             ) : null}
           </CardContent>
         </Card>
+        )}
 
         {/* Community Reports Section */}
         <div className="mb-6">
@@ -951,13 +971,15 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
           )}
         </div>
 
-        {/* Webcams Section */}
-        <div className="mb-6">
-          <WebcamsSection latitude={crag.lat} longitude={crag.lon} />
-        </div>
+        {/* Webcams Section (hidden for locationless crags) */}
+        {hasCoordinates && (
+          <div className="mb-6">
+            <WebcamsSection latitude={crag.lat!} longitude={crag.lon!} />
+          </div>
+        )}
 
-        {/* Detailed Conditions (Tabs) */}
-        {conditionsData && (
+        {/* Detailed Conditions (Tabs) - hidden for locationless crags */}
+        {!isLocationless && conditionsData && (
           <Card className="mb-6">
             <CardContent className="p-6">
               <ConditionsDetailContent variant="sheet" data={conditionsData} />
@@ -1127,8 +1149,8 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
         parentCrag={{
           id: crag.id,
           name: crag.name,
-          lat: crag.lat,
-          lon: crag.lon,
+          lat: crag.lat ?? 0,
+          lon: crag.lon ?? 0,
           country: crag.country,
           state: crag.state,
           municipality: crag.municipality,

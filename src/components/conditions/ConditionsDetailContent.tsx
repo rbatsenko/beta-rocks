@@ -188,8 +188,8 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
       ...window,
       timeRange: formatTimeRange(window.startTime, window.endTime, locale, timeFormat),
     }));
-    return groupWindowsByDay(windowsWithTimeRange, data.hourlyConditions, t, locale);
-  }, [data.optimalWindows, data.hourlyConditions, t, locale, timeFormat]);
+    return groupWindowsByDay(windowsWithTimeRange, data.hourlyConditions, t, locale, data.dailyForecast);
+  }, [data.optimalWindows, data.hourlyConditions, t, locale, timeFormat, data.dailyForecast]);
 
   // Memoize expensive grouping functions to prevent recalculation on every render
   const windowsByDay = useMemo(() => groupWindowsByDayWithParams(), [groupWindowsByDayWithParams]);
@@ -453,7 +453,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
               </>
             )}
 
-            {/* Optimal Windows */}
+            {/* Optimal Windows — shows all days, bad weather days are folded */}
             {windowsByDay && Object.keys(windowsByDay).length > 0 ? (
               <>
                 <div className="space-y-3">
@@ -467,29 +467,47 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                   <Accordion type="multiple" className="space-y-2">
                     {Object.entries(windowsByDay).map(([day, dayData]) => {
                       const isHighlighted = dayData.isToday || dayData.isTomorrow;
+                      const hasWindows = dayData.windows.length > 0;
+                      const isBadDay = !hasWindows;
 
                       return (
                         <AccordionItem
                           key={day}
                           value={day}
                           className={`rounded-lg border transition-colors ${
-                            isHighlighted
-                              ? "bg-green-50/70 dark:bg-green-900/20 border-green-200/70 dark:border-green-700/50"
-                              : "bg-muted/50 border-border"
+                            isBadDay
+                              ? "bg-muted/30 border-border opacity-70"
+                              : isHighlighted
+                                ? "bg-green-50/70 dark:bg-green-900/20 border-green-200/70 dark:border-green-700/50"
+                                : "bg-muted/50 border-border"
                           }`}
                         >
                           <AccordionTrigger className="px-3 py-2 hover:no-underline">
                             <div className="flex items-center gap-2">
+                              {/* Weather icon for the day */}
+                              {dayData.weatherCode !== undefined && (
+                                <span className="text-base">
+                                  {getWeatherEmoji(dayData.weatherCode, false)}
+                                </span>
+                              )}
                               <div
                                 className={`w-2 h-2 rounded-full ${
-                                  isHighlighted ? "bg-green-500" : "bg-green-400"
+                                  isBadDay
+                                    ? dayData.bestRating === "Fair"
+                                      ? "bg-yellow-400"
+                                      : dayData.bestRating === "Poor"
+                                        ? "bg-orange-400"
+                                        : "bg-red-400"
+                                    : isHighlighted ? "bg-green-500" : "bg-green-400"
                                 }`}
                               />
                               <span
                                 className={`text-sm font-medium ${
-                                  isHighlighted
-                                    ? "text-green-800 dark:text-green-200"
-                                    : "text-foreground"
+                                  isBadDay
+                                    ? "text-muted-foreground"
+                                    : isHighlighted
+                                      ? "text-green-800 dark:text-green-200"
+                                      : "text-foreground"
                                 }`}
                               >
                                 {day}
@@ -499,15 +517,28 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                   {t("dialog.todayBadge")}
                                 </span>
                               )}
-                              <span className="text-xs text-muted-foreground ml-auto mr-2">
-                                {dayData.windows.length}{" "}
-                                {dayData.windows.length > 1
-                                  ? t("dialog.windows")
-                                  : t("dialog.window")}
-                              </span>
+                              {isBadDay ? (
+                                <span className="text-xs text-muted-foreground ml-auto mr-2">
+                                  <Badge className={`text-[10px] px-1.5 py-0 ${getRatingColor(dayData.bestRating || "Nope")}`}>
+                                    {translateRating(dayData.bestRating || "Nope")}
+                                  </Badge>
+                                </span>
+                              ) : (
+                                <span className="text-xs text-muted-foreground ml-auto mr-2">
+                                  {dayData.windows.length}{" "}
+                                  {dayData.windows.length > 1
+                                    ? t("dialog.windows")
+                                    : t("dialog.window")}
+                                </span>
+                              )}
                             </div>
                           </AccordionTrigger>
                           <AccordionContent className="px-3 pb-3">
+                            {isBadDay ? (
+                              <p className="text-sm text-muted-foreground italic py-2">
+                                {t("dialog.noOptimalHoursDay", "No good climbing windows on this day. Check the hourly tab for details.")}
+                              </p>
+                            ) : (
                             <div className="space-y-3">
                               {dayData.windows.map((window, idx) => (
                                 <div key={idx} className="space-y-2">
@@ -619,6 +650,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                 </div>
                               ))}
                             </div>
+                            )}
                           </AccordionContent>
                         </AccordionItem>
                       );
@@ -632,30 +664,6 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                       </span>
                     </p>
                   )}
-                </div>
-                <Separator />
-              </>
-            ) : data.optimalWindows && data.optimalWindows.length === 0 ? (
-              <>
-                <div className="space-y-3">
-                  <div className="flex items-start justify-between gap-2">
-                    <h3 className="font-semibold flex items-center gap-2">
-                      <TrendingUp className="w-4 h-4" />
-                      {t("dialog.optimalWindows")}
-                    </h3>
-                    <span className="text-xs text-muted-foreground">{t("dialog.nextDays")}</span>
-                  </div>
-                  <div className="flex flex-col items-center justify-center py-8 text-center">
-                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center mb-3">
-                      <Clock className="h-6 w-6 text-muted-foreground" />
-                    </div>
-                    <p className="text-sm text-muted-foreground">
-                      {t("dialog.noOptimalConditions")}
-                    </p>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      {t("dialog.checkHourlyForecast")}
-                    </p>
-                  </div>
                 </div>
                 <Separator />
               </>

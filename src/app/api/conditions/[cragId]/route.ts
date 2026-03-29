@@ -23,6 +23,14 @@ export async function GET(
       return NextResponse.json({ error: "Crag or sector not found" }, { status: 404 });
     }
 
+    // Locationless crags have no coordinates - can't compute conditions
+    if (cragOrSector.lat == null || cragOrSector.lon == null) {
+      return NextResponse.json(
+        { error: "This crag has no location data. Weather conditions are not available." },
+        { status: 400 }
+      );
+    }
+
     let lat: number;
     let lon: number;
     let rockType: string | null;

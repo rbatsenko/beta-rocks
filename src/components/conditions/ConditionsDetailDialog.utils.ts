@@ -146,20 +146,35 @@ export type OptimalWindow = {
   hours?: HourlyCondition[];
 };
 
+export type DailyForecastDay = {
+  date: string;
+  tempMax: number;
+  tempMin: number;
+  precipitation: number;
+  windSpeedMax: number;
+  windDirectionDominant?: number;
+  sunrise: string;
+  sunset: string;
+  weatherCode: number;
+};
+
 export type GroupedWindow = {
   windows: OptimalWindow[];
   isToday: boolean;
   isTomorrow: boolean;
+  /** Best rating for the day (used when no optimal windows) */
+  bestRating?: string;
+  /** Weather code for the day (for icon display on non-optimal days) */
+  weatherCode?: number;
 };
 
 export const groupWindowsByDay = (
   optimalWindows: OptimalWindow[] | undefined,
   hourlyConditions: HourlyCondition[] | undefined,
   t: (key: string) => string,
-  locale: string
+  locale: string,
+  dailyForecast?: DailyForecastDay[]
 ): Record<string, GroupedWindow> | null => {
-  if (!optimalWindows || optimalWindows.length === 0) return null;
-
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const tomorrow = new Date(today);
@@ -169,61 +184,114 @@ export const groupWindowsByDay = (
 
   const grouped: Record<string, GroupedWindow> = {};
 
-  optimalWindows.forEach((window) => {
-    const startDate = new Date(window.startTime);
-    const endDate = new Date(window.endTime);
-
-    // Skip windows that have already ended or are more than 5 days away
-    if (endDate < now || startDate >= fiveDaysFromNow) return;
-
-    // Skip windows with zero or very short duration (less than 30 minutes)
-    const durationMs = endDate.getTime() - startDate.getTime();
-    const durationMinutes = durationMs / (1000 * 60);
-    if (durationMinutes < 30) return;
-
-    const windowDay = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
-
+  // Helper to get display label and flags for a date
+  const getDayInfo = (date: Date) => {
+    const dayStart = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    const isToday = dayStart.getTime() === today.getTime();
+    const isTomorrow = dayStart.getTime() === tomorrow.getTime();
     let displayDay: string;
-    let isToday = false;
-    let isTomorrow = false;
-
-    if (windowDay.getTime() === today.getTime()) {
+    if (isToday) {
       displayDay = t("dialog.today");
-      isToday = true;
-    } else if (windowDay.getTime() === tomorrow.getTime()) {
+    } else if (isTomorrow) {
       displayDay = t("dialog.tomorrow");
-      isTomorrow = true;
     } else {
-      displayDay = startDate.toLocaleDateString(locale, {
+      displayDay = date.toLocaleDateString(locale, {
         weekday: "short",
         month: "short",
         day: "numeric",
       });
     }
+    return { displayDay, isToday, isTomorrow };
+  };
 
-    if (!grouped[displayDay]) {
+  // Group optimal windows by day
+  if (optimalWindows) {
+    optimalWindows.forEach((window) => {
+      const startDate = new Date(window.startTime);
+      const endDate = new Date(window.endTime);
+
+      // Skip windows that have already ended or are more than 5 days away
+      if (endDate < now || startDate >= fiveDaysFromNow) return;
+
+      // Skip windows with zero or very short duration (less than 30 minutes)
+      const durationMs = endDate.getTime() - startDate.getTime();
+      const durationMinutes = durationMs / (1000 * 60);
+      if (durationMinutes < 30) return;
+
+      const { displayDay, isToday, isTomorrow } = getDayInfo(startDate);
+
+      if (!grouped[displayDay]) {
+        grouped[displayDay] = {
+          windows: [],
+          isToday,
+          isTomorrow,
+        };
+      }
+
+      // Get hourly data for this window
+      const windowHours = hourlyConditions
+        ? hourlyConditions.filter((hour) => {
+            const hourTime = new Date(hour.time);
+            const windowStart = new Date(window.startTime);
+            const windowEnd = new Date(window.endTime);
+            return hourTime >= windowStart && hourTime < windowEnd;
+          })
+        : [];
+
+      grouped[displayDay].windows.push({
+        ...window,
+        hours: windowHours,
+      });
+    });
+  }
+
+  // Fill in days without optimal windows from daily forecast
+  if (dailyForecast) {
+    dailyForecast.forEach((day) => {
+      const dayDate = new Date(day.date);
+      const dayStart = new Date(dayDate.getFullYear(), dayDate.getMonth(), dayDate.getDate());
+
+      // Only include days from today up to 5 days out
+      if (dayStart < today || dayStart >= fiveDaysFromNow) return;
+
+      const { displayDay, isToday, isTomorrow } = getDayInfo(dayDate);
+
+      // Skip if this day already has optimal windows
+      if (grouped[displayDay]) {
+        // Add weather code for display
+        grouped[displayDay].weatherCode = day.weatherCode;
+        return;
+      }
+
+      // Determine the best rating for this day from hourly data
+      let bestRating = "Nope";
+      if (hourlyConditions) {
+        const dayEnd = new Date(dayStart);
+        dayEnd.setDate(dayEnd.getDate() + 1);
+        const hoursForDay = hourlyConditions.filter((h) => {
+          const ht = new Date(h.time);
+          return ht >= dayStart && ht < dayEnd;
+        });
+        const ratingOrder = ["Great", "Good", "Fair", "Poor", "Nope"];
+        for (const h of hoursForDay) {
+          if (ratingOrder.indexOf(h.rating) < ratingOrder.indexOf(bestRating)) {
+            bestRating = h.rating;
+          }
+        }
+      }
+
       grouped[displayDay] = {
         windows: [],
         isToday,
         isTomorrow,
+        bestRating,
+        weatherCode: day.weatherCode,
       };
-    }
-
-    // Get hourly data for this window
-    const windowHours = hourlyConditions
-      ? hourlyConditions.filter((hour) => {
-          const hourTime = new Date(hour.time);
-          const windowStart = new Date(window.startTime);
-          const windowEnd = new Date(window.endTime);
-          return hourTime >= windowStart && hourTime < windowEnd;
-        })
-      : [];
-
-    grouped[displayDay].windows.push({
-      ...window,
-      hours: windowHours,
     });
-  });
+  }
+
+  // Return null only if there's nothing at all
+  if (Object.keys(grouped).length === 0) return null;
 
   return grouped;
 };

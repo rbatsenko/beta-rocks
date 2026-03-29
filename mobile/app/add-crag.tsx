@@ -54,6 +54,7 @@ export default function AddCragScreen() {
   const [selectedClimbingTypes, setSelectedClimbingTypes] = useState<string[]>([]);
   const [description, setDescription] = useState("");
   const [isSecret, setIsSecret] = useState(false);
+  const [isLocationless, setIsLocationless] = useState(false);
 
   // Loading states
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -119,7 +120,7 @@ export default function AddCragScreen() {
       Alert.alert(t("addCragModal.errors.nameRequired", "Name is required"));
       return;
     }
-    if (!position) {
+    if (!isLocationless && !position) {
       Alert.alert(
         t("addCragModal.errors.locationRequired", "Location is required"),
         isSecret
@@ -128,7 +129,7 @@ export default function AddCragScreen() {
       );
       return;
     }
-    if (!country.trim() || country.trim().length < 2) {
+    if (!isLocationless && (!country.trim() || country.trim().length < 2)) {
       Alert.alert(
         t("addCragModal.errors.countryRequired", "Country is required"),
         t("addCragModal.errors.countryRequiredDesc", "Please enter a 2-letter country code (e.g., CH, US, FR).")
@@ -145,9 +146,13 @@ export default function AddCragScreen() {
       const result = await submitCrag(
         {
           name: name.trim(),
-          lat: position.latitude,
-          lon: position.longitude,
-          country: (() => {
+          lat: isLocationless ? undefined : position!.latitude,
+          lon: isLocationless ? undefined : position!.longitude,
+          country: isLocationless ? (country.trim() ? (() => {
+            const code = country.trim().substring(0, 2).toUpperCase();
+            if (/^[A-Z]{2}$/.test(code)) return code;
+            return undefined;
+          })() : undefined) : (() => {
             const code = country.trim().substring(0, 2).toUpperCase();
             if (/^[A-Z]{2}$/.test(code)) return code;
             return "";
@@ -160,6 +165,7 @@ export default function AddCragScreen() {
           climbingTypes: selectedClimbingTypes.length > 0 ? selectedClimbingTypes : undefined,
           description: description.trim() || undefined,
           isSecret: isSecret || undefined,
+          isLocationless: isLocationless || undefined,
         },
         syncKeyHash
       );
@@ -192,7 +198,7 @@ export default function AddCragScreen() {
     }
   }
 
-  const canSubmit = name.trim() && position && country.trim().length >= 2 && !isSubmitting && !isGeocoding;
+  const canSubmit = name.trim() && (isLocationless || (position && country.trim().length >= 2)) && !isSubmitting && !isGeocoding;
 
   return (
     <KeyboardAvoidingView
@@ -250,7 +256,63 @@ export default function AddCragScreen() {
           </View>
         </TouchableOpacity>
 
-        {/* Map Location Picker */}
+        {/* Locationless Crag Toggle */}
+        <TouchableOpacity
+          style={[
+            styles.secretToggle,
+            {
+              backgroundColor: isLocationless
+                ? isDark ? "rgba(147,51,234,0.15)" : "#faf5ff"
+                : colors.surface,
+              borderColor: isLocationless
+                ? isDark ? "rgba(147,51,234,0.4)" : "#d8b4fe"
+                : "transparent",
+            },
+          ]}
+          onPress={() => {
+            setIsLocationless(!isLocationless);
+            if (!isLocationless) {
+              // Switching to locationless: clear position data
+              setIsSecret(false);
+            }
+          }}
+          activeOpacity={0.7}
+        >
+          <View
+            style={[
+              styles.secretIconCircle,
+              {
+                backgroundColor: isLocationless
+                  ? isDark ? "rgba(147,51,234,0.3)" : "#e9d5ff"
+                  : colors.border,
+              },
+            ]}
+          >
+            <Ionicons
+              name="location-outline"
+              size={20}
+              color={isLocationless ? (isDark ? "#d8b4fe" : "#6b21a8") : colors.muted}
+            />
+          </View>
+          <View style={styles.secretTextContainer}>
+            <View style={styles.secretLabelRow}>
+              <Text style={[styles.secretLabel, isLocationless && { color: isDark ? "#f3e8ff" : "#581c87" }]}>
+                {t("addCragModal.locationless.label", "No Location")}
+              </Text>
+              {isLocationless && (
+                <View style={[styles.secretBadge, { backgroundColor: isDark ? "rgba(147,51,234,0.3)" : "#e9d5ff" }]}>
+                  <Text style={[styles.secretBadgeText, { color: isDark ? "#d8b4fe" : "#6b21a8" }]}>ON</Text>
+                </View>
+              )}
+            </View>
+            <Text style={[styles.secretHint, { color: colors.muted }]}>
+              {t("addCragModal.locationless.hint", "For crags with sensitive access. No weather data — only community reports.")}
+            </Text>
+          </View>
+        </TouchableOpacity>
+
+        {/* Map Location Picker (hidden for locationless crags) */}
+        {!isLocationless && (
         <View style={styles.fieldGroup}>
           <Text style={[styles.sectionLabel, { color: colors.textSecondary }]}>
             {isSecret
@@ -266,9 +328,10 @@ export default function AddCragScreen() {
             isSecret={isSecret}
           />
         </View>
+        )}
 
-        {/* Nearby Crags Warning */}
-        {nearbyCrags.length > 0 && (
+        {/* Nearby Crags Warning (hidden for locationless crags) */}
+        {!isLocationless && nearbyCrags.length > 0 && (
           <View
             style={[
               styles.warningBox,
@@ -352,7 +415,7 @@ export default function AddCragScreen() {
         <View style={styles.rowFields}>
           <View style={[styles.fieldGroup, { flex: 1 }]}>
             <Text style={[styles.label, { color: colors.textSecondary }]}>
-              {t("addCragModal.form.country", "Country")} *
+              {t("addCragModal.form.country", "Country")}{isLocationless ? "" : " *"}
             </Text>
             <TextInput
               style={[styles.input, { color: colors.text, backgroundColor: colors.surface, borderColor: colors.border }]}

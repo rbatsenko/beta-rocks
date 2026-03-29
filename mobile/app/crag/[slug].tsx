@@ -226,22 +226,67 @@ export default function CragDetailScreen() {
     return reports.filter(r => r.category === selectedCategory);
   }, [reports, selectedCategory]);
 
-  // Group optimal windows by day
+  // Group optimal windows by day — include all forecast days (bad days shown folded)
   const groupedWindows = useMemo(() => {
     const windows = conditions?.optimalWindows || [];
-    const groups: { label: string; dateKey: string; windows: typeof windows }[] = [];
+    const daily = conditions?.dailyForecast || [];
+    const groups: { label: string; dateKey: string; windows: typeof windows; bestRating?: string; weatherCode?: number }[] = [];
     const seen = new Map<string, typeof windows>();
+
+    // Group optimal windows by day
     for (const w of windows) {
       const key = getDateKey(w.startTime);
       if (!seen.has(key)) seen.set(key, []);
       seen.get(key)!.push(w);
     }
-    seen.forEach((wins, key) => {
-      const label = getDayLabel(wins[0].startTime, t);
-      groups.push({ label, dateKey: key, windows: wins });
-    });
+
+    // Build groups from daily forecast to include all days
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const fiveDaysFromNow = new Date(today);
+    fiveDaysFromNow.setDate(fiveDaysFromNow.getDate() + 5);
+    const hourly = conditions?.hourlyConditions || [];
+
+    if (daily.length > 0) {
+      for (const day of daily) {
+        const dayDate = new Date(day.date);
+        const dayStart = new Date(dayDate.getFullYear(), dayDate.getMonth(), dayDate.getDate());
+        if (dayStart < today || dayStart >= fiveDaysFromNow) continue;
+
+        const key = dayDate.toDateString();
+        const label = getDayLabel(day.date, t);
+        const dayWindows = seen.get(key) || [];
+
+        // Determine best rating for days without windows
+        let bestRating: string | undefined;
+        if (dayWindows.length === 0) {
+          const dayEnd = new Date(dayStart);
+          dayEnd.setDate(dayEnd.getDate() + 1);
+          const ratingOrder = ["Great", "Good", "Fair", "Poor", "Nope"];
+          bestRating = "Nope";
+          for (const h of hourly) {
+            const ht = new Date(h.time);
+            if (ht >= dayStart && ht < dayEnd) {
+              const rl = getRatingLabel(h.frictionScore ?? h.friction);
+              if (rl && ratingOrder.indexOf(rl) < ratingOrder.indexOf(bestRating)) {
+                bestRating = rl;
+              }
+            }
+          }
+        }
+
+        groups.push({ label, dateKey: key, windows: dayWindows, bestRating, weatherCode: day.weatherCode });
+      }
+    } else {
+      // Fallback: only show days with windows
+      seen.forEach((wins, key) => {
+        const label = getDayLabel(wins[0].startTime, t);
+        groups.push({ label, dateKey: key, windows: wins });
+      });
+    }
+
     return groups;
-  }, [conditions?.optimalWindows, t]);
+  }, [conditions?.optimalWindows, conditions?.dailyForecast, conditions?.hourlyConditions, t]);
 
   function openLightbox(photos: string[], index: number) {
     setLightboxPhotos(photos);
@@ -302,12 +347,12 @@ export default function CragDetailScreen() {
           area_name: crag.name,
           area_slug: crag.slug,
           location,
-          latitude: crag.lat,
-          longitude: crag.lon,
+          latitude: crag.lat ?? null,
+          longitude: crag.lon ?? null,
           rock_type: crag.rock_type,
-          last_friction_score: conditions?.frictionScore,
-          last_rating: conditions?.rating,
-          last_checked_at: new Date().toISOString(),
+          last_friction_score: isLocationless ? null : conditions?.frictionScore,
+          last_rating: isLocationless ? null : conditions?.rating,
+          last_checked_at: isLocationless ? null : new Date().toISOString(),
         });
         const favs = getFavorites() as any[];
         favs.push({
@@ -317,12 +362,13 @@ export default function CragDetailScreen() {
           areaName: crag.name,
           areaSlug: crag.slug,
           location,
-          latitude: crag.lat,
-          longitude: crag.lon,
+          latitude: crag.lat ?? 0,
+          longitude: crag.lon ?? 0,
           rockType: crag.rock_type,
-          lastFrictionScore: conditions?.frictionScore,
-          lastRating: conditions?.rating,
-          lastCheckedAt: new Date().toISOString(),
+          lastFrictionScore: isLocationless ? undefined : conditions?.frictionScore,
+          lastRating: isLocationless ? undefined : conditions?.rating,
+          lastCheckedAt: isLocationless ? undefined : new Date().toISOString(),
+          isLocationless: isLocationless || undefined,
           displayOrder: 0,
           addedAt: new Date().toISOString(),
         });
@@ -357,7 +403,7 @@ export default function CragDetailScreen() {
           })
       ).catch(() => {});
     }
-    if (data.crag.lat && data.crag.lon) {
+    if (data.crag.lat != null && data.crag.lon != null) {
       fetch(`${API_URL}/api/webcams?lat=${data.crag.lat}&lon=${data.crag.lon}`)
         .then(r => r.json())
         .then(d => setWebcams(d.webcams?.slice(0, 4) || []))
@@ -391,14 +437,15 @@ export default function CragDetailScreen() {
     );
   }
 
-  const frictionScore = conditions?.frictionScore ?? null;
+  const isLocationless = crag.lat == null || crag.lon == null;
+  const frictionScore = isLocationless ? null : (conditions?.frictionScore ?? null);
   const ratingLabelKey = getRatingLabel(frictionScore);
   const ratingLabel = ratingLabelKey ? t(`ratings.${ratingLabelKey.toLowerCase()}`, ratingLabelKey) : null;
   const ratingColors = getRatingColors(ratingLabelKey);
-  const isDry: boolean | null = conditions?.isDry ?? null;
+  const isDry: boolean | null = isLocationless ? null : (conditions?.isDry ?? null);
   const astro = conditions?.astro;
-  const dailyForecast: any[] = conditions?.dailyForecast || [];
-  const hourlyConditions: any[] = conditions?.hourlyConditions || [];
+  const dailyForecast: any[] = isLocationless ? [] : (conditions?.dailyForecast || []);
+  const hourlyConditions: any[] = isLocationless ? [] : (conditions?.hourlyConditions || []);
   const precipCtx = conditions?.precipitationContext;
   const dewPointSpread = conditions?.dewPointSpread;
   const weatherCode = conditions?.current?.weatherCode;
@@ -438,6 +485,21 @@ export default function CragDetailScreen() {
               {linkifyDescription(crag.description, colors)}
             </Text>
           )}
+          {/* Locationless notice */}
+          {isLocationless && (
+            <View style={[styles.badge, {
+              backgroundColor: isDark ? "rgba(147,51,234,0.12)" : "#faf5ff",
+              borderColor: isDark ? "rgba(147,51,234,0.3)" : "#d8b4fe",
+              paddingHorizontal: Spacing.sm,
+              paddingVertical: Spacing.xs,
+              marginTop: Spacing.xs,
+            }]}>
+              <Ionicons name="eye-off-outline" size={14} color={isDark ? "#d8b4fe" : "#7c3aed"} />
+              <Text style={[styles.badgeText, { color: isDark ? "#d8b4fe" : "#6b21a8", flexShrink: 1 }]}>
+                {t("cragPage.locationless.notice", "No published location — reports only")}
+              </Text>
+            </View>
+          )}
           <View style={styles.badgeRow}>
             {crag.rock_type && crag.rock_type !== "unknown" && (
               <View style={[styles.badge, { backgroundColor: colors.surface, borderColor: colors.border }]}>
@@ -455,13 +517,15 @@ export default function CragDetailScreen() {
                 <Text style={[styles.badgeText, { color: isDry ? "#22c55e" : "#ef4444" }]}>{isDry ? t("cragPage.dry") : t("cragPage.wet")}</Text>
               </View>
             )}
-            {/* L. Coordinates Badge */}
+            {/* L. Coordinates Badge (hidden for locationless) */}
+            {!isLocationless && crag.lat != null && crag.lon != null && (
             <View style={[styles.badge, { backgroundColor: colors.surface, borderColor: colors.border }]}>
               <Ionicons name="location-outline" size={12} color={colors.muted} />
               <Text style={[styles.badgeText, styles.monoText, { color: colors.muted }]}>
                 {crag.lat.toFixed(4)}, {crag.lon.toFixed(4)}
               </Text>
             </View>
+            )}
           </View>
         </View>
         <View style={styles.headerActions}>
@@ -490,7 +554,7 @@ export default function CragDetailScreen() {
               color={isFavorited ? "#ef4444" : colors.muted}
             />
           </TouchableOpacity>
-          {ratingColors && frictionScore && (
+          {!isLocationless && ratingColors && frictionScore && (
             <View style={{ alignItems: "center", gap: 2 }}>
               <View style={[styles.ratingCard, { backgroundColor: ratingColors.bg, borderColor: ratingColors.solid, borderWidth: 1 }]}>
                 <Text style={[styles.ratingLabel, { color: ratingColors.text }]}>{ratingLabel}</Text>
@@ -501,8 +565,8 @@ export default function CragDetailScreen() {
         </View>
       </View>
 
-      {/* Map */}
-      {crag.lat != null && crag.lon != null && (
+      {/* Map (hidden for locationless crags) */}
+      {!isLocationless && crag.lat != null && crag.lon != null && (
         <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
           <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.location", "Location")}</Text>
           <CragMapView
@@ -513,7 +577,8 @@ export default function CragDetailScreen() {
         </View>
       )}
 
-      {/* External links */}
+      {/* External links (hidden for locationless crags) */}
+      {!isLocationless && crag.lat != null && crag.lon != null && (
       <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
         <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.links")}</Text>
         <LinkRow icon="map-outline" label={t("cragPage.viewOnGoogleMaps", "View on Google Maps")} color={colors} onPress={() => Linking.openURL(`https://www.google.com/maps?q=${crag.lat},${crag.lon}&z=15`)} />
@@ -523,6 +588,7 @@ export default function CragDetailScreen() {
         }} />
         <LinkRow icon="navigate-outline" label={t("cragPage.viewOnMap", "View on map")} color={colors} onPress={() => Linking.openURL(`https://www.openstreetmap.org/?mlat=${crag.lat}&mlon=${crag.lon}#map=15/${crag.lat}/${crag.lon}`)} />
       </View>
+      )}
 
       {/* Reports — C. category filter chips, I. empty state, K. author names */}
       <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
@@ -753,7 +819,8 @@ export default function CragDetailScreen() {
         </View>
       )}
 
-      {/* Weather tabs — B. Added "hourly" tab */}
+      {/* Weather tabs — B. Added "hourly" tab (hidden for locationless crags) */}
+      {!isLocationless && (
       <View style={[styles.tabRow, { borderColor: colors.border }]}>
         {(["conditions", "hourly", "forecast"] as const).map(tab => (
           <TouchableOpacity
@@ -767,6 +834,7 @@ export default function CragDetailScreen() {
           </TouchableOpacity>
         ))}
       </View>
+      )}
 
       {/* Conditions tab — G. with unit conversion, A. weather summary */}
       {activeTab === "conditions" && conditions?.current && (
@@ -890,6 +958,7 @@ export default function CragDetailScreen() {
                 windows={group.windows}
                 isHighlighted={isHighlighted}
                 isToday={isToday}
+                bestRating={group.bestRating}
                 colors={colors}
                 units={units}
                 t={t}
@@ -1061,29 +1130,40 @@ export default function CragDetailScreen() {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function FoldableWindowDay({ label, windows, isHighlighted, isToday, colors, units, t }: {
+function FoldableWindowDay({ label, windows, isHighlighted, isToday, bestRating, colors, units, t }: {
   label: string; windows: any[]; isHighlighted: boolean; isToday: boolean;
+  bestRating?: string;
   colors: (typeof Colors)["light"]; units: any; t: any;
 }) {
+  const isBadDay = windows.length === 0;
   const [expanded, setExpanded] = useState(false);
-  const bgColor = isHighlighted
-    ? "rgba(34,197,94,0.08)"
-    : colors.surface;
-  const borderColor = isHighlighted
-    ? "rgba(34,197,94,0.25)"
-    : colors.border;
+  const bgColor = isBadDay
+    ? colors.surface
+    : isHighlighted
+      ? "rgba(34,197,94,0.08)"
+      : colors.surface;
+  const borderColor = isBadDay
+    ? colors.border
+    : isHighlighted
+      ? "rgba(34,197,94,0.25)"
+      : colors.border;
+
+  const badRatingColors = isBadDay ? getRatingColors(bestRating || "Nope") : null;
+  const dotColor = isBadDay
+    ? (bestRating === "Fair" ? "#eab308" : bestRating === "Poor" ? "#f97316" : "#ef4444")
+    : isHighlighted ? "#22c55e" : "#4ade80";
 
   return (
-    <View style={[styles.foldableDay, { backgroundColor: bgColor, borderColor }]}>
+    <View style={[styles.foldableDay, { backgroundColor: bgColor, borderColor, opacity: isBadDay ? 0.7 : 1 }]}>
       <TouchableOpacity
         style={styles.foldableDayHeader}
         onPress={() => setExpanded(!expanded)}
         activeOpacity={0.7}
       >
         <View style={styles.foldableDayLeft}>
-          <View style={[styles.windowDot, { backgroundColor: isHighlighted ? "#22c55e" : "#4ade80" }]} />
+          <View style={[styles.windowDot, { backgroundColor: dotColor }]} />
           <Text style={[styles.foldableDayLabel, {
-            color: isHighlighted ? "#22c55e" : colors.text,
+            color: isBadDay ? colors.muted : isHighlighted ? "#22c55e" : colors.text,
           }]}>{label}</Text>
           {isToday && (
             <View style={[styles.todayBadge, { backgroundColor: "rgba(34,197,94,0.12)", borderColor: "rgba(34,197,94,0.3)" }]}>
@@ -1092,9 +1172,19 @@ function FoldableWindowDay({ label, windows, isHighlighted, isToday, colors, uni
               </Text>
             </View>
           )}
-          <Text style={[styles.precipLabel, { color: colors.muted, marginLeft: "auto" }]}>
-            {windows.length} {windows.length > 1 ? t("dialog.windows", "windows") : t("dialog.window", "window")}
-          </Text>
+          {isBadDay ? (
+            badRatingColors && bestRating ? (
+              <View style={[styles.smallBadge, { backgroundColor: badRatingColors.bg, marginLeft: "auto" }]}>
+                <Text style={[styles.smallBadgeText, { color: badRatingColors.text }]}>
+                  {t(`ratings.${bestRating.toLowerCase()}`, bestRating)}
+                </Text>
+              </View>
+            ) : null
+          ) : (
+            <Text style={[styles.precipLabel, { color: colors.muted, marginLeft: "auto" }]}>
+              {windows.length} {windows.length > 1 ? t("dialog.windows", "windows") : t("dialog.window", "window")}
+            </Text>
+          )}
         </View>
         <Ionicons
           name={expanded ? "chevron-up" : "chevron-down"}
@@ -1104,21 +1194,27 @@ function FoldableWindowDay({ label, windows, isHighlighted, isToday, colors, uni
       </TouchableOpacity>
       {expanded && (
         <View style={styles.foldableDayContent}>
-          {windows.map((w: any, i: number) => {
-            const wl = getRatingLabel(w.avgFrictionScore);
-            const wc = getRatingColors(wl);
-            return (
-              <View key={i} style={styles.windowRow}>
-                <View style={[styles.windowDot, { backgroundColor: wc?.solid || colors.muted }]} />
-                <Text style={[styles.windowTime, { color: colors.text }]}>{fmtTimeRange(w.startTime, w.endTime, units?.timeFormat || "24h")}</Text>
-                {wc && wl && (
-                  <View style={[styles.smallBadge, { backgroundColor: wc.bg }]}>
-                    <Text style={[styles.smallBadgeText, { color: wc.text }]}>{t(`ratings.${wl!.toLowerCase()}`, wl)}</Text>
-                  </View>
-                )}
-              </View>
-            );
-          })}
+          {isBadDay ? (
+            <Text style={[styles.precipLabel, { color: colors.muted, fontStyle: "italic", paddingVertical: Spacing.xs }]}>
+              {t("dialog.noOptimalHoursDay", "No good climbing windows on this day.")}
+            </Text>
+          ) : (
+            windows.map((w: any, i: number) => {
+              const wl = getRatingLabel(w.avgFrictionScore);
+              const wc = getRatingColors(wl);
+              return (
+                <View key={i} style={styles.windowRow}>
+                  <View style={[styles.windowDot, { backgroundColor: wc?.solid || colors.muted }]} />
+                  <Text style={[styles.windowTime, { color: colors.text }]}>{fmtTimeRange(w.startTime, w.endTime, units?.timeFormat || "24h")}</Text>
+                  {wc && wl && (
+                    <View style={[styles.smallBadge, { backgroundColor: wc.bg }]}>
+                      <Text style={[styles.smallBadgeText, { color: wc.text }]}>{t(`ratings.${wl!.toLowerCase()}`, wl)}</Text>
+                    </View>
+                  )}
+                </View>
+              );
+            })
+          )}
         </View>
       )}
     </View>

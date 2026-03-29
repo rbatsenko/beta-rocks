@@ -23,6 +23,9 @@ export interface Favorite {
   lastFrictionScore?: number;
   lastCheckedAt?: string;
 
+  // Locationless crags (no coordinates, reports only)
+  isLocationless?: boolean;
+
   // Metadata
   displayOrder: number;
   addedAt: string;

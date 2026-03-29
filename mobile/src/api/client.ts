@@ -222,9 +222,9 @@ export async function restoreProfile(
 export async function submitCrag(
   crag: {
     name: string;
-    lat: number;
-    lon: number;
-    country: string;
+    lat?: number;
+    lon?: number;
+    country?: string;
     state?: string;
     municipality?: string;
     village?: string;
@@ -233,6 +233,7 @@ export async function submitCrag(
     climbingTypes?: string[];
     description?: string;
     isSecret?: boolean;
+    isLocationless?: boolean;
   },
   syncKeyHash: string
 ): Promise<{ success: boolean; crag: { id: string; name: string; slug: string } }> {
