@@ -307,6 +307,7 @@
     },
     "currentRating": "Nykyinen arvio",
     "currentConditions": "Nykyiset olosuhteet",
+    "current": "Nykyiset",
     "currentWeather": "Nykyiset sääolosuhteet",
     "temperature": "Lämpötila",
     "humidity": "Kosteus",
