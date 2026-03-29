@@ -542,13 +542,13 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
 
                                   {/* Hourly breakdown */}
                                   {window.hours && window.hours.length > 0 && (
-                                    <div className="space-y-1 pl-5">
+                                    <div className="space-y-1 pl-2 sm:pl-5">
                                       {window.hours?.map((hour, hourIdx) => (
                                         <div
                                           key={hourIdx}
-                                          className="flex items-center justify-between text-xs py-1"
+                                          className="flex items-center justify-between text-xs py-1 gap-1"
                                         >
-                                          <div className="flex items-center gap-2 text-muted-foreground">
+                                          <div className="flex items-center gap-1.5 sm:gap-2 text-muted-foreground min-w-0 flex-wrap">
                                             {hour.weatherCode !== undefined && (
                                               <span
                                                 className="text-base"
@@ -562,16 +562,16 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                                 )}
                                               </span>
                                             )}
-                                            <span className="font-mono min-w-[45px]">
+                                            <span className="font-mono min-w-[40px] sm:min-w-[45px]">
                                               {new Date(hour.time).toLocaleTimeString(locale, {
                                                 hour: "2-digit",
                                                 minute: "2-digit",
                                                 hour12: timeFormat === "12h",
                                               })}
                                             </span>
-                                            <div className="flex items-center gap-2">
+                                            <div className="flex items-center gap-1.5 sm:gap-2">
                                               <div className="flex items-center gap-0.5">
-                                                <ThermometerSun className="h-2.5 w-2.5" />
+                                                <ThermometerSun className="h-2.5 w-2.5 shrink-0" />
                                                 <span>
                                                   {Math.round(
                                                     convertTemperature(
@@ -584,12 +584,12 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                                 </span>
                                               </div>
                                               <div className="flex items-center gap-0.5">
-                                                <Droplets className="h-2.5 w-2.5" />
+                                                <Droplets className="h-2.5 w-2.5 shrink-0" />
                                                 <span>{hour.humidity}%</span>
                                               </div>
                                               <div className="flex items-center gap-0.5">
-                                                <Wind className="h-2.5 w-2.5" />
-                                                <span>
+                                                <Wind className="h-2.5 w-2.5 shrink-0" />
+                                                <span className="whitespace-nowrap">
                                                   {Math.round(
                                                     convertWindSpeed(
                                                       hour.wind_kph,
@@ -609,7 +609,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                               </div>
                                             </div>
                                           </div>
-                                          <Badge className={`text-[10px] px-1.5 py-0 ${getRatingColor(hour.rating)}`}>
+                                          <Badge className={`text-[10px] px-1.5 py-0 shrink-0 ${getRatingColor(hour.rating)}`}>
                                             {translateRating(hour.rating)}
                                           </Badge>
                                         </div>

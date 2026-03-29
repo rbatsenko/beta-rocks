@@ -64,6 +64,7 @@ export async function GET(
         temp_c: hour.temperature,
         humidity: hour.humidity,
         wind_kph: hour.windSpeed,
+        wind_direction: hour.windDirection,
         precip_mm: hour.precipitation,
         weatherCode: hour.weatherCode,
       })),
