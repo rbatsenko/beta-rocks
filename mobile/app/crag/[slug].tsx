@@ -833,7 +833,7 @@ export default function CragDetailScreen() {
             onPress={() => setActiveTab(tab)}
           >
             <Text style={[styles.tabText, { color: activeTab === tab ? colors.primary : colors.muted }]}>
-              {tab === "conditions" ? t("cragPage.currentConditions") : tab === "hourly" ? t("dialog.tabs.hourly", "Hourly") : t("cragPage.forecast")}
+              {tab === "conditions" ? t("cragPage.current", "Current") : tab === "hourly" ? t("dialog.tabs.hourly", "Hourly") : t("cragPage.forecast")}
             </Text>
           </TouchableOpacity>
         ))}
@@ -869,7 +869,7 @@ export default function CragDetailScreen() {
             <ConditionItem
               icon="flag-outline"
               label={t("dialog.wind", "Wind")}
-              value={`${formatWindSpeed(convertWindSpeed(conditions.current.windSpeed_kph, "kmh", units.windSpeed), units.windSpeed)}${conditions.current.windDirection != null ? ` ${getWindCardinal(conditions.current.windDirection)}` : ""}`}
+              value={formatWindSpeed(convertWindSpeed(conditions.current.windSpeed_kph, "kmh", units.windSpeed), units.windSpeed)}
               windDirection={conditions.current.windDirection}
               colors={colors}
             />
@@ -1190,7 +1190,7 @@ function ExpandableWindow({ window: w, colors, units, t }: { window: any; colors
                   {formatTemperature(convertTemperature(temp, "celsius", units.temperature), units.temperature, 0)}
                 </Text>
                 <Text style={[styles.hourlyValue, { color: colors.muted, fontSize: 11 }]}>{h.humidity}%</Text>
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <View style={{ flexDirection: "row", alignItems: "center", flex: 1 }}>
                   <Text style={[styles.hourlyValue, { color: colors.muted, fontSize: 11 }]}>
                     {formatWindSpeed(convertWindSpeed(wind, "kmh", units.windSpeed), units.windSpeed, 0)}
                   </Text>
@@ -1202,7 +1202,7 @@ function ExpandableWindow({ window: w, colors, units, t }: { window: any; colors
                   )}
                 </View>
                 {rc && rl && (
-                  <View style={[styles.smallBadge, { backgroundColor: rc.bg, marginLeft: "auto" }]}>
+                  <View style={[styles.smallBadge, { backgroundColor: rc.bg, flexShrink: 0 }]}>
                     <Text style={[styles.smallBadgeText, { color: rc.text, fontSize: 9 }]}>{t(`ratings.${rl!.toLowerCase()}`, rl)}</Text>
                   </View>
                 )}
@@ -1521,9 +1521,9 @@ const styles = StyleSheet.create({
   riskBadge: { paddingHorizontal: Spacing.sm, paddingVertical: 2, borderRadius: BorderRadius.sm },
 
   // Hourly
-  hourlyRow: { flexDirection: "row", alignItems: "center", gap: Spacing.sm, paddingVertical: Spacing.xs + 2 },
-  hourlyTime: { fontSize: FontSize.xs, fontWeight: "600", width: 38 },
-  hourlyValue: { fontSize: FontSize.xs, minWidth: 40 },
+  hourlyRow: { flexDirection: "row", alignItems: "center", gap: Spacing.xs, paddingVertical: Spacing.xs + 2 },
+  hourlyTime: { fontSize: FontSize.xs, fontWeight: "600", minWidth: 36 },
+  hourlyValue: { fontSize: FontSize.xs },
 
   // Forecast
   forecastRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingVertical: Spacing.sm },
