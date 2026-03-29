@@ -1017,7 +1017,10 @@ export default function CragDetailScreen() {
                       {formatWindSpeed(convertWindSpeed(wind, "kmh", units.windSpeed), units.windSpeed, 0)}
                     </Text>
                     {windDir != null && (
-                      <Text style={[styles.hourlyValue, { color: colors.muted, transform: [{ rotate: `${getWindArrowRotation(windDir)}deg` }], marginLeft: 2 }]}>↑</Text>
+                      <>
+                        <Text style={[styles.hourlyValue, { color: colors.muted, transform: [{ rotate: `${getWindArrowRotation(windDir)}deg` }], marginLeft: 2 }]}>↑</Text>
+                        <Text style={[styles.hourlyValue, { color: colors.muted, fontSize: 10, marginLeft: 1 }]}>{getWindCardinal(windDir)}</Text>
+                      </>
                     )}
                   </View>
                   {rc && rl && (
@@ -1059,7 +1062,10 @@ export default function CragDetailScreen() {
                   <Ionicons name="flag-outline" size={12} color={colors.muted} />
                   <Text style={[styles.forecastWind, { color: colors.muted }]}>{Math.round(wind)}</Text>
                   {day.windDirectionDominant != null && (
-                    <Text style={[styles.forecastWind, { color: colors.muted, transform: [{ rotate: `${getWindArrowRotation(day.windDirectionDominant)}deg` }] }]}>↑</Text>
+                    <>
+                      <Text style={[styles.forecastWind, { color: colors.muted, transform: [{ rotate: `${getWindArrowRotation(day.windDirectionDominant)}deg` }] }]}>↑</Text>
+                      <Text style={[styles.forecastWind, { color: colors.muted, fontSize: 10 }]}>{getWindCardinal(day.windDirectionDominant)}</Text>
+                    </>
                   )}
                 </View>
               </View>
@@ -1258,7 +1264,10 @@ function HourlyTimeline({ hours, colors, units, t }: { hours: any[]; colors: (ty
                 {formatWindSpeed(convertWindSpeed(wind, "kmh", units.windSpeed), units.windSpeed, 0)}
               </Text>
               {windDir != null && (
-                <Text style={[styles.hourlyValue, { color: colors.muted, transform: [{ rotate: `${getWindArrowRotation(windDir)}deg` }], marginLeft: 2 }]}>↑</Text>
+                <>
+                  <Text style={[styles.hourlyValue, { color: colors.muted, transform: [{ rotate: `${getWindArrowRotation(windDir)}deg` }], marginLeft: 2 }]}>↑</Text>
+                  <Text style={[styles.hourlyValue, { color: colors.muted, fontSize: 10, marginLeft: 1 }]}>{getWindCardinal(windDir)}</Text>
+                </>
               )}
             </View>
             {rc && rl && (
@@ -1281,7 +1290,10 @@ function ConditionItem({ icon, label, value, windDirection, colors }: { icon: ke
       <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
         <Text style={[styles.conditionValue, { color: colors.text }]}>{value}</Text>
         {windDirection != null && (
-          <Text style={[styles.conditionValue, { color: colors.muted, transform: [{ rotate: `${getWindArrowRotation(windDirection)}deg` }] }]}>↑</Text>
+          <>
+            <Text style={[styles.conditionValue, { color: colors.muted, transform: [{ rotate: `${getWindArrowRotation(windDirection)}deg` }] }]}>↑</Text>
+            <Text style={[styles.conditionValue, { color: colors.muted, fontSize: 12 }]}>{getWindCardinal(windDirection)}</Text>
+          </>
         )}
       </View>
     </View>
