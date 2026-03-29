@@ -47,8 +47,8 @@ export type Database = {
           id: string;
           is_secret: boolean;
           last_synced_at: string | null;
-          lat: number;
-          lon: number;
+          lat: number | null;
+          lon: number | null;
           municipality: string | null;
           name: string;
           osm_id: string | null;
@@ -72,8 +72,8 @@ export type Database = {
           id?: string;
           is_secret?: boolean;
           last_synced_at?: string | null;
-          lat: number;
-          lon: number;
+          lat?: number | null;
+          lon?: number | null;
           municipality?: string | null;
           name: string;
           osm_id?: string | null;
@@ -97,8 +97,8 @@ export type Database = {
           id?: string;
           is_secret?: boolean;
           last_synced_at?: string | null;
-          lat?: number;
-          lon?: number;
+          lat?: number | null;
+          lon?: number | null;
           municipality?: string | null;
           name?: string;
           osm_id?: string | null;
@@ -348,9 +348,9 @@ export type Database = {
           last_checked_at: string | null;
           last_friction_score: number | null;
           last_rating: string | null;
-          latitude: number;
+          latitude: number | null;
           location: string | null;
-          longitude: number;
+          longitude: number | null;
           rock_type: string | null;
           updated_at: string | null;
           user_profile_id: string;
@@ -367,9 +367,9 @@ export type Database = {
           last_checked_at?: string | null;
           last_friction_score?: number | null;
           last_rating?: string | null;
-          latitude: number;
+          latitude?: number | null;
           location?: string | null;
-          longitude: number;
+          longitude?: number | null;
           rock_type?: string | null;
           updated_at?: string | null;
           user_profile_id: string;
@@ -386,9 +386,9 @@ export type Database = {
           last_checked_at?: string | null;
           last_friction_score?: number | null;
           last_rating?: string | null;
-          latitude?: number;
+          latitude?: number | null;
           location?: string | null;
-          longitude?: number;
+          longitude?: number | null;
           rock_type?: string | null;
           updated_at?: string | null;
           user_profile_id?: string;
