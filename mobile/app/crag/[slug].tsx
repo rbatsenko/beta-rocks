@@ -233,11 +233,15 @@ export default function CragDetailScreen() {
     const groups: { label: string; dateKey: string; windows: typeof windows; bestRating?: string; weatherCode?: number }[] = [];
     const seen = new Map<string, typeof windows>();
 
-    // Group optimal windows by day
+    // Group optimal windows by day, attaching hourly data to each window
     for (const w of windows) {
       const key = getDateKey(w.startTime);
       if (!seen.has(key)) seen.set(key, []);
-      seen.get(key)!.push(w);
+      const windowHours = hourly.filter((h: any) => {
+        const ht = new Date(h.time).getTime();
+        return ht >= new Date(w.startTime).getTime() && ht < new Date(w.endTime).getTime();
+      });
+      seen.get(key)!.push({ ...w, hours: windowHours });
     }
 
     // Build groups from daily forecast to include all days
@@ -1136,6 +1140,82 @@ export default function CragDetailScreen() {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
+function ExpandableWindow({ window: w, colors, units, t }: { window: any; colors: (typeof Colors)["light"]; units: any; t: any }) {
+  const [expanded, setExpanded] = useState(false);
+  const wl = getRatingLabel(w.avgFrictionScore);
+  const wc = getRatingColors(wl);
+  const hours = w.hours || [];
+  const tf = units?.timeFormat || "24h";
+
+  return (
+    <View>
+      <TouchableOpacity
+        style={styles.windowRow}
+        onPress={() => setExpanded(!expanded)}
+        activeOpacity={0.7}
+      >
+        <View style={[styles.windowDot, { backgroundColor: wc?.solid || colors.muted }]} />
+        <Text style={[styles.windowTime, { color: colors.text }]}>{fmtTimeRange(w.startTime, w.endTime, tf)}</Text>
+        {wc && wl && (
+          <View style={[styles.smallBadge, { backgroundColor: wc.bg }]}>
+            <Text style={[styles.smallBadgeText, { color: wc.text }]}>{t(`ratings.${wl!.toLowerCase()}`, wl)}</Text>
+          </View>
+        )}
+        <Ionicons
+          name={expanded ? "chevron-up" : "chevron-down"}
+          size={14}
+          color={colors.muted}
+          style={{ marginLeft: "auto" }}
+        />
+      </TouchableOpacity>
+      {expanded && hours.length > 0 && (
+        <View style={{ paddingLeft: Spacing.md, paddingTop: 2 }}>
+          {hours.map((h: any, i: number) => {
+            const score = h.frictionScore ?? h.friction;
+            const rl = getRatingLabel(score);
+            const rc = getRatingColors(rl);
+            const temp = h.temp_c ?? h.temperature_c;
+            const wind = h.wind_kph ?? h.windSpeed_kph;
+            const windDir = h.wind_direction;
+            return (
+              <View key={i} style={[styles.hourlyRow, {
+                backgroundColor: rl === "Great" ? "rgba(34,197,94,0.06)" : rl === "Good" ? "rgba(59,130,246,0.04)" : "transparent",
+                borderRadius: BorderRadius.sm,
+                paddingHorizontal: Spacing.xs,
+                marginVertical: 1,
+              }]}>
+                <Text style={[styles.hourlyTime, { color: colors.text, fontSize: 11 }]}>{fmtHour(h.time, tf)}</Text>
+                <WeatherIcon code={h.weatherCode} size="small" />
+                <Text style={[styles.hourlyValue, { color: colors.text, fontSize: 11 }]}>
+                  {formatTemperature(convertTemperature(temp, "celsius", units.temperature), units.temperature, 0)}
+                </Text>
+                <Text style={[styles.hourlyValue, { color: colors.muted, fontSize: 11 }]}>{h.humidity}%</Text>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <Text style={[styles.hourlyValue, { color: colors.muted, fontSize: 11 }]}>
+                    {formatWindSpeed(convertWindSpeed(wind, "kmh", units.windSpeed), units.windSpeed, 0)}
+                  </Text>
+                  {windDir != null && (
+                    <>
+                      <Text style={[styles.hourlyValue, { color: colors.muted, fontSize: 11, transform: [{ rotate: `${getWindArrowRotation(windDir)}deg` }], marginLeft: 2 }]}>↑</Text>
+                      <Text style={[styles.hourlyValue, { color: colors.muted, fontSize: 9, marginLeft: 1 }]}>{getWindCardinal(windDir)}</Text>
+                    </>
+                  )}
+                </View>
+                {rc && rl && (
+                  <View style={[styles.smallBadge, { backgroundColor: rc.bg, marginLeft: "auto" }]}>
+                    <Text style={[styles.smallBadgeText, { color: rc.text, fontSize: 9 }]}>{t(`ratings.${rl!.toLowerCase()}`, rl)}</Text>
+                  </View>
+                )}
+              </View>
+            );
+          })}
+        </View>
+      )}
+    </View>
+  );
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function FoldableWindowDay({ label, windows, isHighlighted, isToday, bestRating, colors, units, t }: {
   label: string; windows: any[]; isHighlighted: boolean; isToday: boolean;
   bestRating?: string;
@@ -1205,21 +1285,9 @@ function FoldableWindowDay({ label, windows, isHighlighted, isToday, bestRating,
               {t("dialog.noOptimalHoursDay", "No good climbing windows on this day.")}
             </Text>
           ) : (
-            windows.map((w: any, i: number) => {
-              const wl = getRatingLabel(w.avgFrictionScore);
-              const wc = getRatingColors(wl);
-              return (
-                <View key={i} style={styles.windowRow}>
-                  <View style={[styles.windowDot, { backgroundColor: wc?.solid || colors.muted }]} />
-                  <Text style={[styles.windowTime, { color: colors.text }]}>{fmtTimeRange(w.startTime, w.endTime, units?.timeFormat || "24h")}</Text>
-                  {wc && wl && (
-                    <View style={[styles.smallBadge, { backgroundColor: wc.bg }]}>
-                      <Text style={[styles.smallBadgeText, { color: wc.text }]}>{t(`ratings.${wl!.toLowerCase()}`, wl)}</Text>
-                    </View>
-                  )}
-                </View>
-              );
-            })
+            windows.map((w: any, i: number) => (
+              <ExpandableWindow key={i} window={w} colors={colors} units={units} t={t} />
+            ))
           )}
         </View>
       )}
