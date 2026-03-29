@@ -75,8 +75,8 @@ export function WelcomeScreen({ onSearchClick, onAboutClick, onPrivacyClick }: W
                   favorite.areaSlug ||
                   generateUniqueSlug(
                     favorite.areaName,
-                    favorite.latitude,
-                    favorite.longitude
+                    favorite.latitude ?? 0,
+                    favorite.longitude ?? 0
                   );
                 return (
                   <Button

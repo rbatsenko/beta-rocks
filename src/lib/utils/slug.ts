@@ -106,8 +106,8 @@ export function getBaseSlug(slug: string): string {
 export function getCragSlug(crag: {
   slug?: string | null;
   name: string;
-  lat: number;
-  lon: number;
+  lat: number | null;
+  lon: number | null;
 }): string {
   // Prefer stored slug from database
   if (crag.slug) {
@@ -118,5 +118,5 @@ export function getCragSlug(crag: {
   console.warn(
     `[getCragSlug] Crag "${crag.name}" missing slug field, generating coordinate-based slug`
   );
-  return generateUniqueSlug(crag.name, crag.lat, crag.lon);
+  return generateUniqueSlug(crag.name, crag.lat ?? 0, crag.lon ?? 0);
 }
