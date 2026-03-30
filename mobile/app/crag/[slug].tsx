@@ -539,8 +539,8 @@ export default function CragDetailScreen() {
               try {
                 await Share.share(
                   Platform.OS === "ios"
-                    ? { message: crag.name, url }
-                    : { message: `${crag.name} — ${url}` }
+                    ? { url }
+                    : { message: url }
                 );
               } catch {
                 // User cancelled or share failed — no action needed
