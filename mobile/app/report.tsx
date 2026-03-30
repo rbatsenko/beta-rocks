@@ -104,6 +104,7 @@ export default function ReportScreen() {
   const [uploadProgress, setUploadProgress] = useState<{ current: number; total: number; percent: number } | null>(null);
   const [observedAt, setObservedAt] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showTimePicker, setShowTimePicker] = useState(false);
 
   // Photo state: existing paths (from edit) and new local URIs
   const [existingPhotoPaths, setExistingPhotoPaths] = useState<string[]>([]);
@@ -496,13 +497,20 @@ export default function ReportScreen() {
           <>
             <DateTimePicker
               value={observedAt}
-              mode="datetime"
+              mode={Platform.OS === "ios" ? "datetime" : "date"}
               display={Platform.OS === "ios" ? "spinner" : "default"}
               maximumDate={new Date()}
               minimumDate={new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)}
-              onChange={(_, date) => {
-                if (Platform.OS !== "ios") setShowDatePicker(false);
-                if (date) setObservedAt(date);
+              onChange={(event, date) => {
+                if (Platform.OS !== "ios") {
+                  setShowDatePicker(false);
+                  if (event.type === "set" && date) {
+                    setObservedAt(date);
+                    setShowTimePicker(true);
+                  }
+                } else {
+                  if (date) setObservedAt(date);
+                }
               }}
             />
             {Platform.OS === "ios" && (
@@ -516,6 +524,17 @@ export default function ReportScreen() {
               </TouchableOpacity>
             )}
           </>
+        )}
+        {showTimePicker && Platform.OS !== "ios" && (
+          <DateTimePicker
+            value={observedAt}
+            mode="time"
+            display="default"
+            onChange={(event, date) => {
+              setShowTimePicker(false);
+              if (event.type === "set" && date) setObservedAt(date);
+            }}
+          />
         )}
 
         {/* Text input */}
