@@ -56,7 +56,7 @@ This project is built with:
 ```
 src/
 ├── app/
-│   ├── api/              # API routes (chat, conditions, reports)
+│   ├── api/              # API routes (chat, conditions, reports, v1 public API)
 │   ├── location/[slug]/  # Dynamic crag pages (ISR)
 │   ├── sync/            # Sync key restoration page
 │   ├── layout.tsx       # Root layout with Header
@@ -124,6 +124,14 @@ See [Vercel docs](https://vercel.com/docs) for more info.
 - **Offline support** - LocalStorage + Supabase sync with online/offline indicators
 - **Privacy-first** - No accounts, no email, anonymous by default with optional display names
 - **Row-level security** - Supabase RLS policies protect user data
+
+### Public API
+
+- **REST API v1** - Versioned public API at `/api/v1/` for external app integration
+- **Crag search** - Search crags by name, get details by ID, find nearby crags by coordinates
+- **Community reports** - Fetch and submit reports via API with sync key authentication
+- **CORS enabled** - Open CORS for all origins on v1 endpoints
+- **API docs** - Interactive documentation at [`/docs/api`](https://beta.rocks/docs/api)
 
 ### i18n
 

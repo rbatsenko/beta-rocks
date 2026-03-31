@@ -447,6 +447,23 @@ mobile/
 - `sync/[key]/route.ts`: Sync key restoration
 - `webcams/route.ts`: Webcam data via Windy API
 
+### Public API v1 (src/app/api/v1/)
+
+Versioned public API for external app consumption (e.g., ClimbingPartnerAI). All endpoints have open CORS (`Access-Control-Allow-Origin: *`). Documentation page at `/docs/api`.
+
+- `crags/search/route.ts`: `GET` — Search crags by name (`?q=&limit=`). Uses `search_crags_enhanced` RPC. Filters out `is_secret` crags.
+- `crags/[id]/route.ts`: `GET` — Crag detail by ID with child sectors. Filters out `is_secret` crags. Returns 404 if not found.
+- `crags/nearby/route.ts`: `GET` — Find crags near coordinates (`?lat=&lon=&radius=&limit=`). Uses `find_nearby_crags` RPC with bounding box fallback.
+- `crags/[id]/reports/route.ts`: `GET` — Community reports for a crag with pagination and optional category filter.
+- `reports/route.ts`: `POST` — Submit a new report. Requires `sync_key` for user attribution. Validates category, message length, and rating.
+
+**CORS**: Handled in `src/proxy.ts` — `/api/v1/*` routes get open CORS (`*`), while other `/api/*` routes use origin-restricted CORS for the mobile app.
+
+**Key patterns**:
+- Responses use `{ "data": ... }` wrapper, errors use `{ "error": "message" }`
+- No internal user IDs or sync keys exposed in responses
+- Reports table has a `source` column to track origin (web, mobile, external app)
+
 ### Dynamic Routes (src/app/)
 
 - `location/[slug]/page.tsx`: Crag detail pages with ISR (5-minute revalidation)
