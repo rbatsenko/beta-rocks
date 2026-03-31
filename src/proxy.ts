@@ -14,9 +14,24 @@ function isAllowedOrigin(origin: string | null): boolean {
 
 export function proxy(request: NextRequest) {
   const origin = request.headers.get("origin");
-  const isApiRoute = request.nextUrl.pathname.startsWith("/api/");
+  const { pathname } = request.nextUrl;
+  const isApiRoute = pathname.startsWith("/api/");
+  const isPublicApi = pathname.startsWith("/api/v1/");
 
-  // Handle CORS preflight for API routes (mobile app access)
+  // Handle CORS preflight for public API v1 routes (open to all origins)
+  if (request.method === "OPTIONS" && isPublicApi) {
+    return new NextResponse(null, {
+      status: 204,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        "Access-Control-Max-Age": "86400",
+      },
+    });
+  }
+
+  // Handle CORS preflight for other API routes (mobile app access)
   if (request.method === "OPTIONS" && isApiRoute) {
     const response = new NextResponse(null, { status: 204 });
     if (isAllowedOrigin(origin)) {
@@ -37,8 +52,13 @@ export function proxy(request: NextRequest) {
 
   const response = NextResponse.next();
 
-  // Add CORS headers to API responses for mobile app access
-  if (isApiRoute && origin && isAllowedOrigin(origin)) {
+  // Add open CORS headers to public API v1 responses
+  if (isPublicApi) {
+    response.headers.set("Access-Control-Allow-Origin", "*");
+    response.headers.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    response.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  } else if (isApiRoute && origin && isAllowedOrigin(origin)) {
+    // Add CORS headers to other API responses for mobile app access
     response.headers.set("Access-Control-Allow-Origin", origin);
     response.headers.set(
       "Access-Control-Allow-Methods",
