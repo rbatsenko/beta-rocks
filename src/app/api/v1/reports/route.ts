@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseClient, isSupabaseConfigured } from "@/integrations/supabase/client";
 import { hashSyncKey } from "@/lib/auth/sync-key";
 
-const VALID_CATEGORIES = ["conditions", "safety", "access", "beta", "facilities", "lost_and_found"];
+const VALID_CATEGORIES = ["conditions", "safety", "access", "climbing_info", "facilities", "lost_found", "other"];
 
 /**
  * POST /api/v1/reports
@@ -49,11 +49,12 @@ export async function POST(request: NextRequest) {
 
     const supabase = getSupabaseClient();
 
-    // Verify the crag exists
+    // Verify the crag exists and is not secret
     const { data: crag, error: cragError } = await supabase
       .from("crags")
       .select("id")
       .eq("id", crag_id)
+      .eq("is_secret", false)
       .single();
 
     if (cragError || !crag) {

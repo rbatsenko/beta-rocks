@@ -253,6 +253,11 @@
     "privacyFirst": {
       "title": "Ιδιωτικότητα πρώτα",
       "description": "Δεν χρειαζόμαστε τα δεδομένα σας - δεν τα θέλουμε καν! Ανώνυμα κατά προεπιλογή. Χωρίς λογαριασμούς, χωρίς παρακολούθηση. Τα δεδομένα σας παραμένουν δικά σας."
+    },
+    "publicApi": {
+      "title": "Public API",
+      "description": "Build your own apps with our open API. Search crags, fetch conditions, and submit community reports programmatically.",
+      "docsLink": "API Documentation →"
     }
   },
   "ui": {

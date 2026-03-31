@@ -253,6 +253,11 @@
     "privacyFirst": {
       "title": "Yksityisyys ensin",
       "description": "Emme vain tarvitse tietojasi - emme halua niitä! Oletuksena anonyymi. Ei tilejä, ei seurantaa. Tietosi pysyy sinulla."
+    },
+    "publicApi": {
+      "title": "Public API",
+      "description": "Build your own apps with our open API. Search crags, fetch conditions, and submit community reports programmatically.",
+      "docsLink": "API Documentation →"
     }
   },
   "privacy": {

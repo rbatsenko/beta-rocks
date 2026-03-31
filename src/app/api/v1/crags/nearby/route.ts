@@ -9,7 +9,7 @@ import { getSupabaseClient, isSupabaseConfigured } from "@/integrations/supabase
  * - lat (required) — latitude
  * - lon (required) — longitude
  * - radius (optional, default 5000, max 50000) — radius in meters
- * - limit (optional, default 20, max 100)
+ * - limit (optional, default 10, max 10) — the underlying RPC caps at 10
  */
 export async function GET(request: NextRequest) {
   try {
@@ -20,8 +20,24 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const latStr = searchParams.get("lat");
     const lonStr = searchParams.get("lon");
-    const radius = Math.min(parseInt(searchParams.get("radius") || "5000"), 50000);
-    const limit = Math.min(parseInt(searchParams.get("limit") || "20"), 100);
+
+    const rawRadius = searchParams.get("radius");
+    let radius = 5000;
+    if (rawRadius !== null) {
+      const parsed = parseInt(rawRadius, 10);
+      if (!isNaN(parsed)) {
+        radius = Math.min(Math.max(parsed, 1), 50000);
+      }
+    }
+
+    const rawLimit = searchParams.get("limit");
+    let limit = 10;
+    if (rawLimit !== null) {
+      const parsed = parseInt(rawLimit, 10);
+      if (!isNaN(parsed)) {
+        limit = Math.min(Math.max(parsed, 1), 10);
+      }
+    }
 
     if (!latStr || !lonStr) {
       return NextResponse.json(
@@ -50,14 +66,29 @@ export async function GET(request: NextRequest) {
     });
 
     if (!error && data) {
-      const results = data.slice(0, limit).map((r: any) => ({
-        id: r.id,
-        name: r.name,
-        slug: r.slug,
-        lat: Number(r.lat),
-        lon: Number(r.lon),
-        distance_meters: Math.round(r.distance_meters),
-      }));
+      // RPC doesn't filter is_secret, so post-filter
+      const cragIds = data.map((r: any) => r.id);
+      let secretIds = new Set<string>();
+      if (cragIds.length > 0) {
+        const { data: secretCrags } = await supabase
+          .from("crags")
+          .select("id")
+          .in("id", cragIds)
+          .eq("is_secret", true);
+        secretIds = new Set((secretCrags || []).map((c) => c.id));
+      }
+
+      const results = data
+        .filter((r: any) => !secretIds.has(r.id))
+        .slice(0, limit)
+        .map((r: any) => ({
+          id: r.id,
+          name: r.name,
+          slug: r.slug,
+          lat: Number(r.lat),
+          lon: Number(r.lon),
+          distance_meters: Math.round(r.distance_meters),
+        }));
 
       return NextResponse.json({ data: results });
     }

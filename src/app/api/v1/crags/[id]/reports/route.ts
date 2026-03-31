@@ -18,8 +18,25 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
 
     const { id } = await params;
     const searchParams = request.nextUrl.searchParams;
-    const limit = Math.min(parseInt(searchParams.get("limit") || "20"), 100);
-    const offset = parseInt(searchParams.get("offset") || "0");
+
+    const rawLimit = searchParams.get("limit");
+    const rawOffset = searchParams.get("offset");
+    const parsedLimit = rawLimit === null ? 20 : Number(rawLimit);
+    const parsedOffset = rawOffset === null ? 0 : Number(rawOffset);
+
+    if (
+      !Number.isFinite(parsedLimit) ||
+      !Number.isInteger(parsedLimit) ||
+      parsedLimit <= 0 ||
+      !Number.isFinite(parsedOffset) ||
+      !Number.isInteger(parsedOffset) ||
+      parsedOffset < 0
+    ) {
+      return NextResponse.json({ error: "Invalid pagination parameters" }, { status: 400 });
+    }
+
+    const limit = Math.min(parsedLimit, 100);
+    const offset = parsedOffset;
     const category = searchParams.get("category");
 
     const supabase = getSupabaseClient();
@@ -56,8 +73,9 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     }
 
     const reports = (data || []).map((r: any) => {
-      // Count confirmations and denials
-      const confirmationsCount = r.confirmations?.length || 0;
+      // confirmations(count) returns aggregate: [{count: n}]
+      const rawCount = r.confirmations?.[0]?.count ?? 0;
+      const confirmationsCount = typeof rawCount === "number" ? rawCount : Number(rawCount) || 0;
 
       return {
         id: r.id,

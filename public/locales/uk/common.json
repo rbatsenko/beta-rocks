@@ -253,6 +253,11 @@
     "privacyFirst": {
       "title": "Приватність передусім",
       "description": "Нам не просто не потрібні ваші дані - ми їх не хочемо! Анонімність за замовчуванням. Без акаунтів, без стеження. Ваші дані залишаються вашими."
+    },
+    "publicApi": {
+      "title": "Public API",
+      "description": "Build your own apps with our open API. Search crags, fetch conditions, and submit community reports programmatically.",
+      "docsLink": "API Documentation →"
     }
   },
   "privacy": {

@@ -9,7 +9,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Cloud, Users, MapPin, RefreshCw, Lock } from "lucide-react";
+import { Cloud, Users, MapPin, RefreshCw, Lock, Code } from "lucide-react";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Trans } from "react-i18next";
@@ -48,6 +48,11 @@ export function FeaturesDialog({ open, onOpenChange }: FeaturesDialogProps) {
       icon: Lock,
       titleKey: "features.privacyFirst.title",
       descriptionKey: "features.privacyFirst.description",
+    },
+    {
+      icon: Code,
+      titleKey: "features.publicApi.title",
+      descriptionKey: "features.publicApi.description",
     },
   ];
 
@@ -102,6 +107,16 @@ export function FeaturesDialog({ open, onOpenChange }: FeaturesDialogProps) {
                   ),
                 }}
               />
+            </p>
+            <p>
+              <a
+                href="/docs/api"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-foreground transition-colors"
+              >
+                {t("features.publicApi.docsLink")}
+              </a>
             </p>
             <p>{t("footer.copyright")}</p>
           </div>

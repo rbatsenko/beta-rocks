@@ -253,6 +253,11 @@
     "privacyFirst": {
       "title": "Soukromí na prvním místě",
       "description": "Nejen že tvoje data nepotřebujeme - nechceme je! Anonymní ve výchozím nastavení. Žádné účty, žádné sledování. Tvá data zůstávají tvá."
+    },
+    "publicApi": {
+      "title": "Public API",
+      "description": "Build your own apps with our open API. Search crags, fetch conditions, and submit community reports programmatically.",
+      "docsLink": "API Documentation →"
     }
   },
   "privacy": {

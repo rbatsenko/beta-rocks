@@ -173,6 +173,11 @@
     "privacyFirst": {
       "title": "Privacidade em Primeiro Lugar",
       "description": "Não só não precisamos dos seus dados - não os queremos! Anónimo por padrão. Sem contas, sem rastreamento. Os seus dados permanecem seus."
+    },
+    "publicApi": {
+      "title": "Public API",
+      "description": "Build your own apps with our open API. Search crags, fetch conditions, and submit community reports programmatically.",
+      "docsLink": "API Documentation →"
     }
   },
   "privacy": {

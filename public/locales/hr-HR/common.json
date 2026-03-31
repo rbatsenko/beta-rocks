@@ -253,6 +253,11 @@
     "privacyFirst": {
       "title": "Privatnost na prvom mjestu",
       "description": "Ne samo da nam ne trebaju tvoji podaci - ne želimo ih! Anonimno po zadanim postavkama. Bez računa, bez praćenja. Tvoji podaci ostaju tvoji."
+    },
+    "publicApi": {
+      "title": "Public API",
+      "description": "Build your own apps with our open API. Search crags, fetch conditions, and submit community reports programmatically.",
+      "docsLink": "API Documentation →"
     }
   },
   "privacy": {

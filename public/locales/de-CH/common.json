@@ -253,6 +253,11 @@
     "privacyFirst": {
       "title": "Datenschutz zuerst",
       "description": "Wir brauchen deine Daten nicht nur nicht - wir wollen sie gar nicht! Standardmäßig anonym. Keine Accounts, kein Tracking. Deine Daten gehören dir."
+    },
+    "publicApi": {
+      "title": "Public API",
+      "description": "Build your own apps with our open API. Search crags, fetch conditions, and submit community reports programmatically.",
+      "docsLink": "API Documentation →"
     }
   },
   "privacy": {

@@ -120,7 +120,7 @@ export default function ApiDocsPage() {
             <ParamTable
               params={[
                 { name: "q", type: "string", required: true, description: "Search term (min 2 characters)" },
-                { name: "limit", type: "number", required: false, description: "Max results (default 10, max 50)" },
+                { name: "limit", type: "number", required: false, description: "Max results (default 10, max 10)" },
               ]}
             />
             <CodeBlock title="Example request">
@@ -130,7 +130,7 @@ export default function ApiDocsPage() {
               {`{
   "data": [
     {
-      "id": "abc-123",
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
       "name": "Frankenjura",
       "slug": "frankenjura",
       "country": "Germany",
@@ -151,12 +151,12 @@ export default function ApiDocsPage() {
           {/* Get Crag */}
           <Endpoint method="GET" path="/api/v1/crags/:id" description="Get crag detail by ID, including sectors.">
             <CodeBlock title="Example request">
-              {`curl "https://beta.rocks/api/v1/crags/abc-123"`}
+              {`curl "https://beta.rocks/api/v1/crags/a1b2c3d4-e5f6-7890-abcd-ef1234567890"`}
             </CodeBlock>
             <CodeBlock title="Response">
               {`{
   "data": {
-    "id": "abc-123",
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "name": "Frankenjura",
     "slug": "frankenjura",
     "country": "Germany",
@@ -170,7 +170,7 @@ export default function ApiDocsPage() {
     "aspects": [180, 200],
     "description": "Large limestone area in Bavaria",
     "sectors": [
-      { "id": "def-456", "name": "Sector A", "slug": "sector-a" }
+      { "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901", "name": "Sector A", "slug": "sector-a" }
     ]
   }
 }`}
@@ -184,7 +184,7 @@ export default function ApiDocsPage() {
                 { name: "lat", type: "number", required: true, description: "Latitude" },
                 { name: "lon", type: "number", required: true, description: "Longitude" },
                 { name: "radius", type: "number", required: false, description: "Radius in meters (default 5000, max 50000)" },
-                { name: "limit", type: "number", required: false, description: "Max results (default 20, max 100)" },
+                { name: "limit", type: "number", required: false, description: "Max results (default 10, max 10)" },
               ]}
             />
             <CodeBlock title="Example request">
@@ -194,7 +194,7 @@ export default function ApiDocsPage() {
               {`{
   "data": [
     {
-      "id": "abc-123",
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
       "name": "Frankenjura",
       "slug": "frankenjura",
       "lat": 49.7,
@@ -219,18 +219,19 @@ export default function ApiDocsPage() {
               Categories: <code className="bg-muted px-1 py-0.5 rounded">conditions</code>{" "}
               <code className="bg-muted px-1 py-0.5 rounded">safety</code>{" "}
               <code className="bg-muted px-1 py-0.5 rounded">access</code>{" "}
-              <code className="bg-muted px-1 py-0.5 rounded">beta</code>{" "}
+              <code className="bg-muted px-1 py-0.5 rounded">climbing_info</code>{" "}
               <code className="bg-muted px-1 py-0.5 rounded">facilities</code>{" "}
-              <code className="bg-muted px-1 py-0.5 rounded">lost_and_found</code>
+              <code className="bg-muted px-1 py-0.5 rounded">lost_found</code>{" "}
+              <code className="bg-muted px-1 py-0.5 rounded">other</code>
             </p>
             <CodeBlock title="Example request">
-              {`curl "https://beta.rocks/api/v1/crags/abc-123/reports?category=conditions&limit=5"`}
+              {`curl "https://beta.rocks/api/v1/crags/a1b2c3d4-e5f6-7890-abcd-ef1234567890/reports?category=conditions&limit=5"`}
             </CodeBlock>
             <CodeBlock title="Response">
               {`{
   "data": [
     {
-      "id": "rpt-789",
+      "id": "c3d4e5f6-a7b8-9012-cdef-123456789012",
       "category": "conditions",
       "message": "Rock is dry, light wind",
       "rating": 4,
@@ -261,7 +262,7 @@ export default function ApiDocsPage() {
               {`curl -X POST "https://beta.rocks/api/v1/reports" \\
   -H "Content-Type: application/json" \\
   -d '{
-    "crag_id": "abc-123",
+    "crag_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "category": "conditions",
     "message": "Dry rock, perfect conditions",
     "rating": 5,
@@ -272,7 +273,7 @@ export default function ApiDocsPage() {
             <CodeBlock title="Response (201 Created)">
               {`{
   "data": {
-    "id": "rpt-new",
+    "id": "d4e5f6a7-b8c9-0123-defa-234567890123",
     "category": "conditions",
     "message": "Dry rock, perfect conditions",
     "rating": 5,

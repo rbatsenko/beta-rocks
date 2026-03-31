@@ -173,6 +173,11 @@
     "privacyFirst": {
       "title": "Privacy eerst",
       "description": "We hebben je gegevens niet alleen niet nodig - we willen ze niet! Standaard anoniem. Geen accounts, geen tracking. Je gegevens blijven van jou."
+    },
+    "publicApi": {
+      "title": "Public API",
+      "description": "Build your own apps with our open API. Search crags, fetch conditions, and submit community reports programmatically.",
+      "docsLink": "API Documentation →"
     }
   },
   "privacy": {

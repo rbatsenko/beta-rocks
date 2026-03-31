@@ -260,6 +260,11 @@
     "privacyFirst": {
       "title": "Privacy First",
       "description": "We don't just not need your data - we don't want it! Anonymous by default. No accounts, no tracking. Your data stays yours."
+    },
+    "publicApi": {
+      "title": "Public API",
+      "description": "Build your own apps with our open API. Search crags, fetch conditions, and submit community reports programmatically.",
+      "docsLink": "API Documentation →"
     }
   },
   "privacy": {

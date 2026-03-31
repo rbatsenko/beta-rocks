@@ -174,6 +174,11 @@
     "privacyFirst": {
       "title": "Integritet först",
       "description": "Vi behöver inte bara inte din data - vi vill inte ha den! Anonymt som standard. Inga konton, ingen spårning. Dina data förblir dina."
+    },
+    "publicApi": {
+      "title": "Public API",
+      "description": "Build your own apps with our open API. Search crags, fetch conditions, and submit community reports programmatically.",
+      "docsLink": "API Documentation →"
     }
   },
   "privacy": {
