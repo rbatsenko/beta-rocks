@@ -1017,6 +1017,9 @@ export default function CragDetailScreen() {
                     {formatTemperature(convertTemperature(temp, "celsius", units.temperature), units.temperature, 0)}
                   </Text>
                   <Text style={[styles.hourlyValue, { color: colors.muted }]}>{h.humidity}%</Text>
+                  <Text style={[styles.hourlyValue, { color: (h.precipitation_mm ?? h.precip_mm ?? 0) > 0 ? "#3b82f6" : colors.muted }]}>
+                    {formatPrecipitation(convertPrecipitation(h.precipitation_mm ?? h.precip_mm ?? 0, "mm", units.precipitation), units.precipitation, 1)}
+                  </Text>
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
                     <Text style={[styles.hourlyValue, { color: colors.muted }]}>
                       {formatWindSpeed(convertWindSpeed(wind, "kmh", units.windSpeed), units.windSpeed, 0)}
@@ -1328,6 +1331,9 @@ function HourlyTimeline({ hours, colors, units, t }: { hours: any[]; colors: (ty
               {formatTemperature(convertTemperature(temp, "celsius", units.temperature), units.temperature, 0)}
             </Text>
             <Text style={[styles.hourlyValue, { color: colors.muted }]}>{h.humidity}%</Text>
+            <Text style={[styles.hourlyValue, { color: (h.precipitation_mm ?? h.precip_mm ?? 0) > 0 ? "#3b82f6" : colors.muted }]}>
+              {formatPrecipitation(convertPrecipitation(h.precipitation_mm ?? h.precip_mm ?? 0, "mm", units.precipitation), units.precipitation, 1)}
+            </Text>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Text style={[styles.hourlyValue, { color: colors.muted }]}>
                 {formatWindSpeed(convertWindSpeed(wind, "kmh", units.windSpeed), units.windSpeed, 0)}
