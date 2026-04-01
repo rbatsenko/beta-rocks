@@ -68,7 +68,6 @@ src/
 │   └── ...
 ├── lib/
 │   ├── conditions/     # Conditions calculation service
-│   ├── openbeta/       # OpenBeta GraphQL client
 │   ├── external-apis/  # Open-Meteo, geocoding
 │   ├── db/            # Supabase queries
 │   ├── i18n/          # Internationalization config
@@ -95,7 +94,7 @@ See [Vercel docs](https://vercel.com/docs) for more info.
 
 - **Real-time weather** - Open-Meteo integration with 14-day forecasts
 - **Conditions analysis** - Rock type-specific conditions assessment with weather-aware drying calculations
-- **OpenBeta integration** - 200,000+ climbing areas worldwide with precise coordinates
+- **Global crag database** - 8,000+ climbing areas worldwide from OpenStreetMap
 
 ### Community
 
@@ -113,7 +112,7 @@ See [Vercel docs](https://vercel.com/docs) for more info.
 
 - **Crag detail pages** - ISR-generated pages with coordinate-based slugs (5min revalidation)
 - **Direct condition links** - Shareable URLs for any crag (e.g., `/location/45.123,-73.456`)
-- **Maps & external links** - Embedded maps, OpenBeta links, Mountain Project integration
+- **Maps & external links** - Embedded maps with external links
 
 ### Sync & Privacy
 

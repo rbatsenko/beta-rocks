@@ -12,9 +12,7 @@ Key technologies:
 - TypeScript (strict mode)
 - Tailwind CSS 4 + shadcn/ui
 - Supabase (PostgreSQL with RLS)
-- Vercel AI SDK (streaming chat + tools)
-- i18next (17 locales)
-- OpenBeta GraphQL API (climbing database)
+- i18next (30 locales)
 - Open-Meteo API (weather data)
 - QR code generation for sync keys
 
@@ -49,34 +47,6 @@ Environment setup:
 - Do not commit secrets. `.env` may exist for local convenience; prefer `.env.local` for Next.js.
 
 ## Code Architecture
-
-### Core AI Chat Flow (`src/app/api/chat/route.ts`)
-
-Uses Vercel AI SDK `streamText` with tool calling.
-
-1. Tool `get_conditions` (primary):
-   - Searches OpenBeta first (precise crag filtering via `isCrag()` + `hasPreciseCoordinates()`).
-   - Disambiguates if multiple matches; otherwise resolves coordinates and rock type.
-   - Falls back to geocoding when OpenBeta has no precise crag.
-   - Fetches 14-day weather from Open-Meteo.
-   - Computes friction and condition details via `computeConditions` service.
-
-2. Location resolution priority:
-   - OpenBeta GraphQL → single precise crag → use directly
-   - Multiple OpenBeta matches → return disambiguation
-   - No OpenBeta match → Geocoding fallback (+ disambiguation when needed)
-
-3. Disambiguation payload (shape):
-
-```ts
-{
-  disambiguate: true,
-  source: "openbeta" | "geocoding",
-  message: string,
-  translationKey: string,
-  options: [{ id, name, location, latitude, longitude, rockType? }]
-}
-```
 
 ### Climbing Conditions Service (`src/lib/conditions/conditions.service.ts`)
 
@@ -142,7 +112,7 @@ Rock-type guidance:
 - Heart icon on WeatherConditionCard and crag detail pages
 - Favorites displayed on welcome screen with quick query buttons
 - Cached friction scores and ratings for fast display
-- Works with both database crags and external OpenBeta areas
+- Works with database crags
 - Syncs across devices via user profile
 
 **Key Files**:
@@ -185,8 +155,7 @@ Rock-type guidance:
 
 ### Data Layer
 
-- **OpenBeta client** (`src/lib/openbeta/client.ts`): `searchAreas`, `getAreaByUuid`, `formatAreaPath`, helpers `isCrag`, `hasPreciseCoordinates`, `extractRockType`.
-- **External APIs** (`src/lib/external-apis/`): `open-meteo.ts` (forecast), `geocoding.ts` (fallback search).
+- **External APIs** (`src/lib/external-apis/`): `open-meteo.ts` (forecast), `geocoding.ts` (location search).
 - **Database** (`src/lib/db/queries.ts`): Supabase queries for user profiles, favorites, reports, confirmations, chat history. Complete CRUD operations with RLS policies for security. Anonymous user support via sync_key_hash lookups. Optimized with indexes on frequently queried columns.
 - **Database Schema** (see migrations in `supabase/migrations/`):
   - `user_profiles`: User identity with sync_key_hash, display_name
@@ -196,7 +165,7 @@ Rock-type guidance:
   - `chat_messages`: Individual chat messages with tool invocations
   - `reports`: Community reports with category, ratings, and text
   - `confirmations`: User confirmations/votes on reports
-  - `crags`, `sectors`, `routes`: Climbing area data from OpenBeta
+  - `crags`, `sectors`, `routes`: Climbing area data (OpenStreetMap + user-submitted)
 
 ### Internationalization (i18n)
 
@@ -232,7 +201,7 @@ Add translations:
 ## Important Patterns & Conventions
 
 - Tool-calling (Vercel AI SDK): tools return structured data; UI generates content from it.
-- Type safety: strict TS, `noUnusedLocals`, `noUnusedParameters`; Zod schemas for tool inputs; OpenBeta types in `src/lib/openbeta/types.ts`.
+- Type safety: strict TS, `noUnusedLocals`, `noUnusedParameters`; Zod schemas for API validation.
 - Path aliases: import from `@/*` for `src/*`.
 - Middleware: `src/middleware.ts` handles geo-based locale defaults.
 - Git: conventional commits (`feat:`, `fix:`, `refactor:`, `docs:`); lowercase subject, e.g., `fix: correct friction calculation`.

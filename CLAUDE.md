@@ -17,9 +17,7 @@ This is a **monorepo** with two apps:
 - TypeScript with strict mode
 - Tailwind CSS 4 + shadcn/ui components
 - Supabase (PostgreSQL database with RLS)
-- Vercel AI SDK (streaming chat with tools)
 - i18next for internationalization (30 locales)
-- OpenBeta GraphQL API (climbing database)
 - Open-Meteo API (weather data)
 - Windy API (webcams)
 - Resend (email for sync key delivery)
@@ -116,35 +114,6 @@ npm run db:types
 
 ## Code Architecture
 
-### Core AI Chat Flow (src/app/api/chat/route.ts)
-
-The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
-
-1. **get_conditions tool**: Main tool for fetching climbing conditions
-   - Tries OpenBeta API first (climbing-specific database with rock type data)
-   - Falls back to geocoding API if OpenBeta doesn't find precise crag
-   - Returns disambiguation options if multiple locations match
-   - Fetches 14-day weather forecast from Open-Meteo
-   - Computes friction scores using `computeConditions` service
-
-2. **Location Resolution Priority**:
-   - OpenBeta GraphQL → filters to actual crags with precise coordinates → single match used directly
-   - Multiple OpenBeta matches → disambiguation dialog
-   - No OpenBeta match → Geocoding API fallback → disambiguation if multiple results
-   - The `isCrag()` and `hasPreciseCoordinates()` functions filter out regions/countries
-
-3. **Disambiguation Pattern**: When multiple locations match, the tool returns:
-   ```typescript
-   {
-     disambiguate: true,
-     source: "openbeta" | "geocoding",
-     message: "Found multiple...",
-     translationKey: "disambiguation.foundMultipleAreas",
-     options: [{ id, name, location, latitude, longitude, rockType? }]
-   }
-   ```
-   The UI (DisambiguationOptions component) renders these as clickable cards that refine the search.
-
 ### Climbing Conditions Service (src/lib/conditions/conditions.service.ts)
 
 **Core Algorithm**: Calculates friction scores (1-5 scale) based on:
@@ -189,30 +158,13 @@ The chat interface uses Vercel AI SDK's `streamText` with tools pattern:
 - `mobile/src/lib/sync-key.ts`: Mobile sync key logic
 - `mobile/src/contexts/UserProfileContext.tsx`: Mobile auth state
 
-### Chat History Persistence
-
-**Feature**: Save and restore chat conversations across sessions (web only)
-
-- Chat sessions stored in `chat_sessions` table with titles
-- Individual messages stored in `chat_messages` table
-- Automatic background sync to database when online
-- LocalStorage fallback for offline usage
-- Clear chat (current session) and clear history (all sessions) options
-
-**Key Files**:
-
-- `src/lib/chat/history.service.ts`: Chat history CRUD operations
-- `src/hooks/useChatHistory.ts`: React hook integrating with Vercel AI SDK
-- Migration: `supabase/migrations/20251028063433_add_chat_history.sql`
-
 ### Favorites System
 
 **Feature**: Bookmark crags for quick access to conditions
 
 - Heart icon on WeatherConditionCard and crag detail pages
-- Favorites displayed on welcome screen with quick query buttons
-- Cached friction scores and ratings for fast display
-- Works with both database crags and external OpenBeta areas
+- Favorites displayed on welcome screen
+- Syncs across devices via user profile
 - Syncs across devices via user profile
 
 **Key Files**:
@@ -364,16 +316,10 @@ mobile/
 
 ### Data Layer
 
-**OpenBeta Client** (src/lib/openbeta/client.ts):
-
-- GraphQL client for OpenBeta climbing database
-- Provides `searchAreas()`, `getAreaByUuid()`, `formatAreaPath()`
-- Helper functions: `isCrag()` checks if area has climbs/sectors vs being a region, `hasPreciseCoordinates()` filters out generic country-level coords, `extractRockType()` parses description for rock type
-
 **External APIs** (src/lib/external-apis/):
 
 - `open-meteo.ts`: Fetches 14-day weather forecast with hourly data
-- `geocoding.ts`: Fallback location search when OpenBeta doesn't find a crag
+- `geocoding.ts`: Location search for crag lookup
 
 **Units System** (src/lib/units/):
 
@@ -409,7 +355,7 @@ mobile/
 - `chat_messages`: Individual chat messages with tool invocations
 - `reports`: Community reports with category, ratings, and text
 - `confirmations`: User confirmations/votes on reports
-- `crags`, `sectors`, `routes`: Climbing area data from OpenBeta
+- `crags`, `sectors`, `routes`: Climbing area data (OpenStreetMap + user-submitted)
 
 ### Internationalization (i18n)
 
@@ -486,8 +432,7 @@ The chat uses the single-step tool pattern (default behavior for fast responses)
 
 - Strict TypeScript mode enabled
 - `noUnusedLocals` and `noUnusedParameters` enforced
-- Zod schemas for API validation (see tool definitions in chat/route.ts)
-- OpenBeta types defined in `src/lib/openbeta/types.ts`
+- Zod schemas for API validation
 
 ### Path Aliases
 
