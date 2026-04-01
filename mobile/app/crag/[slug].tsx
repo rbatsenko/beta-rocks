@@ -1194,6 +1194,9 @@ function ExpandableWindow({ window: w, colors, units, t }: { window: any; colors
                   {formatTemperature(convertTemperature(temp, "celsius", units.temperature), units.temperature, 0)}
                 </Text>
                 <Text style={[styles.hourlyValue, { color: colors.muted, fontSize: 11 }]}>{h.humidity}%</Text>
+                <Text style={[styles.hourlyValue, { color: (h.precipitation_mm ?? h.precip_mm ?? 0) > 0 ? "#3b82f6" : colors.muted, fontSize: 11 }]}>
+                  {formatPrecipitation(convertPrecipitation(h.precipitation_mm ?? h.precip_mm ?? 0, "mm", units.precipitation), units.precipitation, 1)}
+                </Text>
                 <View style={{ flexDirection: "row", alignItems: "center", flex: 1 }}>
                   <Text style={[styles.hourlyValue, { color: colors.muted, fontSize: 11 }]}>
                     {formatWindSpeed(convertWindSpeed(wind, "kmh", units.windSpeed), units.windSpeed, 0)}

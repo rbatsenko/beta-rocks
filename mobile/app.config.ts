@@ -4,7 +4,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: "beta.rocks",
   slug: "beta-rocks",
-  version: "0.5.0",
+  version: "0.6.0",
   orientation: "portrait",
   icon: "./assets/icon.png",
   scheme: "betarocks",
