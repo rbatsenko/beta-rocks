@@ -76,7 +76,9 @@ export async function GET(request: NextRequest) {
         match_score: r.match_score,
       }));
 
-    return NextResponse.json({ data: results });
+    return NextResponse.json({ data: results }, {
+      headers: { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=120" },
+    });
   } catch (error) {
     console.error("[v1/crags/search] Unexpected error:", error);
     return NextResponse.json({ error: "Failed to search crags" }, { status: 500 });

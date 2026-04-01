@@ -86,6 +86,7 @@ export default function ApiDocsPage() {
       <div className="max-w-3xl mx-auto px-4 py-12 space-y-10">
         {/* Header */}
         <div className="space-y-3">
+          <a href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">&larr; Back to beta.rocks</a>
           <h1 className="text-3xl font-bold tracking-tight">beta.rocks API</h1>
           <p className="text-muted-foreground text-lg">
             Public API v1 for searching crags, fetching conditions, and submitting community reports.

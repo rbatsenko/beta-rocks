@@ -100,6 +100,8 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     return NextResponse.json({
       data: reports,
       total: count || 0,
+    }, {
+      headers: { "Cache-Control": "public, s-maxage=30, stale-while-revalidate=60" },
     });
   } catch (error) {
     console.error("[v1/crags/:id/reports] Unexpected error:", error);

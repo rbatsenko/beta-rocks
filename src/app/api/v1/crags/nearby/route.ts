@@ -90,7 +90,9 @@ export async function GET(request: NextRequest) {
           distance_meters: Math.round(r.distance_meters),
         }));
 
-      return NextResponse.json({ data: results });
+      return NextResponse.json({ data: results }, {
+        headers: { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=120" },
+      });
     }
 
     // Fallback to simple bounding box query if RPC fails
@@ -122,7 +124,9 @@ export async function GET(request: NextRequest) {
       distance_meters: null,
     }));
 
-    return NextResponse.json({ data: results });
+    return NextResponse.json({ data: results }, {
+      headers: { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=120" },
+    });
   } catch (error) {
     console.error("[v1/crags/nearby] Unexpected error:", error);
     return NextResponse.json({ error: "Failed to find nearby crags" }, { status: 500 });

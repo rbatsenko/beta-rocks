@@ -63,6 +63,8 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
           slug: s.slug,
         })),
       },
+    }, {
+      headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600" },
     });
   } catch (error) {
     console.error("[v1/crags/:id] Unexpected error:", error);
