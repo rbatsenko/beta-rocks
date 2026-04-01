@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { Play, Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface Field {
   name: string;
@@ -95,13 +97,15 @@ export function ApiPlayground({ method, buildUrl, fields, bodyFields }: ApiPlayg
             </div>
           ))}
         </div>
-        <button
+        <Button
           onClick={handleSubmit}
           disabled={loading}
-          className="px-3 py-1.5 text-xs font-medium rounded bg-foreground text-background hover:bg-foreground/90 disabled:opacity-50 transition-colors"
+          size="sm"
+          className="gap-1.5"
         >
-          {loading ? "Loading..." : "Send request"}
-        </button>
+          {loading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Play className="h-3.5 w-3.5" />}
+          {loading ? "Sending..." : "Send request"}
+        </Button>
         {response && (
           <div className="rounded border border-border overflow-hidden">
             <div className="px-3 py-1.5 bg-muted/50 border-b border-border flex items-center gap-2">
