@@ -1,6 +1,6 @@
 # beta.rocks
 
-Get the beta on any crag worldwide. A free, chat-first web app that provides real-time conditions, community reports, and route information for climbers. Built with Next.js, React, and deployed on Vercel.
+Get the beta on any crag worldwide. A free web and mobile app that provides real-time weather conditions, community reports, and crag information for climbers. Built with Next.js, React, and deployed on Vercel.
 
 ## Getting Started
 
@@ -48,27 +48,26 @@ This project is built with:
 - **Tailwind CSS 4** - Utility-first CSS
 - **shadcn/ui** - High-quality React components
 - **Supabase** - PostgreSQL database with RLS
-- **Vercel AI SDK** - AI-powered chat (Google Gemini 2.5 Flash)
-- **i18next** - Internationalization (17 locales)
+- **i18next** - Internationalization (30 locales)
 
 ## Project Structure
 
 ```
 src/
 ├── app/
-│   ├── api/              # API routes (chat, conditions, reports, v1 public API)
+│   ├── api/              # API routes (conditions, reports, v1 public API)
 │   ├── location/[slug]/  # Dynamic crag pages (ISR)
+│   ├── docs/api/        # Public API documentation
 │   ├── sync/            # Sync key restoration page
 │   ├── layout.tsx       # Root layout with Header
-│   └── page.tsx         # Home page with ChatInterface
+│   └── page.tsx         # Home page
 ├── components/          # React components
 │   ├── ui/             # shadcn/ui components
-│   ├── ChatInterface.tsx
 │   ├── WeatherConditionCard.tsx
 │   ├── ConditionsDetailSheet.tsx
 │   └── ...
 ├── lib/
-│   ├── conditions/     # Friction calculation service
+│   ├── conditions/     # Conditions calculation service
 │   ├── openbeta/       # OpenBeta GraphQL client
 │   ├── external-apis/  # Open-Meteo, geocoding
 │   ├── db/            # Supabase queries
@@ -94,9 +93,8 @@ See [Vercel docs](https://vercel.com/docs) for more info.
 
 ### Core
 
-- **Chat interface** - Ask about climbing conditions naturally with AI-powered responses (Google Gemini 2.5 Flash)
 - **Real-time weather** - Open-Meteo integration with 14-day forecasts
-- **Friction analysis** - Rock type-specific friction scores (1-5 scale) with weather-aware drying calculations
+- **Conditions analysis** - Rock type-specific conditions assessment with weather-aware drying calculations
 - **OpenBeta integration** - 200,000+ climbing areas worldwide with precise coordinates
 
 ### Community
@@ -108,8 +106,7 @@ See [Vercel docs](https://vercel.com/docs) for more info.
 
 ### Organization
 
-- **Favorites** - Bookmark crags with cached friction scores for quick access
-- **Chat history** - Persistent conversations across sessions with automatic titles
+- **Favorites** - Bookmark crags for quick access
 - **User stats** - Track reports posted, confirmations given, and favorites count
 
 ### Sharing & Pages
@@ -135,7 +132,7 @@ See [Vercel docs](https://vercel.com/docs) for more info.
 
 ### i18n
 
-- **17 languages** - Full internationalization support with region-specific fallbacks
+- **30 languages** - Full internationalization support with region-specific fallbacks
 
 ## Learn More
 
