@@ -75,11 +75,7 @@ export function ApiPlayground({ method, buildUrl, fields, bodyFields }: ApiPlayg
   const allFields = bodyFields ? [...fields, ...bodyFields] : fields;
 
   return (
-    <div className="rounded-md border border-border overflow-hidden">
-      <div className="px-3 py-2 bg-muted/50 border-b border-border flex items-center justify-between">
-        <span className="text-xs font-medium text-muted-foreground">Try it</span>
-      </div>
-      <div className="p-3 space-y-3">
+    <div className="space-y-3">
         <div className="grid gap-2">
           {allFields.map((f) => (
             <div key={f.name} className="flex items-center gap-2">
@@ -121,7 +117,6 @@ export function ApiPlayground({ method, buildUrl, fields, bodyFields }: ApiPlayg
             </pre>
           </div>
         )}
-      </div>
     </div>
   );
 }

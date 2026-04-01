@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { ApiPlayground } from "./ApiPlayground";
 
 function Endpoint({
@@ -62,6 +63,57 @@ function ParamTable({ params }: { params: { name: string; type: string; required
   );
 }
 
+function ExampleAndPlayground({
+  example,
+  playground,
+}: {
+  example: React.ReactNode;
+  playground: React.ReactNode;
+}) {
+  const [tab, setTab] = useState<"example" | "try">("example");
+
+  return (
+    <div className="rounded-md border border-border overflow-hidden">
+      <div className="flex border-b border-border bg-muted/50">
+        <button
+          onClick={() => setTab("example")}
+          className={`px-4 py-2 text-xs font-medium transition-colors ${
+            tab === "example"
+              ? "text-foreground border-b-2 border-foreground -mb-px"
+              : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          Example
+        </button>
+        <button
+          onClick={() => setTab("try")}
+          className={`px-4 py-2 text-xs font-medium transition-colors ${
+            tab === "try"
+              ? "text-foreground border-b-2 border-foreground -mb-px"
+              : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          Try it
+        </button>
+      </div>
+      <div className="p-3">
+        {tab === "example" ? example : playground}
+      </div>
+    </div>
+  );
+}
+
+function CodeBlock({ children, title }: { children: string; title?: string }) {
+  return (
+    <div className="space-y-2">
+      {title && <p className="text-xs text-muted-foreground">{title}</p>}
+      <pre className="p-3 bg-muted/30 rounded overflow-x-auto text-xs leading-relaxed">
+        <code>{children}</code>
+      </pre>
+    </div>
+  );
+}
+
 export function ApiEndpoints() {
   return (
     <div className="space-y-8">
@@ -75,29 +127,79 @@ export function ApiEndpoints() {
             { name: "limit", type: "number", required: false, description: "Max results (default 10, max 10)" },
           ]}
         />
-        <ApiPlayground
-          method="GET"
-          fields={[
-            { name: "q", label: "q", placeholder: "frankenjura", required: true, defaultValue: "frankenjura" },
-            { name: "limit", label: "limit", placeholder: "10" },
-          ]}
-          buildUrl={(p) => {
-            const params = new URLSearchParams();
-            if (p.q) params.set("q", p.q);
-            if (p.limit) params.set("limit", p.limit);
-            return `/api/v1/crags/search?${params.toString()}`;
-          }}
+        <ExampleAndPlayground
+          example={
+            <div className="space-y-3">
+              <CodeBlock title="Request">{`curl "https://beta.rocks/api/v1/crags/search?q=frankenjura&limit=5"`}</CodeBlock>
+              <CodeBlock title="Response">{`{
+  "data": [
+    {
+      "id": "osm_relation_17696060",
+      "name": "Frankenjura",
+      "slug": "frankenjura-3220",
+      "country": "DE",
+      "state": "Bayern",
+      "lat": 49.833391,
+      "lon": 11.2183103,
+      "rock_type": "limestone",
+      "climbing_types": [],
+      "match_score": 0.9
+    }
+  ]
+}`}</CodeBlock>
+            </div>
+          }
+          playground={
+            <ApiPlayground
+              method="GET"
+              fields={[
+                { name: "q", label: "q", placeholder: "frankenjura", required: true, defaultValue: "frankenjura" },
+                { name: "limit", label: "limit", placeholder: "10" },
+              ]}
+              buildUrl={(p) => {
+                const params = new URLSearchParams();
+                if (p.q) params.set("q", p.q);
+                if (p.limit) params.set("limit", p.limit);
+                return `/api/v1/crags/search?${params.toString()}`;
+              }}
+            />
+          }
         />
       </Endpoint>
 
       {/* Get Crag */}
       <Endpoint method="GET" path="/api/v1/crags/:id" description="Get crag detail by ID, including sectors.">
-        <ApiPlayground
-          method="GET"
-          fields={[
-            { name: "id", label: "id", placeholder: "osm_relation_17696060", required: true, defaultValue: "osm_relation_17696060" },
-          ]}
-          buildUrl={(p) => `/api/v1/crags/${encodeURIComponent(p.id || "")}`}
+        <ExampleAndPlayground
+          example={
+            <div className="space-y-3">
+              <CodeBlock title="Request">{`curl "https://beta.rocks/api/v1/crags/osm_relation_17696060"`}</CodeBlock>
+              <CodeBlock title="Response">{`{
+  "data": {
+    "id": "osm_relation_17696060",
+    "name": "Frankenjura",
+    "slug": "frankenjura-3220",
+    "country": "DE",
+    "state": "Bayern",
+    "lat": 49.833391,
+    "lon": 11.2183103,
+    "rock_type": "limestone",
+    "climbing_types": [],
+    "aspects": [],
+    "description": null,
+    "sectors": []
+  }
+}`}</CodeBlock>
+            </div>
+          }
+          playground={
+            <ApiPlayground
+              method="GET"
+              fields={[
+                { name: "id", label: "id", placeholder: "osm_relation_17696060", required: true, defaultValue: "osm_relation_17696060" },
+              ]}
+              buildUrl={(p) => `/api/v1/crags/${encodeURIComponent(p.id || "")}`}
+            />
+          }
         />
       </Endpoint>
 
@@ -111,22 +213,43 @@ export function ApiEndpoints() {
             { name: "limit", type: "number", required: false, description: "Max results (default 10, max 10)" },
           ]}
         />
-        <ApiPlayground
-          method="GET"
-          fields={[
-            { name: "lat", label: "lat", placeholder: "49.7", required: true, defaultValue: "49.7" },
-            { name: "lon", label: "lon", placeholder: "11.3", required: true, defaultValue: "11.3" },
-            { name: "radius", label: "radius", placeholder: "5000" },
-            { name: "limit", label: "limit", placeholder: "10" },
-          ]}
-          buildUrl={(p) => {
-            const params = new URLSearchParams();
-            if (p.lat) params.set("lat", p.lat);
-            if (p.lon) params.set("lon", p.lon);
-            if (p.radius) params.set("radius", p.radius);
-            if (p.limit) params.set("limit", p.limit);
-            return `/api/v1/crags/nearby?${params.toString()}`;
-          }}
+        <ExampleAndPlayground
+          example={
+            <div className="space-y-3">
+              <CodeBlock title="Request">{`curl "https://beta.rocks/api/v1/crags/nearby?lat=49.7&lon=11.3&radius=10000"`}</CodeBlock>
+              <CodeBlock title="Response">{`{
+  "data": [
+    {
+      "id": "osm_node_433922853",
+      "name": "Hartelstein",
+      "slug": "hartelstein-2827",
+      "lat": 49.6897636,
+      "lon": 11.321171,
+      "distance_meters": 1234
+    }
+  ]
+}`}</CodeBlock>
+            </div>
+          }
+          playground={
+            <ApiPlayground
+              method="GET"
+              fields={[
+                { name: "lat", label: "lat", placeholder: "49.7", required: true, defaultValue: "49.7" },
+                { name: "lon", label: "lon", placeholder: "11.3", required: true, defaultValue: "11.3" },
+                { name: "radius", label: "radius", placeholder: "5000" },
+                { name: "limit", label: "limit", placeholder: "10" },
+              ]}
+              buildUrl={(p) => {
+                const params = new URLSearchParams();
+                if (p.lat) params.set("lat", p.lat);
+                if (p.lon) params.set("lon", p.lon);
+                if (p.radius) params.set("radius", p.radius);
+                if (p.limit) params.set("limit", p.limit);
+                return `/api/v1/crags/nearby?${params.toString()}`;
+              }}
+            />
+          }
         />
       </Endpoint>
 
@@ -148,21 +271,45 @@ export function ApiEndpoints() {
           <code className="bg-muted px-1 py-0.5 rounded">lost_found</code>{" "}
           <code className="bg-muted px-1 py-0.5 rounded">other</code>
         </p>
-        <ApiPlayground
-          method="GET"
-          fields={[
-            { name: "id", label: "id", placeholder: "osm_relation_17696060", required: true, defaultValue: "osm_relation_17696060" },
-            { name: "limit", label: "limit", placeholder: "20" },
-            { name: "offset", label: "offset", placeholder: "0" },
-            { name: "category", label: "category", placeholder: "conditions" },
-          ]}
-          buildUrl={(p) => {
-            const params = new URLSearchParams();
-            if (p.limit) params.set("limit", p.limit);
-            if (p.offset) params.set("offset", p.offset);
-            if (p.category) params.set("category", p.category);
-            return `/api/v1/crags/${encodeURIComponent(p.id || "")}/reports?${params.toString()}`;
-          }}
+        <ExampleAndPlayground
+          example={
+            <div className="space-y-3">
+              <CodeBlock title="Request">{`curl "https://beta.rocks/api/v1/crags/osm_relation_17696060/reports?category=conditions&limit=5"`}</CodeBlock>
+              <CodeBlock title="Response">{`{
+  "data": [
+    {
+      "id": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+      "category": "conditions",
+      "message": "Rock is dry, light wind",
+      "rating": 4,
+      "photo_url": null,
+      "created_at": "2026-03-31T10:00:00Z",
+      "display_name": "ClimberX",
+      "confirmations_count": 3
+    }
+  ],
+  "total": 42
+}`}</CodeBlock>
+            </div>
+          }
+          playground={
+            <ApiPlayground
+              method="GET"
+              fields={[
+                { name: "id", label: "id", placeholder: "osm_relation_17696060", required: true, defaultValue: "osm_relation_17696060" },
+                { name: "limit", label: "limit", placeholder: "20" },
+                { name: "offset", label: "offset", placeholder: "0" },
+                { name: "category", label: "category", placeholder: "conditions" },
+              ]}
+              buildUrl={(p) => {
+                const params = new URLSearchParams();
+                if (p.limit) params.set("limit", p.limit);
+                if (p.offset) params.set("offset", p.offset);
+                if (p.category) params.set("category", p.category);
+                return `/api/v1/crags/${encodeURIComponent(p.id || "")}/reports?${params.toString()}`;
+              }}
+            />
+          }
         />
       </Endpoint>
 
@@ -178,18 +325,48 @@ export function ApiEndpoints() {
             { name: "source", type: "string", required: false, description: "Source app identifier (e.g., 'climbingpartner')" },
           ]}
         />
-        <ApiPlayground
-          method="POST"
-          fields={[]}
-          bodyFields={[
-            { name: "crag_id", label: "crag_id", placeholder: "osm_relation_17696060", required: true },
-            { name: "category", label: "category", placeholder: "conditions", required: true },
-            { name: "message", label: "message", placeholder: "Rock is dry, great conditions", required: true },
-            { name: "rating", label: "rating", placeholder: "1-5" },
-            { name: "sync_key", label: "sync_key", placeholder: "your-sync-key", required: true },
-            { name: "source", label: "source", placeholder: "myapp" },
-          ]}
-          buildUrl={() => `/api/v1/reports`}
+        <ExampleAndPlayground
+          example={
+            <div className="space-y-3">
+              <CodeBlock title="Request">{`curl -X POST "https://beta.rocks/api/v1/reports" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "crag_id": "osm_relation_17696060",
+    "category": "conditions",
+    "message": "Dry rock, perfect conditions",
+    "rating": 5,
+    "sync_key": "your-sync-key-here",
+    "source": "myapp"
+  }'`}</CodeBlock>
+              <CodeBlock title="Response (201 Created)">{`{
+  "data": {
+    "id": "d4e5f6a7-b8c9-0123-defa-234567890123",
+    "category": "conditions",
+    "message": "Dry rock, perfect conditions",
+    "rating": 5,
+    "photo_url": null,
+    "created_at": "2026-03-31T12:00:00Z",
+    "display_name": "YourName",
+    "confirmations_count": 0
+  }
+}`}</CodeBlock>
+            </div>
+          }
+          playground={
+            <ApiPlayground
+              method="POST"
+              fields={[]}
+              bodyFields={[
+                { name: "crag_id", label: "crag_id", placeholder: "osm_relation_17696060", required: true },
+                { name: "category", label: "category", placeholder: "conditions", required: true },
+                { name: "message", label: "message", placeholder: "Rock is dry, great conditions", required: true },
+                { name: "rating", label: "rating", placeholder: "1-5" },
+                { name: "sync_key", label: "sync_key", placeholder: "your-sync-key", required: true },
+                { name: "source", label: "source", placeholder: "myapp" },
+              ]}
+              buildUrl={() => `/api/v1/reports`}
+            />
+          }
         />
       </Endpoint>
     </div>
