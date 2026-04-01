@@ -255,9 +255,9 @@
       "description": "Nejen že tvoje data nepotřebujeme - nechceme je! Anonymní ve výchozím nastavení. Žádné účty, žádné sledování. Tvá data zůstávají tvá."
     },
     "publicApi": {
-      "title": "Public API",
-      "description": "Build your own apps with our open API. Search crags, fetch conditions, and submit community reports programmatically.",
-      "docsLink": "API Documentation →"
+      "title": "Veřejné API",
+      "description": "Vytvořte si vlastní aplikace s naším otevřeným API. Vyhledávejte skály, zjišťujte podmínky a odesílejte hlášení programově.",
+      "docsLink": "Dokumentace API →"
     }
   },
   "privacy": {

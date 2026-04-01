@@ -38,6 +38,14 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     const limit = Math.min(parsedLimit, 100);
     const offset = parsedOffset;
     const category = searchParams.get("category");
+    const validCategories = ["conditions", "safety", "access", "climbing_info", "facilities", "lost_found", "other"];
+
+    if (category && !validCategories.includes(category)) {
+      return NextResponse.json(
+        { error: `category must be one of: ${validCategories.join(", ")}` },
+        { status: 400 }
+      );
+    }
 
     const supabase = getSupabaseClient();
 

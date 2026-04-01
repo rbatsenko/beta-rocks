@@ -53,6 +53,8 @@ export function FeaturesDialog({ open, onOpenChange }: FeaturesDialogProps) {
       icon: Code,
       titleKey: "features.publicApi.title",
       descriptionKey: "features.publicApi.description",
+      linkKey: "features.publicApi.docsLink",
+      linkHref: "/docs/api",
     },
   ];
 
@@ -85,6 +87,19 @@ export function FeaturesDialog({ open, onOpenChange }: FeaturesDialogProps) {
                   <CardContent>
                     <CardDescription className="text-sm">
                       {t(feature.descriptionKey)}
+                      {feature.linkKey && feature.linkHref && (
+                        <>
+                          {" "}
+                          <a
+                            href={feature.linkHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline hover:text-foreground transition-colors"
+                          >
+                            {t(feature.linkKey)}
+                          </a>
+                        </>
+                      )}
                     </CardDescription>
                   </CardContent>
                 </Card>
@@ -107,16 +122,6 @@ export function FeaturesDialog({ open, onOpenChange }: FeaturesDialogProps) {
                   ),
                 }}
               />
-            </p>
-            <p>
-              <a
-                href="/docs/api"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline hover:text-foreground transition-colors"
-              >
-                {t("features.publicApi.docsLink")}
-              </a>
             </p>
             <p>{t("footer.copyright")}</p>
           </div>

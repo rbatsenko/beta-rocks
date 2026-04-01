@@ -175,9 +175,9 @@
       "description": "Nu doar că nu avem nevoie de datele tale - nu le vrem! Anonim implicit. Fără conturi, fără urmărire. Datele tale rămân ale tale."
     },
     "publicApi": {
-      "title": "Public API",
-      "description": "Build your own apps with our open API. Search crags, fetch conditions, and submit community reports programmatically.",
-      "docsLink": "API Documentation →"
+      "title": "API public",
+      "description": "Construiește-ți propriile aplicații cu API-ul nostru deschis. Caută stânci, verifică condițiile și trimite rapoarte programatic.",
+      "docsLink": "Documentație API →"
     }
   },
   "privacy": {
