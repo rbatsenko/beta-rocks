@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "API Documentation - beta.rocks",
-  description: "Public API v1 documentation for beta.rocks — search crags, get conditions, and submit community reports.",
+  description: "Public API v1 documentation for beta.rocks - search crags, get conditions, and submit community reports.",
 };
 
 function Endpoint({
@@ -108,6 +108,20 @@ export default function ApiDocsPage() {
             <li>No authentication required for GET endpoints</li>
             <li>POST endpoints require a <code className="text-xs bg-muted px-1 py-0.5 rounded">sync_key</code> for attribution</li>
           </ul>
+        </div>
+
+        {/* Sync Key */}
+        <div className="space-y-3">
+          <h2 className="text-xl font-semibold">Authentication</h2>
+          <p className="text-sm text-muted-foreground">
+            GET endpoints are public and require no authentication. POST endpoints require a <code className="text-xs bg-muted px-1 py-0.5 rounded">sync_key</code> - a UUID
+            that identifies a beta.rocks user. Every user gets a sync key automatically when they first use the app. It&apos;s used for multi-device sync and anonymous identity (no email or password needed).
+            You can find your sync key in the app under Settings &rarr; Sync.
+          </p>
+          <p className="text-sm text-muted-foreground">
+            When building an integration, your app should ask users for their beta.rocks sync key to submit reports on their behalf.
+            The sync key is hashed server-side and never stored in plaintext.
+          </p>
         </div>
 
         <hr className="border-border" />
@@ -304,15 +318,15 @@ export default function ApiDocsPage() {
               <tbody className="text-muted-foreground">
                 <tr className="border-b border-border/50">
                   <td className="py-2 pr-4 font-mono">400</td>
-                  <td className="py-2">Bad request — missing or invalid parameters</td>
+                  <td className="py-2">Bad request - missing or invalid parameters</td>
                 </tr>
                 <tr className="border-b border-border/50">
                   <td className="py-2 pr-4 font-mono">401</td>
-                  <td className="py-2">Unauthorized — invalid sync_key</td>
+                  <td className="py-2">Unauthorized - invalid sync_key</td>
                 </tr>
                 <tr className="border-b border-border/50">
                   <td className="py-2 pr-4 font-mono">404</td>
-                  <td className="py-2">Not found — crag does not exist</td>
+                  <td className="py-2">Not found - crag does not exist</td>
                 </tr>
                 <tr className="border-b border-border/50">
                   <td className="py-2 pr-4 font-mono">500</td>
