@@ -90,7 +90,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
         category: r.category,
         message: r.text || null,
         rating: r.rating_dry || null,
-        photo_url: r.photo_url || null,
+        photos: r.photos?.length ? r.photos : r.photo_url ? [r.photo_url] : [],
         created_at: r.created_at,
         display_name: r.user_profiles?.display_name || "Anonymous",
         confirmations_count: confirmationsCount,

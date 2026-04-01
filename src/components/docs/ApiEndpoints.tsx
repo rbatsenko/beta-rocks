@@ -282,7 +282,7 @@ export function ApiEndpoints() {
       "category": "conditions",
       "message": "Rock is dry, light wind",
       "rating": 4,
-      "photo_url": null,
+      "photos": [],
       "created_at": "2026-03-31T10:00:00Z",
       "display_name": "ClimberX",
       "confirmations_count": 3
@@ -344,7 +344,7 @@ export function ApiEndpoints() {
     "category": "conditions",
     "message": "Dry rock, perfect conditions",
     "rating": 5,
-    "photo_url": null,
+    "photos": [],
     "created_at": "2026-03-31T12:00:00Z",
     "display_name": "YourName",
     "confirmations_count": 0

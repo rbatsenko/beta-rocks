@@ -101,7 +101,7 @@ export async function POST(request: NextRequest) {
           category: report.category,
           message: report.text || null,
           rating: report.rating_dry || null,
-          photo_url: report.photo_url || null,
+          photos: report.photos?.length ? report.photos : report.photo_url ? [report.photo_url] : [],
           created_at: report.created_at,
           display_name: (report as any).user_profiles?.display_name || "Anonymous",
           confirmations_count: 0,
