@@ -99,9 +99,7 @@ npm run db:types
 
 - `NEXT_PUBLIC_SUPABASE_URL` - Supabase project URL
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` - Supabase anon key
-- `GOOGLE_GENERATIVE_AI_API_KEY` - Google AI API key (server-side only)
 - `SUPABASE_SECRET_KEY` - Supabase service_role secret (optional, for admin scripts)
-- `AI_PROVIDER` - AI provider selection
 - `RESEND_API_KEY` - Resend API key for email sync key delivery
 - `WINDY_API_KEY` - Windy API key for webcam integration
 - `NEXT_PUBLIC_DEBUG_RENDERS` - Enable render debugging (optional)
