@@ -253,6 +253,11 @@
     "privacyFirst": {
       "title": "Datenschutz zuerst",
       "description": "Wir brauchen deine Daten nicht nur nicht - wir wollen sie gar nicht! Standardmäßig anonym. Keine Accounts, kein Tracking. Deine Daten gehören dir."
+    },
+    "publicApi": {
+      "title": "Öffentliche API",
+      "description": "Erstelle eigene Apps mit unserer offenen API. Suche Felsen, rufe Bedingungen ab und sende Berichte programmatisch.",
+      "docsLink": "API-Dokumentation →"
     }
   },
   "privacy": {

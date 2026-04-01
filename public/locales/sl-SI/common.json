@@ -254,6 +254,11 @@
     "privacyFirst": {
       "title": "Zasebnost na prvem mestu",
       "description": "Ne samo da ne potrebujemo tvojih podatkov - ne želimo jih! Privzeto anonimno. Brez računov, brez sledenja. Tvoji podatki ostanejo tvoji."
+    },
+    "publicApi": {
+      "title": "Javni API",
+      "description": "Ustvarite lastne aplikacije z našim odprtim API-jem. Iščite plezališča, preverjajte razmere in pošiljajte poročila programsko.",
+      "docsLink": "Dokumentacija API →"
     }
   },
   "privacy": {

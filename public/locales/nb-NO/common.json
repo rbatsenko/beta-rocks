@@ -254,6 +254,11 @@
     "privacyFirst": {
       "title": "Personvern først",
       "description": "Vi trenger ikke bare ikke dataene dine - vi vil ikke ha dem! Anonymt som standard. Ingen kontoer, ingen sporing. Dataene dine forblir dine."
+    },
+    "publicApi": {
+      "title": "Offentlig API",
+      "description": "Bygg dine egne apper med vårt åpne API. Søk klipper, hent forhold og send inn rapporter programmatisk.",
+      "docsLink": "API-dokumentasjon →"
     }
   },
   "privacy": {

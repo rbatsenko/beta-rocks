@@ -253,6 +253,11 @@
     "privacyFirst": {
       "title": "Privacidad ante todo",
       "description": "No solo no necesitamos tus datos - ¡no los queremos! Anonimato por defecto. Sin cuentas, sin seguimiento. Tus datos siguen siendo tuyos."
+    },
+    "publicApi": {
+      "title": "API pública",
+      "description": "Crea tus propias aplicaciones con nuestra API abierta. Busca rocas, consulta condiciones y envía informes de forma programática.",
+      "docsLink": "Documentación de la API →"
     }
   },
   "privacy": {

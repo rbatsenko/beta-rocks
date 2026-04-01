@@ -253,6 +253,11 @@
     "privacyFirst": {
       "title": "Prywatność na pierwszym miejscu",
       "description": "Nie tylko nie potrzebujemy Twoich danych - nie chcemy ich! Anonimowość domyślnie. Bez kont, bez śledzenia. Twoje dane pozostają Twoje."
+    },
+    "publicApi": {
+      "title": "Publiczne API",
+      "description": "Twórz własne aplikacje z naszym otwartym API. Wyszukuj skały, sprawdzaj warunki i wysyłaj raporty programowo.",
+      "docsLink": "Dokumentacja API →"
     }
   },
   "privacy": {

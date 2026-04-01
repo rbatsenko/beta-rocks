@@ -253,6 +253,11 @@
     "privacyFirst": {
       "title": "Privatnost na prvom mjestu",
       "description": "Ne samo da nam ne trebaju tvoji podaci - ne želimo ih! Anonimno po zadanim postavkama. Bez računa, bez praćenja. Tvoji podaci ostaju tvoji."
+    },
+    "publicApi": {
+      "title": "Javni API",
+      "description": "Izradite vlastite aplikacije s našim otvorenim API-jem. Pretražujte stijene, provjerite uvjete i šaljite izvještaje programski.",
+      "docsLink": "API dokumentacija →"
     }
   },
   "privacy": {

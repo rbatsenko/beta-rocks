@@ -253,6 +253,11 @@
     "privacyFirst": {
       "title": "Privacy prima di tutto",
       "description": "Non solo non ci servono i tuoi dati - non li vogliamo! Anonimato di default. Nessun account, nessun tracciamento. I tuoi dati restano tuoi."
+    },
+    "publicApi": {
+      "title": "API pubblica",
+      "description": "Crea le tue applicazioni con la nostra API aperta. Cerca falesie, controlla le condizioni e invia segnalazioni in modo programmatico.",
+      "docsLink": "Documentazione API →"
     }
   },
   "privacy": {

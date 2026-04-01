@@ -253,6 +253,11 @@
     "privacyFirst": {
       "title": "Yksityisyys ensin",
       "description": "Emme vain tarvitse tietojasi - emme halua niitä! Oletuksena anonyymi. Ei tilejä, ei seurantaa. Tietosi pysyy sinulla."
+    },
+    "publicApi": {
+      "title": "Julkinen API",
+      "description": "Rakenna omia sovelluksia avoimella API:llamme. Hae kallioita, tarkista olosuhteet ja lähetä raportteja ohjelmallisesti.",
+      "docsLink": "API-dokumentaatio →"
     }
   },
   "privacy": {

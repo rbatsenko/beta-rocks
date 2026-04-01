@@ -173,6 +173,11 @@
     "privacyFirst": {
       "title": "Confidențialitate în Prim Plan",
       "description": "Nu doar că nu avem nevoie de datele tale - nu le vrem! Anonim implicit. Fără conturi, fără urmărire. Datele tale rămân ale tale."
+    },
+    "publicApi": {
+      "title": "API public",
+      "description": "Construiește-ți propriile aplicații cu API-ul nostru deschis. Caută stânci, verifică condițiile și trimite rapoarte programatic.",
+      "docsLink": "Documentație API →"
     }
   },
   "privacy": {

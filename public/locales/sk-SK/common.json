@@ -173,6 +173,11 @@
     "privacyFirst": {
       "title": "Súkromie na prvom mieste",
       "description": "Nielen že vaše dáta nepotrebujeme - nechceme ich! Anonymné v predvolenom nastavení. Žiadne účty, žiadne sledovanie. Vaše dáta zostávajú vaše."
+    },
+    "publicApi": {
+      "title": "Verejné API",
+      "description": "Vytvorte si vlastné aplikácie s naším otvoreným API. Vyhľadávajte skaly, zisťujte podmienky a odosielajte hlásenia programovo.",
+      "docsLink": "Dokumentácia API →"
     }
   },
   "privacy": {

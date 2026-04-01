@@ -253,6 +253,11 @@
     "privacyFirst": {
       "title": "Privacitat primer",
       "description": "No només no necessitem les teves dades - no les volem! Anònim per defecte. Sense comptes, sense seguiment. Les teves dades són teves."
+    },
+    "publicApi": {
+      "title": "API pública",
+      "description": "Crea les teves pròpies aplicacions amb la nostra API oberta. Cerca roques, consulta condicions i envia informes de manera programàtica.",
+      "docsLink": "Documentació de l'API →"
     }
   },
   "ui": {

@@ -253,6 +253,11 @@
     "privacyFirst": {
       "title": "Confidentialité d'abord",
       "description": "Non seulement nous n'avons pas besoin de vos données - nous n'en voulons pas ! Anonyme par défaut. Aucun compte, aucun suivi. Vos données restent les vôtres."
+    },
+    "publicApi": {
+      "title": "API publique",
+      "description": "Créez vos propres applications avec notre API ouverte. Recherchez des falaises, consultez les conditions et soumettez des rapports de manière programmatique.",
+      "docsLink": "Documentation de l'API →"
     }
   },
   "privacy": {
