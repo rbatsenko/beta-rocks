@@ -83,10 +83,20 @@ function CodeBlock({ children, title }: { children: string; title?: string }) {
 export default function ApiDocsPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      {/* Nav header */}
+      <header className="border-b bg-background/95 backdrop-blur-sm sticky top-0 z-50">
+        <div className="max-w-3xl mx-auto flex h-14 items-center justify-between px-4">
+          <a href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-orange-500"><path d="M12 2v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="M20 12h2"/><path d="m19.07 4.93-1.41 1.41"/><path d="M15.947 12.65a4 4 0 0 0-5.925-4.128"/><path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z"/></svg>
+            <span className="font-bold">beta.rocks</span>
+          </a>
+          <span className="text-xs text-muted-foreground">API Documentation</span>
+        </div>
+      </header>
+
       <div className="max-w-3xl mx-auto px-4 py-12 space-y-10">
         {/* Header */}
         <div className="space-y-3">
-          <a href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">&larr; Back to beta.rocks</a>
           <h1 className="text-3xl font-bold tracking-tight">beta.rocks API</h1>
           <p className="text-muted-foreground text-lg">
             Public API v1 for searching crags, fetching conditions, and submitting community reports.
