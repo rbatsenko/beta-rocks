@@ -50,6 +50,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-friendly site info" />
+        <link rel="alternate" type="text/plain" href="/llms-full.txt" title="LLM-friendly API reference" />
       </head>
       <body>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>

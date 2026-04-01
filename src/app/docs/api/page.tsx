@@ -4,7 +4,25 @@ import { ApiEndpoints } from "@/components/docs/ApiEndpoints";
 
 export const metadata: Metadata = {
   title: "API Documentation - beta.rocks",
-  description: "Public API v1 documentation for beta.rocks - search crags, get conditions, and submit community reports.",
+  description: "Public API v1 documentation for beta.rocks. Search crags, get crag details, find nearby climbing areas, fetch community reports, and submit reports programmatically.",
+  openGraph: {
+    title: "beta.rocks API Documentation",
+    description: "Public REST API for climbing crags, conditions, and community reports. Search 8,000+ crags worldwide.",
+    url: "https://beta.rocks/docs/api",
+    siteName: "beta.rocks",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "beta.rocks API Documentation",
+    description: "Public REST API for climbing crags, conditions, and community reports.",
+  },
+  alternates: {
+    canonical: "https://beta.rocks/docs/api",
+    types: {
+      "text/plain": "https://beta.rocks/llms-full.txt",
+    },
+  },
 };
 
 export default function ApiDocsPage() {
@@ -102,6 +120,21 @@ export default function ApiDocsPage() {
             </table>
           </div>
         </div>
+
+        {/* Plain-text fallback for LLMs/crawlers that can't run JS */}
+        <noscript>
+          <div className="mt-8 p-4 border border-border rounded text-sm text-muted-foreground">
+            <p>This page requires JavaScript for the interactive playground. For a plain-text version of this API documentation, visit: <a href="https://beta.rocks/llms-full.txt">https://beta.rocks/llms-full.txt</a></p>
+            <h3 className="mt-4 font-semibold">Endpoints</h3>
+            <ul className="mt-2 space-y-1">
+              <li>GET /api/v1/crags/search?q=query - Search crags by name</li>
+              <li>GET /api/v1/crags/:id - Get crag detail with sectors</li>
+              <li>GET /api/v1/crags/nearby?lat=X&amp;lon=Y - Find crags near coordinates</li>
+              <li>GET /api/v1/crags/:id/reports - Get community reports for a crag</li>
+              <li>POST /api/v1/reports - Submit a community report (requires sync_key)</li>
+            </ul>
+          </div>
+        </noscript>
 
         {/* Footer */}
         <div className="pt-6 text-center text-xs text-muted-foreground">
