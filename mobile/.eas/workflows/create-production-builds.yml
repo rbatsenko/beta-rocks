@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - mobile/**
+      - mobile/.eas/**
 
 jobs:
   build_android:
