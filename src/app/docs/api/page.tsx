@@ -125,8 +125,7 @@ export default function ApiDocsPage() {
           <h2 className="text-xl font-semibold">Authentication</h2>
           <p className="text-sm text-muted-foreground">
             GET endpoints are public and require no authentication. POST endpoints require a <code className="text-xs bg-muted px-1 py-0.5 rounded">sync_key</code> - a UUID
-            that identifies a beta.rocks user. Every user gets a sync key automatically when they first use the app. It&apos;s used for multi-device sync and anonymous identity (no email or password needed).
-            You can find your sync key in the app under Settings &rarr; Sync.
+            that identifies a beta.rocks user. Users create their profile and sync key in the app under Settings. It&apos;s used for multi-device sync and anonymous identity (no email or password needed).
           </p>
           <p className="text-sm text-muted-foreground">
             When building an integration, your app should ask users for their beta.rocks sync key to submit reports on their behalf.
