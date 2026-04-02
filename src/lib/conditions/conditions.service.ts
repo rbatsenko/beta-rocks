@@ -501,23 +501,35 @@ export function findDryWindows(hourlyConditions: HourlyWeather[]): DryWindow[] {
     !h.flags.condensation_risk &&
     !h.flags.wet_rock_likely;
 
+  const pushWindow = (startIdx: number, endIdx: number) => {
+    const count = endIdx - startIdx;
+    if (count >= 2) {
+      const lastHourTime = new Date(hourlyConditions[endIdx - 1].time);
+      const endDate = new Date(lastHourTime.getTime() + 3600000);
+      windows.push({
+        start: hourlyConditions[startIdx].time,
+        end: endDate.toISOString(),
+        hours: count,
+      });
+    }
+  };
+
   for (let i = 0; i < hourlyConditions.length; i++) {
     if (isGoodHour(hourlyConditions[i])) {
       if (windowStart === null) {
         windowStart = i;
+      } else {
+        // Split at midnight
+        const prevDate = new Date(hourlyConditions[i - 1].time);
+        const currDate = new Date(hourlyConditions[i].time);
+        if (prevDate.getDate() !== currDate.getDate()) {
+          pushWindow(windowStart, i);
+          windowStart = i;
+        }
       }
     } else {
       if (windowStart !== null) {
-        const count = i - windowStart;
-        if (count >= 2) {
-          const lastHourTime = new Date(hourlyConditions[i - 1].time);
-          const endDate = new Date(lastHourTime.getTime() + 3600000);
-          windows.push({
-            start: hourlyConditions[windowStart].time,
-            end: endDate.toISOString(),
-            hours: count,
-          });
-        }
+        pushWindow(windowStart, i);
         windowStart = null;
       }
     }
@@ -525,18 +537,7 @@ export function findDryWindows(hourlyConditions: HourlyWeather[]): DryWindow[] {
 
   // Close trailing window
   if (windowStart !== null) {
-    const count = hourlyConditions.length - windowStart;
-    if (count >= 2) {
-      const lastHourTime = new Date(
-        hourlyConditions[hourlyConditions.length - 1].time
-      );
-      const endDate = new Date(lastHourTime.getTime() + 3600000);
-      windows.push({
-        start: hourlyConditions[windowStart].time,
-        end: endDate.toISOString(),
-        hours: count,
-      });
-    }
+    pushWindow(windowStart, hourlyConditions.length);
   }
 
   return windows;
