@@ -187,7 +187,8 @@ async function fetchConditionsByCragId(cragId: string): Promise<ConditionsData> 
       weatherCode: c.weather.now.weather_code ?? 0,
     };
   }
-  if (c.weather?.hourly && !c.hourlyConditions) {
+  if (c.weather?.hourly) {
+    // Prefer weather.hourly (has flags) over backward compat hourlyConditions (no flags)
     c.hourlyConditions = c.weather.hourly;
   }
   if (c.weather?.daily && !c.dailyForecast) {

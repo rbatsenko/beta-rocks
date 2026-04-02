@@ -81,7 +81,8 @@ export interface WeatherResponse {
   };
   flags: WeatherFlags;
   label: WeatherLabel;
-  summary: string;
+  summary: string; // English fallback
+  summary_template: SummaryTemplate; // For i18n
   dry_windows: DryWindow[];
   precipitation: PrecipitationContext;
   warnings: string[];
@@ -398,17 +399,23 @@ function describeHumidity(humidity: number): string {
   return "Humidity is on the higher side.";
 }
 
+export interface SummaryTemplate {
+  key: string;
+  params?: Record<string, string | number>;
+  fallback: string; // English fallback
+}
+
 function generateSummary(
   flags: WeatherFlags,
   weather: { temp_c: number; humidity: number; wind_kph: number; precip_mm: number },
   rockType: RockType
-): string {
+): SummaryTemplate {
   if (flags.sandstone_wet_warning) {
-    return "Sandstone is still wet. Give it another day.";
+    return { key: "summary.sandstoneWet", fallback: "Sandstone is still wet. Give it another day." };
   }
 
   if (flags.rain_now) {
-    return `Raining now. ${weather.precip_mm}mm so far.`;
+    return { key: "summary.rainingNow", params: { mm: weather.precip_mm }, fallback: `Raining now. ${weather.precip_mm}mm so far.` };
   }
 
   if (flags.wet_rock_likely && flags.estimated_dry_by) {
@@ -416,34 +423,34 @@ function generateSummary(
     const hours = dryBy.getHours();
     const minutes = String(dryBy.getMinutes()).padStart(2, "0");
     const timeStr = `${hours}:${minutes}`;
-    return `Rock may still be wet from recent rain. Should dry by ${timeStr}.`;
+    return { key: "summary.wetRockDryBy", params: { time: timeStr }, fallback: `Rock may still be wet from recent rain. Should dry by ${timeStr}.` };
   }
 
   if (flags.rain_expected) {
-    return `Rain expected in ${flags.rain_expected.in_hours}h. Head out now for a dry window.`;
+    return { key: "summary.rainExpected", params: { hours: flags.rain_expected.in_hours }, fallback: `Rain expected in ${flags.rain_expected.in_hours}h. Head out now for a dry window.` };
   }
 
   if (flags.condensation_risk) {
-    return "High condensation risk. Rock will feel greasy.";
+    return { key: "summary.condensationRisk", fallback: "High condensation risk. Rock will feel greasy." };
   }
 
   if (flags.high_humidity) {
-    return `Humidity is high (${Math.round(weather.humidity)}%). Rock may feel polished.`;
+    return { key: "summary.highHumidity", params: { humidity: Math.round(weather.humidity) }, fallback: `Humidity is high (${Math.round(weather.humidity)}%). Rock may feel polished.` };
   }
 
   if (flags.extreme_wind) {
-    return `Extreme wind (${Math.round(weather.wind_kph)} km/h). Not safe for exposed routes.`;
+    return { key: "summary.extremeWind", params: { wind: Math.round(weather.wind_kph) }, fallback: `Extreme wind (${Math.round(weather.wind_kph)} km/h). Not safe for exposed routes.` };
   }
 
   if (flags.high_wind) {
-    return `Windy (${Math.round(weather.wind_kph)} km/h). Fine for sheltered walls.`;
+    return { key: "summary.highWind", params: { wind: Math.round(weather.wind_kph) }, fallback: `Windy (${Math.round(weather.wind_kph)} km/h). Fine for sheltered walls.` };
   }
 
   // Fallback — conditions look fine
-  void rockType; // kept for future rock-specific fallback messages
+  void rockType;
   const tempDesc = describeTemp(weather.temp_c);
   const humidityDesc = describeHumidity(weather.humidity);
-  return `Dry and ${tempDesc}. ${humidityDesc}`;
+  return { key: "summary.dryAndGood", params: { temp: tempDesc, humidity: humidityDesc }, fallback: `Dry and ${tempDesc}. ${humidityDesc}` };
 }
 
 // ---------------------------------------------------------------------------
@@ -820,7 +827,7 @@ export async function computeWeather(
 
   // Label & summary
   const label = deriveLabel(currentFlags);
-  const summary = generateSummary(currentFlags, current, rockType);
+  const summaryTemplate = generateSummary(currentFlags, current, rockType);
   const warnings = buildWarnings(currentFlags, rockType);
 
   // Dry windows
@@ -848,7 +855,8 @@ export async function computeWeather(
     },
     flags: currentFlags,
     label,
-    summary,
+    summary: summaryTemplate.fallback,
+    summary_template: summaryTemplate,
     dry_windows: dryWindows,
     precipitation: precipContext,
     warnings,

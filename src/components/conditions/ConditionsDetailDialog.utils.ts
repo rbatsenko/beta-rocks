@@ -275,22 +275,11 @@ export const groupWindowsByDay = (
           const ht = new Date(h.time);
           return ht >= dayStart && ht < dayEnd;
         });
-        // If any hour has no active bad flags, it's at least "watch_out"
-        const hasCleanHour = hoursForDay.some(
-          (h) =>
-            !h.flags?.rain_now &&
-            !h.flags?.wet_rock_likely &&
-            !h.flags?.extreme_wind
+        // No dry windows on this day — label based on how bad it is
+        const allRain = hoursForDay.length > 0 && hoursForDay.every(
+          (h) => h.flags?.rain_now || h.flags?.wet_rock_likely
         );
-        const hasWarningHour = hoursForDay.some(
-          (h) =>
-            h.flags?.high_humidity ||
-            h.flags?.condensation_risk ||
-            h.flags?.high_wind
-        );
-        if (hasCleanHour && !hasWarningHour) {
-          label = "looks_good";
-        } else if (hasCleanHour) {
+        if (!allRain && hoursForDay.length > 0) {
           label = "watch_out";
         }
       }
@@ -308,5 +297,19 @@ export const groupWindowsByDay = (
   // Return null only if there's nothing at all
   if (Object.keys(grouped).length === 0) return null;
 
-  return grouped;
+  // Sort chronologically: today first, then tomorrow, then by date
+  const sorted: Record<string, GroupedWindow> = {};
+  const entries = Object.entries(grouped);
+  entries.sort(([, a], [, b]) => {
+    if (a.isToday && !b.isToday) return -1;
+    if (!a.isToday && b.isToday) return 1;
+    if (a.isTomorrow && !b.isTomorrow) return -1;
+    if (!a.isTomorrow && b.isTomorrow) return 1;
+    return 0; // preserve order for other days (already chronological from forecast)
+  });
+  for (const [key, value] of entries) {
+    sorted[key] = value;
+  }
+
+  return sorted;
 };
