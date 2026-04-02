@@ -1,6 +1,8 @@
 # beta.rocks MCP Server
 
-An [MCP (Model Context Protocol)](https://modelcontextprotocol.io) server that gives Claude and other AI assistants direct access to the [beta.rocks](https://beta.rocks) climbing API.
+[![npm](https://img.shields.io/npm/v/beta-rocks-mcp)](https://www.npmjs.com/package/beta-rocks-mcp)
+
+An [MCP (Model Context Protocol)](https://modelcontextprotocol.io) server that gives AI assistants direct access to the [beta.rocks](https://beta.rocks) climbing API.
 
 ## Tools
 
@@ -26,6 +28,66 @@ Add to your config file:
 
 **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
 **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "beta-rocks": {
+      "command": "npx",
+      "args": ["beta-rocks-mcp"]
+    }
+  }
+}
+```
+
+### Cursor
+
+Open Settings > MCP Servers > Add new MCP server:
+
+```json
+{
+  "mcpServers": {
+    "beta-rocks": {
+      "command": "npx",
+      "args": ["beta-rocks-mcp"]
+    }
+  }
+}
+```
+
+### Windsurf
+
+Open Settings > MCP > Add server > Add custom server:
+
+```json
+{
+  "mcpServers": {
+    "beta-rocks": {
+      "command": "npx",
+      "args": ["beta-rocks-mcp"]
+    }
+  }
+}
+```
+
+### Cline (VS Code)
+
+Open Cline settings > MCP Servers > Add:
+
+```json
+{
+  "mcpServers": {
+    "beta-rocks": {
+      "command": "npx",
+      "args": ["beta-rocks-mcp"]
+    }
+  }
+}
+```
+
+### Any MCP-compatible client
+
+The config is the same for any client that supports MCP:
 
 ```json
 {
@@ -67,7 +129,7 @@ Then use the local path:
 
 ## Usage
 
-Once connected, you can ask Claude things like:
+Once connected, you can ask your AI assistant things like:
 
 - "Search for climbing crags near Munich"
 - "What's the rock type at Frankenjura?"
