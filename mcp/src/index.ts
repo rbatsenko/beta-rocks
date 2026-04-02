@@ -118,18 +118,24 @@ server.registerTool(
       crag_id: z.string().describe("Crag ID to report on"),
       category: CATEGORIES.describe("Report category"),
       message: z.string().min(1).max(2000).describe("Report text"),
-      rating: z.number().min(1).max(5).optional().describe("Dryness rating 1-5"),
+      rating_dry: z.number().min(1).max(5).optional().describe("Dryness rating 1-5 (conditions category)"),
+      rating_wind: z.number().min(1).max(5).optional().describe("Wind rating 1-5 (conditions category)"),
+      rating_crowds: z.number().min(1).max(5).optional().describe("Crowds rating 1-5 (conditions category)"),
+      lost_found_type: z.enum(["lost", "found"]).optional().describe("Required when category is 'lost_found'"),
       sync_key: z.string().optional().describe("beta.rocks sync key (uses BETA_ROCKS_SYNC_KEY env var if not provided)"),
       source: z.string().optional().describe("Source app identifier"),
     }),
   },
-  async ({ crag_id, category, message, rating, sync_key, source }) => {
+  async ({ crag_id, category, message, rating_dry, rating_wind, rating_crowds, lost_found_type, sync_key, source }) => {
     const resolvedSyncKey = sync_key || SYNC_KEY;
     if (!resolvedSyncKey) {
       return { content: [{ type: "text", text: "Error: No sync key provided. Either pass sync_key or set the BETA_ROCKS_SYNC_KEY environment variable." }] };
     }
     const body: Record<string, any> = { crag_id, category, message, sync_key: resolvedSyncKey };
-    if (rating) body.rating = rating;
+    if (rating_dry) body.rating_dry = rating_dry;
+    if (rating_wind) body.rating_wind = rating_wind;
+    if (rating_crowds) body.rating_crowds = rating_crowds;
+    if (lost_found_type) body.lost_found_type = lost_found_type;
     if (source) body.source = source;
     const { status, data } = await apiPost("/api/v1/reports", body);
     const text = status === 201

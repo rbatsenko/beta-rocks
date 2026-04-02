@@ -154,7 +154,10 @@ GET /api/v1/crags/osm_relation_17696060/reports?category=conditions&limit=5
       "id": "c3d4e5f6-a7b8-9012-cdef-123456789012",
       "category": "conditions",
       "message": "Rock is dry, light wind",
-      "rating": 4,
+      "rating_dry": 4,
+      "rating_wind": 3,
+      "rating_crowds": 5,
+      "lost_found_type": null,
       "photos": [],
       "created_at": "2026-03-31T10:00:00Z",
       "display_name": "ClimberX",
@@ -185,12 +188,15 @@ When building an integration, ask users for their beta.rocks sync key to submit 
 
 | Name     | Type   | Required | Description                              |
 |----------|--------|----------|------------------------------------------|
-| crag_id  | string | yes      | ID of the crag                           |
-| category | string | yes      | Report category (see categories above)   |
-| message  | string | yes      | Report text (max 2000 chars)             |
-| rating   | number | no       | Rating 1-5 (dryness)                     |
-| sync_key | string | yes      | User sync key for attribution            |
-| source   | string | no       | Source app identifier (e.g., "myapp")    |
+| crag_id         | string | yes      | ID of the crag                                        |
+| category        | string | yes      | Report category (see categories above)                |
+| message         | string | yes      | Report text (max 2000 chars)                          |
+| rating_dry      | number | no       | Dryness rating 1-5 (conditions category)              |
+| rating_wind     | number | no       | Wind rating 1-5 (conditions category)                 |
+| rating_crowds   | number | no       | Crowds rating 1-5 (conditions category)               |
+| lost_found_type | string | no       | "lost" or "found" (required for lost_found category)  |
+| sync_key        | string | yes      | User sync key for attribution                         |
+| source          | string | no       | Source app identifier (e.g., "myapp")                 |
 
 ### Example
 
@@ -201,7 +207,9 @@ Content-Type: application/json
   "crag_id": "osm_relation_17696060",
   "category": "conditions",
   "message": "Dry rock, perfect conditions",
-  "rating": 5,
+  "rating_dry": 5,
+  "rating_wind": 3,
+  "rating_crowds": 4,
   "sync_key": "your-sync-key-here",
   "source": "myapp"
 }
@@ -213,7 +221,10 @@ Content-Type: application/json
     "id": "d4e5f6a7-b8c9-0123-defa-234567890123",
     "category": "conditions",
     "message": "Dry rock, perfect conditions",
-    "rating": 5,
+    "rating_dry": 5,
+    "rating_wind": 3,
+    "rating_crowds": 4,
+    "lost_found_type": null,
     "photos": [],
     "created_at": "2026-03-31T12:00:00Z",
     "display_name": "YourName",

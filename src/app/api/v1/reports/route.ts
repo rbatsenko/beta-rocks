@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { crag_id, category, message, rating, sync_key, source } = body;
+    const { crag_id, category, message, rating_dry, rating_wind, rating_crowds, lost_found_type, sync_key, source } = body;
 
     // Validate required fields
     if (!crag_id) {
@@ -37,10 +37,28 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "message must be 2000 characters or less" }, { status: 400 });
     }
 
-    if (rating !== undefined && rating !== null) {
-      if (!Number.isInteger(rating) || rating < 1 || rating > 5) {
-        return NextResponse.json({ error: "rating must be an integer between 1 and 5" }, { status: 400 });
+    // Validate ratings are 1-5
+    for (const [name, val] of Object.entries({ rating_dry, rating_wind, rating_crowds })) {
+      if (val !== undefined && val !== null) {
+        if (!Number.isInteger(val) || val < 1 || val > 5) {
+          return NextResponse.json({ error: `${name} must be an integer between 1 and 5` }, { status: 400 });
+        }
       }
+    }
+
+    // Validate lost_found_type
+    if (category === "lost_found") {
+      if (!lost_found_type || !["lost", "found"].includes(lost_found_type)) {
+        return NextResponse.json(
+          { error: "lost_found_type must be 'lost' or 'found' when category is 'lost_found'" },
+          { status: 400 }
+        );
+      }
+    } else if (lost_found_type) {
+      return NextResponse.json(
+        { error: "lost_found_type can only be set when category is 'lost_found'" },
+        { status: 400 }
+      );
     }
 
     if (!sync_key || typeof sync_key !== "string") {
@@ -81,7 +99,10 @@ export async function POST(request: NextRequest) {
         author_id: userProfile.id,
         category,
         text: message.trim(),
-        rating_dry: rating || null,
+        rating_dry: rating_dry || null,
+        rating_wind: rating_wind || null,
+        rating_crowds: rating_crowds || null,
+        lost_found_type: lost_found_type || null,
         source: source || null,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
@@ -100,7 +121,10 @@ export async function POST(request: NextRequest) {
           id: report.id,
           category: report.category,
           message: report.text || null,
-          rating: report.rating_dry || null,
+          rating_dry: report.rating_dry || null,
+          rating_wind: report.rating_wind || null,
+          rating_crowds: report.rating_crowds || null,
+          lost_found_type: report.lost_found_type || null,
           photos: report.photos?.length ? report.photos : report.photo_url ? [report.photo_url] : [],
           created_at: report.created_at,
           display_name: (report as any).user_profiles?.display_name || "Anonymous",
