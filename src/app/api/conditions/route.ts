@@ -103,7 +103,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       location: { lat: latitude, lon: longitude },
       rockType,
-      ...weatherResponse,
+      conditions: weatherResponse,
       updatedAt: weatherResponse.updated_at,
     });
   } catch (error) {

@@ -58,9 +58,9 @@ export interface PrecipitationContext {
 }
 
 export interface DryWindow {
-  startTime: string;
-  endTime: string;
-  hourCount: number;
+  start: string;
+  end: string;
+  hours: number;
 }
 
 export interface DailyForecast {
@@ -77,7 +77,8 @@ export interface DailyForecast {
 
 export interface WeatherFlags {
   rain_now: boolean;
-  rain_expected: boolean;
+  rain_expected: { in_hours: number; mm: number } | null;
+  recent_rain: { last_24h_mm: number; last_48h_mm: number };
   condensation_risk: boolean;
   high_humidity: boolean;
   wet_rock_likely: boolean;
@@ -85,7 +86,6 @@ export interface WeatherFlags {
   sandstone_wet_warning: boolean;
   extreme_wind: boolean;
   high_wind: boolean;
-  recent_rain: boolean;
 }
 
 export interface ConditionsData {

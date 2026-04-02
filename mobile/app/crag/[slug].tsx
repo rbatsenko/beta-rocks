@@ -346,7 +346,7 @@ export default function CragDetailScreen() {
           latitude: crag.lat ?? null,
           longitude: crag.lon ?? null,
           rock_type: crag.rock_type,
-          last_label: isLocationless ? null : conditions?.label,
+          last_rating: isLocationless ? null : conditions?.label,
           last_rating: isLocationless ? null : conditions?.label,
           last_checked_at: isLocationless ? null : new Date().toISOString(),
         });

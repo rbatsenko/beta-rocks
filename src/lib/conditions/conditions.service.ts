@@ -738,7 +738,7 @@ function buildDailyFromHourly(
     const temps = hours.map((h) => h.temp_c);
     const winds = hours.map((h) => h.wind_kph);
     const precip = hours.reduce((sum, h) => sum + h.precip_mm, 0);
-    // Pick the most common non-zero weather code, or 0
+    // Pick the first non-zero weather code for the day, or 0
     const codes = hours
       .map((h) => h.weatherCode ?? 0)
       .filter((c) => c > 0);
