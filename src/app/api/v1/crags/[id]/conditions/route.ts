@@ -89,6 +89,13 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
           friction_score: conditions.frictionRating,
           note: "Friction score is a rough estimate based on weather, rock type, and recent precipitation.",
           is_dry: conditions.isDry,
+          drying_time_hours: conditions.dryingTimeHours || null,
+          dew_point_spread: conditions.dewPointSpread || null,
+          precipitation: conditions.precipitationContext ? {
+            last_24h_mm: conditions.precipitationContext.last24h,
+            last_48h_mm: conditions.precipitationContext.last48h,
+            next_24h_mm: conditions.precipitationContext.next24h,
+          } : null,
           reasons: conditions.reasons,
           warnings: conditions.warnings,
           hourly_conditions: conditions.hourlyConditions?.slice(0, 24).map((h: any) => ({
