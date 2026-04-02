@@ -245,7 +245,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                 {t("dialog.currentRating")}
               </h3>
               <div className="flex items-center gap-3">
-                <Badge className={`text-lg px-4 py-2 ${getLabelColor(data.label)}`}>
+                <Badge className={`text-lg px-4 py-2 pointer-events-none ${getLabelColor(data.label)}`}>
                   {translateRating(data.label)}
                 </Badge>
                 <span className="text-xs text-muted-foreground italic">{t("cragPage.estimateBased", "based on weather")}</span>
@@ -743,11 +743,13 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                               )}
                               <div
                                 className={`rounded-lg p-3 border ${
-                                  !hour.flags?.rain_now && !hour.flags?.wet_rock_likely && !hour.flags?.extreme_wind
-                                    ? "bg-green-500/10 border-green-500/30"
-                                    : hour.flags?.high_humidity || hour.flags?.condensation_risk || hour.flags?.high_wind
-                                      ? "bg-amber-500/5 border-amber-500/20"
-                                      : "bg-red-500/10 border-red-500/30"
+                                  !hour.flags
+                                    ? "bg-muted/50 border-border"
+                                    : hour.flags.rain_now || hour.flags.wet_rock_likely || hour.flags.extreme_wind
+                                      ? "bg-red-500/10 border-red-500/30"
+                                      : hour.flags.high_humidity || hour.flags.condensation_risk || hour.flags.high_wind
+                                        ? "bg-amber-500/5 border-amber-500/20"
+                                        : "bg-green-500/10 border-green-500/30"
                                 } ${isDistant ? "opacity-60" : ""}`}
                               >
                                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
@@ -871,11 +873,13 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                   )}
                                   <div
                                     className={`rounded-lg p-2 border text-xs ${
-                                      !hour.flags?.rain_now && !hour.flags?.wet_rock_likely && !hour.flags?.extreme_wind
-                                        ? "bg-green-500/10 border-green-500/30"
-                                        : hour.flags?.high_humidity || hour.flags?.condensation_risk || hour.flags?.high_wind
-                                          ? "bg-amber-500/5 border-amber-500/20"
-                                          : "bg-red-500/10 border-red-500/30"
+                                      !hour.flags
+                                        ? "bg-muted/50 border-border"
+                                        : hour.flags.rain_now || hour.flags.wet_rock_likely || hour.flags.extreme_wind
+                                          ? "bg-red-500/10 border-red-500/30"
+                                          : hour.flags.high_humidity || hour.flags.condensation_risk || hour.flags.high_wind
+                                            ? "bg-amber-500/5 border-amber-500/20"
+                                            : "bg-green-500/10 border-green-500/30"
                                     } ${isDistant ? "opacity-60" : ""}`}
                                   >
                                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">

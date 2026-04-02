@@ -17,7 +17,7 @@ import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal"
 import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog";
 import { generateUniqueSlug } from "@/lib/utils/slug";
 import { useUnits } from "@/hooks/useUnits";
-import { convertTemperature } from "@/lib/units/conversions";
+import { convertTemperature, convertWindSpeed } from "@/lib/units/conversions";
 import { getUserProfile, type UserProfile } from "@/lib/auth/sync-key";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 
@@ -146,7 +146,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
   onDetailsClick,
   onSheetClick,
   onFullDataFetched,
-  conditionsLabel,
+  conditionsLabel: _conditionsLabel,
   detailsLabel,
   favoriteLabel,
   addReportLabel,
@@ -431,10 +431,34 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
             </div>
           )}
 
-          {/* Conditions */}
-          <div className="font-medium">
-            {conditionsLabel}: {data.summary}
+          {/* Summary */}
+          <div className="font-medium text-sm">
+            {data.summary}
           </div>
+
+          {/* Current weather stats */}
+          {data.current && (
+            <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted-foreground">
+              <span>🌡 {Math.round(convertTemperature(data.current.temperature_c, "celsius", units.temperature))}{units.temperature === "celsius" ? "°C" : "°F"}</span>
+              <span>💧 {Math.round(data.current.humidity)}%</span>
+              <span>💨 {Math.round(convertWindSpeed(data.current.windSpeed_kph, "kmh", units.windSpeed))} {units.windSpeed === "kmh" ? "km/h" : units.windSpeed === "mph" ? "mph" : units.windSpeed === "ms" ? "m/s" : "kn"}</span>
+              {data.current.precipitation_mm > 0 && <span>🌧 {data.current.precipitation_mm}mm</span>}
+            </div>
+          )}
+
+          {/* Active flags as pills */}
+          {data.flags && (
+            <div className="flex flex-wrap gap-1.5">
+              {data.flags.rain_now && <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400">🌧 {t("flags.rain", "Rain")}</span>}
+              {data.flags.rain_expected && <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400">🌧 {t("flags.rainExpected", "Rain in {{hours}}h", { hours: data.flags.rain_expected.in_hours })}</span>}
+              {data.flags.condensation_risk && <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">💧 {t("flags.condensation", "Condensation")}</span>}
+              {data.flags.high_humidity && <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-500/10 text-slate-600 dark:text-slate-400">💧 {t("flags.highHumidity", "High humidity")}</span>}
+              {data.flags.wet_rock_likely && <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400">⚠ {t("flags.wetRock", "Wet rock likely")}</span>}
+              {data.flags.high_wind && <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-orange-500/10 text-orange-600 dark:text-orange-400">💨 {t("flags.windy", "Windy")}</span>}
+              {data.flags.extreme_wind && <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-red-500/10 text-red-600 dark:text-red-400">💨 {t("flags.extremeWind", "Extreme wind")}</span>}
+              {data.flags.sandstone_wet_warning && <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-red-500/10 text-red-600 dark:text-red-400">⚠ {t("flags.sandstoneWet", "Sandstone wet")}</span>}
+            </div>
+          )}
 
           {/* Warnings */}
           {data.warnings && data.warnings.length > 0 && (
