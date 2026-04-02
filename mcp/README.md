@@ -1,6 +1,6 @@
 # beta.rocks MCP Server
 
-An [MCP (Model Context Protocol)](https://modelcontextprotocol.io) server that gives Claude and other AI assistants direct access to the beta.rocks climbing API.
+An [MCP (Model Context Protocol)](https://modelcontextprotocol.io) server that gives Claude and other AI assistants direct access to the [beta.rocks](https://beta.rocks) climbing API.
 
 ## Tools
 
@@ -12,32 +12,41 @@ An [MCP (Model Context Protocol)](https://modelcontextprotocol.io) server that g
 | `get_crag_reports` | Get community reports for a crag |
 | `submit_report` | Submit a community report (requires sync_key) |
 
-## Setup
+## Installation
 
 ### Claude Code
 
 ```bash
-cd mcp
-npm install
-npm run build
+claude mcp add beta-rocks -- npx beta-rocks-mcp
 ```
 
-Then add to your Claude Code MCP settings:
+### Claude Desktop
+
+Add to your config file:
+
+**macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
+**Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
 
 ```json
 {
   "mcpServers": {
     "beta-rocks": {
-      "command": "node",
-      "args": ["/path/to/beta-rocks/mcp/dist/index.js"]
+      "command": "npx",
+      "args": ["beta-rocks-mcp"]
     }
   }
 }
 ```
 
-### Claude Desktop
+### From source
 
-Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
+```bash
+git clone https://github.com/rbatsenko/beta-rocks
+cd beta-rocks/mcp
+npm install && npm run build
+```
+
+Then use the local path:
 
 ```json
 {
@@ -56,7 +65,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 |---|---|---|
 | `BETA_ROCKS_API_URL` | `https://beta.rocks` | API base URL |
 
-## Examples
+## Usage
 
 Once connected, you can ask Claude things like:
 
@@ -64,3 +73,8 @@ Once connected, you can ask Claude things like:
 - "What's the rock type at Frankenjura?"
 - "Find crags within 10km of 49.7, 11.3"
 - "Show me recent condition reports for Frankenjura"
+- "Are there any safety reports for this crag?"
+
+## API
+
+This MCP server wraps the [beta.rocks public API v1](https://beta.rocks/docs/api). Full API reference available at [beta.rocks/llms-full.txt](https://beta.rocks/llms-full.txt).

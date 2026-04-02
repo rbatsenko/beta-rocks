@@ -20,18 +20,23 @@ async function apiPost(path: string, body: Record<string, any>): Promise<any> {
   return { status: res.status, data: await res.json() };
 }
 
+const CATEGORIES = z.enum(["conditions", "safety", "access", "climbing_info", "facilities", "lost_found", "other"]);
+
 const server = new McpServer({
   name: "beta-rocks",
   version: "1.0.0",
 });
 
 // Search crags
-server.tool(
+server.registerTool(
   "search_crags",
-  "Search climbing crags by name. Returns matching crags with location, rock type, and climbing types.",
   {
-    query: z.string().min(2).describe("Search term (min 2 characters)"),
-    limit: z.number().min(1).max(10).optional().describe("Max results (default 10)"),
+    title: "Search Crags",
+    description: "Search climbing crags by name. Returns matching crags with location, rock type, and climbing types.",
+    inputSchema: z.object({
+      query: z.string().min(2).describe("Search term (min 2 characters)"),
+      limit: z.number().min(1).max(10).optional().describe("Max results (default 10)"),
+    }),
   },
   async ({ query, limit }) => {
     const params = new URLSearchParams({ q: query });
@@ -42,11 +47,14 @@ server.tool(
 );
 
 // Get crag detail
-server.tool(
+server.registerTool(
   "get_crag",
-  "Get detailed information about a specific crag by ID, including sectors, rock type, and location.",
   {
-    id: z.string().describe("Crag ID (e.g., osm_relation_17696060)"),
+    title: "Get Crag",
+    description: "Get detailed information about a specific crag by ID, including sectors, rock type, and location.",
+    inputSchema: z.object({
+      id: z.string().describe("Crag ID (e.g., osm_relation_17696060)"),
+    }),
   },
   async ({ id }) => {
     const { data } = await apiGet(`/api/v1/crags/${encodeURIComponent(id)}`);
@@ -55,14 +63,17 @@ server.tool(
 );
 
 // Find nearby crags
-server.tool(
+server.registerTool(
   "find_nearby_crags",
-  "Find climbing crags near given coordinates. Useful for discovering crags in an area.",
   {
-    lat: z.number().describe("Latitude"),
-    lon: z.number().describe("Longitude"),
-    radius: z.number().min(1).max(50000).optional().describe("Radius in meters (default 5000, max 50000)"),
-    limit: z.number().min(1).max(10).optional().describe("Max results (default 10)"),
+    title: "Find Nearby Crags",
+    description: "Find climbing crags near given coordinates. Useful for discovering crags in an area.",
+    inputSchema: z.object({
+      lat: z.number().describe("Latitude"),
+      lon: z.number().describe("Longitude"),
+      radius: z.number().min(1).max(50000).optional().describe("Radius in meters (default 5000, max 50000)"),
+      limit: z.number().min(1).max(10).optional().describe("Max results (default 10)"),
+    }),
   },
   async ({ lat, lon, radius, limit }) => {
     const params = new URLSearchParams({ lat: String(lat), lon: String(lon) });
@@ -74,17 +85,17 @@ server.tool(
 );
 
 // Get crag reports
-server.tool(
+server.registerTool(
   "get_crag_reports",
-  "Get community reports for a crag - conditions, safety, access info submitted by climbers.",
   {
-    id: z.string().describe("Crag ID"),
-    limit: z.number().min(1).max(100).optional().describe("Max results (default 20)"),
-    offset: z.number().min(0).optional().describe("Pagination offset (default 0)"),
-    category: z
-      .enum(["conditions", "safety", "access", "climbing_info", "facilities", "lost_found", "other"])
-      .optional()
-      .describe("Filter by report category"),
+    title: "Get Crag Reports",
+    description: "Get community reports for a crag - conditions, safety, access info submitted by climbers.",
+    inputSchema: z.object({
+      id: z.string().describe("Crag ID"),
+      limit: z.number().min(1).max(100).optional().describe("Max results (default 20)"),
+      offset: z.number().min(0).optional().describe("Pagination offset (default 0)"),
+      category: CATEGORIES.optional().describe("Filter by report category"),
+    }),
   },
   async ({ id, limit, offset, category }) => {
     const params = new URLSearchParams();
@@ -97,18 +108,19 @@ server.tool(
 );
 
 // Submit report
-server.tool(
+server.registerTool(
   "submit_report",
-  "Submit a community report for a crag. Requires a beta.rocks sync key for user attribution.",
   {
-    crag_id: z.string().describe("Crag ID to report on"),
-    category: z
-      .enum(["conditions", "safety", "access", "climbing_info", "facilities", "lost_found", "other"])
-      .describe("Report category"),
-    message: z.string().min(1).max(2000).describe("Report text"),
-    rating: z.number().min(1).max(5).optional().describe("Dryness rating 1-5"),
-    sync_key: z.string().describe("Your beta.rocks sync key for attribution"),
-    source: z.string().optional().describe("Source app identifier"),
+    title: "Submit Report",
+    description: "Submit a community report for a crag. Requires a beta.rocks sync key for user attribution.",
+    inputSchema: z.object({
+      crag_id: z.string().describe("Crag ID to report on"),
+      category: CATEGORIES.describe("Report category"),
+      message: z.string().min(1).max(2000).describe("Report text"),
+      rating: z.number().min(1).max(5).optional().describe("Dryness rating 1-5"),
+      sync_key: z.string().describe("Your beta.rocks sync key for attribution"),
+      source: z.string().optional().describe("Source app identifier"),
+    }),
   },
   async ({ crag_id, category, message, rating, sync_key, source }) => {
     const body: Record<string, any> = { crag_id, category, message, sync_key };

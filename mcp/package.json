@@ -1,14 +1,32 @@
 {
   "name": "beta-rocks-mcp",
   "version": "1.0.0",
-  "description": "MCP server for the beta.rocks climbing API",
+  "description": "MCP server for the beta.rocks climbing API - search crags, get conditions, and submit community reports",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
     "beta-rocks-mcp": "dist/index.js"
   },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "climbing",
+    "crags",
+    "beta-rocks",
+    "claude"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rbatsenko/beta-rocks",
+    "directory": "mcp"
+  },
+  "license": "MIT",
   "scripts": {
     "build": "tsc",
+    "prepublishOnly": "npm run build",
     "dev": "tsx src/index.ts"
   },
   "dependencies": {
