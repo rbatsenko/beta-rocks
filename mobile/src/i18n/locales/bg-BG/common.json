@@ -922,5 +922,10 @@
     "done": "Done",
     "cancel": "Cancel",
     "edit": "Edit"
+  },
+  "labels": {
+    "looksGood": "Изглежда добре",
+    "watchOut": "Внимание",
+    "stayHome": "Остани вкъщи"
   }
 }

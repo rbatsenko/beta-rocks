@@ -959,5 +959,10 @@
     "done": "Done",
     "cancel": "Cancel",
     "edit": "Edit"
+  },
+  "labels": {
+    "looksGood": "Sembra buono",
+    "watchOut": "Attenzione",
+    "stayHome": "Resta a casa"
   }
 }

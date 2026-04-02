@@ -873,5 +873,10 @@
     "done": "Done",
     "cancel": "Cancel",
     "edit": "Edit"
+  },
+  "labels": {
+    "looksGood": "Vyzerá dobre",
+    "watchOut": "Pozor",
+    "stayHome": "Zostaň doma"
   }
 }

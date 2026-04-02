@@ -875,5 +875,10 @@
     "done": "Done",
     "cancel": "Cancel",
     "edit": "Edit"
+  },
+  "labels": {
+    "looksGood": "Arată bine",
+    "watchOut": "Atenție",
+    "stayHome": "Stai acasă"
   }
 }

@@ -870,5 +870,10 @@
     "done": "Done",
     "cancel": "Cancel",
     "edit": "Edit"
+  },
+  "labels": {
+    "looksGood": "Ser godt ud",
+    "watchOut": "Pas på",
+    "stayHome": "Bliv hjemme"
   }
 }

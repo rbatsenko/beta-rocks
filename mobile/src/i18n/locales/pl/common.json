@@ -971,5 +971,10 @@
     "done": "Gotowe",
     "cancel": "Anuluj",
     "edit": "Edytuj"
+  },
+  "labels": {
+    "looksGood": "Wygląda dobrze",
+    "watchOut": "Uwaga",
+    "stayHome": "Zostań w domu"
   }
 }

@@ -1021,5 +1021,10 @@
     "done": "Done",
     "cancel": "Cancel",
     "edit": "Edit"
+  },
+  "labels": {
+    "looksGood": "Looks good",
+    "watchOut": "Watch out",
+    "stayHome": "Stay home"
   }
 }

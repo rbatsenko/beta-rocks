@@ -957,5 +957,10 @@
     "done": "Done",
     "cancel": "Cancel",
     "edit": "Edit"
+  },
+  "labels": {
+    "looksGood": "Izgleda dobro",
+    "watchOut": "Pozor",
+    "stayHome": "Ostani doma"
   }
 }

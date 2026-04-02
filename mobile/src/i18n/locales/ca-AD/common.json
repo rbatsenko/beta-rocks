@@ -838,5 +838,10 @@
     "done": "Done",
     "cancel": "Cancel",
     "edit": "Edit"
+  },
+  "labels": {
+    "looksGood": "Bona pinta",
+    "watchOut": "Alerta",
+    "stayHome": "Queda't a casa"
   }
 }

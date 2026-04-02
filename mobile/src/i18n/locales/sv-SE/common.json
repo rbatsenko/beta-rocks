@@ -791,5 +791,10 @@
     "done": "Done",
     "cancel": "Cancel",
     "edit": "Edit"
+  },
+  "labels": {
+    "looksGood": "Ser bra ut",
+    "watchOut": "Se upp",
+    "stayHome": "Stanna hemma"
   }
 }

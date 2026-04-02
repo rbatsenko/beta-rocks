@@ -838,5 +838,10 @@
     "done": "Done",
     "cancel": "Cancel",
     "edit": "Edit"
+  },
+  "labels": {
+    "looksGood": "Φαίνεται καλά",
+    "watchOut": "Προσοχή",
+    "stayHome": "Μείνε σπίτι"
   }
 }
