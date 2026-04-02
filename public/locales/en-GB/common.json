@@ -968,8 +968,8 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Looks good",
-    "watchOut": "Watch out",
-    "stayHome": "Stay home"
+    "looksGood": "Good",
+    "watchOut": "Fair",
+    "stayHome": "Poor"
   }
 }

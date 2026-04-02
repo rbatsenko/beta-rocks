@@ -958,8 +958,8 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Vypadá dobře",
-    "watchOut": "Pozor",
-    "stayHome": "Zůstaň doma"
+    "looksGood": "Dobré",
+    "watchOut": "Přijatelné",
+    "stayHome": "Špatné"
   }
 }

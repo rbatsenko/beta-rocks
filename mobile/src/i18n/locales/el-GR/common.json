@@ -840,8 +840,8 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Φαίνεται καλά",
-    "watchOut": "Προσοχή",
-    "stayHome": "Μείνε σπίτι"
+    "looksGood": "Καλό",
+    "watchOut": "Μέτριο",
+    "stayHome": "Κακό"
   }
 }

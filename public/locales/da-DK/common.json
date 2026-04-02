@@ -869,8 +869,8 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Ser godt ud",
-    "watchOut": "Pas på",
-    "stayHome": "Bliv hjemme"
+    "looksGood": "Godt",
+    "watchOut": "Middel",
+    "stayHome": "Dårligt"
   }
 }

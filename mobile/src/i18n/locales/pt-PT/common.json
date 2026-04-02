@@ -876,8 +876,8 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Parece bom",
-    "watchOut": "Atenção",
-    "stayHome": "Fica em casa"
+    "looksGood": "Bom",
+    "watchOut": "Razoável",
+    "stayHome": "Mau"
   }
 }

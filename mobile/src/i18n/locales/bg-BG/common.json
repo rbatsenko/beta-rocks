@@ -924,8 +924,8 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Изглежда добре",
-    "watchOut": "Внимание",
-    "stayHome": "Остани вкъщи"
+    "looksGood": "Добро",
+    "watchOut": "Средно",
+    "stayHome": "Лошо"
   }
 }

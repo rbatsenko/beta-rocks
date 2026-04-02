@@ -973,8 +973,8 @@
     "edit": "Edytuj"
   },
   "labels": {
-    "looksGood": "Wygląda dobrze",
-    "watchOut": "Uwaga",
-    "stayHome": "Zostań w domu"
+    "looksGood": "Dobre",
+    "watchOut": "Średnie",
+    "stayHome": "Złe"
   }
 }

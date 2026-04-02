@@ -869,8 +869,8 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Näyttää hyvältä",
-    "watchOut": "Varo",
-    "stayHome": "Pysy kotona"
+    "looksGood": "Hyvä",
+    "watchOut": "Kohtalainen",
+    "stayHome": "Huono"
   }
 }

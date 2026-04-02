@@ -954,8 +954,8 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Izgleda dobro",
-    "watchOut": "Oprez",
-    "stayHome": "Ostani doma"
+    "looksGood": "Dobro",
+    "watchOut": "Srednje",
+    "stayHome": "Loše"
   }
 }

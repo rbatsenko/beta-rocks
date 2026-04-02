@@ -958,8 +958,8 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Ça a l'air bien",
-    "watchOut": "Attention",
-    "stayHome": "Reste à la maison"
+    "looksGood": "Bon",
+    "watchOut": "Moyen",
+    "stayHome": "Mauvais"
   }
 }

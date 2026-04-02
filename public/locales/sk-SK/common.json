@@ -875,8 +875,8 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Vyzerá dobre",
-    "watchOut": "Pozor",
-    "stayHome": "Zostaň doma"
+    "looksGood": "Dobré",
+    "watchOut": "Prijateľné",
+    "stayHome": "Zlé"
   }
 }

@@ -876,8 +876,8 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Ziet er goed uit",
-    "watchOut": "Opgelet",
-    "stayHome": "Blijf thuis"
+    "looksGood": "Goed",
+    "watchOut": "Matig",
+    "stayHome": "Slecht"
   }
 }
