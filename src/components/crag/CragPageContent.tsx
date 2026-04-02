@@ -174,7 +174,42 @@ async function fetchConditionsByCragId(cragId: string): Promise<ConditionsData> 
     throw new Error("Failed to fetch conditions");
   }
   const data = await res.json();
-  return data.conditions;
+  const c = data.conditions;
+
+  // Map new weather response shape to what the UI expects
+  if (c.weather?.now && !c.current) {
+    c.current = {
+      temperature_c: c.weather.now.temp_c,
+      humidity: c.weather.now.humidity,
+      windSpeed_kph: c.weather.now.wind_kph,
+      windDirection: c.weather.now.wind_direction,
+      precipitation_mm: c.weather.now.precip_mm,
+      weatherCode: c.weather.now.weather_code ?? 0,
+    };
+  }
+  if (c.weather?.hourly && !c.hourlyConditions) {
+    c.hourlyConditions = c.weather.hourly;
+  }
+  if (c.weather?.daily && !c.dailyForecast) {
+    c.dailyForecast = c.weather.daily.map((d: any) => ({
+      date: d.date,
+      tempMax: d.temp_max_c,
+      tempMin: d.temp_min_c,
+      precipitation: d.precipitation_mm,
+      windSpeedMax: d.wind_speed_max_kph,
+      sunrise: d.sunrise,
+      sunset: d.sunset,
+      weatherCode: d.weather_code,
+    }));
+  }
+  if (c.precipitation && !c.precipitationContext) {
+    c.precipitationContext = c.precipitation;
+  }
+  if (!c.isDry && c.flags) {
+    c.isDry = !c.flags.rain_now && !c.flags.wet_rock_likely;
+  }
+
+  return c;
 }
 
 async function fetchReportsByCragId(cragId: string) {
@@ -749,6 +784,25 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                     <span className="text-xs text-muted-foreground italic">{t("cragPage.estimateBased", "based on weather")}</span>
                   </div>
                 </div>
+
+                {/* Summary */}
+                {conditions.summary && (
+                  <p className="text-sm text-muted-foreground mb-4">{conditions.summary}</p>
+                )}
+
+                {/* Active flags */}
+                {conditions.flags && (
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {conditions.flags.rain_now && <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400">🌧 {t("flags.rain", "Rain")}</span>}
+                    {conditions.flags.rain_expected && <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400">🌧 {t("flags.rainExpected", "Rain in {{hours}}h", { hours: conditions.flags.rain_expected.in_hours })}</span>}
+                    {conditions.flags.condensation_risk && <span className="text-xs px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">💧 {t("flags.condensation", "Condensation")}</span>}
+                    {conditions.flags.high_humidity && <span className="text-xs px-2 py-0.5 rounded-full bg-slate-500/10 text-slate-600 dark:text-slate-400">💧 {t("flags.highHumidity", "High humidity")}</span>}
+                    {conditions.flags.wet_rock_likely && <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400">⚠ {t("flags.wetRock", "Wet rock likely")}</span>}
+                    {conditions.flags.high_wind && <span className="text-xs px-2 py-0.5 rounded-full bg-orange-500/10 text-orange-600 dark:text-orange-400">💨 {t("flags.windy", "Windy")}</span>}
+                    {conditions.flags.extreme_wind && <span className="text-xs px-2 py-0.5 rounded-full bg-red-500/10 text-red-600 dark:text-red-400">💨 {t("flags.extremeWind", "Extreme wind")}</span>}
+                    {conditions.flags.sandstone_wet_warning && <span className="text-xs px-2 py-0.5 rounded-full bg-red-500/10 text-red-600 dark:text-red-400">⚠ {t("flags.sandstoneWet", "Sandstone wet")}</span>}
+                  </div>
+                )}
 
                 {/* Weather emoji and description */}
                 {conditions.current && (
