@@ -1,6 +1,6 @@
 {
   "name": "beta-rocks-mcp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "MCP server for the beta.rocks climbing API - search crags, get conditions, and submit community reports",
   "type": "module",
   "main": "dist/index.js",
