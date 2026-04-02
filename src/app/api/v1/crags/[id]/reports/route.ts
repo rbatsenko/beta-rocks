@@ -1,6 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseClient, isSupabaseConfigured } from "@/integrations/supabase/client";
 
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+
+function resolvePhotoUrls(report: any): string[] {
+  const paths = report.photos?.length ? report.photos : report.photo_url ? [report.photo_url] : [];
+  if (!SUPABASE_URL || paths.length === 0) return paths;
+  return paths.map((p: string) =>
+    p.startsWith("http") ? p : `${SUPABASE_URL}/storage/v1/object/public/report-photos/${p}`
+  );
+}
+
 /**
  * GET /api/v1/crags/:id/reports
  * Get community reports for a crag.
@@ -93,7 +103,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
         rating_wind: r.rating_wind || null,
         rating_crowds: r.rating_crowds || null,
         lost_found_type: r.lost_found_type || null,
-        photos: r.photos?.length ? r.photos : r.photo_url ? [r.photo_url] : [],
+        photos: resolvePhotoUrls(r),
         created_at: r.created_at,
         display_name: r.user_profiles?.display_name || "Anonymous",
         confirmations_count: confirmationsCount,

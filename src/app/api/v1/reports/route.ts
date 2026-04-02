@@ -2,6 +2,16 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseClient, isSupabaseConfigured } from "@/integrations/supabase/client";
 import { hashSyncKey } from "@/lib/auth/sync-key";
 
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+
+function resolvePhotoUrls(report: any): string[] {
+  const paths = report.photos?.length ? report.photos : report.photo_url ? [report.photo_url] : [];
+  if (!SUPABASE_URL || paths.length === 0) return paths;
+  return paths.map((p: string) =>
+    p.startsWith("http") ? p : `${SUPABASE_URL}/storage/v1/object/public/report-photos/${p}`
+  );
+}
+
 const VALID_CATEGORIES = ["conditions", "safety", "access", "climbing_info", "facilities", "lost_found", "other"];
 
 /**
@@ -125,7 +135,7 @@ export async function POST(request: NextRequest) {
           rating_wind: report.rating_wind || null,
           rating_crowds: report.rating_crowds || null,
           lost_found_type: report.lost_found_type || null,
-          photos: report.photos?.length ? report.photos : report.photo_url ? [report.photo_url] : [],
+          photos: resolvePhotoUrls(report),
           created_at: report.created_at,
           display_name: (report as any).user_profiles?.display_name || "Anonymous",
           confirmations_count: 0,
