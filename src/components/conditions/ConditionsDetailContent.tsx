@@ -292,7 +292,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                     <div className="bg-muted/50 rounded-lg p-3">
                       <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
                         <ThermometerSun className="h-3 w-3" />
@@ -356,6 +356,24 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                           units.precipitation,
                           1
                         )}
+                      </p>
+                    </div>
+                    <div className="bg-muted/50 rounded-lg p-3">
+                      <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
+                        <Droplets className="h-3 w-3" />
+                        <span>{t("dialog.dewPointSpread", "Dew Point Spread")}</span>
+                      </div>
+                      <p className="text-lg font-semibold">
+                        {data.dewPointSpread != null ? (
+                          <>
+                            {data.dewPointSpread}°C
+                            {data.flags?.condensation_risk && (
+                              <Badge variant="outline" className="ml-2 text-xs text-amber-600 border-amber-600">
+                                {t("dialog.condensationRisk", "Condensation risk")}
+                              </Badge>
+                            )}
+                          </>
+                        ) : "—"}
                       </p>
                     </div>
                     {(data.timeContext || data.astro) && (
@@ -582,6 +600,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                         {t("dialog.dry")}
                                       </Badge>
                                     </div>
+                                    <span className="text-xs text-muted-foreground ml-auto">{window.hours}h</span>
                                   </div>
 
                                   {/* Hourly breakdown */}

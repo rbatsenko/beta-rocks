@@ -210,6 +210,12 @@ async function fetchConditionsByCragId(cragId: string): Promise<ConditionsData> 
   if (!c.isDry && c.flags) {
     c.isDry = !c.flags.rain_now && !c.flags.wet_rock_likely;
   }
+  if (c.weather?.now?.dew_point_spread != null && c.dewPointSpread == null) {
+    c.dewPointSpread = c.weather.now.dew_point_spread;
+  }
+  if (c.weather?.daily?.[0] && !c.astro) {
+    c.astro = { sunrise: c.weather.daily[0].sunrise, sunset: c.weather.daily[0].sunset };
+  }
 
   return c;
 }
@@ -827,7 +833,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
 
                 {/* Weather metrics grid */}
                 {conditions.current && (
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4">
                     <div className="bg-muted/50 rounded-lg p-3">
                       <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
                         <ThermometerSun className="h-3 w-3" />
@@ -895,6 +901,15 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                           units.precipitation,
                           1
                         )}
+                      </p>
+                    </div>
+                    <div className="bg-muted/50 rounded-lg p-3">
+                      <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
+                        <Droplets className="h-3 w-3" />
+                        <span>{t("dialog.dewPointSpread", "Dew Point Spread")}</span>
+                      </div>
+                      <p className="text-lg font-semibold">
+                        {conditions.dewPointSpread != null ? `${conditions.dewPointSpread}°C` : "—"}
                       </p>
                     </div>
                     {(conditions.timeContext || conditions.astro) && (
