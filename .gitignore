@@ -53,3 +53,5 @@ mobile/dist/
 mobile/ios/
 mobile/android/
 mobile/web-build/
+mcp/node_modules/
+mcp/dist/
