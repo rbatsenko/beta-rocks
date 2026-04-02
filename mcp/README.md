@@ -16,6 +16,16 @@ An [MCP (Model Context Protocol)](https://modelcontextprotocol.io) server that g
 
 ## Installation
 
+### Claude.ai (Remote)
+
+Add as an MCP integration in Claude.ai settings using the server URL:
+
+```
+https://beta.rocks/api/mcp
+```
+
+No installation needed — works directly in the browser.
+
 ### Claude Code
 
 ```bash
