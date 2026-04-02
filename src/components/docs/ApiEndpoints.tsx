@@ -253,6 +253,52 @@ export function ApiEndpoints() {
         />
       </Endpoint>
 
+      {/* Crag Conditions */}
+      <Endpoint method="GET" path="/api/v1/crags/:id/conditions" description="Get current weather and climbing conditions for a crag. Returns friction score (rough estimate), hourly forecast, and optimal climbing windows.">
+        <ExampleAndPlayground
+          example={
+            <div className="space-y-3">
+              <CodeBlock title="Request">{`curl "https://beta.rocks/api/v1/crags/osm_relation_17696060/conditions"`}</CodeBlock>
+              <CodeBlock title="Response">{`{
+  "data": {
+    "crag": {
+      "id": "osm_relation_17696060",
+      "name": "Frankenjura",
+      "rock_type": "limestone"
+    },
+    "current_weather": {
+      "temperature_c": 18.5,
+      "humidity": 55,
+      "wind_speed_kph": 12,
+      "wind_direction": 220,
+      "precipitation_mm": 0
+    },
+    "conditions": {
+      "label": "Good",
+      "friction_score": 4,
+      "note": "Friction score is a rough estimate...",
+      "summary": "Good conditions for climbing",
+      "hourly_conditions": [...],
+      "optimal_windows": [...]
+    },
+    "daily_forecast": [...],
+    "updated_at": "2026-04-02T12:00:00Z"
+  }
+}`}</CodeBlock>
+            </div>
+          }
+          playground={
+            <ApiPlayground
+              method="GET"
+              fields={[
+                { name: "id", label: "id", placeholder: "osm_relation_17696060", required: true, defaultValue: "osm_relation_17696060" },
+              ]}
+              buildUrl={(p) => `/api/v1/crags/${encodeURIComponent(p.id || "")}/conditions`}
+            />
+          }
+        />
+      </Endpoint>
+
       {/* Crag Reports */}
       <Endpoint method="GET" path="/api/v1/crags/:id/reports" description="Get community reports for a crag.">
         <ParamTable

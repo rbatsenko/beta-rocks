@@ -125,6 +125,76 @@ GET /api/v1/crags/nearby?lat=49.7&lon=11.3&radius=10000
 
 ---
 
+## GET /api/v1/crags/{id}/conditions
+
+Get current weather and climbing conditions for a crag.
+
+### Parameters
+
+| Name | Type   | Required | Description |
+|------|--------|----------|-------------|
+| id   | string | yes      | Crag ID (path parameter) |
+
+### Example
+
+GET /api/v1/crags/osm_relation_17696060/conditions
+
+### Response
+
+{
+  "data": {
+    "crag": {
+      "id": "osm_relation_17696060",
+      "name": "Frankenjura",
+      "rock_type": "limestone"
+    },
+    "current_weather": {
+      "temperature_c": 18.5,
+      "humidity": 55,
+      "wind_speed_kph": 12,
+      "wind_direction": 220,
+      "precipitation_mm": 0
+    },
+    "conditions": {
+      "label": "Good",
+      "friction_score": 4,
+      "note": "Friction score is a rough estimate based on weather, rock type, and recent precipitation.",
+      "summary": "Good conditions for climbing",
+      "hourly_conditions": [
+        {
+          "time": "2026-04-02T12:00",
+          "friction_score": 4,
+          "temperature_c": 18.5,
+          "humidity": 55,
+          "wind_speed_kph": 12,
+          "precipitation_mm": 0
+        }
+      ],
+      "optimal_windows": [...]
+    },
+    "daily_forecast": [
+      {
+        "date": "2026-04-02",
+        "temp_max_c": 22,
+        "temp_min_c": 8,
+        "precipitation_mm": 0,
+        "wind_speed_max_kph": 15,
+        "weather_code": 1,
+        "sunrise": "06:45",
+        "sunset": "19:30"
+      }
+    ],
+    "updated_at": "2026-04-02T12:00:00Z"
+  }
+}
+
+### Errors
+
+- 400: Crag has no coordinates
+- 404: Crag not found
+
+---
+
 ## GET /api/v1/crags/{id}/reports
 
 Get community reports for a crag.

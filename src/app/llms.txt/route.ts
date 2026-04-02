@@ -19,6 +19,7 @@ https://beta.rocks/api/v1
 - GET /api/v1/crags/search?q={query} - Search crags by name
 - GET /api/v1/crags/{id} - Get crag detail with sectors
 - GET /api/v1/crags/nearby?lat={lat}&lon={lon} - Find crags near coordinates
+- GET /api/v1/crags/{id}/conditions - Get weather and climbing conditions for a crag
 - GET /api/v1/crags/{id}/reports - Get community reports for a crag
 - POST /api/v1/reports - Submit a community report (requires sync_key)
 `;

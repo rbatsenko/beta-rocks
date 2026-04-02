@@ -108,6 +108,22 @@ server.registerTool(
   }
 );
 
+// Get conditions
+server.registerTool(
+  "get_conditions",
+  {
+    title: "Get Conditions",
+    description: "Get current weather and climbing conditions for a crag - temperature, humidity, wind, friction rating, and optimal climbing windows.",
+    inputSchema: z.object({
+      id: z.string().describe("Crag ID"),
+    }),
+  },
+  async ({ id }) => {
+    const { data } = await apiGet(`/api/v1/crags/${encodeURIComponent(id)}/conditions`);
+    return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
+  }
+);
+
 // Submit report
 server.registerTool(
   "submit_report",

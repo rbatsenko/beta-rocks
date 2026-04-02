@@ -11,6 +11,7 @@ An [MCP (Model Context Protocol)](https://modelcontextprotocol.io) server that g
 | `search_crags` | Search climbing crags by name |
 | `get_crag` | Get crag detail by ID (sectors, rock type, location) |
 | `find_nearby_crags` | Find crags near coordinates |
+| `get_conditions` | Get weather and climbing conditions for a crag |
 | `get_crag_reports` | Get community reports for a crag |
 | `submit_report` | Submit a community report (requires sync_key) |
 
