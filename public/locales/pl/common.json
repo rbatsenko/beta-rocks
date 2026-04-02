@@ -364,7 +364,8 @@
     "lessReliable": "Dni 8-14: Mniej pewna prognoza",
     "lessReliableHourly": "Następne godziny mniej przewidywalne",
     "lessCertain": "MNIEJ PEWNE",
-    "todayBadge": "DZISIAJ"
+    "todayBadge": "DZISIAJ",
+    "noGoodWindows": "Brak dobrych okien wspinaczkowych tego dnia. Sprawdź zakładkę godzinową."
   },
   "timeContext": {
     "sunrise": "Wschód słońca",
@@ -884,7 +885,8 @@
     "forecast": "Prognoza",
     "dry": "Sucho",
     "wet": "Mokro",
-    "helpful": "Pomocne"
+    "helpful": "Pomocne",
+    "basedOnWeather": "na podstawie pogody"
   },
   "time": {
     "today": "Dzisiaj",
@@ -962,5 +964,26 @@
     "looksGood": "Dobre",
     "watchOut": "Średnie",
     "stayHome": "Złe"
+  },
+  "summary": {
+    "sandstoneWet": "Piaskowiec jest wciąż mokry. Poczekaj jeszcze dzień.",
+    "rainingNow": "Pada deszcz. {{mm}}mm do tej pory.",
+    "wetRockDryBy": "Skała może być wciąż mokra po ostatnim deszczu. Powinna wyschnąć do {{time}}.",
+    "rainExpected": "Deszcz spodziewany za {{hours}}h. Wyjdź teraz, by złapać suche okno.",
+    "condensationRisk": "Wysokie ryzyko kondensacji. Skała będzie śliska.",
+    "highHumidity": "Wilgotność jest wysoka ({{humidity}}%). Skała może być śliska.",
+    "extremeWind": "Ekstremalny wiatr ({{wind}} km/h). Niebezpieczne na eksponowanych drogach.",
+    "highWind": "Wietrznie ({{wind}} km/h). Osłonięte ściany powinny być ok.",
+    "dryAndGood": "Sucho i {{temp}}. {{humidity}}"
+  },
+  "flags": {
+    "rain": "Deszcz",
+    "rainExpected": "Deszcz za {{hours}}h",
+    "condensation": "Kondensacja",
+    "highHumidity": "Wysoka wilgotność",
+    "wetRock": "Mokra skała",
+    "windy": "Wietrznie",
+    "extremeWind": "Ekstremalny wiatr",
+    "sandstoneWet": "Mokry piaskowiec"
   }
 }

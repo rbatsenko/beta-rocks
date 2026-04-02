@@ -98,6 +98,7 @@ interface CragPageContentProps {
 interface ConditionsData {
   label: string;
   summary: string;
+  summary_template?: { key: string; params?: Record<string, any>; fallback: string };
   flags?: any;
   reasons?: string[];
   warnings?: string[];
@@ -782,13 +783,17 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                     >
                       {conditions.label === "looks_good" ? t("labels.looksGood", "Looks good") : conditions.label === "watch_out" ? t("labels.watchOut", "Watch out") : t("labels.stayHome", "Stay home")}
                     </Badge>
-                    <span className="text-xs text-muted-foreground italic">{t("cragPage.estimateBased", "based on weather")}</span>
+                    <span className="text-xs text-muted-foreground italic">{t("cragPage.basedOnWeather", "based on weather")}</span>
                   </div>
                 </div>
 
                 {/* Summary */}
                 {conditions.summary && (
-                  <p className="text-sm text-muted-foreground mb-4">{conditions.summary}</p>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    {conditions.summary_template
+                      ? String(t(conditions.summary_template.key, conditions.summary_template.params) || conditions.summary)
+                      : conditions.summary}
+                  </p>
                 )}
 
                 {/* Active flags */}

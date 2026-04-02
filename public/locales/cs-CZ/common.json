@@ -364,7 +364,8 @@
     "lessReliableHourly": "Další hodiny méně předvídatelné",
     "lessCertain": "MÉNĚ JISTÉ",
     "todayBadge": "DNES",
-    "delete": "Smazat"
+    "delete": "Smazat",
+    "noGoodWindows": "Žádná dobrá okna pro lezení tento den. Podívejte se na hodinový tab."
   },
   "timeContext": {
     "sunrise": "Východ slunce",
@@ -882,7 +883,8 @@
     "forecast": "Forecast",
     "dry": "Dry",
     "wet": "Wet",
-    "helpful": "Helpful"
+    "helpful": "Helpful",
+    "basedOnWeather": "na základě počasí"
   },
   "time": {
     "today": "Dnes",
@@ -958,5 +960,15 @@
     "looksGood": "Dobré",
     "watchOut": "Přijatelné",
     "stayHome": "Špatné"
+  },
+  "flags": {
+    "rain": "Déšť",
+    "rainExpected": "Déšť za {{hours}}h",
+    "condensation": "Kondenzace",
+    "highHumidity": "Vysoká vlhkost",
+    "wetRock": "Mokrá skála",
+    "windy": "Větrno",
+    "extremeWind": "Extrémní vítr",
+    "sandstoneWet": "Mokrý pískovec"
   }
 }

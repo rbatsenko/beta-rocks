@@ -248,7 +248,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                 <Badge className={`text-lg px-4 py-2 pointer-events-none ${getLabelColor(data.label)}`}>
                   {translateRating(data.label)}
                 </Badge>
-                <span className="text-xs text-muted-foreground italic">{t("cragPage.estimateBased", "based on weather")}</span>
+                <span className="text-xs text-muted-foreground italic">{t("cragPage.basedOnWeather", "based on weather")}</span>
                 {data.isDry ? (
                   <Badge variant="outline" className="text-green-600 border-green-600">
                     {t("dialog.dry")}
@@ -260,7 +260,11 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                 )}
               </div>
               {data.summary && (
-                <p className="text-sm text-muted-foreground">{data.summary}</p>
+                <p className="text-sm text-muted-foreground">
+                  {(data as any).summary_template
+                    ? String(t((data as any).summary_template.key, (data as any).summary_template.params) || data.summary)
+                    : data.summary}
+                </p>
               )}
             </div>
 
@@ -545,7 +549,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                           <AccordionContent className="px-3 pb-3">
                             {isBadDay ? (
                               <p className="text-sm text-muted-foreground italic py-2">
-                                {t("dialog.noOptimalHoursDay", "No good climbing windows on this day. Check the hourly tab for details.")}
+                                {t("dialog.noGoodWindows", "No good climbing windows on this day. Check the hourly tab for details.")}
                               </p>
                             ) : (
                             <div className="space-y-3">

@@ -368,7 +368,8 @@
     "lessReliableHourly": "Prossime ore meno prevedibili",
     "lessCertain": "MENO CERTO",
     "todayBadge": "OGGI",
-    "delete": "Elimina"
+    "delete": "Elimina",
+    "noGoodWindows": "Nessuna buona finestra per arrampicare oggi. Controlla la scheda oraria."
   },
   "timeContext": {
     "sunrise": "Alba",
@@ -887,7 +888,8 @@
     "forecast": "Forecast",
     "dry": "Dry",
     "wet": "Wet",
-    "helpful": "Helpful"
+    "helpful": "Helpful",
+    "basedOnWeather": "basato sul meteo"
   },
   "time": {
     "today": "Oggi",
@@ -961,5 +963,26 @@
     "looksGood": "Buono",
     "watchOut": "Discreto",
     "stayHome": "Scarso"
+  },
+  "summary": {
+    "sandstoneWet": "L'arenaria è ancora bagnata. Aspetta un altro giorno.",
+    "rainingNow": "Piove ora. {{mm}}mm finora.",
+    "wetRockDryBy": "La roccia potrebbe essere ancora bagnata. Dovrebbe asciugarsi entro le {{time}}.",
+    "rainExpected": "Pioggia prevista tra {{hours}}h. Esci ora per una finestra asciutta.",
+    "condensationRisk": "Alto rischio di condensa. La roccia sarà scivolosa.",
+    "highHumidity": "Umidità alta ({{humidity}}%). La roccia potrebbe essere scivolosa.",
+    "extremeWind": "Vento estremo ({{wind}} km/h). Non sicuro su vie esposte.",
+    "highWind": "Ventoso ({{wind}} km/h). Ok per pareti riparate.",
+    "dryAndGood": "Asciutto e {{temp}}. {{humidity}}"
+  },
+  "flags": {
+    "rain": "Pioggia",
+    "rainExpected": "Pioggia tra {{hours}}h",
+    "condensation": "Condensa",
+    "highHumidity": "Umidità alta",
+    "wetRock": "Roccia probabilmente bagnata",
+    "windy": "Ventoso",
+    "extremeWind": "Vento estremo",
+    "sandstoneWet": "Arenaria bagnata"
   }
 }

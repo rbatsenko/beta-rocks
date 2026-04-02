@@ -284,7 +284,8 @@
     "lessReliableHourly": "Orele următoare mai puțin previzibile",
     "lessCertain": "MAI PUȚIN CERT",
     "todayBadge": "ASTAZI",
-    "delete": "Șterge"
+    "delete": "Șterge",
+    "noGoodWindows": "Nu sunt ferestre bune de cățărat astăzi. Verifică tab-ul orar."
   },
   "timeContext": {
     "sunrise": "Răsărit",
@@ -802,7 +803,8 @@
     "forecast": "Forecast",
     "dry": "Dry",
     "wet": "Wet",
-    "helpful": "Helpful"
+    "helpful": "Helpful",
+    "basedOnWeather": "bazat pe vreme"
   },
   "time": {
     "today": "Astăzi",
@@ -877,5 +879,15 @@
     "looksGood": "Bun",
     "watchOut": "Mediu",
     "stayHome": "Slab"
+  },
+  "flags": {
+    "rain": "Ploaie",
+    "rainExpected": "Ploaie în {{hours}}h",
+    "condensation": "Condensare",
+    "highHumidity": "Umiditate ridicată",
+    "wetRock": "Stâncă probabil udă",
+    "windy": "Vânt",
+    "extremeWind": "Vânt extrem",
+    "sandstoneWet": "Gresie udă"
   }
 }

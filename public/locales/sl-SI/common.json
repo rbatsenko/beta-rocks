@@ -365,7 +365,8 @@
     "lessReliableHourly": "Naslednje ure manj predvidljive",
     "lessCertain": "MANJ ZANESLJIVO",
     "todayBadge": "DANES",
-    "delete": "Izbriši"
+    "delete": "Izbriši",
+    "noGoodWindows": "Ni dobrih oken za plezanje ta dan. Preverite urni zavihek."
   },
   "timeContext": {
     "sunrise": "Sončni vzhod",
@@ -883,7 +884,8 @@
     "forecast": "Forecast",
     "dry": "Dry",
     "wet": "Wet",
-    "helpful": "Helpful"
+    "helpful": "Helpful",
+    "basedOnWeather": "glede na vreme"
   },
   "time": {
     "today": "Danes",
@@ -959,5 +961,15 @@
     "looksGood": "Dobro",
     "watchOut": "Srednje",
     "stayHome": "Slabo"
+  },
+  "flags": {
+    "rain": "Dež",
+    "rainExpected": "Dež čez {{hours}}h",
+    "condensation": "Kondenzacija",
+    "highHumidity": "Visoka vlažnost",
+    "wetRock": "Mokra skala",
+    "windy": "Vetrovno",
+    "extremeWind": "Ekstremni veter",
+    "sandstoneWet": "Mokri peščenjak"
   }
 }

@@ -365,7 +365,8 @@
     "lessReliableHourly": "Neste timer mindre forutsigbare",
     "lessCertain": "MER USIKKERT",
     "todayBadge": "I DAG",
-    "delete": "Slett"
+    "delete": "Slett",
+    "noGoodWindows": "Ingen gode klatrevinduer denne dagen. Sjekk timetabben."
   },
   "timeContext": {
     "sunrise": "Soloppgang",
@@ -804,7 +805,8 @@
     "forecast": "Forecast",
     "dry": "Dry",
     "wet": "Wet",
-    "helpful": "Helpful"
+    "helpful": "Helpful",
+    "basedOnWeather": "basert på vær"
   },
   "time": {
     "today": "I dag",
@@ -873,5 +875,15 @@
     "looksGood": "Bra",
     "watchOut": "Middels",
     "stayHome": "Dårlig"
+  },
+  "flags": {
+    "rain": "Regn",
+    "rainExpected": "Regn om {{hours}}t",
+    "condensation": "Kondens",
+    "highHumidity": "Høy fuktighet",
+    "wetRock": "Våt klippe",
+    "windy": "Vindfullt",
+    "extremeWind": "Ekstrem vind",
+    "sandstoneWet": "Våt sandstein"
   }
 }

@@ -368,7 +368,8 @@
     "lessReliableHourly": "Nächste Stunden weniger vorhersehbar",
     "lessCertain": "UNSICHERER",
     "todayBadge": "HEUTE",
-    "delete": "Löschen"
+    "delete": "Löschen",
+    "noGoodWindows": "Keine guten Kletterfenster an diesem Tag. Prüfe den Stundentab für Details."
   },
   "timeContext": {
     "sunrise": "Sonnenaufgang",
@@ -887,7 +888,8 @@
     "forecast": "Forecast",
     "dry": "Dry",
     "wet": "Wet",
-    "helpful": "Helpful"
+    "helpful": "Helpful",
+    "basedOnWeather": "basierend auf Wetter"
   },
   "time": {
     "today": "Heute",
@@ -961,5 +963,26 @@
     "looksGood": "Gut",
     "watchOut": "Mäßig",
     "stayHome": "Schlecht"
+  },
+  "summary": {
+    "sandstoneWet": "Sandstein ist noch nass. Warte noch einen Tag.",
+    "rainingNow": "Es regnet. {{mm}}mm bisher.",
+    "wetRockDryBy": "Fels könnte noch nass sein. Sollte bis {{time}} trocknen.",
+    "rainExpected": "Regen in {{hours}}h erwartet. Jetzt rausgehen für ein trockenes Fenster.",
+    "condensationRisk": "Hohes Kondensationsrisiko. Fels wird sich schmierig anfühlen.",
+    "highHumidity": "Hohe Luftfeuchtigkeit ({{humidity}}%). Fels könnte sich poliert anfühlen.",
+    "extremeWind": "Extremer Wind ({{wind}} km/h). Nicht sicher für exponierte Routen.",
+    "highWind": "Windig ({{wind}} km/h). Geschützte Wände sind ok.",
+    "dryAndGood": "Trocken und {{temp}}. {{humidity}}"
+  },
+  "flags": {
+    "rain": "Regen",
+    "rainExpected": "Regen in {{hours}}h",
+    "condensation": "Kondensation",
+    "highHumidity": "Hohe Luftfeuchtigkeit",
+    "wetRock": "Nasser Fels wahrscheinlich",
+    "windy": "Windig",
+    "extremeWind": "Extremer Wind",
+    "sandstoneWet": "Nasser Sandstein"
   }
 }
