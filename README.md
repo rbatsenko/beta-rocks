@@ -127,6 +127,7 @@ See [Vercel docs](https://vercel.com/docs) for more info.
 - **Community reports** - Fetch and submit reports via API with sync key authentication
 - **CORS enabled** - Open CORS for all origins on v1 endpoints
 - **API docs** - Interactive documentation at [`/docs/api`](https://beta.rocks/docs/api)
+- **MCP server** - [`beta-rocks-mcp`](https://www.npmjs.com/package/beta-rocks-mcp) for Claude, Cursor, Windsurf, and other AI tools
 
 ### i18n
 
