@@ -108,7 +108,7 @@ function createServer() {
     "submit_report",
     {
       title: "Submit Report",
-      description: "Submit a community report for a crag. Requires a beta.rocks sync key for user attribution.",
+      description: "Submit a community report for a crag. You must provide your beta.rocks sync key (found in Settings in the app).",
       inputSchema: z.object({
         crag_id: z.string().describe("Crag ID to report on"),
         category: CATEGORIES.describe("Report category"),

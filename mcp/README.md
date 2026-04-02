@@ -135,7 +135,26 @@ Then use the local path:
 
 | Env Variable | Default | Description |
 |---|---|---|
+| `BETA_ROCKS_SYNC_KEY` | — | Your beta.rocks sync key (required to submit reports) |
 | `BETA_ROCKS_API_URL` | `https://beta.rocks` | API base URL |
+
+To set your sync key, add `env` to the MCP config:
+
+```json
+{
+  "mcpServers": {
+    "beta-rocks": {
+      "command": "npx",
+      "args": ["beta-rocks-mcp"],
+      "env": {
+        "BETA_ROCKS_SYNC_KEY": "your-sync-key-here"
+      }
+    }
+  }
+}
+```
+
+You can find your sync key in the beta.rocks app under Settings.
 
 ## Usage
 

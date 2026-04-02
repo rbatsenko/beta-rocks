@@ -5,6 +5,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 
 const BASE_URL = process.env.BETA_ROCKS_API_URL || "https://beta.rocks";
+const SYNC_KEY = process.env.BETA_ROCKS_SYNC_KEY || "";
 
 async function apiGet(path: string): Promise<any> {
   const res = await fetch(`${BASE_URL}${path}`);
@@ -112,18 +113,22 @@ server.registerTool(
   "submit_report",
   {
     title: "Submit Report",
-    description: "Submit a community report for a crag. Requires a beta.rocks sync key for user attribution.",
+    description: "Submit a community report for a crag. Uses the sync key from BETA_ROCKS_SYNC_KEY env var, or pass one explicitly.",
     inputSchema: z.object({
       crag_id: z.string().describe("Crag ID to report on"),
       category: CATEGORIES.describe("Report category"),
       message: z.string().min(1).max(2000).describe("Report text"),
       rating: z.number().min(1).max(5).optional().describe("Dryness rating 1-5"),
-      sync_key: z.string().describe("Your beta.rocks sync key for attribution"),
+      sync_key: z.string().optional().describe("beta.rocks sync key (uses BETA_ROCKS_SYNC_KEY env var if not provided)"),
       source: z.string().optional().describe("Source app identifier"),
     }),
   },
   async ({ crag_id, category, message, rating, sync_key, source }) => {
-    const body: Record<string, any> = { crag_id, category, message, sync_key };
+    const resolvedSyncKey = sync_key || SYNC_KEY;
+    if (!resolvedSyncKey) {
+      return { content: [{ type: "text", text: "Error: No sync key provided. Either pass sync_key or set the BETA_ROCKS_SYNC_KEY environment variable." }] };
+    }
+    const body: Record<string, any> = { crag_id, category, message, sync_key: resolvedSyncKey };
     if (rating) body.rating = rating;
     if (source) body.source = source;
     const { status, data } = await apiPost("/api/v1/reports", body);
