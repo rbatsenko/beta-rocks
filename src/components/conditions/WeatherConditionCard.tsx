@@ -25,8 +25,9 @@ interface ConditionsData {
   location: string;
   locationDetails?: string;
   timeframe?: string;
-  rating: string;
-  frictionScore: number;
+  label: string;
+  summary: string;
+  flags?: any;
   reasons?: string[];
   warnings?: string[];
   isDry: boolean;
@@ -50,7 +51,7 @@ interface ConditionsData {
     weatherCode: number;
   };
   hourlyConditions?: unknown[];
-  optimalWindows?: unknown[];
+  dry_windows?: unknown[];
 }
 
 interface PrefetchedFullData {
@@ -65,29 +66,30 @@ interface PrefetchedFullData {
     weatherCode: number;
   };
   conditions: {
-    rating: string;
-    frictionRating: number;
+    label: string;
+    summary: string;
+    flags: any;
     isDry: boolean;
     reasons?: string[];
     warnings?: string[];
+    dry_windows?: any[];
     hourlyConditions?: Array<{
       time: string;
       temp_c: number;
       humidity: number;
       wind_kph: number;
       precip_mm: number;
-      frictionScore: number;
-      rating: string;
-      isDry: boolean;
+      dew_point_spread: number;
       warnings: string[];
       weatherCode?: number;
-    }>;
-    optimalWindows?: Array<{
-      startTime: string;
-      endTime: string;
-      avgFrictionScore: number;
-      rating: string;
-      hourCount: number;
+      flags: {
+        rain_now: boolean;
+        condensation_risk: boolean;
+        high_humidity: boolean;
+        wet_rock_likely: boolean;
+        high_wind: boolean;
+        extreme_wind: boolean;
+      };
     }>;
     precipitationContext?: {
       last24h: number;
@@ -138,7 +140,7 @@ function isNightTime(date: Date): boolean {
 export const WeatherConditionCard = memo(function WeatherConditionCard({
   data,
   translateWeather,
-  translateRating,
+  translateRating: _translateRating,
   translateWarning,
   translateReason,
   onDetailsClick,
@@ -193,8 +195,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
           cragId: data.cragId,
           areaSlug: data.cragSlug,
           rockType: data.rockType,
-          lastRating: data.rating,
-          lastFrictionScore: data.frictionScore,
+          lastLabel: data.label,
           lastCheckedAt: new Date().toISOString(),
         },
         previousFavorites: favorites,
@@ -232,8 +233,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
           cragId: data.cragId,
           areaSlug: data.cragSlug,
           rockType: data.rockType,
-          lastRating: data.rating,
-          lastFrictionScore: data.frictionScore,
+          lastLabel: data.label,
           lastCheckedAt: new Date().toISOString(),
         },
         previousFavorites: favorites,
@@ -277,8 +277,8 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
 
           const fullData = await response.json();
           console.log(
-            "[WeatherConditionCard] Prefetch complete, hourly count:",
-            fullData.conditions?.hourlyConditions?.length || 0
+            "[WeatherConditionCard] Prefetch complete, label:",
+            fullData.conditions?.label || "unknown"
           );
           onFullDataFetched(fullData);
         } catch (error) {
@@ -388,7 +388,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
           </div>
 
           {/* Action buttons row */}
-          {(data.hourlyConditions || data.optimalWindows) && (
+          {(data.hourlyConditions || data.dry_windows) && (
             <div className="flex flex-wrap gap-2">
               {data.latitude && data.longitude && (
                 <MapPopover
@@ -433,7 +433,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
 
           {/* Conditions */}
           <div className="font-medium">
-            {conditionsLabel}: {translateRating(data.rating)} ({data.frictionScore}/5)
+            {conditionsLabel}: {data.summary}
           </div>
 
           {/* Warnings */}

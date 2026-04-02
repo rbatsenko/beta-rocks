@@ -131,7 +131,7 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
           longitude: f.longitude,
           rockType: f.rock_type,
           lastRating: f.last_rating,
-          lastFrictionScore: f.last_friction_score,
+          lastLabel: f.last_label,
           lastCheckedAt: f.last_checked_at,
           displayOrder: f.display_order || 0,
           addedAt: f.added_at,

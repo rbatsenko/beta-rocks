@@ -127,7 +127,7 @@ GET /api/v1/crags/nearby?lat=49.7&lon=11.3&radius=10000
 
 ## GET /api/v1/crags/{id}/conditions
 
-Get current weather and climbing conditions for a crag.
+Get current weather and climbing conditions for a crag. Returns weather data, condition flags, dry windows, and warnings.
 
 ### Parameters
 
@@ -148,51 +148,38 @@ GET /api/v1/crags/osm_relation_17696060/conditions
       "name": "Frankenjura",
       "rock_type": "limestone"
     },
-    "current_weather": {
-      "temperature_c": 18.5,
-      "humidity": 55,
-      "wind_speed_kph": 12,
-      "wind_direction": 220,
-      "precipitation_mm": 0
-    },
-    "conditions": {
-      "label": "Good",
-      "friction_score": 4,
-      "note": "Friction score is a rough estimate based on weather, rock type, and recent precipitation.",
-      "is_dry": true,
-      "drying_time_hours": null,
-      "dew_point_spread": 8.2,
-      "precipitation": {
-        "last_24h_mm": 0,
-        "last_48h_mm": 2.1,
-        "next_24h_mm": 0
-      },
-      "reasons": ["Good temperature for limestone", "Low humidity"],
-      "warnings": [],
-      "hourly_conditions": [
-        {
-          "time": "2026-04-02T12:00",
-          "friction_score": 4,
-          "temperature_c": 18.5,
-          "humidity": 55,
-          "wind_speed_kph": 12,
-          "precipitation_mm": 0
-        }
-      ],
-      "optimal_windows": [...]
-    },
-    "daily_forecast": [
-      {
-        "date": "2026-04-02",
-        "temp_max_c": 22,
-        "temp_min_c": 8,
-        "precipitation_mm": 0,
-        "wind_speed_max_kph": 15,
-        "weather_code": 1,
-        "sunrise": "06:45",
-        "sunset": "19:30"
+    "weather": {
+      "now": {
+        "temp_c": 18.5,
+        "humidity": 55,
+        "dew_point_spread": 8.2,
+        "wind_kph": 12,
+        "precip_mm": 0
       }
+    },
+    "flags": {
+      "rain_now": false,
+      "rain_expected": null,
+      "recent_rain": { "last_24h_mm": 0, "last_48h_mm": 2.1 },
+      "condensation_risk": false,
+      "high_humidity": false,
+      "wet_rock_likely": false,
+      "estimated_dry_by": null,
+      "sandstone_wet_warning": false,
+      "extreme_wind": false,
+      "high_wind": false
+    },
+    "label": "looks_good",
+    "summary": "Dry and comfortable. Low humidity.",
+    "dry_windows": [
+      { "start": "2026-04-02T09:00", "end": "2026-04-02T18:00", "hours": 9 }
     ],
+    "precipitation": {
+      "last_24h_mm": 0,
+      "last_48h_mm": 2.1,
+      "next_24h_mm": 0
+    },
+    "warnings": [],
     "updated_at": "2026-04-02T12:00:00Z"
   }
 }

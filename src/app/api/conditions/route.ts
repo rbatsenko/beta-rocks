@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { computeConditions, RockType } from "@/lib/conditions/conditions.service";
+import { computeWeather, RockType } from "@/lib/conditions/conditions.service";
 import { getWeatherForecast } from "@/lib/external-apis/open-meteo";
 
 /**
@@ -75,9 +75,8 @@ export async function GET(request: NextRequest) {
       weatherCode: h.weatherCode,
     }));
 
-    // Compute conditions with enhanced data (hourly conditions, optimal windows, etc.)
-    // Cached for 1 hour with Cache Components
-    const conditions = await computeConditions(
+    // Compute weather conditions
+    const weatherResponse = await computeWeather(
       {
         current: {
           temp_c: forecast.current.temperature,
@@ -86,6 +85,8 @@ export async function GET(request: NextRequest) {
           precip_mm: forecast.current.precipitation,
         },
         hourly: hourlyData,
+        latitude,
+        longitude,
       },
       rockType,
       recentPrecipMm
@@ -95,45 +96,14 @@ export async function GET(request: NextRequest) {
       latitude,
       longitude,
       rockType,
-      rating: conditions.rating,
-      frictionRating: conditions.frictionRating,
+      label: weatherResponse.label,
     });
 
     return NextResponse.json({
       location: { lat: latitude, lon: longitude },
       rockType,
-      current: {
-        temperature_c: forecast.current.temperature,
-        humidity: forecast.current.humidity,
-        windSpeed_kph: forecast.current.windSpeed,
-        windDirection: forecast.current.windDirection,
-        precipitation_mm: forecast.current.precipitation,
-        weatherCode: forecast.current.weatherCode,
-      },
-      conditions: {
-        ...conditions,
-        // Keep ISO timestamps - formatting happens in UI
-        // Add daily forecast data (full 14 days)
-        dailyForecast: forecast.daily?.map((day) => ({
-          date: day.date,
-          tempMax: day.tempMax,
-          tempMin: day.tempMin,
-          precipitation: day.precipitation,
-          windSpeedMax: day.windSpeedMax,
-          windDirectionDominant: day.windDirectionDominant,
-          sunrise: day.sunrise,
-          sunset: day.sunset,
-          weatherCode: day.weatherCode,
-        })),
-      },
-      // Include today's sunrise/sunset from daily forecast
-      astro: forecast.daily?.[0]
-        ? {
-            sunrise: forecast.daily[0].sunrise,
-            sunset: forecast.daily[0].sunset,
-          }
-        : undefined,
-      updatedAt: new Date().toISOString(),
+      ...weatherResponse,
+      updatedAt: weatherResponse.updated_at,
     });
   } catch (error) {
     const errorDetails = {

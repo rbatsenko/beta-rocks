@@ -108,7 +108,7 @@ function createServer() {
     "get_conditions",
     {
       title: "Get Conditions",
-      description: "Get current weather and climbing conditions for a crag - temperature, humidity, wind, friction score (rough estimate), and optimal climbing windows for the next 24 hours.",
+      description: "Get climbing-relevant weather data for a crag - risk flags (rain, condensation, wet rock, etc.), a plain-language summary, overall label (looks_good / watch_out / stay_home), dry weather windows, precipitation totals, and warnings.",
       inputSchema: z.object({
         id: z.string().describe("Crag ID"),
       }),

@@ -31,8 +31,9 @@ interface ConditionsDetailSheetProps {
     state?: string;
     municipality?: string;
     village?: string;
-    rating: string;
-    frictionScore: number;
+    label: string;
+    summary: string;
+    flags?: any;
     reasons?: string[];
     warnings?: string[];
     isDry: boolean;
@@ -52,18 +53,23 @@ interface ConditionsDetailSheetProps {
       wind_kph: number;
       wind_direction?: number;
       precip_mm: number;
-      frictionScore: number;
-      rating: string;
-      isDry: boolean;
+      dew_point_spread: number;
       warnings: string[];
       weatherCode?: number;
+      flags: {
+        rain_now: boolean;
+        condensation_risk: boolean;
+        high_humidity: boolean;
+        wet_rock_likely: boolean;
+        high_wind: boolean;
+        extreme_wind: boolean;
+      };
     }>;
-    optimalWindows?: Array<{
+    dry_windows?: Array<{
       startTime: string;
       endTime: string;
-      avgFrictionScore: number;
-      rating: string;
       hourCount: number;
+      hours: number;
     }>;
     precipitationContext?: {
       last24h: number;

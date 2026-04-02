@@ -19,8 +19,9 @@ export interface Favorite {
   rockType?: string;
 
   // Cached conditions
-  lastRating?: string;
-  lastFrictionScore?: number;
+  lastLabel?: string;
+  lastRating?: string; // @deprecated — kept for backward compat
+  lastFrictionScore?: number; // @deprecated — kept for backward compat
   lastCheckedAt?: string;
 
   // Locationless crags (no coordinates, reports only)
@@ -121,8 +122,8 @@ export async function addFavoriteToStorage(
         latitude: newFavorite.latitude,
         longitude: newFavorite.longitude,
         rock_type: newFavorite.rockType,
-        last_rating: newFavorite.lastRating,
-        last_friction_score: newFavorite.lastFrictionScore,
+        last_rating: newFavorite.lastLabel || newFavorite.lastRating,
+        last_friction_score: null,
         last_checked_at: newFavorite.lastCheckedAt,
         display_order: newFavorite.displayOrder,
         added_at: newFavorite.addedAt,
@@ -273,8 +274,7 @@ export async function syncFavoritesFromSupabase(): Promise<void> {
       latitude: f.latitude,
       longitude: f.longitude,
       rockType: f.rock_type || undefined,
-      lastRating: f.last_rating || undefined,
-      lastFrictionScore: f.last_friction_score || undefined,
+      lastLabel: f.last_rating || undefined,
       lastCheckedAt: f.last_checked_at || undefined,
       displayOrder: f.display_order,
       addedAt: f.added_at,

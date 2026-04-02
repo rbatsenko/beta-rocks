@@ -96,8 +96,9 @@ interface CragPageContentProps {
 }
 
 interface ConditionsData {
-  rating: string;
-  frictionScore: number;
+  label: string;
+  summary: string;
+  flags?: any;
   reasons?: string[];
   warnings?: string[];
   isDry: boolean;
@@ -117,18 +118,23 @@ interface ConditionsData {
     wind_kph: number;
     wind_direction?: number;
     precip_mm: number;
-    frictionScore: number;
-    rating: string;
-    isDry: boolean;
+    dew_point_spread: number;
     warnings: string[];
     weatherCode?: number;
+    flags: {
+      rain_now: boolean;
+      condensation_risk: boolean;
+      high_humidity: boolean;
+      wet_rock_likely: boolean;
+      high_wind: boolean;
+      extreme_wind: boolean;
+    };
   }>;
-  optimalWindows?: Array<{
+  dry_windows?: Array<{
     startTime: string;
     endTime: string;
-    avgFrictionScore: number;
-    rating: string;
     hourCount: number;
+    hours: number;
   }>;
   precipitationContext?: {
     last24h: number;
@@ -327,8 +333,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
           longitude: crag.lon ?? 0,
           cragId: crag.id,
           rockType: crag.rock_type || undefined,
-          lastRating: isLocationless ? undefined : (conditions?.rating || "unknown"),
-          lastFrictionScore: isLocationless ? undefined : (conditions?.frictionScore || 0),
+          lastLabel: isLocationless ? undefined : (conditions?.label || "unknown"),
           lastCheckedAt: isLocationless ? undefined : new Date().toISOString(),
           isLocationless: isLocationless || undefined,
         },
@@ -367,8 +372,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
           longitude: crag.lon ?? 0,
           cragId: crag.id,
           rockType: crag.rock_type || undefined,
-          lastRating: isLocationless ? undefined : (conditions?.rating || "unknown"),
-          lastFrictionScore: isLocationless ? undefined : (conditions?.frictionScore || 0),
+          lastLabel: isLocationless ? undefined : (conditions?.label || "unknown"),
           lastCheckedAt: isLocationless ? undefined : new Date().toISOString(),
           isLocationless: isLocationless || undefined,
         },
@@ -733,16 +737,14 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                     <Badge
                       variant="outline"
                       className={`text-lg px-4 py-2 ${
-                        conditions.rating === "Great"
+                        conditions.label === "looks_good"
                           ? "bg-green-500/10 text-green-700 dark:text-green-300 border-green-500/30"
-                          : conditions.rating === "Good"
-                            ? "bg-blue-500/10 text-blue-700 dark:text-blue-300 border-blue-500/30"
-                            : conditions.rating === "Fair"
-                              ? "bg-yellow-500/10 text-yellow-700 dark:text-yellow-300 border-yellow-500/30"
-                              : "bg-gray-500/10 text-gray-700 dark:text-gray-300 border-gray-500/30"
+                          : conditions.label === "watch_out"
+                            ? "bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/30"
+                            : "bg-red-500/10 text-red-700 dark:text-red-300 border-red-500/30"
                       }`}
                     >
-                      {t(`ratings.${conditions.rating.toLowerCase()}`) || conditions.rating}
+                      {conditions.label === "looks_good" ? t("labels.looksGood", "Looks good") : conditions.label === "watch_out" ? t("labels.watchOut", "Watch out") : t("labels.stayHome", "Stay home")}
                     </Badge>
                     <span className="text-xs text-muted-foreground italic">{t("cragPage.estimateBased", "based on weather")}</span>
                   </div>

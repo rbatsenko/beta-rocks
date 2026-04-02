@@ -38,8 +38,8 @@ import {
   getWindCardinal,
   getWindArrowRotation,
 } from "@/lib/units";
-import type { Report } from "@/types/api";
-import { FRICTION_RATINGS, RATING_COLORS, CATEGORY_COLORS } from "@/constants/config";
+import type { Report, ConditionsLabel } from "@/types/api";
+import { LABEL_COLORS, CATEGORY_COLORS } from "@/constants/config";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
 import { PhotoLightbox } from "@/components/PhotoLightbox";
@@ -51,15 +51,9 @@ function fmt(val: number | undefined | null, decimals = 1): string {
   return val != null ? val.toFixed(decimals) : "\u2014";
 }
 
-function getRatingLabel(score: number | null | undefined): string | null {
-  if (score == null) return null;
-  const key = Math.round(score) as keyof typeof FRICTION_RATINGS;
-  return FRICTION_RATINGS[key]?.label ?? null;
-}
-
-function getRatingColors(label: string | null) {
+function getLabelColors(label: ConditionsLabel | string | null | undefined) {
   if (!label) return null;
-  return RATING_COLORS[label as keyof typeof RATING_COLORS] ?? null;
+  return LABEL_COLORS[label as keyof typeof LABEL_COLORS] ?? null;
 }
 
 function getCountryFlag(code: string | null | undefined): string {
@@ -226,15 +220,17 @@ export default function CragDetailScreen() {
     return reports.filter(r => r.category === selectedCategory);
   }, [reports, selectedCategory]);
 
-  // Group optimal windows by day — include all forecast days (bad days shown folded)
+  // Group dry windows by day — include all forecast days (bad days shown folded)
   const groupedWindows = useMemo(() => {
-    const windows = conditions?.optimalWindows || [];
+    const windows = conditions?.dry_windows || [];
     const daily = conditions?.dailyForecast || [];
     const hourly = conditions?.hourlyConditions || [];
-    const groups: { label: string; dateKey: string; windows: typeof windows; bestRating?: string; weatherCode?: number }[] = [];
-    const seen = new Map<string, typeof windows>();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const groups: { label: string; dateKey: string; windows: any[]; hasDryHours?: boolean; weatherCode?: number }[] = [];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const seen = new Map<string, any[]>();
 
-    // Group optimal windows by day, attaching hourly data to each window
+    // Group dry windows by day, attaching hourly data to each window
     for (const w of windows) {
       const key = getDateKey(w.startTime);
       if (!seen.has(key)) seen.set(key, []);
@@ -261,36 +257,32 @@ export default function CragDetailScreen() {
         const label = getDayLabel(day.date, t);
         const dayWindows = seen.get(key) || [];
 
-        // Determine best rating for days without windows
-        let bestRating: string | undefined;
-        if (dayWindows.length === 0) {
+        // Check if any dry hours exist on this day
+        let hasDryHours = dayWindows.length > 0;
+        if (!hasDryHours) {
           const dayEnd = new Date(dayStart);
           dayEnd.setDate(dayEnd.getDate() + 1);
-          const ratingOrder = ["Great", "Good", "Fair", "Poor", "Nope"];
-          bestRating = "Nope";
           for (const h of hourly) {
             const ht = new Date(h.time);
-            if (ht >= dayStart && ht < dayEnd) {
-              const rl = getRatingLabel(h.frictionScore ?? h.friction);
-              if (rl && ratingOrder.indexOf(rl) < ratingOrder.indexOf(bestRating)) {
-                bestRating = rl;
-              }
+            if (ht >= dayStart && ht < dayEnd && h.isDry) {
+              hasDryHours = true;
+              break;
             }
           }
         }
 
-        groups.push({ label, dateKey: key, windows: dayWindows, bestRating, weatherCode: day.weatherCode });
+        groups.push({ label, dateKey: key, windows: dayWindows, hasDryHours, weatherCode: day.weatherCode });
       }
     } else {
       // Fallback: only show days with windows
       seen.forEach((wins, key) => {
         const label = getDayLabel(wins[0].startTime, t);
-        groups.push({ label, dateKey: key, windows: wins });
+        groups.push({ label, dateKey: key, windows: wins, hasDryHours: true });
       });
     }
 
     return groups;
-  }, [conditions?.optimalWindows, conditions?.dailyForecast, conditions?.hourlyConditions, t]);
+  }, [conditions?.dry_windows, conditions?.dailyForecast, conditions?.hourlyConditions, t]);
 
   function openLightbox(photos: string[], index: number) {
     setLightboxPhotos(photos);
@@ -354,8 +346,8 @@ export default function CragDetailScreen() {
           latitude: crag.lat ?? null,
           longitude: crag.lon ?? null,
           rock_type: crag.rock_type,
-          last_friction_score: isLocationless ? null : conditions?.frictionScore,
-          last_rating: isLocationless ? null : conditions?.rating,
+          last_label: isLocationless ? null : conditions?.label,
+          last_rating: isLocationless ? null : conditions?.label,
           last_checked_at: isLocationless ? null : new Date().toISOString(),
         });
         const favs = getFavorites() as any[];
@@ -369,8 +361,8 @@ export default function CragDetailScreen() {
           latitude: crag.lat ?? 0,
           longitude: crag.lon ?? 0,
           rockType: crag.rock_type,
-          lastFrictionScore: isLocationless ? undefined : conditions?.frictionScore,
-          lastRating: isLocationless ? undefined : conditions?.rating,
+          lastLabel: isLocationless ? undefined : conditions?.label,
+          lastRating: isLocationless ? undefined : conditions?.label,
           lastCheckedAt: isLocationless ? undefined : new Date().toISOString(),
           isLocationless: isLocationless || undefined,
           displayOrder: 0,
@@ -442,10 +434,9 @@ export default function CragDetailScreen() {
   }
 
   const isLocationless = crag.lat == null || crag.lon == null;
-  const frictionScore = isLocationless ? null : (conditions?.frictionScore ?? null);
-  const ratingLabelKey = getRatingLabel(frictionScore);
-  const ratingLabel = ratingLabelKey ? t(`ratings.${ratingLabelKey.toLowerCase()}`, ratingLabelKey) : null;
-  const ratingColors = getRatingColors(ratingLabelKey);
+  const conditionsLabel = isLocationless ? null : (conditions?.label ?? null);
+  const labelColors = getLabelColors(conditionsLabel);
+  const conditionsSummary = conditions?.summary ?? null;
   const isDry: boolean | null = isLocationless ? null : (conditions?.isDry ?? null);
   const astro = conditions?.astro;
   const dailyForecast: any[] = isLocationless ? [] : (conditions?.dailyForecast || []);
@@ -559,10 +550,12 @@ export default function CragDetailScreen() {
               color={isFavorited ? "#ef4444" : colors.muted}
             />
           </TouchableOpacity>
-          {!isLocationless && ratingColors && frictionScore && (
+          {!isLocationless && labelColors && conditionsLabel && (
             <View style={{ alignItems: "center", gap: 2 }}>
-              <View style={[styles.ratingCard, { backgroundColor: ratingColors.bg, borderColor: ratingColors.solid, borderWidth: 1 }]}>
-                <Text style={[styles.ratingLabel, { color: ratingColors.text }]}>{ratingLabel}</Text>
+              <View style={[styles.ratingCard, { backgroundColor: labelColors.bg, borderColor: labelColors.solid, borderWidth: 1 }]}>
+                <Text style={[styles.ratingLabel, { color: labelColors.text }]}>
+                  {t(`conditions.labels.${conditionsLabel}`, conditionsLabel.replace(/_/g, " "))}
+                </Text>
               </View>
               <Text style={[styles.ratingHint, { color: colors.muted }]}>{t("cragPage.estimateBased", "based on weather")}</Text>
             </View>
@@ -853,6 +846,12 @@ export default function CragDetailScreen() {
               </Text>
             </View>
           )}
+          {/* Conditions summary */}
+          {conditionsSummary && (
+            <Text style={[styles.precipLabel, { color: colors.textSecondary, textAlign: "center", paddingHorizontal: Spacing.sm }]}>
+              {conditionsSummary}
+            </Text>
+          )}
           {/* G. Unit-converted conditions grid */}
           <View style={styles.conditionsGrid}>
             <ConditionItem
@@ -947,7 +946,7 @@ export default function CragDetailScreen() {
       {activeTab === "conditions" && groupedWindows.length > 0 && (
         <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
           <View style={styles.windowsHeader}>
-            <Text style={[styles.cardTitle, { color: colors.text }]}>{t("dialog.optimalWindows", "Optimal Climbing Windows")}</Text>
+            <Text style={[styles.cardTitle, { color: colors.text }]}>{t("dialog.dryWindows", "Dry Windows")}</Text>
             <Text style={[styles.precipLabel, { color: colors.muted }]}>{t("dialog.nextDays", "Next 5 days")}</Text>
           </View>
           {groupedWindows.map((group, gi) => {
@@ -963,7 +962,7 @@ export default function CragDetailScreen() {
                 windows={group.windows}
                 isHighlighted={isHighlighted}
                 isToday={isToday}
-                bestRating={group.bestRating}
+                hasDryHours={group.hasDryHours}
                 colors={colors}
                 units={units}
                 t={t}
@@ -993,20 +992,19 @@ export default function CragDetailScreen() {
         return grouped.map((group, gi) => (
           <View key={gi} style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
             <Text style={[styles.cardTitle, { color: colors.text }]}>{group.label}</Text>
-            {/* Show good/great hours prominently */}
+            {/* Show dry hours without warnings prominently */}
             {group.hours.filter((h: any) => {
-              const rl = getRatingLabel(h.frictionScore ?? h.friction);
-              return rl === "Great" || rl === "Good";
+              const flags = h.flags;
+              return flags && !flags.rain_now && !flags.wet_rock_likely && !flags.extreme_wind;
             }).map((h: any, i: number) => {
-              const score = h.frictionScore ?? h.friction;
-              const rl = getRatingLabel(score);
-              const rc = getRatingColors(rl);
+              const flags = h.flags;
+              const hasWarning = flags?.high_humidity || flags?.condensation_risk || flags?.high_wind;
               const temp = h.temp_c ?? h.temperature_c;
               const wind = h.wind_kph ?? h.windSpeed_kph;
               const windDir = h.wind_direction;
               return (
                 <View key={`good-${i}`} style={[styles.hourlyRow, {
-                  backgroundColor: rl === "Great" ? "rgba(34,197,94,0.08)" : "rgba(59,130,246,0.06)",
+                  backgroundColor: hasWarning ? "rgba(245,158,11,0.06)" : "rgba(34,197,94,0.08)",
                   borderRadius: BorderRadius.md,
                   paddingHorizontal: Spacing.sm,
                   marginVertical: 2,
@@ -1031,11 +1029,7 @@ export default function CragDetailScreen() {
                       </>
                     )}
                   </View>
-                  {rc && rl && (
-                    <View style={[styles.smallBadge, { backgroundColor: rc.bg, marginLeft: "auto" }]}>
-                      <Text style={[styles.smallBadgeText, { color: rc.text }]}>{t(`ratings.${rl!.toLowerCase()}`, rl)}</Text>
-                    </View>
-                  )}
+                  <HourlyFlagIndicator flags={flags} />
                 </View>
               );
             })}
@@ -1146,8 +1140,6 @@ export default function CragDetailScreen() {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function ExpandableWindow({ window: w, colors, units, t }: { window: any; colors: (typeof Colors)["light"]; units: any; t: any }) {
   const [expanded, setExpanded] = useState(false);
-  const wl = getRatingLabel(w.avgFrictionScore);
-  const wc = getRatingColors(wl);
   const hours = w.hours || [];
   const tf = units?.timeFormat || "24h";
 
@@ -1158,13 +1150,11 @@ function ExpandableWindow({ window: w, colors, units, t }: { window: any; colors
         onPress={() => setExpanded(!expanded)}
         activeOpacity={0.7}
       >
-        <View style={[styles.windowDot, { backgroundColor: wc?.solid || colors.muted }]} />
+        <View style={[styles.windowDot, { backgroundColor: "#22c55e" }]} />
         <Text style={[styles.windowTime, { color: colors.text }]}>{fmtTimeRange(w.startTime, w.endTime, tf)}</Text>
-        {wc && wl && (
-          <View style={[styles.smallBadge, { backgroundColor: wc.bg }]}>
-            <Text style={[styles.smallBadgeText, { color: wc.text }]}>{t(`ratings.${wl!.toLowerCase()}`, wl)}</Text>
-          </View>
-        )}
+        <View style={[styles.smallBadge, { backgroundColor: "rgba(34,197,94,0.12)" }]}>
+          <Text style={[styles.smallBadgeText, { color: "#22c55e" }]}>{w.hourCount}h</Text>
+        </View>
         <Ionicons
           name={expanded ? "chevron-up" : "chevron-down"}
           size={14}
@@ -1175,15 +1165,14 @@ function ExpandableWindow({ window: w, colors, units, t }: { window: any; colors
       {expanded && hours.length > 0 && (
         <View style={{ paddingLeft: Spacing.md, paddingTop: 2 }}>
           {hours.map((h: any, i: number) => {
-            const score = h.frictionScore ?? h.friction;
-            const rl = getRatingLabel(score);
-            const rc = getRatingColors(rl);
+            const flags = h.flags;
+            const hasWarning = flags?.high_humidity || flags?.condensation_risk || flags?.high_wind;
             const temp = h.temp_c ?? h.temperature_c;
             const wind = h.wind_kph ?? h.windSpeed_kph;
             const windDir = h.wind_direction;
             return (
               <View key={i} style={[styles.hourlyRow, {
-                backgroundColor: rl === "Great" ? "rgba(34,197,94,0.06)" : rl === "Good" ? "rgba(59,130,246,0.04)" : "transparent",
+                backgroundColor: hasWarning ? "rgba(245,158,11,0.04)" : "rgba(34,197,94,0.06)",
                 borderRadius: BorderRadius.sm,
                 paddingHorizontal: Spacing.xs,
                 marginVertical: 1,
@@ -1208,11 +1197,7 @@ function ExpandableWindow({ window: w, colors, units, t }: { window: any; colors
                     </>
                   )}
                 </View>
-                {rc && rl && (
-                  <View style={[styles.smallBadge, { backgroundColor: rc.bg, flexShrink: 0 }]}>
-                    <Text style={[styles.smallBadgeText, { color: rc.text, fontSize: 9 }]}>{t(`ratings.${rl!.toLowerCase()}`, rl)}</Text>
-                  </View>
-                )}
+                <HourlyFlagIndicator flags={flags} />
               </View>
             );
           })}
@@ -1223,9 +1208,9 @@ function ExpandableWindow({ window: w, colors, units, t }: { window: any; colors
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function FoldableWindowDay({ label, windows, isHighlighted, isToday, bestRating, colors, units, t }: {
+function FoldableWindowDay({ label, windows, isHighlighted, isToday, hasDryHours, colors, units, t }: {
   label: string; windows: any[]; isHighlighted: boolean; isToday: boolean;
-  bestRating?: string;
+  hasDryHours?: boolean;
   colors: (typeof Colors)["light"]; units: any; t: any;
 }) {
   const isBadDay = windows.length === 0;
@@ -1241,9 +1226,8 @@ function FoldableWindowDay({ label, windows, isHighlighted, isToday, bestRating,
       ? "rgba(34,197,94,0.25)"
       : colors.border;
 
-  const badRatingColors = isBadDay ? getRatingColors(bestRating || "Nope") : null;
   const dotColor = isBadDay
-    ? (bestRating === "Fair" ? "#eab308" : bestRating === "Poor" ? "#f97316" : "#ef4444")
+    ? (hasDryHours ? "#F59E0B" : "#ef4444")
     : isHighlighted ? "#22c55e" : "#4ade80";
 
   return (
@@ -1266,13 +1250,11 @@ function FoldableWindowDay({ label, windows, isHighlighted, isToday, bestRating,
             </View>
           )}
           {isBadDay ? (
-            badRatingColors && bestRating ? (
-              <View style={[styles.smallBadge, { backgroundColor: badRatingColors.bg, marginLeft: "auto" }]}>
-                <Text style={[styles.smallBadgeText, { color: badRatingColors.text }]}>
-                  {t(`ratings.${bestRating.toLowerCase()}`, bestRating)}
-                </Text>
-              </View>
-            ) : null
+            <View style={[styles.smallBadge, { backgroundColor: "rgba(239,68,68,0.12)", marginLeft: "auto" }]}>
+              <Text style={[styles.smallBadgeText, { color: "#ef4444" }]}>
+                {t("conditions.labels.stay_home", "stay home")}
+              </Text>
+            </View>
           ) : (
             <Text style={[styles.precipLabel, { color: colors.muted, marginLeft: "auto" }]}>
               {windows.length} {windows.length > 1 ? t("dialog.windows", "windows") : t("dialog.window", "window")}
@@ -1289,7 +1271,7 @@ function FoldableWindowDay({ label, windows, isHighlighted, isToday, bestRating,
         <View style={styles.foldableDayContent}>
           {isBadDay ? (
             <Text style={[styles.precipLabel, { color: colors.muted, fontStyle: "italic", paddingVertical: Spacing.xs }]}>
-              {t("dialog.noOptimalHoursDay", "No good climbing windows on this day.")}
+              {t("dialog.noDryWindowsDay", "No dry windows on this day.")}
             </Text>
           ) : (
             windows.map((w: any, i: number) => (
@@ -1319,10 +1301,12 @@ function HourlyTimeline({ hours, colors, units, t }: { hours: any[]; colors: (ty
         <Ionicons name={expanded ? "chevron-up" : "chevron-down"} size={14} color={colors.muted} />
       </TouchableOpacity>
       {expanded && hours.map((h: any, i: number) => {
-        const score = h.frictionScore ?? h.friction;
-        const rl = getRatingLabel(score);
-        const rc = getRatingColors(rl);
-        const rowBg = rl === "Great" ? "rgba(34,197,94,0.06)" : rl === "Good" ? "rgba(59,130,246,0.04)" : "transparent";
+        const flags = h.flags;
+        const isGoodHour = flags && !flags.rain_now && !flags.wet_rock_likely && !flags.extreme_wind;
+        const hasWarning = flags?.high_humidity || flags?.condensation_risk || flags?.high_wind;
+        const rowBg = isGoodHour
+          ? (hasWarning ? "rgba(245,158,11,0.04)" : "rgba(34,197,94,0.06)")
+          : "transparent";
         const temp = h.temp_c ?? h.temperature_c;
         const wind = h.wind_kph ?? h.windSpeed_kph;
         const windDir = h.wind_direction;
@@ -1348,14 +1332,44 @@ function HourlyTimeline({ hours, colors, units, t }: { hours: any[]; colors: (ty
                 </>
               )}
             </View>
-            {rc && rl && (
-              <View style={[styles.smallBadge, { backgroundColor: rc.bg, marginLeft: "auto" }]}>
-                <Text style={[styles.smallBadgeText, { color: rc.text }]}>{t(`ratings.${rl!.toLowerCase()}`, rl)}</Text>
-              </View>
-            )}
+            <HourlyFlagIndicator flags={flags} />
           </View>
         );
       })}
+    </View>
+  );
+}
+
+function HourlyFlagIndicator({ flags }: { flags: any }) {
+  if (!flags) return null;
+  if (flags.rain_now) {
+    return (
+      <View style={[{ paddingHorizontal: 6, paddingVertical: 3, borderRadius: 4, backgroundColor: "rgba(239,68,68,0.12)", marginLeft: "auto" }]}>
+        <Text style={{ fontSize: 9, fontWeight: "600", color: "#ef4444" }}>rain</Text>
+      </View>
+    );
+  }
+  if (flags.wet_rock_likely || flags.extreme_wind) {
+    return (
+      <View style={[{ paddingHorizontal: 6, paddingVertical: 3, borderRadius: 4, backgroundColor: "rgba(239,68,68,0.12)", marginLeft: "auto" }]}>
+        <Text style={{ fontSize: 9, fontWeight: "600", color: "#ef4444" }}>
+          {flags.wet_rock_likely ? "wet" : "wind!"}
+        </Text>
+      </View>
+    );
+  }
+  if (flags.high_humidity || flags.condensation_risk || flags.high_wind) {
+    return (
+      <View style={[{ paddingHorizontal: 6, paddingVertical: 3, borderRadius: 4, backgroundColor: "rgba(245,158,11,0.12)", marginLeft: "auto" }]}>
+        <Text style={{ fontSize: 9, fontWeight: "600", color: "#F59E0B" }}>
+          {flags.condensation_risk ? "dew" : flags.high_wind ? "wind" : "humid"}
+        </Text>
+      </View>
+    );
+  }
+  return (
+    <View style={[{ paddingHorizontal: 6, paddingVertical: 3, borderRadius: 4, backgroundColor: "rgba(34,197,94,0.12)", marginLeft: "auto" }]}>
+      <Text style={{ fontSize: 9, fontWeight: "600", color: "#22c55e" }}>ok</Text>
     </View>
   );
 }

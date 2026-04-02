@@ -22,8 +22,13 @@ export function useConditionsTranslations(
       if (!rating) {
         return "";
       }
-      const ratingLower = rating.toLowerCase();
-      const key = `ratings.${ratingLower}`;
+      // Support new 3-tier labels
+      const labelMap: Record<string, string> = {
+        looks_good: "ratings.looks_good",
+        watch_out: "ratings.watch_out",
+        stay_home: "ratings.stay_home",
+      };
+      const key = labelMap[rating] || `ratings.${rating.toLowerCase()}`;
       return t(key);
     };
 
