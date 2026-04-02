@@ -49,7 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-friendly site info" />
         <link rel="alternate" type="text/plain" href="/llms-full.txt" title="LLM-friendly API reference" />
       </head>
