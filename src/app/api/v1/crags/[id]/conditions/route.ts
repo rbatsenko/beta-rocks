@@ -61,6 +61,7 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
           precip_mm: forecast.current.precipitation,
         },
         hourly: hourlyData,
+        daily: forecast.daily,
         latitude: crag.lat,
         longitude: crag.lon,
       },

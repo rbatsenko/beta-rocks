@@ -85,6 +85,7 @@ export async function GET(request: NextRequest) {
           precip_mm: forecast.current.precipitation,
         },
         hourly: hourlyData,
+        daily: forecast.daily,
         latitude,
         longitude,
       },

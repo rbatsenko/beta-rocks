@@ -121,6 +121,17 @@ export interface WeatherForecast {
     precip_mm: number;
     weatherCode?: number;
   }>;
+  daily?: Array<{
+    date: string;
+    tempMax: number;
+    tempMin: number;
+    precipitation: number;
+    windSpeedMax: number;
+    windDirectionDominant?: number;
+    sunrise: string;
+    sunset: string;
+    weatherCode: number;
+  }>;
 }
 
 export interface RockTypeConditions {
@@ -835,10 +846,22 @@ export async function computeWeather(
     ? findDryWindows(hourlyConditions)
     : [];
 
-  // Build daily summary from hourly data
-  const daily = hourly
-    ? buildDailyFromHourly(hourly, weather.latitude, weather.longitude)
-    : [];
+  // Use Open-Meteo daily data when available (has correct local-time sunrise/sunset)
+  // Fall back to building from hourly data
+  const daily = weather.daily
+    ? weather.daily.map((d) => ({
+        date: d.date,
+        temp_max_c: d.tempMax,
+        temp_min_c: d.tempMin,
+        precipitation_mm: d.precipitation,
+        wind_speed_max_kph: d.windSpeedMax,
+        weather_code: d.weatherCode,
+        sunrise: d.sunrise,
+        sunset: d.sunset,
+      }))
+    : hourly
+      ? buildDailyFromHourly(hourly, weather.latitude, weather.longitude)
+      : [];
 
   return {
     weather: {
