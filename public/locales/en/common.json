@@ -306,6 +306,11 @@
       "title": "Public API",
       "description": "Build your own apps with our open API. Search crags, fetch conditions, and submit community reports programmatically.",
       "docsLink": "API Documentation →"
+    },
+    "mcpServer": {
+      "title": "MCP Server",
+      "description": "Connect beta.rocks directly to Claude, Cursor, Windsurf, and other AI tools. Search crags and check conditions without leaving your workflow.",
+      "npmLink": "Install from npm →"
     }
   },
   "privacy": {

@@ -258,6 +258,11 @@
       "title": "API pubblica",
       "description": "Crea le tue applicazioni con la nostra API aperta. Cerca falesie, controlla le condizioni e invia segnalazioni in modo programmatico.",
       "docsLink": "Documentazione API →"
+    },
+    "mcpServer": {
+      "title": "Server MCP",
+      "description": "Collega beta.rocks direttamente a Claude, Cursor, Windsurf e altri strumenti AI. Cerca falesie e controlla le condizioni senza lasciare il tuo flusso di lavoro.",
+      "npmLink": "Installa da npm →"
     }
   },
   "privacy": {

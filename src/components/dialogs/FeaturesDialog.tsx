@@ -9,7 +9,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Cloud, Users, MapPin, RefreshCw, Lock, Code } from "lucide-react";
+import { Cloud, Users, MapPin, RefreshCw, Lock, Code, Bot } from "lucide-react";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Trans } from "react-i18next";
@@ -55,6 +55,13 @@ export function FeaturesDialog({ open, onOpenChange }: FeaturesDialogProps) {
       descriptionKey: "features.publicApi.description",
       linkKey: "features.publicApi.docsLink",
       linkHref: "/docs/api",
+    },
+    {
+      icon: Bot,
+      titleKey: "features.mcpServer.title",
+      descriptionKey: "features.mcpServer.description",
+      linkKey: "features.mcpServer.npmLink",
+      linkHref: "https://www.npmjs.com/package/beta-rocks-mcp",
     },
   ];
 

@@ -258,6 +258,11 @@
       "title": "Veřejné API",
       "description": "Vytvořte si vlastní aplikace s naším otevřeným API. Vyhledávejte skály, zjišťujte podmínky a odesílejte hlášení programově.",
       "docsLink": "Dokumentace API →"
+    },
+    "mcpServer": {
+      "title": "MCP server",
+      "description": "Propojte beta.rocks přímo s Claude, Cursor, Windsurf a dalšími AI nástroji. Hledejte skály a kontrolujte podmínky bez opuštění pracovního postupu.",
+      "npmLink": "Instalovat z npm →"
     }
   },
   "privacy": {

@@ -258,6 +258,11 @@
       "title": "Offentlig API",
       "description": "Byg dine egne apps med vores åbne API. Søg klipper, hent forhold og indsend rapporter programmatisk.",
       "docsLink": "API-dokumentation →"
+    },
+    "mcpServer": {
+      "title": "MCP-server",
+      "description": "Forbind beta.rocks direkte med Claude, Cursor, Windsurf og andre AI-værktøjer. Søg klipper og tjek forhold uden at forlade din arbejdsgang.",
+      "npmLink": "Installer fra npm →"
     }
   },
   "privacy": {

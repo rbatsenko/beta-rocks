@@ -259,6 +259,11 @@
       "title": "Javni API",
       "description": "Ustvarite lastne aplikacije z našim odprtim API-jem. Iščite plezališča, preverjajte razmere in pošiljajte poročila programsko.",
       "docsLink": "Dokumentacija API →"
+    },
+    "mcpServer": {
+      "title": "Strežnik MCP",
+      "description": "Povežite beta.rocks neposredno s Claude, Cursor, Windsurf in drugimi orodji AI. Iščite plezališča in preverjajte razmere brez zapuščanja delovnega toka.",
+      "npmLink": "Namesti iz npm →"
     }
   },
   "privacy": {

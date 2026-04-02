@@ -258,6 +258,11 @@
       "title": "Öffentliche API",
       "description": "Erstelle eigene Apps mit unserer offenen API. Suche Felsen, rufe Bedingungen ab und sende Berichte programmatisch.",
       "docsLink": "API-Dokumentation →"
+    },
+    "mcpServer": {
+      "title": "MCP-Server",
+      "description": "Verbinde beta.rocks direkt mit Claude, Cursor, Windsurf und anderen KI-Tools. Suche Felsen und prüfe Bedingungen ohne deinen Workflow zu verlassen.",
+      "npmLink": "Von npm installieren →"
     }
   },
   "privacy": {

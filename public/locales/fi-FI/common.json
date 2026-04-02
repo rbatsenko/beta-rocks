@@ -258,6 +258,11 @@
       "title": "Julkinen API",
       "description": "Rakenna omia sovelluksia avoimella API:llamme. Hae kallioita, tarkista olosuhteet ja lähetä raportteja ohjelmallisesti.",
       "docsLink": "API-dokumentaatio →"
+    },
+    "mcpServer": {
+      "title": "MCP-palvelin",
+      "description": "Yhdistä beta.rocks suoraan Claudeen, Cursoriin, Windsurfiin ja muihin tekoälytyökaluihin. Hae kallioita ja tarkista olosuhteet poistumatta työnkulustasi.",
+      "npmLink": "Asenna npm:stä →"
     }
   },
   "privacy": {

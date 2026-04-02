@@ -258,6 +258,11 @@
       "title": "Publiczne API",
       "description": "Twórz własne aplikacje z naszym otwartym API. Wyszukuj skały, sprawdzaj warunki i wysyłaj raporty programowo.",
       "docsLink": "Dokumentacja API →"
+    },
+    "mcpServer": {
+      "title": "Serwer MCP",
+      "description": "Połącz beta.rocks bezpośrednio z Claude, Cursor, Windsurf i innymi narzędziami AI. Wyszukuj skały i sprawdzaj warunki bez opuszczania przepływu pracy.",
+      "npmLink": "Zainstaluj z npm →"
     }
   },
   "privacy": {

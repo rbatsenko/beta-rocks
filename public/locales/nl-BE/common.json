@@ -178,6 +178,11 @@
       "title": "Openbare API",
       "description": "Bouw je eigen apps met onze open API. Zoek rotsen, bekijk omstandigheden en dien rapporten programmatisch in.",
       "docsLink": "API-documentatie →"
+    },
+    "mcpServer": {
+      "title": "MCP-server",
+      "description": "Verbind beta.rocks rechtstreeks met Claude, Cursor, Windsurf en andere AI-tools. Zoek rotsen en bekijk omstandigheden zonder je workflow te verlaten.",
+      "npmLink": "Installeren via npm →"
     }
   },
   "privacy": {

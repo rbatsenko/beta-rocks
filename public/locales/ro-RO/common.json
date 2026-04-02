@@ -178,6 +178,11 @@
       "title": "API public",
       "description": "Construiește-ți propriile aplicații cu API-ul nostru deschis. Caută stânci, verifică condițiile și trimite rapoarte programatic.",
       "docsLink": "Documentație API →"
+    },
+    "mcpServer": {
+      "title": "Server MCP",
+      "description": "Conectați beta.rocks direct la Claude, Cursor, Windsurf și alte instrumente AI. Căutați stânci și verificați condițiile fără a părăsi fluxul de lucru.",
+      "npmLink": "Instalează din npm →"
     }
   },
   "privacy": {

@@ -258,6 +258,11 @@
       "title": "API pública",
       "description": "Crea les teves pròpies aplicacions amb la nostra API oberta. Cerca roques, consulta condicions i envia informes de manera programàtica.",
       "docsLink": "Documentació de l'API →"
+    },
+    "mcpServer": {
+      "title": "Servidor MCP",
+      "description": "Connecta beta.rocks directament amb Claude, Cursor, Windsurf i altres eines d'IA. Cerca roques i consulta condicions sense sortir del teu flux de treball.",
+      "npmLink": "Instal·lar des de npm →"
     }
   },
   "ui": {

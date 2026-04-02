@@ -258,6 +258,11 @@
       "title": "Javni API",
       "description": "Izradite vlastite aplikacije s našim otvorenim API-jem. Pretražujte stijene, provjerite uvjete i šaljite izvještaje programski.",
       "docsLink": "API dokumentacija →"
+    },
+    "mcpServer": {
+      "title": "MCP poslužitelj",
+      "description": "Povežite beta.rocks izravno s Claude, Cursor, Windsurf i drugim AI alatima. Pretražujte stijene i provjerite uvjete bez napuštanja radnog tijeka.",
+      "npmLink": "Instaliraj s npm-a →"
     }
   },
   "privacy": {
