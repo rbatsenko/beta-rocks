@@ -323,7 +323,8 @@
     "lessReliableHourly": "Οι επόμενες ώρες είναι λιγότερο προβλέψιμες",
     "lessCertain": "ΛΙΓΟΤΕΡΟ ΣΙΓΟΥΡΗ",
     "todayBadge": "ΣΗΜΕΡΑ",
-    "delete": "Διαγραφή"
+    "delete": "Διαγραφή",
+    "noGoodWindows": "Κανένα καλό παράθυρο αναρρίχησης σήμερα. Ελέγξτε την ωριαία καρτέλα."
   },
   "timeContext": {
     "sunrise": "Ανατολή",
@@ -768,7 +769,8 @@
     "forecast": "Forecast",
     "dry": "Dry",
     "wet": "Wet",
-    "helpful": "Helpful"
+    "helpful": "Helpful",
+    "basedOnWeather": "βάσει καιρού"
   },
   "time": {
     "today": "Σήμερα",
@@ -843,5 +845,15 @@
     "looksGood": "Καλό",
     "watchOut": "Μέτριο",
     "stayHome": "Κακό"
+  },
+  "flags": {
+    "rain": "Βροχή",
+    "rainExpected": "Βροχή σε {{hours}}ω",
+    "condensation": "Συμπύκνωση",
+    "highHumidity": "Υψηλή υγρασία",
+    "wetRock": "Βρεγμένος βράχος",
+    "windy": "Αέρας",
+    "extremeWind": "Ακραίος άνεμος",
+    "sandstoneWet": "Βρεγμένος ψαμμίτης"
   }
 }

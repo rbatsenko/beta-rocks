@@ -1059,7 +1059,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
         {!isLocationless && conditionsData && (
           <Card className="mb-6">
             <CardContent className="p-6">
-              <ConditionsDetailContent variant="sheet" data={conditionsData} />
+              <ConditionsDetailContent variant="sheet" data={conditionsData as any} />
             </CardContent>
           </Card>
         )}

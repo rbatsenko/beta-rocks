@@ -95,6 +95,7 @@ export async function GET(
       { includeNightHours: true }
     );
 
+    // TODO: Remove backward compat shim after mobile app v2.0 is widely adopted (target: July 2026)
     // Backward compat: old consumers expect frictionRating, rating, hourlyConditions, optimalWindows
     const backwardCompat = {
       frictionRating: weatherResponse.label === "looks_good" ? 4 : weatherResponse.label === "watch_out" ? 3 : 1,

@@ -63,6 +63,7 @@ interface ConditionsDetailContentProps {
     village?: string;
     label: string;
     summary: string;
+    summary_template?: { key: string; params?: Record<string, any>; fallback: string };
     flags?: any;
     reasons?: string[];
     warnings?: string[];
@@ -96,11 +97,8 @@ interface ConditionsDetailContentProps {
       };
     }>;
     dry_windows?: Array<{
-      start?: string;
-      end?: string;
-      startTime?: string;
-      endTime?: string;
-      hourCount?: number;
+      start: string;
+      end: string;
       hours: number;
     }>;
     precipitationContext?: {
@@ -194,7 +192,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
     // Need to transform windows to include formatted timeRange
     const windowsWithTimeRange = data.dry_windows?.map((window) => ({
       ...window,
-      timeRange: formatTimeRange(window.start || window.startTime || "", window.end || window.endTime || "", locale, timeFormat),
+      timeRange: formatTimeRange(window.start, window.end, locale, timeFormat),
     }));
     return groupWindowsByDay(windowsWithTimeRange, data.hourlyConditions, t, locale, data.dailyForecast);
   }, [data.dry_windows, data.hourlyConditions, t, locale, timeFormat, data.dailyForecast]);

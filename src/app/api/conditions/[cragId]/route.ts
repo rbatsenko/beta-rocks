@@ -98,6 +98,7 @@ export async function GET(
 
     console.log(`[API /conditions/${cragId}] Successfully computed conditions for ${name}`);
 
+    // TODO: Remove backward compat shim after mobile app v2.0 is widely adopted (target: July 2026)
     // Backward compat: old mobile apps expect frictionRating, rating, hourlyConditions, optimalWindows
     // New apps use flags, label, summary, dry_windows
     const backwardCompat = {

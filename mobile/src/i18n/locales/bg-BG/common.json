@@ -323,7 +323,8 @@
     "lessReliableHourly": "Следващи часове по-малко предсказуеми",
     "lessCertain": "ПО-МАЛКО СИГУРНО",
     "todayBadge": "ДНЕС",
-    "delete": "Изтрий"
+    "delete": "Изтрий",
+    "noGoodWindows": "Няма добри прозорци за катерене този ден. Проверете часовия раздел."
   },
   "timeContext": {
     "sunrise": "Изгрев на слънцето",
@@ -847,7 +848,8 @@
     "forecast": "Forecast",
     "dry": "Dry",
     "wet": "Wet",
-    "helpful": "Helpful"
+    "helpful": "Helpful",
+    "basedOnWeather": "на базата на времето"
   },
   "time": {
     "today": "Днес",
@@ -927,5 +929,15 @@
     "looksGood": "Добро",
     "watchOut": "Средно",
     "stayHome": "Лошо"
+  },
+  "flags": {
+    "rain": "Дъжд",
+    "rainExpected": "Дъжд след {{hours}}ч",
+    "condensation": "Кондензация",
+    "highHumidity": "Висока влажност",
+    "wetRock": "Мокра скала",
+    "windy": "Ветровито",
+    "extremeWind": "Екстремен вятър",
+    "sandstoneWet": "Мокър пясъчник"
   }
 }

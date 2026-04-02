@@ -359,7 +359,8 @@
     "lessReliableHourly": "Prochaines heures moins prévisibles",
     "lessCertain": "MOINS CERTAIN",
     "todayBadge": "AUJOURD'HUI",
-    "delete": "Supprimer"
+    "delete": "Supprimer",
+    "noGoodWindows": "Pas de bonnes fenêtres d'escalade ce jour-là. Consultez l'onglet horaire."
   },
   "timeContext": {
     "sunrise": "Lever du soleil",
@@ -884,7 +885,8 @@
     "forecast": "Forecast",
     "dry": "Dry",
     "wet": "Wet",
-    "helpful": "Helpful"
+    "helpful": "Helpful",
+    "basedOnWeather": "basé sur la météo"
   },
   "time": {
     "today": "Aujourd'hui",
@@ -964,5 +966,26 @@
     "looksGood": "Bon",
     "watchOut": "Moyen",
     "stayHome": "Mauvais"
+  },
+  "summary": {
+    "sandstoneWet": "Le grès est encore mouillé. Attendez un jour de plus.",
+    "rainingNow": "Il pleut. {{mm}}mm pour le moment.",
+    "wetRockDryBy": "Le rocher est peut-être encore mouillé. Devrait sécher vers {{time}}.",
+    "rainExpected": "Pluie prévue dans {{hours}}h. Sortez maintenant pour une fenêtre sèche.",
+    "condensationRisk": "Risque élevé de condensation. Le rocher sera glissant.",
+    "highHumidity": "Humidité élevée ({{humidity}}%). Le rocher peut être glissant.",
+    "extremeWind": "Vent extrême ({{wind}} km/h). Dangereux sur les voies exposées.",
+    "highWind": "Venteux ({{wind}} km/h). Ok pour les murs abrités.",
+    "dryAndGood": "Sec et {{temp}}. {{humidity}}"
+  },
+  "flags": {
+    "rain": "Pluie",
+    "rainExpected": "Pluie dans {{hours}}h",
+    "condensation": "Condensation",
+    "highHumidity": "Humidité élevée",
+    "wetRock": "Rocher probablement mouillé",
+    "windy": "Venteux",
+    "extremeWind": "Vent extrême",
+    "sandstoneWet": "Grès mouillé"
   }
 }

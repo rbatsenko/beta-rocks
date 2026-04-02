@@ -66,9 +66,8 @@ interface ConditionsDetailSheetProps {
       };
     }>;
     dry_windows?: Array<{
-      startTime: string;
-      endTime: string;
-      hourCount: number;
+      start: string;
+      end: string;
       hours: number;
     }>;
     precipitationContext?: {

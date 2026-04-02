@@ -140,13 +140,10 @@ export const groupHourlyByDay = (
 };
 
 export type DryWindow = {
-  start?: string;
-  end?: string;
-  startTime?: string; // backward compat alias
-  endTime?: string;   // backward compat alias
-  hourCount?: number;
+  start: string;
+  end: string;
   hours: number;
-  timeRange?: string;
+  timeRange?: string; // computed by UI
 };
 
 export type DailyForecastDay = {
@@ -210,8 +207,8 @@ export const groupWindowsByDay = (
   // Group dry windows by day
   if (dryWindows) {
     dryWindows.forEach((window) => {
-      const startDate = new Date(window.start || window.startTime || "");
-      const endDate = new Date(window.end || window.endTime || "");
+      const startDate = new Date(window.start);
+      const endDate = new Date(window.end);
 
       // Skip windows that have already ended or are more than 5 days away
       if (endDate < now || startDate >= fiveDaysFromNow) return;
@@ -235,8 +232,8 @@ export const groupWindowsByDay = (
       const windowHours = hourlyConditions
         ? hourlyConditions.filter((hour) => {
             const hourTime = new Date(hour.time);
-            const windowStart = new Date(window.start || window.startTime || "");
-            const windowEnd = new Date(window.end || window.endTime || "");
+            const windowStart = new Date(window.start);
+            const windowEnd = new Date(window.end);
             return hourTime >= windowStart && hourTime < windowEnd;
           })
         : [];

@@ -355,7 +355,8 @@
     "lessReliableHourly": "Наступні години менш передбачувані",
     "lessCertain": "МЕНШ ВПЕВНЕНО",
     "todayBadge": "СЬОГОДНІ",
-    "delete": "Видалити"
+    "delete": "Видалити",
+    "noGoodWindows": "Немає хороших вікон для скелелазіння сьогодні. Перевірте годинну вкладку."
   },
   "timeContext": {
     "sunrise": "Схід сонця",
@@ -879,7 +880,8 @@
     "forecast": "Forecast",
     "dry": "Dry",
     "wet": "Wet",
-    "helpful": "Helpful"
+    "helpful": "Helpful",
+    "basedOnWeather": "на основі погоди"
   },
   "time": {
     "today": "Сьогодні",
@@ -961,5 +963,15 @@
     "looksGood": "Добре",
     "watchOut": "Середнє",
     "stayHome": "Погано"
+  },
+  "flags": {
+    "rain": "Дощ",
+    "rainExpected": "Дощ через {{hours}}г",
+    "condensation": "Конденсація",
+    "highHumidity": "Висока вологість",
+    "wetRock": "Мокра скеля",
+    "windy": "Вітряно",
+    "extremeWind": "Екстремальний вітер",
+    "sandstoneWet": "Мокрий пісковик"
   }
 }

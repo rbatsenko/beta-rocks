@@ -418,8 +418,7 @@ export interface SummaryTemplate {
 
 function generateSummary(
   flags: WeatherFlags,
-  weather: { temp_c: number; humidity: number; wind_kph: number; precip_mm: number },
-  rockType: RockType
+  weather: { temp_c: number; humidity: number; wind_kph: number; precip_mm: number }
 ): SummaryTemplate {
   if (flags.sandstone_wet_warning) {
     return { key: "summary.sandstoneWet", fallback: "Sandstone is still wet. Give it another day." };
@@ -458,7 +457,6 @@ function generateSummary(
   }
 
   // Fallback — conditions look fine
-  void rockType;
   const tempDesc = describeTemp(weather.temp_c);
   const humidityDesc = describeHumidity(weather.humidity);
   return { key: "summary.dryAndGood", params: { temp: tempDesc, humidity: humidityDesc }, fallback: `Dry and ${tempDesc}. ${humidityDesc}` };
@@ -468,7 +466,7 @@ function generateSummary(
 // Build warnings list
 // ---------------------------------------------------------------------------
 
-function buildWarnings(flags: WeatherFlags, rockType: RockType): string[] {
+function buildWarnings(flags: WeatherFlags): string[] {
   const warnings: string[] = [];
 
   if (flags.sandstone_wet_warning) {
@@ -502,7 +500,6 @@ function buildWarnings(flags: WeatherFlags, rockType: RockType): string[] {
     warnings.push("High wind — consider sheltered areas");
   }
 
-  void rockType; // used by sandstone check above through flags
   return warnings;
 }
 
@@ -797,9 +794,14 @@ export async function computeWeather(
     ? calculatePrecipitationContext(hourly)
     : { last24h: 0, last48h: 0, next24h: 0 };
 
+  // Use computed precip context when no explicit recent precip is provided
+  const effectivePrecipMm = recentPrecipitationMm > 0
+    ? recentPrecipitationMm
+    : precipContext.last48h;
+
   // Drying estimate
   const dryingHrs = estimateDryingHours(
-    recentPrecipitationMm,
+    effectivePrecipMm,
     rockType,
     current.temp_c,
     current.humidity,
@@ -813,7 +815,7 @@ export async function computeWeather(
   // Compute hourly conditions
   let hourlyConditions: HourlyWeather[] = [];
   if (hourly && hourly.length > 0) {
-    hourlyConditions = computeHourlyConditions(hourly, rockType, recentPrecipitationMm, {
+    hourlyConditions = computeHourlyConditions(hourly, rockType, effectivePrecipMm, {
       includeNightHours: options?.includeNightHours ?? true,
       latitude: weather.latitude,
       longitude: weather.longitude,
@@ -838,8 +840,8 @@ export async function computeWeather(
 
   // Label & summary
   const label = deriveLabel(currentFlags);
-  const summaryTemplate = generateSummary(currentFlags, current, rockType);
-  const warnings = buildWarnings(currentFlags, rockType);
+  const summaryTemplate = generateSummary(currentFlags, current);
+  const warnings = buildWarnings(currentFlags);
 
   // Dry windows
   const dryWindows = hourlyConditions.length > 0
