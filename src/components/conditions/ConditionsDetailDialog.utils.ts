@@ -276,15 +276,15 @@ export const groupWindowsByDay = (
         // If any hour has no active bad flags, it's at least "watch_out"
         const hasCleanHour = hoursForDay.some(
           (h) =>
-            !h.flags.rain_now &&
-            !h.flags.wet_rock_likely &&
-            !h.flags.extreme_wind
+            !h.flags?.rain_now &&
+            !h.flags?.wet_rock_likely &&
+            !h.flags?.extreme_wind
         );
         const hasWarningHour = hoursForDay.some(
           (h) =>
-            h.flags.high_humidity ||
-            h.flags.condensation_risk ||
-            h.flags.high_wind
+            h.flags?.high_humidity ||
+            h.flags?.condensation_risk ||
+            h.flags?.high_wind
         );
         if (hasCleanHour && !hasWarningHour) {
           label = "looks_good";
