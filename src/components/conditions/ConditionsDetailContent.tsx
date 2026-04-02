@@ -555,11 +555,16 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                   </Badge>
                                 </span>
                               ) : (
-                                <span className="text-xs text-muted-foreground ml-auto mr-2">
-                                  {dayData.windows.length}{" "}
-                                  {dayData.windows.length > 1
-                                    ? t("dialog.windows")
-                                    : t("dialog.window")}
+                                <span className="flex items-center gap-2 ml-auto mr-2">
+                                  <span className="text-xs text-muted-foreground">
+                                    {dayData.windows.length}{" "}
+                                    {dayData.windows.length > 1
+                                      ? t("dialog.windows")
+                                      : t("dialog.window")}
+                                  </span>
+                                  <Badge className={`text-[10px] px-1.5 py-0 pointer-events-none ${getLabelColor("looks_good")}`}>
+                                    {translateRating("looks_good")}
+                                  </Badge>
                                 </span>
                               )}
                             </div>
