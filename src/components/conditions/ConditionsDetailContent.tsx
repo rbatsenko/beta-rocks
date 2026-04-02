@@ -741,11 +741,25 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                   return hoursFromNow > 48;
                 };
 
+                // Determine day label based on flags
+                const hasAnyWarning = hours.some((h) =>
+                  h.flags?.rain_now || h.flags?.wet_rock_likely || h.flags?.extreme_wind
+                );
+                const hasMinorWarning = hours.some((h) =>
+                  h.flags?.high_humidity || h.flags?.condensation_risk || h.flags?.high_wind
+                );
+                const dayLabel = hasAnyWarning
+                  ? goodHours.length > 0 ? "watch_out" : "stay_home"
+                  : hasMinorWarning ? "watch_out" : "looks_good";
+
                 return (
                   <div key={day} className="space-y-3">
                     <h3 className="font-semibold flex items-center gap-2">
                       <Calendar className="w-4 h-4" />
                       {day}
+                      <Badge className={`text-[10px] px-1.5 py-0 pointer-events-none ml-auto ${getLabelColor(dayLabel)}`}>
+                        {translateRating(dayLabel)}
+                      </Badge>
                     </h3>
 
                     {/* Display only good hours prominently */}
