@@ -159,7 +159,16 @@ GET /api/v1/crags/osm_relation_17696060/conditions
       "label": "Good",
       "friction_score": 4,
       "note": "Friction score is a rough estimate based on weather, rock type, and recent precipitation.",
-      "summary": "Good conditions for climbing",
+      "is_dry": true,
+      "drying_time_hours": null,
+      "dew_point_spread": 8.2,
+      "precipitation": {
+        "last_24h_mm": 0,
+        "last_48h_mm": 2.1,
+        "next_24h_mm": 0
+      },
+      "reasons": ["Good temperature for limestone", "Low humidity"],
+      "warnings": [],
       "hourly_conditions": [
         {
           "time": "2026-04-02T12:00",

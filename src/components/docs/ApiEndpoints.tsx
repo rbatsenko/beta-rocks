@@ -277,7 +277,16 @@ export function ApiEndpoints() {
       "label": "Good",
       "friction_score": 4,
       "note": "Friction score is a rough estimate...",
-      "summary": "Good conditions for climbing",
+      "is_dry": true,
+      "drying_time_hours": null,
+      "dew_point_spread": 8.2,
+      "precipitation": {
+        "last_24h_mm": 0,
+        "last_48h_mm": 2.1,
+        "next_24h_mm": 0
+      },
+      "reasons": ["Good temperature for limestone", "Low humidity"],
+      "warnings": [],
       "hourly_conditions": [...],
       "optimal_windows": [...]
     },
