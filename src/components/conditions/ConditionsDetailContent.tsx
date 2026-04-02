@@ -867,14 +867,28 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                       </div>
                                     </div>
                                   </div>
-                                  <div className="flex items-center gap-1.5">
-                                    {hour.flags?.rain_now && <CloudRain className="h-4 w-4 text-blue-500" aria-label={t("flags.rainNow", "Rain")} />}
-                                    {hour.flags?.condensation_risk && <Droplets className="h-4 w-4 text-cyan-500" aria-label={t("flags.condensationRisk", "Condensation risk")} />}
+                                  <div className="flex items-center gap-1.5 shrink-0">
+                                    {hour.flags?.rain_now && <CloudRain className="h-4 w-4 text-blue-500" aria-label={t("flags.rain", "Rain")} />}
+                                    {hour.flags?.condensation_risk && <Droplets className="h-4 w-4 text-cyan-500" aria-label={t("flags.condensation", "Condensation")} />}
                                     {hour.flags?.high_humidity && <Cloud className="h-4 w-4 text-slate-400" aria-label={t("flags.highHumidity", "High humidity")} />}
-                                    {(hour.flags?.high_wind || hour.flags?.extreme_wind) && <Wind className="h-4 w-4 text-orange-500" aria-label={t("flags.highWind", "High wind")} />}
-                                    {!hour.flags?.rain_now && !hour.flags?.condensation_risk && !hour.flags?.high_humidity && !hour.flags?.high_wind && !hour.flags?.extreme_wind && (
-                                      <span className="text-green-500 text-sm">&#10003;</span>
-                                    )}
+                                    {(hour.flags?.high_wind || hour.flags?.extreme_wind) && <Wind className="h-4 w-4 text-orange-500" aria-label={t("flags.windy", "Wind")} />}
+                                    <Badge className={`text-[10px] px-1.5 py-0 pointer-events-none ${
+                                      !hour.flags
+                                        ? ""
+                                        : hour.flags.rain_now || hour.flags.wet_rock_likely || hour.flags.extreme_wind
+                                          ? getLabelColor("stay_home")
+                                          : hour.flags.high_humidity || hour.flags.condensation_risk || hour.flags.high_wind
+                                            ? getLabelColor("watch_out")
+                                            : getLabelColor("looks_good")
+                                    }`}>
+                                      {!hour.flags
+                                        ? "—"
+                                        : hour.flags.rain_now || hour.flags.wet_rock_likely || hour.flags.extreme_wind
+                                          ? translateRating("stay_home")
+                                          : hour.flags.high_humidity || hour.flags.condensation_risk || hour.flags.high_wind
+                                            ? translateRating("watch_out")
+                                            : translateRating("looks_good")}
+                                    </Badge>
                                   </div>
                                 </div>
                               </div>
@@ -1001,11 +1015,28 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                           </div>
                                         </div>
                                       </div>
-                                      <div className="flex items-center gap-1.5">
-                                        {hour.flags?.rain_now && <CloudRain className="h-3.5 w-3.5 text-blue-500" aria-label={t("flags.rainNow", "Rain")} />}
-                                        {hour.flags?.condensation_risk && <Droplets className="h-3.5 w-3.5 text-cyan-500" aria-label={t("flags.condensationRisk", "Condensation risk")} />}
+                                      <div className="flex items-center gap-1.5 shrink-0">
+                                        {hour.flags?.rain_now && <CloudRain className="h-3.5 w-3.5 text-blue-500" aria-label={t("flags.rain", "Rain")} />}
+                                        {hour.flags?.condensation_risk && <Droplets className="h-3.5 w-3.5 text-cyan-500" aria-label={t("flags.condensation", "Condensation")} />}
                                         {hour.flags?.high_humidity && <Cloud className="h-3.5 w-3.5 text-slate-400" aria-label={t("flags.highHumidity", "High humidity")} />}
-                                        {(hour.flags?.high_wind || hour.flags?.extreme_wind) && <Wind className="h-3.5 w-3.5 text-orange-500" aria-label={t("flags.highWind", "High wind")} />}
+                                        {(hour.flags?.high_wind || hour.flags?.extreme_wind) && <Wind className="h-3.5 w-3.5 text-orange-500" aria-label={t("flags.windy", "Wind")} />}
+                                        <Badge className={`text-[10px] px-1.5 py-0 pointer-events-none ${
+                                          !hour.flags
+                                            ? ""
+                                            : hour.flags.rain_now || hour.flags.wet_rock_likely || hour.flags.extreme_wind
+                                              ? getLabelColor("stay_home")
+                                              : hour.flags.high_humidity || hour.flags.condensation_risk || hour.flags.high_wind
+                                                ? getLabelColor("watch_out")
+                                                : getLabelColor("looks_good")
+                                        }`}>
+                                          {!hour.flags
+                                            ? "—"
+                                            : hour.flags.rain_now || hour.flags.wet_rock_likely || hour.flags.extreme_wind
+                                              ? translateRating("stay_home")
+                                              : hour.flags.high_humidity || hour.flags.condensation_risk || hour.flags.high_wind
+                                                ? translateRating("watch_out")
+                                                : translateRating("looks_good")}
+                                        </Badge>
                                         {!hour.flags?.rain_now && !hour.flags?.condensation_risk && !hour.flags?.high_humidity && !hour.flags?.high_wind && !hour.flags?.extreme_wind && (
                                           <span className="text-green-500 text-xs">&#10003;</span>
                                         )}
