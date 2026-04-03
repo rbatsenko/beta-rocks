@@ -1034,11 +1034,11 @@
     "rainingNow": "Rain. {{mm}}mm precipitation.",
     "wetRockDryBy": "Recent rain. Estimated dry by {{time}}.",
     "rainExpected": "Rain expected in {{hours}}h.",
-    "condensationRisk": "Condensation risk. {{temp}}°C, {{humidity}}% humidity.",
-    "highHumidity": "{{humidity}}% humidity. {{temp}}°C, {{temp}}.",
+    "condensationRisk": "Condensation risk. {{humidity}}% humidity.",
+    "highHumidity": "{{humidity}}% humidity.",
     "extremeWind": "Extreme wind ({{wind}} km/h).",
     "highWind": "Wind {{wind}} km/h.",
-    "dryAndGood": "Dry, {{temp}}. {{humidity}}% humidity."
+    "dryAndGood": "Dry. {{humidity}}% humidity."
   },
   "flags": {
     "rain": "Rain",

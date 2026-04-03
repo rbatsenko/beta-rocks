@@ -440,7 +440,7 @@ function generateSummary(
   }
 
   if (flags.condensation_risk) {
-    return { key: "summary.condensationRisk", params: { temp, humidity }, fallback: `Condensation risk. ${temp}°C, ${humidity}% humidity.` };
+    return { key: "summary.condensationRisk", params: { humidity }, fallback: `Condensation risk. ${humidity}% humidity.` };
   }
 
   if (flags.extreme_wind) {
@@ -452,11 +452,11 @@ function generateSummary(
   }
 
   if (flags.high_humidity) {
-    return { key: "summary.highHumidity", params: { humidity }, fallback: `${humidity}% humidity. ${temp}°C, ${tempDesc}.` };
+    return { key: "summary.highHumidity", params: { humidity }, fallback: `${humidity}% humidity.` };
   }
 
   // No flags — just weather facts
-  return { key: "summary.dryAndGood", params: { temp: tempDesc, humidity }, fallback: `Dry, ${tempDesc}. ${humidity}% humidity.` };
+  return { key: "summary.dryAndGood", params: { humidity }, fallback: `Dry. ${humidity}% humidity.` };
 }
 
 // ---------------------------------------------------------------------------

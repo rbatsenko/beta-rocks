@@ -969,11 +969,11 @@
     "rainingNow": "Pioggia. {{mm}}mm di precipitazioni.",
     "wetRockDryBy": "Pioggia recente. Asciutto stimato alle {{time}}.",
     "rainExpected": "Pioggia prevista tra {{hours}}h.",
-    "condensationRisk": "Rischio condensazione. {{temp}}°C, {{humidity}}% umidità.",
-    "highHumidity": "{{humidity}}% umidità. {{temp}}°C.",
+    "condensationRisk": "Rischio condensazione. {{humidity}}% umidità.",
+    "highHumidity": "{{humidity}}% umidità.",
     "extremeWind": "Vento estremo ({{wind}} km/h).",
     "highWind": "Vento {{wind}} km/h.",
-    "dryAndGood": "Asciutto, {{temp}}. {{humidity}}% umidità."
+    "dryAndGood": "Asciutto. {{humidity}}% umidità."
   },
   "flags": {
     "rain": "Pioggia",

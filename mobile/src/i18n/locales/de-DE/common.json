@@ -972,11 +972,11 @@
     "rainingNow": "Regen. {{mm}}mm Niederschlag.",
     "wetRockDryBy": "Kürzlich Regen. Voraussichtlich trocken bis {{time}}.",
     "rainExpected": "Regen erwartet in {{hours}}h.",
-    "condensationRisk": "Kondensationsrisiko. {{temp}}°C, {{humidity}}% Luftfeuchtigkeit.",
-    "highHumidity": "{{humidity}}% Luftfeuchtigkeit. {{temp}}°C.",
+    "condensationRisk": "Kondensationsrisiko. {{humidity}}% Luftfeuchtigkeit.",
+    "highHumidity": "{{humidity}}% Luftfeuchtigkeit.",
     "extremeWind": "Extremer Wind ({{wind}} km/h).",
     "highWind": "Wind {{wind}} km/h.",
-    "dryAndGood": "Trocken, {{temp}}. {{humidity}}% Luftfeuchtigkeit."
+    "dryAndGood": "Trocken. {{humidity}}% Luftfeuchtigkeit."
   },
   "flags": {
     "rain": "Regen",

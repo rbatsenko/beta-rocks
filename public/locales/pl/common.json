@@ -970,11 +970,11 @@
     "rainingNow": "Deszcz. {{mm}}mm opadu.",
     "wetRockDryBy": "Ostatni deszcz. Szacowane wyschnięcie do {{time}}.",
     "rainExpected": "Deszcz spodziewany za {{hours}}h.",
-    "condensationRisk": "Ryzyko kondensacji. {{temp}}°C, {{humidity}}% wilgotności.",
-    "highHumidity": "{{humidity}}% wilgotności. {{temp}}°C.",
+    "condensationRisk": "Ryzyko kondensacji. {{humidity}}% wilgotności.",
+    "highHumidity": "{{humidity}}% wilgotności.",
     "extremeWind": "Ekstremalny wiatr ({{wind}} km/h).",
     "highWind": "Wiatr {{wind}} km/h.",
-    "dryAndGood": "Sucho, {{temp}}. {{humidity}}% wilgotności."
+    "dryAndGood": "Sucho. {{humidity}}% wilgotności."
   },
   "flags": {
     "rain": "Deszcz",
