@@ -31,7 +31,7 @@ import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useConditionsTranslations } from "@/hooks/useConditionsTranslations";
 import { logRender, isDebugRenders, logPhase } from "@/lib/debug/render-log";
 import {
-  getRatingColor,
+  getLabelColor,
   formatHourlyTime,
   formatTimeRange,
   groupHourlyByDay,
@@ -61,8 +61,10 @@ interface ConditionsDetailContentProps {
     state?: string;
     municipality?: string;
     village?: string;
-    rating: string;
-    frictionScore: number;
+    label: string;
+    summary: string;
+    summary_template?: { key: string; params?: Record<string, any>; fallback: string };
+    flags?: any;
     reasons?: string[];
     warnings?: string[];
     isDry: boolean;
@@ -82,18 +84,22 @@ interface ConditionsDetailContentProps {
       wind_kph: number;
       wind_direction?: number;
       precip_mm: number;
-      frictionScore: number;
-      rating: string;
-      isDry: boolean;
+      dew_point_spread: number;
       warnings: string[];
       weatherCode?: number;
+      flags: {
+        rain_now: boolean;
+        condensation_risk: boolean;
+        high_humidity: boolean;
+        wet_rock_likely: boolean;
+        high_wind: boolean;
+        extreme_wind: boolean;
+      };
     }>;
-    optimalWindows?: Array<{
-      startTime: string;
-      endTime: string;
-      avgFrictionScore: number;
-      rating: string;
-      hourCount: number;
+    dry_windows?: Array<{
+      start: string;
+      end: string;
+      hours: number;
     }>;
     precipitationContext?: {
       last24h: number;
@@ -146,7 +152,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
     activeTab,
     hasHourly: !!data.hourlyConditions?.length,
     hasDaily: !!data.dailyForecast?.length,
-    hasWindows: !!data.optimalWindows?.length,
+    hasWindows: !!data.dry_windows?.length,
   });
 
   // Get memoized translation functions
@@ -184,12 +190,12 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
   // groupWindowsByDay wrapper to pass required parameters
   const groupWindowsByDayWithParams = useCallback(() => {
     // Need to transform windows to include formatted timeRange
-    const windowsWithTimeRange = data.optimalWindows?.map((window) => ({
+    const windowsWithTimeRange = data.dry_windows?.map((window) => ({
       ...window,
-      timeRange: formatTimeRange(window.startTime, window.endTime, locale, timeFormat),
+      timeRange: formatTimeRange(window.start, window.end, locale, timeFormat),
     }));
     return groupWindowsByDay(windowsWithTimeRange, data.hourlyConditions, t, locale, data.dailyForecast);
-  }, [data.optimalWindows, data.hourlyConditions, t, locale, timeFormat, data.dailyForecast]);
+  }, [data.dry_windows, data.hourlyConditions, t, locale, timeFormat, data.dailyForecast]);
 
   // Memoize expensive grouping functions to prevent recalculation on every render
   const windowsByDay = useMemo(() => groupWindowsByDayWithParams(), [groupWindowsByDayWithParams]);
@@ -237,10 +243,10 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                 {t("dialog.currentRating")}
               </h3>
               <div className="flex items-center gap-3">
-                <Badge className={`text-lg px-4 py-2 ${getRatingColor(data.rating)}`}>
-                  {translateRating(data.rating)}
+                <Badge className={`text-lg px-4 py-2 pointer-events-none ${getLabelColor(data.label)}`}>
+                  {translateRating(data.label)}
                 </Badge>
-                <span className="text-xs text-muted-foreground italic">{t("cragPage.estimateBased", "based on weather")}</span>
+                <span className="text-xs text-muted-foreground italic">{t("cragPage.basedOnWeather", "based on weather")}</span>
                 {data.isDry ? (
                   <Badge variant="outline" className="text-green-600 border-green-600">
                     {t("dialog.dry")}
@@ -251,6 +257,13 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                   </Badge>
                 )}
               </div>
+              {data.summary && (
+                <p className="text-sm text-muted-foreground">
+                  {(data as any).summary_template
+                    ? String(t((data as any).summary_template.key, (data as any).summary_template.params) || data.summary)
+                    : data.summary}
+                </p>
+              )}
             </div>
 
             <Separator />
@@ -277,7 +290,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                     <div className="bg-muted/50 rounded-lg p-3">
                       <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
                         <ThermometerSun className="h-3 w-3" />
@@ -341,6 +354,24 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                           units.precipitation,
                           1
                         )}
+                      </p>
+                    </div>
+                    <div className="bg-muted/50 rounded-lg p-3">
+                      <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
+                        <Droplets className="h-3 w-3" />
+                        <span>{t("dialog.dewPointSpread", "Dew Point Spread")}</span>
+                      </div>
+                      <p className="text-lg font-semibold">
+                        {data.dewPointSpread != null ? (
+                          <>
+                            {data.dewPointSpread}°C
+                            {data.flags?.condensation_risk && (
+                              <Badge variant="outline" className="ml-2 text-xs text-amber-600 border-amber-600">
+                                {t("dialog.condensationRisk", "Condensation risk")}
+                              </Badge>
+                            )}
+                          </>
+                        ) : "—"}
                       </p>
                     </div>
                     {(data.timeContext || data.astro) && (
@@ -453,14 +484,14 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
               </>
             )}
 
-            {/* Optimal Windows — shows all days, bad weather days are folded */}
+            {/* Dry Windows — shows all days, bad weather days are folded */}
             {windowsByDay && Object.keys(windowsByDay).length > 0 ? (
               <>
                 <div className="space-y-3">
                   <div className="flex items-start justify-between gap-2">
                     <h3 className="font-semibold flex items-center gap-2">
                       <TrendingUp className="w-4 h-4" />
-                      {t("dialog.optimalWindows")}
+                      {t("dialog.dryWindows", "Dry Windows")}
                     </h3>
                     <span className="text-xs text-muted-foreground">{t("dialog.nextDays")}</span>
                   </div>
@@ -493,11 +524,9 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                               <div
                                 className={`w-2 h-2 rounded-full ${
                                   isBadDay
-                                    ? dayData.bestRating === "Fair"
-                                      ? "bg-yellow-400"
-                                      : dayData.bestRating === "Poor"
-                                        ? "bg-orange-400"
-                                        : "bg-red-400"
+                                    ? dayData.label === "watch_out"
+                                      ? "bg-amber-400"
+                                      : "bg-red-400"
                                     : isHighlighted ? "bg-green-500" : "bg-green-400"
                                 }`}
                               />
@@ -519,16 +548,21 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                               )}
                               {isBadDay ? (
                                 <span className="text-xs text-muted-foreground ml-auto mr-2">
-                                  <Badge className={`text-[10px] px-1.5 py-0 ${getRatingColor(dayData.bestRating || "Nope")}`}>
-                                    {translateRating(dayData.bestRating || "Nope")}
+                                  <Badge className={`text-[10px] px-1.5 py-0 ${getLabelColor(dayData.label || "stay_home")}`}>
+                                    {translateRating(dayData.label || "stay_home")}
                                   </Badge>
                                 </span>
                               ) : (
-                                <span className="text-xs text-muted-foreground ml-auto mr-2">
-                                  {dayData.windows.length}{" "}
-                                  {dayData.windows.length > 1
-                                    ? t("dialog.windows")
-                                    : t("dialog.window")}
+                                <span className="flex items-center gap-2 ml-auto mr-2">
+                                  <span className="text-xs text-muted-foreground">
+                                    {dayData.windows.length}{" "}
+                                    {dayData.windows.length > 1
+                                      ? t("dialog.windows")
+                                      : t("dialog.window")}
+                                  </span>
+                                  <Badge className={`text-[10px] px-1.5 py-0 pointer-events-none ${getLabelColor("looks_good")}`}>
+                                    {translateRating("looks_good")}
+                                  </Badge>
                                 </span>
                               )}
                             </div>
@@ -536,7 +570,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                           <AccordionContent className="px-3 pb-3">
                             {isBadDay ? (
                               <p className="text-sm text-muted-foreground italic py-2">
-                                {t("dialog.noOptimalHoursDay", "No good climbing windows on this day. Check the hourly tab for details.")}
+                                {t("dialog.noGoodWindows", "No good climbing windows on this day. Check the hourly tab for details.")}
                               </p>
                             ) : (
                             <div className="space-y-3">
@@ -546,18 +580,18 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                   <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-2">
                                       {/* Weather summary for the window */}
-                                      {window.hours &&
-                                        window.hours.length > 0 &&
-                                        window.hours[0].weatherCode !== undefined && (
+                                      {window.hourlyData &&
+                                        window.hourlyData.length > 0 &&
+                                        window.hourlyData[0].weatherCode !== undefined && (
                                           <span
                                             className="text-lg"
                                             title={translateWeather(
-                                              getWeatherDescription(window.hours[0].weatherCode)
+                                              getWeatherDescription(window.hourlyData[0].weatherCode)
                                             )}
                                           >
                                             {getWeatherEmoji(
-                                              window.hours[0].weatherCode,
-                                              isNightTime(new Date(window.hours[0].time))
+                                              window.hourlyData[0].weatherCode,
+                                              isNightTime(new Date(window.hourlyData[0].time))
                                             )}
                                           </span>
                                         )}
@@ -565,16 +599,17 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                       <span className="text-sm font-medium">
                                         {window.timeRange}
                                       </span>
-                                      <Badge className={getRatingColor(window.rating)}>
-                                        {translateRating(window.rating)}
+                                      <Badge className={getLabelColor("looks_good")}>
+                                        {t("dialog.dry")}
                                       </Badge>
                                     </div>
+                                    <span className="text-xs text-muted-foreground ml-auto">{window.hours}h</span>
                                   </div>
 
                                   {/* Hourly breakdown */}
-                                  {window.hours && window.hours.length > 0 && (
+                                  {window.hourlyData && window.hourlyData.length > 0 && (
                                     <div className="space-y-1 pl-2 sm:pl-5">
-                                      {window.hours?.map((hour, hourIdx) => (
+                                      {window.hourlyData?.map((hour, hourIdx) => (
                                         <div
                                           key={hourIdx}
                                           className="flex items-center justify-between text-xs py-1 gap-1"
@@ -640,9 +675,12 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                               </div>
                                             </div>
                                           </div>
-                                          <Badge className={`text-[10px] px-1.5 py-0 shrink-0 ${getRatingColor(hour.rating)}`}>
-                                            {translateRating(hour.rating)}
-                                          </Badge>
+                                          <div className="flex items-center gap-1 shrink-0">
+                                            {hour.flags?.rain_now && <CloudRain className="h-3 w-3 text-blue-500" aria-label={t("flags.rainNow", "Rain")} />}
+                                            {hour.flags?.condensation_risk && <Droplets className="h-3 w-3 text-cyan-500" aria-label={t("flags.condensationRisk", "Condensation risk")} />}
+                                            {hour.flags?.high_humidity && <Cloud className="h-3 w-3 text-slate-400" aria-label={t("flags.highHumidity", "High humidity")} />}
+                                            {(hour.flags?.high_wind || hour.flags?.extreme_wind) && <Wind className="h-3 w-3 text-orange-500" aria-label={t("flags.highWind", "High wind")} />}
+                                          </div>
                                         </div>
                                       ))}
                                     </div>
@@ -685,8 +723,13 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
           {hourlyByDay && Object.keys(hourlyByDay).length > 0 ? (
             <div className="space-y-6">
               {Object.entries(hourlyByDay).map(([day, hours]) => {
-                // Filter to show only good/great hours for the main display
-                const goodHours = hours.filter((h) => h.rating === "Great" || h.rating === "Good");
+                // Filter to show only clean hours (no critical flags) for the main display
+                const goodHours = hours.filter((h) =>
+                  !h.flags?.rain_now &&
+                  !h.flags?.wet_rock_likely &&
+                  !h.flags?.extreme_wind &&
+                  !h.flags?.high_wind
+                );
 
                 // Check if hours are distant (>48h from now)
                 const now = new Date();
@@ -696,11 +739,25 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                   return hoursFromNow > 48;
                 };
 
+                // Determine day label based on flags
+                const hasAnyWarning = hours.some((h) =>
+                  h.flags?.rain_now || h.flags?.wet_rock_likely || h.flags?.extreme_wind
+                );
+                const hasMinorWarning = hours.some((h) =>
+                  h.flags?.high_humidity || h.flags?.condensation_risk || h.flags?.high_wind
+                );
+                const dayLabel = hasAnyWarning
+                  ? goodHours.length > 0 ? "watch_out" : "stay_home"
+                  : hasMinorWarning ? "watch_out" : "looks_good";
+
                 return (
                   <div key={day} className="space-y-3">
                     <h3 className="font-semibold flex items-center gap-2">
                       <Calendar className="w-4 h-4" />
                       {day}
+                      <Badge className={`text-[10px] px-1.5 py-0 pointer-events-none ml-auto ${getLabelColor(dayLabel)}`}>
+                        {translateRating(dayLabel)}
+                      </Badge>
                     </h3>
 
                     {/* Display only good hours prominently */}
@@ -726,11 +783,13 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                               )}
                               <div
                                 className={`rounded-lg p-3 border ${
-                                  hour.rating === "Great"
-                                    ? "bg-green-500/10 border-green-500/30"
-                                    : hour.rating === "Good"
-                                      ? "bg-blue-500/5 border-blue-500/20"
-                                      : "bg-muted/30 border-border"
+                                  !hour.flags
+                                    ? "bg-muted/50 border-border"
+                                    : hour.flags.rain_now || hour.flags.wet_rock_likely || hour.flags.extreme_wind
+                                      ? "bg-red-500/10 border-red-500/30"
+                                      : hour.flags.high_humidity || hour.flags.condensation_risk || hour.flags.high_wind
+                                        ? "bg-amber-500/5 border-amber-500/20"
+                                        : "bg-green-500/10 border-green-500/30"
                                 } ${isDistant ? "opacity-60" : ""}`}
                               >
                                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
@@ -791,31 +850,43 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                           {hour.wind_direction != null && <>{" "}<span className="inline-block" style={{ transform: `rotate(${getWindArrowRotation(hour.wind_direction)}deg)` }}>↑</span>{getWindCardinal(hour.wind_direction)}</>}
                                         </span>
                                       </div>
-                                      <div
-                                        className={`flex items-center gap-1 ${hour.precip_mm > 0 ? "text-blue-500" : ""}`}
-                                      >
-                                        <CloudRain className="h-3 w-3" />
-                                        <span>
-                                          {convertPrecipitation(
-                                            hour.precip_mm,
-                                            "mm",
-                                            units.precipitation
-                                          ).toFixed(1)}
-                                          {units.precipitation === "mm" ? "mm" : "in"}
-                                        </span>
-                                      </div>
+                                      {hour.precip_mm > 0 && (
+                                        <div className="flex items-center gap-1 text-blue-500">
+                                          <CloudRain className="h-3 w-3" />
+                                          <span>
+                                            {convertPrecipitation(
+                                              hour.precip_mm,
+                                              "mm",
+                                              units.precipitation
+                                            ).toFixed(1)}
+                                            {units.precipitation === "mm" ? "mm" : "in"}
+                                          </span>
+                                        </div>
+                                      )}
                                     </div>
                                   </div>
-                                  <div className="flex items-center gap-2">
-                                    <Badge
-                                      className={getRatingColor(hour.rating)}
-                                      variant="outline"
-                                    >
-                                      {translateRating(hour.rating)}
+                                  <div className="flex items-center gap-1.5 shrink-0">
+                                    {hour.flags?.rain_now && <CloudRain className="h-4 w-4 text-blue-500" aria-label={t("flags.rain", "Rain")} />}
+                                    {hour.flags?.condensation_risk && <Droplets className="h-4 w-4 text-cyan-500" aria-label={t("flags.condensation", "Condensation")} />}
+                                    {hour.flags?.high_humidity && <Cloud className="h-4 w-4 text-slate-400" aria-label={t("flags.highHumidity", "High humidity")} />}
+                                    {(hour.flags?.high_wind || hour.flags?.extreme_wind) && <Wind className="h-4 w-4 text-orange-500" aria-label={t("flags.windy", "Wind")} />}
+                                    <Badge className={`text-[10px] px-1.5 py-0 pointer-events-none ${
+                                      !hour.flags
+                                        ? ""
+                                        : hour.flags.rain_now || hour.flags.wet_rock_likely || hour.flags.extreme_wind
+                                          ? getLabelColor("stay_home")
+                                          : hour.flags.high_humidity || hour.flags.condensation_risk || hour.flags.high_wind
+                                            ? getLabelColor("watch_out")
+                                            : getLabelColor("looks_good")
+                                    }`}>
+                                      {!hour.flags
+                                        ? "—"
+                                        : hour.flags.rain_now || hour.flags.wet_rock_likely || hour.flags.extreme_wind
+                                          ? translateRating("stay_home")
+                                          : hour.flags.high_humidity || hour.flags.condensation_risk || hour.flags.high_wind
+                                            ? translateRating("watch_out")
+                                            : translateRating("looks_good")}
                                     </Badge>
-                                    <span className="text-sm font-semibold w-8 text-right">
-                                      {translateRating(hour.rating)}
-                                    </span>
                                   </div>
                                 </div>
                               </div>
@@ -856,11 +927,13 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                   )}
                                   <div
                                     className={`rounded-lg p-2 border text-xs ${
-                                      hour.rating === "Great"
-                                        ? "bg-green-500/10 border-green-500/30"
-                                        : hour.rating === "Good"
-                                          ? "bg-blue-500/5 border-blue-500/20"
-                                          : "bg-muted/30 border-border"
+                                      !hour.flags
+                                        ? "bg-muted/50 border-border"
+                                        : hour.flags.rain_now || hour.flags.wet_rock_likely || hour.flags.extreme_wind
+                                          ? "bg-red-500/10 border-red-500/30"
+                                          : hour.flags.high_humidity || hour.flags.condensation_risk || hour.flags.high_wind
+                                            ? "bg-amber-500/5 border-amber-500/20"
+                                            : "bg-green-500/10 border-green-500/30"
                                     } ${isDistant ? "opacity-60" : ""}`}
                                   >
                                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
@@ -940,16 +1013,31 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                           </div>
                                         </div>
                                       </div>
-                                      <div className="flex items-center gap-2">
-                                        <Badge
-                                          className={getRatingColor(hour.rating)}
-                                          variant="outline"
-                                        >
-                                          {translateRating(hour.rating)}
+                                      <div className="flex items-center gap-1.5 shrink-0">
+                                        {hour.flags?.rain_now && <CloudRain className="h-3.5 w-3.5 text-blue-500" aria-label={t("flags.rain", "Rain")} />}
+                                        {hour.flags?.condensation_risk && <Droplets className="h-3.5 w-3.5 text-cyan-500" aria-label={t("flags.condensation", "Condensation")} />}
+                                        {hour.flags?.high_humidity && <Cloud className="h-3.5 w-3.5 text-slate-400" aria-label={t("flags.highHumidity", "High humidity")} />}
+                                        {(hour.flags?.high_wind || hour.flags?.extreme_wind) && <Wind className="h-3.5 w-3.5 text-orange-500" aria-label={t("flags.windy", "Wind")} />}
+                                        <Badge className={`text-[10px] px-1.5 py-0 pointer-events-none ${
+                                          !hour.flags
+                                            ? ""
+                                            : hour.flags.rain_now || hour.flags.wet_rock_likely || hour.flags.extreme_wind
+                                              ? getLabelColor("stay_home")
+                                              : hour.flags.high_humidity || hour.flags.condensation_risk || hour.flags.high_wind
+                                                ? getLabelColor("watch_out")
+                                                : getLabelColor("looks_good")
+                                        }`}>
+                                          {!hour.flags
+                                            ? "—"
+                                            : hour.flags.rain_now || hour.flags.wet_rock_likely || hour.flags.extreme_wind
+                                              ? translateRating("stay_home")
+                                              : hour.flags.high_humidity || hour.flags.condensation_risk || hour.flags.high_wind
+                                                ? translateRating("watch_out")
+                                                : translateRating("looks_good")}
                                         </Badge>
-                                        <span className="font-semibold">
-                                          {translateRating(hour.rating)}
-                                        </span>
+                                        {!hour.flags?.rain_now && !hour.flags?.condensation_risk && !hour.flags?.high_humidity && !hour.flags?.high_wind && !hour.flags?.extreme_wind && (
+                                          <span className="text-green-500 text-xs">&#10003;</span>
+                                        )}
                                       </div>
                                     </div>
                                   </div>
@@ -1042,9 +1130,11 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                     });
 
                     hasGoodConditions = hoursForDay.some(
-                      (h) => h.rating === "Great" || h.rating === "Good"
+                      (h) => !h.flags?.rain_now && !h.flags?.wet_rock_likely && !h.flags?.extreme_wind && !h.flags?.high_wind
                     );
-                    hasFairConditions = hoursForDay.some((h) => h.rating === "Fair");
+                    hasFairConditions = hoursForDay.some(
+                      (h) => !h.flags?.rain_now && !h.flags?.wet_rock_likely && !h.flags?.extreme_wind && (h.flags?.high_humidity || h.flags?.condensation_risk || h.flags?.high_wind)
+                    );
                   }
 
                   let dayLabel: string;

@@ -275,7 +275,8 @@
     "lessReliableHourly": "Volgende uren minder voorspelbaar",
     "lessCertain": "MINDER ZEKER",
     "todayBadge": "VANDAAG",
-    "delete": "Verwijderen"
+    "delete": "Verwijderen",
+    "noGoodWindows": "Geen goede klimvensters vandaag. Bekijk het uurtab."
   },
   "timeContext": {
     "sunrise": "Zonsopgang",
@@ -799,7 +800,8 @@
     "forecast": "Forecast",
     "dry": "Dry",
     "wet": "Wet",
-    "helpful": "Helpful"
+    "helpful": "Helpful",
+    "basedOnWeather": "op basis van weer"
   },
   "time": {
     "today": "Vandaag",
@@ -874,5 +876,20 @@
     "done": "Done",
     "cancel": "Cancel",
     "edit": "Edit"
+  },
+  "labels": {
+    "looksGood": "Goed",
+    "watchOut": "Matig",
+    "stayHome": "Slecht"
+  },
+  "flags": {
+    "rain": "Regen",
+    "rainExpected": "Regen over {{hours}}u",
+    "condensation": "Condensatie",
+    "highHumidity": "Hoge luchtvochtigheid",
+    "wetRock": "Natte rots",
+    "windy": "Winderig",
+    "extremeWind": "Extreme wind",
+    "sandstoneWet": "Natte zandsteen"
   }
 }

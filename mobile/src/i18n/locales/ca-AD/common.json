@@ -323,7 +323,8 @@
     "lessReliableHourly": "Pròximes hores menys previsibles",
     "lessCertain": "MENYS CERT",
     "todayBadge": "AVUI",
-    "delete": "Elimina"
+    "delete": "Elimina",
+    "noGoodWindows": "Cap bona finestra d'escalada avui. Consulta la pestanya horària."
   },
   "timeContext": {
     "sunrise": "Sortida del sol",
@@ -768,7 +769,8 @@
     "forecast": "Forecast",
     "dry": "Dry",
     "wet": "Wet",
-    "helpful": "Helpful"
+    "helpful": "Helpful",
+    "basedOnWeather": "basat en el temps"
   },
   "time": {
     "today": "Avui",
@@ -838,5 +840,20 @@
     "done": "Done",
     "cancel": "Cancel",
     "edit": "Edit"
+  },
+  "labels": {
+    "looksGood": "Bo",
+    "watchOut": "Regular",
+    "stayHome": "Dolent"
+  },
+  "flags": {
+    "rain": "Pluja",
+    "rainExpected": "Pluja en {{hours}}h",
+    "condensation": "Condensació",
+    "highHumidity": "Humitat alta",
+    "wetRock": "Roca probablement mullada",
+    "windy": "Ventós",
+    "extremeWind": "Vent extrem",
+    "sandstoneWet": "Gres mullat"
   }
 }

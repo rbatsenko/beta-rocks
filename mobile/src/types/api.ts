@@ -12,7 +12,7 @@ export type RockType =
   | "quartzite"
   | "unknown";
 
-export type FrictionRating = "Nope" | "Poor" | "Fair" | "Good" | "Great";
+export type ConditionsLabel = "looks_good" | "watch_out" | "stay_home";
 
 // --- /api/conditions response ---
 
@@ -25,14 +25,21 @@ export interface CurrentWeather {
   weatherCode: number;
 }
 
+export interface HourlyFlags {
+  rain_now: boolean;
+  condensation_risk: boolean;
+  high_humidity: boolean;
+  wet_rock_likely: boolean;
+  high_wind: boolean;
+  extreme_wind: boolean;
+}
+
 export interface HourlyCondition {
   time: string;
-  friction: number;
-  frictionScore: number;
-  rating: string;
   temperature_c: number;
   temp_c: number;
   humidity: number;
+  dew_point_spread: number;
   windSpeed_kph: number;
   wind_kph: number;
   wind_direction?: number;
@@ -41,6 +48,7 @@ export interface HourlyCondition {
   weatherCode: number;
   isDry: boolean;
   warnings: string[];
+  flags: HourlyFlags;
 }
 
 export interface PrecipitationContext {
@@ -49,12 +57,10 @@ export interface PrecipitationContext {
   next24h: number;
 }
 
-export interface OptimalWindow {
-  startTime: string;
-  endTime: string;
-  avgFrictionScore: number;
-  rating: string;
-  hourCount: number;
+export interface DryWindow {
+  start: string;
+  end: string;
+  hours: number;
 }
 
 export interface DailyForecast {
@@ -69,11 +75,24 @@ export interface DailyForecast {
   weatherCode: number;
 }
 
+export interface WeatherFlags {
+  rain_now: boolean;
+  rain_expected: { in_hours: number; mm: number } | null;
+  recent_rain: { last_24h_mm: number; last_48h_mm: number };
+  condensation_risk: boolean;
+  high_humidity: boolean;
+  wet_rock_likely: boolean;
+  estimated_dry_by: string | null;
+  sandstone_wet_warning: boolean;
+  extreme_wind: boolean;
+  high_wind: boolean;
+}
+
 export interface ConditionsData {
-  rating: number;
-  frictionRating: number;
-  frictionScore: number;
-  optimalWindows: OptimalWindow[];
+  label: ConditionsLabel;
+  summary: string;
+  flags: WeatherFlags;
+  dry_windows: DryWindow[];
   hourlyConditions: HourlyCondition[];
   dailyForecast: DailyForecast[];
 }
@@ -146,8 +165,9 @@ export interface CragDetailResponse {
     astro: { sunrise: string; sunset: string };
     precipitationContext?: PrecipitationContext;
     dewPointSpread?: number;
-    frictionScore: number;
-    rating: string;
+    label: ConditionsLabel;
+    summary: string;
+    flags: WeatherFlags;
     reasons: string[];
     warnings: string[];
     isDry: boolean;
@@ -237,7 +257,7 @@ export interface Favorite {
   longitude: number;
   rockType?: RockType;
   lastRating?: string;
-  lastFrictionScore?: number;
+  lastLabel?: ConditionsLabel;
   lastCheckedAt?: string;
   isLocationless?: boolean;
   displayOrder: number;

@@ -2,17 +2,13 @@
  * Utility functions for ConditionsDetailDialog component
  */
 
-export const getRatingColor = (rating: string): string => {
-  switch (rating) {
-    case "Great":
+export const getLabelColor = (label: string): string => {
+  switch (label) {
+    case "looks_good":
       return "bg-green-500/10 text-green-500 border-green-500/20";
-    case "Good":
-      return "bg-blue-500/10 text-blue-500 border-blue-500/20";
-    case "Fair":
-      return "bg-yellow-500/10 text-yellow-500 border-yellow-500/20";
-    case "Poor":
-      return "bg-orange-500/10 text-orange-500 border-orange-500/20";
-    case "Nope":
+    case "watch_out":
+      return "bg-amber-500/10 text-amber-500 border-amber-500/20";
+    case "stay_home":
       return "bg-red-500/10 text-red-500 border-red-500/20";
     default:
       return "bg-muted text-muted-foreground";
@@ -87,10 +83,17 @@ export type HourlyCondition = {
   wind_kph: number;
   wind_direction?: number;
   precip_mm: number;
-  frictionScore: number;
-  rating: string;
+  dew_point_spread: number;
   weatherCode?: number;
   warnings: string[];
+  flags: {
+    rain_now: boolean;
+    condensation_risk: boolean;
+    high_humidity: boolean;
+    wet_rock_likely: boolean;
+    high_wind: boolean;
+    extreme_wind: boolean;
+  };
 };
 
 export const groupHourlyByDay = (
@@ -136,14 +139,11 @@ export const groupHourlyByDay = (
   return grouped;
 };
 
-export type OptimalWindow = {
-  timeRange: string;
-  startTime: string;
-  endTime: string;
-  avgFrictionScore: number;
-  rating: string;
-  hourCount: number;
-  hours?: HourlyCondition[];
+export type DryWindow = {
+  start: string;
+  end: string;
+  hours: number;
+  timeRange?: string; // computed by UI
 };
 
 export type DailyForecastDay = {
@@ -159,17 +159,17 @@ export type DailyForecastDay = {
 };
 
 export type GroupedWindow = {
-  windows: OptimalWindow[];
+  windows: (DryWindow & { hourlyData?: HourlyCondition[] })[];
   isToday: boolean;
   isTomorrow: boolean;
-  /** Best rating for the day (used when no optimal windows) */
-  bestRating?: string;
+  /** Label for the day (used when no dry windows) */
+  label?: string;
   /** Weather code for the day (for icon display on non-optimal days) */
   weatherCode?: number;
 };
 
 export const groupWindowsByDay = (
-  optimalWindows: OptimalWindow[] | undefined,
+  dryWindows: DryWindow[] | undefined,
   hourlyConditions: HourlyCondition[] | undefined,
   t: (key: string) => string,
   locale: string,
@@ -204,11 +204,11 @@ export const groupWindowsByDay = (
     return { displayDay, isToday, isTomorrow };
   };
 
-  // Group optimal windows by day
-  if (optimalWindows) {
-    optimalWindows.forEach((window) => {
-      const startDate = new Date(window.startTime);
-      const endDate = new Date(window.endTime);
+  // Group dry windows by day
+  if (dryWindows) {
+    dryWindows.forEach((window) => {
+      const startDate = new Date(window.start);
+      const endDate = new Date(window.end);
 
       // Skip windows that have already ended or are more than 5 days away
       if (endDate < now || startDate >= fiveDaysFromNow) return;
@@ -232,20 +232,20 @@ export const groupWindowsByDay = (
       const windowHours = hourlyConditions
         ? hourlyConditions.filter((hour) => {
             const hourTime = new Date(hour.time);
-            const windowStart = new Date(window.startTime);
-            const windowEnd = new Date(window.endTime);
+            const windowStart = new Date(window.start);
+            const windowEnd = new Date(window.end);
             return hourTime >= windowStart && hourTime < windowEnd;
           })
         : [];
 
       grouped[displayDay].windows.push({
         ...window,
-        hours: windowHours,
+        hourlyData: windowHours,
       });
     });
   }
 
-  // Fill in days without optimal windows from daily forecast
+  // Fill in days without dry windows from daily forecast
   if (dailyForecast) {
     dailyForecast.forEach((day) => {
       const dayDate = new Date(day.date);
@@ -256,15 +256,15 @@ export const groupWindowsByDay = (
 
       const { displayDay, isToday, isTomorrow } = getDayInfo(dayDate);
 
-      // Skip if this day already has optimal windows
+      // Skip if this day already has dry windows
       if (grouped[displayDay]) {
         // Add weather code for display
         grouped[displayDay].weatherCode = day.weatherCode;
         return;
       }
 
-      // Determine the best rating for this day from hourly data
-      let bestRating = "Nope";
+      // Determine label for this day from hourly data
+      let label = "stay_home";
       if (hourlyConditions) {
         const dayEnd = new Date(dayStart);
         dayEnd.setDate(dayEnd.getDate() + 1);
@@ -272,11 +272,12 @@ export const groupWindowsByDay = (
           const ht = new Date(h.time);
           return ht >= dayStart && ht < dayEnd;
         });
-        const ratingOrder = ["Great", "Good", "Fair", "Poor", "Nope"];
-        for (const h of hoursForDay) {
-          if (ratingOrder.indexOf(h.rating) < ratingOrder.indexOf(bestRating)) {
-            bestRating = h.rating;
-          }
+        // No dry windows on this day — label based on how bad it is
+        const allRain = hoursForDay.length > 0 && hoursForDay.every(
+          (h) => h.flags?.rain_now || h.flags?.wet_rock_likely
+        );
+        if (!allRain && hoursForDay.length > 0) {
+          label = "watch_out";
         }
       }
 
@@ -284,7 +285,7 @@ export const groupWindowsByDay = (
         windows: [],
         isToday,
         isTomorrow,
-        bestRating,
+        label,
         weatherCode: day.weatherCode,
       };
     });
@@ -293,5 +294,19 @@ export const groupWindowsByDay = (
   // Return null only if there's nothing at all
   if (Object.keys(grouped).length === 0) return null;
 
-  return grouped;
+  // Sort chronologically: today first, then tomorrow, then by date
+  const sorted: Record<string, GroupedWindow> = {};
+  const entries = Object.entries(grouped);
+  entries.sort(([, a], [, b]) => {
+    if (a.isToday && !b.isToday) return -1;
+    if (!a.isToday && b.isToday) return 1;
+    if (a.isTomorrow && !b.isTomorrow) return -1;
+    if (!a.isTomorrow && b.isTomorrow) return 1;
+    return 0; // preserve order for other days (already chronological from forecast)
+  });
+  for (const [key, value] of entries) {
+    sorted[key] = value;
+  }
+
+  return sorted;
 };

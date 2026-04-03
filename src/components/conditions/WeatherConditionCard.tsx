@@ -17,7 +17,7 @@ import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal"
 import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog";
 import { generateUniqueSlug } from "@/lib/utils/slug";
 import { useUnits } from "@/hooks/useUnits";
-import { convertTemperature } from "@/lib/units/conversions";
+import { convertTemperature, convertWindSpeed } from "@/lib/units/conversions";
 import { getUserProfile, type UserProfile } from "@/lib/auth/sync-key";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 
@@ -25,8 +25,9 @@ interface ConditionsData {
   location: string;
   locationDetails?: string;
   timeframe?: string;
-  rating: string;
-  frictionScore: number;
+  label: string;
+  summary: string;
+  flags?: any;
   reasons?: string[];
   warnings?: string[];
   isDry: boolean;
@@ -50,7 +51,7 @@ interface ConditionsData {
     weatherCode: number;
   };
   hourlyConditions?: unknown[];
-  optimalWindows?: unknown[];
+  dry_windows?: unknown[];
 }
 
 interface PrefetchedFullData {
@@ -65,29 +66,30 @@ interface PrefetchedFullData {
     weatherCode: number;
   };
   conditions: {
-    rating: string;
-    frictionRating: number;
+    label: string;
+    summary: string;
+    flags: any;
     isDry: boolean;
     reasons?: string[];
     warnings?: string[];
+    dry_windows?: any[];
     hourlyConditions?: Array<{
       time: string;
       temp_c: number;
       humidity: number;
       wind_kph: number;
       precip_mm: number;
-      frictionScore: number;
-      rating: string;
-      isDry: boolean;
+      dew_point_spread: number;
       warnings: string[];
       weatherCode?: number;
-    }>;
-    optimalWindows?: Array<{
-      startTime: string;
-      endTime: string;
-      avgFrictionScore: number;
-      rating: string;
-      hourCount: number;
+      flags: {
+        rain_now: boolean;
+        condensation_risk: boolean;
+        high_humidity: boolean;
+        wet_rock_likely: boolean;
+        high_wind: boolean;
+        extreme_wind: boolean;
+      };
     }>;
     precipitationContext?: {
       last24h: number;
@@ -138,13 +140,13 @@ function isNightTime(date: Date): boolean {
 export const WeatherConditionCard = memo(function WeatherConditionCard({
   data,
   translateWeather,
-  translateRating,
+  translateRating: _translateRating,
   translateWarning,
   translateReason,
   onDetailsClick,
   onSheetClick,
   onFullDataFetched,
-  conditionsLabel,
+  conditionsLabel: _conditionsLabel,
   detailsLabel,
   favoriteLabel,
   addReportLabel,
@@ -193,8 +195,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
           cragId: data.cragId,
           areaSlug: data.cragSlug,
           rockType: data.rockType,
-          lastRating: data.rating,
-          lastFrictionScore: data.frictionScore,
+          lastLabel: data.label,
           lastCheckedAt: new Date().toISOString(),
         },
         previousFavorites: favorites,
@@ -232,8 +233,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
           cragId: data.cragId,
           areaSlug: data.cragSlug,
           rockType: data.rockType,
-          lastRating: data.rating,
-          lastFrictionScore: data.frictionScore,
+          lastLabel: data.label,
           lastCheckedAt: new Date().toISOString(),
         },
         previousFavorites: favorites,
@@ -277,8 +277,8 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
 
           const fullData = await response.json();
           console.log(
-            "[WeatherConditionCard] Prefetch complete, hourly count:",
-            fullData.conditions?.hourlyConditions?.length || 0
+            "[WeatherConditionCard] Prefetch complete, label:",
+            fullData.conditions?.label || "unknown"
           );
           onFullDataFetched(fullData);
         } catch (error) {
@@ -388,7 +388,7 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
           </div>
 
           {/* Action buttons row */}
-          {(data.hourlyConditions || data.optimalWindows) && (
+          {(data.hourlyConditions || data.dry_windows) && (
             <div className="flex flex-wrap gap-2">
               {data.latitude && data.longitude && (
                 <MapPopover
@@ -431,10 +431,34 @@ export const WeatherConditionCard = memo(function WeatherConditionCard({
             </div>
           )}
 
-          {/* Conditions */}
-          <div className="font-medium">
-            {conditionsLabel}: {translateRating(data.rating)} ({data.frictionScore}/5)
+          {/* Summary */}
+          <div className="font-medium text-sm">
+            {data.summary}
           </div>
+
+          {/* Current weather stats */}
+          {data.current && (
+            <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted-foreground">
+              <span>🌡 {Math.round(convertTemperature(data.current.temperature_c, "celsius", units.temperature))}{units.temperature === "celsius" ? "°C" : "°F"}</span>
+              <span>💧 {Math.round(data.current.humidity)}%</span>
+              <span>💨 {Math.round(convertWindSpeed(data.current.windSpeed_kph, "kmh", units.windSpeed))} {units.windSpeed === "kmh" ? "km/h" : units.windSpeed === "mph" ? "mph" : units.windSpeed === "ms" ? "m/s" : "kn"}</span>
+              {data.current.precipitation_mm > 0 && <span>🌧 {data.current.precipitation_mm}mm</span>}
+            </div>
+          )}
+
+          {/* Active flags as pills */}
+          {data.flags && (
+            <div className="flex flex-wrap gap-1.5">
+              {data.flags.rain_now && <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400">🌧 {t("flags.rain", "Rain")}</span>}
+              {data.flags.rain_expected && <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400">🌧 {t("flags.rainExpected", "Rain in {{hours}}h", { hours: data.flags.rain_expected.in_hours })}</span>}
+              {data.flags.condensation_risk && <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">💧 {t("flags.condensation", "Condensation")}</span>}
+              {data.flags.high_humidity && <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-500/10 text-slate-600 dark:text-slate-400">💧 {t("flags.highHumidity", "High humidity")}</span>}
+              {data.flags.wet_rock_likely && <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400">⚠ {t("flags.wetRock", "Wet rock likely")}</span>}
+              {data.flags.high_wind && <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-orange-500/10 text-orange-600 dark:text-orange-400">💨 {t("flags.windy", "Windy")}</span>}
+              {data.flags.extreme_wind && <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-red-500/10 text-red-600 dark:text-red-400">💨 {t("flags.extremeWind", "Extreme wind")}</span>}
+              {data.flags.sandstone_wet_warning && <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-red-500/10 text-red-600 dark:text-red-400">⚠ {t("flags.sandstoneWet", "Sandstone wet")}</span>}
+            </div>
+          )}
 
           {/* Warnings */}
           {data.warnings && data.warnings.length > 0 && (

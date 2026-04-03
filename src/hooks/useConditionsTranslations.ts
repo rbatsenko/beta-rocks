@@ -22,9 +22,16 @@ export function useConditionsTranslations(
       if (!rating) {
         return "";
       }
-      const ratingLower = rating.toLowerCase();
-      const key = `ratings.${ratingLower}`;
-      return t(key);
+      // 3-tier labels
+      const labelMap: Record<string, string> = {
+        looks_good: "labels.looksGood",
+        watch_out: "labels.watchOut",
+        stay_home: "labels.stayHome",
+      };
+      const key = labelMap[rating];
+      if (key) return t(key);
+      // Fallback for any other value
+      return rating;
     };
 
     const translateReason = (reason: string): string => {

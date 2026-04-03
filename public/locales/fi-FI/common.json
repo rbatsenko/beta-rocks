@@ -364,7 +364,8 @@
     "lessReliableHourly": "Seuraavat tunnit vähemmän ennustettavissa",
     "lessCertain": "VÄHEMMÄN VARMA",
     "todayBadge": "TÄNÄÄN",
-    "delete": "Poista"
+    "delete": "Poista",
+    "noGoodWindows": "Ei hyviä kiipeilyikkunoita tänä päivänä. Tarkista tuntitab."
   },
   "timeContext": {
     "sunrise": "Auringonnousu",
@@ -803,7 +804,8 @@
     "forecast": "Forecast",
     "dry": "Dry",
     "wet": "Wet",
-    "helpful": "Helpful"
+    "helpful": "Helpful",
+    "basedOnWeather": "sään perusteella"
   },
   "time": {
     "today": "Tänään",
@@ -867,5 +869,20 @@
     "done": "Done",
     "cancel": "Cancel",
     "edit": "Edit"
+  },
+  "labels": {
+    "looksGood": "Hyvä",
+    "watchOut": "Kohtalainen",
+    "stayHome": "Huono"
+  },
+  "flags": {
+    "rain": "Sadetta",
+    "rainExpected": "Sadetta {{hours}}h päästä",
+    "condensation": "Kosteuden tiivistyminen",
+    "highHumidity": "Korkea kosteus",
+    "wetRock": "Märkä kallio",
+    "windy": "Tuulista",
+    "extremeWind": "Äärimmäinen tuuli",
+    "sandstoneWet": "Märkä hiekkakivi"
   }
 }

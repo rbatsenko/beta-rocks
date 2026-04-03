@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseClient, isSupabaseConfigured } from "@/integrations/supabase/client";
-import { computeConditions, RockType } from "@/lib/conditions/conditions.service";
+import { computeWeather, RockType } from "@/lib/conditions/conditions.service";
 import { getWeatherForecast } from "@/lib/external-apis/open-meteo";
 
 /**
@@ -52,7 +52,7 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
       weatherCode: h.weatherCode,
     }));
 
-    const conditions = await computeConditions(
+    const weatherResponse = await computeWeather(
       {
         current: {
           temp_c: forecast.current.temperature,
@@ -61,6 +61,9 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
           precip_mm: forecast.current.precipitation,
         },
         hourly: hourlyData,
+        daily: forecast.daily,
+        latitude: crag.lat,
+        longitude: crag.lon,
       },
       rockType,
       0
@@ -76,49 +79,32 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
           lon: crag.lon,
           rock_type: rockType,
         },
-        current_weather: {
-          temperature_c: forecast.current.temperature,
-          humidity: forecast.current.humidity,
-          wind_speed_kph: forecast.current.windSpeed,
-          wind_direction: forecast.current.windDirection,
-          precipitation_mm: forecast.current.precipitation,
-          weather_code: forecast.current.weatherCode,
-        },
         conditions: {
-          label: conditions.rating,
-          friction_score: conditions.frictionRating,
-          note: "Friction score is a rough estimate based on weather, rock type, and recent precipitation.",
-          is_dry: conditions.isDry,
-          drying_time_hours: conditions.dryingTimeHours || null,
-          dew_point_spread: conditions.dewPointSpread || null,
-          precipitation: conditions.precipitationContext ? {
-            last_24h_mm: conditions.precipitationContext.last24h,
-            last_48h_mm: conditions.precipitationContext.last48h,
-            next_24h_mm: conditions.precipitationContext.next24h,
-          } : null,
-          reasons: conditions.reasons,
-          warnings: conditions.warnings,
-          hourly_conditions: conditions.hourlyConditions?.slice(0, 24).map((h: any) => ({
+          flags: weatherResponse.flags,
+          label: weatherResponse.label,
+          summary: weatherResponse.summary,
+          dry_windows: weatherResponse.dry_windows,
+          precipitation: {
+            last_24h_mm: weatherResponse.precipitation.last24h,
+            last_48h_mm: weatherResponse.precipitation.last48h,
+            next_24h_mm: weatherResponse.precipitation.next24h,
+          },
+          warnings: weatherResponse.warnings,
+          hourly_conditions: weatherResponse.weather.hourly.slice(0, 24).map((h) => ({
             time: h.time,
-            friction_score: h.frictionScore,
-            temperature_c: h.temperature,
+            temperature_c: h.temp_c,
             humidity: h.humidity,
-            wind_speed_kph: h.windSpeed,
-            precipitation_mm: h.precipitation,
+            dew_point_spread: h.dew_point_spread,
+            wind_speed_kph: h.wind_kph,
+            wind_direction: h.wind_direction,
+            precipitation_mm: h.precip_mm,
+            weather_code: h.weather_code,
+            flags: h.flags,
           })),
-          optimal_windows: conditions.optimalWindows,
         },
-        daily_forecast: forecast.daily?.slice(0, 7).map((day) => ({
-          date: day.date,
-          temp_max_c: day.tempMax,
-          temp_min_c: day.tempMin,
-          precipitation_mm: day.precipitation,
-          wind_speed_max_kph: day.windSpeedMax,
-          weather_code: day.weatherCode,
-          sunrise: day.sunrise,
-          sunset: day.sunset,
-        })),
-        updated_at: new Date().toISOString(),
+        current_weather: weatherResponse.weather.now,
+        daily_forecast: weatherResponse.weather.daily.slice(0, 7),
+        updated_at: weatherResponse.updated_at,
       },
     }, {
       headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600" },

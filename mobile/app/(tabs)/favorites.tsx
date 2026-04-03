@@ -16,8 +16,8 @@ import { useFocusEffect } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { getFavorites, saveFavorites } from "@/lib/storage";
 import { getConditions } from "@/api/client";
-import type { Favorite, RockType } from "@/types/api";
-import { FRICTION_RATINGS, RATING_COLORS } from "@/constants/config";
+import type { Favorite, RockType, ConditionsLabel } from "@/types/api";
+import { LABEL_COLORS } from "@/constants/config";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useTranslation } from "react-i18next";
@@ -59,8 +59,7 @@ export default function FavoritesScreen() {
           );
           return {
             ...fav,
-            lastFrictionScore: response.conditions.frictionScore,
-            lastRating: String(response.conditions.rating),
+            lastLabel: response.conditions.label,
             lastCheckedAt: new Date().toISOString(),
           };
         } catch {
@@ -80,16 +79,14 @@ export default function FavoritesScreen() {
     }
   }
 
-  function getRatingInfo(score?: number) {
-    if (!score) return null;
-    const rounded = Math.round(score) as keyof typeof FRICTION_RATINGS;
-    return FRICTION_RATINGS[rounded] || null;
+  function getLabelColors(label?: ConditionsLabel) {
+    if (!label) return null;
+    return LABEL_COLORS[label] || null;
   }
 
   function renderFavorite({ item }: { item: Favorite }) {
-    const ratingInfo = getRatingInfo(item.lastFrictionScore);
-    const ratingColorKey = ratingInfo?.label as keyof typeof RATING_COLORS | undefined;
-    const rColors = ratingColorKey ? RATING_COLORS[ratingColorKey] : null;
+    const labelKey = item.lastLabel;
+    const lColors = getLabelColors(labelKey);
 
     return (
       <TouchableOpacity
@@ -109,10 +106,10 @@ export default function FavoritesScreen() {
               {t("favorites.reportsOnly", "Reports only")}
             </Text>
           </View>
-        ) : rColors && ratingInfo ? (
-          <View style={[styles.ratingBadge, { backgroundColor: rColors.bg }]}>
-            <Text style={[styles.ratingText, { color: rColors.text }]}>
-              {t(`ratings.${ratingInfo.label.toLowerCase()}`, ratingInfo.label)}
+        ) : lColors && labelKey ? (
+          <View style={[styles.ratingBadge, { backgroundColor: lColors.bg }]}>
+            <Text style={[styles.ratingText, { color: lColors.text }]}>
+              {t(`conditions.labels.${labelKey}`, labelKey.replace(/_/g, " "))}
             </Text>
           </View>
         ) : null}

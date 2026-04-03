@@ -6,7 +6,7 @@ import {
   findCragByCoordinates,
 } from "@/lib/db/queries";
 import { getWeatherForecast } from "@/lib/external-apis/open-meteo";
-import { computeConditions } from "@/lib/conditions/conditions.service";
+import { computeWeather } from "@/lib/conditions/conditions.service";
 import { parseCoordinatesFromSlug } from "@/lib/utils/slug";
 import type { RockType } from "@/lib/conditions/conditions.service";
 
@@ -87,39 +87,46 @@ export async function GET(
       longitude: crag.lon,
     };
 
-    // Compute conditions (cached for 1 hour with Cache Components)
-    const rawConditions = await computeConditions(
+    // Compute weather conditions
+    const weatherResponse = await computeWeather(
       transformedWeather,
       (crag.rock_type as RockType) || "unknown",
       0,
       { includeNightHours: true }
     );
 
-    if (!rawConditions || typeof rawConditions.frictionRating !== "number") {
-      throw new Error("Failed to compute conditions");
-    }
-
-    const conditions = {
-      ...rawConditions,
-      frictionScore: rawConditions.frictionRating,
-      dailyForecast: weather.daily,
-      current: {
-        temperature_c: weather.current.temperature,
-        humidity: weather.current.humidity,
-        windSpeed_kph: weather.current.windSpeed,
-        windDirection: weather.current.windDirection,
-        precipitation_mm: weather.current.precipitation,
-        weatherCode: weather.current.weatherCode,
-      },
-      astro: {
-        sunrise: weather.daily[0].sunrise,
-        sunset: weather.daily[0].sunset,
-      },
+    // TODO: Remove backward compat shim after mobile app v2.0 is widely adopted (target: July 2026)
+    // Backward compat: old consumers expect frictionRating, rating, hourlyConditions, optimalWindows
+    const backwardCompat = {
+      frictionRating: weatherResponse.label === "looks_good" ? 4 : weatherResponse.label === "watch_out" ? 3 : 1,
+      rating: weatherResponse.label === "looks_good" ? "Good" : weatherResponse.label === "watch_out" ? "Fair" : "Poor",
+      isDry: !weatherResponse.flags.rain_now && !weatherResponse.flags.wet_rock_likely,
+      hourlyConditions: weatherResponse.weather.hourly.map((h) => ({
+        time: h.time,
+        temp_c: h.temp_c,
+        humidity: h.humidity,
+        wind_kph: h.wind_kph,
+        wind_direction: h.wind_direction,
+        precip_mm: h.precip_mm,
+        weatherCode: h.weather_code,
+        frictionScore: h.flags.rain_now ? 1 : h.flags.condensation_risk ? 2 : h.flags.high_humidity ? 3 : 4,
+        rating: h.flags.rain_now ? "Poor" : h.flags.condensation_risk ? "Poor" : h.flags.high_humidity ? "Fair" : "Good",
+        isOptimal: !h.flags.rain_now && !h.flags.condensation_risk && !h.flags.wet_rock_likely,
+        isDry: !h.flags.rain_now && !h.flags.wet_rock_likely,
+        warnings: [],
+      })),
+      optimalWindows: weatherResponse.dry_windows.map((w) => ({
+        startTime: w.start,
+        endTime: w.end,
+        avgFrictionScore: 4,
+        rating: "Good",
+        hourCount: w.hours,
+      })),
     };
 
     return NextResponse.json({
       crag,
-      conditions,
+      conditions: { ...weatherResponse, ...backwardCompat },
       reports,
       sectors,
     });

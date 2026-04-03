@@ -276,7 +276,8 @@
     "lessReliableHourly": "Nästa timmar mindre förutsägbara",
     "lessCertain": "OSÄKRARE",
     "todayBadge": "I DAG",
-    "delete": "Radera"
+    "delete": "Radera",
+    "noGoodWindows": "Inga bra klättringsfönster denna dag. Kolla timtabben."
   },
   "timeContext": {
     "sunrise": "Soluppgång",
@@ -721,7 +722,8 @@
     "forecast": "Forecast",
     "dry": "Dry",
     "wet": "Wet",
-    "helpful": "Helpful"
+    "helpful": "Helpful",
+    "basedOnWeather": "baserat på väder"
   },
   "time": {
     "today": "Idag",
@@ -791,5 +793,20 @@
     "done": "Done",
     "cancel": "Cancel",
     "edit": "Edit"
+  },
+  "labels": {
+    "looksGood": "Bra",
+    "watchOut": "Måttligt",
+    "stayHome": "Dåligt"
+  },
+  "flags": {
+    "rain": "Regn",
+    "rainExpected": "Regn om {{hours}}h",
+    "condensation": "Kondens",
+    "highHumidity": "Hög luftfuktighet",
+    "wetRock": "Våt klippa",
+    "windy": "Blåsigt",
+    "extremeWind": "Extrem vind",
+    "sandstoneWet": "Våt sandsten"
   }
 }

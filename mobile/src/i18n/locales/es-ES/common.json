@@ -359,7 +359,8 @@
     "lessReliableHourly": "Próximas horas menos predecibles",
     "lessCertain": "MENOS SEGURO",
     "todayBadge": "HOY",
-    "delete": "Eliminar"
+    "delete": "Eliminar",
+    "noGoodWindows": "Sin ventanas de escalada buenas este día. Revisa la pestaña horaria."
   },
   "timeContext": {
     "sunrise": "Amanecer",
@@ -884,7 +885,8 @@
     "forecast": "Forecast",
     "dry": "Dry",
     "wet": "Wet",
-    "helpful": "Helpful"
+    "helpful": "Helpful",
+    "basedOnWeather": "basado en el clima"
   },
   "time": {
     "today": "Hoy",
@@ -959,5 +961,31 @@
     "done": "Done",
     "cancel": "Cancel",
     "edit": "Edit"
+  },
+  "labels": {
+    "looksGood": "Bueno",
+    "watchOut": "Regular",
+    "stayHome": "Malo"
+  },
+  "summary": {
+    "sandstoneWet": "La arenisca sigue mojada. Espera otro día.",
+    "rainingNow": "Lloviendo ahora. {{mm}}mm hasta ahora.",
+    "wetRockDryBy": "La roca puede seguir mojada. Debería secarse hacia las {{time}}.",
+    "rainExpected": "Lluvia prevista en {{hours}}h. Sal ahora para aprovechar la ventana seca.",
+    "condensationRisk": "Alto riesgo de condensación. La roca estará resbaladiza.",
+    "highHumidity": "Humedad alta ({{humidity}}%). La roca puede estar resbaladiza.",
+    "extremeWind": "Viento extremo ({{wind}} km/h). No seguro en vías expuestas.",
+    "highWind": "Ventoso ({{wind}} km/h). Ok para paredes protegidas.",
+    "dryAndGood": "Seco y {{temp}}. {{humidity}}"
+  },
+  "flags": {
+    "rain": "Lluvia",
+    "rainExpected": "Lluvia en {{hours}}h",
+    "condensation": "Condensación",
+    "highHumidity": "Humedad alta",
+    "wetRock": "Roca probablemente mojada",
+    "windy": "Ventoso",
+    "extremeWind": "Viento extremo",
+    "sandstoneWet": "Arenisca mojada"
   }
 }

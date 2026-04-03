@@ -96,8 +96,10 @@ interface CragPageContentProps {
 }
 
 interface ConditionsData {
-  rating: string;
-  frictionScore: number;
+  label: string;
+  summary: string;
+  summary_template?: { key: string; params?: Record<string, any>; fallback: string };
+  flags?: any;
   reasons?: string[];
   warnings?: string[];
   isDry: boolean;
@@ -117,18 +119,23 @@ interface ConditionsData {
     wind_kph: number;
     wind_direction?: number;
     precip_mm: number;
-    frictionScore: number;
-    rating: string;
-    isDry: boolean;
+    dew_point_spread: number;
     warnings: string[];
     weatherCode?: number;
+    flags: {
+      rain_now: boolean;
+      condensation_risk: boolean;
+      high_humidity: boolean;
+      wet_rock_likely: boolean;
+      high_wind: boolean;
+      extreme_wind: boolean;
+    };
   }>;
-  optimalWindows?: Array<{
+  dry_windows?: Array<{
     startTime: string;
     endTime: string;
-    avgFrictionScore: number;
-    rating: string;
     hourCount: number;
+    hours: number;
   }>;
   precipitationContext?: {
     last24h: number;
@@ -168,7 +175,49 @@ async function fetchConditionsByCragId(cragId: string): Promise<ConditionsData> 
     throw new Error("Failed to fetch conditions");
   }
   const data = await res.json();
-  return data.conditions;
+  const c = data.conditions;
+
+  // Map new weather response shape to what the UI expects
+  if (c.weather?.now && !c.current) {
+    c.current = {
+      temperature_c: c.weather.now.temp_c,
+      humidity: c.weather.now.humidity,
+      windSpeed_kph: c.weather.now.wind_kph,
+      windDirection: c.weather.now.wind_direction,
+      precipitation_mm: c.weather.now.precip_mm,
+      weatherCode: c.weather.now.weather_code ?? 0,
+    };
+  }
+  if (c.weather?.hourly) {
+    // Prefer weather.hourly (has flags) over backward compat hourlyConditions (no flags)
+    c.hourlyConditions = c.weather.hourly;
+  }
+  if (c.weather?.daily && !c.dailyForecast) {
+    c.dailyForecast = c.weather.daily.map((d: any) => ({
+      date: d.date,
+      tempMax: d.temp_max_c,
+      tempMin: d.temp_min_c,
+      precipitation: d.precipitation_mm,
+      windSpeedMax: d.wind_speed_max_kph,
+      sunrise: d.sunrise,
+      sunset: d.sunset,
+      weatherCode: d.weather_code,
+    }));
+  }
+  if (c.precipitation && !c.precipitationContext) {
+    c.precipitationContext = c.precipitation;
+  }
+  if (!c.isDry && c.flags) {
+    c.isDry = !c.flags.rain_now && !c.flags.wet_rock_likely;
+  }
+  if (c.weather?.now?.dew_point_spread != null && c.dewPointSpread == null) {
+    c.dewPointSpread = c.weather.now.dew_point_spread;
+  }
+  if (c.weather?.daily?.[0] && !c.astro) {
+    c.astro = { sunrise: c.weather.daily[0].sunrise, sunset: c.weather.daily[0].sunset };
+  }
+
+  return c;
 }
 
 async function fetchReportsByCragId(cragId: string) {
@@ -327,8 +376,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
           longitude: crag.lon ?? 0,
           cragId: crag.id,
           rockType: crag.rock_type || undefined,
-          lastRating: isLocationless ? undefined : (conditions?.rating || "unknown"),
-          lastFrictionScore: isLocationless ? undefined : (conditions?.frictionScore || 0),
+          lastLabel: isLocationless ? undefined : (conditions?.label || "unknown"),
           lastCheckedAt: isLocationless ? undefined : new Date().toISOString(),
           isLocationless: isLocationless || undefined,
         },
@@ -367,8 +415,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
           longitude: crag.lon ?? 0,
           cragId: crag.id,
           rockType: crag.rock_type || undefined,
-          lastRating: isLocationless ? undefined : (conditions?.rating || "unknown"),
-          lastFrictionScore: isLocationless ? undefined : (conditions?.frictionScore || 0),
+          lastLabel: isLocationless ? undefined : (conditions?.label || "unknown"),
           lastCheckedAt: isLocationless ? undefined : new Date().toISOString(),
           isLocationless: isLocationless || undefined,
         },
@@ -733,20 +780,41 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                     <Badge
                       variant="outline"
                       className={`text-lg px-4 py-2 ${
-                        conditions.rating === "Great"
+                        conditions.label === "looks_good"
                           ? "bg-green-500/10 text-green-700 dark:text-green-300 border-green-500/30"
-                          : conditions.rating === "Good"
-                            ? "bg-blue-500/10 text-blue-700 dark:text-blue-300 border-blue-500/30"
-                            : conditions.rating === "Fair"
-                              ? "bg-yellow-500/10 text-yellow-700 dark:text-yellow-300 border-yellow-500/30"
-                              : "bg-gray-500/10 text-gray-700 dark:text-gray-300 border-gray-500/30"
+                          : conditions.label === "watch_out"
+                            ? "bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/30"
+                            : "bg-red-500/10 text-red-700 dark:text-red-300 border-red-500/30"
                       }`}
                     >
-                      {t(`ratings.${conditions.rating.toLowerCase()}`) || conditions.rating}
+                      {conditions.label === "looks_good" ? t("labels.looksGood", "Looks good") : conditions.label === "watch_out" ? t("labels.watchOut", "Watch out") : t("labels.stayHome", "Stay home")}
                     </Badge>
-                    <span className="text-xs text-muted-foreground italic">{t("cragPage.estimateBased", "based on weather")}</span>
+                    <span className="text-xs text-muted-foreground italic">{t("cragPage.basedOnWeather", "based on weather")}</span>
                   </div>
                 </div>
+
+                {/* Summary */}
+                {conditions.summary && (
+                  <p className="text-sm text-muted-foreground mb-4">
+                    {conditions.summary_template
+                      ? String(t(conditions.summary_template.key, conditions.summary_template.params) || conditions.summary)
+                      : conditions.summary}
+                  </p>
+                )}
+
+                {/* Active flags */}
+                {conditions.flags && (
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {conditions.flags.rain_now && <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400">🌧 {t("flags.rain", "Rain")}</span>}
+                    {conditions.flags.rain_expected && <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400">🌧 {t("flags.rainExpected", "Rain in {{hours}}h", { hours: conditions.flags.rain_expected.in_hours })}</span>}
+                    {conditions.flags.condensation_risk && <span className="text-xs px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">💧 {t("flags.condensation", "Condensation")}</span>}
+                    {conditions.flags.high_humidity && <span className="text-xs px-2 py-0.5 rounded-full bg-slate-500/10 text-slate-600 dark:text-slate-400">💧 {t("flags.highHumidity", "High humidity")}</span>}
+                    {conditions.flags.wet_rock_likely && <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400">⚠ {t("flags.wetRock", "Wet rock likely")}</span>}
+                    {conditions.flags.high_wind && <span className="text-xs px-2 py-0.5 rounded-full bg-orange-500/10 text-orange-600 dark:text-orange-400">💨 {t("flags.windy", "Windy")}</span>}
+                    {conditions.flags.extreme_wind && <span className="text-xs px-2 py-0.5 rounded-full bg-red-500/10 text-red-600 dark:text-red-400">💨 {t("flags.extremeWind", "Extreme wind")}</span>}
+                    {conditions.flags.sandstone_wet_warning && <span className="text-xs px-2 py-0.5 rounded-full bg-red-500/10 text-red-600 dark:text-red-400">⚠ {t("flags.sandstoneWet", "Sandstone wet")}</span>}
+                  </div>
+                )}
 
                 {/* Weather emoji and description */}
                 {conditions.current && (
@@ -765,7 +833,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
 
                 {/* Weather metrics grid */}
                 {conditions.current && (
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4">
                     <div className="bg-muted/50 rounded-lg p-3">
                       <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
                         <ThermometerSun className="h-3 w-3" />
@@ -833,6 +901,15 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                           units.precipitation,
                           1
                         )}
+                      </p>
+                    </div>
+                    <div className="bg-muted/50 rounded-lg p-3">
+                      <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
+                        <Droplets className="h-3 w-3" />
+                        <span>{t("dialog.dewPointSpread", "Dew Point Spread")}</span>
+                      </div>
+                      <p className="text-lg font-semibold">
+                        {conditions.dewPointSpread != null ? `${conditions.dewPointSpread}°C` : "—"}
                       </p>
                     </div>
                     {(conditions.timeContext || conditions.astro) && (
@@ -982,7 +1059,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
         {!isLocationless && conditionsData && (
           <Card className="mb-6">
             <CardContent className="p-6">
-              <ConditionsDetailContent variant="sheet" data={conditionsData} />
+              <ConditionsDetailContent variant="sheet" data={conditionsData as any} />
             </CardContent>
           </Card>
         )}

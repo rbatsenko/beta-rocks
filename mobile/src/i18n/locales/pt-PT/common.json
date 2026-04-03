@@ -275,7 +275,8 @@
     "lessReliableHourly": "Próximas horas menos previsíveis",
     "lessCertain": "MENOS CERTO",
     "todayBadge": "HOJE",
-    "delete": "Eliminar"
+    "delete": "Eliminar",
+    "noGoodWindows": "Sem boas janelas de escalada neste dia. Verifique o separador horário."
   },
   "timeContext": {
     "sunrise": "Nascimento do Sol",
@@ -799,7 +800,8 @@
     "forecast": "Forecast",
     "dry": "Dry",
     "wet": "Wet",
-    "helpful": "Helpful"
+    "helpful": "Helpful",
+    "basedOnWeather": "baseado no tempo"
   },
   "time": {
     "today": "Hoje",
@@ -874,5 +876,20 @@
     "done": "Done",
     "cancel": "Cancel",
     "edit": "Edit"
+  },
+  "labels": {
+    "looksGood": "Bom",
+    "watchOut": "Razoável",
+    "stayHome": "Mau"
+  },
+  "flags": {
+    "rain": "Chuva",
+    "rainExpected": "Chuva em {{hours}}h",
+    "condensation": "Condensação",
+    "highHumidity": "Humidade alta",
+    "wetRock": "Rocha provavelmente molhada",
+    "windy": "Ventoso",
+    "extremeWind": "Vento extremo",
+    "sandstoneWet": "Arenito molhado"
   }
 }

@@ -26,8 +26,7 @@ export type Favorite = {
   latitude: number | null;
   longitude: number | null;
   rockType?: string;
-  lastRating?: string;
-  lastFrictionScore?: number;
+  lastLabel?: string;
   lastCheckedAt?: string;
   isLocationless?: boolean;
   displayOrder: number;
@@ -51,8 +50,7 @@ function dbFavoriteToClient(dbFav: DbFavorite): Favorite {
     latitude: dbFav.latitude,
     longitude: dbFav.longitude,
     rockType: dbFav.rock_type || undefined,
-    lastRating: dbFav.last_rating || undefined,
-    lastFrictionScore: dbFav.last_friction_score || undefined,
+    lastLabel: dbFav.last_rating || undefined,
     lastCheckedAt: dbFav.last_checked_at || undefined,
     displayOrder: dbFav.display_order ?? 0,
     addedAt: dbFav.added_at || new Date().toISOString(),
@@ -75,8 +73,10 @@ function clientFavoriteToDb(
     latitude: fav.latitude,
     longitude: fav.longitude,
     rock_type: fav.rockType || null,
-    last_rating: fav.lastRating || null,
-    last_friction_score: fav.lastFrictionScore || null,
+    // Store new label in last_rating. Old apps may see unknown values but won't crash.
+    last_rating: fav.lastLabel || null,
+    // Map label to legacy score for old mobile versions
+    last_friction_score: fav.lastLabel === "looks_good" ? 4 : fav.lastLabel === "watch_out" ? 3 : fav.lastLabel === "stay_home" ? 1 : null,
     last_checked_at: fav.lastCheckedAt || null,
     display_order: fav.displayOrder,
   };
@@ -275,13 +275,11 @@ export function useUpdateFavorite() {
     }: {
       id: string;
       updates: Partial<
-        Pick<Favorite, "lastRating" | "lastFrictionScore" | "lastCheckedAt" | "displayOrder">
+        Pick<Favorite, "lastLabel" | "lastCheckedAt" | "displayOrder">
       >;
     }): Promise<void> => {
       const dbUpdates: Record<string, unknown> = {};
-      if (updates.lastRating !== undefined) dbUpdates.last_rating = updates.lastRating;
-      if (updates.lastFrictionScore !== undefined)
-        dbUpdates.last_friction_score = updates.lastFrictionScore;
+      if (updates.lastLabel !== undefined) dbUpdates.last_rating = updates.lastLabel;
       if (updates.lastCheckedAt !== undefined) dbUpdates.last_checked_at = updates.lastCheckedAt;
       if (updates.displayOrder !== undefined) dbUpdates.display_order = updates.displayOrder;
 

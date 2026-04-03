@@ -404,7 +404,8 @@
     "lessReliable": "Days 8-14: Less reliable forecast",
     "lessReliableHourly": "Next hours less predictable",
     "lessCertain": "LESS CERTAIN",
-    "todayBadge": "TODAY"
+    "todayBadge": "TODAY",
+    "noGoodWindows": "No good climbing windows on this day. Check the hourly tab for details."
   },
   "timeContext": {
     "sunrise": "Sunrise",
@@ -963,7 +964,8 @@
     "forecast": "Forecast",
     "dry": "Dry",
     "wet": "Wet",
-    "helpful": "Helpful"
+    "helpful": "Helpful",
+    "basedOnWeather": "based on weather"
   },
   "webcams": {
     "title": "Nearby Webcams",
@@ -1015,5 +1017,31 @@
     "done": "Done",
     "cancel": "Cancel",
     "edit": "Edit"
+  },
+  "labels": {
+    "looksGood": "Good",
+    "watchOut": "Fair",
+    "stayHome": "Poor"
+  },
+  "summary": {
+    "sandstoneWet": "Sandstone is still wet. Give it another day.",
+    "rainingNow": "Raining now. {{mm}}mm so far.",
+    "wetRockDryBy": "Rock may still be wet from recent rain. Should dry by {{time}}.",
+    "rainExpected": "Rain expected in {{hours}}h. Head out now for a dry window.",
+    "condensationRisk": "High condensation risk. Rock will feel greasy.",
+    "highHumidity": "Humidity is high ({{humidity}}%). Rock may feel polished.",
+    "extremeWind": "Extreme wind ({{wind}} km/h). Not safe for exposed routes.",
+    "highWind": "Windy ({{wind}} km/h). Fine for sheltered walls.",
+    "dryAndGood": "Dry and {{temp}}. {{humidity}}"
+  },
+  "flags": {
+    "rain": "Rain",
+    "rainExpected": "Rain in {{hours}}h",
+    "condensation": "Condensation",
+    "highHumidity": "High humidity",
+    "wetRock": "Wet rock likely",
+    "windy": "Windy",
+    "extremeWind": "Extreme wind",
+    "sandstoneWet": "Sandstone wet"
   }
 }

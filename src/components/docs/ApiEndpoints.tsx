@@ -254,7 +254,7 @@ export function ApiEndpoints() {
       </Endpoint>
 
       {/* Crag Conditions */}
-      <Endpoint method="GET" path="/api/v1/crags/:id/conditions" description="Get current weather and climbing conditions for a crag. Returns friction score (rough estimate), hourly forecast, and optimal climbing windows.">
+      <Endpoint method="GET" path="/api/v1/crags/:id/conditions" description="Get current weather and climbing conditions for a crag. Returns weather data, condition flags, dry windows, and warnings.">
         <ExampleAndPlayground
           example={
             <div className="space-y-3">
@@ -266,31 +266,38 @@ export function ApiEndpoints() {
       "name": "Frankenjura",
       "rock_type": "limestone"
     },
-    "current_weather": {
-      "temperature_c": 18.5,
-      "humidity": 55,
-      "wind_speed_kph": 12,
-      "wind_direction": 220,
-      "precipitation_mm": 0
+    "weather": {
+      "now": {
+        "temp_c": 18.5,
+        "humidity": 55,
+        "dew_point_spread": 8.2,
+        "wind_kph": 12,
+        "precip_mm": 0
+      }
     },
-    "conditions": {
-      "label": "Good",
-      "friction_score": 4,
-      "note": "Friction score is a rough estimate...",
-      "is_dry": true,
-      "drying_time_hours": null,
-      "dew_point_spread": 8.2,
-      "precipitation": {
-        "last_24h_mm": 0,
-        "last_48h_mm": 2.1,
-        "next_24h_mm": 0
-      },
-      "reasons": ["Good temperature for limestone", "Low humidity"],
-      "warnings": [],
-      "hourly_conditions": [...],
-      "optimal_windows": [...]
+    "flags": {
+      "rain_now": false,
+      "rain_expected": null,
+      "recent_rain": { "last_24h_mm": 0, "last_48h_mm": 2.1 },
+      "condensation_risk": false,
+      "high_humidity": false,
+      "wet_rock_likely": false,
+      "estimated_dry_by": null,
+      "sandstone_wet_warning": false,
+      "extreme_wind": false,
+      "high_wind": false
     },
-    "daily_forecast": [...],
+    "label": "looks_good",
+    "summary": "Dry and comfortable. Low humidity.",
+    "dry_windows": [
+      { "start": "2026-04-02T09:00", "end": "2026-04-02T18:00", "hours": 9 }
+    ],
+    "precipitation": {
+      "last_24h_mm": 0,
+      "last_48h_mm": 2.1,
+      "next_24h_mm": 0
+    },
+    "warnings": [],
     "updated_at": "2026-04-02T12:00:00Z"
   }
 }`}</CodeBlock>
