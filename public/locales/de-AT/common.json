@@ -965,15 +965,15 @@
     "stayHome": "Schlecht"
   },
   "summary": {
-    "sandstoneWet": "Sandstein ist noch nass. Warte noch einen Tag.",
-    "rainingNow": "Es regnet. {{mm}}mm bisher.",
-    "wetRockDryBy": "Fels könnte noch nass sein. Sollte bis {{time}} trocknen.",
-    "rainExpected": "Regen in {{hours}}h erwartet. Jetzt rausgehen für ein trockenes Fenster.",
-    "condensationRisk": "Hohes Kondensationsrisiko. Fels wird sich schmierig anfühlen.",
-    "highHumidity": "Hohe Luftfeuchtigkeit ({{humidity}}%). Fels könnte sich poliert anfühlen.",
-    "extremeWind": "Extremer Wind ({{wind}} km/h). Nicht sicher für exponierte Routen.",
-    "highWind": "Windig ({{wind}} km/h). Geschützte Wände sind ok.",
-    "dryAndGood": "Trocken und {{temp}}. {{humidity}}"
+    "sandstoneWet": "Sandstein ist nass. Nicht klettern — nasser Sandstein ist empfindlich.",
+    "rainingNow": "Regen. {{mm}}mm Niederschlag.",
+    "wetRockDryBy": "Kürzlich Regen. Voraussichtlich trocken bis {{time}}.",
+    "rainExpected": "Regen erwartet in {{hours}}h.",
+    "condensationRisk": "Kondensationsrisiko. {{temp}}°C, {{humidity}}% Luftfeuchtigkeit.",
+    "highHumidity": "{{humidity}}% Luftfeuchtigkeit. {{temp}}°C.",
+    "extremeWind": "Extremer Wind ({{wind}} km/h).",
+    "highWind": "Wind {{wind}} km/h.",
+    "dryAndGood": "Trocken, {{temp}}. {{humidity}}% Luftfeuchtigkeit."
   },
   "flags": {
     "rain": "Regen",

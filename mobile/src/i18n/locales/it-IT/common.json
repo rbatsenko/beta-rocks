@@ -968,15 +968,15 @@
     "stayHome": "Scarso"
   },
   "summary": {
-    "sandstoneWet": "L'arenaria è ancora bagnata. Aspetta un altro giorno.",
-    "rainingNow": "Piove ora. {{mm}}mm finora.",
-    "wetRockDryBy": "La roccia potrebbe essere ancora bagnata. Dovrebbe asciugarsi entro le {{time}}.",
-    "rainExpected": "Pioggia prevista tra {{hours}}h. Esci ora per una finestra asciutta.",
-    "condensationRisk": "Alto rischio di condensa. La roccia sarà scivolosa.",
-    "highHumidity": "Umidità alta ({{humidity}}%). La roccia potrebbe essere scivolosa.",
-    "extremeWind": "Vento estremo ({{wind}} km/h). Non sicuro su vie esposte.",
-    "highWind": "Ventoso ({{wind}} km/h). Ok per pareti riparate.",
-    "dryAndGood": "Asciutto e {{temp}}. {{humidity}}"
+    "sandstoneWet": "L'arenaria è bagnata. Non arrampicare — l'arenaria bagnata è fragile.",
+    "rainingNow": "Pioggia. {{mm}}mm di precipitazioni.",
+    "wetRockDryBy": "Pioggia recente. Asciutto stimato alle {{time}}.",
+    "rainExpected": "Pioggia prevista tra {{hours}}h.",
+    "condensationRisk": "Rischio condensazione. {{temp}}°C, {{humidity}}% umidità.",
+    "highHumidity": "{{humidity}}% umidità. {{temp}}°C.",
+    "extremeWind": "Vento estremo ({{wind}} km/h).",
+    "highWind": "Vento {{wind}} km/h.",
+    "dryAndGood": "Asciutto, {{temp}}. {{humidity}}% umidità."
   },
   "flags": {
     "rain": "Pioggia",

@@ -978,15 +978,15 @@
     "stayHome": "Poor"
   },
   "summary": {
-    "sandstoneWet": "Sandstone is still wet. Give it another day.",
-    "rainingNow": "Raining now. {{mm}}mm so far.",
-    "wetRockDryBy": "Rock may still be wet from recent rain. Should dry by {{time}}.",
-    "rainExpected": "Rain expected in {{hours}}h. Head out now for a dry window.",
-    "condensationRisk": "High condensation risk. Rock will feel greasy.",
-    "highHumidity": "Humidity is high ({{humidity}}%). Rock may feel polished.",
-    "extremeWind": "Extreme wind ({{wind}} km/h). Not safe for exposed routes.",
-    "highWind": "Windy ({{wind}} km/h). Fine for sheltered walls.",
-    "dryAndGood": "Dry and {{temp}}. {{humidity}}"
+    "sandstoneWet": "Sandstone is wet. Do not climb — wet sandstone is fragile.",
+    "rainingNow": "Rain. {{mm}}mm precipitation.",
+    "wetRockDryBy": "Recent rain. Estimated dry by {{time}}.",
+    "rainExpected": "Rain expected in {{hours}}h.",
+    "condensationRisk": "Condensation risk. {{temp}}°C, {{humidity}}% humidity.",
+    "highHumidity": "{{humidity}}% humidity. {{temp}}°C, {{temp}}.",
+    "extremeWind": "Extreme wind ({{wind}} km/h).",
+    "highWind": "Wind {{wind}} km/h.",
+    "dryAndGood": "Dry, {{temp}}. {{humidity}}% humidity."
   },
   "flags": {
     "rain": "Rain",

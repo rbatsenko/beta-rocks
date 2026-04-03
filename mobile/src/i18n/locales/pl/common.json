@@ -980,15 +980,15 @@
     "stayHome": "Złe"
   },
   "summary": {
-    "sandstoneWet": "Piaskowiec jest wciąż mokry. Poczekaj jeszcze dzień.",
-    "rainingNow": "Pada deszcz. {{mm}}mm do tej pory.",
-    "wetRockDryBy": "Skała może być wciąż mokra po ostatnim deszczu. Powinna wyschnąć do {{time}}.",
-    "rainExpected": "Deszcz spodziewany za {{hours}}h. Wyjdź teraz, by złapać suche okno.",
-    "condensationRisk": "Wysokie ryzyko kondensacji. Skała będzie śliska.",
-    "highHumidity": "Wilgotność jest wysoka ({{humidity}}%). Skała może być śliska.",
-    "extremeWind": "Ekstremalny wiatr ({{wind}} km/h). Niebezpieczne na eksponowanych drogach.",
-    "highWind": "Wietrznie ({{wind}} km/h). Osłonięte ściany powinny być ok.",
-    "dryAndGood": "Sucho i {{temp}}. {{humidity}}"
+    "sandstoneWet": "Piaskowiec jest mokry. Nie wspinaj się — mokry piaskowiec jest kruchy.",
+    "rainingNow": "Deszcz. {{mm}}mm opadu.",
+    "wetRockDryBy": "Ostatni deszcz. Szacowane wyschnięcie do {{time}}.",
+    "rainExpected": "Deszcz spodziewany za {{hours}}h.",
+    "condensationRisk": "Ryzyko kondensacji. {{temp}}°C, {{humidity}}% wilgotności.",
+    "highHumidity": "{{humidity}}% wilgotności. {{temp}}°C.",
+    "extremeWind": "Ekstremalny wiatr ({{wind}} km/h).",
+    "highWind": "Wiatr {{wind}} km/h.",
+    "dryAndGood": "Sucho, {{temp}}. {{humidity}}% wilgotności."
   },
   "flags": {
     "rain": "Deszcz",

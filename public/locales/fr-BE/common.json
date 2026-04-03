@@ -965,15 +965,15 @@
     "stayHome": "Mauvais"
   },
   "summary": {
-    "sandstoneWet": "Le grès est encore mouillé. Attendez un jour de plus.",
-    "rainingNow": "Il pleut. {{mm}}mm pour le moment.",
-    "wetRockDryBy": "Le rocher est peut-être encore mouillé. Devrait sécher vers {{time}}.",
-    "rainExpected": "Pluie prévue dans {{hours}}h. Sortez maintenant pour une fenêtre sèche.",
-    "condensationRisk": "Risque élevé de condensation. Le rocher sera glissant.",
-    "highHumidity": "Humidité élevée ({{humidity}}%). Le rocher peut être glissant.",
-    "extremeWind": "Vent extrême ({{wind}} km/h). Dangereux sur les voies exposées.",
-    "highWind": "Venteux ({{wind}} km/h). Ok pour les murs abrités.",
-    "dryAndGood": "Sec et {{temp}}. {{humidity}}"
+    "sandstoneWet": "Le grès est mouillé. Ne grimpez pas — le grès mouillé est fragile.",
+    "rainingNow": "Pluie. {{mm}}mm de précipitations.",
+    "wetRockDryBy": "Pluie récente. Sec estimé vers {{time}}.",
+    "rainExpected": "Pluie prévue dans {{hours}}h.",
+    "condensationRisk": "Risque de condensation. {{temp}}°C, {{humidity}}% d'humidité.",
+    "highHumidity": "{{humidity}}% d'humidité. {{temp}}°C.",
+    "extremeWind": "Vent extrême ({{wind}} km/h).",
+    "highWind": "Vent {{wind}} km/h.",
+    "dryAndGood": "Sec, {{temp}}. {{humidity}}% d'humidité."
   },
   "flags": {
     "rain": "Pluie",

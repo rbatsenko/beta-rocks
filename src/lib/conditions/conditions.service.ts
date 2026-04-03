@@ -398,16 +398,11 @@ function deriveLabel(flags: WeatherFlags): WeatherLabel {
 // ---------------------------------------------------------------------------
 
 function describeTemp(temp_c: number): string {
+  if (temp_c < 0) return "below zero";
   if (temp_c < 5) return "cold";
   if (temp_c < 15) return "cool";
-  if (temp_c <= 25) return "comfortable";
+  if (temp_c <= 25) return "mild";
   return "warm";
-}
-
-function describeHumidity(humidity: number): string {
-  if (humidity < 40) return "Low humidity — great friction.";
-  if (humidity <= 65) return "Humidity is moderate.";
-  return "Humidity is on the higher side.";
 }
 
 export interface SummaryTemplate {
@@ -420,46 +415,48 @@ function generateSummary(
   flags: WeatherFlags,
   weather: { temp_c: number; humidity: number; wind_kph: number; precip_mm: number }
 ): SummaryTemplate {
+  const temp = Math.round(weather.temp_c);
+  const humidity = Math.round(weather.humidity);
+  const wind = Math.round(weather.wind_kph);
+  const tempDesc = describeTemp(weather.temp_c);
+
   if (flags.sandstone_wet_warning) {
-    return { key: "summary.sandstoneWet", fallback: "Sandstone is still wet. Give it another day." };
+    return { key: "summary.sandstoneWet", fallback: "Sandstone is wet. Do not climb — wet sandstone is fragile." };
   }
 
   if (flags.rain_now) {
-    return { key: "summary.rainingNow", params: { mm: weather.precip_mm }, fallback: `Raining now. ${weather.precip_mm}mm so far.` };
+    return { key: "summary.rainingNow", params: { mm: weather.precip_mm }, fallback: `Rain. ${weather.precip_mm}mm precipitation.` };
   }
 
   if (flags.wet_rock_likely && flags.estimated_dry_by) {
     const dryBy = new Date(flags.estimated_dry_by);
-    const hours = dryBy.getHours();
-    const minutes = String(dryBy.getMinutes()).padStart(2, "0");
-    const timeStr = `${hours}:${minutes}`;
-    return { key: "summary.wetRockDryBy", params: { time: timeStr }, fallback: `Rock may still be wet from recent rain. Should dry by ${timeStr}.` };
+    const h = dryBy.getHours();
+    const m = String(dryBy.getMinutes()).padStart(2, "0");
+    return { key: "summary.wetRockDryBy", params: { time: `${h}:${m}` }, fallback: `Recent rain. Estimated dry by ${h}:${m}.` };
   }
 
   if (flags.rain_expected) {
-    return { key: "summary.rainExpected", params: { hours: flags.rain_expected.in_hours }, fallback: `Rain expected in ${flags.rain_expected.in_hours}h. Head out now for a dry window.` };
+    return { key: "summary.rainExpected", params: { hours: flags.rain_expected.in_hours }, fallback: `Rain expected in ${flags.rain_expected.in_hours}h.` };
   }
 
   if (flags.condensation_risk) {
-    return { key: "summary.condensationRisk", fallback: "High condensation risk. Rock will feel greasy." };
-  }
-
-  if (flags.high_humidity) {
-    return { key: "summary.highHumidity", params: { humidity: Math.round(weather.humidity) }, fallback: `Humidity is high (${Math.round(weather.humidity)}%). Rock may feel polished.` };
+    return { key: "summary.condensationRisk", params: { temp, humidity }, fallback: `Condensation risk. ${temp}°C, ${humidity}% humidity.` };
   }
 
   if (flags.extreme_wind) {
-    return { key: "summary.extremeWind", params: { wind: Math.round(weather.wind_kph) }, fallback: `Extreme wind (${Math.round(weather.wind_kph)} km/h). Not safe for exposed routes.` };
+    return { key: "summary.extremeWind", params: { wind }, fallback: `Extreme wind (${wind} km/h).` };
   }
 
   if (flags.high_wind) {
-    return { key: "summary.highWind", params: { wind: Math.round(weather.wind_kph) }, fallback: `Windy (${Math.round(weather.wind_kph)} km/h). Fine for sheltered walls.` };
+    return { key: "summary.highWind", params: { wind }, fallback: `Wind ${wind} km/h.` };
   }
 
-  // Fallback — conditions look fine
-  const tempDesc = describeTemp(weather.temp_c);
-  const humidityDesc = describeHumidity(weather.humidity);
-  return { key: "summary.dryAndGood", params: { temp: tempDesc, humidity: humidityDesc }, fallback: `Dry and ${tempDesc}. ${humidityDesc}` };
+  if (flags.high_humidity) {
+    return { key: "summary.highHumidity", params: { humidity }, fallback: `${humidity}% humidity. ${temp}°C, ${tempDesc}.` };
+  }
+
+  // No flags — just weather facts
+  return { key: "summary.dryAndGood", params: { temp: tempDesc, humidity }, fallback: `Dry, ${tempDesc}. ${humidity}% humidity.` };
 }
 
 // ---------------------------------------------------------------------------
