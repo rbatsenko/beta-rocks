@@ -60,7 +60,6 @@ export default function FavoritesScreen() {
           return {
             ...fav,
             lastLabel: response.conditions.label,
-            lastRating: response.conditions.label,
             lastCheckedAt: new Date().toISOString(),
           };
         } catch {

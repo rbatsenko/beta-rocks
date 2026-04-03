@@ -850,19 +850,19 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                           {hour.wind_direction != null && <>{" "}<span className="inline-block" style={{ transform: `rotate(${getWindArrowRotation(hour.wind_direction)}deg)` }}>↑</span>{getWindCardinal(hour.wind_direction)}</>}
                                         </span>
                                       </div>
-                                      <div
-                                        className={`flex items-center gap-1 ${hour.precip_mm > 0 ? "text-blue-500" : ""}`}
-                                      >
-                                        <CloudRain className="h-3 w-3" />
-                                        <span>
-                                          {convertPrecipitation(
-                                            hour.precip_mm,
-                                            "mm",
-                                            units.precipitation
-                                          ).toFixed(1)}
-                                          {units.precipitation === "mm" ? "mm" : "in"}
-                                        </span>
-                                      </div>
+                                      {hour.precip_mm > 0 && (
+                                        <div className="flex items-center gap-1 text-blue-500">
+                                          <CloudRain className="h-3 w-3" />
+                                          <span>
+                                            {convertPrecipitation(
+                                              hour.precip_mm,
+                                              "mm",
+                                              units.precipitation
+                                            ).toFixed(1)}
+                                            {units.precipitation === "mm" ? "mm" : "in"}
+                                          </span>
+                                        </div>
+                                      )}
                                     </div>
                                   </div>
                                   <div className="flex items-center gap-1.5 shrink-0">

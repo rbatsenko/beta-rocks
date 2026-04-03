@@ -232,11 +232,11 @@ export default function CragDetailScreen() {
 
     // Group dry windows by day, attaching hourly data to each window
     for (const w of windows) {
-      const key = getDateKey(w.startTime);
+      const key = getDateKey(w.start);
       if (!seen.has(key)) seen.set(key, []);
       const windowHours = hourly.filter((h: any) => {
         const ht = new Date(h.time).getTime();
-        return ht >= new Date(w.startTime).getTime() && ht < new Date(w.endTime).getTime();
+        return ht >= new Date(w.start).getTime() && ht < new Date(w.end).getTime();
       });
       seen.get(key)!.push({ ...w, hours: windowHours });
     }
@@ -276,7 +276,7 @@ export default function CragDetailScreen() {
     } else {
       // Fallback: only show days with windows
       seen.forEach((wins, key) => {
-        const label = getDayLabel(wins[0].startTime, t);
+        const label = getDayLabel(wins[0].start, t);
         groups.push({ label, dateKey: key, windows: wins, hasDryHours: true });
       });
     }
@@ -1151,9 +1151,9 @@ function ExpandableWindow({ window: w, colors, units, t }: { window: any; colors
         activeOpacity={0.7}
       >
         <View style={[styles.windowDot, { backgroundColor: "#22c55e" }]} />
-        <Text style={[styles.windowTime, { color: colors.text }]}>{fmtTimeRange(w.startTime, w.endTime, tf)}</Text>
+        <Text style={[styles.windowTime, { color: colors.text }]}>{fmtTimeRange(w.start, w.end, tf)}</Text>
         <View style={[styles.smallBadge, { backgroundColor: "rgba(34,197,94,0.12)" }]}>
-          <Text style={[styles.smallBadgeText, { color: "#22c55e" }]}>{w.hourCount}h</Text>
+          <Text style={[styles.smallBadgeText, { color: "#22c55e" }]}>{w.hours}h</Text>
         </View>
         <Ionicons
           name={expanded ? "chevron-up" : "chevron-down"}
