@@ -397,14 +397,6 @@ function deriveLabel(flags: WeatherFlags): WeatherLabel {
 // Summary generation
 // ---------------------------------------------------------------------------
 
-function describeTemp(temp_c: number): string {
-  if (temp_c < 0) return "below zero";
-  if (temp_c < 5) return "cold";
-  if (temp_c < 15) return "cool";
-  if (temp_c <= 25) return "mild";
-  return "warm";
-}
-
 export interface SummaryTemplate {
   key: string;
   params?: Record<string, string | number>;
@@ -415,10 +407,8 @@ function generateSummary(
   flags: WeatherFlags,
   weather: { temp_c: number; humidity: number; wind_kph: number; precip_mm: number }
 ): SummaryTemplate {
-  const temp = Math.round(weather.temp_c);
   const humidity = Math.round(weather.humidity);
   const wind = Math.round(weather.wind_kph);
-  const tempDesc = describeTemp(weather.temp_c);
 
   if (flags.sandstone_wet_warning) {
     return { key: "summary.sandstoneWet", fallback: "Sandstone is wet. Do not climb — wet sandstone is fragile." };
