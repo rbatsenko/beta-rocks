@@ -55,5 +55,4 @@ mobile/android/
 mobile/web-build/
 mcp/node_modules/
 mcp/dist/
-mcp/
 .playwright-mcp/
