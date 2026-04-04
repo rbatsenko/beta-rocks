@@ -1013,7 +1013,7 @@ export default function CragDetailScreen() {
                   <Text style={[styles.hourlyValue, { color: colors.text }]}>
                     {formatTemperature(convertTemperature(temp, "celsius", units.temperature), units.temperature, 0)}
                   </Text>
-                  <Text style={[styles.hourlyValue, { color: colors.muted }]}>{h.humidity}%</Text>
+                  <DewSpreadCell spread={h.dew_point_spread} humidity={h.humidity} colors={colors} />
                   <Text style={[styles.hourlyValue, { color: (h.precipitation_mm ?? h.precip_mm ?? 0) > 0 ? "#3b82f6" : colors.muted }]}>
                     {formatPrecipitation(convertPrecipitation(h.precipitation_mm ?? h.precip_mm ?? 0, "mm", units.precipitation), units.precipitation, 1)}
                   </Text>
@@ -1194,7 +1194,7 @@ function ExpandableWindow({ window: w, colors, units, t }: { window: any; colors
                 <Text style={[styles.hourlyValue, { color: colors.text, fontSize: 11 }]}>
                   {formatTemperature(convertTemperature(temp, "celsius", units.temperature), units.temperature, 0)}
                 </Text>
-                <Text style={[styles.hourlyValue, { color: colors.muted, fontSize: 11 }]}>{h.humidity}%</Text>
+                <DewSpreadCell spread={h.dew_point_spread} humidity={h.humidity} colors={colors} fontSize={11} />
                 <Text style={[styles.hourlyValue, { color: (h.precipitation_mm ?? h.precip_mm ?? 0) > 0 ? "#3b82f6" : colors.muted, fontSize: 11 }]}>
                   {formatPrecipitation(convertPrecipitation(h.precipitation_mm ?? h.precip_mm ?? 0, "mm", units.precipitation), units.precipitation, 1)}
                 </Text>
@@ -1329,7 +1329,7 @@ function HourlyTimeline({ hours, colors, units, t }: { hours: any[]; colors: (ty
             <Text style={[styles.hourlyValue, { color: colors.text }]}>
               {formatTemperature(convertTemperature(temp, "celsius", units.temperature), units.temperature, 0)}
             </Text>
-            <Text style={[styles.hourlyValue, { color: colors.muted }]}>{h.humidity}%</Text>
+            <DewSpreadCell spread={h.dew_point_spread} humidity={h.humidity} colors={colors} />
             <Text style={[styles.hourlyValue, { color: (h.precipitation_mm ?? h.precip_mm ?? 0) > 0 ? "#3b82f6" : colors.muted }]}>
               {formatPrecipitation(convertPrecipitation(h.precipitation_mm ?? h.precip_mm ?? 0, "mm", units.precipitation), units.precipitation, 1)}
             </Text>
@@ -1352,6 +1352,21 @@ function HourlyTimeline({ hours, colors, units, t }: { hours: any[]; colors: (ty
   );
 }
 
+/** Compact dew point spread display with color coding. Falls back to humidity % if spread unavailable. */
+function DewSpreadCell({ spread, humidity, colors, fontSize = 12 }: {
+  spread?: number | null; humidity?: number; colors: (typeof Colors)["light"]; fontSize?: number;
+}) {
+  if (spread == null) {
+    return <Text style={[styles.hourlyValue, { color: colors.muted, fontSize }]}>{humidity ?? "—"}%</Text>;
+  }
+  const color = spread < 2 ? "#ef4444" : spread < 5 ? "#F59E0B" : "#22c55e";
+  return (
+    <Text style={[styles.hourlyValue, { color, fontSize, fontWeight: "600" }]}>
+      ↕{spread.toFixed(0)}°
+    </Text>
+  );
+}
+
 function HourlyFlagIndicator({ flags }: { flags: any }) {
   const { t } = useTranslation();
   if (!flags) return null;
@@ -1371,11 +1386,20 @@ function HourlyFlagIndicator({ flags }: { flags: any }) {
       </View>
     );
   }
-  if (flags.high_humidity || flags.condensation_risk || flags.high_wind) {
+  // condensation_risk (spread < 3) is serious — red pill
+  if (flags.condensation_risk) {
+    return (
+      <View style={[{ paddingHorizontal: 6, paddingVertical: 3, borderRadius: 4, backgroundColor: "rgba(239,68,68,0.12)", marginLeft: "auto" }]}>
+        <Text style={{ fontSize: 9, fontWeight: "600", color: "#ef4444" }}>{t("hourlyPills.dew", "Dew")}</Text>
+      </View>
+    );
+  }
+  // high_humidity (implies spread < 5) or high_wind — amber pill
+  if (flags.high_humidity || flags.high_wind) {
     return (
       <View style={[{ paddingHorizontal: 6, paddingVertical: 3, borderRadius: 4, backgroundColor: "rgba(245,158,11,0.12)", marginLeft: "auto" }]}>
         <Text style={{ fontSize: 9, fontWeight: "600", color: "#F59E0B" }}>
-          {flags.condensation_risk ? t("hourlyPills.dew", "Dew") : flags.high_wind ? t("hourlyPills.wind", "Wind") : t("hourlyPills.humid", "Humid")}
+          {flags.high_humidity ? t("hourlyPills.dew", "Dew") : t("hourlyPills.wind", "Wind")}
         </Text>
       </View>
     );
