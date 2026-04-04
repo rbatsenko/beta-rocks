@@ -238,7 +238,7 @@ export default function CragDetailScreen() {
         const ht = new Date(h.time).getTime();
         return ht >= new Date(w.start).getTime() && ht < new Date(w.end).getTime();
       });
-      seen.get(key)!.push({ ...w, hours: windowHours });
+      seen.get(key)!.push({ ...w, hourlyData: windowHours });
     }
 
     // Build groups from daily forecast to include all days
@@ -346,7 +346,6 @@ export default function CragDetailScreen() {
           latitude: crag.lat ?? null,
           longitude: crag.lon ?? null,
           rock_type: crag.rock_type,
-          last_rating: isLocationless ? null : conditions?.label,
           last_rating: isLocationless ? null : conditions?.label,
           last_checked_at: isLocationless ? null : new Date().toISOString(),
         });
@@ -1040,7 +1039,7 @@ export default function CragDetailScreen() {
       })()}
 
       {/* Forecast tab — G. with unit conversion */}
-      {activeTab === "forecast" && dailyForecast.length > 0 && (
+      {activeTab === "forecast" && (dailyForecast.length > 0 ? (
         <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
           {dailyForecast.slice(0, 7).map((day: any, i: number) => {
             const tMin = convertTemperature(day.tempMin, "celsius", units.temperature);
@@ -1074,7 +1073,12 @@ export default function CragDetailScreen() {
             );
           })}
         </View>
-      )}
+      ) : (
+        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder, alignItems: "center", paddingVertical: Spacing.lg }]}>
+          <Ionicons name="cloud-offline-outline" size={32} color={colors.muted} />
+          <Text style={[styles.emptyText, { color: colors.muted, marginTop: Spacing.sm }]}>{t("mobile.noForecastData", "No forecast data available")}</Text>
+        </View>
+      ))}
 
       {/* J. Optimal windows - now foldable, inside conditions tab only */}
 
@@ -1140,7 +1144,7 @@ export default function CragDetailScreen() {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function ExpandableWindow({ window: w, colors, units, t }: { window: any; colors: (typeof Colors)["light"]; units: any; t: any }) {
   const [expanded, setExpanded] = useState(false);
-  const hours = w.hours || [];
+  const hourlyData = w.hourlyData || [];
   const tf = units?.timeFormat || "24h";
 
   return (
@@ -1162,9 +1166,9 @@ function ExpandableWindow({ window: w, colors, units, t }: { window: any; colors
           style={{ marginLeft: "auto" }}
         />
       </TouchableOpacity>
-      {expanded && hours.length > 0 && (
+      {expanded && hourlyData.length > 0 && (
         <View style={{ paddingLeft: Spacing.md, paddingTop: 2 }}>
-          {hours.map((h: any, i: number) => {
+          {hourlyData.map((h: any, i: number) => {
             const flags = h.flags;
             const hasWarning = flags?.high_humidity || flags?.condensation_risk || flags?.high_wind;
             const temp = h.temp_c ?? h.temperature_c;
