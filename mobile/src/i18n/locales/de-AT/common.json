@@ -987,5 +987,14 @@
     "windy": "Windig",
     "extremeWind": "Extremer Wind",
     "sandstoneWet": "Nasser Sandstein"
+  },
+  "hourlyPills": {
+    "rain": "Regen",
+    "wet": "Nass",
+    "wind_extreme": "Wind!",
+    "dew": "Tau",
+    "wind": "Wind",
+    "humid": "Feucht",
+    "ok": "OK"
   }
 }

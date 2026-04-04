@@ -893,5 +893,14 @@
     "windy": "Veterno",
     "extremeWind": "Extrémny vietor",
     "sandstoneWet": "Mokrý pieskovec"
+  },
+  "hourlyPills": {
+    "rain": "Dážď",
+    "wet": "Mokro",
+    "wind_extreme": "Vietor!",
+    "dew": "Rosa",
+    "wind": "Vietor",
+    "humid": "Vlhko",
+    "ok": "OK"
   }
 }

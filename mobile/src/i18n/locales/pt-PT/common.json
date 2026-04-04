@@ -891,5 +891,14 @@
     "windy": "Ventoso",
     "extremeWind": "Vento extremo",
     "sandstoneWet": "Arenito molhado"
+  },
+  "hourlyPills": {
+    "rain": "Chuva",
+    "wet": "Molhado",
+    "wind_extreme": "Vento!",
+    "dew": "Orvalho",
+    "wind": "Vento",
+    "humid": "Húmido",
+    "ok": "OK"
   }
 }

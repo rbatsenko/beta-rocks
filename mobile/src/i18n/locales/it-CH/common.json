@@ -987,5 +987,14 @@
     "windy": "Ventoso",
     "extremeWind": "Vento estremo",
     "sandstoneWet": "Arenaria bagnata"
+  },
+  "hourlyPills": {
+    "rain": "Pioggia",
+    "wet": "Bagnato",
+    "wind_extreme": "Vento!",
+    "dew": "Rugiada",
+    "wind": "Vento",
+    "humid": "Umido",
+    "ok": "OK"
   }
 }

@@ -997,5 +997,14 @@
     "windy": "Windy",
     "extremeWind": "Extreme wind",
     "sandstoneWet": "Sandstone wet"
+  },
+  "hourlyPills": {
+    "rain": "Rain",
+    "wet": "Wet",
+    "wind_extreme": "Wind!",
+    "dew": "Dew",
+    "wind": "Wind",
+    "humid": "Humid",
+    "ok": "OK"
   }
 }

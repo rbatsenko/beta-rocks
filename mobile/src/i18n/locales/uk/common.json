@@ -973,5 +973,14 @@
     "windy": "Вітряно",
     "extremeWind": "Екстремальний вітер",
     "sandstoneWet": "Мокрий пісковик"
+  },
+  "hourlyPills": {
+    "rain": "Дощ",
+    "wet": "Мокро",
+    "wind_extreme": "Вітер!",
+    "dew": "Роса",
+    "wind": "Вітер",
+    "humid": "Волого",
+    "ok": "ОК"
   }
 }

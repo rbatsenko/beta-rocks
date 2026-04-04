@@ -808,5 +808,14 @@
     "windy": "Blåsigt",
     "extremeWind": "Extrem vind",
     "sandstoneWet": "Våt sandsten"
+  },
+  "hourlyPills": {
+    "rain": "Regn",
+    "wet": "Vått",
+    "wind_extreme": "Vind!",
+    "dew": "Dagg",
+    "wind": "Vind",
+    "humid": "Fuktigt",
+    "ok": "OK"
   }
 }

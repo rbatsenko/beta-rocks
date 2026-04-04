@@ -343,7 +343,12 @@ function computeFlags(
   };
 
   const condensation_risk = dewPointSpread < 3;
-  const high_humidity = weather.humidity > rockConditions.humidityThreshold;
+  // Humidity % alone is misleading — a large dew point spread means the air
+  // is far from saturation and moisture on rock is unlikely.  Only flag when
+  // humidity exceeds the rock-type threshold AND dew point spread confirms
+  // moisture is a real concern (< 5 °C).
+  const high_humidity =
+    weather.humidity > rockConditions.humidityThreshold && dewPointSpread < 5;
   const wet_rock_likely = precipContext.last48h > 1 && dryingHoursRemaining > 0;
 
   let estimated_dry_by: string | null = null;

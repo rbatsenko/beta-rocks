@@ -1047,11 +1047,19 @@ export default function CragDetailScreen() {
             const precip = convertPrecipitation(day.precipitation, "mm", units.precipitation);
             const wind = convertWindSpeed(day.windSpeedMax, "kmh", units.windSpeed);
             const tempUnit = units.temperature === "celsius" ? "°" : "°";
+            const tint = getForecastDayTint(day);
             return (
-              <View key={i} style={[styles.forecastRow, i > 0 && { borderTopWidth: 1, borderTopColor: colors.border }]}>
-                <Text style={[styles.forecastDay, { color: colors.text }]}>
-                  {new Date(day.date).toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" })}
-                </Text>
+              <View key={i} style={[
+                styles.forecastRow,
+                i > 0 && { borderTopWidth: 1, borderTopColor: colors.border },
+                tint && { backgroundColor: tint.bg, borderRadius: BorderRadius.md, marginVertical: 1 },
+              ]}>
+                <View style={styles.forecastDayRow}>
+                  {tint && <View style={[styles.windowDot, { backgroundColor: tint.dotColor, marginRight: 6 }]} />}
+                  <Text style={[styles.forecastDay, { color: colors.text }]}>
+                    {new Date(day.date).toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" })}
+                  </Text>
+                </View>
                 <View style={styles.forecastDetails}>
                   <Text style={[styles.forecastTemp, { color: colors.text }]}>
                     {Math.round(tMin)}{tempUnit} / {Math.round(tMax)}{tempUnit}
@@ -1345,11 +1353,12 @@ function HourlyTimeline({ hours, colors, units, t }: { hours: any[]; colors: (ty
 }
 
 function HourlyFlagIndicator({ flags }: { flags: any }) {
+  const { t } = useTranslation();
   if (!flags) return null;
   if (flags.rain_now) {
     return (
       <View style={[{ paddingHorizontal: 6, paddingVertical: 3, borderRadius: 4, backgroundColor: "rgba(239,68,68,0.12)", marginLeft: "auto" }]}>
-        <Text style={{ fontSize: 9, fontWeight: "600", color: "#ef4444" }}>rain</Text>
+        <Text style={{ fontSize: 9, fontWeight: "600", color: "#ef4444" }}>{t("hourlyPills.rain", "Rain")}</Text>
       </View>
     );
   }
@@ -1357,7 +1366,7 @@ function HourlyFlagIndicator({ flags }: { flags: any }) {
     return (
       <View style={[{ paddingHorizontal: 6, paddingVertical: 3, borderRadius: 4, backgroundColor: "rgba(239,68,68,0.12)", marginLeft: "auto" }]}>
         <Text style={{ fontSize: 9, fontWeight: "600", color: "#ef4444" }}>
-          {flags.wet_rock_likely ? "wet" : "wind!"}
+          {flags.wet_rock_likely ? t("hourlyPills.wet", "Wet") : t("hourlyPills.wind_extreme", "Wind!")}
         </Text>
       </View>
     );
@@ -1366,16 +1375,42 @@ function HourlyFlagIndicator({ flags }: { flags: any }) {
     return (
       <View style={[{ paddingHorizontal: 6, paddingVertical: 3, borderRadius: 4, backgroundColor: "rgba(245,158,11,0.12)", marginLeft: "auto" }]}>
         <Text style={{ fontSize: 9, fontWeight: "600", color: "#F59E0B" }}>
-          {flags.condensation_risk ? "dew" : flags.high_wind ? "wind" : "humid"}
+          {flags.condensation_risk ? t("hourlyPills.dew", "Dew") : flags.high_wind ? t("hourlyPills.wind", "Wind") : t("hourlyPills.humid", "Humid")}
         </Text>
       </View>
     );
   }
   return (
     <View style={[{ paddingHorizontal: 6, paddingVertical: 3, borderRadius: 4, backgroundColor: "rgba(34,197,94,0.12)", marginLeft: "auto" }]}>
-      <Text style={{ fontSize: 9, fontWeight: "600", color: "#22c55e" }}>ok</Text>
+      <Text style={{ fontSize: 9, fontWeight: "600", color: "#22c55e" }}>{t("hourlyPills.ok", "OK")}</Text>
     </View>
   );
+}
+
+/**
+ * Determine forecast day quality from precipitation + weather code.
+ * Only returns a tint when we're confident — no oracle guessing.
+ */
+function getForecastDayTint(day: { precipitation?: number; weatherCode?: number }): {
+  bg: string; dotColor: string; label?: string;
+} | null {
+  const precip = day.precipitation ?? 0;
+  const code = day.weatherCode ?? 0;
+  // Rain codes: drizzle 51-57, rain 61-67, snow 71-77, showers 80-86, thunderstorm 95-99
+  const isRainCode = (code >= 51 && code <= 67) || (code >= 80 && code <= 99);
+  // Heavy rain — clearly bad
+  if (precip >= 5 || (isRainCode && precip >= 2)) {
+    return { bg: "rgba(239,68,68,0.08)", dotColor: "#ef4444" };
+  }
+  // Dry + clear/cloudy — clearly good
+  if (precip < 1 && code <= 3) {
+    return { bg: "rgba(34,197,94,0.08)", dotColor: "#22c55e" };
+  }
+  // Light drizzle or some precipitation — uncertain, slight amber
+  if (isRainCode || precip >= 2) {
+    return { bg: "rgba(245,158,11,0.06)", dotColor: "#F59E0B" };
+  }
+  return null;
 }
 
 function WindArrow({ degrees, size = 12, color }: { degrees: number; size?: number; color: string }) {
@@ -1554,8 +1589,9 @@ const styles = StyleSheet.create({
   hourlyValue: { fontSize: FontSize.xs },
 
   // Forecast
-  forecastRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingVertical: Spacing.sm },
-  forecastDay: { fontSize: FontSize.sm, fontWeight: "500", flex: 1 },
+  forecastRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingVertical: Spacing.sm, paddingHorizontal: Spacing.xs },
+  forecastDayRow: { flexDirection: "row", alignItems: "center", flex: 1 },
+  forecastDay: { fontSize: FontSize.sm, fontWeight: "500" },
   forecastDetails: { flexDirection: "row", alignItems: "center", gap: Spacing.xs },
   forecastTemp: { fontSize: FontSize.sm, fontWeight: "600", minWidth: 65 },
   forecastPrecip: { fontSize: FontSize.xs, minWidth: 30 },

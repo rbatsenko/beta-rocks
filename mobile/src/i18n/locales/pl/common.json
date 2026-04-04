@@ -999,5 +999,14 @@
     "windy": "Wietrznie",
     "extremeWind": "Ekstremalny wiatr",
     "sandstoneWet": "Mokry piaskowiec"
+  },
+  "hourlyPills": {
+    "rain": "Deszcz",
+    "wet": "Mokro",
+    "wind_extreme": "Wiatr!",
+    "dew": "Rosa",
+    "wind": "Wiatr",
+    "humid": "Wilgotno",
+    "ok": "OK"
   }
 }

@@ -972,5 +972,14 @@
     "windy": "Vjetrovito",
     "extremeWind": "Ekstreman vjetar",
     "sandstoneWet": "Mokri pješčenjak"
+  },
+  "hourlyPills": {
+    "rain": "Kiša",
+    "wet": "Mokro",
+    "wind_extreme": "Vjetar!",
+    "dew": "Rosa",
+    "wind": "Vjetar",
+    "humid": "Vlažno",
+    "ok": "OK"
   }
 }

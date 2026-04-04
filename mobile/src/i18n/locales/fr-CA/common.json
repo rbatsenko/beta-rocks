@@ -987,5 +987,14 @@
     "windy": "Venteux",
     "extremeWind": "Vent extrême",
     "sandstoneWet": "Grès mouillé"
+  },
+  "hourlyPills": {
+    "rain": "Pluie",
+    "wet": "Mouillé",
+    "wind_extreme": "Vent!",
+    "dew": "Rosée",
+    "wind": "Vent",
+    "humid": "Humide",
+    "ok": "OK"
   }
 }

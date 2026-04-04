@@ -855,5 +855,14 @@
     "windy": "Ventós",
     "extremeWind": "Vent extrem",
     "sandstoneWet": "Gres mullat"
+  },
+  "hourlyPills": {
+    "rain": "Pluja",
+    "wet": "Mullat",
+    "wind_extreme": "Vent!",
+    "dew": "Rosada",
+    "wind": "Vent",
+    "humid": "Humit",
+    "ok": "OK"
   }
 }

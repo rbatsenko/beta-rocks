@@ -855,5 +855,14 @@
     "windy": "Αέρας",
     "extremeWind": "Ακραίος άνεμος",
     "sandstoneWet": "Βρεγμένος ψαμμίτης"
+  },
+  "hourlyPills": {
+    "rain": "Βροχή",
+    "wet": "Υγρό",
+    "wind_extreme": "Άνεμος!",
+    "dew": "Δρόσος",
+    "wind": "Άνεμος",
+    "humid": "Υγρασία",
+    "ok": "OK"
   }
 }

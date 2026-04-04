@@ -892,5 +892,14 @@
     "windy": "Vânt",
     "extremeWind": "Vânt extrem",
     "sandstoneWet": "Gresie udă"
+  },
+  "hourlyPills": {
+    "rain": "Ploaie",
+    "wet": "Umed",
+    "wind_extreme": "Vânt!",
+    "dew": "Rouă",
+    "wind": "Vânt",
+    "humid": "Umezeală",
+    "ok": "OK"
   }
 }

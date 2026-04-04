@@ -887,5 +887,14 @@
     "windy": "Tuulista",
     "extremeWind": "Äärimmäinen tuuli",
     "sandstoneWet": "Märkä hiekkakivi"
+  },
+  "hourlyPills": {
+    "rain": "Sade",
+    "wet": "Märkä",
+    "wind_extreme": "Tuuli!",
+    "dew": "Kaste",
+    "wind": "Tuuli",
+    "humid": "Kostea",
+    "ok": "OK"
   }
 }
