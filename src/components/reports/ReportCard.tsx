@@ -40,6 +40,7 @@ import { getUserProfile } from "@/lib/auth/sync-key";
 import { getDateFnsLocale } from "@/lib/i18n/date-locales";
 import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal";
 import { ProfileCreatedDialog } from "@/components/profile/ProfileCreatedDialog";
+import { AuthorBadge } from "@/components/badges/AuthorBadge";
 import { getSupabaseClient } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
 
@@ -394,6 +395,7 @@ export function ReportCard({
             <span className="text-sm font-medium">
               {report.author?.display_name || t("profile.anonymous")}
             </span>
+            <AuthorBadge authorId={report.author_id || report.author?.id} />
             {/* Sector Badge (if report is from a child sector) */}
             {report.location_info?.crag_is_sector && report.location_info?.crag_name && (
               <Badge variant="outline" className="gap-1.5 text-xs">

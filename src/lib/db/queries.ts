@@ -867,3 +867,61 @@ export async function incrementUserStat(
 
   return await updateUserStats(userProfileId, updates);
 }
+
+// ==================== BADGE STATS ====================
+
+/**
+ * Fetch the full badge stats for a user (includes confirmations_received and reports by category).
+ */
+export async function fetchBadgeStats(userProfileId: string) {
+  // Fetch base stats + confirmations_received in parallel
+  const [baseStats, categoryData] = await Promise.all([
+    fetchOrCreateUserStats(userProfileId),
+    fetchReportsByCategory(userProfileId),
+  ]);
+
+  const stats = baseStats as Record<string, unknown>;
+  return {
+    reports_posted: (stats.reports_posted as number) ?? 0,
+    confirmations_given: (stats.confirmations_given as number) ?? 0,
+    confirmations_received: (stats.confirmations_received as number) ?? 0,
+    favorites_count: (stats.favorites_count as number) ?? 0,
+    reports_by_category: categoryData,
+  };
+}
+
+/**
+ * Fetch report counts grouped by category for a user (for specialist badges).
+ */
+export async function fetchReportsByCategory(
+  userProfileId: string
+): Promise<Record<string, number>> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data, error } = await (supabase.rpc as any)("get_user_reports_by_category", {
+    p_user_profile_id: userProfileId,
+  });
+
+  if (error) {
+    console.error("[fetchReportsByCategory] RPC error, falling back to direct query:", error);
+    // Fallback: direct query if RPC not available yet
+    const { data: reports, error: fallbackError } = await supabase
+      .from("reports")
+      .select("category")
+      .eq("author_id", userProfileId);
+
+    if (fallbackError) throw fallbackError;
+
+    const counts: Record<string, number> = {};
+    for (const r of reports || []) {
+      const cat = (r as Record<string, unknown>).category as string || "other";
+      counts[cat] = (counts[cat] || 0) + 1;
+    }
+    return counts;
+  }
+
+  const counts: Record<string, number> = {};
+  for (const row of (data || []) as Array<Record<string, unknown>>) {
+    counts[row.category as string] = Number(row.count);
+  }
+  return counts;
+}

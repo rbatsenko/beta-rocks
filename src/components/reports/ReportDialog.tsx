@@ -33,8 +33,10 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { getUserProfile, hashSyncKeyAsync, type UserProfile } from "@/lib/auth/sync-key";
-import { createReport } from "@/lib/db/queries";
+import { createReport, fetchBadgeStats } from "@/lib/db/queries";
 import { fetchOrCreateUserProfile } from "@/lib/db/queries";
+import { findNewlyEarnedBadges, type BadgeDefinition, type BadgeUserStats } from "@/lib/badges";
+import { BadgeUnlockCelebration } from "@/components/badges/BadgeUnlockCelebration";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { getDateFnsLocale, getLocalizedDateFormat } from "@/lib/i18n/date-locales";
@@ -115,6 +117,7 @@ export function ReportDialog({
   const [selectedPhotos, setSelectedPhotos] = useState<File[]>([]);
   const [photoPreviews, setPhotoPreviews] = useState<string[]>([]);
   const [isUploadingPhotos, setIsUploadingPhotos] = useState(false);
+  const [celebrationBadges, setCelebrationBadges] = useState<BadgeDefinition[]>([]);
 
   useEffect(() => {
     if (open) {
@@ -370,6 +373,14 @@ export function ReportDialog({
           description: t("reports.reportUpdatedDescription"),
         });
       } else {
+        // Snapshot stats BEFORE creating report (for badge comparison)
+        let statsBefore: BadgeUserStats | null = null;
+        try {
+          statsBefore = await fetchBadgeStats(dbProfile.id);
+        } catch {
+          // Non-critical — badge check will be skipped
+        }
+
         // Create new report
         await createReport({
           crag_id: cragId,
@@ -385,11 +396,32 @@ export function ReportDialog({
           photos: photoPaths,
         });
 
-        // Show success toast
-        toast({
-          title: t("reports.reportCreated"),
-          description: t("reports.reportCreatedDescription"),
-        });
+        // Check for newly unlocked badges
+        if (statsBefore) {
+          try {
+            const statsAfter = await fetchBadgeStats(dbProfile.id);
+            const newBadges = findNewlyEarnedBadges(statsBefore, statsAfter);
+            if (newBadges.length > 0) {
+              setCelebrationBadges(newBadges);
+              // Don't show the regular toast — celebration replaces it
+            } else {
+              toast({
+                title: t("reports.reportCreated"),
+                description: t("reports.reportCreatedDescription"),
+              });
+            }
+          } catch {
+            toast({
+              title: t("reports.reportCreated"),
+              description: t("reports.reportCreatedDescription"),
+            });
+          }
+        } else {
+          toast({
+            title: t("reports.reportCreated"),
+            description: t("reports.reportCreatedDescription"),
+          });
+        }
       }
 
       // Success! Close dialog and refresh
@@ -853,6 +885,17 @@ export function ReportDialog({
           completedAction={t("reports.readyToPost")}
         />
       </DialogContent>
+
+      {/* Badge Unlock Celebration */}
+      {celebrationBadges.length > 0 && (
+        <BadgeUnlockCelebration
+          badges={celebrationBadges}
+          onComplete={() => setCelebrationBadges([])}
+          onViewProfile={() => {
+            setCelebrationBadges([]);
+          }}
+        />
+      )}
     </Dialog>
   );
 }

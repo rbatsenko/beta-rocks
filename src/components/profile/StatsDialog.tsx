@@ -1,7 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { BarChart3, MessageSquare, ThumbsUp, Star, Calendar, TrendingUp } from "lucide-react";
+import {
+  BarChart3,
+  MessageSquare,
+  ThumbsUp,
+  Star,
+  Calendar,
+  TrendingUp,
+  Heart,
+} from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -12,7 +20,11 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
-import { fetchOrCreateUserStats, fetchOrCreateUserProfile } from "@/lib/db/queries";
+import {
+  fetchOrCreateUserStats,
+  fetchOrCreateUserProfile,
+  fetchBadgeStats,
+} from "@/lib/db/queries";
 import { getUserProfile, hashSyncKeyAsync } from "@/lib/auth/sync-key";
 import { formatDistanceToNow, format } from "date-fns";
 import { getDateFnsLocale } from "@/lib/i18n/date-locales";
@@ -21,6 +33,8 @@ import {
   saveUserStatsToStorage,
   type CachedUserStats,
 } from "@/lib/storage/user-stats";
+import { BadgesDisplay } from "@/components/badges/BadgesDisplay";
+import type { BadgeUserStats } from "@/lib/badges";
 
 interface StatsDialogProps {
   open: boolean;
@@ -30,6 +44,7 @@ interface StatsDialogProps {
 interface UserStats {
   reports_posted: number;
   confirmations_given: number;
+  confirmations_received: number;
   favorites_count: number;
   last_active: string;
   created_at: string;
@@ -39,6 +54,7 @@ export function StatsDialog({ open, onOpenChange }: StatsDialogProps) {
   const { t, i18n } = useClientTranslation("common");
   const dateLocale = getDateFnsLocale(i18n.language);
   const [stats, setStats] = useState<UserStats | null>(null);
+  const [badgeStats, setBadgeStats] = useState<BadgeUserStats | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -53,8 +69,14 @@ export function StatsDialog({ open, onOpenChange }: StatsDialogProps) {
       const cachedStats = getUserStatsFromStorage();
       if (cachedStats) {
         setStats(cachedStats as UserStats);
+        // Build badge stats from cache (won't have category breakdown yet)
+        setBadgeStats({
+          reports_posted: cachedStats.reports_posted,
+          confirmations_given: cachedStats.confirmations_given,
+          confirmations_received: cachedStats.confirmations_received ?? 0,
+          favorites_count: cachedStats.favorites_count,
+        });
         setIsLoading(false);
-        console.log("[StatsDialog] Loaded stats from localStorage");
       } else {
         setIsLoading(true);
       }
@@ -62,7 +84,6 @@ export function StatsDialog({ open, onOpenChange }: StatsDialogProps) {
       // Then sync from database in the background
       const profile = getUserProfile();
       if (!profile?.syncKey) {
-        console.warn("[StatsDialog] No user profile found");
         if (!cachedStats) setIsLoading(false);
         return;
       }
@@ -72,18 +93,24 @@ export function StatsDialog({ open, onOpenChange }: StatsDialogProps) {
       const dbProfile = await fetchOrCreateUserProfile(syncKeyHash);
 
       if (!dbProfile?.id) {
-        console.warn("[StatsDialog] Failed to get database profile");
         if (!cachedStats) setIsLoading(false);
         return;
       }
 
-      const userStats = await fetchOrCreateUserStats(dbProfile.id);
-      setStats(userStats as UserStats);
+      // Fetch full stats + badge stats in parallel
+      const [userStats, fullBadgeStats] = await Promise.all([
+        fetchOrCreateUserStats(dbProfile.id),
+        fetchBadgeStats(dbProfile.id),
+      ]);
+
+      setStats({
+        ...(userStats as unknown as UserStats),
+        confirmations_received: fullBadgeStats.confirmations_received,
+      });
+      setBadgeStats(fullBadgeStats);
 
       // Update localStorage cache
       saveUserStatsToStorage(userStats as CachedUserStats);
-
-      console.log("[StatsDialog] Updated stats from DB");
     } catch (error) {
       console.error("[StatsDialog] Failed to load user stats:", error);
     } finally {
@@ -98,6 +125,13 @@ export function StatsDialog({ open, onOpenChange }: StatsDialogProps) {
       value: stats?.reports_posted ?? 0,
       color: "text-blue-500",
       bgColor: "bg-blue-500/10",
+    },
+    {
+      icon: Heart,
+      label: t("stats.confirmationsReceived"),
+      value: stats?.confirmations_received ?? 0,
+      color: "text-rose-500",
+      bgColor: "bg-rose-500/10",
     },
     {
       icon: ThumbsUp,
@@ -134,21 +168,30 @@ export function StatsDialog({ open, onOpenChange }: StatsDialogProps) {
           <ScrollArea className="max-h-[60vh] pr-4">
             <div className="space-y-6">
               {/* Main Stats Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {statCards.map((stat) => (
                   <Card key={stat.label} className="border-2">
-                    <CardContent className="p-6">
-                      <div className="flex flex-col items-center text-center space-y-2">
-                        <div className={`rounded-full p-3 ${stat.bgColor}`}>
-                          <stat.icon className={`h-6 w-6 ${stat.color}`} />
+                    <CardContent className="p-4">
+                      <div className="flex flex-col items-center text-center space-y-1.5">
+                        <div className={`rounded-full p-2.5 ${stat.bgColor}`}>
+                          <stat.icon className={`h-5 w-5 ${stat.color}`} />
                         </div>
-                        <div className="text-3xl font-bold">{stat.value}</div>
-                        <div className="text-sm text-muted-foreground">{stat.label}</div>
+                        <div className="text-2xl font-bold">{stat.value}</div>
+                        <div className="text-xs text-muted-foreground leading-tight">
+                          {stat.label}
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
                 ))}
               </div>
+
+              {/* Badges Section */}
+              {badgeStats && (
+                <div className="bg-muted/10 rounded-lg border border-border p-4">
+                  <BadgesDisplay stats={badgeStats} />
+                </div>
+              )}
 
               {/* Activity Info */}
               <div className="space-y-3">

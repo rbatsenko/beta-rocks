@@ -33,6 +33,12 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { createReport } from "@/api/client";
 import { supabase, isSupabaseConfigured } from "@/api/supabase";
 import { useUserProfile } from "@/hooks/useUserProfile";
+import { BadgeUnlockModal } from "@/components/BadgeUnlockModal";
+import {
+  findNewlyEarnedBadges,
+  type BadgeDefinition,
+  type BadgeUserStats,
+} from "@/lib/badges/badge-definitions";
 import { SUPABASE_URL, SUPABASE_ANON_KEY, CATEGORY_COLORS } from "@/constants/config";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -102,6 +108,7 @@ export default function ReportScreen() {
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadProgress, setUploadProgress] = useState<{ current: number; total: number; percent: number } | null>(null);
+  const [celebrationBadges, setCelebrationBadges] = useState<BadgeDefinition[]>([]);
   const [observedAt, setObservedAt] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
@@ -313,6 +320,28 @@ export default function ReportScreen() {
           [{ text: "OK", onPress: () => router.back() }]
         );
       } else {
+        // Snapshot stats BEFORE creating report (for badge comparison)
+        let statsBefore: BadgeUserStats | null = null;
+        if (isSupabaseConfigured && supabase && profileId) {
+          try {
+            const { data: statsData } = await supabase
+              .from("user_stats")
+              .select("reports_posted, confirmations_given, confirmations_received, favorites_count")
+              .eq("user_profile_id", profileId)
+              .single();
+            if (statsData) {
+              statsBefore = {
+                reports_posted: statsData.reports_posted ?? 0,
+                confirmations_given: statsData.confirmations_given ?? 0,
+                confirmations_received: (statsData as any).confirmations_received ?? 0,
+                favorites_count: statsData.favorites_count ?? 0,
+              };
+            }
+          } catch {
+            // Non-critical
+          }
+        }
+
         // Create mode
         const report = await createReport(
           {
@@ -337,11 +366,40 @@ export default function ReportScreen() {
             .eq("id", report.id);
         }
 
-        Alert.alert(
-          t("reports.reportCreated", "Report created"),
-          t("reports.reportCreatedDescription", "Your report has been posted successfully"),
-          [{ text: "OK", onPress: () => router.back() }]
-        );
+        // Check for newly unlocked badges
+        let showedCelebration = false;
+        if (statsBefore && isSupabaseConfigured && supabase && profileId) {
+          try {
+            const { data: newStatsData } = await supabase
+              .from("user_stats")
+              .select("reports_posted, confirmations_given, confirmations_received, favorites_count")
+              .eq("user_profile_id", profileId)
+              .single();
+            if (newStatsData) {
+              const statsAfter: BadgeUserStats = {
+                reports_posted: newStatsData.reports_posted ?? 0,
+                confirmations_given: newStatsData.confirmations_given ?? 0,
+                confirmations_received: (newStatsData as any).confirmations_received ?? 0,
+                favorites_count: newStatsData.favorites_count ?? 0,
+              };
+              const newBadges = findNewlyEarnedBadges(statsBefore, statsAfter);
+              if (newBadges.length > 0) {
+                setCelebrationBadges(newBadges);
+                showedCelebration = true;
+              }
+            }
+          } catch {
+            // Non-critical
+          }
+        }
+
+        if (!showedCelebration) {
+          Alert.alert(
+            t("reports.reportCreated", "Report created"),
+            t("reports.reportCreatedDescription", "Your report has been posted successfully"),
+            [{ text: "OK", onPress: () => router.back() }]
+          );
+        }
       }
     } catch (err) {
       Alert.alert(
@@ -641,6 +699,21 @@ export default function ReportScreen() {
           )}
         </TouchableOpacity>
       </ScrollView>
+    {celebrationBadges.length > 0 && (
+        <BadgeUnlockModal
+          badges={celebrationBadges}
+          onComplete={() => {
+            setCelebrationBadges([]);
+            router.back();
+          }}
+          onViewProfile={() => {
+            setCelebrationBadges([]);
+            router.back();
+            // Navigate to settings (profile) tab
+            setTimeout(() => router.push("/(tabs)/settings"), 300);
+          }}
+        />
+      )}
     </KeyboardAvoidingView>
   );
 }

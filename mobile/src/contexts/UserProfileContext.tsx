@@ -30,6 +30,7 @@ import { supabase, isSupabaseConfigured } from "../api/supabase";
 export interface UserStats {
   reportsPosted: number;
   confirmationsGiven: number;
+  confirmationsReceived: number;
   favoritesCount: number;
 }
 
@@ -141,7 +142,7 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
       // Sync user stats
       const { data: statsData } = await supabase
         .from("user_stats")
-        .select("reports_posted, confirmations_given, favorites_count")
+        .select("reports_posted, confirmations_given, confirmations_received, favorites_count")
         .eq("user_profile_id", dbProfile.id)
         .single();
 
@@ -149,6 +150,7 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
         setStats({
           reportsPosted: statsData.reports_posted ?? 0,
           confirmationsGiven: statsData.confirmations_given ?? 0,
+          confirmationsReceived: (statsData as any).confirmations_received ?? 0,
           favoritesCount: statsData.favorites_count ?? 0,
         });
       }

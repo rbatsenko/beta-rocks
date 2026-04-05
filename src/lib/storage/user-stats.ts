@@ -7,6 +7,7 @@ export interface CachedUserStats {
   user_profile_id: string;
   reports_posted: number;
   confirmations_given: number;
+  confirmations_received: number;
   favorites_count: number;
   last_active: string;
   created_at: string;

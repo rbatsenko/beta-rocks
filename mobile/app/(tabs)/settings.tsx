@@ -26,6 +26,7 @@ import {
 import { formatSyncKeyForDisplay } from "@/lib/sync-key";
 import { APP_VERSION } from "@/constants/config";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
+import { BadgesDisplay } from "@/components/BadgesDisplay";
 import { useTranslation } from "react-i18next";
 import type { UnitsConfig } from "@/types/api";
 
@@ -310,6 +311,23 @@ export default function SettingsScreen() {
                 <Text style={[styles.statLabel, { color: colors.textSecondary }]}>{t("profile.favorites")}</Text>
               </View>
             </View>
+          </View>
+        </View>
+      )}
+
+      {/* Badges */}
+      {hasProfile && stats && (
+        <View style={styles.section}>
+          <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>{t("badges.title", "BADGES").toUpperCase()}</Text>
+          <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+            <BadgesDisplay
+              stats={{
+                reports_posted: stats.reportsPosted,
+                confirmations_given: stats.confirmationsGiven,
+                confirmations_received: stats.confirmationsReceived,
+                favorites_count: stats.favoritesCount,
+              }}
+            />
           </View>
         </View>
       )}
