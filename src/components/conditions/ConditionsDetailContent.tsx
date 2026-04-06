@@ -863,6 +863,14 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                           </span>
                                         </div>
                                       )}
+                                      {hour.dew_point_spread != null && (
+                                        <div className="flex items-center gap-1" title={t("dialog.dewPointSpread", "Dew Point Spread")}>
+                                          <Droplets className={`h-3 w-3 ${hour.dew_point_spread < 2 ? "text-red-500" : hour.dew_point_spread < 5 ? "text-amber-500" : "text-green-500"}`} />
+                                          <span className={`font-semibold ${hour.dew_point_spread < 2 ? "text-red-500" : hour.dew_point_spread < 5 ? "text-amber-500" : "text-green-500"}`}>
+                                            ↕{Math.round(convertTemperature(hour.dew_point_spread, "celsius", units.temperature))}°
+                                          </span>
+                                        </div>
+                                      )}
                                     </div>
                                   </div>
                                   <div className="flex items-center gap-1.5 shrink-0">
@@ -1011,6 +1019,14 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                               {units.precipitation === "mm" ? "mm" : "in"}
                                             </span>
                                           </div>
+                                          {hour.dew_point_spread != null && (
+                                            <div className="flex items-center gap-0.5" title={t("dialog.dewPointSpread", "Dew Point Spread")}>
+                                              <Droplets className={`h-2.5 w-2.5 ${hour.dew_point_spread < 2 ? "text-red-500" : hour.dew_point_spread < 5 ? "text-amber-500" : "text-green-500"}`} />
+                                              <span className={`font-semibold ${hour.dew_point_spread < 2 ? "text-red-500" : hour.dew_point_spread < 5 ? "text-amber-500" : "text-green-500"}`}>
+                                                ↕{Math.round(convertTemperature(hour.dew_point_spread, "celsius", units.temperature))}°
+                                              </span>
+                                            </div>
+                                          )}
                                         </div>
                                       </div>
                                       <div className="flex items-center gap-1.5 shrink-0">
