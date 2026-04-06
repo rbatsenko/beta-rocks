@@ -80,7 +80,18 @@ export async function GET(request: NextRequest) {
 
     const nextCursor = reports.length === PAGE_SIZE ? reports[reports.length - 1].created_at : null;
 
-    return NextResponse.json({ reports, nextCursor });
+    // Total count (only on first page to avoid extra queries on scroll)
+    let totalCount: number | undefined;
+    if (!cursor) {
+      const { count } = await supabase
+        .from("reports")
+        .select("id", { count: "exact", head: true })
+        .or(`expires_at.is.null,expires_at.gt.${new Date().toISOString()}`)
+        .gte("observed_at", new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString());
+      totalCount = count ?? undefined;
+    }
+
+    return NextResponse.json({ reports, nextCursor, ...(totalCount != null && { totalCount }) });
   } catch (error) {
     console.error("[FeedAPI] Failed to fetch feed:", error);
     return NextResponse.json({ error: "Failed to fetch feed" }, { status: 500 });

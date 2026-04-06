@@ -1,9 +1,9 @@
 /**
  * Feed screen - live community reports across all crags
- * Matches web's /feed page
+ * Matches web's /feed page with All/Favorites filter toggle
  */
 
-import { useMemo } from "react";
+import { useState, useMemo } from "react";
 import {
   View,
   Text,
@@ -14,12 +14,11 @@ import {
   RefreshControl,
   Image,
   ScrollView,
-  Modal,
-  Dimensions,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useFeedQuery } from "@/hooks/queries";
+import { getFavorites } from "@/lib/storage";
 import { SUPABASE_URL, CATEGORY_COLORS } from "@/constants/config";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -36,6 +35,7 @@ function getCountryFlag(code: string | null | undefined): string {
 
 interface FeedReport {
   id: string;
+  crag_id?: string;
   category: string;
   text: string | null;
   photos?: string[];
@@ -54,12 +54,15 @@ interface FeedReport {
   } | null;
 }
 
+type FilterMode = "all" | "favorites";
+
 export default function FeedScreen() {
   const { colorScheme } = useTheme();
   const isDark = colorScheme === "dark";
   const colors = isDark ? Colors.dark : Colors.light;
   const router = useRouter();
   const { t } = useTranslation("common");
+  const [filterMode, setFilterMode] = useState<FilterMode>("all");
 
   const {
     data,
@@ -71,10 +74,35 @@ export default function FeedScreen() {
     refetch,
   } = useFeedQuery();
 
-  const reports = useMemo(
+  const allReports = useMemo(
     () => (data?.pages.flatMap((p) => p.reports) as unknown as FeedReport[]) ?? [],
     [data]
   );
+
+  const totalCount = data?.pages[0]?.totalCount;
+
+  // Get favorite crag IDs for filtering
+  const favoriteCragIds = useMemo(() => {
+    const favs = getFavorites() as Array<{ cragId?: string; areaId?: string }>;
+    return favs.map(f => f.cragId || f.areaId).filter(Boolean) as string[];
+  }, []);
+
+  const reports = useMemo(() => {
+    if (filterMode === "favorites") {
+      return allReports.filter(r => {
+        const cragId = r.crag_id || r.crag?.id;
+        return cragId && favoriteCragIds.includes(cragId);
+      });
+    }
+    return allReports;
+  }, [allReports, filterMode, favoriteCragIds]);
+
+  const favoritesCount = useMemo(() => {
+    return allReports.filter(r => {
+      const cragId = r.crag_id || r.crag?.id;
+      return cragId && favoriteCragIds.includes(cragId);
+    }).length;
+  }, [allReports, favoriteCragIds]);
 
   function onRefresh() {
     refetch();
@@ -184,6 +212,34 @@ export default function FeedScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
+      {/* Filter toggle */}
+      <View style={[styles.filterRow, { borderBottomColor: colors.border }]}>
+        {(["all", "favorites"] as const).map(mode => {
+          const isActive = filterMode === mode;
+          const count = mode === "all" ? allReports.length : favoritesCount;
+          return (
+            <TouchableOpacity
+              key={mode}
+              style={[
+                styles.filterTab,
+                isActive && { borderBottomColor: colors.primary, borderBottomWidth: 2 },
+              ]}
+              onPress={() => setFilterMode(mode)}
+              activeOpacity={0.7}
+            >
+              <Text style={[styles.filterText, { color: isActive ? colors.primary : colors.muted }]}>
+                {t(`feed.filters.${mode}`, mode === "all" ? "All" : "Favorites")}
+              </Text>
+              <View style={[styles.countBadge, { backgroundColor: isActive ? `${colors.primary}20` : colors.surface }]}>
+                <Text style={[styles.countText, { color: isActive ? colors.primary : colors.muted }]}>
+                  {count}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+
       <FlatList
         data={reports}
         renderItem={renderReport}
@@ -195,22 +251,40 @@ export default function FeedScreen() {
         onEndReached={onEndReached}
         onEndReachedThreshold={0.3}
         ListFooterComponent={
-          isFetchingNextPage ? (
-            <ActivityIndicator
-              style={styles.loadingMore}
-              size="small"
-              color={colors.primary}
-            />
-          ) : null
+          <>
+            {isFetchingNextPage && (
+              <ActivityIndicator
+                style={styles.loadingMore}
+                size="small"
+                color={colors.primary}
+              />
+            )}
+            {totalCount != null && reports.length > 0 && (
+              <View style={styles.footerInfo}>
+                <Text style={[styles.footerText, { color: colors.muted }]}>
+                  {t("feed.showingOf", { showing: reports.length, total: totalCount })}
+                </Text>
+                {totalCount > reports.length && !hasNextPage && (
+                  <Text style={[styles.footerHint, { color: colors.muted }]}>
+                    {t("feed.olderHidden", "Older reports are still visible on individual crag pages")}
+                  </Text>
+                )}
+              </View>
+            )}
+          </>
         }
         ListEmptyComponent={
           <View style={styles.emptyState}>
             <Ionicons name="chatbubbles-outline" size={48} color={colors.muted} />
             <Text style={[styles.emptyTitle, { color: colors.text }]}>
-              {t("reports.noReportsInCategory", "No reports yet")}
+              {filterMode === "favorites"
+                ? t("feed.emptyState.noFavoritesTitle", "No reports from favorite crags")
+                : t("feed.emptyState.noReportsTitle", "No reports yet")}
             </Text>
             <Text style={[styles.emptySubtitle, { color: colors.textSecondary }]}>
-              {t("feed.viewFeed", "Community reports will appear here")}
+              {filterMode === "favorites"
+                ? t("feed.emptyState.noFavoritesDescription", "Bookmark crags to see their reports here")
+                : t("feed.emptyState.noReportsDescription", "Community reports will appear here")}
             </Text>
           </View>
         }
@@ -245,6 +319,36 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  filterRow: {
+    flexDirection: "row",
+    borderBottomWidth: 1,
+    paddingHorizontal: Spacing.md,
+  },
+  filterTab: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: Spacing.xs,
+    paddingVertical: Spacing.sm + 2,
+    paddingHorizontal: Spacing.sm,
+    marginRight: Spacing.md,
+    borderBottomWidth: 2,
+    borderBottomColor: "transparent",
+  },
+  filterText: {
+    fontSize: FontSize.sm,
+    fontWeight: "600",
+  },
+  countBadge: {
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 10,
+    minWidth: 22,
+    alignItems: "center",
+  },
+  countText: {
+    fontSize: 11,
+    fontWeight: "600",
   },
   list: {
     padding: Spacing.sm,
@@ -313,6 +417,20 @@ const styles = StyleSheet.create({
   loadingMore: {
     paddingVertical: Spacing.md,
   },
+  footerInfo: {
+    alignItems: "center",
+    paddingVertical: Spacing.md,
+    gap: 4,
+  },
+  footerText: {
+    fontSize: FontSize.xs,
+  },
+  footerHint: {
+    fontSize: FontSize.xs,
+    opacity: 0.6,
+    textAlign: "center",
+    paddingHorizontal: Spacing.lg,
+  },
   emptyState: {
     paddingTop: Spacing.xxl * 2,
     alignItems: "center",
@@ -324,6 +442,8 @@ const styles = StyleSheet.create({
   },
   emptySubtitle: {
     fontSize: FontSize.md,
+    textAlign: "center",
+    paddingHorizontal: Spacing.lg,
   },
   feedPhoto: {
     width: 200,

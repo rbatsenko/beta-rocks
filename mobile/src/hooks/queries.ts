@@ -81,6 +81,7 @@ export function useConditionsQuery(
 interface FeedPage {
   reports: Record<string, unknown>[];
   nextCursor: string | null;
+  totalCount?: number;
 }
 
 export function useFeedQuery() {
