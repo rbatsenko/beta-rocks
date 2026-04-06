@@ -287,7 +287,7 @@ export function ApiEndpoints() {
       "extreme_wind": false,
       "high_wind": false
     },
-    "label": "looks_good",
+    "label": "good",
     "summary": "Dry and comfortable. Low humidity.",
     "dry_windows": [
       { "start": "2026-04-02T09:00", "end": "2026-04-02T18:00", "hours": 9 }

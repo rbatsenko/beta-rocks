@@ -4,11 +4,11 @@
 
 export const getLabelColor = (label: string): string => {
   switch (label) {
-    case "looks_good":
+    case "good":
       return "bg-green-500/10 text-green-500 border-green-500/20";
-    case "watch_out":
+    case "fair":
       return "bg-amber-500/10 text-amber-500 border-amber-500/20";
-    case "stay_home":
+    case "poor":
       return "bg-red-500/10 text-red-500 border-red-500/20";
     default:
       return "bg-muted text-muted-foreground";
@@ -264,7 +264,7 @@ export const groupWindowsByDay = (
       }
 
       // Determine label for this day from hourly data
-      let label = "stay_home";
+      let label = "poor";
       if (hourlyConditions) {
         const dayEnd = new Date(dayStart);
         dayEnd.setDate(dayEnd.getDate() + 1);
@@ -277,7 +277,7 @@ export const groupWindowsByDay = (
           (h) => h.flags?.rain_now || h.flags?.wet_rock_likely
         );
         if (!allRain && hoursForDay.length > 0) {
-          label = "watch_out";
+          label = "fair";
         }
       }
 

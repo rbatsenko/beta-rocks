@@ -19,9 +19,9 @@ export const APP_VERSION = "0.6.0";
  * Each has a solid color, a tinted bg (12% opacity), and text color
  */
 export const LABEL_COLORS = {
-  looks_good: { solid: "#22C55E", bg: "rgba(34, 197, 94, 0.12)", text: "#22C55E" },
-  watch_out: { solid: "#F59E0B", bg: "rgba(245, 158, 11, 0.12)", text: "#F59E0B" },
-  stay_home: { solid: "#EF4444", bg: "rgba(239, 68, 68, 0.12)", text: "#EF4444" },
+  good: { solid: "#22C55E", bg: "rgba(34, 197, 94, 0.12)", text: "#22C55E" },
+  fair: { solid: "#F59E0B", bg: "rgba(245, 158, 11, 0.12)", text: "#F59E0B" },
+  poor: { solid: "#EF4444", bg: "rgba(239, 68, 68, 0.12)", text: "#EF4444" },
 } as const;
 
 /**

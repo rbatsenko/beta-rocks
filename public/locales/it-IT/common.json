@@ -960,9 +960,9 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Buono",
-    "watchOut": "Discreto",
-    "stayHome": "Scarso"
+    "good": "Buono",
+    "fair": "Discreto",
+    "poor": "Scarso"
   },
   "summary": {
     "sandstoneWet": "L'arenaria è bagnata. Non arrampicare — l'arenaria bagnata è fragile.",

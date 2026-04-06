@@ -524,7 +524,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                               <div
                                 className={`w-2 h-2 rounded-full ${
                                   isBadDay
-                                    ? dayData.label === "watch_out"
+                                    ? dayData.label === "fair"
                                       ? "bg-amber-400"
                                       : "bg-red-400"
                                     : isHighlighted ? "bg-green-500" : "bg-green-400"
@@ -548,8 +548,8 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                               )}
                               {isBadDay ? (
                                 <span className="text-xs text-muted-foreground ml-auto mr-2">
-                                  <Badge className={`text-[10px] px-1.5 py-0 ${getLabelColor(dayData.label || "stay_home")}`}>
-                                    {translateRating(dayData.label || "stay_home")}
+                                  <Badge className={`text-[10px] px-1.5 py-0 ${getLabelColor(dayData.label || "poor")}`}>
+                                    {translateRating(dayData.label || "poor")}
                                   </Badge>
                                 </span>
                               ) : (
@@ -560,8 +560,8 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                       ? t("dialog.windows")
                                       : t("dialog.window")}
                                   </span>
-                                  <Badge className={`text-[10px] px-1.5 py-0 pointer-events-none ${getLabelColor("looks_good")}`}>
-                                    {translateRating("looks_good")}
+                                  <Badge className={`text-[10px] px-1.5 py-0 pointer-events-none ${getLabelColor("good")}`}>
+                                    {translateRating("good")}
                                   </Badge>
                                 </span>
                               )}
@@ -599,7 +599,7 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                       <span className="text-sm font-medium">
                                         {window.timeRange}
                                       </span>
-                                      <Badge className={getLabelColor("looks_good")}>
+                                      <Badge className={getLabelColor("good")}>
                                         {t("dialog.dry")}
                                       </Badge>
                                     </div>
@@ -747,8 +747,8 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                   h.flags?.high_humidity || h.flags?.condensation_risk || h.flags?.high_wind
                 );
                 const dayLabel = hasAnyWarning
-                  ? goodHours.length > 0 ? "watch_out" : "stay_home"
-                  : hasMinorWarning ? "watch_out" : "looks_good";
+                  ? goodHours.length > 0 ? "fair" : "poor"
+                  : hasMinorWarning ? "fair" : "good";
 
                 return (
                   <div key={day} className="space-y-3">
@@ -874,18 +874,18 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                       !hour.flags
                                         ? ""
                                         : hour.flags.rain_now || hour.flags.wet_rock_likely || hour.flags.extreme_wind
-                                          ? getLabelColor("stay_home")
+                                          ? getLabelColor("poor")
                                           : hour.flags.high_humidity || hour.flags.condensation_risk || hour.flags.high_wind
-                                            ? getLabelColor("watch_out")
-                                            : getLabelColor("looks_good")
+                                            ? getLabelColor("fair")
+                                            : getLabelColor("good")
                                     }`}>
                                       {!hour.flags
                                         ? "—"
                                         : hour.flags.rain_now || hour.flags.wet_rock_likely || hour.flags.extreme_wind
-                                          ? translateRating("stay_home")
+                                          ? translateRating("poor")
                                           : hour.flags.high_humidity || hour.flags.condensation_risk || hour.flags.high_wind
-                                            ? translateRating("watch_out")
-                                            : translateRating("looks_good")}
+                                            ? translateRating("fair")
+                                            : translateRating("good")}
                                     </Badge>
                                   </div>
                                 </div>
@@ -1022,18 +1022,18 @@ export const ConditionsDetailContent = memo(function ConditionsDetailContent({
                                           !hour.flags
                                             ? ""
                                             : hour.flags.rain_now || hour.flags.wet_rock_likely || hour.flags.extreme_wind
-                                              ? getLabelColor("stay_home")
+                                              ? getLabelColor("poor")
                                               : hour.flags.high_humidity || hour.flags.condensation_risk || hour.flags.high_wind
-                                                ? getLabelColor("watch_out")
-                                                : getLabelColor("looks_good")
+                                                ? getLabelColor("fair")
+                                                : getLabelColor("good")
                                         }`}>
                                           {!hour.flags
                                             ? "—"
                                             : hour.flags.rain_now || hour.flags.wet_rock_likely || hour.flags.extreme_wind
-                                              ? translateRating("stay_home")
+                                              ? translateRating("poor")
                                               : hour.flags.high_humidity || hour.flags.condensation_risk || hour.flags.high_wind
-                                                ? translateRating("watch_out")
-                                                : translateRating("looks_good")}
+                                                ? translateRating("fair")
+                                                : translateRating("good")}
                                         </Badge>
                                         {!hour.flags?.rain_now && !hour.flags?.condensation_risk && !hour.flags?.high_humidity && !hour.flags?.high_wind && !hour.flags?.extreme_wind && (
                                           <span className="text-green-500 text-xs">&#10003;</span>

@@ -24,9 +24,9 @@ export function useConditionsTranslations(
       }
       // 3-tier labels
       const labelMap: Record<string, string> = {
-        looks_good: "labels.looksGood",
-        watch_out: "labels.watchOut",
-        stay_home: "labels.stayHome",
+        good: "labels.good",
+        fair: "labels.fair",
+        poor: "labels.poor",
       };
       const key = labelMap[rating];
       if (key) return t(key);

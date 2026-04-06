@@ -23,7 +23,7 @@ export type RockType =
   | "quartzite"
   | "unknown";
 
-export type WeatherLabel = "looks_good" | "watch_out" | "stay_home";
+export type WeatherLabel = "good" | "fair" | "poor";
 
 export interface WeatherFlags {
   rain_now: boolean;
@@ -382,7 +382,7 @@ function computeFlags(
 
 function deriveLabel(flags: WeatherFlags): WeatherLabel {
   if (flags.rain_now || flags.extreme_wind || flags.sandstone_wet_warning) {
-    return "stay_home";
+    return "poor";
   }
 
   if (
@@ -392,10 +392,10 @@ function deriveLabel(flags: WeatherFlags): WeatherLabel {
     flags.wet_rock_likely ||
     flags.high_wind
   ) {
-    return "watch_out";
+    return "fair";
   }
 
-  return "looks_good";
+  return "good";
 }
 
 // ---------------------------------------------------------------------------

@@ -1019,9 +1019,9 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Good",
-    "watchOut": "Fair",
-    "stayHome": "Poor"
+    "good": "Good",
+    "fair": "Fair",
+    "poor": "Poor"
   },
   "summary": {
     "sandstoneWet": "Sandstone is wet. Do not climb — wet sandstone is fragile.",

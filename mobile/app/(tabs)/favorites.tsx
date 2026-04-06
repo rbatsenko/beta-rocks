@@ -109,7 +109,7 @@ export default function FavoritesScreen() {
         ) : lColors && labelKey ? (
           <View style={[styles.ratingBadge, { backgroundColor: lColors.bg }]}>
             <Text style={[styles.ratingText, { color: lColors.text }]}>
-              {t(`conditions.labels.${labelKey}`, labelKey.replace(/_/g, " "))}
+              {labelKey === "good" ? t("labels.good", "Good") : labelKey === "fair" ? t("labels.fair", "Fair") : t("labels.poor", "Poor")}
             </Text>
           </View>
         ) : null}

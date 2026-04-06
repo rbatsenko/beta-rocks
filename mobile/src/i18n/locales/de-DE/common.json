@@ -963,9 +963,9 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Gut",
-    "watchOut": "Mäßig",
-    "stayHome": "Schlecht"
+    "good": "Gut",
+    "fair": "Mäßig",
+    "poor": "Schlecht"
   },
   "summary": {
     "sandstoneWet": "Sandstein ist nass. Nicht klettern — nasser Sandstein ist empfindlich.",

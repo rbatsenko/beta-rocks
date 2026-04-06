@@ -4,9 +4,16 @@
  */
 
 import { View, Text, StyleSheet } from "react-native";
+import { useTranslation } from "react-i18next";
 import { LABEL_COLORS } from "../constants/config";
 import { FontSize, BorderRadius, Spacing } from "../constants/theme";
 import type { ConditionsLabel } from "../types/api";
+
+const LABEL_KEYS: Record<ConditionsLabel, string> = {
+  good: "labels.good",
+  fair: "labels.fair",
+  poor: "labels.poor",
+};
 
 interface ConditionsBadgeProps {
   label: ConditionsLabel;
@@ -17,11 +24,12 @@ export function ConditionsBadge({
   label,
   size = "medium",
 }: ConditionsBadgeProps) {
+  const { t } = useTranslation();
   const colorInfo = LABEL_COLORS[label];
 
   if (!colorInfo) return null;
 
-  const displayLabel = label.replace(/_/g, " ");
+  const displayLabel = t(LABEL_KEYS[label], label.replace(/_/g, " "));
 
   return (
     <View

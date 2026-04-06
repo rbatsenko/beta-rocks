@@ -926,9 +926,9 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Добро",
-    "watchOut": "Средно",
-    "stayHome": "Лошо"
+    "good": "Добро",
+    "fair": "Средно",
+    "poor": "Лошо"
   },
   "flags": {
     "rain": "Дъжд",

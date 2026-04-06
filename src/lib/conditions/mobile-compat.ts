@@ -32,15 +32,15 @@ export function buildMobileCompat(
   return {
     // Legacy friction-based fields
     frictionRating:
-      weatherResponse.label === "looks_good"
+      weatherResponse.label === "good"
         ? 4
-        : weatherResponse.label === "watch_out"
+        : weatherResponse.label === "fair"
           ? 3
           : 1,
     rating:
-      weatherResponse.label === "looks_good"
+      weatherResponse.label === "good"
         ? "Good"
-        : weatherResponse.label === "watch_out"
+        : weatherResponse.label === "fair"
           ? "Fair"
           : "Poor",
     isDry:

@@ -553,7 +553,7 @@ export default function CragDetailScreen() {
             <View style={{ alignItems: "center", gap: 2 }}>
               <View style={[styles.ratingCard, { backgroundColor: labelColors.bg, borderColor: labelColors.solid, borderWidth: 1 }]}>
                 <Text style={[styles.ratingLabel, { color: labelColors.text }]}>
-                  {t(`conditions.labels.${conditionsLabel}`, conditionsLabel.replace(/_/g, " "))}
+                  {conditionsLabel === "good" ? t("labels.good", "Good") : conditionsLabel === "fair" ? t("labels.fair", "Fair") : t("labels.poor", "Poor")}
                 </Text>
               </View>
               <Text style={[styles.ratingHint, { color: colors.muted }]}>{t("cragPage.estimateBased", "based on weather")}</Text>
@@ -1264,7 +1264,7 @@ function FoldableWindowDay({ label, windows, isHighlighted, isToday, hasDryHours
           {isBadDay ? (
             <View style={[styles.smallBadge, { backgroundColor: "rgba(239,68,68,0.12)", marginLeft: "auto" }]}>
               <Text style={[styles.smallBadgeText, { color: "#ef4444" }]}>
-                {t("conditions.labels.stay_home", "stay home")}
+                {t("labels.poor", "Poor")}
               </Text>
             </View>
           ) : (

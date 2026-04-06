@@ -839,9 +839,9 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Καλό",
-    "watchOut": "Μέτριο",
-    "stayHome": "Κακό"
+    "good": "Καλό",
+    "fair": "Μέτριο",
+    "poor": "Κακό"
   },
   "flags": {
     "rain": "Βροχή",

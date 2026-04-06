@@ -871,9 +871,9 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Hyvä",
-    "watchOut": "Kohtalainen",
-    "stayHome": "Huono"
+    "good": "Hyvä",
+    "fair": "Kohtalainen",
+    "poor": "Huono"
   },
   "flags": {
     "rain": "Sadetta",

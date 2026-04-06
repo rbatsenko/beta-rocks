@@ -877,9 +877,9 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Dobré",
-    "watchOut": "Prijateľné",
-    "stayHome": "Zlé"
+    "good": "Dobré",
+    "fair": "Prijateľné",
+    "poor": "Zlé"
   },
   "flags": {
     "rain": "Dážď",

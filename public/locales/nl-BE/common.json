@@ -875,9 +875,9 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Goed",
-    "watchOut": "Matig",
-    "stayHome": "Slecht"
+    "good": "Goed",
+    "fair": "Matig",
+    "poor": "Slecht"
   },
   "flags": {
     "rain": "Regen",

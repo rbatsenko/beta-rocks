@@ -957,9 +957,9 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Добре",
-    "watchOut": "Середнє",
-    "stayHome": "Погано"
+    "good": "Добре",
+    "fair": "Середнє",
+    "poor": "Погано"
   },
   "flags": {
     "rain": "Дощ",

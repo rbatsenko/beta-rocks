@@ -963,9 +963,9 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Bueno",
-    "watchOut": "Regular",
-    "stayHome": "Malo"
+    "good": "Bueno",
+    "fair": "Regular",
+    "poor": "Malo"
   },
   "summary": {
     "sandstoneWet": "La arenisca está mojada. No escales — la arenisca mojada es frágil.",

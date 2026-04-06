@@ -842,9 +842,9 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Bo",
-    "watchOut": "Regular",
-    "stayHome": "Dolent"
+    "good": "Bo",
+    "fair": "Regular",
+    "poor": "Dolent"
   },
   "flags": {
     "rain": "Pluja",

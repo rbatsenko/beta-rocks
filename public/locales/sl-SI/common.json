@@ -958,9 +958,9 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Dobro",
-    "watchOut": "Srednje",
-    "stayHome": "Slabo"
+    "good": "Dobro",
+    "fair": "Srednje",
+    "poor": "Slabo"
   },
   "flags": {
     "rain": "Dež",

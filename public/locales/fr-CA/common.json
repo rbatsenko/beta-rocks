@@ -960,9 +960,9 @@
     "edit": "Edit"
   },
   "labels": {
-    "looksGood": "Bon",
-    "watchOut": "Moyen",
-    "stayHome": "Mauvais"
+    "good": "Bon",
+    "fair": "Moyen",
+    "poor": "Mauvais"
   },
   "summary": {
     "sandstoneWet": "Le grès est mouillé. Ne grimpez pas — le grès mouillé est fragile.",

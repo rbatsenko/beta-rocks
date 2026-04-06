@@ -961,9 +961,9 @@
     "edit": "Edytuj"
   },
   "labels": {
-    "looksGood": "Dobre",
-    "watchOut": "Średnie",
-    "stayHome": "Złe"
+    "good": "Dobre",
+    "fair": "Średnie",
+    "poor": "Złe"
   },
   "summary": {
     "sandstoneWet": "Piaskowiec jest mokry. Nie wspinaj się — mokry piaskowiec jest kruchy.",

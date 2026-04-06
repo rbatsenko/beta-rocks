@@ -12,7 +12,7 @@ export type RockType =
   | "quartzite"
   | "unknown";
 
-export type ConditionsLabel = "looks_good" | "watch_out" | "stay_home";
+export type ConditionsLabel = "good" | "fair" | "poor";
 
 // --- /api/conditions response ---
 

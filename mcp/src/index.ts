@@ -113,7 +113,7 @@ server.registerTool(
   "get_conditions",
   {
     title: "Get Conditions",
-    description: "Get climbing-relevant weather data for a crag - risk flags (rain, condensation, wet rock, etc.), a plain-language summary, overall label (looks_good / watch_out / stay_home), dry weather windows, precipitation totals, and warnings.",
+    description: "Get climbing-relevant weather data for a crag - risk flags (rain, condensation, wet rock, etc.), a plain-language summary, overall label (good / fair / poor), dry weather windows, precipitation totals, and warnings.",
     inputSchema: z.object({
       id: z.string().describe("Crag ID"),
     }),

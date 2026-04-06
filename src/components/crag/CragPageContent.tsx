@@ -780,14 +780,14 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                     <Badge
                       variant="outline"
                       className={`text-lg px-4 py-2 ${
-                        conditions.label === "looks_good"
+                        conditions.label === "good"
                           ? "bg-green-500/10 text-green-700 dark:text-green-300 border-green-500/30"
-                          : conditions.label === "watch_out"
+                          : conditions.label === "fair"
                             ? "bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/30"
                             : "bg-red-500/10 text-red-700 dark:text-red-300 border-red-500/30"
                       }`}
                     >
-                      {conditions.label === "looks_good" ? t("labels.looksGood", "Looks good") : conditions.label === "watch_out" ? t("labels.watchOut", "Watch out") : t("labels.stayHome", "Stay home")}
+                      {conditions.label === "good" ? t("labels.good", "Good") : conditions.label === "fair" ? t("labels.fair", "Fair") : t("labels.poor", "Poor")}
                     </Badge>
                     <span className="text-xs text-muted-foreground italic">{t("cragPage.basedOnWeather", "based on weather")}</span>
                   </div>

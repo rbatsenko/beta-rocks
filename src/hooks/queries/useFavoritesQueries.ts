@@ -76,7 +76,7 @@ function clientFavoriteToDb(
     // Store new label in last_rating. Old apps may see unknown values but won't crash.
     last_rating: fav.lastLabel || null,
     // Map label to legacy score for old mobile versions
-    last_friction_score: fav.lastLabel === "looks_good" ? 4 : fav.lastLabel === "watch_out" ? 3 : fav.lastLabel === "stay_home" ? 1 : null,
+    last_friction_score: fav.lastLabel === "good" ? 4 : fav.lastLabel === "fair" ? 3 : fav.lastLabel === "poor" ? 1 : null,
     last_checked_at: fav.lastCheckedAt || null,
     display_order: fav.displayOrder,
   };
