@@ -247,7 +247,7 @@ export function EditCragDialog({
                   <Button
                     variant={action === "make-sector" ? "default" : "outline"}
                     className={`w-full justify-start ${action === "make-sector" ? "bg-orange-500 hover:bg-orange-600 text-white ring-2 ring-orange-600" : ""}`}
-                    onClick={() => setAction("make-sector")}
+                    onClick={() => setAction(action === "make-sector" ? "rename" : "make-sector")}
                   >
                     {action === "make-sector" ? (
                       <Check className="h-4 w-4 mr-2" />
@@ -262,7 +262,7 @@ export function EditCragDialog({
                     <Button
                       variant={action === "change-parent" ? "default" : "outline"}
                       className={`w-full justify-start ${action === "change-parent" ? "bg-orange-500 hover:bg-orange-600 text-white ring-2 ring-orange-600" : ""}`}
-                      onClick={() => setAction("change-parent")}
+                      onClick={() => setAction(action === "change-parent" ? "rename" : "change-parent")}
                     >
                       {action === "change-parent" ? (
                         <Check className="h-4 w-4 mr-2" />
@@ -274,7 +274,7 @@ export function EditCragDialog({
                     <Button
                       variant={action === "make-crag" ? "default" : "outline"}
                       className={`w-full justify-start ${action === "make-crag" ? "bg-orange-500 hover:bg-orange-600 text-white ring-2 ring-orange-600" : ""}`}
-                      onClick={() => setAction("make-crag")}
+                      onClick={() => setAction(action === "make-crag" ? "rename" : "make-crag")}
                     >
                       {action === "make-crag" ? (
                         <Check className="h-4 w-4 mr-2" />
