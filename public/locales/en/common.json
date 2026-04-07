@@ -893,7 +893,7 @@
   },
   "editCragDialog": {
     "title": "Edit Crag",
-    "subtitle": "Convert this crag to a sector or change its parent",
+    "subtitle": "Rename or change the structure of this crag",
     "currentStatus": "Current Status",
     "crag": "Crag",
     "sector": "Sector",
