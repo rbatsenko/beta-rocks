@@ -56,10 +56,9 @@ export function EditCragDialog({
   const [searching, setSearching] = useState(false);
   const [selectedParentCrag, setSelectedParentCrag] = useState<SearchResult | null>(null);
   const [submitting, setSubmitting] = useState(false);
-  const [action, setAction] = useState<"make-sector" | "make-crag" | "change-parent">(
-    currentlyIsSector ? "change-parent" : "make-sector"
-  );
+  const [action, setAction] = useState<"make-sector" | "make-crag" | "change-parent" | "rename">("rename");
   const [showProfileModal, setShowProfileModal] = useState(false);
+  const [newName, setNewName] = useState(crag.name);
 
   // Reset on dialog open/close
   useEffect(() => {
@@ -67,9 +66,10 @@ export function EditCragDialog({
       setSearchQuery("");
       setSearchResults([]);
       setSelectedParentCrag(null);
-      setAction(currentlyIsSector ? "change-parent" : "make-sector");
+      setAction("rename");
+      setNewName(crag.name);
     }
-  }, [open, currentlyIsSector]);
+  }, [open, currentlyIsSector, crag.name]);
 
   // Debounced search for parent crags
   useEffect(() => {
@@ -122,7 +122,12 @@ export function EditCragDialog({
   };
 
   const handleSubmitWithProfile = async () => {
-    if (action !== "make-crag" && !selectedParentCrag) {
+    if (action === "rename") {
+      if (!newName.trim() || newName.trim() === crag.name) {
+        onOpenChange(false);
+        return;
+      }
+    } else if (action !== "make-crag" && !selectedParentCrag) {
       toast({
         title: t("editCragDialog.errors.parentRequired"),
         description: t("editCragDialog.errors.parentRequiredDesc"),
@@ -134,12 +139,16 @@ export function EditCragDialog({
     setSubmitting(true);
 
     try {
+      const nameChanged = newName.trim() !== crag.name;
+      const effectiveAction = action === "rename" ? "rename" : action;
+
       const response = await fetch(`/api/crags/${crag.id}/convert`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          action,
-          parentCragId: action !== "make-crag" ? selectedParentCrag?.id : null,
+          action: effectiveAction,
+          ...(nameChanged && { name: newName.trim() }),
+          ...(effectiveAction !== "make-crag" && effectiveAction !== "rename" && { parentCragId: selectedParentCrag?.id }),
         }),
       });
 
@@ -152,9 +161,9 @@ export function EditCragDialog({
       // Success!
       toast({
         title: t("editCragDialog.success"),
-        description: t(
-          `editCragDialog.${action === "make-crag" ? "convertedToCrag" : "convertedToSector"}`
-        ),
+        description: action === "rename"
+          ? t("editCragDialog.renamed", { defaultValue: "Crag renamed successfully" })
+          : t(`editCragDialog.${action === "make-crag" ? "convertedToCrag" : "convertedToSector"}`),
       });
 
       onOpenChange(false);
@@ -173,7 +182,11 @@ export function EditCragDialog({
     }
   };
 
-  const canSubmit = action === "make-crag" || selectedParentCrag !== null;
+  const nameChanged = newName.trim().length > 0 && newName.trim() !== crag.name;
+  const canSubmit =
+    action === "rename" ? nameChanged
+    : action === "make-crag" ? true
+    : selectedParentCrag !== null;
 
   return (
     <>
@@ -203,6 +216,25 @@ export function EditCragDialog({
                   {t("editCragDialog.currentParent")}: {crag.parent_crag_name}
                 </p>
               )}
+            </div>
+
+            {/* Rename */}
+            <div>
+              <Label htmlFor="crag-name" className="text-base font-semibold mb-2 block">
+                {t("editCragDialog.name", { defaultValue: "Name" })}
+              </Label>
+              <Input
+                id="crag-name"
+                value={newName}
+                onChange={(e) => {
+                  setNewName(e.target.value);
+                  if (e.target.value.trim() !== crag.name) {
+                    setAction("rename");
+                  }
+                }}
+                placeholder={crag.name}
+                className="max-w-md"
+              />
             </div>
 
             {/* Action Selection */}

@@ -3,8 +3,9 @@ import { z } from "zod";
 import { getSupabaseClient, isSupabaseConfigured } from "@/integrations/supabase/client";
 
 const ConvertSchema = z.object({
-  action: z.enum(["make-sector", "make-crag", "change-parent"]),
+  action: z.enum(["make-sector", "make-crag", "change-parent", "rename"]),
   parentCragId: z.string().optional().nullable(),
+  name: z.string().min(1).max(200).optional(),
 });
 
 /**
@@ -31,7 +32,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       );
     }
 
-    const { action, parentCragId } = validationResult.data;
+    const { action, parentCragId, name } = validationResult.data;
     const { id: cragId } = await params;
     const supabase = getSupabaseClient();
 
@@ -43,29 +44,34 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       );
     }
 
-    // Perform the conversion
+    // Build the update payload
+    const updatePayload: Record<string, unknown> = {};
+
+    // Name change (can accompany any action)
+    if (name) {
+      updatePayload.name = name;
+    }
+
+    // Structural changes
     if (action === "make-crag") {
-      // Convert sector to crag by removing parent_crag_id
-      const { error } = await supabase
-        .from("crags")
-        .update({ parent_crag_id: null })
-        .eq("id", cragId);
+      updatePayload.parent_crag_id = null;
+    } else if (action === "make-sector" || action === "change-parent") {
+      updatePayload.parent_crag_id = parentCragId;
+    }
+    // action === "rename" only changes name, already handled above
 
-      if (error) {
-        console.error("Error converting to crag:", error);
-        return NextResponse.json({ error: "Failed to convert to crag" }, { status: 500 });
-      }
-    } else {
-      // Convert crag to sector or change parent
-      const { error } = await supabase
-        .from("crags")
-        .update({ parent_crag_id: parentCragId })
-        .eq("id", cragId);
+    if (Object.keys(updatePayload).length === 0) {
+      return NextResponse.json({ error: "No changes to apply" }, { status: 400 });
+    }
 
-      if (error) {
-        console.error("Error converting to sector:", error);
-        return NextResponse.json({ error: "Failed to convert to sector" }, { status: 500 });
-      }
+    const { error } = await supabase
+      .from("crags")
+      .update(updatePayload)
+      .eq("id", cragId);
+
+    if (error) {
+      console.error("Error updating crag:", error);
+      return NextResponse.json({ error: "Failed to update crag" }, { status: 500 });
     }
 
     return NextResponse.json({
