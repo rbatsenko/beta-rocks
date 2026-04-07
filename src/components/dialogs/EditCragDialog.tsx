@@ -237,11 +237,14 @@ export function EditCragDialog({
               />
             </div>
 
-            {/* Action Selection */}
+            {/* Action Selection (optional) */}
             <div>
-              <Label className="text-base font-semibold mb-3 block">
+              <Label className="text-base font-semibold mb-1 block">
                 {t("editCragDialog.chooseAction")}
               </Label>
+              <p className="text-sm text-muted-foreground mb-3">
+                {t("editCragDialog.optionalAction", { defaultValue: "Optional. Click to toggle." })}
+              </p>
               <div className="space-y-2">
                 {!currentlyIsSector && (
                   <Button
