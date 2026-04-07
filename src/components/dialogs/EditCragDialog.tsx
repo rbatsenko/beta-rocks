@@ -127,7 +127,7 @@ export function EditCragDialog({
         onOpenChange(false);
         return;
       }
-    } else if (action !== "make-crag" && !selectedParentCrag) {
+    } else if ((action === "make-sector" || action === "change-parent") && !selectedParentCrag) {
       toast({
         title: t("editCragDialog.errors.parentRequired"),
         description: t("editCragDialog.errors.parentRequiredDesc"),
@@ -292,7 +292,7 @@ export function EditCragDialog({
             </div>
 
             {/* Parent Crag Search (only show if not converting to crag) */}
-            {action !== "make-crag" && (
+            {(action === "make-sector" || action === "change-parent") && (
               <div>
                 <Label className="text-base font-semibold mb-2 block">
                   {action === "change-parent"
