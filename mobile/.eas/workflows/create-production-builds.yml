@@ -1,12 +1,8 @@
 name: Create Production Builds
 
+# Manual trigger only — use `npx eas build --local` for free local builds
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - mobile/**
-      - mobile/.eas/**
+  workflow_dispatch:
 
 jobs:
   build_android:
