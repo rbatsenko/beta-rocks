@@ -89,11 +89,14 @@ export function useFeedQuery() {
     queryKey: queryKeys.feed,
     queryFn: async ({ pageParam }) => {
       const url = pageParam
-        ? `${API_URL}/api/reports/feed?cursor=${pageParam}`
+        ? `${API_URL}/api/reports/feed?cursor=${encodeURIComponent(pageParam)}`
         : `${API_URL}/api/reports/feed`;
       const res = await fetch(url, {
         headers: { "X-Client-Platform": "mobile" },
       });
+      if (!res.ok) {
+        throw new Error(`Feed fetch failed: ${res.status}`);
+      }
       return res.json();
     },
     initialPageParam: null as string | null,

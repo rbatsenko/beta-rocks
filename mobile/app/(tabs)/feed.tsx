@@ -67,6 +67,7 @@ export default function FeedScreen() {
   const {
     data,
     isLoading,
+    isError,
     isFetchingNextPage,
     isRefetching,
     hasNextPage,
@@ -75,7 +76,8 @@ export default function FeedScreen() {
   } = useFeedQuery();
 
   const allReports = useMemo(
-    () => (data?.pages.flatMap((p) => p.reports) as unknown as FeedReport[]) ?? [],
+    () =>
+      (data?.pages.flatMap((p) => p.reports ?? []) as unknown as FeedReport[]) ?? [],
     [data]
   );
 
@@ -206,6 +208,22 @@ export default function FeedScreen() {
     return (
       <View style={[styles.centered, { backgroundColor: colors.background }]}>
         <ActivityIndicator size="large" color={colors.primary} />
+      </View>
+    );
+  }
+
+  if (isError && allReports.length === 0) {
+    return (
+      <View style={[styles.centered, { backgroundColor: colors.background }]}>
+        <Ionicons name="cloud-offline-outline" size={48} color={colors.muted} />
+        <Text style={[styles.emptyTitle, { color: colors.text, marginTop: Spacing.md }]}>
+          {t("feed.errorTitle", "Couldn't load feed")}
+        </Text>
+        <TouchableOpacity onPress={() => refetch()} style={{ marginTop: Spacing.sm }}>
+          <Text style={{ color: colors.primary, fontSize: FontSize.md, fontWeight: "600" }}>
+            {t("feed.retry", "Tap to retry")}
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   }
