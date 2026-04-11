@@ -95,7 +95,8 @@ export function useFeedQuery() {
         headers: { "X-Client-Platform": "mobile" },
       });
       if (!res.ok) {
-        throw new Error(`Feed fetch failed: ${res.status}`);
+        const body = await res.text().catch(() => "");
+        throw new Error(`Feed fetch failed: ${res.status} ${body}`);
       }
       return res.json();
     },
