@@ -16,6 +16,7 @@ import type {
   ConditionsResponse,
   RockType,
   Report,
+  FeedPage,
 } from "@/types/api";
 
 // --- Query keys ---
@@ -78,22 +79,22 @@ export function useConditionsQuery(
 
 // --- Feed (infinite scroll) ---
 
-interface FeedPage {
-  reports: Record<string, unknown>[];
-  nextCursor: string | null;
-  totalCount?: number;
-}
-
 export function useFeedQuery() {
   return useInfiniteQuery<FeedPage>({
     queryKey: queryKeys.feed,
     queryFn: async ({ pageParam }) => {
       const url = pageParam
-        ? `${API_URL}/api/reports/feed?cursor=${pageParam}`
+        ? `${API_URL}/api/reports/feed?cursor=${encodeURIComponent(String(pageParam))}`
         : `${API_URL}/api/reports/feed`;
       const res = await fetch(url, {
         headers: { "X-Client-Platform": "mobile" },
       });
+      if (!res.ok) {
+        const body = await res.text().catch(() => "");
+        throw new Error(
+          `Feed fetch failed: ${res.status} ${res.statusText}${body ? ` – ${body}` : ""}`
+        );
+      }
       return res.json();
     },
     initialPageParam: null as string | null,

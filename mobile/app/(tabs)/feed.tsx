@@ -18,40 +18,25 @@ import {
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useFeedQuery } from "@/hooks/queries";
+import type { FeedReport } from "@/types/api";
 import { getFavorites } from "@/lib/storage";
 import { SUPABASE_URL, CATEGORY_COLORS } from "@/constants/config";
 import { Colors, Spacing, FontSize, BorderRadius } from "@/constants/theme";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useTranslation } from "react-i18next";
 
-const PHOTO_BASE_URL = SUPABASE_URL ? `${SUPABASE_URL}/storage/v1/object/public/report-photos/` : "";
+const PHOTO_BASE_URL = SUPABASE_URL
+  ? `${SUPABASE_URL}/storage/v1/object/public/report-photos/`
+  : "";
 
 function getCountryFlag(code: string | null | undefined): string {
   if (!code || code.length !== 2) return "";
   const upper = code.toUpperCase();
   const OFFSET = 0x1f1e6 - 0x41;
-  return String.fromCodePoint(upper.charCodeAt(0) + OFFSET, upper.charCodeAt(1) + OFFSET);
-}
-
-interface FeedReport {
-  id: string;
-  crag_id?: string;
-  category: string;
-  text: string | null;
-  photos?: string[];
-  created_at: string;
-  author?: { display_name: string | null } | null;
-  confirmations?: { count: number }[];
-  crag?: {
-    id: string;
-    name: string;
-    slug: string | null;
-    country: string | null;
-    state: string | null;
-    municipality: string | null;
-    village: string | null;
-    parent_crag?: { name: string; slug: string } | null;
-  } | null;
+  return String.fromCodePoint(
+    upper.charCodeAt(0) + OFFSET,
+    upper.charCodeAt(1) + OFFSET
+  );
 }
 
 type FilterMode = "all" | "favorites";
@@ -67,6 +52,7 @@ export default function FeedScreen() {
   const {
     data,
     isLoading,
+    isError,
     isFetchingNextPage,
     isRefetching,
     hasNextPage,
@@ -74,8 +60,8 @@ export default function FeedScreen() {
     refetch,
   } = useFeedQuery();
 
-  const allReports = useMemo(
-    () => (data?.pages.flatMap((p) => p.reports) as unknown as FeedReport[]) ?? [],
+  const allReports = useMemo<FeedReport[]>(
+    () => data?.pages.flatMap((p) => p.reports ?? []) ?? [],
     [data]
   );
 
@@ -84,12 +70,12 @@ export default function FeedScreen() {
   // Get favorite crag IDs for filtering
   const favoriteCragIds = useMemo(() => {
     const favs = getFavorites() as Array<{ cragId?: string; areaId?: string }>;
-    return favs.map(f => f.cragId || f.areaId).filter(Boolean) as string[];
+    return favs.map((f) => f.cragId || f.areaId).filter(Boolean) as string[];
   }, []);
 
   const reports = useMemo(() => {
     if (filterMode === "favorites") {
-      return allReports.filter(r => {
+      return allReports.filter((r) => {
         const cragId = r.crag_id || r.crag?.id;
         return cragId && favoriteCragIds.includes(cragId);
       });
@@ -98,7 +84,7 @@ export default function FeedScreen() {
   }, [allReports, filterMode, favoriteCragIds]);
 
   const favoritesCount = useMemo(() => {
-    return allReports.filter(r => {
+    return allReports.filter((r) => {
       const cragId = r.crag_id || r.crag?.id;
       return cragId && favoriteCragIds.includes(cragId);
     }).length;
@@ -139,13 +125,18 @@ export default function FeedScreen() {
 
     return (
       <TouchableOpacity
-        style={[styles.reportCard, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}
+        style={[
+          styles.reportCard,
+          { backgroundColor: colors.card, borderColor: colors.cardBorder },
+        ]}
         onPress={() => handleCragPress(item)}
         activeOpacity={0.7}
       >
         {/* Header: category + time */}
         <View style={styles.reportHeader}>
-          <View style={[styles.categoryBadge, { backgroundColor: catColors.bg }]}>
+          <View
+            style={[styles.categoryBadge, { backgroundColor: catColors.bg }]}
+          >
             <Text style={[styles.categoryText, { color: catColors.text }]}>
               {t(`reports.categories.${item.category}`, item.category)}
             </Text>
@@ -158,19 +149,28 @@ export default function FeedScreen() {
         {/* Crag info */}
         <View style={styles.cragInfo}>
           <Ionicons name="location-outline" size={14} color={colors.primary} />
-          <Text style={[styles.cragName, { color: colors.text }]} numberOfLines={1}>
+          <Text
+            style={[styles.cragName, { color: colors.text }]}
+            numberOfLines={1}
+          >
             {cragName}
           </Text>
         </View>
         {location ? (
-          <Text style={[styles.locationText, { color: colors.textSecondary }]} numberOfLines={1}>
+          <Text
+            style={[styles.locationText, { color: colors.textSecondary }]}
+            numberOfLines={1}
+          >
             {location}
           </Text>
         ) : null}
 
         {/* Report text */}
         {item.text && (
-          <Text style={[styles.reportText, { color: colors.text }]} numberOfLines={4}>
+          <Text
+            style={[styles.reportText, { color: colors.text }]}
+            numberOfLines={4}
+          >
             {item.text}
           </Text>
         )}
@@ -179,7 +179,12 @@ export default function FeedScreen() {
         {item.photos && item.photos.length > 0 && (
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {item.photos.map((p, i) => (
-              <Image key={i} source={{ uri: `${PHOTO_BASE_URL}${p}` }} style={styles.feedPhoto} resizeMode="cover" />
+              <Image
+                key={i}
+                source={{ uri: `${PHOTO_BASE_URL}${p}` }}
+                style={styles.feedPhoto}
+                resizeMode="cover"
+              />
             ))}
           </ScrollView>
         )}
@@ -210,11 +215,41 @@ export default function FeedScreen() {
     );
   }
 
+  if (isError && allReports.length === 0) {
+    return (
+      <View style={[styles.centered, { backgroundColor: colors.background }]}>
+        <Ionicons name="cloud-offline-outline" size={48} color={colors.muted} />
+        <Text
+          style={[
+            styles.emptyTitle,
+            { color: colors.text, marginTop: Spacing.md },
+          ]}
+        >
+          {t("feed.errorTitle", "Couldn't load feed")}
+        </Text>
+        <TouchableOpacity
+          onPress={() => refetch()}
+          style={{ marginTop: Spacing.sm }}
+        >
+          <Text
+            style={{
+              color: colors.primary,
+              fontSize: FontSize.md,
+              fontWeight: "600",
+            }}
+          >
+            {t("feed.retry", "Tap to retry")}
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       {/* Filter toggle */}
       <View style={[styles.filterRow, { borderBottomColor: colors.border }]}>
-        {(["all", "favorites"] as const).map(mode => {
+        {(["all", "favorites"] as const).map((mode) => {
           const isActive = filterMode === mode;
           const count = mode === "all" ? allReports.length : favoritesCount;
           return (
@@ -222,16 +257,41 @@ export default function FeedScreen() {
               key={mode}
               style={[
                 styles.filterTab,
-                isActive && { borderBottomColor: colors.primary, borderBottomWidth: 2 },
+                isActive && {
+                  borderBottomColor: colors.primary,
+                  borderBottomWidth: 2,
+                },
               ]}
               onPress={() => setFilterMode(mode)}
               activeOpacity={0.7}
             >
-              <Text style={[styles.filterText, { color: isActive ? colors.primary : colors.muted }]}>
-                {t(`feed.filters.${mode}`, mode === "all" ? "All" : "Favorites")}
+              <Text
+                style={[
+                  styles.filterText,
+                  { color: isActive ? colors.primary : colors.muted },
+                ]}
+              >
+                {t(
+                  `feed.filters.${mode}`,
+                  mode === "all" ? "All" : "Favorites"
+                )}
               </Text>
-              <View style={[styles.countBadge, { backgroundColor: isActive ? `${colors.primary}20` : colors.surface }]}>
-                <Text style={[styles.countText, { color: isActive ? colors.primary : colors.muted }]}>
+              <View
+                style={[
+                  styles.countBadge,
+                  {
+                    backgroundColor: isActive
+                      ? `${colors.primary}20`
+                      : colors.surface,
+                  },
+                ]}
+              >
+                <Text
+                  style={[
+                    styles.countText,
+                    { color: isActive ? colors.primary : colors.muted },
+                  ]}
+                >
                   {count}
                 </Text>
               </View>
@@ -259,14 +319,43 @@ export default function FeedScreen() {
                 color={colors.primary}
               />
             )}
+            {isError && !isFetchingNextPage && reports.length > 0 && (
+              <TouchableOpacity
+                onPress={() => fetchNextPage()}
+                style={styles.loadMoreError}
+                activeOpacity={0.7}
+              >
+                <Ionicons
+                  name="cloud-offline-outline"
+                  size={18}
+                  color={colors.muted}
+                />
+                <Text
+                  style={[styles.loadMoreErrorText, { color: colors.muted }]}
+                >
+                  {t("feed.loadMoreError", "Couldn't load more reports")}
+                </Text>
+                <Text
+                  style={[styles.loadMoreErrorRetry, { color: colors.primary }]}
+                >
+                  {t("feed.retry", "Tap to retry")}
+                </Text>
+              </TouchableOpacity>
+            )}
             {totalCount != null && reports.length > 0 && (
               <View style={styles.footerInfo}>
                 <Text style={[styles.footerText, { color: colors.muted }]}>
-                  {t("feed.showingOf", { showing: reports.length, total: totalCount })}
+                  {t("feed.showingOf", {
+                    showing: reports.length,
+                    total: totalCount,
+                  })}
                 </Text>
                 {totalCount > reports.length && !hasNextPage && (
                   <Text style={[styles.footerHint, { color: colors.muted }]}>
-                    {t("feed.olderHidden", "Older reports are still visible on individual crag pages")}
+                    {t(
+                      "feed.olderHidden",
+                      "Older reports are still visible on individual crag pages"
+                    )}
                   </Text>
                 )}
               </View>
@@ -275,16 +364,31 @@ export default function FeedScreen() {
         }
         ListEmptyComponent={
           <View style={styles.emptyState}>
-            <Ionicons name="chatbubbles-outline" size={48} color={colors.muted} />
+            <Ionicons
+              name="chatbubbles-outline"
+              size={48}
+              color={colors.muted}
+            />
             <Text style={[styles.emptyTitle, { color: colors.text }]}>
               {filterMode === "favorites"
-                ? t("feed.emptyState.noFavoritesTitle", "No reports from favorite crags")
+                ? t(
+                    "feed.emptyState.noFavoritesTitle",
+                    "No reports from favorite crags"
+                  )
                 : t("feed.emptyState.noReportsTitle", "No reports yet")}
             </Text>
-            <Text style={[styles.emptySubtitle, { color: colors.textSecondary }]}>
+            <Text
+              style={[styles.emptySubtitle, { color: colors.textSecondary }]}
+            >
               {filterMode === "favorites"
-                ? t("feed.emptyState.noFavoritesDescription", "Bookmark crags to see their reports here")
-                : t("feed.emptyState.noReportsDescription", "Community reports will appear here")}
+                ? t(
+                    "feed.emptyState.noFavoritesDescription",
+                    "Bookmark crags to see their reports here"
+                  )
+                : t(
+                    "feed.emptyState.noReportsDescription",
+                    "Community reports will appear here"
+                  )}
             </Text>
           </View>
         }
@@ -416,6 +520,22 @@ const styles = StyleSheet.create({
   },
   loadingMore: {
     paddingVertical: Spacing.md,
+  },
+  loadMoreError: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: Spacing.xs,
+    paddingVertical: Spacing.md,
+    paddingHorizontal: Spacing.md,
+    flexWrap: "wrap",
+  },
+  loadMoreErrorText: {
+    fontSize: FontSize.sm,
+  },
+  loadMoreErrorRetry: {
+    fontSize: FontSize.sm,
+    fontWeight: "600",
   },
   footerInfo: {
     alignItems: "center",
