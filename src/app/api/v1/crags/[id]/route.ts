@@ -34,6 +34,34 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
       return NextResponse.json({ error: "Crag not found" }, { status: 404 });
     }
 
+    // If the sector's own rock_type / climbing_types are missing, fall back to
+    // the parent area (e.g. Cuvier sectors → Fontainebleau). The backfill
+    // should have copied these forward already, but newly-imported sectors
+    // may still arrive with nulls before the next backfill cycle.
+    const needsParentFallback =
+      !!crag.parent_crag_id &&
+      (!crag.rock_type ||
+        !crag.climbing_types ||
+        (Array.isArray(crag.climbing_types) && crag.climbing_types.length === 0));
+
+    let parentRockType: string | null = null;
+    let parentClimbingTypes: string[] | null = null;
+    if (needsParentFallback) {
+      const { data: parent } = await supabase
+        .from("crags")
+        .select("rock_type, climbing_types")
+        .eq("id", crag.parent_crag_id)
+        .single();
+      parentRockType = parent?.rock_type ?? null;
+      parentClimbingTypes = parent?.climbing_types ?? null;
+    }
+
+    const rockType = crag.rock_type || parentRockType;
+    const climbingTypes =
+      crag.climbing_types && crag.climbing_types.length > 0
+        ? crag.climbing_types
+        : (parentClimbingTypes ?? []);
+
     // Fetch child crags (sectors)
     const { data: sectors } = await supabase
       .from("crags")
@@ -53,8 +81,8 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
         village: crag.village || null,
         lat: crag.lat,
         lon: crag.lon,
-        rock_type: crag.rock_type || null,
-        climbing_types: crag.climbing_types || [],
+        rock_type: rockType || null,
+        climbing_types: climbingTypes,
         aspects: crag.aspects || [],
         description: crag.description || null,
         sectors: (sectors || []).map((s) => ({
