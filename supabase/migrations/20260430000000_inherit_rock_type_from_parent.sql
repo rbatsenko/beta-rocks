@@ -4,43 +4,24 @@
 -- sectors like "Cuvier Bellevue" carry nulls). The data is always derivable
 -- from the linked parent_crag_id but until now nothing exposed that.
 --
--- This migration does two things:
---   1) Backfills the stored values so reads everywhere benefit (not just the
---      search RPC). Idempotent — only touches rows where the sector is empty
---      and the parent has data.
---   2) Updates search_crags_enhanced to COALESCE from the parent at query
---      time, so any future sectors imported without rock_type still surface
---      the right chip until the next backfill cycle.
+-- This migration updates search_crags_enhanced to COALESCE from the parent
+-- at query time, so sectors surface the right chip without requiring stored
+-- values to be backfilled. The one-time data backfill is run manually outside
+-- this migration.
 
--- =====================================================================
--- 1) Backfill
--- =====================================================================
+-- Drop first because we're keeping the existing return-table column types
+-- (NUMERIC for lat/lon, VARCHAR for slug) as deployed by 20251102213609_*,
+-- and CREATE OR REPLACE FUNCTION refuses any change to those types — so
+-- a clean drop sidesteps both the "change of return type" failure and the
+-- search_path ambiguity Copilot flagged.
+DROP FUNCTION IF EXISTS public.search_crags_enhanced(text);
 
-UPDATE public.crags AS c
-SET rock_type = p.rock_type
-FROM public.crags AS p
-WHERE c.parent_crag_id = p.id
-  AND c.rock_type IS NULL
-  AND p.rock_type IS NOT NULL;
-
-UPDATE public.crags AS c
-SET climbing_types = p.climbing_types
-FROM public.crags AS p
-WHERE c.parent_crag_id = p.id
-  AND (c.climbing_types IS NULL OR cardinality(c.climbing_types) = 0)
-  AND p.climbing_types IS NOT NULL
-  AND cardinality(p.climbing_types) > 0;
-
--- =====================================================================
--- 2) Update search_crags_enhanced to coalesce from parent at query time
--- =====================================================================
-
-CREATE OR REPLACE FUNCTION search_crags_enhanced(search_query TEXT)
+CREATE OR REPLACE FUNCTION public.search_crags_enhanced(search_query TEXT)
 RETURNS TABLE (
   id TEXT,
   name TEXT,
-  lat DOUBLE PRECISION,
-  lon DOUBLE PRECISION,
+  lat NUMERIC,
+  lon NUMERIC,
   country TEXT,
   state TEXT,
   municipality TEXT,
@@ -49,7 +30,7 @@ RETURNS TABLE (
   climbing_types TEXT[],
   description TEXT,
   source TEXT,
-  slug TEXT,
+  slug VARCHAR,
   report_count BIGINT,
   match_score REAL,
   match_type TEXT
@@ -107,7 +88,10 @@ BEGIN
       ELSE 'location'
     END::TEXT AS match_type
   FROM crags c
-  LEFT JOIN crags parent ON parent.id = c.parent_crag_id
+  -- Only inherit from a non-secret parent: secret crags' attributes must
+  -- not leak into public sector results.
+  LEFT JOIN crags parent
+    ON parent.id = c.parent_crag_id AND parent.is_secret = false
   LEFT JOIN reports r ON r.crag_id = c.id
   WHERE
     immutable_unaccent(LOWER(c.name)) LIKE '%' || normalized_query || '%'
