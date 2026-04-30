@@ -186,7 +186,15 @@ export interface Report {
   route_id: string | null;
   author_id: string | null;
   author?: { id: string; display_name: string | null } | null;
-  category: "conditions" | "safety" | "access" | "beta" | "facilities" | "climbing_info" | "lost_found" | "other";
+  category:
+    | "conditions"
+    | "safety"
+    | "access"
+    | "beta"
+    | "facilities"
+    | "climbing_info"
+    | "lost_found"
+    | "other";
   text: string | null;
   rating_dry: number | null;
   rating_wind: number | null;
@@ -205,6 +213,39 @@ export interface ReportsResponse {
   total: number | null;
   limit: number;
   offset: number;
+}
+
+// --- /api/reports/feed response ---
+// Shape differs from /api/reports because of the embedded crag/parent_crag join
+// used by the live feed screen.
+
+export interface FeedReportCrag {
+  id: string;
+  name: string;
+  slug: string | null;
+  country: string | null;
+  state: string | null;
+  municipality: string | null;
+  village: string | null;
+  parent_crag?: { name: string; slug: string } | null;
+}
+
+export interface FeedReport {
+  id: string;
+  crag_id?: string;
+  category: string;
+  text: string | null;
+  photos?: string[];
+  created_at: string;
+  author?: { display_name: string | null } | null;
+  confirmations?: { count: number }[];
+  crag?: FeedReportCrag | null;
+}
+
+export interface FeedPage {
+  reports: FeedReport[];
+  nextCursor: string | null;
+  totalCount?: number;
 }
 
 // --- /api/confirmations ---
