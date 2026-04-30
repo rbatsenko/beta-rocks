@@ -38,19 +38,18 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
     // the parent area (e.g. Cuvier sectors → Fontainebleau). The backfill
     // should have copied these forward already, but newly-imported sectors
     // may still arrive with nulls before the next backfill cycle.
+    const parentId: string | null = crag.parent_crag_id ?? null;
+    const sectorClimbingTypes = Array.isArray(crag.climbing_types) ? crag.climbing_types : [];
     const needsParentFallback =
-      !!crag.parent_crag_id &&
-      (!crag.rock_type ||
-        !crag.climbing_types ||
-        (Array.isArray(crag.climbing_types) && crag.climbing_types.length === 0));
+      parentId !== null && (!crag.rock_type || sectorClimbingTypes.length === 0);
 
     let parentRockType: string | null = null;
     let parentClimbingTypes: string[] | null = null;
-    if (needsParentFallback) {
+    if (parentId !== null && needsParentFallback) {
       const { data: parent } = await supabase
         .from("crags")
         .select("rock_type, climbing_types")
-        .eq("id", crag.parent_crag_id)
+        .eq("id", parentId)
         .single();
       parentRockType = parent?.rock_type ?? null;
       parentClimbingTypes = parent?.climbing_types ?? null;
@@ -58,9 +57,7 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
 
     const rockType = crag.rock_type || parentRockType;
     const climbingTypes =
-      crag.climbing_types && crag.climbing_types.length > 0
-        ? crag.climbing_types
-        : (parentClimbingTypes ?? []);
+      sectorClimbingTypes.length > 0 ? sectorClimbingTypes : (parentClimbingTypes ?? []);
 
     // Fetch child crags (sectors)
     const { data: sectors } = await supabase
