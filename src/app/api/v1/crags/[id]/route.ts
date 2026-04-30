@@ -34,6 +34,31 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
       return NextResponse.json({ error: "Crag not found" }, { status: 404 });
     }
 
+    // If the sector's own rock_type / climbing_types are missing, fall back to
+    // the parent area (e.g. Cuvier sectors → Fontainebleau). Skip secret
+    // parents: their attributes must not leak through a public sector.
+    const parentId: string | null = crag.parent_crag_id ?? null;
+    const sectorClimbingTypes = Array.isArray(crag.climbing_types) ? crag.climbing_types : [];
+    const needsParentFallback =
+      parentId !== null && (!crag.rock_type || sectorClimbingTypes.length === 0);
+
+    let parentRockType: string | null = null;
+    let parentClimbingTypes: string[] | null = null;
+    if (needsParentFallback) {
+      const { data: parent } = await supabase
+        .from("crags")
+        .select("rock_type, climbing_types")
+        .eq("id", parentId as string)
+        .eq("is_secret", false)
+        .maybeSingle();
+      parentRockType = parent?.rock_type ?? null;
+      parentClimbingTypes = parent?.climbing_types ?? null;
+    }
+
+    const rockType = crag.rock_type || parentRockType;
+    const climbingTypes =
+      sectorClimbingTypes.length > 0 ? sectorClimbingTypes : (parentClimbingTypes ?? []);
+
     // Fetch child crags (sectors)
     const { data: sectors } = await supabase
       .from("crags")
@@ -42,30 +67,33 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
       .eq("is_secret", false)
       .order("name");
 
-    return NextResponse.json({
-      data: {
-        id: crag.id,
-        name: crag.name,
-        slug: crag.slug,
-        country: crag.country || null,
-        state: crag.state || null,
-        municipality: crag.municipality || null,
-        village: crag.village || null,
-        lat: crag.lat,
-        lon: crag.lon,
-        rock_type: crag.rock_type || null,
-        climbing_types: crag.climbing_types || [],
-        aspects: crag.aspects || [],
-        description: crag.description || null,
-        sectors: (sectors || []).map((s) => ({
-          id: s.id,
-          name: s.name,
-          slug: s.slug,
-        })),
+    return NextResponse.json(
+      {
+        data: {
+          id: crag.id,
+          name: crag.name,
+          slug: crag.slug,
+          country: crag.country || null,
+          state: crag.state || null,
+          municipality: crag.municipality || null,
+          village: crag.village || null,
+          lat: crag.lat,
+          lon: crag.lon,
+          rock_type: rockType || null,
+          climbing_types: climbingTypes,
+          aspects: crag.aspects || [],
+          description: crag.description || null,
+          sectors: (sectors || []).map((s) => ({
+            id: s.id,
+            name: s.name,
+            slug: s.slug,
+          })),
+        },
       },
-    }, {
-      headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600" },
-    });
+      {
+        headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600" },
+      }
+    );
   } catch (error) {
     console.error("[v1/crags/:id] Unexpected error:", error);
     return NextResponse.json({ error: "Failed to fetch crag" }, { status: 500 });
