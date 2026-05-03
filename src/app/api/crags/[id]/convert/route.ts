@@ -1,27 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { getSupabaseClient, isSupabaseConfigured } from "@/integrations/supabase/client";
-
-const ALLOWED_ROCK_TYPES = [
-  "granite",
-  "sandstone",
-  "limestone",
-  "gneiss",
-  "quartzite",
-  "gritstone",
-  "basalt",
-  "volcanic",
-  "conglomerate",
-  "schist",
-  "slate",
-  "other",
-] as const;
+import { ROCK_TYPES } from "@/lib/crags/rock-types";
 
 const ConvertSchema = z.object({
   action: z.enum(["make-sector", "make-crag", "change-parent", "rename"]),
   parentCragId: z.string().optional().nullable(),
   name: z.string().min(1).max(200).optional(),
-  rockType: z.enum(ALLOWED_ROCK_TYPES).nullable().optional(),
+  rockType: z.enum(ROCK_TYPES).nullable().optional(),
 });
 
 /**

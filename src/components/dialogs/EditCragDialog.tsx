@@ -26,6 +26,7 @@ import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useToast } from "@/hooks/use-toast";
 import { getUserProfile, type UserProfile } from "@/lib/auth/sync-key";
 import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal";
+import { ROCK_TYPES } from "@/lib/crags/rock-types";
 
 interface EditCragDialogProps {
   open: boolean;
@@ -40,21 +41,6 @@ interface EditCragDialogProps {
   };
   currentlyIsSector: boolean;
 }
-
-const ROCK_TYPES = [
-  "granite",
-  "sandstone",
-  "limestone",
-  "gneiss",
-  "quartzite",
-  "gritstone",
-  "basalt",
-  "volcanic",
-  "conglomerate",
-  "schist",
-  "slate",
-  "other",
-];
 
 const NO_ROCK_TYPE = "__none__";
 
@@ -282,7 +268,6 @@ export function EditCragDialog({
                 value={newRockType === "" ? NO_ROCK_TYPE : newRockType}
                 onValueChange={(value) => {
                   setNewRockType(value === NO_ROCK_TYPE ? "" : value);
-                  setAction("rename");
                 }}
               >
                 <SelectTrigger id="crag-rock-type" className="max-w-md">

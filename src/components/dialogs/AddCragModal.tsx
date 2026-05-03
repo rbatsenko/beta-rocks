@@ -30,27 +30,13 @@ import { CragLocationPicker } from "@/components/map/CragLocationPicker";
 import { getAllCountryCodes, getCountryName, getCountryFlag } from "@/lib/utils/countries-client";
 import { getUserProfile, type UserProfile } from "@/lib/auth/sync-key";
 import { ProfileCreationModal } from "@/components/profile/ProfileCreationModal";
+import { ROCK_TYPES } from "@/lib/crags/rock-types";
 
 interface AddCragModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   initialName?: string;
 }
-
-const ROCK_TYPES = [
-  "granite",
-  "sandstone",
-  "limestone",
-  "gneiss",
-  "quartzite",
-  "gritstone",
-  "basalt",
-  "volcanic",
-  "conglomerate",
-  "schist",
-  "slate",
-  "other",
-];
 
 const CLIMBING_TYPES = ["sport", "trad", "boulder", "mixed", "aid", "ice"];
 
