@@ -2,10 +2,26 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { getSupabaseClient, isSupabaseConfigured } from "@/integrations/supabase/client";
 
+const ALLOWED_ROCK_TYPES = [
+  "granite",
+  "sandstone",
+  "limestone",
+  "gneiss",
+  "quartzite",
+  "gritstone",
+  "basalt",
+  "volcanic",
+  "conglomerate",
+  "schist",
+  "slate",
+  "other",
+] as const;
+
 const ConvertSchema = z.object({
   action: z.enum(["make-sector", "make-crag", "change-parent", "rename"]),
   parentCragId: z.string().optional().nullable(),
   name: z.string().min(1).max(200).optional(),
+  rockType: z.enum(ALLOWED_ROCK_TYPES).nullable().optional(),
 });
 
 /**
@@ -32,7 +48,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       );
     }
 
-    const { action, parentCragId, name } = validationResult.data;
+    const { action, parentCragId, name, rockType } = validationResult.data;
     const { id: cragId } = await params;
     const supabase = getSupabaseClient();
 
@@ -52,13 +68,18 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       updatePayload.name = name;
     }
 
+    // Rock type change (can accompany any action; null clears it)
+    if (rockType !== undefined) {
+      updatePayload.rock_type = rockType;
+    }
+
     // Structural changes
     if (action === "make-crag") {
       updatePayload.parent_crag_id = null;
     } else if (action === "make-sector" || action === "change-parent") {
       updatePayload.parent_crag_id = parentCragId;
     }
-    // action === "rename" only changes name, already handled above
+    // action === "rename" only changes name/rock_type, already handled above
 
     if (Object.keys(updatePayload).length === 0) {
       return NextResponse.json({ error: "No changes to apply" }, { status: 400 });

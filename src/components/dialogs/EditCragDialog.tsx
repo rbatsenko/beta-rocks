@@ -15,6 +15,13 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Command, CommandGroup, CommandItem, CommandList } from "@/components/ui/command";
 import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useToast } from "@/hooks/use-toast";
 import { getUserProfile, type UserProfile } from "@/lib/auth/sync-key";
@@ -27,11 +34,29 @@ interface EditCragDialogProps {
     id: string;
     name: string;
     slug: string | null;
+    rock_type?: string | null;
     parent_crag_id?: string | null;
     parent_crag_name?: string | null;
   };
   currentlyIsSector: boolean;
 }
+
+const ROCK_TYPES = [
+  "granite",
+  "sandstone",
+  "limestone",
+  "gneiss",
+  "quartzite",
+  "gritstone",
+  "basalt",
+  "volcanic",
+  "conglomerate",
+  "schist",
+  "slate",
+  "other",
+];
+
+const NO_ROCK_TYPE = "__none__";
 
 interface SearchResult {
   id: string;
@@ -59,6 +84,7 @@ export function EditCragDialog({
   const [action, setAction] = useState<"make-sector" | "make-crag" | "change-parent" | "rename">("rename");
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [newName, setNewName] = useState(crag.name);
+  const [newRockType, setNewRockType] = useState(crag.rock_type ?? "");
 
   // Reset on dialog open/close
   useEffect(() => {
@@ -68,8 +94,9 @@ export function EditCragDialog({
       setSelectedParentCrag(null);
       setAction("rename");
       setNewName(crag.name);
+      setNewRockType(crag.rock_type ?? "");
     }
-  }, [open, currentlyIsSector, crag.name]);
+  }, [open, currentlyIsSector, crag.name, crag.rock_type]);
 
   // Debounced search for parent crags
   useEffect(() => {
@@ -122,8 +149,11 @@ export function EditCragDialog({
   };
 
   const handleSubmitWithProfile = async () => {
+    const nameChanged = newName.trim().length > 0 && newName.trim() !== crag.name;
+    const rockTypeChanged = (newRockType || null) !== (crag.rock_type ?? null);
+
     if (action === "rename") {
-      if (!newName.trim() || newName.trim() === crag.name) {
+      if (!nameChanged && !rockTypeChanged) {
         onOpenChange(false);
         return;
       }
@@ -139,7 +169,6 @@ export function EditCragDialog({
     setSubmitting(true);
 
     try {
-      const nameChanged = newName.trim() !== crag.name;
       const effectiveAction = action === "rename" ? "rename" : action;
 
       const response = await fetch(`/api/crags/${crag.id}/convert`, {
@@ -148,6 +177,7 @@ export function EditCragDialog({
         body: JSON.stringify({
           action: effectiveAction,
           ...(nameChanged && { name: newName.trim() }),
+          ...(rockTypeChanged && { rockType: newRockType || null }),
           ...(effectiveAction !== "make-crag" && effectiveAction !== "rename" && { parentCragId: selectedParentCrag?.id }),
         }),
       });
@@ -159,11 +189,16 @@ export function EditCragDialog({
       }
 
       // Success!
+      const successDescription =
+        action === "rename"
+          ? rockTypeChanged && !nameChanged
+            ? t("editCragDialog.rockTypeUpdated", { defaultValue: "Rock type updated successfully" })
+            : t("editCragDialog.renamed", { defaultValue: "Crag renamed successfully" })
+          : t(`editCragDialog.${action === "make-crag" ? "convertedToCrag" : "convertedToSector"}`);
+
       toast({
         title: t("editCragDialog.success"),
-        description: action === "rename"
-          ? t("editCragDialog.renamed", { defaultValue: "Crag renamed successfully" })
-          : t(`editCragDialog.${action === "make-crag" ? "convertedToCrag" : "convertedToSector"}`),
+        description: successDescription,
       });
 
       onOpenChange(false);
@@ -183,8 +218,9 @@ export function EditCragDialog({
   };
 
   const nameChanged = newName.trim().length > 0 && newName.trim() !== crag.name;
+  const rockTypeChanged = (newRockType || null) !== (crag.rock_type ?? null);
   const canSubmit =
-    action === "rename" ? nameChanged
+    action === "rename" ? nameChanged || rockTypeChanged
     : action === "make-crag" ? true
     : selectedParentCrag !== null;
 
@@ -235,6 +271,38 @@ export function EditCragDialog({
                 placeholder={crag.name}
                 className="max-w-md"
               />
+            </div>
+
+            {/* Rock Type */}
+            <div>
+              <Label htmlFor="crag-rock-type" className="text-base font-semibold mb-2 block">
+                {t("editCragDialog.rockType", { defaultValue: "Rock Type" })}
+              </Label>
+              <Select
+                value={newRockType === "" ? NO_ROCK_TYPE : newRockType}
+                onValueChange={(value) => {
+                  setNewRockType(value === NO_ROCK_TYPE ? "" : value);
+                  setAction("rename");
+                }}
+              >
+                <SelectTrigger id="crag-rock-type" className="max-w-md">
+                  <SelectValue
+                    placeholder={t("editCragDialog.rockTypePlaceholder", {
+                      defaultValue: "Select rock type",
+                    })}
+                  />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value={NO_ROCK_TYPE}>
+                    {t("editCragDialog.rockTypeNone", { defaultValue: "Unknown / not set" })}
+                  </SelectItem>
+                  {ROCK_TYPES.map((type) => (
+                    <SelectItem key={type} value={type}>
+                      {t(`addCragModal.rockTypes.${type}`)}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             {/* Action Selection (optional) */}
