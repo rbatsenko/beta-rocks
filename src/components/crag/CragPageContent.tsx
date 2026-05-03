@@ -1213,6 +1213,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
           id: crag.id,
           name: crag.name,
           slug: crag.slug,
+          rock_type: crag.rock_type,
           parent_crag_id: crag.parent_crag_id,
           parent_crag_name: crag.parent_crag?.name,
         }}
