@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { crag_id, category, message, rating_dry, rating_wind, rating_crowds, lost_found_type, sync_key, source } = body;
+    const { crag_id, category, message, rating_dry, rating_wind, rating_crowds, lost_found_type, sync_key, source, observed_at } = body;
 
     // Validate required fields
     if (!crag_id) {
@@ -101,6 +101,16 @@ export async function POST(request: NextRequest) {
 
     const userProfile = profiles[0];
 
+    // Validate observed_at if provided
+    if (observed_at !== undefined && observed_at !== null) {
+      if (typeof observed_at !== "string" || Number.isNaN(Date.parse(observed_at))) {
+        return NextResponse.json(
+          { error: "observed_at must be a valid ISO 8601 date string" },
+          { status: 400 }
+        );
+      }
+    }
+
     // Insert the report
     const { data: report, error: insertError } = await supabase
       .from("reports")
@@ -114,6 +124,7 @@ export async function POST(request: NextRequest) {
         rating_crowds: rating_crowds || null,
         lost_found_type: lost_found_type || null,
         source: source || null,
+        ...(observed_at && { observed_at }),
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       })
