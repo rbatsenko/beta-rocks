@@ -666,7 +666,7 @@ export default function CragDetailScreen() {
                       <Text style={[styles.metaText, { color: colors.muted }]}>{report.author.display_name}</Text>
                     )}
                   </View>
-                  <Text style={[styles.metaText, { color: colors.muted }]}>{fmtRelative(report.created_at)}</Text>
+                  <Text style={[styles.metaText, { color: colors.muted }]}>{fmtRelative(report.observed_at)}</Text>
                 </View>
                 {/* Condition ratings - only for conditions category */}
                 {report.category === "conditions" &&
