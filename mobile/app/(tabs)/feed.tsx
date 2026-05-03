@@ -142,7 +142,7 @@ export default function FeedScreen() {
             </Text>
           </View>
           <Text style={[styles.timeText, { color: colors.muted }]}>
-            {formatRelativeTime(item.created_at)}
+            {formatRelativeTime(item.observed_at)}
           </Text>
         </View>
 

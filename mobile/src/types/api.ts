@@ -202,6 +202,7 @@ export interface Report {
   photo_url: string | null;
   photos: string[];
   lost_found_type: "lost" | "found" | null;
+  observed_at: string;
   created_at: string;
   updated_at: string;
   confirmationCount?: number;
@@ -236,6 +237,7 @@ export interface FeedReport {
   category: string;
   text: string | null;
   photos?: string[];
+  observed_at: string;
   created_at: string;
   author?: { display_name: string | null } | null;
   confirmations?: { count: number }[];

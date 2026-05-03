@@ -102,6 +102,8 @@ export async function POST(request: NextRequest) {
       photo_url,
       category,
       lost_found_type,
+      observed_at,
+      expires_at,
     } = body;
 
     // Validate required fields
@@ -148,6 +150,8 @@ export async function POST(request: NextRequest) {
         rating_crowds,
         photo_url,
         lost_found_type,
+        ...(observed_at !== undefined && { observed_at }),
+        ...(expires_at !== undefined && { expires_at }),
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       })
