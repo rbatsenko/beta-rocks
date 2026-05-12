@@ -21,7 +21,28 @@
     },
     "searchHint": "Cerca qualsiasi area di arrampicata",
     "yourFavorites": "I Tuoi Preferiti",
-    "favoriteQuery": "Quali sono le condizioni a {{crag}}?"
+    "favoriteQuery": "Quali sono le condizioni a {{crag}}?",
+    "map": {
+      "showNearby": "Crags near me",
+      "locating": "Finding your location…",
+      "locationError": "Couldn't get your location — tap to retry",
+      "geolocationUnsupported": "Location isn't available in this browser",
+      "loadingCrags": "Loading nearby crags…",
+      "loadCragsError": "Couldn't load nearby crags",
+      "noCrags": "No crags within 50 km",
+      "cragsNearby": "{{count}} crag within 50 km",
+      "cragsNearby_other": "{{count}} crags within 50 km",
+      "recenter": "Recenter on my location",
+      "youAreHere": "You are here",
+      "distanceAway": "{{km}} km away",
+      "recentReports": "Recent reports",
+      "loadingReports": "Loading reports…",
+      "noReports": "No reports yet",
+      "searchingArea": "Searching this area…",
+      "unrated": "Unrated",
+      "hideLabel": "Hide {{label}}",
+      "showLabel": "Show {{label}}"
+    }
   },
   "search": {
     "title": "Cerca falesie",
@@ -967,7 +988,7 @@
   "summary": {
     "sandstoneWet": "L'arenaria è bagnata. Non arrampicare — l'arenaria bagnata è fragile.",
     "rainingNow": "Pioggia. {{mm}}mm di precipitazioni.",
-    "wetRockDryBy": "Pioggia recente. Asciutto stimato alle {{time}}.",
+    "wetRock": "Recent rain — rock may still be wet.",
     "rainExpected": "Pioggia prevista tra {{hours}}h.",
     "condensationRisk": "Rischio condensazione. {{humidity}}% umidità.",
     "highHumidity": "{{humidity}}% umidità.",

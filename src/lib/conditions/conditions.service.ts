@@ -351,11 +351,10 @@ function computeFlags(
     weather.humidity > rockConditions.humidityThreshold && dewPointSpread < 5;
   const wet_rock_likely = precipContext.last48h > 1 && dryingHoursRemaining > 0;
 
-  let estimated_dry_by: string | null = null;
-  if (wet_rock_likely || rain_now) {
-    const dryByDate = new Date(now.getTime() + dryingHoursRemaining * 3600000);
-    estimated_dry_by = dryByDate.toISOString();
-  }
+  // We can't reliably predict the hour a crag will be dry (drying depends on sun, wind,
+  // aspect, seepage, …), so we don't surface a fake "dry by HH:MM" — just the wet_rock_likely
+  // signal. The field is kept on the type for API back-compat but is always null.
+  const estimated_dry_by: string | null = null;
 
   const sandstone_wet_warning =
     rockType === "sandstone" && (rain_now || wet_rock_likely);
@@ -423,11 +422,8 @@ function generateSummary(
     return { key: "summary.rainingNow", params: { mm: weather.precip_mm }, fallback: `Rain. ${weather.precip_mm}mm precipitation.` };
   }
 
-  if (flags.wet_rock_likely && flags.estimated_dry_by) {
-    const dryBy = new Date(flags.estimated_dry_by);
-    const h = dryBy.getHours();
-    const m = String(dryBy.getMinutes()).padStart(2, "0");
-    return { key: "summary.wetRockDryBy", params: { time: `${h}:${m}` }, fallback: `Recent rain. Estimated dry by ${h}:${m}.` };
+  if (flags.wet_rock_likely) {
+    return { key: "summary.wetRock", fallback: "Recent rain — rock may still be wet." };
   }
 
   if (flags.rain_expected) {
@@ -469,11 +465,8 @@ function buildWarnings(flags: WeatherFlags): string[] {
   if (flags.rain_now) {
     warnings.push("Currently raining");
   }
-  if (flags.wet_rock_likely && flags.estimated_dry_by) {
-    const dryBy = new Date(flags.estimated_dry_by);
-    const hours = dryBy.getHours();
-    const minutes = String(dryBy.getMinutes()).padStart(2, "0");
-    warnings.push(`Rock may still be wet — estimated dry by ${hours}:${minutes}`);
+  if (flags.wet_rock_likely) {
+    warnings.push("Rock may still be wet from recent rain");
   }
   if (flags.rain_expected) {
     warnings.push(

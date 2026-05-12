@@ -21,7 +21,28 @@
       }
     },
     "yourFavorites": "Τα Αγαπημένα σας",
-    "favoriteQuery": "Ποιες είναι οι συνθήκες στο {{crag}};"
+    "favoriteQuery": "Ποιες είναι οι συνθήκες στο {{crag}};",
+    "map": {
+      "showNearby": "Crags near me",
+      "locating": "Finding your location…",
+      "locationError": "Couldn't get your location — tap to retry",
+      "geolocationUnsupported": "Location isn't available in this browser",
+      "loadingCrags": "Loading nearby crags…",
+      "loadCragsError": "Couldn't load nearby crags",
+      "noCrags": "No crags within 50 km",
+      "cragsNearby": "{{count}} crag within 50 km",
+      "cragsNearby_other": "{{count}} crags within 50 km",
+      "recenter": "Recenter on my location",
+      "youAreHere": "You are here",
+      "distanceAway": "{{km}} km away",
+      "recentReports": "Recent reports",
+      "loadingReports": "Loading reports…",
+      "noReports": "No reports yet",
+      "searchingArea": "Searching this area…",
+      "unrated": "Unrated",
+      "hideLabel": "Hide {{label}}",
+      "showLabel": "Show {{label}}"
+    }
   },
   "search": {
     "title": "Αναζήτηση βράχων",
