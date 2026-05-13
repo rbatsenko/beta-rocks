@@ -48,7 +48,7 @@ export function HomePageClient() {
 
   return (
     <>
-      <div className="relative h-[calc(100dvh-4rem)] overflow-hidden">
+      <div className="relative sm:h-[calc(100dvh-4rem)] sm:overflow-hidden">
         {/* Map is hidden on mobile — there's a dedicated /map screen instead. */}
         <div className="absolute inset-0 z-0 hidden sm:block">
           <HomeMap
@@ -58,7 +58,7 @@ export function HomePageClient() {
             className="absolute inset-0"
           />
         </div>
-        <div className="pointer-events-none absolute inset-0 z-10 flex flex-col">
+        <div className="z-10 flex flex-col pointer-events-none sm:absolute sm:inset-0">
           <WelcomeScreen
             onSearchClick={handleSearchClick}
             onAboutClick={() => setFeaturesDialogOpen(true)}
