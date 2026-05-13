@@ -109,8 +109,12 @@ export function RootLayoutClient({ children }: { children: React.ReactNode }) {
     setAddCragModalOpen(true);
   };
 
-  // Show header on home, location pages, and feed page
-  const showHeader = pathname === "/" || pathname?.startsWith("/location") || pathname === "/feed";
+  // Show header on home, location pages, feed page, and map page
+  const showHeader =
+    pathname === "/" ||
+    pathname?.startsWith("/location") ||
+    pathname === "/feed" ||
+    pathname === "/map";
 
   // Show FAB on most pages except sync and docs pages
   const showFAB = pathname !== "/sync" && !pathname?.startsWith("/docs");
