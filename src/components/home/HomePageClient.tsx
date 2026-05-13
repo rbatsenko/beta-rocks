@@ -1,44 +1,20 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { WelcomeScreen } from "@/components/home/WelcomeScreen";
 import { HomeMap } from "@/components/home/HomeMap";
-import { MAP_LABEL_KEYS, type GeoStatus, type NearbyState } from "@/components/home/home-map-types";
+import { MAP_LABEL_KEYS, type NearbyState } from "@/components/home/home-map-types";
 import { FeaturesDialog } from "@/components/dialogs/FeaturesDialog";
 import { PrivacyDialog } from "@/components/dialogs/PrivacyDialog";
-
-interface UserLocation {
-  lat: number;
-  lon: number;
-}
-
-interface LocationState {
-  position: UserLocation | null;
-  status: GeoStatus;
-}
-
-const LOCATION_STORAGE_KEY = "betarocks:home-map-location";
-
-function readStoredLocation(): UserLocation | null {
-  if (typeof window === "undefined") return null;
-  try {
-    const raw = window.localStorage.getItem(LOCATION_STORAGE_KEY);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw);
-    if (typeof parsed?.lat === "number" && typeof parsed?.lon === "number") {
-      return { lat: parsed.lat, lon: parsed.lon };
-    }
-  } catch {
-    // ignore malformed cache
-  }
-  return null;
-}
+import { useHomeLocation } from "@/hooks/useHomeLocation";
 
 export function HomePageClient() {
+  const router = useRouter();
   const [featuresDialogOpen, setFeaturesDialogOpen] = useState(false);
   const [privacyDialogOpen, setPrivacyDialogOpen] = useState(false);
 
-  const [location, setLocation] = useState<LocationState>({ position: null, status: "idle" });
+  const { location, requestLocation } = useHomeLocation();
   const [nearbyState, setNearbyState] = useState<NearbyState>({
     isLoading: false,
     isError: false,
@@ -59,38 +35,6 @@ export function HomePageClient() {
     });
   }, []);
 
-  // After hydration, restore a previously granted location (or flag unsupported browsers).
-  useEffect(() => {
-    const stored = readStoredLocation();
-    const geoUnavailable = typeof navigator === "undefined" || !("geolocation" in navigator);
-    if (!stored && !geoUnavailable) return; // nothing to sync — stays "idle"
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time hydration from client-only storage / APIs
-    setLocation(
-      stored ? { position: stored, status: "ready" } : { position: null, status: "unsupported" }
-    );
-  }, []);
-
-  const requestLocation = useCallback(() => {
-    if (typeof navigator === "undefined" || !("geolocation" in navigator)) {
-      setLocation({ position: null, status: "unsupported" });
-      return;
-    }
-    setLocation((prev) => ({ ...prev, status: "locating" }));
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const next: UserLocation = { lat: pos.coords.latitude, lon: pos.coords.longitude };
-        setLocation({ position: next, status: "ready" });
-        try {
-          window.localStorage.setItem(LOCATION_STORAGE_KEY, JSON.stringify(next));
-        } catch {
-          // ignore storage failures (private mode, quota, etc.)
-        }
-      },
-      () => setLocation((prev) => ({ ...prev, status: "error" })),
-      { enableHighAccuracy: false, timeout: 10_000, maximumAge: 5 * 60_000 }
-    );
-  }, []);
-
   // Trigger ⌘K search dialog from the global RootLayoutClient
   const handleSearchClick = () => {
     window.dispatchEvent(
@@ -98,21 +42,29 @@ export function HomePageClient() {
     );
   };
 
+  const handleOpenMap = useCallback(() => {
+    router.push("/map");
+  }, [router]);
+
   return (
     <>
       <div className="relative h-[calc(100dvh-4rem)] overflow-hidden">
-        <HomeMap
-          position={location.position}
-          visibleLabels={visibleLabels}
-          onNearbyStateChange={setNearbyState}
-          className="absolute inset-0 z-0"
-        />
+        {/* Map is hidden on mobile — there's a dedicated /map screen instead. */}
+        <div className="absolute inset-0 z-0 hidden sm:block">
+          <HomeMap
+            position={location.position}
+            visibleLabels={visibleLabels}
+            onNearbyStateChange={setNearbyState}
+            className="absolute inset-0"
+          />
+        </div>
         <div className="pointer-events-none absolute inset-0 z-10 flex flex-col">
           <WelcomeScreen
             onSearchClick={handleSearchClick}
             onAboutClick={() => setFeaturesDialogOpen(true)}
             onPrivacyClick={() => setPrivacyDialogOpen(true)}
             onLocateClick={requestLocation}
+            onOpenMap={handleOpenMap}
             geoStatus={location.status}
             nearbyState={nearbyState}
             hiddenLabels={hiddenLabels}

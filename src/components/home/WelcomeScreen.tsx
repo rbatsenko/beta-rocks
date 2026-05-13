@@ -2,16 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import {
-  CloudSun,
-  Search,
-  Star,
-  Activity,
-  MapPin,
-  Loader2,
-  Crosshair,
-  AlertCircle,
-} from "lucide-react";
+import { CloudSun, Search, Star, Activity, Map as MapIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useClientTranslation } from "@/hooks/useClientTranslation";
 import { useFavorites } from "@/hooks/queries/useFavoritesQueries";
@@ -19,134 +10,19 @@ import { generateUniqueSlug } from "@/lib/utils/slug";
 import { useModifierKey } from "@/hooks/usePlatform";
 import { LiveIndicator } from "@/components/ui/live-indicator";
 import { cn } from "@/lib/utils";
-import { MAP_LABEL_KEYS, type GeoStatus, type MapLabelKey, type NearbyState } from "@/components/home/home-map-types";
+import type { GeoStatus, NearbyState } from "@/components/home/home-map-types";
+import { NearbyCragsControl } from "@/components/home/NearbyCragsControl";
 
 interface WelcomeScreenProps {
   onSearchClick: () => void;
   onAboutClick: () => void;
   onPrivacyClick: () => void;
   onLocateClick: () => void;
+  onOpenMap: () => void;
   geoStatus: GeoStatus;
   nearbyState: NearbyState;
   hiddenLabels: ReadonlySet<string>;
   onToggleLabel: (key: string) => void;
-}
-
-const LEGEND_DOT: Record<MapLabelKey, string> = {
-  good: "bg-green-500",
-  fair: "bg-amber-500",
-  poor: "bg-red-500",
-  unrated: "bg-slate-400",
-};
-
-function NearbyCragsControl({
-  geoStatus,
-  nearbyState,
-  onLocateClick,
-  hiddenLabels,
-  onToggleLabel,
-}: {
-  geoStatus: GeoStatus;
-  nearbyState: NearbyState;
-  onLocateClick: () => void;
-  hiddenLabels: ReadonlySet<string>;
-  onToggleLabel: (key: string) => void;
-}) {
-  const { t } = useClientTranslation("common");
-  const pillBase =
-    "inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm border transition-colors";
-
-  const labelText = (key: MapLabelKey) =>
-    key === "unrated" ? t("welcome.map.unrated", "Unrated") : t(`labels.${key}`);
-
-  if (geoStatus === "locating") {
-    return (
-      <div className={`${pillBase} bg-muted/60 text-muted-foreground border-border`}>
-        <Loader2 className="h-4 w-4 animate-spin" />
-        <span>{t("welcome.map.locating")}</span>
-      </div>
-    );
-  }
-
-  if (geoStatus === "ready") {
-    const statusText = nearbyState.isLoading
-      ? t("welcome.map.loadingCrags")
-      : nearbyState.isError
-        ? t("welcome.map.loadCragsError")
-        : nearbyState.count === 0
-          ? t("welcome.map.noCrags")
-          : t("welcome.map.cragsNearby", { count: nearbyState.count ?? 0 });
-
-    return (
-      <div className="flex flex-col items-center gap-2">
-        <div
-          className={`${pillBase} bg-orange-50/70 dark:bg-orange-950/30 border-orange-200/60 dark:border-orange-800/40`}
-        >
-          {nearbyState.isLoading ? (
-            <Loader2 className="h-4 w-4 animate-spin text-orange-500" />
-          ) : (
-            <MapPin className="h-4 w-4 text-orange-500 shrink-0" />
-          )}
-          <span className="text-muted-foreground">{statusText}</span>
-          <button
-            onClick={onLocateClick}
-            title={t("welcome.map.recenter")}
-            className="ml-0.5 rounded-md p-1 text-muted-foreground hover:bg-orange-100/70 dark:hover:bg-orange-900/40 transition-colors"
-          >
-            <Crosshair className="h-3.5 w-3.5" />
-          </button>
-        </div>
-        <div className="flex flex-wrap items-center justify-center gap-1.5">
-          {MAP_LABEL_KEYS.map((key) => {
-            const active = !hiddenLabels.has(key);
-            return (
-              <button
-                key={key}
-                onClick={() => onToggleLabel(key)}
-                aria-pressed={active}
-                title={active ? t("welcome.map.hideLabel", "Hide {{label}}", { label: labelText(key) }) : t("welcome.map.showLabel", "Show {{label}}", { label: labelText(key) })}
-                className={cn(
-                  "inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[11px] transition-colors cursor-pointer",
-                  active
-                    ? "border-border bg-muted/50 text-foreground hover:bg-muted"
-                    : "border-transparent text-muted-foreground/60 line-through hover:text-muted-foreground"
-                )}
-              >
-                <span
-                  className={cn("h-2 w-2 rounded-full", LEGEND_DOT[key], !active && "opacity-40")}
-                  aria-hidden
-                />
-                {labelText(key)}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-    );
-  }
-
-  // idle | error | unsupported
-  const isUnsupported = geoStatus === "unsupported";
-  return (
-    <button
-      onClick={onLocateClick}
-      disabled={isUnsupported}
-      className={`${pillBase} bg-orange-50/70 dark:bg-orange-950/30 border-orange-200/60 dark:border-orange-800/40 hover:bg-orange-100/70 dark:hover:bg-orange-900/40 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60`}
-    >
-      {geoStatus === "error" ? (
-        <AlertCircle className="h-4 w-4 text-amber-500 shrink-0" />
-      ) : (
-        <MapPin className="h-4 w-4 text-orange-500 shrink-0" />
-      )}
-      <span>
-        {isUnsupported
-          ? t("welcome.map.geolocationUnsupported")
-          : geoStatus === "error"
-            ? t("welcome.map.locationError")
-            : t("welcome.map.showNearby")}
-      </span>
-    </button>
-  );
 }
 
 export function WelcomeScreen({
@@ -154,6 +30,7 @@ export function WelcomeScreen({
   onAboutClick,
   onPrivacyClick,
   onLocateClick,
+  onOpenMap,
   geoStatus,
   nearbyState,
   hiddenLabels,
@@ -200,8 +77,8 @@ export function WelcomeScreen({
             </kbd>
           </button>
 
-          {/* Crags near me */}
-          <div className="flex justify-center mb-3">
+          {/* Crags near me — desktop only (map filters/count tied to the visible map) */}
+          <div className="hidden sm:flex justify-center mb-3">
             <NearbyCragsControl
               geoStatus={geoStatus}
               nearbyState={nearbyState}
@@ -209,6 +86,17 @@ export function WelcomeScreen({
               hiddenLabels={hiddenLabels}
               onToggleLabel={onToggleLabel}
             />
+          </div>
+
+          {/* View map — mobile only (the map lives on its own screen on small viewports) */}
+          <div className="flex sm:hidden justify-center mb-3">
+            <button
+              onClick={onOpenMap}
+              className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm border bg-orange-50/70 dark:bg-orange-950/30 border-orange-200/60 dark:border-orange-800/40 hover:bg-orange-100/70 dark:hover:bg-orange-900/40 cursor-pointer transition-colors"
+            >
+              <MapIcon className="h-4 w-4 text-orange-500 shrink-0" />
+              <span>{t("welcome.map.openMap", "Browse crags on map")}</span>
+            </button>
           </div>
 
           {/* View Activity Feed button */}

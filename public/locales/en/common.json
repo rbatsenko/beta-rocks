@@ -41,7 +41,8 @@
       "searchingArea": "Searching this area…",
       "unrated": "Unrated",
       "hideLabel": "Hide {{label}}",
-      "showLabel": "Show {{label}}"
+      "showLabel": "Show {{label}}",
+      "openMap": "Browse crags on map"
     }
   },
   "search": {
