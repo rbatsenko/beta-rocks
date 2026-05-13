@@ -45,12 +45,15 @@ export function WelcomeScreen({
   const slideLeft = geoStatus === "ready";
 
   return (
-    <div className="flex flex-col h-full">
-      {/* Hero — floats over the map; map stays interactive around it */}
-      <div className="flex-1 flex flex-col items-center px-3 sm:px-4 pt-4 sm:pt-8 overflow-hidden">
+    <div className="flex flex-col sm:h-full">
+      {/* Hero — on mobile flows with the page; on desktop floats over the map. */}
+      <div className="flex flex-col items-center px-3 sm:px-4 pt-4 sm:pt-8 sm:flex-1 sm:overflow-hidden">
         <div
           className={cn(
-            "pointer-events-auto w-full max-w-lg max-h-full overflow-y-auto rounded-3xl border bg-background/75 dark:bg-background/65 backdrop-blur-2xl shadow-2xl px-5 py-7 sm:px-8 sm:py-8 text-center transition-transform duration-500 ease-out",
+            "pointer-events-auto w-full max-w-lg px-5 py-7 sm:px-8 sm:py-8 text-center transition-transform duration-500 ease-out",
+            // On desktop the card floats over the map with a glassmorphic look; on mobile it flows
+            // as plain page content so the whole page scrolls naturally.
+            "sm:max-h-full sm:overflow-y-auto sm:rounded-3xl sm:border sm:bg-background/75 sm:shadow-2xl sm:backdrop-blur-2xl sm:dark:bg-background/65",
             // When active, slide left so the card's left edge lines up with the navbar's
             // container edge (the logo). Constants: 16rem = ½ card (max-w-lg), 1rem = container
             // px-4, 43.75rem = ½ of the 1400px container max-width.
