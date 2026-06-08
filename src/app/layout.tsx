@@ -3,6 +3,7 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { I18nProvider } from "@/components/providers/I18nProvider";
 import { QueryProvider } from "@/components/providers/QueryProvider";
 import { RootLayoutClient } from "@/components/layout/RootLayoutClient";
+import { ClientErrorReporter } from "@/components/observability/ClientErrorReporter";
 import { Toaster } from "@/components/ui/toaster";
 import "@/index.css";
 
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="alternate" type="text/plain" href="/llms-full.txt" title="LLM-friendly API reference" />
       </head>
       <body>
+        <ClientErrorReporter />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <QueryProvider>
             <I18nProvider>
