@@ -61,6 +61,14 @@ function RootNavigator() {
           }}
         />
         <Stack.Screen
+          name="map"
+          options={{
+            title: t("welcome.map.title", "Map"),
+            presentation: "card",
+            headerBackTitle: " ",
+          }}
+        />
+        <Stack.Screen
           name="report"
           options={{
             title: t("fab.addReport", "Add Report"),

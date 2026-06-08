@@ -98,6 +98,18 @@ export default function HomeScreen() {
         </Text>
       </TouchableOpacity>
 
+      {/* Browse crags on map */}
+      <TouchableOpacity
+        style={[styles.searchHint, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}
+        onPress={() => router.push("/map" as any)}
+        activeOpacity={0.7}
+      >
+        <Ionicons name="map-outline" size={16} color="#f97316" />
+        <Text style={[styles.searchHintText, { color: colors.text }]}>
+          {t("welcome.map.openMap", "Browse crags on map")}
+        </Text>
+      </TouchableOpacity>
+
       {/* Favorites quick access */}
       {favorites.length > 0 && (
         <View style={styles.favoritesSection}>

@@ -7,6 +7,18 @@
     "description": "Real-time conditions, community reports and route information for crags worldwide",
     "searchHint": "Search for any climbing area",
     "yourFavorites": "Your Favorites",
+    "map": {
+      "title": "Map",
+      "openMap": "Browse crags on map",
+      "loadingCrags": "Loading nearby crags…",
+      "loadCragsError": "Couldn't load nearby crags",
+      "cragsInView_one": "{{count}} crag in view",
+      "cragsInView_other": "{{count}} crags in view",
+      "unrated": "Unrated",
+      "distanceAway": "{{km}} km away",
+      "loadingConditions": "Loading conditions…",
+      "viewCrag": "View Crag"
+    },
     "favoriteQuery": "What are conditions at {{crag}}?",
     "exampleQueries": {
       "query1": {

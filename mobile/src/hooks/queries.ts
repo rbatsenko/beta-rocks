@@ -8,12 +8,14 @@ import {
   getReportsByCrag,
   searchLocations,
   getConditions,
+  getNearbyConditions,
 } from "@/api/client";
 import { API_URL } from "@/constants/config";
 import type {
   CragDetailResponse,
   SearchResult,
   ConditionsResponse,
+  NearbyConditionsResponse,
   RockType,
   Report,
   FeedPage,
@@ -27,6 +29,8 @@ export const queryKeys = {
   search: (query: string) => ["search", query] as const,
   conditions: (lat: number, lon: number, rockType: string) =>
     ["conditions", lat, lon, rockType] as const,
+  nearbyConditions: (lat: number, lon: number, radius: number) =>
+    ["nearby-conditions", lat, lon, radius] as const,
   feed: ["feed"] as const,
 };
 
@@ -74,6 +78,23 @@ export function useConditionsQuery(
     queryKey: queryKeys.conditions(lat!, lon!, rockType),
     queryFn: () => getConditions(lat!, lon!, rockType),
     enabled: lat != null && lon != null,
+  });
+}
+
+// --- Nearby crags for the map (browse screen) ---
+
+export function useNearbyConditions(
+  lat: number | undefined,
+  lon: number | undefined,
+  radius = 50000
+) {
+  return useQuery<NearbyConditionsResponse>({
+    queryKey: queryKeys.nearbyConditions(lat!, lon!, radius),
+    queryFn: () => getNearbyConditions(lat!, lon!, radius),
+    enabled: lat != null && lon != null,
+    staleTime: 30 * 60_000, // conditions change slowly; match web
+    gcTime: 60 * 60_000,
+    placeholderData: (prev) => prev, // keep markers visible while panning
   });
 }
 

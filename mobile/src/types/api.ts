@@ -106,6 +106,36 @@ export interface ConditionsResponse {
   updatedAt: string;
 }
 
+// --- /api/conditions/nearby response (map browsing) ---
+
+/** Marker color buckets on the map: a conditions label, or "unrated". */
+export type MapLabelKey = ConditionsLabel | "unrated";
+
+export interface MapCrag {
+  id: string;
+  name: string;
+  slug: string;
+  lat: number;
+  lon: number;
+  rock_type: string | null;
+  country: string | null;
+  /** Great-circle distance from the query center, in metres. */
+  distance_m: number;
+  /** null when conditions weren't computed for this crag (grey marker). */
+  label: ConditionsLabel | null;
+}
+
+export interface NearbyConditionsResponse {
+  data: MapCrag[];
+  query: {
+    lat: number;
+    lon: number;
+    radius_m: number;
+    count: number;
+    with_conditions: number;
+  };
+}
+
 // --- /api/search response ---
 
 export interface SearchResult {

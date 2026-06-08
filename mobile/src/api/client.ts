@@ -6,6 +6,7 @@
 import { API_URL } from "../constants/config";
 import type {
   ConditionsResponse,
+  NearbyConditionsResponse,
   SearchResponse,
   SearchResult,
   CragDetailResponse,
@@ -84,6 +85,26 @@ export async function getConditions(
   });
 
   return apiFetch<ConditionsResponse>(`/api/conditions?${params}`);
+}
+
+/**
+ * Nearby crags with conditions labels — powers the map browse screen.
+ * Returns crags within `radius` metres of (lat, lon), closest first. Only the
+ * nearest ~30 get a conditions label computed; the rest have label: null.
+ * GET /api/conditions/nearby?lat=X&lon=Y&radius=50000
+ */
+export async function getNearbyConditions(
+  lat: number,
+  lon: number,
+  radius = 50000
+): Promise<NearbyConditionsResponse> {
+  const params = new URLSearchParams({
+    lat: lat.toString(),
+    lon: lon.toString(),
+    radius: radius.toString(),
+  });
+
+  return apiFetch<NearbyConditionsResponse>(`/api/conditions/nearby?${params}`);
 }
 
 /**
