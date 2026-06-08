@@ -25,7 +25,7 @@
     "map": {
       "showNearby": "Crags near me",
       "locating": "Finding your location…",
-      "locationError": "Couldn't get your location — tap to retry",
+      "locationError": "Couldn't get your location - tap to retry",
       "geolocationUnsupported": "Location isn't available in this browser",
       "loadingCrags": "Loading nearby crags…",
       "loadCragsError": "Couldn't load nearby crags",
