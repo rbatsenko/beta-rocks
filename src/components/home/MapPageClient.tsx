@@ -28,7 +28,7 @@ export function MapPageClient() {
   }, []);
 
   return (
-    <div className="relative h-[calc(100dvh-4rem)] overflow-hidden">
+    <div className="relative isolate h-[calc(100dvh-4rem)] overflow-hidden">
       <HomeMap
         position={location.position}
         visibleLabels={visibleLabels}
