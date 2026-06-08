@@ -18,6 +18,11 @@ function fillFor(label: ConditionsLabel | null): string {
   return label ? LABEL_FILL[label] : UNKNOWN_FILL;
 }
 
+/** A coordinate pair Leaflet can safely consume (no NaN/Infinity). */
+function isValidLatLng(pos: [number, number] | null): pos is [number, number] {
+  return pos != null && Number.isFinite(pos[0]) && Number.isFinite(pos[1]);
+}
+
 /** Filter key for a crag: its conditions label, or "unrated" when conditions weren't computed. */
 export function labelKey(crag: MapCrag): string {
   return crag.label ?? "unrated";
@@ -56,7 +61,7 @@ function ViewController({ userPosition, onMapMove }: ViewControllerProps) {
 
   const lastFlownRef = useRef<string | null>(null);
   useEffect(() => {
-    if (!userPosition) return;
+    if (!isValidLatLng(userPosition)) return;
     const key = `${userPosition[0].toFixed(4)},${userPosition[1].toFixed(4)}`;
     if (lastFlownRef.current === key) return;
     lastFlownRef.current = key;
@@ -113,13 +118,21 @@ export default function HomeCragsMapCanvas({
   const isDark = resolvedTheme === "dark";
 
   const shownCrags = useMemo(
-    () => crags.filter((crag) => visibleLabels.has(labelKey(crag))),
+    () =>
+      crags.filter(
+        (crag) =>
+          visibleLabels.has(labelKey(crag)) &&
+          Number.isFinite(crag.lat) &&
+          Number.isFinite(crag.lon)
+      ),
     [crags, visibleLabels]
   );
 
+  const validUserPosition = isValidLatLng(userPosition) ? userPosition : null;
+
   // `center`/`zoom` on MapContainer are only the *initial* view; ViewController handles updates.
-  const initialCenter: [number, number] = userPosition ?? [46, 8];
-  const initialZoom = userPosition ? INITIAL_ZOOM : 4;
+  const initialCenter: [number, number] = validUserPosition ?? [46, 8];
+  const initialZoom = validUserPosition ? INITIAL_ZOOM : 4;
 
   return (
     <MapContainer
@@ -140,11 +153,11 @@ export default function HomeCragsMapCanvas({
         url={isDark ? DARK_TILES : LIGHT_TILES}
       />
 
-      <ViewController userPosition={userPosition} onMapMove={onMapMove} />
+      <ViewController userPosition={validUserPosition} onMapMove={onMapMove} />
 
-      {userPosition && (
+      {validUserPosition && (
         <CircleMarker
-          center={userPosition}
+          center={validUserPosition}
           radius={6}
           pathOptions={{ color: "#ffffff", weight: 2, fillColor: "#3b82f6", fillOpacity: 1 }}
         >

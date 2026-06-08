@@ -21,7 +21,9 @@ function readStoredLocation(): UserLocation | null {
     const raw = window.localStorage.getItem(LOCATION_STORAGE_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw);
-    if (typeof parsed?.lat === "number" && typeof parsed?.lon === "number") {
+    // Number.isFinite (not typeof) — NaN/Infinity are typeof "number" but would
+    // produce an invalid LatLng and crash Leaflet's flyTo.
+    if (Number.isFinite(parsed?.lat) && Number.isFinite(parsed?.lon)) {
       return { lat: parsed.lat, lon: parsed.lon };
     }
   } catch {
@@ -52,7 +54,14 @@ export function useHomeLocation() {
     setLocation((prev) => ({ ...prev, status: "locating" }));
     navigator.geolocation.getCurrentPosition(
       (pos) => {
-        const next: UserLocation = { lat: pos.coords.latitude, lon: pos.coords.longitude };
+        const { latitude, longitude } = pos.coords;
+        // Some devices/browsers can hand back NaN coords — reject them so we
+        // never feed an invalid LatLng to the map.
+        if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+          setLocation((prev) => ({ ...prev, status: "error" }));
+          return;
+        }
+        const next: UserLocation = { lat: latitude, lon: longitude };
         setLocation({ position: next, status: "ready" });
         try {
           window.localStorage.setItem(LOCATION_STORAGE_KEY, JSON.stringify(next));
