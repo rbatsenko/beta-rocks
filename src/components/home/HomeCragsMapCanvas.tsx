@@ -62,6 +62,13 @@ function ViewController({ userPosition, onMapMove }: ViewControllerProps) {
   const lastFlownRef = useRef<string | null>(null);
   useEffect(() => {
     if (!isValidLatLng(userPosition)) return;
+    // When the map is hidden (e.g. `hidden sm:block` on mobile) its container is
+    // 0×0; flyTo's zoom interpolation then divides by zero and produces an
+    // invalid (NaN, NaN) LatLng that crashes the page. Skip — the map already
+    // initialises centered on `initialCenter`, so nothing is lost.
+    const size = map.getSize();
+    if (size.x === 0 || size.y === 0) return;
+
     const key = `${userPosition[0].toFixed(4)},${userPosition[1].toFixed(4)}`;
     if (lastFlownRef.current === key) return;
     lastFlownRef.current = key;
@@ -81,9 +88,11 @@ function ViewController({ userPosition, onMapMove }: ViewControllerProps) {
     const handleMoveEnd = () => {
       if (timer) clearTimeout(timer);
       timer = setTimeout(() => {
-        const offset = focusOffset();
         const size = map.getSize();
+        if (size.x === 0 || size.y === 0) return; // hidden/unsized map → would yield NaN
+        const offset = focusOffset();
         const focus = map.containerPointToLatLng([size.x / 2 + offset.x, size.y / 2 + offset.y]);
+        if (!Number.isFinite(focus.lat) || !Number.isFinite(focus.lng)) return;
         onMapMove(focus.lat, focus.lng);
       }, MOVE_DEBOUNCE_MS);
     };
