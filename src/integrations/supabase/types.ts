@@ -495,8 +495,20 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      fetch_report_category_counts_by_crag: {
+        Args: { p_crag_id: string };
+        Returns: {
+          category: string;
+          report_count: number;
+        }[];
+      };
       fetch_reports_by_crag_sorted: {
-        Args: { p_crag_id: string; p_limit?: number };
+        Args: {
+          p_category?: string;
+          p_crag_id: string;
+          p_limit?: number;
+          p_offset?: number;
+        };
         Returns: {
           author: Json;
           author_id: string;
@@ -516,6 +528,7 @@ export type Database = {
           route_id: string;
           sector_id: string;
           text: string;
+          total_count: number;
           updated_at: string;
         }[];
       };

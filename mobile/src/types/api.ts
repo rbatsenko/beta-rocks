@@ -233,6 +233,7 @@ export interface Report {
   photos: string[];
   lost_found_type: "lost" | "found" | null;
   observed_at: string;
+  expires_at: string | null;
   created_at: string;
   updated_at: string;
   confirmationCount?: number;
@@ -244,6 +245,9 @@ export interface ReportsResponse {
   total: number | null;
   limit: number;
   offset: number;
+  hasMore: boolean;
+  /** Whole-set counts per category; only sent on the first page. */
+  categoryCounts?: Record<string, number>;
 }
 
 // --- /api/reports/feed response ---
