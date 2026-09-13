@@ -17,7 +17,7 @@ import type {
   ConditionsResponse,
   NearbyConditionsResponse,
   RockType,
-  Report,
+  ReportsResponse,
   FeedPage,
 } from "@/types/api";
 
@@ -25,7 +25,8 @@ import type {
 
 export const queryKeys = {
   cragDetail: (slug: string) => ["crag", slug] as const,
-  cragReports: (cragId: string) => ["crag-reports", cragId] as const,
+  cragReports: (cragId: string, category: string | null = null) =>
+    ["crag-reports", cragId, category] as const,
   search: (query: string) => ["search", query] as const,
   conditions: (lat: number, lon: number, rockType: string) =>
     ["conditions", lat, lon, rockType] as const,
@@ -44,12 +45,25 @@ export function useCragDetail(slug: string | undefined) {
   });
 }
 
-// --- Crag reports (separate query for refetching after submit) ---
+// --- Crag reports (paginated, like the live feed) ---
 
-export function useCragReports(cragId: string | undefined) {
-  return useQuery<Report[]>({
-    queryKey: queryKeys.cragReports(cragId!),
-    queryFn: () => getReportsByCrag(cragId!),
+export const CRAG_REPORTS_PAGE_SIZE = 10;
+
+export function useCragReportsQuery(
+  cragId: string | undefined,
+  category: string | null = null
+) {
+  return useInfiniteQuery<ReportsResponse>({
+    queryKey: queryKeys.cragReports(cragId!, category),
+    queryFn: ({ pageParam }) =>
+      getReportsByCrag(cragId!, {
+        limit: CRAG_REPORTS_PAGE_SIZE,
+        offset: (pageParam as number) ?? 0,
+        category,
+      }),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) =>
+      lastPage.hasMore ? lastPage.offset + lastPage.reports.length : undefined,
     enabled: !!cragId,
     staleTime: 2 * 60_000,
   });
