@@ -135,22 +135,15 @@ export async function getCragBySlug(
 }
 
 /**
- * Reports API — one page of reports for a crag (child sectors included).
- * Reports come back author-joined, day-grouped, with expired ones last.
+ * Reports API
+ * Returns { reports, total, limit, offset } — we unwrap to return just the array
  */
 export async function getReportsByCrag(
-  cragId: string,
-  {
-    limit,
-    offset,
-    category,
-  }: { limit?: number; offset?: number; category?: string | null } = {}
-): Promise<ReportsResponse> {
+  cragId: string
+): Promise<Report[]> {
   const params = new URLSearchParams({ cragId });
-  if (limit != null) params.set("limit", String(limit));
-  if (offset != null) params.set("offset", String(offset));
-  if (category) params.set("category", category);
-  return apiFetch<ReportsResponse>(`/api/reports?${params}`);
+  const response = await apiFetch<ReportsResponse>(`/api/reports?${params}`);
+  return response.reports;
 }
 
 export async function createReport(

@@ -20,10 +20,9 @@ import {
 import { useLocalSearchParams, useRouter, useNavigation } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
-import { getCragBySlug, confirmReport as apiConfirmReport, deleteReport as apiDeleteReport } from "@/api/client";
+import { getCragBySlug, getReportsByCrag, confirmReport as apiConfirmReport, deleteReport as apiDeleteReport } from "@/api/client";
 import { useFocusEffect } from "@react-navigation/native";
 import { useQuery } from "@tanstack/react-query";
-import { useCragReportsQuery } from "@/hooks/queries";
 import { API_URL, SUPABASE_URL } from "@/constants/config";
 import { useUserProfile } from "@/hooks/useUserProfile";
 import { useConditionsTranslations, getWeatherDescription } from "@/hooks/useConditionsTranslations";
@@ -195,52 +194,31 @@ export default function CragDetailScreen() {
 
   const crag = cragData?.crag ?? null;
   const conditions = cragData?.conditions ?? null;
+  const [reports, setReports] = useState<Report[]>([]);
   const sectors = cragData?.sectors ?? [];
 
-  // Reports are paginated separately from the crag payload (same approach as the
-  // live feed) so the page stays short and stale reports drop onto later pages.
-  const {
-    data: reportPages,
-    isLoading: isLoadingReports,
-    isFetchingNextPage: isFetchingMoreReports,
-    isError: isReportsError,
-    hasNextPage: hasMoreReports,
-    fetchNextPage: fetchMoreReports,
-    refetch: refetchReports,
-  } = useCragReportsQuery(crag?.id, selectedCategory === "all" ? null : selectedCategory);
-
-  // Already filtered server-side, so these are the reports for the active category.
-  const filteredReports = useMemo<Report[]>(
-    () => reportPages?.pages.flatMap((page) => page.reports ?? []) ?? [],
-    [reportPages]
-  );
-  // Total for the active filter — what "showing X of Y" counts against.
-  const totalReports = reportPages?.pages[0]?.total ?? null;
+  // Sync reports from query data
+  useEffect(() => {
+    if (cragData?.reports) {
+      setReports(cragData.reports);
+    }
+  }, [cragData?.reports]);
 
   // Show loader only on first load (no cached data)
   const isLoading = isCragLoading && !cragData;
   const error = cragError ? (cragError instanceof Error ? cragError.message : "Failed to load crag") : null;
 
-  // Whole-set category counts, sent with the first page. Held in state so the chips
-  // stay put while switching category refetches (each category is its own query).
-  const [categoryCounts, setCategoryCounts] = useState<Record<string, number> | null>(null);
-  useEffect(() => {
-    const counts = reportPages?.pages[0]?.categoryCounts;
-    if (counts) setCategoryCounts(counts);
-  }, [reportPages]);
+  // Report category filter
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    reports.forEach(r => { counts[r.category] = (counts[r.category] || 0) + 1; });
+    return counts;
+  }, [reports]);
 
-  // Reports across every category — drives the section heading and the "All" chip.
-  const totalAllReports = useMemo(() => {
-    if (categoryCounts) {
-      return Object.values(categoryCounts).reduce((sum, n) => sum + n, 0);
-    }
-    return selectedCategory === "all" ? totalReports : null;
-  }, [categoryCounts, selectedCategory, totalReports]);
-
-  // Are there any reports at all on this crag, regardless of the active filter?
-  const hasAnyReports = totalAllReports != null
-    ? totalAllReports > 0
-    : filteredReports.length > 0;
+  const filteredReports = useMemo(() => {
+    if (selectedCategory === "all") return reports;
+    return reports.filter(r => r.category === selectedCategory);
+  }, [reports, selectedCategory]);
 
   // Group dry windows by day — include all forecast days (bad days shown folded)
   const groupedWindows = useMemo(() => {
@@ -312,19 +290,18 @@ export default function CragDetailScreen() {
     setLightboxVisible(true);
   }
 
-  // Refetch reports when screen regains focus (e.g. after submitting a report).
-  // The guard is only armed once the crag id is known — this callback also re-runs
-  // when the crag query resolves, and that first run must not refetch.
-  const hasFocusedWithCrag = useRef(false);
+  // Refetch reports when screen regains focus (e.g. after submitting a report)
+  const hasMounted = useRef(false);
   useFocusEffect(
     useCallback(() => {
-      if (!crag?.id) return;
-      if (!hasFocusedWithCrag.current) {
-        hasFocusedWithCrag.current = true;
-        return; // initial focus — the reports query just fetched
+      if (!hasMounted.current) {
+        hasMounted.current = true;
+        return; // skip initial focus — query already fetched reports
       }
-      refetchReports();
-    }, [crag?.id, refetchReports])
+      if (crag?.id) {
+        getReportsByCrag(crag.id).then(setReports).catch(() => {});
+      }
+    }, [crag?.id])
   );
 
   useEffect(() => {
@@ -408,41 +385,31 @@ export default function CragDetailScreen() {
           .then(({ data: parent }) => { if (parent) setParentCrag(parent); })
       ).catch(() => {});
     }
+    if (syncKeyHash && isSupabaseConfigured && supabase && data.reports.length > 0) {
+      const reportIds = data.reports.map(r => r.id);
+      Promise.resolve(
+        supabase.from("confirmations").select("report_id")
+          .eq("user_key_hash", syncKeyHash)
+          .in("report_id", reportIds)
+          .then(({ data: confirmations }) => {
+            if (confirmations) {
+              setConfirmedReportIds(new Set(confirmations.map(c => c.report_id)));
+            }
+          })
+      ).catch(() => {});
+    }
     if (data.crag.lat != null && data.crag.lon != null) {
       fetch(`${API_URL}/api/webcams?lat=${data.crag.lat}&lon=${data.crag.lon}`)
         .then(r => r.json())
         .then(d => setWebcams(d.webcams?.slice(0, 4) || []))
         .catch(() => {});
     }
-  }, [cragData]);
-
-  // Which of the loaded reports the current user already marked helpful.
-  // Runs per loaded page and merges, so paging in older reports keeps earlier state.
-  const reportIdsKey = filteredReports.map(r => r.id).join(",");
-  useEffect(() => {
-    if (!syncKeyHash || !isSupabaseConfigured || !supabase || !reportIdsKey) return;
-    const reportIds = reportIdsKey.split(",");
-    let cancelled = false;
-    Promise.resolve(
-      supabase.from("confirmations").select("report_id")
-        .eq("user_key_hash", syncKeyHash)
-        .in("report_id", reportIds)
-        .then(({ data: confirmations }) => {
-          if (cancelled || !confirmations) return;
-          setConfirmedReportIds(prev => {
-            const next = new Set(prev);
-            confirmations.forEach(c => next.add(c.report_id));
-            return next;
-          });
-        })
-    ).catch(() => {});
-    return () => { cancelled = true; };
-  }, [reportIdsKey, syncKeyHash]);
+  }, [cragData, syncKeyHash]);
 
   async function handleRefresh() {
     setIsRefreshing(true);
     try {
-      await Promise.all([refetchCrag(), refetchReports()]);
+      await refetchCrag();
     } finally {
       setIsRefreshing(false);
     }
@@ -622,10 +589,10 @@ export default function CragDetailScreen() {
 
       {/* Reports — C. category filter chips, I. empty state, K. author names */}
       <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-        <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.communityReports")}{totalAllReports != null ? ` (${totalAllReports})` : ""}</Text>
+        <Text style={[styles.cardTitle, { color: colors.text }]}>{t("cragPage.communityReports")} ({reports.length})</Text>
 
         {/* C. Report Category Filter Chips */}
-        {hasAnyReports && (
+        {reports.length > 0 && (
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.filterChipsScroll}>
             <TouchableOpacity
               style={[styles.filterChip, selectedCategory === "all"
@@ -635,11 +602,11 @@ export default function CragDetailScreen() {
               onPress={() => setSelectedCategory("all")}
             >
               <Text style={[styles.filterChipText, { color: selectedCategory === "all" ? colors.primaryForeground : colors.text }]}>
-                {t("reports.filters.all", "All")}{totalAllReports != null ? ` (${totalAllReports})` : ""}
+                {t("reports.filters.all", "All")} ({reports.length})
               </Text>
             </TouchableOpacity>
             {allCategories.map(cat => {
-              const count = categoryCounts?.[cat] || 0;
+              const count = categoryCounts[cat] || 0;
               if (count === 0) return null;
               const cc = CATEGORY_COLORS[cat] || CATEGORY_COLORS.other;
               return (
@@ -661,25 +628,7 @@ export default function CragDetailScreen() {
         )}
 
         {/* I. Empty report state */}
-        {isLoadingReports ? (
-          <View style={styles.emptyState}>
-            <ActivityIndicator size="small" color={colors.primary} />
-          </View>
-        ) : isReportsError && filteredReports.length === 0 ? (
-          <View style={styles.emptyState}>
-            <Ionicons name="cloud-offline-outline" size={36} color={colors.muted} />
-            <Text style={[styles.emptyStateText, { color: colors.muted }]}>{t("feed.loadMoreError", "Couldn't load more reports")}</Text>
-            <TouchableOpacity
-              style={[styles.emptyStateButton, { borderColor: colors.primary }]}
-              onPress={() => refetchReports()}
-              activeOpacity={0.7}
-            >
-              <Text style={{ color: colors.primary, fontWeight: "600", fontSize: FontSize.sm }}>
-                {t("feed.retry", "Tap to retry")}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        ) : !hasAnyReports ? (
+        {reports.length === 0 ? (
           <View style={styles.emptyState}>
             <Ionicons name="clipboard-outline" size={36} color={colors.muted} />
             <Text style={[styles.emptyStateText, { color: colors.muted }]}>{t("reports.noReports", "No reports yet")}</Text>
@@ -713,9 +662,9 @@ export default function CragDetailScreen() {
                       <Text style={[styles.smallBadgeText, { color: cc.text }]}>{t(`reports.categories.${report.category}`, report.category)}</Text>
                     </View>
                     {/* K. Report Author Name */}
-                    <Text style={[styles.metaText, { color: colors.muted }]}>
-                      {report.author?.display_name || t("profile.anonymous", "Anonymous")}
-                    </Text>
+                    {report.author?.display_name && (
+                      <Text style={[styles.metaText, { color: colors.muted }]}>{report.author.display_name}</Text>
+                    )}
                   </View>
                   <Text style={[styles.metaText, { color: colors.muted }]}>{fmtRelative(report.observed_at)}</Text>
                 </View>
@@ -821,7 +770,7 @@ export default function CragDetailScreen() {
                                 onPress: async () => {
                                   try {
                                     await apiDeleteReport(report.id, profileId, syncKeyHash!);
-                                    refetchReports();
+                                    setReports(prev => prev.filter(r => r.id !== report.id));
                                   } catch {
                                     Alert.alert(t("common.error", "Error"), t("reports.deleteFailed", "Failed to delete report"));
                                   }
@@ -841,44 +790,6 @@ export default function CragDetailScreen() {
               </View>
             );
           })
-        )}
-
-        {/* Pagination — same approach as the live feed: older reports load on demand
-            and the footer says how much of the total is on screen. */}
-        {filteredReports.length > 0 && (
-          <View style={styles.reportsFooter}>
-            {hasMoreReports && (
-              <TouchableOpacity
-                style={[styles.loadMoreButton, { borderColor: colors.border }]}
-                onPress={() => fetchMoreReports()}
-                disabled={isFetchingMoreReports}
-                activeOpacity={0.7}
-              >
-                {isFetchingMoreReports ? (
-                  <ActivityIndicator size="small" color={colors.primary} />
-                ) : (
-                  <Text style={[styles.loadMoreText, { color: colors.primary }]}>
-                    {t("feed.loadMore", "Load more reports")}
-                  </Text>
-                )}
-              </TouchableOpacity>
-            )}
-            {isReportsError && !isFetchingMoreReports && (
-              <TouchableOpacity
-                onPress={() => (hasMoreReports ? fetchMoreReports() : refetchReports())}
-                activeOpacity={0.7}
-              >
-                <Text style={[styles.metaText, { color: colors.primary }]}>
-                  {t("feed.loadMoreError", "Couldn't load more reports")} — {t("feed.retry", "Tap to retry")}
-                </Text>
-              </TouchableOpacity>
-            )}
-            {totalReports != null && (
-              <Text style={[styles.metaText, { color: colors.muted }]}>
-                {t("feed.showingOf", { showing: filteredReports.length, total: totalReports })}
-              </Text>
-            )}
-          </View>
         )}
       </View>
 
@@ -1765,17 +1676,6 @@ const styles = StyleSheet.create({
 
   // Empty state
   emptyState: { alignItems: "center", paddingVertical: Spacing.lg, gap: Spacing.sm },
-  reportsFooter: { alignItems: "center", paddingTop: Spacing.md, gap: Spacing.sm },
-  loadMoreButton: {
-    borderWidth: 1,
-    borderRadius: BorderRadius.md,
-    paddingVertical: Spacing.sm,
-    paddingHorizontal: Spacing.lg,
-    minHeight: 38,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  loadMoreText: { fontSize: FontSize.sm, fontWeight: "600" },
   emptyStateText: { fontSize: FontSize.sm },
   emptyStateButton: {
     paddingHorizontal: Spacing.md,

@@ -359,73 +359,27 @@ export async function createReport(report: TablesInsert<"reports">) {
   return data;
 }
 
-/**
- * Fetch a page of reports for a crag (including its child sectors).
- *
- * The RPC groups by observation day (ORDER BY DATE(observed_at) DESC, created_at DESC)
- * and sinks expired reports to the bottom, so stale entries land on later pages.
- * Returns the page plus the total number of matching reports, for "showing X of Y".
- *
- * `total` is null when the page came back empty — the count rides along on the rows,
- * so an empty page carries no information about the size of the set.
- */
-export async function fetchReportsByCragPage(
-  cragId: string,
-  limit = 20,
-  offset = 0,
-  category?: string | null
-) {
+export async function fetchReportsByCrag(cragId: string, limit = 20) {
+  // Use RPC function for date-grouped sorting: ORDER BY DATE(observed_at) DESC, created_at DESC
+  // This groups reports by observation day, with newest submissions first within each day
   const { data, error } = await supabase.rpc("fetch_reports_by_crag_sorted", {
     p_crag_id: cragId,
     p_limit: limit,
-    p_offset: offset,
-    p_category: category ?? undefined,
   });
 
   if (error) {
-    console.error("[fetchReportsByCragPage] Error fetching reports:", error);
+    console.error("[fetchReportsByCrag] Error fetching reports:", error);
     throw error;
   }
 
-  // total_count is the same on every row (window function over the full match set)
-  const rawTotal = data?.[0]?.total_count;
+  // Transform the data to include confirmation count
+  const reportsWithCount =
+    data?.map((report: any) => ({
+      ...report,
+      confirmationCount: report.confirmations?.length || 0,
+    })) || [];
 
-  // Transform the data to include confirmation count, and drop the paging column
-  const reports =
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    data?.map((row: any) => {
-      const report = { ...row };
-      delete report.total_count;
-      return { ...report, confirmationCount: report.confirmations?.length || 0 };
-    }) || [];
-
-  return { reports, total: rawTotal == null ? null : Number(rawTotal) };
-}
-
-/**
- * Per-category report counts across the whole set for a crag (child sectors included).
- * Lets a paginated list render complete filter chips without loading every page.
- */
-export async function fetchReportCategoryCountsByCrag(cragId: string) {
-  const { data, error } = await supabase.rpc("fetch_report_category_counts_by_crag", {
-    p_crag_id: cragId,
-  });
-
-  if (error) {
-    console.error("[fetchReportCategoryCountsByCrag] Error fetching counts:", error);
-    throw error;
-  }
-
-  const counts: Record<string, number> = {};
-  for (const row of data ?? []) {
-    counts[row.category] = Number(row.report_count);
-  }
-  return counts;
-}
-
-export async function fetchReportsByCrag(cragId: string, limit = 20, offset = 0) {
-  const { reports } = await fetchReportsByCragPage(cragId, limit, offset);
-  return reports;
+  return reportsWithCount;
 }
 
 export async function fetchReportsBySector(sectorId: string, limit = 20) {
