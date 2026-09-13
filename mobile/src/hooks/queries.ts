@@ -17,7 +17,7 @@ import type {
   ConditionsResponse,
   NearbyConditionsResponse,
   RockType,
-  Report,
+  ReportsResponse,
   FeedPage,
 } from "@/types/api";
 
@@ -44,12 +44,21 @@ export function useCragDetail(slug: string | undefined) {
   });
 }
 
-// --- Crag reports (separate query for refetching after submit) ---
+// --- Crag reports (paginated, like the live feed) ---
 
-export function useCragReports(cragId: string | undefined) {
-  return useQuery<Report[]>({
+export const CRAG_REPORTS_PAGE_SIZE = 10;
+
+export function useCragReportsQuery(cragId: string | undefined) {
+  return useInfiniteQuery<ReportsResponse>({
     queryKey: queryKeys.cragReports(cragId!),
-    queryFn: () => getReportsByCrag(cragId!),
+    queryFn: ({ pageParam }) =>
+      getReportsByCrag(cragId!, {
+        limit: CRAG_REPORTS_PAGE_SIZE,
+        offset: (pageParam as number) ?? 0,
+      }),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) =>
+      lastPage.hasMore ? lastPage.offset + lastPage.reports.length : undefined,
     enabled: !!cragId,
     staleTime: 2 * 60_000,
   });

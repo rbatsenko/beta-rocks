@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseClient, isSupabaseConfigured } from "@/integrations/supabase/client";
+import { fetchReportsByCragPage } from "@/lib/db/queries";
+
+const DEFAULT_LIMIT = 20;
+const MAX_LIMIT = 100;
 
 /**
  * GET /api/reports
@@ -9,8 +13,12 @@ import { getSupabaseClient, isSupabaseConfigured } from "@/integrations/supabase
  * - cragId: string (required if no sectorId/routeId)
  * - sectorId: string (optional)
  * - routeId: string (optional)
- * - limit: number (default 50)
+ * - limit: number (default 20, max 100)
  * - offset: number (default 0)
+ *
+ * For cragId this goes through fetch_reports_by_crag_sorted so the response matches
+ * what the crag page renders server-side: author profiles joined, child-sector reports
+ * included, day-grouped ordering, and expired reports pushed to the end.
  */
 export async function GET(request: NextRequest) {
   try {
@@ -23,8 +31,13 @@ export async function GET(request: NextRequest) {
     const cragId = request.nextUrl.searchParams.get("cragId");
     const sectorId = request.nextUrl.searchParams.get("sectorId");
     const routeId = request.nextUrl.searchParams.get("routeId");
-    const limit = parseInt(request.nextUrl.searchParams.get("limit") || "50");
-    const offset = parseInt(request.nextUrl.searchParams.get("offset") || "0");
+
+    const parsedLimit = parseInt(request.nextUrl.searchParams.get("limit") || "", 10);
+    const limit = Number.isFinite(parsedLimit)
+      ? Math.min(Math.max(parsedLimit, 1), MAX_LIMIT)
+      : DEFAULT_LIMIT;
+    const parsedOffset = parseInt(request.nextUrl.searchParams.get("offset") || "", 10);
+    const offset = Number.isFinite(parsedOffset) ? Math.max(parsedOffset, 0) : 0;
 
     if (!cragId && !sectorId && !routeId) {
       return NextResponse.json(
@@ -33,9 +46,25 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    if (cragId && !sectorId && !routeId) {
+      const { reports, total } = await fetchReportsByCragPage(cragId, limit, offset);
+      return NextResponse.json({
+        reports,
+        total,
+        limit,
+        offset,
+        hasMore: offset + reports.length < total,
+      });
+    }
+
     let query = supabase
       .from("reports")
-      .select("*, confirmations(count)", { count: "exact" })
+      .select(
+        "*, author:user_profiles!reports_author_id_fkey(id, display_name), confirmations(count)",
+        {
+          count: "exact",
+        }
+      )
       .order("created_at", { ascending: false })
       .range(offset, offset + limit - 1);
 
@@ -43,8 +72,6 @@ export async function GET(request: NextRequest) {
       query = query.eq("route_id", routeId);
     } else if (sectorId) {
       query = query.eq("sector_id", sectorId);
-    } else {
-      query = query.eq("crag_id", cragId as string);
     }
 
     const { data, error, count } = await query;
@@ -54,11 +81,14 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
+    const reports = data || [];
+
     return NextResponse.json({
-      reports: data || [],
+      reports,
       total: count,
       limit,
       offset,
+      hasMore: count != null ? offset + reports.length < count : reports.length === limit,
     });
   } catch (error) {
     console.error("Reports GET error:", error);

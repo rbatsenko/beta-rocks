@@ -496,7 +496,7 @@ export type Database = {
     };
     Functions: {
       fetch_reports_by_crag_sorted: {
-        Args: { p_crag_id: string; p_limit?: number };
+        Args: { p_crag_id: string; p_limit?: number; p_offset?: number };
         Returns: {
           author: Json;
           author_id: string;
@@ -516,6 +516,7 @@ export type Database = {
           route_id: string;
           sector_id: string;
           text: string;
+          total_count: number;
           updated_at: string;
         }[];
       };

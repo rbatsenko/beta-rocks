@@ -359,27 +359,43 @@ export async function createReport(report: TablesInsert<"reports">) {
   return data;
 }
 
-export async function fetchReportsByCrag(cragId: string, limit = 20) {
-  // Use RPC function for date-grouped sorting: ORDER BY DATE(observed_at) DESC, created_at DESC
-  // This groups reports by observation day, with newest submissions first within each day
+/**
+ * Fetch a page of reports for a crag (including its child sectors).
+ *
+ * The RPC groups by observation day (ORDER BY DATE(observed_at) DESC, created_at DESC)
+ * and sinks expired reports to the bottom, so stale entries land on later pages.
+ * Returns the page plus the total number of matching reports, for "showing X of Y".
+ */
+export async function fetchReportsByCragPage(cragId: string, limit = 20, offset = 0) {
   const { data, error } = await supabase.rpc("fetch_reports_by_crag_sorted", {
     p_crag_id: cragId,
     p_limit: limit,
+    p_offset: offset,
   });
 
   if (error) {
-    console.error("[fetchReportsByCrag] Error fetching reports:", error);
+    console.error("[fetchReportsByCragPage] Error fetching reports:", error);
     throw error;
   }
 
-  // Transform the data to include confirmation count
-  const reportsWithCount =
-    data?.map((report: any) => ({
-      ...report,
-      confirmationCount: report.confirmations?.length || 0,
-    })) || [];
+  // total_count is the same on every row (window function over the full match set)
+  const total = data?.[0]?.total_count ?? 0;
 
-  return reportsWithCount;
+  // Transform the data to include confirmation count, and drop the paging column
+  const reports =
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    data?.map((row: any) => {
+      const report = { ...row };
+      delete report.total_count;
+      return { ...report, confirmationCount: report.confirmations?.length || 0 };
+    }) || [];
+
+  return { reports, total: Number(total) };
+}
+
+export async function fetchReportsByCrag(cragId: string, limit = 20, offset = 0) {
+  const { reports } = await fetchReportsByCragPage(cragId, limit, offset);
+  return reports;
 }
 
 export async function fetchReportsBySector(sectorId: string, limit = 20) {
