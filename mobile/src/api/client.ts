@@ -140,11 +140,16 @@ export async function getCragBySlug(
  */
 export async function getReportsByCrag(
   cragId: string,
-  { limit, offset }: { limit?: number; offset?: number } = {}
+  {
+    limit,
+    offset,
+    category,
+  }: { limit?: number; offset?: number; category?: string | null } = {}
 ): Promise<ReportsResponse> {
   const params = new URLSearchParams({ cragId });
   if (limit != null) params.set("limit", String(limit));
   if (offset != null) params.set("offset", String(offset));
+  if (category) params.set("category", category);
   return apiFetch<ReportsResponse>(`/api/reports?${params}`);
 }
 

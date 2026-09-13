@@ -25,7 +25,8 @@ import type {
 
 export const queryKeys = {
   cragDetail: (slug: string) => ["crag", slug] as const,
-  cragReports: (cragId: string) => ["crag-reports", cragId] as const,
+  cragReports: (cragId: string, category: string | null = null) =>
+    ["crag-reports", cragId, category] as const,
   search: (query: string) => ["search", query] as const,
   conditions: (lat: number, lon: number, rockType: string) =>
     ["conditions", lat, lon, rockType] as const,
@@ -48,13 +49,17 @@ export function useCragDetail(slug: string | undefined) {
 
 export const CRAG_REPORTS_PAGE_SIZE = 10;
 
-export function useCragReportsQuery(cragId: string | undefined) {
+export function useCragReportsQuery(
+  cragId: string | undefined,
+  category: string | null = null
+) {
   return useInfiniteQuery<ReportsResponse>({
-    queryKey: queryKeys.cragReports(cragId!),
+    queryKey: queryKeys.cragReports(cragId!, category),
     queryFn: ({ pageParam }) =>
       getReportsByCrag(cragId!, {
         limit: CRAG_REPORTS_PAGE_SIZE,
         offset: (pageParam as number) ?? 0,
+        category,
       }),
     initialPageParam: 0,
     getNextPageParam: (lastPage) =>

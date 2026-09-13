@@ -246,6 +246,8 @@ export interface ReportsResponse {
   limit: number;
   offset: number;
   hasMore: boolean;
+  /** Whole-set counts per category; only sent on the first page. */
+  categoryCounts?: Record<string, number>;
 }
 
 // --- /api/reports/feed response ---

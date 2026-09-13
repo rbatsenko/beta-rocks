@@ -1,16 +1,23 @@
--- Add pagination (offset + total count) to fetch_reports_by_crag_sorted and push
--- expired reports to the end of the list so stale entries fall onto later pages.
+-- Add pagination (offset + total count) and category filtering to
+-- fetch_reports_by_crag_sorted, and push expired reports to the end of the list so
+-- stale entries fall onto later pages.
 --
 -- Previously the crag page could only ask for the first N reports with no way to
 -- fetch the rest, and expired reports were interleaved with fresh ones.
+--
+-- Category filtering has to happen here rather than on the client: with the list
+-- paginated, a client-side filter can only see the pages already loaded, so a
+-- category whose reports all sit further down would look empty.
 
 DROP FUNCTION IF EXISTS fetch_reports_by_crag_sorted(text, int);
 DROP FUNCTION IF EXISTS fetch_reports_by_crag_sorted(text, int, int);
+DROP FUNCTION IF EXISTS fetch_reports_by_crag_sorted(text, int, int, text);
 
 CREATE OR REPLACE FUNCTION fetch_reports_by_crag_sorted(
   p_crag_id TEXT,
   p_limit INT DEFAULT 20,
-  p_offset INT DEFAULT 0
+  p_offset INT DEFAULT 0,
+  p_category TEXT DEFAULT NULL
 )
 RETURNS TABLE (
   id TEXT,
@@ -79,6 +86,7 @@ BEGIN
   LEFT JOIN crags crag ON crag.id = r.crag_id
   LEFT JOIN crags sector ON sector.id = r.sector_id
   WHERE
+  (
     -- Include reports directly on the crag
     r.crag_id = p_crag_id
     OR
@@ -90,6 +98,8 @@ BEGIN
     r.sector_id IN (
       SELECT child.id FROM crags child WHERE child.parent_crag_id = p_crag_id
     )
+  )
+  AND (p_category IS NULL OR r.category = p_category)
   ORDER BY
     -- Expired (stale) reports sink below everything still relevant
     (r.expires_at IS NOT NULL AND r.expires_at <= NOW()) ASC,
@@ -101,3 +111,35 @@ END;
 $$;
 
 GRANT EXECUTE ON FUNCTION fetch_reports_by_crag_sorted TO anon, authenticated;
+
+
+-- Per-category report counts over the WHOLE set, so the crag page can render a
+-- complete, accurate set of filter chips no matter how few pages are loaded.
+DROP FUNCTION IF EXISTS fetch_report_category_counts_by_crag(text);
+
+CREATE OR REPLACE FUNCTION fetch_report_category_counts_by_crag(
+  p_crag_id TEXT
+)
+RETURNS TABLE (
+  category TEXT,
+  report_count BIGINT
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  RETURN QUERY
+  SELECT r.category, COUNT(*)
+  FROM reports r
+  WHERE
+    r.crag_id = p_crag_id
+    OR r.crag_id IN (
+      SELECT child.id FROM crags child WHERE child.parent_crag_id = p_crag_id
+    )
+    OR r.sector_id IN (
+      SELECT child.id FROM crags child WHERE child.parent_crag_id = p_crag_id
+    )
+  GROUP BY r.category;
+END;
+$$;
+
+GRANT EXECUTE ON FUNCTION fetch_report_category_counts_by_crag TO anon, authenticated;

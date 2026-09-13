@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseClient, isSupabaseConfigured } from "@/integrations/supabase/client";
-import { fetchReportsByCragPage } from "@/lib/db/queries";
+import { fetchReportCategoryCountsByCrag, fetchReportsByCragPage } from "@/lib/db/queries";
 
 const DEFAULT_LIMIT = 20;
 const MAX_LIMIT = 100;
@@ -13,6 +13,8 @@ const MAX_LIMIT = 100;
  * - cragId: string (required if no sectorId/routeId)
  * - sectorId: string (optional)
  * - routeId: string (optional)
+ * - category: string (optional, cragId only — filters server-side so a paginated
+ *   list can filter across the whole set rather than just the loaded pages)
  * - limit: number (default 20, max 100)
  * - offset: number (default 0)
  *
@@ -31,6 +33,7 @@ export async function GET(request: NextRequest) {
     const cragId = request.nextUrl.searchParams.get("cragId");
     const sectorId = request.nextUrl.searchParams.get("sectorId");
     const routeId = request.nextUrl.searchParams.get("routeId");
+    const category = request.nextUrl.searchParams.get("category");
 
     const parsedLimit = parseInt(request.nextUrl.searchParams.get("limit") || "", 10);
     const limit = Number.isFinite(parsedLimit)
@@ -47,13 +50,20 @@ export async function GET(request: NextRequest) {
     }
 
     if (cragId && !sectorId && !routeId) {
-      const { reports, total } = await fetchReportsByCragPage(cragId, limit, offset);
+      const { reports, total } = await fetchReportsByCragPage(cragId, limit, offset, category);
+
+      // Only on the first page: whole-set per-category counts, so the caller can render
+      // a complete set of filter chips without paging through everything first.
+      const categoryCounts =
+        offset === 0 ? await fetchReportCategoryCountsByCrag(cragId).catch(() => null) : null;
+
       return NextResponse.json({
         reports,
         total,
         limit,
         offset,
-        hasMore: offset + reports.length < total,
+        hasMore: total != null && offset + reports.length < total,
+        ...(categoryCounts && { categoryCounts }),
       });
     }
 
