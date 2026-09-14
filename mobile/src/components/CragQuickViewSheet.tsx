@@ -7,7 +7,19 @@
  * dependency (and the Expo SDK alignment that would require).
  */
 
-import { View, Text, StyleSheet, Modal, TouchableOpacity, Pressable, ActivityIndicator } from "react-native";
+import { useEffect, useRef, useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Modal,
+  TouchableOpacity,
+  Pressable,
+  ActivityIndicator,
+  Animated,
+  Easing,
+  useWindowDimensions,
+} from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -42,13 +54,46 @@ function formatDistance(meters: number): string {
   return km < 10 ? km.toFixed(1) : Math.round(km).toString();
 }
 
-export function CragQuickViewSheet({ crag, onClose }: Props) {
+export function CragQuickViewSheet({ crag: cragProp, onClose }: Props) {
   const { colorScheme } = useTheme();
   const isDark = colorScheme === "dark";
   const colors = isDark ? Colors.dark : Colors.light;
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { t } = useTranslation("common");
+
+  // Hold on to the last crag while the sheet animates out, otherwise the
+  // content blanks before it has left the screen.
+  const [crag, setCrag] = useState(cragProp);
+  const [mounted, setMounted] = useState(cragProp !== null);
+  const [sheetHeight, setSheetHeight] = useState(0);
+  const anim = useRef(new Animated.Value(0)).current;
+  const { height: windowHeight } = useWindowDimensions();
+
+  useEffect(() => {
+    if (cragProp) {
+      setCrag(cragProp);
+      setMounted(true);
+      Animated.timing(anim, {
+        toValue: 1,
+        duration: 260,
+        easing: Easing.out(Easing.cubic),
+        useNativeDriver: true,
+      }).start();
+      return;
+    }
+    Animated.timing(anim, {
+      toValue: 0,
+      duration: 200,
+      easing: Easing.in(Easing.cubic),
+      useNativeDriver: true,
+    }).start(({ finished }) => {
+      if (finished) {
+        setMounted(false);
+        setCrag(null);
+      }
+    });
+  }, [cragProp, anim]);
 
   const rockType = (crag?.rock_type as RockType | undefined) ?? "unknown";
   const conditions = useConditionsQuery(crag?.lat, crag?.lon, rockType);
@@ -57,7 +102,7 @@ export function CragQuickViewSheet({ crag, onClose }: Props) {
   const labelText =
     labelKey === "unrated" ? t("welcome.map.unrated", "Unrated") : t(`labels.${labelKey}`);
   const flag = getCountryFlag(crag?.country);
-  const current = conditions.data?.current;
+  const current = conditions.data?.conditions.weather?.now;
   const summary = conditions.data?.conditions.summary;
 
   const handleViewCrag = () => {
@@ -68,24 +113,38 @@ export function CragQuickViewSheet({ crag, onClose }: Props) {
 
   return (
     <Modal
-      visible={crag !== null}
+      visible={mounted}
       transparent
-      animationType="slide"
+      // Animated by hand. RN's "slide" translates the entire modal — dimming
+      // backdrop included — so the shade rose with the sheet as one block
+      // instead of fading in place.
+      animationType="none"
       statusBarTranslucent
       onRequestClose={onClose}
     >
-      <Pressable style={styles.backdrop} onPress={onClose}>
-        {/* Inner press shouldn't close: stop propagation by handling it. */}
-        <Pressable
+      <View style={styles.root}>
+        <Animated.View style={[styles.backdrop, { opacity: anim }]} />
+        {/* Tap-to-close sits below the sheet, so presses on the sheet never reach it. */}
+        <Pressable style={StyleSheet.absoluteFill} onPress={onClose} />
+        <Animated.View
+          onLayout={(e) => setSheetHeight(e.nativeEvent.layout.height)}
           style={[
             styles.sheet,
             {
               backgroundColor: colors.surfaceElevated,
               borderColor: colors.cardBorder,
               paddingBottom: insets.bottom + Spacing.lg,
+              transform: [
+                {
+                  translateY: anim.interpolate({
+                    inputRange: [0, 1],
+                    // Fall back to half the screen until the first layout measures it.
+                    outputRange: [sheetHeight || windowHeight * 0.5, 0],
+                  }),
+                },
+              ],
             },
           ]}
-          onPress={() => {}}
         >
           <View style={styles.grabber} />
 
@@ -141,13 +200,13 @@ export function CragQuickViewSheet({ crag, onClose }: Props) {
                 <View style={styles.stats}>
                   <Stat
                     icon="thermometer-outline"
-                    value={`${Math.round(current.temperature_c)}°C`}
+                    value={`${Math.round(current.temp_c)}°C`}
                     colors={colors}
                   />
                   <Stat icon="water-outline" value={`${current.humidity}%`} colors={colors} />
                   <Stat
                     icon="navigate-outline"
-                    value={`${Math.round(current.windSpeed_kph)} km/h`}
+                    value={`${Math.round(current.wind_kph)} km/h`}
                     colors={colors}
                   />
                 </View>
@@ -166,8 +225,8 @@ export function CragQuickViewSheet({ crag, onClose }: Props) {
             </Text>
             <Ionicons name="arrow-forward" size={18} color={colors.primaryForeground} />
           </TouchableOpacity>
-        </Pressable>
-      </Pressable>
+        </Animated.View>
+      </View>
     </Modal>
   );
 }
@@ -190,10 +249,13 @@ function Stat({
 }
 
 const styles = StyleSheet.create({
-  backdrop: {
+  root: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.4)",
     justifyContent: "flex-end",
+  },
+  backdrop: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(0,0,0,0.4)",
   },
   sheet: {
     borderTopLeftRadius: BorderRadius.xl,

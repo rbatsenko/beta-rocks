@@ -88,21 +88,38 @@ export interface WeatherFlags {
   high_wind: boolean;
 }
 
+/**
+ * Current readings as /api/conditions returns them.
+ *
+ * Deliberately distinct from CurrentWeather: that one describes the crag-detail
+ * payload, which names the same values differently (temperature_c vs temp_c,
+ * windSpeed_kph vs wind_kph). Sharing one type here produced fields that type-
+ * checked but were always undefined at runtime.
+ */
+export interface NowWeather {
+  temp_c: number;
+  humidity: number;
+  dew_point_spread: number;
+  wind_kph: number;
+  precip_mm: number;
+}
+
 export interface ConditionsData {
   label: ConditionsLabel;
   summary: string;
   flags: WeatherFlags;
   dry_windows: DryWindow[];
-  hourlyConditions: HourlyCondition[];
-  dailyForecast: DailyForecast[];
+  /** The readings live here — /api/conditions has no top-level `current`. */
+  weather: { now: NowWeather; hourly?: unknown[]; daily?: unknown[] };
+  hourlyConditions?: HourlyCondition[];
+  dailyForecast?: DailyForecast[];
 }
 
 export interface ConditionsResponse {
   location: { lat: number; lon: number };
   rockType: string;
-  current: CurrentWeather;
   conditions: ConditionsData;
-  astro: { sunrise: string; sunset: string };
+  astro?: { sunrise: string; sunset: string };
   updatedAt: string;
 }
 
