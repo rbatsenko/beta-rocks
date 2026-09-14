@@ -398,7 +398,8 @@ Versioned public API for external app consumption (e.g., ClimbingPartnerAI). All
 - `crags/search/route.ts`: `GET` — Search crags by name (`?q=&limit=`). Uses `search_crags_enhanced` RPC. Filters out `is_secret` crags.
 - `crags/[id]/route.ts`: `GET` — Crag detail by ID with child sectors. Filters out `is_secret` crags. Returns 404 if not found.
 - `crags/nearby/route.ts`: `GET` — Find crags near coordinates (`?lat=&lon=&radius=&limit=`). Uses `find_nearby_crags` RPC with bounding box fallback.
-- `crags/[id]/reports/route.ts`: `GET` — Community reports for a crag with pagination and optional category filter.
+- `crags/[id]/reports/route.ts`: `GET` — Community reports for a crag with pagination and optional category filter. Uses the `fetch_reports_by_crag_sorted` RPC, so it includes reports on child sectors and sorts expired ones last — same data the website shows.
+- `crags/[id]/conditions/route.ts`: `GET` — Climbing conditions for a crag (risk flags, summary, label, dry windows, warnings).
 - `reports/route.ts`: `POST` — Submit a new report. Requires `sync_key` for user attribution. Validates category, message length, and rating.
 
 **CORS**: Handled in `src/proxy.ts` — `/api/v1/*` routes get open CORS (`*`), while other `/api/*` routes use origin-restricted CORS for the mobile app.

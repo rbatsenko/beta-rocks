@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseClient, isSupabaseConfigured } from "@/integrations/supabase/client";
+import { fetchReportsByCragPage } from "@/lib/db/queries";
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 
@@ -71,48 +72,31 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
       return NextResponse.json({ error: "Crag not found" }, { status: 404 });
     }
 
-    // Build reports query
-    let query = supabase
-      .from("reports")
-      .select("*, user_profiles(display_name), confirmations(count)", { count: "exact" })
-      .eq("crag_id", id)
-      .order("created_at", { ascending: false })
-      .range(offset, offset + limit - 1);
+    // Use the same RPC the website uses. A plain .eq("crag_id", id) query misses
+    // reports filed against child sectors, which is most of them for a parent crag:
+    // Margalef returned 0 through this endpoint while the site showed 4. The RPC
+    // also sinks expired reports below current ones and applies limit/offset and
+    // the category filter server-side.
+    const { reports: rows, total } = await fetchReportsByCragPage(id, limit, offset, category);
 
-    if (category) {
-      query = query.eq("category", category);
-    }
-
-    const { data, error, count } = await query;
-
-    if (error) {
-      console.error("[v1/crags/:id/reports] Supabase error:", error);
-      return NextResponse.json({ error: "Failed to fetch reports" }, { status: 500 });
-    }
-
-    const reports = (data || []).map((r: any) => {
-      // confirmations(count) returns aggregate: [{count: n}]
-      const rawCount = r.confirmations?.[0]?.count ?? 0;
-      const confirmationsCount = typeof rawCount === "number" ? rawCount : Number(rawCount) || 0;
-
-      return {
-        id: r.id,
-        category: r.category,
-        message: r.text || null,
-        rating_dry: r.rating_dry || null,
-        rating_wind: r.rating_wind || null,
-        rating_crowds: r.rating_crowds || null,
-        lost_found_type: r.lost_found_type || null,
-        photos: resolvePhotoUrls(r),
-        created_at: r.created_at,
-        display_name: r.user_profiles?.display_name || "Anonymous",
-        confirmations_count: confirmationsCount,
-      };
-    });
+    const reports = rows.map((r: any) => ({
+      id: r.id,
+      category: r.category,
+      message: r.text || null,
+      rating_dry: r.rating_dry || null,
+      rating_wind: r.rating_wind || null,
+      rating_crowds: r.rating_crowds || null,
+      lost_found_type: r.lost_found_type || null,
+      photos: resolvePhotoUrls(r),
+      created_at: r.created_at,
+      display_name: r.author?.display_name || "Anonymous",
+      confirmations_count: r.confirmationCount ?? 0,
+    }));
 
     return NextResponse.json({
+      // `total` is null when the page came back empty — the count rides on the rows.
       data: reports,
-      total: count || 0,
+      total: total ?? 0,
     }, {
       headers: { "Cache-Control": "public, s-maxage=30, stale-while-revalidate=60" },
     });
