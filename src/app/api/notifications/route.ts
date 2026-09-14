@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSupabaseClient, isSupabaseConfigured } from "@/integrations/supabase/client";
+import {
+  getSupabaseAdminClient,
+  isSupabaseAdminConfigured,
+} from "@/integrations/supabase/admin";
 
 /**
  * GET /api/notifications
@@ -15,13 +18,15 @@ import { getSupabaseClient, isSupabaseConfigured } from "@/integrations/supabase
  */
 export async function GET(request: NextRequest) {
   try {
-    if (!isSupabaseConfigured) {
-      console.error("Supabase environment variables are not configured.");
+    if (!isSupabaseAdminConfigured) {
+      console.error("SUPABASE_SECRET_KEY is not configured.");
       return NextResponse.json({ error: "Supabase client is not configured" }, { status: 500 });
     }
 
+    // Service role: bypasses RLS, so every query below is scoped to the
+    // profile resolved from the caller's sync key hash.
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const supabase = getSupabaseClient() as any;
+    const supabase = getSupabaseAdminClient() as any;
     const syncKeyHash = request.headers.get("X-Sync-Key-Hash");
     const limit = parseInt(request.nextUrl.searchParams.get("limit") || "50");
     const offset = parseInt(request.nextUrl.searchParams.get("offset") || "0");
@@ -97,13 +102,15 @@ export async function GET(request: NextRequest) {
  */
 export async function PATCH(request: NextRequest) {
   try {
-    if (!isSupabaseConfigured) {
-      console.error("Supabase environment variables are not configured.");
+    if (!isSupabaseAdminConfigured) {
+      console.error("SUPABASE_SECRET_KEY is not configured.");
       return NextResponse.json({ error: "Supabase client is not configured" }, { status: 500 });
     }
 
+    // Service role: bypasses RLS, so every query below is scoped to the
+    // profile resolved from the caller's sync key hash.
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const supabase = getSupabaseClient() as any;
+    const supabase = getSupabaseAdminClient() as any;
     const syncKeyHash = request.headers.get("X-Sync-Key-Hash");
     const body = await request.json();
     const { ids, markAllRead } = body;
@@ -155,13 +162,15 @@ export async function PATCH(request: NextRequest) {
  */
 export async function DELETE(request: NextRequest) {
   try {
-    if (!isSupabaseConfigured) {
-      console.error("Supabase environment variables are not configured.");
+    if (!isSupabaseAdminConfigured) {
+      console.error("SUPABASE_SECRET_KEY is not configured.");
       return NextResponse.json({ error: "Supabase client is not configured" }, { status: 500 });
     }
 
+    // Service role: bypasses RLS, so every query below is scoped to the
+    // profile resolved from the caller's sync key hash.
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const supabase = getSupabaseClient() as any;
+    const supabase = getSupabaseAdminClient() as any;
     const syncKeyHash = request.headers.get("X-Sync-Key-Hash");
 
     if (!syncKeyHash) {
