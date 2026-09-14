@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback, useMemo, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
 import {
   MapPin,
 
@@ -55,7 +55,7 @@ import {
 } from "@/hooks/queries/useFavoritesQueries";
 import { getSunCalcUrl, getGoogleMapsUrl, getOpenStreetMapEmbedUrl } from "@/lib/utils/urls";
 import { getCountryFlag } from "@/lib/utils/country-flag";
-import { fetchReportsByCrag } from "@/lib/db/queries";
+import { fetchReportsByCragPage, fetchReportCategoryCountsByCrag } from "@/lib/db/queries";
 import { getUserProfile, type UserProfile } from "@/lib/auth/sync-key";
 import { getWeatherEmoji, getWeatherDescription } from "@/lib/utils/weather-emojis";
 import { useUnits } from "@/hooks/useUnits";
@@ -220,9 +220,8 @@ async function fetchConditionsByCragId(cragId: string): Promise<ConditionsData> 
   return c;
 }
 
-async function fetchReportsByCragId(cragId: string) {
-  return fetchReportsByCrag(cragId, 20);
-}
+/** Reports are paged; the crag page loads one page at a time via "load more". */
+const REPORTS_PAGE_SIZE = 20;
 
 // Helper to detect if it's night time (7pm-7am)
 function isNightTime(date: Date): boolean {
@@ -248,7 +247,10 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
   const [editingReport, setEditingReport] = useState<any | null>(null);
   const [deletingReportId, setDeletingReportId] = useState<string | null>(null);
+  const queryClient = useQueryClient();
   const [selectedCategory, setSelectedCategory] = useState<"all" | ReportCategory>("all");
+  // Stale reports stay visible by default, sunk to the bottom by the RPC's ordering.
+  const [hideStaleReports, setHideStaleReports] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showProfileCreated, setShowProfileCreated] = useState(false);
   const [newSyncKey, setNewSyncKey] = useState<string>("");
@@ -284,17 +286,54 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
     enabled: !isLocationless, // Don't fetch conditions for locationless crags
   });
 
-  // React Query for reports (client-side)
+  // Reports are paged. The category is part of the query key and is applied by the
+  // RPC, not on the client: a client-side filter can only see the pages already
+  // loaded, so a category whose reports sit further down would look empty.
   const {
-    data: reports = [],
+    data: reportsPages,
     isLoading: isLoadingReports,
     refetch: refetchReports,
-  } = useQuery({
-    queryKey: ["reports", crag.id],
-    queryFn: () => fetchReportsByCragId(crag.id),
+    fetchNextPage: fetchMoreReports,
+    hasNextPage: hasMoreReports,
+    isFetchingNextPage: isLoadingMoreReports,
+  } = useInfiniteQuery({
+    queryKey: ["reports", crag.id, selectedCategory],
+    queryFn: ({ pageParam }) =>
+      fetchReportsByCragPage(
+        crag.id,
+        REPORTS_PAGE_SIZE,
+        pageParam,
+        selectedCategory === "all" ? null : selectedCategory
+      ),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, allPages) => {
+      // `total` is null on an empty page — the count rides along on the rows.
+      if (lastPage.total == null) return undefined;
+      const loaded = allPages.reduce((sum, page) => sum + page.reports.length, 0);
+      return loaded < lastPage.total ? loaded : undefined;
+    },
     staleTime: 2 * 60 * 1000, // 2 minutes (reports change more frequently)
     gcTime: 5 * 60 * 1000, // 5 minutes
   });
+
+  const reports = useMemo(
+    () => reportsPages?.pages.flatMap((page) => page.reports) ?? [],
+    [reportsPages]
+  );
+  const totalReports = reportsPages?.pages[0]?.total ?? 0;
+
+  // Counts come from a dedicated RPC over the whole set, so the filter chips stay
+  // accurate no matter how few pages are loaded.
+  const { data: categoryCounts = {} } = useQuery({
+    queryKey: ["report-category-counts", crag.id],
+    queryFn: () => fetchReportCategoryCountsByCrag(crag.id),
+    staleTime: 2 * 60 * 1000,
+    gcTime: 5 * 60 * 1000,
+  });
+  const totalReportCount = useMemo(
+    () => Object.values(categoryCounts).reduce((sum, n) => sum + n, 0),
+    [categoryCounts]
+  );
 
   // React Query hooks for favorites
   const { data: favorites = [] } = useFavorites();
@@ -305,22 +344,19 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
   const addFavorite = useAddFavorite();
   const removeFavorite = useRemoveFavorite();
 
-  // Filter and sort reports by selected category (expired reports go to bottom)
-  const filteredReports = useMemo(() => {
-    const filtered =
-      selectedCategory === "all"
-        ? reports
-        : reports.filter((report) => report.category === selectedCategory);
+  // Category filtering and expired-last ordering are both done by the RPC, so the
+  // only thing left here is the optional "hide stale" toggle. Note this filters the
+  // pages already loaded rather than the query, so hiding can leave a short page.
+  const staleReportCount = useMemo(() => {
+    const now = Date.now();
+    return reports.filter((r) => r.expires_at && new Date(r.expires_at).getTime() < now).length;
+  }, [reports]);
 
-    // Sort: non-expired first, then expired, within each group maintain existing order
-    return filtered.sort((a, b) => {
-      const aExpired = a.expires_at && new Date(a.expires_at) < new Date();
-      const bExpired = b.expires_at && new Date(b.expires_at) < new Date();
-
-      if (aExpired === bExpired) return 0; // Maintain existing order within groups
-      return aExpired ? 1 : -1; // Expired go to bottom
-    });
-  }, [reports, selectedCategory]);
+  const visibleReports = useMemo(() => {
+    if (!hideStaleReports) return reports;
+    const now = Date.now();
+    return reports.filter((r) => !(r.expires_at && new Date(r.expires_at).getTime() < now));
+  }, [reports, hideStaleReports]);
 
   // Filter sectors by search query
   const filteredSectors = useMemo(() => {
@@ -425,10 +461,14 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
   };
 
   const handleReportCreated = useCallback(async () => {
-    // Refetch reports using React Query
-    await refetchReports();
+    // Refetch the pages and the category counts — the counts come from their own
+    // query, so without this the filter chips would keep the pre-report totals.
+    await Promise.all([
+      refetchReports(),
+      queryClient.invalidateQueries({ queryKey: ["report-category-counts", crag.id] }),
+    ]);
     console.log(`[CragPageContent] Refetched reports after creation`);
-  }, [refetchReports]);
+  }, [refetchReports, queryClient, crag.id]);
 
   // Load current user profile ID for checking authorship
   useEffect(() => {
@@ -971,7 +1011,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
           ) : (
             <>
               {/* Category Filter Tabs */}
-              {reports.length > 0 && (
+              {totalReportCount > 0 && (
                 <div className="flex flex-wrap gap-2 mb-4">
                   <Button
                     variant={selectedCategory === "all" ? "default" : "outline"}
@@ -981,7 +1021,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                       selectedCategory === "all" ? "bg-orange-500 hover:bg-orange-600" : ""
                     }
                   >
-                    {t("reports.filters.all")} ({reports.length})
+                    {t("reports.filters.all")} ({totalReportCount})
                   </Button>
                   {(
                     [
@@ -993,7 +1033,7 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                       "other",
                     ] as ReportCategory[]
                   ).map((category) => {
-                    const count = reports.filter((r) => r.category === category).length;
+                    const count = categoryCounts[category] ?? 0;
                     if (count === 0) return null;
                     return (
                       <Button
@@ -1011,7 +1051,31 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                 </div>
               )}
 
-              {reports.length === 0 ? (
+              {/* Stale reports sort to the bottom already; this hides them outright.
+                  Only offered when the loaded pages actually contain some. */}
+              {staleReportCount > 0 && (
+                <div className="flex justify-end mb-4">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setHideStaleReports((hidden) => !hidden)}
+                    className="text-muted-foreground gap-1.5"
+                  >
+                    {hideStaleReports
+                      ? t("reports.showStale", "Show out-of-date ({{n}})", {
+                          n: staleReportCount,
+                        })
+                      : t("reports.hideStale", "Hide out-of-date ({{n}})", {
+                          n: staleReportCount,
+                        })}
+                  </Button>
+                </div>
+              )}
+
+              {/* Whether the crag has any reports at all, across every category —
+                  `reports` only holds the selected category now, so it can be empty
+                  while the crag is full of reports of another kind. */}
+              {totalReportCount === 0 ? (
                 <Card>
                   <CardContent className="p-12 text-center">
                     <p className="text-muted-foreground mb-4">{t("reports.noReports")}</p>
@@ -1024,15 +1088,19 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                     </Button>
                   </CardContent>
                 </Card>
-              ) : filteredReports.length === 0 ? (
+              ) : visibleReports.length === 0 ? (
                 <Card>
                   <CardContent className="p-12 text-center">
-                    <p className="text-muted-foreground">{t("reports.noReportsInCategory")}</p>
+                    <p className="text-muted-foreground">
+                      {hideStaleReports && staleReportCount > 0
+                        ? t("reports.onlyStaleHidden", "Only out-of-date reports here — show them to read on.")
+                        : t("reports.noReportsInCategory")}
+                    </p>
                   </CardContent>
                 </Card>
               ) : (
                 <div className="space-y-4">
-                  {filteredReports.map((report) => (
+                  {visibleReports.map((report) => (
                     <ReportCard
                       key={report.id}
                       report={report}
@@ -1042,6 +1110,33 @@ export function CragPageContent({ crag, sectors, currentSector }: CragPageConten
                       currentUserProfileId={currentUserProfileId}
                     />
                   ))}
+
+                  {hasMoreReports && (
+                    <div className="flex justify-center pt-2">
+                      <Button
+                        variant="outline"
+                        onClick={() => fetchMoreReports()}
+                        disabled={isLoadingMoreReports}
+                      >
+                        {isLoadingMoreReports ? (
+                          <>
+                            <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                            {t("loading.reports")}
+                          </>
+                        ) : (
+                          t("reports.loadMore", "Load more reports")
+                        )}
+                      </Button>
+                    </div>
+                  )}
+
+                  {!hasMoreReports && totalReports > REPORTS_PAGE_SIZE && (
+                    <p className="text-center text-sm text-muted-foreground pt-2">
+                      {t("reports.allLoaded", "That's all {{total}} reports.", {
+                        total: totalReports,
+                      })}
+                    </p>
+                  )}
                 </div>
               )}
             </>

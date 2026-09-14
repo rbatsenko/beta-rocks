@@ -911,7 +911,12 @@
     "galleryPermission": "Photo library access is needed to select photos.",
     "takePhoto": "Take Photo",
     "chooseFromGallery": "Choose from Gallery",
-    "addPhotos": "Add Photos"
+    "addPhotos": "Add Photos",
+    "loadMore": "Load more reports",
+    "allLoaded": "That's all {{total}} reports.",
+    "showStale": "Show out-of-date ({{n}})",
+    "hideStale": "Hide out-of-date ({{n}})",
+    "onlyStaleHidden": "Only out-of-date reports here — show them to read on."
   },
   "editCragDialog": {
     "title": "Edit Crag",

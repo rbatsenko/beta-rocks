@@ -885,7 +885,12 @@
     "takePhoto": "Zrób zdjęcie",
     "chooseFromGallery": "Wybierz z galerii",
     "addPhotos": "Dodaj zdjęcia",
-    "voteReady": "Możesz już głosować na raporty"
+    "voteReady": "Możesz już głosować na raporty",
+    "loadMore": "Wczytaj więcej raportów",
+    "allLoaded": "To wszystkie raporty ({{total}}).",
+    "showStale": "Pokaż nieaktualne ({{n}})",
+    "hideStale": "Ukryj nieaktualne ({{n}})",
+    "onlyStaleHidden": "Tu są tylko nieaktualne raporty — pokaż je, aby przeczytać."
   },
   "editCragDialog": {
     "title": "Edytuj Skałę",
