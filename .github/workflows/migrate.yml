@@ -6,6 +6,9 @@ on:
       - main
     paths:
       - "supabase/migrations/**"
+  # Lets us run migrations on demand, e.g. to re-apply after a failure without
+  # having to push a dummy migration.
+  workflow_dispatch:
 
 jobs:
   migrate:
@@ -17,14 +20,22 @@ jobs:
         with:
           version: latest
 
-      - name: Link Supabase project
-        run: supabase link --project-ref ${{ secrets.SUPABASE_PROJECT_REF }}
-        env:
-          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
-          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
-
+      # We connect straight to Postgres instead of running `supabase link`.
+      # `link` calls GET /v1/projects/{ref}/api-keys?reveal=true, which a scoped
+      # access token is not allowed to do, so it fails with a privileges error
+      # even when the token can run migrations perfectly well.
+      #
+      # Port 5432 on the pooler is session mode — required, because `db push`
+      # takes advisory locks that the transaction pooler (6543) doesn't support.
+      # The runner is IPv4-only, so the direct db.<ref>.supabase.co host is not
+      # an option either.
       - name: Run migrations
-        run: supabase db push
         env:
-          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
-          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+          PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+          DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+        run: |
+          set -euo pipefail
+          ENCODED_PASSWORD=$(python3 -c 'import os, urllib.parse; print(urllib.parse.quote(os.environ["DB_PASSWORD"], safe=""))')
+          DB_URL="postgresql://postgres.${PROJECT_REF}:${ENCODED_PASSWORD}@aws-1-us-east-2.pooler.supabase.com:5432/postgres"
+          # Never echo DB_URL — it carries the password.
+          supabase db push --db-url "$DB_URL" --skip-vault --yes
