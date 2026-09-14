@@ -23,25 +23,29 @@
     "yourFavorites": "Twoje Ulubione",
     "favoriteQuery": "Jakie są warunki w {{crag}}?",
     "map": {
-      "showNearby": "Crags near me",
-      "locating": "Finding your location…",
-      "locationError": "Couldn't get your location - tap to retry",
-      "geolocationUnsupported": "Location isn't available in this browser",
-      "loadingCrags": "Loading nearby crags…",
-      "loadCragsError": "Couldn't load nearby crags",
-      "noCrags": "No crags within 50 km",
-      "cragsNearby": "{{count}} crag within 50 km",
-      "cragsNearby_other": "{{count}} crags within 50 km",
-      "recenter": "Recenter on my location",
-      "youAreHere": "You are here",
-      "distanceAway": "{{km}} km away",
-      "recentReports": "Recent reports",
-      "loadingReports": "Loading reports…",
-      "noReports": "No reports yet",
-      "searchingArea": "Searching this area…",
-      "unrated": "Unrated",
-      "hideLabel": "Hide {{label}}",
-      "showLabel": "Show {{label}}"
+      "showNearby": "Skałki w pobliżu",
+      "locating": "Szukam Twojej lokalizacji…",
+      "locationError": "Nie udało się ustalić lokalizacji – dotknij, aby spróbować ponownie",
+      "geolocationUnsupported": "Lokalizacja nie jest dostępna w tej przeglądarce",
+      "loadingCrags": "Ładowanie skałek w pobliżu…",
+      "loadCragsError": "Nie udało się załadować skałek w pobliżu",
+      "noCrags": "Brak skałek w promieniu 50 km",
+      "cragsNearby": "{{count}} skałka w promieniu 50 km",
+      "cragsNearby_other": "{{count}} skałek w promieniu 50 km",
+      "recenter": "Wyśrodkuj na mojej lokalizacji",
+      "youAreHere": "Tu jesteś",
+      "distanceAway": "{{km}} km stąd",
+      "recentReports": "Ostatnie raporty",
+      "loadingReports": "Ładowanie raportów…",
+      "noReports": "Brak raportów",
+      "searchingArea": "Przeszukiwanie tego obszaru…",
+      "unrated": "Bez oceny",
+      "hideLabel": "Ukryj {{label}}",
+      "showLabel": "Pokaż {{label}}",
+      "openMap": "Przeglądaj skałki na mapie",
+      "cragsNearby_one": "{{count}} skałka w promieniu 50 km",
+      "cragsNearby_few": "{{count}} skałki w promieniu 50 km",
+      "cragsNearby_many": "{{count}} skałek w promieniu 50 km"
     }
   },
   "search": {
@@ -146,6 +150,17 @@
       "duplicateDesc": "Rejon o podobnej nazwie już istnieje w tej lokalizacji. Sprawdź mapę, aby zobaczyć istniejące rejony.",
       "failed": "Nie udało się dodać rejonu",
       "failedDesc": "Wystąpił błąd podczas dodawania rejonu. Spróbuj ponownie."
+    },
+    "secretCrag": {
+      "label": "Sekretny rejon",
+      "hint": "Ukryj dokładną lokalizację. Przydatne przy wrażliwych lub zamkniętych rejonach. Współrzędne nie będą pokazywane, ale możesz wskazać pobliskie miasto dla pogody.",
+      "mapLabel": "Lokalizacja odniesienia dla pogody",
+      "mapHelp": "Wyszukaj pobliskie miasto lub miejscowość. Ta lokalizacja posłuży wyłącznie do prognozy pogody — dokładne współrzędne nie będą pokazywane.",
+      "locationRequiredDesc": "Wybierz na mapie pobliskie miasto jako punkt odniesienia dla pogody"
+    },
+    "locationless": {
+      "label": "Bez lokalizacji",
+      "hint": "Dla rejonów z wrażliwym dostępem. Dane pogodowe nie będą dostępne — tylko raporty społeczności."
     }
   },
   "conditions": {
@@ -187,7 +202,7 @@
     "recentPrecip": "Niedawne opady ({{precip}}) - wyschnie za ~{{hours}}h",
     "currentlyWetDangerous": "Mokro - poczekaj aż wyschnie",
     "currentlyWet": "Mokro",
-    "cold": "Cold ({{temp}})",
+    "cold": "Zimno ({{temp}})",
     "veryHighCondensationRisk": "Bardzo wysokie ryzyko kondensacji (rozpiętość punktu rosy {{dewPointSpread}}) - powierzchnia skały prawdopodobnie wilgotna",
     "highCondensationRisk": "Wysokie ryzyko kondensacji (rozpiętość punktu rosy {{dewPointSpread}})",
     "highCondensationRiskSimple": "Wysokie ryzyko kondensacji",
@@ -386,7 +401,8 @@
     "lessReliableHourly": "Następne godziny mniej przewidywalne",
     "lessCertain": "MNIEJ PEWNE",
     "todayBadge": "DZISIAJ",
-    "noGoodWindows": "Brak dobrych okien wspinaczkowych tego dnia. Sprawdź zakładkę godzinową."
+    "noGoodWindows": "Brak dobrych okien wspinaczkowych tego dnia. Sprawdź zakładkę godzinową.",
+    "noOptimalHoursDay": "Brak dobrych okien wspinaczkowych tego dnia. Szczegóły znajdziesz w zakładce godzinowej."
   },
   "timeContext": {
     "sunrise": "Wschód słońca",
@@ -409,7 +425,8 @@
     "basalt": "Bazalt",
     "gneiss": "Gnejs",
     "quartzite": "Kwarcyt",
-    "unknown": "Nieznany"
+    "unknown": "Nieznany",
+    "gritstone": "Piaskowiec gruboziarnisty"
   },
   "sync": {
     "banner": {
@@ -421,13 +438,29 @@
     "status": {
       "synced": "Zsynchronizowano",
       "syncing": "Synchronizacja...",
-      "offline": "Offline"
+      "offline": "Offline",
+      "clickToLearnMore": "Kliknij, aby dowiedzieć się więcej o synchronizacji"
     },
     "notification": {
       "title": "Klucz synchronizacji utworzony",
       "description": "Wygenerowaliśmy unikalny klucz do synchronizacji twoich ulubionych i czatów między urządzeniami.",
       "viewInSettings": "Zobacz w ustawieniach",
       "viewMore": "Co to jest klucz synchronizacji?"
+    },
+    "page": {
+      "validating": "Weryfikowanie klucza synchronizacji...",
+      "invalidTitle": "Nieprawidłowy klucz synchronizacji",
+      "noKeyError": "Nie znaleziono klucza synchronizacji w adresie URL",
+      "invalidKeyError": "Nieprawidłowy format klucza synchronizacji",
+      "goHome": "Przejdź do strony głównej",
+      "restoreTitle": "Przywróć swoje dane",
+      "restoreDescription": "To przywróci Twoje ulubione i ustawienia z innego urządzenia",
+      "syncKeyLabel": "Klucz synchronizacji",
+      "restoreSuccess": "Klucz synchronizacji przywrócony! Przekierowywanie...",
+      "cancel": "Anuluj",
+      "restore": "Przywróć",
+      "replaceWarning": "To zastąpi wszystkie istniejące dane na tym urządzeniu danymi z Twojego klucza synchronizacji",
+      "restoreError": "Nie udało się przywrócić klucza synchronizacji. Spróbuj ponownie."
     }
   },
   "syncExplainer": {
@@ -693,7 +726,8 @@
     "errorToggling": "Nie udało się przełączyć ulubionego. Spróbuj ponownie.",
     "added": "Skała dodana do ulubionych",
     "removed": "Skała usunięta z ulubionych",
-    "loading": "Ładowanie ulubionych..."
+    "loading": "Ładowanie ulubionych...",
+    "reportsOnly": "Tylko raporty"
   },
   "reports": {
     "addReport": "Dodaj zgłoszenie",
@@ -706,7 +740,7 @@
     "commentsPlaceholder": "Np: sektor wschodni wciąż wilgotny, ścieżka błotnista - uwaga, Droga X - woda sączy się ze szczeliny, chwyty śliskie...",
     "submit": "Wyślij raport",
     "submitting": "Wysyłanie...",
-    "readyToPost": "Profile created! You're ready to post your report.",
+    "readyToPost": "Profil utworzony! Możesz już dodać swój raport.",
     "helpful": "Pomocne",
     "loginToConfirm": "Skonfiguruj swój profil, aby potwierdzać raporty",
     "confirmFailed": "Nie udało się potwierdzić raportu. Spróbuj ponownie.",
@@ -809,7 +843,7 @@
       "lost": "Zgubione",
       "found": "Znalezione"
     },
-    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypePlaceholder": "Wybierz, czy to rzecz zgubiona czy znaleziona",
     "lostFoundTypeRequired": "Wybierz, czy jest to zgubiony czy znaleziony przedmiot",
     "lostBadge": "ZGUBIONY",
     "foundBadge": "ZNALEZIONY",
@@ -850,7 +884,8 @@
     "galleryPermission": "Wymagany dostęp do galerii zdjęć.",
     "takePhoto": "Zrób zdjęcie",
     "chooseFromGallery": "Wybierz z galerii",
-    "addPhotos": "Dodaj zdjęcia"
+    "addPhotos": "Dodaj zdjęcia",
+    "voteReady": "Możesz już głosować na raporty"
   },
   "editCragDialog": {
     "title": "Edytuj Skałę",
@@ -879,7 +914,14 @@
       "parentRequiredDesc": "Proszę wybrać skałę nadrzędną dla tego sektora",
       "failed": "Aktualizacja nie powiodła się",
       "failedDesc": "Nie udało się zaktualizować skały. Spróbuj ponownie."
-    }
+    },
+    "name": "Nazwa",
+    "rockType": "Rodzaj skały",
+    "rockTypePlaceholder": "Wybierz rodzaj skały",
+    "rockTypeNone": "Nieznany / nie ustawiono",
+    "rockTypeUpdated": "Rodzaj skały zaktualizowany",
+    "renamed": "Nazwa rejonu zmieniona",
+    "optionalAction": "Opcjonalne. Kliknij, aby przełączyć."
   },
   "cragPage": {
     "edit": "Edytuj",
@@ -907,7 +949,19 @@
     "dry": "Sucho",
     "wet": "Mokro",
     "helpful": "Pomocne",
-    "basedOnWeather": "na podstawie pogody"
+    "basedOnWeather": "na podstawie pogody",
+    "share": "Udostępnij",
+    "shareCrag": "Udostępnij ten rejon",
+    "linkCopied": "Link skopiowany do schowka",
+    "openInApp": "Otwórz w aplikacji",
+    "openInAppDescription": "Zobacz ten rejon w aplikacji beta.rocks",
+    "secretCrag": {
+      "notice": "To jest sekretny rejon. Lokalizacja jest ukryta, aby chronić dostęp.",
+      "weatherNote": "Pogoda dla pobliskiej lokalizacji odniesienia"
+    },
+    "locationless": {
+      "notice": "Ten rejon nie ma opublikowanej lokalizacji. Dane pogodowe i warunki nie są dostępne — sprawdź raporty społeczności poniżej."
+    }
   },
   "time": {
     "today": "Dzisiaj",
@@ -989,7 +1043,7 @@
   "summary": {
     "sandstoneWet": "Piaskowiec jest mokry. Nie wspinaj się — mokry piaskowiec jest kruchy.",
     "rainingNow": "Deszcz. {{mm}}mm opadu.",
-    "wetRock": "Recent rain — rock may still be wet.",
+    "wetRock": "Niedawny deszcz — skała może być jeszcze mokra.",
     "rainExpected": "Deszcz spodziewany za {{hours}}h.",
     "condensationRisk": "Ryzyko kondensacji. {{humidity}}% wilgotności.",
     "highHumidity": "{{humidity}}% wilgotności.",
@@ -1006,5 +1060,45 @@
     "windy": "Wietrznie",
     "extremeWind": "Ekstremalny wiatr",
     "sandstoneWet": "Mokry piaskowiec"
+  },
+  "addSectorModal": {
+    "title": "Dodaj nowy sektor",
+    "subtitle": "Dodaj sektor do {{cragName}}",
+    "mapLabel": "Lokalizacja sektora",
+    "mapHelp": "Kliknij na mapie, aby ustawić lokalizację sektora (zaczyna się w rejonie nadrzędnym)",
+    "nearbySectorsWarning": {
+      "title": "Istniejące sektory w pobliżu",
+      "message": "Znaleziono {{count}} sektor/rejon w promieniu 200 m",
+      "message_one": "Znaleziono {{count}} sektor/rejon w promieniu 200 m",
+      "message_few": "Znaleziono {{count}} sektory/rejony w promieniu 200 m",
+      "message_many": "Znaleziono {{count}} sektorów/rejonów w promieniu 200 m",
+      "message_other": "Znaleziono {{count}} sektorów/rejonów w promieniu 200 m"
+    },
+    "form": {
+      "name": "Nazwa sektora",
+      "namePlaceholder": "np. Ściana Główna, Północna Ściana",
+      "description": "Opis",
+      "descriptionPlaceholder": "Szczegóły o tym sektorze (opcjonalnie)..."
+    },
+    "cancel": "Anuluj",
+    "submit": "Dodaj sektor",
+    "submitting": "Dodawanie...",
+    "success": "Sektor dodany!",
+    "successDesc": "{{name}} został dodany do rejonu",
+    "errors": {
+      "nameRequired": "Nazwa jest wymagana",
+      "nameRequiredDesc": "Podaj nazwę sektora",
+      "locationRequired": "Lokalizacja jest wymagana",
+      "locationRequiredDesc": "Kliknij na mapie, aby ustawić lokalizację sektora",
+      "failed": "Nie udało się dodać sektora",
+      "failedDesc": "Wystąpił błąd podczas dodawania sektora. Spróbuj ponownie."
+    }
+  },
+  "tabs": {
+    "overview": "Przegląd",
+    "reports": "Raporty"
+  },
+  "errors": {
+    "failedToLoadConditions": "Nie udało się załadować warunków. Spróbuj ponownie."
   }
 }

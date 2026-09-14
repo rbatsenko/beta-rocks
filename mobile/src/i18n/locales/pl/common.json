@@ -21,7 +21,21 @@
       }
     },
     "yourFavorites": "Twoje Ulubione",
-    "favoriteQuery": "Jakie są warunki w {{crag}}?"
+    "favoriteQuery": "Jakie są warunki w {{crag}}?",
+    "map": {
+      "title": "Mapa",
+      "openMap": "Przeglądaj skałki na mapie",
+      "loadingCrags": "Ładowanie skałek w pobliżu…",
+      "loadCragsError": "Nie udało się załadować skałek w pobliżu",
+      "cragsInView_one": "{{count}} skałka w widoku",
+      "cragsInView_few": "{{count}} skałki w widoku",
+      "cragsInView_many": "{{count}} skałek w widoku",
+      "cragsInView_other": "{{count}} skałek w widoku",
+      "unrated": "Bez oceny",
+      "distanceAway": "{{km}} km stąd",
+      "loadingConditions": "Ładowanie warunków…",
+      "viewCrag": "Zobacz rejon"
+    }
   },
   "search": {
     "title": "Szukaj skałek",
@@ -51,7 +65,8 @@
     "nearbyCragsFound": "Znaleziono {{count}} pobliski rejon",
     "nearbyCragsFound_other": "Znaleziono {{count}} pobliskich rejonów",
     "clickMarkersToView": "Kliknij znaczniki, aby wyświetlić istniejące rejony",
-    "coordinates": "Współrzędne"
+    "coordinates": "Współrzędne",
+    "useMyLocation": "Użyj mojej lokalizacji"
   },
   "addCragModal": {
     "title": "Dodaj nowy rejon",
@@ -125,6 +140,13 @@
       "duplicateDesc": "Rejon o podobnej nazwie już istnieje w tej lokalizacji. Sprawdź mapę, aby zobaczyć istniejące rejony.",
       "failed": "Nie udało się dodać rejonu",
       "failedDesc": "Wystąpił błąd podczas dodawania rejonu. Spróbuj ponownie."
+    },
+    "secretCrag": {
+      "label": "Sekretny rejon",
+      "hint": "Ukryj dokładną lokalizację. Przydatne przy wrażliwych lub zamkniętych rejonach. Współrzędne nie będą pokazywane, ale możesz wskazać pobliskie miasto dla pogody.",
+      "mapLabel": "Lokalizacja odniesienia dla pogody",
+      "mapHelp": "Wyszukaj pobliskie miasto lub miejscowość. Ta lokalizacja posłuży wyłącznie do prognozy pogody — dokładne współrzędne nie będą pokazywane.",
+      "locationRequiredDesc": "Wybierz na mapie pobliskie miasto jako punkt odniesienia dla pogody"
     }
   },
   "conditions": {
@@ -166,7 +188,7 @@
     "recentPrecip": "Niedawne opady ({{precip}}) - wyschnie za ~{{hours}}h",
     "currentlyWetDangerous": "Mokro - poczekaj aż wyschnie",
     "currentlyWet": "Mokro",
-    "cold": "Cold ({{temp}})",
+    "cold": "Zimno ({{temp}})",
     "veryHighCondensationRisk": "Bardzo wysokie ryzyko kondensacji (rozpiętość punktu rosy {{dewPointSpread}}) - powierzchnia skały prawdopodobnie wilgotna",
     "highCondensationRisk": "Wysokie ryzyko kondensacji (rozpiętość punktu rosy {{dewPointSpread}})",
     "highCondensationRiskSimple": "Wysokie ryzyko kondensacji",
@@ -379,7 +401,8 @@
     "basalt": "Bazalt",
     "gneiss": "Gnejs",
     "quartzite": "Kwarcyt",
-    "unknown": "Nieznany"
+    "unknown": "Nieznany",
+    "gritstone": "Piaskowiec gruboziarnisty"
   },
   "sync": {
     "banner": {
@@ -391,7 +414,8 @@
     "status": {
       "synced": "Zsynchronizowano",
       "syncing": "Synchronizacja...",
-      "offline": "Offline"
+      "offline": "Offline",
+      "clickToLearnMore": "Kliknij, aby dowiedzieć się więcej o synchronizacji"
     },
     "notification": {
       "title": "Klucz synchronizacji utworzony",
@@ -714,7 +738,7 @@
     "commentsPlaceholder": "Np: sektor wschodni wciąż wilgotny, ścieżka błotnista - uwaga, Droga X - woda sączy się ze szczeliny, chwyty śliskie...",
     "submit": "Wyślij raport",
     "submitting": "Wysyłanie...",
-    "readyToPost": "Profile created! You're ready to post your report.",
+    "readyToPost": "Profil utworzony! Możesz już dodać swój raport.",
     "helpful": "Pomocne",
     "loginToConfirm": "Skonfiguruj swój profil, aby potwierdzać raporty",
     "confirmFailed": "Nie udało się potwierdzić raportu. Spróbuj ponownie.",
@@ -817,7 +841,7 @@
       "lost": "Zgubione",
       "found": "Znalezione"
     },
-    "lostFoundTypePlaceholder": "Select if this is a lost or found item",
+    "lostFoundTypePlaceholder": "Wybierz, czy to rzecz zgubiona czy znaleziona",
     "lostFoundTypeRequired": "Wybierz, czy jest to zgubiony czy znaleziony przedmiot",
     "lostBadge": "ZGUBIONY",
     "foundBadge": "ZNALEZIONY",
@@ -858,7 +882,8 @@
     "galleryPermission": "Wymagany dostęp do galerii zdjęć.",
     "takePhoto": "Zrób zdjęcie",
     "chooseFromGallery": "Wybierz z galerii",
-    "addPhotos": "Dodaj zdjęcia"
+    "addPhotos": "Dodaj zdjęcia",
+    "voteReady": "Możesz już głosować na raporty"
   },
   "editCragDialog": {
     "title": "Edytuj Skałę",
@@ -915,7 +940,11 @@
     "dry": "Sucho",
     "wet": "Mokro",
     "helpful": "Pomocne",
-    "basedOnWeather": "na podstawie pogody"
+    "basedOnWeather": "na podstawie pogody",
+    "secretCrag": {
+      "notice": "To jest sekretny rejon. Lokalizacja jest ukryta, aby chronić dostęp.",
+      "weatherNote": "Pogoda dla pobliskiej lokalizacji odniesienia"
+    }
   },
   "time": {
     "today": "Dzisiaj",
@@ -1011,5 +1040,45 @@
     "wind": "Wiatr",
     "humid": "Wilgotno",
     "ok": "OK"
+  },
+  "addSectorModal": {
+    "title": "Dodaj nowy sektor",
+    "subtitle": "Dodaj sektor do {{cragName}}",
+    "mapLabel": "Lokalizacja sektora",
+    "mapHelp": "Kliknij na mapie, aby ustawić lokalizację sektora (zaczyna się w rejonie nadrzędnym)",
+    "nearbySectorsWarning": {
+      "title": "Istniejące sektory w pobliżu",
+      "message": "Znaleziono {{count}} sektor/rejon w promieniu 200 m",
+      "message_one": "Znaleziono {{count}} sektor/rejon w promieniu 200 m",
+      "message_few": "Znaleziono {{count}} sektory/rejony w promieniu 200 m",
+      "message_many": "Znaleziono {{count}} sektorów/rejonów w promieniu 200 m",
+      "message_other": "Znaleziono {{count}} sektorów/rejonów w promieniu 200 m"
+    },
+    "form": {
+      "name": "Nazwa sektora",
+      "namePlaceholder": "np. Ściana Główna, Północna Ściana",
+      "description": "Opis",
+      "descriptionPlaceholder": "Szczegóły o tym sektorze (opcjonalnie)..."
+    },
+    "cancel": "Anuluj",
+    "submit": "Dodaj sektor",
+    "submitting": "Dodawanie...",
+    "success": "Sektor dodany!",
+    "successDesc": "{{name}} został dodany do rejonu",
+    "errors": {
+      "nameRequired": "Nazwa jest wymagana",
+      "nameRequiredDesc": "Podaj nazwę sektora",
+      "locationRequired": "Lokalizacja jest wymagana",
+      "locationRequiredDesc": "Kliknij na mapie, aby ustawić lokalizację sektora",
+      "failed": "Nie udało się dodać sektora",
+      "failedDesc": "Wystąpił błąd podczas dodawania sektora. Spróbuj ponownie."
+    }
+  },
+  "tabs": {
+    "overview": "Przegląd",
+    "reports": "Raporty"
+  },
+  "errors": {
+    "failedToLoadConditions": "Nie udało się załadować warunków. Spróbuj ponownie."
   }
 }
