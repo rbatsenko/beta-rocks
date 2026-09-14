@@ -28,8 +28,22 @@ export function labelKey(crag: MapCrag): string {
   return crag.label ?? "unrated";
 }
 
-const LIGHT_TILES = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
-const DARK_TILES = "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
+// Stadia Maps. CARTO started watermarking unauthenticated basemap tiles with
+// "API KEY REQUIRED", so the old basemaps.cartocdn.com URLs are unusable.
+//
+// Styles are chosen for label legibility: positron/alidade_smooth are designed
+// as muted backdrops for data overlays, so place names wash out. Outdoors also
+// carries terrain and trails, which is what you want when finding a crag.
+//
+// Auth is by domain allowlist (beta.rocks + localhost) configured in the Stadia
+// dashboard; the API key is only needed for non-browser or unlisted origins.
+const STADIA_API_KEY = process.env.NEXT_PUBLIC_STADIA_API_KEY;
+const stadiaTiles = (style: string) =>
+  `https://tiles.stadiamaps.com/tiles/${style}/{z}/{x}/{y}{r}.png` +
+  (STADIA_API_KEY ? `?api_key=${STADIA_API_KEY}` : "");
+
+const LIGHT_TILES = stadiaTiles("outdoors");
+const DARK_TILES = stadiaTiles("alidade_smooth_dark");
 
 const INITIAL_ZOOM = 10;
 const MOVE_DEBOUNCE_MS = 700;
@@ -158,7 +172,7 @@ export default function HomeCragsMapCanvas({
       <AttributionControl position="topright" prefix={false} />
       <TileLayer
         key={isDark ? "dark" : "light"}
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+        attribution='&copy; <a href="https://www.stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url={isDark ? DARK_TILES : LIGHT_TILES}
       />
 
