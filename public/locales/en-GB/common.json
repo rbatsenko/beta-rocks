@@ -41,7 +41,8 @@
       "searchingArea": "Searching this area…",
       "unrated": "Unrated",
       "hideLabel": "Hide {{label}}",
-      "showLabel": "Show {{label}}"
+      "showLabel": "Show {{label}}",
+      "openMap": "Browse crags on map"
     }
   },
   "search": {
@@ -146,6 +147,17 @@
       "duplicateDesc": "A crag with a similar name already exists at this location. Check the map for existing crags.",
       "failed": "Failed to add crag",
       "failedDesc": "An error occurred while adding the crag. Please try again."
+    },
+    "secretCrag": {
+      "label": "Secret Crag",
+      "hint": "Hide exact location. Useful for sensitive or closed crags. Coordinates won't be shown, but you can set a nearby city for weather reference.",
+      "mapLabel": "Reference Location for Weather",
+      "mapHelp": "Search for a nearby city or town. This location will be used for weather forecasts only - the exact coordinates won't be shown.",
+      "locationRequiredDesc": "Please select a nearby city on the map for weather reference"
+    },
+    "locationless": {
+      "label": "No Location",
+      "hint": "For crags with sensitive access. No weather data will be available — only community reports."
     }
   },
   "conditions": {
@@ -397,7 +409,8 @@
     "lessReliableHourly": "Next hours less predictable",
     "lessCertain": "LESS CERTAIN",
     "todayBadge": "TODAY",
-    "noGoodWindows": "No good climbing windows on this day. Check the hourly tab for details."
+    "noGoodWindows": "No good climbing windows on this day. Check the hourly tab for details.",
+    "noOptimalHoursDay": "No good climbing windows on this day. Check the hourly tab for details."
   },
   "timeContext": {
     "sunrise": "Sunrise",
@@ -713,7 +726,8 @@
     "errorToggling": "Failed to toggle favorite. Please try again.",
     "added": "Crag added to favorites",
     "removed": "Crag removed from favorites",
-    "loading": "Loading favorites..."
+    "loading": "Loading favorites...",
+    "reportsOnly": "Reports only"
   },
   "reports": {
     "addReport": "Add Report",
@@ -896,7 +910,14 @@
       "parentRequiredDesc": "Please select a parent crag for this sector",
       "failed": "Update failed",
       "failedDesc": "Failed to update crag. Please try again."
-    }
+    },
+    "name": "Name",
+    "rockType": "Rock Type",
+    "rockTypePlaceholder": "Select rock type",
+    "rockTypeNone": "Unknown / not set",
+    "rockTypeUpdated": "Rock type updated successfully",
+    "renamed": "Crag renamed successfully",
+    "optionalAction": "Optional. Click to toggle."
   },
   "cragPage": {
     "edit": "Edit",
@@ -924,7 +945,19 @@
     "dry": "Dry",
     "wet": "Wet",
     "helpful": "Helpful",
-    "basedOnWeather": "based on weather"
+    "basedOnWeather": "based on weather",
+    "share": "Share",
+    "shareCrag": "Share this crag",
+    "linkCopied": "Link copied to clipboard",
+    "openInApp": "Open in App",
+    "openInAppDescription": "View this crag in the beta.rocks app",
+    "secretCrag": {
+      "notice": "This is a secret crag. Location is hidden to protect access.",
+      "weatherNote": "Weather for nearby reference location"
+    },
+    "locationless": {
+      "notice": "This crag has no published location. Weather and conditions data are not available — check community reports below."
+    }
   },
   "loading": {
     "conditions": "Loading conditions...",
@@ -1015,5 +1048,35 @@
     "windy": "Windy",
     "extremeWind": "Extreme wind",
     "sandstoneWet": "Sandstone wet"
+  },
+  "addSectorModal": {
+    "title": "Add New Sector",
+    "subtitle": "Add a sector to {{cragName}}",
+    "mapLabel": "Sector Location",
+    "mapHelp": "Click on the map to set the sector location (starts at parent crag)",
+    "nearbySectorsWarning": {
+      "title": "Existing Sectors Nearby",
+      "message": "{{count}} sector/crag found within 200m",
+      "message_other": "{{count}} sectors/crags found within 200m"
+    },
+    "form": {
+      "name": "Sector Name",
+      "namePlaceholder": "e.g. Main Wall, North Face",
+      "description": "Description",
+      "descriptionPlaceholder": "Details about this sector (optional)..."
+    },
+    "cancel": "Cancel",
+    "submit": "Add Sector",
+    "submitting": "Adding...",
+    "success": "Sector added!",
+    "successDesc": "{{name}} has been added to the crag",
+    "errors": {
+      "nameRequired": "Name is required",
+      "nameRequiredDesc": "Please enter a name for the sector",
+      "locationRequired": "Location is required",
+      "locationRequiredDesc": "Please click on the map to set the sector location",
+      "failed": "Failed to add sector",
+      "failedDesc": "An error occurred while adding the sector. Please try again."
+    }
   }
 }

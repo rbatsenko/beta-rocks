@@ -18,6 +18,17 @@ export function useConditionsTranslations(
 ) {
   const { units } = useUnits();
   return useMemo(() => {
+    /**
+     * The API embeds rock types in English ("granite"), so interpolating the
+     * raw match would leave an English word inside an otherwise translated
+     * sentence. Map it through rockTypes.* and fall back to the original if
+     * that locale has no entry.
+     */
+    const translateRockType = (rockType: string): string => {
+      const translated = t(`rockTypes.${rockType.toLowerCase()}`);
+      return translated && !translated.startsWith("rockTypes.") ? translated : rockType;
+    };
+
     const translateRating = (rating: string): string => {
       if (!rating) {
         return "";
@@ -91,7 +102,9 @@ export function useConditionsTranslations(
       // Extract rock type from "Cold but good for X friction"
       const coldFrictionMatch = reason.match(/Cold but good for (\w+) friction/);
       if (coldFrictionMatch) {
-        const translated = t("reasons.coldGoodFriction", { rockType: coldFrictionMatch[1] });
+        const translated = t("reasons.coldGoodFriction", {
+          rockType: translateRockType(coldFrictionMatch[1]),
+        });
         if (translated && !translated.startsWith("reasons.")) {
           return translated;
         }
@@ -184,16 +197,13 @@ export function useConditionsTranslations(
       if (coldMatch) {
         if (coldMatch[1]) {
           // Full version with rock type
-          return t("warnings.coldSuboptimal", { rockType: coldMatch[1] });
+          return t("warnings.coldSuboptimal", { rockType: translateRockType(coldMatch[1]) });
         } else if (coldMatch[2]) {
           // Simplified version with temperature
           const tempCelsius = parseFloat(coldMatch[2]);
           const convertedTemp = convertTemperature(tempCelsius, "celsius", units.temperature);
           const tempFormatted = formatTemperature(convertedTemp, units.temperature, 0);
-          return (
-            t("warnings.cold", { temp: tempFormatted }) ||
-            t("warnings.coldSuboptimal", { rockType: "" }).replace(" for ", "")
-          );
+          return t("warnings.cold", { temp: tempFormatted });
         }
       }
 
