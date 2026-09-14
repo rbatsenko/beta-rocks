@@ -2,6 +2,8 @@
  * App configuration constants
  */
 
+import Constants from "expo-constants";
+
 export const API_URL =
   process.env.EXPO_PUBLIC_API_URL || "https://beta.rocks";
 
@@ -12,7 +14,13 @@ export const SUPABASE_ANON_KEY =
   process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY || "sb_publishable_l3JH7lREcNNPqL6lHBxjuQ_KuX6jhEK";
 
 export const APP_NAME = "beta.rocks";
-export const APP_VERSION = "0.7.0";
+
+/**
+ * Read from the Expo config rather than hardcoded, so the version shown in
+ * Settings always matches the one shipped to the stores. As a literal it had
+ * drifted: app.config.ts said 0.8.0 while Settings still displayed 0.7.0.
+ */
+export const APP_VERSION = Constants.expoConfig?.version ?? "unknown";
 
 /**
  * Label colors for the 3-tier conditions system
