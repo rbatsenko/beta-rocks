@@ -299,7 +299,9 @@
     "brand": "beta.rocks",
     "description": "Free climbing conditions for everyone. Built with ❤️ for the climbing community.",
     "attribution": "Data from Open-Meteo, OpenBeta and <osmLink>OpenStreetMap contributors</osmLink>. Community-powered reports.",
-    "copyright": "© 2026 beta.rocks. All rights reserved."
+    "copyright": "© 2026 beta.rocks. All rights reserved.",
+    "api": "API",
+    "mcp": "MCP"
   },
   "features": {
     "heading": "Everything You Need",
@@ -332,7 +334,8 @@
     "mcpServer": {
       "title": "MCP Server",
       "description": "Connect beta.rocks directly to Claude, Cursor, Windsurf, and other AI tools. Search crags and check conditions without leaving your workflow.",
-      "npmLink": "Install from npm →"
+      "npmLink": "Install from npm →",
+      "docsLink": "MCP Documentation →"
     }
   },
   "privacy": {

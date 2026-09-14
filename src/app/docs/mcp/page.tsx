@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
+import { CodeBlock } from "@/components/docs/CodeBlock";
 
 export const metadata: Metadata = {
   title: "MCP Server - beta.rocks",
@@ -120,14 +121,6 @@ const CATEGORIES = [
 
 const MCP_URL = "https://beta.rocks/api/mcp";
 
-function CodeBlock({ children }: { children: string }) {
-  return (
-    <pre className="overflow-x-auto rounded border border-border bg-muted/50 p-3 text-xs leading-relaxed">
-      <code>{children}</code>
-    </pre>
-  );
-}
-
 export default function McpDocsPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -192,12 +185,12 @@ export default function McpDocsPage() {
             <p className="text-sm text-muted-foreground">
               Add an MCP integration in settings using the server URL. Nothing to install.
             </p>
-            <CodeBlock>{MCP_URL}</CodeBlock>
+            <CodeBlock label="Copy the server URL">{MCP_URL}</CodeBlock>
           </div>
 
           <div className="space-y-2">
             <h3 className="text-sm font-semibold">Claude Code</h3>
-            <CodeBlock>{`claude mcp add beta-rocks -- npx beta-rocks-mcp`}</CodeBlock>
+            <CodeBlock label="Copy the Claude Code command">{`claude mcp add beta-rocks -- npx beta-rocks-mcp`}</CodeBlock>
           </div>
 
           <div className="space-y-2">
@@ -207,7 +200,7 @@ export default function McpDocsPage() {
             <p className="text-sm text-muted-foreground">
               The config is the same for any client that supports MCP over stdio:
             </p>
-            <CodeBlock>{`{
+            <CodeBlock label="Copy the client config">{`{
   "mcpServers": {
     "beta-rocks": {
       "command": "npx",
@@ -245,7 +238,7 @@ export default function McpDocsPage() {
                 </tbody>
               </table>
             </div>
-            <CodeBlock>{`{
+            <CodeBlock label="Copy the config with a sync key">{`{
   "mcpServers": {
     "beta-rocks": {
       "command": "npx",

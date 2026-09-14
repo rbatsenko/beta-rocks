@@ -60,8 +60,8 @@ export function FeaturesDialog({ open, onOpenChange }: FeaturesDialogProps) {
       icon: Bot,
       titleKey: "features.mcpServer.title",
       descriptionKey: "features.mcpServer.description",
-      linkKey: "features.mcpServer.npmLink",
-      linkHref: "https://www.npmjs.com/package/beta-rocks-mcp",
+      linkKey: "features.mcpServer.docsLink",
+      linkHref: "/docs/mcp",
     },
   ];
 

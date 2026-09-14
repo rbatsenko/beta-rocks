@@ -265,7 +265,9 @@
     "brand": "beta.rocks",
     "description": "Darmowe raporty wspinaczkowe dla każdego. Stworzone z ❤️ dla wspinaczkowej społeczności.",
     "attribution": "Dane z Open-Meteo, OpenBeta i <osmLink>współtwórców OpenStreetMap</osmLink>. Raporty społecznościowe.",
-    "copyright": "© 2026 beta.rocks. Wszelkie prawa zastrzeżone."
+    "copyright": "© 2026 beta.rocks. Wszelkie prawa zastrzeżone.",
+    "api": "API",
+    "mcp": "MCP"
   },
   "features": {
     "heading": "Wszystko czego potrzebujesz",
@@ -298,7 +300,8 @@
     "mcpServer": {
       "title": "Serwer MCP",
       "description": "Połącz beta.rocks bezpośrednio z Claude, Cursor, Windsurf i innymi narzędziami AI. Wyszukuj skały i sprawdzaj warunki bez opuszczania przepływu pracy.",
-      "npmLink": "Zainstaluj z npm →"
+      "npmLink": "Zainstaluj z npm →",
+      "docsLink": "Dokumentacja MCP →"
     }
   },
   "privacy": {
