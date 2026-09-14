@@ -209,3 +209,11 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* Dark mode for the home crags map.
+   OpenStreetMap has no dark tile style, so invert the tiles instead. The
+   hue-rotate restores hues the invert flipped (without it, water renders
+   orange); the brightness/contrast trim stops the result glaring. */
+.map-tiles-dark {
+  filter: invert(1) hue-rotate(180deg) brightness(0.95) contrast(0.9);
+}

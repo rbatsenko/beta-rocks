@@ -28,22 +28,20 @@ export function labelKey(crag: MapCrag): string {
   return crag.label ?? "unrated";
 }
 
-// Stadia Maps. CARTO started watermarking unauthenticated basemap tiles with
-// "API KEY REQUIRED", so the old basemaps.cartocdn.com URLs are unusable.
+// Standard OpenStreetMap tiles — the same source the crag map and the add-crag
+// picker already use, so no API key or account is involved.
 //
-// Styles are chosen for label legibility: positron/alidade_smooth are designed
-// as muted backdrops for data overlays, so place names wash out. Outdoors also
-// carries terrain and trails, which is what you want when finding a crag.
+// CARTO (the previous source) began stamping "API KEY REQUIRED" across
+// unauthenticated tiles. OSM's standard style is also far more legible here:
+// the CARTO positron style is built as a muted backdrop for data overlays, so
+// place names washed out.
 //
-// Auth is by domain allowlist (beta.rocks + localhost) configured in the Stadia
-// dashboard; the API key is only needed for non-browser or unlisted origins.
-const STADIA_API_KEY = process.env.NEXT_PUBLIC_STADIA_API_KEY;
-const stadiaTiles = (style: string) =>
-  `https://tiles.stadiamaps.com/tiles/${style}/{z}/{x}/{y}{r}.png` +
-  (STADIA_API_KEY ? `?api_key=${STADIA_API_KEY}` : "");
+// No {s} subdomain — OSM deprecated the a/b/c tile subdomains.
+const OSM_TILES = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 
-const LIGHT_TILES = stadiaTiles("outdoors");
-const DARK_TILES = stadiaTiles("alidade_smooth_dark");
+// OSM publishes no dark style, so dark mode inverts the tiles in CSS
+// (see .map-tiles-dark). hue-rotate puts the colours back the right way round
+// after the invert, otherwise water comes out orange.
 
 const INITIAL_ZOOM = 10;
 const MOVE_DEBOUNCE_MS = 700;
@@ -172,8 +170,9 @@ export default function HomeCragsMapCanvas({
       <AttributionControl position="topright" prefix={false} />
       <TileLayer
         key={isDark ? "dark" : "light"}
-        attribution='&copy; <a href="https://www.stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url={isDark ? DARK_TILES : LIGHT_TILES}
+        className={isDark ? "map-tiles-dark" : undefined}
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url={OSM_TILES}
       />
 
       <ViewController userPosition={validUserPosition} onMapMove={onMapMove} />
